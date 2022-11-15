@@ -96,6 +96,14 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     if ((0, _ValidateInfo.default)(values).variant === 'success') {
       setAddCardOpen(false);
       handleNewCard(values);
+      setValues({
+        cardName: '',
+        cardNumber: '',
+        cardMonth: '',
+        cardYear: '',
+        cardSecurityCode: '',
+        focus: ''
+      });
     } else {
       setErrors((0, _ValidateInfo.default)(values));
     }

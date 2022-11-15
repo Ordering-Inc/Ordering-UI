@@ -465,7 +465,8 @@ var PFChangsBusinesListing = function PFChangsBusinesListing(props) {
       pageSize: 30,
       controlType: 'infinity'
     },
-    isPfChangs: true
+    isPfChangs: true,
+    brandId: 7
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessSearchList, businessListingProps);
 };

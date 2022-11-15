@@ -7,6 +7,7 @@ exports.default = validateInfo;
 var _cardValidator = _interopRequireDefault(require("card-validator"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function validateInfo(values) {
+  var _values$cardSecurityC;
   var errors = {};
   var creditCard = _cardValidator.default.number(values.cardNumber);
   creditCard.expirationMonth = _cardValidator.default.expirationMonth(values.cardMonth);
@@ -27,7 +28,7 @@ function validateInfo(values) {
   // Card CVV expiration
   if (values.cardSecurityCode === null || !values.cardSecurityCode.trim()) {
     errors.message = 'Credit card CVC is not complete';
-  } else if (creditCard.cvv.isValid) {
+  } else if (creditCard.cvv.isValid || ((_values$cardSecurityC = values.cardSecurityCode) === null || _values$cardSecurityC === void 0 ? void 0 : _values$cardSecurityC.length) === 4) {
     errors.ccvv = true;
   } else {
     errors.message = 'Credit card CVC is invalid';
