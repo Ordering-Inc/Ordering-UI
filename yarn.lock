@@ -2075,25 +2075,24 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@segment/analytics-core@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.1.1.tgz#34a583d12fd42c82f3a55173dcaf121e03e27228"
-  integrity sha512-rnxhw5sBGfV0R79SI/C4nKw3OFjhhWQMo7lOwRv2GuL/JbnOcA6DxP1RMs1Vc7TaS/fjeSJrfpP84k3A5xPzHw==
+"@segment/analytics-core@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.1.2.tgz#c18ef4081bbb59f42a7332b3e47df8aec9c83e65"
+  integrity sha512-F20iWeARLK1xE82RjzVaTl0g7sdHsKTyeXPiTy4jc/kx/ttvQ3WjyCqUjFgbviDJeN8VTsKBVIY/4yPq57efKg==
   dependencies:
-    "@lukeed/uuid" "^2.0.0"
     dset "^3.1.2"
     tslib "^2.4.0"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.46.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.46.0.tgz#4bfa48200b8073d8d99b1a8e528122d149a74a9b"
-  integrity sha512-5QgBk2bQIgYmElY2Dk2hrruHrKlNZ0yyUOG+WWsz/6ca+jDdNHjMZLiKIGARg6Das8MLrmHbrXy67TXp3Ch82A==
+  version "1.46.1"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.46.1.tgz#f310257b52f632025507dfe9e88c69e98ca51029"
+  integrity sha512-wJe1y9c/YgL5TAlTLM8wfYAl8yaFIXoUr/0Ay4ZxvY807zzgBuk6ULd5nyDgE4EbKEfN8iYOp0hrtrjp4P0TFw==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
-    "@segment/analytics-core" "1.1.1"
+    "@segment/analytics-core" "1.1.2"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
-    "@segment/tsub" "^0.2.0"
+    "@segment/tsub" "1.0.1"
     dset "^3.1.2"
     js-cookie "3.0.1"
     node-fetch "^2.6.7"
@@ -2130,10 +2129,10 @@
   resolved "https://registry.yarnpkg.com/@segment/isodate/-/isodate-1.0.3.tgz#f44e8202d5edd277ce822785239474b2c9411d4a"
   integrity sha512-BtanDuvJqnACFkeeYje7pWULVv8RgZaqKHWwGFnL/g/TH/CcZjkIVTfGDp/MAxmilYHUkrX70SqwnYSTNEaN7A==
 
-"@segment/tsub@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@segment/tsub/-/tsub-0.2.0.tgz#456345ad04bca81f6c3fefacac722fd9eb4923ce"
-  integrity sha512-DThHEnZ+1PlSjj59Q7Ns/ESevjfztDV4PtKMcoVp1PWSWaaPcaktWGdTeDgi8ucsJO91qtY9N4aM2cbfGr/yWA==
+"@segment/tsub@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@segment/tsub/-/tsub-1.0.1.tgz#4d7fad9eb84b354eec559020da7408fac3046b33"
+  integrity sha512-rUpvlj/rRfOolk5rjwyrsbl0qzGLsaYgFNEiOSrwrWDryDPq1ZGdo+3Eb+E8+EC0yZOAO4F1DjJfLtaSifpx7w==
   dependencies:
     "@stdlib/math-base-special-ldexp" "^0.0.5"
     dlv "^1.1.3"
@@ -2563,10 +2562,24 @@
   dependencies:
     "@stdlib/utils-library-manifest" "^0.0.x"
 
+"@stdlib/constants-float64-high-word-abs-mask@^0.0.x":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-high-word-abs-mask/-/constants-float64-high-word-abs-mask-0.0.1.tgz#efb4cd3c13c301a3e9da83e8065dd2479e2c976e"
+  integrity sha512-1vy8SUyMHFBwqUUVaZFA7r4/E3cMMRKSwsaa/EZ15w7Kmc01W/ZmaaTLevRcIdACcNgK+8i8813c8H7LScXNcQ==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
+
 "@stdlib/constants-float64-high-word-exponent-mask@^0.0.x":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-high-word-exponent-mask/-/constants-float64-high-word-exponent-mask-0.0.8.tgz#c5671d462674ab09e48f25c2b3ca4d6d5cc4d875"
   integrity sha512-z28/EQERc0VG7N36bqdvtrRWjFc8600PKkwvl/nqx6TpKAzMXNw55BS1xT4C28Sa9Z7uBWeUj3UbIFedbkoyMw==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
+
+"@stdlib/constants-float64-high-word-sign-mask@^0.0.x":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-high-word-sign-mask/-/constants-float64-high-word-sign-mask-0.0.1.tgz#d45bdec657199cdf522240d02ccd4b04040f58ca"
+  integrity sha512-hmTr5caK1lh1m0eyaQqt2Vt3y+eEdAx57ndbADEbXhxC9qSGd0b4bLSzt/Xp4MYBYdQkHAE/BlkgUiRThswhCg==
   dependencies:
     "@stdlib/utils-library-manifest" "^0.0.x"
 
@@ -2709,10 +2722,12 @@
     "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/math-base-special-copysign@^0.0.x":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@stdlib/math-base-special-copysign/-/math-base-special-copysign-0.0.6.tgz#ba1781b4be40dee5a67282b368c30f9cc5201bd0"
-  integrity sha512-2u2ariXtGK0c+Z8y0QHUrdP2aEvkKSZZ4GRNehVYMZT1cwDnZZOZRdTNKFquDldJ/C407upOvLpkzIeS9WmkUQ==
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@stdlib/math-base-special-copysign/-/math-base-special-copysign-0.0.7.tgz#d2ead27ff93a84a46263ecfa5f9838a8ab809cfc"
+  integrity sha512-7Br7oeuVJSBKG8BiSk/AIRFTBd2sbvHdV3HaqRj8tTZHX8BQomZ3Vj4Qsiz3kPyO4d6PpBLBTYlGTkSDlGOZJA==
   dependencies:
+    "@stdlib/constants-float64-high-word-abs-mask" "^0.0.x"
+    "@stdlib/constants-float64-high-word-sign-mask" "^0.0.x"
     "@stdlib/math-base-napi-binary" "^0.0.x"
     "@stdlib/number-float64-base-from-words" "^0.0.x"
     "@stdlib/number-float64-base-get-high-word" "^0.0.x"
@@ -2795,9 +2810,9 @@
     "@stdlib/array-float32" "^0.0.x"
 
 "@stdlib/number-float64-base-to-words@^0.0.x":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@stdlib/number-float64-base-to-words/-/number-float64-base-to-words-0.0.6.tgz#527d0f251bad55b628e67aee95d2e00d611ff843"
-  integrity sha512-J7S0+yOBcrU9/gMTLE3oQUrtGvDj6uSxC8swOnXCLrCm0l3WItYlBl4PHPxJ+cgRiduHd1ol+ud7ctFI5/66sw==
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@stdlib/number-float64-base-to-words/-/number-float64-base-to-words-0.0.7.tgz#b3e88daa82334d90cf416f5387f503f66849545e"
+  integrity sha512-7wsYuq+2MGp9rAkTnQ985rah7EJI9TfgHrYSSd4UIu4qIjoYmWIKEhIDgu7/69PfGrls18C3PxKg1pD/v7DQTg==
   dependencies:
     "@stdlib/array-float64" "^0.0.x"
     "@stdlib/array-uint32" "^0.0.x"
@@ -2805,6 +2820,7 @@
     "@stdlib/os-byte-order" "^0.0.x"
     "@stdlib/os-float-word-order" "^0.0.x"
     "@stdlib/types" "^0.0.x"
+    "@stdlib/utils-define-nonenumerable-read-only-property" "^0.0.x"
     "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/os-byte-order@^0.0.x":
@@ -3047,9 +3063,9 @@
     "@stdlib/utils-global" "^0.0.x"
 
 "@stripe/react-stripe-js@^1.1.2":
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-1.14.2.tgz#4030f1723b4c58003bfbe38189129955f6fff764"
-  integrity sha512-8dGBdSFldq6dyiYgv3r4tOwS5PGAO/446hodegSKlmWg7NkAl0McopszXJd11A9otGi47v5OzCsljyfHJgnLhw==
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-1.15.0.tgz#a381de453dfac5fc47d2d604dfa1c6a9b6fc881e"
+  integrity sha512-nqIOuAbbAN1p/zj2d2vykMzd097ZiHbu0+EpPRcfiswBRQIQIZaPrUwmj6HGD8BRA6Wp89mZen1UJbqtsfc3ZA==
   dependencies:
     prop-types "^15.7.2"
 
@@ -3425,9 +3441,9 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.4, ajv@^6.12.5:
     uri-js "^4.2.2"
 
 ajv@^8.6.0:
-  version "8.11.0"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.11.0.tgz#977e91dd96ca669f54a11e23e378e33b884a565f"
-  integrity sha512-wGgprdCvMalC0BztXvitD2hC04YffAvtsUn93JbGXYLAtCUO4xd17mCCZQxUOItiBwZvJScWo8NIvQMQ71rdpg==
+  version "8.11.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.11.2.tgz#aecb20b50607acf2569b6382167b65a96008bb78"
+  integrity sha512-E4bfmKAhGiSTvMfL1Myyycaub+cUEU2/IvpylXkUu7CHBkBj1f/ikdzbD7YQ6FKUbixDxeYvB/xY4fvyroDlQg==
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
@@ -4879,16 +4895,16 @@ copy-webpack-plugin@^6.3.2:
     webpack-sources "^1.4.3"
 
 core-js-compat@^3.1.1, core-js-compat@^3.25.1:
-  version "3.26.0"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.26.0.tgz#94e2cf8ba3e63800c4956ea298a6473bc9d62b44"
-  integrity sha512-piOX9Go+Z4f9ZiBFLnZ5VrOpBl0h7IGCkiFUN11QTe6LjAvOT3ifL/5TdoizMh99hcGy5SoLyWbapIY/PIb/3A==
+  version "3.26.1"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.26.1.tgz#0e710b09ebf689d719545ac36e49041850f943df"
+  integrity sha512-622/KzTudvXCDLRw70iHW4KKs1aGpcRcowGWyYJr2DEBfRrd6hNJybxSWJFuZYD4ma86xhrwDDHxmDaIq4EA8A==
   dependencies:
     browserslist "^4.21.4"
 
 core-js@^3.6.0, core-js@^3.8.3:
-  version "3.26.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.26.0.tgz#a516db0ed0811be10eac5d94f3b8463d03faccfe"
-  integrity sha512-+DkDrhoR4Y0PxDz6rurahuB+I45OsEUv8E1maPTB6OuHRohMMcznBq9TMpdpDMm/hUPob/mJJS3PqgbHpMTQgw==
+  version "3.26.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.26.1.tgz#7a9816dabd9ee846c1c0fe0e8fcad68f3709134e"
+  integrity sha512-21491RRQVzUn0GGM9Z1Jrpr6PNPxPi+Za8OM9q4tksTSnlbXXGKK1nXNg/QvwFYettXvSX6zWKCtHHfjN4puyA==
 
 core-util-is@1.0.2:
   version "1.0.2"
@@ -10007,9 +10023,9 @@ react-smartbanner@^5.1.4:
     ua-parser-js "^0.7.9"
 
 react-to-print@^2.12.3:
-  version "2.14.8"
-  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.8.tgz#15203e4f4b83b18931a490d39899b25d68923a6f"
-  integrity sha512-5MkSF3rLdxF9gmcSA6PdqTq9IFh7XkpYiJGP15OW+7hVr0+bpjLvi+kAIAuVjyV5/pv4GI3GuhVBQ0/hq94EZg==
+  version "2.14.9"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.9.tgz#a133ec70500ba87afcbac6d6c7de1b429c36a267"
+  integrity sha512-E8lGe6GO9ljZ1RmJ7uyWUExK0yXbeOTiwsETmGC7WdTsOU5JP9odM9cMcQZAEhSIIKIL4KpBOwxcku18Fl/xNg==
   dependencies:
     prop-types "^15.8.1"
 
@@ -10158,16 +10174,16 @@ regexpp@^3.0.0:
   integrity sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==
 
 regexpu-core@^5.1.0:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-5.2.1.tgz#a69c26f324c1e962e9ffd0b88b055caba8089139"
-  integrity sha512-HrnlNtpvqP1Xkb28tMhBUO2EbyUHdQlsnlAhzWcwHy8WJR53UWr7/MAvqrsQKMbV4qdpv03oTMG8iIhfsPFktQ==
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-5.2.2.tgz#3e4e5d12103b64748711c3aad69934d7718e75fc"
+  integrity sha512-T0+1Zp2wjF/juXMrMxHxidqGYn8U4R+zleSJhX9tQ1PUsS8a9UtYfbsF9LdiVgNX3kiX8RNaKM42nfSgvFJjmw==
   dependencies:
     regenerate "^1.4.2"
     regenerate-unicode-properties "^10.1.0"
     regjsgen "^0.7.1"
     regjsparser "^0.9.1"
     unicode-match-property-ecmascript "^2.0.0"
-    unicode-match-property-value-ecmascript "^2.0.0"
+    unicode-match-property-value-ecmascript "^2.1.0"
 
 regjsgen@^0.7.1:
   version "0.7.1"
@@ -11763,10 +11779,10 @@ unicode-match-property-ecmascript@^2.0.0:
     unicode-canonical-property-names-ecmascript "^2.0.0"
     unicode-property-aliases-ecmascript "^2.0.0"
 
-unicode-match-property-value-ecmascript@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/unicode-match-property-value-ecmascript/-/unicode-match-property-value-ecmascript-2.0.0.tgz#1a01aa57247c14c568b89775a54938788189a714"
-  integrity sha512-7Yhkc0Ye+t4PNYzOGKedDhXbYIBe1XEQYQxOPyhcXNMJ0WCABqqj6ckydd6pWRZTHV4GuCPKdBAUiMc60tsKVw==
+unicode-match-property-value-ecmascript@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/unicode-match-property-value-ecmascript/-/unicode-match-property-value-ecmascript-2.1.0.tgz#cb5fffdcd16a05124f5a4b0bf7c3770208acbbe0"
+  integrity sha512-qxkjQt6qjg/mYscYMC0XKRn3Rh0wFPlfxB0xkt9CfyTvpX1Ra0+rAmdX2QyAobptSEvuy4RtpPRui6XkV+8wjA==
 
 unicode-property-aliases-ecmascript@^2.0.0:
   version "2.1.0"

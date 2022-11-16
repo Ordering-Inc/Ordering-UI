@@ -138,12 +138,12 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
     }
-  }, "login"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('LOGIN', 'login')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return handleOpenLoginSignUp('signup');
     }
-  }, "signUp")), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, t('SIGNUP', 'signUp'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'),
     open: modals.formOpen,
     onClose: function onClose() {
