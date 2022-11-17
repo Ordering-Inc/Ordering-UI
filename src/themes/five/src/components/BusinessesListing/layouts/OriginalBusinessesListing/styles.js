@@ -206,6 +206,10 @@ export const BusinessHeroImgStyled = styled.div`
 
   @media (min-width: 821px) {
     height: ${({ height }) => height || '650px'};
+    width: 75%;
+    ${({ isFullScreen }) => isFullScreen && css`
+      width: 100%;
+    `}
   }
 `
 

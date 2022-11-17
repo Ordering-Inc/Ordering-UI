@@ -9,7 +9,7 @@ import {
 import { useTheme, ThemeProvider } from 'styled-components'
 import PWAPrompt from 'react-ios-pwa-prompt'
 
-import { useSession, useApi, useLanguage, useOrder, Analytics, FacebookPixel, useConfig, AnalyticsSegment, useEvent, useOrderingTheme, useSite } from 'ordering-components'
+import { useSession, useApi, useLanguage, useOrder, Analytics, FacebookPixel, useConfig, AnalyticsSegment, useEvent, useOrderingTheme, useSite, useDefaultTheme } from 'ordering-components'
 import { Header } from '../src/themes/five/src/components/Header'
 import { Header as HeaderKiosk } from '../src/themes/five/src/components/Header/layouts/Kiosk'
 import { Footer } from '../src/themes/five/src/components/Footer'
@@ -75,6 +75,7 @@ export const App = () => {
   const [{ loading: siteLoading }] = useSite()
   const [, t] = useLanguage()
   const [orderingTheme] = useOrderingTheme()
+  const [defaultTheme] = useDefaultTheme()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
@@ -94,7 +95,12 @@ export const App = () => {
 
   const themeUpdated = {
     ...theme,
-    ...orderingTheme?.theme
+    ...orderingTheme?.theme,
+    colors: {
+      ...theme.colors,
+      ...(defaultTheme?.theme?.theme_settings?.components?.style?.primary_btn_color && { primary: defaultTheme?.theme?.theme_settings?.components?.style?.primary_btn_color }),
+      ...(defaultTheme?.theme?.theme_settings?.components?.style?.primary_link_color && { links: defaultTheme?.theme?.theme_settings?.components?.style?.primary_link_color })
+    }
   }
 
   const businessesSlug = {
