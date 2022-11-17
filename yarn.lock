@@ -2562,10 +2562,24 @@
   dependencies:
     "@stdlib/utils-library-manifest" "^0.0.x"
 
+"@stdlib/constants-float64-high-word-abs-mask@^0.0.x":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-high-word-abs-mask/-/constants-float64-high-word-abs-mask-0.0.1.tgz#efb4cd3c13c301a3e9da83e8065dd2479e2c976e"
+  integrity sha512-1vy8SUyMHFBwqUUVaZFA7r4/E3cMMRKSwsaa/EZ15w7Kmc01W/ZmaaTLevRcIdACcNgK+8i8813c8H7LScXNcQ==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
+
 "@stdlib/constants-float64-high-word-exponent-mask@^0.0.x":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-high-word-exponent-mask/-/constants-float64-high-word-exponent-mask-0.0.8.tgz#c5671d462674ab09e48f25c2b3ca4d6d5cc4d875"
   integrity sha512-z28/EQERc0VG7N36bqdvtrRWjFc8600PKkwvl/nqx6TpKAzMXNw55BS1xT4C28Sa9Z7uBWeUj3UbIFedbkoyMw==
+  dependencies:
+    "@stdlib/utils-library-manifest" "^0.0.x"
+
+"@stdlib/constants-float64-high-word-sign-mask@^0.0.x":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@stdlib/constants-float64-high-word-sign-mask/-/constants-float64-high-word-sign-mask-0.0.1.tgz#d45bdec657199cdf522240d02ccd4b04040f58ca"
+  integrity sha512-hmTr5caK1lh1m0eyaQqt2Vt3y+eEdAx57ndbADEbXhxC9qSGd0b4bLSzt/Xp4MYBYdQkHAE/BlkgUiRThswhCg==
   dependencies:
     "@stdlib/utils-library-manifest" "^0.0.x"
 
@@ -2708,10 +2722,12 @@
     "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/math-base-special-copysign@^0.0.x":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@stdlib/math-base-special-copysign/-/math-base-special-copysign-0.0.6.tgz#ba1781b4be40dee5a67282b368c30f9cc5201bd0"
-  integrity sha512-2u2ariXtGK0c+Z8y0QHUrdP2aEvkKSZZ4GRNehVYMZT1cwDnZZOZRdTNKFquDldJ/C407upOvLpkzIeS9WmkUQ==
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@stdlib/math-base-special-copysign/-/math-base-special-copysign-0.0.7.tgz#d2ead27ff93a84a46263ecfa5f9838a8ab809cfc"
+  integrity sha512-7Br7oeuVJSBKG8BiSk/AIRFTBd2sbvHdV3HaqRj8tTZHX8BQomZ3Vj4Qsiz3kPyO4d6PpBLBTYlGTkSDlGOZJA==
   dependencies:
+    "@stdlib/constants-float64-high-word-abs-mask" "^0.0.x"
+    "@stdlib/constants-float64-high-word-sign-mask" "^0.0.x"
     "@stdlib/math-base-napi-binary" "^0.0.x"
     "@stdlib/number-float64-base-from-words" "^0.0.x"
     "@stdlib/number-float64-base-get-high-word" "^0.0.x"
@@ -2794,9 +2810,9 @@
     "@stdlib/array-float32" "^0.0.x"
 
 "@stdlib/number-float64-base-to-words@^0.0.x":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@stdlib/number-float64-base-to-words/-/number-float64-base-to-words-0.0.6.tgz#527d0f251bad55b628e67aee95d2e00d611ff843"
-  integrity sha512-J7S0+yOBcrU9/gMTLE3oQUrtGvDj6uSxC8swOnXCLrCm0l3WItYlBl4PHPxJ+cgRiduHd1ol+ud7ctFI5/66sw==
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@stdlib/number-float64-base-to-words/-/number-float64-base-to-words-0.0.7.tgz#b3e88daa82334d90cf416f5387f503f66849545e"
+  integrity sha512-7wsYuq+2MGp9rAkTnQ985rah7EJI9TfgHrYSSd4UIu4qIjoYmWIKEhIDgu7/69PfGrls18C3PxKg1pD/v7DQTg==
   dependencies:
     "@stdlib/array-float64" "^0.0.x"
     "@stdlib/array-uint32" "^0.0.x"
@@ -2804,6 +2820,7 @@
     "@stdlib/os-byte-order" "^0.0.x"
     "@stdlib/os-float-word-order" "^0.0.x"
     "@stdlib/types" "^0.0.x"
+    "@stdlib/utils-define-nonenumerable-read-only-property" "^0.0.x"
     "@stdlib/utils-library-manifest" "^0.0.x"
 
 "@stdlib/os-byte-order@^0.0.x":
@@ -9051,7 +9068,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/fd1d656aaf7647ddaca4a4d463a08d131e1c6668"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/9386d3eac4f4e361df0c890ab5a91831845f2161"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -10006,9 +10023,9 @@ react-smartbanner@^5.1.4:
     ua-parser-js "^0.7.9"
 
 react-to-print@^2.12.3:
-  version "2.14.9"
-  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.9.tgz#a133ec70500ba87afcbac6d6c7de1b429c36a267"
-  integrity sha512-E8lGe6GO9ljZ1RmJ7uyWUExK0yXbeOTiwsETmGC7WdTsOU5JP9odM9cMcQZAEhSIIKIL4KpBOwxcku18Fl/xNg==
+  version "2.14.10"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.10.tgz#f063bb368c2d8926012d52780a2b983e91c3a797"
+  integrity sha512-XJyhDWH/xxgHy5nIBYPXjVidoroq0qRHqTrVF5QbfohPkMx3q8x3H3+Lv7gSq9uA0csAbjkSU0J4mWgj64f6yQ==
   dependencies:
     prop-types "^15.8.1"
 
@@ -10118,14 +10135,14 @@ regenerator-runtime@^0.12.0:
   integrity sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==
 
 regenerator-runtime@^0.13.10, regenerator-runtime@^0.13.7:
-  version "0.13.10"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.10.tgz#ed07b19616bcbec5da6274ebc75ae95634bfc2ee"
-  integrity sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==
+  version "0.13.11"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
+  integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
 regenerator-transform@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.15.0.tgz#cbd9ead5d77fae1a48d957cf889ad0586adb6537"
-  integrity sha512-LsrGtPmbYg19bcPHwdtmXwbW+TqNvtY4riE3P83foeHRroMbH6/2ddFBfab3t7kbzc7v7p4wbkIecHImqt0QNg==
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.15.1.tgz#f6c4e99fc1b4591f780db2586328e4d9a9d8dc56"
+  integrity sha512-knzmNAcuyxV+gQCufkYcvOqX/qIIfHLv0u5x79kRxuGojfYVky1f15TzZEu2Avte8QGepvUNTnLskf8E6X6Vyg==
   dependencies:
     "@babel/runtime" "^7.8.4"
 
