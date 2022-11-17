@@ -10,13 +10,14 @@ import {
   useSession,
   useLanguage,
   useConfig,
-  BusinessList as BusinessListController
+  BusinessList as BusinessListController,
+  useDefaultTheme
 } from 'ordering-components'
 
 import {
   BusinessContainer,
   BusinessList,
-  ErrorMessage,
+  // ErrorMessage,
   WrapperSearch,
   BusinessesTitle,
   BusinessHeroImg,
@@ -81,9 +82,11 @@ const BusinessesListingUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState, { changeCityFilter }] = useOrder()
+  const [configState] = useConfig()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const windowSize = useWindowSize()
+  const [{ theme: orderingTheme }] = useDefaultTheme()
   const theme = useTheme()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -102,6 +105,7 @@ const BusinessesListingUI = (props) => {
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -285,7 +289,7 @@ const BusinessesListingUI = (props) => {
               </AddressMenu>
               <FeatureItems>
                 <ItemInline>
-                  <OrderTypeSelectorHeader />
+                  <OrderTypeSelectorHeader configTypes={configTypes} />
                 </ItemInline>
                 <ItemInline>
                   <MomentPopover
@@ -299,8 +303,9 @@ const BusinessesListingUI = (props) => {
             </BusinessFeatures>
           )}
           <BusinessHeroImg
-            bgimage={theme.images?.general?.businessHero}
+            bgimage={orderingTheme?.images?.components?.homepage_background?.components?.image || theme.images?.general?.businessHero}
             height={theme?.business_listing_view?.components?.business_hero?.style?.height}
+            isFullScreen={!!orderingTheme?.images?.components?.homepage_image_fullscreen}
           />
         </BusinessBanner>
         {!!Object.values(orderState?.carts)?.length && (
