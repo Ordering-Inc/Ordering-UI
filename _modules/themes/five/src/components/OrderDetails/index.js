@@ -706,7 +706,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return handleChangeOrderStatus(20);
     },
-    disabled: (order === null || order === void 0 ? void 0 : order.status) === 20
+    disabled: (order === null || order === void 0 ? void 0 : order.status) === 20 || (order === null || order === void 0 ? void 0 : order.status) === 21
   }, (_getOrderStatus3 = getOrderStatus(20)) === null || _getOrderStatus3 === void 0 ? void 0 : _getOrderStatus3.value)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     style: {
       fontSize: 14

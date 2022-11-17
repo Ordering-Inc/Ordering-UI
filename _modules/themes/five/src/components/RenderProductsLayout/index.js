@@ -115,6 +115,13 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   var hideBusinessNearCity = (_theme$business_view$ = theme === null || theme === void 0 ? void 0 : (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 ? void 0 : (_theme$business_view$2 = _theme$business_view.components) === null || _theme$business_view$2 === void 0 ? void 0 : (_theme$business_view$3 = _theme$business_view$2.near_business) === null || _theme$business_view$3 === void 0 ? void 0 : _theme$business_view$3.hidden) !== null && _theme$business_view$ !== void 0 ? _theme$business_view$ : true;
   var BusinessLayoutCategories = businessLayout.layoutOne ? _groceries.BusinessProductsCategories : _BusinessProductsCategories.BusinessProductsCategories;
   var BusinessLayoutProductsList = businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
+  var handleSaveProduct = function handleSaveProduct() {
+    var productContainer = document.getElementsByClassName('bp-list')[0];
+    scrollTo(productContainer, 500, 1250);
+  };
+  (0, _react.useEffect)(function () {
+    handleSaveProduct();
+  }, [categorySelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList
   }, !hideBusinessNearCity && !useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.NearBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessesListing.BusinessesListing, {
