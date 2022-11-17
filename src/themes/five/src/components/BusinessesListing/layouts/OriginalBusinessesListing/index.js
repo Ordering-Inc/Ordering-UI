@@ -10,13 +10,14 @@ import {
   useSession,
   useLanguage,
   useConfig,
-  BusinessList as BusinessListController
+  BusinessList as BusinessListController,
+  useDefaultTheme
 } from 'ordering-components'
 
 import {
   BusinessContainer,
   BusinessList,
-  ErrorMessage,
+  // ErrorMessage,
   WrapperSearch,
   BusinessesTitle,
   BusinessHeroImg,
@@ -84,6 +85,7 @@ const BusinessesListingUI = (props) => {
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const windowSize = useWindowSize()
+  const [{ theme: orderingTheme }] = useDefaultTheme()
   const theme = useTheme()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -299,8 +301,9 @@ const BusinessesListingUI = (props) => {
             </BusinessFeatures>
           )}
           <BusinessHeroImg
-            bgimage={theme.images?.general?.businessHero}
+            bgimage={orderingTheme?.images?.components?.homepage_background?.components?.image || theme.images?.general?.businessHero}
             height={theme?.business_listing_view?.components?.business_hero?.style?.height}
+            isFullScreen={!!orderingTheme?.images?.components?.homepage_image_fullscreen}
           />
         </BusinessBanner>
         {!!Object.values(orderState?.carts)?.length && (
