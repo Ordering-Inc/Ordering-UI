@@ -81,6 +81,7 @@ const BusinessesListingUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState, { changeCityFilter }] = useOrder()
+  const [configState] = useConfig()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const windowSize = useWindowSize()
@@ -102,6 +103,7 @@ const BusinessesListingUI = (props) => {
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -285,7 +287,7 @@ const BusinessesListingUI = (props) => {
               </AddressMenu>
               <FeatureItems>
                 <ItemInline>
-                  <OrderTypeSelectorHeader />
+                  <OrderTypeSelectorHeader configTypes={configTypes} />
                 </ItemInline>
                 <ItemInline>
                   <MomentPopover
