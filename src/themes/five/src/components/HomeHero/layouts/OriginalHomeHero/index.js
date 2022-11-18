@@ -36,6 +36,11 @@ export const OriginalHomeHero = (props) => {
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
 
+  const isShowLoginAccount = !orderingTheme?.theme?.mobile_view_web?.components?.home?.components?.login_account?.hidden
+  const bgImg = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_background?.components?.image
+  const logo = orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image
+  const isFullScreen = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_image_fullscreen
+
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
       setModals({ ...modals, formOpen: true })
@@ -86,11 +91,17 @@ export const OriginalHomeHero = (props) => {
   }, [])
 
   return (
-    <HeroContainer bgimage={theme.images?.general?.homeHero} mb={!auth && '30vh'}>
+    <HeroContainer
+      mb={!auth && '30vh'}
+      bgimage={bgImg || (windowSize.width < 576
+        ? theme.images?.general?.homeHeroMobile
+        : theme.images?.general?.homeHero)}
+      isFullScreen={isFullScreen}
+    >
       <ContentWrapper>
         {windowSize.width < 576 && (
           <LogoWrapper>
-            <img alt='Logotype' src={theme?.images?.logos?.logotypeInvert} loading='lazy' />
+            <img alt='Logotype' src={logo || theme?.images?.logos?.logotypeInvert} loading='lazy' />
           </LogoWrapper>
         )}
         <HeroContent>

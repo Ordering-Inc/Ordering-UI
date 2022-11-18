@@ -24,6 +24,9 @@ export const HeroContainerStyled = styled.div`
 
   @media (min-width: 567px) {
     height: calc(100vh - 65px);
+    ${({ isFullScreen }) => !isFullScreen && css`
+      height: calc(60vh - 65px);
+    `}
     margin-bottom: 0;
   }
 `

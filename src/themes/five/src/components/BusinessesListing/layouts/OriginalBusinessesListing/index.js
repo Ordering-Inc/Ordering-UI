@@ -16,7 +16,7 @@ import {
 import {
   BusinessContainer,
   BusinessList,
-  ErrorMessage,
+  // ErrorMessage,
   WrapperSearch,
   BusinessesTitle,
   BusinessHeroImg,
