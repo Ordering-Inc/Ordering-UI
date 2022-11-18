@@ -52,6 +52,7 @@ import { BusinessesMap } from '../../../../../../../components/BusinessesMap'
 import { HighestRated } from '../../../HighestRated'
 import { BusinessPreorder } from '../../../BusinessPreorder'
 import { OrderProgress } from '../../../OrderProgress'
+import { PageBanner } from '../../../PageBanner'
 
 import Skeleton from 'react-loading-skeleton'
 import { MomentPopover } from '../../../../../../pwa/src/components/MomentPopover'
@@ -364,6 +365,9 @@ const BusinessesListingUI = (props) => {
             <Divider />
           </HightestRatedWrapper>
         )}
+
+        <PageBanner position='web_business_listing' />
+
         {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
           <BusinessTypeFilter
             images={props.images}

@@ -32,7 +32,8 @@ import {
   WrapperSearch,
   ProfessionalFilterWrapper,
   WrapperSearchAbsolute,
-  NearBusiness
+  NearBusiness,
+  PageBannerWrapper
 } from './styles'
 
 import { SearchProducts as SearchProductsOriginal } from '../../../../../themes/five/src/components/SearchProducts'
@@ -42,6 +43,8 @@ import { ProfessionalFilter } from '../ProfessionalFilter'
 import { SearchIconWrapper } from '../BusinessBasicInformation/styles'
 import { OrderItAgain } from '../OrderItAgain'
 import { ProfessionalBusinessFilter } from '../ProfessionalBusinessFilter'
+import { PageBanner } from '../PageBanner'
+
 
 const layoutOne = 'groceries'
 
@@ -165,6 +168,11 @@ export const RenderProductsLayout = (props) => {
                 sortByValue={sortByValue}
               />
             )}
+
+            <PageBannerWrapper>
+              <PageBanner position='web_business_page' />
+            </PageBannerWrapper>
+
             {!errorQuantityProducts && SearchProductsComponent && !useKioskApp && (
               <>
                 <WrapperSearch>
