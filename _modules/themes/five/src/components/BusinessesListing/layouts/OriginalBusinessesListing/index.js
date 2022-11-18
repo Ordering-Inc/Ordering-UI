@@ -51,7 +51,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _businessesList$busin, _configState$configs, _configState$configs$, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _orderState$options3, _orderState$options3$, _orderingTheme$images, _orderingTheme$images2, _orderingTheme$images3, _orderingTheme$images4, _theme$images2, _theme$images2$genera, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _orderingTheme$images5, _orderingTheme$images6, _Object$values, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options5, _orderState$options5$, _configs$advanced_bus2, _orderState$options6, _orderState$options6$, _businessesList$busin6, _businessesList$busin7, _orderState$options9, _citiesState$cities4, _props$afterComponent, _props$afterElements;
+  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _businessesList$busin, _configState$configs, _configState$configs$, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _orderState$options3, _orderState$options3$, _theme$images2, _theme$images2$genera, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _Object$values, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options5, _orderState$options5$, _configs$advanced_bus2, _orderState$options6, _orderState$options6$, _businessesList$busin6, _businessesList$busin7, _orderState$options9, _citiesState$cities4, _props$afterComponent, _props$afterElements;
   var businessesList = props.businessesList,
     paginationProps = props.paginationProps,
     searchValue = props.searchValue,
@@ -85,9 +85,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     _useConfig4 = _slicedToArray(_useConfig3, 1),
     configs = _useConfig4[0].configs;
   var windowSize = (0, _useWindowSize.useWindowSize)();
-  var _useDefaultTheme = (0, _orderingComponents.useDefaultTheme)(),
-    _useDefaultTheme2 = _slicedToArray(_useDefaultTheme, 1),
-    orderingTheme = _useDefaultTheme2[0].theme;
   var theme = (0, _styledComponents.useTheme)();
   var _useState = (0, _react.useState)({
       listOpen: false,
@@ -318,9 +315,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     },
     isBanner: true
   })))), /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
-    bgimage: (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$images = orderingTheme.images) === null || _orderingTheme$images === void 0 ? void 0 : (_orderingTheme$images2 = _orderingTheme$images.components) === null || _orderingTheme$images2 === void 0 ? void 0 : (_orderingTheme$images3 = _orderingTheme$images2.homepage_background) === null || _orderingTheme$images3 === void 0 ? void 0 : (_orderingTheme$images4 = _orderingTheme$images3.components) === null || _orderingTheme$images4 === void 0 ? void 0 : _orderingTheme$images4.image) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.businessHero),
-    height: theme === null || theme === void 0 ? void 0 : (_theme$business_listi11 = theme.business_listing_view) === null || _theme$business_listi11 === void 0 ? void 0 : (_theme$business_listi12 = _theme$business_listi11.components) === null || _theme$business_listi12 === void 0 ? void 0 : (_theme$business_listi13 = _theme$business_listi12.business_hero) === null || _theme$business_listi13 === void 0 ? void 0 : (_theme$business_listi14 = _theme$business_listi13.style) === null || _theme$business_listi14 === void 0 ? void 0 : _theme$business_listi14.height,
-    isFullScreen: !!(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$images5 = orderingTheme.images) !== null && _orderingTheme$images5 !== void 0 && (_orderingTheme$images6 = _orderingTheme$images5.components) !== null && _orderingTheme$images6 !== void 0 && _orderingTheme$images6.homepage_image_fullscreen)
+    bgimage: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.businessHero,
+    height: theme === null || theme === void 0 ? void 0 : (_theme$business_listi11 = theme.business_listing_view) === null || _theme$business_listi11 === void 0 ? void 0 : (_theme$business_listi12 = _theme$business_listi11.components) === null || _theme$business_listi12 === void 0 ? void 0 : (_theme$business_listi13 = _theme$business_listi12.business_hero) === null || _theme$business_listi13 === void 0 ? void 0 : (_theme$business_listi14 = _theme$business_listi13.style) === null || _theme$business_listi14 === void 0 ? void 0 : _theme$business_listi14.height
   })), !!((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) !== null && _Object$values !== void 0 && _Object$values.length) && /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderProgress.OrderProgress, {
     franchiseId: props.franchiseId,
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
