@@ -18,7 +18,7 @@ export const CategoriesContainer = styled.div`
   z-index: 1000;
   text-align: center;
   width: 100%;
-  top: 20px;
+  top: 45px;
   position: sticky;
 
   div.category {
