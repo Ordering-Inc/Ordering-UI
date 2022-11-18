@@ -66,7 +66,7 @@ var CreditCard2 = function CreditCard2() {
   }));
 };
 var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI(props) {
-  var _configs$wallet_cash_, _configs$wallet_credi, _paymethodSelected$pa, _paymethodSelected$pa2, _paymethodSelected$pa3, _paymethodSelected$pa4, _paymethodSelected$pa5, _paymethodSelected$pa6, _paymethodSelected$pa7, _paymethodSelected$pa8, _paymethodSelected$pa9, _paymethodSelected$pa10;
+  var _configs$wallet_cash_, _configs$wallet_credi, _paymethodSelected$pa, _paymethodSelected$pa2, _paymethodSelected$pa3, _paymethodSelected$pa4, _paymethodSelected$pa5, _paymethodSelected$pa6, _paymethodSelected$pa7, _paymethodSelected$pa8, _paymethodSelected$pa9, _paymethodSelected$pa10, _walletsState$result;
   var businessIds = props.businessIds,
     paymethodsAndWallets = props.paymethodsAndWallets,
     walletsState = props.walletsState,
@@ -144,7 +144,7 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
         marginBottom: '20px'
       }
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, walletsState.result.filter(function (wallet) {
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, walletsState === null || walletsState === void 0 ? void 0 : (_walletsState$result = walletsState.result) === null || _walletsState$result === void 0 ? void 0 : _walletsState$result.filter(function (wallet) {
     return paymethodsAndWallets.wallets.find(function (item) {
       return item.type === wallet.type;
     });
