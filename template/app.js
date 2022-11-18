@@ -94,7 +94,12 @@ export const App = () => {
 
   const themeUpdated = {
     ...theme,
-    ...orderingTheme?.theme
+    ...orderingTheme?.theme,
+    colors: {
+      ...theme.colors,
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color && { primary: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color }),
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color && { links: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color })
+    }
   }
 
   const businessesSlug = {

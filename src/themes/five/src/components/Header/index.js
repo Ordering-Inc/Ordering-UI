@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useOrderingTheme } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
@@ -68,6 +68,7 @@ export const Header = (props) => {
   const theme = useTheme()
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
+  const [{ theme: orderingTheme }] = useOrderingTheme()
 
   const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -223,8 +224,8 @@ export const Header = (props) => {
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
             >
-              <img alt='Logotype' width='170px' height='45px' src={theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
+              <img alt='Logotype' width='170px' height='45px' src={orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
+              <img alt='Isotype' width='35px' height='45px' src={orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && !props.isCustomLayout && (
