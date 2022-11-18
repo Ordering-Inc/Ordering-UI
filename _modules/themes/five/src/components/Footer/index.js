@@ -23,6 +23,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Footer = function Footer() {
+  var _theme$my_products, _theme$my_products$co, _theme$my_products$co2, _theme$my_products$co3, _theme$my_products$co4;
   var _useState = (0, _react.useState)({
       body: null,
       loading: false,
@@ -34,7 +35,11 @@ var Footer = function Footer() {
   var _useApi = (0, _orderingComponents.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+    theme = _useOrderingTheme2[0].theme;
   var requestsState = {};
+  var footerContent = theme === null || theme === void 0 ? void 0 : (_theme$my_products = theme.my_products) === null || _theme$my_products === void 0 ? void 0 : (_theme$my_products$co = _theme$my_products.components) === null || _theme$my_products$co === void 0 ? void 0 : (_theme$my_products$co2 = _theme$my_products$co.theme_settings) === null || _theme$my_products$co2 === void 0 ? void 0 : (_theme$my_products$co3 = _theme$my_products$co2.components) === null || _theme$my_products$co3 === void 0 ? void 0 : (_theme$my_products$co4 = _theme$my_products$co3.values) === null || _theme$my_products$co4 === void 0 ? void 0 : _theme$my_products$co4.footer_content;
   var getPage = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var source, _yield$ordering$pages, _yield$ordering$pages2, error, result;
@@ -99,13 +104,13 @@ var Footer = function Footer() {
       }
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, footerState.body && /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, (footerContent || footerState.body) && /*#__PURE__*/_react.default.createElement("div", {
     style: {
       wordBreak: 'break-all',
       padding: '0px 10px'
     },
     dangerouslySetInnerHTML: {
-      __html: footerState.body
+      __html: footerContent || footerState.body
     }
   }));
 };
