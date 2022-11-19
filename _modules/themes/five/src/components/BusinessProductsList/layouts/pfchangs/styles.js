@@ -65,10 +65,14 @@ var CategoryDescription = _styledComponents.default.div(_templateObject10 || (_t
 exports.CategoryDescription = CategoryDescription;
 var WrapperNotFound = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  height: 500px;\n  > div{\n    height: 100%;\n  }\n"])));
 exports.WrapperNotFound = WrapperNotFound;
-var HeaderWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  font-family: ", ", Arial, Helvetica;\n"])), function (_ref6) {
+var HeaderWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  font-family: ", ", Arial, Helvetica;\n  h3{\n    color: ", ";\n  }\n"])), function (_ref6) {
   var _theme$fonts2, _theme$fonts2$special;
   var theme = _ref6.theme;
   return (_theme$fonts2 = theme.fonts) === null || _theme$fonts2 === void 0 ? void 0 : (_theme$fonts2$special = _theme$fonts2.special) === null || _theme$fonts2$special === void 0 ? void 0 : _theme$fonts2$special.name;
+}, function (_ref7) {
+  var _theme$colors;
+  var theme = _ref7.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#fff';
 });
 exports.HeaderWrapper = HeaderWrapper;
 var DescriptionModalContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 0 10px;\n  img{\n    border-radius: 7.6px;\n    width: 200px;\n    height: 200px;\n    min-width: 200px;\n    min-height: 200px;\n    margin-bottom: 20px;\n  }\n"])));

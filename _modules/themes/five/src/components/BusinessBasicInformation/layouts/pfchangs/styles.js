@@ -39,8 +39,12 @@ var DeliveryPickupContainer = _styledComponents.default.div(_templateObject7 || 
   });
 });
 exports.DeliveryPickupContainer = DeliveryPickupContainer;
-var TitleContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  h2{\n    color: #fff;\n    font-size: 20px;\n  }\n  svg {\n    font-size: 34px;\n    color: ", ";\n    cursor: pointer;\n  }\n\n  span {\n    position: relative;\n    bottom: 5px;\n    margin-top: 15px;\n    margin-bottom: 5px;\n  }\n"])), function (_ref6) {
+var TitleContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  h2{\n    color: ", ";\n    font-size: 20px;\n  }\n  svg {\n    font-size: 34px;\n    color: ", ";\n    cursor: pointer;\n  }\n\n  span {\n    position: relative;\n    bottom: 5px;\n    margin-top: 15px;\n    margin-bottom: 5px;\n  }\n"])), function (_ref6) {
+  var _theme$colors;
   var theme = _ref6.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#FFF';
+}, function (_ref7) {
+  var theme = _ref7.theme;
   return theme.colors.gold;
 });
 exports.TitleContainer = TitleContainer;

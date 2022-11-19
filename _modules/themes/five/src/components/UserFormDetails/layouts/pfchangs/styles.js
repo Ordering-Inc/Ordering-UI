@@ -10,8 +10,12 @@ var _templateObject, _templateObject2, _templateObject3, _templateObject4, _temp
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var FormInput = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  border: 1px solid #fff;\n  box-sizing: border-box;\n  div.phone_number {\n    margin-bottom: 20px;\n    width: 100%;\n  }\n  button {\n    width: 100%;\n    padding: 7px 0;\n  }\n  ", "\n"])), function (_ref) {
-  var isCheckout = _ref.isCheckout;
+var FormInput = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  border: 1px solid #fff;\n  box-sizing: border-box;\n  color: ", ";\n  div.phone_number {\n    margin-bottom: 20px;\n    width: 100%;\n  }\n  button {\n    width: 100%;\n    padding: 7px 0;\n  }\n  ", "\n"])), function (_ref) {
+  var _theme$colors;
+  var theme = _ref.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#fff';
+}, function (_ref2) {
+  var isCheckout = _ref2.isCheckout;
   return isCheckout && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    border: none;\n  "])));
 });
 exports.FormInput = FormInput;
@@ -22,7 +26,11 @@ var ActionsForm = _styledComponents.default.div(_templateObject3 || (_templateOb
 exports.ActionsForm = ActionsForm;
 var SkeletonForm = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  justify-content: center;\n  height: auto;\n  display: inline-flex;\n  flex-wrap: wrap;\n  padding: 0;\n  margin-top: 0px;\n  > * {\n    width: 100%;\n    margin: 10px 0;\n    display: inline;\n    height: 50px;\n    span{\n      border-radius: 16px;\n      width: 100%;\n      height: 100%;\n    }\n  }\n  @media (min-width: 768px){\n    justify-content: flex-start;\n    > * {\n      width: calc(50% - 10px);\n      margin: 5px;\n    }\n  }\n"])));
 exports.SkeletonForm = SkeletonForm;
-var InputGroup = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 50%;\n  padding: 0 10px;\n  p {\n    font-weight: 500;\n    font-size: 16px;\n    color: #fff;\n    width: 100%;\n    text-align: left;\n    margin: 0 0 7px 0;\n  }\n  input {\n    padding: 10px;\n  }\n"])));
+var InputGroup = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 50%;\n  padding: 0 10px;\n  p {\n    font-weight: 500;\n    font-size: 16px;\n    color: ", ";\n    width: 100%;\n    text-align: left;\n    margin: 0 0 7px 0;\n  }\n  input {\n    padding: 10px;\n  }\n"])), function (_ref3) {
+  var _theme$colors2;
+  var theme = _ref3.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#fff';
+});
 exports.InputGroup = InputGroup;
 var Divider = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n  height: 8px;\n  width: 100%;\n  margin-bottom: 20px;\n"])));
 exports.Divider = Divider;
@@ -40,14 +48,22 @@ var PromotionsWrapper = _styledComponents.default.div(_templateObject10 || (_tem
   return props.theme.colors.primary;
 });
 exports.PromotionsWrapper = PromotionsWrapper;
-var Title = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  border-bottom: 1px solid #fff;\n  display: flex;\n  justify-content: flex-start;\n  color: #fff;\n  padding: 15px;\n  h2{\n    font-size: 16px;\n  }\n"])));
+var Title = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  border-bottom: 1px solid #fff;\n  display: flex;\n  justify-content: flex-start;\n  color: ", ";\n  padding: 15px;\n  h2{\n    font-size: 16px;\n  }\n"])), function (_ref4) {
+  var _theme$colors3;
+  var theme = _ref4.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#fff';
+});
 exports.Title = Title;
-var UserInformationContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  color: #fff;\n  width: 100%;\n  display: flex;\n  flex-direction: row;\n  padding: 15px;\n  box-sizing: border-box;\n  justify-content: space-between;\n  align-items: center;\n  text-align: left;\n  p{\n    margin: 2px 0;\n  }\n  span {\n    color: ", ";\n    cursor: pointer;\n    text-decoration: underline;\n    text-align: right;\n    display: flex;\n  }\n  ", "\n"])), function (_ref2) {
-  var _theme$colors;
-  var theme = _ref2.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold;
-}, function (_ref3) {
-  var isCheckout = _ref3.isCheckout;
+var UserInformationContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  color: ", ";\n  width: 100%;\n  display: flex;\n  flex-direction: row;\n  padding: 15px;\n  box-sizing: border-box;\n  justify-content: space-between;\n  align-items: center;\n  text-align: left;\n  p{\n    margin: 2px 0;\n  }\n  span {\n    color: ", ";\n    cursor: pointer;\n    text-decoration: underline;\n    text-align: right;\n    display: flex;\n  }\n  ", "\n"])), function (_ref5) {
+  var _theme$colors4;
+  var theme = _ref5.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.tertiary) || '#fff';
+}, function (_ref6) {
+  var _theme$colors5;
+  var theme = _ref6.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors5 = theme.colors) === null || _theme$colors5 === void 0 ? void 0 : _theme$colors5.gold;
+}, function (_ref7) {
+  var isCheckout = _ref7.isCheckout;
   return isCheckout && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    padding: 0;\n  "])));
 });
 exports.UserInformationContainer = UserInformationContainer;
@@ -57,8 +73,8 @@ var CountryFlag = _styledComponents.default.div(_templateObject19 || (_templateO
 exports.CountryFlag = CountryFlag;
 var Info = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
 exports.Info = Info;
-var FormContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  padding: 15px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  form {\n    box-sizing: border;\n  }\n  input.form {\n    padding: 5px;\n    font-size: 14px;\n    width: 100%;\n    margin-bottom: 20px;\n    box-sizing: border-box;\n    &:disabled {\n      background-color: rgba(239, 239, 239, 0.3);\n      cursor: not-allowed;\n    }\n  }\n  ", "\n  @media (min-width: 768px){\n    flex-direction: row;\n    justify-content: center;\n    flex-wrap: wrap;\n  }\n"])), function (_ref4) {
-  var isCheckout = _ref4.isCheckout;
+var FormContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  padding: 15px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  form {\n    box-sizing: border;\n  }\n  input.form {\n    padding: 5px;\n    font-size: 14px;\n    width: 100%;\n    margin-bottom: 20px;\n    box-sizing: border-box;\n    &:disabled {\n      background-color: rgba(239, 239, 239, 0.3);\n      cursor: not-allowed;\n    }\n  }\n  ", "\n  @media (min-width: 768px){\n    flex-direction: row;\n    justify-content: center;\n    flex-wrap: wrap;\n  }\n"])), function (_ref8) {
+  var isCheckout = _ref8.isCheckout;
   return isCheckout && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    input {\n      color: #000 !important;\n    }\n  "])));
 });
 exports.FormContainer = FormContainer;

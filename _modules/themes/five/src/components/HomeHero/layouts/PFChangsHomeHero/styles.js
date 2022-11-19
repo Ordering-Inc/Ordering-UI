@@ -50,25 +50,29 @@ var WrapInput = _styledComponents.default.div(_templateObject3 || (_templateObje
 exports.WrapInput = WrapInput;
 var ContentWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  @media (min-width: 768px){\n    flex-direction: row;\n    min-height: 100vh;\n  }\n"])));
 exports.ContentWrapper = ContentWrapper;
-var SearchLocationsContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 40px 20px 20px;\n  overflow-y: auto;\n  overflow-x: hidden;\n  box-sizing: border-box;\n  h1 {\n    color: #fff;\n    font-family: ", ";\n  }\n  div {\n    margin: 20px 0 0;\n    p{\n      color: ", ";\n    }\n  }\n  @media (min-width: 768px){\n    width: 50%;\n    height: calc(100vh - 97px);\n  }\n\n  @media (min-width: 1024px){\n    width: 500px;\n  }\n"])), function (_ref4) {
-  var _theme$fonts2, _theme$fonts2$special;
+var SearchLocationsContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 40px 20px 20px;\n  overflow-y: auto;\n  overflow-x: hidden;\n  box-sizing: border-box;\n  h1 {\n    color: ", ";\n    font-family: ", ";\n  }\n  div {\n    margin: 20px 0 0;\n    p{\n      color: ", ";\n    }\n  }\n  @media (min-width: 768px){\n    width: 50%;\n    height: calc(100vh - 97px);\n  }\n\n  @media (min-width: 1024px){\n    width: 500px;\n  }\n"])), function (_ref4) {
+  var _theme$colors;
   var theme = _ref4.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$fonts2 = theme.fonts) === null || _theme$fonts2 === void 0 ? void 0 : (_theme$fonts2$special = _theme$fonts2.special) === null || _theme$fonts2$special === void 0 ? void 0 : _theme$fonts2$special.name;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#fff';
 }, function (_ref5) {
+  var _theme$fonts2, _theme$fonts2$special;
   var theme = _ref5.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$fonts2 = theme.fonts) === null || _theme$fonts2 === void 0 ? void 0 : (_theme$fonts2$special = _theme$fonts2.special) === null || _theme$fonts2$special === void 0 ? void 0 : _theme$fonts2$special.name;
+}, function (_ref6) {
+  var theme = _ref6.theme;
   return theme.colors.titleHomeColor;
 });
 exports.SearchLocationsContainer = SearchLocationsContainer;
-var DeliveryPickupContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  flex-direction: row-reverse;\n  position: relative;\n  border-radius: 0px;\n  border: 1px solid ", ";\n  height: 52px;\n  background-color: transparent;\n\n  button {\n    outline: none;\n    background: none;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    z-index: 1;\n  }\n\n  &::after {\n    ", "}\n"])), function (_ref6) {
-  var theme = _ref6.theme;
+var DeliveryPickupContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  display: flex;\n  flex-direction: row-reverse;\n  position: relative;\n  border-radius: 0px;\n  border: 1px solid ", ";\n  height: 52px;\n  background-color: transparent;\n\n  button {\n    outline: none;\n    background: none;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    z-index: 1;\n  }\n\n  &::after {\n    ", "}\n"])), function (_ref7) {
+  var theme = _ref7.theme;
   return theme.colors.gold;
-}, function (_ref7) {
-  var orderTypeSelected = _ref7.orderTypeSelected;
-  return orderTypeSelected === 1 ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      content: \"\";\n      background:  ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      left: 6px;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n    "])), function (_ref8) {
-    var theme = _ref8.theme;
-    return theme.colors.gold;
-  }) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      content: \"\";\n      background: ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n      left: 50%;\n    "])), function (_ref9) {
+}, function (_ref8) {
+  var orderTypeSelected = _ref8.orderTypeSelected;
+  return orderTypeSelected === 1 ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      content: \"\";\n      background:  ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      left: 6px;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n    "])), function (_ref9) {
     var theme = _ref9.theme;
+    return theme.colors.gold;
+  }) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      content: \"\";\n      background: ", ";\n      position: absolute;\n      transition: all 0.2s linear 0s;\n      bottom: 5px;\n      height: calc(100% - 10px);\n      width: calc(50% - 6px);\n      left: 50%;\n    "])), function (_ref10) {
+    var theme = _ref10.theme;
     return theme.colors.gold;
   });
 });

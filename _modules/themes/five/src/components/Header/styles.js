@@ -24,7 +24,7 @@ var Header = _styledComponents.default.div(_templateObject || (_templateObject =
 exports.Header = Header;
 var InnerHeader = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  color: #FFF;\n  justify-content: space-between;\n  width: 98%;\n  margin: 15px auto;\n  align-items: center;\n"])));
 exports.InnerHeader = InnerHeader;
-var LogoHeader = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  img {\n    width: ", ";\n    height: ", ";\n    margin: 0;\n    vertical-align: middle;\n    margin-left: 10px;\n\n    ", "\n\n    @media (min-width: 768px) {\n      width: ", ";\n    }\n  }\n\n  ", "\n\n  @media (min-width: 768px) {\n    img:nth-child(1) {\n      display: block;\n    }\n    img:nth-child(2) {\n      display: none;\n    }\n  }\n"])), function (props) {
+var LogoHeader = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  img {\n    object-fit: contain;\n    width: ", ";\n    height: ", ";\n    margin: 0;\n    vertical-align: middle;\n    margin-left: 10px;\n\n    ", "\n\n    @media (min-width: 768px) {\n      width: ", ";\n    }\n  }\n\n  ", "\n\n  @media (min-width: 768px) {\n    img:nth-child(1) {\n      display: block;\n    }\n    img:nth-child(2) {\n      display: none;\n    }\n  }\n"])), function (props) {
   var _props$imgW;
   return (_props$imgW = props.imgW) !== null && _props$imgW !== void 0 ? _props$imgW : '35px';
 }, function (props) {

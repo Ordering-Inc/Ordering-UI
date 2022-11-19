@@ -42,27 +42,35 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 });
 exports.Container = Container;
 var Content = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  position: relative;\n  border-radius: 16px;\n  padding: 10px;\n\n  ", "\n\n  ", "\n"])), function (_ref7) {
-  var _theme$layouts2, _theme$layouts2$order, _theme$layouts2$order2, _theme$layouts2$order3, _theme$colors;
+  var _theme$layouts2, _theme$layouts2$order, _theme$layouts2$order2, _theme$layouts2$order3, _theme$colors3;
   var theme = _ref7.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$order = _theme$layouts2.orders) === null || _theme$layouts2$order === void 0 ? void 0 : (_theme$layouts2$order2 = _theme$layouts2$order.components) === null || _theme$layouts2$order2 === void 0 ? void 0 : (_theme$layouts2$order3 = _theme$layouts2$order2.layout) === null || _theme$layouts2$order3 === void 0 ? void 0 : _theme$layouts2$order3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      background: #000;\n      color: #fff;\n      border-radius: 0;\n      border: 1px solid #fff;\n      .order-status {\n        color: ", ";\n        width: 230px;\n      }\n      .orders-detail {\n        margin-top: 5px;\n      }\n  "])), theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold);
-}, function (_ref8) {
-  var isCustomerMode = _ref8.isCustomerMode;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts2 = theme.layouts) === null || _theme$layouts2 === void 0 ? void 0 : (_theme$layouts2$order = _theme$layouts2.orders) === null || _theme$layouts2$order === void 0 ? void 0 : (_theme$layouts2$order2 = _theme$layouts2$order.components) === null || _theme$layouts2$order2 === void 0 ? void 0 : (_theme$layouts2$order3 = _theme$layouts2$order2.layout) === null || _theme$layouts2$order3 === void 0 ? void 0 : _theme$layouts2$order3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      background: ", ";\n      color: ", ";\n      border-radius: 0;\n      border: 1px solid #fff;\n      .order-status {\n        color: ", ";\n        width: 230px;\n      }\n      .orders-detail {\n        margin-top: 5px;\n      }\n  "])), function (_ref8) {
+    var _theme$colors;
+    var theme = _ref8.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiaryContrast) || '#fff';
+  }, function (_ref9) {
+    var _theme$colors2;
+    var theme = _ref9.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#fff';
+  }, theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.gold);
+}, function (_ref10) {
+  var isCustomerMode = _ref10.isCustomerMode;
   return isCustomerMode ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    align-items: center;\n  "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    align-items: flex-start;\n    flex: 1;\n  "])));
 });
 exports.Content = Content;
-var Price = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 35%;\n  \n  ", "\n\n  h2 {\n    font-size: 16px;\n    margin-block-end: ", ";\n    margin-block-start: 0.1em;\n    font-weight: normal;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: ", ";\n    color: #ff9300;\n    font-size: 0.8em;\n    overflow:hidden;\n    text-overflow: ellipsis;\n    margin-left: 5px;\n  }\n\n  p[name='view-cart']{\n    color: ", ";\n    cursor: pointer;\n  }\n\n  @media (min-width: 480px) {\n    ", "\n  }\n"])), function (_ref9) {
-  var isCustomerMode = _ref9.isCustomerMode;
+var Price = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 35%;\n  \n  ", "\n\n  h2 {\n    font-size: 16px;\n    margin-block-end: ", ";\n    margin-block-start: 0.1em;\n    font-weight: normal;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: ", ";\n    color: #ff9300;\n    font-size: 0.8em;\n    overflow:hidden;\n    text-overflow: ellipsis;\n    margin-left: 5px;\n  }\n\n  p[name='view-cart']{\n    color: ", ";\n    cursor: pointer;\n  }\n\n  @media (min-width: 480px) {\n    ", "\n  }\n"])), function (_ref11) {
+  var isCustomerMode = _ref11.isCustomerMode;
   return isCustomerMode ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  text-align: end;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: flex-end;\n    flex-direction: column;\n    align-items: flex-end;\n  "])));
-}, function (_ref10) {
-  var isBusinessesPage = _ref10.isBusinessesPage;
+}, function (_ref12) {
+  var isBusinessesPage = _ref12.isBusinessesPage;
   return isBusinessesPage ? '0.1em' : '1em';
-}, function (_ref11) {
-  var isBusinessesPage = _ref11.isBusinessesPage;
+}, function (_ref13) {
+  var isBusinessesPage = _ref13.isBusinessesPage;
   return isBusinessesPage ? '0.1em' : '1em';
 }, function (props) {
   return props.theme.colors.primary;
-}, function (_ref12) {
-  var isCustomerMode = _ref12.isCustomerMode;
+}, function (_ref14) {
+  var isCustomerMode = _ref14.isCustomerMode;
   return !isCustomerMode && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      flex-direction: row;\n      align-items: center;\n    "])));
 });
 exports.Price = Price;
@@ -87,30 +95,30 @@ var ButtonWrapper = _styledComponents.default.div(_templateObject19 || (_templat
   return props.theme.colors.primaryContrast;
 }, function (props) {
   return props.theme.colors.primary;
-}, function (_ref13) {
-  var _theme$layouts3, _theme$layouts3$order, _theme$layouts3$order2, _theme$layouts3$order3, _theme$colors2, _theme$colors3;
-  var theme = _ref13.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$order = _theme$layouts3.orders) === null || _theme$layouts3$order === void 0 ? void 0 : (_theme$layouts3$order2 = _theme$layouts3$order.components) === null || _theme$layouts3$order2 === void 0 ? void 0 : (_theme$layouts3$order3 = _theme$layouts3$order2.layout) === null || _theme$layouts3$order3 === void 0 ? void 0 : _theme$layouts3$order3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      button {\n        border: 0;\n        border-radius: 0;\n        color: #fff;\n        background: ", ";\n        \n        &.reorder {\n          background: ", ";\n          &:hover {\n            background: #b92d1b;\n          }\n        }\n      }\n  "])), theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary, theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.primary);
+}, function (_ref15) {
+  var _theme$layouts3, _theme$layouts3$order, _theme$layouts3$order2, _theme$layouts3$order3, _theme$colors4, _theme$colors5;
+  var theme = _ref15.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts3 = theme.layouts) === null || _theme$layouts3 === void 0 ? void 0 : (_theme$layouts3$order = _theme$layouts3.orders) === null || _theme$layouts3$order === void 0 ? void 0 : (_theme$layouts3$order2 = _theme$layouts3$order.components) === null || _theme$layouts3$order2 === void 0 ? void 0 : (_theme$layouts3$order3 = _theme$layouts3$order2.layout) === null || _theme$layouts3$order3 === void 0 ? void 0 : _theme$layouts3$order3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      button {\n        border: 0;\n        border-radius: 0;\n        color: #fff;\n        background: ", ";\n        \n        &.reorder {\n          background: ", ";\n          &:hover {\n            background: #b92d1b;\n          }\n        }\n      }\n  "])), theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.primary, theme === null || theme === void 0 ? void 0 : (_theme$colors5 = theme.colors) === null || _theme$colors5 === void 0 ? void 0 : _theme$colors5.primary);
 });
 exports.ButtonWrapper = ButtonWrapper;
 var Logo = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  width: 55px;\n  height: 55px;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  border-radius: 7.6px;\n\n  img {\n    width: 100%;\n    height: 100%;\n    border-radius: 7.6px;\n  }\n\n  @media (min-width: 480px){\n    width: 86px;\n    height: 86px;\n  }\n"])));
 exports.Logo = Logo;
 var TitleContainer = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
 exports.TitleContainer = TitleContainer;
-var Map = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n  min-height: ", ";\n  img{\n    width: 100%;\n    height: 100%;\n    border-top-left-radius: 16px;\n    border-top-right-radius: 16px;\n    border-radius: ", ";\n    image-rendering: -webkit-optimize-contrast;\n    object-fit: cover;\n  }\n  @media(min-width: 480px){\n    height: ", ";\n    min-height: ", "\n  }\n"])), function (_ref14) {
-  var isBusinessesPage = _ref14.isBusinessesPage;
-  return isBusinessesPage ? '200px' : '88px';
-}, function (_ref15) {
-  var isBusinessesPage = _ref15.isBusinessesPage;
-  return isBusinessesPage && '175px';
-}, function (_ref16) {
+var Map = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n  min-height: ", ";\n  img{\n    width: 100%;\n    height: 100%;\n    border-top-left-radius: 16px;\n    border-top-right-radius: 16px;\n    border-radius: ", ";\n    image-rendering: -webkit-optimize-contrast;\n    object-fit: cover;\n  }\n  @media(min-width: 480px){\n    height: ", ";\n    min-height: ", "\n  }\n"])), function (_ref16) {
   var isBusinessesPage = _ref16.isBusinessesPage;
-  return isBusinessesPage && '16px';
+  return isBusinessesPage ? '200px' : '88px';
 }, function (_ref17) {
   var isBusinessesPage = _ref17.isBusinessesPage;
-  return isBusinessesPage ? '200px' : '100px';
+  return isBusinessesPage && '175px';
 }, function (_ref18) {
   var isBusinessesPage = _ref18.isBusinessesPage;
+  return isBusinessesPage && '16px';
+}, function (_ref19) {
+  var isBusinessesPage = _ref19.isBusinessesPage;
+  return isBusinessesPage ? '200px' : '100px';
+}, function (_ref20) {
+  var isBusinessesPage = _ref20.isBusinessesPage;
   return isBusinessesPage && '200px';
 });
 exports.Map = Map;
@@ -122,9 +130,9 @@ var FavoriteWrapper = _styledComponents.default.div(_templateObject24 || (_templ
 exports.FavoriteWrapper = FavoriteWrapper;
 var ReviewWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  .review-sent {\n    border-radius: 7.6px;\n  }\n"])));
 exports.ReviewWrapper = ReviewWrapper;
-var WowPointsWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 10px;\n  top: 58px;\n  p{\n    color: ", ";\n    margin: 0;\n    font-size: 14px;\n  }\n"])), function (_ref19) {
-  var _theme$colors4;
-  var theme = _ref19.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.gold;
+var WowPointsWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 10px;\n  top: 58px;\n  p{\n    color: ", ";\n    margin: 0;\n    font-size: 14px;\n  }\n"])), function (_ref21) {
+  var _theme$colors6;
+  var theme = _ref21.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors6 = theme.colors) === null || _theme$colors6 === void 0 ? void 0 : _theme$colors6.gold;
 });
 exports.WowPointsWrapper = WowPointsWrapper;

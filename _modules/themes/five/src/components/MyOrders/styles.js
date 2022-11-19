@@ -12,9 +12,13 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px;\n  overflow: hidden;\n  min-height: auto;\n  width: 100%;\n  box-sizing: border-box;\n  position: relative;\n\n  > h1 {\n    font-weight: 600;\n    font-size: 32px;\n    line-height: 48px;\n    margin-bottom: 7px;\n    margin-top: 0px;\n    text-transform: capitalize;\n  }\n\n  ", "\n\n  @media (min-width: 769px) {\n    ", "\n    margin-left: auto;\n    margin-right: auto;\n  }\n\n"])), function (_ref) {
   var pfchangs = _ref.pfchangs;
-  return pfchangs && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    > h1 {\n      color: #fff;\n    }\n  "])));
-}, function (_ref2) {
-  var hideOrders = _ref2.hideOrders;
+  return pfchangs && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    > h1 {\n      color: ", ";\n    }\n  "])), function (_ref2) {
+    var _theme$colors;
+    var theme = _ref2.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#fff';
+  });
+}, function (_ref3) {
+  var hideOrders = _ref3.hideOrders;
   return !hideOrders ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      padding: 40px;\n      width: 80%;\n    \n      @media (min-width: 993px) {\n        min-height: calc(100vh - 382px);\n      }\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      padding: 0;\n      width: 100%;\n\n      @media (min-width: 993px) {\n        min-height: 'auto';\n      }\n    "])));
 });
 exports.Container = Container;
@@ -26,13 +30,13 @@ var OrderGroupFilterWrapper = _styledComponents.default.div(_templateObject6 || 
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n        margin-right: 5px;\n        margin-left: 0;\n      "])));
 });
 exports.OrderGroupFilterWrapper = OrderGroupFilterWrapper;
-var NoOrdersWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 50px 0px;\n  position: absolute;\n  box-sizing: border-box;\n  height: calc(100% - 120px);\n  width: 100%;\n  ", "\n  > p {\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 24px;\n    margin-top: 0px;\n    margin-bottom: 25px;\n  }\n\n  button {\n    height: 44px;\n  }\n  @media (min-width: 993px){\n    ", "\n  }\n"])), function (_ref3) {
+var NoOrdersWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 50px 0px;\n  position: absolute;\n  box-sizing: border-box;\n  height: calc(100% - 120px);\n  width: 100%;\n  ", "\n  > p {\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 24px;\n    margin-top: 0px;\n    margin-bottom: 25px;\n  }\n\n  button {\n    height: 44px;\n  }\n  @media (min-width: 993px){\n    ", "\n  }\n"])), function (_ref4) {
   var _theme$orders, _theme$orders$compone, _theme$orders$compone2;
-  var theme = _ref3.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$orders = theme.orders) === null || _theme$orders === void 0 ? void 0 : (_theme$orders$compone = _theme$orders.components) === null || _theme$orders$compone === void 0 ? void 0 : (_theme$orders$compone2 = _theme$orders$compone.layout) === null || _theme$orders$compone2 === void 0 ? void 0 : _theme$orders$compone2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    position: relative;\n  "])));
-}, function (_ref4) {
-  var _theme$orders2, _theme$orders2$compon, _theme$orders2$compon2;
   var theme = _ref4.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$orders = theme.orders) === null || _theme$orders === void 0 ? void 0 : (_theme$orders$compone = _theme$orders.components) === null || _theme$orders$compone === void 0 ? void 0 : (_theme$orders$compone2 = _theme$orders$compone.layout) === null || _theme$orders$compone2 === void 0 ? void 0 : _theme$orders$compone2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    position: relative;\n  "])));
+}, function (_ref5) {
+  var _theme$orders2, _theme$orders2$compon, _theme$orders2$compon2;
+  var theme = _ref5.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$orders2 = theme.orders) === null || _theme$orders2 === void 0 ? void 0 : (_theme$orders2$compon = _theme$orders2.components) === null || _theme$orders2$compon === void 0 ? void 0 : (_theme$orders2$compon2 = _theme$orders2$compon.layout) === null || _theme$orders2$compon2 === void 0 ? void 0 : _theme$orders2$compon2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      position: absolute;\n    "])));
 });
 exports.NoOrdersWrapper = NoOrdersWrapper;
@@ -42,11 +46,11 @@ var MyOrdersMenuContainer = _styledComponents.default.div(_templateObject12 || (
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n        margin-left: 15px;\n        margin-right: 15px;\n      "])));
 }, function (props) {
   return !props.featured && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      display: none\n    "])));
-}, function (_ref5) {
-  var pfchangs = _ref5.pfchangs;
-  return pfchangs && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid #fff;\n      div{\n        flex: 1;\n        div{\n          flex: 1;\n          display: flex; \n          justify-content: center;\n          padding: 20px;\n          border-bottom-width: 3px;\n        }\n      }\n      a{\n        font-size: 24px;\n        svg {\n          display: none;\n        }\n      }\n  "])));
 }, function (_ref6) {
   var pfchangs = _ref6.pfchangs;
+  return pfchangs && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid #fff;\n      div{\n        flex: 1;\n        div{\n          flex: 1;\n          display: flex; \n          justify-content: center;\n          padding: 20px;\n          border-bottom-width: 3px;\n        }\n      }\n      a{\n        font-size: 24px;\n        svg {\n          display: none;\n        }\n      }\n  "])));
+}, function (_ref7) {
+  var pfchangs = _ref7.pfchangs;
   return pfchangs && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      padding: 0;\n    "])));
 });
 exports.MyOrdersMenuContainer = MyOrdersMenuContainer;

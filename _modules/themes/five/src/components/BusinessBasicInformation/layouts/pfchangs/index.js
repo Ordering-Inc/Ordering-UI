@@ -16,6 +16,7 @@ var _dayjs = _interopRequireDefault(require("dayjs"));
 var _timezone = _interopRequireDefault(require("dayjs/plugin/timezone"));
 var _isBetween = _interopRequireDefault(require("dayjs/plugin/isBetween"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -28,7 +29,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _dayjs.default.extend(_timezone.default);
 _dayjs.default.extend(_isBetween.default);
 var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs(props) {
-  var _orderState$options;
+  var _orderState$options, _theme$colors, _theme$colors2;
   var businessState = props.businessState,
     isSkeleton = props.isSkeleton,
     setOpenBusinessInformation = props.setOpenBusinessInformation,
@@ -49,6 +50,7 @@ var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs
     _useState2 = _slicedToArray(_useState, 2),
     orderTypeSelected = _useState2[0],
     setOrderTypeSelected = _useState2[1];
+  var theme = (0, _styledComponents.useTheme)();
   var getBusinessType = function getBusinessType() {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
     var _types = [];
@@ -79,13 +81,13 @@ var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs
   }))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
     orderTypeSelected: orderTypeSelected
   }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 2 ? '#000' : '#FFF',
+    color: orderTypeSelected === 2 ? '#000' : (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#FFF',
     onClick: function onClick() {
       return handleChangeOrderType(2);
     },
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 1 ? '#000' : '#FFF',
+    color: orderTypeSelected === 1 ? '#000' : (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#FFF',
     onClick: function onClick() {
       return handleChangeOrderType(1);
     },

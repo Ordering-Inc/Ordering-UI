@@ -44,16 +44,24 @@ var UserData = _styledComponents.default.div(_templateObject10 || (_templateObje
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n     text-align: right;\n    "])));
 });
 exports.UserData = UserData;
-var SavedPlaces = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 90%;\n  text-align: center;\n  margin: 0 auto;\n  margin-top: 40px;\n  margin-bottom: 20px;\n\n\n  h1{\n    font-size: 24px;\n    text-align: left;\n    ", "\n  }\n\n  > div{\n    display: flex;\n    flex-direction: column-reverse;\n    align-items: center;\n  }\n\n  button{\n    width: 100%;\n    align-self: center;\n  }\n\n  ", "\n\n  @media (min-width: 768px){\n    width: 90%;\n    margin-top: 40px;\n    h1 {\n      text-align: center;\n    }\n    ul{\n      width: 100%;\n    }\n    button {\n      width: 50%;\n      align-self: flex-end;\n    }\n    ", "\n  }\n\n"])), function (props) {
+var SavedPlaces = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 90%;\n  text-align: center;\n  margin: 0 auto;\n  margin-top: 40px;\n  margin-bottom: 20px;\n\n\n  h1{\n    font-size: 24px;\n    text-align: left;\n    ", "\n    color: ", ";\n  }\n\n  > div{\n    display: flex;\n    flex-direction: column-reverse;\n    align-items: center;\n  }\n\n  button{\n    width: 100%;\n    align-self: center;\n  }\n\n  ", "\n\n  @media (min-width: 768px){\n    width: 90%;\n    margin-top: 40px;\n    h1 {\n      text-align: center;\n    }\n    ul{\n      width: 100%;\n    }\n    button {\n      width: 50%;\n      align-self: flex-end;\n    }\n    ", "\n  }\n\n"])), function (props) {
   var _props$theme3;
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    text-align: right;\n    "])));
 }, function (_ref3) {
-  var _theme$profile3, _theme$profile3$compo, _theme$profile3$compo2;
+  var _theme$colors;
   var theme = _ref3.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$profile3 = theme.profile) === null || _theme$profile3 === void 0 ? void 0 : (_theme$profile3$compo = _theme$profile3.components) === null || _theme$profile3$compo === void 0 ? void 0 : (_theme$profile3$compo2 = _theme$profile3$compo.layout) === null || _theme$profile3$compo2 === void 0 ? void 0 : _theme$profile3$compo2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      width: 90%;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      margin: 25px auto auto;\n      box-sizing: border-box;\n      margin-bottom: 20px;\n      * {\n        color: #fff;\n      }\n      button { \n        display: none;\n      }\n      > div {\n        padding: 0;\n      }\n      h1 { \n        display: none;\n      }\n      \n      ul {\n        box-sizing: border-box;\n        border: 1px solid #fff;\n        padding: 0px;\n        width: 100%;\n        margin: 0px;\n      }\n    "])));
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#fff';
 }, function (_ref4) {
-  var _theme$profile4, _theme$profile4$compo, _theme$profile4$compo2;
+  var _theme$profile3, _theme$profile3$compo, _theme$profile3$compo2;
   var theme = _ref4.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$profile3 = theme.profile) === null || _theme$profile3 === void 0 ? void 0 : (_theme$profile3$compo = _theme$profile3.components) === null || _theme$profile3$compo === void 0 ? void 0 : (_theme$profile3$compo2 = _theme$profile3$compo.layout) === null || _theme$profile3$compo2 === void 0 ? void 0 : _theme$profile3$compo2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      width: 90%;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      margin: 25px auto auto;\n      box-sizing: border-box;\n      margin-bottom: 20px;\n      * {\n        color: ", ";\n      }\n      button { \n        display: none;\n      }\n      > div {\n        padding: 0;\n      }\n      h1 { \n        display: none;\n      }\n      \n      ul {\n        box-sizing: border-box;\n        border: 1px solid #fff;\n        padding: 0px;\n        width: 100%;\n        margin: 0px;\n      }\n    "])), function (_ref5) {
+    var _theme$colors2;
+    var theme = _ref5.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#fff';
+  });
+}, function (_ref6) {
+  var _theme$profile4, _theme$profile4$compo, _theme$profile4$compo2;
+  var theme = _ref6.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$profile4 = theme.profile) === null || _theme$profile4 === void 0 ? void 0 : (_theme$profile4$compo = _theme$profile4.components) === null || _theme$profile4$compo === void 0 ? void 0 : (_theme$profile4$compo2 = _theme$profile4$compo.layout) === null || _theme$profile4$compo2 === void 0 ? void 0 : _theme$profile4$compo2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n        ul {\n          width: 70%;\n          margin: 30px 0 0 30px;\n        }\n      "])));
 });
 exports.SavedPlaces = SavedPlaces;
