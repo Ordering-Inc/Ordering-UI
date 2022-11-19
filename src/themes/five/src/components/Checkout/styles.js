@@ -9,7 +9,7 @@ export const Container = styled.div`
   ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
   position: relative;
     * {
-      color: #fff;
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     }
   `}
 
@@ -84,7 +84,7 @@ export const UserDetailsContainer = styled.div`
     border-bottom: 1px solid #fff;
     border-right: 1px solid #fff;
     margin-bottom: 20px;
-    background: #000;
+    background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
   `}
 `
 
@@ -107,7 +107,7 @@ export const BusinessDetailsContainer = styled(UserDetailsContainer)`
     
   ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
     border: 1px solid #fff;
-    background: #000;
+    background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
     padding: 30px;
   `}
 `
@@ -125,7 +125,7 @@ export const PaymentMethodContainer = styled.div`
 
   ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
     border: 1px solid #fff;
-    background: #000;
+    background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
     padding: 30px;
     margin: 0;
   `}
@@ -312,12 +312,12 @@ export const DeliveryOptionsContainer = styled.div`
     padding: 20px 20px;
     border: 1px solid #fff;
     margin-bottom: 20px;
-    background: #000;
+    background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
     #select-input {
       margin-bottom: 0px;
     }
     > div {
-      background-color: #000!important;
+      background-color: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'} !important;
       border: 1px solid #fff;
       border-radius: 0px;
       color: #fff !important;
@@ -325,7 +325,7 @@ export const DeliveryOptionsContainer = styled.div`
       box-sizing: border-box;
 
       > div#list {
-        background-color: #000 !important;
+        background-color: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'} !important;
         border: 1px solid #fff;
         border-radius: 0px;
       }
@@ -399,7 +399,7 @@ export const SubtitleContainer = styled.div`
   border-left: 1px solid #fff;
   border-top: 1px solid #fff;
   border-right: 1px solid #fff;
-  background: #000;
+  background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
   h2 {
     font-size: 16px;
     margin: 0;
@@ -411,7 +411,7 @@ export const ItemHeader = styled.div`
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
-  background: #000;
+  background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
 `
 
 export const BusinessDetails = styled.div`
@@ -421,7 +421,7 @@ export const BusinessDetails = styled.div`
   border-top: 1px solid #fff;
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
-  background: #000;
+  background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
   img{
     width: 100%;
     height: 200px;
@@ -450,7 +450,7 @@ export const MasterCardCoupon = styled.div`
   padding: 0px !important;
   width: 100%;
   box-sizing: border-box;
-  background: #000;
+  background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
   img {
     width: 100%
   }

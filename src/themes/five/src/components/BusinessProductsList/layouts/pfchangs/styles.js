@@ -126,6 +126,9 @@ export const WrapperNotFound = styled.div`
 
 export const HeaderWrapper = styled.div`
   font-family: ${({ theme }) => theme.fonts?.special?.name}, Arial, Helvetica;
+  h3{
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
+  }
 `
 
 export const DescriptionModalContainer = styled.div`

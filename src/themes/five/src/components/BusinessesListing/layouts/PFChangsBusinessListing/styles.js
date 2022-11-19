@@ -64,7 +64,7 @@ export const LeftContainer = styled.div`
   flex-direction: column;
   margin: 0;
   width: 100%;
-  color: #fff;
+  color: ${({ theme }) => theme?.colors?.tertiary || '#FFF'};
   padding-right: 10px;
   overflow: hidden;
   text-align: center;

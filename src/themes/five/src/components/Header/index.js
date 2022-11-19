@@ -57,9 +57,9 @@ export const Header = (props) => {
     isShowOrderOptions,
     isHideSignup,
     isCustomerMode,
-    franchiseId
+    franchiseId,
+    slug
   } = props
-
   const { pathname } = useLocation()
   const [events] = useEvent()
   const [{ parseDate }] = useUtils()
@@ -86,7 +86,7 @@ export const Header = (props) => {
   const [isFarAway, setIsFarAway] = useState(false)
   const isAlsea = ordering.project === 'alsea'
 
-  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.slug.includes('pf_changs')))) || null // change filter includes pf_changs for cart?.business?.franchise_id === franchiseId || !franchiseId || !cart?.business?.franchiseId) DON'T MERGE THIS TO MASTER
+  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.slug.includes(slug || 'pf_changs')))) || null // change filter includes pf_changs for cart?.business?.franchise_id === franchiseId || !franchiseId || !cart?.business?.franchiseId) DON'T MERGE THIS TO MASTER
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
@@ -98,7 +98,7 @@ export const Header = (props) => {
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
 
   const headerLayout = theme?.layouts?.header?.components?.layout?.type
-  const headerBackgroundColor = theme?.layouts?.header?.components?.style?.backgroundColor
+  const headerBackgroundColor = theme?.colors?.tertiaryContrast || theme?.layouts?.header?.components?.style?.backgroundColor
   const headerBorderBottom = theme?.layouts?.header?.components?.style?.borderBottom
   const headerLogo = theme?.layouts?.header?.components?.logo?.components?.image
   const isloginSignupLayoutPF = theme?.layouts?.header?.components?.login_signup?.components?.layout?.type === 'pfchangs'

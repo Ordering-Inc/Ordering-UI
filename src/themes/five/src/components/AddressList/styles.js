@@ -207,6 +207,7 @@ export const AddressTitle = styled.span`
     margin-bottom: 0;
     border-bottom: 1px solid #fff;
     font-weight: 600;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   `}
 `
 
@@ -287,6 +288,7 @@ export const TitleAddress = styled.h1`
   margin: auto;
   font-size: 24px;
   margin-bottom: 20px;
+  color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
     font-family: ${theme?.fonts?.special?.name};
   `}

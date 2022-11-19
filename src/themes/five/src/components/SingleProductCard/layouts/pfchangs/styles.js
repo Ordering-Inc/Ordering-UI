@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 export const CardContainer = styled.div`
   min-height: 400px;  
-  background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#000'};
+  background: ${({ soldOut, theme }) => soldOut ? '#6c757d33' : theme?.colors?.tertiaryContrast || '#000'};
   border: 1px solid ${({ theme }) => theme.colors.gold};
   box-sizing: border-box;
   cursor: pointer;
@@ -92,7 +92,7 @@ export const CardInfo = styled.div`
   padding: 10px;
   box-sizing: border-box;
   p {
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     text-align: left;
     font-size: 10px;
     ${props => props.theme?.rtl && css`
@@ -155,7 +155,7 @@ export const PriceWrapper = styled.div`
   display: flex;
   align-items: center;
   span {
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   }
 
   .off-price {
@@ -240,7 +240,7 @@ export const TitleWrapper = styled.div`
     font-size: 16px;
     font-weight: 500;
     text-align: left;
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

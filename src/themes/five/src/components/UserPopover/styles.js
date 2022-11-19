@@ -17,6 +17,10 @@ export const HeaderItem = styled.div`
     height: 40px;
     width: 40px;
   }
+  
+  p{
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'}
+  }
 
   .menu-list {
     font-size: 16px;
@@ -37,14 +41,14 @@ export const HeaderItem = styled.div`
   }
 
   ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
-    background: #000;
+    background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
     .menu-list {
       color: #000;
     }
     svg {
       width: 20px;
       height: 20px;
-      color: #fff;
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     }
     img {
       width: 28px;

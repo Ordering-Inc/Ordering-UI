@@ -19,7 +19,7 @@ export const Container = styled.div`
 
   ${({ pfchangs }) => pfchangs && css`
     > h1 {
-      color: #fff;
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     }
   `}
 

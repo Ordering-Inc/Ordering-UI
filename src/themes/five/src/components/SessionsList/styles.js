@@ -9,7 +9,7 @@ export const SessionsListContainer = styled.div`
   min-height: calc(100vh - 280px);
 
   ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   `}
 
   @media (min-width: 769px) {

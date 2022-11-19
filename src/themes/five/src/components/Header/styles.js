@@ -28,6 +28,7 @@ export const LogoHeader = styled.div`
   display: flex;
   align-items: center;
   img {
+    object-fit: contain;
     width: ${props => props.imgW ?? '35px'};
     height: ${(props) => props?.theme?.layouts?.header?.components?.layout?.type === 'pfchangs' ? '30px' : props.imgH ?? '45px'};
     margin: 0;

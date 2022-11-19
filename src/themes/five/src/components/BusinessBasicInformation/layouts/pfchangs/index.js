@@ -9,6 +9,7 @@ import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import isBetween from 'dayjs/plugin/isBetween'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 
 dayjs.extend(timezone)
 dayjs.extend(isBetween)
@@ -26,7 +27,7 @@ export const BusinessBasicInformationPFChangs = (props) => {
   const types = ['food', 'laundry', 'alcohol', 'groceries']
   const [{ optimizeImage }] = useUtils()
   const [orderTypeSelected, setOrderTypeSelected] = useState(orderState?.options?.type)
-
+  const theme = useTheme()
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -62,14 +63,14 @@ export const BusinessBasicInformationPFChangs = (props) => {
       </TitleContainer>
       <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
         <Button
-          color={orderTypeSelected === 2 ? '#000' : '#FFF'}
+          color={orderTypeSelected === 2 ? '#000' : theme?.colors?.tertiary || '#FFF'}
           onClick={() => handleChangeOrderType(2)}
           disabled={orderState?.loading}
         >
           {t('PICKUP', 'Pickup')}
         </Button>
         <Button
-          color={orderTypeSelected === 1 ? '#000' : '#FFF'}
+          color={orderTypeSelected === 1 ? '#000' : theme?.colors?.tertiary || '#FFF'}
           onClick={() => handleChangeOrderType(1)}
           disabled={orderState?.loading}
         >

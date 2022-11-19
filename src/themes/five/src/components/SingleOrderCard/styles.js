@@ -74,8 +74,8 @@ export const Content = styled.div`
   padding: 10px;
 
   ${({ theme }) => theme?.layouts?.orders?.components?.layout?.type === 'pfchangs' && css`
-      background: #000;
-      color: #fff;
+      background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#fff'};
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
       border-radius: 0;
       border: 1px solid #fff;
       .order-status {

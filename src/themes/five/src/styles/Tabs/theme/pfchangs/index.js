@@ -21,5 +21,5 @@ export const Tab = styled.div`
   text-align: center;
   font-size: 22px;
   margin-bottom: 5px;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.tertiary || '#fff'};
 `

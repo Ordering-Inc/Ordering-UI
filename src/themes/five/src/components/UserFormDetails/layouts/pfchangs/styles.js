@@ -7,6 +7,7 @@ export const FormInput = styled.form`
   width: 100%;
   border: 1px solid #fff;
   box-sizing: border-box;
+  color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   div.phone_number {
     margin-bottom: 20px;
     width: 100%;
@@ -88,7 +89,7 @@ export const InputGroup = styled.div`
   p {
     font-weight: 500;
     font-size: 16px;
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     width: 100%;
     text-align: left;
     margin: 0 0 7px 0;
@@ -184,7 +185,7 @@ export const Title = styled.div`
   border-bottom: 1px solid #fff;
   display: flex;
   justify-content: flex-start;
-  color: #fff;
+  color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   padding: 15px;
   h2{
     font-size: 16px;
@@ -192,7 +193,7 @@ export const Title = styled.div`
 `
 
 export const UserInformationContainer = styled.div`
-  color: #fff;
+  color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   width: 100%;
   display: flex;
   flex-direction: row;

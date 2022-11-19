@@ -22,7 +22,7 @@ export const Tab = styled.div`
     border: 1px solid transparent;
     @keyframes hoverTab {
       from { 
-        color: ${props => props.theme.colors.darkGray};
+        color: ${props => props.theme?.colors?.tertiary || props.theme.colors.darkGray};
       }
       to { 
         color: ${({ activeColor }) => activeColor || ''};
@@ -47,6 +47,6 @@ export const Tab = styled.div`
   `}
 
   ${({ active }) => !active && css`
-    color: ${props => props.theme.colors.darkGray};
+    color: ${props => props.theme?.colors?.tertiary || props.theme.colors.darkGray};
   `}
 `

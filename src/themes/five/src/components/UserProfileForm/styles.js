@@ -136,6 +136,7 @@ export const SavedPlaces = styled.div`
     ${props => props.theme?.rtl && css`
     text-align: right;
     `}
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   }
 
   > div{
@@ -158,7 +159,7 @@ export const SavedPlaces = styled.div`
       box-sizing: border-box;
       margin-bottom: 20px;
       * {
-        color: #fff;
+        color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
       }
       button { 
         display: none;

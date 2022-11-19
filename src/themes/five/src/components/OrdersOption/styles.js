@@ -13,7 +13,7 @@ export const OptionTitle = styled.div`
 
   ${({ theme }) => theme?.layouts?.general?.components?.layout?.type === 'pfchangs' && css`
     h1{
-      color: #fff;
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     }  
   `}
 

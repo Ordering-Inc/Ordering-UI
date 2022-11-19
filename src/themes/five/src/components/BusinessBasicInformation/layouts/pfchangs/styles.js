@@ -90,7 +90,7 @@ export const TitleContainer = styled.div`
   display: flex;
   align-items: center;
   h2{
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#FFF'};
     font-size: 20px;
   }
   svg {

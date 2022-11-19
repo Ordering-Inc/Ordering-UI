@@ -107,7 +107,7 @@ export const SearchLocationsContainer = styled.div`
   overflow-x: hidden;
   box-sizing: border-box;
   h1 {
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     font-family: ${({ theme }) => theme?.fonts?.special?.name};
   }
   div {
