@@ -1,141 +1,91 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BusinessListingSearchUI = exports.BusinessListingSearch = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _styles = require("./styles");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _SearchBar = require("../SearchBar");
-
 var _orderingComponents = require("ordering-components");
-
 var _BusinessController = require("../BusinessController");
-
 var _AutoScroll = require("../AutoScroll");
-
 var _BusinessTypeFilter = require("../BusinessTypeFilter");
-
 var _MyOrders = require("../MyOrders");
-
 var _styledComponents = require("styled-components");
-
 var _GoPrimitiveDot = _interopRequireDefault(require("@meronex/icons/go/GoPrimitiveDot"));
-
 var _utils = require("../../../../../utils");
-
 var _Buttons = require("../../styles/Buttons");
-
 var _SingleProductCard = require("../SingleProductCard");
-
 var _NotFoundSource = require("../NotFoundSource");
-
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
-
 var _BisDownArrow = _interopRequireDefault(require("@meronex/icons/bi/BisDownArrow"));
-
 var _BisUpArrow = _interopRequireDefault(require("@meronex/icons/bi/BisUpArrow"));
-
 var _Modal = require("../Modal");
-
 var _ProductForm = require("../ProductForm");
-
 var _MaxSectionItem = require("./MaxSectionItem");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var PIXELS_TO_SCROLL = 300;
-
 var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
   var _businessesSearchList, _sortItems$filter, _brandList$brands, _brandList$brands$fil, _orderState$options3, _orderState$options4, _orderState$options5, _businessesSearchList3, _businessesSearchList4, _businessesSearchList6, _curProduct$business, _curProduct$business2, _curProduct$product, _curProduct$product2;
-
   var businessesSearchList = props.businessesSearchList,
-      onBusinessClick = props.onBusinessClick,
-      handleChangeFilters = props.handleChangeFilters,
-      filters = props.filters,
-      handleChangeTermValue = props.handleChangeTermValue,
-      termValue = props.termValue,
-      paginationProps = props.paginationProps,
-      handleSearchbusinessAndProducts = props.handleSearchbusinessAndProducts,
-      brandList = props.brandList,
-      onRedirectPage = props.onRedirectPage,
-      onProductRedirect = props.onProductRedirect,
-      handleUpdateBusinessList = props.handleUpdateBusinessList,
-      _handleUpdateProducts = props.handleUpdateProducts;
-
+    onBusinessClick = props.onBusinessClick,
+    handleChangeFilters = props.handleChangeFilters,
+    filters = props.filters,
+    handleChangeTermValue = props.handleChangeTermValue,
+    termValue = props.termValue,
+    paginationProps = props.paginationProps,
+    handleSearchbusinessAndProducts = props.handleSearchbusinessAndProducts,
+    brandList = props.brandList,
+    onRedirectPage = props.onRedirectPage,
+    onProductRedirect = props.onProductRedirect,
+    handleUpdateBusinessList = props.handleUpdateBusinessList,
+    _handleUpdateProducts = props.handleUpdateProducts;
   var _useOrder = (0, _orderingComponents.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      orderState = _useOrder2[0];
-
+    _useOrder2 = _slicedToArray(_useOrder, 1),
+    orderState = _useOrder2[0];
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
-
   var _useState = (0, _react.useState)({
-    business: null,
-    product: null
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      curProduct = _useState2[0],
-      setCurProduct = _useState2[1];
-
+      business: null,
+      product: null
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    curProduct = _useState2[0],
+    setCurProduct = _useState2[1];
   var _useUtils = (0, _orderingComponents.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      parsePrice = _useUtils2$.parsePrice,
-      optimizeImage = _useUtils2$.optimizeImage,
-      parseDistance = _useUtils2$.parseDistance;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    _useUtils2$ = _useUtils2[0],
+    parsePrice = _useUtils2$.parsePrice,
+    optimizeImage = _useUtils2$.optimizeImage,
+    parseDistance = _useUtils2$.parseDistance;
   var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      auth = _useSession2[0].auth;
-
+    _useSession2 = _slicedToArray(_useSession, 1),
+    auth = _useSession2[0].auth;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width;
-
-  var maxDeliveryFeeOptions = [15, 25, 35, 'default']; // const maxProductPriceOptions = [5, 10, 15, 'default']
-
+    width = _useWindowSize.width;
+  var maxDeliveryFeeOptions = [15, 25, 35, 'default'];
+  // const maxProductPriceOptions = [5, 10, 15, 'default']
   var maxDistanceOptions = [1000, 2000, 5000, 'default'];
   var maxTimeOptions = [5, 15, 30, 'default'];
   var sortItems = [{
@@ -167,36 +117,29 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
   var noResults = !businessesSearchList.loading && !businessesSearchList.lengthError && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList = businessesSearchList.businesses) === null || _businessesSearchList === void 0 ? void 0 : _businessesSearchList.length) === 0;
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle, _document$documentEle2, _businessesSearchList2;
-
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
     var badScrollPosition = innerHeightScrolltop < ((_document$documentEle2 = document.documentElement) === null || _document$documentEle2 === void 0 ? void 0 : _document$documentEle2.offsetHeight);
     var hasMore = !((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) === (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage));
     if (badScrollPosition || businessesSearchList !== null && businessesSearchList !== void 0 && businessesSearchList.loading || ((_businessesSearchList2 = businessesSearchList.error) === null || _businessesSearchList2 === void 0 ? void 0 : _businessesSearchList2.length) > 0 || !hasMore) return;
     handleSearchbusinessAndProducts();
   }, [businessesSearchList.loading, paginationProps]);
-
   var handleChangeBrandFilter = function handleChangeBrandFilter(brandId) {
     var _filters$franchise_id, _filters$franchise_id2;
-
     var franchiseIds = _toConsumableArray(filters === null || filters === void 0 ? void 0 : filters.franchise_ids);
-
     if (filters !== null && filters !== void 0 && (_filters$franchise_id = filters.franchise_ids) !== null && _filters$franchise_id !== void 0 && _filters$franchise_id.includes(brandId)) franchiseIds = filters === null || filters === void 0 ? void 0 : (_filters$franchise_id2 = filters.franchise_ids) === null || _filters$franchise_id2 === void 0 ? void 0 : _filters$franchise_id2.filter(function (item) {
       return item !== brandId;
     });else franchiseIds.push(brandId);
     handleChangeFilters && handleChangeFilters('franchise_ids', franchiseIds);
   };
-
   var handleChangePriceRange = function handleChangePriceRange(value) {
     if (value === (filters === null || filters === void 0 ? void 0 : filters.price_level)) handleChangeFilters('price_level', null);else handleChangeFilters('price_level', value);
   };
-
   var _onProductClick = function onProductClick(product, business) {
     setCurProduct({
       business: business,
       product: product
     });
   };
-
   var handleRedirectToCart = function handleRedirectToCart(product, code) {
     setCurProduct({
       business: null,
@@ -204,14 +147,12 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     });
     onBusinessClick(curProduct === null || curProduct === void 0 ? void 0 : curProduct.business);
   };
-
   var closeModalProductForm = function closeModalProductForm() {
     setCurProduct({
       business: null,
       product: null
     });
   };
-
   (0, _react.useEffect)(function () {
     window.addEventListener('scroll', handleScroll);
     return function () {
@@ -229,11 +170,9 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     search: termValue
   }), /*#__PURE__*/_react.default.createElement(_styles.FiltersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Filters, null, /*#__PURE__*/_react.default.createElement(_styles.SortContainer, null, /*#__PURE__*/_react.default.createElement("h3", null, t('SORT', 'Sort')), sortItems === null || sortItems === void 0 ? void 0 : (_sortItems$filter = sortItems.filter(function (item) {
     var _orderState$options, _orderState$options2;
-
     return !((orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 && (item === null || item === void 0 ? void 0 : item.value) === 'pickup_time') && !((orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 2 && (item === null || item === void 0 ? void 0 : item.value) === 'delivery_time');
   })) === null || _sortItems$filter === void 0 ? void 0 : _sortItems$filter.map(function (item) {
     var _filters$orderBy, _filters$orderBy2, _filters$orderBy3;
-
     return /*#__PURE__*/_react.default.createElement(_styles.SortItem, {
       key: item === null || item === void 0 ? void 0 : item.value,
       onClick: function onClick() {
@@ -253,7 +192,6 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     }));
   })), !(brandList !== null && brandList !== void 0 && brandList.loading) && (brandList === null || brandList === void 0 ? void 0 : brandList.brands.map(function (brand, i) {
     var _filters$franchise_id3;
-
     return (brand === null || brand === void 0 ? void 0 : brand.enabled) && /*#__PURE__*/_react.default.createElement(_styles.BrandItem, {
       key: i,
       onClick: function onClick() {
@@ -307,7 +245,6 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     isColumnMode: width <= 681
   }, businessesSearchList.businesses.map(function (business, i) {
     var _orderState$options6;
-
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
       className: "card",
@@ -329,7 +266,6 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     }
   }, t('LOAD_MORE_BUSINESS', 'Load more business')))), businessesSearchList.loading && /*#__PURE__*/_react.default.createElement(_styles.BusinessControllerSkeleton, null, _toConsumableArray(Array(3).keys()).map(function (i) {
     var _orderState$options7, _businessesSearchList5;
-
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
@@ -341,11 +277,9 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     });
   })))), /*#__PURE__*/_react.default.createElement(_styles.ProductsList, null, (_businessesSearchList6 = businessesSearchList.businesses) === null || _businessesSearchList6 === void 0 ? void 0 : _businessesSearchList6.filter(function (business) {
     var _business$categories;
-
     return (business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) >= 0;
   }).map(function (business) {
     var _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _orderState$options8, _orderState$options9, _business$categories2;
-
     return /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessSearch, {
       key: "card-".concat(business === null || business === void 0 ? void 0 : business.id)
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, ((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
@@ -365,7 +299,6 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
       scrollId: "products-".concat(business === null || business === void 0 ? void 0 : business.id)
     }, business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.map(function (category) {
       var _category$products;
-
       return category === null || category === void 0 ? void 0 : (_category$products = category.products) === null || _category$products === void 0 ? void 0 : _category$products.map(function (product) {
         return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
           key: product === null || product === void 0 ? void 0 : product.id,
@@ -419,15 +352,11 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     onSave: handleRedirectToCart
   })));
 };
-
 exports.BusinessListingSearchUI = BusinessListingSearchUI;
-
 var BusinessListingSearch = function BusinessListingSearch(props) {
   var BusinessListSearch = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessListingSearchUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessSearchList, BusinessListSearch);
 };
-
 exports.BusinessListingSearch = BusinessListingSearch;

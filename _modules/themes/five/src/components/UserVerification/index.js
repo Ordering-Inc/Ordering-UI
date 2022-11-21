@@ -1,62 +1,35 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.UserVerification = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _reactOtpInput = _interopRequireDefault(require("react-otp-input"));
-
 var _orderingComponents = require("ordering-components");
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _Confirm = require("../Confirm");
-
 var _Modal = require("../Modal");
-
 var _Inputs = require("../../styles/Inputs");
-
 var _Buttons = require("../../styles/Buttons");
-
 var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
-
 var _utils = require("../../../../../utils");
-
 var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
-
 var _UserFormDetails = require("../UserFormDetails");
-
 var _styles = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var UserDetails = function UserDetails(props) {
   var userDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     isEdit: true,
@@ -64,81 +37,65 @@ var UserDetails = function UserDetails(props) {
     useDefualtSessionManager: true,
     UIComponent: _UserFormDetails.UserFormDetailsUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UserFormDetails, userDetailsProps);
 };
-
 var UserVerificationUI = function UserVerificationUI(props) {
   var _configs$verification, _configs$verification2, _phoneState$cellphone, _phoneState$cellphone2, _phoneState$cellphone3;
-
   var verifyEmailState = props.verifyEmailState,
-      verifyPhoneState = props.verifyPhoneState,
-      sendVerifyEmailCode = props.sendVerifyEmailCode,
-      sendVerifyPhoneCode = props.sendVerifyPhoneCode,
-      checkVerifyEmailCode = props.checkVerifyEmailCode,
-      checkVerifyPhoneCode = props.checkVerifyPhoneCode,
-      cleanErrorsState = props.cleanErrorsState;
-
+    verifyPhoneState = props.verifyPhoneState,
+    sendVerifyEmailCode = props.sendVerifyEmailCode,
+    sendVerifyPhoneCode = props.sendVerifyPhoneCode,
+    checkVerifyEmailCode = props.checkVerifyEmailCode,
+    checkVerifyPhoneCode = props.checkVerifyPhoneCode,
+    cleanErrorsState = props.cleanErrorsState;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useConfig = (0, _orderingComponents.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useSession = (0, _orderingComponents.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      _useSession2$ = _useSession2[0],
-      auth = _useSession2$.auth,
-      user = _useSession2$.user;
-
+    _useSession2 = _slicedToArray(_useSession, 1),
+    _useSession2$ = _useSession2[0],
+    auth = _useSession2$.auth,
+    user = _useSession2$.user;
   var _useState = (0, _react.useState)(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      otpState = _useState2[0],
-      setOtpState = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    otpState = _useState2[0],
+    setOtpState = _useState2[1];
   var _useState3 = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
-
+      open: false,
+      content: []
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    alertState = _useState4[0],
+    setAlertState = _useState4[1];
   var _useState5 = (0, _react.useState)({
-    email: false,
-    phone: false
-  }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      verificationState = _useState6[0],
-      setVerificationState = _useState6[1];
-
+      email: false,
+      phone: false
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    verificationState = _useState6[0],
+    setVerificationState = _useState6[1];
   var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      phoneState = _useState8[0],
-      setPhoneState = _useState8[1];
-
+    _useState8 = _slicedToArray(_useState7, 2),
+    phoneState = _useState8[0],
+    setPhoneState = _useState8[1];
   var _useState9 = (0, _react.useState)(false),
-      _useState10 = _slicedToArray(_useState9, 2),
-      modalIsOpen = _useState10[0],
-      setModalIsOpen = _useState10[1];
-
+    _useState10 = _slicedToArray(_useState9, 2),
+    modalIsOpen = _useState10[0],
+    setModalIsOpen = _useState10[1];
   var isEmailVerifyRequired = auth && (configs === null || configs === void 0 ? void 0 : (_configs$verification = configs.verification_email_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1' && !(user !== null && user !== void 0 && user.email_verified);
   var isPhoneVerifyRequired = auth && (configs === null || configs === void 0 ? void 0 : (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1' && !(user !== null && user !== void 0 && user.phone_verified);
   var phoneLength = (phoneState === null || phoneState === void 0 ? void 0 : phoneState.cellphone) && (phoneState === null || phoneState === void 0 ? void 0 : phoneState.country_phone_code) && (phoneState === null || phoneState === void 0 ? void 0 : (_phoneState$cellphone = phoneState.cellphone) === null || _phoneState$cellphone === void 0 ? void 0 : (_phoneState$cellphone2 = _phoneState$cellphone.split('')) === null || _phoneState$cellphone2 === void 0 ? void 0 : _phoneState$cellphone2.length);
   var lastNumbers = (phoneState === null || phoneState === void 0 ? void 0 : phoneState.cellphone) && (phoneState === null || phoneState === void 0 ? void 0 : phoneState.country_phone_code) && (phoneState === null || phoneState === void 0 ? void 0 : (_phoneState$cellphone3 = phoneState.cellphone) === null || _phoneState$cellphone3 === void 0 ? void 0 : _phoneState$cellphone3.split('').fill('*', 0, phoneLength - 2).join(''));
-
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, isEmailVerifyRequired ? verificationState.email : verificationState.phone),
-      _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
-      otpLeftTime = _useCountdownTimer2[0],
-      resetOtpLeftTime = _useCountdownTimer2[2];
-
+    _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
+    otpLeftTime = _useCountdownTimer2[0],
+    resetOtpLeftTime = _useCountdownTimer2[2];
   var numOtpInputs = isEmailVerifyRequired ? 6 : 4;
-
   var handleSendOtp = function handleSendOtp(opt) {
     resetOtpLeftTime();
-
     if (opt === 'phone') {
       sendVerifyPhoneCode({
         cellphone: phoneState === null || phoneState === void 0 ? void 0 : phoneState.cellphone,
@@ -146,12 +103,10 @@ var UserVerificationUI = function UserVerificationUI(props) {
       });
       return;
     }
-
     sendVerifyEmailCode({
       email: user === null || user === void 0 ? void 0 : user.email
     });
   };
-
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -161,7 +116,6 @@ var UserVerificationUI = function UserVerificationUI(props) {
     cleanErrorsState('phone');
     setOtpState('');
   };
-
   var setupUserPhoneNumber = function setupUserPhoneNumber() {
     if (!user || !(user !== null && user !== void 0 && user.cellphone) || !(user !== null && user !== void 0 && user.country_phone_code)) return;
     setPhoneState({
@@ -170,7 +124,6 @@ var UserVerificationUI = function UserVerificationUI(props) {
       formatted: "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ").concat(user === null || user === void 0 ? void 0 : user.cellphone)
     });
   };
-
   (0, _react.useEffect)(function () {
     if ((otpState === null || otpState === void 0 ? void 0 : otpState.length) === numOtpInputs) {
       if (verificationState.email) {
@@ -179,7 +132,6 @@ var UserVerificationUI = function UserVerificationUI(props) {
         });
         return;
       }
-
       if (verificationState.phone) {
         checkVerifyPhoneCode({
           cellphone: phoneState === null || phoneState === void 0 ? void 0 : phoneState.cellphone,
@@ -192,16 +144,13 @@ var UserVerificationUI = function UserVerificationUI(props) {
   (0, _react.useEffect)(function () {
     if (verifyEmailState !== null && verifyEmailState !== void 0 && verifyEmailState.errorSendCode || verifyEmailState !== null && verifyEmailState !== void 0 && verifyEmailState.errorCheckCode) {
       var _ref, _verifyEmailState$err, _verifyEmailState$err2, _verifyEmailState$err3;
-
       setAlertState({
         open: true,
         content: (_ref = (_verifyEmailState$err = verifyEmailState === null || verifyEmailState === void 0 ? void 0 : (_verifyEmailState$err2 = verifyEmailState.errorSendCode) === null || _verifyEmailState$err2 === void 0 ? void 0 : _verifyEmailState$err2[0]) !== null && _verifyEmailState$err !== void 0 ? _verifyEmailState$err : verifyEmailState === null || verifyEmailState === void 0 ? void 0 : (_verifyEmailState$err3 = verifyEmailState.errorCheckCode) === null || _verifyEmailState$err3 === void 0 ? void 0 : _verifyEmailState$err3[0]) !== null && _ref !== void 0 ? _ref : t('ERROR', 'Error')
       });
     }
-
     if (verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.errorSendCode || verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.errorCheckCode) {
       var _ref2, _verifyPhoneState$err, _verifyPhoneState$err2, _verifyPhoneState$err3;
-
       setAlertState({
         open: true,
         content: (_ref2 = (_verifyPhoneState$err = verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$err2 = verifyPhoneState.errorSendCode) === null || _verifyPhoneState$err2 === void 0 ? void 0 : _verifyPhoneState$err2[0]) !== null && _verifyPhoneState$err !== void 0 ? _verifyPhoneState$err : verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$err3 = verifyPhoneState.errorCheckCode) === null || _verifyPhoneState$err3 === void 0 ? void 0 : _verifyPhoneState$err3[0]) !== null && _ref2 !== void 0 ? _ref2 : t('ERROR', 'Error')
@@ -215,7 +164,6 @@ var UserVerificationUI = function UserVerificationUI(props) {
         email: !!(verifyEmailState !== null && verifyEmailState !== void 0 && verifyEmailState.resultSendCode)
       }));
     }
-
     if (!(verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.loadingSendCode) && isPhoneVerifyRequired && !isEmailVerifyRequired) {
       setVerificationState(_objectSpread(_objectSpread({}, verificationState), {}, {
         email: false,
@@ -362,13 +310,10 @@ var UserVerificationUI = function UserVerificationUI(props) {
     closeOnBackdrop: false
   }));
 };
-
 var UserVerification = function UserVerification(props) {
   var verifyProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UserVerificationUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UserVerification, verifyProps);
 };
-
 exports.UserVerification = UserVerification;
