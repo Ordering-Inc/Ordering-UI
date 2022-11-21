@@ -130,6 +130,11 @@ export const CardItemContent = styled.div`
     font-size: 26px;
   }
 
+  img {
+    max-width: 26px;
+    max-height: 26px;
+  }
+
   > * {
     margin-right: 10px
     ${props => props.theme?.rtl && css`
