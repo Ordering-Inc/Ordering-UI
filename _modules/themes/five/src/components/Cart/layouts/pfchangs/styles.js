@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.SpotSelect = exports.Spinner = exports.SelectedItemsTitle = exports.SavedContainer = exports.OrderBill = exports.NoValidProductMessage = exports.IconContainer = exports.Exclamation = exports.Divider = exports.CouponContainer = exports.CommentSection = exports.CheckoutAction = exports.CartSticky = exports.CartError = exports.CartContainer = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -49,29 +49,41 @@ var SpotSelect = _styledComponents.default.select(_templateObject8 || (_template
 exports.SpotSelect = SpotSelect;
 var NoValidProductMessage = _styledComponents.default.p(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  font-size: 14px;\n"])));
 exports.NoValidProductMessage = NoValidProductMessage;
-var OrderBill = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  padding: 20px;\n  background-color: ", ";\n  box-sizing: border-box;\n  table {\n    width: 100%;\n    font-size: 14px;\n    color: #fff;\n    td span {\n      unicode-bidi: bidi-override;\n    }\n\n    tr td:nth-child(2) {\n      text-align: right;\n      ", "\n    }\n\n    .icon {\n      display: flex;\n      align-items: center;\n      max-height: 25px;\n    }\n  }\n  table.total {\n    border-top: 1px solid #EAEAEA;\n    padding-top: 10px;\n    tr {\n      td {\n        font-weight: bold;\n        color: #fff;\n        font-size: 16px;\n      }\n    }\n  }\n  table.comments {\n    margin-top: 20px;\n    tr {\n      padding: 0;\n      td:nth-child(1) {\n        padding: 0;\n        font-weight: bold;\n      }\n    }\n    textarea {\n      width: 100%;\n      box-sizing: border-box;\n      height: 77px;\n      padding-right: 60px;\n    }\n  }\n  table.spot {\n    tr {\n      td:nth-child(1) {\n        font-weight: bold;\n      }\n      td:nth-child(2) {\n        font-weight: bold;\n        color: ", ";\n        text-decoration: underline;\n        cursor: pointer;\n      }\n    }\n  }\n"])), function (isCheckout) {
+var OrderBill = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  padding: 20px;\n  background-color: ", ";\n  box-sizing: border-box;\n  table {\n    width: 100%;\n    font-size: 14px;\n    color: #fff;\n    td span {\n      unicode-bidi: bidi-override;\n    }\n\n    tr td:nth-child(2) {\n      text-align: right;\n      ", "\n    }\n\n    .icon {\n      display: flex;\n      align-items: center;\n      max-height: 25px;\n    }\n  }\n  table.total {\n    border-top: 1px solid #EAEAEA;\n    padding-top: 10px;\n    tr {\n      td {\n        font-weight: bold;\n        color: ", ";\n        font-size: 16px;\n      }\n    }\n  }\n  table.comments {\n    margin-top: 20px;\n    tr {\n      padding: 0;\n      td:nth-child(1) {\n        padding: 0;\n        font-weight: bold;\n      }\n    }\n    textarea {\n      width: 100%;\n      box-sizing: border-box;\n      height: 77px;\n      padding-right: 60px;\n    }\n  }\n  table.spot {\n    tr {\n      td:nth-child(1) {\n        font-weight: bold;\n      }\n      td:nth-child(2) {\n        font-weight: bold;\n        color: ", ";\n        text-decoration: underline;\n        cursor: pointer;\n      }\n    }\n  }\n"])), function (isCheckout) {
   return isCheckout ? 'transparent' : '#FFF';
 }, function (props) {
   var _props$theme5;
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n        text-align: left;\n    "])));
 }, function (_ref3) {
+  var _theme$colors;
   var theme = _ref3.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#fff';
+}, function (_ref4) {
+  var theme = _ref4.theme;
   return theme.colors.primary;
 });
 exports.OrderBill = OrderBill;
-var CouponContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px;\n  padding: 0 20px;\n  box-sizing: border-box;\n  input {\n    flex: 1;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n  }\n\n  input, button {\n    border-radius: 0;\n    border: 0;\n    height: 44px;\n    box-sizing: border-box;\n  }\n\n"])));
+var CouponContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px;\n  padding: 0 20px;\n  box-sizing: border-box;\n  input {\n    flex: 1;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n    ", "\n  }\n\n  input, button {\n    border-radius: 0;\n    border: 0;\n    height: 44px;\n    box-sizing: border-box;\n  }\n\n"])), function (_ref5) {
+  var _theme$colors2;
+  var theme = _ref5.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      border: 1px solid rgb(230,230,230) !important;\n    "])));
+});
 exports.CouponContainer = CouponContainer;
-var IconContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  position: relative;\n  display: inline-flex;\n  cursor: pointer;\n  margin-left: 5px;\n  height: 20px;\n  svg:nth-child(1){\n    position: relative;\n    top: -1px;\n  }\n  svg:nth-child(2){\n    position: relative;\n    top: -3px;\n  }\n"])));
+var IconContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  display: inline-flex;\n  cursor: pointer;\n  margin-left: 5px;\n  height: 20px;\n  svg:nth-child(1){\n    position: relative;\n    top: -1px;\n  }\n  svg:nth-child(2){\n    position: relative;\n    top: -3px;\n  }\n"])));
 exports.IconContainer = IconContainer;
-var Spinner = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0;\n  right: 0;\n  transform: translate(-20%, 15%);\n"])));
+var Spinner = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0;\n  right: 0;\n  transform: translate(-20%, 15%);\n"])));
 exports.Spinner = Spinner;
-var CommentSection = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  h2 {\n    font-size: 16px;\n    color: #fff;\n  }\n  textarea {\n    width: 100%;\n    height: 76px;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n  }\n"])));
+var CommentSection = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  h2 {\n    font-size: 16px;\n    color: ", ";\n  }\n  textarea {\n    width: 100%;\n    height: 76px;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n  }\n"])), function (_ref6) {
+  var _theme$colors3;
+  var theme = _ref6.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#fff';
+});
 exports.CommentSection = CommentSection;
-var SelectedItemsTitle = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  padding: 0 20px;\n  margin: 10px 0px;\n  h2{ \n    font-size: 18px;\n  }\n"])));
+var SelectedItemsTitle = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  padding: 0 20px;\n  margin: 10px 0px;\n  h2{ \n    font-size: 18px;\n  }\n"])));
 exports.SelectedItemsTitle = SelectedItemsTitle;
-var CartError = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  padding: 0 20px;\n  p{\n    width: 50%;\n    text-align: center;\n    font-size: 14px;\n    margin: 0;\n    color: ", ";\n  }\n"])), function (_ref4) {
-  var _theme$colors;
-  var theme = _ref4.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
+var CartError = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  padding: 0 20px;\n  p{\n    width: 50%;\n    text-align: center;\n    font-size: 14px;\n    margin: 0;\n    color: ", ";\n  }\n"])), function (_ref7) {
+  var _theme$colors4;
+  var theme = _ref7.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.primary;
 });
 exports.CartError = CartError;

@@ -14,14 +14,18 @@ var AccordionSection = _styledComponents.default.div(_templateObject || (_templa
   return readOnlyMode ? 'transparent' : '#FFF';
 }, function (_ref) {
   var readOnlyMode = _ref.readOnlyMode;
-  return readOnlyMode && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    color: #fff;\n  "])));
+  return readOnlyMode && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (_ref2) {
+    var _theme$colors;
+    var theme = _ref2.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#fff';
+  });
 });
 exports.AccordionSection = AccordionSection;
 var ContentInfo = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-transform: capitalize;\n  width: 100%;\n\n  ", "\n\n  h3 {\n    font-size: 14px;\n    margin: 0px;\n    font-weight: 600;\n    color: ", ";\n  }\n\n  > div {\n    > p {\n      font-size: 10px;\n      color: ", ";\n      overflow-wrap: break-word;\n    }\n  }\n\n  span {\n    display: flex;\n    justify-content: space-between;\n    margin: 0px;\n\n    p {\n      margin: 0px;\n      font-size: 14px;\n    }\n\n    div {\n      display: flex;\n\n      span {\n        height: 20px;\n        svg {\n          font-size: 20px;\n          &:nth-child(1) {\n            margin-right: 3px;\n            ", "\n          }\n        }\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme;
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0px;\n  "])));
-}, function (_ref2) {
-  var theme = _ref2.theme;
+}, function (_ref3) {
+  var theme = _ref3.theme;
   return theme.colors.gold;
 }, function (props) {
   var _props$theme2;
@@ -50,9 +54,13 @@ var ProductOptionsList = _styledComponents.default.div(_templateObject12 || (_te
 exports.ProductOptionsList = ProductOptionsList;
 var ProductOptionsContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n"])));
 exports.ProductOptionsContainer = ProductOptionsContainer;
-var ProductTitle = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  div {\n    display: flex;\n    align-items: center;\n  }\n  h3 {\n    margin-left: 10px;\n    cursor: pointer;\n  }\n  h3:hover {\n    text-decoration: underline;\n  }\n  p {\n    font-size: 14px;\n  }\n  @media (min-width: 768px){\n    h3{\n        max-width: 250px;\n    }\n  }\n  ", "\n"])), function (_ref3) {
-  var readOnlyMode = _ref3.readOnlyMode;
-  return readOnlyMode && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    h3, p, div {\n      color: white;\n    }\n  "])));
+var ProductTitle = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  div {\n    display: flex;\n    align-items: center;\n  }\n  h3 {\n    margin-left: 10px;\n    cursor: pointer;\n  }\n  h3:hover {\n    text-decoration: underline;\n  }\n  p {\n    font-size: 14px;\n  }\n  @media (min-width: 768px){\n    h3{\n        max-width: 250px;\n    }\n  }\n  ", "\n"])), function (_ref4) {
+  var readOnlyMode = _ref4.readOnlyMode;
+  return readOnlyMode && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    h3, p, div {\n      color: ", ";\n    }\n  "])), function (_ref5) {
+    var _theme$colors2;
+    var theme = _ref5.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#fff';
+  });
 });
 exports.ProductTitle = ProductTitle;
 var PriceContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  svg{\n    cursor: pointer;\n    width: 20px;\n    height: 20px;\n  }\n"])));
