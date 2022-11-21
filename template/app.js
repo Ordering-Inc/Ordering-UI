@@ -94,7 +94,12 @@ export const App = () => {
 
   const themeUpdated = {
     ...theme,
-    ...orderingTheme?.theme
+    ...orderingTheme?.theme,
+    colors: {
+      ...theme.colors,
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color && { primary: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color }),
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color && { links: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color })
+    }
   }
 
   const businessesSlug = {
@@ -132,6 +137,7 @@ export const App = () => {
   const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
   const isPhoneVerifyRequired = auth && configs?.verification_phone_required?.value === '1' && !user?.phone_verified
   const isUserVerifyRequired = (isEmailVerifyRequired || isPhoneVerifyRequired) && !isKioskApp
+  const isHideFooter = orderingTheme?.theme?.footer?.hidden
 
   const closeAlert = () => {
     setAlertState({
@@ -146,7 +152,7 @@ export const App = () => {
   }
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
-  const isFooterPage = location.pathname === '/pages/footer' || isKioskApp
+  const isFooterPage = location.pathname === '/pages/footer' || isKioskApp || isHideFooter
 
   const handleSuccessSignup = (user) => {
     if (!user?.enabled && (configs?.business_signup_enabled_default?.value === '0' || configs?.driver_signup_enabled_default?.value === '0')) {
@@ -221,7 +227,7 @@ export const App = () => {
 
   const OrderReviewRequired = (order) => {
     setLastOrderReview({
-      isReviewOpen: true,
+      isReviewOpen: !!((location?.pathname === '/' || location?.pathname === '/search' || location?.pathname === '/home')),
       order: order,
       defaultStar: 5,
       reviewStatus: { trigger: true, order: false, product: false, driver: false },

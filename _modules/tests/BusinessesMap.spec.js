@@ -1,10 +1,15 @@
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
+
 var _react2 = require("@cypress/react");
+
 var _BusinessesMap = require("../components/BusinessesMap");
+
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 describe('Mounting Businesses Map component', function () {
   var userLocation = {
     lat: 40.7751052,

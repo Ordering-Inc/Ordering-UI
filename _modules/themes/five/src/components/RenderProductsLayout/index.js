@@ -1,109 +1,159 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.RenderProductsLayout = void 0;
+
 var _react = _interopRequireWildcard(require("react"));
+
 var _styledComponents = require("styled-components");
+
 var _orderingComponents = require("ordering-components");
+
 var _CgSearch = _interopRequireDefault(require("@meronex/icons/cg/CgSearch"));
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _BusinessBasicInformation = require("../BusinessBasicInformation");
+
 var _seven = require("../../../../seven");
+
 var _six = require("../../../../six");
+
 var _BusinessBasicInformation2 = require("../../../../../components/BusinessBasicInformation");
+
 var _BusinessProductsCategories = require("../BusinessProductsCategories");
+
 var _BusinessProductsList = require("../BusinessProductsList");
+
 var _groceries = require("../BusinessProductsCategories/layouts/groceries");
+
 var _groceries2 = require("../BusinessProductsList/layouts/groceries");
+
 var _Modal = require("../Modal");
+
 var _BusinessesListing = require("../BusinessesListing");
+
 var _Cart = require("../Cart");
+
 var _Buttons = require("../../styles/Buttons");
+
 var _styles = require("./styles");
+
 var _SearchProducts = require("../../../../../themes/five/src/components/SearchProducts");
+
 var _SearchProducts2 = require("../../../../../components/RenderProductsLayout/SearchProducts");
+
 var _SearchProducts3 = require("../../../../six/src/components/BusinessProductsListing/SearchProducts");
+
 var _ProfessionalFilter = require("../ProfessionalFilter");
+
 var _styles2 = require("../BusinessBasicInformation/styles");
+
 var _OrderItAgain = require("../OrderItAgain");
+
 var _ProfessionalBusinessFilter = require("../ProfessionalBusinessFilter");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var layoutOne = 'groceries';
+
 var RenderProductsLayout = function RenderProductsLayout(props) {
   var _configs$use_parent_c, _configs$use_parent_c2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _orderingTheme$theme21, _orderingTheme$theme22, _orderingTheme$theme23, _orderingTheme$theme24, _orderingTheme$theme25, _orderingTheme$theme26, _orderingTheme$theme27, _orderingTheme$theme28, _orderingTheme$theme29, _orderingTheme$theme30, _theme$business_view$, _theme$business_view, _theme$business_view$2, _theme$business_view$3, _businessState$busine, _businessState$busine2, _business$professiona, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _business$professiona2, _business$previously_, _theme$defaultLanguag3, _theme$defaultLanguag4, _business$professiona3, _currentCart$products, _business$professiona4, _business$categories2, _theme$defaultLanguag5, _theme$defaultLanguag6, _business$previously_2, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
+
   var errors = props.errors,
-    isError = props.isError,
-    isLoading = props.isLoading,
-    business = props.business,
-    categoryId = props.categoryId,
-    searchValue = props.searchValue,
-    sortByValue = props.sortByValue,
-    currentCart = props.currentCart,
-    businessState = props.businessState,
-    sortByOptions = props.sortByOptions,
-    categoryState = props.categoryState,
-    categorySelected = props.categorySelected,
-    openCategories = props.openCategories,
-    openBusinessInformation = props.openBusinessInformation,
-    isCartOnProductsList = props.isCartOnProductsList,
-    handleChangeSortBy = props.handleChangeSortBy,
-    errorQuantityProducts = props.errorQuantityProducts,
-    handler = props.handler,
-    onClickCategory = props.onClickCategory,
-    featuredProducts = props.featuredProducts,
-    onProductClick = props.onProductClick,
-    handleSearchRedirect = props.handleSearchRedirect,
-    handleChangeSearch = props.handleChangeSearch,
-    setOpenBusinessInformation = props.setOpenBusinessInformation,
-    handleCartOpen = props.handleCartOpen,
-    isCustomLayout = props.isCustomLayout,
-    useKioskApp = props.useKioskApp,
-    setSubcategoriesSelected = props.setSubcategoriesSelected,
-    subcategoriesSelected = props.subcategoriesSelected,
-    isLazy = props.isLazy,
-    handleUpdateProducts = props.handleUpdateProducts,
-    handleChangeProfessionalSelected = props.handleChangeProfessionalSelected,
-    professionalSelected = props.professionalSelected,
-    onBusinessClick = props.onBusinessClick,
-    handleChangePriceFilterValues = props.handleChangePriceFilterValues,
-    priceFilterValues = props.priceFilterValues;
+      isError = props.isError,
+      isLoading = props.isLoading,
+      business = props.business,
+      categoryId = props.categoryId,
+      searchValue = props.searchValue,
+      sortByValue = props.sortByValue,
+      currentCart = props.currentCart,
+      businessState = props.businessState,
+      sortByOptions = props.sortByOptions,
+      categoryState = props.categoryState,
+      categorySelected = props.categorySelected,
+      openCategories = props.openCategories,
+      openBusinessInformation = props.openBusinessInformation,
+      isCartOnProductsList = props.isCartOnProductsList,
+      handleChangeSortBy = props.handleChangeSortBy,
+      errorQuantityProducts = props.errorQuantityProducts,
+      handler = props.handler,
+      onClickCategory = props.onClickCategory,
+      featuredProducts = props.featuredProducts,
+      onProductClick = props.onProductClick,
+      handleSearchRedirect = props.handleSearchRedirect,
+      handleChangeSearch = props.handleChangeSearch,
+      setOpenBusinessInformation = props.setOpenBusinessInformation,
+      handleCartOpen = props.handleCartOpen,
+      isCustomLayout = props.isCustomLayout,
+      useKioskApp = props.useKioskApp,
+      setSubcategoriesSelected = props.setSubcategoriesSelected,
+      subcategoriesSelected = props.subcategoriesSelected,
+      isLazy = props.isLazy,
+      handleUpdateProducts = props.handleUpdateProducts,
+      handleChangeProfessionalSelected = props.handleChangeProfessionalSelected,
+      professionalSelected = props.professionalSelected,
+      onBusinessClick = props.onBusinessClick,
+      handleChangePriceFilterValues = props.handleChangePriceFilterValues,
+      priceFilterValues = props.priceFilterValues;
   var theme = (0, _styledComponents.useTheme)();
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useConfig = (0, _orderingComponents.useConfig)(),
-    _useConfig2 = _slicedToArray(_useConfig, 1),
-    configs = _useConfig2[0].configs;
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
-    _useUtils2 = _slicedToArray(_useUtils, 1),
-    parsePrice = _useUtils2[0].parsePrice;
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      parsePrice = _useUtils2[0].parsePrice;
+
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
+      _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+      orderingTheme = _useOrderingTheme2[0];
+
   var _useState = (0, _react.useState)(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    isCartModal = _useState2[0],
-    setisCartModal = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      isCartModal = _useState2[0],
+      setisCartModal = _useState2[1];
+
   var _useState3 = (0, _react.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    openSearchProducts = _useState4[0],
-    setOpenSearchProducts = _useState4[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      openSearchProducts = _useState4[0],
+      setOpenSearchProducts = _useState4[1];
+
   var isUseParentCategory = ((configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1') && !useKioskApp;
   var BusinessBasicInformationComponent = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.header) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.layout) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.type) === 'red' ? _seven.BusinessBasicInformation : (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.business_view) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.header) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.components) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.layout) === null || _orderingTheme$theme7 === void 0 ? void 0 : _orderingTheme$theme7.type) === 'starbucks' ? _six.BusinessBasicInformation : (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme8 = orderingTheme.theme) === null || _orderingTheme$theme8 === void 0 ? void 0 : (_orderingTheme$theme9 = _orderingTheme$theme8.business_view) === null || _orderingTheme$theme9 === void 0 ? void 0 : (_orderingTheme$theme10 = _orderingTheme$theme9.components) === null || _orderingTheme$theme10 === void 0 ? void 0 : (_orderingTheme$theme11 = _orderingTheme$theme10.header) === null || _orderingTheme$theme11 === void 0 ? void 0 : (_orderingTheme$theme12 = _orderingTheme$theme11.components) === null || _orderingTheme$theme12 === void 0 ? void 0 : (_orderingTheme$theme13 = _orderingTheme$theme12.layout) === null || _orderingTheme$theme13 === void 0 ? void 0 : _orderingTheme$theme13.type) === 'old' ? _BusinessBasicInformation2.BusinessBasicInformation : _BusinessBasicInformation.BusinessBasicInformation;
   var SearchProductsComponent = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme14 = orderingTheme.theme) === null || _orderingTheme$theme14 === void 0 ? void 0 : (_orderingTheme$theme15 = _orderingTheme$theme14.business_view) === null || _orderingTheme$theme15 === void 0 ? void 0 : (_orderingTheme$theme16 = _orderingTheme$theme15.components) === null || _orderingTheme$theme16 === void 0 ? void 0 : (_orderingTheme$theme17 = _orderingTheme$theme16.product_search) === null || _orderingTheme$theme17 === void 0 ? void 0 : (_orderingTheme$theme18 = _orderingTheme$theme17.components) === null || _orderingTheme$theme18 === void 0 ? void 0 : (_orderingTheme$theme19 = _orderingTheme$theme18.layout) === null || _orderingTheme$theme19 === void 0 ? void 0 : _orderingTheme$theme19.type) === 'old' ? _SearchProducts2.SearchProducts : (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme20 = orderingTheme.theme) === null || _orderingTheme$theme20 === void 0 ? void 0 : (_orderingTheme$theme21 = _orderingTheme$theme20.business_view) === null || _orderingTheme$theme21 === void 0 ? void 0 : (_orderingTheme$theme22 = _orderingTheme$theme21.components) === null || _orderingTheme$theme22 === void 0 ? void 0 : (_orderingTheme$theme23 = _orderingTheme$theme22.product_search) === null || _orderingTheme$theme23 === void 0 ? void 0 : (_orderingTheme$theme24 = _orderingTheme$theme23.components) === null || _orderingTheme$theme24 === void 0 ? void 0 : (_orderingTheme$theme25 = _orderingTheme$theme24.layout) === null || _orderingTheme$theme25 === void 0 ? void 0 : _orderingTheme$theme25.type) === 'starbucks' ? _SearchProducts3.SearchProducts : null;
@@ -115,10 +165,12 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   var hideBusinessNearCity = (_theme$business_view$ = theme === null || theme === void 0 ? void 0 : (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 ? void 0 : (_theme$business_view$2 = _theme$business_view.components) === null || _theme$business_view$2 === void 0 ? void 0 : (_theme$business_view$3 = _theme$business_view$2.near_business) === null || _theme$business_view$3 === void 0 ? void 0 : _theme$business_view$3.hidden) !== null && _theme$business_view$ !== void 0 ? _theme$business_view$ : true;
   var BusinessLayoutCategories = businessLayout.layoutOne ? _groceries.BusinessProductsCategories : _BusinessProductsCategories.BusinessProductsCategories;
   var BusinessLayoutProductsList = businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
+
   var handleSaveProduct = function handleSaveProduct() {
     var productContainer = document.getElementsByClassName('bp-list')[0];
     scrollTo(productContainer, 500, 1250);
   };
+
   (0, _react.useEffect)(function () {
     handleSaveProduct();
   }, [categorySelected]);
@@ -388,4 +440,5 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart')))))));
 };
+
 exports.RenderProductsLayout = RenderProductsLayout;

@@ -1,92 +1,135 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Messages = void 0;
+
 var _react = _interopRequireWildcard(require("react"));
+
 var _styledComponents = require("styled-components");
+
 var _orderingComponents = require("ordering-components");
+
 var _reactHookForm = require("react-hook-form");
+
 var _IosSend = _interopRequireDefault(require("@meronex/icons/ios/IosSend"));
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _styles = require("./styles");
+
 var _Image = require("../../../../../components/Image");
+
 var _Inputs = require("../../styles/Inputs");
+
 var _Buttons = require("../../styles/Buttons");
+
 var _BsCardImage = _interopRequireDefault(require("@meronex/icons/bs/BsCardImage"));
+
 var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
+
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
+
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+
 var _MdcCloseOctagonOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcCloseOctagonOutline"));
+
 var _utils = require("../../../../../utils");
+
 var _Confirm = require("../Confirm");
+
 var _Modal = require("../Modal");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var filterSpecialStatus = ['prepared_in', 'delivered_in'];
+
 var MessagesUI = function MessagesUI(props) {
   var _messages$messages, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _theme$images2$dummie, _order$driver3, _order$business4, _order$driver4, _order$business5, _theme$images3, _theme$images3$dummie, _order$driver5, _messagesToShow$messa2;
+
   var order = props.order,
-    messages = props.messages,
-    handleSend = props.handleSend,
-    image = props.image,
-    message = props.message,
-    sendMessage = props.sendMessage,
-    setImage = props.setImage,
-    setMessage = props.setMessage,
-    business = props.business,
-    driver = props.driver,
-    messagesToShow = props.messagesToShow,
-    readMessages = props.readMessages,
-    onClose = props.onClose,
-    onMessages = props.onMessages,
-    setCanRead = props.setCanRead,
-    profileMessages = props.profileMessages;
+      messages = props.messages,
+      handleSend = props.handleSend,
+      image = props.image,
+      message = props.message,
+      sendMessage = props.sendMessage,
+      setImage = props.setImage,
+      setMessage = props.setMessage,
+      business = props.business,
+      driver = props.driver,
+      messagesToShow = props.messagesToShow,
+      readMessages = props.readMessages,
+      onClose = props.onClose,
+      onMessages = props.onMessages,
+      setCanRead = props.setCanRead,
+      profileMessages = props.profileMessages;
   var theme = (0, _styledComponents.useTheme)();
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useForm = (0, _reactHookForm.useForm)(),
-    handleSubmit = _useForm.handleSubmit,
-    register = _useForm.register,
-    errors = _useForm.errors,
-    setValue = _useForm.setValue;
+      handleSubmit = _useForm.handleSubmit,
+      register = _useForm.register,
+      errors = _useForm.errors,
+      setValue = _useForm.setValue;
+
   var _useState = (0, _react.useState)({
-      open: false,
-      content: []
-    }),
-    _useState2 = _slicedToArray(_useState, 2),
-    alertState = _useState2[0],
-    setAlertState = _useState2[1];
+    open: false,
+    content: []
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
+
   var _useSession = (0, _orderingComponents.useSession)(),
-    _useSession2 = _slicedToArray(_useSession, 1),
-    user = _useSession2[0].user;
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
   var _useUtils = (0, _orderingComponents.useUtils)(),
-    _useUtils2 = _slicedToArray(_useUtils, 1),
-    _useUtils2$ = _useUtils2[0],
-    parseDate = _useUtils2$.parseDate,
-    parseTime = _useUtils2$.parseTime;
+      _useUtils2 = _slicedToArray(_useUtils, 1),
+      _useUtils2$ = _useUtils2[0],
+      parseDate = _useUtils2$.parseDate,
+      parseTime = _useUtils2$.parseTime;
+
   var buttonRef = (0, _react.useRef)(null);
+
   var _useState3 = (0, _react.useState)({
-      open: false,
-      src: ''
-    }),
-    _useState4 = _slicedToArray(_useState3, 2),
-    modalImage = _useState4[0],
-    setModalImage = _useState4[1];
+    open: false,
+    src: ''
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      modalImage = _useState4[0],
+      setModalImage = _useState4[1];
+
   var imageRef = (0, _react.useRef)(null);
   var quickMessageList = [{
     key: 'message_1',
@@ -101,16 +144,19 @@ var MessagesUI = function MessagesUI(props) {
     key: 'message_4',
     text: t('CUSTOMER_MESSAGE_4', 'Lorem ipsum 4')
   }];
+
   var handleClickQuickMessage = function handleClickQuickMessage(index) {
     setValue('message', "".concat(message, " ").concat(index));
     setMessage("".concat(message, " ").concat(index));
   };
+
   var handleModalImage = function handleModalImage(src) {
     setModalImage({
       open: true,
       src: src
     });
   };
+
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -128,6 +174,7 @@ var MessagesUI = function MessagesUI(props) {
         content: sendMessage.error || [t('ERROR', 'Error')]
       });
     }
+
     if (sendMessage.loading) {
       clearInputs();
     }
@@ -153,22 +200,29 @@ var MessagesUI = function MessagesUI(props) {
   (0, _react.useEffect)(function () {
     setImage(null);
   }, [alertState.open]);
+
   var onChangeMessage = function onChangeMessage(e) {
     setMessage(e.target.value);
   };
+
   var removeImage = function removeImage(e) {
     setImage(null);
     imageRef.current.value = '';
   };
+
   var onChangeImage = function onChangeImage(e) {
     var _files$;
+
     var files = e.target.files[0];
     var reader = new window.FileReader();
     reader.readAsDataURL(files);
+
     reader.onload = function () {
       setImage(reader.result);
     };
+
     var type = files.type.split('/')[0];
+
     if (type !== 'image') {
       setAlertState({
         open: true,
@@ -176,6 +230,7 @@ var MessagesUI = function MessagesUI(props) {
       });
       return;
     }
+
     if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
       setAlertState({
         open: true,
@@ -183,7 +238,9 @@ var MessagesUI = function MessagesUI(props) {
       });
       return;
     }
+
     buttonRef.current.focus();
+
     reader.onerror = function (error) {
       console.log(error);
       setAlertState({
@@ -192,96 +249,135 @@ var MessagesUI = function MessagesUI(props) {
       });
     };
   };
+
   var getStatus = function getStatus(s) {
     var status = parseInt(s);
+
     switch (status) {
       case 0:
         return 'ORDER_STATUS_PENDING';
+
       case 1:
         return 'ORDERS_COMPLETED';
+
       case 2:
         return 'ORDER_REJECTED';
+
       case 3:
         return 'ORDER_STATUS_IN_BUSINESS';
+
       case 4:
         return 'ORDER_READY';
+
       case 5:
         return 'ORDER_REJECTED_RESTAURANT';
+
       case 6:
         return 'ORDER_STATUS_CANCELLEDBYDRIVER';
+
       case 7:
         return 'ORDER_STATUS_ACCEPTEDBYRESTAURANT';
+
       case 8:
         return 'ORDER_CONFIRMED_ACCEPTED_BY_DRIVER';
+
       case 9:
         return 'ORDER_PICKUP_COMPLETED_BY_DRIVER';
+
       case 10:
         return 'ORDER_PICKUP_FAILED_BY_DRIVER';
+
       case 11:
         return 'ORDER_DELIVERY_COMPLETED_BY_DRIVER';
+
       case 12:
         return 'ORDER_DELIVERY_FAILED_BY_DRIVER';
+
       case 13:
         return 'PREORDER';
+
       case 14:
         return 'ORDER_NOT_READY';
+
       case 15:
         return 'ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER';
+
       case 16:
         return 'ORDER_STATUS_CANCELLED_BY_CUSTOMER';
+
       case 17:
         return 'ORDER_NOT_PICKEDUP_BY_CUSTOMER';
+
       case 18:
         return 'ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS';
+
       case 19:
         return 'ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER';
+
       case 20:
         return 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS';
+
       case 21:
         return 'ORDER_CUSTOMER_ARRIVED_BUSINESS';
+
       case 22:
         return 'ORDER_LOOKING_FOR_DRIVER';
+
       case 23:
         return 'ORDER_DRIVER_ON_WAY';
+
       default:
         return (0, _utils.getTraduction)(status);
     }
   };
+
   var getLevel = function getLevel(level) {
     switch (level) {
       case 0:
         return t('ADMIN', 'Admin');
+
       case 1:
         return t('CITY_MANAGER', 'City Manager');
+
       case 2:
         return t('BUSINESS', 'Business');
+
       case 3:
         return t('CUSTOMER', 'Customer');
+
       case 4:
         return t('DRIVER', 'Driver');
+
       case 5:
         return t('DRIVER_MANAGER', 'Driver Manager');
     }
   };
+
   var clearInputs = function clearInputs() {
     var input = document.getElementById('message');
+
     if (input) {
       input.value = '';
     }
+
     removeImage();
     setMessage('');
   };
+
   var onSubmit = function onSubmit(values) {
     handleSend();
   };
+
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
   };
+
   var MapMessages = function MapMessages(_ref) {
     var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+
     var messages = _ref.messages;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -293,6 +389,7 @@ var MessagesUI = function MessagesUI(props) {
       }, props));
     }), messages === null || messages === void 0 ? void 0 : messages.messages.map(function (message) {
       var _message$change, _message$driver, _message$driver2, _messagesToShow$messa, _message$can_see, _message$can_see2;
+
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: message.id
       }, message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageContentWrapper, {
@@ -340,6 +437,7 @@ var MessagesUI = function MessagesUI(props) {
       }, AfterElement);
     }));
   };
+
   return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, {
     profileMessages: profileMessages
   }, /*#__PURE__*/_react.default.createElement(_styles.MessagesLayoutWrapper, null, !profileMessages && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MessagesClose, {
@@ -499,10 +597,13 @@ var MessagesUI = function MessagesUI(props) {
     loading: "lazy"
   }))));
 };
+
 var Messages = function Messages(props) {
   var MessagesProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: MessagesUI
   });
+
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.Messages, MessagesProps);
 };
+
 exports.Messages = Messages;

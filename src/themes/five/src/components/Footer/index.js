@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { useApi } from 'ordering-components'
+import { useApi, useOrderingTheme } from 'ordering-components'
 
 import { Container } from './styles'
 
 export const Footer = () => {
   const [footerState, setfooterState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
+  const [{ theme }] = useOrderingTheme()
   const requestsState = {}
+
+  const footerContent = theme?.my_products?.components?.theme_settings?.components?.values?.footer_content
 
   const getPage = async () => {
     setfooterState({ ...footerState, loading: true })
@@ -39,11 +42,11 @@ export const Footer = () => {
   return (
     <Container>
       {
-        footerState.body && (
+        (footerContent || footerState.body) && (
           <div
             style={{ wordBreak: 'break-all', padding: '0px 10px' }}
             dangerouslySetInnerHTML={{
-              __html: footerState.body
+              __html: (footerContent || footerState.body)
             }}
           />
         )
