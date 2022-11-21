@@ -7,6 +7,8 @@ import { HelmetTags } from '../../components/HelmetTags'
 import Skeleton from 'react-loading-skeleton'
 import settings from '../../config'
 
+import { PageBanner } from '../../../src/themes/five/src/components/PageBanner'
+
 import {
   HomeContainer,
   SkeletonContainer,
@@ -115,6 +117,7 @@ export const HomePage = (props) => {
               />
             )
           }
+          <PageBanner position='web_home_page' />
         </HomeContainer>
       )}
     </>

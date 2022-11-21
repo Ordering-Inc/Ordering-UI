@@ -41,6 +41,7 @@ export const BannerContainer = styled.div`
   }
 `
 export const ImageWrapper = styled.div`
+  cursor: pointer;
   width: 100%;
   padding-top: 260px;
   position: relative;

@@ -47,6 +47,7 @@ import { AutoScroll } from '../../../AutoScroll'
 import { CitiesControl } from '../../../CitiesControl'
 import { OrderContextUI } from '../../../OrderContextUI'
 import { OrdersSection } from './OrdersSection'
+import { getCateringValues } from '../../../../../../../utils'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -97,6 +98,13 @@ const BusinessesListingUI = (props) => {
   const businessesIds = businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
   const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const cateringTypeString = orderState?.options?.type === 7
+    ? 'catering_delivery'
+    : orderState?.options?.type === 8
+      ? 'catering_pickup'
+      : null
+
+  const cateringValues = preorderBusiness?.configs && getCateringValues(cateringTypeString, preorderBusiness?.configs)
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -210,7 +218,7 @@ const BusinessesListingUI = (props) => {
       {(windowSize.width < 576 || (configs?.business_listing_hide_image?.value !== '1' && !isChew)) && (
         <BusinessBanner>
           {windowSize.width < 576 && (
-            <OrderContextUI isBusinessList />
+            <OrderContextUI isBusinessList hideHero={!hideHero} />
           )}
           {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && !hideHero && (
             <BusinessHeroImg
@@ -415,6 +423,8 @@ const BusinessesListingUI = (props) => {
           business={preorderBusiness}
           handleClick={handleBusinessClick}
           showButton
+          cateringPreorder={!!cateringTypeString}
+          {...cateringValues}
         />
       </Modal>
       <Modal
