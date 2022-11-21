@@ -423,6 +423,12 @@ Object.defineProperty(exports, "OrdersOption", {
     return _OrdersOption.OrdersOption;
   }
 });
+Object.defineProperty(exports, "PageBanner", {
+  enumerable: true,
+  get: function get() {
+    return _PageBanner.PageBanner;
+  }
+});
 Object.defineProperty(exports, "PaymentOptionCash", {
   enumerable: true,
   get: function get() {
@@ -778,6 +784,7 @@ var _OrdersOption = require("./src/components/OrdersOption");
 var _OrderProgress = require("./src/components/OrderProgress");
 var _OrderTypeSelectorContent = require("./src/components/OrderTypeSelectorContent");
 var _OrderTypeSelectorHeader = require("./src/components/OrderTypeSelectorHeader");
+var _PageBanner = require("./src/components/PageBanner");
 var _PaymentOptionCash = require("./src/components/PaymentOptionCash");
 var _PaymentOptions = require("./src/components/PaymentOptions");
 var _PaymentOptionStripe = require("./src/components/PaymentOptionStripe");

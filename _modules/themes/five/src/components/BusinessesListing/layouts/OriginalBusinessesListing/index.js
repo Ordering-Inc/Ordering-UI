@@ -29,6 +29,7 @@ var _BusinessesMap = require("../../../../../../../components/BusinessesMap");
 var _HighestRated = require("../../../HighestRated");
 var _BusinessPreorder = require("../../../BusinessPreorder");
 var _OrderProgress = require("../../../OrderProgress");
+var _PageBanner = require("../../../PageBanner");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _MomentPopover = require("../../../../../../pwa/src/components/MomentPopover");
 var _OrderTypeSelectorHeader = require("../../../../../../../components/OrderTypeSelectorHeader");
@@ -51,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _businessesList$busin, _configState$configs, _configState$configs$, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _orderState$options3, _orderState$options3$, _theme$images2, _theme$images2$genera, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _Object$values, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options5, _orderState$options5$, _configs$advanced_bus2, _orderState$options6, _orderState$options6$, _businessesList$busin6, _businessesList$busin7, _orderState$options9, _citiesState$cities4, _props$afterComponent, _props$afterElements;
+  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _businessesList$busin, _configState$configs, _configState$configs$, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _orderState$options3, _orderState$options3$, _configs$business_lis, _theme$images2, _theme$images2$genera, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _Object$values, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options5, _orderState$options5$, _configs$advanced_bus2, _orderState$options6, _orderState$options6$, _businessesList$busin6, _businessesList$busin7, _orderState$options9, _citiesState$cities4, _props$afterComponent, _props$afterElements;
   var businessesList = props.businessesList,
     paginationProps = props.paginationProps,
     searchValue = props.searchValue,
@@ -314,7 +315,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return handleClosePopover('moment');
     },
     isBanner: true
-  })))), /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
+  })))), (configs === null || configs === void 0 ? void 0 : (_configs$business_lis = configs.business_listing_hide_image) === null || _configs$business_lis === void 0 ? void 0 : _configs$business_lis.value) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
     bgimage: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.businessHero,
     height: theme === null || theme === void 0 ? void 0 : (_theme$business_listi11 = theme.business_listing_view) === null || _theme$business_listi11 === void 0 ? void 0 : (_theme$business_listi12 = _theme$business_listi11.components) === null || _theme$business_listi12 === void 0 ? void 0 : (_theme$business_listi13 = _theme$business_listi12.business_hero) === null || _theme$business_listi13 === void 0 ? void 0 : (_theme$business_listi14 = _theme$business_listi13.style) === null || _theme$business_listi14 === void 0 ? void 0 : _theme$business_listi14.height
   })), !!((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) !== null && _Object$values !== void 0 && _Object$values.length) && /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderProgress.OrderProgress, {
@@ -363,7 +364,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isCustomerMode: isCustomerMode,
     favoriteIds: favoriteIds,
     setFavoriteIds: setFavoriteIds
-  }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
+    position: "web_business_listing"
+  }), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     images: props.images,
     businessTypes: props.businessTypes,
     defaultBusinessType: props.defaultBusinessType,
