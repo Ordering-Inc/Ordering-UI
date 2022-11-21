@@ -298,10 +298,12 @@ const BusinessesListingUI = (props) => {
               </FeatureItems>
             </BusinessFeatures>
           )}
-          <BusinessHeroImg
-            bgimage={theme.images?.general?.businessHero}
-            height={theme?.business_listing_view?.components?.business_hero?.style?.height}
-          />
+          {configs?.business_listing_hide_image?.value !== '1' && (
+            <BusinessHeroImg
+              bgimage={theme.images?.general?.businessHero}
+              height={theme?.business_listing_view?.components?.business_hero?.style?.height}
+            />
+          )}
         </BusinessBanner>
         {!!Object.values(orderState?.carts)?.length && (
           <OrderProgressWrapper>
