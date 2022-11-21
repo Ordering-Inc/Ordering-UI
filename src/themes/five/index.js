@@ -59,6 +59,7 @@ import { OrdersOption } from './src/components/OrdersOption'
 import { OrderProgress } from './src/components/OrderProgress'
 import { OrderTypeSelectorContent } from './src/components/OrderTypeSelectorContent'
 import { OrderTypeSelectorHeader } from './src/components/OrderTypeSelectorHeader'
+import { PageBanner } from './src/components/PageBanner'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { PaymentOptionStripe } from './src/components/PaymentOptionStripe'
@@ -181,6 +182,7 @@ export {
   OrderTypeSelectorContent,
   OrderTypeSelectorHeader,
   OrderProgress,
+  PageBanner,
   PaymentOptionCash,
   PaymentOptionStripe,
   PaymentOptionWallet,

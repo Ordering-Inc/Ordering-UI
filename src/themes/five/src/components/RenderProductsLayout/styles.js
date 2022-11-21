@@ -241,3 +241,8 @@ export const WrapperSearchAbsolute = styled.div`
 export const NearBusiness = styled.div`
   width: 100%;
 `
+export const PageBannerWrapper = styled.div`
+  > div {
+    border-radius: 8px;
+  }
+`

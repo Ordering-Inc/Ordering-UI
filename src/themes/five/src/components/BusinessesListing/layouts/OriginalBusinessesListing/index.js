@@ -52,6 +52,7 @@ import { BusinessesMap } from '../../../../../../../components/BusinessesMap'
 import { HighestRated } from '../../../HighestRated'
 import { BusinessPreorder } from '../../../BusinessPreorder'
 import { OrderProgress } from '../../../OrderProgress'
+import { PageBanner } from '../../../PageBanner'
 
 import Skeleton from 'react-loading-skeleton'
 import { MomentPopover } from '../../../../../../pwa/src/components/MomentPopover'
@@ -300,10 +301,12 @@ const BusinessesListingUI = (props) => {
               </FeatureItems>
             </BusinessFeatures>
           )}
-          <BusinessHeroImg
-            bgimage={theme.images?.general?.businessHero}
-            height={theme?.business_listing_view?.components?.business_hero?.style?.height}
-          />
+          {configs?.business_listing_hide_image?.value !== '1' && (
+            <BusinessHeroImg
+              bgimage={theme.images?.general?.businessHero}
+              height={theme?.business_listing_view?.components?.business_hero?.style?.height}
+            />
+          )}
         </BusinessBanner>
         {!!Object.values(orderState?.carts)?.length && (
           <OrderProgressWrapper>
@@ -366,6 +369,9 @@ const BusinessesListingUI = (props) => {
             <Divider />
           </HightestRatedWrapper>
         )}
+
+        <PageBanner position='web_business_listing' />
+
         {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
           <BusinessTypeFilter
             images={props.images}
