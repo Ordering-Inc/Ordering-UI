@@ -116,7 +116,8 @@ const OrderDetailsUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isShowBusinessLogo, setIsShowBusinessLogo] = useState(true)
   const [dateTimeETA, setDateTimeETA] = useState(null)
-  const statusDelayInfo = JSON.parse(configs.eta_messages_config.value);
+  const [segmentCustomData, setSegmentCustomData] = useState(null)
+  const statusDelayInfo = JSON.parse(configs.eta_messages_config.value)
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
   const acceptedStatus = [1, 2, 5, 6, 10, 11, 12]
@@ -225,7 +226,7 @@ const OrderDetailsUI = (props) => {
   ]
 
   const handleOpenReview = () => {
-    setSegmentCustomData({type: 'Calificar Orden', data: {business_id: order.business_id, order_id: order.orderId, user_id: userCustomerId}})
+    setSegmentCustomData({ type: 'Calificar Orden', data: { business_id: order.business_id, order_id: order.orderId, user_id: userCustomerId } })
     if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false })
     else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false })
     else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true })
@@ -306,23 +307,23 @@ const OrderDetailsUI = (props) => {
   }
 
   const verifyOrderOnTime = () => {
-      let updated_at = null
-      delayedETA = 0
-      if (order.updated_at) {
-        updated_at = new Date(order.updated_at+' UTC');
-      }
-      if (order.updated_at && (order.delivery_type == 1 && statusDelayInfo[order.status].Show_delay_delivery || order.delivery_type == 2 && statusDelayInfo[order.status].Show_delay_pick_up)) {
-        let currentTime = new Date()
-        let delayETA = currentTime.getTime() - updated_at.getTime()
-        delayETA = Math.floor(delayETA / 60000)
-        if (delayETA > order.eta_current_status_time) {
-          delayETA = delayETA - order.eta_current_status_time
-          delayedETA = delayETA
-          return true
-        }
-        return false
+    let updated_at = null
+    delayedETA = 0
+    if (order.updated_at) {
+      updated_at = new Date(order.updated_at + ' UTC');
+    }
+    if (order.updated_at && (order.delivery_type == 1 && statusDelayInfo[order.status].Show_delay_delivery || order.delivery_type == 2 && statusDelayInfo[order.status].Show_delay_pick_up)) {
+      let currentTime = new Date()
+      let delayETA = currentTime.getTime() - updated_at.getTime()
+      delayETA = Math.floor(delayETA / 60000)
+      if (delayETA > order.eta_current_status_time) {
+        delayETA = delayETA - order.eta_current_status_time
+        delayedETA = delayETA
+        return true
       }
       return false
+    }
+    return false
   }
 
   const getEstimatedDeliveryTime = () => {
@@ -504,7 +505,7 @@ const OrderDetailsUI = (props) => {
                 )}
                 {showDeliveryDate && (
                   <p className='date'>
-                    { dateTimeETA }
+                    {dateTimeETA}
                   </p>
                 )}
                 {preorderMetafieldEnabled && (

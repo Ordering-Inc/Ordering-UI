@@ -11,7 +11,7 @@ export const AddressContainer = styled.div`
     border-left: 1px solid #fff;
     border-top: 1px solid #fff;
     border-right: 1px solid #fff;
-    background: #000;
+    background: ${({ theme }) => theme?.colors?.tertiaryContrast ?? '#000'};
   `}
 `
 

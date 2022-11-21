@@ -137,7 +137,7 @@ export const OrderBill = styled.div`
     tr {
       td {
         font-weight: bold;
-        color: #fff;
+        color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
         font-size: 16px;
       }
     }
@@ -187,6 +187,9 @@ export const CouponContainer = styled.div`
     &:-ms-input-placeholder {
       color: #aaa;
     }
+    ${({ theme }) => theme?.colors?.tertiary && css`
+      border: 1px solid rgb(230,230,230) !important;
+    `}
   }
 
   input, button {
@@ -226,7 +229,7 @@ export const CommentSection = styled.div`
   box-sizing: border-box;
   h2 {
     font-size: 16px;
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   }
   textarea {
     width: 100%;

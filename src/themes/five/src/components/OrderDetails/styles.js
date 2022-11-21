@@ -8,7 +8,7 @@ export const Container = styled.div`
   align-items: center;
   margin: 45px 0 20px;
   ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     margin: 20px 0;
   `}
 
@@ -47,7 +47,7 @@ export const HeaderInfo = styled.div`
     margin: 0;
     color: ${props => props.theme.colors.darkTextColor};
     ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
-      color: #fff;
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     `}
   }
 
@@ -75,9 +75,9 @@ export const OrderBusiness = styled.div`
   box-shadow: 0px 4px 10px 0px #0000001F;
 
   ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
-    border: 1px solid #fff;
+    border: 1px solid ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     padding: 30px;
-    background: ${props => props.theme.colors.secundaryContrast};
+    background: ${props => props?.theme?.colors?.tertiaryContrast || props.theme.colors.secundaryContrast};
   `}
 
   @media (min-width: 769px) {
@@ -149,7 +149,7 @@ export const BusinessInfo = styled.div`
     color: ${props => props.theme.colors.darkTextColor};
     overflow-wrap: anywhere;
     ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
-      color: #fff;
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     `}
   }
 
@@ -202,7 +202,7 @@ export const OrderInfo = styled.div`
     margin: 0px;
     color: ${props => props.theme.colors.darkTextColor};
     ${({ theme }) => theme?.confirmation?.components?.layout?.type === 'pfchangs' && css`
-      color: #fff;
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     `}
   }
   h1 {
@@ -233,9 +233,10 @@ export const OrderInfo = styled.div`
 
     
   ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
-    border: 1px solid #fff;
+    border: 1px solid ${({ theme }) => theme?.colors?.tertiary || '#fff'};;
     padding: 30px;
     box-sizing: border-box;
+    background: ${({ theme }) => theme?.colors?.tertiaryContrast || theme?.colors?.secundaryContrast};
   `}
 `
 export const OrderIdSec = styled.h1`
@@ -306,8 +307,8 @@ export const OrderCustomer = styled(BusinessInfo)`
   margin-bottom: 30px;
 
   ${({ theme }) => theme?.layouts?.confirmation?.components?.layout?.type === 'pfchangs' && css`
-    background: ${props => props.theme.colors.secundaryContrast};
-    border: 1px solid #fff;
+    background: ${props => theme?.colors?.tertiaryContrast || props.theme.colors.secundaryContrast};
+    border: 1px solid ${({ theme }) => theme?.colors?.tertiary || '#fff'};;
     padding: 30px;
   `}
 `

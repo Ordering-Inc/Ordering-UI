@@ -10,7 +10,7 @@ export const AccordionSection = styled.div`
   background: ${readOnlyMode => readOnlyMode ? 'transparent' : '#FFF'};
   box-sizing: border-box;
   ${({ readOnlyMode }) => readOnlyMode && css`
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   `}
 `
 
@@ -192,7 +192,7 @@ export const ProductTitle = styled.div`
   }
   ${({ readOnlyMode }) => readOnlyMode && css`
     h3, p, div {
-      color: white;
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     }
   `}
 `
