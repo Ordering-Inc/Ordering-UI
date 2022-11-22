@@ -293,7 +293,7 @@ var Header = function Header(props) {
     onClick: function onClick(e) {
       return handleClickUserCustomer(e);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), /*#__PURE__*/_react.default.createElement("span", null, ((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), /*#__PURE__*/_react.default.createElement("span", null, ((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.address) || t('LANG_WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
     onClick: function onClick(e) {
       return handleClickUserCustomer(e);
     }
@@ -473,7 +473,7 @@ var Header = function Header(props) {
     },
     width: "50%",
     authModal: true,
-    closeOnBackdrop: false
+    closeOnBackdrop: true
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {

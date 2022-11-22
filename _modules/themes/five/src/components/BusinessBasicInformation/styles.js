@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.WrapperSearch = exports.WrapperBusinessLogo = exports.TitleWrapper = exports.SocialList = exports.SearchIconWrapper = exports.SearchComponentContainer = exports.RibbonBox = exports.IconWrapper = exports.BusinessMoreDetail = exports.BusinessLogo = exports.BusinessInfoWrapper = exports.BusinessInfoItem = exports.BusinessInfoContent = exports.BusinessInfoContainer = exports.BusinessInfo = exports.BusinessDetail = exports.BusinessContent = exports.BusinessContainer = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -88,50 +88,64 @@ var BusinessDetail = _styledComponents.default.div(_templateObject18 || (_templa
   });
 });
 exports.BusinessDetail = BusinessDetail;
-var BusinessMoreDetail = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  top: 30px;\n  right: 30px;\n  position: absolute;\n  min-width: 24px;\n  width: 24px;\n  height: 24px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n\n  svg {\n    font-size: 24px;\n    color: white;\n  }\n"])));
+var BusinessMoreDetail = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  ", "\n  position: ", ";\n  min-width: 24px;\n  width: 24px;\n  height: 24px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n  }\n"])), function (_ref3) {
+  var position = _ref3.position;
+  return position ? (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    width: 100% !important;\n    justify-content: flex-end !important;\n    top: 0px;\n    right: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    top: 30px;\n    right: 30px;\n  "])));
+}, function (props) {
+  var _props$position;
+  return (_props$position = props.position) !== null && _props$position !== void 0 ? _props$position : 'absolute';
+}, function (props) {
+  return props.position ? 'black' : 'white';
+});
 exports.BusinessMoreDetail = BusinessMoreDetail;
-var TitleWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n\n  h2 {\n    font-size: 24px;\n    line-height: 36px;\n    margin: 0 0 10px 0;\n    font-weight: 600;\n    width: 100%;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    @media (min-width: 768px) {\n      font-size: 32px;\n    }\n  }\n"])));
+var TitleWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n\n  h2 {\n    font-size: 24px;\n    line-height: 36px;\n    margin: 0 0 10px 0;\n    font-weight: 600;\n    width: 100%;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    @media (min-width: 768px) {\n      font-size: 32px;\n    }\n  }\n"])));
 exports.TitleWrapper = TitleWrapper;
-var RibbonBox = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  background-color: ", ";\n  max-width: 200px;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  overflow: hidden;\n  margin-left: 5px;\n  margin-bottom: 10px;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
+var RibbonBox = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  background-color: ", ";\n  max-width: 200px;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  overflow: hidden;\n  margin-left: 5px;\n  margin-bottom: 10px;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.colorTextSignForm;
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 5px;\n  "])));
-}, function (_ref3) {
-  var bgColor = _ref3.bgColor;
-  return bgColor && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 5px;\n  "])));
 }, function (_ref4) {
-  var isRoundRect = _ref4.isRoundRect;
-  return isRoundRect && (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+  var bgColor = _ref4.bgColor;
+  return bgColor && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
 }, function (_ref5) {
-  var isCapsule = _ref5.isCapsule;
-  return isCapsule && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
+  var isRoundRect = _ref5.isRoundRect;
+  return isRoundRect && (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+}, function (_ref6) {
+  var isCapsule = _ref6.isCapsule;
+  return isCapsule && (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
+}, function (_ref7) {
+  var colorText = _ref7.colorText;
+  return colorText && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), colorText ? 'black' : 'white');
+}, function (_ref8) {
+  var borderRibbon = _ref8.borderRibbon;
+  return borderRibbon && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), borderRibbon ? 'black' : 'white');
 });
 exports.RibbonBox = RibbonBox;
-var SearchIconWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  background-color: ", ";\n  width: 36px;\n  height: 36px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  svg {\n    font-size: 18px;\n  }\n"])), function (props) {
+var SearchIconWrapper = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  background-color: ", ";\n  width: 36px;\n  height: 36px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  svg {\n    font-size: 18px;\n  }\n"])), function (props) {
   return props.theme.colors.gray200;
 });
 exports.SearchIconWrapper = SearchIconWrapper;
-var SearchComponentContainer = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10px;\n  right: 60px;\n  color: ", ";\n  #select-input {\n    color: #FFFFFF !important;\n  }\n  svg {\n    color: #FFFFFF;\n  }\n"])), function (_ref6) {
-  var theme = _ref6.theme;
+var SearchComponentContainer = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10px;\n  right: 60px;\n  color: ", ";\n  #select-input {\n    color: #FFFFFF !important;\n  }\n  svg {\n    color: #FFFFFF;\n  }\n"])), function (_ref9) {
+  var theme = _ref9.theme;
   return theme.colors.white;
 });
 exports.SearchComponentContainer = SearchComponentContainer;
-var SocialList = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-left: -3px;\n  ", "\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    margin-right: -3px;\n    margin-left: 0px;\n  "])));
+var SocialList = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-left: -3px;\n  ", "\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n    margin-right: -3px;\n    margin-left: 0px;\n  "])));
 });
 exports.SocialList = SocialList;
-var IconWrapper = _styledComponents.default.a(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  margin: 0px 3px 10px 3px;\n  border-radius: 3px;\n  border: 0.5px solid ", ";\n  width: 27px;\n  height: 27px;\n  min-width: 27px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  transition: all 0.2s linear;\n\n  ", "\n\n  svg {\n    height: 18px;\n    font-size: 18px;\n    transition: all 0.2s ease-in;\n    color: ", ";\n  }\n  &:hover {\n    background-color: ", ";\n    svg {\n      transform: scale(1.07);\n    }\n  }\n"])), function (props) {
+var IconWrapper = _styledComponents.default.a(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  margin: 0px 3px 10px 3px;\n  border-radius: 3px;\n  border: 0.5px solid ", ";\n  width: 27px;\n  height: 27px;\n  min-width: 27px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  transition: all 0.2s linear;\n\n  ", "\n\n  svg {\n    height: 18px;\n    font-size: 18px;\n    transition: all 0.2s ease-in;\n    color: ", ";\n  }\n  &:hover {\n    background-color: ", ";\n    svg {\n      transform: scale(1.07);\n    }\n  }\n"])), function (props) {
   return props.theme.colors.gray200;
-}, function (_ref7) {
-  var isSkeleton = _ref7.isSkeleton;
-  return isSkeleton && (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n    border: none;\n  "])));
+}, function (_ref10) {
+  var isSkeleton = _ref10.isSkeleton;
+  return isSkeleton && (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n    border: none;\n  "])));
 }, function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.gray200;
 });
 exports.IconWrapper = IconWrapper;
-var BusinessInfoWrapper = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  @media (min-width: 768px) {\n    flex-direction: column;\n  }\n"])));
+var BusinessInfoWrapper = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  @media (min-width: 768px) {\n    flex-direction: column;\n  }\n"])));
 exports.BusinessInfoWrapper = BusinessInfoWrapper;

@@ -37,12 +37,14 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
   return circle && outline && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background: #FFF;\n    color: #CCC;\n    border-color: #CCC;\n    padding: 0;\n    width: 34px;\n    height: 34px;\n    line-height: 34px;\n    text-align: center;\n    border-radius: 50%;\n    &:active {\n      color: #FFF;\n      background: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#CCC'));
 }, function (_ref6) {
   var color = _ref6.color;
-  return color === 'primary' && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:active {\n      background: ", ";\n    }\n    ", "\n    ", "\n    ", "\n  "])), function (props) {
+  return color === 'primary' && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:active {\n      background: ", ";\n    }\n    &:hover {\n      background: ", ";\n      color: #FFF;\n    }\n    ", "\n    ", "\n    ", "\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
     return props.theme.colors.primaryContrast;
   }, function (props) {
     return props.theme.colors.primary;
+  }, function (props) {
+    return (0, _polished.darken)(0.07, props.theme.colors.primary);
   }, function (props) {
     return (0, _polished.darken)(0.07, props.theme.colors.primary);
   }, function (_ref7) {
