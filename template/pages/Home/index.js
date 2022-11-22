@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useApi, useEvent, useSite } from 'ordering-components'
+import { useApi, useEvent, useSite, useOrderingTheme } from 'ordering-components'
 import { HomeHero } from '../../../src/themes/five/src/components/HomeHero'
 import { KioskHomeHero } from '../../../src/themes/five/src/components/HomeHero/layouts/KioskHomeHero'
 import { useHistory } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 import Skeleton from 'react-loading-skeleton'
 import settings from '../../config'
+
+import { PageBanner } from '../../../src/themes/five/src/components/PageBanner'
 
 import {
   HomeContainer,
@@ -23,10 +25,12 @@ export const HomePage = (props) => {
   const [ordering] = useApi()
   const [events] = useEvent()
   const [{ site }] = useSite()
+  const [{ theme }] = useOrderingTheme()
 
   const requestsState = {}
   const isKioskApp = settings?.use_kiosk
   const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
+  const homeContent = theme?.my_products?.components?.theme_settings?.components?.values?.homepage_content
 
   const handlerFindBusiness = () => {
     history.push('/search')
@@ -106,13 +110,14 @@ export const HomePage = (props) => {
             )
           }
           {
-            homeState.body && (
+            (homeContent || homeState.body) && (
               <div dangerouslySetInnerHTML={{
-                __html: homeState.body
+                __html: (homeContent || homeState.body)
               }}
               />
             )
           }
+          <PageBanner position='web_home_page' />
         </HomeContainer>
       )}
     </>

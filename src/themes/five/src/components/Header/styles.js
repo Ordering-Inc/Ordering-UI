@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const Header = styled.div`
   display: flex;
@@ -239,6 +240,11 @@ export const MenuLink = styled.a`
     color: ${props => props.theme.colors.primaryContrast};
     border-radius: 7.6px;
     padding: 11px 15px;
+
+    &:hover {
+      background: ${props => darken(0.07, props.theme.colors.primary)};
+      color: #FFF;
+    }
   `}
 `
 
@@ -458,5 +464,8 @@ export const LanguageSelectorWrapper = styled(InputGroup)`
       background: #F8F9FA !important;
       border-color: #F8F9FA;
     }
+  }
+  #select-input {
+    margin: 0px 10px 0 5px;
   }
 `

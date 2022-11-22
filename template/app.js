@@ -73,7 +73,7 @@ export const App = () => {
   const [orderStatus, { changeType, getLastOrderHasNoReview }] = useOrder()
   const [{ configs, loading: configLoading }] = useConfig()
   const [{ loading: siteLoading }] = useSite()
-  const [, t] = useLanguage()
+  const [languageState, t] = useLanguage()
   const [orderingTheme] = useOrderingTheme()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
@@ -96,7 +96,12 @@ export const App = () => {
 
   const themeUpdated = {
     ...theme,
-    ...orderingTheme?.theme
+    ...orderingTheme?.theme,
+    colors: {
+      ...theme.colors,
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color && { primary: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color }),
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color && { links: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color })
+    }
   }
 
   const businessesSlug = {
@@ -317,6 +322,16 @@ export const App = () => {
       goToPage('business', { store: 'marketplace' })
     }
   }, [])
+
+  useEffect(() => {
+    if (
+      languageState?.error &&
+      languageState?.error?.includes('This project does not exist') &&
+      settings?.use_project_subdomain
+    ) {
+      window.open('https://www.ordering.co', '_self')
+    }
+  }, [languageState])
 
   useEffect(() => {
     if (!orderStatus.loading) {

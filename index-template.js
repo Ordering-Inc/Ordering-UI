@@ -6,7 +6,6 @@ import { Alert } from './src/components/Confirm'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
-import settings from './template/config.json'
 import smoothscroll from 'smoothscroll-polyfill'
 
 /**
@@ -79,6 +78,7 @@ import curbside from './template/assets/images/delivery-types/curbside.jpg'
 import driveThru from './template/assets/images/delivery-types/drive_thru.jpg'
 import eatIn from './template/assets/images/delivery-types/eat_in.jpg'
 import pickUp from './template/assets/images/delivery-types/pickup.jpg'
+import { SubdomainComponent } from './template/components/SubdomainComponent'
 
 const logos = {
   logotype,
@@ -166,9 +166,11 @@ smoothscroll.polyfill()
 const wrapper = document.getElementById('app')
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <OrderingProvider Alert={Alert} settings={settings}>
-      <Router />
-      <Toast />
-    </OrderingProvider>
+    <SubdomainComponent>
+      <OrderingProvider Alert={Alert}>
+        <Router />
+        <Toast />
+      </OrderingProvider>
+    </SubdomainComponent>
   </ThemeProvider>
   , wrapper)

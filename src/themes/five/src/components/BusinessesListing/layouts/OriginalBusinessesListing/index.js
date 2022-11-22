@@ -16,7 +16,7 @@ import {
 import {
   BusinessContainer,
   BusinessList,
-  ErrorMessage,
+  // ErrorMessage,
   WrapperSearch,
   BusinessesTitle,
   BusinessHeroImg,
@@ -52,6 +52,7 @@ import { BusinessesMap } from '../../../../../../../components/BusinessesMap'
 import { HighestRated } from '../../../HighestRated'
 import { BusinessPreorder } from '../../../BusinessPreorder'
 import { OrderProgress } from '../../../OrderProgress'
+import { PageBanner } from '../../../PageBanner'
 
 import Skeleton from 'react-loading-skeleton'
 import { MomentPopover } from '../../../../../../pwa/src/components/MomentPopover'
@@ -81,6 +82,7 @@ const BusinessesListingUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState, { changeCityFilter }] = useOrder()
+  const [configState] = useConfig()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const windowSize = useWindowSize()
@@ -102,6 +104,7 @@ const BusinessesListingUI = (props) => {
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -285,7 +288,7 @@ const BusinessesListingUI = (props) => {
               </AddressMenu>
               <FeatureItems>
                 <ItemInline>
-                  <OrderTypeSelectorHeader />
+                  <OrderTypeSelectorHeader configTypes={configTypes} />
                 </ItemInline>
                 <ItemInline>
                   <MomentPopover
@@ -298,10 +301,12 @@ const BusinessesListingUI = (props) => {
               </FeatureItems>
             </BusinessFeatures>
           )}
-          <BusinessHeroImg
-            bgimage={theme.images?.general?.businessHero}
-            height={theme?.business_listing_view?.components?.business_hero?.style?.height}
-          />
+          {configs?.business_listing_hide_image?.value !== '1' && (
+            <BusinessHeroImg
+              bgimage={theme.images?.general?.businessHero}
+              height={theme?.business_listing_view?.components?.business_hero?.style?.height}
+            />
+          )}
         </BusinessBanner>
         {!!Object.values(orderState?.carts)?.length && (
           <OrderProgressWrapper>
@@ -364,6 +369,9 @@ const BusinessesListingUI = (props) => {
             <Divider />
           </HightestRatedWrapper>
         )}
+
+        <PageBanner position='web_business_listing' />
+
         {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
           <BusinessTypeFilter
             images={props.images}

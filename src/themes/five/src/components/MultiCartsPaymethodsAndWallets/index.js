@@ -148,7 +148,7 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
           </>
         ) : (
           <>
-            {walletsState.result.filter(wallet => paymethodsAndWallets.wallets.find(item => item.type === wallet.type)).map((wallet, idx) => walletName[wallet.type]?.isActive && (
+            {walletsState?.result?.filter(wallet => paymethodsAndWallets.wallets.find(item => item.type === wallet.type)).map((wallet, idx) => walletName[wallet.type]?.isActive && (
               <WalletOptionContainer
                 key={wallet.type}
                 isBottomBorder={idx === paymethodsAndWallets.wallets?.length - 1}

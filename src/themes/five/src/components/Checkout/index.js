@@ -220,7 +220,7 @@ const CheckoutUI = (props) => {
   const handleScrollTo = () => {
     if (!((!paymethodSelected && cart?.balance > 0) && cart?.status !== 2)) return
     const scrollElement = document.querySelector('.paymentsContainer')
-    window.scrollTo(0, scrollElement.offsetTop - 20);
+    window.scrollTo(0, scrollElement.offsetTop - 20)
   }
 
   useEffect(() => {
@@ -536,17 +536,17 @@ const CheckoutUI = (props) => {
         <MobileWrapperPlaceOrderButton>
           <span>{parsePrice(cart?.total)}</span>
           <Button
-              color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
-              // disabled={isDisablePlaceOrderButton}
-              onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
-            >
-              {!cart?.valid_maximum ? (
+            color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
+            // disabled={isDisablePlaceOrderButton}
+            onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
+          >
+            {!cart?.valid_maximum ? (
                 `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
-              ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
+            ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
                 `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-              ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
-            </Button>
-          </MobileWrapperPlaceOrderButton>
+            ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
+          </Button>
+        </MobileWrapperPlaceOrderButton>
       )}
       <Alert
         title={t('CUSTOMER_DETAILS', 'Customer Details')}
@@ -578,7 +578,10 @@ const CheckoutUI = (props) => {
           isCheckout
           isEdit
           isModal
-          onClose={() => setIsOpen(false)}
+          onClose={() => {
+            setIsOpen(false)
+            handlePlaceOrder()
+          }}
         />
       </Modal>
     </Container>
