@@ -553,7 +553,10 @@ const CheckoutUI = (props) => {
           isCheckout
           isEdit
           isModal
-          onClose={() => setIsOpen(false)}
+          onClose={() => {
+            setIsOpen(false)
+            handlePlaceOrder()
+          }}
         />
       </Modal>
     </Container>

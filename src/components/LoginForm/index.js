@@ -483,11 +483,12 @@ const LoginFormUI = (props) => {
                 )}
                 {useLoginByCellphone && loginTab === 'cellphone' &&
                   configs && Object.keys(configs).length > 0 && (configs?.twilio_service_enabled?.value === 'true' ||
-                    configs?.twilio_service_enabled?.value === '1') && (
-                    <SmsLoginButton
-                      handleSmsLogin={() => { setLoginWithOtpState(true) }}
-                    />
-                  )}
+                    configs?.twilio_service_enabled?.value === '1') &&
+                (
+                  <SmsLoginButton
+                    handleSmsLogin={() => { setLoginWithOtpState(true) }}
+                  />
+                )}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>

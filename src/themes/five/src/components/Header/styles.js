@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const Header = styled.div`
   display: flex;
@@ -241,6 +242,11 @@ export const MenuLink = styled.a`
     color: ${props => props.theme.colors.primaryContrast};
     border-radius: 7.6px;
     padding: 11px 15px;
+
+    &:hover {
+      background: ${props => darken(0.07, props.theme.colors.primary)};
+      color: #FFF;
+    }
   `}
 `
 
@@ -429,5 +435,39 @@ export const Divider = styled.div`
 export const AddressFormWrapper = styled.div`
   @media (min-width: 450px) {
     margin-top: 20px;
+  }
+`
+export const InputGroup = styled.div`
+  p {
+    font-weight: 500;
+    font-size: 20px;
+    color: ${props => props.theme.colors.darkTextColor};
+    width: 100%;
+    text-align: left;
+    margin: 0 0 7px 0;
+  }
+`
+
+export const LanguageSelectorWrapper = styled(InputGroup)`
+  > div {
+    border-radius: 7.6px;
+    text-align: left;
+    background: #F8F9FA !important;
+    border-color: #F8F9FA;
+    background-color: #F8F9FA !important;
+    height: 44px;
+
+    > div:first-child {
+      height: 44px;
+    }
+
+    #list {
+      border-radius: 7.6px;
+      background: #F8F9FA !important;
+      border-color: #F8F9FA;
+    }
+  }
+  #select-input {
+    margin: 0px 10px 0 5px;
   }
 `
