@@ -9,6 +9,7 @@ import {
   useLanguage,
   useConfig,
   useSession,
+  useToast, ToastType,
   ReCaptcha,
   useApi
 } from 'ordering-components'
@@ -88,10 +89,10 @@ const LoginFormUI = (props) => {
     useLoginOtpCellphone
   } = props
   const numOtpInputs = loginTab === 'otp' ? 6 : 4
-  const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
   const [ordering, { setOrdering }] = useApi()
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [, { showToast }] = useToast()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
   const [recaptchaConfig] = useRecaptcha(enableReCaptcha)
@@ -305,15 +306,9 @@ const LoginFormUI = (props) => {
 
   useEffect(() => {
     if (checkPhoneCodeState?.result?.error) {
-      setAlertState({
-        open: true,
-        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
-      })
+      showToast(ToastType.Error, checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')])
     } else if (checkPhoneCodeState?.result?.result) {
-      setAlertState({
-        open: true,
-        content: t('CODE_SENT', 'The code has been sent')
-      })
+      showToast(ToastType.Success, t('CODE_SENT', 'The code has been sent'))
       resetOtpLeftTime()
     }
   }, [checkPhoneCodeState])
@@ -516,13 +511,12 @@ const LoginFormUI = (props) => {
                     numInputs={numOtpInputs}
                     containerStyle='otp-container'
                     inputStyle='otp-input'
-                    placeholder={otpPlaceholder}
                     isInputNum
                     shouldAutoFocus
                   />
                 </OtpWrapper>
                 <ResendCode disabled={otpLeftTime > 520} onClick={handleSendOtp}>
-                  {t('RESEND_AGAIN', 'Resend again')}?
+                  {t('LANG_SEND_AGAIN', 'Send again')}?
                 </ResendCode>
                 <Button
                   type='button'

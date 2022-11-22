@@ -90,6 +90,10 @@ export const Button = styled.button`
     &:active {
       background: ${props => darken(0.07, props.theme.colors.primary)};
     }
+    &:hover {
+      background: ${props => darken(0.07, props.theme.colors.primary)};
+      color: #FFF;
+    }
     ${({ outline }) => outline && css`
       background: #FFF;
       color: ${props => props.theme.colors.primary};
