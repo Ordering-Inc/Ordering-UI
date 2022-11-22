@@ -39,14 +39,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 var LoginFormUI = function LoginFormUI(props) {
   var _configs$google_login, _configs$google_login2, _configs$google_login3, _configs$facebook_log, _configs$facebook_log2, _configs$apple_login_, _configs$apple_login_2, _configs$facebook_log3, _configs$facebook_log4, _configs$facebook_id, _configs$google_login4, _configs$google_login5, _configs$google_login6, _configs$apple_login_3, _configs$twilio_servi, _configs$twilio_servi2, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _props$beforeMidEleme, _props$beforeMidCompo, _formMethods$errors, _formMethods$errors$e, _formMethods$errors2, _formMethods$errors2$, _formMethods$errors3, _formMethods$errors3$, _formMethods$errors4, _formMethods$errors5, _formMethods$errors6, _formMethods$errors6$, _formMethods$errors7, _formMethods$errors7$, _formMethods$errors8, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag, _configs$facebook_log5, _configs$facebook_log6, _configs$facebook_id2, _configs$facebook_id3, _configs$google_login7, _configs$google_login8, _configs$google_login9, _configs$apple_login_4, _configs$twilio_servi3, _configs$twilio_servi4, _props$afterComponent, _props$afterElements;
   var useLoginByEmail = props.useLoginByEmail,
@@ -76,7 +72,6 @@ var LoginFormUI = function LoginFormUI(props) {
     useLoginOtpEmail = props.useLoginOtpEmail,
     useLoginOtpCellphone = props.useLoginOtpCellphone;
   var numOtpInputs = loginTab === 'otp' ? 6 : 4;
-  var otpPlaceholder = _toConsumableArray(Array(numOtpInputs)).fill(0).join('');
   var _useApi = (0, _orderingComponents.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 2),
     ordering = _useApi2[0],
@@ -85,6 +80,9 @@ var LoginFormUI = function LoginFormUI(props) {
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
+  var _useToast = (0, _orderingComponents.useToast)(),
+    _useToast2 = _slicedToArray(_useToast, 2),
+    showToast = _useToast2[1].showToast;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
@@ -363,15 +361,9 @@ var LoginFormUI = function LoginFormUI(props) {
     var _checkPhoneCodeState$2, _checkPhoneCodeState$4;
     if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$2 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$2 !== void 0 && _checkPhoneCodeState$2.error) {
       var _checkPhoneCodeState$3;
-      setAlertState({
-        open: true,
-        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$3 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$3 === void 0 ? void 0 : _checkPhoneCodeState$3.result) || [t('ERROR', 'Error')]
-      });
+      showToast(_orderingComponents.ToastType.Error, (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$3 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$3 === void 0 ? void 0 : _checkPhoneCodeState$3.result) || [t('ERROR', 'Error')]);
     } else if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$4 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$4 !== void 0 && _checkPhoneCodeState$4.result) {
-      setAlertState({
-        open: true,
-        content: t('CODE_SENT', 'The code has been sent')
-      });
+      showToast(_orderingComponents.ToastType.Success, t('CODE_SENT', 'The code has been sent'));
       resetOtpLeftTime();
     }
   }, [checkPhoneCodeState]);
@@ -510,13 +502,12 @@ var LoginFormUI = function LoginFormUI(props) {
     numInputs: numOtpInputs,
     containerStyle: "otp-container",
     inputStyle: "otp-input",
-    placeholder: otpPlaceholder,
     isInputNum: true,
     shouldAutoFocus: true
   })), /*#__PURE__*/_react.default.createElement(_styles.ResendCode, {
     disabled: otpLeftTime > 520,
     onClick: handleSendOtp
-  }, t('RESEND_AGAIN', 'Resend again'), "?"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('LANG_SEND_AGAIN', 'Send again'), "?"), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "button",
     color: "secundary",
     disabled: formState.loading,

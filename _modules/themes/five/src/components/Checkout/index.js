@@ -469,7 +469,8 @@ var CheckoutUI = function CheckoutUI(props) {
     isEdit: true,
     isModal: true,
     onClose: function onClose() {
-      return setIsOpen(false);
+      setIsOpen(false);
+      handlePlaceOrder();
     }
   })));
 };

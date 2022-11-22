@@ -43,7 +43,7 @@ _dayjs.default.extend(_timezone.default);
 _dayjs.default.extend(_isBetween.default);
 var types = ['food', 'laundry', 'alcohol', 'groceries'];
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _configs$preorder_sta, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _orderingTheme$theme$7, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _orderingTheme$theme21, _orderingTheme$theme22, _orderingTheme$theme23, _orderingTheme$theme24, _orderingTheme$theme25, _orderingTheme$theme26, _orderingTheme$theme27, _orderingTheme$theme28, _orderingTheme$theme29, _orderingTheme$theme30, _orderingTheme$theme31, _orderingTheme$theme32, _orderingTheme$theme33, _orderingTheme$theme34, _orderingTheme$theme35, _orderingTheme$theme36, _orderingTheme$theme37, _orderingTheme$theme38, _orderingTheme$theme39, _orderingTheme$theme40, _orderingTheme$theme41, _orderingTheme$theme42, _orderingTheme$theme43, _orderingTheme$theme44, _orderingTheme$theme45, _orderingTheme$theme46, _orderingTheme$theme47, _orderingTheme$theme48, _orderingTheme$theme49, _orderingTheme$theme50, _orderingTheme$theme51, _orderingTheme$theme52, _orderingTheme$theme53, _orderingTheme$theme54, _orderingTheme$theme55, _orderingTheme$theme56, _orderingTheme$theme57, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _orderingTheme$theme58, _orderingTheme$theme59, _orderingTheme$theme60, _orderingTheme$theme61, _orderingTheme$theme62, _orderingTheme$theme63, _orderingTheme$theme64, _orderingTheme$theme65, _orderingTheme$theme66, _orderingTheme$theme67, _orderingTheme$theme68, _orderingTheme$theme69, _orderingTheme$theme70, _orderingTheme$theme71, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
+  var _configs$preorder_sta, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _orderingTheme$theme$7, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _orderingTheme$theme21, _orderingTheme$theme22, _orderingTheme$theme23, _orderingTheme$theme24, _orderingTheme$theme25, _orderingTheme$theme26, _orderingTheme$theme27, _orderingTheme$theme28, _orderingTheme$theme29, _orderingTheme$theme30, _orderingTheme$theme31, _orderingTheme$theme32, _orderingTheme$theme33, _orderingTheme$theme34, _orderingTheme$theme35, _orderingTheme$theme36, _orderingTheme$theme37, _orderingTheme$theme38, _orderingTheme$theme39, _orderingTheme$theme40, _orderingTheme$theme41, _orderingTheme$theme42, _orderingTheme$theme43, _orderingTheme$theme44, _orderingTheme$theme45, _orderingTheme$theme46, _orderingTheme$theme47, _orderingTheme$theme48, _orderingTheme$theme49, _orderingTheme$theme50, _orderingTheme$theme51, _orderingTheme$theme52, _orderingTheme$theme53, _orderingTheme$theme54, _orderingTheme$theme55, _orderingTheme$theme56, _orderingTheme$theme57, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _orderingTheme$theme58, _orderingTheme$theme59, _orderingTheme$theme60, _orderingTheme$theme61, _orderingTheme$theme62, _orderingTheme$theme63, _orderingTheme$theme64, _orderingTheme$theme65, _orderingTheme$theme66, _orderingTheme$theme67, _orderingTheme$theme68, _orderingTheme$theme69, _orderingTheme$theme70, _orderingTheme$theme71, _props$beforeElements, _props$beforeComponen, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
   var isSkeleton = props.isSkeleton,
     businessState = props.businessState,
     setOpenBusinessInformation = props.setOpenBusinessInformation,
@@ -295,13 +295,13 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       });
     },
     business: businessState.business
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoWrapper, null, !isInfoShrunken && /*#__PURE__*/_react.default.createElement(BusinessInfoComponent, null), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
-    bgimage: (business === null || business === void 0 ? void 0 : business.header) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessHeader),
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoWrapper, null, !isInfoShrunken && /*#__PURE__*/_react.default.createElement(BusinessInfoComponent, null), ((business === null || business === void 0 ? void 0 : business.header) || (business === null || business === void 0 ? void 0 : business.logo) || loading || isInfoShrunken) && /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, {
+    bgimage: business === null || business === void 0 ? void 0 : business.header,
     isSkeleton: isSkeleton,
     id: "container",
     isClosed: !(business !== null && business !== void 0 && business.open)
-  }, !loading && !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed')), showLogo && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading && /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit')
+  }, !loading && !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed')), showLogo && (business === null || business === void 0 ? void 0 : business.logo) && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading && /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+    bgimage: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_200,c_limit')
   }))), isInfoShrunken && /*#__PURE__*/_react.default.createElement(BusinessInfoComponent, null), !loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isInfoShrunken && /*#__PURE__*/_react.default.createElement(_styles.SearchComponentContainer, null, /*#__PURE__*/_react.default.createElement(SearchComponent, null)), searchLayout === 'floating' && /*#__PURE__*/_react.default.createElement(_styles.WrapperFloatingSearch, null, /*#__PURE__*/_react.default.createElement(_SearchProducts2.SearchProducts, {
     handleChangeSearch: handleChangeSearch,
     searchValue: searchValue,
@@ -313,6 +313,12 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     businessState: businessState,
     disablePadding: true
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessMoreDetail, null, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
+    onClick: function onClick() {
+      return setOpenBusinessInformation(true);
+    }
+  })))), !(business !== null && business !== void 0 && business.header) && !(business !== null && business !== void 0 && business.logo) && !loading && !isInfoShrunken && /*#__PURE__*/_react.default.createElement(_styles.BusinessMoreDetail, {
+    position: "relative"
+  }, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
     onClick: function onClick() {
       return setOpenBusinessInformation(true);
     }
@@ -356,7 +362,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     handleClick: function handleClick() {
       return setIsPreOrder(false);
     }
-  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

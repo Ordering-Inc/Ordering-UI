@@ -2084,9 +2084,9 @@
     tslib "^2.4.0"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.46.1"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.46.1.tgz#f310257b52f632025507dfe9e88c69e98ca51029"
-  integrity sha512-wJe1y9c/YgL5TAlTLM8wfYAl8yaFIXoUr/0Ay4ZxvY807zzgBuk6ULd5nyDgE4EbKEfN8iYOp0hrtrjp4P0TFw==
+  version "1.46.3"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.46.3.tgz#4d7903a55fcc35afec58fc6846053dc4218eb7d7"
+  integrity sha512-JGgaJjNqu3bnwjM9/iB5X7W2iCYwiJZFF3FKSp/Al1tHUtm9wsne2lr7YniTYFjedQt+YYR0bj9aoHPfzGS/oA==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics-core" "1.1.2"
@@ -3525,9 +3525,9 @@ anymatch@^2.0.0:
     normalize-path "^2.1.1"
 
 anymatch@^3.0.0, anymatch@~3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/anymatch/-/anymatch-3.1.2.tgz#c0557c096af32f106198f4f4e2a383537e378716"
-  integrity sha512-P43ePfOAIupkguHUycrc4qJ9kz8ZiuOUijaETwX7THt0Y/GNK7v0aa8rY816xWjZ7rJdA5XdMcpVFTKMq+RvWg==
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/anymatch/-/anymatch-3.1.3.tgz#790c58b19ba1720a84205b57c618d5ad8524973e"
+  integrity sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
@@ -9068,7 +9068,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/07ff4283582c7763ee67ebcaea0352ced1874825"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/5295f234b57fc7459e09d6d637d27d0c528c4771"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -9832,9 +9832,9 @@ react-async-script@^1.1.1:
     prop-types "^15.5.0"
 
 react-bootstrap-icons@^1.7.2:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-icons/-/react-bootstrap-icons-1.9.1.tgz#d12b2e14a9f9c8b4d13c809c57c0e94aae6b1435"
-  integrity sha512-EOxEkiKt/ucn17cXHzUcxbVmH7YCFjV5ifrIB+aGkfxjXnGGJyBDfG5kRChoCDs1Y7vLRtgSauOq+whF751Yzg==
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-icons/-/react-bootstrap-icons-1.10.2.tgz#e8e765f5cf9672f1a6b3e9146f441db92bb104cc"
+  integrity sha512-PC72g6uARdSxZH+ViBbul3FRWKuIhiJajahwt1h0daPBDw789KqpA+x3hrJpSUyQMF0PQ9LfWxu1a0O67bqPeg==
   dependencies:
     prop-types "^15.7.2"
 
