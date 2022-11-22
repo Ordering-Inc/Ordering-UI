@@ -19,6 +19,7 @@ var _FiClock = _interopRequireDefault(require("@meronex/icons/fi/FiClock"));
 var _GrLocation = _interopRequireDefault(require("@meronex/icons/gr/GrLocation"));
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 var _AutoScroll = require("../AutoScroll");
+var _moment = _interopRequireDefault(require("moment/moment"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -33,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessInformationUI = function BusinessInformationUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _orderState$options, _business$reviews2, _business$offers, _configs$google_maps_, _business$reviews3, _business$reviews4, _business$reviews5, _business$offers2, _props$afterComponent, _props$afterElements;
+  var _configs$format_time, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _orderState$options, _business$reviews2, _business$offers, _configs$google_maps_, _business$reviews3, _business$reviews4, _business$reviews5, _business$offers2, _props$afterComponent, _props$afterElements;
   var business = props.business,
     getBusinessType = props.getBusinessType,
     optimizeImage = props.optimizeImage,
@@ -70,13 +71,10 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     image = _useState6[0],
     setImage = _useState6[1];
-  var scheduleFormatted = function scheduleFormatted(_ref) {
-    var hour = _ref.hour,
-      minute = _ref.minute;
-    var checkTime = function checkTime(val) {
-      return val < 10 ? "0".concat(val) : val;
-    };
-    return "".concat(checkTime(hour), ":").concat(checkTime(minute));
+  var timeFormat = configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value;
+  var timeOptions = {
+    12: 'hh:mm a',
+    24: 'HH:mm'
   };
   var handleModalImage = function handleModalImage(src) {
     setImage(src);
@@ -137,13 +135,13 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     }, /*#__PURE__*/_react.default.createElement("h4", null, daysOfWeek[i]), schedule.enabled ? schedule.lapses.map(function (time, k) {
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: k
-      }, /*#__PURE__*/_react.default.createElement("p", null, scheduleFormatted(time.open)), /*#__PURE__*/_react.default.createElement("p", {
+      }, /*#__PURE__*/_react.default.createElement("p", null, (0, _moment.default)(time.open).format(timeOptions[timeFormat])), /*#__PURE__*/_react.default.createElement("p", {
         style: {
           borderBottom: '2px solid',
           borderBottomColor: theme.colors.primary,
           marginBottom: 10
         }
-      }, scheduleFormatted(time.close)));
+      }, (0, _moment.default)(time.close).format(timeOptions[timeFormat])));
     }) : /*#__PURE__*/_react.default.createElement("p", {
       style: {
         fontWeight: 500
