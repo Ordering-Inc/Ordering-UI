@@ -233,18 +233,18 @@ export const OtpWrapper = styled.div`
   .otp-container{
     display: flex;
     justify-content: space-evenly;
-    margin: 20px;
-    
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+
     .otp-input{
-      width: 30px;
-      height: 30px;
-      padding: 12px 20px;
-      border: 2px solid #CCC;
-      border-radius: 16px;
+      width: 25px !important;
+      height: 35px;
+      border: 1px solid #CCC;
+      border-radius: 8px;
       background-color: #FFF;
       outline: none;
       font-size: 20px;
-      font-weight: bold; 
+      font-weight: bold;
 
       &:focus{
         border-color: ${() => darken(0.07, '#CCC')} !important;
@@ -256,6 +256,27 @@ export const OtpWrapper = styled.div`
       }
       &:-ms-input-placeholder {
         color: #DBDCDB;
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    .otp-container {
+      margin: 20px;
+      div {
+        padding: 10px;
+      }
+
+      .otp-input {
+        width: 80px !important;
+        height: 100px;
+      }
+    }
+  }
+  @media (min-width: 1024px) {
+    .otp-container {
+      .otp-input {
+        width: 60px !important;
+        height: 80px;
       }
     }
   }

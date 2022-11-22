@@ -17,6 +17,7 @@ import {
   useLanguage,
   useConfig,
   useSession,
+  useToast, ToastType,
   ReCaptcha,
   useEvent
 } from 'ordering-components'
@@ -98,6 +99,7 @@ const SignUpFormUI = (props) => {
     useSignUpOtpCellphone
   } = props
   const [, t] = useLanguage()
+  const [, { showToast }] = useToast()
   const [{ configs }] = useConfig()
   const formMethods = useForm()
   const [events] = useEvent()
@@ -110,8 +112,7 @@ const SignUpFormUI = (props) => {
   const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
   const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
 
-  const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
-  const [otpLeftTime, _, resetOtpLeftTime] = useCountdownTimer(600, !checkPhoneCodeState?.loading && willVerifyOtpState)
+  const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(600, !checkPhoneCodeState?.loading && willVerifyOtpState)
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
@@ -310,15 +311,9 @@ const SignUpFormUI = (props) => {
 
   useEffect(() => {
     if (checkPhoneCodeState?.result?.error) {
-      setAlertState({
-        open: true,
-        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
-      })
+      showToast(ToastType.Error, checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')])
     } else if (checkPhoneCodeState?.result?.result && checkPhoneCodeState?.result?.result?.[0] === 'VERIFICATION_CODE_WAS_SENT_TO') {
-      setAlertState({
-        open: true,
-        content: t('CODE_SENT', 'The code has been sent')
-      })
+      showToast(ToastType.Success, t('CODE_SENT', 'The code has been sent'))
       resetOtpLeftTime()
     }
   }, [checkPhoneCodeState])
@@ -613,13 +608,12 @@ const SignUpFormUI = (props) => {
                   numInputs={numOtpInputs || 6}
                   containerStyle='otp-container'
                   inputStyle='otp-input'
-                  placeholder={otpPlaceholder}
                   isInputNum
                   shouldAutoFocus
                 />
               </OtpWrapper>
               <ResendCode disabled={otpLeftTime > 520} onClick={handleSendOtp}>
-                {t('RESEND_AGAIN', 'Resend again')}?
+                {t('LANG_SEND_AGAIN', 'Send again')}?
               </ResendCode>
               <Button
                 type='button'

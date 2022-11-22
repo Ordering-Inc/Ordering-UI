@@ -243,7 +243,7 @@ export const Header = (props) => {
                     onClick={(e) => handleClickUserCustomer(e)}
                   >
                     <GeoAlt />
-                    <span>{orderState.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}</span>
+                    <span>{orderState.options?.address?.address || t('LANG_WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}</span>
                   </AddressMenu>
                   <Divider />
                 </>
@@ -513,7 +513,7 @@ export const Header = (props) => {
             onClose={() => closeAuthModal()}
             width='50%'
             authModal
-            closeOnBackdrop={false}
+            closeOnBackdrop
           >
             {modalPageToShow === 'login' && (
               <LoginForm

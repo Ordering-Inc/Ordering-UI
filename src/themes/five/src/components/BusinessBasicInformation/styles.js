@@ -306,9 +306,16 @@ export const BusinessDetail = styled.div`
 `
 
 export const BusinessMoreDetail = styled.div`
-  top: 30px;
-  right: 30px;
-  position: absolute;
+  ${({ position }) => position ? css`
+    width: 100% !important;
+    justify-content: flex-end !important;
+    top: 0px;
+    right: 0px;
+  ` : css`
+    top: 30px;
+    right: 30px;
+  `}
+  position: ${props => props.position ?? 'absolute'};
   min-width: 24px;
   width: 24px;
   height: 24px;
@@ -319,7 +326,7 @@ export const BusinessMoreDetail = styled.div`
 
   svg {
     font-size: 24px;
-    color: white;
+    color: ${props => props.position ? 'black' : 'white'};
   }
 `
 
@@ -378,11 +385,11 @@ export const RibbonBox = styled.div`
   `}
 
   ${({ colorText }) => colorText && css`
-    color: ${colorText ? 'black': 'white'};
+    color: ${colorText ? 'black' : 'white'};
   `}
 
   ${({ borderRibbon }) => borderRibbon && css`
-    border: 1px solid ${borderRibbon ? 'black': 'white'};
+    border: 1px solid ${borderRibbon ? 'black' : 'white'};
   `}
 `
 export const SearchIconWrapper = styled.div`
