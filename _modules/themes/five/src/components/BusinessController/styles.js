@@ -160,10 +160,10 @@ var RibbonBox = _styledComponents.default.div(_templateObject40 || (_templateObj
   return isCapsule && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
 }, function (_ref21) {
   var colorText = _ref21.colorText;
-  return colorText && (0, _styledComponents.css)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), colorText);
+  return colorText && (0, _styledComponents.css)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), colorText ? 'black' : 'white');
 }, function (_ref22) {
   var borderRibbon = _ref22.borderRibbon;
-  return borderRibbon && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), borderRibbon);
+  return borderRibbon && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), borderRibbon ? 'black' : 'white');
 });
 exports.RibbonBox = RibbonBox;
 var FavoriteWrapper = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  margin-left: 15px;\n  ", "\n\n  svg {\n    font-size: 16px;\n    color: ", ";\n  }\n"])), function (props) {
