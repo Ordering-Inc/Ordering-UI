@@ -88,6 +88,8 @@ export const App = () => {
     reviewStatus: { trigger: false, order: false, product: false, driver: false },
     reviewed: { isOrderReviewed: false, isProductReviewed: false, isDriverReviewed: false }
   })
+  const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const isAllowUnaddressOrderType = unaddressedTypes.includes(orderStatus?.options?.type)
   const isShowReviewsPopupEnabled = configs?.show_reviews_popups_enabled?.value === '1'
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
   const isKioskApp = settings?.use_kiosk
@@ -371,7 +373,7 @@ export const App = () => {
                     ) : (
                       isKioskApp
                         ? <HomePage />
-                        : orderStatus.options?.address?.location
+                        : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                           : singleBusinessConfig.isActive
                             ? <Redirect to={singleBusinessConfig.isActive ? '' : '/search'} />
@@ -384,7 +386,7 @@ export const App = () => {
                     ) : (
                       isKioskApp
                         ? <HomePage />
-                        : orderStatus.options?.address?.location
+                        : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                           : <HomePage />
                     )}
@@ -490,7 +492,7 @@ export const App = () => {
                             isUserVerifyRequired ? (
                               <Redirect to='/verify' />
                             ) : (
-                              orderStatus.options?.address?.location
+                              (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                                 ? <BusinessesList />
                                 : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                             )
@@ -502,7 +504,7 @@ export const App = () => {
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      orderStatus.options?.address?.location && !isKioskApp ? (
+                      (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !isKioskApp ? (
                         <BusinessListingSearch />
                       ) : (
                         <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
