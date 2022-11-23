@@ -173,8 +173,9 @@ export const BusinessContent = styled.div`
 
   ${({ theme }) => theme?.layouts?.orders?.components?.layout?.type === 'pfchangs' && css`
     * {
-      color: #fff !important;
+      color: ${({ theme }) => theme?.colors?.tertiary || '#fff'} !important;
     }
+    background: ${({ theme }) => theme?.colors?.tertiaryContrast || 'transparent'};
   `}
 
   @media (min-width: 481px) {
