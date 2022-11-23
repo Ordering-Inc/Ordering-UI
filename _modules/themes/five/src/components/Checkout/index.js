@@ -11,6 +11,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _styledComponents = require("styled-components");
 var _Modal = require("../Modal");
 var _orderingComponents = require("ordering-components");
+var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _UpsellingPage = require("../UpsellingPage");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _reactRouterDom = require("react-router-dom");
@@ -104,6 +105,7 @@ var CheckoutUI = function CheckoutUI(props) {
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
   var history = (0, _reactRouterDom.useHistory)();
+  var windowSize = (0, _useWindowSize.useWindowSize)();
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     errorCash = _useState2[0],
@@ -223,6 +225,11 @@ var CheckoutUI = function CheckoutUI(props) {
       }
     }
     setUserErrors(errors);
+  };
+  var handleScrollTo = function handleScrollTo() {
+    if (!(!paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2)) return;
+    var scrollElement = document.querySelector('.paymentsContainer');
+    window.scrollTo(0, scrollElement.offsetTop - 20);
   };
   (0, _react.useEffect)(function () {
     var _validationFields$fie14;
@@ -364,7 +371,9 @@ var CheckoutUI = function CheckoutUI(props) {
     onChange: function onChange(val) {
       return handleChangeDeliveryOption(val);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.CheckOutDivider, null)), !cartState.loading && cart && /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMENT_METHODS', 'Payment Methods')), !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.CheckOutDivider, null)), !cartState.loading && cart && /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodContainer, {
+    className: "paymentsContainer"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMENT_METHODS', 'Payment Methods')), !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 4 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, {
     style: {
       marginTop: 20
     }
@@ -412,13 +421,20 @@ var CheckoutUI = function CheckoutUI(props) {
     useKioskApp: useKioskApp,
     isCheckout: true,
     isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) || 0
-  })), !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), windowSize.width >= 576 && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? 'secundary' : 'primary',
     disabled: isDisablePlaceOrderButton,
     onClick: function onClick() {
       return handlePlaceOrder();
     }
-  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')), (options === null || options === void 0 ? void 0 : options.type) === 3 && !(cart !== null && cart !== void 0 && cart.spot_number) && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')), options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie18 = validationFields.fields) === null || _validationFields$fie18 === void 0 ? void 0 : (_validationFields$fie19 = _validationFields$fie18.checkout) === null || _validationFields$fie19 === void 0 ? void 0 : (_validationFields$fie20 = _validationFields$fie19.driver_tip) === null || _validationFields$fie20 === void 0 ? void 0 : _validationFields$fie20.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie21 = validationFields.fields) === null || _validationFields$fie21 === void 0 ? void 0 : (_validationFields$fie22 = _validationFields$fie21.checkout) === null || _validationFields$fie22 === void 0 ? void 0 : (_validationFields$fie23 = _validationFields$fie22.driver_tip) === null || _validationFields$fie23 === void 0 ? void 0 : _validationFields$fie23.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')), (options === null || options === void 0 ? void 0 : options.type) === 3 && !(cart !== null && cart !== void 0 && cart.spot_number) && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')), options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie18 = validationFields.fields) === null || _validationFields$fie18 === void 0 ? void 0 : (_validationFields$fie19 = _validationFields$fie18.checkout) === null || _validationFields$fie19 === void 0 ? void 0 : (_validationFields$fie20 = _validationFields$fie19.driver_tip) === null || _validationFields$fie20 === void 0 ? void 0 : _validationFields$fie20.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie21 = validationFields.fields) === null || _validationFields$fie21 === void 0 ? void 0 : (_validationFields$fie22 = _validationFields$fie21.checkout) === null || _validationFields$fie22 === void 0 ? void 0 : (_validationFields$fie23 = _validationFields$fie22.driver_tip) === null || _validationFields$fie23 === void 0 ? void 0 : _validationFields$fie23.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.'))), windowSize.width < 576 && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MobileWrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? 'secundary' : 'primary'
+    // disabled={isDisablePlaceOrderButton}
+    ,
+    onClick: function onClick() {
+      return isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder();
+    }
+  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CUSTOMER_DETAILS', 'Customer Details'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

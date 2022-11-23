@@ -168,7 +168,7 @@ var OrderBillSection = function OrderBillSection(props) {
       marginTop: 10
     }
   }, order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.map(function (event) {
-    var _walletName$event$wal, _event$wallet_event, _event$wallet_event$w, _event$paymethod, _event$data, _event$data2;
+    var _walletName$event$wal, _event$wallet_event, _event$wallet_event$w, _event$paymethod, _event$paymethod2, _event$data, _event$data2;
     return event.amount > 0 && /*#__PURE__*/_react.default.createElement("div", {
       key: event.id,
       style: {
@@ -183,7 +183,7 @@ var OrderBillSection = function OrderBillSection(props) {
         display: 'flex',
         flexDirection: 'column'
       }
-    }, /*#__PURE__*/_react.default.createElement("span", null, event !== null && event !== void 0 && event.wallet_event ? (_walletName$event$wal = walletName[event === null || event === void 0 ? void 0 : (_event$wallet_event = event.wallet_event) === null || _event$wallet_event === void 0 ? void 0 : (_event$wallet_event$w = _event$wallet_event.wallet) === null || _event$wallet_event$w === void 0 ? void 0 : _event$wallet_event$w.type]) === null || _walletName$event$wal === void 0 ? void 0 : _walletName$event$wal.name : event === null || event === void 0 ? void 0 : (_event$paymethod = event.paymethod) === null || _event$paymethod === void 0 ? void 0 : _event$paymethod.name), (event === null || event === void 0 ? void 0 : (_event$data = event.data) === null || _event$data === void 0 ? void 0 : _event$data.charge_id) && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('CODE', 'Code'), ": ").concat(event === null || event === void 0 ? void 0 : (_event$data2 = event.data) === null || _event$data2 === void 0 ? void 0 : _event$data2.charge_id))), /*#__PURE__*/_react.default.createElement("span", null, "-", parsePrice(event.amount, {
+    }, /*#__PURE__*/_react.default.createElement("span", null, event !== null && event !== void 0 && event.wallet_event ? (_walletName$event$wal = walletName[event === null || event === void 0 ? void 0 : (_event$wallet_event = event.wallet_event) === null || _event$wallet_event === void 0 ? void 0 : (_event$wallet_event$w = _event$wallet_event.wallet) === null || _event$wallet_event$w === void 0 ? void 0 : _event$wallet_event$w.type]) === null || _walletName$event$wal === void 0 ? void 0 : _walletName$event$wal.name : t(event === null || event === void 0 ? void 0 : (_event$paymethod = event.paymethod) === null || _event$paymethod === void 0 ? void 0 : _event$paymethod.name.toUpperCase(), event === null || event === void 0 ? void 0 : (_event$paymethod2 = event.paymethod) === null || _event$paymethod2 === void 0 ? void 0 : _event$paymethod2.name)), (event === null || event === void 0 ? void 0 : (_event$data = event.data) === null || _event$data === void 0 ? void 0 : _event$data.charge_id) && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('CODE', 'Code'), ": ").concat(event === null || event === void 0 ? void 0 : (_event$data2 = event.data) === null || _event$data2 === void 0 ? void 0 : _event$data2.charge_id))), /*#__PURE__*/_react.default.createElement("span", null, "-", parsePrice(event.amount, {
       isTruncable: true
     })));
   }))));
