@@ -9068,7 +9068,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/07f5ef2de77cf1fd2b75d241dd90879481502070"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/d4cedf560425ba504cbf828c197b66b0b17d191d"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
