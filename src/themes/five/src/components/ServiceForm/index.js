@@ -13,6 +13,7 @@ import { ChevronLeft, ChevronRight, ChevronDown } from 'react-bootstrap-icons'
 import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 import { Button } from '../../styles/Buttons'
 import moment from 'moment'
+import { getTimes } from '../../../../../utils'
 import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
@@ -82,6 +83,7 @@ const ServiceFormUI = (props) => {
   const [datesList, setDatesList] = useState([])
 
   const dropDownRef = useRef()
+  const is12Hours = configs?.format_time?.value === '12'
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -164,52 +166,10 @@ const ServiceFormUI = (props) => {
     setIsEnabled(menu?.schedule?.[day]?.enabled || false)
   }
 
-  const getTimes = (curdate, menu) => {
+  const getTimeList = (curdate, menu) => {
     validateSelectedDate(curdate, menu)
-    const date = new Date()
     const selectedDate = new Date(curdate)
-    const times = []
-    for (var k = 0; k < menu.schedule[selectedDate.getDay()].lapses.length; k++) {
-      const open = {
-        hour: menu.schedule[selectedDate.getDay()].lapses[k].open.hour,
-        minute: menu.schedule[selectedDate.getDay()].lapses[k].open.minute
-      }
-      const close = {
-        hour: menu.schedule[selectedDate.getDay()].lapses[k].close.hour,
-        minute: menu.schedule[selectedDate.getDay()].lapses[k].close.minute
-      }
-      for (let i = open.hour; i <= close.hour; i++) {
-        if (date.getDate() !== selectedDate.getDate() || i >= date.getHours()) {
-          let hour = ''
-          let meridian = ''
-          if (configs?.format_time?.value === '12') {
-            if (i === 0) {
-              hour = '12'
-              meridian = ' ' + t('AM', 'AM')
-            } else if (i > 0 && i < 12) {
-              hour = (i < 10 ? '0' + i : i)
-              meridian = ' ' + t('AM', 'AM')
-            } else if (i === 12) {
-              hour = '12'
-              meridian = ' ' + t('PM', 'PM')
-            } else {
-              hour = ((i - 12 < 10) ? '0' + (i - 12) : `${(i - 12)}`)
-              meridian = ' ' + t('PM', 'PM')
-            }
-          } else {
-            hour = i < 10 ? '0' + i : i
-          }
-          for (let j = (i === open.hour ? open.minute : 0); j <= (i === close.hour ? close.minute : 59); j += 15) {
-            if (i !== date.getHours() || j >= date.getMinutes() || date.getDate() !== selectedDate.getDate()) {
-              times.push({
-                text: hour + ':' + (j < 10 ? '0' + j : j) + meridian,
-                value: (i < 10 ? '0' + i : i) + ':' + (j < 10 ? '0' + j : j)
-              })
-            }
-          }
-        }
-      }
-    }
+    const times = getTimes(selectedDate, menu?.schedule, is12Hours)
     return times
   }
 
@@ -260,7 +220,7 @@ const ServiceFormUI = (props) => {
 
   useEffect(() => {
     if (selectDate === null || currentProfessional === null) return
-    const _times = getTimes(selectDate, currentProfessional)
+    const _times = getTimeList(selectDate, currentProfessional)
     setTimeList(_times)
   }, [selectDate, currentProfessional])
 

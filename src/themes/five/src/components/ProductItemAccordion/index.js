@@ -197,7 +197,6 @@ export const ProductItemAccordion = (props) => {
                 </ContentInfo>
               </>
             )}
-
           </ProductInfo>
 
           {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
