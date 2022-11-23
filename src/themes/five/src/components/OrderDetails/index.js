@@ -124,7 +124,7 @@ const OrderDetailsUI = (props) => {
   const completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const placeSpotTypes = [3, 4, 5]
   const googleMapsApiKey = configs?.google_maps_api_key?.value
-  const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value || true
+  const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
 
   const showOrderActions = order?.delivery_type !== 1
 

@@ -52,7 +52,7 @@ export const Footer = ({ isFooterPage }) => {
           />
         )
       }
-      {!enabledPoweredByOrdering && (
+      {enabledPoweredByOrdering && (
         <PoweredByOrdering>
           {t('POWERED_BY', 'Powered by')}
           <a href='https://www.ordering.co'>
