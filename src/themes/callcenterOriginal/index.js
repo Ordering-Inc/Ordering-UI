@@ -69,6 +69,8 @@ import { UpsellingPage } from './src/components/UpsellingPage'
 import { UserDetails } from './src/components/UserDetails'
 import { UserPopover } from './src/components/UserPopover'
 import { UserProfileForm } from './src/components/UserProfileForm'
+import { Confirm } from './src/components/Confirm'
+import { LanguageSelector } from './src/components/LanguageSelector'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -146,6 +148,8 @@ export {
   UserDetails,
   UserPopover,
   UserProfileForm,
+  Confirm,
+  LanguageSelector,
 
   // styles
   Button,
