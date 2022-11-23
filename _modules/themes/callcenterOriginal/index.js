@@ -153,6 +153,12 @@ Object.defineProperty(exports, "Checkout", {
     return _Checkout.Checkout;
   }
 });
+Object.defineProperty(exports, "Confirm", {
+  enumerable: true,
+  get: function get() {
+    return _Confirm.Confirm;
+  }
+});
 Object.defineProperty(exports, "DriverTips", {
   enumerable: true,
   get: function get() {
@@ -223,6 +229,12 @@ Object.defineProperty(exports, "InputPhoneNumber", {
   enumerable: true,
   get: function get() {
     return _InputPhoneNumber.InputPhoneNumber;
+  }
+});
+Object.defineProperty(exports, "LanguageSelector", {
+  enumerable: true,
+  get: function get() {
+    return _LanguageSelector.LanguageSelector;
   }
 });
 Object.defineProperty(exports, "LastOrders", {
@@ -524,6 +536,8 @@ var _UpsellingPage = require("./src/components/UpsellingPage");
 var _UserDetails = require("./src/components/UserDetails");
 var _UserPopover = require("./src/components/UserPopover");
 var _UserProfileForm = require("./src/components/UserProfileForm");
+var _Confirm = require("./src/components/Confirm");
+var _LanguageSelector = require("./src/components/LanguageSelector");
 var _Buttons = require("./src/styles/Buttons");
 var _Inputs = require("./src/styles/Inputs");
 var _Select = require("./src/styles/Select");

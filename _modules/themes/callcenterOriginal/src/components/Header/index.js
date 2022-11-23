@@ -50,7 +50,8 @@ var Header = function Header(props) {
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
     isHideSignup = props.isHideSignup,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    franchiseId = props.franchiseId;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
     pathname = _useLocation.pathname;
   var _useEvent = (0, _orderingComponents.useEvent)(),
@@ -299,7 +300,8 @@ var Header = function Header(props) {
     auth: auth,
     location: location,
     isCustomerMode: isCustomerMode,
-    setPreorderBusiness: setPreorderBusiness
+    setPreorderBusiness: setPreorderBusiness,
+    franchiseId: franchiseId
   }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "cart",
     totalCarts: cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length,
