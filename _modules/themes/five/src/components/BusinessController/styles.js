@@ -72,22 +72,30 @@ exports.BusinessTags = BusinessTags;
 var BusinessContent = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  max-height: 135px;\n  padding: 0 20px 20px 20px;\n  height: calc(100% - 145px);\n\n  ", "\n\n  @media (min-width: 481px) {\n    height: calc(100% - 165px);\n  }\n"])), function (_ref10) {
   var _theme$layouts, _theme$layouts$orders, _theme$layouts$orders2, _theme$layouts$orders3;
   var theme = _ref10.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$orders = _theme$layouts.orders) === null || _theme$layouts$orders === void 0 ? void 0 : (_theme$layouts$orders2 = _theme$layouts$orders.components) === null || _theme$layouts$orders2 === void 0 ? void 0 : (_theme$layouts$orders3 = _theme$layouts$orders2.layout) === null || _theme$layouts$orders3 === void 0 ? void 0 : _theme$layouts$orders3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    * {\n      color: #fff !important;\n    }\n  "])));
+  return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$orders = _theme$layouts.orders) === null || _theme$layouts$orders === void 0 ? void 0 : (_theme$layouts$orders2 = _theme$layouts$orders.components) === null || _theme$layouts$orders2 === void 0 ? void 0 : (_theme$layouts$orders3 = _theme$layouts$orders2.layout) === null || _theme$layouts$orders3 === void 0 ? void 0 : _theme$layouts$orders3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    * {\n      color: ", " !important;\n    }\n    background: ", ";\n  "])), function (_ref11) {
+    var _theme$colors;
+    var theme = _ref11.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#fff';
+  }, function (_ref12) {
+    var _theme$colors2;
+    var theme = _ref12.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiaryContrast) || 'transparent';
+  });
 });
 exports.BusinessContent = BusinessContent;
-var WrapperBusinessLogo = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  align-self: center;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n\n  ", "\n\n  ", "\n"])), function (_ref11) {
-  var isCustomerMode = _ref11.isCustomerMode;
+var WrapperBusinessLogo = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  align-self: center;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n\n  ", "\n\n  ", "\n"])), function (_ref13) {
+  var isCustomerMode = _ref13.isCustomerMode;
   return isCustomerMode && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    width: 65px;\n    height: 65px;\n    min-height: 65px;\n    min-width: 65px;\n  "])));
-}, function (_ref12) {
-  var isSkeleton = _ref12.isSkeleton;
-  return isSkeleton && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    height: auto;\n    width: auto;\n    > span {\n      display: flex;\n    }\n    @media (min-width: 481px){\n      ", "\n    }\n  "])), function (_ref13) {
-    var isCustomerMode = _ref13.isCustomerMode;
+}, function (_ref14) {
+  var isSkeleton = _ref14.isSkeleton;
+  return isSkeleton && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    height: auto;\n    width: auto;\n    > span {\n      display: flex;\n    }\n    @media (min-width: 481px){\n      ", "\n    }\n  "])), function (_ref15) {
+    var isCustomerMode = _ref15.isCustomerMode;
     return isCustomerMode && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n        min-width: 75px;\n        min-height: 75px;\n        height: 75px;\n        width: 75px;\n      "])));
   });
 });
 exports.WrapperBusinessLogo = WrapperBusinessLogo;
-var BusinessLogoStyled = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 65px;\n  height: 65px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  min-height: 65px;\n  border-radius: 7.6px;\n\n  @media (min-width: 481px){\n    min-width: 75px;\n    min-height: 75px;\n    height: 75px;\n    width: 75px;\n    min-height: 75px;\n    ", "\n  }\n"])), function (_ref14) {
-  var isCustomerMode = _ref14.isCustomerMode;
+var BusinessLogoStyled = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 65px;\n  height: 65px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  min-height: 65px;\n  border-radius: 7.6px;\n\n  @media (min-width: 481px){\n    min-width: 75px;\n    min-height: 75px;\n    height: 75px;\n    width: 75px;\n    min-height: 75px;\n    ", "\n  }\n"])), function (_ref16) {
+  var isCustomerMode = _ref16.isCustomerMode;
   return isCustomerMode && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      width: 100%;\n      height: 100%;\n    "])));
 });
 var BusinessLogo = function BusinessLogo(props) {
@@ -113,11 +121,11 @@ var BusinessName = _styledComponents.default.h6(_templateObject25 || (_templateO
 exports.BusinessName = BusinessName;
 var Categories = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  font-weight: 300;\n  color: #6C6C6C;\n\n  @media (min-width: 481px) {\n    font-size: 16px;\n  }\n"])));
 exports.Categories = Categories;
-var Medadata = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  margin-top: 5px;\n  display: flex;\n  font-weight: 300;\n  font-size: 12px;\n  color: #909BA9;\n  flex-wrap: wrap;\n  \n\n  ", "\n  ", "\n  p {\n    color: #909BA9;\n    svg {\n      font-size: 7px;\n      min-width: 6px;\n      margin: 0 3px;\n    }\n\n    span {\n      margin-right: 10px;\n      ", "\n    }\n  }\n\n  @media (min-width: 481px) {\n    font-size: 14px;\n  }\n"])), function (_ref15) {
-  var isCustomerMode = _ref15.isCustomerMode;
+var Medadata = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  margin-top: 5px;\n  display: flex;\n  font-weight: 300;\n  font-size: 12px;\n  color: #909BA9;\n  flex-wrap: wrap;\n  \n\n  ", "\n  ", "\n  p {\n    color: #909BA9;\n    svg {\n      font-size: 7px;\n      min-width: 6px;\n      margin: 0 3px;\n    }\n\n    span {\n      margin-right: 10px;\n      ", "\n    }\n  }\n\n  @media (min-width: 481px) {\n    font-size: 14px;\n  }\n"])), function (_ref17) {
+  var isCustomerMode = _ref17.isCustomerMode;
   return isCustomerMode && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    > div {\n      flex-direction: column;\n    }\n  "])));
-}, function (_ref16) {
-  var isSkeleton = _ref16.isSkeleton;
+}, function (_ref18) {
+  var isSkeleton = _ref18.isSkeleton;
   return isSkeleton && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: center;\n  "])));
 }, function (props) {
   var _props$theme4;
@@ -126,10 +134,10 @@ var Medadata = _styledComponents.default.div(_templateObject27 || (_templateObje
 exports.Medadata = Medadata;
 var CallCenterInformation = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  div{\n    justify-content: space-evenly;\n  }\n"])));
 exports.CallCenterInformation = CallCenterInformation;
-var CallCenterInformationBullet = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 2px;\n  margin-bottom: 2px;\n  border-radius: 16px;\n  svg{\n    font-size: 18px;\n  }\n  ", "\n"])), function (_ref17) {
-  var isCustomerMode = _ref17.isCustomerMode;
-  return isCustomerMode ? (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    flex-direction: column;\n    "]))) : (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    width: 50px;\n    background: ", ";\n    color: #fff;\n  "])), function (_ref18) {
-    var bgcolor = _ref18.bgcolor;
+var CallCenterInformationBullet = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 2px;\n  margin-bottom: 2px;\n  border-radius: 16px;\n  svg{\n    font-size: 18px;\n  }\n  ", "\n"])), function (_ref19) {
+  var isCustomerMode = _ref19.isCustomerMode;
+  return isCustomerMode ? (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    flex-direction: column;\n    "]))) : (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    width: 50px;\n    background: ", ";\n    color: #fff;\n  "])), function (_ref20) {
+    var bgcolor = _ref20.bgcolor;
     return bgcolor;
   });
 });
@@ -153,14 +161,14 @@ var RibbonBox = _styledComponents.default.div(_templateObject41 || (_templateObj
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    left: -3px;\n    right: initial;\n  "])));
-}, function (_ref19) {
-  var bgColor = _ref19.bgColor;
-  return bgColor && (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
-}, function (_ref20) {
-  var isRoundRect = _ref20.isRoundRect;
-  return isRoundRect && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
 }, function (_ref21) {
-  var isCapsule = _ref21.isCapsule;
+  var bgColor = _ref21.bgColor;
+  return bgColor && (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
+}, function (_ref22) {
+  var isRoundRect = _ref22.isRoundRect;
+  return isRoundRect && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+}, function (_ref23) {
+  var isCapsule = _ref23.isCapsule;
   return isCapsule && (0, _styledComponents.css)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
 });
 exports.RibbonBox = RibbonBox;
