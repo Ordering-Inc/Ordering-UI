@@ -119,10 +119,13 @@ var Header = function Header(props) {
     _useState18 = _slicedToArray(_useState17, 2),
     preorderBusiness = _useState18[0],
     setPreorderBusiness = _useState18[1];
+
+  // const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
-    var _cart$products;
-    return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0;
-  }) || null;
+    var _cart$products, _cart$business;
+    return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug.includes('dominos'));
+  }) || null; // change filter includes dominos for cart?.business?.franchise_id === franchiseId || !franchiseId || !cart?.business?.franchiseId) DON'T MERGE THIS TO MASTER
+
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
