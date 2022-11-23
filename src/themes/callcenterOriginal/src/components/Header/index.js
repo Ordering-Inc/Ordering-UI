@@ -48,7 +48,8 @@ export const Header = (props) => {
     location,
     isShowOrderOptions,
     isHideSignup,
-    isCustomerMode
+    isCustomerMode,
+    franchiseId
   } = props
 
   const { pathname } = useLocation()
@@ -283,6 +284,7 @@ export const Header = (props) => {
                             location={location}
                             isCustomerMode={isCustomerMode}
                             setPreorderBusiness={setPreorderBusiness}
+                            franchiseId={franchiseId}
                           />
                         ) : (
                           <HeaderOption
