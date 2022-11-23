@@ -415,6 +415,7 @@ const LoginFormUI = (props) => {
           <FormInput
             noValidate
             isPopup={isPopup}
+            autoComplete='on'
           >
             {
               props.beforeMidElements?.map((BeforeMidElements, i) => (
@@ -473,7 +474,7 @@ const LoginFormUI = (props) => {
                       pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                     })}
                     onChange={handleChangeInputEmail}
-                    autoComplete='off'
+                    autoComplete='on'
                     isError={formMethods.errors?.email}
                   />
                   <InputBeforeIcon>
