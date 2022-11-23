@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useUtils, useLanguage, useSession, ProductForm as ProductFormController } from 'ordering-components'
+import { useUtils, useLanguage, useSession, useConfig, ProductForm as ProductFormController } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
@@ -10,8 +10,10 @@ import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { useTheme } from 'styled-components'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { ChevronLeft, ChevronRight, ChevronDown } from 'react-bootstrap-icons'
-import { BusinessPreorder } from '../BusinessPreorder'
+import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 import { Button } from '../../styles/Buttons'
+import moment from 'moment'
+import { getTimes } from '../../../../../utils'
 import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
@@ -36,10 +38,21 @@ import {
   DropDownWrapper,
   DropDownTitle,
   EmptyProfessional,
-  SkeletonBlock
+  SkeletonBlock,
+  OrderTimeWrapper,
+  DateWrapper,
+  MonthYearLayer,
+  DaysSwiper,
+  Day,
+  DayName,
+  DayNumber,
+  TimeListWrapper,
+  TimeItem,
+  ClosedBusinessMsg
 } from './styles'
-import moment from 'moment'
 SwiperCore.use([Navigation])
+
+const maxDate = 40
 
 const ServiceFormUI = (props) => {
   const {
@@ -56,14 +69,21 @@ const ServiceFormUI = (props) => {
   const { product, loading, error } = productObject
   const theme = useTheme()
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()
   const [{ auth }, { login }] = useSession()
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [isDropDown, setIsDropDown] = useState(false)
   const [currentProfessional, setCurrentProfessional] = useState(null)
+  const [timeList, setTimeList] = useState([])
+  const [timeSelected, setTimeSelected] = useState(null)
+  const [selectDate, setSelectedDate] = useState(new Date())
+  const [isEnabled, setIsEnabled] = useState(false)
+  const [datesList, setDatesList] = useState([])
 
   const dropDownRef = useRef()
+  const is12Hours = configs?.format_time?.value === '12'
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -115,6 +135,13 @@ const ServiceFormUI = (props) => {
     handleSave(values)
   }
 
+  const handleChangeTime = (time) => {
+    if (!time || time === timeSelected) return
+    const _moment = moment(`${moment(selectDate).format('YYYY-MM-DD')} ${time}`, 'YYYY-MM-DD HH:mm').toDate()
+    setTimeSelected(time)
+    setDateSelected(_moment)
+  }
+
   const isBusyTime = (professional) => {
     if (professional?.busy_times?.length === 0 || !dateSelected) return false
     const valid = professional?.busy_times.some(item => {
@@ -132,6 +159,31 @@ const ServiceFormUI = (props) => {
   const handleChangeProfessional = (professional) => {
     setIsDropDown(false)
     setCurrentProfessional(professional)
+  }
+
+  const validateSelectedDate = (curdate, menu) => {
+    const day = moment(curdate).format('d')
+    setIsEnabled(menu?.schedule?.[day]?.enabled || false)
+  }
+
+  const getTimeList = (curdate, menu) => {
+    validateSelectedDate(curdate, menu)
+    const selectedDate = new Date(curdate)
+    const times = getTimes(selectedDate, menu?.schedule, is12Hours)
+    return times
+  }
+
+  const validDate = (date) => {
+    if (!date) return
+    const _date = moment(date, 'YYYY-MM-DD HH:mm').isSameOrAfter(moment(), 'day')
+      ? moment(date).format('YYYY-MM-DD HH:mm')
+      : moment().format('YYYY-MM-DD HH:mm')
+    return _date
+  }
+
+  const handleChangeDate = (date) => {
+    setSelectedDate(date)
+    setTimeSelected(null)
   }
 
   useEffect(() => {
@@ -165,6 +217,27 @@ const ServiceFormUI = (props) => {
       setCurrentProfessional(professional)
     }
   }, [isCartProduct, professionalListState?.professionals])
+
+  useEffect(() => {
+    if (selectDate === null || currentProfessional === null) return
+    const _times = getTimeList(selectDate, currentProfessional)
+    setTimeList(_times)
+  }, [selectDate, currentProfessional])
+
+  useEffect(() => {
+    const _datesList = []
+
+    for (let i = 0; i < maxDate + 1; i++) {
+      _datesList.push(moment(validDate(new Date())).add(i, 'd').format('YYYY-MM-DD'))
+    }
+    setDatesList(_datesList)
+  }, [])
+
+  useEffect(() => {
+    if (!productCart?.calendar_event?.start) return
+    setSelectedDate(moment.utc(productCart?.calendar_event?.start).local())
+    setTimeSelected(moment.utc(productCart?.calendar_event?.start).local().format('HH:mm'))
+  }, [productCart])
 
   return (
     <>
@@ -289,13 +362,80 @@ const ServiceFormUI = (props) => {
                 <span>{t('REQUIRED', 'Required')}</span>
               </SectionHeader>
               {currentProfessional ? (
-                <BusinessPreorder
-                  business={currentProfessional}
-                  isProfessional
-                  maxDays={50}
-                  onChangeMoment={setDateSelected}
-                  useOrderContext={false}
-                />
+                <OrderTimeWrapper>
+                  <DateWrapper>
+                    <MonthYearLayer>
+                      <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
+                    </MonthYearLayer>
+                    <DaysSwiper left={<BsCaretLeftFill />}>
+                      <Swiper
+                        spaceBetween={0}
+                        navigation
+                        breakpoints={{
+                          0: {
+                            slidesPerView: 4,
+                            spaceBetween: 0
+                          },
+                          400: {
+                            slidesPerView: 5,
+                            spaceBetween: 0
+                          },
+                          550: {
+                            slidesPerView: 6,
+                            spaceBetween: 0
+                          },
+                          769: {
+                            slidesPerView: 7,
+                            spaceBetween: 0
+                          }
+                        }}
+                        freeMode
+                        watchSlidesProgress
+                        className='swiper-datelist'
+                        preventClicksPropagation={false}
+                      >
+                        {
+                          datesList.slice(0, Number(maxDate - 1, 10)).map((date, i) => {
+                            const dateParts = date.split('-')
+                            const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
+                            const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2)
+                            const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
+                            return (
+                              <SwiperSlide key={i}>
+                                <Day
+                                  selected={moment(selectDate).format('YYYY-MM-DD') === date}
+                                  onClick={() => handleChangeDate(moment(date))}
+                                >
+                                  <DayName>{dayName}</DayName>
+                                  <DayNumber>{dayNumber}</DayNumber>
+                                </Day>
+                              </SwiperSlide>
+                            )
+                          })
+                        }
+                      </Swiper>
+                    </DaysSwiper>
+                  </DateWrapper>
+                  <TimeListWrapper>
+                    {(isEnabled && timeList?.length > 0) ? (
+                      <>
+                        {timeList.map((time, i) => (
+                          <TimeItem
+                            key={i}
+                            active={timeSelected === time.value}
+                            onClick={() => handleChangeTime(time.value)}
+                          >
+                            <span>{time.text}</span>
+                          </TimeItem>
+                        ))}
+                      </>
+                    ) : (
+                      <ClosedBusinessMsg>
+                        {t('PROFESSIONAL_NOT_AVAILABLE', 'Professional is not available at the moment')}
+                      </ClosedBusinessMsg>
+                    )}
+                  </TimeListWrapper>
+                </OrderTimeWrapper>
               ) : (
                 <EmptyProfessional>
                   {t('NO_SCHEDULE', 'No schedule')}
