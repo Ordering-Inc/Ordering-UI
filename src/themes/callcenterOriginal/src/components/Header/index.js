@@ -73,7 +73,8 @@ export const Header = (props) => {
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
 
-  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
+  // const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
+  const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.slug.includes('dominos')))) || null // change filter includes dominos for cart?.business?.franchise_id === franchiseId || !franchiseId || !cart?.business?.franchiseId) DON'T MERGE THIS TO MASTER
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
