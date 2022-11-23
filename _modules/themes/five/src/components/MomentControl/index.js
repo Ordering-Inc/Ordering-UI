@@ -89,49 +89,9 @@ var MomentControlUI = function MomentControlUI(props) {
   };
   var getTimes = function getTimes(curdate, schedule) {
     validateSelectedDate(curdate, schedule);
-    var date = new Date();
     var dateParts = curdate.split('-');
     var dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    var times = [];
-    for (var k = 0; k < schedule[dateSeleted.getDay()].lapses.length; k++) {
-      var open = {
-        hour: schedule[dateSeleted.getDay()].lapses[k].open.hour,
-        minute: schedule[dateSeleted.getDay()].lapses[k].open.minute
-      };
-      var close = {
-        hour: schedule[dateSeleted.getDay()].lapses[k].close.hour,
-        minute: schedule[dateSeleted.getDay()].lapses[k].close.minute
-      };
-      for (var i = open.hour; i <= close.hour; i++) {
-        if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
-          var hour = '';
-          var meridian = '';
-          if (!is12hours) hour = i < 10 ? '0' + i : i;else {
-            if (i === 0) {
-              hour = '12';
-              meridian = ' ' + t('AM', 'AM');
-            } else if (i > 0 && i < 12) {
-              hour = i < 10 ? '0' + i : i;
-              meridian = ' ' + t('AM', 'AM');
-            } else if (i === 12) {
-              hour = '12';
-              meridian = ' ' + t('PM', 'PM');
-            } else {
-              hour = i - 12 < 10 ? '0' + (i - 12) : i - 12;
-              meridian = ' ' + t('PM', 'PM');
-            }
-          }
-          for (var j = i === open.hour ? open.minute : 0; j <= (i === close.hour ? close.minute : 59); j += 15) {
-            if (i !== date.getHours() || j >= date.getMinutes() || date.getDate() !== dateSeleted.getDate()) {
-              times.push({
-                text: hour + ':' + (j < 10 ? '0' + j : j) + meridian,
-                value: (i < 10 ? '0' + i : i) + ':' + (j < 10 ? '0' + j : j)
-              });
-            }
-          }
-        }
-      }
-    }
+    var times = getTimes(dateSeleted, schedule, is12hours);
     return times;
   };
   var setLocalMoment = function setLocalMoment() {

@@ -37,7 +37,7 @@ var ProfessionalProfile = function ProfessionalProfile(props) {
     business: currentProfessional,
     isProfessional: true,
     isDisabled: true,
-    maxDays: 50,
+    maxDays: 40,
     useOrderContext: false
   }) : /*#__PURE__*/_react.default.createElement("p", null, t('NO_SCHEDULE', 'No schedule'))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
