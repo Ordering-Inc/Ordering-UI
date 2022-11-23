@@ -4,7 +4,7 @@ import {
   Pencil,
   Trash
 } from 'react-bootstrap-icons'
-import { useUtils, useLanguage, useOrder, useOrderingTheme } from 'ordering-components'
+import { useUtils, useLanguage, useOrder, useConfig, useOrderingTheme } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import {
   AccordionSection,
@@ -50,6 +50,7 @@ export const ProductItemAccordion = (props) => {
   const [orderState] = useOrder()
   const [{ parsePrice, parseDate }] = useUtils()
   const windowSize = useWindowSize()
+  const [{ configs }] = useConfig()
   const [orderingTheme] = useOrderingTheme()
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
@@ -130,7 +131,11 @@ export const ProductItemAccordion = (props) => {
               <ScheduleInfoWrapper>
                 <h3>{product.name}</h3>
                 <ScheduleInfo>
-                  <span>{parseDate(product?.calendar_event?.start, { outputFormat: 'hh:mm a' })} - {parseDate(product?.calendar_event?.end, { outputFormat: 'hh:mm a' })}</span>
+                  <span>
+                    {parseDate(product?.calendar_event?.start, { outputFormat: (configs?.format_time?.value === '12') ? 'hh:mm a' : 'HH:mm' })}
+                    {' '}-{' '}
+                    {parseDate(product?.calendar_event?.end, { outputFormat: (configs?.format_time?.value === '12') ? 'hh:mm a' : 'HH:mm' })}
+                  </span>
                 </ScheduleInfo>
               </ScheduleInfoWrapper>
             ) : (
@@ -192,7 +197,6 @@ export const ProductItemAccordion = (props) => {
                 </ContentInfo>
               </>
             )}
-
           </ProductInfo>
 
           {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
