@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { useApi, useOrderingTheme } from 'ordering-components'
+import { useApi, useConfig, useLanguage, useOrderingTheme } from 'ordering-components'
 
-import { Container } from './styles'
+import { Container, PoweredByOrdering } from './styles'
 
-export const Footer = () => {
+export const Footer = ({ isFooterPage }) => {
   const [footerState, setfooterState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
   const [{ theme }] = useOrderingTheme()
   const requestsState = {}
-
+  const [{ configs }] = useConfig()
+  const [, t] = useLanguage()
   const footerContent = theme?.my_products?.components?.theme_settings?.components?.values?.footer_content
-
+  const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
   const getPage = async () => {
     setfooterState({ ...footerState, loading: true })
     try {
@@ -42,7 +43,7 @@ export const Footer = () => {
   return (
     <Container>
       {
-        (footerContent || footerState.body) && (
+        ((footerContent || footerState.body) && !isFooterPage) && (
           <div
             style={{ wordBreak: 'break-all', padding: '0px 10px' }}
             dangerouslySetInnerHTML={{
@@ -51,6 +52,14 @@ export const Footer = () => {
           />
         )
       }
+      {!enabledPoweredByOrdering && (
+        <PoweredByOrdering>
+          {t('POWERED_BY', 'Powered by')}
+          <a href='https://www.ordering.co'>
+            {' '}{t('ORDERING_CO', 'Ordering.co')}
+          </a>
+        </PoweredByOrdering>
+      )}
     </Container>
   )
 }
