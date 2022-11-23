@@ -43,6 +43,7 @@ import SwiperCore, {
 } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
+import { getTimes } from '../../../../../utils'
 
 SwiperCore.use([Navigation])
 
@@ -92,58 +93,17 @@ const BusinessPreorderUI = (props) => {
     setIsEnabled(menu.schedule[day].enabled || false)
   }
 
-  const getTimes = (curdate, menu) => {
+  const getTimeList = (curdate, menu) => {
     validateSelectedDate(curdate, menu)
-    const date = new Date()
     const dateParts = curdate.split('-')
     const dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
-    var times = []
-    for (var k = 0; k < menu.schedule[dateSeleted.getDay()].lapses.length; k++) {
-      var open = {
-        hour: menu.schedule[dateSeleted.getDay()].lapses[k].open.hour,
-        minute: menu.schedule[dateSeleted.getDay()].lapses[k].open.minute
-      }
-      var close = {
-        hour: menu.schedule[dateSeleted.getDay()].lapses[k].close.hour,
-        minute: menu.schedule[dateSeleted.getDay()].lapses[k].close.minute
-      }
-      for (var i = open.hour; i <= close.hour; i++) {
-        if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
-          let hour = ''
-          let meridian = ''
-          if (!is12Hours) hour = i < 10 ? '0' + i : i
-          else {
-            if (i === 0) {
-              hour = '12'
-              meridian = ' ' + t('AM', 'AM')
-            } else if (i > 0 && i < 12) {
-              hour = (i < 10 ? '0' + i : i)
-              meridian = ' ' + t('AM', 'AM')
-            } else if (i === 12) {
-              hour = '12'
-              meridian = ' ' + t('PM', 'PM')
-            } else {
-              hour = ((i - 12 < 10) ? '0' + (i - 12) : (i - 12))
-              meridian = ' ' + t('PM', 'PM')
-            }
-          }
-          for (let j = (i === open.hour ? open.minute : 0); j <= (i === close.hour ? close.minute : 59); j += 15) {
-            if (i !== date.getHours() || j >= date.getMinutes() || date.getDate() !== dateSeleted.getDate()) {
-              times.push({
-                text: hour + ':' + (j < 10 ? '0' + j : j) + meridian,
-                value: (i < 10 ? '0' + i : i) + ':' + (j < 10 ? '0' + j : j)
-              })
-            }
-          }
-        }
-      }
-    }
+    const times = getTimes(dateSeleted, menu?.schedule, is12Hours)
     return times
   }
 
   useEffect(() => {
     const selectedMenu = menu ? (menu?.use_business_schedule ? business : menu) : business
-    const _times = getTimes(dateSelected, selectedMenu)
+    const _times = getTimeList(dateSelected, selectedMenu)
     setTimeList(_times)
   }, [dateSelected, menu, business])
 
@@ -219,13 +179,13 @@ const BusinessPreorderUI = (props) => {
                 preventClicksPropagation={false}
               >
                 {
-                  datesList.slice(0, Number(maxDays || configs?.max_days_preorder?.value || 6, 10)).map(date => {
+                  datesList.slice(0, Number(maxDays || configs?.max_days_preorder?.value || 6, 10)).map((date, i) => {
                     const dateParts = date.split('-')
                     const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
                     const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2)
                     const dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate()
                     return (
-                      <SwiperSlide key={dayNumber}>
+                      <SwiperSlide key={i}>
                         <Day selected={dateSelected === date} onClick={() => handleChangeDate(date)}>
                           <DayName>{dayName}</DayName>
                           <DayNumber>{dayNumber}</DayNumber>
