@@ -236,7 +236,6 @@ const ServiceFormUI = (props) => {
   useEffect(() => {
     if (!productCart?.calendar_event?.start) return
     setSelectedDate(moment.utc(productCart?.calendar_event?.start).local())
-    console.log(configs?.format_time?.value)
     setTimeSelected(moment.utc(productCart?.calendar_event?.start).local().format('HH:mm'))
   }, [productCart])
 
