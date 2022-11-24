@@ -17,15 +17,15 @@ export const InnerHeader = styled.div`
   align-items: center;
 
   #left-side {
-    width: 20%;
+    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : '25%'};
     justify-content: flex-start;
   }
   #right-side {
-    width: 20%;
+    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : '20%'};
     justify-content: flex-end;
   }
   #center-side {
-    width: calc(60% - 30px);
+    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)'};
   }
 
   @media (min-width: 1024px) {
