@@ -26,7 +26,7 @@ export const CardContainer = styled.div`
     transition: box-shadow 0.3s ease 0s;
   
   &:hover{
-    box-shadow: 0 2px 3px 3px rgba(161,124,50,0.8);
+    box-shadow: 0 2px 6px 3px ${({ theme }) => theme?.colors?.gold};
   }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`

@@ -148,6 +148,12 @@ export const Divider = styled.div`
 export const UserImgWrapper = styled.div`
   position: relative;
   display: flex;
+  ${({ pfchangs }) => pfchangs && css`
+    margin-right: 10px;
+    svg{
+      color: ${({ theme }) => theme?.colors?.gold};
+    }
+  `}
 `
 
 export const RoundMark = styled.div`

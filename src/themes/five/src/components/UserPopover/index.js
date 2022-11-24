@@ -18,7 +18,7 @@ import { capitalize } from '../../../../../utils'
 import AiOutlineMenu from '@meronex/icons/ai/AiOutlineMenu'
 import EnChevronSmallDown from '@meronex/icons/en/EnChevronSmallDown'
 import { useTheme } from 'styled-components'
-
+import BsFillPersonFill from '@meronex/icons/bs/BsFillPersonFill';
 export const UserPopover = (props) => {
   const {
     open,
@@ -133,10 +133,8 @@ export const UserPopover = (props) => {
         {
           pfchangs ? (
             <>
-              <UserImgWrapper>
-                <DropDownCircleImage
-                  fallback={<img alt='login-icon' width='28px' height='28px' src={loginSignupIcon} loading='lazy' />}
-                />
+              <UserImgWrapper pfchangs={pfchangs}>
+                <BsFillPersonFill />
               </UserImgWrapper>
               {<p>{t('HI', 'Hi')}, {sessionState.user?.name}</p>}
               <EnChevronSmallDown width={20} height={20} />
@@ -148,9 +146,7 @@ export const UserPopover = (props) => {
                 <RoundMark />
                 <DropDownCircleImage
                   src={sessionState?.user?.photo}
-                  fallback={pfchangs
-                    ? <img alt='login-icon' width='40px' height='40px' src={loginSignupIcon} loading='lazy' />
-                    : <FaUserAlt />}
+                  fallback={<FaUserAlt />}
                 />
               </UserImgWrapper>
             </>
