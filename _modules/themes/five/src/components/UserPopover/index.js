@@ -15,6 +15,7 @@ var _utils = require("../../../../../utils");
 var _AiOutlineMenu = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineMenu"));
 var _EnChevronSmallDown = _interopRequireDefault(require("@meronex/icons/en/EnChevronSmallDown"));
 var _styledComponents = require("styled-components");
+var _BsFillPersonFill = _interopRequireDefault(require("@meronex/icons/bs/BsFillPersonFill"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -204,28 +205,16 @@ var UserPopover = function UserPopover(props) {
     ref: referenceElement,
     isOpen: open,
     onClick: props.onClick
-  }, pfchangs ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UserImgWrapper, null, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
-    fallback: /*#__PURE__*/_react.default.createElement("img", {
-      alt: "login-icon",
-      width: "28px",
-      height: "28px",
-      src: loginSignupIcon,
-      loading: "lazy"
-    })
-  })), /*#__PURE__*/_react.default.createElement("p", null, t('HI', 'Hi'), ", ", (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name), /*#__PURE__*/_react.default.createElement(_EnChevronSmallDown.default, {
+  }, pfchangs ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UserImgWrapper, {
+    pfchangs: pfchangs
+  }, /*#__PURE__*/_react.default.createElement(_BsFillPersonFill.default, null)), /*#__PURE__*/_react.default.createElement("p", null, t('HI', 'Hi'), ", ", (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name), /*#__PURE__*/_react.default.createElement(_EnChevronSmallDown.default, {
     width: 20,
     height: 20
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_AiOutlineMenu.default, {
     className: "menu-list"
   }), /*#__PURE__*/_react.default.createElement(_styles.UserImgWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.RoundMark, null), /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
     src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.photo,
-    fallback: pfchangs ? /*#__PURE__*/_react.default.createElement("img", {
-      alt: "login-icon",
-      width: "40px",
-      height: "40px",
-      src: loginSignupIcon,
-      loading: "lazy"
-    }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
+    fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   })))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
