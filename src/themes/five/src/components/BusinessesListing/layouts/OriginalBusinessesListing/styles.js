@@ -232,6 +232,10 @@ export const Divider = styled.div`
 
 export const OrderProgressWrapper = styled.div`
   padding: 45px 20px;
+  margin: 0px;
+  @media (min-width: 768px) {
+    margin: 0 35px;
+  }
 `
 
 export const SearchContainer = styled.div`
@@ -241,7 +245,7 @@ export const SearchContainer = styled.div`
 `
 
 export const BusinessCityList = styled.div`
-  
+
 `
 
 export const CityItem = styled.div`
