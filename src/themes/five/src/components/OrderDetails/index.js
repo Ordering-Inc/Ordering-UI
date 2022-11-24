@@ -68,6 +68,7 @@ import {
   DirectionButtonWrapper,
   ProfessionalWrapper,
   ProfessionalBlock,
+  PlaceSpotWrapper,
   PoweredByOrdering
 } from './styles'
 import { useTheme } from 'styled-components'
@@ -549,18 +550,14 @@ const OrderDetailsUI = (props) => {
                 </BusinessWrapper>
 
                 {showDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
-                  <BusinessWrapper
-                    w='calc(100% - 20px)'
-                    borderTop
-                  >
+                  <PlaceSpotWrapper>
                     <PlaceSpot
                       isInputMode
                       cart={order}
-                      containerStyle={{ width: 'calc(100% - 20px)' }}
                       spotNumberDefault={order?.spot_number}
                       vehicleDefault={order?.vehicle}
                     />
-                  </BusinessWrapper>
+                  </PlaceSpotWrapper>
                 )}
 
                 {showOrderActions && (
