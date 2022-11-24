@@ -67,7 +67,8 @@ import {
   BusinessExternalWrapper,
   DirectionButtonWrapper,
   ProfessionalWrapper,
-  ProfessionalBlock
+  ProfessionalBlock,
+  PoweredByOrdering
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
@@ -123,6 +124,7 @@ const OrderDetailsUI = (props) => {
   const completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const placeSpotTypes = [3, 4, 5]
   const googleMapsApiKey = configs?.google_maps_api_key?.value
+  const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
 
   const showOrderActions = order?.delivery_type !== 1
 
@@ -405,6 +407,14 @@ const OrderDetailsUI = (props) => {
             <OrderInfo>
               <TitleContainer>
                 <OrderIdSec>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</OrderIdSec>
+                {enabledPoweredByOrdering && (
+                  <PoweredByOrdering>
+                    {t('POWERED_BY', 'Powered by')}
+                    <a href='https://www.ordering.co'>
+                      {' '}{t('ORDERING_CO', 'Ordering.co')}
+                    </a>
+                  </PoweredByOrdering>
+                )}
                 {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
                   <Content className='order-content'>
                     <ShareOrder>
