@@ -790,6 +790,11 @@ export const ProfessionalBlock = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.disabled};
   margin-bottom: 15px;
 `
+export const PlaceSpotWrapper = styled.div`
+  @media (min-width: 768px) {
+    width: calc(100% - 20px);
+  }
+`
 
 export const PoweredByOrdering = styled.p`
   text-align: center;
