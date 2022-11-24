@@ -374,6 +374,7 @@ const SignUpFormUI = (props) => {
               isPopup={isPopup}
               onSubmit={formMethods.handleSubmit(onSubmit)}
               isSkeleton={useChekoutFileds && validationFields?.loading}
+              autoComplete='on'
             >
               {props.beforeMidElements?.map((BeforeMidElements, i) => (
                 <React.Fragment key={i}>
@@ -417,7 +418,7 @@ const SignUpFormUI = (props) => {
                                           pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                                         })}
                                         required={!!field.required}
-                                        autoComplete='off'
+                                        autoComplete='on'
                                         isError={formMethods.errors?.email && !notValidationFields.includes(field.code)}
                                       />
                                       <InputBeforeIcon>

@@ -795,3 +795,18 @@ export const PlaceSpotWrapper = styled.div`
     width: calc(100% - 20px);
   }
 `
+
+export const PoweredByOrdering = styled.p`
+  text-align: center;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  white-space: pre !important;
+  margin-bottom: 10px;
+  a{
+    font-weight: 600;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
+`
