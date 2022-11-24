@@ -23,7 +23,7 @@ var ButtonWrapper = _styledComponents.default.div(_templateObject5 || (_template
 exports.ButtonWrapper = ButtonWrapper;
 var WrapperInput = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  input {\n    width: 100%;\n    box-sizing: border-box;\n  }\n\n  button {\n    margin-top: 16px;\n  }\n"])));
 exports.WrapperInput = WrapperInput;
-var WrapperOption = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
+var WrapperOption = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  min-width: 240px;\n  flex: 1;\n  padding: 0 10px;\n"])));
 exports.WrapperOption = WrapperOption;
-var WrapperOptionList = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display:grid;\n  grid-template-columns: 1fr 1fr;\n  grid-column-gap: 20px;\n  grid-row-gap: 20px;\n"])));
+var WrapperOptionList = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  width: calc(100% + 20px);\n  margin-left: -10px;\n\n  @media (min-width: 1600px) {\n    display:grid;\n    grid-template-columns: 1fr 1fr;\n    grid-column-gap: 20px;\n    grid-row-gap: 20px;\n  }\n"])));
 exports.WrapperOptionList = WrapperOptionList;

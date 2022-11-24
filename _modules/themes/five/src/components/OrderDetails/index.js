@@ -691,15 +691,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       var _order$business11;
       return window.open("http://maps.google.com/?q=".concat(order === null || order === void 0 ? void 0 : (_order$business11 = order.business) === null || _order$business11 === void 0 ? void 0 : _order$business11.address));
     }
-  }, t('GET_DIRECTIONS', 'Get Directions'))))), showDeliveryType && placeSpotTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
-    w: "calc(100% - 20px)",
-    borderTop: true
-  }, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
+  }, t('GET_DIRECTIONS', 'Get Directions'))))), showDeliveryType && placeSpotTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotWrapper, null, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
     isInputMode: true,
     cart: order,
-    containerStyle: {
-      width: 'calc(100% - 20px)'
-    },
     spotNumberDefault: order === null || order === void 0 ? void 0 : order.spot_number,
     vehicleDefault: order === null || order === void 0 ? void 0 : order.vehicle
   })), showOrderActions && /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
