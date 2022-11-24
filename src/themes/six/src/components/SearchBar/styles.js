@@ -48,9 +48,8 @@ export const BusinessSearch = styled.div`
       ${({ theme, disablePadding }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
       ${disablePadding && css`
         padding-left: 0;
-        padding-right: 0;
       `}
-   `}
+    `}
     }
   }
 `
@@ -65,7 +64,11 @@ export const DeleteContent = styled.span`
   border-radius: 25%;
   max-height: 100%;
   ${({ theme, isHome }) => theme?.business_listing_view?.components?.layout?.type === 'mapview' && css`
-    left: ${isHome ? '40px' : '20px'};
+    left: ${isHome ? '40px' : '30px'};
+  `}
+  ${({ isClear, isHome }) => isClear && css`
+    left: initial;
+    right: 20px;
   `}
   ${props => props.theme?.rtl && css`
     transform: translate(30%, 0%);
@@ -74,7 +77,7 @@ export const DeleteContent = styled.span`
     cursor: pointer;
   }
   svg {
-    color: ${({ isHome }) => isHome ? '#ADB5BD' : '#fff'};
+    color: #ADB5BD;
     width: 24px;
     height: 24px;
     position: relative;
@@ -88,6 +91,9 @@ export const DeleteContent = styled.span`
     `}
   }
 `
+
+export const SearchWrapper = styled(DeleteContent)``
+
 export const SearchIcon = styled.div`
   background-image: url(${props => props.theme?.images?.general?.searchIcon});
   background-position: right 10px center;
