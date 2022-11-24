@@ -116,6 +116,11 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     }
     return lapse ? "".concat(scheduleFormatted(lapse.open), " - ").concat(scheduleFormatted(lapse.close)) : '';
   };
+  var handleClickBusiness = function handleClickBusiness(e, business) {
+    var _favoriteRef$current;
+    if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
+    handleClick(business);
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -128,8 +133,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     isSkeleton: isSkeleton
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
     isSkeleton: isSkeleton,
-    onClick: function onClick() {
-      return !isSkeleton && handleClick && (!(business !== null && business !== void 0 && business.open) && isCustomLayout ? handleShowAlert() : handleClick(business));
+    onClick: function onClick(e) {
+      return !isSkeleton && handleClick && (!(business !== null && business !== void 0 && business.open) && isCustomLayout ? handleShowAlert() : handleClickBusiness(e, business));
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, {
     isSkeleton: isSkeleton
@@ -187,11 +192,16 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "reviews"
   }, /*#__PURE__*/_react.default.createElement(_GrStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : (_business$reviews5 = business.reviews) === null || _business$reviews5 === void 0 ? void 0 : _business$reviews5.total)) : (business === null || business === void 0 ? void 0 : (_business$reviews6 = business.reviews) === null || _business$reviews6 === void 0 ? void 0 : _business$reviews6.total) !== 0 && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }))), /*#__PURE__*/_react.default.createElement(_styles.Medadata, null, /*#__PURE__*/_react.default.createElement("div", {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Medadata, null, !isSkeleton > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "schedule"
   }, "".concat(t('SCHEDULE', 'Schedule'), ": ").concat(getScheduleOpen(business))), /*#__PURE__*/_react.default.createElement(_styles.SelectStoreContainer, null, /*#__PURE__*/_react.default.createElement(_five.Button, {
     outline: true
-  }, t('SELECT_BUSINESS', 'Select business'))))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, t('SELECT_BUSINESS', 'Select business')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 120,
+    height: 20
+  })))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_CLOSED', 'Business Closed'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

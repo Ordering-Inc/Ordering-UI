@@ -7,7 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.SearchBar = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _Inputs = require("../../styles/Inputs");
-var _ThemeContext = require("../../../../../contexts/ThemeContext");
 var _orderingComponents = require("ordering-components");
 var _AiOutlineSearch = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineSearch"));
 var _styles = require("./styles");
@@ -39,10 +38,16 @@ var SearchBar = function SearchBar(props) {
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
         onSearch(e.target.value);
+        if (el.current) {
+          el.current.value = e.target.value;
+        }
       } else {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
           onSearch(e.target.value);
+          if (el.current) {
+            el.current.value = e.target.value;
+          }
         }, 750);
       }
     }
@@ -81,11 +86,14 @@ var SearchBar = function SearchBar(props) {
     isCustomLayout: isCustomLayout,
     autoComplete: "off",
     maxLength: "500"
-  }), /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, {
-    isHome: props.isHome
-  }, (_el$current2 = el.current) !== null && _el$current2 !== void 0 && _el$current2.value ? /*#__PURE__*/_react.default.createElement("span", {
+  }), ((_el$current2 = el.current) === null || _el$current2 === void 0 ? void 0 : _el$current2.value) && /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, {
+    isHome: props.isHome,
+    isClear: true
+  }, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleClear
-  }, t('CLEAR', 'Clear')) : /*#__PURE__*/_react.default.createElement(_AiOutlineSearch.default, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, t('CLEAR', 'Clear'))), /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, {
+    isHome: props.isHome
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineSearch.default, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

@@ -22,8 +22,9 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var Footer = function Footer() {
-  var _theme$my_products, _theme$my_products$co, _theme$my_products$co2, _theme$my_products$co3, _theme$my_products$co4;
+var Footer = function Footer(_ref) {
+  var _theme$my_products, _theme$my_products$co, _theme$my_products$co2, _theme$my_products$co3, _theme$my_products$co4, _configs$powered_by_o;
+  var isFooterPage = _ref.isFooterPage;
   var _useState = (0, _react.useState)({
       body: null,
       loading: false,
@@ -39,9 +40,16 @@ var Footer = function Footer() {
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     theme = _useOrderingTheme2[0].theme;
   var requestsState = {};
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var footerContent = theme === null || theme === void 0 ? void 0 : (_theme$my_products = theme.my_products) === null || _theme$my_products === void 0 ? void 0 : (_theme$my_products$co = _theme$my_products.components) === null || _theme$my_products$co === void 0 ? void 0 : (_theme$my_products$co2 = _theme$my_products$co.theme_settings) === null || _theme$my_products$co2 === void 0 ? void 0 : (_theme$my_products$co3 = _theme$my_products$co2.components) === null || _theme$my_products$co3 === void 0 ? void 0 : (_theme$my_products$co4 = _theme$my_products$co3.values) === null || _theme$my_products$co4 === void 0 ? void 0 : _theme$my_products$co4.footer_content;
+  var enabledPoweredByOrdering = configs === null || configs === void 0 ? void 0 : (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
   var getPage = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var source, _yield$ordering$pages, _yield$ordering$pages2, error, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
@@ -93,7 +101,7 @@ var Footer = function Footer() {
       }, _callee, null, [[1, 14]]);
     }));
     return function getPage() {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
   (0, _react.useEffect)(function () {
@@ -104,7 +112,7 @@ var Footer = function Footer() {
       }
     };
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, (footerContent || footerState.body) && /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, (footerContent || footerState.body) && !isFooterPage && /*#__PURE__*/_react.default.createElement("div", {
     style: {
       wordBreak: 'break-all',
       padding: '0px 10px'
@@ -112,6 +120,8 @@ var Footer = function Footer() {
     dangerouslySetInnerHTML: {
       __html: footerContent || footerState.body
     }
-  }));
+  }), enabledPoweredByOrdering && /*#__PURE__*/_react.default.createElement(_styles.PoweredByOrdering, null, t('POWERED_BY', 'Powered by'), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.ordering.co"
+  }, ' ', t('ORDERING_CO', 'Ordering.co'))));
 };
 exports.Footer = Footer;

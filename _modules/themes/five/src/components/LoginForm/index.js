@@ -455,7 +455,8 @@ var LoginFormUI = function LoginFormUI(props) {
     borderBottom: isOtpCellphone
   }, t('BY_OTP_CELLPHONE', 'by Otp Cellphone')))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
-    isPopup: isPopup
+    isPopup: isPopup,
+    autoComplete: "on"
   }, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -487,7 +488,7 @@ var LoginFormUI = function LoginFormUI(props) {
       pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
     }),
     onChange: handleChangeInputEmail,
-    autoComplete: "off",
+    autoComplete: "on",
     isError: (_formMethods$errors4 = formMethods.errors) === null || _formMethods$errors4 === void 0 ? void 0 : _formMethods$errors4.email
   }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null)))), (useLoginByCellphone && loginTab === 'cellphone' || loginTab === 'otp' && otpType === 'cellphone') && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors5 = formMethods.errors) === null || _formMethods$errors5 === void 0 ? void 0 : _formMethods$errors5.cellphone) && !(credentials !== null && credentials !== void 0 && credentials.cellphone) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors6 = formMethods.errors) === null || _formMethods$errors6 === void 0 ? void 0 : (_formMethods$errors6$ = _formMethods$errors6.cellphone) === null || _formMethods$errors6$ === void 0 ? void 0 : _formMethods$errors6$.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors7 = formMethods.errors) === null || _formMethods$errors7 === void 0 ? void 0 : (_formMethods$errors7$ = _formMethods$errors7.cellphone) === null || _formMethods$errors7$ === void 0 ? void 0 : _formMethods$errors7$.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     value: credentials === null || credentials === void 0 ? void 0 : credentials.cellphone,
