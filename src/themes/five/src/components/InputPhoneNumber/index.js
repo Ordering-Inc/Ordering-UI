@@ -52,6 +52,7 @@ export const InputPhoneNumber = (props) => {
           placeholder={t('PHONE_NUMBER', 'Phone number')}
           defaultCountry={configs?.default_country_code?.value}
           value={value}
+          name='telefono'
           displayInitialValueAsLocalNumber
           onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val))}
         />

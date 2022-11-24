@@ -25,7 +25,7 @@ import { SearchBar } from '../../../../../../six/src/components/SearchBar'
 import { AddressList } from '../../../../../../six/src/components/AddressList'
 import { AddressForm } from '../../../../../../six/src/components/AddressForm'
 import { BusinessInformation } from '../../../../../../six/src/components/BusinessInformation'
-
+import EiLocation from '@meronex/icons/ei/EiLocation'
 import {
   BusinessContainer,
   BusinessList,
@@ -34,7 +34,8 @@ import {
   BusinessesTitle,
   ListWrapper,
   BusinessContent,
-  MapWrapper
+  MapWrapper,
+  AddressInput
 } from './styles'
 
 const PIXELS_TO_SCROLL = 500
@@ -227,6 +228,14 @@ const BusinessesListingUI = (props) => {
                 </>
               </ListWrapper>
               <MapWrapper className='map-wrapper'>
+                {windowSize.width < 576 && orderState.options?.address?.address && (
+                  <AddressInput onClick={handleClickAddress}>
+                    <EiLocation />
+                    <p>
+                      {orderState.options?.address?.address}
+                    </p>
+                  </AddressInput>
+                )}
                 {windowSize.width < 850 && (
                   <WrapperSearch isCustomLayout={isCustomLayout}>
                     <SearchBar
@@ -241,21 +250,19 @@ const BusinessesListingUI = (props) => {
                     )}
                   </WrapperSearch>
                 )}
-                {(configs?.google_maps_api_key?.value && businessesList?.businesses?.length > 0) ? (
+                {(configs?.google_maps_api_key?.value && businessesList?.businesses?.length > 0) && (
                   <BusinessesMap
                     businessList={businessesList.businesses}
                     userLocation={orderState?.options?.address?.location}
                     setErrors={setMapErrors}
                   />
-                ) : (
-                  <Skeleton width={70} />
                 )}
               </MapWrapper>
             </BusinessContent>
           ) : (
             <>
               {
-                businessInfoById &&
+                businessInfoById && (
                   <BusinessInformation
                     business={businessInfoById}
                     getBusinessType={getBusinessType}
@@ -263,6 +270,7 @@ const BusinessesListingUI = (props) => {
                     onClose={setShowBusinessInfo}
                     goBusiness={handleBusinessClick}
                   />
+                )
               }
             </>
           )}
