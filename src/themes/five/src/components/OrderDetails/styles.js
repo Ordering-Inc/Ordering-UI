@@ -7,7 +7,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 45px 0 20px;
-
   @media (min-width: 740px) {
     margin: 20px 0;
   }
@@ -19,7 +18,6 @@ export const WrapperContainer = styled.div`
   flex-direction: column;
   min-height: auto;
   position: relative;
-
   @media (min-width: 993px) {
     min-height: calc(100vh - 337px);
     box-sizing: border-box;
@@ -29,7 +27,6 @@ export const WrapperContainer = styled.div`
 export const SkeletonWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
   @media (min-width: 768px) {
     flex-direction: row;
   }
@@ -38,12 +35,10 @@ export const SkeletonWrapper = styled.div`
 export const HeaderInfo = styled.div`
   width: 80%;
   margin-bottom: 20px;
-
   h1, p {
     margin: 0;
     color: ${props => props.theme.colors.darkTextColor};
   }
-
   h1 {
     margin-bottom: 22px;
   }
@@ -66,7 +61,6 @@ export const OrderBusiness = styled.div`
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0px 4px 10px 0px #0000001F;
-
   @media (min-width: 769px) {
     flex-direction: row;
   }
@@ -78,7 +72,6 @@ export const BusinessWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-
   ${props => props.borderBottom && css`
     padding-bottom: 15px;
     border-bottom: 1px solid ${props => props.theme.colors.lightGray};
@@ -92,12 +85,10 @@ export const BusinessWrapper = styled.div`
     height: 100px;
     border-radius: 7.6px;
     margin-right: 0;
-
     @media (min-width: 400px) {
       margin-right: 40px;
     }
   }
-
   @media (min-width: 400px) {
     flex-direction: row;
     width: ${props => props.w ?? '100%'};
@@ -110,7 +101,6 @@ export const BtsOrderStatus = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-
   div + div {
     margin-left: 0;
     margin-top: 10px;
@@ -129,14 +119,12 @@ export const BusinessInfo = styled.div`
   box-sizing: border-box;
   margin-right: 0;
   margin-top: 10px;
-
   h1,
   p {
     margin: 0;
     color: ${props => props.theme.colors.darkTextColor};
     overflow-wrap: anywhere;
   }
-
   h2 {
     font-weight: 500;
     font-size: 18px;
@@ -146,7 +134,6 @@ export const BusinessInfo = styled.div`
     font-size: 14px;
     margin-bottom: 5px;
   }
-
   @media (min-width: 400px) {
     margin-right: 15px;
     margin-top: 0;
@@ -169,7 +156,6 @@ export const ActionsBlock = styled.div`
     cursor: pointer;
     color: #B1BCCC;
   }
-
   @media (min-width: 380px) {
     svg {
       font-size: 20px;
@@ -196,16 +182,13 @@ export const OrderInfo = styled.div`
     overflow: hidden;
     white-space: nowrap;
   }
-
   .date {
     margin-bottom: 6px;
   }
-
   .types {
     margin-bottom: 6px;
     font-size: 16px;
   }
-
   .order-status {
     font-weight: 600;
     font-size: 16px;
@@ -295,7 +278,6 @@ export const Map = styled.div`
     width: 100% !important;
     height: 100% !important;
   }
-
   img {
     object-fit: cover;
   }
@@ -307,12 +289,10 @@ export const WrapperDriver = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-
   div.photo {
     display: flex;
     align-items: center;
     justify-content: center;
-
     svg {
       width: 48px;
       height: 48px;
@@ -347,7 +327,6 @@ export const OrderBill = styled.div`
       `}
     }
   }
-
   table.total {
     border-top: 1px solid #BFBFBF;
     margin-top: 15px;
@@ -365,7 +344,6 @@ export const OrderBill = styled.div`
       }
     }
   }
-
   table.comments {
     margin-top: 20px;
     align-items: center;
@@ -375,7 +353,6 @@ export const OrderBill = styled.div`
       }
     }
   }
-
   @media (min-width: 678px) {
     table {
       font-size: 16px;
@@ -405,7 +382,6 @@ export const ShareOrder = styled.div`
   margin: 0 0 20px;
   justify-content: space-between;
   z-index: 1;
-
   div.wrap {
     & > div:first-child {
       left: 0;
@@ -419,12 +395,10 @@ export const ShareOrder = styled.div`
     font-size: 15px;
     margin: 0px;
   }
-
   p {
     font-size: 13px;
     margin: 0px;
   }
-
   button {
     display: flex;
     justify-content: center;
@@ -432,28 +406,23 @@ export const ShareOrder = styled.div`
     font-size: 14px;
     align-items: center;
     background: ${props => props.theme.colors.backgroundPage};
-
     svg {
       left: 0;
       margin-right: 6px;
       color: ${props => props.theme.colors.primary};
     }
-
     &:hover {
       svg {
         color: #FFFFFF;
       }
     }
   }
-
   div.text {
     width: 60%;
   }
-
   div.wrap {
     display: flex;
     align-items: center;
-
     & > div:first-child {
       width: 100%;
       position: relative;
@@ -464,7 +433,6 @@ export const ShareOrder = styled.div`
       }
     }
   }
-
   @media (min-width: 1201px) {
     div.wrap {
       & > div:first-child {
@@ -472,7 +440,6 @@ export const ShareOrder = styled.div`
       }
     }
   }
-
   @media (min-width: 768px) {
     div.wrap {
       width: 30%;
@@ -480,15 +447,12 @@ export const ShareOrder = styled.div`
         left: 0;
       }
     }
-
     h1 {
       font-size: 20px;
     }
-
     p {
       font-size: 18px;
     }
-
     button {
       font-size: 18px;
       width: 100%;
@@ -498,16 +462,13 @@ export const ShareOrder = styled.div`
       }
     }
   }
-
   @media (min-width: 425px) {
     div.text {
       width: 70%;
     }
-
     h1 {
       font-size: 18px;
     }
-
     p {
       font-size: 15px;
     }
@@ -540,7 +501,6 @@ export const Divider = styled.div`
   background: #F8F9FA;
   width: calc(100% + 40px);
   margin-left: -20px;
-
   @media(min-width: 769px) {
     width: calc(100% + 80px);
     margin-left: -40px;
@@ -608,17 +568,14 @@ export const ReOrder = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
   flex-direction: column;
-
   button {
     padding: 5px 16px;
     min-width: unset;
     margin: 5px 5px;
-
     @media (min-width: 650px) {
       margin: 0px 5px;
     }
   }
-
   @media (min-width: 650px) {
     flex-direction: row;
   }
@@ -644,13 +601,11 @@ export const HeaderTitle = styled.div`
 `
 
 export const PlaceSpotSection = styled.div`
-
 `
 export const OrderStatusAndLinkContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   @media (min-width: 450px) {
     flex-direction: row;
   }
@@ -668,7 +623,6 @@ export const HistoryItemWrapper = styled.div`
   align-items: center;
   padding: 28px 23px;
   border-bottom: 1px solid ${props => props.theme.colors.gray200};
-
   > svg {
     width: 24px;
     height: 24px;
@@ -682,7 +636,6 @@ export const DetailWrapper = styled.div`
     margin-left: 0px;
     margin-right: 50px;
   `}
-
   h3 {
     font-weight: 600;
     font-size: 16px;
@@ -703,7 +656,6 @@ export const ButtonWrapper = styled.div`
     width: 100%;
     height: 44px;
     position: relative;
-
     svg {
       position: absolute;
       top: 10px;
@@ -721,7 +673,6 @@ export const ButtonWrapper = styled.div`
 export const MapWrapper = styled.div`
   width: 100%;
   margin-top: 20px;
-
   @media (min-width: 769px) {
     width: 50%;
     margin-top: 0px;
@@ -732,7 +683,6 @@ export const BusinessExternalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-
   @media (min-width: 769px) {
     width: 50%;
   }
@@ -745,7 +695,6 @@ export const ProfessionalWrapper = styled.div`
   display: flex;
   align-items: center;
   margin: 0px 10px 10px 10px;
-
   > img {
     width: 55px;
     height: 55px;
@@ -753,25 +702,21 @@ export const ProfessionalWrapper = styled.div`
     border-radius: 8px;
     object-fit: cover;
   }
-
   > svg {
     width: 55px;
     height: 55px;
     min-width: 55px;
   }
-
   > p {
     font-weight: 600;
     font-size: 17px;
     line-height: 26px;
     margin-left: 14px;
-
     ${props => props.theme.rtl && css`
       margin-left: 0px;
       margin-right: 14px;
     `}
   }
-
   @media (min-width: 411px) {
     > img {
       width: 65px;
