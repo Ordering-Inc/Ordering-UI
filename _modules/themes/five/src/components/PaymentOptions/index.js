@@ -120,7 +120,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     brandInformation = props.brandInformation,
     wowPoints = props.wowPoints,
     isHideCash = props.isHideCash,
-    isApplyMasterCoupon = props.isApplyMasterCoupon;
+    isApplyMasterCoupon = props.isApplyMasterCoupon,
+    hasCateringProducts = props.hasCateringProducts;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -149,10 +150,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
-  var excludePaymethods = ['cash'];
+  var excludePaymethods = hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash'];
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
   var supportedMethods = paymethodsList.paymethods.filter(function (p) {
-    return isHideCash ? !excludePaymethods.includes(p.gateway) : p;
+    return isHideCash || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? !excludePaymethods.includes(p.gateway) : p;
   });
   var isDisabledWowPoints = function isDisabledWowPoints(paymethod) {
     return paymethod.gateway === 'wow_rewards' && (wowPoints.loading || wowPoints.error || (wowPoints === null || wowPoints === void 0 ? void 0 : wowPoints.points) < (cart === null || cart === void 0 ? void 0 : cart.total));
@@ -211,7 +212,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     if (methodsPay.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && paymethodData !== null && paymethodData !== void 0 && paymethodData.id && paymethodSelected !== null && paymethodSelected !== void 0 && (_paymethodSelected$da = paymethodSelected.data) !== null && _paymethodSelected$da !== void 0 && _paymethodSelected$da.card) {
       handlePlaceOrder();
     }
-    if ((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay' && (cart === null || cart === void 0 ? void 0 : cart.offers.length) > 0) {
+    if (((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay' || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result) && (cart === null || cart === void 0 ? void 0 : cart.offers.length) > 0) {
       var _configs$advanced_off;
       if (!(configs !== null && configs !== void 0 && (_configs$advanced_off = configs.advanced_offers_module) !== null && _configs$advanced_off !== void 0 && _configs$advanced_off.value)) {
         applyCoupon({
@@ -236,7 +237,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
     className: "payments-list"
-  }, supportedMethods.length > 0 && supportedMethods.sort(function (a, b) {
+  }, supportedMethods.length > 0 && !(hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.loading) && supportedMethods.sort(function (a, b) {
     return a.id - b.id;
   }).map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -248,7 +249,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
         return handlePaymentMethodClick(paymethod);
       }
     }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod.gateway.toUpperCase(), paymethod.name), paymethod.gateway === 'wow_rewards' && (wowPoints === null || wowPoints === void 0 ? void 0 : wowPoints.points) >= 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ' ', "(", wowPoints.points || 0, " ", t('PTS', 'pts'), ")"))));
-  }), (paymethodsList.loading || isLoading) && _toConsumableArray(Array(5).keys()).map(function (i) {
+  }), (paymethodsList.loading || isLoading || (hasCateringProducts === null || hasCateringProducts === void 0 ? void 0 : hasCateringProducts.loading)) && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       key: i,
       isSkeleton: true
