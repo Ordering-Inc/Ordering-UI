@@ -171,15 +171,6 @@ export const SavedPlaces = styled.div`
   margin-top: 40px;
   margin-bottom: 20px;
 
-
-  h1{
-    font-size: 24px;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-    text-align: right;
-    `}
-  }
-
   > div{
     display: flex;
     flex-direction: column-reverse;
@@ -192,10 +183,11 @@ export const SavedPlaces = styled.div`
   }
 
   @media (min-width: 768px){
-    width: 90%;
+    width: 75%;
     margin-top: 40px;
     h1 {
-      text-align: center;
+      font-size: 24px;
+      text-align: left;
     }
     ul{
       width: 100%;

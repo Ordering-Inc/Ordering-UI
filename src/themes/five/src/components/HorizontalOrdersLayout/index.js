@@ -1,12 +1,15 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components'
-import { Card } from './styles'
+import {
+  Card,
+  CardWrapper,
+  CardsContainer
+} from './styles'
 import { OrdersContainer } from '../OrdersOption/styles'
 
-import { AutoScroll } from '../AutoScroll'
-import { Tabs } from '../../styles/Tabs'
 import { Button } from '../../styles/Buttons'
 import { SingleOrderCard } from '../SingleOrderCard'
+import { Pagination } from '../../../../../components/Pagination'
 
 export const HorizontalOrdersLayout = (props) => {
   const {
@@ -15,11 +18,10 @@ export const HorizontalOrdersLayout = (props) => {
     isBusinessesPage,
     customArray,
     businessesIds,
-    activeOrders,
-    pastOrders,
     isCustomerMode,
     isProducts,
-    isBusiness
+    isBusiness,
+    handleChangePage
   } = props
 
   const orders = customArray || props.orders
@@ -82,36 +84,22 @@ export const HorizontalOrdersLayout = (props) => {
       ordersLength={orders?.length <= 1}
       isBusinessesPage={isBusinessesPage}
     >
-      {!isBusinessesPage ? (
-        <Tabs>
-          <AutoScroll scrollId={activeOrders ? 'activeOrders' : (pastOrders ? 'pastOrders' : 'prevOrders')}>
-            {orders.length > 0 && ordersToShow.map(order => (
-              <SingleOrderCard
-                {...props}
-                key={order.id}
-                order={order}
-              />
-            ))}
-            {pagination?.totalPages && pagination?.currentPage < pagination?.totalPages && (
-              <Card
-                flex
-                nobg
-                isBusinessesPage={isBusinessesPage}
-                isCustomerMode={isCustomerMode}
-              >
-                <Button
-                  className='load-orders'
-                  color='primary'
-                  outline
-                  onClick={loadMoreOrders}
-                >
-                  {t('LOAD_MORE_ORDERS', 'Load more orders')}
-                </Button>
-              </Card>
-            )}
-          </AutoScroll>
-        </Tabs>
-      ) : <Orders />}
+      <CardWrapper>
+        <CardsContainer>
+          {orders.length > 0 && ordersToShow.map(order => (
+            <SingleOrderCard
+              {...props}
+              key={order.id}
+              order={order}
+            />
+          ))}
+        </CardsContainer>
+        <Pagination
+          currentPage={pagination.currentPage}
+          totalPages={Math.ceil(pagination?.totalPages)}
+          handleChangePage={handleChangePage}
+        />
+      </CardWrapper>
     </OrdersContainer>
   )
 }

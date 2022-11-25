@@ -22,8 +22,6 @@ export const OrdersContainer = styled.div`
     padding: 0 10px;
     text-align: center;
     display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
     justify-content: ${({ ordersLength }) => !ordersLength ? 'flex-start' : 'center'};
     width: 100%;
     margin: auto 0px auto auto;
@@ -36,7 +34,7 @@ export const OrdersContainer = styled.div`
       height: 0px;
     }
 
-    ${({ isSkeleton }) => !isSkeleton && css`   
+    ${({ isSkeleton }) => !isSkeleton && css`
       ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
