@@ -151,7 +151,7 @@ const CheckoutUI = (props) => {
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
   const daysForApplyCoupon = [0, 2, 4] // Domingo 0
-  const isApplyMasterCoupon = daysForApplyCoupon.includes(moment().days());
+  const isApplyMasterCoupon = !hasCateringProducts?.result && daysForApplyCoupon.includes(moment().days());
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -304,7 +304,7 @@ const CheckoutUI = (props) => {
   }, [uberDirect, cart, options, paymethodSelected])
 
   useEffect(() => {
-    if (!configs?.advanced_offers_module?.value && paymethodSelected?.gateway !== 'openpay' && !cartState.loading && cart?.coupon && cart?.coupon === 'DLVMASTER30') {
+    if ((!configs?.advanced_offers_module?.value && (paymethodSelected?.gateway !== 'openpay' || hasCateringProducts?.result) && !cartState.loading && cart?.coupon && cart?.coupon === 'DLVMASTER30')) {
       applyCoupon({
         business_id: cart?.business_id,
         coupon: null
@@ -554,7 +554,7 @@ const CheckoutUI = (props) => {
                     </h1>
                   </WarningMessage>
                 )}
-                {isApplyMasterCoupon && (
+                {isApplyMasterCoupon && !hasCateringProducts.loading && (
                   <MasterCardCoupon>
                     <img src={"https://d347gjkxx0g7x1.cloudfront.net/wow-plus/banners/dev/Banner_APP_Wow_MasterCard.jpg"} />
                   </MasterCardCoupon>
@@ -577,6 +577,7 @@ const CheckoutUI = (props) => {
                   brandInformation={brandInformation}
                   isHideCash={isHideCash}
                   isApplyMasterCoupon={isApplyMasterCoupon}
+                  hasCateringProducts={hasCateringProducts}
                 />
               </PaymentMethodContainer>
             </>
@@ -671,6 +672,7 @@ const CheckoutUI = (props) => {
               useKioskApp={useKioskApp}
               isCheckout
               isProducts={cart?.products?.length || 0}
+              hasCateringProducts={hasCateringProducts}
             />
           </CartContainer>
         )}
