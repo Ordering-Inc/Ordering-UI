@@ -131,8 +131,12 @@ export const RenderProductsLayout = (props) => {
 
   const handleSaveProduct = (scrollToCategories) => {
     if (windowSize.width < 993) {
-      const categoriesContainer = document.getElementById('groceries')
-      scrollToCategories && categoriesContainer && categoriesContainer.scrollIntoView()
+      const categoriesContainerTop = document.getElementById('groceries').offsetTop
+      if (scrollToCategories) {
+        window.scroll({
+          top: categoriesContainerTop
+        })
+      }
       return
     }
     const productContainer = document.getElementsByClassName('bp-list')[0]
