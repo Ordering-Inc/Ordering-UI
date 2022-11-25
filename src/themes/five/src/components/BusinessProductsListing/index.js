@@ -438,6 +438,9 @@ const BusinessProductsListingUI = (props) => {
                 useKioskApp={props.useKioskApp}
                 product={productModal.product || curProduct}
                 businessId={business?.id}
+                categoryId={curProduct?.category_id}
+                productId={curProduct?.id}
+                handleUpdateProducts={(productId, changes) => handleUpdateProducts(productId, curProduct?.category_id, business?.id, changes)}
                 onSave={handlerProductAction}
                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0) || 0}
               />
