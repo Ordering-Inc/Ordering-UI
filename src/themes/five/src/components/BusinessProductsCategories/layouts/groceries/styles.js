@@ -4,8 +4,12 @@ export const CategoriesWrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  @media (min-width: 933px){
+  border: 1px solid #ccc;
+  border-radius: 7.6px;
+  @media (min-width: 993){
     width: calc(100% - 40px);
+    border: 0;
+    padding: 0;
   }
 `
 
@@ -20,7 +24,6 @@ export const CategoriesContainer = styled.div`
   width: 100%;
   top: 45px;
   position: sticky;
-
   div.category {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -45,9 +48,8 @@ export const CategoryTab = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-left: ${props => props.categorySpace ?? 0}px;
-  border-radius: 8px;
   text-align: left;
-
+  border-bottom: ${({ isSub }) => !isSub ? '1px solid #ccc' : ''};
   span {
     width: 90%;
     text-overflow: ellipsis;
@@ -58,4 +60,10 @@ export const CategoryTab = styled.div`
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.primaryContrast};
   `}
+`
+
+export const IterateCategoriesContainer = styled.div`
+  div.level-1 {
+    border-bottom: ${({ isSub }) => !isSub ? '1px solid #ccc' : ''} !important;
+  }
 `

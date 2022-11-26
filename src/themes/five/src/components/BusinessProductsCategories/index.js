@@ -3,7 +3,6 @@ import Skeleton from 'react-loading-skeleton'
 import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
 import { useTheme } from 'styled-components'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import { CategoriesContainer } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
@@ -23,7 +22,6 @@ const BusinessProductsCategoriesUI = (props) => {
 
   const theme = useTheme()
   const [selectedCategory, setSelectedCateogry] = useState({ id: null })
-  const { width } = useWindowSize()
   const scrollTopSpan = 60
 
   const handleChangeCategory = (category) => {
