@@ -31,6 +31,7 @@ var _styles2 = require("../BusinessBasicInformation/styles");
 var _OrderItAgain = require("../OrderItAgain");
 var _ProfessionalBusinessFilter = require("../ProfessionalBusinessFilter");
 var _PageBanner = require("../PageBanner");
+var _useWindowSize = require("../../../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -105,6 +106,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     openSearchProducts = _useState4[0],
     setOpenSearchProducts = _useState4[1];
+  var windowSize = (0, _useWindowSize.useWindowSize)();
   var isUseParentCategory = ((configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1') && !useKioskApp;
   var BusinessBasicInformationComponent = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.business_view) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.header) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.layout) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.type) === 'red' ? _seven.BusinessBasicInformation : (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.business_view) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.header) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.components) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.layout) === null || _orderingTheme$theme7 === void 0 ? void 0 : _orderingTheme$theme7.type) === 'starbucks' ? _six.BusinessBasicInformation : (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme8 = orderingTheme.theme) === null || _orderingTheme$theme8 === void 0 ? void 0 : (_orderingTheme$theme9 = _orderingTheme$theme8.business_view) === null || _orderingTheme$theme9 === void 0 ? void 0 : (_orderingTheme$theme10 = _orderingTheme$theme9.components) === null || _orderingTheme$theme10 === void 0 ? void 0 : (_orderingTheme$theme11 = _orderingTheme$theme10.header) === null || _orderingTheme$theme11 === void 0 ? void 0 : (_orderingTheme$theme12 = _orderingTheme$theme11.components) === null || _orderingTheme$theme12 === void 0 ? void 0 : (_orderingTheme$theme13 = _orderingTheme$theme12.layout) === null || _orderingTheme$theme13 === void 0 ? void 0 : _orderingTheme$theme13.type) === 'old' ? _BusinessBasicInformation2.BusinessBasicInformation : _BusinessBasicInformation.BusinessBasicInformation;
   var SearchProductsComponent = (theme === null || theme === void 0 ? void 0 : (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 ? void 0 : (_theme$business_view$ = _theme$business_view.components) === null || _theme$business_view$ === void 0 ? void 0 : (_theme$business_view$2 = _theme$business_view$.product_search) === null || _theme$business_view$2 === void 0 ? void 0 : (_theme$business_view$3 = _theme$business_view$2.components) === null || _theme$business_view$3 === void 0 ? void 0 : (_theme$business_view$4 = _theme$business_view$3.layout) === null || _theme$business_view$4 === void 0 ? void 0 : _theme$business_view$4.type) === 'old' ? _SearchProducts2.SearchProducts : (theme === null || theme === void 0 ? void 0 : (_theme$business_view2 = theme.business_view) === null || _theme$business_view2 === void 0 ? void 0 : (_theme$business_view3 = _theme$business_view2.components) === null || _theme$business_view3 === void 0 ? void 0 : (_theme$business_view4 = _theme$business_view3.product_search) === null || _theme$business_view4 === void 0 ? void 0 : (_theme$business_view5 = _theme$business_view4.components) === null || _theme$business_view5 === void 0 ? void 0 : (_theme$business_view6 = _theme$business_view5.layout) === null || _theme$business_view6 === void 0 ? void 0 : _theme$business_view6.type) === 'starbucks' ? _SearchProducts3.SearchProducts : null;
@@ -116,12 +118,22 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   var hideBusinessNearCity = (_theme$business_view$5 = theme === null || theme === void 0 ? void 0 : (_theme$business_view7 = theme.business_view) === null || _theme$business_view7 === void 0 ? void 0 : (_theme$business_view8 = _theme$business_view7.components) === null || _theme$business_view8 === void 0 ? void 0 : (_theme$business_view9 = _theme$business_view8.near_business) === null || _theme$business_view9 === void 0 ? void 0 : _theme$business_view9.hidden) !== null && _theme$business_view$5 !== void 0 ? _theme$business_view$5 : true;
   var BusinessLayoutCategories = businessLayout.layoutOne ? _groceries.BusinessProductsCategories : _BusinessProductsCategories.BusinessProductsCategories;
   var BusinessLayoutProductsList = businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
-  var handleSaveProduct = function handleSaveProduct() {
+  var handleSaveProduct = function handleSaveProduct(scrollToCategories) {
+    if (windowSize.width < 993) {
+      var categoriesContainerTop = document.getElementById('groceries').offsetTop;
+      if (scrollToCategories) {
+        window.scroll({
+          top: categoriesContainerTop
+        });
+      }
+      return;
+    }
     var productContainer = document.getElementsByClassName('bp-list')[0];
     scrollTo(productContainer, 500, 1250);
   };
   (0, _react.useEffect)(function () {
-    handleSaveProduct();
+    var _categorySelected$sub;
+    handleSaveProduct((categorySelected === null || categorySelected === void 0 ? void 0 : (_categorySelected$sub = categorySelected.subcategories) === null || _categorySelected$sub === void 0 ? void 0 : _categorySelected$sub.length) === 0);
   }, [categorySelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList
@@ -301,7 +313,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     currentCart: currentCart,
     useKioskApp: useKioskApp
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapContent, {
-    isGroceries: true
+    isGroceries: true,
+    id: "groceries"
   }, !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_2 = business.previously_products) === null || _business$previously_2 === void 0 ? void 0 : _business$previously_2.length) > 0 && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
     onProductClick: onProductClick,
     productList: business === null || business === void 0 ? void 0 : business.previously_products,

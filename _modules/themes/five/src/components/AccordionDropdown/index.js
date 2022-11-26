@@ -25,9 +25,9 @@ var AccordionDropdown = function AccordionDropdown(props) {
       return handleClickItem();
     },
     isOpen: isOpen
-  }, /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, item.name), /*#__PURE__*/_react.default.createElement(_BiCaretUp.default, {
     className: "accordion__icon ".concat(isOpen ? 'rotate' : '')
-  }), /*#__PURE__*/_react.default.createElement("span", null, item.name)), isOpen && /*#__PURE__*/_react.default.createElement("div", {
+  })), isOpen && /*#__PURE__*/_react.default.createElement("div", {
     className: "accordion-content"
   }, /*#__PURE__*/_react.default.createElement(IterateCategories, {
     list: item.subcategories,

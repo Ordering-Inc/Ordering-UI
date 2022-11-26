@@ -19,9 +19,9 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-var SPACE_CONTANT = 25;
+var SPACE_CONTANT = 5;
 var categorySpace = {
-  1: 1,
+  1: 0,
   2: 2 * SPACE_CONTANT,
   3: 3 * SPACE_CONTANT,
   4: 4 * SPACE_CONTANT,
@@ -39,12 +39,12 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     var list = _ref.list,
       isSub = _ref.isSub,
       currentCat = _ref.currentCat;
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (list === null || list === void 0 ? void 0 : list.length) && (list === null || list === void 0 ? void 0 : list.map(function (category) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (list === null || list === void 0 ? void 0 : list.length) && (list === null || list === void 0 ? void 0 : list.map(function (category, i) {
       var _category$id, _category$subcategori, _category$subcategori2, _category$level, _category$subcategori3, _category$level2, _category$level3;
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement(_styles.IterateCategoriesContainer, {
         key: (_category$id = category === null || category === void 0 ? void 0 : category.id) !== null && _category$id !== void 0 ? _category$id : category === null || category === void 0 ? void 0 : category.name
       }, (category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0 || isSub ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (category === null || category === void 0 ? void 0 : (_category$subcategori2 = category.subcategories) === null || _category$subcategori2 === void 0 ? void 0 : _category$subcategori2.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-        className: "accordion"
+        className: "accordion ".concat((category === null || category === void 0 ? void 0 : category.level) === 1 ? 'level-1' : '')
       }, /*#__PURE__*/_react.default.createElement(_AccordionDropdown.AccordionDropdown, {
         item: category,
         isSelected: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
@@ -60,14 +60,16 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         categorySpace: categorySpace[(_category$level2 = category === null || category === void 0 ? void 0 : category.level) !== null && _category$level2 !== void 0 ? _category$level2 : 1],
         onClick: function onClick() {
           return handlerClickCategory(category);
-        }
+        },
+        isSub: isSub || i + 1 === (list === null || list === void 0 ? void 0 : list.length)
       }, /*#__PURE__*/_react.default.createElement("span", null, category.name))) : /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
         active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
         className: "".concat(category.id === 'featured' ? 'special' : ''),
         categorySpace: categorySpace[(_category$level3 = category === null || category === void 0 ? void 0 : category.level) !== null && _category$level3 !== void 0 ? _category$level3 : 1],
         onClick: function onClick() {
           return handlerClickCategory(category);
-        }
+        },
+        isSub: isSub || i + 1 === (list === null || list === void 0 ? void 0 : list.length)
       }, /*#__PURE__*/_react.default.createElement("span", null, category.name)));
     })), list && (list === null || list === void 0 ? void 0 : list.length) === 0 && isSub && /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
       active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,

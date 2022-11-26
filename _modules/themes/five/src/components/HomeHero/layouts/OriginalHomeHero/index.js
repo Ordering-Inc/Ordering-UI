@@ -31,7 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OriginalHomeHero = function OriginalHomeHero(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$logos, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options2, _orderState$options2$, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _orderState$options3, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _configs$powered_by_o, _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$logos, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options2, _orderState$options2$, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _orderState$options3, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10;
   var onFindBusiness = props.onFindBusiness;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 2),
@@ -43,6 +43,9 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useState = (0, _react.useState)({
       listOpen: false,
       formOpen: false
@@ -68,6 +71,7 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
   var bgImg = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.my_products) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.images) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.components) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.homepage_background) === null || _orderingTheme$theme7 === void 0 ? void 0 : (_orderingTheme$theme8 = _orderingTheme$theme7.components) === null || _orderingTheme$theme8 === void 0 ? void 0 : _orderingTheme$theme8.image;
   var logo = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme9 = orderingTheme.theme) === null || _orderingTheme$theme9 === void 0 ? void 0 : (_orderingTheme$theme10 = _orderingTheme$theme9.my_products) === null || _orderingTheme$theme10 === void 0 ? void 0 : (_orderingTheme$theme11 = _orderingTheme$theme10.components) === null || _orderingTheme$theme11 === void 0 ? void 0 : (_orderingTheme$theme12 = _orderingTheme$theme11.images) === null || _orderingTheme$theme12 === void 0 ? void 0 : (_orderingTheme$theme13 = _orderingTheme$theme12.components) === null || _orderingTheme$theme13 === void 0 ? void 0 : (_orderingTheme$theme14 = _orderingTheme$theme13.logo) === null || _orderingTheme$theme14 === void 0 ? void 0 : (_orderingTheme$theme15 = _orderingTheme$theme14.components) === null || _orderingTheme$theme15 === void 0 ? void 0 : _orderingTheme$theme15.image;
   var isFullScreen = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme16 = orderingTheme.theme) === null || _orderingTheme$theme16 === void 0 ? void 0 : (_orderingTheme$theme17 = _orderingTheme$theme16.my_products) === null || _orderingTheme$theme17 === void 0 ? void 0 : (_orderingTheme$theme18 = _orderingTheme$theme17.components) === null || _orderingTheme$theme18 === void 0 ? void 0 : (_orderingTheme$theme19 = _orderingTheme$theme18.images) === null || _orderingTheme$theme19 === void 0 ? void 0 : (_orderingTheme$theme20 = _orderingTheme$theme19.components) === null || _orderingTheme$theme20 === void 0 ? void 0 : _orderingTheme$theme20.homepage_image_fullscreen;
+  var enabledPoweredByOrdering = configs === null || configs === void 0 ? void 0 : (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
   var handleFindBusinesses = function handleFindBusinesses() {
     var _orderState$options, _orderState$options$a;
     if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
@@ -141,7 +145,9 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
     color: "primary",
     name: "find-business",
     onClick: handleFindBusinesses
-  }, t('FIND_BUSINESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.FIND_BUSINESSES) || 'Find businesses')))), windowSize.width < 576 && !auth && isShowLoginAccount && /*#__PURE__*/_react.default.createElement(_styles.UseAccount, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, t('YOUR_ACCOUNT', 'Use your account')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('FIND_BUSINESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.FIND_BUSINESSES) || 'Find businesses')))), windowSize.width < 576 && !auth && isShowLoginAccount && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, enabledPoweredByOrdering && /*#__PURE__*/_react.default.createElement(_styles.PoweredByOrdering, null, t('POWERED_BY', 'Powered by'), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.ordering.co"
+  }, ' ', t('ORDERING_CO', 'Ordering.co'))), /*#__PURE__*/_react.default.createElement(_styles.UseAccount, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, t('YOUR_ACCOUNT', 'Use your account')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
@@ -151,7 +157,7 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
     onClick: function onClick() {
       return handleOpenLoginSignUp('signup');
     }
-  }, t('SIGNUP', 'signUp'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, t('SIGNUP', 'signUp')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'),
     open: modals.formOpen,
     onClose: function onClose() {
