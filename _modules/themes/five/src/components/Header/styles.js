@@ -57,12 +57,14 @@ var Menu = _styledComponents.default.div(_templateObject9 || (_templateObject9 =
 exports.Menu = Menu;
 var MenuItem = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 exports.MenuItem = MenuItem;
-var MenuLink = _styledComponents.default.a(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 14px;\n  padding: 10px;\n  color: #333;\n  cursor: pointer;\n\n  ", "\n"])), function (_ref6) {
+var MenuLink = _styledComponents.default.a(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 14px;\n  padding: 10px;\n  color: ", ";\n  cursor: pointer;\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.tertiary || '#ccc';
+}, function (_ref6) {
   var highlight = _ref6.highlight;
   return highlight && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    color: ", ";\n    border-radius: 7.6px;\n    padding: 11px 15px;\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
-    return props.theme.colors.primaryContrast;
+    return props.theme.colors.tertiary || props.theme.colors.primaryContrast;
   });
 });
 exports.MenuLink = MenuLink;
@@ -115,5 +117,13 @@ var FarAwayMessage = _styledComponents.default.div(_templateObject25 || (_templa
 exports.FarAwayMessage = FarAwayMessage;
 var Divider = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  border: 1px solid #DEE2E6;\n  height: 100%;\n"])));
 exports.Divider = Divider;
-var LoginButton = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+var LoginButton = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  p {\n    color: ", ";\n  }\n\n  svg{\n    color: ", ";\n    margin-right: 10px;\n  }\n"])), function (_ref10) {
+  var _theme$colors;
+  var theme = _ref10.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || 'initial';
+}, function (_ref11) {
+  var _theme$colors2;
+  var theme = _ref11.theme;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold;
+});
 exports.LoginButton = LoginButton;

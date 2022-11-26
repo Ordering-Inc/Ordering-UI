@@ -41,8 +41,16 @@ var LeftContainer = _styledComponents.default.div(_templateObject6 || (_template
 exports.LeftContainer = LeftContainer;
 var RightContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  button {\n    height: 40px;\n    margin-bottom: 5px;\n    width: 100%;\n    font-size: 14px;\n    padding: 0;\n    height: 44px;\n  }\n  width: 100%;\n  @media (min-width: 768px){\n    width: initial;\n    button{\n      width: 70px;\n      height: 50px;\n    }\n  }\n  @media (min-width: 920px){\n    width: 30%;\n  }\n"])));
 exports.RightContainer = RightContainer;
-var CityContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid #fff;\n  height: 70px;\n  margin: 0;\n  box-sizing: border-box;\n  h3, svg {\n    color: #fff;\n  }\n  h3{\n    font-size: 16px;\n  }\n  ", "\n"])), function (_ref6) {
-  var isSelected = _ref6.isSelected;
+var CityContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  border-bottom: 1px solid ", ";;\n  height: 70px;\n  margin: 0;\n  box-sizing: border-box;\n  h3, svg {\n    color: ", ";\n  }\n  h3{\n    font-size: 16px;\n  }\n  ", "\n"])), function (_ref6) {
+  var _theme$colors3;
+  var theme = _ref6.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#fff';
+}, function (_ref7) {
+  var _theme$colors4;
+  var theme = _ref7.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.tertiary) || '#fff';
+}, function (_ref8) {
+  var isSelected = _ref8.isSelected;
   return isSelected && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      \n  "])));
 });
 exports.CityContainer = CityContainer;
