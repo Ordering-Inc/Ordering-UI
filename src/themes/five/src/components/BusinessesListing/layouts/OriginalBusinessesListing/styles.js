@@ -249,12 +249,26 @@ export const BusinessCityList = styled.div`
 
 `
 
+export const ButtonWrapper = styled.div`
+  position: relative;
+  svg {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    font-size: 25px;
+    color: #ffffff;
+  }
+  button {
+    width: 100%;
+    padding: 5px;
+  }
+`
+
 export const CityItem = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 15px 0px;
-  border-top: 1px solid #E9ECEF;
   cursor: pointer;
   span {
     margin-right: 15px;

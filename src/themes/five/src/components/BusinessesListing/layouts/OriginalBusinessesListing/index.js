@@ -33,7 +33,8 @@ import {
   BusinessFeatures,
   AddressMenu,
   FeatureItems,
-  ItemInline
+  ItemInline,
+  ButtonWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { Button } from '../../../../styles/Buttons'
@@ -58,6 +59,7 @@ import { PageBanner } from '../../../PageBanner'
 import Skeleton from 'react-loading-skeleton'
 import { MomentPopover } from '../../../../../../pwa/src/components/MomentPopover'
 import { OrderTypeSelectorHeader } from '../../../../../../../components/OrderTypeSelectorHeader'
+import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -94,6 +96,7 @@ const BusinessesListingUI = (props) => {
   const [activeMap, setActiveMap] = useState(false)
   const [openPopover, setOpenPopover] = useState({})
   const [mapErrors, setMapErrors] = useState('')
+  const [actualCity, setActualCity] = useState(orderState?.options?.city_id)
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
@@ -530,7 +533,7 @@ const BusinessesListingUI = (props) => {
           />
         </Modal>
         <Modal
-          title={t('FILTER_BUSINESS_BY_CITY', 'Filter business by city')}
+          title={t('SELECT_A_STORE', 'Select a store')}
           open={modals.citiesOpen}
           width='70%'
           onClose={() => setModals({ ...modals, citiesOpen: false })}
@@ -542,13 +545,19 @@ const BusinessesListingUI = (props) => {
               ) : (
                 <>
                   {citiesState?.cities?.map(city => (
-                    <CityItem key={city?.id} onClick={() => handleChangeCity(city?.id)}>
+                    <CityItem key={city?.id} onClick={() => setActualCity(city?.id)}>
                       <span className='radio'>
-                        {city?.id === orderState?.options?.city_id ? <RiRadioButtonFill className='city-checked' /> : <IosRadioButtonOff />}
+                        {city?.id === actualCity ? <RiRadioButtonFill className='city-checked' /> : <IosRadioButtonOff />}
                       </span>
                       {city?.name}
                     </CityItem>
                   ))}
+                  <ButtonWrapper>
+                    <Button color='primary' disabled={actualCity === null} onClick={() => handleChangeCity(actualCity)}>
+                      {t('CONTINUE', 'Continue')}
+                    </Button>
+                    <BsArrowRight />
+                  </ButtonWrapper>
                 </>
               )
             }
