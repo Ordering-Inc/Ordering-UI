@@ -103,7 +103,8 @@ const PaymentOptionsUI = (props) => {
     brandInformation,
     wowPoints,
     isHideCash,
-    isApplyMasterCoupon
+    isApplyMasterCoupon,
+    hasCateringProducts
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -122,10 +123,10 @@ const PaymentOptionsUI = (props) => {
 
   const stripeDirectMethods = ['stripe_direct', ...methodsPay]
 
-  const excludePaymethods = ['cash']
+  const excludePaymethods = hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash']
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
-  const supportedMethods = paymethodsList.paymethods.filter(p => isHideCash ? !excludePaymethods.includes(p.gateway) : p)
+  const supportedMethods = paymethodsList.paymethods.filter(p => (isHideCash || hasCateringProducts?.result) ? !excludePaymethods.includes(p.gateway) : p)
   const isDisabledWowPoints = (paymethod) => paymethod.gateway === 'wow_rewards' && (wowPoints.loading || wowPoints.error || wowPoints?.points < cart?.total)
   const handlePaymentMethodClick = (paymethod) => {
     if (cart?.balance > 0) {
@@ -182,7 +183,7 @@ const PaymentOptionsUI = (props) => {
     if (methodsPay.includes(paymethodSelected?.gateway) && paymethodData?.id && paymethodSelected?.data?.card) {
       handlePlaceOrder()
     }
-    if (paymethodSelected?.gateway !== 'openpay' && cart?.offers.length > 0) {
+    if ((paymethodSelected?.gateway !== 'openpay' || hasCateringProducts?.result) && cart?.offers.length > 0) {
       if (!configs?.advanced_offers_module?.value) {
         applyCoupon({
           business_id: props?.businessId,
@@ -207,7 +208,7 @@ const PaymentOptionsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
-          {supportedMethods.length > 0 && (
+          {supportedMethods.length > 0 && !hasCateringProducts?.loading && (
             supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
               <React.Fragment key={paymethod.id}>
                 {
@@ -235,7 +236,7 @@ const PaymentOptionsUI = (props) => {
             ))
           )}
 
-          {(paymethodsList.loading || isLoading) && (
+          {(paymethodsList.loading || isLoading || hasCateringProducts?.loading) && (
             [...Array(5).keys()].map(i => (
               <PayCard key={i} isSkeleton>
                 <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />

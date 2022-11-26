@@ -57,7 +57,8 @@ const CartUI = (props) => {
     handleRemoveOfferClick,
     handleChangeComment,
     commentState,
-    onClose
+    onClose,
+    hasCateringProducts
   } = props
 
   const theme = useTheme()
@@ -502,7 +503,7 @@ const CartUI = (props) => {
                 )}
               </OrderBill>
             )}
-            {isCouponEnabled && isCheckout && (
+            {isCouponEnabled && isCheckout && !hasCateringProducts?.result && (
               <CouponContainer>
                 <CouponControl
                   businessId={cart.business_id}

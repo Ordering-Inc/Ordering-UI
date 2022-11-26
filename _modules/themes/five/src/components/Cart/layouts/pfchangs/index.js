@@ -62,7 +62,8 @@ var CartUI = function CartUI(props) {
     handleRemoveOfferClick = props.handleRemoveOfferClick,
     handleChangeComment = props.handleChangeComment,
     commentState = props.commentState,
-    onClose = props.onClose;
+    onClose = props.onClose,
+    hasCateringProducts = props.hasCateringProducts;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -455,7 +456,7 @@ var CartUI = function CartUI(props) {
     style: {
       height: 100
     }
-  }))))), isCouponEnabled && isCheckout && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
+  }))))), isCouponEnabled && isCheckout && !(hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result) && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
     businessId: cart.business_id,
     price: cart.total
   })), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("h4", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
