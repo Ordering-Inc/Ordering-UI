@@ -8,7 +8,7 @@ export const HeaderItem = styled.div`
   padding: 7px 13px;
   margin: 0px;
 
-  ${({ isOpen }) => isOpen && css`
+  ${({ isOpen, isChew }) => (isOpen && !isChew) && css`
     background: #F8F9FA;
   `}
 
@@ -27,7 +27,7 @@ export const HeaderItem = styled.div`
       margin-left: 20px;
       margin-right: 0;
     `}
-    color: ${props => props.theme.colors.darkTextColor};
+    color: ${props => props.isChew ? props.theme.colors.backgroundPage : props.theme.colors.darkTextColor};
   }
 
   img {

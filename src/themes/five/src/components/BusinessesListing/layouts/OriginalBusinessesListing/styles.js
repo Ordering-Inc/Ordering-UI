@@ -231,11 +231,12 @@ export const Divider = styled.div`
 `
 
 export const OrderProgressWrapper = styled.div`
-  padding: 45px 20px;
+  padding: ${props => props.isChew ? '110px 20px 45px' : '45px 20px'};
   margin: 0px;
   @media (min-width: 768px) {
-    margin: 0 35px;
-  }
+      margin: 0 35px;
+      padding: 45px 20px;
+    }
 `
 
 export const SearchContainer = styled.div`

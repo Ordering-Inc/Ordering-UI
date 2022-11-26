@@ -5,7 +5,8 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid #E9ECEF;
+  background-color: ${props => props.isChew && props.theme.colors.primary};
+  border-bottom: ${props => !props.isChew && css`1px solid #E9ECEF`};
 `
 
 export const InnerHeader = styled.div`
@@ -135,7 +136,7 @@ export const Menu = styled.div`
     background: #F8F9FA;
     border: none;
     box-sizing: border-box;
-    border-radius: 50px;
+    border-radius: ${props => props.isChew ? '8px' : '50px'};
     margin: 0 15px;
     flex-grow: 1;
     padding: 0 10px;
@@ -282,8 +283,8 @@ export const CustomerInfo = styled.div`
         white-space: nowrap;
         color: #909BA9;
       }
-      svg {       
-        color: #748194; 
+      svg {
+        color: #748194;
         margin: 0;
         font-size: 20px;
         position: absolute;
@@ -295,7 +296,7 @@ export const CustomerInfo = styled.div`
 
 export const UserEdit = styled.div`
   > :first-child{
-     margin-bottom: 20px;  
+     margin-bottom: 20px;
   }
 `
 
@@ -303,7 +304,7 @@ export const AddressMenu = styled.div`
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-  color: ${props => props.theme.colors?.headingColor};
+  color: ${props => props.isChew ? props.theme.colors?.backgroundPage : props.theme.colors?.headingColor};
   display: flex;
   align-items: center;
   position: relative;

@@ -3,11 +3,11 @@ import styled, { css } from 'styled-components'
 export const HeaderItem = styled.div`
   cursor: pointer;
   > span {
+    background: ${props => !props.isChew ? props.theme.colors.primary : props.theme.colors.backgroundPage};
+    color: ${props => !props.isChew ? props.theme.colors.backgroundPage : props.theme.colors.colorPage};
     padding: 10px;
     display: flex;
     align-items: center;
-    background: ${props => props.theme.colors.primary};
-    color: #FFFFFF;
     border-radius: 7.6px;
 
     span {
@@ -17,7 +17,7 @@ export const HeaderItem = styled.div`
         margin-right: 10px;
       ` : css`
         margin-left: 10px;
-      `} 
+      `}
     }
     svg {
       font-size: 16px;

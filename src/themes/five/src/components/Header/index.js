@@ -93,6 +93,7 @@ export const Header = (props) => {
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
 
   const handleSuccessSignup = (user) => {
     login({
@@ -212,7 +213,7 @@ export const Header = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <HeaderContainer>
+      <HeaderContainer isChew={isChew}>
         <InnerHeader>
           <LeftHeader id='left-side'>
             <SidebarMenu
@@ -229,7 +230,7 @@ export const Header = (props) => {
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && !props.isCustomLayout && (
-            <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode}>
+            <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode} isChew={isChew}>
               {windowSize.width > 820 && isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />

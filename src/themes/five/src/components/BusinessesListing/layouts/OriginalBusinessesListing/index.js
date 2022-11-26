@@ -10,7 +10,8 @@ import {
   useSession,
   useLanguage,
   useConfig,
-  BusinessList as BusinessListController
+  BusinessList as BusinessListController,
+  useOrderingTheme
 } from 'ordering-components'
 
 import {
@@ -86,6 +87,7 @@ const BusinessesListingUI = (props) => {
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const windowSize = useWindowSize()
+  const [{ theme: orderingTheme }] = useOrderingTheme()
   const theme = useTheme()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -106,6 +108,7 @@ const BusinessesListingUI = (props) => {
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -302,7 +305,7 @@ const BusinessesListingUI = (props) => {
               </FeatureItems>
             </BusinessFeatures>
           )}
-          {configs?.business_listing_hide_image?.value !== '1' && (
+          {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && (
             <BusinessHeroImg
               bgimage={theme.images?.general?.businessHero}
               height={theme?.business_listing_view?.components?.business_hero?.style?.height}
@@ -310,7 +313,7 @@ const BusinessesListingUI = (props) => {
           )}
         </BusinessBanner>
         {!!Object.values(orderState?.carts)?.length && (
-          <OrderProgressWrapper>
+          <OrderProgressWrapper isChew={isChew}>
             <OrderProgress
               franchiseId={props.franchiseId}
               userCustomerId={userCustomer?.id}
@@ -318,6 +321,12 @@ const BusinessesListingUI = (props) => {
               isCustomerMode={isCustomerMode}
             />
           </OrderProgressWrapper>
+        )}
+        {(configs?.business_listing_hide_image?.value !== '1' && isChew) && (
+          <BusinessHeroImg
+            bgimage={theme.images?.general?.businessHero}
+            height={theme?.business_listing_view?.components?.business_hero?.style?.height}
+          />
         )}
         {isCustomerMode && (
           <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />

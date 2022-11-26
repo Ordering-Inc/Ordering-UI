@@ -43,6 +43,7 @@ export const UserPopover = (props) => {
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
   const isAddressListNewPage = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
 
   const extraOptions = [
     { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
@@ -121,6 +122,7 @@ export const UserPopover = (props) => {
       <HeaderItem
         isPhoto={sessionState?.user?.photo}
         isHome={isHome}
+        isChew={isChew}
         ref={referenceElement}
         isOpen={open}
         onClick={props.onClick}
