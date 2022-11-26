@@ -22,6 +22,7 @@ var _react2 = require("swiper/react");
 var _swiper = _interopRequireWildcard(require("swiper"));
 require("swiper/swiper-bundle.min.css");
 require("swiper/swiper.min.css");
+var _utils = require("../../../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -98,56 +99,16 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     var day = (0, _moment.default)(curdate).format('d');
     setIsEnabled(menu.schedule[day].enabled || false);
   };
-  var getTimes = function getTimes(curdate, menu) {
+  var getTimeList = function getTimeList(curdate, menu) {
     validateSelectedDate(curdate, menu);
-    var date = new Date();
     var dateParts = curdate.split('-');
     var dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    var times = [];
-    for (var k = 0; k < menu.schedule[dateSeleted.getDay()].lapses.length; k++) {
-      var open = {
-        hour: menu.schedule[dateSeleted.getDay()].lapses[k].open.hour,
-        minute: menu.schedule[dateSeleted.getDay()].lapses[k].open.minute
-      };
-      var close = {
-        hour: menu.schedule[dateSeleted.getDay()].lapses[k].close.hour,
-        minute: menu.schedule[dateSeleted.getDay()].lapses[k].close.minute
-      };
-      for (var i = open.hour; i <= close.hour; i++) {
-        if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
-          var hour = '';
-          var meridian = '';
-          if (!is12Hours) hour = i < 10 ? '0' + i : i;else {
-            if (i === 0) {
-              hour = '12';
-              meridian = ' ' + t('AM', 'AM');
-            } else if (i > 0 && i < 12) {
-              hour = i < 10 ? '0' + i : i;
-              meridian = ' ' + t('AM', 'AM');
-            } else if (i === 12) {
-              hour = '12';
-              meridian = ' ' + t('PM', 'PM');
-            } else {
-              hour = i - 12 < 10 ? '0' + (i - 12) : i - 12;
-              meridian = ' ' + t('PM', 'PM');
-            }
-          }
-          for (var j = i === open.hour ? open.minute : 0; j <= (i === close.hour ? close.minute : 59); j += 15) {
-            if (i !== date.getHours() || j >= date.getMinutes() || date.getDate() !== dateSeleted.getDate()) {
-              times.push({
-                text: hour + ':' + (j < 10 ? '0' + j : j) + meridian,
-                value: (i < 10 ? '0' + i : i) + ':' + (j < 10 ? '0' + j : j)
-              });
-            }
-          }
-        }
-      }
-    }
+    var times = (0, _utils.getTimes)(dateSeleted, menu === null || menu === void 0 ? void 0 : menu.schedule, is12Hours);
     return times;
   };
   (0, _react.useEffect)(function () {
     var selectedMenu = menu ? menu !== null && menu !== void 0 && menu.use_business_schedule ? business : menu : business;
-    var _times = getTimes(dateSelected, selectedMenu);
+    var _times = getTimeList(dateSelected, selectedMenu);
     setTimeList(_times);
   }, [dateSelected, menu, business]);
   (0, _react.useEffect)(function () {
@@ -196,13 +157,13 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     watchSlidesProgress: true,
     className: "swiper-datelist",
     preventClicksPropagation: false
-  }, datesList.slice(0, Number(maxDays || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
+  }, datesList.slice(0, Number(maxDays || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date, i) {
     var dateParts = date.split('-');
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2);
     var dayNumber = (_date.getDate() < 10 ? '0' : '') + _date.getDate();
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
-      key: dayNumber
+      key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.Day, {
       selected: dateSelected === date,
       onClick: function onClick() {
