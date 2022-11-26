@@ -101,6 +101,7 @@ const BusinessesListingUI = (props) => {
   const hideSearch = theme?.business_listing_view?.components?.search?.hidden
   const hideFilter = theme?.business_listing_view?.components?.filter?.hidden
   const hideSearchSection = hideCities && hideSearch && hideFilter
+  const isAllCategoriesHidden = theme?.business_listing_view?.components?.categories?.components?.all?.hidden
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
@@ -372,7 +373,7 @@ const BusinessesListingUI = (props) => {
 
         <PageBanner position='web_business_listing' />
 
-        {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
+        {(((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && !isAllCategoriesHidden) && (
           <BusinessTypeFilter
             images={props.images}
             businessTypes={props.businessTypes}
