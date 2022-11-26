@@ -52,6 +52,7 @@ const StripeElementsFormUI = (props) => {
               handleSource={handleSource}
               onNewCard={onNewCard}
               toSave={toSave}
+              isSplitForm
               requirements={requirements}
               businessId={businessId}
               handleCancel={onCancel}
