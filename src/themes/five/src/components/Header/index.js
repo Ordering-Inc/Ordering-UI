@@ -49,6 +49,7 @@ import { SignUpForm as SignUpFormPF } from '../SignUpForm/layouts/pfchangs'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { getDistance } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
+import BsFillPersonFill from '@meronex/icons/bs/BsFillPersonFill';
 
 export const Header = (props) => {
   const {
@@ -426,7 +427,7 @@ export const Header = (props) => {
                   !auth && isloginSignupLayoutPF && windowSize.width > 920 && (
                     <LoginButton onClick={() => handleOpenLoginSignUp('login')}>
                       {loginSignupIcon && (
-                        <img alt='login-icon' width='28px' height='28px' src={loginSignupIcon} loading='lazy' />
+                        <BsFillPersonFill />
                       )}
                       <p>{t('SIGN_IN_JOIN', 'Sign In/Join')}</p>
                     </LoginButton>

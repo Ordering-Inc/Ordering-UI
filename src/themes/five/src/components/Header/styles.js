@@ -216,12 +216,12 @@ export const MenuLink = styled.a`
   text-decoration: none;
   font-size: 14px;
   padding: 10px;
-  color: #333;
+  color: ${props => props.theme.colors.tertiary || '#ccc'};
   cursor: pointer;
 
   ${({ highlight }) => highlight && css`
     background-color: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.tertiary || props.theme.colors.primaryContrast};
     border-radius: 7.6px;
     padding: 11px 15px;
   `}
@@ -401,4 +401,12 @@ export const Divider = styled.div`
 export const LoginButton = styled.div`
   display: flex;
   align-items: center;
+  p {
+    color: ${({ theme }) => theme?.colors?.tertiary || 'initial'};
+  }
+
+  svg{
+    color: ${({ theme }) => theme?.colors?.gold};
+    margin-right: 10px;
+  }
 `

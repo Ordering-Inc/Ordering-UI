@@ -119,12 +119,12 @@ export const CityContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid ${({ theme }) => theme?.colors?.tertiary || '#fff'};;
   height: 70px;
   margin: 0;
   box-sizing: border-box;
   h3, svg {
-    color: #fff;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   }
   h3{
     font-size: 16px;
