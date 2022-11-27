@@ -5,7 +5,7 @@ export const WrapperMap = styled.div`
   display: flex;  
   justify-content: center;
   box-sizing: border-box;
-  min-height: 30vh;
+  min-height: 70vh;
   height:100%;
   
   > div {

@@ -22,12 +22,12 @@ export const AccordionDropdown = (props) => {
         onClick={() => handleClickItem()}
         isOpen={isOpen}
       >
-        <BiCaretUp
-          className={`accordion__icon ${isOpen ? 'rotate' : ''}`}
-        />
         <span>
           {item.name}
         </span>
+        <BiCaretUp
+          className={`accordion__icon ${isOpen ? 'rotate' : ''}`}
+        />
       </CategoryTab>
       {isOpen && (
         <div className='accordion-content'>

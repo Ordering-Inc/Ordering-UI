@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react'
 import { Input } from '../../styles/Inputs'
-import { useTheme } from '../../../../../contexts/ThemeContext'
 import { useLanguage } from 'ordering-components'
 import AiOutlineSearch from '@meronex/icons/ai/AiOutlineSearch'
 import {
   BusinessSearch,
-  DeleteContent
+  DeleteContent,
+  SearchWrapper
 } from './styles'
 export const SearchBar = (props) => {
   const {
@@ -25,10 +25,16 @@ export const SearchBar = (props) => {
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
         onSearch(e.target.value)
+        if (el.current) {
+          el.current.value = e.target.value
+        }
       } else {
         clearTimeout(timeout)
         timeout = setTimeout(function () {
           onSearch(e.target.value)
+          if (el.current) {
+            el.current.value = e.target.value
+          }
         }, 750)
       }
     }
@@ -40,11 +46,13 @@ export const SearchBar = (props) => {
   useEffect(() => {
     el.current.onkeyup = onChangeSearch
   }, [])
+
   useEffect(() => {
     if (!search) {
       el.current.value = ''
     }
   }, [search])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -69,13 +77,19 @@ export const SearchBar = (props) => {
           autoComplete='off'
           maxLength='500'
         />
-        <DeleteContent
+        {el.current?.value && (
+          <DeleteContent
+            isHome={props.isHome}
+            isClear
+          >
+            <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span>
+          </DeleteContent>
+        )}
+        <SearchWrapper
           isHome={props.isHome}
         >
-          {el.current?.value
-            ? <span onClick={handleClear}>{t('CLEAR', 'Clear')}</span>
-            : <AiOutlineSearch />}
-        </DeleteContent>
+          <AiOutlineSearch />
+        </SearchWrapper>
       </BusinessSearch>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
