@@ -19,7 +19,8 @@ export const VerticalOrdersLayout = (props) => {
   const {
     orders,
     pagination,
-    loadMoreOrders
+    loadMoreOrders,
+    handleUpdateOrderList
   } = props
 
   const [, t] = useLanguage()
@@ -115,7 +116,7 @@ export const VerticalOrdersLayout = (props) => {
           <ReviewWrapper>
             {
               reviewStatus?.order
-                ? <ReviewOrder order={orderSelected} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
+                ? <ReviewOrder order={orderSelected} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} handleUpdateOrderList={handleUpdateOrderList} />
                 : (reviewStatus?.product
                   ? <ReviewProduct order={orderSelected} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
                   : <ReviewDriver order={orderSelected} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
