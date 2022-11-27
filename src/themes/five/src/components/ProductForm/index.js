@@ -8,7 +8,7 @@ import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { AutoScroll } from '../AutoScroll'
 
 import {
-  // ProductForm as ProductOptions,
+  ProductForm as ProductOptions,
   useSession,
   useLanguage,
   useOrder,
@@ -16,8 +16,6 @@ import {
   useSite,
   useConfig
 } from 'ordering-components'
-
-import { ProductForm as ProductOptions } from './test'
 
 import { scrollTo } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
