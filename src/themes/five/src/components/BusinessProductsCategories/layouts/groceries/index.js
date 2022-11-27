@@ -6,13 +6,14 @@ import { AccordionDropdown } from '../../../AccordionDropdown'
 import {
   CategoriesContainer,
   CategoriesWrap,
-  CategoryTab
+  CategoryTab,
+  IterateCategoriesContainer
 } from './styles'
 
-const SPACE_CONTANT = 25
+const SPACE_CONTANT = 5
 
 const categorySpace = {
-  1: 1,
+  1: 0,
   2: 2 * SPACE_CONTANT,
   3: 3 * SPACE_CONTANT,
   4: 4 * SPACE_CONTANT,
@@ -32,13 +33,13 @@ const BusinessProductsCategoriesUI = (props) => {
   const IterateCategories = ({ list, isSub, currentCat }) => {
     return (
       <>
-        {list?.length && list?.map(category => (
-          <div key={category?.id ?? category?.name}>
+        {list?.length && list?.map((category, i) => (
+          <IterateCategoriesContainer key={category?.id ?? category?.name}>
             {(category?.subcategories?.length > 0 || isSub) ? (
               <>
                 {category?.subcategories?.length > 0 && (
                   <>
-                    <div className='accordion'>
+                    <div className={`accordion ${category?.level === 1 ? 'level-1' : ''}`}>
                       <AccordionDropdown
                         item={category}
                         isSelected={categorySelected?.id === category.id}
@@ -56,6 +57,7 @@ const BusinessProductsCategoriesUI = (props) => {
                     className={`${category.id === 'featured' ? 'special' : ''}`}
                     categorySpace={categorySpace[category?.level ?? 1]}
                     onClick={() => handlerClickCategory(category)}
+                    isSub={isSub || i + 1 === list?.length}
                   >
                     <span>
                       {category.name}
@@ -69,13 +71,14 @@ const BusinessProductsCategoriesUI = (props) => {
                 className={`${category.id === 'featured' ? 'special' : ''}`}
                 categorySpace={categorySpace[category?.level ?? 1]}
                 onClick={() => handlerClickCategory(category)}
+                isSub={isSub || i + 1 === list?.length}
               >
                 <span>
                   {category.name}
                 </span>
               </CategoryTab>
             )}
-          </div>
+          </IterateCategoriesContainer>
         ))}
 
         {list && list?.length === 0 && isSub && (

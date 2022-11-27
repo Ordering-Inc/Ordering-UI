@@ -269,3 +269,11 @@ export const HeroContent = styled.div`
     }
   }
 `
+
+export const PoweredByOrdering = styled.div`
+  text-align: center;
+  margin-top: 10px;
+  a{
+    font-weight: 600;
+  }
+`

@@ -91,6 +91,7 @@ export const App = () => {
   const isShowReviewsPopupEnabled = configs?.show_reviews_popups_enabled?.value === '1'
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
   const isKioskApp = settings?.use_kiosk
+  const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
 
   const themeUpdated = {
     ...theme,
@@ -691,8 +692,8 @@ export const App = () => {
             {!navigator.userAgent.match('CriOS') && (
               <PWAPrompt promptOnVisit={1} timesToShow={100} copyClosePrompt='Close' permanentlyHideOnDismiss={false} />
             )}
-            {!isFooterPage && (
-              <Footer />
+            {(!isFooterPage || enabledPoweredByOrdering) && (
+              <Footer isFooterPage={isFooterPage} />
             )}
             {windowSize.width < 576 && onlineStatus && (
               <NavigationBar />
