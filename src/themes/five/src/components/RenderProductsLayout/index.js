@@ -439,6 +439,7 @@ export const RenderProductsLayout = (props) => {
               category={categorySelected}
               categoryState={categoryState}
               isBusinessLoading={isLoading}
+              handleUpdateProducts={handleUpdateProducts}
               errorQuantityProducts={errorQuantityProducts}
             />
           </WrapContent>
