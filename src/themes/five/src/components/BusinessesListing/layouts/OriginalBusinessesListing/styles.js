@@ -278,21 +278,25 @@ export const CityItem = styled.div`
   }
 `
 
+export const BusinessLogosWrapper = styled.div`
+  overflow: scroll hidden;
+  width: 100%;
+`
+
+
 const BusinessLogoStyled = styled.div`
-  display: flex;
-  min-width: 75px;
-  min-height: 75px;
-  height: 75px;
-  width: 75px;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  border-radius: 7.6px;
-  margin-right: 15px;
-  cursor: pointer;
+min-width: 100px;
+min-height: 100px;
+height: 100px;
+width: 100px;
+box-sizing: border-box;
+background-repeat: no-repeat, repeat;
+background-size: cover;
+object-fit: cover;
+background-position: center;
+border-radius: 7.6px;
+margin-right: 15px;
+cursor: pointer;
 `
 
 export const BusinessLogo = (props) => {
@@ -307,16 +311,7 @@ export const BusinessLogo = (props) => {
     </BusinessLogoStyled>
   )
 }
-
 export const BusinessLogosContainer = styled.div`
   display: flex;
-  overflow: auto;
   padding-bottom: 10px;
-  span {
-    margin-right: 15px;
-  }
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
 `

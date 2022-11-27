@@ -119,7 +119,6 @@ const ProductOptionsUI = (props) => {
   const [videoGallery, setVideoGallery] = useState(null)
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [isHaveWeight, setIsHaveWeight] = useState(false)
-  // const [favorite, setFavorite] = useState(product?.favorite || false)
   const [isScrollAvailable, setIsScrollAvailable] = useState(false)
   const [qtyBy, setQtyBy] = useState({
     weight_unit: false,
@@ -311,21 +310,21 @@ const ProductOptionsUI = (props) => {
   useEffect(() => {
     const imageList = []
     const videoList = []
-    imageList?.push(product?.images || theme?.images?.dummies?.product)
+    imageList.push(product?.images || theme.images?.dummies?.product)
     if (product?.gallery && product?.gallery?.length > 0) {
       for (const galleryItem of product?.gallery) {
         if (galleryItem?.file) {
-          imageList?.push(galleryItem?.file)
+          imageList.push(galleryItem?.file)
         }
         if (galleryItem?.video) {
-          const _url = galleryItem?.video?.split('/')
+          const _url = galleryItem?.video.split('/')
           let _videoId = _url[_url?.length - 1]
-          if (_videoId?.includes('watch')) {
-            const __url = _videoId?.split('=')[1]
+          if (_videoId.includes('watch')) {
+            const __url = _videoId.split('=')[1]
             _videoId = __url
           }
           const embedURL = 'https://www.youtube.com/embed/' + _videoId
-          videoList?.push(embedURL)
+          videoList.push(embedURL)
         }
       }
     }
@@ -346,22 +345,22 @@ const ProductOptionsUI = (props) => {
     const categoryId = product?.category_id
     const productId = product?.id
     if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug') {
-      _urlToShare = `${window?.location?.origin}/store/${businessSlug}/${categorySlug}/${productSlug}`
+      _urlToShare = `${window.location.origin}/store/${businessSlug}/${categorySlug}/${productSlug}`
     }
     if (/\/store\/:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug/.test(productUrlTemplate)) {
-      const businessParameter = productUrlTemplate?.replace('/store/:category_slug/:product_slug?', '')?.replace('=:business_slug', '')
+      const businessParameter = productUrlTemplate.replace('/store/:category_slug/:product_slug?', '').replace('=:business_slug', '')
       _urlToShare = `${window.location.origin}/store/${categorySlug}/${productSlug}?${businessParameter}=${businessSlug}`
     }
     if (/\/store\/:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id/.test(productUrlTemplate)) {
-      const ids = productUrlTemplate?.split('?')[1]?.split('&')
-      const categoryParameter = ids[0]?.replace('=:category_id', '')
-      const productParameter = ids[1]?.replace('=:product_id', '')
+      const ids = productUrlTemplate.split('?')[1].split('&')
+      const categoryParameter = ids[0].replace('=:category_id', '')
+      const productParameter = ids[1].replace('=:product_id', '')
       _urlToShare = `${window.location.origin}/store/${businessSlug}?${categoryParameter}=${categoryId}&${productParameter}=${productId}`
     }
-    if (/\/:business_slug\/:category_slug\/:product_slug/.test(productUrlTemplate) && productUrlTemplate?.indexOf('/store') !== 0) {
+    if (/\/:business_slug\/:category_slug\/:product_slug/.test(productUrlTemplate) && productUrlTemplate.indexOf('/store') !== 0) {
       _urlToShare = `${window.location.origin}/${businessSlug}/${categorySlug}/${productSlug}`
     }
-    if (/\/:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id/.test(productUrlTemplate) && productUrlTemplate?.indexOf('/store') !== 0) {
+    if (/\/:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id/.test(productUrlTemplate) && productUrlTemplate.indexOf('/store') !== 0) {
       const ids = productUrlTemplate.split('?')[1].split('&')
       const categoryParameter = ids[0].replace('=:category_id', '')
       const productParameter = ids[1].replace('=:product_id', '')

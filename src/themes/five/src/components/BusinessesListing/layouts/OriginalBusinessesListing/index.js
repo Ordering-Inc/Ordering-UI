@@ -34,6 +34,7 @@ import {
   AddressMenu,
   FeatureItems,
   ItemInline,
+  BusinessLogosWrapper,
   ButtonWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
@@ -60,6 +61,7 @@ import Skeleton from 'react-loading-skeleton'
 import { MomentPopover } from '../../../../../../pwa/src/components/MomentPopover'
 import { OrderTypeSelectorHeader } from '../../../../../../../components/OrderTypeSelectorHeader'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
+import { AutoScroll } from '../../../AutoScroll'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -255,23 +257,27 @@ const BusinessesListingUI = (props) => {
 
   if (logosLayout) {
     return (
-      <BusinessLogosContainer>
-        {businessesList?.loading ? (
-          <Skeleton count={12} height={75} width={75} />
-        ) : (
-          <>
-            {businessesList.businesses
-              ?.filter(business => business?.slug !== actualSlug && business?.open)
-              ?.map(business => (
-                <BusinessLogo
-                  key={business?.id}
-                  bgimage={business?.logo || theme.images?.dummies?.businessLogo}
-                  onClick={() => onBusinessClick(business)}
-                />
-              ))}
-          </>
-        )}
-      </BusinessLogosContainer>
+      <BusinessLogosWrapper>
+        <BusinessLogosContainer>
+          <AutoScroll scrollId='businessLogos'>
+            {businessesList?.loading ? (
+              <Skeleton count={12} height={75} width={75} />
+            ) : (
+              <>
+                {businessesList.businesses
+                  ?.filter(business => business?.slug !== actualSlug && business?.open)
+                  ?.map(business => (
+                    <BusinessLogo
+                      key={business?.id}
+                      bgimage={business?.logo || theme.images?.dummies?.businessLogo}
+                      onClick={() => onBusinessClick(business)}
+                    />
+                  ))}
+              </>
+            )}
+          </AutoScroll>
+        </BusinessLogosContainer>
+      </BusinessLogosWrapper>
     )
   }
 
