@@ -11,6 +11,7 @@ import smoothscroll from 'smoothscroll-polyfill'
 /**
  * Theme images
  */
+import chewLogo from './template/assets/images/chew_logo.png'
 import logotype from './template/assets/images/logotype.svg'
 import logotypeInvert from './template/assets/images/logotype-invert.svg'
 import isotype from './template/assets/images/isotype.svg'
@@ -84,7 +85,8 @@ const logos = {
   logotype,
   logotypeInvert,
   isotype,
-  isotypeInvert
+  isotypeInvert,
+  chewLogo
 }
 
 theme.images = {

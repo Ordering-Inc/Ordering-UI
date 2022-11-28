@@ -14,7 +14,8 @@ import {
   OfferData,
   Code,
   BusinessInfo,
-  OfferView
+  OfferView,
+  OfferInfoWrapper
 } from './styles'
 import { SearchBar } from '../SearchBar'
 import { Button } from '../../styles/Buttons'
@@ -22,6 +23,7 @@ import { Modal } from '../Modal'
 import Skeleton from 'react-loading-skeleton'
 import { NotFoundSource } from '../NotFoundSource'
 import { checkSiteUrl } from '../../../../../utils'
+import { useTheme } from 'styled-components'
 
 const PromotionsUI = (props) => {
   const {
@@ -32,6 +34,7 @@ const PromotionsUI = (props) => {
     setOfferSelected
   } = props
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [{ parseDate, parsePrice }] = useUtils()
   const [events] = useEvent()
   const [openModal, setOpenModal] = useState(false)
@@ -93,21 +96,24 @@ const PromotionsUI = (props) => {
       )}
       {!offersState?.loading && offersState.offers?.length > 0 && filteredOffers?.map(offer => (
         <SingleOfferContainer key={offer.id}>
-          <OfferInformation>
-            <h2>{offer?.name}</h2>
-            <Description>{offer?.description}</Description>
-            <ExpiresAt>
-              {t('EXPIRES', 'Expires')} {parseDate(offer?.end, { outputFormat: 'MMM DD, YYYY' })}
-            </ExpiresAt>
-            <AvailableBusinesses>
-              <p>{t('APPLY_FOR', 'Apply for')}:</p>
-              <p>
-                {offer.businesses.map((business, i) => (
-                  <React.Fragment key={business?.id}>{' '}{business?.name}{i + 1 < offer.businesses?.length ? ',' : ''}</React.Fragment>
-                ))}
-              </p>
-            </AvailableBusinesses>
-          </OfferInformation>
+          <OfferInfoWrapper>
+            <BusinessLogo bgimage={offer?.image || theme.images?.dummies?.businessLogo} />
+            <OfferInformation>
+              <h2>{offer?.name}</h2>
+              <Description>{offer?.description}</Description>
+              <ExpiresAt>
+                {t('EXPIRES', 'Expires')} {parseDate(offer?.end, { outputFormat: 'MMM DD, YYYY' })}
+              </ExpiresAt>
+              <AvailableBusinesses>
+                <p>{t('APPLY_FOR', 'Apply for')}:</p>
+                <p>
+                  {offer.businesses.map((business, i) => (
+                    <React.Fragment key={business?.id}>{' '}{business?.name}{i + 1 < offer.businesses?.length ? ',' : ''}</React.Fragment>
+                  ))}
+                </p>
+              </AvailableBusinesses>
+            </OfferInformation>
+          </OfferInfoWrapper>
           <Button
             color='primary'
             onClick={() => handleClickOffer(offer)}

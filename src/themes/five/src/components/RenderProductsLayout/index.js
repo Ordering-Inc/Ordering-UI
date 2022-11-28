@@ -94,9 +94,9 @@ export const RenderProductsLayout = (props) => {
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
   const [orderingTheme] = useOrderingTheme()
+  const windowSize = useWindowSize()
   const [isCartModal, setisCartModal] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
-  const windowSize = useWindowSize()
   const [categoryClicked, setCategoryClicked] = useState(false)
   const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1') && !useKioskApp
   const BusinessBasicInformationComponent =
@@ -130,13 +130,22 @@ export const RenderProductsLayout = (props) => {
     ? ProductListLayoutGroceries
     : BusinessProductsList
 
-  const handleSaveProduct = () => {
+  const handleSaveProduct = (scrollToCategories) => {
+    if (windowSize.width < 993) {
+      const categoriesContainerTop = document.getElementById('groceries').offsetTop
+      if (scrollToCategories) {
+        window.scroll({
+          top: categoriesContainerTop
+        })
+      }
+      return
+    }
     const productContainer = document.getElementsByClassName('bp-list')[0]
     scrollTo(productContainer, 500, 1250)
   }
 
   useEffect(() => {
-    handleSaveProduct()
+    handleSaveProduct(categorySelected?.subcategories?.length === 0)
   }, [categorySelected])
 
   return (

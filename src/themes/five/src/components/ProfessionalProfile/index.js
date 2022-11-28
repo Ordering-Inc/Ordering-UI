@@ -48,7 +48,7 @@ export const ProfessionalProfile = (props) => {
             business={currentProfessional}
             isProfessional
             isDisabled
-            maxDays={50}
+            maxDays={40}
             useOrderContext={false}
           />
         ) : (

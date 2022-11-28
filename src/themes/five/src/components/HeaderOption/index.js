@@ -1,5 +1,5 @@
 import React from 'react'
-import { useUtils, useLanguage, useConfig, useOrder } from 'ordering-components'
+import { useUtils, useLanguage, useConfig, useOrder, useOrderingTheme } from 'ordering-components'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 
@@ -19,8 +19,10 @@ export const HeaderOption = (props) => {
 
   const [{ configs }] = useConfig()
   const [{ parseDate }] = useUtils()
+  const [{ theme: orderingTheme }] = useOrderingTheme()
   const [, t] = useLanguage()
   const [orderStatus] = useOrder()
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
 
   return (
     <>
@@ -29,11 +31,12 @@ export const HeaderOption = (props) => {
           {BeforeElement}
         </React.Fragment>))}
       {
-      props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
+        props.beforeComponents?.map((BeforeComponent, i) => (
+          <BeforeComponent key={i} {...props} />))
       }
       <Container
         variant={variant}
+        isChew={isChew}
         onClick={() => props.onClick(variant)}
         isHome={props.isHome}
       >
@@ -58,21 +61,21 @@ export const HeaderOption = (props) => {
         )}
         {
           variant === 'delivery' && (
-            <DeliveryType>
+            <DeliveryType isChew={isChew}>
               {(orderTypeList && orderTypeList[orderStatus?.options.type - 1]) || t('DELIVERY', 'Delivery')}
             </DeliveryType>
           )
         }
       </Container>
       {
-      props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))
+        props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))
       }
       {
-      props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))
+        props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))
       }
     </>
   )

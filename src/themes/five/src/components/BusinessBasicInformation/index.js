@@ -89,8 +89,9 @@ export const BusinessBasicInformation = (props) => {
   const isInfoShrunken = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
   const searchLayout = theme?.business_view?.components?.product_search?.components?.layout?.type
   const hideCity = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
-  const layoutsWithOldSearch = ['starbucks', 'old']
-  const hideSearch = layoutsWithOldSearch.includes(orderingTheme?.theme?.business_view?.components?.product_search?.components?.layout?.type)
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
+  const layoutsWithOldSearch = ['starbucks', 'old', 'floating']
+  const hideSearch = layoutsWithOldSearch.includes(theme?.business_view?.components?.product_search?.components?.layout?.type)
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -183,7 +184,7 @@ export const BusinessBasicInformation = (props) => {
 
   const BusinessInfoComponent = () => {
     return (
-      <BusinessInfoContainer>
+      <BusinessInfoContainer isChew={isChew}>
         <BusinessInfoContent>
           <BusinessInfo className='info'>
             <BusinessInfoItem isInfoShrunken={isInfoShrunken}>
@@ -393,13 +394,13 @@ export const BusinessBasicInformation = (props) => {
         />
       )}
       <BusinessInfoWrapper>
-        {!isInfoShrunken && (
+        {(!isInfoShrunken && !isChew) && (
           <BusinessInfoComponent />
         )}
         {(business?.header || business?.logo || loading || isInfoShrunken) && (
-          <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open}>
+          <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open} isChew={isChew}>
             {(!loading && !business?.open) && <h1>{t('CLOSED', 'Closed')}</h1>}
-            {showLogo && business?.logo && (
+            {(showLogo && business?.logo && !isChew) && (
               <BusinessContent>
                 <WrapperBusinessLogo>
                   {!loading && (
@@ -408,7 +409,7 @@ export const BusinessBasicInformation = (props) => {
                 </WrapperBusinessLogo>
               </BusinessContent>
             )}
-            {isInfoShrunken && (
+            {(isInfoShrunken || isChew) && (
               <BusinessInfoComponent />
             )}
             {!loading && (

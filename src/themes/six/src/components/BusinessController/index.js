@@ -95,6 +95,11 @@ const BusinessControllerUI = (props) => {
     return lapse ? `${scheduleFormatted(lapse.open)} - ${scheduleFormatted(lapse.close)}` : ''
   }
 
+  const handleClickBusiness = (e, business) => {
+    if (favoriteRef?.current?.contains(e.target)) return
+    handleClick(business)
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -104,7 +109,7 @@ const BusinessControllerUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ContainerCard isSkeleton={isSkeleton}>
-        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={() => !isSkeleton && handleClick && (!business?.open && isCustomLayout ? handleShowAlert() : handleClick(business))}>
+        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={(e) => !isSkeleton && handleClick && (!business?.open && isCustomLayout ? handleShowAlert() : handleClickBusiness(e, business))}>
           <BusinessContent>
             <WrapperBusinessLogo isSkeleton={isSkeleton}>
               {!isSkeleton && (business?.logo || theme.images?.dummies?.businessLogo) ? (
@@ -233,16 +238,25 @@ const BusinessControllerUI = (props) => {
                   </Medadata>
                 )}
                 <Medadata>
-                  <div className='schedule'>
-                    {`${t('SCHEDULE', 'Schedule')}: ${getScheduleOpen(business)}`}
-                  </div>
-                  <SelectStoreContainer>
-                    <Button
-                      outline
-                    >
-                      {t('SELECT_BUSINESS', 'Select business')}
-                    </Button>
-                  </SelectStoreContainer>
+                  {!isSkeleton > 0 ? (
+                    <>
+                      <div className='schedule'>
+                        {`${t('SCHEDULE', 'Schedule')}: ${getScheduleOpen(business)}`}
+                      </div>
+                      <SelectStoreContainer>
+                        <Button
+                          outline
+                        >
+                          {t('SELECT_BUSINESS', 'Select business')}
+                        </Button>
+                      </SelectStoreContainer>
+                    </>
+                  ) : (
+                    <>
+                      <Skeleton width={70} />
+                      <Skeleton width={120} height={20} />
+                    </>
+                  )}
                 </Medadata>
               </BusinessInfoItem>
             </BusinessInfo>

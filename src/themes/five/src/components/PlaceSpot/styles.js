@@ -67,11 +67,21 @@ export const WrapperInput = styled.div`
 export const WrapperOption = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 240px;
+  flex: 1;
+  padding: 0 10px;
 `
 
 export const WrapperOptionList = styled.div`
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+
+  @media (min-width: 1600px) {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+  }
 `
