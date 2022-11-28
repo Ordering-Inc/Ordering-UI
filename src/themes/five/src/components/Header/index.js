@@ -224,9 +224,10 @@ export const Header = (props) => {
             />
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
+              isChew={isChew}
             >
-              <img alt='Logotype' width='170px' height='45px' src={orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width='35px' height='45px' src={orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
+              <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
+              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && !props.isCustomLayout && (

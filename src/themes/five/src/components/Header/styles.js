@@ -52,8 +52,8 @@ export const LogoHeader = styled.div`
   cursor: pointer;
 
   img {
-    width: ${props => props.imgW ?? '35px'};
-    height: ${props => props.imgH ?? '45px'};
+    width: ${props => props.isChew ? '70px' : props.imgW ?? '35px'};
+    height: ${props => props.isChew ? '20px' : props.imgH ?? '45px'};
     margin: 0;
     vertical-align: middle;
     margin-left: 10px;
@@ -65,6 +65,7 @@ export const LogoHeader = styled.div`
 
     @media (min-width: 768px) {
       width: ${props => props.imgW ?? '150px'};
+      height: ${props => props.isChew && '35px'};
     }
   }
 
@@ -87,6 +88,7 @@ export const LogoHeader = styled.div`
 export const LeftHeader = styled.div`
   align-self: center;
   display: flex;
+  align-items: center;
 `
 
 export const RightHeader = styled.div`
