@@ -4,7 +4,6 @@ import moment from 'moment'
 import { useLanguage, useOrder, useEvent, OrderList } from 'ordering-components'
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
 
 import { useTheme } from 'styled-components'
 
@@ -46,7 +45,6 @@ const OrdersOptionUI = (props) => {
     isBusinessesLoading,
     pastOrders,
     preOrders,
-    selectItem,
     setIsEmptyPast,
     setIsEmptyActive,
     setIsEmptyPreorder,
@@ -67,7 +65,8 @@ const OrdersOptionUI = (props) => {
     professionals,
     handleUpdateProfessionals,
     businesses,
-    handleUpdateBusinesses
+    handleUpdateBusinesses,
+    getPage
   } = props
 
   const [, t] = useLanguage()
@@ -76,10 +75,6 @@ const OrdersOptionUI = (props) => {
   const [events] = useEvent()
   const { width } = useWindowSize()
   const { loading, error, orders: values } = orderList
-
-  const imageFails = activeOrders
-    ? theme.images?.general?.emptyActiveOrders
-    : theme.images?.general?.emptyPastOrders
 
   const orders = customArray || values || []
   const isShowTitles = businessesIds
@@ -96,6 +91,10 @@ const OrdersOptionUI = (props) => {
       sessionStorage.setItem('adjust-cart-products', _businessId)
       onRedirectPage && onRedirectPage({ page: 'business', params: { store: reorderState?.result?.business?.slug } })
     }
+  }
+
+  const handleChangePage = (page) => {
+    getPage(page)
   }
 
   const showSkeletons = (!isBusiness && !isProducts && loading) || (businesses?.loading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
@@ -215,13 +214,6 @@ const OrdersOptionUI = (props) => {
               </h1>
             </OptionTitle>
           )}
-          {!loading && orders.length === 0 && selectItem !== 'all' && (
-            <NotFoundSource
-              image={imageFails}
-              content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
-              conditioned
-            />
-          )}
         </>
       )}
       {isBusiness && businessOrderIds?.length > 0 && (
@@ -329,7 +321,7 @@ const OrdersOptionUI = (props) => {
         horizontal ? (
           <HorizontalOrdersLayout
             businessesIds={businessesIds}
-            orders={orders.filter(order => orderStatus.includes(order.status)).sort((a, b) => moment(b?.delivery_datetime_utc).valueOf() - moment(a?.delivery_datetime_utc).valueOf())}
+            orders={orders?.filter(order => orderStatus?.includes(order.status)).sort((a, b) => moment(b?.delivery_datetime_utc)?.valueOf() - moment(a?.delivery_datetime_utc)?.valueOf())}
             pagination={pagination}
             onRedirectPage={onRedirectPage}
             loadMoreOrders={loadMoreOrders}
@@ -344,6 +336,7 @@ const OrdersOptionUI = (props) => {
             isCustomerMode={isCustomerMode}
             isBusiness={isBusiness}
             isProducts={isProducts}
+            handleChangePage={handleChangePage}
           />
         ) : (
           <VerticalOrdersLayout
@@ -354,6 +347,7 @@ const OrdersOptionUI = (props) => {
             onRedirectPage={onRedirectPage}
             getOrderStatus={getOrderStatus}
             handleReorder={handleReorder}
+            handleUpdateOrderList={handleUpdateOrderList}
           />
         )
       )}
@@ -390,7 +384,7 @@ export const OrdersOption = (props) => {
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: getAllOrders ? 30 : 10,
+      pageSize: 3,
       controlType: 'infinity'
     }
   }

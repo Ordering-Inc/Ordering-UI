@@ -21,12 +21,16 @@ export const BusinessContainer = styled.div`
     background-color: #cccccc;
   `}
 
-  ${props => props.bgimage && !props.isClosed && css`
+  ${props => props.bgimage && (!props.isClosed && !props.isChew) && css`
     background-image: url(${props.bgimage});
   `}
 
-  ${props => props.bgimage && props.isClosed && css`
+  ${props => props.bgimage && (props.isClosed && !props.isChew) && css`
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.bgimage});
+  `}
+
+  ${props => props.bgimage && props.isChew && css`
+    background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(${props.bgimage});
   `}
 
   h1 {
@@ -71,7 +75,7 @@ export const WrapperBusinessLogo = styled.div`
   max-height: 80px;
   width: 80px;
   height: 80px;
-  
+
   @media (min-width: 576px) {
     max-width: 124px;
     max-height: 124px;
@@ -161,6 +165,7 @@ export const BusinessInfoItem = styled.div`
 `
 
 export const BusinessInfoContainer = styled.div`
+  width: ${props => props.isChew && '100%'};
   padding-top: 40px;
   padding-left: 5px;
   padding-right: 5px;
@@ -180,6 +185,7 @@ export const BusinessInfoContainer = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
     margin-bottom: 25px;
+    margin-left: ${props => props.isChew && '25px'};
   }
 `
 

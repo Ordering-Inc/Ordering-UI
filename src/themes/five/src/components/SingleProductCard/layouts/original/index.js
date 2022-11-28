@@ -42,7 +42,8 @@ const SingleProductCardUI = (props) => {
     productAddedToCartLength,
     handleFavoriteProduct,
     isFavorite,
-    isPreviously
+    isPreviously,
+    isProductList
   } = props
 
   const [, t] = useLanguage()
@@ -182,7 +183,10 @@ const SingleProductCardUI = (props) => {
                   {isPreviously && (!isSkeleton ? (<LastOrder>{t('LAST_ORDERED_ON', 'Last ordered on')} {parseDate(product?.last_ordered_date, { outputFormat: 'MMM DD, YYYY' })}</LastOrder>) : (<Skeleton width={80} />))}
                 </CardInfo>
                 {!isSkeleton ? (
-                  <WrapLogo isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}>
+                  <WrapLogo
+                    isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}
+                    isProductList={isProductList}
+                  >
                     {product?.ribbon?.enabled && (
                       <RibbonBox
                         bgColor={product?.ribbon?.color}
@@ -193,6 +197,7 @@ const SingleProductCardUI = (props) => {
                       </RibbonBox>
                     )}
                     <CardLogo
+                      isProductList={isProductList}
                       className='image'
                       soldOut={isSoldOut || maxProductQuantity <= 0}
                       bgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}

@@ -20,8 +20,7 @@ export const Container = styled.div`
   @media (min-width: 769px) {
     ${({ hideOrders }) => !hideOrders ? css`
       padding: 40px;
-      width: 80%;
-    
+      width: 100%;
       @media (min-width: 993px) {
         min-height: calc(100vh - 382px);
       }

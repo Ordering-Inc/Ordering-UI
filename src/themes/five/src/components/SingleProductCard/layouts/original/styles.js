@@ -23,6 +23,7 @@ export const CardContainer = styled.div`
   button {
     width: 100%;
     margin-top: 10px;
+    padding: 4px;
   }
   ${({ productsRows }) => productsRows ? css`
     width: ${() => productsRows === 3 ? 'calc(33% - 20px)' : 'calc(50% - 20px)'};
@@ -136,11 +137,11 @@ export const CardInfo = styled.div`
 
 export const WrapLogo = styled.div`
   position: relative;
-  max-width: 86px;
-  max-height: 86px;
-  height: 86px;
+  max-width: ${props => props.isProductList ? '100px' : '86px'};
+  max-height: ${props => props.isProductList ? '100px' : '86px'};
+  height: ${props => props.isProductList ? '100px' : '86px'};
   ${({ isBgimage }) => isBgimage && css`
-    width: 86px;
+    width: ${props => props.isProductList ? '100px' : '86px'};
   `}
   margin-left: 5px;
   ${props => props.theme?.rtl && css`
@@ -156,7 +157,7 @@ const CardLogoStyled = styled.div`
   background-size: cover;
   background-position: center;
   object-fit: cover;
-  min-height: 86px;
+  min-height: ${props => props.isProductList ? '100px' : '86px'};
   border-radius: 10px;
 `
 export const CardLogo = (props) => {

@@ -424,6 +424,7 @@ export const BusinessListingSearchUI = (props) => {
             categoryId={curProduct?.product?.category_id}
             productId={curProduct?.product?.id}
             onSave={handleRedirectToCart}
+            handleUpdateProducts={(productId, changes) => handleUpdateProducts(productId, curProduct?.product?.category_id, curProduct?.business?.id, changes)}
           />
         )}
       </Modal>
