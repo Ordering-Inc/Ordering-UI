@@ -222,7 +222,12 @@ export const Divider = styled.div`
 `
 
 export const OrderProgressWrapper = styled.div`
-  padding: 45px 20px;
+  padding: ${props => props.isChew ? '110px 20px 45px' : '45px 20px'};
+  margin: 0px;
+  @media (min-width: 768px) {
+      margin: 0 35px;
+      padding: 45px 20px;
+    }
 `
 
 export const SearchContainer = styled.div`
@@ -232,7 +237,22 @@ export const SearchContainer = styled.div`
 `
 
 export const BusinessCityList = styled.div`
-  
+
+`
+
+export const ButtonWrapper = styled.div`
+  position: relative;
+  svg {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    font-size: 25px;
+    color: #ffffff;
+  }
+  button {
+    width: 100%;
+    padding: 5px;
+  }
 `
 
 export const CityItem = styled.div`
@@ -240,7 +260,6 @@ export const CityItem = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding: 15px 0px;
-  border-top: 1px solid #E9ECEF;
   cursor: pointer;
   span {
     margin-right: 15px;
@@ -250,21 +269,25 @@ export const CityItem = styled.div`
   }
 `
 
+export const BusinessLogosWrapper = styled.div`
+  overflow: scroll hidden;
+  width: 100%;
+`
+
+
 const BusinessLogoStyled = styled.div`
-  display: flex;
-  min-width: 75px;
-  min-height: 75px;
-  height: 75px;
-  width: 75px;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  border-radius: 7.6px;
-  margin-right: 15px;
-  cursor: pointer;
+min-width: 100px;
+min-height: 100px;
+height: 100px;
+width: 100px;
+box-sizing: border-box;
+background-repeat: no-repeat, repeat;
+background-size: cover;
+object-fit: cover;
+background-position: center;
+border-radius: 7.6px;
+margin-right: 15px;
+cursor: pointer;
 `
 
 export const BusinessLogo = (props) => {
@@ -279,16 +302,7 @@ export const BusinessLogo = (props) => {
     </BusinessLogoStyled>
   )
 }
-
 export const BusinessLogosContainer = styled.div`
   display: flex;
-  overflow: auto;
   padding-bottom: 10px;
-  span {
-    margin-right: 15px;
-  }
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
 `

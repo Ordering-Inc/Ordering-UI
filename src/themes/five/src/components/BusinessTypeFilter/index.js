@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { XLg as Close } from 'react-bootstrap-icons'
 import { BusinessTypeFilter as BusinessTypeFilterController, useLanguage } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 import { Tabs, Tab } from '../../styles/Tabs'
 
@@ -22,9 +23,11 @@ const BusinessTypeFilterUI = (props) => {
   const { loading, error, types } = typesState
   const [, t] = useLanguage()
   const [load, setLoad] = useState(false)
+  const theme = useTheme()
+  const isCategoriesHidden = theme?.business_listing_view?.components?.categories?.hidden
 
   const handleChangeCategory = (category) => {
-    if (isAppoint && category === currentTypeSelected) {
+    if (isAppoint && category === currentTypeSelected && !isCategoriesHidden) {
       handleChangeBusinessType(null)
       return
     }
@@ -45,6 +48,14 @@ const BusinessTypeFilterUI = (props) => {
       handleChangeFilters('business_types', [...filters?.business_types, type?.id])
     }
   }
+
+  useEffect(() => {
+    if (isCategoriesHidden && currentTypeSelected === null) {
+      if (types && types?.length > 0) {
+        (!isSearchMode && !isAppoint) && handleChangeCategory(types[1]?.id)
+      }
+    }
+  }, [types, currentTypeSelected])
 
   return (
     <>
@@ -102,11 +113,10 @@ const BusinessTypeFilterUI = (props) => {
           {!loading && !error && types && types.length > 0 && (
             <Tabs variant='primary'>
               <AutoScroll>
-                {types.map((type, i) => type.enabled && (
+                {types.map((type, i) => (isCategoriesHidden ? type.enabled && type.name !== 'All' : type.enabled) && (
                   <Tab
                     key={type.id}
-                    active={type.id === currentTypeSelected}
-                    className='category'
+                    active={type.id === currentTypeSelected || i === 0}
                   >
                     <BusinessCategoryTitle
                       active={type.id === currentTypeSelected}

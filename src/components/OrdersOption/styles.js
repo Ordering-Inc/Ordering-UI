@@ -100,7 +100,7 @@ export const OrdersContainer = styled.div`
     }
 
     @media(min-width: 480px){
-      width: 80%;
+      width: 100%;
       padding: 0;
       div:last-child {
         border-top: none;
@@ -275,7 +275,6 @@ export const BusinessInformation = styled.div`
   }
 
   p[name='order_number']{
-    width: 170px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -288,6 +287,10 @@ export const BusinessInformation = styled.div`
     width: fit-content;
   }
 
+  .status {
+    color: ${props => props.theme.colors.primary};
+  }
+
   @media (min-width: 480px){
     h2 {
     font-size: 14px;
@@ -298,9 +301,6 @@ export const BusinessInformation = styled.div`
       ${({ activeOrders }) => activeOrders && css`
         font-size: 0.9em;
       `}
-    }
-    p[name='order_number']{
-      width: 230px;
     }
   }
 

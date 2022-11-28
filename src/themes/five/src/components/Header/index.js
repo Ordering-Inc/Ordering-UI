@@ -93,6 +93,7 @@ export const Header = (props) => {
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
 
   const handleSuccessSignup = (user) => {
     login({
@@ -212,7 +213,7 @@ export const Header = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <HeaderContainer>
+      <HeaderContainer isChew={isChew}>
         <InnerHeader>
           <LeftHeader id='left-side'>
             <SidebarMenu
@@ -223,13 +224,14 @@ export const Header = (props) => {
             />
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
+              isChew={isChew}
             >
-              <img alt='Logotype' width='170px' height='45px' src={orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width='35px' height='45px' src={orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
+              <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
+              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && !props.isCustomLayout && (
-            <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode}>
+            <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode} isChew={isChew}>
               {windowSize.width > 820 && isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />

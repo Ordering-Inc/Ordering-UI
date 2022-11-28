@@ -27,20 +27,12 @@ export const MyOrders = (props) => {
   const [orderingTheme] = useOrderingTheme()
   const layout = orderingTheme?.theme?.orders?.components?.layout?.type || 'original'
 
-  const [selectItem, setSelectItem] = useState('all')
   const [isEmptyActive, setIsEmptyActive] = useState(false)
   const [isEmptyPast, setIsEmptyPast] = useState(false)
   const [isEmptyPreorder, setIsEmptyPreorder] = useState(false)
   const [selectedOption, setSelectedOption] = useState(!hideOrders ? 'orders' : 'business')
   const [isEmptyBusinesses, setIsEmptyBusinesses] = useState(false)
   const [businessOrderIds, setBusinessOrderIds] = useState([])
-
-  const filterList = [
-    { key: 'all', value: t('ALL', 'All') },
-    { key: 'active', value: t('ACTIVE', 'Active') },
-    { key: 'past', value: t('PAST', 'Past') },
-    { key: 'preorder', value: t('PREORDERS', 'Preorders') }
-  ]
 
   const MyOrdersMenu = [
     { key: 'orders', value: t('ORDERS', 'Orders') },
@@ -50,11 +42,6 @@ export const MyOrders = (props) => {
 
   const notOrderOptions = ['business', 'products', 'professionals']
   const allEmpty = (isEmptyActive && isEmptyPast && isEmptyPreorder) || ((isEmptyBusinesses || businessOrderIds?.length === 0) && hideOrders)
-
-  const handleChangeFilter = (key) => {
-    if (selectItem === key) setSelectItem('all')
-    else setSelectItem(key)
-  }
 
   return (
     <>
@@ -99,19 +86,6 @@ export const MyOrders = (props) => {
             </Tabs>
           </MyOrdersMenuContainer>
         )}
-        {!(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && layout !== 'appointments' && (
-          <OrderGroupFilterWrapper>
-            {filterList?.map((order, i) => (
-              <Button
-                key={i}
-                color={selectItem === order.key ? 'primary' : 'secundary'}
-                onClick={() => handleChangeFilter(order.key)}
-              >
-                {order.value}{selectItem === order.key && <MdClose />}
-              </Button>
-            ))}
-          </OrderGroupFilterWrapper>
-        )}
         {selectedOption === 'orders' && (
           <>
             {(isEmptyActive && isEmptyPast && isEmptyPreorder) ? (
@@ -126,42 +100,26 @@ export const MyOrders = (props) => {
               </NoOrdersWrapper>
             ) : (
               <>
-                {(selectItem === 'all' || selectItem === 'preorder') && (
-                  <>
-                    <OrdersOption
-                      {...props}
-                      preOrders
-                      horizontal
-                      setIsEmptyPreorder={setIsEmptyPreorder}
-                      selectItem={selectItem}
-                    />
-                    {!isEmptyPreorder && <Divider />}
-                  </>
-                )}
-                {(selectItem === 'all' || selectItem === 'active') && (
-                  <>
-                    <OrdersOption
-                      {...props}
-                      activeOrders
-                      horizontal
-                      setIsEmptyActive={setIsEmptyActive}
-                      selectItem={selectItem}
-                    />
-                    {!isEmptyActive && <Divider />}
-                  </>
-                )}
-                {(selectItem === 'all' || selectItem === 'past') && (
-                  <>
-                    <OrdersOption
-                      {...props}
-                      pastOrders
-                      horizontal
-                      setIsEmptyPast={setIsEmptyPast}
-                      selectItem={selectItem}
-                    />
-                    {!isEmptyPast && <Divider />}
-                  </>
-                )}
+                <OrdersOption
+                  {...props}
+                  preOrders
+                  horizontal
+                  setIsEmptyPreorder={setIsEmptyPreorder}
+                />
+                {!isEmptyPreorder && <Divider />}
+                <OrdersOption
+                  {...props}
+                  activeOrders
+                  horizontal
+                  setIsEmptyActive={setIsEmptyActive}
+                />
+                {!isEmptyActive && <Divider />}
+                <OrdersOption
+                  {...props}
+                  pastOrders
+                  setIsEmptyPast={setIsEmptyPast}
+                />
+                {!isEmptyPast && <Divider />}
               </>
             )}
           </>
