@@ -13,7 +13,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  ", "\n  background: ", ";\n  border: 1px solid #E9ECEF;\n  padding: 10px;\n  border-radius: 7.6px;\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n\n  > div {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n  }\n  ", "\n"])), function (_ref) {
+var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  ", "\n  background: ", ";\n  border: 1px solid #E9ECEF;\n  padding: 10px;\n  border-radius: 7.6px;\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n\n  > div {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n    padding: 4px;\n  }\n  ", "\n"])), function (_ref) {
   var isShowAddButt = _ref.isShowAddButt;
   return (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    min-height: ", ";\n    max-height: ", ";\n  "])), isShowAddButt ? '162px' : '110px', isShowAddButt ? '162px' : '110px');
 }, function (_ref2) {
@@ -60,15 +60,25 @@ var CardInfo = _styledComponents.default.div(_templateObject12 || (_templateObje
   return oneLine && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    p {\n      -webkit-line-clamp: 1;\n    }\n  "])));
 });
 exports.CardInfo = CardInfo;
-var WrapLogo = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  max-width: 86px;\n  max-height: 86px;\n  height: 86px;\n  ", "\n  margin-left: 5px;\n  ", "\n"])), function (_ref9) {
+var WrapLogo = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  max-width: ", ";\n  max-height: ", ";\n  height: ", ";\n  ", "\n  margin-left: 5px;\n  ", "\n"])), function (props) {
+  return props.isProductList ? '100px' : '86px';
+}, function (props) {
+  return props.isProductList ? '100px' : '86px';
+}, function (props) {
+  return props.isProductList ? '100px' : '86px';
+}, function (_ref9) {
   var isBgimage = _ref9.isBgimage;
-  return isBgimage && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    width: 86px;\n  "])));
+  return isBgimage && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    width: ", ";\n  "])), function (props) {
+    return props.isProductList ? '100px' : '86px';
+  });
 }, function (props) {
   var _props$theme5;
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n    margin-left: 0px;\n  "])));
 });
 exports.WrapLogo = WrapLogo;
-var CardLogoStyled = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 86px;\n  border-radius: 10px;\n"])));
+var CardLogoStyled = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: ", ";\n  border-radius: 10px;\n"])), function (props) {
+  return props.isProductList ? '100px' : '86px';
+});
 var CardLogo = function CardLogo(props) {
   var style = {};
   if (props.bgimage) {

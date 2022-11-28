@@ -7,11 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.OrdersOption = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-var _moment = _interopRequireDefault(require("moment"));
+var _moment3 = _interopRequireDefault(require("moment"));
 var _orderingComponents = require("ordering-components");
 var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
 var _VerticalOrdersLayout = require("../../../../../components/VerticalOrdersLayout");
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
 var _styledComponents = require("styled-components");
 var _styles = require("./styles");
 var _PreviousBusinessOrdered = require("./PreviousBusinessOrdered");
@@ -26,7 +25,9 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -36,10 +37,10 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersOptionUI = function OrdersOptionUI(props) {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var horizontal = props.horizontal,
     activeOrders = props.activeOrders,
     orderList = props.orderList,
@@ -55,7 +56,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     isBusinessesLoading = props.isBusinessesLoading,
     pastOrders = props.pastOrders,
     preOrders = props.preOrders,
-    selectItem = props.selectItem,
     setIsEmptyPast = props.setIsEmptyPast,
     setIsEmptyActive = props.setIsEmptyActive,
     setIsEmptyPreorder = props.setIsEmptyPreorder,
@@ -76,7 +76,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     professionals = props.professionals,
     handleUpdateProfessionals = props.handleUpdateProfessionals,
     businesses = props.businesses,
-    handleUpdateBusinesses = props.handleUpdateBusinesses;
+    handleUpdateBusinesses = props.handleUpdateBusinesses,
+    getPage = props.getPage;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -92,7 +93,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var loading = orderList.loading,
     error = orderList.error,
     values = orderList.orders;
-  var imageFails = activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders;
   var orders = customArray || values || [];
   var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
     return businessesIds && businessesIds.includes(order.business_id);
@@ -123,6 +123,9 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
         }
       });
     }
+  };
+  var handleChangePage = function handleChangePage(page) {
+    getPage(page);
   };
   var showSkeletons = !isBusiness && !isProducts && loading || (businesses === null || businesses === void 0 ? void 0 : businesses.loading) && isBusiness || (products === null || products === void 0 ? void 0 : products.length) === 0 && isProducts && (!businessesSearchList && loading || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.loading));
   var getOrderStatus = function getOrderStatus(s) {
@@ -289,11 +292,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }, props));
   }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : (isShowTitles || !isBusinessesPage) && !hideOrders) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
     isBusinessesPage: isBusinessesPage
-  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))), !loading && orders.length === 0 && selectItem !== 'all' && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    image: imageFails,
-    content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
-    conditioned: true
-  })), isBusiness && (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_PreviousBusinessOrdered.PreviousBusinessOrdered, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming'))))), isBusiness && (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_PreviousBusinessOrdered.PreviousBusinessOrdered, {
     businesses: businesses,
     onRedirectPage: onRedirectPage,
     isLoadingOrders: loading,
@@ -356,10 +355,11 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   }))), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading && !hideOrders : !loading && !error && orders.length > 0 && !hideOrders) && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
     businessesIds: businessesIds,
-    orders: orders.filter(function (order) {
-      return orderStatus.includes(order.status);
+    orders: orders === null || orders === void 0 ? void 0 : orders.filter(function (order) {
+      return orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.includes(order.status);
     }).sort(function (a, b) {
-      return (0, _moment.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf() - (0, _moment.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf();
+      var _moment, _moment2;
+      return ((_moment = (0, _moment3.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc)) === null || _moment === void 0 ? void 0 : _moment.valueOf()) - ((_moment2 = (0, _moment3.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc)) === null || _moment2 === void 0 ? void 0 : _moment2.valueOf());
     }),
     pagination: pagination,
     onRedirectPage: onRedirectPage,
@@ -374,19 +374,21 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     pastOrders: pastOrders,
     isCustomerMode: isCustomerMode,
     isBusiness: isBusiness,
-    isProducts: isProducts
+    isProducts: isProducts,
+    handleChangePage: handleChangePage
   }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading,
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);
     }).sort(function (a, b) {
-      return (0, _moment.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf() - (0, _moment.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf();
+      return (0, _moment3.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf() - (0, _moment3.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf();
     }),
     pagination: pagination,
     loadMoreOrders: loadMoreOrders,
     onRedirectPage: onRedirectPage,
     getOrderStatus: getOrderStatus,
-    handleReorder: handleReorder
+    handleReorder: handleReorder,
+    handleUpdateOrderList: handleUpdateOrderList
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('MY_ORDERS', 'My orders'),
     content: alertState.content,
@@ -423,7 +425,7 @@ var OrdersOption = function OrdersOption(props) {
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: getAllOrders ? 30 : 10,
+      pageSize: 3,
       controlType: 'infinity'
     }
   });

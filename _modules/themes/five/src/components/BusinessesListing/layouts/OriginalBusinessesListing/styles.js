@@ -4,10 +4,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSearch = exports.SearchContainer = exports.PreviousOrders = exports.OrderProgressWrapper = exports.ItemInline = exports.HightestRatedWrapper = exports.FeatureItems = exports.ErrorMessage = exports.Divider = exports.CityItem = exports.BusinessesTitle = exports.BusinessSearch = exports.BusinessLogosContainer = exports.BusinessLogo = exports.BusinessList = exports.BusinessHeroImgStyled = exports.BusinessHeroImg = exports.BusinessFeatures = exports.BusinessContainer = exports.BusinessCityList = exports.BusinessBanner = exports.AddressMenu = void 0;
+exports.WrapperSearch = exports.SearchContainer = exports.PreviousOrders = exports.OrderProgressWrapper = exports.ItemInline = exports.HightestRatedWrapper = exports.FeatureItems = exports.ErrorMessage = exports.Divider = exports.CityItem = exports.ButtonWrapper = exports.BusinessesTitle = exports.BusinessSearch = exports.BusinessLogosWrapper = exports.BusinessLogosContainer = exports.BusinessLogo = exports.BusinessList = exports.BusinessHeroImgStyled = exports.BusinessHeroImg = exports.BusinessFeatures = exports.BusinessContainer = exports.BusinessCityList = exports.BusinessBanner = exports.AddressMenu = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _react = _interopRequireDefault(require("react"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -75,17 +75,23 @@ var HightestRatedWrapper = _styledComponents.default.div(_templateObject22 || (_
 exports.HightestRatedWrapper = HightestRatedWrapper;
 var Divider = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n  height: 8px;\n  width: 100%;\n"])));
 exports.Divider = Divider;
-var OrderProgressWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  padding: 45px 20px;\n"])));
+var OrderProgressWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  padding: ", ";\n  margin: 0px;\n  @media (min-width: 768px) {\n      margin: 0 35px;\n      padding: 45px 20px;\n    }\n"])), function (props) {
+  return props.isChew ? '110px 20px 45px' : '45px 20px';
+});
 exports.OrderProgressWrapper = OrderProgressWrapper;
 var SearchContainer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n"])));
 exports.SearchContainer = SearchContainer;
-var BusinessCityList = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  \n"])));
+var BusinessCityList = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n\n"])));
 exports.BusinessCityList = BusinessCityList;
-var CityItem = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 15px 0px;\n  border-top: 1px solid #E9ECEF;\n  cursor: pointer;\n  span {\n    margin-right: 15px;\n  }\n  .city-checked{\n    color: ", ";\n  }\n"])), function (props) {
+var ButtonWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  position: relative;\n  svg {\n    position: absolute;\n    right: 10px;\n    top: 8px;\n    font-size: 25px;\n    color: #ffffff;\n  }\n  button {\n    width: 100%;\n    padding: 5px;\n  }\n"])));
+exports.ButtonWrapper = ButtonWrapper;
+var CityItem = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  padding: 15px 0px;\n  cursor: pointer;\n  span {\n    margin-right: 15px;\n  }\n  .city-checked{\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.CityItem = CityItem;
-var BusinessLogoStyled = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  min-width: 75px;\n  min-height: 75px;\n  height: 75px;\n  width: 75px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  border-radius: 7.6px;\n  margin-right: 15px;\n  cursor: pointer;\n"])));
+var BusinessLogosWrapper = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  overflow: scroll hidden;\n  width: 100%;\n"])));
+exports.BusinessLogosWrapper = BusinessLogosWrapper;
+var BusinessLogoStyled = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\nmin-width: 100px;\nmin-height: 100px;\nheight: 100px;\nwidth: 100px;\nbox-sizing: border-box;\nbackground-repeat: no-repeat, repeat;\nbackground-size: cover;\nobject-fit: cover;\nbackground-position: center;\nborder-radius: 7.6px;\nmargin-right: 15px;\ncursor: pointer;\n"])));
 var BusinessLogo = function BusinessLogo(props) {
   var style = {};
   if (props.bgimage) {
@@ -96,5 +102,5 @@ var BusinessLogo = function BusinessLogo(props) {
   }), props.children);
 };
 exports.BusinessLogo = BusinessLogo;
-var BusinessLogosContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  overflow: auto;\n  padding-bottom: 10px;\n  span {\n    margin-right: 15px;\n  }\n  ::-webkit-scrollbar {\n    width: 6px;\n    height: 6px;\n  }\n"])));
+var BusinessLogosContainer = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  padding-bottom: 10px;\n"])));
 exports.BusinessLogosContainer = BusinessLogosContainer;
