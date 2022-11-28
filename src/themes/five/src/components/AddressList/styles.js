@@ -4,6 +4,7 @@ import { darken } from 'polished'
 export const AddressListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
   padding: 0;
   @media (min-width: 768px) {
         padding: 0px 10px;
@@ -20,6 +21,7 @@ export const AddressListContainer = styled.div`
     height: 50px;
     ${({ isProfile }) => !isProfile && css`
       min-width: 100px;
+      padding: 7px 70px;
     `}
   }
 `

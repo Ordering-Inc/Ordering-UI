@@ -26,6 +26,7 @@ export const CartPopover = (props) => {
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
   const popper = usePopper(referenceElement.current, popperElement.current, {
     placement: theme?.rtl ? 'bottom' : 'bottom-end',
     modifiers: [
@@ -102,7 +103,7 @@ export const CartPopover = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <div style={{ overflow: 'hidden' }}>
-        <HeaderItem ref={referenceElement} onClick={props.onClick} name='cart-popover'>
+        <HeaderItem ref={referenceElement} onClick={props.onClick} name='cart-popover' isChew={isChew}>
           <span>
             <Cart3 />
             {props.carts?.length > 0 && <span>{props.carts?.length}</span>}

@@ -1,12 +1,16 @@
 import React from 'react'
-import { CardElement } from '@stripe/react-stripe-js'
+import { CardCvcElement, CardElement, CardExpiryElement, CardNumberElement } from '@stripe/react-stripe-js'
 import { CardForm as CardFormController, useLanguage } from 'ordering-components'
 
 import {
   FormStripe,
   FormRow,
   ErrorMessage,
-  FormActions
+  FormActions,
+  CardNumberField,
+  CardExpiryCvcField,
+  CardExpiryField,
+  CardCvcField
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -31,9 +35,14 @@ const CARD_ELEMENT_OPTIONS = {
 const CardFormUI = (props) => {
   const {
     error,
+    errorExpiry,
+    errorCvc,
     loading,
     handleSubmit,
-    handleChange
+    handleChange,
+    isSplitForm,
+    handleChangeExpiry,
+    handleChangeCvc
   } = props
 
   const [, t] = useLanguage()
@@ -48,11 +57,43 @@ const CardFormUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <FormStripe onSubmit={handleSubmit}>
         <FormRow>
-          <CardElement
-            options={CARD_ELEMENT_OPTIONS}
-            onChange={handleChange}
-          />
-          <ErrorMessage>{error}</ErrorMessage>
+          {!isSplitForm ?
+            <>
+              <CardElement
+                options={CARD_ELEMENT_OPTIONS}
+                onChange={handleChange}
+              />
+              <ErrorMessage>{error}</ErrorMessage>
+            </> :
+            <>
+              <CardNumberField>
+                <label>{t('CARD_NUMBER', 'Card number')}</label>
+                <CardNumberElement
+                  options={CARD_ELEMENT_OPTIONS}
+                  onChange={handleChange}
+                />
+                <ErrorMessage>{error}</ErrorMessage>
+              </CardNumberField>
+              <CardExpiryCvcField>
+                <CardExpiryField>
+                  <label>{t('EXPIRE_DATE', 'Expire date')}</label>
+                  <CardExpiryElement
+                    options={CARD_ELEMENT_OPTIONS}
+                    onChange={handleChangeExpiry}
+                  />
+                  <ErrorMessage>{errorExpiry}</ErrorMessage>
+                </CardExpiryField>
+                <CardCvcField>
+                  <label>{t('CVC', 'CVC')}</label>
+                  <CardCvcElement
+                    options={CARD_ELEMENT_OPTIONS}
+                    onChange={handleChangeCvc}
+                  />
+                  <ErrorMessage>{errorCvc}</ErrorMessage>
+                </CardCvcField>
+              </CardExpiryCvcField>
+            </>
+          }
         </FormRow>
         <FormActions>
           <Button

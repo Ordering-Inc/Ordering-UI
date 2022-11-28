@@ -14,9 +14,20 @@ export const Content = styled.div`
   `}
 `
 
+export const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
+export const CardsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  overflow-x: auto;
+`
+
 export const Price = styled.div`
   width: 35%;
-  
+
   ${({ isCustomerMode }) => isCustomerMode ? css`
   text-align: end;
   white-space: nowrap;

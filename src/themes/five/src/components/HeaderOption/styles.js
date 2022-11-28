@@ -30,7 +30,7 @@ export const Container = styled.div`
   `}
 
   ${({ variant }) => variant === 'address' && css`
-    color: #909BA9;
+    color: ${props => props.isChew ? props.theme.colors?.backgroundPage : props.theme.colors?.headingColor};
     display: flex;
     align-items: center;
 
@@ -45,7 +45,7 @@ export const Container = styled.div`
   `}
 
   ${({ variant }) => variant === 'moment' && css`
-    color: #909BA9;
+    color: ${props => props.isChew ? props.theme.colors?.backgroundPage : props.theme.colors?.headingColor};
     display: flex;
     align-items: center;
 
