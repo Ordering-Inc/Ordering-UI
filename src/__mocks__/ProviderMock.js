@@ -6,7 +6,7 @@ import theme from '../../template/theme.json'
 
 const configFile = {
   app_id: 'ordering-react',
-  project: 'jorgev4',
+  project: 'luisv4',
   api: {
     url: 'https://apiv4.ordering.co',
     language: 'en',
