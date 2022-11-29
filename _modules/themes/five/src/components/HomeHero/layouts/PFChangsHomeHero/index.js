@@ -280,6 +280,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       zoom: 17
     }),
     alt: "google-maps-img",
+    className: "google-maps-img",
     height: "100%",
     width: "100%"
   }))), !!googleMapsApiKey && mapActivated && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {

@@ -12,6 +12,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var FacebookButton = (0, _styledComponents.default)(_Buttons.Button)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  border: 1px solid #000000;\n  background: transparent;\n  border-radius: 7.6px;\n  border-color: ", ";\n  font-size: 16px;\n  font-weight: 400;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 10px;\n  justify-content: space-around;\n\n  &:active {\n    background: ", ";\n  }\n\n  svg {\n    font-size: 16px;\n    color: #1977F2;\n  }\n\n  div {\n    width: 80%;\n    text-align: left;\n    font-size: 16px;\n\n    @media (min-width: 576px) {\n      width: 50%;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.gold;
 }, function (props) {
-  return props.theme.colors.primaryContrast;
+  var _props$theme, _props$theme$colors;
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors = _props$theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.tertiaryContrast) || props.theme.colors.primaryContrast;
 });
 exports.FacebookButton = FacebookButton;
