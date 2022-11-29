@@ -202,7 +202,7 @@ const PaymentOptionOpenPayUI = (props) => {
         </Modal>
         <Alert
           title={t('PAYMENT_METHODS', 'Payment methods')}
-          content={errors.message}
+          content={t(errors.message, errors?.message?.toLowerCase()?.replaceAll('_', ' '))}
           acceptText={t('ACCEPT', 'Accept')}
           open={errors.show}
           onClose={() => closeAlert()}

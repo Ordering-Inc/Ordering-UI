@@ -239,6 +239,13 @@ export const CountryFlag = styled.div`
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 190px;
+  p{
+    overflow: hidden;
+    min-width: 190px;
+    max-width: 190px;
+    text-overflow: ellipsis;
+  }
 `
 
 export const FormContainer = styled.div`

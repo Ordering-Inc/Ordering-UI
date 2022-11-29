@@ -13,7 +13,7 @@ export default function validateInfo (values) {
   errors.show = true
   errors.border = false
   errors.variant = 'danger'
-  errors.message = 'An unknown error occured. Please try again later'
+  errors.message = 'AN_UNKNOWN_ERROR_OCCURED_PLEASE_TRY_AGAIN'
   errors.cname = false
   errors.cnumber = false
   errors.month = false
@@ -22,28 +22,28 @@ export default function validateInfo (values) {
 
   // Card CVV expiration
   if (values.cardSecurityCode === null || !values.cardSecurityCode.trim()) {
-    errors.message = 'Credit card CVC is not complete'
+    errors.message = 'CREDIT_CARD_CVC_IS_NOT_COMPLETE'
   } else if (creditCard.cvv.isValid || values.cardSecurityCode?.length === 4) {
     errors.ccvv = true
   } else {
-    errors.message = 'Credit card CVC is invalid'
+    errors.message = 'CREDIT_CARD_CVC_IS_INVALID'
   }
 
   // Card Expiration Verification
   if (values.cardMonth === null || !values.cardMonth.trim()) {
-    errors.message = 'Credit card expiration month is not complete'
+    errors.message = 'CREDIT_CARD_EXPIRATION_MONTH_IS_NOT_COMPLETE'
   } else if (creditCard.expirationMonth.isValid) {
     errors.month = true
   } else {
-    errors.message = 'Credit card expiration month is invalid'
+    errors.message = 'CREDIT_CARD_EXPIRATION_MONTH_IS_INVALID'
   }
 
   if (values.cardYear === null || !values.cardYear.trim()) {
-    errors.message = 'Credit card expiration year is not complete'
+    errors.message = 'CREDIT_CARD_EXPIRATION_YEAR_IS_NOT_COMPLETE'
   } else if (creditCard.expirationYear.isValid) {
     errors.year = true
   } else {
-    errors.message = 'Credit card expiration year is invalid'
+    errors.message = 'CREDIT_CARD_EXPIRATION_YEAR_IS_INVALID'
   }
 
   // //Card Type Verification
@@ -64,20 +64,20 @@ export default function validateInfo (values) {
 
   // Card Number Verification
   if (values.cardNumber === null || !values.cardNumber.trim()) {
-    errors.message = 'Credit card number is not complete'
+    errors.message = 'CREDIT_CARD_NUMBER_IS_NOT_COMPLETE'
   } else if (creditCard.isValid) {
     errors.cnumber = true
   } else {
-    errors.message = 'Credit card number is invalid'
+    errors.message = 'CREDIT_CARD_NUMBER_IS_INVALID'
   }
 
   // Cardholder Name Verification
   if (values.cardName === null || !values.cardName.trim()) {
-    errors.message = 'Cardholder name is not complete'
+    errors.message = 'CARDHOLDER_NAME_IS_NOT_COMPLETE'
   } else if (creditCard.cardholderName.isValid) {
     errors.cname = true
   } else {
-    errors.message = 'Cardholder name is invalid'
+    errors.message = 'CARDHOLDER_NAME_IS_INVALID'
   }
 
   if (
@@ -88,7 +88,7 @@ export default function validateInfo (values) {
     errors.ccvv
   ) {
     errors.variant = 'success'
-    errors.message = 'Credit Card is valid'
+    errors.message = 'CREDIT_CARD_IS_VALID'
   }
 
   return errors
