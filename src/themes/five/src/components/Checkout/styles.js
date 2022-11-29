@@ -502,3 +502,39 @@ export const ColumnDivider = styled.div`
   position: relative;
   right: 20px;
 `
+export const RewardContainer = styled.div`
+  padding: 0px 10px 25px 10px;
+  text-align: left;
+`
+export const RewardDisclaimerContainer = styled.div`
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+`
+export const RewardBox = styled.div`
+  margin: 10px auto;
+  padding: 5px 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px -1px 10px 0px rgb(138 138 138 / 60%);
+  -moz-box-shadow: 0px -1px 10px 0px rgba(138,138,138,0.6);
+  box-shadow: 0px -1px 10px 0px rgb(138 138 138 / 60%);
+  text-align: left;
+  > div {
+    color: #003C4A;
+    font-size: 16px;
+    margin: 7px 0;
+  }
+`
+export const RewardBoxContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  div.image-reward {
+    display: flex;
+  }
+  div.value {
+    font-weight: bold;
+    margin: auto 0px;
+  }
+`

@@ -49,7 +49,11 @@ import {
   MasterCardCoupon,
   GoToMenu,
   BackIcon,
-  ColumnDivider
+  ColumnDivider,
+  RewardContainer,
+  RewardBox,
+  RewardBoxContainer,
+  RewardDisclaimerContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -108,9 +112,9 @@ const CheckoutUI = (props) => {
     uberDirect,
     applyCoupon,
     hasCateringProducts,
-    cateringHours
+    cateringHours,
+    wowAcumulationPoints
   } = props
-
   const theme = useTheme()
   const [validationFields] = useValidationFields()
   // const [{ options, loading }, { changePaymethod }] = useOrder()
@@ -676,7 +680,22 @@ const CheckoutUI = (props) => {
             />
           </CartContainer>
         )}
-
+        {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && (
+          <RewardContainer>
+              <RewardBox>
+                <RewardBoxContainer>
+                  <div className='image-reward'>
+                    <div style={{paddingRight: 10}}><img src={theme.images?.general?.rewardsIcon} /></div>
+                    <div style={{margin: 'auto'}} className="name">{t('WOW_CART_NEW_POINTS', 'Saldo que acumulas')}</div>
+                  </div>
+                  <div className="value">{parsePrice(wowAcumulationPoints?.result?.pesos)}</div>
+                </RewardBoxContainer>
+              </RewardBox>
+              <RewardDisclaimerContainer>
+                {t('REWARDS_DISCLAIMER','*Cálculo aproximado, el saldo real se verá reflejado máx en 24 hrs.')}
+              </RewardDisclaimerContainer>
+          </RewardContainer>
+        )}
         {!cartState.loading && cart && cart?.status !== 2 && (
           <WrapperPlaceOrderButton>
             <Button
