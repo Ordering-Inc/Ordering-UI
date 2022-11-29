@@ -25,6 +25,7 @@ var _BusinessPreorder = require("../BusinessPreorder");
 var _dayjs = _interopRequireDefault(require("dayjs"));
 var _timezone = _interopRequireDefault(require("dayjs/plugin/timezone"));
 var _isBetween = _interopRequireDefault(require("dayjs/plugin/isBetween"));
+var _useWindowSize = require("../../../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -55,7 +56,8 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     handleChangeSortBy = props.handleChangeSortBy,
     categoryState = props.categoryState,
     errorQuantityProducts = props.errorQuantityProducts,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    categoryClicked = props.categoryClicked;
   var business = businessState.business,
     loading = businessState.loading;
   var theme = (0, _styledComponents.useTheme)();
@@ -71,6 +73,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     parsePrice = _useUtils2$.parsePrice,
     parseDistance = _useUtils2$.parseDistance,
     optimizeImage = _useUtils2$.optimizeImage;
+  var windowSize = (0, _useWindowSize.useWindowSize)();
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
@@ -278,7 +281,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       }
     }, t('REVIEWS', 'Reviews'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: isCustomerMode ? 100 : 150
-    })))), !hideSearch && ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && !(business !== null && business !== void 0 && (_business$professiona = business.professionals) !== null && _business$professiona !== void 0 && _business$professiona.length) && /*#__PURE__*/_react.default.createElement(SearchComponent, null));
+    })))), !hideSearch && ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && !(business !== null && business !== void 0 && (_business$professiona = business.professionals) !== null && _business$professiona !== void 0 && _business$professiona.length) && (categoryClicked || windowSize.width >= 993) && /*#__PURE__*/_react.default.createElement(SearchComponent, null));
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

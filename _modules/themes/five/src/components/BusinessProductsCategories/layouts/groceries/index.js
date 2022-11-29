@@ -36,7 +36,14 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     handlerClickCategory = props.handlerClickCategory,
     categorySelected = props.categorySelected,
     featured = props.featured,
-    openCategories = props.openCategories;
+    openCategories = props.openCategories,
+    setCategoryClicked = props.setCategoryClicked;
+  var _handleClickItem = function handleClickItem(category, isSelectCategory) {
+    handlerClickCategory(category);
+    if (isSelectCategory) {
+      setCategoryClicked(true);
+    }
+  };
   var IterateCategories = function IterateCategories(_ref) {
     var _category$level4, _category;
     var list = _ref.list,
@@ -53,8 +60,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         isSelected: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
         isOpen: openCategories === null || openCategories === void 0 ? void 0 : openCategories.includes(category.id),
         spaceTab: categorySpace[(_category$level = category === null || category === void 0 ? void 0 : category.level) !== null && _category$level !== void 0 ? _category$level : 1],
-        handleClickItem: function handleClickItem() {
-          return handlerClickCategory(category);
+        handleClickItem: function handleClickItem(isSelectCategory) {
+          return _handleClickItem(category, isSelectCategory);
         },
         IterateCategories: IterateCategories
       }))), isSub && !(category !== null && category !== void 0 && (_category$subcategori3 = category.subcategories) !== null && _category$subcategori3 !== void 0 && _category$subcategori3.length) && /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
@@ -62,7 +69,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         className: "".concat(category.id === 'featured' ? 'special' : ''),
         categorySpace: categorySpace[(_category$level2 = category === null || category === void 0 ? void 0 : category.level) !== null && _category$level2 !== void 0 ? _category$level2 : 1],
         onClick: function onClick() {
-          return handlerClickCategory(category);
+          return _handleClickItem(category, true);
         },
         isSub: isSub || i + 1 === (list === null || list === void 0 ? void 0 : list.length)
       }, /*#__PURE__*/_react.default.createElement("span", null, category.name))) : /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
@@ -70,7 +77,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         className: "".concat(category.id === 'featured' ? 'special' : ''),
         categorySpace: categorySpace[(_category$level3 = category === null || category === void 0 ? void 0 : category.level) !== null && _category$level3 !== void 0 ? _category$level3 : 1],
         onClick: function onClick() {
-          return handlerClickCategory(category);
+          return _handleClickItem(category, true);
         },
         isSub: isSub || i + 1 === (list === null || list === void 0 ? void 0 : list.length)
       }, /*#__PURE__*/_react.default.createElement("span", null, category.name)));
@@ -79,7 +86,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       className: "".concat(category.id === 'featured' ? 'special' : ''),
       categorySpace: categorySpace[(_category$level4 = (_category = category) === null || _category === void 0 ? void 0 : _category.level) !== null && _category$level4 !== void 0 ? _category$level4 : 1],
       onClick: function onClick() {
-        return handlerClickCategory(category);
+        return _handleClickItem(category, true);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, currentCat.name)));
   };
