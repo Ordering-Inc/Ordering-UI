@@ -13,15 +13,12 @@ export const WrappLayout = styled.div``
 export const WrapContent = styled.div`
   padding: 5px;
   background: ${props => props.theme.colors.backgroundPage};
-
   ${({ isGroceries }) => !isGroceries && css`
     margin-top: 70px;
   `}
-
   @media (min-width: 576px) {
     padding: 0px;
   }
-
   &#businessProductList {
     > div {
       margin-top: 30px;
@@ -33,7 +30,6 @@ export const BusinessContent = styled.div`
   margin-top: ${props => props.isCustomLayout ? 0 : 30}px;
   display: flex;
   flex-direction: column;
-
   @media (min-width: 993px) {
     flex-direction: row;
   }
@@ -41,18 +37,15 @@ export const BusinessContent = styled.div`
 
 export const BusinessCategoryProductWrapper = styled.div`
   width: 100%;
-
   /* Hide scrollbar for Chrome, Safari and Opera */
   .category-lists::-webkit-scrollbar {
     display: none;
   }
-
   /* Hide scrollbar for IE, Edge and Firefox */
   .category-lists {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
   @media (min-width: 1000px) {
     width: ${({ showCartOnProductList }) => showCartOnProductList ? '70%' : '85%'};
   }
@@ -93,26 +86,21 @@ export const BusinessCartContent = styled.div`
   margin-bottom: 30px;
   max-height: ${({ maxHeight }) => `${maxHeight}px`};
   overflow: auto;
-
   .product.accordion {
     margin: 0;
   }
-
   /* .accordion.active {
     padding-bottom: 10px;
   } */
-
   ${({ isModal }) => !isModal && css`
     border: 1px solid #E9ECEF;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     border-radius: 7.6px;
   `}
-
   @media (min-width: 1200px) {
     position: sticky;
     top: 0;
   }
-
   @media (min-width: 768px) {
     padding: 35px 30px;
   }
@@ -123,13 +111,11 @@ export const EmptyCart = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     svg {
       font-size: 45px;
       color: #B1BCCC;
       margin-top: 10px;
     }
-
     p {
       font-size: 14px;
       color: #B1BCCC;
@@ -143,13 +129,11 @@ export const EmptyBtnWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
-
   span {
     font-weight: 600;
     font-size: 16px;
     color: ${props => props.theme.colors.darkTextColor};
   }
-
   button {
     color: #748194;
     background: #F8F9FA;
@@ -175,12 +159,10 @@ export const MobileCartViewWrapper = styled.div`
   box-sizing: border-box;
   z-index: 1000;
   box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
-
   span {
     font-weight: 600;
     font-size: 16px;
   }
-
   button {
     height: 44px;
     border-radius: 7.6px;
@@ -192,7 +174,6 @@ export const WrapperSearch = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
   .search-bar {
     margin-right: 10px;
     ${props => props.theme?.rtl && css`
@@ -201,16 +182,13 @@ export const WrapperSearch = styled.div`
     `}
     input {
       width: 100%;
-
       @media (min-width: 500px) {
         width: 250px;
       }
     }
   }
-
   div:last-child {
     text-align: right;
-
     ${props => props.theme?.rtl && css`
       text-align: left;
     `}
@@ -240,4 +218,27 @@ export const WrapperSearchAbsolute = styled.div`
 
 export const NearBusiness = styled.div`
   width: 100%;
+`
+export const PageBannerWrapper = styled.div`
+  > div {
+    border-radius: 8px;
+  }
+`
+
+export const CategorySelectedContainer = styled.div`
+  display: inline;
+  margin-left: 10px;
+  color: ${({ theme }) => theme?.colors?.primary};
+  padding-right: 5px;
+  cursor: pointer;
+  p{
+    margin: 0;
+  }
+  svg {
+    position: relative;
+    top: 2px;
+    margin-right: 3px;
+    width: 14px;
+    height: 14px;
+  }
 `
