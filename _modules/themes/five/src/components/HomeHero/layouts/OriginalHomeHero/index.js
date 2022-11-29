@@ -129,7 +129,7 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
     };
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
-    mb: !auth && '30vh',
+    mb: !auth && isShowLoginAccount && '30vh',
     bgimage: bgImg || (windowSize.width < 576 ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHeroMobile : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.homeHero),
     isFullScreen: isFullScreen
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
