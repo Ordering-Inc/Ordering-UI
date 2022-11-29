@@ -71,7 +71,7 @@ var PhoneContainer = _styledComponents.default.div(_templateObject18 || (_templa
 exports.PhoneContainer = PhoneContainer;
 var CountryFlag = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-right: 5px;\n  .PhoneInputCountryIcon {\n    width: 25px;\n  }\n  .PhoneInputInput {\n    display: none;\n  }\n  .PhoneInputCountrySelect {\n    display: none;\n  }\n"])));
 exports.CountryFlag = CountryFlag;
-var Info = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
+var Info = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  max-width: 190px;\n  p{\n    overflow: hidden;\n    min-width: 190px;\n    max-width: 190px;\n    text-overflow: ellipsis;\n  }\n"])));
 exports.Info = Info;
 var FormContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  width: 100%;\n  padding: 15px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  form {\n    box-sizing: border;\n  }\n  input.form {\n    padding: 5px;\n    font-size: 14px;\n    width: 100%;\n    margin-bottom: 20px;\n    box-sizing: border-box;\n    &:disabled {\n      background-color: rgba(239, 239, 239, 0.3);\n      cursor: not-allowed;\n    }\n  }\n  ", "\n  @media (min-width: 768px){\n    flex-direction: row;\n    justify-content: center;\n    flex-wrap: wrap;\n  }\n"])), function (_ref8) {
   var isCheckout = _ref8.isCheckout;

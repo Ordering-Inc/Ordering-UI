@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _cardsList$error$, _cardsList$cards, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _cardsList$error$, _cardsList$cards, _errors$message, _errors$message$toLow, _props$afterComponent, _props$afterElements;
   var deleteCard = props.deleteCard,
     cardsList = props.cardsList,
     _handleCardClick = props.handleCardClick,
@@ -204,7 +204,7 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     color: "primary"
   }, t('ADD_CARD', 'Add Card')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PAYMENT_METHODS', 'Payment methods'),
-    content: errors.message,
+    content: t(errors.message, errors === null || errors === void 0 ? void 0 : (_errors$message = errors.message) === null || _errors$message === void 0 ? void 0 : (_errors$message$toLow = _errors$message.toLowerCase()) === null || _errors$message$toLow === void 0 ? void 0 : _errors$message$toLow.replaceAll('_', ' ')),
     acceptText: t('ACCEPT', 'Accept'),
     open: errors.show,
     onClose: function onClose() {
