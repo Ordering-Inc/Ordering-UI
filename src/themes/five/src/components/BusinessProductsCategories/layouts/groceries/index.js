@@ -27,8 +27,16 @@ const BusinessProductsCategoriesUI = (props) => {
     handlerClickCategory,
     categorySelected,
     featured,
-    openCategories
+    openCategories,
+    setCategoryClicked
   } = props
+
+  const handleClickItem = (category, isSelectCategory) => {
+    handlerClickCategory(category)
+    if (isSelectCategory) {
+      setCategoryClicked(true)
+    }
+  }
 
   const IterateCategories = ({ list, isSub, currentCat }) => {
     return (
@@ -45,7 +53,7 @@ const BusinessProductsCategoriesUI = (props) => {
                         isSelected={categorySelected?.id === category.id}
                         isOpen={openCategories?.includes(category.id)}
                         spaceTab={categorySpace[category?.level ?? 1]}
-                        handleClickItem={() => handlerClickCategory(category)}
+                        handleClickItem={(isSelectCategory) => handleClickItem(category, isSelectCategory)}
                         IterateCategories={IterateCategories}
                       />
                     </div>
@@ -56,7 +64,7 @@ const BusinessProductsCategoriesUI = (props) => {
                     active={categorySelected?.id === category.id}
                     className={`${category.id === 'featured' ? 'special' : ''}`}
                     categorySpace={categorySpace[category?.level ?? 1]}
-                    onClick={() => handlerClickCategory(category)}
+                    onClick={() => handleClickItem(category, true)}
                     isSub={isSub || i + 1 === list?.length}
                   >
                     <span>
@@ -70,7 +78,7 @@ const BusinessProductsCategoriesUI = (props) => {
                 active={categorySelected?.id === category.id}
                 className={`${category.id === 'featured' ? 'special' : ''}`}
                 categorySpace={categorySpace[category?.level ?? 1]}
-                onClick={() => handlerClickCategory(category)}
+                onClick={() => handleClickItem(category, true)}
                 isSub={isSub || i + 1 === list?.length}
               >
                 <span>
@@ -86,7 +94,7 @@ const BusinessProductsCategoriesUI = (props) => {
             active={categorySelected?.id === category.id}
             className={`${category.id === 'featured' ? 'special' : ''}`}
             categorySpace={categorySpace[category?.level ?? 1]}
-            onClick={() => handlerClickCategory(category)}
+            onClick={() => handleClickItem(category, true)}
           >
             <span>
               {currentCat.name}
