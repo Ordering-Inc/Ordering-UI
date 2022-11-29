@@ -95,7 +95,7 @@ export const OriginalHomeHero = (props) => {
 
   return (
     <HeroContainer
-      mb={!auth && '30vh'}
+      mb={!auth && isShowLoginAccount && '30vh'}
       bgimage={bgImg || (windowSize.width < 576
         ? theme.images?.general?.homeHeroMobile
         : theme.images?.general?.homeHero)}
