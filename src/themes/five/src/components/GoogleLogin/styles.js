@@ -14,7 +14,7 @@ export const GoogleButton = styled(Button)`
   justify-content: space-around;
 
   &:active {
-    background: ${props => props.theme.colors.primaryContrast};
+    background: ${props => props.theme?.colors?.tertiaryContrast || props.theme.colors.primaryContrast};
   }
 
   svg {

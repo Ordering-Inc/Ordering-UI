@@ -239,6 +239,7 @@ export const PFChangsHomeHero = (props) => {
                       }
                     )}
                     alt='google-maps-img'
+                    className='google-maps-img'
                     height='100%'
                     width='100%'
                   />

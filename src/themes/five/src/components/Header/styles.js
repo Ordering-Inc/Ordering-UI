@@ -29,20 +29,26 @@ export const LogoHeader = styled.div`
   align-items: center;
   img {
     object-fit: contain;
-    width: ${props => props.imgW ?? '35px'};
-    height: ${(props) => props?.theme?.layouts?.header?.components?.layout?.type === 'pfchangs' ? '30px' : props.imgH ?? '45px'};
     margin: 0;
     vertical-align: middle;
     margin-left: 10px;
-
+    
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
       margin-left: 0;
     `}
+      
+      ${({ theme }) => theme?.layouts?.header?.components?.layout?.type === 'pfchangs' ? css`
+        max-height: 40px;
+        max-width: 150px;
+      ` : css`
+      width: ${props => props.imgW ?? '35px'};
+      height: ${props => props.imgH ?? '45px'};
+      @media (min-width: 768px) {
+        width: ${props => props.imgW ?? '150px'};
+      }
+    `}
 
-    @media (min-width: 768px) {
-      width: ${props => props.imgW ?? '150px'};
-    }
   }
 
   ${props => !props.disabledResponsive && css`

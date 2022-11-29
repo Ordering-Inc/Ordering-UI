@@ -235,6 +235,9 @@ export const WrapperMap = styled.div`
       text-decoration: underline;
     }
   }
+  .className {
+    object-fit: none;
+  }
   @media (min-width: 768px){
     flex: 1;
     height: calc(100vh - 97px);

@@ -88,7 +88,6 @@ export const Header = (props) => {
   const isAlsea = ordering.project === 'alsea'
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.slug.includes(slug || 'pf_changs')))) || null // change filter includes pf_changs for cart?.business?.franchise_id === franchiseId || !franchiseId || !cart?.business?.franchiseId) DON'T MERGE THIS TO MASTER
-
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
 
@@ -295,7 +294,7 @@ export const Header = (props) => {
               imgW={windowSize.width <= 768 && headerLogo ? '95px' : null}
               imgH={windowSize.width <= 768 && headerLogo ? '21px' : null}
             >
-              <img alt='Logotype' width='170px' height='45px' src={headerLogo || theme?.images?.logos?.logotype} loading='lazy' />
+              <img alt='Logotype' width={headerLayout === 'pfchangs' ? '' : '170px'} height={headerLayout === 'pfchangs' ? '' : '45px'} src={headerLogo || theme?.images?.logos?.logotype} loading='lazy' />
               {!headerLogo && (
                 <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
               )}
