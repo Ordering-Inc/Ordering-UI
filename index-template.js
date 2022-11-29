@@ -57,6 +57,7 @@ import categoryAlcohol from './template/assets/images/categories/category-alcoho
 import categoryLaundry from './template/assets/images/categories/category-laundry.png'
 import categoryAll from './template/assets/images/categories/category-all.png'
 import pfLocationPin from './template/assets/pf-location-pin.png'
+import rewardsIcon from './template/assets/rewards-header.svg'
 
 import productDummy from './template/assets/images/dummies/product.png'
 import storeDummy from './template/assets/images/dummies/store.png'
@@ -86,7 +87,8 @@ theme.images = {
     successOrder,
     leftArrow,
     rightArrow,
-    pfLocationPin
+    pfLocationPin,
+    rewardsIcon
   },
 
   order: {
