@@ -85,7 +85,6 @@ const BusinessProductsListUI = (props) => {
               categoryState?.products?.map((product, i) => (
                 <SingleProductCard
                   key={i}
-                  isProductList
                   isSoldOut={(product?.inventoried && !product?.quantity)}
                   product={product}
                   businessId={businessId}
@@ -123,7 +122,6 @@ const BusinessProductsListUI = (props) => {
                 {featProducts?.filter((p, index) => index < 9)?.map((product, i) => product.featured && (
                   <SingleProductCard
                     key={i}
-                    isProductList
                     isSoldOut={(product?.inventoried && !product?.quantity)}
                     product={product}
                     businessId={businessId}
@@ -211,7 +209,6 @@ const BusinessProductsListUI = (props) => {
                         products.filter((p, index) => index < 9).map((product, i) => (
                           <SingleProductCard
                             key={i}
-                            isProductList
                             isSoldOut={product?.inventoried && !product?.quantity}
                             businessId={businessId}
                             product={product}
