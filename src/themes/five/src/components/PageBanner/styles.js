@@ -6,12 +6,8 @@ export const BannerContainer = styled.div`
   overflow: hidden;
 
   .swiper-slide {
-    height: 256px;
-    .banner-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    /* position: relative; */
+    /* height: 256px; */
   }
 
   .swiper-button-next {
@@ -48,5 +44,23 @@ export const BannerContainer = styled.div`
 
   .swiper-button-next::after, .swiper-button-prev::after {
     display: none;
+  }
+`
+export const ImageWrapper = styled.div`
+  width: 100%;
+  padding-top: 260px;
+  position: relative;
+
+  .banner-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 768px) {
+    padding-top: 18%;
   }
 `
