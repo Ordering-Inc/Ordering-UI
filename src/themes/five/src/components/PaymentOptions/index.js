@@ -236,13 +236,13 @@ const PaymentOptionsUI = (props) => {
             ))
           )}
 
-          {(paymethodsList.loading || isLoading || hasCateringProducts?.loading) && (
+          {/* {(paymethodsList.loading || isLoading || hasCateringProducts?.loading) && (
             [...Array(5).keys()].map(i => (
               <PayCard key={i} isSkeleton>
                 <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />
               </PayCard>
             ))
-          )}
+          )} */}
 
           {paymethodsList.error && paymethodsList.error.length > 0 && (
             <NotFoundSource
