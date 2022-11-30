@@ -28,7 +28,10 @@ const PageBannerUI = (props) => {
       ) : (
         pageBannerState.banner?.items && (
           <BannerContainer>
-            <Swiper navigation loop>
+            <Swiper
+              navigation
+              loop={pageBannerState.banner?.items.length > 1}
+            >
               {pageBannerState.banner?.items.map((img, i) => (
                 <SwiperSlide key={i}>
                   <img src={img.url} className='banner-img' alt='' />
