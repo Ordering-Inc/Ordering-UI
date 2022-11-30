@@ -130,14 +130,8 @@ export const RenderProductsLayout = (props) => {
     ? ProductListLayoutGroceries
     : BusinessProductsList
 
-  const handleSaveProduct = (scrollToCategories) => {
+  const handleSaveProduct = () => {
     if (windowSize.width < 993) {
-      const categoriesContainerTop = document.getElementById('groceries').offsetTop
-      if (scrollToCategories) {
-        window.scroll({
-          top: categoriesContainerTop
-        })
-      }
       return
     }
     const productContainer = document.getElementsByClassName('bp-list')[0]
@@ -145,7 +139,7 @@ export const RenderProductsLayout = (props) => {
   }
 
   useEffect(() => {
-    handleSaveProduct(categorySelected?.subcategories?.length === 0)
+    handleSaveProduct()
   }, [categorySelected])
 
   return (
