@@ -9,7 +9,8 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 
 import {
-  BannerContainer
+  BannerContainer,
+  ImageWrapper
 } from './styles'
 
 SwiperCore.use([Navigation])
@@ -28,10 +29,16 @@ const PageBannerUI = (props) => {
       ) : (
         pageBannerState.banner?.items && (
           <BannerContainer>
-            <Swiper navigation>
+            <Swiper
+              navigation
+              spaceBetween={0}
+              loop={pageBannerState.banner?.items.length > 1}
+            >
               {pageBannerState.banner?.items.map((img, i) => (
                 <SwiperSlide key={i}>
-                  <img src={img.url} className='banner-img' alt='' />
+                  <ImageWrapper>
+                    <img src={img.url} className='banner-img' alt='' />
+                  </ImageWrapper>
                 </SwiperSlide>
               ))}
             </Swiper>
