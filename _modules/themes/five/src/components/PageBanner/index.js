@@ -23,20 +23,22 @@ function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _ty
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 _swiper.default.use([_swiper.Navigation]);
 var PageBannerUI = function PageBannerUI(props) {
-  var _pageBannerState$bann, _pageBannerState$bann2;
+  var _pageBannerState$bann, _pageBannerState$bann2, _pageBannerState$bann3;
   var pageBannerState = props.pageBannerState;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, pageBannerState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 250
   })) : ((_pageBannerState$bann = pageBannerState.banner) === null || _pageBannerState$bann === void 0 ? void 0 : _pageBannerState$bann.items) && /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
-    navigation: true
-  }, (_pageBannerState$bann2 = pageBannerState.banner) === null || _pageBannerState$bann2 === void 0 ? void 0 : _pageBannerState$bann2.items.map(function (img, i) {
+    navigation: true,
+    spaceBetween: 0,
+    loop: ((_pageBannerState$bann2 = pageBannerState.banner) === null || _pageBannerState$bann2 === void 0 ? void 0 : _pageBannerState$bann2.items.length) > 1
+  }, (_pageBannerState$bann3 = pageBannerState.banner) === null || _pageBannerState$bann3 === void 0 ? void 0 : _pageBannerState$bann3.items.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.ImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
       src: img.url,
       className: "banner-img",
       alt: ""
-    }));
+    })));
   }))));
 };
 var PageBanner = function PageBanner(props) {

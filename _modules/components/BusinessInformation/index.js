@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessInformationUI = function BusinessInformationUI(props) {
-  var _configs$format_time, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _orderState$options, _business$reviews2, _business$offers, _configs$google_maps_, _business$reviews3, _business$reviews4, _business$reviews5, _business$offers2, _props$afterComponent, _props$afterElements;
+  var _configs$general_hour, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _orderState$options, _business$reviews2, _business$offers, _configs$google_maps_, _business$reviews3, _business$reviews4, _business$reviews5, _business$offers2, _props$afterComponent, _props$afterElements;
   var business = props.business,
     getBusinessType = props.getBusinessType,
     optimizeImage = props.optimizeImage,
@@ -73,11 +73,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     image = _useState6[0],
     setImage = _useState6[1];
-  var timeFormat = configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value;
-  var timeOptions = {
-    12: 'hh:mm a',
-    24: 'HH:mm'
-  };
+  var timeFormat = configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.value;
   var handleModalImage = function handleModalImage(src) {
     setImage(src);
     setModalImage(true);
@@ -137,13 +133,13 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     }, /*#__PURE__*/_react.default.createElement("h4", null, daysOfWeek[i]), schedule.enabled ? schedule.lapses.map(function (time, k) {
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: k
-      }, /*#__PURE__*/_react.default.createElement("p", null, (0, _moment.default)(time.open).format(timeOptions[timeFormat])), /*#__PURE__*/_react.default.createElement("p", {
+      }, /*#__PURE__*/_react.default.createElement("p", null, (0, _moment.default)(time.open).format(timeFormat)), /*#__PURE__*/_react.default.createElement("p", {
         style: {
           borderBottom: '2px solid',
           borderBottomColor: theme.colors.primary,
           marginBottom: 10
         }
-      }, (0, _moment.default)(time.close).format(timeOptions[timeFormat])));
+      }, (0, _moment.default)(time.close).format(timeFormat)));
     }) : /*#__PURE__*/_react.default.createElement("p", {
       style: {
         fontWeight: 500
