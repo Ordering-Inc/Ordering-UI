@@ -86,7 +86,7 @@ const AddressFormUI = (props) => {
   const AlertComponent = theme?.general?.components?.layout?.type === 'pfchangs'
     ? AlertPFchangs
     : Alert
-  const isHideAddressComponents = pfchangs && !auth
+  const isHideAddressComponentsGuest = pfchangs && !auth
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
@@ -438,9 +438,9 @@ const AddressFormUI = (props) => {
               </React.Fragment>
             ) : (
               <React.Fragment key={field.name}>
-                {(isRequiredField(field.name) || showFieldWithTheme(field.name)) && !isHideAddressComponents && (
+                {(isRequiredField(field.name) || showFieldWithTheme(field.name)) && (
                   <>
-                    {field.name !== 'address_notes' ? (
+                    {field.name !== 'address_notes' ? (!isHideAddressComponentsGuest && (
                       <Input
                         className={field.name}
                         placeholder={t(field.name.toUpperCase(), field.code)}
@@ -452,7 +452,7 @@ const AddressFormUI = (props) => {
                         autoComplete='new-field'
                         maxLength={30}
                       />
-                    ) : (
+                    )) : (
                       <TextArea
                         rows={3}
                         placeholder={t('ADDRESS_NOTES', 'Address Notes')}
@@ -472,7 +472,7 @@ const AddressFormUI = (props) => {
           ))}
 
           {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
-          {(!isHideIcons && !isHideAddressComponents) && (
+          {(!isHideIcons && !isHideAddressComponentsGuest) && (
             <AddressTagSection>
               <Button className={addressTag === 'home' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('home')}>
                 <span><House /></span>
