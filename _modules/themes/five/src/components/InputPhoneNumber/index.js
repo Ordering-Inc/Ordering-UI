@@ -70,6 +70,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     placeholder: t('PHONE_NUMBER', 'Phone number'),
     defaultCountry: configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.value,
     value: value,
+    name: "telefono",
     displayInitialValueAsLocalNumber: true,
     onChange: function onChange(val) {
       return setValue && setValue(val, isValidPhoneNumber(val));
