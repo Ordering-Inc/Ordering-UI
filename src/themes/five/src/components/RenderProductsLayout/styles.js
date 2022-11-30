@@ -246,3 +246,21 @@ export const PageBannerWrapper = styled.div`
     border-radius: 8px;
   }
 `
+
+export const CategorySelectedContainer = styled.div`
+  display: inline;
+  margin-left: 10px;
+  color: ${({ theme }) => theme?.colors?.primary};
+  padding-right: 5px;
+  cursor: pointer;
+  p{
+    margin: 0;
+  }
+  svg {
+    position: relative;
+    top: 2px;
+    margin-right: 3px;
+    width: 14px;
+    height: 14px;
+  }
+`
