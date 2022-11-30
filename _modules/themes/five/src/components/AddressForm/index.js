@@ -115,7 +115,7 @@ var AddressFormUI = function AddressFormUI(props) {
   var isHideMap = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.address_form) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.map) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.hidden;
   var isHideIcons = theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.address_form) === null || _theme$header$compone2 === void 0 ? void 0 : (_theme$header$compone3 = _theme$header$compone2.components) === null || _theme$header$compone3 === void 0 ? void 0 : (_theme$header$compone4 = _theme$header$compone3.icons) === null || _theme$header$compone4 === void 0 ? void 0 : _theme$header$compone4.hidden;
   var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$general = theme.general) === null || _theme$general === void 0 ? void 0 : (_theme$general$compon = _theme$general.components) === null || _theme$general$compon === void 0 ? void 0 : (_theme$general$compon2 = _theme$general$compon.layout) === null || _theme$general$compon2 === void 0 ? void 0 : _theme$general$compon2.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
-  var isHideAddressComponents = pfchangs && !auth;
+  var isHideAddressComponentsGuest = pfchangs && !auth;
   var maxLimitLocation = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.meters_to_change_address) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
   var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value;
   var isLocationRequired = ((_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.google_autocomplete_selection_required) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === '1' || ((_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.google_autocomplete_selection_required) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === 'true';
@@ -502,7 +502,7 @@ var AddressFormUI = function AddressFormUI(props) {
       maxLimitLocation: parseInt(maxLimitLocation, 10)
     }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
-    }, (isRequiredField(field.name) || showFieldWithTheme(field.name)) && !isHideAddressComponents && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, field.name !== 'address_notes' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    }, (isRequiredField(field.name) || showFieldWithTheme(field.name)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, field.name !== 'address_notes' ? !isHideAddressComponentsGuest && /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       className: field.name,
       placeholder: t(field.name.toUpperCase(), field.code),
       value: (_ref9 = (_formState$changes$fi2 = (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27[field.name]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : (_addressState$address13 = addressState.address) === null || _addressState$address13 === void 0 ? void 0 : _addressState$address13[field.name]) !== null && _ref9 !== void 0 ? _ref9 : '',
@@ -537,7 +537,7 @@ var AddressFormUI = function AddressFormUI(props) {
     style: {
       color: '#c10000'
     }
-  }, formState.error), !isHideIcons && !isHideAddressComponents && /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
+  }, formState.error), !isHideIcons && !isHideAddressComponentsGuest && /*#__PURE__*/_react.default.createElement(_styles.AddressTagSection, null, /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
     className: addressTag === 'home' ? 'active' : '',
     bgtransparent: true,
     type: "button",
