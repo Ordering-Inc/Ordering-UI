@@ -123,22 +123,15 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   var hideBusinessNearCity = (_theme$business_view$5 = theme === null || theme === void 0 ? void 0 : (_theme$business_view7 = theme.business_view) === null || _theme$business_view7 === void 0 ? void 0 : (_theme$business_view8 = _theme$business_view7.components) === null || _theme$business_view8 === void 0 ? void 0 : (_theme$business_view9 = _theme$business_view8.near_business) === null || _theme$business_view9 === void 0 ? void 0 : _theme$business_view9.hidden) !== null && _theme$business_view$5 !== void 0 ? _theme$business_view$5 : true;
   var BusinessLayoutCategories = businessLayout.layoutOne ? _groceries.BusinessProductsCategories : _BusinessProductsCategories.BusinessProductsCategories;
   var BusinessLayoutProductsList = businessLayout.layoutOne ? _groceries2.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
-  var handleSaveProduct = function handleSaveProduct(scrollToCategories) {
+  var handleSaveProduct = function handleSaveProduct() {
     if (windowSize.width < 993) {
-      var categoriesContainerTop = document.getElementById('groceries').offsetTop;
-      if (scrollToCategories) {
-        window.scroll({
-          top: categoriesContainerTop
-        });
-      }
       return;
     }
     var productContainer = document.getElementsByClassName('bp-list')[0];
     scrollTo(productContainer, 500, 1250);
   };
   (0, _react.useEffect)(function () {
-    var _categorySelected$sub;
-    handleSaveProduct((categorySelected === null || categorySelected === void 0 ? void 0 : (_categorySelected$sub = categorySelected.subcategories) === null || _categorySelected$sub === void 0 ? void 0 : _categorySelected$sub.length) === 0);
+    handleSaveProduct();
   }, [categorySelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList
