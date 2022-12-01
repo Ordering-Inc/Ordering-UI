@@ -54,6 +54,21 @@ export const ProductList = styled.div`
   box-sizing: border-box;
   align-items: center;
 
+  button {
+    padding: 0px;
+  }
+
+  .order-it-again-logo {
+    max-width: 75px;
+    max-height: 100px;
+    height: 100px;
+    width: 75px;
+  }
+
+  .image {
+    min-height: 75px;
+  }
+
   #orderItAgain > div {
     width: 350px;
     ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`

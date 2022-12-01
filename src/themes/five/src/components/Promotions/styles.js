@@ -66,12 +66,8 @@ export const ExpiresAt = styled.p`
 export const OfferInfoWrapper = styled.div`
   display: flex;
   gap: 10px;
-  width: 70%;
+  max-width: 70%;
   align-items: center;
-
-  @media (min-width: 768px){
-    width: 90%;
-  }
 `
 
 export const OfferInformation = styled.div`
