@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
-import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill';
+import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 import { Cart3 } from 'react-bootstrap-icons'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
@@ -457,6 +457,7 @@ export const RenderProductsLayout = (props) => {
                 category={categorySelected}
                 categoryState={categoryState}
                 isBusinessLoading={isLoading}
+                handleUpdateProducts={handleUpdateProducts}
                 errorQuantityProducts={errorQuantityProducts}
               />
             </WrapContent>
