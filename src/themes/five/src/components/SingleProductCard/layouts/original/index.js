@@ -43,7 +43,6 @@ const SingleProductCardUI = (props) => {
     handleFavoriteProduct,
     isFavorite,
     isPreviously,
-    isProductList
   } = props
 
   const [, t] = useLanguage()
@@ -184,8 +183,8 @@ const SingleProductCardUI = (props) => {
                 </CardInfo>
                 {!isSkeleton ? (
                   <WrapLogo
+                    className='order-it-again-logo'
                     isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}
-                    isProductList={isProductList}
                   >
                     {product?.ribbon?.enabled && (
                       <RibbonBox
@@ -197,7 +196,6 @@ const SingleProductCardUI = (props) => {
                       </RibbonBox>
                     )}
                     <CardLogo
-                      isProductList={isProductList}
                       className='image'
                       soldOut={isSoldOut || maxProductQuantity <= 0}
                       bgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}

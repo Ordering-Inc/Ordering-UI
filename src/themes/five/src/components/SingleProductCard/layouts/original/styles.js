@@ -137,11 +137,11 @@ export const CardInfo = styled.div`
 
 export const WrapLogo = styled.div`
   position: relative;
-  max-width: ${props => props.isProductList ? '100px' : '86px'};
-  max-height: ${props => props.isProductList ? '100px' : '86px'};
-  height: ${props => props.isProductList ? '100px' : '86px'};
+  max-width: 120px;
+  max-height: 120px;
+  height: 120px;
   ${({ isBgimage }) => isBgimage && css`
-    width: ${props => props.isProductList ? '100px' : '86px'};
+    width: 120px;
   `}
   margin-left: 5px;
   ${props => props.theme?.rtl && css`
@@ -157,7 +157,7 @@ const CardLogoStyled = styled.div`
   background-size: cover;
   background-position: center;
   object-fit: cover;
-  min-height: ${props => props.isProductList ? '100px' : '86px'};
+  min-height: 120px;
   border-radius: 10px;
 `
 export const CardLogo = (props) => {

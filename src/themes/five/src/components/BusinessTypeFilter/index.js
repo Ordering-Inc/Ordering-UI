@@ -24,7 +24,7 @@ const BusinessTypeFilterUI = (props) => {
   const [, t] = useLanguage()
   const [load, setLoad] = useState(false)
   const theme = useTheme()
-  const isCategoriesHidden = theme?.business_listing_view?.components?.categories?.hidden
+  const isCategoriesHidden = theme?.business_listing_view?.components?.categories?.components?.all?.hidden
 
   const handleChangeCategory = (category) => {
     if (isAppoint && category === currentTypeSelected && !isCategoriesHidden) {
