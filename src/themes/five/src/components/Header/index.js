@@ -358,6 +358,7 @@ export const Header = (props) => {
                           withLogout
                           isCustomerMode={isCustomerMode}
                           open={openPopover.user}
+                          handleOpenAddressModal={() => openModal('address')}
                           onClick={() => handleTogglePopover('user')}
                           onClose={() => handleClosePopover('user')}
                         />

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer, useConfig, useOrderingTheme } from 'ordering-components'
+import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer, useConfig, useOrderingTheme, useOrder } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
@@ -29,13 +29,16 @@ export const UserPopover = (props) => {
     isHome,
     optionsList,
     withLogout,
-    isCustomerMode
+    isCustomerMode,
+    handleOpenAddressModal
   } = props
   const [sessionState] = useSession()
   const [, t] = useLanguage()
   const [events] = useEvent()
   const [{ configs }] = useConfig()
   const [orderingTheme] = useOrderingTheme()
+  const [orderStatus] = useOrder()
+
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -55,6 +58,8 @@ export const UserPopover = (props) => {
     { name: 'favorite', pathname: '/favorite', displayName: 'favorites', key: 'favorites', isActive: true },
     { name: 'addresses', pathname: '/profile/addresses', displayName: 'places', key: 'places', isActive: isAddressListNewPage }
   ]
+
+  const addressRequiredPageNames = ['business_search', 'promotions']
 
   const options = isCustomerMode
     ? optionsDefault.filter(option => option.name === 'profile')
@@ -94,7 +99,11 @@ export const UserPopover = (props) => {
   }
 
   const handleGoToPage = (page) => {
-    events.emit('go_to_page', { page })
+    if (!orderStatus.options?.address?.location && addressRequiredPageNames.includes(page)) {
+      handleOpenAddressModal()
+    } else {
+      events.emit('go_to_page', { page })
+    }
     props.onClick && props.onClick()
   }
 
