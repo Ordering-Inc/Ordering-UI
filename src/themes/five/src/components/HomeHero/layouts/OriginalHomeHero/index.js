@@ -38,6 +38,7 @@ export const OriginalHomeHero = (props) => {
   const [orderingTheme] = useOrderingTheme()
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
+  const [newAddressModalOpened, setNewAddressModalOpened] = useState(false)
 
   const isShowLoginAccount = !orderingTheme?.theme?.mobile_view_web?.components?.home?.components?.login_account?.hidden
   const bgImg = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_background?.components?.image
@@ -92,6 +93,14 @@ export const OriginalHomeHero = (props) => {
   useEffect(() => {
     return () => setModals({ listOpen: false, formOpen: false })
   }, [])
+
+  useEffect(() => {
+    if (newAddressModalOpened) return
+    if (auth && !orderState.loading && !orderState?.options?.address?.location) {
+      setModals({ ...modals, listOpen: true })
+      setNewAddressModalOpened(true)
+    }
+  }, [auth, orderState, newAddressModalOpened])
 
   return (
     <HeroContainer
