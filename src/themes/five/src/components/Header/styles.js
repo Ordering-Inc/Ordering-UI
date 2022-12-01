@@ -155,17 +155,17 @@ export const Menu = styled.div`
 
     @media (min-width: 1024px) {
       padding: 0 20px;
-      margin: 0 70px;
+      margin-left: 45px;
     }
 
     @media (min-width: 1200px) {
       padding: 0 30px;
-      margin: 0 100px;
+      margin-left: 50px;
     }
 
     @media (min-width: 1500px) {
       padding: 0 30px;
-      margin: 0 130px;
+      margin: 0 75px;
     }
   }
 
@@ -470,5 +470,15 @@ export const LanguageSelectorWrapper = styled(InputGroup)`
   }
   #select-input {
     margin: 0px 10px 0 5px;
+  }
+`
+
+export const HeaderSearchMode = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 300px;
+
+  @media (min-width: 1400px){
+    width: 300px;
   }
 `

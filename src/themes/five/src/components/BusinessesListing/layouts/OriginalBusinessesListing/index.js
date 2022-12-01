@@ -343,7 +343,7 @@ const BusinessesListingUI = (props) => {
         {!isCustomerMode && !hideSearchSection && (
           <>
             <WrapperSearch isCustomLayout={isCustomLayout} isCustomerMode={isCustomerMode}>
-              {!hideSearch && (
+              {!hideSearch && windowSize.width <= 1200 && (
                 <SearchBar
                   lazyLoad
                   search={searchValue}
