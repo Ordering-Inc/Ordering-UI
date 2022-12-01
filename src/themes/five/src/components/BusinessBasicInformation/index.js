@@ -82,7 +82,6 @@ export const BusinessBasicInformation = (props) => {
   const showLogo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
   const showDeliveryFee = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
   const showTime = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
-  const showBusinessInfo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
   const showReviews = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
   const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
   const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
@@ -205,15 +204,6 @@ export const BusinessBasicInformation = (props) => {
                 </TitleWrapper>
               ) : (
                 <Skeleton width={isCustomerMode ? 100 : 150} height={isCustomerMode ? 35 : 'auto'} />
-              )}
-              {showBusinessInfo && (
-                <>
-                  {!loading ? (
-                    <p className='type'>{getBusinessType()}</p>
-                  ) : (
-                    <Skeleton width={isCustomerMode ? 100 : 150} />
-                  )}
-                </>
               )}
               {typeof hideCity !== 'undefined' && !hideCity && business?.city?.name && (
                 <>
