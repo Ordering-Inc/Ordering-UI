@@ -63,3 +63,5 @@ export const Footer = ({ isFooterPage }) => {
     </Container>
   )
 }
+
+export default Footer
