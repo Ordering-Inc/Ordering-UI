@@ -23,7 +23,7 @@ var Description = _styledComponents.default.p(_templateObject4 || (_templateObje
 exports.Description = Description;
 var ExpiresAt = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  color: #414954;\n"])));
 exports.ExpiresAt = ExpiresAt;
-var OfferInfoWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  gap: 10px;\n  width: 70%;\n  align-items: center;\n\n  @media (min-width: 768px){\n    width: 90%;\n  }\n"])));
+var OfferInfoWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  gap: 10px;\n  max-width: 70%;\n  align-items: center;\n"])));
 exports.OfferInfoWrapper = OfferInfoWrapper;
 var OfferInformation = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  width: 50%;\n  ", "\n  h2{\n    overflow: hidden;\n    text-overflow: ellipsis;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    line-clamp: 2;\n    -webkit-box-orient: vertical;\n    font-size: 14px;\n  }\n  @media (min-width: 720px){\n    width: 70%;\n    h2{\n      font-size: 16px;\n    }\n  }\n"])), function (_ref) {
   var isSkeleton = _ref.isSkeleton;

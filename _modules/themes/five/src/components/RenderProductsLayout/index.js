@@ -379,6 +379,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     category: categorySelected,
     categoryState: categoryState,
     isBusinessLoading: isLoading,
+    handleUpdateProducts: handleUpdateProducts,
     errorQuantityProducts: errorQuantityProducts
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "40%",

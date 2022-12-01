@@ -142,7 +142,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     var _currentCart$products;
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: i,
-      isProductList: true,
       isSoldOut: product.inventoried && !product.quantity,
       product: product,
       useKioskApp: useKioskApp,
@@ -170,7 +169,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       var _currentCart$products2;
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: i,
-        isProductList: true,
         isSoldOut: product.inventoried && !product.quantity,
         businessId: businessId,
         product: product,
@@ -191,7 +189,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     var _currentCart$products3;
     return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: i,
-      isProductList: true,
       isSoldOut: product.inventoried && !product.quantity,
       product: product,
       useKioskApp: useKioskApp,
@@ -258,7 +255,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       var _currentCart$products4;
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: i,
-        isProductList: true,
         isSoldOut: product.inventoried && !product.quantity,
         businessId: businessId,
         product: product,
@@ -274,7 +270,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       var _currentCart$products5;
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: i,
-        isProductList: true,
         isSoldOut: product.inventoried && !product.quantity,
         businessId: businessId,
         product: product,
@@ -307,7 +302,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         var _currentCart$products6;
         return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
           key: i,
-          isProductList: true,
           isSoldOut: product.inventoried && !product.quantity,
           businessId: businessId,
           product: product,

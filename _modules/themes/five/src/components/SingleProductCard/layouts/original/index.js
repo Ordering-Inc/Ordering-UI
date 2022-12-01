@@ -52,8 +52,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     productAddedToCartLength = props.productAddedToCartLength,
     handleFavoriteProduct = props.handleFavoriteProduct,
     isFavorite = props.isFavorite,
-    isPreviously = props.isPreviously,
-    isProductList = props.isProductList;
+    isPreviously = props.isPreviously;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -199,14 +198,13 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
   }))), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, {
-    isBgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || (theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.product), 'h_86,c_limit'),
-    isProductList: isProductList
+    className: "order-it-again-logo",
+    isBgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || (theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.product), 'h_86,c_limit')
   }, (product === null || product === void 0 ? void 0 : (_product$ribbon = product.ribbon) === null || _product$ribbon === void 0 ? void 0 : _product$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
     bgColor: product === null || product === void 0 ? void 0 : (_product$ribbon2 = product.ribbon) === null || _product$ribbon2 === void 0 ? void 0 : _product$ribbon2.color,
     isRoundRect: (product === null || product === void 0 ? void 0 : (_product$ribbon3 = product.ribbon) === null || _product$ribbon3 === void 0 ? void 0 : _product$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
     isCapsule: (product === null || product === void 0 ? void 0 : (_product$ribbon4 = product.ribbon) === null || _product$ribbon4 === void 0 ? void 0 : _product$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
   }, product === null || product === void 0 ? void 0 : (_product$ribbon5 = product.ribbon) === null || _product$ribbon5 === void 0 ? void 0 : _product$ribbon5.text), /*#__PURE__*/_react.default.createElement(_styles.CardLogo, {
-    isProductList: isProductList,
     className: "image",
     soldOut: isSoldOut || maxProductQuantity <= 0,
     bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || (theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.product), 'h_86,c_limit')

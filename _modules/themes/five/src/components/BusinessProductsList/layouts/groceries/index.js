@@ -80,7 +80,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     var _currentCart$products;
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: i,
-      isProductList: true,
       isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
       product: product,
       businessId: businessId,
@@ -116,7 +115,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       var _currentCart$products2;
       return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: i,
-        isProductList: true,
         isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
         product: product,
         businessId: businessId,
@@ -181,7 +179,6 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       var _currentCart$products3;
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: i,
-        isProductList: true,
         isSoldOut: (product === null || product === void 0 ? void 0 : product.inventoried) && !(product !== null && product !== void 0 && product.quantity),
         businessId: businessId,
         product: product,

@@ -60,25 +60,15 @@ var CardInfo = _styledComponents.default.div(_templateObject12 || (_templateObje
   return oneLine && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    p {\n      -webkit-line-clamp: 1;\n    }\n  "])));
 });
 exports.CardInfo = CardInfo;
-var WrapLogo = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  max-width: ", ";\n  max-height: ", ";\n  height: ", ";\n  ", "\n  margin-left: 5px;\n  ", "\n"])), function (props) {
-  return props.isProductList ? '100px' : '86px';
-}, function (props) {
-  return props.isProductList ? '100px' : '86px';
-}, function (props) {
-  return props.isProductList ? '100px' : '86px';
-}, function (_ref9) {
+var WrapLogo = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: relative;\n  max-width: 120px;\n  max-height: 120px;\n  height: 120px;\n  ", "\n  margin-left: 5px;\n  ", "\n"])), function (_ref9) {
   var isBgimage = _ref9.isBgimage;
-  return isBgimage && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    width: ", ";\n  "])), function (props) {
-    return props.isProductList ? '100px' : '86px';
-  });
+  return isBgimage && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    width: 120px;\n  "])));
 }, function (props) {
   var _props$theme5;
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n    margin-left: 0px;\n  "])));
 });
 exports.WrapLogo = WrapLogo;
-var CardLogoStyled = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: ", ";\n  border-radius: 10px;\n"])), function (props) {
-  return props.isProductList ? '100px' : '86px';
-});
+var CardLogoStyled = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 120px;\n  border-radius: 10px;\n"])));
 var CardLogo = function CardLogo(props) {
   var style = {};
   if (props.bgimage) {

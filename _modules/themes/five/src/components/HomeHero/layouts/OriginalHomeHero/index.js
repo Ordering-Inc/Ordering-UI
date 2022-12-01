@@ -33,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OriginalHomeHero = function OriginalHomeHero(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _configs$powered_by_o, _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$logos, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options2, _orderState$options2$, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _orderState$options3, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _configs$powered_by_o, _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$logos, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options3, _orderState$options3$, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _orderState$options4, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10;
   var onFindBusiness = props.onFindBusiness;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 2),
@@ -69,6 +69,10 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     modalPageToShow = _useState6[0],
     setModalPageToShow = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    newAddressModalOpened = _useState8[0],
+    setNewAddressModalOpened = _useState8[1];
   var isShowLoginAccount = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.mobile_view_web) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.home) !== null && _orderingTheme$theme$3 !== void 0 && (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) !== null && _orderingTheme$theme$4 !== void 0 && (_orderingTheme$theme$5 = _orderingTheme$theme$4.login_account) !== null && _orderingTheme$theme$5 !== void 0 && _orderingTheme$theme$5.hidden);
   var bgImg = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.my_products) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.images) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.components) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.homepage_background) === null || _orderingTheme$theme7 === void 0 ? void 0 : (_orderingTheme$theme8 = _orderingTheme$theme7.components) === null || _orderingTheme$theme8 === void 0 ? void 0 : _orderingTheme$theme8.image;
   var logo = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme9 = orderingTheme.theme) === null || _orderingTheme$theme9 === void 0 ? void 0 : (_orderingTheme$theme10 = _orderingTheme$theme9.my_products) === null || _orderingTheme$theme10 === void 0 ? void 0 : (_orderingTheme$theme11 = _orderingTheme$theme10.components) === null || _orderingTheme$theme11 === void 0 ? void 0 : (_orderingTheme$theme12 = _orderingTheme$theme11.images) === null || _orderingTheme$theme12 === void 0 ? void 0 : (_orderingTheme$theme13 = _orderingTheme$theme12.components) === null || _orderingTheme$theme13 === void 0 ? void 0 : (_orderingTheme$theme14 = _orderingTheme$theme13.logo) === null || _orderingTheme$theme14 === void 0 ? void 0 : (_orderingTheme$theme15 = _orderingTheme$theme14.components) === null || _orderingTheme$theme15 === void 0 ? void 0 : _orderingTheme$theme15.image;
@@ -132,6 +136,16 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
       });
     };
   }, []);
+  (0, _react.useEffect)(function () {
+    var _orderState$options2, _orderState$options2$;
+    if (newAddressModalOpened) return;
+    if (auth && !orderState.loading && !(orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2$ = _orderState$options2.address) !== null && _orderState$options2$ !== void 0 && _orderState$options2$.location)) {
+      setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        listOpen: true
+      }));
+      setNewAddressModalOpened(true);
+    }
+  }, [auth, orderState, newAddressModalOpened]);
   return /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     mb: !auth && isShowLoginAccount && '30vh',
     bgimage: bgImg || (windowSize.width < 576 ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHeroMobile : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.homeHero),
@@ -143,7 +157,7 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.HeroContent, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'All We need is Food.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Let\'s start to order food now')), /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
     onClick: handleAddressInput,
     withIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address) || t('WHERE_DO_WE_DELIVERY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.WHERE_DO_WE_DELIVERY) || 'Where do we delivery?'))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     name: "find-business",
     onClick: handleFindBusinesses
@@ -169,7 +183,7 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false

@@ -50,7 +50,8 @@ var UserPopover = function UserPopover(props) {
     isHome = props.isHome,
     optionsList = props.optionsList,
     withLogout = props.withLogout,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    handleOpenAddressModal = props.handleOpenAddressModal;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     sessionState = _useSession2[0];
@@ -66,6 +67,9 @@ var UserPopover = function UserPopover(props) {
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+    _useOrder2 = _slicedToArray(_useOrder, 1),
+    orderStatus = _useOrder2[0];
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
@@ -122,6 +126,7 @@ var UserPopover = function UserPopover(props) {
     key: 'places',
     isActive: isAddressListNewPage
   }];
+  var addressRequiredPageNames = ['business_search', 'promotions'];
   var options = isCustomerMode ? optionsDefault.filter(function (option) {
     return option.name === 'profile';
   }) : optionsList || optionsDefault;
@@ -159,9 +164,14 @@ var UserPopover = function UserPopover(props) {
     }
   };
   var handleGoToPage = function handleGoToPage(page) {
-    events.emit('go_to_page', {
-      page: page
-    });
+    var _orderStatus$options, _orderStatus$options$;
+    if (!((_orderStatus$options = orderStatus.options) !== null && _orderStatus$options !== void 0 && (_orderStatus$options$ = _orderStatus$options.address) !== null && _orderStatus$options$ !== void 0 && _orderStatus$options$.location) && addressRequiredPageNames.includes(page)) {
+      handleOpenAddressModal();
+    } else {
+      events.emit('go_to_page', {
+        page: page
+      });
+    }
     props.onClick && props.onClick();
   };
   (0, _react.useEffect)(function () {
