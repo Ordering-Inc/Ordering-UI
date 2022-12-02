@@ -119,7 +119,6 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const onProductClick = async (product) => {
-    console.log(product)
     if (product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct) {
       setProductIdToLoading(product.id)
       const isProductAddedToCart = currentCart?.products?.find(Cproduct => Cproduct.id === product.id)
