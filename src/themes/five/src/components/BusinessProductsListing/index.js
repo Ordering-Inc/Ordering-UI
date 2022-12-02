@@ -118,8 +118,6 @@ const BusinessProductsListingUI = (props) => {
     setOpenBusinessInformation(true)
   }
 
-  console.log(productToIdLoading)
-
   const onProductClick = async (product) => {
     console.log(product)
     if (product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct) {
