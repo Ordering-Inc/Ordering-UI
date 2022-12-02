@@ -54,7 +54,7 @@ export const SidebarContent = styled.div`
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 1005;
+  z-index: 2050;
   top: 0;
   background-color: ${({ theme }) => theme.colors.backgroundPage};
   overflow-x: hidden;

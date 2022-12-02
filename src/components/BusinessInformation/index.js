@@ -43,6 +43,7 @@ import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import MdClose from '@meronex/icons/md/MdClose'
 import { AutoScroll } from '../AutoScroll'
+import moment from 'moment/moment'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -74,11 +75,7 @@ export const BusinessInformationUI = (props) => {
   const [{ parsePrice, parseDistance }] = useUtils()
   const [modalImage, setModalImage] = useState(false)
   const [image, setImage] = useState('')
-
-  const scheduleFormatted = ({ hour, minute }) => {
-    const checkTime = (val) => val < 10 ? `0${val}` : val
-    return `${checkTime(hour)}:${checkTime(minute)}`
-  }
+  const timeFormat = configs?.general_hour_format?.value
 
   const handleModalImage = (src) => {
     setImage(src)
@@ -214,14 +211,14 @@ export const BusinessInformationUI = (props) => {
                             <ScheduleBlock key={i}>
                               <h4>{daysOfWeek[i]}</h4>
                               {schedule.enabled ? (
-                                schedule.lapses.map( (time, k) => (
+                                schedule.lapses.map((time, k) => (
                                   <React.Fragment key={k}>
-                                    <p>{scheduleFormatted(time.open)}</p>
+                                    <p>{moment(time.open).format(timeFormat)}</p>
                                     <p style={{
                                       borderBottom: '2px solid',
                                       borderBottomColor: theme.colors.primary,
                                       marginBottom: 10
-                                    }} >{scheduleFormatted(time.close)}</p>
+                                    }} >{moment(time.close).format(timeFormat)}</p>
                                   </React.Fragment>
                                 ))
                               ) : (

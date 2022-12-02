@@ -63,11 +63,22 @@ export const ExpiresAt = styled.p`
   color: #414954;
 `
 
+export const OfferInfoWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  width: 70%;
+  align-items: center;
+
+  @media (min-width: 768px){
+    width: 90%;
+  }
+`
+
 export const OfferInformation = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 70%;
+  width: 50%;
   ${({ isSkeleton }) => isSkeleton && css`
     width: 100%;
   `}
@@ -76,12 +87,12 @@ export const OfferInformation = styled.div`
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-clamp: 2; 
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     font-size: 14px;
   }
   @media (min-width: 720px){
-    width: 80%;
+    width: 70%;
     h2{
       font-size: 16px;
     }
@@ -105,7 +116,6 @@ export const SearchBarContainer = styled.div`
 `
 
 const BusinessLogoStyled = styled.div`
-  display: flex;
   width: 65px;
   height: 65px;
   box-sizing: border-box;

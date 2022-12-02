@@ -58,6 +58,7 @@ import { OrderSuccessModal } from './components/OrderSuccessModal'
 import { OrderTypeSelectorHeader } from './components/OrderTypeSelectorHeader'
 import { PageNotFound } from './components/PageNotFound'
 import { PagesList } from './components/PagesList'
+import { Pagination } from './themes/five/src/components/Pagination'
 import { PaymentOptionCash } from './components/PaymentOptionCash'
 import { PaymentOptionPaypal } from './components/PaymentOptionPaypal'
 import { PaymentOptions } from './components/PaymentOptions'
@@ -197,6 +198,7 @@ export {
   OrderTypeSelectorHeader,
   PageNotFound,
   PagesList,
+  Pagination,
   PaymentOptionCash,
   PaymentOptions,
   PaymentOptionStripe,

@@ -32,6 +32,24 @@ export const FormStripe = styled.form`
   }
 `
 
+export const CardExpiryField = styled.div`
+  color: #ADB2B9;
+`
+
+export const CardCvcField = styled.div`
+  color: #ADB2B9;
+`
+
+export const CardNumberField = styled.div`
+  width: 100%;
+  color: #ADB2B9;
+`
+export const CardExpiryCvcField = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+`
+
 export const FormRow = styled.div`
   input {
     display: block;
@@ -62,8 +80,8 @@ export const ErrorMessage = styled.div`
   color: #D81212;
   margin: 10px 0px 0px 10px;
   ${props => props.theme?.rtl && css`
-    margin: 10px 10px 0px 0px    
-  `}  
+    margin: 10px 10px 0px 0px
+  `}
 `
 
 export const FormActions = styled.div`

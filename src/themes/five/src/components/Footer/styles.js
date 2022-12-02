@@ -1,11 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  display: none;
-
-  @media (min-width: 768px) {
-    display: block;
-  }
+  position: relative;
 `
 
 export const FooterWrapper = styled.div`
@@ -154,5 +150,20 @@ export const SocialGroup = styled.div`
       transform: scale(1.04);
       color: ${props => props.theme.colors.primary};
     }
+  }
+`
+
+export const PoweredByOrdering = styled.p`
+  text-align: center;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  white-space: pre;
+  margin-bottom: 10px;
+  a{
+    font-weight: 600;
   }
 `

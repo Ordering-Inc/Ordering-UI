@@ -128,7 +128,6 @@ const SingleOrderCardUI = (props) => {
 
   const showBusinessLogo = !orderingTheme?.theme?.orders?.components?.business_logo?.hidden
   const showDate = !orderingTheme?.theme?.orders?.components?.date?.hidden
-  const showMap = !orderingTheme?.theme?.orders?.components?.map?.hidden
 
   return (
     <>
@@ -144,26 +143,6 @@ const SingleOrderCardUI = (props) => {
         isCustomerMode={isCustomerMode}
         onClick={(e) => handleClickCard(e, order?.uuid)}
       >
-        {(configs?.google_maps_api_key?.value || isBusinessesPage) && showMap && (
-          <>
-            {isSkeleton ? (
-              <Skeleton height={80} />
-            ) : (
-              <Map isBusinessesPage={isBusinessesPage}>
-                <img
-                  src={
-                    isBusinessesPage
-                      ? (order?.business?.header || order?.business?.logo || theme.images?.dummies?.businessLogo)
-                      : getGoogleMapImage(order?.business?.location, configs?.google_maps_api_key?.value)
-                  }
-                  alt={isBusinessesPage ? 'business_header' : 'google-maps-img'}
-                  height={isBusinessesPage ? '200px' : '100px'}
-                  width='400px'
-                />
-              </Map>
-            )}
-          </>
-        )}
         <Content isCustomerMode={isCustomerMode}>
           {isSkeleton ? (
             <Skeleton width={60} height={60} />

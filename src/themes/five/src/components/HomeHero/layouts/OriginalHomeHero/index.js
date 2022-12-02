@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
-import { useSession, useOrder, useLanguage, useOrderingTheme } from 'ordering-components'
+import { useSession, useOrder, useLanguage, useOrderingTheme, useConfig } from 'ordering-components'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import {
   HeroContainer,
@@ -11,7 +11,8 @@ import {
   LogoWrapper,
   UseAccount,
   HeroContent,
-  SectionHeader
+  SectionHeader,
+  PoweredByOrdering
 } from './styles'
 
 import { Modal } from '../../../Modal'
@@ -29,6 +30,7 @@ export const OriginalHomeHero = (props) => {
   const [{ auth }, { login }] = useSession()
   const [orderState] = useOrder()
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
   const theme = useTheme()
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
@@ -41,7 +43,7 @@ export const OriginalHomeHero = (props) => {
   const bgImg = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_background?.components?.image
   const logo = orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image
   const isFullScreen = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_image_fullscreen
-
+  const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
       setModals({ ...modals, formOpen: true })
@@ -93,7 +95,7 @@ export const OriginalHomeHero = (props) => {
 
   return (
     <HeroContainer
-      mb={!auth && '30vh'}
+      mb={!auth && isShowLoginAccount && '30vh'}
       bgimage={bgImg || (windowSize.width < 576
         ? theme.images?.general?.homeHeroMobile
         : theme.images?.general?.homeHero)}
@@ -126,13 +128,23 @@ export const OriginalHomeHero = (props) => {
       </ContentWrapper>
 
       {windowSize.width < 576 && !auth && isShowLoginAccount && (
-        <UseAccount>
-          <SectionHeader>
-            {t('YOUR_ACCOUNT', 'Use your account')}
-          </SectionHeader>
-          <Button color='primary' onClick={() => handleOpenLoginSignUp('login')}>{t('LOGIN', 'login')}</Button>
-          <Button color='primary' onClick={() => handleOpenLoginSignUp('signup')}>{t('SIGNUP', 'signUp')}</Button>
-        </UseAccount>
+        <>
+          {enabledPoweredByOrdering && (
+            <PoweredByOrdering>
+              {t('POWERED_BY', 'Powered by')}
+              <a href='https://www.ordering.co'>
+                {' '}{t('ORDERING_CO', 'Ordering.co')}
+              </a>
+            </PoweredByOrdering>
+          )}
+          <UseAccount>
+            <SectionHeader>
+              {t('YOUR_ACCOUNT', 'Use your account')}
+            </SectionHeader>
+            <Button color='primary' onClick={() => handleOpenLoginSignUp('login')}>{t('LOGIN', 'login')}</Button>
+            <Button color='primary' onClick={() => handleOpenLoginSignUp('signup')}>{t('SIGNUP', 'signUp')}</Button>
+          </UseAccount>
+        </>
       )}
 
       <Modal

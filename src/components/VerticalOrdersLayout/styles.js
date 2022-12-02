@@ -6,26 +6,23 @@ export const SingleCard = styled.div`
   display: flex;
   max-height: 100px;
   height: auto;
-  border: none;
+  border-bottom: 1px solid #F5F6F6;
 
   ${props => (
     props.theme.colors.backgroundPage === '#FFF' ||
     props.theme.colors.backgroundPage === '#FFFFFF'
   ) && css`
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
-    border-radius: 16px;
     margin-bottom: 15px;
   `}
 
   @media(min-width: 480px){
     height: 140px;
     ${props => (
-      props.theme.colors.backgroundPage === '#FFF' ||
-      props.theme.colors.backgroundPage === '#FFFFFF'
-    ) && css`
+    props.theme.colors.backgroundPage === '#FFF' ||
+    props.theme.colors.backgroundPage === '#FFFFFF'
+  ) && css`
       border-top: none !important;
     `}
-    border-top: 1px solid #ccc;
   }
 `
 
@@ -43,33 +40,61 @@ export const OrderPastContent = styled.div`
   `}
 `
 
+export const FavoriteWrapper = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    color: ${props => props.theme.colors.danger500};
+    font-size: 16px;
+  }
+`
+
 export const PastLogo = styled.div`
-  width: 55px;
-  height: 80%;
+  width: 75px;
+  height: 100%;
   img {
     width: 100%;
     height: 100%;
     border-radius: 17px;
     object-fit: contain;
   }
-  @media (min-width: 480px){
-    width: 75px;
-  }
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 10px;
 `
 
 export const WrapperBusinessTitle = styled.div`
-  width: 95%
+  width: 95%;
+  display: flex;
+  gap: 10px;
 `
 
 export const Reorder = styled.div`
   display: flex;
   flex-direction: column;
-  width: 25%;
+  width: 20%;
   text-align: center;
   align-items: center;
   justify-content: center;
   font-size: 0.8em;
-  margin-right: 25px;
+
+  button {
+    border-radius: 8px;
+    font-size: 10px;
+    line-height: 15px;
+    padding: 10px;
+    overflow: inherit;
+    text-overflow: inherit;
+    border: 1px solid ${props => props.theme.colors.primaryContrast};
+    margin: 5px 0;
+
+    &.reorder {
+      background: ${props => props.theme.colors.primaryContrast};
+      &:hover {
+        background: ${props => props.theme.colors.primary};
+      }
+    }
+  }
 
   ${props => props.theme?.rtl && css`
       margin-left: 25px;
@@ -85,19 +110,15 @@ export const Reorder = styled.div`
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
   }
-  button {
-    margin: 5px 0;
-    width: 100%;
-    font-size: 0.9em;
-    white-space: nowrap;
-  }
-
   @media (min-width: 480px){
     font-size: 1em;
     button{
       width: 90%;
       font-size: 0.9em;
     }
+    flex-direction: row;
+    gap: 10px;
+    margin-right: 25px;
   }
 
   @media (min-width: 768px){
@@ -114,6 +135,24 @@ export const Reorder = styled.div`
   @media (min-width: 1024px){
     button{
       width: 50%;
+    }
+  }
+`
+
+export const OrderInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .dot {
+    display: none;
+  }
+
+  @media (min-width: 480px){
+    flex-direction: row;
+    align-items: center;
+    .dot {
+      display: block;
     }
   }
 `
@@ -137,5 +176,10 @@ export const WrappButton = styled.div`
     button {
       width: 60%;
     }
+  }
+`
+export const ReviewWrapper = styled.div`
+  .review-sent {
+    border-radius: 7.6px;
   }
 `
