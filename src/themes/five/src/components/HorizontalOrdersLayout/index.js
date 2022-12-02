@@ -9,7 +9,7 @@ import { OrdersContainer } from '../OrdersOption/styles'
 
 import { Button } from '../../styles/Buttons'
 import { SingleOrderCard } from '../SingleOrderCard'
-import { Pagination } from '../../../../../components/Pagination'
+import { Pagination } from '../Pagination'
 
 export const HorizontalOrdersLayout = (props) => {
   const {

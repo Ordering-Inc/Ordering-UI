@@ -1,11 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  display: none;
   position: relative;
-  @media (min-width: 768px) {
-    display: block;
-  }
 `
 
 export const FooterWrapper = styled.div`

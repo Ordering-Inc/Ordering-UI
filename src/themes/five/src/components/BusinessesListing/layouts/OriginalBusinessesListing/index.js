@@ -108,7 +108,7 @@ const BusinessesListingUI = (props) => {
   const hideSearch = theme?.business_listing_view?.components?.search?.hidden
   const hideFilter = theme?.business_listing_view?.components?.filter?.hidden
   const hideSearchSection = hideCities && hideSearch && hideFilter
-  const isAllCategoriesHidden = theme?.business_listing_view?.components?.categories?.components?.all?.hidden
+  const isAllCategoriesHidden = theme?.business_listing_view?.components?.categories?.hidden
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)

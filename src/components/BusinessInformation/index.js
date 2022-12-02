@@ -75,12 +75,7 @@ export const BusinessInformationUI = (props) => {
   const [{ parsePrice, parseDistance }] = useUtils()
   const [modalImage, setModalImage] = useState(false)
   const [image, setImage] = useState('')
-  const timeFormat = configs?.format_time?.value
-
-  const timeOptions = {
-    12: 'hh:mm a',
-    24: 'HH:mm'
-  }
+  const timeFormat = configs?.general_hour_format?.value
 
   const handleModalImage = (src) => {
     setImage(src)
@@ -218,12 +213,12 @@ export const BusinessInformationUI = (props) => {
                               {schedule.enabled ? (
                                 schedule.lapses.map((time, k) => (
                                   <React.Fragment key={k}>
-                                    <p>{moment(time.open).format(timeOptions[timeFormat])}</p>
+                                    <p>{moment(time.open).format(timeFormat)}</p>
                                     <p style={{
                                       borderBottom: '2px solid',
                                       borderBottomColor: theme.colors.primary,
                                       marginBottom: 10
-                                    }} >{moment(time.close).format(timeOptions[timeFormat])}</p>
+                                    }} >{moment(time.close).format(timeFormat)}</p>
                                   </React.Fragment>
                                 ))
                               ) : (

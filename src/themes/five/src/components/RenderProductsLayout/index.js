@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
+import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 import { Cart3 } from 'react-bootstrap-icons'
-
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
 import { BusinessBasicInformation as BusinessBasicInformationStarbucks } from '../../../../six'
@@ -33,7 +33,8 @@ import {
   ProfessionalFilterWrapper,
   WrapperSearchAbsolute,
   NearBusiness,
-  PageBannerWrapper
+  PageBannerWrapper,
+  CategorySelectedContainer
 } from './styles'
 
 import { SearchProducts as SearchProductsOriginal } from '../../../../../themes/five/src/components/SearchProducts'
@@ -93,10 +94,10 @@ export const RenderProductsLayout = (props) => {
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
   const [orderingTheme] = useOrderingTheme()
+  const windowSize = useWindowSize()
   const [isCartModal, setisCartModal] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
-  const windowSize = useWindowSize()
-
+  const [categoryClicked, setCategoryClicked] = useState(false)
   const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1') && !useKioskApp
   const BusinessBasicInformationComponent =
     orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'red'
@@ -129,14 +130,8 @@ export const RenderProductsLayout = (props) => {
     ? ProductListLayoutGroceries
     : BusinessProductsList
 
-  const handleSaveProduct = (scrollToCategories) => {
+  const handleSaveProduct = () => {
     if (windowSize.width < 993) {
-      const categoriesContainerTop = document.getElementById('groceries').offsetTop
-      if (scrollToCategories) {
-        window.scroll({
-          top: categoriesContainerTop
-        })
-      }
       return
     }
     const productContainer = document.getElementsByClassName('bp-list')[0]
@@ -144,7 +139,7 @@ export const RenderProductsLayout = (props) => {
   }
 
   useEffect(() => {
-    handleSaveProduct(categorySelected?.subcategories?.length === 0)
+    handleSaveProduct()
   }, [categorySelected])
 
   return (
@@ -176,6 +171,7 @@ export const RenderProductsLayout = (props) => {
                 categoryState={categoryState}
                 errorQuantityProducts={errorQuantityProducts}
                 sortByValue={sortByValue}
+                categoryClicked={categoryClicked}
               />
             )}
 
@@ -358,61 +354,72 @@ export const RenderProductsLayout = (props) => {
                 <BusinessContent>
                   <BusinessCategoriesContainer offSticky>
                     {!(business?.categories?.length === 0 && !categoryId) && (
-                      <BusinessLayoutCategories
-                        component='categories'
-                        categories={[
-                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                          ...business?.categories.sort((a, b) => a.rank - b.rank)
-                        ]}
-                        categorySelected={categorySelected}
-                        onClickCategory={onClickCategory}
-                        featured={featuredProducts}
-                        openBusinessInformation={openBusinessInformation}
-                        openCategories={openCategories}
-                        business={business}
-                        currentCart={currentCart}
-                        useKioskApp={useKioskApp}
-                      />
+                      <>
+                        {(!categoryClicked || windowSize.width >= 993) ? (
+                          <BusinessLayoutCategories
+                            component='categories'
+                            categories={[
+                              { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                              { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                              ...business?.categories.sort((a, b) => a.rank - b.rank)
+                            ]}
+                            categorySelected={categorySelected}
+                            onClickCategory={onClickCategory}
+                            featured={featuredProducts}
+                            openBusinessInformation={openBusinessInformation}
+                            openCategories={openCategories}
+                            business={business}
+                            currentCart={currentCart}
+                            useKioskApp={useKioskApp}
+                            setCategoryClicked={setCategoryClicked}
+                          />
+                        ) : (
+                          <CategorySelectedContainer onClick={() => setCategoryClicked(false)}>
+                            <BsCaretLeftFill /> {categorySelected?.name}
+                          </CategorySelectedContainer>
+                        )}
+                      </>
                     )}
                   </BusinessCategoriesContainer>
-                  <BusinessCategoryProductWrapper>
-                    <WrapContent isGroceries id='groceries'>
-                      {!business?.loading && business?.previously_products?.length > 0 && (
-                        <OrderItAgain
-                          onProductClick={onProductClick}
-                          productList={business?.previously_products}
+                  {(categoryClicked || windowSize.width >= 993) && (
+                    <BusinessCategoryProductWrapper>
+                      <WrapContent isGroceries id='groceries'>
+                        {!business?.loading && business?.previously_products?.length > 0 && (
+                          <OrderItAgain
+                            onProductClick={onProductClick}
+                            productList={business?.previously_products}
+                            businessId={business?.id}
+                            isGroceries
+                          />
+                        )}
+                        <BusinessLayoutProductsList
+                          categories={[
+                            { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
+                            { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
+                            ...business?.categories.sort((a, b) => a.rank - b.rank)
+                          ]}
+                          category={categorySelected}
+                          onClickCategory={onClickCategory}
+                          categoriesState={props.categoriesState}
+                          categoryState={categoryState}
                           businessId={business?.id}
-                          isGroceries
+                          errors={errors}
+                          onProductClick={onProductClick}
+                          handleSearchRedirect={handleSearchRedirect}
+                          featured={featuredProducts}
+                          searchValue={searchValue}
+                          isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
+                          handleClearSearch={handleChangeSearch}
+                          errorQuantityProducts={errorQuantityProducts}
+                          business={business}
+                          currentCart={currentCart}
+                          handleUpdateProducts={handleUpdateProducts}
+                          professionalSelected={professionalSelected}
+                          handleChangeProfessionalSelected={handleChangeProfessionalSelected}
                         />
-                      )}
-                      <BusinessLayoutProductsList
-                        categories={[
-                          { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
-                          { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                          ...business?.categories.sort((a, b) => a.rank - b.rank)
-                        ]}
-                        category={categorySelected}
-                        onClickCategory={onClickCategory}
-                        categoriesState={props.categoriesState}
-                        categoryState={categoryState}
-                        businessId={business?.id}
-                        errors={errors}
-                        onProductClick={onProductClick}
-                        handleSearchRedirect={handleSearchRedirect}
-                        featured={featuredProducts}
-                        searchValue={searchValue}
-                        isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
-                        handleClearSearch={handleChangeSearch}
-                        errorQuantityProducts={errorQuantityProducts}
-                        business={business}
-                        currentCart={currentCart}
-                        handleUpdateProducts={handleUpdateProducts}
-                        professionalSelected={professionalSelected}
-                        handleChangeProfessionalSelected={handleChangeProfessionalSelected}
-                      />
-                    </WrapContent>
-                  </BusinessCategoryProductWrapper>
+                      </WrapContent>
+                    </BusinessCategoryProductWrapper>
+                  )}
                 </BusinessContent>
               </>
 
@@ -442,17 +449,19 @@ export const RenderProductsLayout = (props) => {
               </div>
             </BusinessCategoryProductWrapper>
           </BusinessContent>
-          <WrapContent>
-            <BusinessProductsList
-              categories={[]}
-              useKioskApp={useKioskApp}
-              category={categorySelected}
-              categoryState={categoryState}
-              isBusinessLoading={isLoading}
-              handleUpdateProducts={handleUpdateProducts}
-              errorQuantityProducts={errorQuantityProducts}
-            />
-          </WrapContent>
+          {(categoryClicked || windowSize.width >= 993) && (
+            <WrapContent>
+              <BusinessProductsList
+                categories={[]}
+                useKioskApp={useKioskApp}
+                category={categorySelected}
+                categoryState={categoryState}
+                isBusinessLoading={isLoading}
+                handleUpdateProducts={handleUpdateProducts}
+                errorQuantityProducts={errorQuantityProducts}
+              />
+            </WrapContent>
+          )}
         </>
       )}
       <Modal

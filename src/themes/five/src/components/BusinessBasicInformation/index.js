@@ -42,6 +42,7 @@ import { BusinessPreorder } from '../BusinessPreorder'
 import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import isBetween from 'dayjs/plugin/isBetween'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 dayjs.extend(timezone)
 dayjs.extend(isBetween)
@@ -61,7 +62,8 @@ export const BusinessBasicInformation = (props) => {
     handleChangeSortBy,
     categoryState,
     errorQuantityProducts,
-    isCustomerMode
+    isCustomerMode,
+    categoryClicked
   } = props
   const { business, loading } = businessState
 
@@ -69,6 +71,7 @@ export const BusinessBasicInformation = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
+  const windowSize = useWindowSize()
   const [orderingTheme] = useOrderingTheme()
   const [isBusinessReviews, setIsBusinessReviews] = useState(false)
   const [isPreOrder, setIsPreOrder] = useState(false)
@@ -79,7 +82,6 @@ export const BusinessBasicInformation = (props) => {
   const showLogo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
   const showDeliveryFee = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
   const showTime = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
-  const showBusinessInfo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
   const showReviews = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
   const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
   const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
@@ -202,15 +204,6 @@ export const BusinessBasicInformation = (props) => {
                 </TitleWrapper>
               ) : (
                 <Skeleton width={isCustomerMode ? 100 : 150} height={isCustomerMode ? 35 : 'auto'} />
-              )}
-              {showBusinessInfo && (
-                <>
-                  {!loading ? (
-                    <p className='type'>{getBusinessType()}</p>
-                  ) : (
-                    <Skeleton width={isCustomerMode ? 100 : 150} />
-                  )}
-                </>
               )}
               {typeof hideCity !== 'undefined' && !hideCity && business?.city?.name && (
                 <>
@@ -355,9 +348,15 @@ export const BusinessBasicInformation = (props) => {
             </BusinessInfoItem>
           </BusinessInfo>
         </BusinessInfoContent>
-        {!hideSearch && (categoryState?.products?.length !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && !business?.professionals?.length && (
-          <SearchComponent />
-        )}
+        {!hideSearch &&
+          (categoryState?.products?.length !== 0 || searchValue) &&
+          !errorQuantityProducts &&
+          !isInfoShrunken &&
+          !business?.professionals?.length &&
+          (categoryClicked || windowSize.width >= 993) &&
+          (
+            <SearchComponent />
+          )}
       </BusinessInfoContainer>
     )
   }
