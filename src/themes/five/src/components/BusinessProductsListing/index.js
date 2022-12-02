@@ -14,7 +14,8 @@ import {
   useUtils,
   useSession,
   useSite,
-  useOrderingTheme
+  useOrderingTheme,
+  useConfig
 } from 'ordering-components'
 
 import {
@@ -81,9 +82,10 @@ const BusinessProductsListingUI = (props) => {
   } = props
 
   const { business, loading, error } = businessState
+  const [{ configs }] = useConfig()
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }] = useOrder()
+  const [{ carts }, { addProduct, updateProduct }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const location = useLocation()
@@ -99,8 +101,10 @@ const BusinessProductsListingUI = (props) => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
   const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
+  const [productToIdLoading, setProductIdToLoading] = useState(null)
   const isMounted = useIsMounted()
 
+  const isQuickAddProduct = configs?.add_product_with_one_click?.value === '1'
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
   const showViewOrderButton = !orderingTheme?.theme?.business_view?.components?.order_view_button?.hidden
@@ -114,25 +118,50 @@ const BusinessProductsListingUI = (props) => {
     setOpenBusinessInformation(true)
   }
 
-  const onProductClick = (product) => {
-    if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
-      if (site?.product_url_template) {
-        onProductRedirect({
-          slug: business?.slug,
-          product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
-          category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
-        })
-      } else {
-        onProductRedirect({
-          slug: business?.slug,
-          product: product.id,
-          category: product.category_id
-        })
+  console.log(productToIdLoading)
+
+  const onProductClick = async (product) => {
+    console.log(product)
+    if (product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct) {
+      setProductIdToLoading(product.id)
+      const isProductAddedToCart = currentCart?.products?.find(Cproduct => Cproduct.id === product.id)
+      const productQuantity = isProductAddedToCart?.quantity
+      const addCurrentProduct = {
+        ...product,
+        quantity: 1
       }
+      const updateCurrentProduct = {
+        id: product.id,
+        code: isProductAddedToCart?.code,
+        quantity: productQuantity + 1
+      }
+      const cartData = currentCart?.business_id ? currentCart : { business_id: business.id }
+      if (isProductAddedToCart) {
+        await updateProduct(updateCurrentProduct, cartData, isQuickAddProduct)
+      } else {
+        await addProduct(addCurrentProduct, cartData, isQuickAddProduct)
+      }
+      setProductIdToLoading(null)
+    } else {
+      if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
+        if (site?.product_url_template) {
+          onProductRedirect({
+            slug: business?.slug,
+            product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
+            category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
+          })
+        } else {
+          onProductRedirect({
+            slug: business?.slug,
+            product: product.id,
+            category: product.category_id
+          })
+        }
+      }
+      setCurProduct(product)
+      setModalIsOpen(true)
+      events.emit('product_clicked', product)
     }
-    setCurProduct(product)
-    setModalIsOpen(true)
-    events.emit('product_clicked', product)
   }
 
   const handlerProductAction = (product) => {
@@ -296,6 +325,7 @@ const BusinessProductsListingUI = (props) => {
           onBusinessClick={onBusinessClick}
           priceFilterValues={priceFilterValues}
           handleChangePriceFilterValues={handleChangePriceFilterValues}
+          productToIdLoading={productToIdLoading}
         />
 
         {
