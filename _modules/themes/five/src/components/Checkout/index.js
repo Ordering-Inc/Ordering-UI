@@ -89,7 +89,8 @@ var CheckoutUI = function CheckoutUI(props) {
     applyCoupon = props.applyCoupon,
     hasCateringProducts = props.hasCateringProducts,
     cateringHours = props.cateringHours,
-    wowAcumulationPoints = props.wowAcumulationPoints;
+    wowAcumulationPoints = props.wowAcumulationPoints,
+    configSlug = props.configSlug;
   var theme = (0, _styledComponents.useTheme)();
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
     _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
@@ -533,7 +534,7 @@ var CheckoutUI = function CheckoutUI(props) {
     isCheckout: true,
     isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) || 0,
     hasCateringProducts: hasCateringProducts
-  })), !(wowAcumulationPoints !== null && wowAcumulationPoints !== void 0 && wowAcumulationPoints.loading) && !(wowAcumulationPoints !== null && wowAcumulationPoints !== void 0 && wowAcumulationPoints.error) && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'wow_rewards' && /*#__PURE__*/_react.default.createElement(_styles.RewardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.RewardBox, null, /*#__PURE__*/_react.default.createElement(_styles.RewardBoxContainer, null, /*#__PURE__*/_react.default.createElement("div", {
+  })), !(wowAcumulationPoints !== null && wowAcumulationPoints !== void 0 && wowAcumulationPoints.loading) && !(wowAcumulationPoints !== null && wowAcumulationPoints !== void 0 && wowAcumulationPoints.error) && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'wow_rewards' && configSlug !== 'starbucks' && /*#__PURE__*/_react.default.createElement(_styles.RewardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.RewardBox, null, /*#__PURE__*/_react.default.createElement(_styles.RewardBoxContainer, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "image-reward"
   }, /*#__PURE__*/_react.default.createElement("div", {
     style: {

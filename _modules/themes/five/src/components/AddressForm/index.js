@@ -522,11 +522,11 @@ var AddressFormUI = function AddressFormUI(props) {
       placeholder: t('ADDRESS_NOTES', 'Address Notes'),
       value: (_ref10 = (_formState$changes$ad5 = (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.address_notes) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressState.address.address_notes) !== null && _ref10 !== void 0 ? _ref10 : '',
       onChange: function onChange(e) {
-        formMethods.setValue('address_notes', e.target.value);
+        formMethods.setValue('address_notes', e.target.value.trimStart());
         handleChangeInput({
           target: {
             name: 'address_notes',
-            value: e.target.value
+            value: e.target.value.trimStart()
           }
         });
       },
