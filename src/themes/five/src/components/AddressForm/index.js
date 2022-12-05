@@ -458,8 +458,8 @@ const AddressFormUI = (props) => {
                         placeholder={t('ADDRESS_NOTES', 'Address Notes')}
                         value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
                         onChange={(e) => {
-                          formMethods.setValue('address_notes', e.target.value)
-                          handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
+                          formMethods.setValue('address_notes', e.target.value.trimStart())
+                          handleChangeInput({ target: { name: 'address_notes', value: e.target.value.trimStart() } })
                         }}
                         autoComplete='new-field'
                         maxLength={250}

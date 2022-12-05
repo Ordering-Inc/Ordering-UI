@@ -113,7 +113,8 @@ const CheckoutUI = (props) => {
     applyCoupon,
     hasCateringProducts,
     cateringHours,
-    wowAcumulationPoints
+    wowAcumulationPoints,
+    configSlug
   } = props
   const theme = useTheme()
   const [validationFields] = useValidationFields()
@@ -680,7 +681,7 @@ const CheckoutUI = (props) => {
             />
           </CartContainer>
         )}
-        {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && (
+        {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && configSlug !== 'starbucks' && (
           <RewardContainer>
               <RewardBox>
                 <RewardBoxContainer>
