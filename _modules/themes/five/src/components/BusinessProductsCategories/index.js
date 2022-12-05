@@ -10,7 +10,6 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _orderingComponents = require("ordering-components");
 var _AutoScroll = require("../../../../../components/AutoScroll");
 var _styledComponents = require("styled-components");
-var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 var _styles = require("./styles");
 var _Tabs = require("../../styles/Tabs");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -50,8 +49,6 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     _useState2 = _slicedToArray(_useState, 2),
     selectedCategory = _useState2[0],
     setSelectedCateogry = _useState2[1];
-  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-    width = _useWindowSize.width;
   var scrollTopSpan = 60;
   var handleChangeCategory = function handleChangeCategory(category) {
     var _document$getElementB, _document$getElementB2;
