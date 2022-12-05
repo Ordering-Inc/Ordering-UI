@@ -15,7 +15,7 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  ", "\n  background: ", ";\n  border: 1px solid #E9ECEF;\n  padding: 10px;\n  border-radius: 7.6px;\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n\n  > div {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n    padding: 4px;\n  }\n  ", "\n"])), function (_ref) {
   var isShowAddButt = _ref.isShowAddButt;
-  return (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    min-height: ", ";\n    max-height: ", ";\n  "])), isShowAddButt ? '162px' : '110px', isShowAddButt ? '162px' : '110px');
+  return (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    min-height: ", ";\n  "])), isShowAddButt ? '162px' : '110px');
 }, function (_ref2) {
   var soldOut = _ref2.soldOut;
   return soldOut ? '#6c757d33' : '#FFF';

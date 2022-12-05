@@ -2075,22 +2075,22 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@segment/analytics-core@1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.1.4.tgz#7d7e59de596d519939d27a11da799fb5b40bead3"
-  integrity sha512-qW6NkxFArqiURiJv7f0BV+bN14ZBiDj1ir3QkYf/CKrtRCu4ct85LxkPNTBIwq3GDACUkwVwCH251Nl5yjrjcg==
+"@segment/analytics-core@1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.1.5.tgz#55791b136d0f08b6e8a2b18f33306a2f37076e8a"
+  integrity sha512-kjNv2YNYTdRgkxkIi4qT8bwc6iyFeN/44t//Eu21hfORAU8/6DAakUO7k4xzLRWiwupPVudhhjGTKuyX0jAIDg==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     dset "^3.1.2"
     tslib "^2.4.0"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.47.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.47.0.tgz#ebff09b7c2bc00312a04b464a639717b3ce3e47e"
-  integrity sha512-1X4A8EZ3k2UjOIj/Il+aCbz+OpZr1o/B8FRG9IKMmQS1QxTHP3WKXMITHek+5YIuWb3g9SuzLAYrXR1zCjreqw==
+  version "1.47.1"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.47.1.tgz#7dc79b883efce2aa31c4e2f6977671fbbc1d4e75"
+  integrity sha512-Xy/qz/trCW0/4zyRTfyw3mgZZmpxtfPz4o+MDMDLxzBUDANN2lVR7bRPuBUkqfQoCiVAdxYKJ+qaUhOPIOcv0Q==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
-    "@segment/analytics-core" "1.1.4"
+    "@segment/analytics-core" "1.1.5"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
     "@segment/tsub" "1.0.1"
@@ -3064,16 +3064,16 @@
     "@stdlib/utils-global" "^0.0.x"
 
 "@stripe/react-stripe-js@^1.1.2":
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-1.15.0.tgz#a381de453dfac5fc47d2d604dfa1c6a9b6fc881e"
-  integrity sha512-nqIOuAbbAN1p/zj2d2vykMzd097ZiHbu0+EpPRcfiswBRQIQIZaPrUwmj6HGD8BRA6Wp89mZen1UJbqtsfc3ZA==
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-1.16.0.tgz#eb9e6cec5e9fd45f9d016c7ae66c40c0e8fa5757"
+  integrity sha512-HCgaZjo2tGn7ZxMul6NAiBNYgPBIX5Bxx0lsE8DxFakp1v/JA0KZezs0HXj37Ua0clK1Ip4kVCBG0TIJsqf/Aw==
   dependencies:
     prop-types "^15.7.2"
 
 "@stripe/stripe-js@^1.9.0":
-  version "1.44.1"
-  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.44.1.tgz#376fdbed2b394c84deaa2041b8029b97e7eab3a7"
-  integrity sha512-DKj3U6tS+sCNsSXsoZbOl5gDrAVD3cAZ9QCiVSykLC3iJo085kkmw/3BAACRH54Bq2bN34yySuH6G1SLh2xHXA==
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.46.0.tgz#2b9acca0dfa7b90aaecd909e678a049f799a27d6"
+  integrity sha512-dkm0zCEoRLu5rTnsIgwDf/QG2DKcalOT2dk1IVgMySOHWTChLyOvQwMYhEduGgLvyYWTwNhAUV4WOLPQvjwLwA==
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
@@ -4423,9 +4423,9 @@ camelize@^1.0.0:
   integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
 
 caniuse-lite@^1.0.30001400:
-  version "1.0.30001435"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001435.tgz#502c93dbd2f493bee73a408fe98e98fb1dad10b2"
-  integrity sha512-kdCkUTjR+v4YAJelyiDTqiu82BDr4W4CP5sgTA0ZBmqn30XfS2ZghPLMowik9TPhS+psWJiUNxsqLyurDbmutA==
+  version "1.0.30001436"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001436.tgz#22d7cbdbbbb60cdc4ca1030ccd6dea9f5de4848b"
+  integrity sha512-ZmWkKsnC2ifEPoWUvSAIGyOYwT+keAaaWPHiQ9DfMqS1t6tfuyFYoWR78TeZtznkEQ64+vGXH9cZrElwR2Mrxg==
 
 canvg@^3.0.6:
   version "3.0.10"
@@ -5236,9 +5236,9 @@ decamelize@^1.2.0:
   integrity sha512-z2S+W9X73hAUUki+N+9Za2lBlun89zigOyGrsax+KUQ6wKW4ZoWpEYBkGhQjwAjjDCkWxhY0VKEhk8wzY7F5cA==
 
 decode-uri-component@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
-  integrity sha512-hjf+xovcEn31w/EUYdTXQh/8smFL/dzYjohQGEIgjyNavaJfBY2p5F527Bo1VPATxv0VYTUC2bOcXvqFwk78Og==
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.2.tgz#e69dbe25d37941171dd540e024c444cd5188e1e9"
+  integrity sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==
 
 deep-equal@^1.0.1:
   version "1.1.1"
@@ -6192,9 +6192,9 @@ fast-safe-stringify@^2.0.7:
   integrity sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==
 
 fastq@^1.6.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.13.0.tgz#616760f88a7526bdfc596b7cab8c18938c36b98c"
-  integrity sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.14.0.tgz#107f69d7295b11e0fccc264e1fc6389f623731ce"
+  integrity sha512-eR2D+V9/ExcbF9ls441yIuN6TI2ED1Y2ZcA5BmMtJsOkWOFRJQ0Jt0g1UwqXJJVAb+V+umH5Dfr8oh4EVP7VVg==
   dependencies:
     reusify "^1.0.4"
 
@@ -9069,7 +9069,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/96cc875a1cd24c4505eb097c32dd63b6adc23ea1"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/4c699c40eb251a6c29ca4fb16ffe29a8b8854e31"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -9949,9 +9949,9 @@ react-otp-input@^2.3.0:
   integrity sha512-AIgl7u4sS9BTNCxX1xlaS5fPWay/Zml8Ho5LszXZKXrH1C/TiFsTQGmtl13UecQYO3mSF3HUzG2rrDf0sjEFmg==
 
 react-phone-number-input@^3.1.6:
-  version "3.2.12"
-  resolved "https://registry.yarnpkg.com/react-phone-number-input/-/react-phone-number-input-3.2.12.tgz#9ddf4366af1e6d0f3f2345063733ed3e83e82cd3"
-  integrity sha512-bqfg4iz4KWIkCGi7nV69CG90iX9EZ5wBXKoMnoyw7NDv/e2KH2uobDSLHXC4HydUgB+InjERxRdbdWTBbEff2w==
+  version "3.2.13"
+  resolved "https://registry.yarnpkg.com/react-phone-number-input/-/react-phone-number-input-3.2.13.tgz#c3b0c33cbd21c7fc4ee8ebcde0811408ce5cbcbc"
+  integrity sha512-2hvWIZCCbG5zQTcZOuwP++ixOlns4vosn7EXLJc8y9LSNCDBAJHufP/CrKp3YrCoGcyzokzmDbU8FmqfPRg8SA==
   dependencies:
     classnames "^2.3.1"
     country-flag-icons "^1.5.4"
@@ -11464,9 +11464,9 @@ terser@^4.1.2, terser@^4.6.3:
     source-map-support "~0.5.12"
 
 terser@^5.0.0, terser@^5.3.4:
-  version "5.16.0"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-5.16.0.tgz#29362c6f5506e71545c73b069ccd199bb28f7f54"
-  integrity sha512-KjTV81QKStSfwbNiwlBXfcgMcOloyuRdb62/iLFPGBcVNF4EXjhdYBhYHmbJpiBrVxZhDvltE11j+LBQUxEEJg==
+  version "5.16.1"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.16.1.tgz#5af3bc3d0f24241c7fb2024199d5c461a1075880"
+  integrity sha512-xvQfyfA1ayT0qdK47zskQgRZeWLoOQ8JQ6mIgRGVNwZKdQMU+5FkCBjmv4QjcrTzyZquRw2FVtlJSRUmMKQslw==
   dependencies:
     "@jridgewell/source-map" "^0.3.2"
     acorn "^8.5.0"

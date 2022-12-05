@@ -134,9 +134,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
   var includeKioskPaymethods = ['cash', 'card_delivery'];
-  var list = paymethods ? paymethods === null || paymethods === void 0 ? void 0 : paymethods.map(function (pay) {
+  var list = paymethodsList ? paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods : paymethods === null || paymethods === void 0 ? void 0 : paymethods.map(function (pay) {
     return pay.paymethod;
-  }) : paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods;
+  });
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
   var supportedMethods = list === null || list === void 0 ? void 0 : list.filter(function (p) {
     return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
