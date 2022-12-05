@@ -10,9 +10,10 @@ import {
   useSession,
   useLanguage,
   useConfig,
-  BusinessList as BusinessListController,
+  // BusinessList as BusinessListController,
   useOrderingTheme
 } from 'ordering-components'
+import { BusinessList as BusinessListController } from './test'
 
 import {
   BusinessContainer,
@@ -282,311 +283,298 @@ const BusinessesListingUI = (props) => {
   }
 
   return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <BusinessContainer>
-        <BusinessBanner>
-          {windowSize.width < 576 && (
-            <BusinessFeatures>
-              <AddressMenu
-                onClick={() => handleClickAddress()}
-              >
-                <FaMapMarkerAlt />
-                <span>{orderState.options?.address?.address || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}</span>
-              </AddressMenu>
-              <FeatureItems>
-                <ItemInline>
-                  <OrderTypeSelectorHeader configTypes={configTypes} />
-                </ItemInline>
-                <ItemInline>
-                  <MomentPopover
-                    open={openPopover.moment}
-                    onClick={() => handleTogglePopover('moment')}
-                    onClose={() => handleClosePopover('moment')}
-                    isBanner
-                  />
-                </ItemInline>
-              </FeatureItems>
-            </BusinessFeatures>
-          )}
-          {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && (
-            <BusinessHeroImg
-              bgimage={theme.images?.general?.businessHero}
-              height={theme?.business_listing_view?.components?.business_hero?.style?.height}
-            />
-          )}
-        </BusinessBanner>
-        {!!Object.values(orderState?.carts)?.length && (
-          <OrderProgressWrapper isChew={isChew}>
-            <OrderProgress
-              franchiseId={props.franchiseId}
-              userCustomerId={userCustomer?.id}
-              asDashboard={isCustomerMode}
-              isCustomerMode={isCustomerMode}
-            />
-          </OrderProgressWrapper>
+    <BusinessContainer>
+      {/* Hola */}
+      <BusinessBanner>
+        {windowSize.width < 576 && (
+          <BusinessFeatures>
+            <AddressMenu
+              onClick={() => handleClickAddress()}
+            >
+              <FaMapMarkerAlt />
+              <span>{orderState.options?.address?.address || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}</span>
+            </AddressMenu>
+            <FeatureItems>
+              <ItemInline>
+                <OrderTypeSelectorHeader configTypes={configTypes} />
+              </ItemInline>
+              <ItemInline>
+                <MomentPopover
+                  open={openPopover.moment}
+                  onClick={() => handleTogglePopover('moment')}
+                  onClose={() => handleClosePopover('moment')}
+                  isBanner
+                />
+              </ItemInline>
+            </FeatureItems>
+          </BusinessFeatures>
         )}
-        {(configs?.business_listing_hide_image?.value !== '1' && isChew) && (
+        {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && (
           <BusinessHeroImg
             bgimage={theme.images?.general?.businessHero}
             height={theme?.business_listing_view?.components?.business_hero?.style?.height}
           />
         )}
-        {isCustomerMode && (
-          <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />
-        )}
-        {!isCustomerMode && !hideSearchSection && (
-          <>
-            <WrapperSearch isCustomLayout={isCustomLayout} isCustomerMode={isCustomerMode}>
-              {!hideSearch && (
-                <SearchBar
-                  lazyLoad
-                  search={searchValue}
-                  isCustomLayout={isCustomLayout}
-                  placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
-                  onSearch={handleChangeSearch}
-                  handleCustomEnter={() => onRedirectPage({ page: 'business_search' })}
-                />
-              )}
-              {!hideCities && citiesState?.cities?.length > 0 && (
-                <Button color='primary' onClick={handleOpenCities}>
-                  {citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)?.name || t('SELECT_A_CITY', 'Select a city')}
-                </Button>
-              )}
-              {!hideFilter && configs?.advanced_business_search_enabled?.value === '1' && (
-                <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
-              )}
-              {isCustomLayout && (
-                <FiMap onClick={toggleMap} />
-              )}
-            </WrapperSearch>
-            {activeMap && (
-              <BusinessesMap
-                businessList={businessesList.businesses}
-                userLocation={orderState?.options?.address?.location}
-                setErrors={setMapErrors}
-              />
-            )}
-          </>
-        )}
-        {hasHighRatedBusiness && !props.franchiseId && (
-          <HightestRatedWrapper>
-            <Divider />
-            <HighestRated
-              handleClickAddress={handleClickAddress}
-              setHasHighRatedBusiness={setHasHighRatedBusiness}
-              onBusinessClick={onBusinessClick}
-              isCustomerMode={isCustomerMode}
-              favoriteIds={favoriteIds}
-              setFavoriteIds={setFavoriteIds}
-            />
-            <Divider />
-          </HightestRatedWrapper>
-        )}
-
-        <PageBanner position='web_business_listing' />
-
-        {(((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && !isAllCategoriesHidden) && (
-          <BusinessTypeFilter
-            images={props.images}
-            businessTypes={props.businessTypes}
-            defaultBusinessType={props.defaultBusinessType}
-            handleChangeBusinessType={handleChangeBusinessType}
+      </BusinessBanner>
+      {!!Object.values(orderState?.carts)?.length && (
+        <OrderProgressWrapper isChew={isChew}>
+          <OrderProgress
+            franchiseId={props.franchiseId}
+            userCustomerId={userCustomer?.id}
+            asDashboard={isCustomerMode}
+            isCustomerMode={isCustomerMode}
           />
-        )}
-        {isCustomerMode && (
-          <SearchContainer>
-            {isCustomLayout && (
-              <BusinessesTitle isCustomerMode={isCustomerMode}>
-                {t('BUSINESSES', 'Businesses')}
-              </BusinessesTitle>
-            )}
-            <WrapperSearch isCustomLayout={isCustomLayout} isCustomerMode={isCustomerMode}>
+        </OrderProgressWrapper>
+      )}
+      {(configs?.business_listing_hide_image?.value !== '1' && isChew) && (
+        <BusinessHeroImg
+          bgimage={theme.images?.general?.businessHero}
+          height={theme?.business_listing_view?.components?.business_hero?.style?.height}
+        />
+      )}
+      {isCustomerMode && (
+        <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />
+      )}
+      {!isCustomerMode && !hideSearchSection && (
+        <>
+          <WrapperSearch isCustomLayout={isCustomLayout} isCustomerMode={isCustomerMode}>
+            {!hideSearch && (
               <SearchBar
                 lazyLoad
                 search={searchValue}
                 isCustomLayout={isCustomLayout}
                 placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
                 onSearch={handleChangeSearch}
+                handleCustomEnter={() => onRedirectPage({ page: 'business_search' })}
               />
-              {configs?.advanced_business_search_enabled?.value === '1' && (
-                <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
-              )}
-              {isCustomLayout && (
-                <FiMap onClick={toggleMap} />
-              )}
-            </WrapperSearch>
-          </SearchContainer>
-        )}
-        {isCustomerMode && activeMap && (
-          <BusinessesMap
-            businessList={businessesList.businesses}
-            userLocation={orderState?.options?.address?.location}
-            setErrors={setMapErrors}
+            )}
+            {!hideCities && citiesState?.cities?.length > 0 && (
+              <Button color='primary' onClick={handleOpenCities}>
+                {citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)?.name || t('SELECT_A_CITY', 'Select a city')}
+              </Button>
+            )}
+            {!hideFilter && configs?.advanced_business_search_enabled?.value === '1' && (
+              <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
+            )}
+            {isCustomLayout && (
+              <FiMap onClick={toggleMap} />
+            )}
+          </WrapperSearch>
+          {activeMap && (
+            <BusinessesMap
+              businessList={businessesList.businesses}
+              userLocation={orderState?.options?.address?.location}
+              setErrors={setMapErrors}
+            />
+          )}
+        </>
+      )}
+      {hasHighRatedBusiness && !props.franchiseId && (
+        <HightestRatedWrapper>
+          <Divider />
+          <HighestRated
+            handleClickAddress={handleClickAddress}
+            setHasHighRatedBusiness={setHasHighRatedBusiness}
+            onBusinessClick={onBusinessClick}
+            isCustomerMode={isCustomerMode}
+            favoriteIds={favoriteIds}
+            setFavoriteIds={setFavoriteIds}
           />
-        )}
-        {!isCustomerMode && (
-          <OrdersSection />
-        )}
-        <>
-          {!isCustomLayout && isCustomerMode && businessesList?.businesses?.length > 0 && (
-            <BusinessesTitle>
+          <Divider />
+        </HightestRatedWrapper>
+      )}
+
+      <PageBanner position='web_business_listing' />
+
+      {(((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && !isAllCategoriesHidden) && (
+        <BusinessTypeFilter
+          images={props.images}
+          businessTypes={props.businessTypes}
+          defaultBusinessType={props.defaultBusinessType}
+          handleChangeBusinessType={handleChangeBusinessType}
+        />
+      )}
+      {isCustomerMode && (
+        <SearchContainer>
+          {isCustomLayout && (
+            <BusinessesTitle isCustomerMode={isCustomerMode}>
               {t('BUSINESSES', 'Businesses')}
             </BusinessesTitle>
           )}
-
-          <BusinessList>
-            {
-              !businessesList.loading && businessesList.businesses.length === 0 && (
-                <NotFoundSource
-                  content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-                >
-                  <Button
-                    outline
-                    color='primary'
-                    onClick={() => handleClickAddress()}
-                    style={{ height: '44px' }}
-                  >
-                    {t('CHANGE_ADDRESS', 'Select other Address')}
-                  </Button>
-                </NotFoundSource>
-              )
-            }
-            {
-              businessesList.businesses?.map((business) => (
-                <BusinessController
-                  key={business.id}
-                  className='card'
-                  business={business}
-                  isBusinessOpen={business.open}
-                  handleCustomClick={handleBusinessClick}
-                  orderType={orderState?.options?.type}
-                  isCustomLayout={isCustomLayout}
-                  isCustomerMode={isCustomerMode}
-                  onPreorderBusiness={setPreorderBusiness}
-                  businessHeader={business?.header}
-                  businessFeatured={business?.featured}
-                  businessOffers={business?.offers}
-                  businessLogo={business?.logo}
-                  businessReviews={business?.reviews?.total}
-                  businessDeliveryPrice={business?.delivery_price}
-                  businessDeliveryTime={business?.delivery_time}
-                  businessPickupTime={business?.pickup_time}
-                  businessDistance={business?.distance}
-                  handleUpdateBusinessList={handleUpdateBusinessList}
-                  favoriteIds={favoriteIds}
-                  setFavoriteIds={setFavoriteIds}
-                />
-              ))
-            }
-            {businessesList.loading && (
-              [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
-                <BusinessController
-                  key={i}
-                  className='card'
-                  business={{}}
-                  isSkeleton
-                  orderType={orderState?.options?.type}
-                />
-              ))
+          <WrapperSearch isCustomLayout={isCustomLayout} isCustomerMode={isCustomerMode}>
+            <SearchBar
+              lazyLoad
+              search={searchValue}
+              isCustomLayout={isCustomLayout}
+              placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+              onSearch={handleChangeSearch}
+            />
+            {configs?.advanced_business_search_enabled?.value === '1' && (
+              <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
             )}
-          </BusinessList>
-        </>
-        <Modal
-          open={isPreorder}
-          width='760px'
-          onClose={() => handleClosePreorder()}
-        >
-          <BusinessPreorder
-            business={preorderBusiness}
-            handleClick={handleBusinessClick}
-            showButton
-          />
-        </Modal>
-
-        <Modal
-          title={t('ADDRESS_FORM', 'Address Form')}
-          open={modals.formOpen}
-          onClose={() => setModals({ ...modals, formOpen: false })}
-        >
-          <AddressForm
-            useValidationFileds
-            address={orderState?.options?.address || {}}
-            onClose={() => setModals({ ...modals, formOpen: false })}
-            onCancel={() => setModals({ ...modals, formOpen: false })}
-            onSaveAddress={() => setModals({ ...modals, formOpen: false })}
-          />
-        </Modal>
-
-        <Modal
-          title={t('ADDRESSES', 'Address List')}
-          open={modals.listOpen}
-          width='70%'
-          onClose={() => setModals({ ...modals, listOpen: false })}
-        >
-          <AddressList
-            isModal
-            changeOrderAddressWithDefault
-            userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-            onCancel={() => setModals({ ...modals, listOpen: false })}
-            onAccept={() => handleFindBusinesses()}
-            isCustomerMode={isCustomerMode}
-          />
-        </Modal>
-        <Modal
-          title={t('SELECT_A_STORE', 'Select a store')}
-          open={modals.citiesOpen}
-          width='70%'
-          onClose={() => setModals({ ...modals, citiesOpen: false })}
-        >
-          <BusinessCityList>
-            {
-              orderState?.loading ? (
-                <Skeleton height={40} count={3} style={{ marginBottom: '10px' }} />
-              ) : (
-                <>
-                  {citiesState?.cities?.map(city => (
-                    <CityItem key={city?.id} onClick={() => setActualCity(city?.id)}>
-                      <span className='radio'>
-                        {city?.id === actualCity ? <RiRadioButtonFill className='city-checked' /> : <IosRadioButtonOff />}
-                      </span>
-                      {city?.name}
-                    </CityItem>
-                  ))}
-                  <ButtonWrapper>
-                    <Button color='primary' disabled={actualCity === null} onClick={() => handleChangeCity(actualCity)}>
-                      {t('CONTINUE', 'Continue')}
-                    </Button>
-                    <BsArrowRight />
-                  </ButtonWrapper>
-                </>
-              )
-            }
-          </BusinessCityList>
-        </Modal>
-
-        <Alert
-          title={!mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map')}
-          content={alertState.content}
-          acceptText={t('ACCEPT', 'Accept')}
-          open={alertState.open}
-          onClose={() => handleCloseAlerts()}
-          onAccept={() => handleCloseAlerts()}
-          closeOnBackdrop={false}
+            {isCustomLayout && (
+              <FiMap onClick={toggleMap} />
+            )}
+          </WrapperSearch>
+        </SearchContainer>
+      )}
+      {isCustomerMode && activeMap && (
+        <BusinessesMap
+          businessList={businessesList.businesses}
+          userLocation={orderState?.options?.address?.location}
+          setErrors={setMapErrors}
         />
-      </BusinessContainer>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
-    </>
+      )}
+      {!isCustomerMode && (
+        <OrdersSection />
+      )}
+      <>
+        {!isCustomLayout && isCustomerMode && businessesList?.businesses?.length > 0 && (
+          <BusinessesTitle>
+            {t('BUSINESSES', 'Businesses')}
+          </BusinessesTitle>
+        )}
+
+        <BusinessList>
+          {
+            !businessesList.loading && businessesList.businesses.length === 0 && (
+              <NotFoundSource
+                content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
+              >
+                <Button
+                  outline
+                  color='primary'
+                  onClick={() => handleClickAddress()}
+                  style={{ height: '44px' }}
+                >
+                  {t('CHANGE_ADDRESS', 'Select other Address')}
+                </Button>
+              </NotFoundSource>
+            )
+          }
+          {
+            businessesList.businesses?.map((business) => (
+              <BusinessController
+                key={business.id}
+                className='card'
+                business={business}
+                isBusinessOpen={business.open}
+                handleCustomClick={handleBusinessClick}
+                orderType={orderState?.options?.type}
+                isCustomLayout={isCustomLayout}
+                isCustomerMode={isCustomerMode}
+                onPreorderBusiness={setPreorderBusiness}
+                businessHeader={business?.header}
+                businessFeatured={business?.featured}
+                businessOffers={business?.offers}
+                businessLogo={business?.logo}
+                businessReviews={business?.reviews?.total}
+                businessDeliveryPrice={business?.delivery_price}
+                businessDeliveryTime={business?.delivery_time}
+                businessPickupTime={business?.pickup_time}
+                businessDistance={business?.distance}
+                handleUpdateBusinessList={handleUpdateBusinessList}
+                favoriteIds={favoriteIds}
+                setFavoriteIds={setFavoriteIds}
+              />
+            ))
+          }
+          {businessesList.loading && (
+            [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
+              <BusinessController
+                key={i}
+                className='card'
+                business={{}}
+                isSkeleton
+                orderType={orderState?.options?.type}
+              />
+            ))
+          )}
+        </BusinessList>
+      </>
+      <Modal
+        open={isPreorder}
+        width='760px'
+        onClose={() => handleClosePreorder()}
+      >
+        <BusinessPreorder
+          business={preorderBusiness}
+          handleClick={handleBusinessClick}
+          showButton
+        />
+      </Modal>
+
+      <Modal
+        title={t('ADDRESS_FORM', 'Address Form')}
+        open={modals.formOpen}
+        onClose={() => setModals({ ...modals, formOpen: false })}
+      >
+        <AddressForm
+          useValidationFileds
+          address={orderState?.options?.address || {}}
+          onClose={() => setModals({ ...modals, formOpen: false })}
+          onCancel={() => setModals({ ...modals, formOpen: false })}
+          onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+        />
+      </Modal>
+
+      <Modal
+        title={t('ADDRESSES', 'Address List')}
+        open={modals.listOpen}
+        width='70%'
+        onClose={() => setModals({ ...modals, listOpen: false })}
+      >
+        <AddressList
+          isModal
+          changeOrderAddressWithDefault
+          userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+          onCancel={() => setModals({ ...modals, listOpen: false })}
+          onAccept={() => handleFindBusinesses()}
+          isCustomerMode={isCustomerMode}
+        />
+      </Modal>
+      <Modal
+        title={t('SELECT_A_STORE', 'Select a store')}
+        open={modals.citiesOpen}
+        width='70%'
+        onClose={() => setModals({ ...modals, citiesOpen: false })}
+      >
+        <BusinessCityList>
+          {
+            orderState?.loading ? (
+              <Skeleton height={40} count={3} style={{ marginBottom: '10px' }} />
+            ) : (
+              <>
+                {citiesState?.cities?.map(city => (
+                  <CityItem key={city?.id} onClick={() => setActualCity(city?.id)}>
+                    <span className='radio'>
+                      {city?.id === actualCity ? <RiRadioButtonFill className='city-checked' /> : <IosRadioButtonOff />}
+                    </span>
+                    {city?.name}
+                  </CityItem>
+                ))}
+                <ButtonWrapper>
+                  <Button color='primary' disabled={actualCity === null} onClick={() => handleChangeCity(actualCity)}>
+                    {t('CONTINUE', 'Continue')}
+                  </Button>
+                  <BsArrowRight />
+                </ButtonWrapper>
+              </>
+            )
+          }
+        </BusinessCityList>
+      </Modal>
+
+      <Alert
+        title={!mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => handleCloseAlerts()}
+        onAccept={() => handleCloseAlerts()}
+        closeOnBackdrop={false}
+      />
+    </BusinessContainer>
   )
 }
 
