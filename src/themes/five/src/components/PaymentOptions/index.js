@@ -110,7 +110,7 @@ const PaymentOptionsUI = (props) => {
 
   const includeKioskPaymethods = ['cash', 'card_delivery']
 
-  const list = paymethods ? paymethods?.map(pay => pay.paymethod) : paymethodsList?.paymethods
+  const list = paymethodsList ? paymethodsList?.paymethods : paymethods?.map(pay => pay.paymethod)
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
   const supportedMethods = list?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
