@@ -36,6 +36,7 @@ import SwiperCore, {
 } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
+import { getTimes as getTimesUtils } from '../../../../../utils'
 
 SwiperCore.use([Navigation])
 
@@ -78,9 +79,9 @@ const MomentControlUI = (props) => {
 
   const getTimes = (curdate, schedule) => {
     validateSelectedDate(curdate, schedule)
-    const dateParts = curdate.split('-')
+    const dateParts = curdate?.split?.('-')
     const dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
-    const times = getTimes(dateSeleted, schedule, is12hours)
+    const times = getTimesUtils(dateSeleted, schedule, is12hours)
     return times
   }
 
