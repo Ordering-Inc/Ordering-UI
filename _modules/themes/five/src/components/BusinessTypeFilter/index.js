@@ -9,6 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _orderingComponents = require("ordering-components");
+var _styledComponents = require("styled-components");
 var _Tabs = require("../../styles/Tabs");
 var _styles = require("./styles");
 var _AutoScroll = require("../../../../../components/AutoScroll");
@@ -33,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _theme$business_listi5, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var typesState = props.typesState,
     currentTypeSelected = props.currentTypeSelected,
     handleChangeBusinessType = props.handleChangeBusinessType,
@@ -51,8 +52,10 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     load = _useState2[0],
     setLoad = _useState2[1];
+  var theme = (0, _styledComponents.useTheme)();
+  var isCategoriesHidden = theme === null || theme === void 0 ? void 0 : (_theme$business_listi = theme.business_listing_view) === null || _theme$business_listi === void 0 ? void 0 : (_theme$business_listi2 = _theme$business_listi.components) === null || _theme$business_listi2 === void 0 ? void 0 : (_theme$business_listi3 = _theme$business_listi2.categories) === null || _theme$business_listi3 === void 0 ? void 0 : (_theme$business_listi4 = _theme$business_listi3.components) === null || _theme$business_listi4 === void 0 ? void 0 : (_theme$business_listi5 = _theme$business_listi4.all) === null || _theme$business_listi5 === void 0 ? void 0 : _theme$business_listi5.hidden;
   var handleChangeCategory = function handleChangeCategory(category) {
-    if (isAppoint && category === currentTypeSelected) {
+    if (isAppoint && category === currentTypeSelected && !isCategoriesHidden) {
       handleChangeBusinessType(null);
       return;
     }
@@ -73,6 +76,14 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
       handleChangeFilters('business_types', [].concat(_toConsumableArray(filters === null || filters === void 0 ? void 0 : filters.business_types), [type === null || type === void 0 ? void 0 : type.id]));
     }
   };
+  (0, _react.useEffect)(function () {
+    if (isCategoriesHidden && currentTypeSelected === null) {
+      if (types && (types === null || types === void 0 ? void 0 : types.length) > 0) {
+        var _types$;
+        !isSearchMode && !isAppoint && handleChangeCategory((_types$ = types[1]) === null || _types$ === void 0 ? void 0 : _types$.id);
+      }
+    }
+  }, [types, currentTypeSelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -126,10 +137,9 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
   })))), !loading && !error && types && types.length > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, types.map(function (type, i) {
-    return type.enabled && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    return (isCategoriesHidden ? type.enabled && type.name !== 'All' : type.enabled) && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       key: type.id,
-      active: type.id === currentTypeSelected,
-      className: "category"
+      active: type.id === currentTypeSelected || i === 0
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryTitle, {
       active: type.id === currentTypeSelected,
       load: load,

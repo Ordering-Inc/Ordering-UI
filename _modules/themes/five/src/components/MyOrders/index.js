@@ -37,47 +37,30 @@ var MyOrders = function MyOrders(props) {
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
   var layout = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.orders) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : _orderingTheme$theme$3.type) || 'original';
-  var _useState = (0, _react.useState)('all'),
+  var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    selectItem = _useState2[0],
-    setSelectItem = _useState2[1];
+    isEmptyActive = _useState2[0],
+    setIsEmptyActive = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    isEmptyActive = _useState4[0],
-    setIsEmptyActive = _useState4[1];
+    isEmptyPast = _useState4[0],
+    setIsEmptyPast = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    isEmptyPast = _useState6[0],
-    setIsEmptyPast = _useState6[1];
-  var _useState7 = (0, _react.useState)(false),
+    isEmptyPreorder = _useState6[0],
+    setIsEmptyPreorder = _useState6[1];
+  var _useState7 = (0, _react.useState)(!hideOrders ? 'orders' : 'business'),
     _useState8 = _slicedToArray(_useState7, 2),
-    isEmptyPreorder = _useState8[0],
-    setIsEmptyPreorder = _useState8[1];
-  var _useState9 = (0, _react.useState)(!hideOrders ? 'orders' : 'business'),
+    selectedOption = _useState8[0],
+    setSelectedOption = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
-    selectedOption = _useState10[0],
-    setSelectedOption = _useState10[1];
-  var _useState11 = (0, _react.useState)(false),
+    isEmptyBusinesses = _useState10[0],
+    setIsEmptyBusinesses = _useState10[1];
+  var _useState11 = (0, _react.useState)([]),
     _useState12 = _slicedToArray(_useState11, 2),
-    isEmptyBusinesses = _useState12[0],
-    setIsEmptyBusinesses = _useState12[1];
-  var _useState13 = (0, _react.useState)([]),
-    _useState14 = _slicedToArray(_useState13, 2),
-    businessOrderIds = _useState14[0],
-    setBusinessOrderIds = _useState14[1];
-  var filterList = [{
-    key: 'all',
-    value: t('ALL', 'All')
-  }, {
-    key: 'active',
-    value: t('ACTIVE', 'Active')
-  }, {
-    key: 'past',
-    value: t('PAST', 'Past')
-  }, {
-    key: 'preorder',
-    value: t('PREORDERS', 'Preorders')
-  }];
+    businessOrderIds = _useState12[0],
+    setBusinessOrderIds = _useState12[1];
   var MyOrdersMenu = [{
     key: 'orders',
     value: t('ORDERS', 'Orders')
@@ -90,9 +73,6 @@ var MyOrders = function MyOrders(props) {
   }];
   var notOrderOptions = ['business', 'products', 'professionals'];
   var allEmpty = isEmptyActive && isEmptyPast && isEmptyPreorder || (isEmptyBusinesses || (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) === 0) && hideOrders;
-  var handleChangeFilter = function handleChangeFilter(key) {
-    if (selectItem === key) setSelectItem('all');else setSelectItem(key);
-  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -126,35 +106,23 @@ var MyOrders = function MyOrders(props) {
     },
     active: selectedOption === 'professionals',
     borderBottom: true
-  }, t('PROFESSIONALS', 'Professionals')))), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && layout !== 'appointments' && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
-    return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-      key: i,
-      color: selectItem === order.key ? 'primary' : 'secundary',
-      onClick: function onClick() {
-        return handleChangeFilter(order.key);
-      }
-    }, order.value, selectItem === order.key && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
-  })), selectedOption === 'orders' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEmptyActive && isEmptyPast && isEmptyPreorder ? /*#__PURE__*/_react.default.createElement(_styles.NoOrdersWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('PROFESSIONALS', 'Professionals')))), selectedOption === 'orders' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEmptyActive && isEmptyPast && isEmptyPreorder ? /*#__PURE__*/_react.default.createElement(_styles.NoOrdersWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return history.push('/');
     }
-  }, t('ORDER_NOW', 'Order now'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (selectItem === 'all' || selectItem === 'preorder') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
+  }, t('ORDER_NOW', 'Order now'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     preOrders: true,
     horizontal: true,
-    setIsEmptyPreorder: setIsEmptyPreorder,
-    selectItem: selectItem
-  })), !isEmptyPreorder && /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'active') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
+    setIsEmptyPreorder: setIsEmptyPreorder
+  })), !isEmptyPreorder && /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     activeOrders: true,
     horizontal: true,
-    setIsEmptyActive: setIsEmptyActive,
-    selectItem: selectItem
-  })), !isEmptyActive && /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'past') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
+    setIsEmptyActive: setIsEmptyActive
+  })), !isEmptyActive && /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     pastOrders: true,
-    horizontal: true,
-    setIsEmptyPast: setIsEmptyPast,
-    selectItem: selectItem
-  })), !isEmptyPast && /*#__PURE__*/_react.default.createElement(_styles.Divider, null)))), notOrderOptions.includes(selectedOption) && /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
+    setIsEmptyPast: setIsEmptyPast
+  })), !isEmptyPast && /*#__PURE__*/_react.default.createElement(_styles.Divider, null))), notOrderOptions.includes(selectedOption) && /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     titleContent: t('PREVIOUSLY_ORDERED', 'Previously ordered'),
     hideOrders: true,
     horizontal: true,

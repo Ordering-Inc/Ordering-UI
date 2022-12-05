@@ -20,7 +20,7 @@ var OptionTitle = _styledComponents.default.div(_templateObject || (_templateObj
 exports.OptionTitle = OptionTitle;
 var OrdersContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  ", "\n\n  ", "\n"])), function (_ref3) {
   var activeOrders = _ref3.activeOrders;
-  return activeOrders && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 0 10px;\n    text-align: center;\n    display: flex;\n    overflow-x: auto;\n    overflow-y: hidden;\n    justify-content: ", ";\n    width: 100%;\n    margin: auto 0px auto auto;\n    box-sizing: border-box;\n    ", "\n    ::-webkit-scrollbar {\n      width: 0px;\n      height: 0px;\n    }\n\n    ", "\n    \n    @media (min-width: 768px) {\n      width: 100%;\n      justify-content: flex-start;\n      ", "\n  "])), function (_ref4) {
+  return activeOrders && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 0 10px;\n    text-align: center;\n    display: flex;\n    justify-content: ", ";\n    width: 100%;\n    margin: auto 0px auto auto;\n    box-sizing: border-box;\n    ", "\n    ::-webkit-scrollbar {\n      width: 0px;\n      height: 0px;\n    }\n\n    ", "\n    \n    @media (min-width: 768px) {\n      width: 100%;\n      justify-content: flex-start;\n      ", "\n  "])), function (_ref4) {
     var ordersLength = _ref4.ordersLength;
     return !ordersLength ? 'flex-start' : 'center';
   }, function (props) {
@@ -28,7 +28,7 @@ var OrdersContainer = _styledComponents.default.div(_templateObject2 || (_templa
     return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin: auto auto auto 0px;\n    "])));
   }, function (_ref5) {
     var isSkeleton = _ref5.isSkeleton;
-    return !isSkeleton && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["   \n      ::-webkit-scrollbar {\n      width: 6px;\n      height: 6px;\n      }\n      ", "\n    "])), function (_ref6) {
+    return !isSkeleton && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      ::-webkit-scrollbar {\n      width: 6px;\n      height: 6px;\n      }\n      ", "\n    "])), function (_ref6) {
       var ordersLength = _ref6.ordersLength,
         isBusinessesPage = _ref6.isBusinessesPage;
       return !ordersLength && !isBusinessesPage && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        > div {\n          margin-left: -10px;\n          ", "\n        }\n        > div:first-child{\n          margin-left: -15px;\n          ", "\n        }\n      "])), function (props) {

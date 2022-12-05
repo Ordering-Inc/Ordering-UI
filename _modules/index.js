@@ -447,6 +447,12 @@ Object.defineProperty(exports, "PagesList", {
     return _PagesList.PagesList;
   }
 });
+Object.defineProperty(exports, "Pagination", {
+  enumerable: true,
+  get: function get() {
+    return _Pagination.Pagination;
+  }
+});
 Object.defineProperty(exports, "PaymentOptionCash", {
   enumerable: true,
   get: function get() {
@@ -909,6 +915,7 @@ var _OrderSuccessModal = require("./components/OrderSuccessModal");
 var _OrderTypeSelectorHeader = require("./components/OrderTypeSelectorHeader");
 var _PageNotFound = require("./components/PageNotFound");
 var _PagesList = require("./components/PagesList");
+var _Pagination = require("./themes/five/src/components/Pagination");
 var _PaymentOptionCash = require("./components/PaymentOptionCash");
 var _PaymentOptionPaypal = require("./components/PaymentOptionPaypal");
 var _PaymentOptions = require("./components/PaymentOptions");

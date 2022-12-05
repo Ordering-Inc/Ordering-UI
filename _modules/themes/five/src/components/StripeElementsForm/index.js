@@ -65,6 +65,7 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
     handleSource: handleSource,
     onNewCard: onNewCard,
     toSave: toSave,
+    isSplitForm: true,
     requirements: requirements,
     businessId: businessId,
     handleCancel: onCancel,

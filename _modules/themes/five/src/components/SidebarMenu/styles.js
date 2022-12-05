@@ -23,7 +23,7 @@ var IconContent = _styledComponents.default.button(_templateObject4 || (_templat
   return isHome ? 'rgb(255, 255, 255)' : '#333';
 });
 exports.IconContent = IconContent;
-var SidebarContent = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  height: 100%;\n  width: 0;\n  position: fixed;\n  z-index: 1005;\n  top: 0;\n  background-color: ", ";\n  overflow-x: hidden;\n  transition: 0.5s;\n  padding-top: 60px;\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n\n  ", "\n\n  @media (max-height: 450px) {\n    padding-top: 15px;\n  }\n"])), function (_ref4) {
+var SidebarContent = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  height: 100%;\n  width: 0;\n  position: fixed;\n  z-index: 2050;\n  top: 0;\n  background-color: ", ";\n  overflow-x: hidden;\n  transition: 0.5s;\n  padding-top: 60px;\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n\n  ", "\n\n  @media (max-height: 450px) {\n    padding-top: 15px;\n  }\n"])), function (_ref4) {
   var theme = _ref4.theme;
   return theme.colors.backgroundPage;
 }, function (props) {

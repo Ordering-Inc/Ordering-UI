@@ -18,7 +18,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var HeaderOption = function HeaderOption(props) {
-  var _props$beforeElements, _props$beforeComponen, _configs$dates_moment, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _props$beforeElements, _props$beforeComponen, _configs$dates_moment, _props$afterComponent, _props$afterElements;
   var variant = props.variant,
     addressState = props.addressState,
     momentState = props.momentState,
@@ -30,12 +30,16 @@ var HeaderOption = function HeaderOption(props) {
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseDate = _useUtils2[0].parseDate;
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+    orderingTheme = _useOrderingTheme2[0].theme;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderStatus = _useOrder2[0];
+  var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : _orderingTheme$theme$3.type) === 'Chew';
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -46,6 +50,7 @@ var HeaderOption = function HeaderOption(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     variant: variant,
+    isChew: isChew,
     onClick: function onClick() {
       return props.onClick(variant);
     },
@@ -56,7 +61,9 @@ var HeaderOption = function HeaderOption(props) {
     id: "icon"
   }), addressState || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), variant === 'moment' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, momentState ? parseDate(momentState, {
     outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
-  }) : t('ASAP_ABBREVIATION', 'ASAP')), variant === 'delivery' && /*#__PURE__*/_react.default.createElement(_styles.DeliveryType, null, orderTypeList && orderTypeList[(orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.options.type) - 1] || t('DELIVERY', 'Delivery'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }) : t('ASAP_ABBREVIATION', 'ASAP')), variant === 'delivery' && /*#__PURE__*/_react.default.createElement(_styles.DeliveryType, {
+    isChew: isChew
+  }, orderTypeList && orderTypeList[(orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.options.type) - 1] || t('DELIVERY', 'Delivery'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

@@ -7,11 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.OrdersOption = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-var _moment = _interopRequireDefault(require("moment"));
+var _moment3 = _interopRequireDefault(require("moment"));
 var _orderingComponents = require("ordering-components");
 var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
 var _VerticalOrdersLayout = require("../../../../../components/VerticalOrdersLayout");
-var _NotFoundSource = require("../../../../../components/NotFoundSource");
 var _styledComponents = require("styled-components");
 var _styles = require("./styles");
 var _PreviousBusinessOrdered = require("./PreviousBusinessOrdered");
@@ -41,7 +40,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersOptionUI = function OrdersOptionUI(props) {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var horizontal = props.horizontal,
     activeOrders = props.activeOrders,
     orderList = props.orderList,
@@ -57,7 +56,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     isBusinessesLoading = props.isBusinessesLoading,
     pastOrders = props.pastOrders,
     preOrders = props.preOrders,
-    selectItem = props.selectItem,
     setIsEmptyPast = props.setIsEmptyPast,
     setIsEmptyActive = props.setIsEmptyActive,
     setIsEmptyPreorder = props.setIsEmptyPreorder,
@@ -78,7 +76,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     professionals = props.professionals,
     handleUpdateProfessionals = props.handleUpdateProfessionals,
     businesses = props.businesses,
-    handleUpdateBusinesses = props.handleUpdateBusinesses;
+    handleUpdateBusinesses = props.handleUpdateBusinesses,
+    getPage = props.getPage;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -94,7 +93,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var loading = orderList.loading,
     error = orderList.error,
     values = orderList.orders;
-  var imageFails = activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders;
   var orders = customArray || values || [];
   var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
     return businessesIds && businessesIds.includes(order.business_id);
@@ -125,6 +123,9 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
         }
       });
     }
+  };
+  var handleChangePage = function handleChangePage(page) {
+    getPage(page);
   };
   var showSkeletons = !isBusiness && !isProducts && loading || (businesses === null || businesses === void 0 ? void 0 : businesses.loading) && isBusiness || (products === null || products === void 0 ? void 0 : products.length) === 0 && isProducts && (!businessesSearchList && loading || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.loading));
   var getOrderStatus = function getOrderStatus(s) {
@@ -291,11 +292,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }, props));
   }), (isCustomLayout ? (isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading : (isShowTitles || !isBusinessesPage) && !hideOrders) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.OptionTitle, {
     isBusinessesPage: isBusinessesPage
-  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))), !loading && orders.length === 0 && selectItem !== 'all' && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    image: imageFails,
-    content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
-    conditioned: true
-  })), isBusiness && (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_PreviousBusinessOrdered.PreviousBusinessOrdered, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, titleContent || (activeOrders ? t('ACTIVE', 'Active') : pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming'))))), isBusiness && (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_PreviousBusinessOrdered.PreviousBusinessOrdered, {
     businesses: businesses,
     onRedirectPage: onRedirectPage,
     isLoadingOrders: loading,
@@ -358,10 +355,11 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }))), /*#__PURE__*/_react.default.createElement(_styles.SkeletonReorder, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null))));
   }))), (isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading && !hideOrders : !loading && !error && orders.length > 0 && !hideOrders) && (horizontal ? /*#__PURE__*/_react.default.createElement(_HorizontalOrdersLayout.HorizontalOrdersLayout, {
     businessesIds: businessesIds,
-    orders: orders.filter(function (order) {
-      return orderStatus.includes(order.status);
+    orders: orders === null || orders === void 0 ? void 0 : orders.filter(function (order) {
+      return orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.includes(order.status);
     }).sort(function (a, b) {
-      return (0, _moment.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf() - (0, _moment.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf();
+      var _moment, _moment2;
+      return ((_moment = (0, _moment3.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc)) === null || _moment === void 0 ? void 0 : _moment.valueOf()) - ((_moment2 = (0, _moment3.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc)) === null || _moment2 === void 0 ? void 0 : _moment2.valueOf());
     }),
     pagination: pagination,
     onRedirectPage: onRedirectPage,
@@ -376,19 +374,21 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     pastOrders: pastOrders,
     isCustomerMode: isCustomerMode,
     isBusiness: isBusiness,
-    isProducts: isProducts
+    isProducts: isProducts,
+    handleChangePage: handleChangePage
   }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading,
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);
     }).sort(function (a, b) {
-      return (0, _moment.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf() - (0, _moment.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf();
+      return (0, _moment3.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf() - (0, _moment3.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf();
     }),
     pagination: pagination,
     loadMoreOrders: loadMoreOrders,
     onRedirectPage: onRedirectPage,
     getOrderStatus: getOrderStatus,
-    handleReorder: handleReorder
+    handleReorder: handleReorder,
+    handleUpdateOrderList: handleUpdateOrderList
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('MY_ORDERS', 'My orders'),
     content: alertState.content,
@@ -425,7 +425,7 @@ var OrdersOption = function OrdersOption(props) {
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: getAllOrders ? 30 : 10,
+      pageSize: 3,
       controlType: 'infinity'
     }
   });

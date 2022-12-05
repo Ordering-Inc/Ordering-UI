@@ -11,6 +11,7 @@ var _FiMinusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiMinusCi
 var _FiPlusCircle = _interopRequireDefault(require("@meronex/icons/fi/FiPlusCircle"));
 var _MdcPlayCircleOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcPlayCircleOutline"));
 var _LinkableText = require("../LinkableText");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _AutoScroll = require("../AutoScroll");
 var _orderingComponents = require("ordering-components");
 var _utils = require("../../../../../utils");
@@ -69,7 +70,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     handleChangeIngredientState = props.handleChangeIngredientState,
     handleChangeSuboptionState = props.handleChangeSuboptionState,
     handleChangeCommentState = props.handleChangeCommentState,
-    productAddedToCartLength = props.productAddedToCartLength;
+    productAddedToCartLength = props.productAddedToCartLength,
+    handleFavoriteProduct = props.handleFavoriteProduct;
   var product = productObject.product,
     loading = productObject.loading,
     error = productObject.error;
@@ -166,6 +168,14 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   var handleSuccessLogin = function handleSuccessLogin(user) {
     if (user) {
       closeModal();
+    }
+  };
+  var handleChangeFavorite = function handleChangeFavorite() {
+    if (auth) {
+      handleFavoriteProduct && handleFavoriteProduct(product, !(product !== null && product !== void 0 && product.favorite));
+    } else {
+      setModalPageToShow('login');
+      setModalIsOpen(true);
     }
   };
   var handleSaveProduct = function handleSaveProduct() {
@@ -393,18 +403,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     className: "product-container",
     ref: productContainerRef,
     useKioskApp: props.useKioskApp
-  }, loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
-    width: 90
-  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    variant: "rect",
-    height: 50
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    variant: "rect",
-    height: 50
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    variant: "rect",
-    height: 200
-  })), product && !loading && !error && /*#__PURE__*/_react.default.createElement(_styles.ProductShareWrapper, null, !props.useKioskApp ? /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
+  }, product && !error && /*#__PURE__*/_react.default.createElement(_styles.ProductShareWrapper, null, !props.useKioskApp ? /*#__PURE__*/_react.default.createElement(_ProductShare.ProductShare, {
     defaultUrl: urlToShare,
     slug: businessSlug,
     categoryId: product === null || product === void 0 ? void 0 : product.category_id,
@@ -414,7 +413,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     style: {
       height: 30
     }
-  })), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.SwiperWrapper, {
+  })), product && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.SwiperWrapper, {
     isSoldOut: isSoldOut
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 10,
@@ -430,7 +429,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     onSlideChange: function onSlideChange() {
       return handleSlideChange();
     }
-  }, gallery.map(function (img, i) {
+  }, gallery === null || gallery === void 0 ? void 0 : gallery.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("img", {
@@ -438,7 +437,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       alt: "",
       className: "active-img"
     }));
-  }), videoGallery && videoGallery.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, videoGallery.map(function (video, j) {
+  }), videoGallery && (videoGallery === null || videoGallery === void 0 ? void 0 : videoGallery.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, videoGallery === null || videoGallery === void 0 ? void 0 : videoGallery.map(function (video, j) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: j
     }, /*#__PURE__*/_react.default.createElement("iframe", {
@@ -482,25 +481,41 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     observer: true,
     observeParents: true,
     parallax: true
-  }, gallery.map(function (img, i) {
+  }, gallery === null || gallery === void 0 ? void 0 : gallery.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: img,
       alt: ""
     }));
-  }), videoGallery && videoGallery.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, videoGallery.map(function (video, j) {
+  }), videoGallery && (videoGallery === null || videoGallery === void 0 ? void 0 : videoGallery.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, videoGallery === null || videoGallery === void 0 ? void 0 : videoGallery.map(function (video, j) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: j
     }, /*#__PURE__*/_react.default.createElement(_styles.VideoGalleryWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
       src: getOverFlowImage(video),
       alt: ""
     }), /*#__PURE__*/_react.default.createElement(_MdcPlayCircleOutline.default, null)));
-  }))))), /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name), (product === null || product === void 0 ? void 0 : product.calories) && /*#__PURE__*/_react.default.createElement("span", {
-    className: "calories"
-  }, product === null || product === void 0 ? void 0 : product.calories, ' ', "cal")), /*#__PURE__*/_react.default.createElement(_styles.Properties, null, isHaveWeight ? /*#__PURE__*/_react.default.createElement(_styles.PriceContent, null, parsePrice(pricePerWeightUnit), " / ", product === null || product === void 0 ? void 0 : product.weight_unit) : /*#__PURE__*/_react.default.createElement(_styles.PriceContent, null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : '', (product === null || product === void 0 ? void 0 : product.in_offer) && /*#__PURE__*/_react.default.createElement("span", {
+  }))))), loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
+    width: 90
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect",
+    height: 50
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect",
+    height: 50
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    variant: "rect",
+    height: 200
+  })), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name)), /*#__PURE__*/_react.default.createElement("span", {
+    className: "favorite",
+    onClick: function onClick() {
+      return handleChangeFavorite();
+    }
+  }, product !== null && product !== void 0 && product.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), /*#__PURE__*/_react.default.createElement(_styles.Properties, null, isHaveWeight ? /*#__PURE__*/_react.default.createElement(_styles.PriceContent, null, parsePrice(pricePerWeightUnit), " / ", product === null || product === void 0 ? void 0 : product.weight_unit) : /*#__PURE__*/_react.default.createElement(_styles.PriceContent, null, /*#__PURE__*/_react.default.createElement("p", null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : ''), (product === null || product === void 0 ? void 0 : product.in_offer) && /*#__PURE__*/_react.default.createElement("span", {
     className: "offer-price"
-  }, product !== null && product !== void 0 && product.offer_price ? parsePrice(product === null || product === void 0 ? void 0 : product.offer_price) : '')), /*#__PURE__*/_react.default.createElement(_styles.ProductMeta, null, (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku'), "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.sku)), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement("span", null, "\xA0\xB7\xA0"), (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement(_styles.EstimatedPersons, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.estimated_person, "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_PERSONS', 'persons'))))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement(_styles.ProductDescription, null, /*#__PURE__*/_react.default.createElement(_LinkableText.LinkableText, {
+  }, product !== null && product !== void 0 && product.offer_price ? parsePrice(product === null || product === void 0 ? void 0 : product.offer_price) : '')), /*#__PURE__*/_react.default.createElement(_styles.ProductMeta, null, (product === null || product === void 0 ? void 0 : product.calories) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+    className: "calories"
+  }, product === null || product === void 0 ? void 0 : product.calories, ' ', "cal"), /*#__PURE__*/_react.default.createElement("span", null, "\xA0\xB7\xA0")), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku'), "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.sku)), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement("span", null, "\xA0\xB7\xA0"), (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement(_styles.EstimatedPersons, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.estimated_person, "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_PERSONS', 'persons'))))), (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement(_styles.ProductDescription, null, /*#__PURE__*/_react.default.createElement(_LinkableText.LinkableText, {
     text: product === null || product === void 0 ? void 0 : product.description
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductTagsListContainer, null, product.tags.map(function (tag) {
     var _theme$images2, _theme$images2$dummie;

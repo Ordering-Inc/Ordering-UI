@@ -42,9 +42,14 @@ var CARD_ELEMENT_OPTIONS = {
 var CardFormUI = function CardFormUI(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var error = props.error,
+    errorExpiry = props.errorExpiry,
+    errorCvc = props.errorCvc,
     loading = props.loading,
     handleSubmit = props.handleSubmit,
-    handleChange = props.handleChange;
+    handleChange = props.handleChange,
+    isSplitForm = props.isSplitForm,
+    handleChangeExpiry = props.handleChangeExpiry,
+    handleChangeCvc = props.handleChangeCvc;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -58,10 +63,19 @@ var CardFormUI = function CardFormUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.FormStripe, {
     onSubmit: handleSubmit
-  }, /*#__PURE__*/_react.default.createElement(_styles.FormRow, null, /*#__PURE__*/_react.default.createElement(_reactStripeJs.CardElement, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.FormRow, null, !isSplitForm ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactStripeJs.CardElement, {
     options: CARD_ELEMENT_OPTIONS,
     onChange: handleChange
-  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, error)), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, error)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CardNumberField, null, /*#__PURE__*/_react.default.createElement("label", null, t('CARD_NUMBER', 'Card number')), /*#__PURE__*/_react.default.createElement(_reactStripeJs.CardNumberElement, {
+    options: CARD_ELEMENT_OPTIONS,
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, error)), /*#__PURE__*/_react.default.createElement(_styles.CardExpiryCvcField, null, /*#__PURE__*/_react.default.createElement(_styles.CardExpiryField, null, /*#__PURE__*/_react.default.createElement("label", null, t('EXPIRE_DATE', 'Expire date')), /*#__PURE__*/_react.default.createElement(_reactStripeJs.CardExpiryElement, {
+    options: CARD_ELEMENT_OPTIONS,
+    onChange: handleChangeExpiry
+  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, errorExpiry)), /*#__PURE__*/_react.default.createElement(_styles.CardCvcField, null, /*#__PURE__*/_react.default.createElement("label", null, t('CVC', 'CVC')), /*#__PURE__*/_react.default.createElement(_reactStripeJs.CardCvcElement, {
+    options: CARD_ELEMENT_OPTIONS,
+    onChange: handleChangeCvc
+  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, errorCvc))))), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
     disabled: loading

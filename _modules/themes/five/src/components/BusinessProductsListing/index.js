@@ -458,6 +458,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     useKioskApp: props.useKioskApp,
     product: productModal.product || curProduct,
     businessId: business === null || business === void 0 ? void 0 : business.id,
+    categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
+    productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
+    handleUpdateProducts: handleUpdateProducts,
     onSave: handlerProductAction,
     productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products7 = currentCart.products) === null || _currentCart$products7 === void 0 ? void 0 : _currentCart$products7.reduce(function (productsLength, Cproduct) {
       var _ref3;

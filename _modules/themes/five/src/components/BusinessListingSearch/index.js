@@ -351,7 +351,11 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     businessId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business2 = curProduct.business) === null || _curProduct$business2 === void 0 ? void 0 : _curProduct$business2.id,
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$product = curProduct.product) === null || _curProduct$product === void 0 ? void 0 : _curProduct$product.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$product2 = curProduct.product) === null || _curProduct$product2 === void 0 ? void 0 : _curProduct$product2.id,
-    onSave: handleRedirectToCart
+    onSave: handleRedirectToCart,
+    handleUpdateProducts: function handleUpdateProducts(productId, changes) {
+      var _curProduct$product3, _curProduct$business3;
+      return _handleUpdateProducts(productId, curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$product3 = curProduct.product) === null || _curProduct$product3 === void 0 ? void 0 : _curProduct$product3.category_id, curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business3 = curProduct.business) === null || _curProduct$business3 === void 0 ? void 0 : _curProduct$business3.id, changes);
+    }
   })));
 };
 exports.BusinessListingSearchUI = BusinessListingSearchUI;

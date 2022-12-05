@@ -14,6 +14,7 @@ var _Modal = require("../Modal");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _NotFoundSource = require("../NotFoundSource");
 var _utils = require("../../../../../utils");
+var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -42,6 +43,7 @@ var PromotionsUI = function PromotionsUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var theme = (0, _styledComponents.useTheme)();
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
@@ -104,16 +106,19 @@ var PromotionsUI = function PromotionsUI(props) {
   })), (!(offersState !== null && offersState !== void 0 && offersState.loading) && (filteredOffers === null || filteredOffers === void 0 ? void 0 : filteredOffers.length) === 0 || (offersState === null || offersState === void 0 ? void 0 : offersState.error)) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (offersState === null || offersState === void 0 ? void 0 : offersState.error) || t('NOT_FOUND_OFFERS', 'Not found offers')
   }), !(offersState !== null && offersState !== void 0 && offersState.loading) && ((_offersState$offers2 = offersState.offers) === null || _offersState$offers2 === void 0 ? void 0 : _offersState$offers2.length) > 0 && (filteredOffers === null || filteredOffers === void 0 ? void 0 : filteredOffers.map(function (offer) {
+    var _theme$images, _theme$images$dummies;
     return /*#__PURE__*/_react.default.createElement(_styles.SingleOfferContainer, {
       key: offer.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.OfferInformation, null, /*#__PURE__*/_react.default.createElement("h2", null, offer === null || offer === void 0 ? void 0 : offer.name), /*#__PURE__*/_react.default.createElement(_styles.Description, null, offer === null || offer === void 0 ? void 0 : offer.description), /*#__PURE__*/_react.default.createElement(_styles.ExpiresAt, null, t('EXPIRES', 'Expires'), " ", parseDate(offer === null || offer === void 0 ? void 0 : offer.end, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.OfferInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+      bgimage: (offer === null || offer === void 0 ? void 0 : offer.image) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)
+    }), /*#__PURE__*/_react.default.createElement(_styles.OfferInformation, null, /*#__PURE__*/_react.default.createElement("h2", null, offer === null || offer === void 0 ? void 0 : offer.name), /*#__PURE__*/_react.default.createElement(_styles.Description, null, offer === null || offer === void 0 ? void 0 : offer.description), /*#__PURE__*/_react.default.createElement(_styles.ExpiresAt, null, t('EXPIRES', 'Expires'), " ", parseDate(offer === null || offer === void 0 ? void 0 : offer.end, {
       outputFormat: 'MMM DD, YYYY'
     })), /*#__PURE__*/_react.default.createElement(_styles.AvailableBusinesses, null, /*#__PURE__*/_react.default.createElement("p", null, t('APPLY_FOR', 'Apply for'), ":"), /*#__PURE__*/_react.default.createElement("p", null, offer.businesses.map(function (business, i) {
       var _offer$businesses;
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: business === null || business === void 0 ? void 0 : business.id
       }, ' ', business === null || business === void 0 ? void 0 : business.name, i + 1 < ((_offer$businesses = offer.businesses) === null || _offer$businesses === void 0 ? void 0 : _offer$businesses.length) ? ',' : '');
-    })))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }))))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       color: "primary",
       onClick: function onClick() {
         return handleClickOffer(offer);
