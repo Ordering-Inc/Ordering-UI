@@ -26,7 +26,8 @@ import {
   FarAwayMessage,
   Divider,
   AddressFormWrapper,
-  LanguageSelectorWrapper
+  LanguageSelectorWrapper,
+  HeaderSearchMode
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -48,6 +49,7 @@ import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { getDistance } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
+import { SearchBar } from '../SearchBar'
 
 export const Header = (props) => {
   const {
@@ -55,7 +57,9 @@ export const Header = (props) => {
     location,
     isShowOrderOptions,
     isHideSignup,
-    isCustomerMode
+    isCustomerMode,
+    searchValue,
+    setSearchValue
   } = props
 
   const { pathname } = useLocation()
@@ -79,7 +83,6 @@ export const Header = (props) => {
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
-
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
 
@@ -309,6 +312,18 @@ export const Header = (props) => {
                 />
               )}
             </Menu>
+          )}
+          {windowSize.width > 1200 && window.location.pathname === '/search' && (
+            <HeaderSearchMode>
+              <SearchBar
+                lazyLoad
+                search={searchValue}
+                placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                starbucksStyle
+                onSearch={(value) => setSearchValue(value)}
+                handleCustomEnter={() => events.emit('go_to_page', { page: 'business_search' })}
+              />
+            </HeaderSearchMode>
           )}
           {onlineStatus && (
             <RightHeader id='right-side'>
