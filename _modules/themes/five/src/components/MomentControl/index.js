@@ -20,6 +20,7 @@ var _react2 = require("swiper/react");
 var _swiper = _interopRequireWildcard(require("swiper"));
 require("swiper/swiper-bundle.min.css");
 require("swiper/swiper.min.css");
+var _utils = require("../../../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -90,10 +91,11 @@ var MomentControlUI = function MomentControlUI(props) {
     setIsEnabled(schedule[day].enabled);
   };
   var getTimes = function getTimes(curdate, schedule) {
+    var _curdate$split;
     validateSelectedDate(curdate, schedule);
-    var dateParts = curdate.split('-');
+    var dateParts = curdate === null || curdate === void 0 ? void 0 : (_curdate$split = curdate.split) === null || _curdate$split === void 0 ? void 0 : _curdate$split.call(curdate, '-');
     var dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    var times = getTimes(dateSeleted, schedule, is12hours);
+    var times = (0, _utils.getTimes)(dateSeleted, schedule, is12hours);
     return times;
   };
   var setLocalMoment = function setLocalMoment() {
