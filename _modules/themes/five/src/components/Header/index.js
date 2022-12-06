@@ -34,6 +34,7 @@ var _SignUpForm = require("../SignUpForm");
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
 var _utils = require("../../../../../utils");
 var _BusinessPreorder = require("../BusinessPreorder");
+var _SearchBar = require("../SearchBar");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -55,7 +56,9 @@ var Header = function Header(props) {
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
     isHideSignup = props.isHideSignup,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    searchValue = props.searchValue,
+    setSearchValue = props.setSearchValue;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
     pathname = _useLocation.pathname;
   var _useEvent = (0, _orderingComponents.useEvent)(),
@@ -327,6 +330,19 @@ var Header = function Header(props) {
       return openModal(variant);
     },
     orderTypeList: orderTypeList
+  })), windowSize.width > 1200 && window.location.pathname === '/search' && /*#__PURE__*/_react.default.createElement(_styles.HeaderSearchMode, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+    lazyLoad: true,
+    search: searchValue,
+    placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
+    starbucksStyle: true,
+    onSearch: function onSearch(value) {
+      return setSearchValue(value);
+    },
+    handleCustomEnter: function handleCustomEnter() {
+      return events.emit('go_to_page', {
+        page: 'business_search'
+      });
+    }
   })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, {
     id: "right-side"
   }, /*#__PURE__*/_react.default.createElement(_styles.Menu, {

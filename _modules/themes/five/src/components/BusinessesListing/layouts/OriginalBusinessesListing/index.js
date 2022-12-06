@@ -348,7 +348,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }), !isCustomerMode && !hideSearchSection && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout,
     isCustomerMode: isCustomerMode
-  }, !hideSearch && /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }, !hideSearch && windowSize.width <= 1200 && /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     search: searchValue,
     isCustomLayout: isCustomLayout,
