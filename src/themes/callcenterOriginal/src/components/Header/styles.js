@@ -9,12 +9,33 @@ export const Header = styled.div`
 
 export const InnerHeader = styled.div`
   display: flex;
-  width: 100%;
   color: #FFF;
   justify-content: space-between;
   width: 98%;
   margin: 15px auto;
   align-items: center;
+
+  #center-side {
+    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)'};
+  }
+
+  @media (min-width: 1024px) {
+    #center-side {
+      width: calc(60% - 100px);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    #center-side {
+      width: calc(60% - 160px);
+    }
+  }
+
+  @media (min-width: 1500px) {
+    #center-side {
+      width: calc(60% - 200px);
+    }
+  }
 `
 
 export const LogoHeader = styled.div`
@@ -85,7 +106,6 @@ export const Menu = styled.div`
     box-sizing: border-box;
     border-radius: 50px;
     margin: 0 20px;
-    flex-grow: 1;
     padding: 0 10px;
     display: flex;
     align-items: center;
@@ -100,17 +120,20 @@ export const Menu = styled.div`
 
     @media (min-width: 1024px) {
       padding: 0 20px;
-      margin: 0 70px;
+      margin-left: 35px;
+      margin-right: 10px;
     }
     
     @media (min-width: 1200px) {
       padding: 0 30px;
-      margin: 0 100px;
+      margin-left: 50px;
+      margin-right: 15px;
     }
 
     @media (min-width: 1500px) {
       padding: 0 30px;
-      margin: 0 130px;
+      margin-left: 75px;
+      margin-right: 20px
     }
   }
 
@@ -345,4 +368,25 @@ export const FarAwayMessage = styled.div`
 export const Divider = styled.div`
   border: 1px solid #DEE2E6;
   height: 100%;
+`
+
+export const AdminSection = styled.div`
+  border: 1px solid ${({ theme }) => theme?.colors?.primary};
+  background: #fff;
+  height: 30px;
+  width: 120px;
+  color: ${({ theme }) => theme?.colors?.primary};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  cursor: pointer;
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+  svg{
+    width: 14px;
+    height: 14px;
+  }
 `
