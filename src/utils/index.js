@@ -604,3 +604,15 @@ export const reviewCommentList = (type) => {
 
   return reviews[type]
 }
+
+/**
+ * Function to convert star rate in width to display
+ * @param {int} qualification star rate or qualification
+ */
+export const getStarWidth = (qualification) => {
+  if (qualification) {
+    return qualification / 5 * 100 + '%'
+  } else {
+    return '0%'
+  }
+}

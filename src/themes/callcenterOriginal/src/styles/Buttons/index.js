@@ -1,6 +1,70 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
+export const IconButton = styled.button`
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s ease-in;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  > svg {
+    width: 20px;
+    height: 20px;
+    color: #B1BCCC;
+  }
+
+  &:hover {
+    background-color: #1507260a;
+
+    > svg {
+      color:  #151b26;
+    }
+  }
+
+  &:active {
+    background-color: #1507261a;
+  }
+
+  ${({ color }) => color === 'black' && css`
+    > svg {
+      color: ${props => props.theme.colors.headingColor};
+    }
+    &:hover {
+      background-color: ${props => props.theme.colors.secundary};
+    }
+    &:active {
+      background-color: ${props => props.theme.colors.secundaryDarkContrast};
+    }
+
+    ${({ active }) => active && css`
+      background-color: ${props => props.theme.colors.secundaryDarkContrast};
+    `}
+  `}
+
+  ${({ color }) => color === 'primary' && css`
+    > svg {
+      color: ${props => props.theme.colors.primary};
+    }
+    &:hover {
+      background-color: #1507260a;
+      > svg {
+        color: ${props => props.theme.colors.primary};
+      }
+    }
+  `}
+  ${({ isDisabled }) => isDisabled && css`
+    pointer-events: none;
+  `}
+`
+
 export const Button = styled.button`
   background: #CCC;
   color: #FFF;

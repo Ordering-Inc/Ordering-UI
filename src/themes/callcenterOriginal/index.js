@@ -71,7 +71,9 @@ import { UserPopover } from './src/components/UserPopover'
 import { UserProfileForm } from './src/components/UserProfileForm'
 import { Confirm } from './src/components/Confirm'
 import { LanguageSelector } from './src/components/LanguageSelector'
-
+import { DeliveriesManager } from './src/components/Orders/DeliveriesManager'
+import { DriversManager } from './src/components/Orders/DriversManager'
+import { OrdersManager } from './src/components/Orders/OrdersManager'
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
@@ -150,7 +152,9 @@ export {
   UserProfileForm,
   Confirm,
   LanguageSelector,
-
+  DeliveriesManager,
+  DriversManager,
+  OrdersManager,
   // styles
   Button,
   Input,
