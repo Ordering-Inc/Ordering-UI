@@ -106,7 +106,7 @@ const BusinessesListingUI = (props) => {
   const [favoriteIds, setFavoriteIds] = useState([])
   const hideCities = theme?.business_listing_view?.components?.cities?.hidden ?? true
   const hideSearch = theme?.business_listing_view?.components?.search?.hidden
-  const hideFilter = theme?.business_listing_view?.components?.filter?.hidden
+  const hideFilter = theme?.business_listing_view?.components?.filter?.hidden || hideSearch
   const hideSearchSection = hideCities && hideSearch && hideFilter
   const isAllCategoriesHidden = theme?.business_listing_view?.components?.categories?.hidden
   const businessesIds = isCustomLayout &&
