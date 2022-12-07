@@ -89,12 +89,13 @@ const CheckoutUI = (props) => {
     instructionsOptions,
     deliveryOptionSelected,
     handleStoreRedirect,
-    onPlaceOrderClick
+    onPlaceOrderClick,
+    setPlaceSpotNumber,
+    placeSpotNumber
   } = props
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  // const [{ options, loading }, { changePaymethod }] = useOrder()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -128,7 +129,7 @@ const CheckoutUI = (props) => {
     placing ||
     errorCash ||
     loading ||
-    (options?.type === 3 && !(cartState?.cart?.spot_number || cart?.spot_number)) ||
+    (options?.type === 3 && !(cartState?.cart?.spot_number || cart?.spot_number || placeSpotNumber)) ||
     !cart?.valid_maximum ||
     (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
     // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
@@ -433,6 +434,7 @@ const CheckoutUI = (props) => {
               cart={cart}
               spotNumberDefault={cartState?.cart?.spot_number ?? cart?.spot_number}
               vehicleDefault={cart?.vehicle}
+              setPlaceSpotNumber={setPlaceSpotNumber}
             />
           </SelectSpotContainer>
         )}
@@ -517,20 +519,20 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
-        {options?.type === 3 && !cart?.spot_number && (
+        {options?.type === 3 && !(cart?.spot_number || placeSpotNumber) && (
           <WarningText>
             {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
           </WarningText>
         )}
 
         {options.type === 1 &&
-        validationFields?.fields?.checkout?.driver_tip?.enabled &&
-        validationFields?.fields?.checkout?.driver_tip?.required &&
-        (Number(cart?.driver_tip) <= 0) && (
-          <WarningText>
-            {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
-          </WarningText>
-        )}
+          validationFields?.fields?.checkout?.driver_tip?.enabled &&
+          validationFields?.fields?.checkout?.driver_tip?.required &&
+          (Number(cart?.driver_tip) <= 0) && (
+            <WarningText>
+              {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
+            </WarningText>
+          )}
       </WrapperRightContainer>
       {windowSize.width < 576 && !cartState.loading && cart && cart?.status !== 2 && (
         <MobileWrapperPlaceOrderButton>
@@ -541,9 +543,9 @@ const CheckoutUI = (props) => {
             onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
           >
             {!cart?.valid_maximum ? (
-                `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
+              `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
             ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
-                `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+              `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
             ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
           </Button>
         </MobileWrapperPlaceOrderButton>
