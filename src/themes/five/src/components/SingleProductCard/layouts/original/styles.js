@@ -10,6 +10,9 @@ export const CardContainer = styled.div`
   padding: 10px;
   border-radius: 7.6px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   cursor: pointer;
   position: relative;
 
@@ -17,6 +20,7 @@ export const CardContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
   }
 
   button {
@@ -88,15 +92,13 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 86px;
   ${({ isBgimage }) => css`
     width: ${isBgimage ? 'calc(100% - 90px)' : '100%'};
   `}
   > * {
     margin: 3px;
   }
-  ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'pfchangs' && css`
-    
-  `}
   p {
     color: #909BA9;
     text-align: left;
@@ -136,11 +138,11 @@ export const CardInfo = styled.div`
 
 export const WrapLogo = styled.div`
   position: relative;
-  max-width: 120px;
-  max-height: 120px;
-  height: 120px;
+  max-width: 86px;
+  max-height: 86px;
+  height: 86px;
   ${({ isBgimage }) => isBgimage && css`
-    width: 120px;
+    width: 86px;
   `}
   margin-left: 5px;
   ${props => props.theme?.rtl && css`
@@ -156,7 +158,7 @@ const CardLogoStyled = styled.div`
   background-size: cover;
   background-position: center;
   object-fit: cover;
-  min-height: 120px;
+  min-height: 86px;
   border-radius: 10px;
 `
 export const CardLogo = (props) => {
