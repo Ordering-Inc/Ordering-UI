@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components'
 export const CardContainer = styled.div`
   ${({ isShowAddButt }) => css`
     min-height: ${isShowAddButt ? '162px' : '110px'};
-    max-height: ${isShowAddButt ? '162px' : '110px'};
   `}
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
   border: 1px solid #E9ECEF;
