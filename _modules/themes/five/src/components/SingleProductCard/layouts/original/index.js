@@ -76,9 +76,6 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     _useSession2 = _slicedToArray(_useSession, 2),
     auth = _useSession2[0].auth,
     login = _useSession2[1].login;
-  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
   var theme = (0, _styledComponents.useTheme)();
   var favoriteRef = (0, _react.useRef)(null);
   var _useState = (0, _react.useState)(false),
@@ -172,7 +169,6 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     style: useCustomFunctionality && customStyle,
     className: "product-card",
     isShowAddButt: !useCustomFunctionality && !hideAddButton && !isSkeleton
-    // productsRows={productsRows}
   }, isObservedValidation ? /*#__PURE__*/_react.default.createElement("div", null, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0,
     isBgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_86,c_limit'),
@@ -198,7 +194,6 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
   }))), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.WrapLogo, {
-    className: "order-it-again-logo",
     isBgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || (theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.product), 'h_86,c_limit')
   }, (product === null || product === void 0 ? void 0 : (_product$ribbon = product.ribbon) === null || _product$ribbon === void 0 ? void 0 : _product$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
     bgColor: product === null || product === void 0 ? void 0 : (_product$ribbon2 = product.ribbon) === null || _product$ribbon2 === void 0 ? void 0 : _product$ribbon2.color,
