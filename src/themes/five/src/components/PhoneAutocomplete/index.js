@@ -86,6 +86,7 @@ const PhoneAutocompleteUI = (props) => {
     }
     if (!inputValue) {
       setInputValue(inputValue)
+      onChangeNumber(inputValue)
     }
     if ((inputValue && inputValue.length > 10) || !(/^[0-9]+$/.test(inputValue))) {
       return
@@ -95,6 +96,7 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const onChange = (option) => {
+    if (!option) { onChangeNumber('') }
     setOptSelected(option)
     setInputValue(option ? option?.value : '')
     const user = customersPhones.users?.find(user => user.cellphone === option?.value || user.phone === option?.value)
