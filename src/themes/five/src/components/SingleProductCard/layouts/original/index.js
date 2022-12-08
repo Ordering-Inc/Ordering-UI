@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useConfig, useOrder, useUtils, useSession, useOrderingTheme, SingleProductCard as SingleProductCardController } from 'ordering-components'
+import { useLanguage, useConfig, useOrder, useUtils, useSession, SingleProductCard as SingleProductCardController } from 'ordering-components'
 import { shape } from '../../../../../../../utils'
 import { useIntersectionObserver } from '../../../../../../../hooks/useIntersectionObserver'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
@@ -42,7 +42,7 @@ const SingleProductCardUI = (props) => {
     productAddedToCartLength,
     handleFavoriteProduct,
     isFavorite,
-    isPreviously,
+    isPreviously
   } = props
 
   const [, t] = useLanguage()
@@ -51,7 +51,6 @@ const SingleProductCardUI = (props) => {
   const [{ parsePrice, optimizeImage, parseDate }] = useUtils()
   const [orderState] = useOrder()
   const [{ auth }, { login }] = useSession()
-  const [orderingTheme] = useOrderingTheme()
   const theme = useTheme()
   const favoriteRef = useRef(null)
 
@@ -146,7 +145,6 @@ const SingleProductCardUI = (props) => {
         style={useCustomFunctionality && customStyle}
         className='product-card'
         isShowAddButt={!useCustomFunctionality && !hideAddButton && !isSkeleton}
-      // productsRows={productsRows}
       >
         {isObservedValidation ? (
           <div>
@@ -183,7 +181,6 @@ const SingleProductCardUI = (props) => {
                 </CardInfo>
                 {!isSkeleton ? (
                   <WrapLogo
-                    className='order-it-again-logo'
                     isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}
                   >
                     {product?.ribbon?.enabled && (
