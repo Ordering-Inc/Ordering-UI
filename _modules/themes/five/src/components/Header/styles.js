@@ -24,7 +24,7 @@ var InnerHeader = _styledComponents.default.div(_templateObject3 || (_templateOb
 }, function (_ref2) {
   var _theme$header2, _theme$header2$compon, _theme$header2$compon2;
   var theme = _ref2.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$header2 = theme.header) === null || _theme$header2 === void 0 ? void 0 : (_theme$header2$compon = _theme$header2.components) === null || _theme$header2$compon === void 0 ? void 0 : (_theme$header2$compon2 = _theme$header2$compon.layout) === null || _theme$header2$compon2 === void 0 ? void 0 : _theme$header2$compon2.type) === 'starbucks' ? '30%' : '20%';
+  return (theme === null || theme === void 0 ? void 0 : (_theme$header2 = theme.header) === null || _theme$header2 === void 0 ? void 0 : (_theme$header2$compon = _theme$header2.components) === null || _theme$header2$compon === void 0 ? void 0 : (_theme$header2$compon2 = _theme$header2$compon.layout) === null || _theme$header2$compon2 === void 0 ? void 0 : _theme$header2$compon2.type) === 'starbucks' ? '30%' : '25%';
 }, function (_ref3) {
   var _theme$header3, _theme$header3$compon, _theme$header3$compon2;
   var theme = _ref3.theme;
@@ -132,5 +132,5 @@ var InputGroup = _styledComponents.default.div(_templateObject30 || (_templateOb
 exports.InputGroup = InputGroup;
 var LanguageSelectorWrapper = (0, _styledComponents.default)(InputGroup)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  > div {\n    border-radius: 7.6px;\n    text-align: left;\n    background: #F8F9FA !important;\n    border-color: #F8F9FA;\n    background-color: #F8F9FA !important;\n    height: 44px;\n\n    > div:first-child {\n      height: 44px;\n    }\n\n    #list {\n      border-radius: 7.6px;\n      background: #F8F9FA !important;\n      border-color: #F8F9FA;\n    }\n  }\n  #select-input {\n    margin: 0px 10px 0 5px;\n  }\n"])));
 exports.LanguageSelectorWrapper = LanguageSelectorWrapper;
-var HeaderSearchMode = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  width: 300px;\n\n  @media (min-width: 1400px){\n    width: 300px;\n  }\n"])));
+var HeaderSearchMode = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  width: 300px;\n\n  @media (min-width: 1400px){\n    width: 300px;\n  }\n  @media (min-width: 1200px){\n    width: 250px;\n  }\n"])));
 exports.HeaderSearchMode = HeaderSearchMode;
