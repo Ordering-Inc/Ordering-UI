@@ -22,7 +22,7 @@ export const InnerHeader = styled.div`
     justify-content: flex-start;
   }
   #right-side {
-    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : '20%'};
+    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : '25%'};
     justify-content: flex-end;
   }
   #center-side {
@@ -480,5 +480,8 @@ export const HeaderSearchMode = styled.div`
 
   @media (min-width: 1400px){
     width: 300px;
+  }
+  @media (min-width: 1200px){
+    width: 250px;
   }
 `
