@@ -68,7 +68,7 @@ export const Header = (props) => {
   const theme = useTheme()
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
-  const [{ theme: orderingTheme }] = useOrderingTheme()
+  const [orderingTheme] = useOrderingTheme()
 
   const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -93,7 +93,7 @@ export const Header = (props) => {
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const handleSuccessSignup = (user) => {
     login({
@@ -423,7 +423,7 @@ export const Header = (props) => {
         )}
         {modalIsOpen && (
           <Modal
-            title={(!auth && modalSelected === 'address') && t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+            {...(!auth && modalSelected === 'address' && { title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?') })}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
             width={modalSelected === 'address' ? orderState?.options?.user_id ? '70%' : '50%' : '700px'}

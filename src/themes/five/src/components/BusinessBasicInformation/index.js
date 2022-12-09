@@ -89,7 +89,7 @@ export const BusinessBasicInformation = (props) => {
   const isInfoShrunken = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
   const searchLayout = theme?.business_view?.components?.product_search?.components?.layout?.type
   const hideCity = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const layoutsWithOldSearch = ['starbucks', 'old', 'floating']
   const hideSearch = layoutsWithOldSearch.includes(theme?.business_view?.components?.product_search?.components?.layout?.type)
   const getBusinessType = () => {

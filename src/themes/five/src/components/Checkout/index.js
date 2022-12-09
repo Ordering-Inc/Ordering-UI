@@ -13,7 +13,7 @@ import {
   useValidationFields,
   useConfig,
   useCustomer,
-  useEvent
+  useOrderingTheme
 } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UpsellingPage } from '../UpsellingPage'
@@ -94,14 +94,13 @@ const CheckoutUI = (props) => {
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  // const [{ options, loading }, { changePaymethod }] = useOrder()
+  const [orderingTheme] = useOrderingTheme()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
-  const [events] = useEvent()
   const history = useHistory()
   const windowSize = useWindowSize()
 
@@ -118,6 +117,7 @@ const CheckoutUI = (props) => {
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
   const isWalletCreditPointsEnabled = businessConfigs.find(config => config.key === 'wallet_credit_point_enabled')?.value === '1'
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp
+  const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
@@ -220,7 +220,7 @@ const CheckoutUI = (props) => {
   const handleScrollTo = () => {
     if (!((!paymethodSelected && cart?.balance > 0) && cart?.status !== 2)) return
     const scrollElement = document.querySelector('.paymentsContainer')
-    window.scrollTo(0, scrollElement.offsetTop - 20);
+    window.scrollTo(0, scrollElement.offsetTop - 20)
   }
 
   useEffect(() => {
@@ -421,6 +421,35 @@ const CheckoutUI = (props) => {
               />
             </WalletPaymentOptionContainer>
           )}
+
+          {
+            isMultiDriverTips &&
+            !cartState.loading &&
+            cart &&
+            cart?.business_id &&
+            options.type === 1 &&
+            cart?.status !== 2 &&
+            validationFields?.fields?.checkout?.driver_tip?.enabled &&
+            driverTipsOptions.length > 0 &&
+            !useKioskApp &&
+            (
+              <DriverTipContainer>
+                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                <DriverTips
+                  businessId={cart?.business_id}
+                  driverTipsOptions={driverTipsOptions}
+                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate}
+                  cart={cart}
+                  useOrderContext
+                />
+              </DriverTipContainer>
+            )
+          }
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
@@ -437,6 +466,7 @@ const CheckoutUI = (props) => {
           </SelectSpotContainer>
         )}
         {
+          !isMultiDriverTips &&
           !cartState.loading &&
           cart &&
           cart?.business_id &&
@@ -524,9 +554,10 @@ const CheckoutUI = (props) => {
         )}
 
         {options.type === 1 &&
-        validationFields?.fields?.checkout?.driver_tip?.enabled &&
-        validationFields?.fields?.checkout?.driver_tip?.required &&
-        (Number(cart?.driver_tip) <= 0) && (
+          validationFields?.fields?.checkout?.driver_tip?.enabled &&
+          validationFields?.fields?.checkout?.driver_tip?.required &&
+          (Number(cart?.driver_tip) <= 0) &&
+        (
           <WarningText>
             {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
           </WarningText>
@@ -536,17 +567,17 @@ const CheckoutUI = (props) => {
         <MobileWrapperPlaceOrderButton>
           <span>{parsePrice(cart?.total)}</span>
           <Button
-              color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
-              // disabled={isDisablePlaceOrderButton}
-              onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
-            >
-              {!cart?.valid_maximum ? (
+            color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
+            // disabled={isDisablePlaceOrderButton}
+            onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
+          >
+            {!cart?.valid_maximum ? (
                 `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
-              ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
+            ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
                 `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-              ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
-            </Button>
-          </MobileWrapperPlaceOrderButton>
+            ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
+          </Button>
+        </MobileWrapperPlaceOrderButton>
       )}
       <Alert
         title={t('CUSTOMER_DETAILS', 'Customer Details')}
