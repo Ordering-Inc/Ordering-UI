@@ -91,7 +91,7 @@ const BusinessesListingUI = (props) => {
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const windowSize = useWindowSize()
-  const [{ theme: orderingTheme }] = useOrderingTheme()
+  const [orderingTheme] = useOrderingTheme()
   const theme = useTheme()
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -113,7 +113,7 @@ const BusinessesListingUI = (props) => {
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -265,7 +265,7 @@ const BusinessesListingUI = (props) => {
             ) : (
               <>
                 {businessesList.businesses
-                  ?.filter(business => business?.slug !== actualSlug && business?.open)
+                  ?.filter(business => business?.open)
                   ?.map(business => (
                     <BusinessLogo
                       key={business?.id}
@@ -434,7 +434,7 @@ const BusinessesListingUI = (props) => {
           <OrdersSection />
         )}
         <>
-          {!isCustomLayout && isCustomerMode && businessesList?.businesses?.length > 0 && (
+          {((!isCustomLayout && isCustomerMode && businessesList?.businesses?.length > 0) || isChew) && (
             <BusinessesTitle>
               {t('BUSINESSES', 'Businesses')}
             </BusinessesTitle>

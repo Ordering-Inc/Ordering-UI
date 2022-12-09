@@ -26,7 +26,7 @@ export const CartPopover = (props) => {
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const popper = usePopper(referenceElement.current, popperElement.current, {
     placement: theme?.rtl ? 'bottom' : 'bottom-end',
     modifiers: [
@@ -40,7 +40,7 @@ export const CartPopover = (props) => {
     ]
   })
 
-  const { styles, attributes, forceUpdate } = popper
+  const { styles, attributes } = popper
 
   const isSlideBar = orderingTheme?.theme?.header?.components?.cart?.open_strategy?.type === 'slide'
 

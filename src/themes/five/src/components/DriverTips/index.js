@@ -14,6 +14,7 @@ import { Button } from '../../styles/Buttons'
 
 const DriverTipsUI = (props) => {
   const {
+    isMulti,
     driverTip,
     driverTipsOptions,
     cart,
@@ -38,69 +39,51 @@ const DriverTipsUI = (props) => {
     : `0${configs?.format_number_currency?.value}`
 
   return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <DriverTipContainer id='driver-tip-container'>
-        <>
-          {isDriverTipUseCustom ? (
-            <FormDriverTip>
-              <WrapperInput>
-                <Input
-                  name='drivertip'
-                  type='text'
-                  value={value}
-                  placeholder={placeholderCurrency}
-                  onChange={handleChangeDriverTip}
-                />
-                <Button
-                  color='primary'
-                  disabled={parseFloat(value || 0) < 0 || parseFloat(value || 0) === driverTip || value === ''}
-                  onClick={() => {
-                    handlerChangeOption(value)
-                    setvalue('')
-                  }}
-                >
-                  {t('APPLY_TIP', 'Apply Tip')}
-                </Button>
-              </WrapperInput>
-              {parseFloat(driverTip || 0) > 0 && (
-                <DriverTipMessage>
-                  {t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount')}{!isFixedPriceType && ` (${driverTip}%)`}: {isFixedPriceType ? parsePrice(driverTip) : parsePrice(cart?.driver_tip)}
-                </DriverTipMessage>
-              )}
-            </FormDriverTip>
-          ) : (
-            <WrapperTips>
-              {driverTipsOptions.map((option, i) => (
-                <TipCard
-                  key={i}
-                  className={`${option === driverTip ? 'active' : ''}`}
-                  onClick={() => handlerChangeOption(option)}
-                >
-                  {`${isFixedPriceType ? parsePrice(option) : `${option}%`}`}
-                </TipCard>
-              ))}
-            </WrapperTips>
-          )}
-        </>
-        {/* {isDriverTipUseCustom && !driverTipsOptions.includes(driverTip) && driverTip > 0 && (
-          <DriverTipMessage>
-            {t('CUSTOM_DRIVER_TIP_AMOUNT', 'The driver\'s current tip comes from a custom option')}
-          </DriverTipMessage>
-        )} */}
-      </DriverTipContainer>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
-    </>
+    <DriverTipContainer id='driver-tip-container'>
+      <>
+        {isDriverTipUseCustom && !isMulti ? (
+          <FormDriverTip>
+            <WrapperInput>
+              <Input
+                name='drivertip'
+                type='text'
+                value={value}
+                placeholder={placeholderCurrency}
+                onChange={handleChangeDriverTip}
+              />
+              <Button
+                color='primary'
+                disabled={parseFloat(value || 0) < 0 || parseFloat(value || 0) === driverTip || value === ''}
+                onClick={() => {
+                  handlerChangeOption(value)
+                  setvalue('')
+                }}
+              >
+                {t('APPLY_TIP', 'Apply Tip')}
+              </Button>
+            </WrapperInput>
+            {parseFloat(driverTip || 0) > 0 && (
+              <DriverTipMessage>
+                {t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount')}{!isFixedPriceType &&
+                  ` (${driverTip}%)`}: {isFixedPriceType ? parsePrice(driverTip) : parsePrice(cart?.driver_tip)}
+              </DriverTipMessage>
+            )}
+          </FormDriverTip>
+        ) : (
+          <WrapperTips>
+            {driverTipsOptions.map((option, i) => (
+              <TipCard
+                key={i}
+                className={`${option === driverTip ? 'active' : ''}`}
+                onClick={() => handlerChangeOption(option)}
+              >
+                {`${isFixedPriceType ? parsePrice(option) : `${option}%`}`}
+              </TipCard>
+            ))}
+          </WrapperTips>
+        )}
+      </>
+    </DriverTipContainer>
   )
 }
 
