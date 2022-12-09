@@ -73,10 +73,7 @@ const OrderProgressUI = (props) => {
     const deliveryTime = lastOrder?.delivery_datetime_utc
       ? parseDate(lastOrder?.delivery_datetime_utc, { outputFormat: 'YYYY-MM-DD hh:mm A' })
       : parseDate(lastOrder?.delivery_datetime, { utc: false, outputFormat: 'YYYY-MM-DD hh:mm A' })
-    const hour = time?.split(':')[0]
-    const minute = time?.split(':')[1]
-    const result = time ? (parseInt(hour, 10) * 60) + parseInt(minute, 10) : 0
-    const returnedDate = moment(new Date(deliveryTime.replace(/-/g, '/'))).add(result, 'minutes').format('hh:mm A')
+    const returnedDate = moment(new Date(deliveryTime.replace(/-/g, '/'))).add(time, 'minutes').format('hh:mm A')
     return returnedDate
   }
 
@@ -132,7 +129,7 @@ const OrderProgressUI = (props) => {
                     ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
                     : parseTime(lastOrder?.delivery_datetime, { utc: false })}
                     &nbsp;-&nbsp;
-                  {convertDiffToHours(lastOrder.delivery_type === 1 ? lastOrder?.business?.delivery_time : lastOrder?.business?.pickup_time)}
+                  {convertDiffToHours(lastOrder.eta_time)}
                 </span>
               </TimeWrapper>
             </ProgressTextWrapper>
