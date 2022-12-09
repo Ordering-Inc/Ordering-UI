@@ -49,7 +49,8 @@ export const FormControl = styled.form`
     border: 1px solid #BBB;
     border-radius: 30px;
     font-size: 16px;
-    padding: 7px 15px;
+    padding: 7px 15px !important;
+    height: 50px;
     outline: none;
     ::placeholder {
       color: #DBDCDB;
