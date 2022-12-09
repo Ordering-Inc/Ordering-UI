@@ -1,7 +1,7 @@
 {
-  "app_id": "ordering-react",
+  "app_id": "chew-website",
   "app_name": "Ordering",
-  "project": "luisv4",
+  "project": "rossproject",
   "api": {
     "url": "https://apiv4.ordering.co",
     "language": "en",
