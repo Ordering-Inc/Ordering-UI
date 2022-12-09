@@ -175,6 +175,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var acceptedStatus = [1, 2, 5, 6, 10, 11, 12];
   var completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
   var placeSpotTypes = [3, 4, 5];
+  var activeStatus = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23];
   var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var enabledPoweredByOrdering = configs === null || configs === void 0 ? void 0 : (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
   var showOrderActions = (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1;
@@ -646,7 +647,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     return (order === null || order === void 0 ? void 0 : order.delivery_type) === (type === null || type === void 0 ? void 0 : type.value);
   })) === null || _orderTypes$find === void 0 ? void 0 : _orderTypes$find.text), showDeliveryDate && /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
-  }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  }, activeStatus.includes(order === null || order === void 0 ? void 0 : order.status) ? (order === null || order === void 0 ? void 0 : order.eta_time) + 'min' : order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   })), (acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) || !isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_styles.ReOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
