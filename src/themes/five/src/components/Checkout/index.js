@@ -250,7 +250,7 @@ const CheckoutUI = (props) => {
 
   useEffect(() => {
     if (cart?.products?.length) return
-    handleStoreRedirect(cart?.business?.slug)
+    cart?.business?.slug && handleStoreRedirect(cart?.business?.slug)
   }, [cart?.products])
 
   return (
@@ -270,21 +270,25 @@ const CheckoutUI = (props) => {
 
           {!useKioskApp ? (
             <>
-              {(businessDetails?.loading || cartState.loading) ? (
-                <div style={{ width: '100%', marginBottom: '20px' }}>
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={150} />
-                </div>
-              ) : (
-                <AddressDetails
-                  location={businessDetails?.business?.location}
-                  businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
-                  isCartPending={cart?.status === 2}
-                  businessId={cart?.business_id}
-                  apiKey={configs?.google_maps_api_key?.value}
-                  mapConfigs={mapConfigs}
-                  isCustomerMode={isCustomerMode}
-                />
+              {cart?.business_id && (
+                <>
+                  {(businessDetails?.loading || cartState.loading) ? (
+                    <div style={{ width: '100%', marginBottom: '20px' }}>
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={150} />
+                    </div>
+                  ) : (
+                    <AddressDetails
+                      location={businessDetails?.business?.location}
+                      businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
+                      isCartPending={cart?.status === 2}
+                      businessId={cart?.business_id}
+                      apiKey={configs?.google_maps_api_key?.value}
+                      mapConfigs={mapConfigs}
+                      isCustomerMode={isCustomerMode}
+                    />
+                  )}
+                </>
               )}
               <UserDetailsContainer>
                 <WrapperUserDetails>
@@ -313,38 +317,40 @@ const CheckoutUI = (props) => {
                   )}
                 </WrapperUserDetails>
               </UserDetailsContainer>
-              <BusinessDetailsContainer>
-                {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
-                  <div>
+              {cart?.business_id && (
+                <BusinessDetailsContainer>
+                  {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
                     <div>
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <div>
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      </div>
                     </div>
-                  </div>
-                )}
-                {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
-                  <div>
-                    <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                  )}
+                  {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
                     <div>
-                      <p>{businessDetails?.business?.address}</p>
-                      <p>{businessDetails?.business?.name}</p>
-                      <p>{businessDetails?.business?.email}</p>
-                      <p>{businessDetails?.business?.cellphone}</p>
+                      <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                      <div>
+                        <p>{businessDetails?.business?.address}</p>
+                        <p>{businessDetails?.business?.name}</p>
+                        <p>{businessDetails?.business?.email}</p>
+                        <p>{businessDetails?.business?.cellphone}</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-                {businessDetails?.error && businessDetails?.error?.length > 0 && (
-                  <div>
-                    <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                    <NotFoundSource
-                      content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
-                    />
-                  </div>
-                )}
-              </BusinessDetailsContainer>
+                  )}
+                  {businessDetails?.error && businessDetails?.error?.length > 0 && (
+                    <div>
+                      <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                      <NotFoundSource
+                        content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
+                      />
+                    </div>
+                  )}
+                </BusinessDetailsContainer>
+              )}
               <CheckOutDivider />
             </>
           ) : (
@@ -529,11 +535,11 @@ const CheckoutUI = (props) => {
         {options.type === 1 &&
           validationFields?.fields?.checkout?.driver_tip?.enabled &&
           validationFields?.fields?.checkout?.driver_tip?.required &&
-          (Number(cart?.driver_tip) <= 0) && (
-            <WarningText>
-              {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
-            </WarningText>
-          )}
+        (Number(cart?.driver_tip) <= 0) && (
+          <WarningText>
+            {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
+          </WarningText>
+        )}
       </WrapperRightContainer>
       {windowSize.width < 576 && !cartState.loading && cart && cart?.status !== 2 && (
         <MobileWrapperPlaceOrderButton>
