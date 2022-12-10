@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useUtils, useLanguage, useSession, MessagesDashboard as MessagesController  } from 'ordering-components'
+import { useUtils, useLanguage, useSession, MessagesDasboard as MessagesController } from 'ordering-components'
 import { useForm, Controller } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
