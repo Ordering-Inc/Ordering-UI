@@ -406,8 +406,8 @@ const CheckoutUI = (props) => {
                 cart={cart}
                 useKioskApp={useKioskApp}
                 isDisabled={cart?.status === 2}
-                businessId={businessDetails?.business?.id}
-                isLoading={businessDetails.loading}
+                businessId={cart?.business_id ? businessDetails?.business?.id : -1}
+                isLoading={cart?.business_id ? businessDetails.loading : false}
                 paymethods={businessDetails?.business?.paymethods}
                 onPaymentChange={handlePaymethodChange}
                 errorCash={errorCash}
