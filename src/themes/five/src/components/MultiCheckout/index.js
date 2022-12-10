@@ -8,6 +8,7 @@ import {
   useSession,
   useValidationFields,
   useOrder,
+  useOrderingTheme,
   MultiCheckout as MultiCheckoutController
 } from 'ordering-components'
 
@@ -34,8 +35,10 @@ import {
   MultiCartPriceContainer,
   PaymentMethodContainer,
   WrapperPlaceOrderButton,
-  WarningText
+  WarningText,
+  DriverTipContainer
 } from './styles'
+import { DriverTips } from '../DriverTips'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -63,6 +66,7 @@ const MultiCheckoutUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
   const [customerState] = useCustomer()
+  const [orderingTheme] = useOrderingTheme()
   const [validationFields] = useValidationFields()
   const [{ user }] = useSession()
   const [orderState] = useOrder()
@@ -74,6 +78,10 @@ const MultiCheckoutUI = (props) => {
   const maximumCarts = 5
   const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || openCarts.length > maximumCarts
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
+  const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -193,6 +201,31 @@ const MultiCheckoutUI = (props) => {
                 />
               </PaymentMethodContainer>
 
+              {
+                isMultiDriverTips &&
+                orderState?.options.type === 1 &&
+                validationFields?.fields?.checkout?.driver_tip?.enabled &&
+                openCarts.every(cart => cart.business_id && cart.status !== 2) &&
+                driverTipsOptions.length > 0 &&
+                (
+                  <DriverTipContainer>
+                    <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                    <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                    <DriverTips
+                      isMulti
+                      carts={openCarts}
+                      businessIds={openCarts.map(cart => cart.business_id)}
+                      driverTipsOptions={driverTipsOptions}
+                      isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                      isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                      driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                        ? openCarts[0]?.driver_tip
+                        : openCarts[0]?.driver_tip_rate}
+                      useOrderContext
+                    />
+                  </DriverTipContainer>
+                )
+              }
             </WrapperLeftContent>
           </WrapperLeftContainer>
           <WrapperRightContainer>
@@ -205,7 +238,7 @@ const MultiCheckoutUI = (props) => {
                   <Cart
                     isCartPending={cart?.status === 2}
                     cart={cart}
-                    isMultiCheckout
+                    isMultiCheckout={!isMultiDriverTips}
                     isProducts={cart?.products?.length || 0}
                   />
                   <DriverTipDivider />

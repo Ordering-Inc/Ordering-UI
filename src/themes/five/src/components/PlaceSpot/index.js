@@ -36,7 +36,8 @@ const PlaceSpotUI = (props) => {
     setVehicle,
     setSpotState,
     handleChangeSpot,
-    setHasBusinessPlaces
+    setHasBusinessPlaces,
+    setPlaceSpotNumber
   } = props
 
   const el = useRef()
@@ -92,6 +93,7 @@ const PlaceSpotUI = (props) => {
       let spotNumber = parseFloat(e?.target?.value)
       spotNumber = isNaN(spotNumber) ? null : spotNumber
       setSpotNumber(spotNumber)
+      setPlaceSpotNumber(spotNumber)
     }
   }
 

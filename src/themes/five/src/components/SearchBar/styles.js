@@ -30,9 +30,17 @@ export const BusinessSearch = styled.div`
       transition: width 0.4s ease-in-out; 
     `}
 
+    ${({ starbucksStyle }) => starbucksStyle && css`
+        background-color: #F8F9FA;
+        border: 1px solid #DEE2E6;
+        font-size: 14px;
+        color: #000;
+        border-radius: 7.6px;
+    `}
+
     @media (min-width: 681px) {
       width: 100%;
-      ${({ isCustomLayout }) => !isCustomLayout && css`
+      ${({ isCustomLayout, starbucksStyle }) => !isCustomLayout && !starbucksStyle && css`
         width: 50%;
       `}
     }

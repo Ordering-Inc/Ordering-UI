@@ -38,10 +38,12 @@ export const OriginalHomeHero = (props) => {
   const [orderingTheme] = useOrderingTheme()
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
+  const [newAddressModalOpened, setNewAddressModalOpened] = useState(false)
 
   const isShowLoginAccount = !orderingTheme?.theme?.mobile_view_web?.components?.home?.components?.login_account?.hidden
   const bgImg = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_background?.components?.image
   const logo = orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image
+  const mobileBgImg = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_mobile_background?.components?.image
   const isFullScreen = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_image_fullscreen
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
   const handleFindBusinesses = () => {
@@ -93,12 +95,20 @@ export const OriginalHomeHero = (props) => {
     return () => setModals({ listOpen: false, formOpen: false })
   }, [])
 
+  useEffect(() => {
+    if (newAddressModalOpened) return
+    if (auth && !orderState.loading && !orderState?.options?.address?.location) {
+      setModals({ ...modals, listOpen: true })
+      setNewAddressModalOpened(true)
+    }
+  }, [auth, orderState, newAddressModalOpened])
+
   return (
     <HeroContainer
       mb={!auth && isShowLoginAccount && '30vh'}
-      bgimage={bgImg || (windowSize.width < 576
-        ? theme.images?.general?.homeHeroMobile
-        : theme.images?.general?.homeHero)}
+      bgimage={windowSize.width < 576
+        ? (mobileBgImg || theme.images?.general?.homeHeroMobile)
+        : (bgImg || theme.images?.general?.homeHero)}
       isFullScreen={isFullScreen}
     >
       <ContentWrapper>

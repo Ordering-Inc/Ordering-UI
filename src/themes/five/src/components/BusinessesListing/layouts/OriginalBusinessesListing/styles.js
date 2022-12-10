@@ -283,7 +283,6 @@ export const BusinessLogosWrapper = styled.div`
   width: 100%;
 `
 
-
 const BusinessLogoStyled = styled.div`
 min-width: 100px;
 min-height: 100px;
@@ -314,4 +313,9 @@ export const BusinessLogo = (props) => {
 export const BusinessLogosContainer = styled.div`
   display: flex;
   padding-bottom: 10px;
+`
+
+export const HeaderSearchMode = styled.div`
+  position: absolute;
+  width: 200px;
 `

@@ -13,7 +13,7 @@ import {
   useValidationFields,
   useConfig,
   useCustomer,
-  useEvent
+  useOrderingTheme
 } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UpsellingPage } from '../UpsellingPage'
@@ -89,19 +89,20 @@ const CheckoutUI = (props) => {
     instructionsOptions,
     deliveryOptionSelected,
     handleStoreRedirect,
-    onPlaceOrderClick
+    onPlaceOrderClick,
+    setPlaceSpotNumber,
+    placeSpotNumber
   } = props
 
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  // const [{ options, loading }, { changePaymethod }] = useOrder()
+  const [orderingTheme] = useOrderingTheme()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
-  const [events] = useEvent()
   const history = useHistory()
   const windowSize = useWindowSize()
 
@@ -115,9 +116,11 @@ const CheckoutUI = (props) => {
   const [isSuccess, setIsSuccess] = useState(false)
 
   const businessConfigs = businessDetails?.business?.configs ?? []
+  const isTableNumberEnabled = configs?.table_numer_enabled?.value
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
   const isWalletCreditPointsEnabled = businessConfigs.find(config => config.key === 'wallet_credit_point_enabled')?.value === '1'
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp
+  const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
@@ -128,7 +131,7 @@ const CheckoutUI = (props) => {
     placing ||
     errorCash ||
     loading ||
-    (options?.type === 3 && !(cartState?.cart?.spot_number || cart?.spot_number)) ||
+    (isTableNumberEnabled === '1' && (options?.type === 3 && !(cartState?.cart?.spot_number || cart?.spot_number || placeSpotNumber))) ||
     !cart?.valid_maximum ||
     (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
     // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
@@ -421,6 +424,35 @@ const CheckoutUI = (props) => {
               />
             </WalletPaymentOptionContainer>
           )}
+
+          {
+            isMultiDriverTips &&
+            !cartState.loading &&
+            cart &&
+            cart?.business_id &&
+            options.type === 1 &&
+            cart?.status !== 2 &&
+            validationFields?.fields?.checkout?.driver_tip?.enabled &&
+            driverTipsOptions.length > 0 &&
+            !useKioskApp &&
+            (
+              <DriverTipContainer>
+                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                <DriverTips
+                  businessId={cart?.business_id}
+                  driverTipsOptions={driverTipsOptions}
+                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate}
+                  cart={cart}
+                  useOrderContext
+                />
+              </DriverTipContainer>
+            )
+          }
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
@@ -433,10 +465,12 @@ const CheckoutUI = (props) => {
               cart={cart}
               spotNumberDefault={cartState?.cart?.spot_number ?? cart?.spot_number}
               vehicleDefault={cart?.vehicle}
+              setPlaceSpotNumber={setPlaceSpotNumber}
             />
           </SelectSpotContainer>
         )}
         {
+          !isMultiDriverTips &&
           !cartState.loading &&
           cart &&
           cart?.business_id &&
@@ -517,16 +551,17 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
-        {options?.type === 3 && !cart?.spot_number && (
+        {isTableNumberEnabled === '1' && (options?.type === 3 && !(cart?.spot_number || placeSpotNumber)) && (
           <WarningText>
             {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
           </WarningText>
         )}
 
         {options.type === 1 &&
-        validationFields?.fields?.checkout?.driver_tip?.enabled &&
-        validationFields?.fields?.checkout?.driver_tip?.required &&
-        (Number(cart?.driver_tip) <= 0) && (
+          validationFields?.fields?.checkout?.driver_tip?.enabled &&
+          validationFields?.fields?.checkout?.driver_tip?.required &&
+          (Number(cart?.driver_tip) <= 0) &&
+        (
           <WarningText>
             {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
           </WarningText>
@@ -541,9 +576,9 @@ const CheckoutUI = (props) => {
             onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
           >
             {!cart?.valid_maximum ? (
-                `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
+              `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
             ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
-                `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+              `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
             ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
           </Button>
         </MobileWrapperPlaceOrderButton>

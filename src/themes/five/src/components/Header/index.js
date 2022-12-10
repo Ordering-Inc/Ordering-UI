@@ -26,7 +26,8 @@ import {
   FarAwayMessage,
   Divider,
   AddressFormWrapper,
-  LanguageSelectorWrapper
+  LanguageSelectorWrapper,
+  HeaderSearchMode
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -48,6 +49,7 @@ import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { getDistance } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
+import { SearchBar } from '../SearchBar'
 
 export const Header = (props) => {
   const {
@@ -55,7 +57,9 @@ export const Header = (props) => {
     location,
     isShowOrderOptions,
     isHideSignup,
-    isCustomerMode
+    isCustomerMode,
+    searchValue,
+    setSearchValue
   } = props
 
   const { pathname } = useLocation()
@@ -68,7 +72,7 @@ export const Header = (props) => {
   const theme = useTheme()
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
-  const [{ theme: orderingTheme }] = useOrderingTheme()
+  const [orderingTheme] = useOrderingTheme()
 
   const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -79,7 +83,6 @@ export const Header = (props) => {
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
-
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
 
@@ -93,7 +96,7 @@ export const Header = (props) => {
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const handleSuccessSignup = (user) => {
     login({
@@ -310,6 +313,18 @@ export const Header = (props) => {
               )}
             </Menu>
           )}
+          {windowSize.width > 1200 && window.location.pathname === '/search' && (
+            <HeaderSearchMode>
+              <SearchBar
+                lazyLoad
+                search={searchValue}
+                placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
+                starbucksStyle
+                onSearch={(value) => setSearchValue(value)}
+                handleCustomEnter={() => events.emit('go_to_page', { page: 'business_search' })}
+              />
+            </HeaderSearchMode>
+          )}
           {onlineStatus && (
             <RightHeader id='right-side'>
               <Menu isCustomerMode={isCustomerMode}>
@@ -358,6 +373,7 @@ export const Header = (props) => {
                           withLogout
                           isCustomerMode={isCustomerMode}
                           open={openPopover.user}
+                          handleOpenAddressModal={() => openModal('address')}
                           onClick={() => handleTogglePopover('user')}
                           onClose={() => handleClosePopover('user')}
                         />
@@ -423,7 +439,7 @@ export const Header = (props) => {
         )}
         {modalIsOpen && (
           <Modal
-            title={(!auth && modalSelected === 'address') && t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+            {...(!auth && modalSelected === 'address' && { title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?') })}
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
             width={modalSelected === 'address' ? orderState?.options?.user_id ? '70%' : '50%' : '700px'}

@@ -54,6 +54,10 @@ export const ProductList = styled.div`
   box-sizing: border-box;
   align-items: center;
 
+  button {
+    padding: 0px;
+  }
+
   #orderItAgain > div {
     width: 350px;
     ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'starbucks' && css`
