@@ -375,7 +375,7 @@ const CheckoutUI = (props) => {
             </div>
           )}
 
-          {!useKioskApp && (
+          {!useKioskApp && cart?.business_id && (
             <>
               {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
                 <DeliveryOptionsContainer>
@@ -432,7 +432,7 @@ const CheckoutUI = (props) => {
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
-        {!cartState.loading && placeSpotsEnabled && (
+        {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
             <PlaceSpot
               isCheckout
