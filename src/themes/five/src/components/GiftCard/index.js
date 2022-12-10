@@ -4,6 +4,7 @@ import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
 import BsGift from '@meronex/icons/bs/BsGift'
 import { PurchaseGiftCard } from '../PurchaseGiftCard'
+import { RedeemGiftCard } from '../RedeemGiftCard'
 
 import {
   Container,
@@ -32,6 +33,7 @@ export const GiftCard = (props) => {
           outline
           color='primary'
           className='light'
+          onClick={() => setOpenModal('redeem')}
         >
           {t('REDEEM_GIFT_CARD', 'Redeem gift card')}
         </Button>
@@ -42,6 +44,13 @@ export const GiftCard = (props) => {
         onClose={() => setOpenModal(null)}
       >
         <PurchaseGiftCard />
+      </Modal>
+      <Modal
+        width='700px'
+        open={openModal === 'redeem'}
+        onClose={() => setOpenModal(null)}
+      >
+        <RedeemGiftCard />
       </Modal>
     </Container>
   )

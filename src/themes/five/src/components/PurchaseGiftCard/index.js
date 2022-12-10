@@ -17,7 +17,7 @@ const PurchaseGiftCardUI = (props) => {
     productsListState,
     selectedProduct,
     setSelectedProduct,
-    hanldeAccept
+    handleAccept
   } = props
   const [, t] = useLanguage()
 
@@ -52,7 +52,7 @@ const PurchaseGiftCardUI = (props) => {
         type='button'
         color='primary'
         disabled={!selectedProduct}
-        onClick={() => hanldeAccept()}
+        onClick={() => handleAccept()}
       >
         {t('ACCEPT', 'Accept')}
       </Button>
