@@ -4,6 +4,10 @@ import styled, { css } from 'styled-components'
 export const ContainerCard = styled.div` 
   width: 100%;
   position: relative;
+  @media (min-width: 768px) {
+    padding: 7px 10px 7px 20px;
+    margin-bottom: 5px;
+  }
 `
 
 export const WrapperBusinessCard = styled.div`
