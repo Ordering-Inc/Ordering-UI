@@ -165,6 +165,7 @@ const BusinessesListingUI = (props) => {
                     <WrapperSearch isCustomLayout={isCustomLayout}>
                       <SearchBar
                         lazyLoad
+                        isStarbucks
                         search={searchValue}
                         isCustomLayout
                         placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
@@ -240,6 +241,7 @@ const BusinessesListingUI = (props) => {
                   <WrapperSearch isCustomLayout={isCustomLayout}>
                     <SearchBar
                       lazyLoad
+                      isStarbucks
                       search={searchValue}
                       isCustomLayout={isCustomLayout}
                       placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
