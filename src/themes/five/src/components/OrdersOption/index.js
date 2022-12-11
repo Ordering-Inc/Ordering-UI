@@ -76,7 +76,31 @@ const OrdersOptionUI = (props) => {
   const { width } = useWindowSize()
   const { loading, error, orders: values } = orderList
 
-  const orders = customArray || values || []
+  const _orders = customArray || values || []
+  const uniqueOrders = []
+  const orders = _orders.map(order => order?.cart_group_id
+    ? _orders
+      .filter(_order => _order?.cart_group_id === order?.cart_group_id)
+      ?.reduce((orderCompleted, currentOrder) => ({
+        ...orderCompleted,
+        total: orderCompleted.summary?.total + currentOrder?.summary?.total,
+        business: [orderCompleted.business, currentOrder.business].flat(),
+        business_id: [orderCompleted.business_id, currentOrder.business_id].flat(),
+        id: [orderCompleted.id, currentOrder.id].flat(),
+        review: orderCompleted.review && currentOrder.review,
+        user_review: orderCompleted.user_review && currentOrder.user_review,
+        products: [orderCompleted.products, currentOrder.products].flat()
+      }))
+    : order)
+    .filter(order => {
+      const isDuplicate = uniqueOrders.includes(order?.cart_group_id)
+      if (!isDuplicate) {
+        uniqueOrders.push(order?.cart_group_id)
+        return true
+      }
+      return false
+    })
+
   const isShowTitles = businessesIds
     ? orders && orders.length > 0 && !orders.map(order => businessesIds && businessesIds.includes(order.business_id)).every(i => !i)
     : orders.length > 0

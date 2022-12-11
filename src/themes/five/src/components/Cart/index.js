@@ -122,8 +122,35 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    if (checkoutMultiBusinessEnabled && openCarts.length > 1) {
-      events.emit('go_to_page', { page: 'multi_checkout' })
+    const cartSelectedHasGroup = cart?.group?.uuid
+    const cartFilterValidation = cart => cart?.valid && cart?.status !== 2
+    const cartsGroupLength = cartSelectedHasGroup ? Object.values(orderState.carts).filter(_cart => _cart?.group?.uuid === cartSelectedHasGroup && cartFilterValidation(_cart))?.length : 0
+    if (cartsGroupLength > 1 && checkoutMultiBusinessEnabled) {
+      events.emit('go_to_page', { page: 'multi_checkout', params: { cartUuid: cart?.group?.uuid } })
+      events.emit('cart_popover_closed')
+      return
+    }
+    const cartGroupsCount = {}
+    // eslint-disable-next-line no-unused-expressions
+    Object.values(orderState.carts).filter(_cart => cartFilterValidation(_cart))?.forEach(_cart => {
+      if (cartGroupsCount[_cart?.group?.uuid]) {
+        cartGroupsCount[_cart?.group?.uuid] += 1
+      } else {
+        cartGroupsCount[_cart?.group?.uuid] = 1
+      }
+    })
+    let groupForTheCart
+    const groupForAddCartArray = Object.keys(cartGroupsCount).filter(cartGroupUuid => cartGroupsCount[cartGroupUuid] > 0 && cartGroupsCount[cartGroupUuid] < 5)
+    const max = Math.max(...groupForAddCartArray.map(uuid => cartGroupsCount[uuid]))
+    const indexes = groupForAddCartArray.filter(uuid => cartGroupsCount[uuid] === max)
+    if (indexes?.length > 1) {
+      groupForTheCart = indexes.find(uuid => uuid !== 'undefined')
+    } else {
+      groupForTheCart = indexes[0]
+    }
+
+    if (checkoutMultiBusinessEnabled && !cartSelectedHasGroup && openCarts?.length > 1 && groupForTheCart) {
+      events.emit('go_to_page', { page: 'multi_cart', params: { cartUuid: cart.uuid, cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart } })
     } else {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
     }

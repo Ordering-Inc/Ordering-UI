@@ -22,7 +22,8 @@ import {
   TitleContainer,
   Map,
   FavoriteWrapper,
-  ReviewWrapper
+  ReviewWrapper,
+  MultiLogosContainer
 } from './styles'
 
 import {
@@ -59,13 +60,15 @@ const SingleOrderCardUI = (props) => {
   const [isProductReviewed, setIsProductReviewed] = useState(false)
   const [isDriverReviewed, setIsDriverReviewed] = useState(false)
 
-  const handleClickCard = (e, uuid) => {
+  const handleClickCard = (e, order) => {
     if (e.target.closest('.favorite') || e.target.closest('.review') || e.target.closest('.reorder')) return
 
     if (customArray) {
-      onRedirectPage({ page: 'checkout', params: { cartUuid: uuid } })
+      onRedirectPage({ page: 'checkout', params: { cartUuid: order.uuid } })
     } else {
-      onRedirectPage({ page: 'order_detail', params: { orderId: uuid } })
+      order?.cart_group_id
+        ? onRedirectPage({ page: 'multi_orders', params: { orderId: order.cart_group_id } })
+        : onRedirectPage({ page: 'order_detail', params: { orderId: order.uuid } })
     }
   }
 
@@ -141,7 +144,7 @@ const SingleOrderCardUI = (props) => {
         id='order-card'
         isBusinessesPage={isBusinessesPage}
         isCustomerMode={isCustomerMode}
-        onClick={(e) => handleClickCard(e, order?.uuid)}
+        onClick={(e) => handleClickCard(e, order)}
       >
         <Content isCustomerMode={isCustomerMode}>
           {isSkeleton ? (
@@ -149,7 +152,28 @@ const SingleOrderCardUI = (props) => {
           ) : (
             <>
               {!isCustomerMode && showBusinessLogo && (
-                <BusinessLogoWrapper bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} />
+                <>
+                  {order?.business?.length > 1 ? (
+                    <MultiLogosContainer>
+                      {order?.business?.map((business, i) => (
+                        <React.Fragment key={business?.id}>
+                          {i > 1 ? (
+                            <p>
+                              + {order?.business?.length - 2}
+                            </p>
+                          ) : (
+                            <BusinessLogoWrapper
+                              bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')}
+                              isMulti
+                            />
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </MultiLogosContainer>
+                  ) : (
+                    <BusinessLogoWrapper bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} />
+                  )}
+                </>
               )}
               {isCustomerMode && showBusinessLogo && (
                 <>
@@ -163,7 +187,7 @@ const SingleOrderCardUI = (props) => {
             </>
           )}
 
-          <BusinessInformation activeOrders>
+          <BusinessInformation activeOrders isMultiCart={order?.business?.length > 1}>
             {isCustomerMode ? (
               <TitleContainer>
                 <h2>{isSkeleton ? <Skeleton width={120} /> : order.business?.name}</h2>
@@ -174,7 +198,7 @@ const SingleOrderCardUI = (props) => {
                 </Price>
               </TitleContainer>
             ) : (
-              <h2>{isSkeleton ? <Skeleton width={120} /> : order.business?.name}</h2>
+              <h2>{isSkeleton ? <Skeleton width={120} /> : order?.business?.length > 1 ? `${t('GROUP_ORDER', 'Group Order')} ${t('No', 'No')}. ${order?.cart_group_id}` : order.business?.name}</h2>
             )}
             {
               isSkeleton ? (
@@ -186,7 +210,7 @@ const SingleOrderCardUI = (props) => {
                   {order?.id && (
                     <>
                       <BsDot />
-                      <p name='order_number'>{t('ORDER_NUM', 'Order No.')} {order.id}</p>
+                      <p name='order_number'>{order?.business?.length > 1 ? `${order?.business?.length} ${t('ORDERS', 'orders')}` : `${t('ORDER_NUM', 'Order No.')} ${order.id}`}</p>
                     </>
                   )}
                   {showDate && (
@@ -209,7 +233,7 @@ const SingleOrderCardUI = (props) => {
               {
                 !pastOrders && (
                   <h2>
-                    {isSkeleton ? <Skeleton width={50} /> : parsePrice(order?.summary?.total || order?.total)}
+                    {isSkeleton ? <Skeleton width={50} /> : parsePrice(order?.business?.length > 1 ? order?.total : order?.summary?.total || order?.total)}
                   </h2>
                 )
               }
@@ -234,13 +258,15 @@ const SingleOrderCardUI = (props) => {
               )}
             </ButtonWrapper>
           )}
-          <FavoriteWrapper onClick={() => handleChangeFavorite(order)} className='favorite'>
-            {isSkeleton ? <Skeleton width={20} height={20} /> : (
-              <>
-                {order?.favorite ? <Like /> : <DisLike />}
-              </>
-            )}
-          </FavoriteWrapper>
+          {!order?.business?.length && (
+            <FavoriteWrapper onClick={() => handleChangeFavorite(order)} className='favorite'>
+              {isSkeleton ? <Skeleton width={20} height={20} /> : (
+                <>
+                  {order?.favorite ? <Like /> : <DisLike />}
+                </>
+              )}
+            </FavoriteWrapper>
+          )}
         </Content>
       </Container>
       {isReviewOpen && (

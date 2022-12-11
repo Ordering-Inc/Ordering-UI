@@ -56,7 +56,8 @@ const MultiCheckoutUI = (props) => {
     handleSelectPaymethod,
     handleSelectWallet,
     handlePaymethodDataChange,
-    onRedirectPage
+    onRedirectPage,
+    cartGroup
   } = props
 
   const [, t] = useLanguage()
@@ -232,7 +233,7 @@ const MultiCheckoutUI = (props) => {
             <WrapperPlaceOrderButton>
               <Button
                 color='primary'
-                disabled={isDisablePlaceOrderButton || placing}
+                disabled={isDisablePlaceOrderButton || placing || cartGroup?.loading}
                 onClick={handlePlaceOrder}
               >
                 {placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
