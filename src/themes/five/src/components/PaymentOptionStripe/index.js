@@ -148,8 +148,9 @@ export const PaymentCard = (props) => {
     handleDeleteCard,
     card,
     handleCardClick,
-    onSelectCard 
+    onSelectCard
   } = props
+
   const [, t] = useLanguage()
   const theme = useTheme()
   const [isShowActions, setIsShowActions] = useState(false)
