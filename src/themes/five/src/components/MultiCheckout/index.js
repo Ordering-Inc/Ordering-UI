@@ -57,7 +57,8 @@ const MultiCheckoutUI = (props) => {
     handleSelectWallet,
     handlePaymethodDataChange,
     onRedirectPage,
-    cartGroup
+    cartGroup,
+    cartUuid
   } = props
 
   const [, t] = useLanguage()
@@ -191,6 +192,7 @@ const MultiCheckoutUI = (props) => {
                   handleSelectPaymethod={handleSelectPaymethod}
                   handleSelectWallet={handleSelectWallet}
                   handlePaymethodDataChange={handlePaymethodDataChange}
+                  cartUuid={cartUuid}
                 />
               </PaymentMethodContainer>
 
