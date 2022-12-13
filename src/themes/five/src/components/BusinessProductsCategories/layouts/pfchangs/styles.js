@@ -66,19 +66,35 @@ export const CategoryPFChangs = styled.div`
   ${({ active }) => active && css`
     span {
       background: ${({ theme }) => theme.colors.primary};
-      margin: 0 40px;
+      margin: 0 5px;
       height: 4px;
       margin-bottom: 10px;
+      @media (min-width: 580px){
+        margin: 0 30px;
+        margin-bottom: 10px;
+      }
+      @media (min-width: 768px){
+        margin: 0 40px;
+        margin-bottom: 10px;
+      }
     }
   `}
   &:hover {
     ${({ hover }) => hover && css`
       span {
-          background: ${({ theme }) => theme.colors.primary};
-          margin: 0 40px;
-          height: 4px;
+        background: ${({ theme }) => theme.colors.primary};
+        margin: 0 5px;
+        height: 4px;
+        margin-bottom: 10px;
+        @media (min-width: 580px){
+          margin: 0 30px;
           margin-bottom: 10px;
         }
+        @media (min-width: 768px){
+          margin: 0 40px;
+          margin-bottom: 10px;
+        }
+      }
     `}
   }
 `

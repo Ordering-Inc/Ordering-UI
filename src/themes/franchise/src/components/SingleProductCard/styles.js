@@ -18,7 +18,7 @@ export const CardContainer = styled.div`
 
   @media (min-width: 576px) {
     margin: 10px;
-    width: calc(100% - 40px);
+    width: calc(50% - 40px);
   }
 
   ${({ isCartOnProductsList }) => isCartOnProductsList ? css`

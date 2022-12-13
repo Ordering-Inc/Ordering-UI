@@ -9,21 +9,32 @@ export const Tabs = styled.div`
 `
 
 export const Tab = styled.div`
-  padding: 0px 40px !important;
-  margin: 0px 40px;
+  padding: 0px 15px !important;
+  margin: 0px 5px;
+  font-size: 15px;
   cursor: pointer;
   border: 4px solid ${({ theme }) => theme.colors.primary};
   height: 70px;
-  width: 130px;
+  width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 20px;
   margin-bottom: 5px;
   color: ${({ theme }) => theme.colors.tertiary || '#fff'};
-  @media (min-width: 480px){
+
+  @media (min-width: 580px){
+    width: 170px;
+    padding: 0px 30px !important;
+    margin: 0px 25px;
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+  @media (min-width: 769px){
     width: 230px;
+    padding: 0px 40px !important;
+    margin: 0px 40px;
+    margin-bottom: 5px;
     font-size: 22px;
   }
 `

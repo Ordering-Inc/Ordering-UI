@@ -4,6 +4,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 95px;
   border-bottom: ${({ headerBorderBottom }) => headerBorderBottom || '1px solid #E9ECEF'};
   background-color: ${({ headerBackgroundColor }) => headerBackgroundColor || ''};
 
@@ -19,8 +20,11 @@ export const InnerHeader = styled.div`
   color: #FFF;
   justify-content: space-between;
   width: 98%;
-  margin: 15px auto;
+  margin: auto;
   align-items: center;
+  @media (min-width: 786px){
+    margin: 15px auto;
+  }
 `
 
 export const LogoHeader = styled.div`

@@ -17,7 +17,8 @@ import {
   useSession,
   useOrder,
   useConfig,
-  useOrderingTheme
+  useOrderingTheme,
+  useApi
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { Alert as AlertPFchangs } from '../Confirm/layouts/pfchangs'
@@ -68,6 +69,9 @@ const AddressFormUI = (props) => {
   const [{ auth }] = useSession()
   const [orderingTheme] = useOrderingTheme()
   const theme = useTheme()
+  const [ordering] = useApi()
+  const isAlsea = ordering.project === 'alsea'
+
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -88,7 +92,7 @@ const AddressFormUI = (props) => {
     : Alert
   const isHideAddressComponentsGuest = pfchangs && !auth
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
-  const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
+  const googleMapsApiKey = isAlsea ? theme?.google_maps_api_key : configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
     configState.configs?.google_autocomplete_selection_required?.value === 'true'
 

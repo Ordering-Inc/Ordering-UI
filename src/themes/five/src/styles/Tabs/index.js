@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Tabs = styled.div`
   display: flex;  
+  justify-content: center;
   ${({ variant }) => variant === 'primary' && css`
     color: ${props => props.theme.colors.darkTextColor};
   `}

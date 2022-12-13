@@ -35,6 +35,7 @@ export const ErrorMessage = styled.div`
 export const ProductsListing = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: ${({ isSubcategorySearch }) => isSubcategorySearch ? '0px' : '45px'};
   ${({ theme }) => theme?.business_view?.components?.categories?.components?.layout?.type === 'twocategories' && css`
     margin-bottom: 0;
