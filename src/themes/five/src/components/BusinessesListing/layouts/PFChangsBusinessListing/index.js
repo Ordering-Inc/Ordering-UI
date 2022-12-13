@@ -235,7 +235,7 @@ const BusinessesListingUI = (props) => {
         <RightContainer>
           {showGoToStore && (
             <Button color='primary' onClick={() => onBusinessClick(business)}>
-              {t('GO_TO_BUSINESS', 'Go to business')}
+              {t('ORDER_NOW', 'Order now')}
             </Button>
           )}
         </RightContainer>
