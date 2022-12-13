@@ -32,7 +32,7 @@ var ProductsContainer = function ProductsContainer(props) {
 exports.ProductsContainer = ProductsContainer;
 var ErrorMessage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 20px;\n  width: 100%;\n  background-color: #CCCCCC;\n  margin: 0px 15px;\n  color: #D81313;\n  font-weight: bold;\n"])));
 exports.ErrorMessage = ErrorMessage;
-var ProductsListing = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  margin-bottom: ", ";\n  ", "\n"])), function (_ref2) {
+var ProductsListing = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin-bottom: ", ";\n  ", "\n"])), function (_ref2) {
   var isSubcategorySearch = _ref2.isSubcategorySearch;
   return isSubcategorySearch ? '0px' : '45px';
 }, function (_ref3) {

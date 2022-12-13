@@ -42,13 +42,13 @@ var CategoriesContainer = _styledComponents.default.div(_templateObject || (_tem
 exports.CategoriesContainer = CategoriesContainer;
 var CategoryPFChangs = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  ", "\n  &:hover {\n    ", "\n  }\n"])), function (_ref6) {
   var active = _ref6.active;
-  return active && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    span {\n      background: ", ";\n      margin: 0 40px;\n      height: 4px;\n      margin-bottom: 10px;\n    }\n  "])), function (_ref7) {
+  return active && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    span {\n      background: ", ";\n      margin: 0 5px;\n      height: 4px;\n      margin-bottom: 10px;\n      @media (min-width: 580px){\n        margin: 0 30px;\n        margin-bottom: 10px;\n      }\n      @media (min-width: 768px){\n        margin: 0 40px;\n        margin-bottom: 10px;\n      }\n    }\n  "])), function (_ref7) {
     var theme = _ref7.theme;
     return theme.colors.primary;
   });
 }, function (_ref8) {
   var hover = _ref8.hover;
-  return hover && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      span {\n          background: ", ";\n          margin: 0 40px;\n          height: 4px;\n          margin-bottom: 10px;\n        }\n    "])), function (_ref9) {
+  return hover && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      span {\n        background: ", ";\n        margin: 0 5px;\n        height: 4px;\n        margin-bottom: 10px;\n        @media (min-width: 580px){\n          margin: 0 30px;\n          margin-bottom: 10px;\n        }\n        @media (min-width: 768px){\n          margin: 0 40px;\n          margin-bottom: 10px;\n        }\n      }\n    "])), function (_ref9) {
     var theme = _ref9.theme;
     return theme.colors.primary;
   });

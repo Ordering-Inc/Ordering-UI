@@ -13,7 +13,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-height: 400px;  \n  background: ", ";\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n  }\n\n    width: 100%;\n    margin: 10px 0px;\n    @media (min-width: 576px) {\n      margin: 10px;\n      width: calc(100% - 40px);\n    }\n\n    transition: box-shadow 0.3s ease 0s;\n  \n  &:hover{\n    box-shadow: 0 2px 6px 3px ", ";\n  }\n\n  ", "\n\n"])), function (_ref) {
+var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  /* min-height: 400px; */\n  min-height: 250px;\n  background: ", ";\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  width: calc(50% - 40px);\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n  }\n\n    width: 100%;\n    margin: 10px 0px;\n    @media (min-width: 320px) {\n      margin: 10px;\n      width: calc(56% - 40px);\n    }\n    @media (min-width: 384px ) {\n      margin: 10px;\n      width: calc(54% - 40px);\n    }\n    @media (min-width: 551px ) {\n      margin: 10px;\n      width: calc(52% - 40px);\n      min-height: 325px;\n    }\n    @media (min-width: 769px){\n      min-height: 400px;\n    }\n\n    transition: box-shadow 0.3s ease 0s;\n  \n  &:hover{\n    box-shadow: 0 2px 6px 3px ", ";\n  }\n\n  ", "\n\n"])), function (_ref) {
   var _theme$colors;
   var soldOut = _ref.soldOut,
     theme = _ref.theme;
@@ -30,7 +30,7 @@ var CardContainer = _styledComponents.default.div(_templateObject || (_templateO
   return isCartOnProductsList ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    @media (min-width: 993px) {\n      width: calc(50% - 40px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
     var _props$theme;
     return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        margin: 10px 0px 10px 20px;\n      "])));
-  }) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    @media (min-width: 681px) {\n      width: calc(49% - 20px);\n    }\n\n    @media (min-width: 1200px) {\n      width: calc(33% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n    @media (min-width: 1500px) {\n      width: calc(25% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
+  }) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    @media (min-width: 681px) {\n      width: calc(50% - 20px);\n    }\n\n    @media (min-width: 1200px) {\n      width: calc(33% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n    @media (min-width: 1500px) {\n      width: calc(25% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
     var _props$theme2;
     return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        margin: 10px 0px 10px 20px;\n      "])));
   }, function (props) {
@@ -58,9 +58,9 @@ var CardInfo = _styledComponents.default.div(_templateObject10 || (_templateObje
   return props.theme.colors.darkTextColor;
 });
 exports.CardInfo = CardInfo;
-var WrapLogo = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: relative;\n  height: 300px;\n  width: 100%;\n"])));
+var WrapLogo = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: relative;\n  /* height: 300px; */\n  height: 150px;\n  width: 100%;\n  @media (min-width: 551px ) {\n    height: 225px;\n  }\n  @media (min-width: 769px){\n    height: 300px;\n  }\n"])));
 exports.WrapLogo = WrapLogo;
-var CardLogoStyled = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 300px;\n"])));
+var CardLogoStyled = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  /* min-height: 300px; */\n  min-height: 150px;\n  @media (min-width: 551px ) {\n    min-height: 225px;\n  }\n  @media (min-width: 769px){\n      min-height: 300px;\n  }\n"])));
 var CardLogo = function CardLogo(props) {
   var style = {};
   if (props.bgimage) {
