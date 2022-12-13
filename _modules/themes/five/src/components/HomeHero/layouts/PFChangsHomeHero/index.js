@@ -222,7 +222,9 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     bgimage: homeBackgroundImage || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero)
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
     contentPosition: contentPosition
-  }, /*#__PURE__*/_react.default.createElement(_styles.SearchLocationsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, auth ? "".concat(t('WELCOME_BACK', 'Welcome back'), " ").concat(user === null || user === void 0 ? void 0 : user.name) : t('WELCOME', 'Welcome')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('SEARCH_OR_VIEW_LOCATIONS_BELOW', 'Search or view nearby locations below'))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.SearchLocationsContainer, {
+    id: "search-container"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, auth ? "".concat(t('WELCOME_BACK', 'Welcome back'), " ").concat(user === null || user === void 0 ? void 0 : user.name) : t('WELCOME', 'Welcome')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('SEARCH_OR_VIEW_LOCATIONS_BELOW', 'Search or view nearby locations below'))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
     orderTypeSelected: orderTypeSelected
   }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     color: orderTypeSelected === 2 ? '#000' : (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#FFF',
@@ -241,15 +243,13 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     withIcon: true
   }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_IosSend.default, {
     className: "geolocation-button"
-  })), !isResponsive && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCities && /*#__PURE__*/_react.default.createElement(_styles.ViewLocationsContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: "primary",
-    style: {
-      width: '100%'
-    },
+  })), /*#__PURE__*/_react.default.createElement(_styles.StartOrder, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    onClick: handleAddressInput
+  }, t('START_ORDER', 'Start order'))), !isResponsive && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCities && /*#__PURE__*/_react.default.createElement(_styles.ViewLocationsContainer, null, /*#__PURE__*/_react.default.createElement("p", {
     onClick: function onClick() {
       return !showAllLocations ? setShowAllLocations(true) : setShowAllLocations(false);
     }
-  }, showAllLocations ? t('HIDE_ALL_CITIES', 'Hide all cities') : t('VIEW_ALL_CITIES', 'View all cities'))), /*#__PURE__*/_react.default.createElement(_styles.Diviver, null), /*#__PURE__*/_react.default.createElement(_PFChangsBusinessListing.PFChangsBusinesListing, _extends({}, businessListingProps, {
+  }, showAllLocations ? t('HIDE_RESTAURANTS_BY_CITY', 'Hide cities') : t('VIEW_RESTAURANTS_BY_CITY', 'View restaurants by city'))), /*#__PURE__*/_react.default.createElement(_styles.Diviver, null), /*#__PURE__*/_react.default.createElement(_PFChangsBusinessListing.PFChangsBusinesListing, _extends({}, businessListingProps, {
     filterByAddress: true,
     filterByCity: showAllLocations,
     setBusinessesLocations: setBusinessesLocations,

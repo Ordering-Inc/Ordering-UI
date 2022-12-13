@@ -4,11 +4,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperMap = exports.WrapInput = exports.ViewLocationsContainer = exports.SearchLocationsContainer = exports.HeroContainerStyled = exports.HeroContainer = exports.Diviver = exports.DeliveryPickupContainer = exports.ContentWrapper = exports.ContainerResponsiveWrapper = exports.AddressInputContainer = exports.ActiveMapContainer = void 0;
+exports.WrapperMap = exports.WrapInput = exports.ViewLocationsContainer = exports.StartOrder = exports.SearchLocationsContainer = exports.HeroContainerStyled = exports.HeroContainer = exports.Diviver = exports.DeliveryPickupContainer = exports.ContentWrapper = exports.ContainerResponsiveWrapper = exports.AddressInputContainer = exports.ActiveMapContainer = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -79,7 +79,7 @@ var DeliveryPickupContainer = _styledComponents.default.div(_templateObject10 ||
 exports.DeliveryPickupContainer = DeliveryPickupContainer;
 var AddressInputContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n  position: relative;\n  button {\n    height: 46px;\n    margin-left: 10px;\n  }\n  .geolocation-button {\n    position: absolute;\n    top: 30px;\n    right: 10px;\n    width: 25px;\n    height: 25px;\n    cursor: pointer;\n  }\n"])));
 exports.AddressInputContainer = AddressInputContainer;
-var ViewLocationsContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  width: 100%;\n  button { \n    width: 100%;\n  }\n"])));
+var ViewLocationsContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  width: 100%;\n  display: flex;\n  p {\n    font-size: 18px;\n    cursor: pointer;\n    margin: 0;\n    text-decoration: underline;\n  }\n  button { \n    width: 100%;\n  }\n"])));
 exports.ViewLocationsContainer = ViewLocationsContainer;
 var Diviver = _styledComponents.default.hr(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  background-color: rgb(230, 230, 230);\n  display: block;\n  height: 1px;\n  margin: 24px 0px;\n"])));
 exports.Diviver = Diviver;
@@ -97,3 +97,5 @@ var ActiveMapContainer = _styledComponents.default.span(_templateObject17 || (_t
 exports.ActiveMapContainer = ActiveMapContainer;
 var ContainerResponsiveWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  padding: 20px;\n  p {\n    color: #fff;\n  }\n"])));
 exports.ContainerResponsiveWrapper = ContainerResponsiveWrapper;
+var StartOrder = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  margin-top: 10px;\n  button {\n    width: 100%;\n  }\n"])));
+exports.StartOrder = StartOrder;

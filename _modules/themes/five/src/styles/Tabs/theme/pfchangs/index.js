@@ -17,7 +17,7 @@ var Tabs = _styledComponents.default.div(_templateObject || (_templateObject = _
   });
 });
 exports.Tabs = Tabs;
-var Tab = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 0px 40px !important;\n  margin: 0px 40px;\n  cursor: pointer;\n  border: 4px solid ", ";\n  height: 70px;\n  width: 230px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n  font-size: 22px;\n  margin-bottom: 5px;\n  color: ", ";\n"])), function (_ref2) {
+var Tab = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 0px 40px !important;\n  margin: 0px 40px;\n  cursor: pointer;\n  border: 4px solid ", ";\n  height: 70px;\n  width: 130px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n  font-size: 20px;\n  margin-bottom: 5px;\n  color: ", ";\n  @media (min-width: 480px){\n    width: 230px;\n    font-size: 22px;\n  }\n"])), function (_ref2) {
   var theme = _ref2.theme;
   return theme.colors.primary;
 }, function (_ref3) {

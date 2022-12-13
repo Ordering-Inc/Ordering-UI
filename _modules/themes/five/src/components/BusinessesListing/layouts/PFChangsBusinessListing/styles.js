@@ -58,7 +58,7 @@ var LocationSelect = _styledComponents.default.select(_templateObject10 || (_tem
 exports.LocationSelect = LocationSelect;
 var LoadMoreButtonWrap = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: sticky;\n  bottom: 0;\n  button {\n    width: 100%;\n  }\n"])));
 exports.LoadMoreButtonWrap = LoadMoreButtonWrap;
-var NotFoundSourceWrapper = _styledComponents.default.span(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  > div{\n    margin: 0 auto;\n  }\n  h1{\n    color: #fff;\n  }\n"])));
+var NotFoundSourceWrapper = _styledComponents.default.span(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  > div{\n    margin: 0 auto !important;\n  }\n  h1{\n    color: #fff;\n  }\n"])));
 exports.NotFoundSourceWrapper = NotFoundSourceWrapper;
 var DeliveryTextWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  width: 100%;\n  p {\n    color: #fff;\n  }\n"])));
 exports.DeliveryTextWrapper = DeliveryTextWrapper;
