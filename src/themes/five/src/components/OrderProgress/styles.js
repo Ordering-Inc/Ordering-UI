@@ -26,6 +26,15 @@ export const OrderProgressContainer = styled.div`
   }
 `
 
+export const OrderProgressWrapper = styled.div`
+  padding: ${props => props.isChew ? '110px 20px 45px' : '45px 20px'};
+  margin: 0px;
+  @media (min-width: 768px) {
+      margin: 0 35px;
+      padding: 45px 20px;
+    }
+`
+
 export const OrderInfoWrapper = styled.div`
   display: flex;
   align-items: center;

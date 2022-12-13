@@ -2,8 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { useTheme } from 'styled-components'
 import FiMap from '@meronex/icons/fi/FiMap'
 import FiFilter from '@meronex/icons/fi/FiFilter'
-import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
-import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 import {
   useOrder,
@@ -17,16 +15,12 @@ import {
 import {
   BusinessContainer,
   BusinessList,
-  // ErrorMessage,
   WrapperSearch,
   BusinessesTitle,
   BusinessHeroImg,
   HightestRatedWrapper,
   Divider,
-  OrderProgressWrapper,
   SearchContainer,
-  BusinessCityList,
-  CityItem,
   BusinessLogo,
   BusinessLogosContainer,
   BusinessBanner,
@@ -34,8 +28,7 @@ import {
   AddressMenu,
   FeatureItems,
   ItemInline,
-  BusinessLogosWrapper,
-  ButtonWrapper
+  BusinessLogosWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { Button } from '../../../../styles/Buttons'
@@ -60,8 +53,8 @@ import { PageBanner } from '../../../PageBanner'
 import Skeleton from 'react-loading-skeleton'
 import { MomentPopover } from '../../../../../../pwa/src/components/MomentPopover'
 import { OrderTypeSelectorHeader } from '../../../../../../../components/OrderTypeSelectorHeader'
-import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import { AutoScroll } from '../../../AutoScroll'
+import { CitiesControl } from '../../../CitiesControl'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -98,13 +91,12 @@ const BusinessesListingUI = (props) => {
   const [activeMap, setActiveMap] = useState(false)
   const [openPopover, setOpenPopover] = useState({})
   const [mapErrors, setMapErrors] = useState('')
-  const [actualCity, setActualCity] = useState(orderState?.options?.city_id)
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [favoriteIds, setFavoriteIds] = useState([])
-  const hideCities = theme?.business_listing_view?.components?.cities?.hidden ?? true
+  const hideCities = (theme?.business_listing_view?.components?.cities?.hidden || orderState?.options?.type !== 2) ?? true
   const hideSearch = theme?.business_listing_view?.components?.search?.hidden
   const hideFilter = theme?.business_listing_view?.components?.filter?.hidden || hideSearch
   const hideSearchSection = hideCities && hideSearch && hideFilter
@@ -269,6 +261,7 @@ const BusinessesListingUI = (props) => {
                   ?.map(business => (
                     <BusinessLogo
                       key={business?.id}
+                      isActive={actualSlug === business?.slug}
                       bgimage={business?.logo || theme.images?.dummies?.businessLogo}
                       onClick={() => onBusinessClick(business)}
                     />
@@ -290,46 +283,47 @@ const BusinessesListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
-        <BusinessBanner>
-          {windowSize.width < 576 && (
-            <BusinessFeatures>
-              <AddressMenu
-                onClick={() => handleClickAddress()}
-              >
-                <FaMapMarkerAlt />
-                <span>{orderState.options?.address?.address || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}</span>
-              </AddressMenu>
-              <FeatureItems>
-                <ItemInline>
-                  <OrderTypeSelectorHeader configTypes={configTypes} />
-                </ItemInline>
-                <ItemInline>
-                  <MomentPopover
-                    open={openPopover.moment}
-                    onClick={() => handleTogglePopover('moment')}
-                    onClose={() => handleClosePopover('moment')}
-                    isBanner
-                  />
-                </ItemInline>
-              </FeatureItems>
-            </BusinessFeatures>
-          )}
-          {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && (
-            <BusinessHeroImg
-              bgimage={theme.images?.general?.businessHero}
-              height={theme?.business_listing_view?.components?.business_hero?.style?.height}
-            />
-          )}
-        </BusinessBanner>
+        {(windowSize.width < 576 || (configs?.business_listing_hide_image?.value !== '1' && !isChew)) && (
+          <BusinessBanner>
+            {windowSize.width < 576 && (
+              <BusinessFeatures>
+                <AddressMenu
+                  onClick={() => handleClickAddress()}
+                >
+                  <FaMapMarkerAlt />
+                  <span>{orderState.options?.address?.address || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}</span>
+                </AddressMenu>
+                <FeatureItems>
+                  <ItemInline>
+                    <OrderTypeSelectorHeader configTypes={configTypes} />
+                  </ItemInline>
+                  <ItemInline>
+                    <MomentPopover
+                      open={openPopover.moment}
+                      onClick={() => handleTogglePopover('moment')}
+                      onClose={() => handleClosePopover('moment')}
+                      isBanner
+                    />
+                  </ItemInline>
+                </FeatureItems>
+              </BusinessFeatures>
+            )}
+            {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && (
+              <BusinessHeroImg
+                bgimage={theme.images?.general?.businessHero}
+                height={theme?.business_listing_view?.components?.business_hero?.style?.height}
+              />
+            )}
+          </BusinessBanner>
+        )}
         {!!Object.values(orderState?.carts)?.length && (
-          <OrderProgressWrapper isChew={isChew}>
-            <OrderProgress
-              franchiseId={props.franchiseId}
-              userCustomerId={userCustomer?.id}
-              asDashboard={isCustomerMode}
-              isCustomerMode={isCustomerMode}
-            />
-          </OrderProgressWrapper>
+          <OrderProgress
+            isChew={isChew}
+            franchiseId={props.franchiseId}
+            userCustomerId={userCustomer?.id}
+            asDashboard={isCustomerMode}
+            isCustomerMode={isCustomerMode}
+          />
         )}
         {(configs?.business_listing_hide_image?.value !== '1' && isChew) && (
           <BusinessHeroImg
@@ -544,30 +538,11 @@ const BusinessesListingUI = (props) => {
           width='70%'
           onClose={() => setModals({ ...modals, citiesOpen: false })}
         >
-          <BusinessCityList>
-            {
-              orderState?.loading ? (
-                <Skeleton height={40} count={3} style={{ marginBottom: '10px' }} />
-              ) : (
-                <>
-                  {citiesState?.cities?.map(city => (
-                    <CityItem key={city?.id} onClick={() => setActualCity(city?.id)}>
-                      <span className='radio'>
-                        {city?.id === actualCity ? <RiRadioButtonFill className='city-checked' /> : <IosRadioButtonOff />}
-                      </span>
-                      {city?.name}
-                    </CityItem>
-                  ))}
-                  <ButtonWrapper>
-                    <Button color='primary' disabled={actualCity === null} onClick={() => handleChangeCity(actualCity)}>
-                      {t('CONTINUE', 'Continue')}
-                    </Button>
-                    <BsArrowRight />
-                  </ButtonWrapper>
-                </>
-              )
-            }
-          </BusinessCityList>
+          <CitiesControl
+            cities={citiesState?.cities}
+            handleChangeCity={handleChangeCity}
+            onClose={() => setModals({ ...modals, citiesOpen: false })}
+          />
         </Modal>
 
         <Alert

@@ -230,52 +230,10 @@ export const Divider = styled.div`
   width: 100%;
 `
 
-export const OrderProgressWrapper = styled.div`
-  padding: ${props => props.isChew ? '110px 20px 45px' : '45px 20px'};
-  margin: 0px;
-  @media (min-width: 768px) {
-      margin: 0 35px;
-      padding: 45px 20px;
-    }
-`
-
 export const SearchContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
-
-export const BusinessCityList = styled.div`
-
-`
-
-export const ButtonWrapper = styled.div`
-  position: relative;
-  svg {
-    position: absolute;
-    right: 10px;
-    top: 8px;
-    font-size: 25px;
-    color: #ffffff;
-  }
-  button {
-    width: 100%;
-    padding: 5px;
-  }
-`
-
-export const CityItem = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 15px 0px;
-  cursor: pointer;
-  span {
-    margin-right: 15px;
-  }
-  .city-checked{
-    color: ${props => props.theme.colors.primary};
-  }
 `
 
 export const BusinessLogosWrapper = styled.div`
@@ -284,18 +242,21 @@ export const BusinessLogosWrapper = styled.div`
 `
 
 const BusinessLogoStyled = styled.div`
-min-width: 100px;
-min-height: 100px;
-height: 100px;
-width: 100px;
-box-sizing: border-box;
-background-repeat: no-repeat, repeat;
-background-size: cover;
-object-fit: cover;
-background-position: center;
-border-radius: 7.6px;
-margin-right: 15px;
-cursor: pointer;
+  min-width: 100px;
+  min-height: 100px;
+  height: 100px;
+  width: 100px;
+  box-sizing: border-box;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  border-radius: 7.6px;
+  margin-right: 15px;
+  cursor: pointer;
+  ${props => props.isActive && css`
+    border: 2px solid ${props => props.theme.colors.primary};
+  `};
 `
 
 export const BusinessLogo = (props) => {
