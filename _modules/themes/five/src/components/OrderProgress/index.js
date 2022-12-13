@@ -28,7 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderProgressUI = function OrderProgressUI(props) {
-  var _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2, _lastOrder$business2, _lastOrder$business3;
+  var _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2;
   var orderList = props.orderList,
     isCustomerMode = props.isCustomerMode;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -185,10 +185,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
       utc: false,
       outputFormat: 'YYYY-MM-DD hh:mm A'
     });
-    var hour = time === null || time === void 0 ? void 0 : time.split(':')[0];
-    var minute = time === null || time === void 0 ? void 0 : time.split(':')[1];
-    var result = time ? parseInt(hour, 10) * 60 + parseInt(minute, 10) : 0;
-    var returnedDate = (0, _moment.default)(new Date(deliveryTime.replace(/-/g, '/'))).add(result, 'minutes').format('hh:mm A');
+    var returnedDate = (0, _moment.default)(new Date(deliveryTime.replace(/-/g, '/'))).add(time, 'minutes').format('hh:mm A');
     return returnedDate;
   };
   var handleGoToPage = function handleGoToPage(index) {
@@ -207,9 +204,13 @@ var OrderProgressUI = function OrderProgressUI(props) {
       setLastOrder(sortedOrders[0]);
     }
   }, [orderList === null || orderList === void 0 ? void 0 : orderList.orders]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderList === null || orderList === void 0 ? void 0 : orderList.loading) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderList === null || orderList === void 0 ? void 0 : orderList.loading) && /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, {
+    isChew: props.isChew
+  }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) > 0 && lastOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderProgressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressLogo, {
+  })), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) > 0 && lastOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, {
+    isChew: props.isChew
+  }, /*#__PURE__*/_react.default.createElement(_styles.OrderProgressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressLogo, {
     bgimage: optimizeImage((lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$business = lastOrder.business) === null || _lastOrder$business === void 0 ? void 0 : _lastOrder$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_91,c_limit')
   }), /*#__PURE__*/_react.default.createElement(_styles.ProgressDescriptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_IN_PROGRESS', 'Order in progress')), /*#__PURE__*/_react.default.createElement("p", null, t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primaryContrast",
@@ -225,7 +226,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     outputFormat: 'hh:mm A'
   }) : parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
     utc: false
-  }), "\xA0-\xA0", convertDiffToHours(lastOrder.delivery_type === 1 ? lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$business2 = lastOrder.business) === null || _lastOrder$business2 === void 0 ? void 0 : _lastOrder$business2.delivery_time : lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$business3 = lastOrder.business) === null || _lastOrder$business3 === void 0 ? void 0 : _lastOrder$business3.pickup_time)))))));
+  }), "\xA0-\xA0", convertDiffToHours(lastOrder.eta_time))))))));
 };
 var OrderProgress = function OrderProgress(props) {
   var orderProgressProps = _objectSpread(_objectSpread({}, props), {}, {
