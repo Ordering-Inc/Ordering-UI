@@ -284,7 +284,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       onClick: function onClick() {
         return onBusinessClick(business);
       }
-    }, t('GO_TO_BUSINESS', 'Go to business'))));
+    }, t('ORDER_NOW', 'Order now'))));
   };
   var sortBusinessFunction = function sortBusinessFunction(businessA, businessB) {
     var businesses = businessesInsideZone === null || businessesInsideZone === void 0 ? void 0 : businessesInsideZone.businesses;
