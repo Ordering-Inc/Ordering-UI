@@ -150,7 +150,7 @@ export const LoadMoreButtonWrap = styled.div`
 
 export const NotFoundSourceWrapper = styled.span`
   > div{
-    margin: 0 auto;
+    margin: 0 auto !important;
   }
   h1{
     color: #fff;

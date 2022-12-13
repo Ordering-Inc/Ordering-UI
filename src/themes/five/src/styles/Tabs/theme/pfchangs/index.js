@@ -14,12 +14,16 @@ export const Tab = styled.div`
   cursor: pointer;
   border: 4px solid ${({ theme }) => theme.colors.primary};
   height: 70px;
-  width: 230px;
+  width: 130px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 5px;
   color: ${({ theme }) => theme.colors.tertiary || '#fff'};
+  @media (min-width: 480px){
+    width: 230px;
+    font-size: 22px;
+  }
 `

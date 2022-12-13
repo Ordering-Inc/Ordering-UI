@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 import RiArrowDropDownLine from '@meronex/icons/ri/RiArrowDropDownLine'
 import {
@@ -15,7 +15,6 @@ import {
   RightContainer,
   CityContainer,
   LocationSelect,
-  LoadMoreButtonWrap,
   NotFoundSourceWrapper,
   DeliveryTextWrapper,
   LoadMoreButtonCityWrap,
@@ -94,10 +93,10 @@ const BusinessesListingUI = (props) => {
     })
   }
 
-  const getBusinesses = async (newFetch, options) => {
+  const getBusinesses = async (newFetch, options, force) => {
     const optionsDeliveryZone = {
       ...options,
-      force_max_distance: false
+      force_max_distance: force || false
     }
     await handleSearchbusinessAndProducts(newFetch, options)
     await handleSearchbusinessAndProducts(newFetch, optionsDeliveryZone)
@@ -205,6 +204,22 @@ const BusinessesListingUI = (props) => {
     }
   }, [businessesSearchList.businesses[0]])
 
+  const container = document.getElementById('search-container')
+
+  const handleScroll = useCallback(() => {
+    const hasMore = paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && businessesSearchList?.businesses?.length > 0
+    if (container.scrollHeight - container.scrollTop < container.clientHeight && hasMore && !businessesSearchList.loading) {
+      getBusinesses(false, {}, true)
+    }
+  }, [businessesSearchList.loading, paginationProps])
+
+  useEffect(() => {
+    if (container) {
+      container.addEventListener('scroll', handleScroll)
+      return () => container.removeEventListener('scroll', handleScroll)
+    }
+  }, [handleScroll])
+
   const SingleBusinessController = ({ business, showGoToStore }) => {
     return (
       <SingleBusinessContainer isSelected={businessClikedId === business?.id} onClick={() => mapActivated && setBusinessClikedId(business?.id)}>
@@ -309,19 +324,9 @@ const BusinessesListingUI = (props) => {
                 <SingleBusinessController key={business?.id} business={business} showGoToStore={business?.open && businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id)} />
               ))
             }
-            {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && businessesSearchList?.businesses?.length > 0 && (
-              <LoadMoreButtonWrap>
-                <Button
-                  onClick={() => getBusinesses()}
-                  color='primary'
-                >
-                  {t('LOAD_MORE_BUSINESSES', 'Load more businesses')}
-                </Button>
-              </LoadMoreButtonWrap>
-            )}
           </>
           {filterByAddress && businessesSearchList.loading && (
-            [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
+            [...Array(paginationProps?.nextPageItems > 4 ? 30 : 8).keys()].map(i => (
               <SingleBusinessContainer key={i}>
                 <LeftContainer>
                   <Skeleton width={230} height={16} />
@@ -337,7 +342,7 @@ const BusinessesListingUI = (props) => {
             ))
           )}
           {
-            !businessesSearchList.loading && businessesSearchList?.businesses?.length === 0 && (
+            !businessesSearchList.loading && businessesSearchList?.businesses?.length > 0 && (
               <NotFoundSourceWrapper>
                 <NotFoundSource
                   content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}

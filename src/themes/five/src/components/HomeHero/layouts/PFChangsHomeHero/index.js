@@ -15,7 +15,8 @@ import {
   Diviver,
   WrapperMap,
   ActiveMapContainer,
-  ContainerResponsiveWrapper
+  ContainerResponsiveWrapper,
+  StartOrder
 } from './styles'
 
 import { Modal } from '../../../Modal'
@@ -146,7 +147,7 @@ export const PFChangsHomeHero = (props) => {
     <>
       <HeroContainer bgimage={homeBackgroundImage || theme.images?.general?.homeHero}>
         <ContentWrapper contentPosition={contentPosition}>
-          <SearchLocationsContainer>
+          <SearchLocationsContainer id='search-container'>
             <h1>{auth ? `${t('WELCOME_BACK', 'Welcome back')} ${user?.name}` : t('WELCOME', 'Welcome')}</h1>
             <div>
               <p>{t('SEARCH_OR_VIEW_LOCATIONS_BELOW', 'Search or view nearby locations below')}</p>
@@ -178,17 +179,18 @@ export const PFChangsHomeHero = (props) => {
               </WrapInput>
               <IosSend className='geolocation-button' />
             </AddressInputContainer>
+            <StartOrder>
+              <Button onClick={handleAddressInput}>
+                {t('START_ORDER', 'Start order')}
+              </Button>
+            </StartOrder>
             {!isResponsive && (
               <>
                 {showCities && (
                   <ViewLocationsContainer>
-                    <Button
-                      color='primary'
-                      style={{ width: '100%' }}
-                      onClick={() => !showAllLocations ? setShowAllLocations(true) : setShowAllLocations(false)}
-                    >
-                      {showAllLocations ? t('HIDE_ALL_CITIES', 'Hide all cities') : t('VIEW_ALL_CITIES', 'View all cities')}
-                    </Button>
+                    <p onClick={() => !showAllLocations ? setShowAllLocations(true) : setShowAllLocations(false)}>
+                      {showAllLocations ? t('HIDE_RESTAURANTS_BY_CITY', 'Hide cities') : t('VIEW_RESTAURANTS_BY_CITY', 'View restaurants by city')}
+                    </p>
                   </ViewLocationsContainer>
                 )}
                 <Diviver />

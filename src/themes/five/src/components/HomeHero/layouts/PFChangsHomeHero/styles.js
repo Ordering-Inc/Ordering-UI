@@ -191,6 +191,13 @@ export const AddressInputContainer = styled.div`
 export const ViewLocationsContainer = styled.div`
   margin-top: 20px;
   width: 100%;
+  display: flex;
+  p {
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0;
+    text-decoration: underline;
+  }
   button { 
     width: 100%;
   }
@@ -282,5 +289,14 @@ export const ContainerResponsiveWrapper = styled.div`
   padding: 20px;
   p {
     color: #fff;
+  }
+`
+
+export const StartOrder = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+  button {
+    width: 100%;
   }
 `
