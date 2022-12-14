@@ -2,10 +2,12 @@ import React, { useRef, useEffect } from 'react'
 import { Input } from '../../styles/Inputs'
 import { useLanguage } from 'ordering-components'
 import AiOutlineSearch from '@meronex/icons/ai/AiOutlineSearch'
+import { Funnel } from 'react-bootstrap-icons'
 import {
   BusinessSearch,
   DeleteContent,
-  SearchWrapper
+  SearchWrapper,
+  FunnelWrapper
 } from './styles'
 export const SearchBar = (props) => {
   const {
@@ -13,7 +15,8 @@ export const SearchBar = (props) => {
     search,
     placeholder,
     lazyLoad,
-    isCustomLayout
+    isCustomLayout,
+    isStarbucks
   } = props
 
   const [, t] = useLanguage()
@@ -90,6 +93,11 @@ export const SearchBar = (props) => {
         >
           <AiOutlineSearch />
         </SearchWrapper>
+        {isStarbucks &&
+          <FunnelWrapper>
+            <Funnel />
+          </FunnelWrapper>
+        }
       </BusinessSearch>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

@@ -477,7 +477,10 @@ export const HeaderSearchMode = styled.div`
   display: flex;
   justify-content: center;
   width: 300px;
-
+  input {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   @media (min-width: 1400px){
     width: 300px;
   }

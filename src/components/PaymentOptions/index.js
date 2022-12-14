@@ -8,7 +8,7 @@ import FaCcStripe from '@meronex/icons/fa/FaCcStripe'
 import FaStripeS from '@meronex/icons/fa/FaStripeS'
 import GrStripe from '@meronex/icons/gr/GrStripe'
 import EnPaypal from '@meronex/icons/en/EnPaypal'
-import { 
+import {
   PaymentOptions as PaymentOptionsController,
   useLanguage,
   useOrder,
@@ -91,7 +91,7 @@ const PaymentOptionsUI = (props) => {
   const [{ token }] = useSession()
   const [{ loading: loadingOptions }] = useOrder()
 
-  const list = paymethods ? paymethods?.map(pay => pay.paymethod) : paymethodsList?.paymethods
+  const list = paymethodsList ? paymethodsList?.paymethods : paymethods?.map(pay => pay.paymethod)
 
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
@@ -140,26 +140,26 @@ const PaymentOptionsUI = (props) => {
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
           {!(paymethodsList.loading || isLoading || loadingOptions) &&
-          list?.length > 0 && (
-            list?.sort((a, b) => a.id - b.id).map(paymethod => (
-              <React.Fragment key={paymethod.id}>
-                {
-                  (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
-                    <PayCard
-                      isDisabled={isDisabled}
-                      className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
-                      onClick={() => handlePaymentMethodClick(paymethod)}
-                    >
-                      {getPayIcon(paymethod.id)}
-                      <p>
-                        {t(paymethod.gateway.toUpperCase(), paymethod.name)}
-                      </p>
-                    </PayCard>
-                  )
-                }
-              </React.Fragment>
-            ))
-          )}
+            list?.length > 0 && (
+              list?.sort((a, b) => a.id - b.id).map(paymethod => (
+                <React.Fragment key={paymethod.id}>
+                  {
+                    (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                      <PayCard
+                        isDisabled={isDisabled}
+                        className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
+                        onClick={() => handlePaymentMethodClick(paymethod)}
+                      >
+                        {getPayIcon(paymethod.id)}
+                        <p>
+                          {t(paymethod.gateway.toUpperCase(), paymethod.name)}
+                        </p>
+                      </PayCard>
+                    )
+                  }
+                </React.Fragment>
+              ))
+            )}
           {(paymethodsList.loading || isLoading || loadingOptions) && (
             [...Array(5).keys()].map(i => (
               <PayCard key={i} isSkeleton>
