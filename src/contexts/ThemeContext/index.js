@@ -47,6 +47,11 @@ export const ThemeProvider = ({ children, ...props }) => {
       ::-webkit-scrollbar-track {
         background: rgba(204, 204, 204, 0.3);
       }
+      #___reactour {
+        div{
+          color: rgba(0,0,0,0.5);
+        }
+      }
     }
     body {
       font-family: '${theme.fonts.primary?.name || 'Helvetica'}', sans-serif;
