@@ -75,7 +75,7 @@ export const OrderBillSection = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {offer.name}
+                  {t(offer.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
@@ -127,7 +127,7 @@ export const OrderBillSection = (props) => {
             order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
               <tr key={tax?.id}>
                 <td>
-                  {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  {t(tax?.name?.toUpperCase()?.replaceAll(' ', '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                   {setOpenTaxModal && (
                     <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
@@ -143,7 +143,7 @@ export const OrderBillSection = (props) => {
             order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
               <tr key={fee.id}>
                 <td>
-                  {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  {t(fee?.name?.toUpperCase()?.replaceAll(' ', '_'), fee?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
                   {setOpenTaxModal && (
                     <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
@@ -159,7 +159,7 @@ export const OrderBillSection = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {offer.name}
+                  {t(offer.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
@@ -185,7 +185,7 @@ export const OrderBillSection = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {offer.name}
+                  {t(offer.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
@@ -254,7 +254,7 @@ export const OrderBillSection = (props) => {
                   <span>
                     {event?.wallet_event
                       ? walletName[event?.wallet_event?.wallet?.type]?.name
-                      : t(event?.paymethod?.name.toUpperCase(), event?.paymethod?.name)}
+                      : t(event?.paymethod?.name.toUpperCase()?.replaceAll(' ', '_'), event?.paymethod?.name)}
                   </span>
                   {event?.data?.charge_id && (
                     <span>
