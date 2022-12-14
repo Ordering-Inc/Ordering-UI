@@ -67,9 +67,11 @@ const SingleOrderCardUI = (props) => {
         <BusinessInformation>
           <WrapperBusinessTitle>
             <h2>{order?.business?.length > 1 ? `${t('GROUP_ORDER', 'Group Order')} ${t('No', 'No')}. ${order?.cart_group_id}` : order.business?.name}</h2>
-            <FavoriteWrapper onClick={() => handleChangeFavorite(order)} className='favorite'>
-              {order?.favorite ? <Like /> : <DisLike />}
-            </FavoriteWrapper>
+            {!order?.business?.length && (
+              <FavoriteWrapper onClick={() => handleChangeFavorite(order)} className='favorite'>
+                {order?.favorite ? <Like /> : <DisLike />}
+              </FavoriteWrapper>
+            )}
           </WrapperBusinessTitle>
           <OrderInfo>
             {order?.id && (
