@@ -371,6 +371,9 @@ var Header = function Header(props) {
     withLogout: true,
     isCustomerMode: isCustomerMode,
     open: openPopover.user,
+    handleOpenAddressModal: function handleOpenAddressModal() {
+      return openModal('address');
+    },
     onClick: function onClick() {
       return handleTogglePopover('user');
     },

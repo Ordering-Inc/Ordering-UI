@@ -42,7 +42,8 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     setVehicle = props.setVehicle,
     setSpotState = props.setSpotState,
     handleChangeSpot = props.handleChangeSpot,
-    setHasBusinessPlaces = props.setHasBusinessPlaces;
+    setHasBusinessPlaces = props.setHasBusinessPlaces,
+    setPlaceSpotNumber = props.setPlaceSpotNumber;
   var el = (0, _react.useRef)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -122,6 +123,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
       var _spotNumber = parseFloat(e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value);
       _spotNumber = isNaN(_spotNumber) ? null : _spotNumber;
       setSpotNumber(_spotNumber);
+      setPlaceSpotNumber(_spotNumber);
     }
   };
   var onChangeSpot = function onChangeSpot() {

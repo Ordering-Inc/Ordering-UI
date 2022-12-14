@@ -129,6 +129,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     }
     if (!inputValue) {
       setInputValue(inputValue);
+      onChangeNumber(inputValue);
     }
     if (inputValue && inputValue.length > 10 || !/^[0-9]+$/.test(inputValue)) {
       return;
@@ -138,6 +139,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   };
   var onChange = function onChange(option) {
     var _customersPhones$user;
+    if (!option) {
+      onChangeNumber('');
+    }
     setOptSelected(option);
     setInputValue(option ? option === null || option === void 0 ? void 0 : option.value : '');
     var user = (_customersPhones$user = customersPhones.users) === null || _customersPhones$user === void 0 ? void 0 : _customersPhones$user.find(function (user) {
