@@ -13,7 +13,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var ContainerCard = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral([" \n  width: 100%;\n  position: relative;\n"])));
+var ContainerCard = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral([" \n  width: 100%;\n  position: relative;\n  @media (min-width: 768px) {\n    padding: 7px 10px 7px 20px;\n    margin-bottom: 5px;\n  }\n"])));
 exports.ContainerCard = ContainerCard;
 var WrapperBusinessCard = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-radius: 10px;\n  cursor: ", ";\n"])), function (_ref) {
   var isSkeleton = _ref.isSkeleton;
