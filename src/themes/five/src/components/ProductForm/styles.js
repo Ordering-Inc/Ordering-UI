@@ -508,6 +508,7 @@ export const Properties = styled.div`
 export const ProductDescription = styled.p`
   margin-top: 0px;
   white-space: pre-wrap;
+  color: #909BA9;
 `
 export const PriceContent = styled.div`
   display: flex;
