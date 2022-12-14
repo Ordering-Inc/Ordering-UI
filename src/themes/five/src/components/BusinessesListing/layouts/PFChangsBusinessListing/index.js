@@ -342,7 +342,7 @@ const BusinessesListingUI = (props) => {
             ))
           )}
           {
-            !businessesSearchList.loading && businessesSearchList?.businesses?.length > 0 && (
+            !businessesSearchList.loading && businessesSearchList?.businesses?.length === 0 && (
               <NotFoundSourceWrapper>
                 <NotFoundSource
                   content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
