@@ -9,6 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _Inputs = require("../../styles/Inputs");
 var _orderingComponents = require("ordering-components");
 var _AiOutlineSearch = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineSearch"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -26,7 +27,8 @@ var SearchBar = function SearchBar(props) {
     search = props.search,
     placeholder = props.placeholder,
     lazyLoad = props.lazyLoad,
-    isCustomLayout = props.isCustomLayout;
+    isCustomLayout = props.isCustomLayout,
+    isStarbucks = props.isStarbucks;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -93,7 +95,7 @@ var SearchBar = function SearchBar(props) {
     onClick: handleClear
   }, t('CLEAR', 'Clear'))), /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, {
     isHome: props.isHome
-  }, /*#__PURE__*/_react.default.createElement(_AiOutlineSearch.default, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineSearch.default, null)), isStarbucks && /*#__PURE__*/_react.default.createElement(_styles.FunnelWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Funnel, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

@@ -111,9 +111,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     loadingOptions = _useOrder2[0].loading;
-  var list = paymethods ? paymethods === null || paymethods === void 0 ? void 0 : paymethods.map(function (pay) {
+  var list = paymethodsList ? paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods : paymethods === null || paymethods === void 0 ? void 0 : paymethods.map(function (pay) {
     return pay.paymethod;
-  }) : paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods;
+  });
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);

@@ -202,6 +202,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
+    isStarbucks: true,
     search: searchValue,
     isCustomLayout: true,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
@@ -265,6 +266,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
+    isStarbucks: true,
     search: searchValue,
     isCustomLayout: isCustomLayout,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),

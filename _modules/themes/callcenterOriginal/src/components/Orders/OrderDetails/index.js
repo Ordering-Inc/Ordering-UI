@@ -600,6 +600,6 @@ var OrderDetails = function OrderDetails(props) {
     isDisableLoadMessages: true,
     UIComponent: OrderDetailsUI
   });
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetailsDashbaord, orderDetailsProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetailsDashboard, orderDetailsProps);
 };
 exports.OrderDetails = OrderDetails;

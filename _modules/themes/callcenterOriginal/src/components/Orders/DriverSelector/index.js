@@ -240,6 +240,6 @@ var DriverSelector = function DriverSelector(props) {
     UIComponent: DriverSelectorUI,
     propsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo']
   });
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.DriversList, DriversControlProps));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.DriverListDashboard, DriversControlProps));
 };
 exports.DriverSelector = DriverSelector;

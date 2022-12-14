@@ -57,7 +57,7 @@ var PositionControl = _styledComponents.default.div(_templateObject10 || (_templ
   return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        margin-left: 0;\n      "])));
 });
 exports.PositionControl = PositionControl;
-var SuboptionPrice = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  white-space: nowrap;\n  font-weight: 300;\n  font-size: 14px;\n  color: ", ";\n  margin-left: 5px;\n  min-width: 60px;\n  max-width: 60px;\n  ", "\n"])), function (props) {
+var SuboptionPrice = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  white-space: nowrap;\n  font-weight: 300;\n  font-size: 14px;\n  color: ", ";\n  margin-left: 5px;\n  min-width: 60px;\n  ", "\n"])), function (props) {
   return props.theme.colors.darkGray;
 }, function (props) {
   var _props$theme7;

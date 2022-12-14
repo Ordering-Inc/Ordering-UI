@@ -108,7 +108,7 @@ var ProductName = _styledComponents.default.h1(_templateObject31 || (_templateOb
 exports.ProductName = ProductName;
 var Properties = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  justify-content: space-between;\n  margin-bottom: 20px;\n"])));
 exports.Properties = Properties;
-var ProductDescription = _styledComponents.default.p(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n  white-space: pre-wrap;\n"])));
+var ProductDescription = _styledComponents.default.p(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  margin-top: 0px;\n  white-space: pre-wrap;\n  color: #909BA9;\n"])));
 exports.ProductDescription = ProductDescription;
 var PriceContent = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  > p {\n    font-size: 18px;\n    line-height: 27px;\n    color: #344050;\n    margin: 0;\n  }\n  .offer-price {\n    text-decoration: line-through;\n    font-size: 16px;\n    color: #909BA9;\n  }\n"])));
 exports.PriceContent = PriceContent;

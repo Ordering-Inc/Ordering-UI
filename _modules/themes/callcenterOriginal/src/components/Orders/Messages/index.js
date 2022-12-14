@@ -698,6 +698,6 @@ var Messages = function Messages(props) {
     asDashboard: true,
     UIComponent: MessagesUI
   });
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.MessagesDashboard, MessagesProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.MessagesDasboard, MessagesProps);
 };
 exports.Messages = Messages;
