@@ -50,6 +50,9 @@ export const ThemeProvider = ({ children, ...props }) => {
       #___reactour {
         div{
           color: rgba(0,0,0,0.5);
+          button svg {
+            display: none;
+          }
         }
       }
     }
