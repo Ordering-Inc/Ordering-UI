@@ -4,9 +4,6 @@ export const BusinessContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 0;
-  @media (min-width: 577px){
-    margin-top: 35px
-  }
 `
 export const BusinessList = styled.div`
   display: flex;
@@ -17,7 +14,7 @@ export const WrapperSearch = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
-  padding: 15px 10px 15px 25px;
+  padding: 30px;
   input {
     border-bottom: 1px solid #ccc;
   }
@@ -33,8 +30,7 @@ export const WrapperSearch = styled.div`
     width: 100%;
     box-shadow: 0px -2px 1px 4px lightgrey;
   }
-    
-  
+
   ${({ isCustomLayout }) => isCustomLayout && css`
     box-sizing: border-box;
     display: flex;

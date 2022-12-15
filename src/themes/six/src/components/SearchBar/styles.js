@@ -68,7 +68,7 @@ export const DeleteContent = styled.span`
   `}
   ${({ isClear, isHome }) => isClear && css`
     left: initial;
-    right: 20px;
+    right: 40px;
   `}
   ${props => props.theme?.rtl && css`
     transform: translate(30%, 0%);
@@ -93,6 +93,17 @@ export const DeleteContent = styled.span`
 `
 
 export const SearchWrapper = styled(DeleteContent)``
+
+export const FunnelWrapper = styled.div`
+  svg {
+    position: absolute;
+    right: 10px !important;
+    color: #ADB5BD;
+    width: 20px;
+    height: 20px;
+    bottom: 22px;
+  }
+`
 
 export const SearchIcon = styled.div`
   background-image: url(${props => props.theme?.images?.general?.searchIcon});

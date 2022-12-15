@@ -20,7 +20,8 @@ import {
   ProgressBar,
   ProgressTextWrapper,
   StatusWrapper,
-  TimeWrapper
+  TimeWrapper,
+  OrderProgressWrapper
 } from './styles'
 
 const OrderProgressUI = (props) => {
@@ -73,10 +74,7 @@ const OrderProgressUI = (props) => {
     const deliveryTime = lastOrder?.delivery_datetime_utc
       ? parseDate(lastOrder?.delivery_datetime_utc, { outputFormat: 'YYYY-MM-DD hh:mm A' })
       : parseDate(lastOrder?.delivery_datetime, { utc: false, outputFormat: 'YYYY-MM-DD hh:mm A' })
-    const hour = time?.split(':')[0]
-    const minute = time?.split(':')[1]
-    const result = time ? (parseInt(hour, 10) * 60) + parseInt(minute, 10) : 0
-    const returnedDate = moment(new Date(deliveryTime.replace(/-/g, '/'))).add(result, 'minutes').format('hh:mm A')
+    const returnedDate = moment(new Date(deliveryTime.replace(/-/g, '/'))).add(time, 'minutes').format('hh:mm A')
     return returnedDate
   }
 
@@ -93,51 +91,57 @@ const OrderProgressUI = (props) => {
 
   return (
     <>
-      {orderList?.loading && <Skeleton height={150} />}
+      {orderList?.loading && (
+        <OrderProgressWrapper isChew={props.isChew}>
+          <Skeleton height={150} />
+        </OrderProgressWrapper>
+      )}
       {!orderList?.loading && orderList?.orders?.length > 0 && lastOrder && (
-        <OrderProgressContainer>
-          <OrderInfoWrapper>
-            <ProgressLogo bgimage={optimizeImage(lastOrder?.business?.logo || theme.images?.dummies?.businessLogo, 'h_91,c_limit')} />
-            <ProgressDescriptionWrapper>
-              <h2>{t('ORDER_IN_PROGRESS', 'Order in progress')}</h2>
-              <p>{t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')}</p>
-              <Button
-                color='primaryContrast'
-                naked
-                onClick={() => handleGoToPage(isCustomerMode ? 'order_detail' : 'orders')}
-              >
-                {isCustomerMode ? (
-                  <>
-                    {t('GO_TO_THE_ORDER', 'Go to the order')}
-                  </>
-                ) : (
-                  <>
-                    {t('GO_TO_MY_ORDERS', 'Go to my orders')}
-                  </>
-                )}
-                <BsArrowRight />
-              </Button>
-            </ProgressDescriptionWrapper>
-          </OrderInfoWrapper>
-          <ProgressBarWrapper>
-            <ProgressContentWrapper>
-              <ProgressBar style={{ width: getOrderStatus(lastOrder.status)?.percentage ? `${getOrderStatus(lastOrder.status).percentage}%` : '0%' }} />
-            </ProgressContentWrapper>
-            <ProgressTextWrapper>
-              <StatusWrapper>{getOrderStatus(lastOrder?.status)?.value}</StatusWrapper>
-              <TimeWrapper>
-                <span>{t('ESTIMATED_DELIVERY', 'Estimated delivery')}:&nbsp;</span>
-                <span>
-                  {lastOrder?.delivery_datetime_utc
-                    ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
-                    : parseTime(lastOrder?.delivery_datetime, { utc: false })}
-                    &nbsp;-&nbsp;
-                  {convertDiffToHours(lastOrder.delivery_type === 1 ? lastOrder?.business?.delivery_time : lastOrder?.business?.pickup_time)}
-                </span>
-              </TimeWrapper>
-            </ProgressTextWrapper>
-          </ProgressBarWrapper>
-        </OrderProgressContainer>
+        <OrderProgressWrapper isChew={props.isChew}>
+          <OrderProgressContainer>
+            <OrderInfoWrapper>
+              <ProgressLogo bgimage={optimizeImage(lastOrder?.business?.logo || theme.images?.dummies?.businessLogo, 'h_91,c_limit')} />
+              <ProgressDescriptionWrapper>
+                <h2>{t('ORDER_IN_PROGRESS', 'Order in progress')}</h2>
+                <p>{t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')}</p>
+                <Button
+                  color='primaryContrast'
+                  naked
+                  onClick={() => handleGoToPage(isCustomerMode ? 'order_detail' : 'orders')}
+                >
+                  {isCustomerMode ? (
+                    <>
+                      {t('GO_TO_THE_ORDER', 'Go to the order')}
+                    </>
+                  ) : (
+                    <>
+                      {t('GO_TO_MY_ORDERS', 'Go to my orders')}
+                    </>
+                  )}
+                  <BsArrowRight />
+                </Button>
+              </ProgressDescriptionWrapper>
+            </OrderInfoWrapper>
+            <ProgressBarWrapper>
+              <ProgressContentWrapper>
+                <ProgressBar style={{ width: getOrderStatus(lastOrder.status)?.percentage ? `${getOrderStatus(lastOrder.status).percentage}%` : '0%' }} />
+              </ProgressContentWrapper>
+              <ProgressTextWrapper>
+                <StatusWrapper>{getOrderStatus(lastOrder?.status)?.value}</StatusWrapper>
+                <TimeWrapper>
+                  <span>{t('ESTIMATED_DELIVERY', 'Estimated delivery')}:&nbsp;</span>
+                  <span>
+                    {lastOrder?.delivery_datetime_utc
+                      ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
+                      : parseTime(lastOrder?.delivery_datetime, { utc: false })}
+                      &nbsp;-&nbsp;
+                    {convertDiffToHours(lastOrder.eta_time)}
+                  </span>
+                </TimeWrapper>
+              </ProgressTextWrapper>
+            </ProgressBarWrapper>
+          </OrderProgressContainer>
+        </OrderProgressWrapper>
       )}
     </>
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, DriversList as DriversController } from 'ordering-components'
+import { useLanguage, DriverListDashboard } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import { Select } from '../../../styles/Select/DashboardSelect'
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
@@ -231,7 +231,7 @@ export const DriverSelector = (props) => {
   }
   return (
     <>
-      <DriversController {...DriversControlProps} />
+      <DriverListDashboard {...DriversControlProps} />
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils, useSession, OrderDetailsDashbaord as OrderDetailsController } from 'ordering-components'
+import { useLanguage, useUtils, useSession, OrderDetailsDashboard as OrderDetailsController } from 'ordering-components'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { Messages } from '../Messages'
@@ -523,6 +523,7 @@ const OrderDetailsUI = (props) => {
     </Container>
   )
 }
+
 export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,

@@ -19,10 +19,10 @@ export const HeaderOption = (props) => {
 
   const [{ configs }] = useConfig()
   const [{ parseDate }] = useUtils()
-  const [{ theme: orderingTheme }] = useOrderingTheme()
+  const [orderingTheme] = useOrderingTheme()
   const [, t] = useLanguage()
   const [orderStatus] = useOrder()
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type === 'Chew'
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   return (
     <>
