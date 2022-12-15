@@ -26,6 +26,7 @@ import {
   Divider
 } from './styles'
 import MdClose from '@meronex/icons/md/MdClose'
+import { ScheduleAccordion } from '../ScheduleAccordion'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -124,18 +125,12 @@ export const BusinessInformationUI = (props) => {
                   <ScheduleSection>
                     <ScheduleContainer>
                       {businessSchedule.map((schedule, i) => (
-                        <ScheduleBlock key={i}>
-                          <h4>{daysOfWeek[i]}</h4>
-                          {schedule.enabled ? (
-                            <div>
-                              <p>{scheduleFormatted(schedule.lapses[0].open)}</p>
-                              <div>-</div>
-                              <p>{scheduleFormatted(schedule.lapses[0].close)}</p>
-                            </div>
-                          ) : (
-                            <p className='close'>{t('CLOSED', 'Closed')}</p>
-                          )}
-                        </ScheduleBlock>
+                        <ScheduleAccordion
+                          key={i}
+                          weekIndex={i}
+                          scheduleFormatted={scheduleFormatted}
+                          schedule={schedule}
+                        />
                       ))}
                     </ScheduleContainer>
                   </ScheduleSection>
