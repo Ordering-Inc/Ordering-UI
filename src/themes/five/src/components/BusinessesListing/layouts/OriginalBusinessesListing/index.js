@@ -368,7 +368,7 @@ const BusinessesListingUI = (props) => {
             )}
           </>
         )}
-        {hasHighRatedBusiness && !props.franchiseId && (
+        {!isChew && hasHighRatedBusiness && !props.franchiseId && (
           <HightestRatedWrapper>
             <Divider />
             <HighestRated
