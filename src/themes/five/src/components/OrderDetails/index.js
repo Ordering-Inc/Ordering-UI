@@ -129,6 +129,7 @@ const OrderDetailsUI = (props) => {
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
 
   const showOrderActions = order?.delivery_type !== 1
+  const isGiftCardOrder = !order?.business_id
 
   const isOriginalLayout = orderingTheme?.theme?.confirmation?.components?.layout?.type === 'original'
   const showDeliveryType = !orderingTheme?.theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
@@ -455,7 +456,7 @@ const OrderDetailsUI = (props) => {
                 )}
                 {(acceptedStatus.includes(parseInt(order?.status, 10)) ||
                   !isOriginalLayout
-                ) &&
+                ) && !isGiftCardOrder &&
                   (
                     <ReOrder>
                       <Button
@@ -481,7 +482,7 @@ const OrderDetailsUI = (props) => {
                     </ReOrder>
                   )}
               </TitleContainer>
-              {showDeliveryProgress && (
+              {showDeliveryProgress && !isGiftCardOrder && (
                 <>
                   <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                   <OrderStatusAndLinkContainer>
@@ -508,106 +509,108 @@ const OrderDetailsUI = (props) => {
                 </>
               )}
             </OrderInfo>
-            <OrderBusiness>
-              <BusinessExternalWrapper>
-                <BusinessWrapper
-                  w='calc(100% - 20px)'
-                // borderBottom={showOrderActions}
-                >
-                  {isShowBusinessLogo && <img src={order?.business?.logo} />}
-                  <BusinessInfo>
-                    <h2>{order?.business?.name}</h2>
-                    <ActionsSection
-                      {...ActionsSectionProps}
-                      actionType='business'
-                      showPhone={showBusinessPhone}
-                      showMessages={showBusinessMessages}
-                    />
-                    {showBusinessEmail && (
-                      <p>{order?.business?.email}</p>
-                    )}
-                    {showBusinessPhone && (
-                      <p>{order?.business?.cellphone}</p>
-                    )}
-                    {showBusinessAddress && (
-                      <p>{order?.business?.address}</p>
-                    )}
-                    {order?.place?.name && (
-                      <PlaceSpotSection>
-                        <p>
-                          {yourSpotString}: {order?.place?.name}
-                        </p>
-                      </PlaceSpotSection>
-                    )}
-                    {showOrderActions && (
-                      <DirectionButtonWrapper>
-                        <Button
-                          color='primary'
-                          onClick={() => window.open(`http://maps.google.com/?q=${order?.business?.address}`)}
-                        >
-                          {t('GET_DIRECTIONS', 'Get Directions')}
-                        </Button>
-                      </DirectionButtonWrapper>
-                    )}
-                  </BusinessInfo>
-                </BusinessWrapper>
-
-                {showDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
-                  <PlaceSpotWrapper>
-                    <PlaceSpot
-                      isInputMode
-                      cart={order}
-                      spotNumberDefault={order?.spot_number}
-                      vehicleDefault={order?.vehicle}
-                    />
-                  </PlaceSpotWrapper>
-                )}
-
-                {showOrderActions && (
+            {!isGiftCardOrder && (
+              <OrderBusiness>
+                <BusinessExternalWrapper>
                   <BusinessWrapper
                     w='calc(100% - 20px)'
-                    borderTop
+                  // borderBottom={showOrderActions}
                   >
-                    <BtsOrderStatus>
-                      <div>
-                        <Button
-                          style={{ fontSize: 14 }}
-                          color={order?.status === 20 ? 'secundary' : 'primary'}
-                          onClick={() => handleChangeOrderStatus(20)}
-                          disabled={order?.status === 20 || order?.status === 21}
-                        >
-                          {getOrderStatus(20)?.value}
-                        </Button>
-                      </div>
-                      <div>
-                        <Button
-                          style={{ fontSize: 14 }}
-                          color={order?.status === 20 ? 'primary' : 'secundary'}
-                          disabled={order?.status === 21}
-                          onClick={() => handleChangeOrderStatus(21)}
-                        >
-                          {getOrderStatus(21)?.value}
-                        </Button>
-                      </div>
-                    </BtsOrderStatus>
+                    {isShowBusinessLogo && <img src={order?.business?.logo} />}
+                    <BusinessInfo>
+                      <h2>{order?.business?.name}</h2>
+                      <ActionsSection
+                        {...ActionsSectionProps}
+                        actionType='business'
+                        showPhone={showBusinessPhone}
+                        showMessages={showBusinessMessages}
+                      />
+                      {showBusinessEmail && (
+                        <p>{order?.business?.email}</p>
+                      )}
+                      {showBusinessPhone && (
+                        <p>{order?.business?.cellphone}</p>
+                      )}
+                      {showBusinessAddress && (
+                        <p>{order?.business?.address}</p>
+                      )}
+                      {order?.place?.name && (
+                        <PlaceSpotSection>
+                          <p>
+                            {yourSpotString}: {order?.place?.name}
+                          </p>
+                        </PlaceSpotSection>
+                      )}
+                      {showOrderActions && (
+                        <DirectionButtonWrapper>
+                          <Button
+                            color='primary'
+                            onClick={() => window.open(`http://maps.google.com/?q=${order?.business?.address}`)}
+                          >
+                            {t('GET_DIRECTIONS', 'Get Directions')}
+                          </Button>
+                        </DirectionButtonWrapper>
+                      )}
+                    </BusinessInfo>
                   </BusinessWrapper>
+
+                  {showDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
+                    <PlaceSpotWrapper>
+                      <PlaceSpot
+                        isInputMode
+                        cart={order}
+                        spotNumberDefault={order?.spot_number}
+                        vehicleDefault={order?.vehicle}
+                      />
+                    </PlaceSpotWrapper>
+                  )}
+
+                  {showOrderActions && (
+                    <BusinessWrapper
+                      w='calc(100% - 20px)'
+                      borderTop
+                    >
+                      <BtsOrderStatus>
+                        <div>
+                          <Button
+                            style={{ fontSize: 14 }}
+                            color={order?.status === 20 ? 'secundary' : 'primary'}
+                            onClick={() => handleChangeOrderStatus(20)}
+                            disabled={order?.status === 20 || order?.status === 21}
+                          >
+                            {getOrderStatus(20)?.value}
+                          </Button>
+                        </div>
+                        <div>
+                          <Button
+                            style={{ fontSize: 14 }}
+                            color={order?.status === 20 ? 'primary' : 'secundary'}
+                            disabled={order?.status === 21}
+                            onClick={() => handleChangeOrderStatus(21)}
+                          >
+                            {getOrderStatus(21)?.value}
+                          </Button>
+                        </div>
+                      </BtsOrderStatus>
+                    </BusinessWrapper>
+                  )}
+                </BusinessExternalWrapper>
+                {googleMapsApiKey && showBusinessMap && (
+                  <MapWrapper>
+                    <Map style={{ width: '100%' }}>
+                      <img
+                        src={getGoogleMapImage(order?.business?.location, googleMapsApiKey, mapConfigs)}
+                        id='google-maps-image'
+                        alt='google-maps-location'
+                        width='100%'
+                        height='100%'
+                        loading='lazy'
+                      />
+                    </Map>
+                  </MapWrapper>
                 )}
-              </BusinessExternalWrapper>
-              {googleMapsApiKey && showBusinessMap && (
-                <MapWrapper>
-                  <Map style={{ width: '100%' }}>
-                    <img
-                      src={getGoogleMapImage(order?.business?.location, googleMapsApiKey, mapConfigs)}
-                      id='google-maps-image'
-                      alt='google-maps-location'
-                      width='100%'
-                      height='100%'
-                      loading='lazy'
-                    />
-                  </Map>
-                </MapWrapper>
-              )}
-            </OrderBusiness>
+              </OrderBusiness>
+            )}
             <OrderCustomer>
               <BusinessWrapper>
                 {showCustomerPhoto && order?.customer?.photo && (
@@ -682,7 +685,7 @@ const OrderDetailsUI = (props) => {
                 }
               </>
             )}
-            {(order?.delivery_type === 1 || order?.comment) && (
+            {(order?.delivery_type === 1 || order?.comment) && !isGiftCardOrder && (
               <OrderPreferences>
                 <OrderPreferencesSection
                   order={order}

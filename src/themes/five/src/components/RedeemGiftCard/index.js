@@ -51,7 +51,7 @@ const RedeemGiftCardUI = (props) => {
           placeholder='0000 0000'
           type='text'
           ref={register({
-            required: t('VALIDATION_ERROR_REQUIRED', 'Code is required').replace('_attribute_', t('CODE', ''))
+            required: t('VALIDATION_ERROR_REQUIRED', 'Code is required').replace('_attribute_', t('CODE', 'Code'))
           })}
           autoComplete='off'
         />
@@ -62,7 +62,7 @@ const RedeemGiftCardUI = (props) => {
           name='password'
           type='password'
           ref={register({
-            required: t('VALIDATION_ERROR_REQUIRED', 'Code is required').replace('_attribute_', t('PASSWORD', ''))
+            required: t('VALIDATION_ERROR_REQUIRED', 'Code is required').replace('_attribute_', t('PASSWORD', 'Password'))
           })}
           autoComplete='new-password'
         />

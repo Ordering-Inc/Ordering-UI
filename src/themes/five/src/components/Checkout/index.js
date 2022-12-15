@@ -124,6 +124,7 @@ const CheckoutUI = (props) => {
 
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
+  const isGiftCardCart = !cart?.business_id
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
   const isDisablePlaceOrderButton = !cart?.valid ||
@@ -407,8 +408,8 @@ const CheckoutUI = (props) => {
                 cart={cart}
                 useKioskApp={useKioskApp}
                 isDisabled={cart?.status === 2}
-                businessId={cart?.business_id ? businessDetails?.business?.id : -1}
-                isLoading={cart?.business_id ? businessDetails.loading : false}
+                businessId={!isGiftCardCart ? businessDetails?.business?.id : -1}
+                isLoading={!isGiftCardCart ? businessDetails.loading : false}
                 paymethods={businessDetails?.business?.paymethods}
                 onPaymentChange={handlePaymethodChange}
                 errorCash={errorCash}
