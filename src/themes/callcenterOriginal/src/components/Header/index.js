@@ -148,7 +148,7 @@ export const Header = (props) => {
     if (isCustomerMode) {
       setCustomerModalOpen(false)
     }
-  }, [customerState?.user?.address])
+  }, [JSON.stringify(orderState?.options?.address?.address)])
 
   useEffect(() => {
     if (!(pathname.includes('/search') || pathname.includes('/checkout'))) {
@@ -428,31 +428,29 @@ export const Header = (props) => {
             hideCloseDefault
           >
             <UserEdit>
-              {!customerState?.loading && (
-                <>
-                  <UserDetails
-                    isAddressFormOpen={isAddressFormOpen}
-                    userData={customerState?.user}
-                    userId={customerState?.user?.id}
-                    isOpenUserData={isOpenUserData}
-                    isCustomerMode
-                    isModal
-                    setIsOpenUserData={setIsOpenUserData}
-                    onClose={() => setCustomerModalOpen(false)}
-                  />
-                  <AddressList
-                    isModal
-                    userId={customerState?.user?.id}
-                    changeOrderAddressWithDefault
-                    userCustomerSetup={customerState.user}
-                    isOpenUserData={isOpenUserData}
-                    setCustomerModalOpen={setCustomerModalOpen}
-                    setIsOpenUserData={setIsOpenUserData}
-                    setIsAddressFormOpen={setIsAddressFormOpen}
-                    isHeader
-                  />
-                </>
-              )}
+              <>
+                <UserDetails
+                  isAddressFormOpen={isAddressFormOpen}
+                  userData={customerState?.user}
+                  userId={customerState?.user?.id}
+                  isOpenUserData={isOpenUserData}
+                  isCustomerMode
+                  isModal
+                  setIsOpenUserData={setIsOpenUserData}
+                  onClose={() => setCustomerModalOpen(false)}
+                />
+                <AddressList
+                  isModal
+                  userId={customerState?.user?.id}
+                  changeOrderAddressWithDefault
+                  userCustomerSetup={customerState.user}
+                  isOpenUserData={isOpenUserData}
+                  setCustomerModalOpen={setCustomerModalOpen}
+                  setIsOpenUserData={setIsOpenUserData}
+                  setIsAddressFormOpen={setIsAddressFormOpen}
+                  isHeader
+                />
+              </>
             </UserEdit>
           </Modal>
         )}
