@@ -28,6 +28,7 @@ import { OrderBillSection } from './OrderBillSection'
 import { ActionsSection } from './ActionsSection'
 import { OrderPreferencesSection } from './OrderPreferencesSections'
 import { PlaceSpot } from '../PlaceSpot'
+import { SendGiftCard } from '../SendGiftCard'
 import { Confirm } from '../Confirm'
 
 import {
@@ -711,6 +712,12 @@ const OrderDetailsUI = (props) => {
               />
             </OrderProducts>
           </WrapperRightContainer>
+
+          {isGiftCardOrder && (
+            <SendGiftCard
+              giftCardId={34}
+            />
+          )}
         </WrapperContainer>
       )}
 
