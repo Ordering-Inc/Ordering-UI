@@ -13,7 +13,6 @@ import {
   BusinessContent,
   SectionTitle,
   Map,
-  ScheduleBlock,
   ScheduleSection,
   ScheduleContainer,
   DeliveryInfo,
@@ -40,16 +39,6 @@ export const BusinessInformationUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-
-  const daysOfWeek = [
-    t('SUNDAY_ABBREVIATION', 'Sun'),
-    t('MONDAY_ABBREVIATION', 'Mon'),
-    t('TUESDAY_ABBREVIATION', 'Tues'),
-    t('WEDNESDAY_ABBREVIATION', 'Wed'),
-    t('THURSDAY_ABBREVIATION', 'Thur'),
-    t('FRIDAY_ABBREVIATION', 'Fri'),
-    t('SATURDAY_ABBREVIATION', 'Sat')
-  ]
   const [modalImage, setModalImage] = useState(false)
   const [image, setImage] = useState('')
   const [orderingTheme] = useOrderingTheme()
