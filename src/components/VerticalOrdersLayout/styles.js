@@ -54,6 +54,13 @@ export const FavoriteWrapper = styled.div`
 export const PastLogo = styled.div`
   width: 75px;
   height: 100%;
+  ${({ isMulti }) => isMulti && css`
+      width: 55px;
+      min-width: 55px;
+      height: 55px;
+      min-height: 55px;
+      margin: 3px;
+    `}
   img {
     width: 100%;
     height: 100%;
@@ -182,4 +189,9 @@ export const ReviewWrapper = styled.div`
   .review-sent {
     border-radius: 7.6px;
   }
+`
+
+export const MultiLogosContainer = styled.div`
+  display: flex;
+  align-items: center;
 `

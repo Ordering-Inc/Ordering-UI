@@ -147,6 +147,12 @@ const BusinessLogoWrapperStyled = styled.div`
     min-width: 86px;
     height: 86px;
     min-height: 86px;
+    ${({ isMulti }) => isMulti && css`
+      width: 55px;
+      min-width: 55px;
+      height: 55px;
+      min-height: 55px;
+    `}
   }
 `
 
@@ -251,5 +257,13 @@ export const FavoriteWrapper = styled.div`
 export const ReviewWrapper = styled.div`
   .review-sent {
     border-radius: 7.6px;
+  }
+`
+
+export const MultiLogosContainer = styled.div`
+  display: flex;
+  align-items: center;
+  p {
+    white-space: nowrap;
   }
 `
