@@ -59,7 +59,9 @@ const MultiCheckoutUI = (props) => {
     handleSelectPaymethod,
     handleSelectWallet,
     handlePaymethodDataChange,
-    onRedirectPage
+    onRedirectPage,
+    cartGroup,
+    cartUuid
   } = props
 
   const [, t] = useLanguage()
@@ -76,7 +78,7 @@ const MultiCheckoutUI = (props) => {
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const maximumCarts = 5
-  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || openCarts.length > maximumCarts
+  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || openCarts.length > maximumCarts || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data)
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
   const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
@@ -198,6 +200,7 @@ const MultiCheckoutUI = (props) => {
                   handleSelectPaymethod={handleSelectPaymethod}
                   handleSelectWallet={handleSelectWallet}
                   handlePaymethodDataChange={handlePaymethodDataChange}
+                  cartUuid={cartUuid}
                 />
               </PaymentMethodContainer>
 
@@ -265,7 +268,7 @@ const MultiCheckoutUI = (props) => {
             <WrapperPlaceOrderButton>
               <Button
                 color='primary'
-                disabled={isDisablePlaceOrderButton || placing}
+                disabled={isDisablePlaceOrderButton || placing || cartGroup?.loading}
                 onClick={handlePlaceOrder}
               >
                 {placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}

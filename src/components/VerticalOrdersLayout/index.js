@@ -4,7 +4,7 @@ import { Button } from '../../styles/Buttons'
 
 import {
   WrappButton,
-  ReviewWrapper,
+  ReviewWrapper
 } from './styles'
 
 import { OrdersContainer } from '../OrdersOption/styles'
@@ -83,7 +83,7 @@ export const VerticalOrdersLayout = (props) => {
         {orders.map(order => (
           <SingleOrderCard
             {...props}
-            key={order.id}
+            key={order.id || order.id?.[0]}
             order={order}
             setOrderSelected={setOrderSelected}
           />

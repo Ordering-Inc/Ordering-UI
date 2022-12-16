@@ -63,7 +63,6 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
     businessIds,
     paymethodsAndWallets,
     walletsState,
-    businessPaymethods,
     paymethodSelected,
     handleSelectPaymethod,
     handleSelectWallet,
@@ -98,14 +97,14 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
             </PayCard>
           ))
         ) : (
-          businessPaymethods.result.filter(paymethod => paymethodsAndWallets.paymethods.find(item => item.id === paymethod.paymethod_id)).map(paymethod => (
+          paymethodsAndWallets.paymethods.map(paymethod => (
             <PayCard
               key={paymethod.id}
-              isActive={paymethodSelected?.paymethod_id === paymethod.paymethod_id}
-              onClick={() => handleSelectPaymethod(paymethod)}
+              isActive={paymethodSelected?.id === paymethod.id}
+              onClick={() => handleSelectPaymethod({ ...paymethod, paymethod: { gateway: paymethod.gateway }, paymethod_id: paymethod?.id })}
             >
-              <div>{getPayIcon(paymethod.paymethod_id)}</div>
-              <p>{t(paymethod?.paymethod?.gateway.toUpperCase(), paymethod?.paymethod?.name)}</p>
+              <div>{getPayIcon(paymethod.id)}</div>
+              <p>{t(paymethod?.gateway.toUpperCase(), paymethod?.name)}</p>
             </PayCard>
           ))
         )}

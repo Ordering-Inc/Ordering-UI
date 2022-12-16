@@ -13,7 +13,8 @@ import {
   WrapperBusinessTitle,
   Reorder,
   OrderInfo,
-  FavoriteWrapper
+  FavoriteWrapper,
+  MultiLogosContainer
 } from '../styles'
 
 const SingleOrderCardUI = (props) => {
@@ -39,21 +40,43 @@ const SingleOrderCardUI = (props) => {
     <SingleCard key={order.id} id='order-card'>
       <OrderPastContent>
         {(order.business?.logo || theme.images?.dummies?.businessLogo) && (
-          <PastLogo>
-            <img src={order.business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='55px' height='64px' loading='lazy' />
-          </PastLogo>
+          <>
+            {order?.business?.length > 1 ? (
+              <MultiLogosContainer>
+                {order?.business?.map((business, i) => (
+                  <React.Fragment key={business?.id}>
+                    {i > 1 ? (
+                      <p>
+                        + {order?.business?.length - 2}
+                      </p>
+                    ) : (
+                      <PastLogo isMulti>
+                        <img src={business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='55px' height='64px' loading='lazy' />
+                      </PastLogo>
+                    )}
+                  </React.Fragment>
+                ))}
+              </MultiLogosContainer>
+            ) : (
+              <PastLogo>
+                <img src={order.business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='55px' height='64px' loading='lazy' />
+              </PastLogo>
+            )}
+          </>
         )}
         <BusinessInformation>
           <WrapperBusinessTitle>
-            <h2>{order.business?.name}</h2>
-            <FavoriteWrapper onClick={() => handleChangeFavorite(order)} className='favorite'>
-              {order?.favorite ? <Like /> : <DisLike />}
-            </FavoriteWrapper>
+            <h2>{order?.business?.length > 1 ? `${t('GROUP_ORDER', 'Group Order')} ${t('No', 'No')}. ${order?.cart_group_id}` : order.business?.name}</h2>
+            {!order?.business?.length && (
+              <FavoriteWrapper onClick={() => handleChangeFavorite(order)} className='favorite'>
+                {order?.favorite ? <Like /> : <DisLike />}
+              </FavoriteWrapper>
+            )}
           </WrapperBusinessTitle>
           <OrderInfo>
             {order?.id && (
               <>
-                <p name='order_number'>{t('ORDER_NUM', 'Order No.')} {order.id}</p>
+                <p name='order_number'>{order?.business?.length > 1 ? `${order?.business?.length} ${t('ORDERS', 'orders')}` : `${t('ORDER_NUM', 'Order No.')} ${order.id}`}</p>
                 <BsDot className='dot' />
               </>
             )}

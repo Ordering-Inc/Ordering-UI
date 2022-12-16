@@ -111,6 +111,7 @@ import { OrderBillSection } from './src/components/OrderDetails/OrderBillSection
 import { OrderPreferencesSection } from './src/components/OrderDetails/OrderPreferencesSections'
 import { ActionsSection } from './src/components/OrderDetails/ActionsSection'
 import { ProductShare } from './src/components/ProductShare'
+import { MultiCart } from './src/components/MultiCart'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -233,6 +234,7 @@ export {
   OrderPreferencesSection,
   ActionsSection,
   ProductShare,
+  MultiCart,
 
   // styles
   Button,
