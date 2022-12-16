@@ -12,6 +12,7 @@ import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
 import { BusinessPreorder } from './src/components/BusinessPreorder'
 import { BusinessMenuList } from './src/components/BusinessMenuList'
 import { BusinessProductsCategories } from './src/components/BusinessProductsCategories'
+import { ScheduleAccordion } from './src/components/ScheduleAccordion'
 import { BusinessProductsCategories as CategoriesLayoutGroceries } from './src/components/BusinessProductsCategories/layouts/groceries'
 import { BusinessProductsList } from './src/components/BusinessProductsList'
 import { BusinessProductsList as ProductListLayoutGroceries } from './src/components/BusinessProductsList/layouts/groceries'
@@ -201,6 +202,7 @@ export {
   ReviewProfessional,
   RenderProductsLayout,
   ResetPassword,
+  ScheduleAccordion,
   SearchBar,
   SessionsList,
   SidebarMenu,
