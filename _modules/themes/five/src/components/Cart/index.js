@@ -95,6 +95,9 @@ var CartUI = function CartUI(props) {
     _useSite2 = _slicedToArray(_useSite, 1),
     site = _useSite2[0].site;
   var windowSize = (0, _useWindowSize.useWindowSize)();
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+    _useCustomer2 = _slicedToArray(_useCustomer, 1),
+    user = _useCustomer2[0].user;
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var _useState = (0, _react.useState)({
       open: false,
@@ -267,7 +270,7 @@ var CartUI = function CartUI(props) {
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
-        handleRemoveOfferClick(id);
+        handleRemoveOfferClick(id, user === null || user === void 0 ? void 0 : user.id);
       }
     });
   };
@@ -587,27 +590,6 @@ var CartUI = function CartUI(props) {
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "70%",
-    title: t('CHANGE_STORE', 'Change store'),
-    open: openChangeStore,
-    padding: "20px",
-    closeOnBackdrop: true,
-    modalTitleStyle: {
-      display: 'flex',
-      justifyContent: 'center'
-    },
-    onClose: function onClose() {
-      return setOpenChangeStore(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_CartStoresListing.CartStoresListing, {
-    isStore: isStore,
-    pageChangeStore: "business",
-    cartuuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
-    onClose: function onClose() {
-      return setOpenChangeStore(false);
-    },
-    handleCustomStoreRedirect: handleStoreRedirect
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
