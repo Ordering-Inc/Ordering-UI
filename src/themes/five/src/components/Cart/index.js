@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig, useOrderingTheme, useSite } from 'ordering-components'
+import {
+  Cart as CartController,
+  useOrder,
+  useLanguage,
+  useEvent,
+  useUtils,
+  useValidationFields,
+  useConfig,
+  useOrderingTheme,
+  useSite,
+  useCustomer
+} from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
@@ -69,6 +80,7 @@ const CartUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ site }] = useSite()
   const windowSize = useWindowSize()
+  const [{ user }] = useCustomer()
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -225,7 +237,7 @@ const CartUI = (props) => {
       title: t('OFFER', 'Offer'),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
-        handleRemoveOfferClick(id)
+        handleRemoveOfferClick(id, user?.id)
       }
     })
   }
@@ -649,7 +661,7 @@ const CartUI = (props) => {
           )}
         </CartSticky>
 
-        <Modal
+        {/* <Modal
           width='70%'
           title={t('CHANGE_STORE', 'Change store')}
           open={openChangeStore}
@@ -665,7 +677,7 @@ const CartUI = (props) => {
             onClose={() => setOpenChangeStore(false)}
             handleCustomStoreRedirect={handleStoreRedirect}
           />
-        </Modal>
+        </Modal> */}
 
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
