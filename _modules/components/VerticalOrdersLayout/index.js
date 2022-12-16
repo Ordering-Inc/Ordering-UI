@@ -127,8 +127,9 @@ var VerticalOrdersLayout = function VerticalOrdersLayout(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrdersContainer, {
     id: "orders-container"
   }, orders.map(function (order) {
+    var _order$id;
     return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, _extends({}, props, {
-      key: order.id,
+      key: order.id || ((_order$id = order.id) === null || _order$id === void 0 ? void 0 : _order$id[0]),
       order: order,
       setOrderSelected: setOrderSelected
     }));

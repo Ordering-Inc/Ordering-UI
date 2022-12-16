@@ -11,6 +11,7 @@ var _orderingComponents = require("ordering-components");
 var _Modal = require("../Modal");
 var _styles = require("./styles");
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
+var _ScheduleAccordion = require("../ScheduleAccordion");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -40,7 +41,6 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var daysOfWeek = [t('SUNDAY_ABBREVIATION', 'Sun'), t('MONDAY_ABBREVIATION', 'Mon'), t('TUESDAY_ABBREVIATION', 'Tues'), t('WEDNESDAY_ABBREVIATION', 'Wed'), t('THURSDAY_ABBREVIATION', 'Thur'), t('FRIDAY_ABBREVIATION', 'Fri'), t('SATURDAY_ABBREVIATION', 'Sat')];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     modalImage = _useState2[0],
@@ -83,11 +83,12 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     location: businessLocation.location,
     mapControls: businessLocation.googleMapsControls || business.googleMapsControls
   }))), (business === null || business === void 0 ? void 0 : business.address) && /*#__PURE__*/_react.default.createElement(_styles.BusinessAddress, null, business === null || business === void 0 ? void 0 : business.address), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (businessSchedule === null || businessSchedule === void 0 ? void 0 : businessSchedule.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showSchedule && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('OPENING_TIME', 'Opening time')), /*#__PURE__*/_react.default.createElement(_styles.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleContainer, null, businessSchedule.map(function (schedule, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.ScheduleBlock, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement("h4", null, daysOfWeek[i]), schedule.enabled ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, scheduleFormatted(schedule.lapses[0].open)), /*#__PURE__*/_react.default.createElement("div", null, "-"), /*#__PURE__*/_react.default.createElement("p", null, scheduleFormatted(schedule.lapses[0].close))) : /*#__PURE__*/_react.default.createElement("p", {
-      className: "close"
-    }, t('CLOSED', 'Closed')));
+    return /*#__PURE__*/_react.default.createElement(_ScheduleAccordion.ScheduleAccordion, {
+      key: i,
+      weekIndex: i,
+      scheduleFormatted: scheduleFormatted,
+      schedule: schedule
+    });
   }))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), /*#__PURE__*/_react.default.createElement(_styles.DeliveryInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h5", null, t('DELIVERY_TIME', 'Delivery Time'), ": ", (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)), /*#__PURE__*/_react.default.createElement("h5", null, t('PICKUP_TIME', 'Pickup Time'), ": ", (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time)))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (businessVideos === null || businessVideos === void 0 ? void 0 : businessVideos.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessMediaContent, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('VIDEOS', 'Videos')), /*#__PURE__*/_react.default.createElement("div", null, businessVideos.map(function (video, i) {
     return /*#__PURE__*/_react.default.createElement("iframe", {
       key: i,

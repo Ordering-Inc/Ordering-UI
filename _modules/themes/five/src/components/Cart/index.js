@@ -31,6 +31,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -95,6 +99,9 @@ var CartUI = function CartUI(props) {
     _useSite2 = _slicedToArray(_useSite, 1),
     site = _useSite2[0].site;
   var windowSize = (0, _useWindowSize.useWindowSize)();
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+    _useCustomer2 = _slicedToArray(_useCustomer, 1),
+    user = _useCustomer2[0].user;
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var _useState = (0, _react.useState)({
       open: false,
@@ -173,9 +180,64 @@ var CartUI = function CartUI(props) {
     setModalIsOpen(true);
   };
   var handleClickCheckout = function handleClickCheckout() {
-    if (checkoutMultiBusinessEnabled && openCarts.length > 1) {
+    var _cart$group, _Object$values$filter, _Object$values$filter2;
+    var cartSelectedHasGroup = cart === null || cart === void 0 ? void 0 : (_cart$group = cart.group) === null || _cart$group === void 0 ? void 0 : _cart$group.uuid;
+    var cartFilterValidation = function cartFilterValidation(cart) {
+      return (cart === null || cart === void 0 ? void 0 : cart.valid) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2;
+    };
+    var cartsGroupLength = cartSelectedHasGroup ? (_Object$values$filter = Object.values(orderState.carts).filter(function (_cart) {
+      var _cart$group2;
+      return (_cart === null || _cart === void 0 ? void 0 : (_cart$group2 = _cart.group) === null || _cart$group2 === void 0 ? void 0 : _cart$group2.uuid) === cartSelectedHasGroup && cartFilterValidation(_cart);
+    })) === null || _Object$values$filter === void 0 ? void 0 : _Object$values$filter.length : 0;
+    if (cartsGroupLength > 1 && checkoutMultiBusinessEnabled) {
+      var _cart$group3;
       events.emit('go_to_page', {
-        page: 'multi_checkout'
+        page: 'multi_checkout',
+        params: {
+          cartUuid: cart === null || cart === void 0 ? void 0 : (_cart$group3 = cart.group) === null || _cart$group3 === void 0 ? void 0 : _cart$group3.uuid
+        }
+      });
+      events.emit('cart_popover_closed');
+      return;
+    }
+    var cartGroupsCount = {};
+    // eslint-disable-next-line no-unused-expressions
+    (_Object$values$filter2 = Object.values(orderState.carts).filter(function (_cart) {
+      return cartFilterValidation(_cart);
+    })) === null || _Object$values$filter2 === void 0 ? void 0 : _Object$values$filter2.forEach(function (_cart) {
+      var _cart$group4;
+      if (cartGroupsCount[_cart === null || _cart === void 0 ? void 0 : (_cart$group4 = _cart.group) === null || _cart$group4 === void 0 ? void 0 : _cart$group4.uuid]) {
+        var _cart$group5;
+        cartGroupsCount[_cart === null || _cart === void 0 ? void 0 : (_cart$group5 = _cart.group) === null || _cart$group5 === void 0 ? void 0 : _cart$group5.uuid] += 1;
+      } else {
+        var _cart$group6;
+        cartGroupsCount[_cart === null || _cart === void 0 ? void 0 : (_cart$group6 = _cart.group) === null || _cart$group6 === void 0 ? void 0 : _cart$group6.uuid] = 1;
+      }
+    });
+    var groupForTheCart;
+    var groupForAddCartArray = Object.keys(cartGroupsCount).filter(function (cartGroupUuid) {
+      return cartGroupsCount[cartGroupUuid] > 0 && cartGroupsCount[cartGroupUuid] < 5;
+    });
+    var max = Math.max.apply(Math, _toConsumableArray(groupForAddCartArray.map(function (uuid) {
+      return cartGroupsCount[uuid];
+    })));
+    var indexes = groupForAddCartArray.filter(function (uuid) {
+      return cartGroupsCount[uuid] === max;
+    });
+    if ((indexes === null || indexes === void 0 ? void 0 : indexes.length) > 1) {
+      groupForTheCart = indexes.find(function (uuid) {
+        return uuid !== 'undefined';
+      });
+    } else {
+      groupForTheCart = indexes[0];
+    }
+    if (checkoutMultiBusinessEnabled && (openCarts === null || openCarts === void 0 ? void 0 : openCarts.length) > 1 && groupForTheCart) {
+      events.emit('go_to_page', {
+        page: 'multi_cart',
+        params: {
+          cartUuid: cart.uuid,
+          cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart
+        }
       });
     } else {
       events.emit('go_to_page', {
@@ -267,7 +329,7 @@ var CartUI = function CartUI(props) {
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
-        handleRemoveOfferClick(id);
+        handleRemoveOfferClick(id, user === null || user === void 0 ? void 0 : user.id);
       }
     });
   };
@@ -587,27 +649,6 @@ var CartUI = function CartUI(props) {
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "70%",
-    title: t('CHANGE_STORE', 'Change store'),
-    open: openChangeStore,
-    padding: "20px",
-    closeOnBackdrop: true,
-    modalTitleStyle: {
-      display: 'flex',
-      justifyContent: 'center'
-    },
-    onClose: function onClose() {
-      return setOpenChangeStore(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_CartStoresListing.CartStoresListing, {
-    isStore: isStore,
-    pageChangeStore: "business",
-    cartuuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
-    onClose: function onClose() {
-      return setOpenChangeStore(false);
-    },
-    handleCustomStoreRedirect: handleStoreRedirect
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

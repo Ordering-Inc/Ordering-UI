@@ -41,7 +41,7 @@ var mapConfigs = {
   }
 };
 var MultiCheckoutUI = function MultiCheckoutUI(props) {
-  var _Object$values, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$google_maps_, _customerState$user, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2;
+  var _paymethodSelected$pa, _Object$values, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$google_maps_, _customerState$user, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2;
   var placing = props.placing,
     isCustomerMode = props.isCustomerMode,
     openCarts = props.openCarts,
@@ -51,7 +51,9 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     handleSelectPaymethod = props.handleSelectPaymethod,
     handleSelectWallet = props.handleSelectWallet,
     handlePaymethodDataChange = props.handlePaymethodDataChange,
-    onRedirectPage = props.onRedirectPage;
+    onRedirectPage = props.onRedirectPage,
+    cartGroup = props.cartGroup,
+    cartUuid = props.cartUuid;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -93,7 +95,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     alertState = _useState6[0],
     setAlertState = _useState6[1];
   var maximumCarts = 5;
-  var isDisablePlaceOrderButton = !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id) || openCarts.length > maximumCarts;
+  var isDisablePlaceOrderButton = !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id) || openCarts.length > maximumCarts || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa = paymethodSelected.paymethod) === null || _paymethodSelected$pa === void 0 ? void 0 : _paymethodSelected$pa.gateway) === 'stripe' && !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_data);
   var walletCarts = ((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
     var _cart$products;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (cart === null || cart === void 0 ? void 0 : cart.valid_schedule) && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.valid_maximum) && (cart === null || cart === void 0 ? void 0 : cart.valid_minimum) && (cart === null || cart === void 0 ? void 0 : cart.wallets);
@@ -191,7 +193,8 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     paymethodSelected: paymethodSelected,
     handleSelectPaymethod: handleSelectPaymethod,
     handleSelectWallet: handleSelectWallet,
-    handlePaymethodDataChange: handlePaymethodDataChange
+    handlePaymethodDataChange: handlePaymethodDataChange,
+    cartUuid: cartUuid
   })), isMultiDriverTips && (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : (_validationFields$fie10 = _validationFields$fie9.checkout) === null || _validationFields$fie10 === void 0 ? void 0 : (_validationFields$fie11 = _validationFields$fie10.driver_tip) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.enabled) && openCarts.every(function (cart) {
     return cart.business_id && cart.status !== 2;
   }) && driverTipsOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
@@ -217,7 +220,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     }), /*#__PURE__*/_react.default.createElement(_styles.DriverTipDivider, null));
   }), walletCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_PARTIAL_WALLET_CARTS', 'Important: One or more carts can`t be completed due a partial payment with cash/points wallet and requires to be paid individually')), openCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(totalCartsPrice))), /*#__PURE__*/_react.default.createElement("p", null, t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')))), /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
-    disabled: isDisablePlaceOrderButton || placing,
+    disabled: isDisablePlaceOrderButton || placing || (cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.loading),
     onClick: handlePlaceOrder
   }, placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), openCarts.length > maximumCarts && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_MAXIMUM_CARTS', 'You can only pay for a maximum of 5 carts, please discard one or more to continue.'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CHECKOUT ', 'Checkout'),

@@ -34,7 +34,14 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var ordersToShow = businessesIds ? orders.filter(function (order) {
-    return businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id);
+    var _order$business;
+    return (businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id)) || JSON.stringify(businessesIds.sort(function (a, b) {
+      return a - b;
+    })) === JSON.stringify(order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.map(function (business) {
+      return business === null || business === void 0 ? void 0 : business.id;
+    }).sort(function (a, b) {
+      return a - b;
+    }));
   }) : orders;
   var notOrders = isProducts || isBusiness;
   var Orders = function Orders() {
@@ -78,8 +85,9 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     ordersLength: (orders === null || orders === void 0 ? void 0 : orders.length) <= 1,
     isBusinessesPage: isBusinessesPage
   }, /*#__PURE__*/_react.default.createElement(_styles.CardWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CardsContainer, null, orders.length > 0 && ordersToShow.map(function (order) {
+    var _order$id;
     return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, _extends({}, props, {
-      key: order.id,
+      key: order.id || ((_order$id = order.id) === null || _order$id === void 0 ? void 0 : _order$id[0]),
       order: order
     }));
   })), /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {

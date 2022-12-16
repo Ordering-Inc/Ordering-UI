@@ -13,6 +13,8 @@ var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _Confirm = require("../Confirm");
 var _SingleOrderCard = require("./SingleOrderCard");
 var _styles = require("./styles");
+var _NotFoundSource = require("../NotFoundSource");
+var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -32,13 +34,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
+  var _theme$defaultLanguag, _theme$defaultLanguag2;
   var customer = props.customer,
     paymentEvents = props.paymentEvents,
-    ordersSummary = props.ordersSummary;
+    ordersSummary = props.ordersSummary,
+    handleOrderRedirect = props.handleOrderRedirect;
   var _props$ordersList = props.ordersList,
     loading = _props$ordersList.loading,
     orders = _props$ordersList.orders,
     error = _props$ordersList.error;
+  var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -68,7 +73,7 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
       });
     }
   }, [error]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, ((orders === null || orders === void 0 ? void 0 : orders.length) > 0 || loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 36,
     width: 250,
     style: {
@@ -103,7 +108,7 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: order.id
     }, /*#__PURE__*/_react.default.createElement("td", null, t('ORDER', 'Order'), " #", order.id), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_order$summary$total = order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) !== null && _order$summary$total !== void 0 ? _order$summary$total : order === null || order === void 0 ? void 0 : order.total)));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL_BEFORE_TAX', 'Total before tax'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.subtotal))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('ESTIMATED_TAX_TO_BE_COLLECTED', 'Estimated tax to be collected'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.tax))))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('PAYMENT_TOTAL', 'Payment total'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.total)))))), loading ? _toConsumableArray(Array(3).keys()).map(function (i) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL_BEFORE_TAX', 'Total before tax'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.subtotal))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('ESTIMATED_TAX_TO_BE_COLLECTED', 'Estimated tax to be collected'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.tax))))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('PAYMENT_TOTAL', 'Payment total'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.total))))))), loading ? _toConsumableArray(Array(3).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SingleOrderContainer, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -114,6 +119,12 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
       key: order.id,
       order: order
     });
+  })), !loading && (error || (orders === null || orders === void 0 ? void 0 : orders.length) === 0) && (error !== null && error !== void 0 && error.includes('ERROR_ACCESS_EXPIRED') ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: t(error[0], 'Sorry, the order has expired.')
+  }) : /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: t('NOT_FOUND_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.NOT_FOUND_ORDER) || 'Sorry, we couldn\'t find the requested order.'),
+    btnTitle: t('ORDERS_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.ORDERS_REDIRECT) || 'Go to Orders'),
+    onClickButton: handleOrderRedirect
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

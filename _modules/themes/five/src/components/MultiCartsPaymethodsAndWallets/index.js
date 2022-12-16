@@ -73,7 +73,6 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
   var businessIds = props.businessIds,
     paymethodsAndWallets = props.paymethodsAndWallets,
     walletsState = props.walletsState,
-    businessPaymethods = props.businessPaymethods,
     paymethodSelected = props.paymethodSelected,
     handleSelectPaymethod = props.handleSelectPaymethod,
     handleSelectWallet = props.handleSelectWallet,
@@ -111,19 +110,19 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
         marginLeft: '10px'
       }
     }));
-  }) : businessPaymethods.result.filter(function (paymethod) {
-    return paymethodsAndWallets.paymethods.find(function (item) {
-      return item.id === paymethod.paymethod_id;
-    });
-  }).map(function (paymethod) {
-    var _paymethod$paymethod, _paymethod$paymethod2;
+  }) : paymethodsAndWallets.paymethods.map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       key: paymethod.id,
-      isActive: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.paymethod_id) === paymethod.paymethod_id,
+      isActive: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id,
       onClick: function onClick() {
-        return handleSelectPaymethod(paymethod);
+        return handleSelectPaymethod(_objectSpread(_objectSpread({}, paymethod), {}, {
+          paymethod: {
+            gateway: paymethod.gateway
+          },
+          paymethod_id: paymethod === null || paymethod === void 0 ? void 0 : paymethod.id
+        }));
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.paymethod_id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$paymethod = paymethod.paymethod) === null || _paymethod$paymethod === void 0 ? void 0 : _paymethod$paymethod.gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$paymethod2 = paymethod.paymethod) === null || _paymethod$paymethod2 === void 0 ? void 0 : _paymethod$paymethod2.name)));
+    }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)));
   })), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa = paymethodSelected.paymethod) === null || _paymethodSelected$pa === void 0 ? void 0 : _paymethodSelected$pa.gateway) === 'stripe' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
     paymethod: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.paymethod,
     businessId: businessIds[0],
