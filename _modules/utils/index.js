@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = void 0;
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -872,4 +872,17 @@ var reviewCommentList = function reviewCommentList(type) {
   };
   return reviews[type];
 };
+
+/**
+ * Function to convert star rate in width to display
+ * @param {int} qualification star rate or qualification
+ */
 exports.reviewCommentList = reviewCommentList;
+var getStarWidth = function getStarWidth(qualification) {
+  if (qualification) {
+    return qualification / 5 * 100 + '%';
+  } else {
+    return '0%';
+  }
+};
+exports.getStarWidth = getStarWidth;
