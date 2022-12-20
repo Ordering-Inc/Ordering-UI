@@ -96,6 +96,7 @@ const SendGiftCardUI = (props) => {
 export const SendGiftCard = (props) => {
   const sendGiftCardProps = {
     ...props,
+    showToastMsg: true,
     UIComponent: SendGiftCardUI
   }
   return <SendGiftCardController {...sendGiftCardProps} />

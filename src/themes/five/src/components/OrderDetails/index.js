@@ -112,6 +112,7 @@ const OrderDetailsUI = (props) => {
   const [isProductReviewed, setIsProductReviewed] = useState(false)
   const [isDriverReviewed, setIsDriverReviewed] = useState(false)
   const [isProReviewed, setIsProReviewed] = useState(false)
+  const [isGiftCardSent, setIsGiftCardSent] = useState(false)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false, professional: false })
@@ -713,9 +714,10 @@ const OrderDetailsUI = (props) => {
             </OrderProducts>
           </WrapperRightContainer>
 
-          {isGiftCardOrder && (
+          {isGiftCardOrder && order?.products[0]?.gift_card?.status !== 'sent' && !isGiftCardSent && (
             <SendGiftCard
               giftCardId={order?.products[0]?.gift_card?.id}
+              setIsGiftCardSent={setIsGiftCardSent}
             />
           )}
         </WrapperContainer>
