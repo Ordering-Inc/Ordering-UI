@@ -13,7 +13,8 @@ import {
   useValidationFields,
   useConfig,
   useCustomer,
-  useOrderingTheme
+  useOrderingTheme,
+  useEvent
 } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UpsellingPage } from '../UpsellingPage'
@@ -103,6 +104,8 @@ const CheckoutUI = (props) => {
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
+  const [events] = useEvent()
+
   const history = useHistory()
   const windowSize = useWindowSize()
 
@@ -252,7 +255,11 @@ const CheckoutUI = (props) => {
 
   useEffect(() => {
     if (cart?.products?.length) return
-    cart?.business?.slug && handleStoreRedirect(cart?.business?.slug)
+    if (cart?.business?.slug) {
+      handleStoreRedirect(cart?.business?.slug)
+    } else {
+      events.emit('go_to_page', { page: 'wallets' })
+    }
   }, [cart?.products])
 
   return (
@@ -512,7 +519,9 @@ const CheckoutUI = (props) => {
           <CartContainer>
             <CartHeader>
               <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
-              <span onClick={() => cart?.business?.slug && handleStoreRedirect && handleStoreRedirect(cart?.business?.slug)}>{t('ADD_PRODUCTS', 'Add products')}</span>
+              {cart?.business?.slug && (
+                <span onClick={() => cart?.business?.slug && handleStoreRedirect && handleStoreRedirect(cart?.business?.slug)}>{t('ADD_PRODUCTS', 'Add products')}</span>
+              )}
             </CartHeader>
             <Cart
               isCartPending={cart?.status === 2}

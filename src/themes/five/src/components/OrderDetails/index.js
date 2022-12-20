@@ -715,7 +715,7 @@ const OrderDetailsUI = (props) => {
 
           {isGiftCardOrder && (
             <SendGiftCard
-              giftCardId={34}
+              giftCardId={order?.products[0]?.gift_card?.id}
             />
           )}
         </WrapperContainer>

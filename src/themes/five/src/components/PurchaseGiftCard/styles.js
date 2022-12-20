@@ -24,6 +24,7 @@ export const GiftCardsListContainer = styled.div`
   margin-bottom: 40px;
 `
 export const GiftCardItem = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.colors.gray200};
@@ -34,7 +35,6 @@ export const GiftCardItem = styled.div`
   }
 `
 export const IconControl = styled.div`
-  cursor: pointer;
   display: flex;
   color: ${props => props.theme.colors.primary};
   margin-right: 40px;

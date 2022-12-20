@@ -78,7 +78,7 @@ const SendGiftCardUI = (props) => {
         color='primary'
         disabled={actionState.loading}
       >
-        {actionState?.loading ? t('LOADING', 'Loading') : t('APPLY_TO_YOUR_BALANCE', 'Apply to your balance')}
+        {actionState?.loading ? t('LOADING', 'Loading') : t('SEND_GIFT_CARD', 'Send gift card')}
       </Button>
       <Alert
         title={t('ERROR', 'Error')}

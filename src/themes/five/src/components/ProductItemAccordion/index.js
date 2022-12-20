@@ -33,6 +33,7 @@ import { useTheme } from 'styled-components'
 
 export const ProductItemAccordion = (props) => {
   const {
+    isDisabledEdit,
     isCartPending,
     isCartProduct,
     product,
@@ -180,7 +181,7 @@ export const ProductItemAccordion = (props) => {
                       <p>{parsePrice(product.total || product.price)}</p>
                       {isCartProduct && !isCartPending && (
                         <div>
-                          {onEditProduct && (
+                          {onEditProduct && !isDisabledEdit && (
                             <span ref={productActionsEdit}>
                               <Pencil color='#B1BCCC' onClick={() => onEditProduct(product)} />
                             </span>
@@ -213,13 +214,15 @@ export const ProductItemAccordion = (props) => {
               </ProductPrice>
               {isCartProduct && !isCartPending && (
                 <ProductActions>
-                  <ProductActionsEdit
-                    ref={productActionsEdit}
-                    onClick={() => onEditProduct(product)}
-                    disabled={orderState.loading}
-                  >
-                    <Pencil color='#B1BCCC' />
-                  </ProductActionsEdit>
+                  {!isDisabledEdit && (
+                    <ProductActionsEdit
+                      ref={productActionsEdit}
+                      onClick={() => onEditProduct(product)}
+                      disabled={orderState.loading}
+                    >
+                      <Pencil color='#B1BCCC' />
+                    </ProductActionsEdit>
+                  )}
                   <ProductActionsDelete
                     ref={productActionsDelete}
                     onClick={() => onDeleteProduct(product)}
@@ -235,13 +238,15 @@ export const ProductItemAccordion = (props) => {
           {isCartProduct && !isCartPending && product?.valid_menu && !product?.valid_quantity && (
             <ProductError>
               <ProductActions>
-                <ProductActionsEdit
-                  ref={productActionsEdit}
-                  onClick={() => onEditProduct(product)}
-                  disabled={orderState.loading}
-                >
-                  <Pencil color='#B1BCCC' />
-                </ProductActionsEdit>
+                {!isDisabledEdit && (
+                  <ProductActionsEdit
+                    ref={productActionsEdit}
+                    onClick={() => onEditProduct(product)}
+                    disabled={orderState.loading}
+                  >
+                    <Pencil color='#B1BCCC' />
+                  </ProductActionsEdit>
+                )}
                 <ProductActionsDelete
                   ref={productActionsDelete}
                   onClick={() => onDeleteProduct(product)}

@@ -34,10 +34,11 @@ const PurchaseGiftCardUI = (props) => {
           ))
         )}
         {productsListState.products.map(product => (
-          <GiftCardItem key={product.id}>
-            <IconControl
-              onClick={() => setSelectedProduct(product)}
-            >
+          <GiftCardItem
+            key={product.id}
+            onClick={() => setSelectedProduct(product)}
+          >
+            <IconControl>
               {selectedProduct?.id === product.id ? (
                 <RiRadioButtonFill />
               ) : (
