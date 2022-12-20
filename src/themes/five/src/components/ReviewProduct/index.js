@@ -24,6 +24,7 @@ import { TextArea } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { Alert } from '../Confirm'
 import { reviewCommentList } from '../../../../../utils'
+import { useTheme } from 'styled-components'
 
 const SingleProductReview = (props) => {
   const {
@@ -33,6 +34,7 @@ const SingleProductReview = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [isLike, setIsLike] = useState(true)
   const [isExtraComment, setIsExtraComment] = useState(false)
   const [comments, setComments] = useState([])
