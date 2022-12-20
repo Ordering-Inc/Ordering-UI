@@ -78,6 +78,10 @@ const BusinessLogoStyled = styled.div`
   @media (min-width: 481px){
     width: 100%;
     height: 100%;
+    ${({ isMulti }) => isMulti && css`
+      width: 124px;
+      height: 124px;
+    `}
     min-height: 124px;
   }
 `
@@ -101,6 +105,10 @@ export const WrapperBusinessLogo = styled.div`
   height: 124px;
   min-height: 124px;
   max-width: 124px;
+  ${({ isMulti }) => isMulti && css`
+    max-width: initial;
+    width: 100%;
+  `}
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
 `
@@ -250,4 +258,9 @@ export const ContinueContainer = styled.div`
   p{
     flex: 1
   }
+`
+
+export const MultiLogosContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
 `

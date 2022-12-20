@@ -13,7 +13,6 @@ import {
   BusinessContent,
   SectionTitle,
   Map,
-  ScheduleBlock,
   ScheduleSection,
   ScheduleContainer,
   DeliveryInfo,
@@ -26,6 +25,7 @@ import {
   Divider
 } from './styles'
 import MdClose from '@meronex/icons/md/MdClose'
+import { ScheduleAccordion } from '../ScheduleAccordion'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -39,16 +39,6 @@ export const BusinessInformationUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-
-  const daysOfWeek = [
-    t('SUNDAY_ABBREVIATION', 'Sun'),
-    t('MONDAY_ABBREVIATION', 'Mon'),
-    t('TUESDAY_ABBREVIATION', 'Tues'),
-    t('WEDNESDAY_ABBREVIATION', 'Wed'),
-    t('THURSDAY_ABBREVIATION', 'Thur'),
-    t('FRIDAY_ABBREVIATION', 'Fri'),
-    t('SATURDAY_ABBREVIATION', 'Sat')
-  ]
   const [modalImage, setModalImage] = useState(false)
   const [image, setImage] = useState('')
   const [orderingTheme] = useOrderingTheme()
@@ -124,18 +114,12 @@ export const BusinessInformationUI = (props) => {
                   <ScheduleSection>
                     <ScheduleContainer>
                       {businessSchedule.map((schedule, i) => (
-                        <ScheduleBlock key={i}>
-                          <h4>{daysOfWeek[i]}</h4>
-                          {schedule.enabled ? (
-                            <div>
-                              <p>{scheduleFormatted(schedule.lapses[0].open)}</p>
-                              <div>-</div>
-                              <p>{scheduleFormatted(schedule.lapses[0].close)}</p>
-                            </div>
-                          ) : (
-                            <p className='close'>{t('CLOSED', 'Closed')}</p>
-                          )}
-                        </ScheduleBlock>
+                        <ScheduleAccordion
+                          key={i}
+                          weekIndex={i}
+                          scheduleFormatted={scheduleFormatted}
+                          schedule={schedule}
+                        />
                       ))}
                     </ScheduleContainer>
                   </ScheduleSection>

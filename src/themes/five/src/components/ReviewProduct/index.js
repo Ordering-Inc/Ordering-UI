@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, ReviewProduct as ReviewProductController } from 'ordering-components'
 import { useForm } from 'react-hook-form'
-
 import {
   ReviewProductContainer,
   ActionBlock,
@@ -15,7 +14,7 @@ import {
   Comments,
   CommentsList,
   WrapperProductLogo,
-  ProductLogo,
+  ProductLogo
 } from './styles'
 import AiOutlineLike from '@meronex/icons/ai/AiOutlineLike'
 import AiOutlineDislike from '@meronex/icons/ai/AiOutlineDislike'
@@ -91,12 +90,12 @@ const SingleProductReview = (props) => {
 
   return (
     <SingleProductReviewContainer>
-        {(product?.images || theme.images?.dummies?.businessLogo) && (
-          <WrapperProductLogo>
-                  <ProductLogo bgimage={product?.images || theme.images?.dummies?.businessLogo} />
-          </WrapperProductLogo>
-        )}
-        <HandReviewWrapper>
+      {(product?.images || theme.images?.dummies?.businessLogo) && (
+        <WrapperProductLogo>
+          <ProductLogo bgimage={product?.images || theme.images?.dummies?.businessLogo} />
+        </WrapperProductLogo>
+      )}
+      <HandReviewWrapper>
         <p>{product?.name}</p>
         <HandReviewContent>
           <HandIconWrapper onClick={() => setIsLike(true)} active={isLike}>
