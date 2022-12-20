@@ -16,7 +16,8 @@ const RedeemGiftCardUI = (props) => {
   const {
     actionState,
     redeemedGiftCard,
-    handleApply
+    handleApply,
+    onClose
   } = props
 
   const [, t] = useLanguage()
@@ -101,6 +102,7 @@ const RedeemGiftCardUI = (props) => {
             <p>{t('MESSAGES', 'Messages')}: {redeemedGiftCard?.message}</p>
             <Button
               color='primary'
+              onClick={() => onClose()}
             >
               {t('OK', 'Ok')}
             </Button>

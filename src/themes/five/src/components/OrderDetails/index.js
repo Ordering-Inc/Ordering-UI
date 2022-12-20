@@ -714,7 +714,7 @@ const OrderDetailsUI = (props) => {
             </OrderProducts>
           </WrapperRightContainer>
 
-          {isGiftCardOrder && order?.products[0]?.gift_card?.status !== 'sent' && !isGiftCardSent && (
+          {isGiftCardOrder && order?.products[0]?.gift_card?.status === 'pending' && !isGiftCardSent && (
             <SendGiftCard
               giftCardId={order?.products[0]?.gift_card?.id}
               setIsGiftCardSent={setIsGiftCardSent}

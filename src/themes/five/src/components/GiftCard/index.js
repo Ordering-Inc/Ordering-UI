@@ -50,7 +50,9 @@ export const GiftCard = (props) => {
         open={openModal === 'redeem'}
         onClose={() => setOpenModal(null)}
       >
-        <RedeemGiftCard />
+        <RedeemGiftCard
+          onClose={() => setOpenModal(null)}
+        />
       </Modal>
     </Container>
   )

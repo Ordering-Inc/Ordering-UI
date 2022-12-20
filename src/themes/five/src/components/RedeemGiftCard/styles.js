@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.form`
+export const Container = styled.div`
   h2 {
     font-size: 24px;
     font-weight: 600;
