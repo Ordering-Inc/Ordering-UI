@@ -23,7 +23,6 @@ export const MomentContent = (props) => {
   const momentProps = {
     maxDate: currentDate
   }
-
   const { width } = useWindowSize()
   const momentControl = document?.getElementById('moment_control')?.getBoundingClientRect()
 
