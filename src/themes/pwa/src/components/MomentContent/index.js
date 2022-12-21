@@ -3,6 +3,7 @@ import { useOrder, useConfig } from 'ordering-components'
 
 import { Container, Layer } from './styles'
 
+import { MomentControl } from '../MomentControl'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
@@ -19,7 +20,9 @@ export const MomentContent = (props) => {
   currentDate.setTime(time)
   currentDate.setHours(23)
   currentDate.setMinutes(59)
-
+  const momentProps = {
+    maxDate: currentDate
+  }
   const { width } = useWindowSize()
   const momentControl = document?.getElementById('moment_control')?.getBoundingClientRect()
 
@@ -32,6 +35,7 @@ export const MomentContent = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container isLoading={orderState?.loading}>
+        <MomentControl {...momentProps} />
         {orderState?.loading && (
           <Layer height={momentControl?.height && `${momentControl?.height}px`}>
             {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (
