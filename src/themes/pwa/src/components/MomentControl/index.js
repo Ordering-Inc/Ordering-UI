@@ -133,9 +133,6 @@ const MomentControlUI = (props) => {
     }
   }, [hoursList])
 
-  useEffect(() => {
-    if (isASP) handleCheckBoxChange(true)
-  }, [isAsap])
 
   return (
     <div id='moment_control'>
