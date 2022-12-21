@@ -289,7 +289,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$changes9, _formState$changes10, _configs$verification2;
     if (isChanged && userPhoneNumber && isValidPhoneNumber && formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.country_phone_code && formState !== null && formState !== void 0 && (_formState$changes10 = formState.changes) !== null && _formState$changes10 !== void 0 && _formState$changes10.cellphone && (configs === null || configs === void 0 ? void 0 : (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1') {
-      setWillVerifyOtpState(true);
+      setWillVerifyOtpState && setWillVerifyOtpState(true);
     }
   }, [isValidPhoneNumber, userPhoneNumber, configs === null || configs === void 0 ? void 0 : (_configs$verification3 = configs.verification_phone_required) === null || _configs$verification3 === void 0 ? void 0 : _configs$verification3.value, isChanged]);
   (0, _react.useEffect)(function () {
