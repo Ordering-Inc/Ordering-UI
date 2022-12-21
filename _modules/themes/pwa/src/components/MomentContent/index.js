@@ -7,6 +7,7 @@ exports.MomentContent = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _orderingComponents = require("ordering-components");
 var _styles = require("./styles");
+var _MomentControl = require("../MomentControl");
 var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31,6 +32,9 @@ var MomentContent = function MomentContent(props) {
   currentDate.setTime(time);
   currentDate.setHours(23);
   currentDate.setMinutes(59);
+  var momentProps = {
+    maxDate: currentDate
+  };
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var momentControl = (_document = document) === null || _document === void 0 ? void 0 : (_document$getElementB = _document.getElementById('moment_control')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.getBoundingClientRect();
@@ -44,7 +48,7 @@ var MomentContent = function MomentContent(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, {
+  }, /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, momentProps), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, {
     height: (momentControl === null || momentControl === void 0 ? void 0 : momentControl.height) && "".concat(momentControl === null || momentControl === void 0 ? void 0 : momentControl.height, "px")
   }, (window.location.pathname !== '/search' || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {

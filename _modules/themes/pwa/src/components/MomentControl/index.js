@@ -144,9 +144,6 @@ var MomentControlUI = function MomentControlUI(props) {
       setTimeLists(_timeLists);
     }
   }, [hoursList]);
-  (0, _react.useEffect)(function () {
-    if (isASP) handleCheckBoxChange(true);
-  }, [isAsap]);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
   }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
