@@ -321,6 +321,12 @@ Object.defineProperty(exports, "MomentControl", {
     return _MomentControl.MomentControl;
   }
 });
+Object.defineProperty(exports, "MultiCart", {
+  enumerable: true,
+  get: function get() {
+    return _MultiCart.MultiCart;
+  }
+});
 Object.defineProperty(exports, "MultiCartsPaymethodsAndWallets", {
   enumerable: true,
   get: function get() {
@@ -836,6 +842,7 @@ var _OrderBillSection = require("./src/components/OrderDetails/OrderBillSection"
 var _OrderPreferencesSections = require("./src/components/OrderDetails/OrderPreferencesSections");
 var _ActionsSection = require("./src/components/OrderDetails/ActionsSection");
 var _ProductShare = require("./src/components/ProductShare");
+var _MultiCart = require("./src/components/MultiCart");
 var _Buttons = require("./src/styles/Buttons");
 var _Inputs = require("./src/styles/Inputs");
 var _Select = require("./src/styles/Select");

@@ -32,8 +32,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect'];
 var getPayIcon = function getPayIcon(method) {
@@ -73,7 +73,6 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
   var businessIds = props.businessIds,
     paymethodsAndWallets = props.paymethodsAndWallets,
     walletsState = props.walletsState,
-    businessPaymethods = props.businessPaymethods,
     paymethodSelected = props.paymethodSelected,
     handleSelectPaymethod = props.handleSelectPaymethod,
     handleSelectWallet = props.handleSelectWallet,
@@ -111,19 +110,19 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
         marginLeft: '10px'
       }
     }));
-  }) : businessPaymethods.result.filter(function (paymethod) {
-    return paymethodsAndWallets.paymethods.find(function (item) {
-      return item.id === paymethod.paymethod_id;
-    });
-  }).map(function (paymethod) {
-    var _paymethod$paymethod, _paymethod$paymethod2;
+  }) : paymethodsAndWallets.paymethods.map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       key: paymethod.id,
-      isActive: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.paymethod_id) === paymethod.paymethod_id,
+      isActive: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id,
       onClick: function onClick() {
-        return handleSelectPaymethod(paymethod);
+        return handleSelectPaymethod(_objectSpread(_objectSpread({}, paymethod), {}, {
+          paymethod: {
+            gateway: paymethod.gateway
+          },
+          paymethod_id: paymethod === null || paymethod === void 0 ? void 0 : paymethod.id
+        }));
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.paymethod_id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$paymethod = paymethod.paymethod) === null || _paymethod$paymethod === void 0 ? void 0 : _paymethod$paymethod.gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$paymethod2 = paymethod.paymethod) === null || _paymethod$paymethod2 === void 0 ? void 0 : _paymethod$paymethod2.name)));
+    }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)));
   })), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa = paymethodSelected.paymethod) === null || _paymethodSelected$pa === void 0 ? void 0 : _paymethodSelected$pa.gateway) === 'stripe' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
     paymethod: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.paymethod,
     businessId: businessIds[0],

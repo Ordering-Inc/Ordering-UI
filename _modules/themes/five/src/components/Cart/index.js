@@ -31,6 +31,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -39,8 +43,8 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CartUI = function CartUI(props) {
   var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _Object$values, _orderState$carts, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products2, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options2, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_t2, _configs$driver_tip_u2, _configs$driver_tip_t3, _cart$payment_events, _cart$payment_events2, _cart$business2, _cart$business3, _curProduct$calendar_, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
@@ -176,9 +180,64 @@ var CartUI = function CartUI(props) {
     setModalIsOpen(true);
   };
   var handleClickCheckout = function handleClickCheckout() {
-    if (checkoutMultiBusinessEnabled && openCarts.length > 1) {
+    var _cart$group, _Object$values$filter, _Object$values$filter2;
+    var cartSelectedHasGroup = cart === null || cart === void 0 ? void 0 : (_cart$group = cart.group) === null || _cart$group === void 0 ? void 0 : _cart$group.uuid;
+    var cartFilterValidation = function cartFilterValidation(cart) {
+      return (cart === null || cart === void 0 ? void 0 : cart.valid) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2;
+    };
+    var cartsGroupLength = cartSelectedHasGroup ? (_Object$values$filter = Object.values(orderState.carts).filter(function (_cart) {
+      var _cart$group2;
+      return (_cart === null || _cart === void 0 ? void 0 : (_cart$group2 = _cart.group) === null || _cart$group2 === void 0 ? void 0 : _cart$group2.uuid) === cartSelectedHasGroup && cartFilterValidation(_cart);
+    })) === null || _Object$values$filter === void 0 ? void 0 : _Object$values$filter.length : 0;
+    if (cartsGroupLength > 1 && checkoutMultiBusinessEnabled) {
+      var _cart$group3;
       events.emit('go_to_page', {
-        page: 'multi_checkout'
+        page: 'multi_checkout',
+        params: {
+          cartUuid: cart === null || cart === void 0 ? void 0 : (_cart$group3 = cart.group) === null || _cart$group3 === void 0 ? void 0 : _cart$group3.uuid
+        }
+      });
+      events.emit('cart_popover_closed');
+      return;
+    }
+    var cartGroupsCount = {};
+    // eslint-disable-next-line no-unused-expressions
+    (_Object$values$filter2 = Object.values(orderState.carts).filter(function (_cart) {
+      return cartFilterValidation(_cart);
+    })) === null || _Object$values$filter2 === void 0 ? void 0 : _Object$values$filter2.forEach(function (_cart) {
+      var _cart$group4;
+      if (cartGroupsCount[_cart === null || _cart === void 0 ? void 0 : (_cart$group4 = _cart.group) === null || _cart$group4 === void 0 ? void 0 : _cart$group4.uuid]) {
+        var _cart$group5;
+        cartGroupsCount[_cart === null || _cart === void 0 ? void 0 : (_cart$group5 = _cart.group) === null || _cart$group5 === void 0 ? void 0 : _cart$group5.uuid] += 1;
+      } else {
+        var _cart$group6;
+        cartGroupsCount[_cart === null || _cart === void 0 ? void 0 : (_cart$group6 = _cart.group) === null || _cart$group6 === void 0 ? void 0 : _cart$group6.uuid] = 1;
+      }
+    });
+    var groupForTheCart;
+    var groupForAddCartArray = Object.keys(cartGroupsCount).filter(function (cartGroupUuid) {
+      return cartGroupsCount[cartGroupUuid] > 0 && cartGroupsCount[cartGroupUuid] < 5;
+    });
+    var max = Math.max.apply(Math, _toConsumableArray(groupForAddCartArray.map(function (uuid) {
+      return cartGroupsCount[uuid];
+    })));
+    var indexes = groupForAddCartArray.filter(function (uuid) {
+      return cartGroupsCount[uuid] === max;
+    });
+    if ((indexes === null || indexes === void 0 ? void 0 : indexes.length) > 1) {
+      groupForTheCart = indexes.find(function (uuid) {
+        return uuid !== 'undefined';
+      });
+    } else {
+      groupForTheCart = indexes[0];
+    }
+    if (checkoutMultiBusinessEnabled && (openCarts === null || openCarts === void 0 ? void 0 : openCarts.length) > 1 && groupForTheCart) {
+      events.emit('go_to_page', {
+        page: 'multi_cart',
+        params: {
+          cartUuid: cart.uuid,
+          cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart
+        }
       });
     } else {
       events.emit('go_to_page', {
