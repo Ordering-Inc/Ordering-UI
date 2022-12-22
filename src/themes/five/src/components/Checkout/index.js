@@ -53,7 +53,10 @@ import {
   RewardContainer,
   RewardBox,
   RewardBoxContainer,
-  RewardDisclaimerContainer
+  RewardDisclaimerContainer,
+  CardForm,
+  Row,
+  InputContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -114,7 +117,8 @@ const CheckoutUI = (props) => {
     hasCateringProducts,
     cateringHours,
     wowAcumulationPoints,
-    configSlug
+    configSlug,
+    isCSVPopup
   } = props
   const theme = useTheme()
   const [validationFields] = useValidationFields()
@@ -127,6 +131,11 @@ const CheckoutUI = (props) => {
   const [customerState] = useCustomer()
   const [events] = useEvent()
   const history = useHistory()
+  const [openCardCSV, setOpenCardCSV] = useState(false)
+  const [values, setValues] = useState({
+    cardSecurityCode: '',
+  })
+  const [errorsCSV, setErrorsCSV] = useState({})
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
@@ -194,7 +203,7 @@ const CheckoutUI = (props) => {
   const businessInformationLoading = (businessDetails?.loading || cartState.loading) && !businessDetails?.error
   const businessInformationAvailable = !cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = (csvID) => {
     if (!userErrors.length && !requiredFields?.length) {
       const body = {}
       let paymentOptions = null
@@ -207,6 +216,7 @@ const CheckoutUI = (props) => {
           ...brandInformation
         }
       }
+      if (csvID) body.externalcardid = csvID
       handlerClickPlaceOrder && handlerClickPlaceOrder(paymentOptions, body)
       return
     }
@@ -273,6 +283,26 @@ const CheckoutUI = (props) => {
     }
 
     setUserErrors(errors)
+  }
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setValues({
+      ...values,
+      [name]: value
+    })
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    if (values.cardSecurityCode === '') {
+      setErrorsCSV({csv: false, border: true})
+    } else {
+      setErrorsCSV({})
+      setOpenCardCSV(false)
+      handlePlaceOrder(values?.cardSecurityCode)
+      setValues({ cardSecurityCode: '' })
+    }
   }
 
   useEffect(() => {
@@ -702,7 +732,7 @@ const CheckoutUI = (props) => {
             <Button
               color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
               disabled={isDisablePlaceOrderButton}
-              onClick={() => handlePlaceOrder()}
+              onClick={() => (paymethodSelected?.gateway === 'openpay' && isCSVPopup) ? setOpenCardCSV(true) : handlePlaceOrder()}
             >
               {!cart?.valid_maximum ? (
                 `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
@@ -793,6 +823,36 @@ const CheckoutUI = (props) => {
           isModal
           onClose={() => setIsOpen(false)}
         />
+      </Modal>
+      <Modal
+        title={t('CSV_DESCRIPTION', 'CSV_DESCRIPTION')}
+        className='modal-info'
+        open={openCardCSV}
+        onClose={() => setOpenCardCSV(false)}
+      >
+        <CardForm>
+          <Row>
+            <InputContainer isValid={errorsCSV.csv} showBorder={errorsCSV.border}>
+              <Input
+                name='cardSecurityCode'
+                id='csv'
+                type={'password'}
+                minLength={3}
+                maxLength={4}
+                onChange={handleChange}
+                placeholder='CVV'
+                onKeyPress={(e) => {
+                  if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
+              />
+            </InputContainer>
+          </Row>
+          <Button onClick={handleSubmit} color='primary'>
+            {t('CONTINUE', 'CONTINUE')}
+          </Button>
+        </CardForm>
       </Modal>
     </Container>
   )

@@ -538,3 +538,63 @@ export const RewardBoxContainer = styled.div`
     margin: auto 0px;
   }
 `
+export const CardForm = styled.div`
+  *{
+    box-sizing: border-box;
+  }
+.formDiv {
+  width: 400px;
+  padding: 30px;
+  border-radius: 10px;
+  -webkit-box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
+  -moz-box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
+  box-shadow: -1px 8px 15px 0px rgba(0, 0, 0, 0.44);
+}
+
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 20px;
+  }
+`
+
+export const Row = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+`
+
+export const InputContainer = styled.div`
+  flex: 1;
+  ${({ isValid, showBorder }) => showBorder && css`
+    ${isValid ? css`
+      -webkit-box-shadow: 1px 1px 1px 1px #0CAD63;
+      -moz-box-shadow: 1px 1px 1px 1px #0CAD63;
+      box-shadow: 1px 1px 1px 1px #0CAD63;
+    ` : css`
+      -webkit-box-shadow: 1px 1px 1px 1px #C90800;
+      -moz-box-shadow: 1px 1px 1px 1px #C90800;
+      box-shadow: 1px 1px 1px 1px #C90800;
+    `}
+  `}
+  input {
+    border: 1px solid #7D7E7B;
+  }
+  input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #7D7E7B;
+    opacity: 1; /* Firefox */
+  }
+
+  input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #7D7E7B;
+  }
+
+  input::-ms-input-placeholder { /* Microsoft Edge */
+    color: #7D7E7B;
+  }
+`
