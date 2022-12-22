@@ -34,11 +34,15 @@ function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key i
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var maxDate = 40;
@@ -174,10 +178,15 @@ var ServiceFormUI = function ServiceFormUI(props) {
     setDateSelected(_moment);
   };
   var isBusyTime = function isBusyTime(professional) {
-    var _professional$busy_ti;
+    var _professional$busy_ti, _product$duration;
     if ((professional === null || professional === void 0 ? void 0 : (_professional$busy_ti = professional.busy_times) === null || _professional$busy_ti === void 0 ? void 0 : _professional$busy_ti.length) === 0 || !dateSelected) return false;
-    var valid = professional === null || professional === void 0 ? void 0 : professional.busy_times.some(function (item) {
-      return (0, _moment2.default)(item === null || item === void 0 ? void 0 : item.start).valueOf() <= (0, _moment2.default)(dateSelected).valueOf() && (0, _moment2.default)(dateSelected).valueOf() <= (0, _moment2.default)(item === null || item === void 0 ? void 0 : item.end).valueOf();
+    var duration = (_product$duration = product === null || product === void 0 ? void 0 : product.duration) !== null && _product$duration !== void 0 ? _product$duration : 0;
+    var busyTimes = isCartProduct ? professional === null || professional === void 0 ? void 0 : professional.busy_times.filter(function (item) {
+      var _productCart$calendar, _productCart$calendar2;
+      return !(item.start === (productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar = productCart.calendar_event) === null || _productCart$calendar === void 0 ? void 0 : _productCart$calendar.start) && item.end === (productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar2 = productCart.calendar_event) === null || _productCart$calendar2 === void 0 ? void 0 : _productCart$calendar2.end));
+    }) : _toConsumableArray(professional === null || professional === void 0 ? void 0 : professional.busy_times);
+    var valid = busyTimes.some(function (item) {
+      return _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(dateSelected).valueOf() && (0, _moment2.default)(dateSelected).valueOf() <= _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf() || _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(dateSelected).add(duration, 'minutes').valueOf() && (0, _moment2.default)(dateSelected).add(duration, 'minutes').valueOf() <= _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf();
     });
     return valid;
   };
@@ -264,10 +273,10 @@ var ServiceFormUI = function ServiceFormUI(props) {
     setDatesList(_datesList);
   }, []);
   (0, _react.useEffect)(function () {
-    var _productCart$calendar, _productCart$calendar2, _productCart$calendar3;
-    if (!(productCart !== null && productCart !== void 0 && (_productCart$calendar = productCart.calendar_event) !== null && _productCart$calendar !== void 0 && _productCart$calendar.start)) return;
-    setSelectedDate(_moment2.default.utc(productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar2 = productCart.calendar_event) === null || _productCart$calendar2 === void 0 ? void 0 : _productCart$calendar2.start).local());
-    setTimeSelected(_moment2.default.utc(productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar3 = productCart.calendar_event) === null || _productCart$calendar3 === void 0 ? void 0 : _productCart$calendar3.start).local().format('HH:mm'));
+    var _productCart$calendar3, _productCart$calendar4, _productCart$calendar5;
+    if (!(productCart !== null && productCart !== void 0 && (_productCart$calendar3 = productCart.calendar_event) !== null && _productCart$calendar3 !== void 0 && _productCart$calendar3.start)) return;
+    setSelectedDate(_moment2.default.utc(productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar4 = productCart.calendar_event) === null || _productCart$calendar4 === void 0 ? void 0 : _productCart$calendar4.start).local());
+    setTimeSelected(_moment2.default.utc(productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar5 = productCart.calendar_event) === null || _productCart$calendar5 === void 0 ? void 0 : _productCart$calendar5.start).local().format('HH:mm'));
   }, [productCart]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, loading && !error && /*#__PURE__*/_react.default.createElement(_styles.SkeletonBlock, {
     width: 90
@@ -314,7 +323,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
   }, currentProfessional ? /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, currentProfessional !== null && currentProfessional !== void 0 && currentProfessional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
     bgimage: currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.photo
   }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.NameWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.name, " ", currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.lastname), /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, {
-    available: !isBusyTime()
+    available: !isBusyTime(currentProfessional)
   }, isBusyTime(currentProfessional) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "status"
   }, t('BUSY_ON_SELECTED_TIME', 'Busy on selected time'))) : /*#__PURE__*/_react.default.createElement("span", {
