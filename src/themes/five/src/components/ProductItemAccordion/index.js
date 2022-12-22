@@ -141,7 +141,7 @@ export const ProductItemAccordion = (props) => {
               </ScheduleInfoWrapper>
             ) : (
               <>
-                {isCartProduct && !isCartPending && getProductMax ? (
+                {!isDisabledEdit && isCartProduct && !isCartPending && getProductMax ? (
                   <ProductSelectWrapper>
                     <IosArrowDown />
                     <ProductSelect
