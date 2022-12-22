@@ -139,13 +139,13 @@ export const OrderContactInformation = (props) => {
                   </IconButton>
                 )}
               </div>
-              {!order?.user_review && pastOrderStatuses.includes(order?.status) && (
+              {/* {!order?.user_review && pastOrderStatuses.includes(order?.status) && (
                 <ReviewButton
                   onClick={() => handleReviewCustomer(order?.customer)}
                 >
                   {t('REVIEW', 'Review')}
                 </ReviewButton>
-              )}
+              )} */}
             </InfoContent>
             <ChevronDown className='down-arrow' />
           </CustomerInfo>
