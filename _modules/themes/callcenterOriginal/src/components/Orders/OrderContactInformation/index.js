@@ -88,11 +88,7 @@ var OrderContactInformation = function OrderContactInformation(props) {
       var _order$customer8, _order$customer9, _order$customer10;
       return window.open("tel:".concat(order !== null && order !== void 0 && (_order$customer8 = order.customer) !== null && _order$customer8 !== void 0 && _order$customer8.country_phone_code ? '+' + (order === null || order === void 0 ? void 0 : (_order$customer9 = order.customer) === null || _order$customer9 === void 0 ? void 0 : _order$customer9.country_phone_code) : '').concat(order === null || order === void 0 ? void 0 : (_order$customer10 = order.customer) === null || _order$customer10 === void 0 ? void 0 : _order$customer10.cellphone));
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Telephone, null))), !(order !== null && order !== void 0 && order.user_review) && pastOrderStatuses.includes(order === null || order === void 0 ? void 0 : order.status) && /*#__PURE__*/_react.default.createElement(_styles2.ReviewButton, {
-    onClick: function onClick() {
-      return handleReviewCustomer(order === null || order === void 0 ? void 0 : order.customer);
-    }
-  }, t('REVIEW', 'Review'))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Telephone, null)))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, {
     className: "down-arrow"
   }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "1"
