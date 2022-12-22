@@ -144,9 +144,15 @@ const ServiceFormUI = (props) => {
 
   const isBusyTime = (professional) => {
     if (professional?.busy_times?.length === 0 || !dateSelected) return false
-    const valid = professional?.busy_times.some(item => {
-      return moment(item?.start).valueOf() <= moment(dateSelected).valueOf() &&
-        moment(dateSelected).valueOf() <= moment(item?.end).valueOf()
+    const duration = product?.duration ?? 0
+    const busyTimes = isCartProduct
+      ? professional?.busy_times.filter(item => !(item.start === productCart?.calendar_event?.start && item.end === productCart?.calendar_event?.end))
+      : [...professional?.busy_times]
+    const valid = busyTimes.some(item => {
+      return (moment.utc(item?.start).local().valueOf() <= moment(dateSelected).valueOf() &&
+        moment(dateSelected).valueOf() <= moment.utc(item?.end).local().valueOf()) ||
+        (moment.utc(item?.start).local().valueOf() <= moment(dateSelected).add(duration, 'minutes').valueOf() &&
+        moment(dateSelected).add(duration, 'minutes').valueOf() <= moment.utc(item?.end).local().valueOf())
     })
     return valid
   }
@@ -304,7 +310,7 @@ const ServiceFormUI = (props) => {
                       ) : <FaUserAlt />}
                       <NameWrapper>
                         <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
-                        <StatusInfo available={!isBusyTime()}>
+                        <StatusInfo available={!isBusyTime(currentProfessional)}>
                           {isBusyTime(currentProfessional) ? (
                             <>
                               <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>

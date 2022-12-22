@@ -78,7 +78,8 @@ const BusinessProductsListingUI = (props) => {
     onChangeMetaTag,
     onBusinessClick,
     handleChangePriceFilterValues,
-    priceFilterValues
+    priceFilterValues,
+    handleUpdateProfessionals
   } = props
 
   const { business, loading, error } = businessState
@@ -458,6 +459,7 @@ const BusinessProductsListingUI = (props) => {
                 professionalList={business?.professionals}
                 professionalSelected={professionalSelected}
                 handleChangeProfessional={handleChangeProfessionalSelected}
+                handleUpdateProfessionals={handleUpdateProfessionals}
                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0) || 0}
               />
             ) : (
