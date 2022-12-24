@@ -309,7 +309,18 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
-                {allowColumns && Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)
+                {allowColumns && (Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)?.length === 0 ?
+                (
+                  <th className='orderPrice' key={`noDragTh-${i}`}>
+                    <ColumnAllowSettingPopover
+                      allowColumns={allowColumns}
+                      optionsDefault={optionsDefault}
+                      handleChangeAllowColumns={handleChangeAllowColumns}
+                      isOrder
+                    />
+                  </th>
+                ) : (
+                  Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)
                   .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
                   .map((column, i, array) => {
                     if (column === 'slaBar') {
@@ -317,24 +328,36 @@ export const OrdersTable = (props) => {
                     }
                     if (column === 'orderNumber') {
                       return (
-                        <th
-                          className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
-                          key={`noDragTh-${i}`}
-                          colSpan={allowColumns?.slaBar?.visable ? 2 : 1}
-                        >
-                          <CheckBox
-                            isChecked={!orderList.loading && isAllChecked}
-                            onClick={() => handleSelecteAllOrder()}
-                            className='orderCheckBox'
+                        <React.Fragment key={i}>
+                          <th
+                            className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
+                            key={`noDragTh-${i}`}
+                            colSpan={allowColumns?.slaBar?.visable ? 2 : 1}
                           >
-                            {(!orderList.loading && isAllChecked) ? (
-                              <RiCheckboxFill />
-                            ) : (
-                              <RiCheckboxBlankLine />
-                            )}
-                          </CheckBox>
-                          {t('ORDER', 'Order')}
-                        </th>
+                            <CheckBox
+                              isChecked={!orderList.loading && isAllChecked}
+                              onClick={() => handleSelecteAllOrder()}
+                              className='orderCheckBox'
+                            >
+                              {(!orderList.loading && isAllChecked) ? (
+                                <RiCheckboxFill />
+                              ) : (
+                                <RiCheckboxBlankLine />
+                              )}
+                            </CheckBox>
+                            {t('ORDER', 'Order')}
+                          </th>
+                          {column === [...array].pop() && (
+                            <th className='orderPrice' key={`noDragTh-${i}`}>
+                              <ColumnAllowSettingPopover
+                                allowColumns={allowColumns}
+                                optionsDefault={optionsDefault}
+                                handleChangeAllowColumns={handleChangeAllowColumns}
+                                isOrder
+                              />
+                            </th>
+                          )}
+                        </React.Fragment>
                       )
                     }
                     if (column === 'total' || (column !== 'total' && column === [...array].pop())) {
@@ -388,7 +411,8 @@ export const OrdersTable = (props) => {
                           <span>{allowColumns[column]?.title}</span>
                         </div>
                       </DragTh>)
-                  })}
+                  })
+                ))}
               </tr>
             </thead>
           )}
