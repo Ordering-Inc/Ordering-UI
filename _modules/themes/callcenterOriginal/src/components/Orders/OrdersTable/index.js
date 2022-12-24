@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersTable = function OrdersTable(props) {
-  var _orderList$orders3;
+  var _orderList$orders3, _Object$keys$filter;
   var isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
     pagination = props.pagination,
@@ -350,12 +350,23 @@ var OrdersTable = function OrdersTable(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "orders_table",
     noFixedHeader: !orderList.loading && ((_orderList$orders3 = orderList.orders) === null || _orderList$orders3 === void 0 ? void 0 : _orderList$orders3.length) <= 5
-  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, allowColumns && Object.keys(allowColumns).filter(function (col) {
+  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, allowColumns && (((_Object$keys$filter = Object.keys(allowColumns).filter(function (col) {
     var _allowColumns$col, _allowColumns$col2;
     return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.visable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) !== 0;
-  }).sort(function (col1, col2) {
+  })) === null || _Object$keys$filter === void 0 ? void 0 : _Object$keys$filter.length) === 0 ? /*#__PURE__*/_react.default.createElement("th", {
+    className: "orderPrice",
+    key: "noDragTh-".concat(i)
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
+    allowColumns: allowColumns,
+    optionsDefault: optionsDefault,
+    handleChangeAllowColumns: handleChangeAllowColumns,
+    isOrder: true
+  })) : Object.keys(allowColumns).filter(function (col) {
     var _allowColumns$col3, _allowColumns$col4;
-    return ((_allowColumns$col3 = allowColumns[col1]) === null || _allowColumns$col3 === void 0 ? void 0 : _allowColumns$col3.order) - ((_allowColumns$col4 = allowColumns[col2]) === null || _allowColumns$col4 === void 0 ? void 0 : _allowColumns$col4.order);
+    return ((_allowColumns$col3 = allowColumns[col]) === null || _allowColumns$col3 === void 0 ? void 0 : _allowColumns$col3.visable) && ((_allowColumns$col4 = allowColumns[col]) === null || _allowColumns$col4 === void 0 ? void 0 : _allowColumns$col4.order) !== 0;
+  }).sort(function (col1, col2) {
+    var _allowColumns$col5, _allowColumns$col6;
+    return ((_allowColumns$col5 = allowColumns[col1]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.order) - ((_allowColumns$col6 = allowColumns[col2]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.order);
   }).map(function (column, i, array) {
     var _allowColumns$column$2, _allowColumns$column4, _allowColumns$column5, _theme$images$icons2, _allowColumns$column6;
     if (column === 'slaBar') {
@@ -363,7 +374,9 @@ var OrdersTable = function OrdersTable(props) {
     }
     if (column === 'orderNumber') {
       var _allowColumns$orderNu, _allowColumns$dateTim, _allowColumns$slaBar;
-      return /*#__PURE__*/_react.default.createElement("th", {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: i
+      }, /*#__PURE__*/_react.default.createElement("th", {
         className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu = allowColumns.orderNumber) !== null && _allowColumns$orderNu !== void 0 && _allowColumns$orderNu.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim = allowColumns.dateTime) !== null && _allowColumns$dateTim !== void 0 && _allowColumns$dateTim.visable) ? 'orderNo small' : 'orderNo',
         key: "noDragTh-".concat(i),
         colSpan: allowColumns !== null && allowColumns !== void 0 && (_allowColumns$slaBar = allowColumns.slaBar) !== null && _allowColumns$slaBar !== void 0 && _allowColumns$slaBar.visable ? 2 : 1
@@ -373,7 +386,15 @@ var OrdersTable = function OrdersTable(props) {
           return handleSelecteAllOrder();
         },
         className: "orderCheckBox"
-      }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order'));
+      }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order')), column === _toConsumableArray(array).pop() && /*#__PURE__*/_react.default.createElement("th", {
+        className: "orderPrice",
+        key: "noDragTh-".concat(i)
+      }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
+        allowColumns: allowColumns,
+        optionsDefault: optionsDefault,
+        handleChangeAllowColumns: handleChangeAllowColumns,
+        isOrder: true
+      })));
     }
     if (column === 'total' || column !== 'total' && column === _toConsumableArray(array).pop()) {
       var _allowColumns$column$, _allowColumns$column, _allowColumns$column2, _theme$images$icons, _allowColumns$column3;
@@ -434,7 +455,7 @@ var OrdersTable = function OrdersTable(props) {
       src: (_theme$images$icons2 = theme.images.icons) === null || _theme$images$icons2 === void 0 ? void 0 : _theme$images$icons2.sixDots,
       alt: "six dots"
     }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column6 = allowColumns[column]) === null || _allowColumns$column6 === void 0 ? void 0 : _allowColumns$column6.title)));
-  }))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  })))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
     var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
@@ -558,11 +579,11 @@ var OrdersTable = function OrdersTable(props) {
       },
       "data-tour": i === 0 ? 'tour_start' : ''
     }, /*#__PURE__*/_react.default.createElement("tr", null, Object.keys(allowColumns).filter(function (col) {
-      var _allowColumns$col5;
-      return (_allowColumns$col5 = allowColumns[col]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.visable;
+      var _allowColumns$col7;
+      return (_allowColumns$col7 = allowColumns[col]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.visable;
     }).sort(function (col1, col2) {
-      var _allowColumns$col6, _allowColumns$col7;
-      return ((_allowColumns$col6 = allowColumns[col1]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.order) - ((_allowColumns$col7 = allowColumns[col2]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.order);
+      var _allowColumns$col8, _allowColumns$col9;
+      return ((_allowColumns$col8 = allowColumns[col1]) === null || _allowColumns$col8 === void 0 ? void 0 : _allowColumns$col8.order) - ((_allowColumns$col9 = allowColumns[col2]) === null || _allowColumns$col9 === void 0 ? void 0 : _allowColumns$col9.order);
     }).map(function (column, index) {
       if (column === 'slaBar') {
         return /*#__PURE__*/_react.default.createElement("td", {
