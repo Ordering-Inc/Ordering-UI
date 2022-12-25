@@ -574,7 +574,7 @@ const OrderDetailsUI = (props) => {
                           style={{ fontSize: 14 }}
                           color={order?.status === 20 ? 'secundary' : 'primary'}
                           onClick={() => handleChangeOrderStatus(20)}
-                          disabled={order?.status === 20 || order?.status === 21}
+                          disabled={order?.status === 20 || order?.status === 15 || order?.status === 1}
                         >
                           {getOrderStatus(20)?.value}
                         </Button>
@@ -583,7 +583,7 @@ const OrderDetailsUI = (props) => {
                         <Button
                           style={{ fontSize: 14 }}
                           color={order?.status === 20 ? 'primary' : 'secundary'}
-                          disabled={order?.status === 21}
+                          disabled={order?.status === 21 || order?.status === 15 || order?.status === 1}
                           onClick={() => handleChangeOrderStatus(21)}
                         >
                           {getOrderStatus(21)?.value}
