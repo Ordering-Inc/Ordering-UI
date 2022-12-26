@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _props$beforeElements, _props$beforeComponen, _category$subcategori2, _productsCategorySele, _category$subcategori3, _category$subcategori4, _category$subcategori5, _categoryState$produc2, _categoryState$produc3, _props$afterComponent, _props$afterElements;
+  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _props$beforeElements, _props$beforeComponen, _category$subcategori2, _category$subcategori3, _category$subcategori4, _category$subcategori5, _categoryState$produc2, _categoryState$produc3, _categoryState$produc4, _props$afterComponent, _props$afterElements;
   var errors = props.errors,
     businessId = props.businessId,
     isLazy = props.isLazy,
@@ -136,9 +136,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, (category === null || category === void 0 ? void 0 : category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderWrapper, null, (category === null || category === void 0 ? void 0 : (_category$subcategori2 = category.subcategories) === null || _category$subcategori2 === void 0 ? void 0 : _category$subcategori2.length) > 0 && !isSearchMode && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
     category: category
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, productsCategorySelected === null || productsCategorySelected === void 0 ? void 0 : (_productsCategorySele = productsCategorySelected.filter(function (product) {
-    return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
-  })) === null || _productsCategorySele === void 0 ? void 0 : _productsCategorySele.map(function (product, i) {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, productsCategorySelected.map(function (product, i) {
     var _currentCart$products;
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: i,
@@ -158,14 +156,14 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
     });
   })) === null || _category$subcategori5 === void 0 ? void 0 : _category$subcategori5.map(function (subcategory) {
-    var _productsCategorySele2;
+    var _productsCategorySele;
     return /*#__PURE__*/_react.default.createElement(_styles.SubcategorySearchContainer, {
       key: subcategory === null || subcategory === void 0 ? void 0 : subcategory.id
     }, /*#__PURE__*/_react.default.createElement("h4", null, subcategory === null || subcategory === void 0 ? void 0 : subcategory.name), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, {
       isSubcategorySearch: true
-    }, productsCategorySelected === null || productsCategorySelected === void 0 ? void 0 : (_productsCategorySele2 = productsCategorySelected.filter(function (product) {
+    }, productsCategorySelected === null || productsCategorySelected === void 0 ? void 0 : (_productsCategorySele = productsCategorySelected.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
-    })) === null || _productsCategorySele2 === void 0 ? void 0 : _productsCategorySele2.map(function (product, i) {
+    })) === null || _productsCategorySele === void 0 ? void 0 : _productsCategorySele.map(function (product, i) {
       var _currentCart$products2;
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: i,
@@ -200,18 +198,30 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
       }, 0)
     });
+  }), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+    useCustomFunctionality: true,
+    onCustomClick: function onCustomClick() {
+      return onClickCategory(category);
+    },
+    isCartOnProductsList: isCartOnProductsList,
+    handleUpdateProducts: handleUpdateProducts,
+    customText: t('MORE', 'More'),
+    customStyle: {
+      display: 'flex',
+      justifyContent: 'center'
+    }
   })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
   }).map(function (category, i, _categories) {
-    var _categoryState$produc4, _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _category$description, _category$description2, _category$subcategori6, _category$subcategori7, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _headerRef$current, _category$description3, _category$subcategori8, _category$subcategori9, _products$filter, _category$subcategori10, _category$subcategori11, _category$subcategori12;
-    var _products = !isUseParentCategory ? (_categoryState$produc4 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc5 = categoryState.products) === null || _categoryState$produc5 === void 0 ? void 0 : _categoryState$produc5.filter(function (product) {
+    var _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _categoryState$produc8, _category$description, _category$description2, _category$subcategori6, _category$subcategori7, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _headerRef$current, _category$description3, _category$subcategori8, _category$subcategori9, _products$filter, _category$subcategori10, _category$subcategori11, _category$subcategori12;
+    var _products = !isUseParentCategory ? (_categoryState$produc5 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc6 = categoryState.products) === null || _categoryState$produc6 === void 0 ? void 0 : _categoryState$produc6.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
-    })) !== null && _categoryState$produc4 !== void 0 ? _categoryState$produc4 : [] : (_categoryState$produc6 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc7 = categoryState.products) === null || _categoryState$produc7 === void 0 ? void 0 : _categoryState$produc7.filter(function (product) {
+    })) !== null && _categoryState$produc5 !== void 0 ? _categoryState$produc5 : [] : (_categoryState$produc7 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc8 = categoryState.products) === null || _categoryState$produc8 === void 0 ? void 0 : _categoryState$produc8.filter(function (product) {
       var _category$children;
       return category === null || category === void 0 ? void 0 : (_category$children = category.children) === null || _category$children === void 0 ? void 0 : _category$children.some(function (cat) {
         return cat.category_id === (product === null || product === void 0 ? void 0 : product.category_id);
       });
-    })) !== null && _categoryState$produc6 !== void 0 ? _categoryState$produc6 : [];
+    })) !== null && _categoryState$produc7 !== void 0 ? _categoryState$produc7 : [];
     var products = (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.length) > 0 ? _products === null || _products === void 0 ? void 0 : _products.filter(function (product) {
       return !(subcategoriesSelected !== null && subcategoriesSelected !== void 0 && subcategoriesSelected.find(function (subcategory) {
         return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id) === (category === null || category === void 0 ? void 0 : category.id);
