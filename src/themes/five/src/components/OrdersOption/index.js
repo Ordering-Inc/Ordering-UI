@@ -90,16 +90,15 @@ const OrdersOptionUI = (props) => {
         review: orderCompleted.review && currentOrder.review,
         user_review: orderCompleted.user_review && currentOrder.user_review,
         products: [orderCompleted.products, currentOrder.products].flat()
-      }))
+      })).filter(order => {
+        const isDuplicate = uniqueOrders.includes(order?.cart_group_id)
+        if (!isDuplicate) {
+          uniqueOrders.push(order?.cart_group_id)
+          return true
+        }
+        return false
+      })
     : order)
-    .filter(order => {
-      const isDuplicate = uniqueOrders.includes(order?.cart_group_id)
-      if (!isDuplicate) {
-        uniqueOrders.push(order?.cart_group_id)
-        return true
-      }
-      return false
-    })
 
   const isShowTitles = businessesIds
     ? orders && orders.length > 0 && !orders.map(order => businessesIds && businessesIds.includes(order.business_id)).every(i => !i)
