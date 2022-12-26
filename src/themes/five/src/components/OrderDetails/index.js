@@ -401,6 +401,9 @@ const OrderDetailsUI = (props) => {
     businessLogoUrlValidation()
   }, [order])
 
+  const disableLeftButton = [1, 15, 20, 21]
+  const disableRightButton = [1, 15, 21]
+
   return (
     <Container>
       {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
@@ -574,7 +577,7 @@ const OrderDetailsUI = (props) => {
                           style={{ fontSize: 14 }}
                           color={order?.status === 20 ? 'secundary' : 'primary'}
                           onClick={() => handleChangeOrderStatus(20)}
-                          disabled={order?.status === 20 || order?.status === 21}
+                          disabled={disableLeftButton.includes(order?.status)}
                         >
                           {getOrderStatus(20)?.value}
                         </Button>
@@ -583,7 +586,7 @@ const OrderDetailsUI = (props) => {
                         <Button
                           style={{ fontSize: 14 }}
                           color={order?.status === 20 ? 'primary' : 'secundary'}
-                          disabled={order?.status === 21}
+                          disabled={disableRightButton.includes(order?.status)}
                           onClick={() => handleChangeOrderStatus(21)}
                         >
                           {getOrderStatus(21)?.value}
