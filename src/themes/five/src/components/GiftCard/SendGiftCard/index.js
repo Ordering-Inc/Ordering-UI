@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, SendGiftCard as SendGiftCardController } from 'ordering-components'
 import { useForm } from 'react-hook-form'
-import { Alert } from '../Confirm'
-import { Button } from '../../styles/Buttons'
-import { Input, TextArea } from '../../styles/Inputs'
+import { Alert } from '../../Confirm'
+import { Button } from '../../../styles/Buttons'
+import { Input, TextArea } from '../../../styles/Inputs'
 import {
   Container,
   FormController

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLanguage, PurchaseGiftCard as PurchaseGiftCardController } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
-import { Button } from '../../styles/Buttons'
+import { Button } from '../../../styles/Buttons'
 import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
 import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
 

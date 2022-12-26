@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, useUtils, RedeemGiftCard as RedeemGiftCardController } from 'ordering-components'
 import { useForm } from 'react-hook-form'
-import { Alert } from '../Confirm'
-import { Button } from '../../styles/Buttons'
-import { Input } from '../../styles/Inputs'
+import { Alert } from '../../Confirm'
+import { Button } from '../../../styles/Buttons'
+import { Input } from '../../../styles/Inputs'
 
 import {
   Container,

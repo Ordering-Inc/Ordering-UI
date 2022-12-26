@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components'
-import { Modal } from '../Modal'
-import { Button } from '../../styles/Buttons'
+import { Modal } from '../../Modal'
+import { Button } from '../../../styles/Buttons'
 import BsGift from '@meronex/icons/bs/BsGift'
 import { PurchaseGiftCard } from '../PurchaseGiftCard'
 import { RedeemGiftCard } from '../RedeemGiftCard'
@@ -12,7 +12,7 @@ import {
   ActionWrapper
 } from './styles'
 
-export const GiftCard = (props) => {
+export const GiftCardUI = (props) => {
   const [, t] = useLanguage()
   const [openModal, setOpenModal] = useState(null)
 

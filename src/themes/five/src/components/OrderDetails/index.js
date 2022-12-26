@@ -28,7 +28,7 @@ import { OrderBillSection } from './OrderBillSection'
 import { ActionsSection } from './ActionsSection'
 import { OrderPreferencesSection } from './OrderPreferencesSections'
 import { PlaceSpot } from '../PlaceSpot'
-import { SendGiftCard } from '../SendGiftCard'
+import { SendGiftCard } from '../GiftCard/SendGiftCard'
 import { Confirm } from '../Confirm'
 
 import {
