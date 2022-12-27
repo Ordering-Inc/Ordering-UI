@@ -118,11 +118,10 @@ export const ProductItemAccordion = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <AccordionSection isCheckout={isCheckout}>
         <Accordion
-          isValid={product?.valid ?? true}
           className={`product accordion ${setActive}`}
           onClick={(e) => toggleAccordion(e)}
         >
-          <ProductInfo className='info'>
+          <ProductInfo className='info' isValid={product?.valid ?? true}>
             {(product?.images || theme?.images?.dummies?.product) && showProductImage && (
               <WrapperProductImage>
                 <ProductImage bgimage={product?.images || theme?.images?.dummies?.product} />
@@ -200,39 +199,53 @@ export const ProductItemAccordion = (props) => {
             )}
           </ProductInfo>
 
-          {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
-            <ProductPriceSection>
-              <ProductPrice className='prod-price'>
-                <span>
-                  {parsePrice(product.total || product.price)}
-                </span>
-                {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
-                  <p>
-                    <IosArrowDown className={`${setRotate}`} />
-                  </p>
-                )}
-              </ProductPrice>
-              {isCartProduct && !isCartPending && (
-                <ProductActions>
-                  {!isDisabledEdit && (
-                    <ProductActionsEdit
-                      ref={productActionsEdit}
-                      onClick={() => onEditProduct(product)}
-                      disabled={orderState.loading}
-                    >
-                      <Pencil color='#B1BCCC' />
-                    </ProductActionsEdit>
+          {product.valid ? (
+            <>
+              {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
+                <ProductPriceSection>
+                  <ProductPrice className='prod-price'>
+                    <span>
+                      {parsePrice(product.total || product.price)}
+                    </span>
+                    {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
+                      <p>
+                        <IosArrowDown className={`${setRotate}`} />
+                      </p>
+                    )}
+                  </ProductPrice>
+                  {isCartProduct && !isCartPending && (
+                    <ProductActions>
+                      {!isDisabledEdit && (
+                        <ProductActionsEdit
+                          ref={productActionsEdit}
+                          onClick={() => onEditProduct(product)}
+                          disabled={orderState.loading}
+                        >
+                          <Pencil color='#B1BCCC' />
+                        </ProductActionsEdit>
+                      )}
+                      <ProductActionsDelete
+                        ref={productActionsDelete}
+                        onClick={() => onDeleteProduct(product)}
+                        disabled={orderState.loading}
+                      >
+                        <Trash color='#B1BCCC' />
+                      </ProductActionsDelete>
+                    </ProductActions>
                   )}
-                  <ProductActionsDelete
-                    ref={productActionsDelete}
-                    onClick={() => onDeleteProduct(product)}
-                    disabled={orderState.loading}
-                  >
-                    <Trash color='#B1BCCC' />
-                  </ProductActionsDelete>
-                </ProductActions>
+                </ProductPriceSection>
               )}
-            </ProductPriceSection>
+            </>
+          ) : (
+            <ProductActions>
+              <ProductActionsDelete
+                ref={productActionsDelete}
+                onClick={() => onDeleteProduct(product)}
+                disabled={orderState.loading}
+              >
+                <Trash color='#B1BCCC' />
+              </ProductActionsDelete>
+            </ProductActions>
           )}
 
           {isCartProduct && !isCartPending && product?.valid_menu && !product?.valid_quantity && (
