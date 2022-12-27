@@ -13,7 +13,8 @@ import {
   useValidationFields,
   useConfig,
   useCustomer,
-  useOrderingTheme
+  useOrderingTheme,
+  useEvent
 } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UpsellingPage } from '../UpsellingPage'
@@ -106,6 +107,8 @@ const CheckoutUI = (props) => {
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
+  const [events] = useEvent()
+
   const history = useHistory()
   const windowSize = useWindowSize()
 
@@ -127,6 +130,7 @@ const CheckoutUI = (props) => {
 
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
+  const isGiftCardCart = !cart?.business_id
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
   const isDisablePlaceOrderButton = !cart?.valid ||
@@ -254,7 +258,11 @@ const CheckoutUI = (props) => {
 
   useEffect(() => {
     if (cart?.products?.length) return
-    handleStoreRedirect(cart?.business?.slug)
+    if (cart?.business?.slug) {
+      handleStoreRedirect(cart?.business?.slug)
+    } else {
+      events.emit('go_to_page', { page: 'wallets' })
+    }
   }, [cart?.products])
 
   useEffect(() => {
@@ -285,21 +293,25 @@ const CheckoutUI = (props) => {
 
           {!useKioskApp ? (
             <>
-              {(businessDetails?.loading || cartState.loading) ? (
-                <div style={{ width: '100%', marginBottom: '20px' }}>
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={150} />
-                </div>
-              ) : (
-                <AddressDetails
-                  location={businessDetails?.business?.location}
-                  businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
-                  isCartPending={cart?.status === 2}
-                  businessId={cart?.business_id}
-                  apiKey={configs?.google_maps_api_key?.value}
-                  mapConfigs={mapConfigs}
-                  isCustomerMode={isCustomerMode}
-                />
+              {cart?.business_id && (
+                <>
+                  {(businessDetails?.loading || cartState.loading) ? (
+                    <div style={{ width: '100%', marginBottom: '20px' }}>
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={150} />
+                    </div>
+                  ) : (
+                    <AddressDetails
+                      location={businessDetails?.business?.location}
+                      businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
+                      isCartPending={cart?.status === 2}
+                      businessId={cart?.business_id}
+                      apiKey={configs?.google_maps_api_key?.value}
+                      mapConfigs={mapConfigs}
+                      isCustomerMode={isCustomerMode}
+                    />
+                  )}
+                </>
               )}
               <UserDetailsContainer>
                 <WrapperUserDetails>
@@ -328,38 +340,40 @@ const CheckoutUI = (props) => {
                   )}
                 </WrapperUserDetails>
               </UserDetailsContainer>
-              <BusinessDetailsContainer>
-                {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
-                  <div>
+              {cart?.business_id && (
+                <BusinessDetailsContainer>
+                  {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
                     <div>
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <div>
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      </div>
                     </div>
-                  </div>
-                )}
-                {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
-                  <div>
-                    <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                  )}
+                  {!cartState.loading && businessDetails?.business && Object.values(businessDetails?.business)?.length > 0 && (
                     <div>
-                      <p>{businessDetails?.business?.address}</p>
-                      <p>{businessDetails?.business?.name}</p>
-                      <p>{businessDetails?.business?.email}</p>
-                      <p>{businessDetails?.business?.cellphone}</p>
+                      <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                      <div>
+                        <p>{businessDetails?.business?.address}</p>
+                        <p>{businessDetails?.business?.name}</p>
+                        <p>{businessDetails?.business?.email}</p>
+                        <p>{businessDetails?.business?.cellphone}</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-                {businessDetails?.error && businessDetails?.error?.length > 0 && (
-                  <div>
-                    <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                    <NotFoundSource
-                      content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
-                    />
-                  </div>
-                )}
-              </BusinessDetailsContainer>
+                  )}
+                  {businessDetails?.error && businessDetails?.error?.length > 0 && (
+                    <div>
+                      <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                      <NotFoundSource
+                        content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
+                      />
+                    </div>
+                  )}
+                </BusinessDetailsContainer>
+              )}
               <CheckOutDivider />
             </>
           ) : (
@@ -384,7 +398,7 @@ const CheckoutUI = (props) => {
             </div>
           )}
 
-          {!useKioskApp && (
+          {!useKioskApp && cart?.business_id && (
             <>
               {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
                 <DeliveryOptionsContainer>
@@ -415,8 +429,8 @@ const CheckoutUI = (props) => {
                 cart={cart}
                 useKioskApp={useKioskApp}
                 isDisabled={cart?.status === 2}
-                businessId={businessDetails?.business?.id}
-                isLoading={businessDetails.loading}
+                businessId={!isGiftCardCart ? businessDetails?.business?.id : -1}
+                isLoading={!isGiftCardCart ? businessDetails.loading : false}
                 paymethods={businessDetails?.business?.paymethods}
                 onPaymentChange={handlePaymethodChange}
                 errorCash={errorCash}
@@ -470,7 +484,7 @@ const CheckoutUI = (props) => {
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
-        {!cartState.loading && placeSpotsEnabled && (
+        {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
             <PlaceSpot
               isCheckout
@@ -519,7 +533,9 @@ const CheckoutUI = (props) => {
           <CartContainer>
             <CartHeader>
               <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
-              <span onClick={() => cart?.business?.slug && handleStoreRedirect && handleStoreRedirect(cart?.business?.slug)}>{t('ADD_PRODUCTS', 'Add products')}</span>
+              {cart?.business?.slug && (
+                <span onClick={() => cart?.business?.slug && handleStoreRedirect && handleStoreRedirect(cart?.business?.slug)}>{t('ADD_PRODUCTS', 'Add products')}</span>
+              )}
             </CartHeader>
             <Cart
               isCartPending={cart?.status === 2}
