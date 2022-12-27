@@ -116,7 +116,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     setCreateOrder = props.setCreateOrder,
     onPlaceOrderClick = props.onPlaceOrderClick,
     handlePlaceOrder = props.handlePlaceOrder,
-    paymethods = props.paymethods;
+    paymethods = props.paymethods,
+    hasCateringProducts = props.hasCateringProducts;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -138,8 +139,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     return pay.paymethod;
   });
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
+  var excludePaymethods = hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash'];
   var supportedMethods = list === null || list === void 0 ? void 0 : list.filter(function (p) {
-    return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
+    return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? !excludePaymethods.includes(p.gateway) : p;
   });
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
     if ((cart === null || cart === void 0 ? void 0 : cart.balance) > 0) {
@@ -184,6 +186,20 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     var _paymethodSelected$da;
     if (methodsPay.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && paymethodData !== null && paymethodData !== void 0 && paymethodData.id && paymethodSelected !== null && paymethodSelected !== void 0 && (_paymethodSelected$da = paymethodSelected.data) !== null && _paymethodSelected$da !== void 0 && _paymethodSelected$da.card) {
       handlePlaceOrder();
+    }
+    if (((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay' || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result) && (cart === null || cart === void 0 ? void 0 : cart.offers.length) > 0) {
+      var _configs, _configs$advanced_off;
+      if (!((_configs = configs) !== null && _configs !== void 0 && (_configs$advanced_off = _configs.advanced_offers_module) !== null && _configs$advanced_off !== void 0 && _configs$advanced_off.value)) {
+        applyCoupon({
+          business_id: props === null || props === void 0 ? void 0 : props.businessId,
+          coupon: null
+        });
+      } else {
+        removeOffer({
+          business_id: props === null || props === void 0 ? void 0 : props.businessId,
+          offer_id: cart === null || cart === void 0 ? void 0 : cart.offers[0].id
+        });
+      }
     }
   }, [paymethodData, paymethodSelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
