@@ -234,6 +234,10 @@ const CheckoutUI = (props) => {
     window.scrollTo(0, scrollElement.offsetTop - 20)
   }
 
+  const closeCateringAlert = () => {
+    setOpenAlertCatering(false)
+  }
+
   useEffect(() => {
     if (validationFields && validationFields?.fields?.checkout) {
       checkValidationFields()
@@ -696,10 +700,6 @@ export const Checkout = (props) => {
       content: []
     })
     clearErrors && clearErrors()
-  }
-
-  const closeCateringAlert = () => {
-    setOpenAlertCatering(false)
   }
 
   const handleUpsellingPage = () => {

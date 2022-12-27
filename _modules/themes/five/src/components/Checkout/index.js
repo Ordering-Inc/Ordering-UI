@@ -247,6 +247,9 @@ var CheckoutUI = function CheckoutUI(props) {
     var scrollElement = document.querySelector('.paymentsContainer');
     window.scrollTo(0, scrollElement.offsetTop - 20);
   };
+  var closeCateringAlert = function closeCateringAlert() {
+    setOpenAlertCatering(false);
+  };
   (0, _react.useEffect)(function () {
     var _validationFields$fie14;
     if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie14 = validationFields.fields) !== null && _validationFields$fie14 !== void 0 && _validationFields$fie14.checkout) {
@@ -592,9 +595,6 @@ var Checkout = function Checkout(props) {
       content: []
     });
     clearErrors && clearErrors();
-  };
-  var closeCateringAlert = function closeCateringAlert() {
-    setOpenAlertCatering(false);
   };
   var handleUpsellingPage = function handleUpsellingPage() {
     setOpenUpselling(false);
