@@ -138,7 +138,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setFavoriteIds = _useState18[1];
   var hideCities = (_ref = (theme === null || theme === void 0 ? void 0 : (_theme$business_listi = theme.business_listing_view) === null || _theme$business_listi === void 0 ? void 0 : (_theme$business_listi2 = _theme$business_listi.components) === null || _theme$business_listi2 === void 0 ? void 0 : (_theme$business_listi3 = _theme$business_listi2.cities) === null || _theme$business_listi3 === void 0 ? void 0 : _theme$business_listi3.hidden) || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) !== 2) !== null && _ref !== void 0 ? _ref : true;
   var hideSearch = theme === null || theme === void 0 ? void 0 : (_theme$business_listi4 = theme.business_listing_view) === null || _theme$business_listi4 === void 0 ? void 0 : (_theme$business_listi5 = _theme$business_listi4.components) === null || _theme$business_listi5 === void 0 ? void 0 : (_theme$business_listi6 = _theme$business_listi5.search) === null || _theme$business_listi6 === void 0 ? void 0 : _theme$business_listi6.hidden;
-  var hideFilter = theme === null || theme === void 0 ? void 0 : (_theme$business_listi7 = theme.business_listing_view) === null || _theme$business_listi7 === void 0 ? void 0 : (_theme$business_listi8 = _theme$business_listi7.components) === null || _theme$business_listi8 === void 0 ? void 0 : (_theme$business_listi9 = _theme$business_listi8.filter) === null || _theme$business_listi9 === void 0 ? void 0 : _theme$business_listi9.hidden;
+  var hideFilter = (theme === null || theme === void 0 ? void 0 : (_theme$business_listi7 = theme.business_listing_view) === null || _theme$business_listi7 === void 0 ? void 0 : (_theme$business_listi8 = _theme$business_listi7.components) === null || _theme$business_listi8 === void 0 ? void 0 : (_theme$business_listi9 = _theme$business_listi8.filter) === null || _theme$business_listi9 === void 0 ? void 0 : _theme$business_listi9.hidden) || hideSearch;
   var hideSearchSection = hideCities && hideSearch && hideFilter;
   var isAllCategoriesHidden = theme === null || theme === void 0 ? void 0 : (_theme$business_listi10 = theme.business_listing_view) === null || _theme$business_listi10 === void 0 ? void 0 : (_theme$business_listi11 = _theme$business_listi10.components) === null || _theme$business_listi11 === void 0 ? void 0 : (_theme$business_listi12 = _theme$business_listi11.categories) === null || _theme$business_listi12 === void 0 ? void 0 : _theme$business_listi12.hidden;
   var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
@@ -342,7 +342,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }), !isCustomerMode && !hideSearchSection && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout,
     isCustomerMode: isCustomerMode
-  }, !hideSearch && /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  }, !hideSearch && windowSize.width <= 1200 && /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,
     search: searchValue,
     isCustomLayout: isCustomLayout,

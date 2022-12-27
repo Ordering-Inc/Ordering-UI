@@ -77,7 +77,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onChangeMetaTag = props.onChangeMetaTag,
     onBusinessClick = props.onBusinessClick,
     handleChangePriceFilterValues = props.handleChangePriceFilterValues,
-    priceFilterValues = props.priceFilterValues;
+    priceFilterValues = props.priceFilterValues,
+    handleUpdateProfessionals = props.handleUpdateProfessionals;
   var business = businessState.business,
     loading = businessState.loading,
     error = businessState.error;
@@ -509,6 +510,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     professionalList: business === null || business === void 0 ? void 0 : business.professionals,
     professionalSelected: professionalSelected,
     handleChangeProfessional: handleChangeProfessionalSelected,
+    handleUpdateProfessionals: handleUpdateProfessionals,
     productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products7 = currentCart.products) === null || _currentCart$products7 === void 0 ? void 0 : _currentCart$products7.reduce(function (productsLength, Cproduct) {
       var _ref3;
       return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === ((_ref3 = productModal.product || curProduct) === null || _ref3 === void 0 ? void 0 : _ref3.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);

@@ -110,14 +110,14 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
         user_review: orderCompleted.user_review && currentOrder.user_review,
         products: [orderCompleted.products, currentOrder.products].flat()
       });
+    }).filter(function (order) {
+      var isDuplicate = uniqueOrders.includes(order === null || order === void 0 ? void 0 : order.cart_group_id);
+      if (!isDuplicate) {
+        uniqueOrders.push(order === null || order === void 0 ? void 0 : order.cart_group_id);
+        return true;
+      }
+      return false;
     }) : order;
-  }).filter(function (order) {
-    var isDuplicate = uniqueOrders.includes(order === null || order === void 0 ? void 0 : order.cart_group_id);
-    if (!isDuplicate) {
-      uniqueOrders.push(order === null || order === void 0 ? void 0 : order.cart_group_id);
-      return true;
-    }
-    return false;
   });
   var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
     return businessesIds && businessesIds.includes(order.business_id);

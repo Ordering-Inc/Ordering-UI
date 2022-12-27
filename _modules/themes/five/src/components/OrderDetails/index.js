@@ -624,6 +624,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setIsService(_isService);
     businessLogoUrlValidation();
   }, [order]);
+  var disableLeftButton = [1, 15, 20, 21];
+  var disableRightButton = [1, 15, 21];
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, !loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfo, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderIdSec, null, isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag25 = theme.defaultLanguages) === null || _theme$defaultLanguag25 === void 0 ? void 0 : _theme$defaultLanguag25.ORDER) || 'Order'), " #", order === null || order === void 0 ? void 0 : order.id), enabledPoweredByOrdering && /*#__PURE__*/_react.default.createElement(_styles.PoweredByOrdering, null, t('POWERED_BY', 'Powered by'), /*#__PURE__*/_react.default.createElement("a", {
     href: "https://www.ordering.co"
   }, ' ', t('ORDERING_CO', 'Ordering.co'))), parseInt(configs === null || configs === void 0 ? void 0 : (_configs$guest_uuid_a = configs.guest_uuid_access) === null || _configs$guest_uuid_a === void 0 ? void 0 : _configs$guest_uuid_a.value, 10) && (order === null || order === void 0 ? void 0 : order.hash_key) && /*#__PURE__*/_react.default.createElement(_styles.Content, {
@@ -705,13 +707,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return handleChangeOrderStatus(20);
     },
-    disabled: (order === null || order === void 0 ? void 0 : order.status) === 20 || (order === null || order === void 0 ? void 0 : order.status) === 21
+    disabled: disableLeftButton.includes(order === null || order === void 0 ? void 0 : order.status)
   }, (_getOrderStatus3 = getOrderStatus(20)) === null || _getOrderStatus3 === void 0 ? void 0 : _getOrderStatus3.value)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     style: {
       fontSize: 14
     },
     color: (order === null || order === void 0 ? void 0 : order.status) === 20 ? 'primary' : 'secundary',
-    disabled: (order === null || order === void 0 ? void 0 : order.status) === 21,
+    disabled: disableRightButton.includes(order === null || order === void 0 ? void 0 : order.status),
     onClick: function onClick() {
       return handleChangeOrderStatus(21);
     }

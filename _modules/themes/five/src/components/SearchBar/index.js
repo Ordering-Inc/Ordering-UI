@@ -27,7 +27,8 @@ var SearchBar = function SearchBar(props) {
     lazyLoad = props.lazyLoad,
     isCustomLayout = props.isCustomLayout,
     handleCustomEnter = props.handleCustomEnter,
-    forwardRef = props.forwardRef;
+    forwardRef = props.forwardRef,
+    starbucksStyle = props.starbucksStyle;
   var _useTheme = (0, _ThemeContext.useTheme)(),
     _useTheme2 = _slicedToArray(_useTheme, 1),
     theme = _useTheme2[0];
@@ -88,7 +89,8 @@ var SearchBar = function SearchBar(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, {
     className: !isCustomLayout && 'search-bar',
     isCustomLayout: isCustomLayout,
-    hasValue: (_el$current = el.current) === null || _el$current === void 0 ? void 0 : _el$current.value
+    hasValue: (_el$current = el.current) === null || _el$current === void 0 ? void 0 : _el$current.value,
+    starbucksStyle: starbucksStyle
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     ref: function ref(_ref) {
       el.current = _ref;

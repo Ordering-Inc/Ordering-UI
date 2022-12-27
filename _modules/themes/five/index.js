@@ -585,6 +585,12 @@ Object.defineProperty(exports, "ReviewTrigger", {
     return _ReviewTrigger.ReviewTrigger;
   }
 });
+Object.defineProperty(exports, "ScheduleAccordion", {
+  enumerable: true,
+  get: function get() {
+    return _ScheduleAccordion.ScheduleAccordion;
+  }
+});
 Object.defineProperty(exports, "SearchBar", {
   enumerable: true,
   get: function get() {
@@ -743,6 +749,7 @@ var _BusinessItemAccordion = require("./src/components/BusinessItemAccordion");
 var _BusinessPreorder = require("./src/components/BusinessPreorder");
 var _BusinessMenuList = require("./src/components/BusinessMenuList");
 var _BusinessProductsCategories = require("./src/components/BusinessProductsCategories");
+var _ScheduleAccordion = require("./src/components/ScheduleAccordion");
 var _groceries = require("./src/components/BusinessProductsCategories/layouts/groceries");
 var _BusinessProductsList = require("./src/components/BusinessProductsList");
 var _groceries2 = require("./src/components/BusinessProductsList/layouts/groceries");
