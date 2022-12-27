@@ -379,6 +379,7 @@ var CartUI = function CartUI(props) {
       key: product.code,
       isCartPending: isCartPending,
       isCartProduct: true,
+      isDisabledEdit: !(cart !== null && cart !== void 0 && cart.business_id),
       product: product,
       isCheckout: isCheckout,
       changeQuantity: changeQuantity,

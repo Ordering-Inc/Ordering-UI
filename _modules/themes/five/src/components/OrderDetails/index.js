@@ -23,6 +23,7 @@ var _OrderBillSection = require("./OrderBillSection");
 var _ActionsSection = require("./ActionsSection");
 var _OrderPreferencesSections = require("./OrderPreferencesSections");
 var _PlaceSpot = require("../PlaceSpot");
+var _SendGiftCard = require("../GiftCard/SendGiftCard");
 var _Confirm = require("../Confirm");
 var _styles = require("./styles");
 var _styledComponents = require("styled-components");
@@ -55,7 +56,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _configs$google_maps_, _configs$powered_by_o, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _orderingTheme$theme21, _orderingTheme$theme22, _orderingTheme$theme23, _orderingTheme$theme24, _orderingTheme$theme25, _orderingTheme$theme26, _orderingTheme$theme27, _orderingTheme$theme28, _orderingTheme$theme29, _orderingTheme$theme30, _orderingTheme$theme31, _orderingTheme$theme32, _orderingTheme$theme33, _orderingTheme$theme34, _orderingTheme$theme35, _orderingTheme$theme36, _orderingTheme$theme37, _orderingTheme$theme38, _orderingTheme$theme39, _orderingTheme$theme40, _orderingTheme$theme41, _orderingTheme$theme42, _orderingTheme$theme43, _orderingTheme$theme44, _orderingTheme$theme45, _orderingTheme$theme46, _orderingTheme$theme47, _orderingTheme$theme48, _orderingTheme$theme49, _orderingTheme$theme50, _orderingTheme$theme51, _orderingTheme$theme52, _orderingTheme$theme53, _orderingTheme$theme54, _orderingTheme$theme55, _orderingTheme$theme56, _orderingTheme$theme57, _orderingTheme$theme58, _orderingTheme$theme59, _orderingTheme$theme60, _orderingTheme$theme61, _orderingTheme$theme62, _orderingTheme$theme63, _orderingTheme$theme64, _orderingTheme$theme65, _orderingTheme$theme66, _orderingTheme$theme67, _orderingTheme$theme68, _orderingTheme$theme69, _orderingTheme$theme70, _orderingTheme$theme71, _orderingTheme$theme72, _orderingTheme$theme73, _orderingTheme$theme74, _orderingTheme$theme75, _orderingTheme$theme76, _orderingTheme$theme77, _orderingTheme$theme78, _orderingTheme$theme79, _orderingTheme$theme80, _orderingTheme$theme81, _orderingTheme$theme82, _orderingTheme$theme83, _orderingTheme$theme84, _orderingTheme$theme85, _orderingTheme$theme86, _orderingTheme$theme87, _orderingTheme$theme88, _orderingTheme$theme89, _orderingTheme$theme90, _orderingTheme$theme91, _orderingTheme$theme92, _orderingTheme$theme93, _orderingTheme$theme94, _orderingTheme$theme95, _orderingTheme$theme96, _orderingTheme$theme97, _orderingTheme$theme98, _orderingTheme$theme99, _orderingTheme$theme100, _orderingTheme$theme101, _orderingTheme$theme102, _orderingTheme$theme103, _order$driver, _order$driver2, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _theme$images2, _theme$images2$dummie, _order$customer, _order$customer2, _theme$images3, _theme$images3$dummie, _order$driver3, _order$driver3$locati, _order$driver4, _order$driver4$locati, _order$driver4$locati2, _theme$defaultLanguag25, _configs$guest_uuid_a, _order$business4, _order$business5, _orderTypes$find, _getOrderStatus, _getOrderStatus2, _theme$defaultLanguag26, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$place, _order$place2, _getOrderStatus3, _getOrderStatus4, _order$business12, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _theme$defaultLanguag27, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11, _order$driver12, _order$driver13, _order$driver13$locat, _order$driver14, _configs$google_maps_2, _theme$defaultLanguag28, _theme$defaultLanguag29, _theme$defaultLanguag30, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6;
+  var _configs$google_maps_, _configs$powered_by_o, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _orderingTheme$theme19, _orderingTheme$theme20, _orderingTheme$theme21, _orderingTheme$theme22, _orderingTheme$theme23, _orderingTheme$theme24, _orderingTheme$theme25, _orderingTheme$theme26, _orderingTheme$theme27, _orderingTheme$theme28, _orderingTheme$theme29, _orderingTheme$theme30, _orderingTheme$theme31, _orderingTheme$theme32, _orderingTheme$theme33, _orderingTheme$theme34, _orderingTheme$theme35, _orderingTheme$theme36, _orderingTheme$theme37, _orderingTheme$theme38, _orderingTheme$theme39, _orderingTheme$theme40, _orderingTheme$theme41, _orderingTheme$theme42, _orderingTheme$theme43, _orderingTheme$theme44, _orderingTheme$theme45, _orderingTheme$theme46, _orderingTheme$theme47, _orderingTheme$theme48, _orderingTheme$theme49, _orderingTheme$theme50, _orderingTheme$theme51, _orderingTheme$theme52, _orderingTheme$theme53, _orderingTheme$theme54, _orderingTheme$theme55, _orderingTheme$theme56, _orderingTheme$theme57, _orderingTheme$theme58, _orderingTheme$theme59, _orderingTheme$theme60, _orderingTheme$theme61, _orderingTheme$theme62, _orderingTheme$theme63, _orderingTheme$theme64, _orderingTheme$theme65, _orderingTheme$theme66, _orderingTheme$theme67, _orderingTheme$theme68, _orderingTheme$theme69, _orderingTheme$theme70, _orderingTheme$theme71, _orderingTheme$theme72, _orderingTheme$theme73, _orderingTheme$theme74, _orderingTheme$theme75, _orderingTheme$theme76, _orderingTheme$theme77, _orderingTheme$theme78, _orderingTheme$theme79, _orderingTheme$theme80, _orderingTheme$theme81, _orderingTheme$theme82, _orderingTheme$theme83, _orderingTheme$theme84, _orderingTheme$theme85, _orderingTheme$theme86, _orderingTheme$theme87, _orderingTheme$theme88, _orderingTheme$theme89, _orderingTheme$theme90, _orderingTheme$theme91, _orderingTheme$theme92, _orderingTheme$theme93, _orderingTheme$theme94, _orderingTheme$theme95, _orderingTheme$theme96, _orderingTheme$theme97, _orderingTheme$theme98, _orderingTheme$theme99, _orderingTheme$theme100, _orderingTheme$theme101, _orderingTheme$theme102, _orderingTheme$theme103, _order$driver, _order$driver2, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _theme$images2, _theme$images2$dummie, _order$customer, _order$customer2, _theme$images3, _theme$images3$dummie, _order$driver3, _order$driver3$locati, _order$driver4, _order$driver4$locati, _order$driver4$locati2, _theme$defaultLanguag25, _configs$guest_uuid_a, _order$business4, _order$business5, _orderTypes$find, _getOrderStatus, _getOrderStatus2, _theme$defaultLanguag26, _getOrderStatus3, _getOrderStatus4, _getOrderStatus5, _getOrderStatus6, _order$business6, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _theme$defaultLanguag27, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11, _order$driver12, _order$driver13, _order$driver13$locat, _order$driver14, _configs$google_maps_2, _order$products$, _order$products$$gift, _order$products$2, _order$products$2$gif, _theme$defaultLanguag28, _theme$defaultLanguag29, _theme$defaultLanguag30, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6;
   var userCustomerId = props.userCustomerId,
     handleChangeOrderStatus = props.handleChangeOrderStatus,
     handleBusinessRedirect = props.handleBusinessRedirect,
@@ -119,53 +120,57 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     isProReviewed = _useState10[0],
     setIsProReviewed = _useState10[1];
-  var _useState11 = (0, _react.useState)({
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isGiftCardSent = _useState12[0],
+    setIsGiftCardSent = _useState12[1];
+  var _useState13 = (0, _react.useState)({
       business: false,
       driver: false
     }),
-    _useState12 = _slicedToArray(_useState11, 2),
-    unreadAlert = _useState12[0],
-    setUnreadAlert = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    isReviewOpen = _useState14[0],
-    setIsReviewOpen = _useState14[1];
-  var _useState15 = (0, _react.useState)({
+    unreadAlert = _useState14[0],
+    setUnreadAlert = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    isReviewOpen = _useState16[0],
+    setIsReviewOpen = _useState16[1];
+  var _useState17 = (0, _react.useState)({
       order: false,
       product: false,
       driver: false,
       professional: false
     }),
-    _useState16 = _slicedToArray(_useState15, 2),
-    reviewStatus = _useState16[0],
-    setReviewStatus = _useState16[1];
-  var _useState17 = (0, _react.useState)({
+    _useState18 = _slicedToArray(_useState17, 2),
+    reviewStatus = _useState18[0],
+    setReviewStatus = _useState18[1];
+  var _useState19 = (0, _react.useState)({
       open: false,
       tax: null
     }),
-    _useState18 = _slicedToArray(_useState17, 2),
-    openTaxModal = _useState18[0],
-    setOpenTaxModal = _useState18[1];
-  var _useState19 = (0, _react.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    isService = _useState20[0],
-    setIsService = _useState20[1];
+    openTaxModal = _useState20[0],
+    setOpenTaxModal = _useState20[1];
   var _useState21 = (0, _react.useState)(false),
     _useState22 = _slicedToArray(_useState21, 2),
-    isOrderHistory = _useState22[0],
-    setIsOrderHistory = _useState22[1];
-  var _useState23 = (0, _react.useState)({
+    isService = _useState22[0],
+    setIsService = _useState22[1];
+  var _useState23 = (0, _react.useState)(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    isOrderHistory = _useState24[0],
+    setIsOrderHistory = _useState24[1];
+  var _useState25 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
-    _useState24 = _slicedToArray(_useState23, 2),
-    confirm = _useState24[0],
-    setConfirm = _useState24[1];
-  var _useState25 = (0, _react.useState)(true),
     _useState26 = _slicedToArray(_useState25, 2),
-    isShowBusinessLogo = _useState26[0],
-    setIsShowBusinessLogo = _useState26[1];
+    confirm = _useState26[0],
+    setConfirm = _useState26[1];
+  var _useState27 = (0, _react.useState)(true),
+    _useState28 = _slicedToArray(_useState27, 2),
+    isShowBusinessLogo = _useState28[0],
+    setIsShowBusinessLogo = _useState28[1];
   var _props$order = props.order,
     order = _props$order.order,
     loading = _props$order.loading,
@@ -179,6 +184,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var enabledPoweredByOrdering = configs === null || configs === void 0 ? void 0 : (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
   var showOrderActions = (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1;
+  var isGiftCardOrder = !(order !== null && order !== void 0 && order.business_id);
   var isOriginalLayout = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.confirmation) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : _orderingTheme$theme$3.type) === 'original';
   var showDeliveryType = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.confirmation) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.order) !== null && _orderingTheme$theme5 !== void 0 && (_orderingTheme$theme6 = _orderingTheme$theme5.components) !== null && _orderingTheme$theme6 !== void 0 && (_orderingTheme$theme7 = _orderingTheme$theme6.delivery_type) !== null && _orderingTheme$theme7 !== void 0 && _orderingTheme$theme7.hidden);
   var showDeliveryDate = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme8 = orderingTheme.theme) !== null && _orderingTheme$theme8 !== void 0 && (_orderingTheme$theme9 = _orderingTheme$theme8.confirmation) !== null && _orderingTheme$theme9 !== void 0 && (_orderingTheme$theme10 = _orderingTheme$theme9.components) !== null && _orderingTheme$theme10 !== void 0 && (_orderingTheme$theme11 = _orderingTheme$theme10.order) !== null && _orderingTheme$theme11 !== void 0 && (_orderingTheme$theme12 = _orderingTheme$theme11.components) !== null && _orderingTheme$theme12 !== void 0 && (_orderingTheme$theme13 = _orderingTheme$theme12.date) !== null && _orderingTheme$theme13 !== void 0 && _orderingTheme$theme13.hidden);
@@ -647,7 +653,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     className: "date"
   }, activeStatus.includes(order === null || order === void 0 ? void 0 : order.status) ? (order === null || order === void 0 ? void 0 : order.eta_time) + 'min' : order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
-  })), (acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) || !isOriginalLayout) && /*#__PURE__*/_react.default.createElement(_styles.ReOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), (acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) || !isOriginalLayout) && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.ReOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     outline: true,
     onClick: function onClick() {
@@ -661,7 +667,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       return handleClickReorder(order);
     },
     disabled: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading
-  }, reorderState !== null && reorderState !== void 0 && reorderState.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')))), showDeliveryProgress && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
+  }, reorderState !== null && reorderState !== void 0 && reorderState.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')))), showDeliveryProgress && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderStatusAndLinkContainer, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "order-status"
@@ -677,29 +683,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     active: acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || isService && !isProReviewed || !isDriverReviewed)
   }, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleOpenReview
-  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.REVIEW_ORDER) || 'Review your Order'))))))), /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessExternalWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
+  }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.REVIEW_ORDER) || 'Review your Order'))))))), !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessExternalWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
     w: "calc(100% - 20px)"
     // borderBottom={showOrderActions}
-  }, isShowBusinessLogo && /*#__PURE__*/_react.default.createElement("img", {
-    src: order === null || order === void 0 ? void 0 : (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement("h2", null, order === null || order === void 0 ? void 0 : (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.name), /*#__PURE__*/_react.default.createElement(_ActionsSection.ActionsSection, _extends({}, ActionsSectionProps, {
-    actionType: "business",
-    showPhone: showBusinessPhone,
-    showMessages: showBusinessMessages
-  })), showBusinessEmail && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business8 = order.business) === null || _order$business8 === void 0 ? void 0 : _order$business8.email), showBusinessPhone && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business9 = order.business) === null || _order$business9 === void 0 ? void 0 : _order$business9.cellphone), showBusinessAddress && /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business10 = order.business) === null || _order$business10 === void 0 ? void 0 : _order$business10.address), (order === null || order === void 0 ? void 0 : (_order$place = order.place) === null || _order$place === void 0 ? void 0 : _order$place.name) && /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotSection, null, /*#__PURE__*/_react.default.createElement("p", null, yourSpotString, ": ", order === null || order === void 0 ? void 0 : (_order$place2 = order.place) === null || _order$place2 === void 0 ? void 0 : _order$place2.name)), showOrderActions && /*#__PURE__*/_react.default.createElement(_styles.DirectionButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    onClick: function onClick() {
-      var _order$business11;
-      return window.open("http://maps.google.com/?q=".concat(order === null || order === void 0 ? void 0 : (_order$business11 = order.business) === null || _order$business11 === void 0 ? void 0 : _order$business11.address));
-    }
-  }, t('GET_DIRECTIONS', 'Get Directions'))))), showDeliveryType && placeSpotTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotWrapper, null, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
-    isInputMode: true,
-    cart: order,
-    spotNumberDefault: order === null || order === void 0 ? void 0 : order.spot_number,
-    vehicleDefault: order === null || order === void 0 ? void 0 : order.vehicle
-  })), showOrderActions && /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
-    w: "calc(100% - 20px)",
-    borderTop: true
   }, /*#__PURE__*/_react.default.createElement(_styles.BtsOrderStatus, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     style: {
       fontSize: 14
@@ -718,12 +704,38 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return handleChangeOrderStatus(21);
     }
-  }, (_getOrderStatus4 = getOrderStatus(21)) === null || _getOrderStatus4 === void 0 ? void 0 : _getOrderStatus4.value))))), googleMapsApiKey && showBusinessMap && /*#__PURE__*/_react.default.createElement(_styles.MapWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Map, {
+  }, (_getOrderStatus4 = getOrderStatus(21)) === null || _getOrderStatus4 === void 0 ? void 0 : _getOrderStatus4.value)))), showDeliveryType && placeSpotTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement(_styles.PlaceSpotWrapper, null, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
+    isInputMode: true,
+    cart: order,
+    spotNumberDefault: order === null || order === void 0 ? void 0 : order.spot_number,
+    vehicleDefault: order === null || order === void 0 ? void 0 : order.vehicle
+  })), showOrderActions && /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
+    w: "calc(100% - 20px)",
+    borderTop: true
+  }, /*#__PURE__*/_react.default.createElement(_styles.BtsOrderStatus, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    style: {
+      fontSize: 14
+    },
+    color: (order === null || order === void 0 ? void 0 : order.status) === 20 ? 'secundary' : 'primary',
+    onClick: function onClick() {
+      return handleChangeOrderStatus(20);
+    },
+    disabled: (order === null || order === void 0 ? void 0 : order.status) === 20 || (order === null || order === void 0 ? void 0 : order.status) === 21
+  }, (_getOrderStatus5 = getOrderStatus(20)) === null || _getOrderStatus5 === void 0 ? void 0 : _getOrderStatus5.value)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    style: {
+      fontSize: 14
+    },
+    color: (order === null || order === void 0 ? void 0 : order.status) === 20 ? 'primary' : 'secundary',
+    disabled: (order === null || order === void 0 ? void 0 : order.status) === 21,
+    onClick: function onClick() {
+      return handleChangeOrderStatus(21);
+    }
+  }, (_getOrderStatus6 = getOrderStatus(21)) === null || _getOrderStatus6 === void 0 ? void 0 : _getOrderStatus6.value))))), googleMapsApiKey && showBusinessMap && /*#__PURE__*/_react.default.createElement(_styles.MapWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Map, {
     style: {
       width: '100%'
     }
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business12 = order.business) === null || _order$business12 === void 0 ? void 0 : _order$business12.location, googleMapsApiKey, mapConfigs),
+    src: (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.location, googleMapsApiKey, mapConfigs),
     id: "google-maps-image",
     alt: "google-maps-location",
     width: "100%",
@@ -751,7 +763,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     locations: parsedLocations,
     mapControls: googleMapsControls,
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value
-  }))), ((order === null || order === void 0 ? void 0 : order.delivery_type) === 1 || (order === null || order === void 0 ? void 0 : order.comment)) && /*#__PURE__*/_react.default.createElement(_styles.OrderPreferences, null, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
+  }))), ((order === null || order === void 0 ? void 0 : order.delivery_type) === 1 || (order === null || order === void 0 ? void 0 : order.comment)) && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderPreferences, null, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
     order: order,
     placeSpotTypes: placeSpotTypes
   }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, /*#__PURE__*/_react.default.createElement(_OrderHeaderInfoSection.OrderHeaderInfoSection, {
@@ -763,7 +775,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   })), sortedProductList, /*#__PURE__*/_react.default.createElement(_OrderBillSection.OrderBillSection, {
     order: order,
     setOpenTaxModal: setOpenTaxModal
-  })))), (openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
+  }))), isGiftCardOrder && (order === null || order === void 0 ? void 0 : (_order$products$ = order.products[0]) === null || _order$products$ === void 0 ? void 0 : (_order$products$$gift = _order$products$.gift_card) === null || _order$products$$gift === void 0 ? void 0 : _order$products$$gift.status) === 'pending' && !isGiftCardSent && /*#__PURE__*/_react.default.createElement(_SendGiftCard.SendGiftCard, {
+    giftCardId: order === null || order === void 0 ? void 0 : (_order$products$2 = order.products[0]) === null || _order$products$2 === void 0 ? void 0 : (_order$products$2$gif = _order$products$2.gift_card) === null || _order$products$2$gif === void 0 ? void 0 : _order$products$2$gif.id,
+    setIsGiftCardSent: setIsGiftCardSent
+  })), (openMessages.driver || openMessages.business) && /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     business: openMessages.business,
