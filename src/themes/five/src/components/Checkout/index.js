@@ -91,7 +91,10 @@ const CheckoutUI = (props) => {
     handleStoreRedirect,
     onPlaceOrderClick,
     setPlaceSpotNumber,
-    placeSpotNumber
+    placeSpotNumber,
+    applyCoupon,
+    hasCateringProducts,
+    cateringHours,
   } = props
 
   const theme = useTheme()
@@ -114,6 +117,9 @@ const CheckoutUI = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [requiredFields, setRequiredFields] = useState([])
   const [isSuccess, setIsSuccess] = useState(false)
+
+  const [cateringDayError, setCateringDayError] = useState(false)
+  const [openAlertCatering, setOpenAlertCatering] = useState(false)
 
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isTableNumberEnabled = configs?.table_numer_enabled?.value
@@ -138,7 +144,9 @@ const CheckoutUI = (props) => {
     (options.type === 1 &&
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
       validationFields?.fields?.checkout?.driver_tip?.required &&
-      (Number(cart?.driver_tip) <= 0))
+      (Number(cart?.driver_tip) <= 0))||
+      cateringDayError ||
+      hasCateringProducts?.loading
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -250,9 +258,24 @@ const CheckoutUI = (props) => {
   }, [isResetPaymethod])
 
   useEffect(() => {
+    if ((!configs?.advanced_offers_module?.value && (paymethodSelected?.gateway !== 'openpay' || hasCateringProducts?.result) && !cartState.loading && cart?.coupon && cart?.coupon === 'DLVMASTER30')) {
+      applyCoupon({
+        business_id: cart?.business_id,
+        coupon: null
+      })
+    }
+  }, [paymethodSelected, cartState.loading])
+
+  useEffect(() => {
     if (cart?.products?.length) return
     handleStoreRedirect(cart?.business?.slug)
   }, [cart?.products])
+
+  useEffect(() => {
+    if (hasCateringProducts.result) {
+      setOpenAlertCatering(true)
+    }
+  }, [hasCateringProducts])
 
   return (
     <Container>
@@ -412,6 +435,7 @@ const CheckoutUI = (props) => {
                 paySelected={paymethodSelected}
                 handlePlaceOrder={handlePlaceOrder}
                 onPlaceOrderClick={onPlaceOrderClick}
+                hasCateringProducts={hasCateringProducts}
               />
             </PaymentMethodContainer>
           )}
@@ -513,6 +537,7 @@ const CheckoutUI = (props) => {
               useKioskApp={useKioskApp}
               isCheckout
               isProducts={cart?.products?.length || 0}
+              hasCateringProducts={hasCateringProducts}
             />
           </CartContainer>
         )}
@@ -548,6 +573,12 @@ const CheckoutUI = (props) => {
         {!cart?.valid_products && cart?.status !== 2 && (
           <WarningText>
             {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
+          </WarningText>
+        )}
+
+        {cateringDayError && (
+          <WarningText>
+            {t('WARNING_CATERING_BUSINESS_CLOSED', 'The Business will be closed before preparing catering')}
           </WarningText>
         )}
 
@@ -590,6 +621,15 @@ const CheckoutUI = (props) => {
         open={alertState.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+      <Alert
+        title={t('DISCLAIMER_CATERING_TITLE', 'Disclaimer catering title')}
+        content={t('DISCLAIMER_CATERING', 'Disclaimer Catering')}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={openAlertCatering}
+        onClose={() => closeCateringAlert()}
+        onAccept={() => closeCateringAlert()}
         closeOnBackdrop={false}
       />
       <Modal
@@ -635,7 +675,7 @@ export const Checkout = (props) => {
     handleCheckoutListRedirect
   } = props
 
-  const [orderState, { confirmCart }] = useOrder()
+  const [orderState, { confirmCart, applyCoupon }] = useOrder()
   const [{ token }] = useSession()
   const [ordering] = useApi()
   const [, t] = useLanguage()
@@ -656,6 +696,10 @@ export const Checkout = (props) => {
       content: []
     })
     clearErrors && clearErrors()
+  }
+
+  const closeCateringAlert = () => {
+    setOpenAlertCatering(false)
   }
 
   const handleUpsellingPage = () => {
@@ -779,7 +823,8 @@ export const Checkout = (props) => {
     cartState,
     uuid: cartUuid,
     isResetPaymethod,
-    setIsResetPaymethod
+    setIsResetPaymethod,
+    applyCoupon
   }
 
   return (

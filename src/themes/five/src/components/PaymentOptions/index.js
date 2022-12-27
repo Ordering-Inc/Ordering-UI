@@ -96,7 +96,8 @@ const PaymentOptionsUI = (props) => {
     setCreateOrder,
     onPlaceOrderClick,
     handlePlaceOrder,
-    paymethods
+    paymethods,
+    hasCateringProducts
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -113,7 +114,10 @@ const PaymentOptionsUI = (props) => {
   const list = paymethodsList ? paymethodsList?.paymethods : paymethods?.map(pay => pay.paymethod)
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
-  const supportedMethods = list?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
+
+  const excludePaymethods = hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash']
+
+  const supportedMethods = list?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : hasCateringProducts?.result ? !excludePaymethods.includes(p.gateway) : p)
 
   const handlePaymentMethodClick = (paymethod) => {
     if (cart?.balance > 0) {
@@ -159,6 +163,20 @@ const PaymentOptionsUI = (props) => {
   useEffect(() => {
     if (methodsPay.includes(paymethodSelected?.gateway) && paymethodData?.id && paymethodSelected?.data?.card) {
       handlePlaceOrder()
+    }
+
+    if ((paymethodSelected?.gateway !== 'openpay' || hasCateringProducts?.result) && cart?.offers.length > 0) {
+      if (!configs?.advanced_offers_module?.value) {
+        applyCoupon({
+          business_id: props?.businessId,
+          coupon: null
+        })
+      } else {
+        removeOffer({
+          business_id: props?.businessId,
+          offer_id: cart?.offers[0].id
+        })
+      }
     }
   }, [paymethodData, paymethodSelected])
 

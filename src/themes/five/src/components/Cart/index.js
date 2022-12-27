@@ -67,7 +67,8 @@ const CartUI = (props) => {
     handleChangeComment,
     commentState,
     handleRemoveOfferClick,
-    setPreorderBusiness
+    setPreorderBusiness,
+    hasCateringProducts
   } = props
 
   const theme = useTheme()
@@ -448,7 +449,7 @@ const CartUI = (props) => {
                     )}
                   </tbody>
                 </table>
-                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && (
+                {isCouponEnabled && !hasCateringProducts?.result && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && (
                   <CouponContainer>
                     <CouponControl
                       businessId={cart.business_id}
