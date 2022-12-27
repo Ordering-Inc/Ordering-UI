@@ -404,6 +404,9 @@ const OrderDetailsUI = (props) => {
     businessLogoUrlValidation()
   }, [order])
 
+  const disableLeftButton = [1, 15, 20, 21]
+  const disableRightButton = [1, 15, 21]
+
   return (
     <Container>
       {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
@@ -518,42 +521,28 @@ const OrderDetailsUI = (props) => {
                     w='calc(100% - 20px)'
                   // borderBottom={showOrderActions}
                   >
-                    {isShowBusinessLogo && <img src={order?.business?.logo} />}
-                    <BusinessInfo>
-                      <h2>{order?.business?.name}</h2>
-                      <ActionsSection
-                        {...ActionsSectionProps}
-                        actionType='business'
-                        showPhone={showBusinessPhone}
-                        showMessages={showBusinessMessages}
-                      />
-                      {showBusinessEmail && (
-                        <p>{order?.business?.email}</p>
-                      )}
-                      {showBusinessPhone && (
-                        <p>{order?.business?.cellphone}</p>
-                      )}
-                      {showBusinessAddress && (
-                        <p>{order?.business?.address}</p>
-                      )}
-                      {order?.place?.name && (
-                        <PlaceSpotSection>
-                          <p>
-                            {yourSpotString}: {order?.place?.name}
-                          </p>
-                        </PlaceSpotSection>
-                      )}
-                      {showOrderActions && (
-                        <DirectionButtonWrapper>
-                          <Button
-                            color='primary'
-                            onClick={() => window.open(`http://maps.google.com/?q=${order?.business?.address}`)}
-                          >
-                            {t('GET_DIRECTIONS', 'Get Directions')}
-                          </Button>
-                        </DirectionButtonWrapper>
-                      )}
-                    </BusinessInfo>
+                    <BtsOrderStatus>
+                      <div>
+                        <Button
+                          style={{ fontSize: 14 }}
+                          color={order?.status === 20 ? 'secundary' : 'primary'}
+                          onClick={() => handleChangeOrderStatus(20)}
+                          disabled={disableLeftButton.includes(order?.status)}
+                        >
+                          {getOrderStatus(20)?.value}
+                        </Button>
+                      </div>
+                      <div>
+                        <Button
+                          style={{ fontSize: 14 }}
+                          color={order?.status === 20 ? 'primary' : 'secundary'}
+                          disabled={disableRightButton.includes(order?.status)}
+                          onClick={() => handleChangeOrderStatus(21)}
+                        >
+                          {getOrderStatus(21)?.value}
+                        </Button>
+                      </div>
+                    </BtsOrderStatus>
                   </BusinessWrapper>
 
                   {showDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
