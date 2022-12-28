@@ -32,7 +32,7 @@ var ProductOptionUI = function ProductOptionUI(props) {
   if (option.min === 1 && option.max === 1) {
     maxMin = t('REQUIRED', 'Required');
   } else if (option.min === 0 && option.max > 0) {
-    maxMin = "".concat(!(option !== null && option !== void 0 && option.limit_suboptions_by_max) ? t('MAX_PER_SUBOPTION', 'MAX PER SUBOPTION') : t('MAX', 'Max'), ". ").concat(option.max);
+    maxMin = "".concat(t('MAX', 'Max'), ". ").concat(option.max);
   } else if (option.min > 0 && option.max === 0) {
     maxMin = "".concat(t('MIN', 'Min'), ". ").concat(option.min, ")");
   }
