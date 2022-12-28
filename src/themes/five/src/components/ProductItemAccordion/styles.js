@@ -41,9 +41,6 @@ const AccordionStyled = styled.div`
 
 export const Accordion = (props) => {
   const style = {}
-  if (!props.isValid) {
-    style.opacity = '0.5'
-  }
   return (
     <AccordionStyled
       {...props}
@@ -216,6 +213,10 @@ export const ProductInfo = styled.div`
     font-size: 20px;
     margin: 0px 5px;
   }
+
+  ${({ isValid }) => !isValid && css`
+    opacity: 0.5;
+  `}
 
   @media (min-width: 411px) {
     width: 80%;
