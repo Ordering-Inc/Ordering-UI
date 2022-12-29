@@ -375,6 +375,12 @@ Object.defineProperty(exports, "OrderBillSection", {
     return _OrderBillSection.OrderBillSection;
   }
 });
+Object.defineProperty(exports, "OrderContextUI", {
+  enumerable: true,
+  get: function get() {
+    return _OrderContextUI.OrderContextUI;
+  }
+});
 Object.defineProperty(exports, "OrderDetails", {
   enumerable: true,
   get: function get() {
@@ -845,6 +851,7 @@ var _SearchProducts = require("./src/components/SearchProducts");
 var _MultiCartsPaymethodsAndWallets = require("./src/components/MultiCartsPaymethodsAndWallets");
 var _ProfessionalProfile = require("./src/components/ProfessionalProfile");
 var _OrderHistory = require("./src/components/OrderDetails/OrderHistory");
+var _OrderContextUI = require("./src/components/OrderContextUI");
 var _OrderBillSection = require("./src/components/OrderDetails/OrderBillSection");
 var _OrderPreferencesSections = require("./src/components/OrderDetails/OrderPreferencesSections");
 var _ActionsSection = require("./src/components/OrderDetails/ActionsSection");

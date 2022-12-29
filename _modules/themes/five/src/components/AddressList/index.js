@@ -53,7 +53,8 @@ var AddressListUI = function AddressListUI(props) {
     isCustomerMode = props.isCustomerMode,
     isFromCheckout = props.isFromCheckout,
     setIsAddressFormOpen = props.setIsAddressFormOpen,
-    isProfile = props.isProfile;
+    isProfile = props.isProfile,
+    isMobile = props.isMobile;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -225,7 +226,7 @@ var AddressListUI = function AddressListUI(props) {
         return openAddress({});
       },
       disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading,
-      style: isCompletedLayout ? {
+      style: isCompletedLayout && !isMobile ? {
         flex: 1,
         width: 'fit-content'
       } : {}
