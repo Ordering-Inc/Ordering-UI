@@ -64,7 +64,8 @@ const AddressListUI = (props) => {
     isCustomerMode,
     isFromCheckout,
     setIsAddressFormOpen,
-    isProfile
+    isProfile,
+    isMobile
   } = props
 
   const [, t] = useLanguage()
@@ -235,7 +236,7 @@ const AddressListUI = (props) => {
                 color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
                 onClick={() => openAddress({})}
                 disabled={orderState?.loading || actionStatus.loading}
-                style={isCompletedLayout ? { flex: 1, width: 'fit-content' } : {}}
+                style={(isCompletedLayout && !isMobile) ? { flex: 1, width: 'fit-content' } : {}}
               >
                 {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
               </Button>

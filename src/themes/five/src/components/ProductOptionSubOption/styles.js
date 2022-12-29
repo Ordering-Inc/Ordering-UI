@@ -59,6 +59,12 @@ export const Text = styled.div`
       margin-right: 10px;    
     `}
   }
+
+  ${({ noMargin }) => noMargin && css`
+    span {
+      margin: 0;
+    }
+  `}
 `
 
 export const SubOptionThumbnail = styled.div`

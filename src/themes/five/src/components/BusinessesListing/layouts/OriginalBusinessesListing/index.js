@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { useTheme } from 'styled-components'
 import FiMap from '@meronex/icons/fi/FiMap'
 import FiFilter from '@meronex/icons/fi/FiFilter'
-import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 import {
   useOrder,
   useSession,
@@ -24,10 +23,6 @@ import {
   BusinessLogo,
   BusinessLogosContainer,
   BusinessBanner,
-  BusinessFeatures,
-  AddressMenu,
-  FeatureItems,
-  ItemInline,
   BusinessLogosWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
@@ -36,8 +31,6 @@ import { NotFoundSource } from '../../../NotFoundSource'
 
 import { Modal } from '../../../Modal'
 import { Alert } from '../../../Confirm'
-import { AddressForm } from '../../../AddressForm'
-import { AddressList } from '../../../AddressList'
 import { SearchBar } from '../../../SearchBar'
 
 import { BusinessTypeFilter } from '../../../BusinessTypeFilter'
@@ -51,10 +44,9 @@ import { OrderProgress } from '../../../OrderProgress'
 import { PageBanner } from '../../../PageBanner'
 
 import Skeleton from 'react-loading-skeleton'
-import { MomentPopover } from '../../../../../../pwa/src/components/MomentPopover'
-import { OrderTypeSelectorHeader } from '../../../../../../../components/OrderTypeSelectorHeader'
 import { AutoScroll } from '../../../AutoScroll'
 import { CitiesControl } from '../../../CitiesControl'
+import { OrderContextUI } from '../../../OrderContextUI'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -80,7 +72,6 @@ const BusinessesListingUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState, { changeCityFilter }] = useOrder()
-  const [configState] = useConfig()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const windowSize = useWindowSize()
@@ -89,7 +80,6 @@ const BusinessesListingUI = (props) => {
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [activeMap, setActiveMap] = useState(false)
-  const [openPopover, setOpenPopover] = useState({})
   const [mapErrors, setMapErrors] = useState('')
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
@@ -104,7 +94,6 @@ const BusinessesListingUI = (props) => {
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
-  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const handleScroll = useCallback(() => {
@@ -126,28 +115,6 @@ const BusinessesListingUI = (props) => {
     } else {
       setModals({ ...modals, formOpen: true })
     }
-  }
-
-  const handleTogglePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: !openPopover[type]
-    })
-  }
-
-  const handleClosePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: false
-    })
-  }
-
-  const handleFindBusinesses = () => {
-    if (!orderState?.options?.address?.location) {
-      setAlertState({ open: true, content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')] })
-      return
-    }
-    setModals({ listOpen: false, formOpen: false })
   }
 
   const toggleMap = () => {
@@ -286,27 +253,7 @@ const BusinessesListingUI = (props) => {
         {(windowSize.width < 576 || (configs?.business_listing_hide_image?.value !== '1' && !isChew)) && (
           <BusinessBanner>
             {windowSize.width < 576 && (
-              <BusinessFeatures>
-                <AddressMenu
-                  onClick={() => handleClickAddress()}
-                >
-                  <FaMapMarkerAlt />
-                  <span>{orderState.options?.address?.address || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}</span>
-                </AddressMenu>
-                <FeatureItems>
-                  <ItemInline>
-                    <OrderTypeSelectorHeader configTypes={configTypes} />
-                  </ItemInline>
-                  <ItemInline>
-                    <MomentPopover
-                      open={openPopover.moment}
-                      onClick={() => handleTogglePopover('moment')}
-                      onClose={() => handleClosePopover('moment')}
-                      isBanner
-                    />
-                  </ItemInline>
-                </FeatureItems>
-              </BusinessFeatures>
+              <OrderContextUI isBusinessList />
             )}
             {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && (
               <BusinessHeroImg
@@ -500,36 +447,6 @@ const BusinessesListingUI = (props) => {
             business={preorderBusiness}
             handleClick={handleBusinessClick}
             showButton
-          />
-        </Modal>
-
-        <Modal
-          title={t('ADDRESS_FORM', 'Address Form')}
-          open={modals.formOpen}
-          onClose={() => setModals({ ...modals, formOpen: false })}
-        >
-          <AddressForm
-            useValidationFileds
-            address={orderState?.options?.address || {}}
-            onClose={() => setModals({ ...modals, formOpen: false })}
-            onCancel={() => setModals({ ...modals, formOpen: false })}
-            onSaveAddress={() => setModals({ ...modals, formOpen: false })}
-          />
-        </Modal>
-
-        <Modal
-          title={t('ADDRESSES', 'Address List')}
-          open={modals.listOpen}
-          width='70%'
-          onClose={() => setModals({ ...modals, listOpen: false })}
-        >
-          <AddressList
-            isModal
-            changeOrderAddressWithDefault
-            userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-            onCancel={() => setModals({ ...modals, listOpen: false })}
-            onAccept={() => handleFindBusinesses()}
-            isCustomerMode={isCustomerMode}
           />
         </Modal>
         <Modal
