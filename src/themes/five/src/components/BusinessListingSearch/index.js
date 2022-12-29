@@ -75,7 +75,6 @@ export const BusinessListingSearchUI = (props) => {
   } = props
 
   const [{ carts }, orderState] = useOrder()
-  // console.log(carts)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [curProduct, setCurProduct] = useState({ business: null, product: null })
@@ -102,8 +101,6 @@ export const BusinessListingSearchUI = (props) => {
 
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === curProduct?.business?.slug) ?? {}
-
-  // console.log(currentCart)
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -142,8 +139,6 @@ export const BusinessListingSearchUI = (props) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
-
-  console.log(curProduct?.product)
 
   return (
     <BusinessListingSearchContainer>
