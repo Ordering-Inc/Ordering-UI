@@ -154,14 +154,14 @@ export const PFChangsHomeHero = (props) => {
             </div>
             <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
               <Button
-                color={orderTypeSelected === 2 ? '#000' : theme?.colors?.tertiary || '#FFF'}
+                color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
                 onClick={() => handleChangeOrderType(2)}
                 disabled={orderState?.loading}
               >
                 {t('PICKUP', 'Pickup')}
               </Button>
               <Button
-                color={orderTypeSelected === 1 ? '#000' : theme?.colors?.tertiary || '#FFF'}
+                color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? '#000' : '#FFF'  : theme?.colors?.tertiary || '#FFF'}
                 onClick={() => handleChangeOrderType(1)}
                 disabled={orderState?.loading}
               >
