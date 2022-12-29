@@ -184,12 +184,6 @@ export const WrapperLeftContent = styled.div`
     font-size: 32px;
     color: ${props => props.theme?.colors.darkTextColor};
   }
-
-  .back-arrow {
-    font-size: 24px;
-    cursor: pointer;
-    margin-bottom: 5px;
-  }
 `
 export const CheckOutDivider = styled.div`
   height: 8px;
@@ -317,5 +311,24 @@ export const MobileWrapperPlaceOrderButton = styled.div`
   button {
     min-height: 44px;
     border-radius: 7.6px;
+  }
+`
+
+export const OrderContextUIWrapper = styled.div`
+  flex: 1;
+  margin-left: 15px;
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: 15px;
+  `}
+`
+
+export const HeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  .back-arrow {
+    font-size: 24px;
+    cursor: pointer;
   }
 `

@@ -108,6 +108,7 @@ import { SearchProducts } from './src/components/SearchProducts'
 import { MultiCartsPaymethodsAndWallets } from './src/components/MultiCartsPaymethodsAndWallets'
 import { ProfessionalProfile } from './src/components/ProfessionalProfile'
 import { OrderHistory } from './src/components/OrderDetails/OrderHistory'
+import { OrderContextUI } from './src/components/OrderContextUI'
 import { OrderBillSection } from './src/components/OrderDetails/OrderBillSection'
 import { OrderPreferencesSection } from './src/components/OrderDetails/OrderPreferencesSections'
 import { ActionsSection } from './src/components/OrderDetails/ActionsSection'
@@ -177,6 +178,7 @@ export {
   Modal,
   NotFoundSource,
   NotNetworkConnectivity,
+  OrderContextUI,
   OrderDetails,
   OrderItAgain,
   OrderDetailsKiosk,
