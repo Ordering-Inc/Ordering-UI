@@ -229,13 +229,13 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
   }, /*#__PURE__*/_react.default.createElement("h1", null, auth ? "".concat(t('WELCOME_BACK', 'Welcome back'), " ").concat(user === null || user === void 0 ? void 0 : user.name) : t('WELCOME', 'Welcome')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('SEARCH_OR_VIEW_LOCATIONS_BELOW', 'Search or view nearby locations below'))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
     orderTypeSelected: orderTypeSelected
   }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 2 ? '#000' : (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#FFF',
+    color: orderTypeSelected === 2 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#FFF',
     onClick: function onClick() {
       return handleChangeOrderType(2);
     },
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 1 ? '#000' : (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#FFF',
+    color: orderTypeSelected === 1 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#FFF',
     onClick: function onClick() {
       return handleChangeOrderType(1);
     },
