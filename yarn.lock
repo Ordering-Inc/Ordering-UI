@@ -9063,7 +9063,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/63516edecf5fc5e00b4c05949531e82b30765be0"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/743c0ab0067acc1a41e890950768d2d35e09eeaf"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -9075,6 +9075,7 @@ optionator@^0.8.3:
     dayjs "^1.9.3"
     firebase "^9.9.2"
     libphonenumber-js "^1.9.17"
+    moment "^2.29.4"
     ordering-api-sdk "github:Ordering-Inc/ordering-api-sdk#release"
     prop-types "^15.7.2"
     react-google-recaptcha latest

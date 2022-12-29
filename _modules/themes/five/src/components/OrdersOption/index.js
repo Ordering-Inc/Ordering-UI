@@ -95,7 +95,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     values = orderList.orders;
   var _orders = customArray || values || [];
   var uniqueOrders = [];
-  var orders = _orders.map(function (order) {
+  var ordersReduced = _orders.map(function (order) {
     var _orders$filter;
     return order !== null && order !== void 0 && order.cart_group_id ? (_orders$filter = _orders.filter(function (_order) {
       return (_order === null || _order === void 0 ? void 0 : _order.cart_group_id) === (order === null || order === void 0 ? void 0 : order.cart_group_id);
@@ -110,14 +110,16 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
         user_review: orderCompleted.user_review && currentOrder.user_review,
         products: [orderCompleted.products, currentOrder.products].flat()
       });
-    }).filter(function (order) {
-      var isDuplicate = uniqueOrders.includes(order === null || order === void 0 ? void 0 : order.cart_group_id);
-      if (!isDuplicate) {
-        uniqueOrders.push(order === null || order === void 0 ? void 0 : order.cart_group_id);
-        return true;
-      }
-      return false;
     }) : order;
+  });
+  var orders = ordersReduced === null || ordersReduced === void 0 ? void 0 : ordersReduced.filter(function (order) {
+    if (!(order !== null && order !== void 0 && order.cart_group_id)) return true;
+    var isDuplicate = uniqueOrders.includes(order === null || order === void 0 ? void 0 : order.cart_group_id);
+    if (!isDuplicate) {
+      uniqueOrders.push(order === null || order === void 0 ? void 0 : order.cart_group_id);
+      return true;
+    }
+    return false;
   });
   var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {
     return businessesIds && businessesIds.includes(order.business_id);
