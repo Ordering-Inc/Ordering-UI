@@ -26,7 +26,9 @@ import {
   BusinessCartContent,
   EmptyCart,
   EmptyBtnWrapper,
-  Title
+  Title,
+  HeaderContent,
+  OrderContextUIWrapper
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -42,6 +44,8 @@ import { Alert } from '../../../../../components/Confirm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { ServiceForm } from '../ServiceForm'
+import { OrderContextUI } from '../OrderContextUI'
+
 const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
@@ -284,7 +288,15 @@ const BusinessProductsListingUI = (props) => {
     <>
       <ProductsContainer>
         {!props.useKioskApp && (
-          <ArrowLeft onClick={() => handleGoToBusinessList()} />
+          // <ArrowLeft onClick={() => handleGoToBusinessList()} />
+          <HeaderContent>
+            <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
+            {windowSize?.width < 576 && (
+              <OrderContextUIWrapper>
+                <OrderContextUI isCheckOut />
+              </OrderContextUIWrapper>
+            )}
+          </HeaderContent>
         )}
         <RenderProductsLayout
           errors={errors}

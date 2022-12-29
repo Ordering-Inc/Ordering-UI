@@ -43,7 +43,9 @@ import {
   CartHeader,
   SelectSpotContainer,
   WrapperActionsInput,
-  MobileWrapperPlaceOrderButton
+  MobileWrapperPlaceOrderButton,
+  OrderContextUIWrapper,
+  HeaderContent
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -61,6 +63,7 @@ import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
 import { PlaceSpot } from '../PlaceSpot'
+import { OrderContextUI } from '../OrderContextUI'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -254,11 +257,22 @@ const CheckoutUI = (props) => {
     handleStoreRedirect(cart?.business?.slug)
   }, [cart?.products])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <Container>
       <WrapperLeftContainer>
         <WrapperLeftContent>
-          <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
+          <HeaderContent>
+            <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
+            {windowSize?.width < 576 && (
+              <OrderContextUIWrapper>
+                <OrderContextUI isCheckOut />
+              </OrderContextUIWrapper>
+            )}
+          </HeaderContent>
           {!cartState.loading && cart?.status === 2 && (
             <WarningMessage>
               <VscWarning />
