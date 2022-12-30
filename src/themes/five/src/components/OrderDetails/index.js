@@ -404,6 +404,10 @@ const OrderDetailsUI = (props) => {
     businessLogoUrlValidation()
   }, [order])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const disableLeftButton = [1, 15, 20, 21]
   const disableRightButton = [1, 15, 21]
 
