@@ -133,10 +133,8 @@
         },
         "fonts": {
           "primary": {
-            "name": "Raleway",
-            "weights": [
-              300
-            ],
+            "name": "",
+            "weights": [],
             "href": ""
           }
         },
