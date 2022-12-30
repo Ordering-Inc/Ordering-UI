@@ -154,6 +154,11 @@ const CheckoutUI = (props) => {
     }
   })
 
+  const hideBusinessAddress = theme?.checkout?.components?.business?.components?.address?.hidden
+  const hideBusinessDetails = theme?.checkout?.components?.business?.hidden
+  const hideBusinessMap = theme?.checkout?.components?.business?.components?.map?.hidden
+  const hideCustomerDetails = theme?.checkout?.components?.customer?.hidden
+
   const handlePlaceOrder = () => {
     if (!userErrors.length && !requiredFields?.length) {
       const body = {}
@@ -279,7 +284,7 @@ const CheckoutUI = (props) => {
 
           {!useKioskApp ? (
             <>
-              {cart?.business_id && (
+              {cart?.business_id && !hideBusinessMap && (
                 <>
                   {(businessDetails?.loading || cartState.loading) ? (
                     <div style={{ width: '100%', marginBottom: '20px' }}>
@@ -299,34 +304,36 @@ const CheckoutUI = (props) => {
                   )}
                 </>
               )}
-              <UserDetailsContainer>
-                <WrapperUserDetails>
-                  {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
-                    <div>
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                    </div>
-                  ) : (
-                    <UserDetails
-                      isUserDetailsEdit={isUserDetailsEdit}
-                      cartStatus={cart?.status}
-                      businessId={cart?.business_id}
-                      useValidationFields
-                      useDefualtSessionManager
-                      useSessionUser={!isCustomerMode}
-                      isCustomerMode={isCustomerMode}
-                      userData={isCustomerMode && customerState.user}
-                      userId={isCustomerMode && customerState?.user?.id}
-                      isSuccess={isSuccess}
-                      isCheckout
-                    />
-                  )}
-                </WrapperUserDetails>
-              </UserDetailsContainer>
-              {cart?.business_id && (
+              {!hideCustomerDetails && (
+                <UserDetailsContainer>
+                  <WrapperUserDetails>
+                    {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
+                      <div>
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      </div>
+                    ) : (
+                      <UserDetails
+                        isUserDetailsEdit={isUserDetailsEdit}
+                        cartStatus={cart?.status}
+                        businessId={cart?.business_id}
+                        useValidationFields
+                        useDefualtSessionManager
+                        useSessionUser={!isCustomerMode}
+                        isCustomerMode={isCustomerMode}
+                        userData={isCustomerMode && customerState.user}
+                        userId={isCustomerMode && customerState?.user?.id}
+                        isSuccess={isSuccess}
+                        isCheckout
+                      />
+                    )}
+                  </WrapperUserDetails>
+                </UserDetailsContainer>
+              )}
+              {cart?.business_id && !hideBusinessDetails && (
                 <BusinessDetailsContainer>
                   {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
                     <div>
@@ -343,7 +350,9 @@ const CheckoutUI = (props) => {
                     <div>
                       <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
                       <div>
-                        <p>{businessDetails?.business?.address}</p>
+                        {!hideBusinessAddress && (
+                          <p>{businessDetails?.business?.address}</p>
+                        )}
                         <p>{businessDetails?.business?.name}</p>
                         <p>{businessDetails?.business?.email}</p>
                         <p>{businessDetails?.business?.cellphone}</p>
@@ -529,6 +538,7 @@ const CheckoutUI = (props) => {
               useKioskApp={useKioskApp}
               isCheckout
               isProducts={cart?.products?.length || 0}
+              viewString='checkout'
             />
           </CartContainer>
         )}
@@ -577,11 +587,11 @@ const CheckoutUI = (props) => {
           validationFields?.fields?.checkout?.driver_tip?.enabled &&
           validationFields?.fields?.checkout?.driver_tip?.required &&
           (Number(cart?.driver_tip) <= 0) &&
-        (
-          <WarningText>
-            {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
-          </WarningText>
-        )}
+          (
+            <WarningText>
+              {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
+            </WarningText>
+          )}
       </WrapperRightContainer>
       {windowSize.width < 576 && !cartState.loading && cart && cart?.status !== 2 && (
         <MobileWrapperPlaceOrderButton>

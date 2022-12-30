@@ -5,7 +5,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: ${props => props.isChew && props.theme.colors.primary};
+  background-color: ${props => (props.isChew && props.theme.colors.primary) || props.theme?.header?.components?.style?.backgroundColor};
   border-bottom: ${props => !props.isChew && css`1px solid #E9ECEF`};
 `
 
@@ -63,7 +63,7 @@ export const LogoHeader = styled.div`
       margin-left: 0;
     `}
 
-    @media (min-width: 768px) {
+    @media (min-width: 769px) {
       width: ${props => props.imgW ?? '150px'};
       height: ${props => props.isChew && '35px'};
     }
@@ -75,7 +75,7 @@ export const LogoHeader = styled.div`
     }
   `}
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     img:nth-child(1) {
       display: block;
     }
@@ -486,5 +486,15 @@ export const HeaderSearchMode = styled.div`
   }
   @media (min-width: 1200px){
     width: 250px;
+  }
+`
+
+export const LeftSide = styled.div`
+  display: flex;
+  width: 100%;
+  @media (min-width: 769px){
+    flex-direction: ${({ theme }) =>
+      theme?.header?.components?.logo?.components?.layout?.position === 'center' ? 'row-reverse' : 'row'};
+    width: 60%;
   }
 `
