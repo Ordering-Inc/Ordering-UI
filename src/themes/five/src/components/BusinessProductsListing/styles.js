@@ -12,6 +12,7 @@ export const ProductsContainer = styled.div`
   div {
     background-color: ${({ theme }) => theme?.business_view?.components?.style?.backgroundColor};
   }
+
 `
 
 export const ProductLoading = styled.div`
@@ -137,4 +138,22 @@ export const EmptyBtnWrapper = styled.div`
     padding-left: 25px;
     padding-right: 25px;
   }
+`
+
+export const HeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  .back-arrow {
+    font-size: 24px;
+    cursor: pointer;
+  }
+`
+export const OrderContextUIWrapper = styled.div`
+  flex: 1;
+  margin-left: 15px;
+  ${props => props.theme.rtl && css`
+    margin-left: 0px;
+    margin-right: 15px;
+  `}
 `
