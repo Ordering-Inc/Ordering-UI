@@ -125,7 +125,7 @@ export const BusinessHeroImgStyled = styled.div`
   }
 
   @media (min-width: 821px) {
-    height: ${({ height }) => height || '650px'};
+    height: ${({ height, theme }) => theme?.business_listing_view?.components?.business_hero?.components?.styles?.height || height || '650px'};
   }
 `
 

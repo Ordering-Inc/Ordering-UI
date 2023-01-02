@@ -130,27 +130,27 @@ const OrderDetailsUI = (props) => {
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
 
-  const showOrderActions = order?.delivery_type !== 1
+  const hideOrderActions = order?.delivery_type !== 1
   const isGiftCardOrder = !order?.business_id
 
   const isOriginalLayout = orderingTheme?.theme?.confirmation?.components?.layout?.type === 'original'
-  const showDeliveryType = !orderingTheme?.theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
-  const showDeliveryDate = !orderingTheme?.theme?.confirmation?.components?.order?.components?.date?.hidden
-  const showDeliveryProgress = !orderingTheme?.theme?.confirmation?.components?.order?.components?.progress?.hidden
-  const showBusinessPhone = !orderingTheme?.theme?.confirmation?.components?.business?.components?.phone?.hidden
-  const showBusinessMessages = !orderingTheme?.theme?.confirmation?.components?.business?.components?.messages?.hidden
-  const showBusinessEmail = !orderingTheme?.theme?.confirmation?.components?.business?.components?.email?.hidden
-  const showBusinessAddress = !orderingTheme?.theme?.confirmation?.components?.business?.components?.address?.hidden
-  const showBusinessMap = !orderingTheme?.theme?.confirmation?.components?.business?.components?.map?.hidden
-  const showDriverName = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.name?.hidden
-  const showDriverPhone = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.phone?.hidden
-  const showDriverMessages = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.messages?.hidden
-  const showDriverEmail = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.email?.hidden
-  const showDriverPhoto = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.photo?.hidden
-  const showCustomerPhone = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.phone?.hidden
-  const showCustomerAddress = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.address?.hidden
-  const showCustomerEmail = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.email?.hidden
-  const showCustomerPhoto = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.photo?.hidden
+  const hideDeliveryType = theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
+  const hideDeliveryDate = theme?.confirmation?.components?.order?.components?.date?.hidden
+  const hideDeliveryProgress = theme?.confirmation?.components?.order?.components?.progress?.hidden
+  const hideBusinessPhone = theme?.confirmation?.components?.business?.components?.phone?.hidden
+  const hideBusinessMessages = theme?.confirmation?.components?.business?.components?.messages?.hidden
+  const hideBusinessEmail = theme?.confirmation?.components?.business?.components?.email?.hidden
+  const hideBusinessAddress = theme?.confirmation?.components?.business?.components?.address?.hidden
+  const hideBusinessMap = theme?.confirmation?.components?.business?.components?.map?.hidden
+  const hideDriverName = theme?.confirmation?.components?.driver?.components?.name?.hidden
+  const hideDriverPhone = theme?.confirmation?.components?.driver?.components?.phone?.hidden
+  const hideDriverMessages = theme?.confirmation?.components?.driver?.components?.messages?.hidden
+  const hideDriverEmail = theme?.confirmation?.components?.driver?.components?.email?.hidden
+  const hideDriverPhoto = theme?.confirmation?.components?.driver?.components?.photo?.hidden
+  const hideCustomerPhone = theme?.confirmation?.components?.customer?.components?.phone?.hidden
+  const hideCustomerAddress = theme?.confirmation?.components?.customer?.components?.address?.hidden
+  const hideCustomerEmail = theme?.confirmation?.components?.customer?.components?.email?.hidden
+  const hideCustomerPhoto = theme?.confirmation?.components?.customer?.components?.photo?.hidden
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)
@@ -445,14 +445,14 @@ const OrderDetailsUI = (props) => {
                 {order?.status !== 0 && order?.integration_id && (
                   <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
                 )}
-                {showDeliveryType && (
+                {!hideDeliveryType && (
                   <p className='types'>
                     {isService
                       ? t('SERVICE_AT_HOME', 'Service at home')
                       : orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
                   </p>
                 )}
-                {showDeliveryDate && (
+                {!hideDeliveryDate && (
                   <p className='date'>
                     {
                       activeStatus.includes(order?.status)
@@ -491,7 +491,7 @@ const OrderDetailsUI = (props) => {
                     </ReOrder>
                   )}
               </TitleContainer>
-              {showDeliveryProgress && !isGiftCardOrder && (
+              {!hideDeliveryProgress && !isGiftCardOrder && (
                 <>
                   <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                   <OrderStatusAndLinkContainer>
@@ -523,7 +523,7 @@ const OrderDetailsUI = (props) => {
                 <BusinessExternalWrapper>
                   <BusinessWrapper
                     w='calc(100% - 20px)'
-                  // borderBottom={showOrderActions}
+                  // borderBottom={!hideOrderActions}
                   >
                     <BtsOrderStatus>
                       <div>
@@ -549,7 +549,7 @@ const OrderDetailsUI = (props) => {
                     </BtsOrderStatus>
                   </BusinessWrapper>
 
-                  {showDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
+                  {!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
                     <PlaceSpotWrapper>
                       <PlaceSpot
                         isInputMode
@@ -560,7 +560,7 @@ const OrderDetailsUI = (props) => {
                     </PlaceSpotWrapper>
                   )}
 
-                  {showOrderActions && (
+                  {!hideOrderActions && (
                     <BusinessWrapper
                       w='calc(100% - 20px)'
                       borderTop
@@ -590,7 +590,7 @@ const OrderDetailsUI = (props) => {
                     </BusinessWrapper>
                   )}
                 </BusinessExternalWrapper>
-                {googleMapsApiKey && showBusinessMap && (
+                {googleMapsApiKey && !hideBusinessMap && (
                   <MapWrapper>
                     <Map style={{ width: '100%' }}>
                       <img
@@ -608,18 +608,18 @@ const OrderDetailsUI = (props) => {
             )}
             <OrderCustomer>
               <BusinessWrapper>
-                {showCustomerPhoto && order?.customer?.photo && (
+                {!hideCustomerPhoto && order?.customer?.photo && (
                   <img src={order?.customer?.photo} />
                 )}
                 <BusinessInfo>
                   <p>{order?.customer?.name} {order?.customer?.lastname}</p>
-                  {showCustomerEmail && (
+                  {!hideCustomerEmail && (
                     <p>{order?.customer?.email}</p>
                   )}
-                  {showCustomerPhone && (
+                  {!hideCustomerPhone && (
                     <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
                   )}
-                  {showCustomerAddress && (
+                  {!hideCustomerAddress && (
                     <p>{order?.customer?.address}</p>
                   )}
                 </BusinessInfo>
@@ -633,12 +633,12 @@ const OrderDetailsUI = (props) => {
                     <ActionsSection
                       {...ActionsSectionProps}
                       actionType='driver'
-                      showPhone={showDriverPhone}
-                      showMessages={showDriverMessages}
+                      showPhone={!hideDriverPhone}
+                      showMessages={!hideDriverMessages}
                     />
                   </SectionTitleContainer>
                   <WrapperDriver>
-                    {showDriverPhoto && (
+                    {!hideDriverPhoto && (
                       <div className='photo'>
                         {order?.driver?.photo ? (
                           <PhotoBlock src={order?.driver?.photo} />
@@ -648,13 +648,13 @@ const OrderDetailsUI = (props) => {
                       </div>
                     )}
                     <div>
-                      {showDriverName && (
+                      {!hideDriverName && (
                         <h2>{order?.driver?.name} {order?.driver?.lastname}</h2>
                       )}
-                      {showDriverEmail && (
+                      {!hideDriverEmail && (
                         <p>{order?.driver?.email}</p>
                       )}
-                      {showDriverPhone && (
+                      {!hideDriverPhone && (
                         <p>{order?.driver?.cellphone || order?.driver?.phone}</p>
                       )}
                     </div>

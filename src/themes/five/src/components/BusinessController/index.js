@@ -86,6 +86,8 @@ const BusinessControllerUI = (props) => {
   const hideBusinessReviews = theme?.business_listing_view?.components?.business?.components?.reviews?.hidden
   const hideBusinessFavorite = theme?.business_listing_view?.components?.business?.components?.favorite?.hidden
   const hideBusinessOffer = theme?.business_listing_view?.components?.business?.components?.offer?.hidden
+  const hideBusinessHeader = theme?.business_listing_view?.components?.business?.components?.header?.hidden
+  const hideBusinessFavoriteBadge = theme?.business_listing_view?.components?.business?.components?.featured_badge?.hidden
 
   // const handleShowAlert = () => {
   //   setAlertState({ open: true, content: [t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The Business is closed at the moment')] })
@@ -165,9 +167,9 @@ const BusinessControllerUI = (props) => {
             {isSkeleton ? (
               <Skeleton height={isCustomerMode ? 100 : 140} />
             ) : (
-              <BusinessHeader bgimage={optimizeImage((businessHeader || business?.header || theme.images?.dummies?.businessHeader), 'h_400,c_limit')} isClosed={!isBusinessOpen}>
+              <BusinessHeader bgimage={!hideBusinessHeader ? optimizeImage((businessHeader || business?.header || theme.images?.dummies?.businessHeader), 'h_400,c_limit') : ''} isClosed={!isBusinessOpen}>
                 <BusinessTags>
-                  {(businessFeatured ?? business?.featured) &&
+                  {(businessFeatured ?? business?.featured) && !hideBusinessFavoriteBadge &&
                     <span className='crown'>
                       <FaCrown />
                     </span>}

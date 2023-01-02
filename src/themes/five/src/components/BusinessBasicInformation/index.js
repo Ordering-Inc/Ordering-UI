@@ -8,7 +8,7 @@ import { BusinessInformation } from '../BusinessInformation'
 import { BusinessReviews } from '../BusinessReviews'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
-import { useUtils, useOrder, useLanguage, useConfig, useOrderingTheme } from 'ordering-components'
+import { useUtils, useOrder, useLanguage, useConfig } from 'ordering-components'
 
 import { convertHoursToMinutes, shape, lightenDarkenColor } from '../../../../../utils'
 import { Select } from '../../styles/Select'
@@ -72,23 +72,25 @@ export const BusinessBasicInformation = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const windowSize = useWindowSize()
-  const [orderingTheme] = useOrderingTheme()
   const [isBusinessReviews, setIsBusinessReviews] = useState(false)
   const [isPreOrder, setIsPreOrder] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
   const [{ configs }] = useConfig()
   const isPreOrderSetting = configs?.preorder_status_enabled?.value === '1'
 
-  const showLogo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
-  const showDeliveryFee = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
-  const showTime = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
-  const showReviews = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
-  const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
-  const showSort = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
-  const isInfoShrunken = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
+  const hideLogo = theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
+  const hideDeliveryFee = theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
+  const hideTime = theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
+  const hideReviews = theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
+  const hideReviewsPopup = theme?.business_view?.components?.header?.components?.reviews?.hidden
+  const hideDistance = theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
+  const hideSort = theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
+  const hideInfoIcon = theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
+
+  const isInfoShrunken = theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
   const searchLayout = theme?.business_view?.components?.product_search?.components?.layout?.type
-  const hideCity = orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const hideCity = theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const layoutsWithOldSearch = ['starbucks', 'old', 'floating']
   const hideSearch = layoutsWithOldSearch.includes(theme?.business_view?.components?.product_search?.components?.layout?.type)
   const getBusinessType = () => {
@@ -160,7 +162,7 @@ export const BusinessBasicInformation = (props) => {
         >
           <CgSearch />
         </SearchIconWrapper>
-        {showSort && (
+        {!hideSort && (
           <Select
             notAsync
             notReload
@@ -263,7 +265,7 @@ export const BusinessBasicInformation = (props) => {
                 </SocialList>
               )}
               <BusinessDetail isSkeleton={loading}>
-                {orderState?.options.type === 1 && showDeliveryFee && (
+                {orderState?.options.type === 1 && !hideDeliveryFee && (
                   <>
                     {!loading ? (
                       <>
@@ -278,7 +280,7 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 )}
-                {showTime && (
+                {!hideTime && (
                   <>
                     {!loading ? (
                       <>
@@ -303,7 +305,7 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 )}
-                {showDistance && (
+                {!hideDistance && (
                   <>
                     {!loading ? (
                       <>
@@ -317,7 +319,7 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 )}
-                {showReviews && (
+                {!hideReviews && (
                   <>
                     {!loading ? (
                       <div className='review'>
@@ -339,7 +341,7 @@ export const BusinessBasicInformation = (props) => {
                         <span className='dot'>•</span>
                       </>
                     )}
-                    {business.reviews?.reviews && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
+                    {business.reviews?.reviews && !hideReviewsPopup && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
                   </div>
                 ) : (
                   <Skeleton width={isCustomerMode ? 100 : 150} />
@@ -390,7 +392,7 @@ export const BusinessBasicInformation = (props) => {
         {(business?.header || business?.logo || loading || isInfoShrunken) && (
           <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open} isChew={isChew}>
             {(!loading && !business?.open) && <h1>{t('CLOSED', 'Closed')}</h1>}
-            {(showLogo && business?.logo && !isChew) && (
+            {(!hideLogo && business?.logo && !isChew) && (
               <BusinessContent>
                 <WrapperBusinessLogo>
                   {!loading && (
@@ -429,7 +431,7 @@ export const BusinessBasicInformation = (props) => {
             )}
           </BusinessContainer>
         )}
-        {!business?.header && !business?.logo && !loading && !isInfoShrunken && (
+        {!business?.header && !business?.logo && !loading && !isInfoShrunken && !hideInfoIcon && (
           <BusinessMoreDetail position='relative'>
             <BsInfoCircle onClick={() => setOpenBusinessInformation(true)} />
           </BusinessMoreDetail>
