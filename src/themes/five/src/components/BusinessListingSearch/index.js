@@ -74,7 +74,7 @@ export const BusinessListingSearchUI = (props) => {
     handleUpdateProducts
   } = props
 
-  const [{ carts }, orderState] = useOrder()
+  const [orderState] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
   const [curProduct, setCurProduct] = useState({ business: null, product: null })
@@ -100,7 +100,8 @@ export const BusinessListingSearchUI = (props) => {
   ]
 
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
-  const currentCart = Object.values(carts).find(cart => cart?.business?.slug === curProduct?.business?.slug) ?? {}
+  const currentCart = Object.values(orderState?.carts).find(cart => cart?.business?.slug === curProduct?.business?.slug) ?? {}
+
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -427,7 +428,7 @@ export const BusinessListingSearchUI = (props) => {
             productId={curProduct?.product?.id}
             onSave={handleRedirectToCart}
             handleUpdateProducts={(productId, changes) => handleUpdateProducts(productId, curProduct?.product?.category_id, curProduct?.business?.id, changes)}
-            productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0) || 0}
+            productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === curProduct?.id ? Cproduct?.quantity : 0) }, 0) || 0}
           />
         )}
       </Modal>
