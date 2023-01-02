@@ -4,15 +4,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserEdit = exports.SubMenu = exports.RightHeader = exports.MomentMenu = exports.MenuLink = exports.MenuItem = exports.Menu = exports.LogoHeader = exports.LeftHeader = exports.LanguageSelectorWrapper = exports.InputGroup = exports.InnerHeader = exports.HeaderSearchMode = exports.Header = exports.FarAwayMessage = exports.Divider = exports.CustomerInfo = exports.AddressMenu = exports.AddressFormWrapper = void 0;
+exports.UserEdit = exports.SubMenu = exports.RightHeader = exports.MomentMenu = exports.MenuLink = exports.MenuItem = exports.Menu = exports.LogoHeader = exports.LeftSide = exports.LeftHeader = exports.LanguageSelectorWrapper = exports.InputGroup = exports.InnerHeader = exports.HeaderSearchMode = exports.Header = exports.FarAwayMessage = exports.Divider = exports.CustomerInfo = exports.AddressMenu = exports.AddressFormWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  background-color: ", ";\n  border-bottom: ", ";\n"])), function (props) {
-  return props.isChew && props.theme.colors.primary;
+  var _props$theme, _props$theme$header, _props$theme$header$c, _props$theme$header$c2;
+  return props.isChew && props.theme.colors.primary || ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$header = _props$theme.header) === null || _props$theme$header === void 0 ? void 0 : (_props$theme$header$c = _props$theme$header.components) === null || _props$theme$header$c === void 0 ? void 0 : (_props$theme$header$c2 = _props$theme$header$c.style) === null || _props$theme$header$c2 === void 0 ? void 0 : _props$theme$header$c2.backgroundColor);
 }, function (props) {
   return !props.isChew && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["1px solid #E9ECEF"])));
 });
@@ -31,15 +32,15 @@ var InnerHeader = _styledComponents.default.div(_templateObject3 || (_templateOb
   return (theme === null || theme === void 0 ? void 0 : (_theme$header3 = theme.header) === null || _theme$header3 === void 0 ? void 0 : (_theme$header3$compon = _theme$header3.components) === null || _theme$header3$compon === void 0 ? void 0 : (_theme$header3$compon2 = _theme$header3$compon.layout) === null || _theme$header3$compon2 === void 0 ? void 0 : _theme$header3$compon2.type) === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)';
 });
 exports.InnerHeader = InnerHeader;
-var LogoHeader = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  img {\n    width: ", ";\n    height: ", ";\n    margin: 0;\n    vertical-align: middle;\n    margin-left: 10px;\n\n    ", "\n\n    @media (min-width: 768px) {\n      width: ", ";\n      height: ", ";\n    }\n  }\n\n  ", "\n\n  @media (min-width: 768px) {\n    img:nth-child(1) {\n      display: block;\n    }\n    img:nth-child(2) {\n      display: none;\n    }\n  }\n"])), function (props) {
+var LogoHeader = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  img {\n    width: ", ";\n    height: ", ";\n    margin: 0;\n    vertical-align: middle;\n    margin-left: 10px;\n\n    ", "\n\n    @media (min-width: 769px) {\n      width: ", ";\n      height: ", ";\n    }\n  }\n\n  ", "\n\n  @media (min-width: 769px) {\n    img:nth-child(1) {\n      display: block;\n    }\n    img:nth-child(2) {\n      display: none;\n    }\n  }\n"])), function (props) {
   var _props$imgW;
   return props.isChew ? '70px' : (_props$imgW = props.imgW) !== null && _props$imgW !== void 0 ? _props$imgW : '35px';
 }, function (props) {
   var _props$imgH;
   return props.isChew ? '20px' : (_props$imgH = props.imgH) !== null && _props$imgH !== void 0 ? _props$imgH : '45px';
 }, function (props) {
-  var _props$theme;
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
+  var _props$theme2;
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
 }, function (props) {
   var _props$imgW2;
   return (_props$imgW2 = props.imgW) !== null && _props$imgW2 !== void 0 ? _props$imgW2 : '150px';
@@ -91,8 +92,8 @@ var AddressMenu = _styledComponents.default.div(_templateObject17 || (_templateO
   var _props$theme$colors3;
   return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.lightGray;
 }, function (props) {
-  var _props$theme2;
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "])));
+  var _props$theme3;
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "])));
 }, function (_ref7) {
   var isCustomerMode = _ref7.isCustomerMode;
   return !isCustomerMode && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      width: 80%;\n    "])));
@@ -108,18 +109,18 @@ var FarAwayMessage = _styledComponents.default.div(_templateObject24 || (_templa
 }, function (props) {
   return props.theme.colors.warning500;
 }, function (props) {
-  var _props$theme3;
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    right: 5px;\n    left: initial;\n  "])));
+  var _props$theme4;
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    right: 5px;\n    left: initial;\n  "])));
 }, function (props) {
   return props.theme.colors.warning500;
 }, function (props) {
-  var _props$theme4;
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      margin-right: auto;\n      margin-left: 10px;\n    "])));
+  var _props$theme5;
+  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      margin-right: auto;\n      margin-left: 10px;\n    "])));
 }, function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
-  var _props$theme5;
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      right: 10px;\n      left: initial;\n    "])));
+  var _props$theme6;
+  return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      right: 10px;\n      left: initial;\n    "])));
 });
 exports.FarAwayMessage = FarAwayMessage;
 var Divider = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  border: 1px solid #DEE2E6;\n  height: 100%;\n"])));
@@ -134,3 +135,9 @@ var LanguageSelectorWrapper = (0, _styledComponents.default)(InputGroup)(_templa
 exports.LanguageSelectorWrapper = LanguageSelectorWrapper;
 var HeaderSearchMode = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  width: 300px;\n  input {\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n  @media (min-width: 1400px){\n    width: 300px;\n  }\n  @media (min-width: 1200px){\n    width: 250px;\n  }\n"])));
 exports.HeaderSearchMode = HeaderSearchMode;
+var LeftSide = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  @media (min-width: 769px){\n    flex-direction: ", ";\n    width: 60%;\n  }\n"])), function (_ref9) {
+  var _theme$header4, _theme$header4$compon, _theme$header4$compon2, _theme$header4$compon3, _theme$header4$compon4;
+  var theme = _ref9.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$header4 = theme.header) === null || _theme$header4 === void 0 ? void 0 : (_theme$header4$compon = _theme$header4.components) === null || _theme$header4$compon === void 0 ? void 0 : (_theme$header4$compon2 = _theme$header4$compon.logo) === null || _theme$header4$compon2 === void 0 ? void 0 : (_theme$header4$compon3 = _theme$header4$compon2.components) === null || _theme$header4$compon3 === void 0 ? void 0 : (_theme$header4$compon4 = _theme$header4$compon3.layout) === null || _theme$header4$compon4 === void 0 ? void 0 : _theme$header4$compon4.position) === 'center' ? 'row-reverse' : 'row';
+});
+exports.LeftSide = LeftSide;

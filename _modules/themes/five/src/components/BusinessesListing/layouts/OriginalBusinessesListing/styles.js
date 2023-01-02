@@ -46,8 +46,10 @@ var BusinessHeroImgStyled = _styledComponents.default.div(_templateObject14 || (
   var bgimage = _ref3.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 }, function (_ref4) {
-  var height = _ref4.height;
-  return height || '650px';
+  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _theme$business_listi5;
+  var height = _ref4.height,
+    theme = _ref4.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$business_listi = theme.business_listing_view) === null || _theme$business_listi === void 0 ? void 0 : (_theme$business_listi2 = _theme$business_listi.components) === null || _theme$business_listi2 === void 0 ? void 0 : (_theme$business_listi3 = _theme$business_listi2.business_hero) === null || _theme$business_listi3 === void 0 ? void 0 : (_theme$business_listi4 = _theme$business_listi3.components) === null || _theme$business_listi4 === void 0 ? void 0 : (_theme$business_listi5 = _theme$business_listi4.styles) === null || _theme$business_listi5 === void 0 ? void 0 : _theme$business_listi5.height) || height || '650px';
 });
 exports.BusinessHeroImgStyled = BusinessHeroImgStyled;
 var BusinessHeroImg = function BusinessHeroImg(props) {

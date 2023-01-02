@@ -39,7 +39,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SingleOrderCardUI = function SingleOrderCardUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _props$beforeElements, _props$beforeComponen, _order$business, _order$business2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _theme$images4, _theme$images4$dummie, _order$business7, _order$business8, _order$summary, _order$business9, _order$business10, _order$business11, _order$business12, _getOrderStatus, _order$business13, _order$summary2, _order$business14, _props$afterComponent, _props$afterElements;
+  var _theme$orders, _theme$orders$compone, _theme$orders$compone2, _theme$orders2, _theme$orders2$compon, _theme$orders2$compon2, _theme$orders3, _theme$orders3$compon, _theme$orders3$compon2, _theme$orders4, _theme$orders4$compon, _theme$orders4$compon2, _theme$orders5, _theme$orders5$compon, _theme$orders5$compon2, _theme$orders6, _theme$orders6$compon, _theme$orders6$compon2, _theme$orders7, _theme$orders7$compon, _theme$orders7$compon2, _theme$orders8, _theme$orders8$compon, _theme$orders8$compon2, _props$beforeElements, _props$beforeComponen, _order$business, _order$business2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _theme$images4, _theme$images4$dummie, _order$business7, _order$business8, _order$summary, _order$business9, _order$business10, _order$business11, _order$business12, _getOrderStatus, _order$business13, _order$summary2, _order$business14, _props$afterComponent, _props$afterElements;
   var order = props.order,
     getOrderStatus = props.getOrderStatus,
     isBusinessesPage = props.isBusinessesPage,
@@ -69,9 +69,6 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isReviewOpen = _useState2[0],
@@ -218,8 +215,14 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     }));
     handleReorder(order.id);
   };
-  var showBusinessLogo = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.orders) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.business_logo) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
-  var showDate = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.orders) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.date) !== null && _orderingTheme$theme5 !== void 0 && _orderingTheme$theme5.hidden);
+  var hideBusinessLogo = theme === null || theme === void 0 ? void 0 : (_theme$orders = theme.orders) === null || _theme$orders === void 0 ? void 0 : (_theme$orders$compone = _theme$orders.components) === null || _theme$orders$compone === void 0 ? void 0 : (_theme$orders$compone2 = _theme$orders$compone.business_logo) === null || _theme$orders$compone2 === void 0 ? void 0 : _theme$orders$compone2.hidden;
+  var hideDate = theme === null || theme === void 0 ? void 0 : (_theme$orders2 = theme.orders) === null || _theme$orders2 === void 0 ? void 0 : (_theme$orders2$compon = _theme$orders2.components) === null || _theme$orders2$compon === void 0 ? void 0 : (_theme$orders2$compon2 = _theme$orders2$compon.date) === null || _theme$orders2$compon2 === void 0 ? void 0 : _theme$orders2$compon2.hidden;
+  var hideBusinessName = theme === null || theme === void 0 ? void 0 : (_theme$orders3 = theme.orders) === null || _theme$orders3 === void 0 ? void 0 : (_theme$orders3$compon = _theme$orders3.components) === null || _theme$orders3$compon === void 0 ? void 0 : (_theme$orders3$compon2 = _theme$orders3$compon.business_name) === null || _theme$orders3$compon2 === void 0 ? void 0 : _theme$orders3$compon2.hidden;
+  var hideOrderNumber = theme === null || theme === void 0 ? void 0 : (_theme$orders4 = theme.orders) === null || _theme$orders4 === void 0 ? void 0 : (_theme$orders4$compon = _theme$orders4.components) === null || _theme$orders4$compon === void 0 ? void 0 : (_theme$orders4$compon2 = _theme$orders4$compon.order_number) === null || _theme$orders4$compon2 === void 0 ? void 0 : _theme$orders4$compon2.hidden;
+  var hideReviewOrderButton = theme === null || theme === void 0 ? void 0 : (_theme$orders5 = theme.orders) === null || _theme$orders5 === void 0 ? void 0 : (_theme$orders5$compon = _theme$orders5.components) === null || _theme$orders5$compon === void 0 ? void 0 : (_theme$orders5$compon2 = _theme$orders5$compon.review_order_button) === null || _theme$orders5$compon2 === void 0 ? void 0 : _theme$orders5$compon2.hidden;
+  var hideReorderButton = theme === null || theme === void 0 ? void 0 : (_theme$orders6 = theme.orders) === null || _theme$orders6 === void 0 ? void 0 : (_theme$orders6$compon = _theme$orders6.components) === null || _theme$orders6$compon === void 0 ? void 0 : (_theme$orders6$compon2 = _theme$orders6$compon.reorder_button) === null || _theme$orders6$compon2 === void 0 ? void 0 : _theme$orders6$compon2.hidden;
+  var hideFavorite = theme === null || theme === void 0 ? void 0 : (_theme$orders7 = theme.orders) === null || _theme$orders7 === void 0 ? void 0 : (_theme$orders7$compon = _theme$orders7.components) === null || _theme$orders7$compon === void 0 ? void 0 : (_theme$orders7$compon2 = _theme$orders7$compon.favorite) === null || _theme$orders7$compon2 === void 0 ? void 0 : _theme$orders7$compon2.hidden;
+  var hideOrderStatus = theme === null || theme === void 0 ? void 0 : (_theme$orders8 = theme.orders) === null || _theme$orders8 === void 0 ? void 0 : (_theme$orders8$compon = _theme$orders8.components) === null || _theme$orders8$compon === void 0 ? void 0 : (_theme$orders8$compon2 = _theme$orders8$compon.order_status) === null || _theme$orders8$compon2 === void 0 ? void 0 : _theme$orders8$compon2.hidden;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -240,7 +243,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 60,
     height: 60
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomerMode && showBusinessLogo && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.length) > 1 ? /*#__PURE__*/_react.default.createElement(_styles.MultiLogosContainer, null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.map(function (business, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomerMode && !hideBusinessLogo && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.length) > 1 ? /*#__PURE__*/_react.default.createElement(_styles.MultiLogosContainer, null, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.map(function (business, i) {
     var _order$business3, _theme$images, _theme$images$dummies;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: business === null || business === void 0 ? void 0 : business.id
@@ -250,7 +253,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     }));
   })) : /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, {
     bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_400,c_limit')
-  })), isCustomerMode && showBusinessLogo && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
+  })), isCustomerMode && !hideBusinessLogo && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
     src: ((_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo) || ((_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$dummie = _theme$images4.dummies) === null || _theme$images4$dummie === void 0 ? void 0 : _theme$images4$dummie.businessLogo),
     alt: "business-logo",
     width: "75px",
@@ -258,7 +261,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   })))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
     activeOrders: true,
     isMultiCart: (order === null || order === void 0 ? void 0 : (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.length) > 1
-  }, isCustomerMode ? /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, !hideBusinessName && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomerMode ? /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 120
   }) : (_order$business8 = order.business) === null || _order$business8 === void 0 ? void 0 : _order$business8.name), /*#__PURE__*/_react.default.createElement(_styles.Price, {
     isBusinessesPage: isBusinessesPage,
@@ -267,19 +270,19 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     width: 50
   }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))))) : /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 120
-  }) : (order === null || order === void 0 ? void 0 : (_order$business9 = order.business) === null || _order$business9 === void 0 ? void 0 : _order$business9.length) > 1 ? "".concat(t('GROUP_ORDER', 'Group Order'), " ").concat(t('No', 'No'), ". ").concat(order === null || order === void 0 ? void 0 : order.cart_group_id) : (_order$business10 = order.business) === null || _order$business10 === void 0 ? void 0 : _order$business10.name), isSkeleton ? /*#__PURE__*/_react.default.createElement("div", {
+  }) : (order === null || order === void 0 ? void 0 : (_order$business9 = order.business) === null || _order$business9 === void 0 ? void 0 : _order$business9.length) > 1 ? "".concat(t('GROUP_ORDER', 'Group Order'), " ").concat(t('No', 'No'), ". ").concat(order === null || order === void 0 ? void 0 : order.cart_group_id) : (_order$business10 = order.business) === null || _order$business10 === void 0 ? void 0 : _order$business10.name)), isSkeleton ? /*#__PURE__*/_react.default.createElement("div", {
     className: "orders-detail"
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   })) : /*#__PURE__*/_react.default.createElement("div", {
     className: "orders-detail"
-  }, (order === null || order === void 0 ? void 0 : order.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", {
+  }, (order === null || order === void 0 ? void 0 : order.id) && !hideOrderNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", {
     name: "order_number"
-  }, (order === null || order === void 0 ? void 0 : (_order$business11 = order.business) === null || _order$business11 === void 0 ? void 0 : _order$business11.length) > 1 ? "".concat(order === null || order === void 0 ? void 0 : (_order$business12 = order.business) === null || _order$business12 === void 0 ? void 0 : _order$business12.length, " ").concat(t('ORDERS', 'orders')) : "".concat(t('ORDER_NUM', 'Order No.'), " ").concat(order.id))), showDate && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", null, pastOrders ? order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
+  }, (order === null || order === void 0 ? void 0 : (_order$business11 = order.business) === null || _order$business11 === void 0 ? void 0 : _order$business11.length) > 1 ? "".concat(order === null || order === void 0 ? void 0 : (_order$business12 = order.business) === null || _order$business12 === void 0 ? void 0 : _order$business12.length, " ").concat(t('ORDERS', 'orders')) : "".concat(t('ORDER_NUM', 'Order No.'), " ").concat(order.id))), !hideDate && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", null, pastOrders ? order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
     outputFormat: 'MM/DD/YY hh:mm A'
   }) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
-  }) : (order === null || order === void 0 ? void 0 : order.eta_time) + 'min'))), /*#__PURE__*/_react.default.createElement("p", {
+  }) : (order === null || order === void 0 ? void 0 : order.eta_time) + 'min'))), !hideOrderStatus && /*#__PURE__*/_react.default.createElement("p", {
     className: "order-status"
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
@@ -287,21 +290,21 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     isBusinessesPage: isBusinessesPage
   }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$business13 = order.business) === null || _order$business13 === void 0 ? void 0 : _order$business13.length) > 1 ? order === null || order === void 0 ? void 0 : order.total : (order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, !isOrderReviewed && !isFavorite && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$business13 = order.business) === null || _order$business13 === void 0 ? void 0 : _order$business13.length) > 1 ? order === null || order === void 0 ? void 0 : order.total : (order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, !isOrderReviewed && !isFavorite && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && !hideReviewOrderButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     className: "review",
     onClick: function onClick() {
       return handleClickReview(order);
     }
-  }, t('REVIEW', 'Review')), order.cart && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('REVIEW', 'Review')), order.cart && !hideReorderButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     className: "reorder",
     outline: true,
     onClick: function onClick() {
       return handleClickReorder(order);
     }
-  }, cartState !== null && cartState !== void 0 && cartState.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder'))), !(order !== null && order !== void 0 && (_order$business14 = order.business) !== null && _order$business14 !== void 0 && _order$business14.length) && /*#__PURE__*/_react.default.createElement(_styles.FavoriteWrapper, {
+  }, cartState !== null && cartState !== void 0 && cartState.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder'))), !(order !== null && order !== void 0 && (_order$business14 = order.business) !== null && _order$business14 !== void 0 && _order$business14.length) && !hideFavorite && /*#__PURE__*/_react.default.createElement(_styles.FavoriteWrapper, {
     onClick: function onClick() {
       return handleChangeFavorite(order);
     },
