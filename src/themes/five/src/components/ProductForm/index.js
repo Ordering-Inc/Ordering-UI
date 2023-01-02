@@ -248,7 +248,7 @@ const ProductOptionsUI = (props) => {
 
   const handleSlideChange = () => {
     var videos = document.querySelectorAll('iframe, video')
-    Array?.prototype?.forEach?.call(videos, function (video) {
+    Array.prototype.forEach.call(videos, function (video) {
       if (video.tagName.toLowerCase() === 'video') {
         video.pause()
       } else {
@@ -269,15 +269,15 @@ const ProductOptionsUI = (props) => {
     const scrollElement = document.querySelector('.popup-dialog')
     const handleScroll = () => {
       const extraHeight = 60
-      if (product?.ingredients?.length > 0 || product?.extras?.length > 0) {
+      if (product?.ingredients.length > 0 || product?.extras.length > 0) {
         const menuList = []
         if (product?.ingredients?.length > 0) menuList.push('ingredients')
-        product?.extras?.length > 0 && product?.extras?.sort((a, b) => a.rank - b.rank)?.forEach(extra => {
-          extra?.options?.length > 0 && extra?.options?.sort((a, b) => a.rank - b.rank)?.forEach(option => {
+        product?.extras.length > 0 && product?.extras.sort((a, b) => a.rank - b.rank).forEach(extra => {
+          extra?.options.length > 0 && extra?.options.sort((a, b) => a.rank - b.rank).forEach(option => {
             showOption(option) && menuList.push(`id_${option?.id}`)
           })
         })
-        menuList?.forEach(menu => {
+        menuList.forEach(menu => {
           const elementTop = scrollElement.scrollTop
           const topPos = document.getElementById(menu).offsetTop
           if (Math.abs(elementTop - topPos) < extraHeight) {
@@ -366,8 +366,6 @@ const ProductOptionsUI = (props) => {
     }
     setUrlToShare(_urlToShare)
   }, [])
-
-  // console.log('product', product)
 
   return (
     <ProductContainer
@@ -565,7 +563,7 @@ const ProductOptionsUI = (props) => {
                           )
                         }
                         {
-                          product?.extras?.sort((a, b) => a.rank - b.rank)?.map(extra => extra.options?.sort((a, b) => a.rank - b.rank)?.map(option => {
+                          product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options?.sort((a, b) => a.rank - b.rank).map(option => {
                             return (
                               showOption(option) && (
                                 <Tab
@@ -588,7 +586,7 @@ const ProductOptionsUI = (props) => {
               }
               {product?.ingredients?.length > 0 && (
                 <div id='ingredients'>
-                  {product?.ingredients?.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
+                  {product?.ingredients?.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                   <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
                     {product?.ingredients.map(ingredient => (
                       <ProductIngredient
@@ -604,7 +602,7 @@ const ProductOptionsUI = (props) => {
               )}
               <div>
                 {
-                  product?.extras?.sort((a, b) => a.rank - b.rank)?.map(extra => extra?.options?.sort((a, b) => a.rank - b.rank)?.map(option => {
+                  product?.extras?.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                     const currentState = productCart.options[`id:${option?.id}`] || {}
                     return (
                       <React.Fragment key={option?.id}>
@@ -616,7 +614,7 @@ const ProductOptionsUI = (props) => {
                           >
                             <WrapperSubOption className={isError(option?.id)}>
                               {
-                                option.suboptions.filter(suboptions => suboptions.enabled)?.sort((a, b) => a.rank - b.rank).map(suboption => {
+                                option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
                                   const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
                                   const balance = productCart.options[`id:${option?.id}`]?.balance || 0
                                   return (
@@ -712,7 +710,7 @@ const ProductOptionsUI = (props) => {
 
               {productCart && !isSoldOut && maxProductQuantity > 0 && auth && (orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)) && (
                 <Button
-                  className={`add ${(maxProductQuantity === 0 || Object.keys(errors)?.length > 0) ? 'disabled' : ''}`}
+                  className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                   color='primary'
                   onClick={() => handleSaveProduct()}
                   disabled={orderState.loading || productCart?.quantity === 0 || (product?.minimum_per_order && ((productCart?.quantity + productAddedToCartLength) < product?.minimum_per_order)) || (product?.maximum_per_order && ((productCart?.quantity + productAddedToCartLength) > product?.maximum_per_order))}
@@ -824,7 +822,7 @@ const ProductOptionsUI = (props) => {
         </Modal>
       )}
 
-      {error && error?.length > 0 && (
+      {error && error.length > 0 && (
         <NotFoundSource
           content={error[0]?.message || error[0]}
         />
