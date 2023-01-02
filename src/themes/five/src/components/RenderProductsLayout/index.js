@@ -121,6 +121,7 @@ export const RenderProductsLayout = (props) => {
   }
   const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
   const hideBusinessNearCity = theme?.business_view?.components?.near_business?.hidden ?? true
+  const hidePreviousOrdered = theme?.business_view?.components?.products_ordered?.hidden
 
   const BusinessLayoutCategories = businessLayout.layoutOne
     ? CategoriesLayoutGroceries
@@ -267,7 +268,7 @@ export const RenderProductsLayout = (props) => {
                     )}
                   </div>
                   <WrapContent id='businessProductList'>
-                    {!business?.loading && business?.previously_products?.length > 0 && (
+                    {!business?.loading && business?.previously_products?.length > 0 && !hidePreviousOrdered && (
                       <OrderItAgain
                         onProductClick={onProductClick}
                         productList={business?.previously_products}

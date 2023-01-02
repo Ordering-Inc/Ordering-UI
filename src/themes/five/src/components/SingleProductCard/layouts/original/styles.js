@@ -19,6 +19,14 @@ export const CardContainer = styled.div`
   > div {
     display: flex;
     justify-content: space-between;
+    ${({ theme }) => theme?.layouts?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ? css`
+      flex-direction: row-reverse;
+    `
+    : css`
+      flex-direction: row;
+    `
+  }
     align-items: center;
     width: 100%;
   }
@@ -144,7 +152,13 @@ export const WrapLogo = styled.div`
   ${({ isBgimage }) => isBgimage && css`
     width: 86px;
   `}
-  margin-left: 5px;
+  ${({ theme }) => theme?.layouts?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ? css`
+    margin-left: 5px;
+  `
+    : css`
+    margin-right: 5px;
+  `}
   ${props => props.theme?.rtl && css`
     margin-right: 5px;
     margin-left: 0px;

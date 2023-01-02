@@ -3,6 +3,16 @@ import styled, { css } from 'styled-components'
 export const ProductsContainer = styled.div`
   width: 95%;
   margin: 20px auto 0px;
+  > svg {
+    color: ${props => props.theme.colors.headingColor};
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+  div {
+    background-color: ${({ theme }) => theme?.business_view?.components?.style?.backgroundColor};
+  }
+
 `
 
 export const ProductLoading = styled.div`

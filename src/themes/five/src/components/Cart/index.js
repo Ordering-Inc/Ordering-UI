@@ -103,7 +103,8 @@ const CartUI = (props) => {
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
-  const hideCartComments = orderingTheme?.theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount?.hidden
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -298,6 +299,7 @@ const CartUI = (props) => {
                 onDeleteProduct={handleDeleteClick}
                 onEditProduct={handleEditProduct}
                 isStore={isStore}
+                viewString={viewString}
               />
             ))}
             {!cart?.valid_products && (
@@ -415,7 +417,7 @@ const CartUI = (props) => {
                       </tr>
                     )}
                     {
-                      cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
+                      !hideCartDiscount && cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
                         <tr key={offer.id}>
                           <td className='icon'>
                             {offer.name}
@@ -449,7 +451,7 @@ const CartUI = (props) => {
                     )}
                   </tbody>
                 </table>
-                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && (
+                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && !hideCartDiscount && (
                   <CouponContainer>
                     <CouponControl
                       businessId={cart.business_id}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useUtils, useConfig, useOrder, useOrderingTheme, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
+import { useLanguage, useUtils, useConfig, useOrder, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { ReviewOrder } from '../ReviewOrder'
 import { ReviewProduct } from '../ReviewProduct'
@@ -52,7 +52,6 @@ const SingleOrderCardUI = (props) => {
   const [{ carts }] = useOrder()
   const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
   const [{ configs }] = useConfig()
-  const [orderingTheme] = useOrderingTheme()
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -129,8 +128,14 @@ const SingleOrderCardUI = (props) => {
     handleReorder(order.id)
   }
 
-  const showBusinessLogo = !orderingTheme?.theme?.orders?.components?.business_logo?.hidden
-  const showDate = !orderingTheme?.theme?.orders?.components?.date?.hidden
+  const hideBusinessLogo = theme?.orders?.components?.business_logo?.hidden
+  const hideDate = theme?.orders?.components?.date?.hidden
+  const hideBusinessName = theme?.orders?.components?.business_name?.hidden
+  const hideOrderNumber = theme?.orders?.components?.order_number?.hidden
+  const hideReviewOrderButton = theme?.orders?.components?.review_order_button?.hidden
+  const hideReorderButton = theme?.orders?.components?.reorder_button?.hidden
+  const hideFavorite = theme?.orders?.components?.favorite?.hidden
+  const hideOrderStatus = theme?.orders?.components?.order_status?.hidden
 
   return (
     <>
@@ -151,7 +156,7 @@ const SingleOrderCardUI = (props) => {
             <Skeleton width={60} height={60} />
           ) : (
             <>
-              {!isCustomerMode && showBusinessLogo && (
+              {!isCustomerMode && !hideBusinessLogo && (
                 <>
                   {order?.business?.length > 1 ? (
                     <MultiLogosContainer>
@@ -175,7 +180,7 @@ const SingleOrderCardUI = (props) => {
                   )}
                 </>
               )}
-              {isCustomerMode && showBusinessLogo && (
+              {isCustomerMode && !hideBusinessLogo && (
                 <>
                   {(order.business?.logo || theme.images?.dummies?.businessLogo) && (
                     <Logo>
@@ -188,17 +193,21 @@ const SingleOrderCardUI = (props) => {
           )}
 
           <BusinessInformation activeOrders isMultiCart={order?.business?.length > 1}>
-            {isCustomerMode ? (
-              <TitleContainer>
-                <h2>{isSkeleton ? <Skeleton width={120} /> : order.business?.name}</h2>
-                <Price isBusinessesPage={isBusinessesPage} isCustomerMode={isCustomerMode}>
-                  <h2>
-                    {isSkeleton ? <Skeleton width={50} /> : parsePrice(order?.summary?.total || order?.total)}
-                  </h2>
-                </Price>
-              </TitleContainer>
-            ) : (
-              <h2>{isSkeleton ? <Skeleton width={120} /> : order?.business?.length > 1 ? `${t('GROUP_ORDER', 'Group Order')} ${t('No', 'No')}. ${order?.cart_group_id}` : order.business?.name}</h2>
+            {!hideBusinessName && (
+              <>
+                {isCustomerMode ? (
+                  <TitleContainer>
+                    <h2>{isSkeleton ? <Skeleton width={120} /> : order.business?.name}</h2>
+                    <Price isBusinessesPage={isBusinessesPage} isCustomerMode={isCustomerMode}>
+                      <h2>
+                        {isSkeleton ? <Skeleton width={50} /> : parsePrice(order?.summary?.total || order?.total)}
+                      </h2>
+                    </Price>
+                  </TitleContainer>
+                ) : (
+                  <h2>{isSkeleton ? <Skeleton width={120} /> : order?.business?.length > 1 ? `${t('GROUP_ORDER', 'Group Order')} ${t('No', 'No')}. ${order?.cart_group_id}` : order.business?.name}</h2>
+                )}
+              </>
             )}
             {
               isSkeleton ? (
@@ -207,13 +216,13 @@ const SingleOrderCardUI = (props) => {
                 </div>
               ) : (
                 <div className='orders-detail'>
-                  {order?.id && (
+                  {order?.id && !hideOrderNumber && (
                     <>
                       <BsDot />
                       <p name='order_number'>{order?.business?.length > 1 ? `${order?.business?.length} ${t('ORDERS', 'orders')}` : `${t('ORDER_NUM', 'Order No.')} ${order.id}`}</p>
                     </>
                   )}
-                  {showDate && (
+                  {!hideDate && (
                     <>
                       <BsDot />
                       <p>
@@ -231,7 +240,9 @@ const SingleOrderCardUI = (props) => {
                 </div>
               )
             }
-            <p className='order-status'>{isSkeleton ? <Skeleton width={80} /> : getOrderStatus(order.status)?.value}</p>
+            {!hideOrderStatus && (
+              <p className='order-status'>{isSkeleton ? <Skeleton width={80} /> : getOrderStatus(order.status)?.value}</p>
+            )}
           </BusinessInformation>
           {!isCustomerMode && (
             <Price isBusinessesPage={isBusinessesPage}>
@@ -246,7 +257,7 @@ const SingleOrderCardUI = (props) => {
           )}
           {pastOrders && !isCustomerMode && (
             <ButtonWrapper>
-              {!isOrderReviewed && !isFavorite && (!order?.review || (order.driver && !order?.user_review)) && (
+              {!isOrderReviewed && !isFavorite && (!order?.review || (order.driver && !order?.user_review)) && !hideReviewOrderButton && (
                 <Button
                   outline
                   color='primary'
@@ -256,14 +267,14 @@ const SingleOrderCardUI = (props) => {
                   {t('REVIEW', 'Review')}
                 </Button>
               )}
-              {order.cart && (
+              {order.cart && !hideReorderButton && (
                 <Button color='primary' className='reorder' outline onClick={() => handleClickReorder(order)}>
                   {cartState?.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
                 </Button>
               )}
             </ButtonWrapper>
           )}
-          {!order?.business?.length && (
+          {!order?.business?.length && !hideFavorite && (
             <FavoriteWrapper onClick={() => handleChangeFavorite(order)} className='favorite'>
               {isSkeleton ? <Skeleton width={20} height={20} /> : (
                 <>

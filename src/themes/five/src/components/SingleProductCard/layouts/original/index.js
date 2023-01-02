@@ -42,7 +42,8 @@ const SingleProductCardUI = (props) => {
     productAddedToCartLength,
     handleFavoriteProduct,
     isFavorite,
-    isPreviously
+    isPreviously,
+    viewString
   } = props
 
   const [, t] = useLanguage()
@@ -71,6 +72,11 @@ const SingleProductCardUI = (props) => {
   const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
 
   const hideAddButton = theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden ?? true
+  const hideProductDescription = theme?.business_view?.components?.products?.components?.product?.components?.description?.hidden
+  const hideProductLogo = viewString
+    ? theme?.[viewString]?.components?.cart?.components?.products?.image?.hidden
+    : theme?.business_view?.components?.products?.components?.product?.components?.image?.hidden
+
   // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
   let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - totalBalance
@@ -176,12 +182,16 @@ const SingleProductCardUI = (props) => {
                   ) : (
                     <Skeleton width={100} />
                   )}
-                  {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+                  {!hideProductDescription && (
+                    <>
+                      {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+                    </>
+                  )}
                   {isPreviously && (!isSkeleton ? (<LastOrder>{t('LAST_ORDERED_ON', 'Last ordered on')} {parseDate(product?.last_ordered_date, { outputFormat: 'MMM DD, YYYY' })}</LastOrder>) : (<Skeleton width={80} />))}
                 </CardInfo>
                 {!isSkeleton ? (
                   <WrapLogo
-                    isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}
+                    isBgimage={optimizeImage(!hideProductLogo ? product?.images || theme?.images?.dummies?.product : '', 'h_86,c_limit')}
                   >
                     {product?.ribbon?.enabled && (
                       <RibbonBox
