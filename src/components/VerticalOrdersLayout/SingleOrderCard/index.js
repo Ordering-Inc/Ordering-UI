@@ -40,14 +40,12 @@ const SingleOrderCardUI = (props) => {
 
   const handleClickCard = (e, order) => {
     if (e.target.closest('.favorite') || e.target.closest('.review') || e.target.closest('.reorder')) return
-
-    if (customArray) {
-      onRedirectPage({ page: 'checkout', params: { cartUuid: order.uuid } })
-    } else {
-      order?.cart_group_id
-        ? onRedirectPage({ page: 'multi_orders', params: { orderId: order.cart_group_id } })
-        : onRedirectPage({ page: 'order_detail', params: { orderId: order.uuid } })
-    }
+    onRedirectPage(customArray ?
+      { page: 'checkout', params: { cartUuid: order.uuid } } :
+      order?.cart_group_id ?
+        { page: 'multi_orders', params: { orderId: order.cart_group_id } } :
+        { page: 'order_detail', params: { orderId: order.uuid } }
+    )
   }
 
   return (
