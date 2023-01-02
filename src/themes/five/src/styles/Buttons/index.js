@@ -44,6 +44,9 @@ export const Button = styled.button`
     `}
     }
   `}
+  ${({ theme }) => theme?.general?.components?.buttons?.borderRadius && css`
+      border-radius: ${theme?.general?.components?.buttons?.borderRadius};
+  `}
   ${({ outline }) => outline && css`
     background: #FFF;
     color: #CCC;

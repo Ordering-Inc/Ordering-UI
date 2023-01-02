@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useOrderingTheme } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useOrderingTheme, useBusiness } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
@@ -47,7 +47,7 @@ import { Confirm } from '../Confirm'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
-import { getDistance } from '../../../../../utils'
+import { getDistance, getCateringValues } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { SearchBar } from '../SearchBar'
 
@@ -73,6 +73,7 @@ export const Header = (props) => {
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
   const [orderingTheme] = useOrderingTheme()
+  const [{ business }] = useBusiness()
 
   const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -93,11 +94,18 @@ export const Header = (props) => {
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
-  const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
+  const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru'), '', t('CATERING_DELIVERY', 'Catering Delivery'), t('CATERING_PICKUP', 'Catering pickup')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
   const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const isHideLanguages = theme?.header?.components?.language_selector?.hidden
+  const cateringTypeString = orderState?.options?.type === 7
+    ? 'catering_delivery'
+    : orderState?.options?.type === 8
+      ? 'catering_pickup'
+      : null
+
+  const cateringValues = getCateringValues(cateringTypeString, pathname.includes('store') && Object?.keys(business || {})?.length > 0 ? business?.configs : configState?.configs)
 
   const handleSuccessSignup = (user) => {
     login({
@@ -225,12 +233,12 @@ export const Header = (props) => {
               isChew={isChew}
             >
               <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
+              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (isHome && windowSize.width < 576 ? theme?.images?.logos?.isotypeInvert : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && !props.isCustomLayout && windowSize.width >= 576 && (
             <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode} isChew={isChew}>
-              {windowSize.width > 820 && isFarAway && (
+              {windowSize.width > 850 && isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />
                   <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
@@ -484,6 +492,10 @@ export const Header = (props) => {
           {modalSelected === 'moment' && (
             <MomentContent
               onClose={() => setModalIsOpen(false)}
+              cateringPreorder={!!cateringTypeString}
+              isHeader
+              business={pathname.includes('store') && business}
+              {...cateringValues}
             />
           )}
           {modalSelected === 'delivery' && (

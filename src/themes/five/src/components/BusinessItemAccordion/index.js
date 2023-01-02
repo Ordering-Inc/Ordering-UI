@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import TiArrowSortedUp from '@meronex/icons/ti/TiArrowSortedUp'
-import { useOrder, useLanguage, useEvent, useUtils, useConfig, useOrderingTheme } from 'ordering-components'
+import { useOrder, useLanguage, useEvent, useUtils, useConfig } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import FiClock from '@meronex/icons/fi/FiClock'
 import {
@@ -49,7 +49,6 @@ export const BusinessItemAccordion = (props) => {
   const [{ parsePrice }] = useUtils()
   const [{ configs }] = useConfig()
   const theme = useTheme()
-  const [orderingTheme] = useOrderingTheme()
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')
@@ -63,8 +62,8 @@ export const BusinessItemAccordion = (props) => {
   const changeStore = useRef(null)
 
   const viewString = isStore ? 'business_view' : 'header'
-  const showBusinessLogo = !orderingTheme?.theme?.[viewString]?.components?.cart?.components?.business?.components?.logo?.hidden
-  const showBusinessTime = !orderingTheme?.theme?.[viewString]?.components?.cart?.components?.business?.components?.time?.hidden
+  const hideBusinessLogo = theme?.[viewString]?.components?.cart?.components?.business?.components?.logo?.hidden
+  const hideBusinessTime = theme?.[viewString]?.components?.cart?.components?.business?.components?.time?.hidden
 
   const toggleAccordion = (e) => {
     const isActionsClick = businessStore.current?.contains(e?.target) || businessDelete.current?.contains(e?.target) || changeStore.current?.contains(e?.target)
@@ -146,14 +145,14 @@ export const BusinessItemAccordion = (props) => {
               onClick={(e) => toggleAccordion(e)}
             >
               <BusinessInfo>
-                {!showBusinessLogo && (
+                {!hideBusinessLogo && (
                   <WrapperBusinessLogo>
                     <BusinessLogo bgimage={business?.logo || theme.images?.dummies?.businessLogo} />
                   </WrapperBusinessLogo>
                 )}
                 <ContentInfo className='info' isStore={isStore}>
                   <h2>{business?.name}</h2>
-                  {!showBusinessTime && (
+                  {!hideBusinessTime && (
                     <TimeContainer>
                       {orderState?.options?.type === 1 ? (
                         <span>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useOrderingTheme } from 'ordering-components'
+import { useLanguage } from 'ordering-components'
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { OrdersOption } from '../OrdersOption'
 import { Button } from '../../styles/Buttons'
@@ -13,6 +13,7 @@ import {
   MyOrdersMenuContainer
 } from './styles'
 import { Tab, Tabs } from '../../styles/Tabs'
+import { useTheme } from 'styled-components'
 
 export const MyOrders = (props) => {
   const {
@@ -23,9 +24,8 @@ export const MyOrders = (props) => {
 
   const [, t] = useLanguage()
   const history = useHistory()
-
-  const [orderingTheme] = useOrderingTheme()
-  const layout = orderingTheme?.theme?.orders?.components?.layout?.type || 'original'
+  const theme = useTheme()
+  const layout = theme?.orders?.components?.layout?.type || 'original'
 
   const [isEmptyActive, setIsEmptyActive] = useState(false)
   const [isEmptyPast, setIsEmptyPast] = useState(false)
@@ -34,10 +34,13 @@ export const MyOrders = (props) => {
   const [isEmptyBusinesses, setIsEmptyBusinesses] = useState(false)
   const [businessOrderIds, setBusinessOrderIds] = useState([])
 
+  const hideProductsTab = theme?.orders?.components?.products_tab?.hidden
+  const hideBusinessTab = theme?.orders?.components?.business_tab?.hidden
+
   const MyOrdersMenu = [
-    { key: 'orders', value: t('ORDERS', 'Orders') },
-    { key: 'business', value: t('BUSINESS', 'Business') },
-    { key: 'products', value: t('PRODUCTS', 'Products') }
+    { key: 'orders', value: t('ORDERS', 'Orders'), disabled: false},
+    { key: 'business', value: t('BUSINESS', 'Business'), disabled: hideBusinessTab },
+    { key: 'products', value: t('PRODUCTS', 'Products'), disabled: hideProductsTab }
   ]
 
   const notOrderOptions = ['business', 'products', 'professionals']
@@ -61,7 +64,7 @@ export const MyOrders = (props) => {
         {!allEmpty && (
           <MyOrdersMenuContainer className='category-lists'>
             <Tabs variant='primary'>
-              {MyOrdersMenu.filter(option => !hideOrders || option.key !== 'orders').map(option => (
+              {MyOrdersMenu.filter(option => (!hideOrders || option.key !== 'orders') && !option.disabled).map(option => (
                 <Tab
                   key={option.key}
                   onClick={() => setSelectedOption(option.key)}

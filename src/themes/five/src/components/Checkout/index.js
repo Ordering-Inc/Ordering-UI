@@ -47,7 +47,9 @@ import {
   MobileWrapperPlaceOrderButton,
   OrderContextUIWrapper,
   HeaderContent,
-  AuthButtonList
+  AuthButtonList,
+  Flag,
+  SectionTitleContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -141,6 +143,8 @@ const CheckoutUI = (props) => {
   const isGiftCardCart = !cart?.business_id
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
+  const validateCommentsCartField = validationFields?.fields?.checkout?.comments?.enabled && validationFields?.fields?.checkout?.comments?.required && (cart?.comment === null || cart?.comment?.trim().length === 0)
+
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
     (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0) ||
@@ -154,7 +158,8 @@ const CheckoutUI = (props) => {
     (options.type === 1 &&
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
       validationFields?.fields?.checkout?.driver_tip?.required &&
-      (Number(cart?.driver_tip) <= 0))
+      (Number(cart?.driver_tip) <= 0)) ||
+    (validateCommentsCartField)
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -168,7 +173,7 @@ const CheckoutUI = (props) => {
 
   const hideBusinessAddress = theme?.checkout?.components?.business?.components?.address?.hidden
   const hideBusinessDetails = theme?.checkout?.components?.business?.hidden
-  const hideBusinessMap = theme?.checkout?.components?.business?.components?.map?.hidden
+  const hideBusinessMap = theme?.checkout?.components?.map?.hidden
   const hideCustomerDetails = theme?.checkout?.components?.customer?.hidden
   const driverTipsField = !cartState.loading && cart && cart?.business_id && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.checkout?.driver_tip?.enabled && driverTipsOptions.length > 0 && !useKioskApp
 
@@ -341,7 +346,7 @@ const CheckoutUI = (props) => {
                     </div>
                   ) : (
                     <AddressDetails
-                      location={businessDetails?.business?.location}
+                      location={options?.address?.location}
                       businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
                       isCartPending={cart?.status === 2}
                       businessId={cart?.business_id}
@@ -474,7 +479,10 @@ const CheckoutUI = (props) => {
 
           {!cartState.loading && cart && (
             <PaymentMethodContainer className='paymentsContainer'>
-              <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+              <SectionTitleContainer>
+                <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+                <Flag>{t('REQUIRED', 'Required')}</Flag>
+              </SectionTitleContainer>
               {!cartState.loading && cart?.status === 4 && (
                 <WarningMessage style={{ marginTop: 20 }}>
                   <VscWarning />
@@ -643,6 +651,12 @@ const CheckoutUI = (props) => {
               {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
             </WarningText>
           )}
+
+        {validateCommentsCartField && (
+          <WarningText>
+            {t('WARNING_INVALID_CART_COMMENTS', 'Cart comments is required.')}
+          </WarningText>
+        )}
 
         {cart?.valid_preorder !== undefined && !cart?.valid_preorder && (
           <WarningText>

@@ -39,7 +39,7 @@ import {
   NoValidProductMessage,
   DriverTipContainer
 } from './styles'
-import { verifyDecimals } from '../../../../../utils'
+import { getCateringValues, verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 import MdCloseCircle from '@meronex/icons/ios/MdCloseCircle'
 import { MomentContent } from '../MomentContent'
@@ -100,26 +100,21 @@ const CartUI = (props) => {
   const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
-  const isChewLayout = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const cateringTypes = [7, 8]
   const isMultiCheckout = configs?.checkout_multi_business_enabled?.value === '1'
   const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
-  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
-  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount?.hidden
+  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden || !validationFields?.fields?.checkout?.comments?.enabled
+  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount_coupon?.hidden
   const cateringTypeString = orderState?.options?.type === 7
     ? 'catering_delivery'
     : orderState?.options?.type === 8
       ? 'catering_pickup'
       : null
-  const splitCateringValue = (configName) => businessConfigs.find(config => config.key === configName)?.value?.split('|')?.find(val => val.includes(cateringTypeString))?.split(',')[1]
-  const preorderSlotInterval = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_slot_interval'))
-  const preorderLeadTime = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_lead_time'))
-  const preorderTimeRange = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_time_range'))
-  const preorderMaximumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_maximum_days'))
-  const preorderMinimumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_minimum_days'))
+
+  const cateringValues = businessConfigs && getCateringValues(cateringTypeString, businessConfigs)
 
   const walletName = {
     cash: {
@@ -140,7 +135,9 @@ const CartUI = (props) => {
     }
   }
 
-  const loyaltyRewardValue = Math.round((cart?.subtotal + getIncludedTaxes()) / loyaltyRewardRate)
+  const loyaltyRewardValue = ((
+    Math.trunc(((cart?.subtotal + getIncludedTaxes()) * loyaltyRewardRate) * 100) / 100
+  ).toFixed(configs.format_number_decimal_length?.value ?? 2), 10)
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -514,7 +511,7 @@ const CartUI = (props) => {
                       <td>{t('TOTAL', 'Total')}</td>
                       <td>{parsePrice(cart?.total >= 0 ? cart?.total : 0)}</td>
                     </tr>
-                    {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && (
+                    {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && !isMultiCheckout && (
                       <tr>
                         <td>&nbsp;</td>
                         <td id='loyalty'>{t('REWARD_LOYALTY_POINT', 'Reward :amount: on loyalty points').replace(':amount:', loyaltyRewardValue)}</td>
@@ -601,12 +598,8 @@ const CartUI = (props) => {
                 <MomentContent
                   cateringPreorder
                   isCart
-                  preorderSlotInterval={preorderSlotInterval}
-                  preorderLeadTime={preorderLeadTime}
-                  preorderTimeRange={preorderTimeRange}
-                  preorderMaximumDays={preorderMaximumDays}
                   business={cart?.business}
-                  preorderMinimumDays={preorderMinimumDays}
+                  {...cateringValues}
                 />
               </div>
             )}
@@ -657,6 +650,7 @@ const CartUI = (props) => {
                 categoryId={curProduct?.category_id}
                 productId={curProduct?.id}
                 onSave={handlerProductAction}
+                viewString={viewString}
               />
             ) : (
               <ServiceForm

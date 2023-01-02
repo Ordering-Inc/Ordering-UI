@@ -62,6 +62,10 @@ export const LogoHeader = styled.div`
       margin-left: 0;
     `}
     @media (min-width: 769px) {
+      ${({ theme }) =>
+      ['center', 'right']?.includes(theme?.header?.components?.logo?.components?.layout?.position) && css`
+        margin-right: 30px;
+      `};
       width: ${props => props.imgW ?? '150px'};
       height: ${props => props.isChew && '35px'};
     }
@@ -101,7 +105,6 @@ export const Menu = styled.div`
   display: flex;
   align-items: center;
   margin-right: 10px;
-
   #select-input {
     border-radius: 7.6px;
     #list {
@@ -137,7 +140,7 @@ export const Menu = styled.div`
     justify-content: center;
     position: relative;
     height: 44px;
-    @media (min-width: 821px) {
+    @media (min-width: 850px) {
       border: 1px solid #DEE2E6;
       justify-content: space-between;
     }
@@ -195,7 +198,7 @@ export const Menu = styled.div`
       padding: 0 20px;
     }
   }
-  @media (min-width: 821px) {
+  @media (min-width: 850px) {
     .moment-popover,
     .address-popover {
       display: flex;
@@ -233,7 +236,7 @@ export const SubMenu = styled(InnerHeader)`
   box-sizing: border-box;
   margin: 0px;
   position: relative;
-  @media (min-width: 821px) {
+  @media (min-width: 850px) {
     display: none;
   }
 `
@@ -326,7 +329,7 @@ export const MomentMenu = styled.div`
   width: 200px;
   display: none;
   
-  @media (min-width: 821px) {
+  @media (min-width: 850px) {
     display: flex;
   }
   @media (min-width: 1175px) {
@@ -455,7 +458,7 @@ export const LeftSide = styled.div`
   width: 100%;
   @media (min-width: 769px){
     flex-direction: ${({ theme }) =>
-    theme?.header?.components?.logo?.components?.layout?.position === 'center' ? 'row-reverse' : 'row'};
+    ['center', 'right']?.includes(theme?.header?.components?.logo?.components?.layout?.position) ? 'row-reverse' : 'row'};
     width: 60%;
   }
 `

@@ -209,7 +209,7 @@ export const RenderProductsLayout = (props) => {
                 </WrapperSearch>
               </>
             )}
-            {!business?.loading && business?.previously_products?.length > 0 && !hidePreviousOrdered && windowSize.width < 993 && !categoryClicked && (
+            {!business?.loading && business?.previously_products?.length > 0 && !hidePreviousOrdered && !categoryClicked && (
               <OrderItAgain
                 onProductClick={onProductClick}
                 productList={business?.previously_products}
@@ -321,7 +321,7 @@ export const RenderProductsLayout = (props) => {
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
-                {showCartOnProductList && (
+                {(windowSize.width >= 1000 && windowSize.height >= 600) && showCartOnProductList && (
                   <BusinessCartContainer isProfessional={business?.professionals?.length > 0 && !useKioskApp}>
                     <BusinessCartContent maxHeight={window.innerHeight - 100}>
                       {currentCart?.products?.length > 0 ? (
@@ -399,7 +399,7 @@ export const RenderProductsLayout = (props) => {
                   {(categoryClicked || windowSize.width >= 993) && (
                     <BusinessCategoryProductWrapper>
                       <WrapContent isGroceries id='groceries'>
-                        {!business?.loading && business?.previously_products?.length > 0 && windowSize.width >= 993 && (
+                        {!business?.loading && !hidePreviousOrdered && business?.previously_products?.length > 0 && windowSize.width >= 993 && (
                           <OrderItAgain
                             onProductClick={onProductClick}
                             productList={business?.previously_products}
