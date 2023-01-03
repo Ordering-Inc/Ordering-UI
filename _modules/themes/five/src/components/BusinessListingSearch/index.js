@@ -47,7 +47,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
-  var _businessesSearchList, _sortItems$filter, _brandList$brands, _brandList$brands$fil, _orderState$options3, _orderState$options4, _orderState$options5, _businessesSearchList3, _businessesSearchList4, _businessesSearchList6, _curProduct$business, _curProduct$business2, _curProduct$product, _curProduct$product2;
+  var _businessesSearchList, _Object$values$find, _sortItems$filter, _brandList$brands, _brandList$brands$fil, _orderState$options3, _orderState$options4, _orderState$options5, _businessesSearchList3, _businessesSearchList4, _businessesSearchList6, _curProduct$business2, _curProduct$business3, _curProduct$product, _curProduct$product2, _currentCart$products;
   var businessesSearchList = props.businessesSearchList,
     onBusinessClick = props.onBusinessClick,
     handleChangeFilters = props.handleChangeFilters,
@@ -117,6 +117,10 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     content: '$$$$$'
   }];
   var noResults = !businessesSearchList.loading && !businessesSearchList.lengthError && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList = businessesSearchList.businesses) === null || _businessesSearchList === void 0 ? void 0 : _businessesSearchList.length) === 0;
+  var currentCart = (_Object$values$find = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).find(function (cart) {
+    var _cart$business, _curProduct$business;
+    return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === (curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business = curProduct.business) === null || _curProduct$business === void 0 ? void 0 : _curProduct$business.slug);
+  })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle, _document$documentEle2, _businessesSearchList2;
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
@@ -346,16 +350,20 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     isProductForm: true,
     disableOverflowX: true
   }, !!(curProduct !== null && curProduct !== void 0 && curProduct.product) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
-    businessSlug: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business = curProduct.business) === null || _curProduct$business === void 0 ? void 0 : _curProduct$business.slug,
+    businessSlug: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business2 = curProduct.business) === null || _curProduct$business2 === void 0 ? void 0 : _curProduct$business2.slug,
     useKioskApp: props === null || props === void 0 ? void 0 : props.useKioskApp,
-    businessId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business2 = curProduct.business) === null || _curProduct$business2 === void 0 ? void 0 : _curProduct$business2.id,
+    product: curProduct === null || curProduct === void 0 ? void 0 : curProduct.product,
+    businessId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business3 = curProduct.business) === null || _curProduct$business3 === void 0 ? void 0 : _curProduct$business3.id,
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$product = curProduct.product) === null || _curProduct$product === void 0 ? void 0 : _curProduct$product.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$product2 = curProduct.product) === null || _curProduct$product2 === void 0 ? void 0 : _curProduct$product2.id,
     onSave: handleRedirectToCart,
     handleUpdateProducts: function handleUpdateProducts(productId, changes) {
-      var _curProduct$product3, _curProduct$business3;
-      return _handleUpdateProducts(productId, curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$product3 = curProduct.product) === null || _curProduct$product3 === void 0 ? void 0 : _curProduct$product3.category_id, curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business3 = curProduct.business) === null || _curProduct$business3 === void 0 ? void 0 : _curProduct$business3.id, changes);
-    }
+      var _curProduct$product3, _curProduct$business4;
+      return _handleUpdateProducts(productId, curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$product3 = curProduct.product) === null || _curProduct$product3 === void 0 ? void 0 : _curProduct$product3.category_id, curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business4 = curProduct.business) === null || _curProduct$business4 === void 0 ? void 0 : _curProduct$business4.id, changes);
+    },
+    productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.reduce(function (productsLength, Cproduct) {
+      return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (curProduct === null || curProduct === void 0 ? void 0 : curProduct.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
+    }, 0)) || 0
   })));
 };
 exports.BusinessListingSearchUI = BusinessListingSearchUI;

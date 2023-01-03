@@ -33,7 +33,9 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     reorderLoading = props.reorderLoading,
     orderID = props.orderID,
     handleFavoriteOrder = props.handleFavoriteOrder,
-    setOrderSelected = props.setOrderSelected;
+    setOrderSelected = props.setOrderSelected,
+    onRedirectPage = props.onRedirectPage,
+    customArray = props.customArray;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -44,9 +46,22 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   var handleChangeFavorite = function handleChangeFavorite(order) {
     handleFavoriteOrder && handleFavoriteOrder(!(order !== null && order !== void 0 && order.favorite));
   };
+  var handleClickCard = function handleClickCard(e, order) {
+    var _order$cart_group_id;
+    if (e.target.closest('.favorite') || e.target.closest('.review') || e.target.closest('.reorder')) return;
+    var params = _defineProperty({}, customArray ? 'cartUuid' : 'orderId', customArray ? order.uuid : (_order$cart_group_id = order === null || order === void 0 ? void 0 : order.cart_group_id) !== null && _order$cart_group_id !== void 0 ? _order$cart_group_id : order.uuid);
+    var page = customArray ? 'checkout' : order !== null && order !== void 0 && order.cart_group_id ? 'multi_orders' : 'order_detail';
+    onRedirectPage({
+      page: page,
+      params: params
+    });
+  };
   return /*#__PURE__*/_react.default.createElement(_styles2.SingleCard, {
     key: order.id,
-    id: "order-card"
+    id: "order-card",
+    onClick: function onClick(e) {
+      return handleClickCard(e, order);
+    }
   }, /*#__PURE__*/_react.default.createElement(_styles2.OrderPastContent, null, (((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.length) > 1 ? /*#__PURE__*/_react.default.createElement(_styles2.MultiLogosContainer, null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.map(function (business, i) {
     var _order$business4, _theme$images2, _theme$images2$dummie;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

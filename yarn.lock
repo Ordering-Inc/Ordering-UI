@@ -3443,9 +3443,9 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.4, ajv@^6.12.5:
     uri-js "^4.2.2"
 
 ajv@^8.6.0:
-  version "8.11.2"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.11.2.tgz#aecb20b50607acf2569b6382167b65a96008bb78"
-  integrity sha512-E4bfmKAhGiSTvMfL1Myyycaub+cUEU2/IvpylXkUu7CHBkBj1f/ikdzbD7YQ6FKUbixDxeYvB/xY4fvyroDlQg==
+  version "8.12.0"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.12.0.tgz#d1a0527323e22f53562c567c00991577dfbe19d1"
+  integrity sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
@@ -9063,7 +9063,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/5b75ada1546e6454c15f876929fe4d3b9a473351"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/4f01d246cbc332723e169d533ca4290ce4ace8fa"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -10019,9 +10019,9 @@ react-smartbanner@^5.1.4:
     ua-parser-js "^0.7.9"
 
 react-to-print@^2.12.3:
-  version "2.14.10"
-  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.10.tgz#f063bb368c2d8926012d52780a2b983e91c3a797"
-  integrity sha512-XJyhDWH/xxgHy5nIBYPXjVidoroq0qRHqTrVF5QbfohPkMx3q8x3H3+Lv7gSq9uA0csAbjkSU0J4mWgj64f6yQ==
+  version "2.14.11"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.11.tgz#14ce17fce6ed238ae08c8c375c13847eb1aefbac"
+  integrity sha512-sePHBaCtZLp8/g4d/gRyI9XQZkveZq6xoukanAHfkzlXOa7sTuXCEQOYq37lIa5MkUoxySdJxYuyClaXPa9Zpg==
   dependencies:
     prop-types "^15.8.1"
 
