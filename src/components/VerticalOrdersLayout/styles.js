@@ -6,7 +6,11 @@ export const SingleCard = styled.div`
   display: flex;
   max-height: 100px;
   height: auto;
+  border-radius: 16px;
+  padding: 10px;
+  transition: all 0.3s ease;
   border-bottom: 1px solid #F5F6F6;
+  cursor: pointer;
 
   ${props => (
     props.theme.colors.backgroundPage === '#FFF' ||
@@ -23,6 +27,10 @@ export const SingleCard = styled.div`
   ) && css`
       border-top: none !important;
     `}
+  }
+
+  &:hover {
+    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;
   }
 `
 

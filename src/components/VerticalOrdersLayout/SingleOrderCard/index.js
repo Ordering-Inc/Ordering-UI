@@ -25,7 +25,9 @@ const SingleOrderCardUI = (props) => {
     reorderLoading,
     orderID,
     handleFavoriteOrder,
-    setOrderSelected
+    setOrderSelected,
+    onRedirectPage,
+    customArray
   } = props
 
   const theme = useTheme()
@@ -36,8 +38,17 @@ const SingleOrderCardUI = (props) => {
     handleFavoriteOrder && handleFavoriteOrder(!order?.favorite)
   }
 
+  const handleClickCard = (e, order) => {
+    if (e.target.closest('.favorite') || e.target.closest('.review') || e.target.closest('.reorder')) return
+    const params = {
+      [customArray ? 'cartUuid' : 'orderId']: customArray ? order.uuid : order?.cart_group_id ?? order.uuid
+    }
+    const page = customArray ? 'checkout' : order?.cart_group_id ? 'multi_orders' : 'order_detail'
+    onRedirectPage({ page, params })
+  }
+
   return (
-    <SingleCard key={order.id} id='order-card'>
+    <SingleCard key={order.id} id='order-card' onClick={(e) => handleClickCard(e, order)}>
       <OrderPastContent>
         {(order.business?.logo || theme.images?.dummies?.businessLogo) && (
           <>
