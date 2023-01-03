@@ -61,6 +61,7 @@ import { Alert } from '../Confirm'
 import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
 import { PlaceSpot } from '../PlaceSpot'
+import { MomentContent as MomentContentCatering } from '../MomentContent/layout/MomentCatering'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -395,6 +396,15 @@ const CheckoutUI = (props) => {
                 <Skeleton height={55} style={{ marginBottom: '10px' }} />
               </div>
             </div>
+          )}
+
+          {!hasCateringProducts.loading && (
+            <MomentContentCatering
+              hasCateringProducts={hasCateringProducts.result}
+              cateringHours={cateringHours}
+              cateringDayError={cateringDayError}
+              setCateringDayError={setCateringDayError}
+            />
           )}
 
           {!useKioskApp && (

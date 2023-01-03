@@ -115,7 +115,7 @@ const PaymentOptionsUI = (props) => {
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
 
-  const excludePaymethods = hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash']
+  const excludePaymethods = [''] // hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['']
 
   const supportedMethods = list?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : hasCateringProducts?.result ? !excludePaymethods.includes(p.gateway) : p)
 
