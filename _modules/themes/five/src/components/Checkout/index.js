@@ -30,6 +30,7 @@ var _Confirm = require("../Confirm");
 var _CartContent = require("../CartContent");
 var _Select = require("../../styles/Select");
 var _PlaceSpot = require("../PlaceSpot");
+var _MomentCatering = require("../MomentContent/layout/MomentCatering");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -398,7 +399,12 @@ var CheckoutUI = function CheckoutUI(props) {
     style: {
       marginBottom: '10px'
     }
-  }))), !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartState.loading && deliveryOptionSelected !== undefined && (options === null || options === void 0 ? void 0 : options.type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.DeliveryOptionsContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_DETAILS', 'Delivery Details')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  }))), !hasCateringProducts.loading && /*#__PURE__*/_react.default.createElement(_MomentCatering.MomentContent, {
+    hasCateringProducts: hasCateringProducts.result,
+    cateringHours: cateringHours,
+    cateringDayError: cateringDayError,
+    setCateringDayError: setCateringDayError
+  }), !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartState.loading && deliveryOptionSelected !== undefined && (options === null || options === void 0 ? void 0 : options.type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.DeliveryOptionsContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DELIVERY_DETAILS', 'Delivery Details')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     defaultValue: deliveryOptionSelected,
     options: deliveryOptions,
     onChange: function onChange(val) {

@@ -139,7 +139,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     return pay.paymethod;
   });
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
-  var excludePaymethods = hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash'];
+  var excludePaymethods = ['']; // hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['']
+
   var supportedMethods = list === null || list === void 0 ? void 0 : list.filter(function (p) {
     return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? !excludePaymethods.includes(p.gateway) : p;
   });
