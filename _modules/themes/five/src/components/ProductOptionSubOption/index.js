@@ -11,6 +11,7 @@ var _BsCircleFill = _interopRequireDefault(require("@meronex/icons/bs/BsCircleFi
 var _BsCircleHalf = _interopRequireDefault(require("@meronex/icons/bs/BsCircleHalf"));
 var _BsDashCircle = _interopRequireDefault(require("@meronex/icons/bs/BsDashCircle"));
 var _BsPlusCircle = _interopRequireDefault(require("@meronex/icons/bs/BsPlusCircle"));
+var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 var _styles = require("./styles");
 var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
 var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
@@ -51,6 +52,8 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parsePrice = _useUtils2[0].parsePrice;
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     showMessage = _useState2[0],
@@ -109,7 +112,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     disabled: true
   })), suboption.image && suboption.image !== '-' && /*#__PURE__*/_react.default.createElement(_styles.SubOptionThumbnail, {
     src: suboption.image
-  }), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), showMessage && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max)))), /*#__PURE__*/_react.default.createElement(_styles.RightOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && (state === null || state === void 0 ? void 0 : state.selected) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name), showMessage && width > 576 && /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max)))), /*#__PURE__*/_react.default.createElement(_styles.RightOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && (state === null || state === void 0 ? void 0 : state.selected) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
     disabled: state.quantity === 0 || isSoldOut,
     onClick: handleDecrement
   }), state.quantity, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, {
@@ -136,7 +139,9 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     onClick: function onClick(e) {
       return handlePosition(e, 'right');
     }
-  })))), /*#__PURE__*/_react.default.createElement(_styles.SuboptionPrice, null, price > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "+ ", parsePrice(price)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.SuboptionPrice, null, price > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "+ ", parsePrice(price)))), showMessage && width < 576 && /*#__PURE__*/_react.default.createElement(_styles.Text, {
+    noMargin: true
+  }, /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
