@@ -140,9 +140,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, [mapErrors]);
   (0, _react.useEffect)(function () {
-    if (orderState.loading && businessesList.loading) {
-      //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
-      //  window.history.pushState({ path: newurl }, '', newurl)
+    if (orderState.loading || businessesList.loading) {
       var params = new URLSearchParams();
       history.replace({
         pathname: location.pathname,
