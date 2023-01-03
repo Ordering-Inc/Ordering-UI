@@ -94,9 +94,7 @@ const BusinessesListingUI = (props) => {
   }, [mapErrors])
 
   useEffect(() => {
-    if (orderState.loading && businessesList.loading) {
-    //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
-    //  window.history.pushState({ path: newurl }, '', newurl)
+    if (orderState.loading || businessesList.loading) {
       const params = new URLSearchParams()
       history.replace({ pathname: location.pathname, search: params.toString() })
       setPrevPage({ loading: true, page: 1 })
