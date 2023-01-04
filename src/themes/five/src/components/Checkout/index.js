@@ -295,7 +295,7 @@ const CheckoutUI = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (values.cardSecurityCode === '') {
+    if ((paymethodSelected?.data?.brandCardName === 'american_express' && values.cardSecurityCode.length !== 4) || (paymethodSelected?.data?.brandCardName !== 'american_express' && values.cardSecurityCode.length !== 3)) {
       setErrorsCSV({csv: false, border: true})
     } else {
       setErrorsCSV({})
@@ -838,7 +838,7 @@ const CheckoutUI = (props) => {
                 id='csv'
                 type={'password'}
                 minLength={3}
-                maxLength={4}
+                maxLength={paymethodSelected?.data && paymethodSelected?.data?.brandCardName !== 'american_express' ? 3 : 4}
                 onChange={handleChange}
                 placeholder='CVV'
                 onKeyPress={(e) => {
