@@ -35,3 +35,5 @@ export const BusinessesList = (props) => {
     </>
   )
 }
+
+export default BusinessesList

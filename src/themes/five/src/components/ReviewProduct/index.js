@@ -257,3 +257,5 @@ export const ReviewProduct = (props) => {
   }
   return <ReviewProductController {...reviewProductProps} />
 }
+
+export default ReviewProduct
