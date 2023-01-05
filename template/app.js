@@ -138,16 +138,6 @@ export const App = () => {
     ? 'old'
     : 'new'
 
-  // const HeaderComponent =
-  //   isKioskApp ? HeaderKiosk
-  //     : orderingTheme?.theme?.header?.components?.layout?.type === 'old'
-  //       ? HeaderOld
-  //       : orderingTheme?.theme?.header?.components?.layout?.type === 'red'
-  //         ? HeaderRed
-  //         : orderingTheme?.theme?.header?.components?.layout?.type === 'starbucks'
-  //           ? HeaderStarbucks
-  //           : Header
-
   const orderTypeSearchParam = parseInt(new URLSearchParams(useLocation()?.search)?.get('order_type') ?? 0, 10)
   const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
