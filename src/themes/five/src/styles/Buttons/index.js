@@ -36,7 +36,7 @@ export const Button = styled.button`
       padding-left: 15%
       ${props => props.theme?.rtl && css`
         padding-right: 15%;
-        padding-left: 0
+        padding-left: 0;
     `}
     }
   `}
@@ -259,3 +259,5 @@ export const Button = styled.button`
     `}
   `}
 `
+
+export default Button

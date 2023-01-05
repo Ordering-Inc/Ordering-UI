@@ -10,3 +10,5 @@ export const UserVerification = (props) => {
     </>
   )
 }
+
+export default UserVerification

@@ -226,3 +226,5 @@ export const BusinessProductsList = (props) => {
     </>
   )
 }
+
+export default BusinessProductsList

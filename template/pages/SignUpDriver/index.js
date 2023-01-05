@@ -10,3 +10,5 @@ export const SignUpDriver = (props) => {
     </>
   )
 }
+
+export default SignUpDriver

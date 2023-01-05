@@ -120,3 +120,5 @@ export const HomePage = (props) => {
     </>
   )
 }
+
+export default HomePage

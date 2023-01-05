@@ -178,3 +178,5 @@ export const Header = (props) => {
     </HeaderContainer>
   )
 }
+
+export default Header

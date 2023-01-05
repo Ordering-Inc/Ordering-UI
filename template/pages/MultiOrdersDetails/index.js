@@ -24,3 +24,5 @@ export const MultiOrdersDetails = (props) => {
     </>
   )
 }
+
+export default MultiOrdersDetails

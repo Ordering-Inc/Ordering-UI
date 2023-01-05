@@ -325,3 +325,5 @@ const styles = {
 Header.defaultProps = {
   isShowOrderOptions: true
 }
+
+export default Header

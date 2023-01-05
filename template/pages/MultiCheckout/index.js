@@ -100,3 +100,5 @@ export const MultiCheckout = (props) => {
     </>
   )
 }
+
+export default MultiCheckout
