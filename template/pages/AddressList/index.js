@@ -32,3 +32,5 @@ export const AddressList = (props) => {
     </>
   )
 }
+
+export default AddressList

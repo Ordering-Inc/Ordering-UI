@@ -136,3 +136,5 @@ export const CheckoutPage = (props) => {
     </>
   )
 }
+
+export default CheckoutPage
