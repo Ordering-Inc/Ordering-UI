@@ -47,6 +47,7 @@ import Skeleton from 'react-loading-skeleton'
 import { AutoScroll } from '../../../AutoScroll'
 import { CitiesControl } from '../../../CitiesControl'
 import { OrderContextUI } from '../../../OrderContextUI'
+import { OrdersSection } from './OrdersSection'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -178,45 +179,6 @@ const BusinessesListingUI = (props) => {
     setFavoriteIds([...new Set(ids)])
   }, [businessesList?.businesses?.length])
 
-  const OrdersSection = ({ titleContent }) => {
-    return (
-      <>
-        {onRedirectPage && (
-          <>
-            <OrdersOption
-              horizontal
-              isBusinessesPage
-              onRedirectPage={onRedirectPage}
-              titleContent={t('CARTS', 'Carts')}
-              businessesIds={businessesIds}
-              customArray={
-                getCustomArray(orderState.carts)?.filter(cart => cart.products.length > 0)
-              }
-              isCustomLayout
-              isBusinessesLoading={businessesList.loading}
-              isCustomerMode={isCustomerMode}
-              franchiseId={props.franchiseId}
-            />
-            <OrdersOption
-              pastOrders
-              horizontal
-              asDashboard
-              isBusinessesPage
-              businessesIds={businessesIds}
-              onRedirectPage={onRedirectPage}
-              userCustomerId={userCustomer?.id}
-              isCustomLayout
-              titleContent={titleContent}
-              isBusinessesLoading={businessesList.loading}
-              isCustomerMode={isCustomerMode}
-              franchiseId={props.franchiseId}
-            />
-          </>
-        )}
-      </>
-    )
-  }
-
   if (logosLayout) {
     return (
       <BusinessLogosWrapper>
@@ -281,8 +243,16 @@ const BusinessesListingUI = (props) => {
             height={theme?.business_listing_view?.components?.business_hero?.style?.height}
           />
         )}
-        {isCustomerMode && !hidePreviousOrders && (
-          <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />
+        {isCustomerMode && !hidePreviousOrders && !businessesList.loading && (
+          <OrdersSection
+            titleContent={t('PREVIOUS_ORDERS', 'Previous orders')}
+            onRedirectPage={onRedirectPage}
+            businessesIds={businessesIds}
+            getCustomArray={getCustomArray}
+            businessesList={businessesList}
+            isCustomerMode={isCustomerMode}
+            userCustomer={userCustomer}
+          />
         )}
         {!isCustomerMode && !hideSearchSection && (
           <>
@@ -373,9 +343,6 @@ const BusinessesListingUI = (props) => {
             userLocation={orderState?.options?.address?.location}
             setErrors={setMapErrors}
           />
-        )}
-        {!isCustomerMode && (
-          <OrdersSection />
         )}
         <>
           {((!isCustomLayout && isCustomerMode && businessesList?.businesses?.length > 0) || isChew) && (
