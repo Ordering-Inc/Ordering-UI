@@ -4,3 +4,5 @@ import { PageNotFound as PageNotFoundController } from '../../../src/components/
 export const PageNotFound = (props) => {
   return <PageNotFoundController {...props} />
 }
+
+export default PageNotFound

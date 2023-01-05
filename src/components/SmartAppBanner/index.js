@@ -38,3 +38,5 @@ export const SmartAppBanner = (props) => {
   }
   return <SmartAppBannerController {...smartAppBannerProps} />
 }
+
+export default SmartAppBanner

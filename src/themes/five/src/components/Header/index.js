@@ -629,3 +629,5 @@ export const Header = (props) => {
 Header.defaultProps = {
   isShowOrderOptions: true
 }
+
+export default Header

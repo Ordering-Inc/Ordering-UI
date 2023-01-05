@@ -11,3 +11,5 @@ export const Promotions = (props) => {
     </>
   )
 }
+
+export default Promotions

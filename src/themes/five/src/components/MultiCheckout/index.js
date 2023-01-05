@@ -61,7 +61,8 @@ const MultiCheckoutUI = (props) => {
     handlePaymethodDataChange,
     onRedirectPage,
     cartGroup,
-    cartUuid
+    cartUuid,
+    totalCartsFee
   } = props
 
   const [, t] = useLanguage()
@@ -82,6 +83,7 @@ const MultiCheckoutUI = (props) => {
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
   const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+  const totalFeeEnabled = configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
@@ -158,7 +160,7 @@ const MultiCheckoutUI = (props) => {
 
   return (
     <>
-      {openCarts.length === 0 ? (
+      {!cartGroup?.loading && openCarts.length === 0 ? (
         <NotFoundSource
           content={t('CARTS_NOT_FOUND', 'You don’t have carts available')}
         />
@@ -253,7 +255,13 @@ const MultiCheckoutUI = (props) => {
                 </WarningText>
               )}
               {openCarts.length > 0 && (
-                <MultiCartPriceContainer>
+                <MultiCartPriceContainer totalFeeEnabled={totalFeeEnabled}>
+                  {totalCartsFee && configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1' && (
+                    <span>
+                      <p>{t('TOTAL_DELIVERY_FEE', 'Total delivery fee')}</p>
+                      <p>{parsePrice(totalCartsFee)}</p>
+                    </span>
+                  )}
                   <div>
                     <h4>{t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')}</h4>
                     <h4>{parsePrice(totalCartsPrice)}</h4>

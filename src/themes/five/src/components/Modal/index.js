@@ -104,3 +104,5 @@ export const Modal = (props) => {
     <Popup {...ModalProps} />
   )
 }
+
+export default Modal
