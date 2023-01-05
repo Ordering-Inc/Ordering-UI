@@ -374,8 +374,8 @@ const OrderDetailsUI = (props) => {
     window.scrollTo(0, 0)
   }, [])
 
-  const disableLeftButton = [1, 15, 20, 21]
-  const disableRightButton = [1, 15, 21]
+  const disableLeftButton = [1, 2, 5, 15, 16, 17, 20, 21]
+  const disableRightButton = [1, 2, 5, 15, 16, 17, 21]
 
   return (
     <Container>

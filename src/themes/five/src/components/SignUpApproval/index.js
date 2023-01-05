@@ -106,3 +106,5 @@ export const SignUpApproval = (props) => {
     </Container>
   )
 }
+
+export default SignUpApproval

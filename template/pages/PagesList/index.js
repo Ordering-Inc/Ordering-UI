@@ -16,3 +16,5 @@ export const PagesList = (props) => {
   ]
   return <PagesListController {...props} routes={routes} />
 }
+
+export default PagesList

@@ -21,3 +21,5 @@ export const ScrollToTop = withRouter(({ history, children }) => {
 
   return <>{children}</>
 })
+
+export default ScrollToTop

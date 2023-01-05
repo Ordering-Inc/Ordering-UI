@@ -100,6 +100,8 @@ export const BusinessListingSearchUI = (props) => {
   ]
 
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
+  const currentCart = Object.values(orderState?.carts).find(cart => cart?.business?.slug === curProduct?.business?.slug) ?? {}
+
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -420,11 +422,13 @@ export const BusinessListingSearchUI = (props) => {
           <ProductForm
             businessSlug={curProduct?.business?.slug}
             useKioskApp={props?.useKioskApp}
+            product={curProduct?.product}
             businessId={curProduct?.business?.id}
             categoryId={curProduct?.product?.category_id}
             productId={curProduct?.product?.id}
             onSave={handleRedirectToCart}
             handleUpdateProducts={(productId, changes) => handleUpdateProducts(productId, curProduct?.product?.category_id, curProduct?.business?.id, changes)}
+            productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === curProduct?.id ? Cproduct?.quantity : 0) }, 0) || 0}
           />
         )}
       </Modal>

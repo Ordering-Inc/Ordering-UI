@@ -17,3 +17,5 @@ export const MessagesList = (props) => {
     </>
   )
 }
+
+export default MessagesList
