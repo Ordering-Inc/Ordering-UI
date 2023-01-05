@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NotNetworkConnectivity = void 0;
+exports.default = exports.NotNetworkConnectivity = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
@@ -91,3 +91,5 @@ var NotNetworkConnectivity = function NotNetworkConnectivity(props) {
   }, t('REFRESH', 'Refresh')))));
 };
 exports.NotNetworkConnectivity = NotNetworkConnectivity;
+var _default = NotNetworkConnectivity;
+exports.default = _default;

@@ -32,7 +32,6 @@ var _OrderContextUI = require("../../../OrderContextUI");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -50,7 +49,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _configs$business_lis, _configs$business_lis2, _theme$images2, _theme$images2$genera, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _Object$values, _configs$business_lis3, _theme$images3, _theme$images3$genera, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _orderState$options5, _orderState$options5$, _businessesList$busin6, _businessesList$busin7, _props$afterComponent, _props$afterElements;
+  var _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _businessesList$busin3, _configs$business_lis, _configs$business_lis2, _theme$images2, _theme$images2$genera, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _Object$values, _configs$business_lis3, _theme$images3, _theme$images3$genera, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _orderState$options5, _orderState$options5$, _businessesList$busin6, _businessesList$busin7;
   var businessesList = props.businessesList,
     paginationProps = props.paginationProps,
     searchValue = props.searchValue,
@@ -133,7 +132,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   var hideHighestBusiness = theme === null || theme === void 0 ? void 0 : (_theme$business_listi16 = theme.business_listing_view) === null || _theme$business_listi16 === void 0 ? void 0 : (_theme$business_listi17 = _theme$business_listi16.components) === null || _theme$business_listi17 === void 0 ? void 0 : (_theme$business_listi18 = _theme$business_listi17.highest_rated_business_block) === null || _theme$business_listi18 === void 0 ? void 0 : _theme$business_listi18.hidden;
   var hideSearchSection = hideCities && hideSearch && hideFilter;
   var isAllCategoriesHidden = theme === null || theme === void 0 ? void 0 : (_theme$business_listi19 = theme.business_listing_view) === null || _theme$business_listi19 === void 0 ? void 0 : (_theme$business_listi20 = _theme$business_listi19.components) === null || _theme$business_listi20 === void 0 ? void 0 : (_theme$business_listi21 = _theme$business_listi20.categories) === null || _theme$business_listi21 === void 0 ? void 0 : _theme$business_listi21.hidden;
-  var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
+  var businessesIds = businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
   }));
   var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.type) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.toLowerCase()) === 'chew';
@@ -222,7 +221,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   var OrdersSection = function OrdersSection(_ref2) {
     var _getCustomArray;
     var titleContent = _ref2.titleContent;
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
       horizontal: true,
       isBusinessesPage: true,
       onRedirectPage: onRedirectPage,
@@ -236,6 +235,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       isCustomerMode: isCustomerMode,
       franchiseId: props.franchiseId
     }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+      pastOrders: true,
       horizontal: true,
       asDashboard: true,
       isBusinessesPage: true,
@@ -271,15 +271,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       });
     })))));
   }
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, (windowSize.width < 576 || (configs === null || configs === void 0 ? void 0 : (_configs$business_lis = configs.business_listing_hide_image) === null || _configs$business_lis === void 0 ? void 0 : _configs$business_lis.value) !== '1' && !isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, (windowSize.width < 576 || (configs === null || configs === void 0 ? void 0 : (_configs$business_lis = configs.business_listing_hide_image) === null || _configs$business_lis === void 0 ? void 0 : _configs$business_lis.value) !== '1' && !isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
     isBusinessList: true
   }), (configs === null || configs === void 0 ? void 0 : (_configs$business_lis2 = configs.business_listing_hide_image) === null || _configs$business_lis2 === void 0 ? void 0 : _configs$business_lis2.value) !== '1' && !isChew && !hideHero && /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
     bgimage: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.businessHero,
@@ -333,7 +325,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onBusinessClick: onBusinessClick,
     isCustomerMode: isCustomerMode,
     favoriteIds: favoriteIds,
-    setFavoriteIds: setFavoriteIds
+    setFavoriteIds: setFavoriteIds,
+    disabledCities: true
   }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
     position: "web_business_listing"
   }), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && !isAllCategoriesHidden && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
@@ -448,14 +441,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return handleCloseAlerts();
     },
     closeOnBackdrop: false
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 var OriginalBusinessesListing = function OriginalBusinessesListing(props) {

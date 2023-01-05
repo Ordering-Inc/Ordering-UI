@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SignUpApproval = void 0;
+exports.default = exports.SignUpApproval = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = require("styled-components");
 var _Buttons = require("../../styles/Buttons");
@@ -87,3 +87,5 @@ var SignUpApproval = function SignUpApproval(props) {
   }, t('SIGNUP_DRIVER_EMAIL', contactEmail)))));
 };
 exports.SignUpApproval = SignUpApproval;
+var _default = SignUpApproval;
+exports.default = _default;

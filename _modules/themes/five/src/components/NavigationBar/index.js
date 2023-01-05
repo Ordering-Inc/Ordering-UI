@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NavigationBar = void 0;
+exports.default = exports.NavigationBar = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _styledComponents = require("styled-components");
 var _reactRouterDom = require("react-router-dom");
@@ -232,3 +232,5 @@ var NavigationBar = function NavigationBar() {
   })));
 };
 exports.NavigationBar = NavigationBar;
+var _default = NavigationBar;
+exports.default = _default;

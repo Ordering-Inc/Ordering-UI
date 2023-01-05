@@ -33,7 +33,10 @@ var CartHeader = _styledComponents.default.div(_templateObject8 || (_templateObj
 exports.CartHeader = CartHeader;
 var DriverTipDivider = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  height: 8px;\n  width: calc(100% + 40px);\n  margin-left: -20px;\n  background: #E9ECEF;\n\n  @media(min-width: 769px) {\n    width: calc(100% + 80px);\n    margin-left: -40px;\n  }\n"])));
 exports.DriverTipDivider = DriverTipDivider;
-var MultiCartPriceContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  > div {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    margin-top: 38px;\n    margin-bottom: 5px;\n    > h4 {\n      font-size: 18px;\n      margin: 0;\n    }\n  }\n  p {\n    font-size: 14px;\n    color: ", ";\n    margin: 0;\n  }\n"])), function (props) {
+var MultiCartPriceContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  > div {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    margin-top: ", ";\n    margin-bottom: 5px;\n    > h4 {\n      font-size: 18px;\n      margin: 0;\n    }\n  }\n  > span {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    margin-top: 38px;\n    margin-bottom: 5px;\n  }\n  p {\n    font-size: 14px;\n    color: ", ";\n    margin: 0;\n  }\n"])), function (_ref) {
+  var totalFeeEnabled = _ref.totalFeeEnabled;
+  return totalFeeEnabled ? '5px' : '38px';
+}, function (props) {
   return props.theme.colors.darkGray;
 });
 exports.MultiCartPriceContainer = MultiCartPriceContainer;

@@ -41,7 +41,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SingleOrderCardUI = function SingleOrderCardUI(props) {
   var _theme$orders, _theme$orders$compone, _theme$orders$compone2, _theme$orders2, _theme$orders2$compon, _theme$orders2$compon2, _theme$orders3, _theme$orders3$compon, _theme$orders3$compon2, _theme$orders4, _theme$orders4$compon, _theme$orders4$compon2, _theme$orders5, _theme$orders5$compon, _theme$orders5$compon2, _theme$orders6, _theme$orders6$compon, _theme$orders6$compon2, _theme$orders7, _theme$orders7$compon, _theme$orders7$compon2, _theme$orders8, _theme$orders8$compon, _theme$orders8$compon2, _props$beforeElements, _props$beforeComponen, _order$business, _order$business2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _theme$images4, _theme$images4$dummie, _order$business7, _order$business8, _order$summary, _order$business9, _order$business10, _order$business11, _order$business12, _getOrderStatus, _order$business13, _order$summary2, _order$business14, _props$afterComponent, _props$afterElements;
   var order = props.order,
-    getOrderStatus = props.getOrderStatus,
     isBusinessesPage = props.isBusinessesPage,
     handleReorder = props.handleReorder,
     customArray = props.customArray,
@@ -286,7 +285,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     className: "order-status"
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
-  }) : (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.Price, {
+  }) : (_getOrderStatus = (0, _utils.getOrderStatus)(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.Price, {
     isBusinessesPage: isBusinessesPage
   }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50

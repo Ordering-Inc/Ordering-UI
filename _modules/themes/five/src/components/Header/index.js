@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Header = void 0;
+exports.default = exports.Header = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactRouterDom = require("react-router-dom");
 var _orderingComponents = require("ordering-components");
@@ -589,3 +589,5 @@ exports.Header = Header;
 Header.defaultProps = {
   isShowOrderOptions: true
 };
+var _default = Header;
+exports.default = _default;

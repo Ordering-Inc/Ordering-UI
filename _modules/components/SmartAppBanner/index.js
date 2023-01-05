@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SmartAppBanner = void 0;
+exports.default = exports.SmartAppBanner = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _orderingComponents = require("ordering-components");
 var _reactSmartbanner = _interopRequireDefault(require("react-smartbanner"));
@@ -52,3 +52,5 @@ var SmartAppBanner = function SmartAppBanner(props) {
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.SmartAppBanner, smartAppBannerProps);
 };
 exports.SmartAppBanner = SmartAppBanner;
+var _default = SmartAppBanner;
+exports.default = _default;

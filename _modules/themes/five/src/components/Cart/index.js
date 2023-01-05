@@ -47,7 +47,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CartUI = function CartUI(props) {
-  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _Object$values, _orderState$carts, _theme$viewString, _theme$viewString$com, _theme$viewString$com2, _theme$viewString$com3, _theme$viewString$com4, _theme$viewString2, _theme$viewString2$co, _theme$viewString2$co2, _theme$viewString2$co3, _theme$viewString2$co4, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products2, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options2, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_t2, _configs$driver_tip_u2, _configs$driver_tip_t3, _cart$payment_events, _cart$payment_events2, _cart$business2, _cart$business3, _curProduct$calendar_, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _Object$values, _orderState$carts, _props$cart, _theme$viewString, _theme$viewString$com, _theme$viewString$com2, _theme$viewString$com3, _theme$viewString$com4, _theme$viewString2, _theme$viewString2$co, _theme$viewString2$co2, _theme$viewString2$co3, _theme$viewString2$co4, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products2, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$delivery_price_, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options2, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_t2, _configs$driver_tip_u2, _configs$driver_tip_t3, _cart$payment_events, _cart$payment_events2, _cart$business2, _cart$business3, _curProduct$calendar_, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
   var currentCartUuid = props.currentCartUuid,
     clearCart = props.clearCart,
     isProducts = props.isProducts,
@@ -69,7 +69,8 @@ var CartUI = function CartUI(props) {
     handleChangeComment = props.handleChangeComment,
     commentState = props.commentState,
     handleRemoveOfferClick = props.handleRemoveOfferClick,
-    setPreorderBusiness = props.setPreorderBusiness;
+    setPreorderBusiness = props.setPreorderBusiness,
+    cartMulticart = props.cart;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -149,7 +150,7 @@ var CartUI = function CartUI(props) {
     var _cart$products;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (cart === null || cart === void 0 ? void 0 : cart.valid_schedule) && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.valid_maximum) && (cart === null || cart === void 0 ? void 0 : cart.valid_minimum) && !(cart !== null && cart !== void 0 && cart.wallets);
   })) || null || [];
-  var cart = orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(props.cart.business_id)];
+  var cart = cartMulticart || (orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat((_props$cart = props.cart) === null || _props$cart === void 0 ? void 0 : _props$cart.business_id)]);
   var viewString = isStore ? 'business_view' : 'header';
   var hideCartComments = theme === null || theme === void 0 ? void 0 : (_theme$viewString = theme[viewString]) === null || _theme$viewString === void 0 ? void 0 : (_theme$viewString$com = _theme$viewString.components) === null || _theme$viewString$com === void 0 ? void 0 : (_theme$viewString$com2 = _theme$viewString$com.cart) === null || _theme$viewString$com2 === void 0 ? void 0 : (_theme$viewString$com3 = _theme$viewString$com2.components) === null || _theme$viewString$com3 === void 0 ? void 0 : (_theme$viewString$com4 = _theme$viewString$com3.comments) === null || _theme$viewString$com4 === void 0 ? void 0 : _theme$viewString$com4.hidden;
   var hideCartDiscount = theme === null || theme === void 0 ? void 0 : (_theme$viewString2 = theme[viewString]) === null || _theme$viewString2 === void 0 ? void 0 : (_theme$viewString2$co = _theme$viewString2.components) === null || _theme$viewString2$co === void 0 ? void 0 : (_theme$viewString2$co2 = _theme$viewString2$co.cart) === null || _theme$viewString2$co2 === void 0 ? void 0 : (_theme$viewString2$co3 = _theme$viewString2$co2.components) === null || _theme$viewString2$co3 === void 0 ? void 0 : (_theme$viewString2$co4 = _theme$viewString2$co3.discount) === null || _theme$viewString2$co4 === void 0 ? void 0 : _theme$viewString2$co4.hidden;
@@ -236,7 +237,7 @@ var CartUI = function CartUI(props) {
       events.emit('go_to_page', {
         page: 'multi_cart',
         params: {
-          cartUuid: cart.uuid,
+          cartUuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
           cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart
         }
       });
@@ -244,7 +245,7 @@ var CartUI = function CartUI(props) {
       events.emit('go_to_page', {
         page: 'checkout',
         params: {
-          cartUuid: cart.uuid
+          cartUuid: cart === null || cart === void 0 ? void 0 : cart.uuid
         }
       });
     }
@@ -304,7 +305,7 @@ var CartUI = function CartUI(props) {
   };
   var getIncludedTaxes = function getIncludedTaxes() {
     if ((cart === null || cart === void 0 ? void 0 : cart.taxes) === null) {
-      return cart.business.tax_type === 1 ? cart === null || cart === void 0 ? void 0 : cart.tax : 0;
+      return (cart === null || cart === void 0 ? void 0 : cart.business.tax_type) === 1 ? cart === null || cart === void 0 ? void 0 : cart.tax : 0;
     } else {
       return cart === null || cart === void 0 ? void 0 : cart.taxes.reduce(function (taxIncluded, tax) {
         var _tax$summary;
@@ -487,7 +488,7 @@ var CartUI = function CartUI(props) {
         return onRemoveOffer(offer === null || offer === void 0 ? void 0 : offer.id);
       }
     }))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 ? void 0 : (_offer$summary2 = offer.summary) === null || _offer$summary2 === void 0 ? void 0 : _offer$summary2.discount)));
-  })), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.delivery_price))), !hideCartDiscount && (cart === null || cart === void 0 ? void 0 : (_cart$offers7 = cart.offers) === null || _cart$offers7 === void 0 ? void 0 : _cart$offers7.length) > 0 && (cart === null || cart === void 0 ? void 0 : (_cart$offers8 = cart.offers) === null || _cart$offers8 === void 0 ? void 0 : (_cart$offers8$filter = _cart$offers8.filter(function (offer) {
+  })), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_cart$delivery_price_ = cart === null || cart === void 0 ? void 0 : cart.delivery_price_with_discount) !== null && _cart$delivery_price_ !== void 0 ? _cart$delivery_price_ : cart === null || cart === void 0 ? void 0 : cart.delivery_price))), !hideCartDiscount && (cart === null || cart === void 0 ? void 0 : (_cart$offers7 = cart.offers) === null || _cart$offers7 === void 0 ? void 0 : _cart$offers7.length) > 0 && (cart === null || cart === void 0 ? void 0 : (_cart$offers8 = cart.offers) === null || _cart$offers8 === void 0 ? void 0 : (_cart$offers8$filter = _cart$offers8.filter(function (offer) {
     return (offer === null || offer === void 0 ? void 0 : offer.target) === 2;
   })) === null || _cart$offers8$filter === void 0 ? void 0 : _cart$offers8$filter.map(function (offer) {
     var _offer$summary3;
@@ -513,8 +514,8 @@ var CartUI = function CartUI(props) {
       }
     }))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 ? void 0 : (_offer$summary3 = offer.summary) === null || _offer$summary3 === void 0 ? void 0 : _offer$summary3.discount)));
   })), (cart === null || cart === void 0 ? void 0 : cart.driver_tip) > 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip'), ' ', (cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate) > 0 && parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 2 && !parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_u = configs.driver_tip_use_custom) === null || _configs$driver_tip_u === void 0 ? void 0 : _configs$driver_tip_u.value, 10) && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate, parseNumber), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.driver_tip))))), isCouponEnabled && !isCartPending && (isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover) && !hideCartDiscount && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
-    businessId: cart.business_id,
-    price: cart.total
+    businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
+    price: cart === null || cart === void 0 ? void 0 : cart.total
   })), isMultiCheckout && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.checkout) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.driver_tip) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.enabled) && driverTipsOptions.length > 0 && !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
@@ -640,14 +641,14 @@ var CartUI = function CartUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_TaxInformation.TaxInformation, {
     type: openTaxModal.type,
     data: openTaxModal.data,
-    products: cart.products,
+    products: cart === null || cart === void 0 ? void 0 : cart.products,
     useKioskApp: useKioskApp
   })), (openUpselling || isUpselling) && /*#__PURE__*/_react.default.createElement(_UpsellingPage.UpsellingPage, {
     useKioskApp: useKioskApp,
-    businessId: cart.business_id,
+    businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     isCustomMode: isCustomMode,
-    cartProducts: cart.products,
-    business: cart.business,
+    cartProducts: cart === null || cart === void 0 ? void 0 : cart.products,
+    business: cart === null || cart === void 0 ? void 0 : cart.business,
     handleUpsellingPage: handleUpsellingPage,
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,

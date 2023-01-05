@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Modal = void 0;
+exports.default = exports.Modal = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 var _orderingComponents = require("ordering-components");
@@ -102,3 +102,5 @@ var Modal = function Modal(props) {
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.Popup, ModalProps);
 };
 exports.Modal = Modal;
+var _default = Modal;
+exports.default = _default;
