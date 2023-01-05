@@ -132,7 +132,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   var hideHighestBusiness = theme === null || theme === void 0 ? void 0 : (_theme$business_listi16 = theme.business_listing_view) === null || _theme$business_listi16 === void 0 ? void 0 : (_theme$business_listi17 = _theme$business_listi16.components) === null || _theme$business_listi17 === void 0 ? void 0 : (_theme$business_listi18 = _theme$business_listi17.highest_rated_business_block) === null || _theme$business_listi18 === void 0 ? void 0 : _theme$business_listi18.hidden;
   var hideSearchSection = hideCities && hideSearch && hideFilter;
   var isAllCategoriesHidden = theme === null || theme === void 0 ? void 0 : (_theme$business_listi19 = theme.business_listing_view) === null || _theme$business_listi19 === void 0 ? void 0 : (_theme$business_listi20 = _theme$business_listi19.components) === null || _theme$business_listi20 === void 0 ? void 0 : (_theme$business_listi21 = _theme$business_listi20.categories) === null || _theme$business_listi21 === void 0 ? void 0 : _theme$business_listi21.hidden;
-  var businessesIds = businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
+  var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
   }));
   var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.type) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.toLowerCase()) === 'chew';
@@ -221,7 +221,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   var OrdersSection = function OrdersSection(_ref2) {
     var _getCustomArray;
     var titleContent = _ref2.titleContent;
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
       horizontal: true,
       isBusinessesPage: true,
       onRedirectPage: onRedirectPage,
@@ -235,7 +235,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       isCustomerMode: isCustomerMode,
       franchiseId: props.franchiseId
     }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
-      pastOrders: true,
       horizontal: true,
       asDashboard: true,
       isBusinessesPage: true,

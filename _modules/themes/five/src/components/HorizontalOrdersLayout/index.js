@@ -33,9 +33,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var ordersToShow = businessesIds && isCustomerMode ? orders.filter(function (order) {
-    return businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id);
-  }) : businessesIds ? orders.filter(function (order) {
+  var ordersToShow = businessesIds ? orders.filter(function (order) {
     var _order$business;
     return (businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id)) || JSON.stringify(businessesIds.sort(function (a, b) {
       return a - b;
