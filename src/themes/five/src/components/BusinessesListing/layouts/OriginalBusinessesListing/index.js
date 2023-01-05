@@ -94,8 +94,7 @@ const BusinessesListingUI = (props) => {
   const hideHighestBusiness = theme?.business_listing_view?.components?.highest_rated_business_block?.hidden
   const hideSearchSection = hideCities && hideSearch && hideFilter
   const isAllCategoriesHidden = theme?.business_listing_view?.components?.categories?.hidden
-  const businessesIds = isCustomLayout &&
-    businessesList.businesses &&
+  const businessesIds = businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
   const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
@@ -182,7 +181,7 @@ const BusinessesListingUI = (props) => {
   const OrdersSection = ({ titleContent }) => {
     return (
       <>
-        {isCustomLayout && onRedirectPage && (
+        {onRedirectPage && (
           <>
             <OrdersOption
               horizontal
@@ -199,6 +198,7 @@ const BusinessesListingUI = (props) => {
               franchiseId={props.franchiseId}
             />
             <OrdersOption
+              pastOrders
               horizontal
               asDashboard
               isBusinessesPage
