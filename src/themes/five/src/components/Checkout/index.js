@@ -56,7 +56,9 @@ import {
   RewardDisclaimerContainer,
   CardForm,
   Row,
-  InputContainer
+  InputContainer,
+  PayCardSelected,
+  CardItemContent
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -80,6 +82,7 @@ import { Select } from '../../styles/Select'
 import { PlaceSpot } from '../PlaceSpot'
 import { VaXMiCuenta } from '../VaXMiCuenta'
 import { MomentContent as MomentContentPF } from '../MomentContent/layouts/pfchangs'
+import { getIconCard } from '../../../../../utils'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -831,6 +834,16 @@ const CheckoutUI = (props) => {
         onClose={() => setOpenCardCSV(false)}
       >
         <CardForm>
+          <PayCardSelected>
+            <CardItemContent>
+              <span className='brand'>
+                <img src={getIconCard(paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName)} alt={paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName} />
+              </span>
+              <span>
+                XXXX-XXXX-XXXX-{paymethodSelected?.data?.card?.last4}
+              </span>
+            </CardItemContent>
+          </PayCardSelected>
           <Row>
             <InputContainer isValid={errorsCSV.csv} showBorder={errorsCSV.border}>
               <Input

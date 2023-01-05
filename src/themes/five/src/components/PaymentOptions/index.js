@@ -198,6 +198,11 @@ const PaymentOptionsUI = (props) => {
     }
   }, [paymethodData, paymethodSelected])
 
+  useEffect(() => {
+    if (!hasCateringProducts?.loading && hasCateringProducts?.result && paymethodSelected?.gateway !== 'openpay' ) handlePaymentMethodClick(null)
+
+  }, [paymethodSelected, hasCateringProducts])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
