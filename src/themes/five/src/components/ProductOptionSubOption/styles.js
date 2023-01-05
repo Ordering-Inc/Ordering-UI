@@ -31,7 +31,6 @@ export const IconControl = styled.div`
     color: ${props => props.theme.colors.lightGray};
   }
 `
-
 export const Text = styled.div`
   flex: 1 1 auto;
   display: flex;
