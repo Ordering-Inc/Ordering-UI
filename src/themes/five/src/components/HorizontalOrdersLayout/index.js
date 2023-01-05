@@ -28,11 +28,14 @@ export const HorizontalOrdersLayout = (props) => {
 
   const [, t] = useLanguage()
 
-  const ordersToShow = businessesIds
+  const ordersToShow = businessesIds && isCustomerMode
     ? orders.filter(order =>
-      businessesIds?.includes(order?.business_id) ||
-      JSON.stringify(businessesIds.sort((a, b) => a - b)) === JSON.stringify(order?.business?.map(business => business?.id).sort((a, b) => a - b)))
-    : orders
+      businessesIds?.includes(order?.business_id))
+    : businessesIds
+      ? orders.filter(order =>
+        businessesIds?.includes(order?.business_id) ||
+        JSON.stringify(businessesIds.sort((a, b) => a - b)) === JSON.stringify(order?.business?.map(business => business?.id).sort((a, b) => a - b)))
+      : orders
 
   const notOrders = isProducts || isBusiness
 
