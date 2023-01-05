@@ -22,3 +22,5 @@ export const Cms = (props) => {
     </>
   )
 }
+
+export default Cms

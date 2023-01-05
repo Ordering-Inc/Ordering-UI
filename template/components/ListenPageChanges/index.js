@@ -112,3 +112,5 @@ export const ListenPageChanges = ({ children }) => {
     </>
   )
 }
+
+export default ListenPageChanges
