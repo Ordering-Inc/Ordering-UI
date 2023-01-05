@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useUtils, MultiOrdersDetails as MultiOrdersDetailsController } from 'ordering-components'
+import { useLanguage, useUtils, MultiOrdersDetails as MultiOrdersDetailsController, useConfig } from 'ordering-components'
 import { Image } from '../../../../../components/Image'
 import Skeleton from 'react-loading-skeleton'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -15,7 +15,9 @@ import {
   PhotoWrapper,
   OrderSummary,
   SingleOrderContainer,
-  Divider
+  Divider,
+  StatusBar,
+  StatusBarContainer
 } from './styles'
 import { NotFoundSource } from '../NotFoundSource'
 import { useTheme } from 'styled-components'
@@ -33,7 +35,11 @@ const MultiOrdersDetailsUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [{ configs }] = useConfig()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const progressBarStyle = configs.multi_business_checkout_progress_bar_style?.value
+  const showBarInOrder = ['group', 'both']
+  const showBarInIndividual = ['individual', 'both']
 
   const isTaxIncludedOnPrice = orders.every(_order => _order.taxes?.length ? _order.taxes?.every(_tax => _tax.type === 1) : true)
 
@@ -116,6 +122,12 @@ const MultiOrdersDetailsUI = (props) => {
           ) : (
             <OrderSummary>
               <h3>{t('ORDER_SUMMARY', 'Order summary')}</h3>
+              {(showBarInOrder.includes(progressBarStyle)) && (
+                <StatusBarContainer>
+                  <StatusBar percentage={getOrderStatus(orders[0]?.status)?.percentage} />
+                  <p className='order-status'>{getOrderStatus(orders[0]?.status)?.value}</p>
+                </StatusBarContainer>
+              )}
               <table>
                 <tbody>
                   {orders.map(order => (
@@ -171,6 +183,7 @@ const MultiOrdersDetailsUI = (props) => {
               isMultiOrders
               getOrderStatus={getOrderStatus}
               order={order}
+              showProgressBar={showBarInIndividual.includes(progressBarStyle)}
             />
           ))}
         </>

@@ -6,7 +6,7 @@ import { ReviewProduct } from '../ReviewProduct'
 import { ReviewDriver } from '../ReviewDriver'
 
 import { useTheme } from 'styled-components'
-import { getGoogleMapImage } from '../../../../../utils'
+import { getGoogleMapImage, getOrderStatus } from '../../../../../utils'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
@@ -33,7 +33,6 @@ import {
 const SingleOrderCardUI = (props) => {
   const {
     order,
-    getOrderStatus,
     isBusinessesPage,
     handleReorder,
     customArray,

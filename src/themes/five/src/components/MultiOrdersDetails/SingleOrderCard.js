@@ -3,7 +3,8 @@ import {
   useLanguage,
   useEvent,
   useUtils,
-  OrderDetails as OrderDetailsController
+  OrderDetails as OrderDetailsController,
+  useConfig
 } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import { Messages } from '../../../../../components/Messages'
@@ -30,7 +31,9 @@ const SingleOrderCardUI = (props) => {
     orderTypes,
     readMessages,
     messages,
-    setMessages
+    setMessages,
+    showProgressBar,
+    getOrderStatus
   } = props
 
   const { order } = props.order
@@ -39,40 +42,10 @@ const SingleOrderCardUI = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
   const [{ parsePrice, parseDate }] = useUtils()
+  const [{ configs }] = useConfig()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
-
-  const getOrderStatus = (s) => {
-    const status = parseInt(s)
-    const orderStatus = [
-      { key: 0, value: t('PENDING', theme?.defaultLanguages?.PENDING || 'Pending'), slug: 'PENDING', percentage: 25 },
-      { key: 1, value: t('COMPLETED', theme?.defaultLanguages?.COMPLETED || 'Completed'), slug: 'COMPLETED', percentage: 100 },
-      { key: 2, value: t('REJECTED', theme?.defaultLanguages?.REJECTED || 'Rejected'), slug: 'REJECTED', percentage: 0 },
-      { key: 3, value: t('DRIVER_IN_BUSINESS', theme?.defaultLanguages?.DRIVER_IN_BUSINESS || 'Driver in business'), slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
-      { key: 4, value: t('PREPARATION_COMPLETED', theme?.defaultLanguages?.PREPARATION_COMPLETED || 'Preparation Completed'), slug: 'PREPARATION_COMPLETED', percentage: 70 },
-      { key: 5, value: t('REJECTED_BY_BUSINESS', theme?.defaultLanguages?.REJECTED_BY_BUSINESS || 'Rejected by business'), slug: 'REJECTED_BY_BUSINESS', percentage: 0 },
-      { key: 6, value: t('REJECTED_BY_DRIVER', theme?.defaultLanguages?.REJECTED_BY_DRIVER || 'Rejected by Driver'), slug: 'REJECTED_BY_DRIVER', percentage: 0 },
-      { key: 7, value: t('ACCEPTED_BY_BUSINESS', theme?.defaultLanguages?.ACCEPTED_BY_BUSINESS || 'Accepted by business'), slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
-      { key: 8, value: t('ACCEPTED_BY_DRIVER', theme?.defaultLanguages?.ACCEPTED_BY_DRIVER || 'Accepted by driver'), slug: 'ACCEPTED_BY_DRIVER', percentage: 45 },
-      { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', theme?.defaultLanguages?.PICK_UP_COMPLETED_BY_DRIVER || 'Pick up completed by driver'), slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },
-      { key: 10, value: t('PICK_UP_FAILED_BY_DRIVER', theme?.defaultLanguages?.PICK_UP_FAILED_BY_DRIVER || 'Pick up Failed by driver'), slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', theme?.defaultLanguages?.DELIVERY_COMPLETED_BY_DRIVER || 'Delivery completed by driver'), slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
-      { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', theme?.defaultLanguages?.DELIVERY_FAILED_BY_DRIVER || 'Delivery Failed by driver'), slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 13, value: t('PREORDER', theme?.defaultLanguages?.PREORDER || 'PreOrder'), slug: 'PREORDER', percentage: 0 },
-      { key: 14, value: t('ORDER_NOT_READY', theme?.defaultLanguages?.ORDER_NOT_READY || 'Order not ready'), slug: 'ORDER_NOT_READY', percentage: 65 },
-      { key: 15, value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER || 'Order picked up completed by customer'), slug: 'ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
-      { key: 16, value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_STATUS_CANCELLED_BY_CUSTOMER || 'Order cancelled by customer'), slug: 'ORDER_STATUS_CANCELLED_BY_CUSTOMER', percentage: 0 },
-      { key: 17, value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_NOT_PICKEDUP_BY_CUSTOMER || 'Order not picked up by customer'), slug: 'ORDER_NOT_PICKEDUP_BY_CUSTOMER', percentage: 0 },
-      { key: 18, value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS || 'Driver almost arrived to business'), slug: 'ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', percentage: 55 },
-      { key: 19, value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', theme?.defaultLanguages?.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER || 'Driver almost arrived to customer'), slug: 'ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', percentage: 90 },
-      { key: 20, value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS || 'Customer almost arrived to business'), slug: 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', percentage: 90 },
-      { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ARRIVED_BUSINESS || 'Customer arrived to business'), slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS', percentage: 95 },
-      { key: 22, value: t('ORDER_LOOKING_FOR_DRIVER', theme?.defaultLanguages?.ORDER_LOOKING_FOR_DRIVER || 'Looking for driver'), slug: 'ORDER_LOOKING_FOR_DRIVER', percentage: 35 },
-      { key: 23, value: t('ORDER_DRIVER_ON_WAY', theme?.defaultLanguages?.ORDER_DRIVER_ON_WAY || 'Driver on way'), slug: 'ORDER_DRIVER_ON_WAY', percentage: 45 }
-    ]
-    const objectStatus = orderStatus.find((o) => o.key === status)
-    return objectStatus && objectStatus
-  }
+  const hideIndividualButton = configs.multi_business_checkout_remove_individual_buttons?.value === '1'
 
   const handleGoToOrderDetails = (uuid) => {
     events.emit('go_to_page', { page: 'order_detail', params: { orderId: uuid }, replace: !props.isMultiOrders })
@@ -119,13 +92,15 @@ const SingleOrderCardUI = (props) => {
             </p>
           </div>
         </div>
-        <Button
-          outline
-          color='primary'
-          onClick={() => handleGoToOrderDetails(order?.uuid)}
-        >
-          {t('ORDER_DETAILS', 'Order Details')}
-        </Button>
+        {!hideIndividualButton && (
+          <Button
+            outline
+            color='primary'
+            onClick={() => handleGoToOrderDetails(order?.uuid)}
+          >
+            {t('ORDER_DETAILS', 'Order Details')}
+          </Button>
+        )}
       </SingleOrderHeader>
       <OrderBusinessDetails>
         <OrderBusinessWrapper>
@@ -155,8 +130,12 @@ const SingleOrderCardUI = (props) => {
           </MessagesIcon>
         </ActionsBlock>
       </OrderBusinessDetails>
-      <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
-      <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
+      {showProgressBar && (
+        <>
+          <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+          <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
+        </>
+      )}
       <p className='order-total'>{t('EXPORT_ORDER_TOTAL', 'Order total')}: {parsePrice(order?.summary?.total ?? order?.total)}</p>
 
       {openMessages.business && (
@@ -164,7 +143,7 @@ const SingleOrderCardUI = (props) => {
           open={openMessages.business}
           onClose={() => setOpenMessages({ driver: false, business: false })}
           width='70%'
-          // padding='0'
+        // padding='0'
         >
           <Messages
             orderId={order?.id}

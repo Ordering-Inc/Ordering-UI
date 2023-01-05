@@ -262,3 +262,11 @@ export const ExclamationWrapper = styled.div`
     color: ${props => props.theme?.colors?.primary}
   }
 `
+
+export const StatusBarContainer = styled.div`
+  margin-top: 10px;
+  p {
+    font-weight: 500;
+    margin-top: 0;
+  }
+`
