@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
-import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 import { Cart3 } from 'react-bootstrap-icons'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
@@ -33,8 +32,7 @@ import {
   ProfessionalFilterWrapper,
   WrapperSearchAbsolute,
   NearBusiness,
-  PageBannerWrapper,
-  CategorySelectedContainer
+  PageBannerWrapper
 } from './styles'
 
 import { SearchProducts as SearchProductsOriginal } from '../../../../../themes/five/src/components/SearchProducts'
@@ -173,6 +171,8 @@ export const RenderProductsLayout = (props) => {
                 errorQuantityProducts={errorQuantityProducts}
                 sortByValue={sortByValue}
                 categoryClicked={categoryClicked}
+                categorySelected={categorySelected}
+                setCategoryClicked={setCategoryClicked}
               />
             )}
 
@@ -356,7 +356,7 @@ export const RenderProductsLayout = (props) => {
                   <BusinessCategoriesContainer offSticky>
                     {!(business?.categories?.length === 0 && !categoryId) && (
                       <>
-                        {(!categoryClicked || windowSize.width >= 993) ? (
+                        {(!categoryClicked || windowSize.width >= 993) && (
                           <BusinessLayoutCategories
                             component='categories'
                             categories={[
@@ -374,10 +374,6 @@ export const RenderProductsLayout = (props) => {
                             useKioskApp={useKioskApp}
                             setCategoryClicked={setCategoryClicked}
                           />
-                        ) : (
-                          <CategorySelectedContainer onClick={() => setCategoryClicked(false)}>
-                            <BsCaretLeftFill /> {categorySelected?.name}
-                          </CategorySelectedContainer>
                         )}
                       </>
                     )}
