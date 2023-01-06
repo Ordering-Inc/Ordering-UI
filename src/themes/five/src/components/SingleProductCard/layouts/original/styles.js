@@ -42,7 +42,7 @@ export const CardContainer = styled.div`
 
   ` : css`
     width: 100%;
-    margin: 10px 0px;
+    margin: 10px;
     @media (min-width: 576px) {
       margin: 10px;
       width: calc(100% - 20px);
