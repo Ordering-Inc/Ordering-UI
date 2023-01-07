@@ -324,6 +324,12 @@ const SignUpFormUI = (props) => {
     }
   }, [recaptchaConfig])
 
+  const preventWhiteSpaceOnKeyDown = (e) => {
+    if (e.key === " ") {
+      e.preventDefault()
+    }
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -417,6 +423,7 @@ const SignUpFormUI = (props) => {
                                             : null,
                                           pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                                         })}
+                                        onKeyDown={preventWhiteSpaceOnKeyDown}
                                         required={!!field.required}
                                         autoComplete='on'
                                         isError={formMethods.errors?.email && !notValidationFields.includes(field.code)}
