@@ -10,3 +10,5 @@ export const Favorite = (props) => {
     </>
   )
 }
+
+export default Favorite

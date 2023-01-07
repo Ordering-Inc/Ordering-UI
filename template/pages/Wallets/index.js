@@ -10,3 +10,5 @@ export const Wallets = (props) => {
     </>
   )
 }
+
+export default Wallets

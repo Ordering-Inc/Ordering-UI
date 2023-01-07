@@ -30,3 +30,5 @@ export const HelmetTags = (props) => {
     </Helmet>
   )
 }
+
+export default HelmetTags

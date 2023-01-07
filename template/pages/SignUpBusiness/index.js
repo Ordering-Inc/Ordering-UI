@@ -10,3 +10,5 @@ export const SignUpBusiness = (props) => {
     </>
   )
 }
+
+export default SignUpBusiness
