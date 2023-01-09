@@ -18,18 +18,22 @@ var Header = _styledComponents.default.div(_templateObject || (_templateObject =
   return !props.isChew && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["1px solid #E9ECEF"])));
 });
 exports.Header = Header;
-var InnerHeader = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  color: #FFF;\n  justify-content: space-between;\n  margin: 15px 0;\n  align-items: center;\n\n  #left-side {\n    width: ", ";\n    justify-content: flex-start;\n  }\n  #right-side {\n    width: ", ";\n    justify-content: flex-end;\n  }\n  #center-side {\n    width: ", ";\n  }\n\n  @media (min-width: 1024px) {\n    #center-side {\n      width: calc(60% - 140px);\n    }\n  }\n\n  @media (min-width: 1200px) {\n    #center-side {\n      width: calc(60% - 200px);\n    }\n  }\n\n  @media (min-width: 1500px) {\n    #center-side {\n      width: calc(60% - 260px);\n    }\n  }\n"])), function (_ref) {
+var InnerHeader = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  color: #FFF;\n  justify-content: space-between;\n  margin: 15px 0;\n  align-items: center;\n\n  #left-side {\n    width: ", ";\n    justify-content: flex-start;\n  }\n  #right-side {\n    width: ", ";\n    justify-content: flex-end;\n  }\n  #center-side {\n    width: ", ";\n  }\n\n  @media (min-width: 768px) {\n    #left-side {\n      width: ", ";\n    }\n  }\n\n  @media (min-width: 1024px) {\n    #center-side {\n      width: calc(60% - 140px);\n    }\n  }\n\n  @media (min-width: 1200px) {\n    #center-side {\n      width: calc(60% - 200px);\n    }\n  }\n\n  @media (min-width: 1500px) {\n    #center-side {\n      width: calc(60% - 260px);\n    }\n  }\n"])), function (_ref) {
   var _theme$header, _theme$header$compone, _theme$header$compone2;
   var theme = _ref.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.layout) === null || _theme$header$compone2 === void 0 ? void 0 : _theme$header$compone2.type) === 'starbucks' ? '30%' : '25%';
 }, function (_ref2) {
   var _theme$header2, _theme$header2$compon, _theme$header2$compon2;
   var theme = _ref2.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$header2 = theme.header) === null || _theme$header2 === void 0 ? void 0 : (_theme$header2$compon = _theme$header2.components) === null || _theme$header2$compon === void 0 ? void 0 : (_theme$header2$compon2 = _theme$header2$compon.layout) === null || _theme$header2$compon2 === void 0 ? void 0 : _theme$header2$compon2.type) === 'starbucks' ? '30%' : '25%';
+  return (theme === null || theme === void 0 ? void 0 : (_theme$header2 = theme.header) === null || _theme$header2 === void 0 ? void 0 : (_theme$header2$compon = _theme$header2.components) === null || _theme$header2$compon === void 0 ? void 0 : (_theme$header2$compon2 = _theme$header2$compon.layout) === null || _theme$header2$compon2 === void 0 ? void 0 : _theme$header2$compon2.type) === 'starbucks' ? '30%' : '40%';
 }, function (_ref3) {
   var _theme$header3, _theme$header3$compon, _theme$header3$compon2;
   var theme = _ref3.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$header3 = theme.header) === null || _theme$header3 === void 0 ? void 0 : (_theme$header3$compon = _theme$header3.components) === null || _theme$header3$compon === void 0 ? void 0 : (_theme$header3$compon2 = _theme$header3$compon.layout) === null || _theme$header3$compon2 === void 0 ? void 0 : _theme$header3$compon2.type) === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)';
+}, function (_ref4) {
+  var _theme$header4, _theme$header4$compon, _theme$header4$compon2;
+  var theme = _ref4.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$header4 = theme.header) === null || _theme$header4 === void 0 ? void 0 : (_theme$header4$compon = _theme$header4.components) === null || _theme$header4$compon === void 0 ? void 0 : (_theme$header4$compon2 = _theme$header4$compon.layout) === null || _theme$header4$compon2 === void 0 ? void 0 : _theme$header4$compon2.type) === 'starbucks' ? '30%' : 'initial';
 });
 exports.InnerHeader = InnerHeader;
 var LogoHeader = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  img {\n    width: ", ";\n    height: ", ";\n    margin: 0;\n    vertical-align: middle;\n    margin-left: 10px;\n\n    ", "\n\n    @media (min-width: 769px) {\n      width: ", ";\n      height: ", ";\n    }\n  }\n\n  ", "\n\n  @media (min-width: 769px) {\n    img:nth-child(1) {\n      display: block;\n    }\n    img:nth-child(2) {\n      display: none;\n    }\n  }\n"])), function (props) {
@@ -56,8 +60,8 @@ var RightHeader = _styledComponents.default.div(_templateObject8 || (_templateOb
   return props.theme.colors.darkTextColor;
 });
 exports.RightHeader = RightHeader;
-var Menu = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  #select-input {\n    border-radius: 7.6px;\n\n    #list {\n      border-radius: 7.6px;\n    }\n\n    ", "\n  }\n\n  &.left-header {\n    background: #F8F9FA;\n    border: none;\n    box-sizing: border-box;\n    border-radius: ", ";\n    margin: 0 15px;\n    flex-grow: 1;\n    padding: 0 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: relative;\n    height: 44px;\n\n    @media (min-width: 821px) {\n      border: 1px solid #DEE2E6;\n      justify-content: space-between;\n    }\n\n    @media (min-width: 1024px) {\n      padding: 0 20px;\n      margin-left: 45px;\n    }\n\n    @media (min-width: 1200px) {\n      padding: 0 30px;\n      margin-left: 50px;\n    }\n\n    @media (min-width: 1500px) {\n      padding: 0 30px;\n      margin: 0 75px;\n    }\n  }\n\n  > *:not(:last-child) {\n    margin: 0 5px;\n  }\n\n  > span {\n    #select-input {\n      background: transparent !important;\n    }\n  }\n\n  .moment-popover {\n    border-left: 1px solid #DEE2E6;\n    border-right: 1px solid #DEE2E6;\n    height: 100%;\n    justify-content: center;\n    width: 200px;\n    display: none;\n\n    @media (min-width: 1175px) {\n      width: 250px;\n    }\n    \n    @media (min-width: 1400px) {\n      width: 400px;\n    }\n\n    > div:first-child {\n      width: 100%;\n      display: flex;\n      justify-content: center;\n    }\n  }\n\n  .address-popover {\n    flex-grow: 1;\n    display: none;\n    > div:first-child {\n      width: 100%;\n    }\n  }\n\n  .order-type {\n    padding: 0 10px;\n\n    @media (min-width: 1200px) {\n      padding: 0 20px;\n    }\n  }\n\n\n  @media (min-width: 821px) {\n    .moment-popover,\n    .address-popover {\n      display: flex;\n    }\n  }\n"])), function (_ref4) {
-  var isCustomerMode = _ref4.isCustomerMode;
+var Menu = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  #select-input {\n    border-radius: 7.6px;\n\n    #list {\n      border-radius: 7.6px;\n    }\n\n    ", "\n  }\n\n  &.left-header {\n    background: #F8F9FA;\n    border: none;\n    box-sizing: border-box;\n    border-radius: ", ";\n    margin: 0 20px;\n    flex-grow: 1;\n    padding: 0 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: relative;\n    height: 44px;\n\n    @media (min-width: 821px) {\n      border: 1px solid #DEE2E6;\n      justify-content: space-between;\n    }\n\n    @media (min-width: 1024px) {\n      padding: 0 20px;\n      margin-left: 45px;\n    }\n\n    @media (min-width: 1200px) {\n      padding: 0 30px;\n      margin-left: 50px;\n    }\n\n    @media (min-width: 1500px) {\n      padding: 0 30px;\n      margin: 0 75px;\n    }\n  }\n\n  > *:not(:last-child) {\n    margin: 0 5px;\n  }\n\n  > span {\n    #select-input {\n      background: transparent !important;\n    }\n  }\n\n  .moment-popover {\n    border-left: 1px solid #DEE2E6;\n    border-right: 1px solid #DEE2E6;\n    height: 100%;\n    justify-content: center;\n    width: 200px;\n    display: none;\n\n    @media (min-width: 1175px) {\n      width: 250px;\n    }\n    \n    @media (min-width: 1400px) {\n      width: 400px;\n    }\n\n    > div:first-child {\n      width: 100%;\n      display: flex;\n      justify-content: center;\n    }\n  }\n\n  .address-popover {\n    flex-grow: 1;\n    display: none;\n    > div:first-child {\n      width: 100%;\n    }\n  }\n\n  .order-type {\n    padding: 0 10px;\n\n    @media (min-width: 1200px) {\n      padding: 0 20px;\n    }\n  }\n\n\n  @media (min-width: 821px) {\n    .moment-popover,\n    .address-popover {\n      display: flex;\n    }\n  }\n"])), function (_ref5) {
+  var isCustomerMode = _ref5.isCustomerMode;
   return !isCustomerMode && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin: 0px 5px;\n      height: 40px;\n\n      svg {\n        font-size: 16px;\n      }\n\n      > div:first-child {\n        height: 100%;\n        padding-left: 10px;\n        padding-right: 10px;\n\n        @media (min-width: 993px) {\n          padding-left: 13px;\n          padding-right: 13px;\n        }\n      }\n    "])));
 }, function (props) {
   return props.isChew ? '8px' : '50px';
@@ -65,8 +69,8 @@ var Menu = _styledComponents.default.div(_templateObject9 || (_templateObject9 =
 exports.Menu = Menu;
 var MenuItem = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 exports.MenuItem = MenuItem;
-var MenuLink = _styledComponents.default.a(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 14px;\n  padding: 10px;\n  color: #333;\n  cursor: pointer;\n\n  ", "\n"])), function (_ref5) {
-  var highlight = _ref5.highlight;
+var MenuLink = _styledComponents.default.a(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 14px;\n  padding: 10px;\n  color: #333;\n  cursor: pointer;\n\n  ", "\n"])), function (_ref6) {
+  var highlight = _ref6.highlight;
   return highlight && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    color: ", ";\n    border-radius: 7.6px;\n    padding: 11px 15px;\n\n    &:hover {\n      background: ", ";\n      color: #FFF;\n    }\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
@@ -85,8 +89,8 @@ exports.UserEdit = UserEdit;
 var AddressMenu = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  font-weight: 600;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  position: relative;\n\n  span {\n    width: 85%;\n    p {\n      margin: 0;\n      padding: 0;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n      overflow: hidden;\n    }\n  }\n\n  ", "\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n    margin-right: 10px;\n    ", "\n  }\n  @media (min-width: 765px) {\n    ", "\n  }\n  @media (min-width: 820px) {\n    ", "\n  }\n"])), function (props) {
   var _props$theme$colors, _props$theme$colors2;
   return props.isChew ? (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage : (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
-}, function (_ref6) {
-  var isCustomerMode = _ref6.isCustomerMode;
+}, function (_ref7) {
+  var isCustomerMode = _ref7.isCustomerMode;
   return isCustomerMode ? (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    flex: 0.8;\n  "]))) : (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    width: 50%;\n  "])));
 }, function (props) {
   var _props$theme$colors3;
@@ -94,11 +98,11 @@ var AddressMenu = _styledComponents.default.div(_templateObject17 || (_templateO
 }, function (props) {
   var _props$theme3;
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "])));
-}, function (_ref7) {
-  var isCustomerMode = _ref7.isCustomerMode;
-  return !isCustomerMode && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      width: 80%;\n    "])));
 }, function (_ref8) {
   var isCustomerMode = _ref8.isCustomerMode;
+  return !isCustomerMode && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      width: 80%;\n    "])));
+}, function (_ref9) {
+  var isCustomerMode = _ref9.isCustomerMode;
   return !isCustomerMode && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n      width: 50%;\n    "])));
 });
 exports.AddressMenu = AddressMenu;
@@ -135,9 +139,9 @@ var LanguageSelectorWrapper = (0, _styledComponents.default)(InputGroup)(_templa
 exports.LanguageSelectorWrapper = LanguageSelectorWrapper;
 var HeaderSearchMode = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  width: 300px;\n  input {\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n  @media (min-width: 1400px){\n    width: 300px;\n  }\n  @media (min-width: 1200px){\n    width: 250px;\n  }\n"])));
 exports.HeaderSearchMode = HeaderSearchMode;
-var LeftSide = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  @media (min-width: 769px){\n    flex-direction: ", ";\n    width: 60%;\n  }\n"])), function (_ref9) {
-  var _theme$header4, _theme$header4$compon, _theme$header4$compon2, _theme$header4$compon3, _theme$header4$compon4;
-  var theme = _ref9.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$header4 = theme.header) === null || _theme$header4 === void 0 ? void 0 : (_theme$header4$compon = _theme$header4.components) === null || _theme$header4$compon === void 0 ? void 0 : (_theme$header4$compon2 = _theme$header4$compon.logo) === null || _theme$header4$compon2 === void 0 ? void 0 : (_theme$header4$compon3 = _theme$header4$compon2.components) === null || _theme$header4$compon3 === void 0 ? void 0 : (_theme$header4$compon4 = _theme$header4$compon3.layout) === null || _theme$header4$compon4 === void 0 ? void 0 : _theme$header4$compon4.position) === 'center' ? 'row-reverse' : 'row';
+var LeftSide = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  @media (min-width: 769px){\n    flex-direction: ", ";\n    width: 60%;\n  }\n"])), function (_ref10) {
+  var _theme$header5, _theme$header5$compon, _theme$header5$compon2, _theme$header5$compon3, _theme$header5$compon4;
+  var theme = _ref10.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$header5 = theme.header) === null || _theme$header5 === void 0 ? void 0 : (_theme$header5$compon = _theme$header5.components) === null || _theme$header5$compon === void 0 ? void 0 : (_theme$header5$compon2 = _theme$header5$compon.logo) === null || _theme$header5$compon2 === void 0 ? void 0 : (_theme$header5$compon3 = _theme$header5$compon2.components) === null || _theme$header5$compon3 === void 0 ? void 0 : (_theme$header5$compon4 = _theme$header5$compon3.layout) === null || _theme$header5$compon4 === void 0 ? void 0 : _theme$header5$compon4.position) === 'center' ? 'row-reverse' : 'row';
 });
 exports.LeftSide = LeftSide;

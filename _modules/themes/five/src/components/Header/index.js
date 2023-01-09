@@ -51,7 +51,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$header, _theme$header$compone, _theme$header$compone2, _customerState$user, _orderState$options3, _orderState$options3$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _orderingTheme$my_pro, _orderingTheme$my_pro2, _orderingTheme$my_pro3, _orderingTheme$my_pro4, _orderingTheme$my_pro5, _orderingTheme$my_pro6, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderingTheme$my_pro7, _orderingTheme$my_pro8, _orderingTheme$my_pro9, _orderingTheme$my_pro10, _orderingTheme$my_pro11, _orderingTheme$my_pro12, _theme$images4, _theme$images4$logos, _theme$images5, _theme$images5$logos, _orderState$options5, _orderState$options5$, _orderState$options6, _orderState$options6$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options7, _orderState$options8, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options9, _orderState$options9$, _configState$configs12, _configState$configs13, _orderState$options10, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options11, _orderState$options12, _configState$configs18, _configState$configs19, _orderState$options13, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options14, _orderState$options15, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$header, _theme$header$compone, _theme$header$compone2, _customerState$user, _orderState$options3, _orderState$options3$, _theme$images, _theme$images$logos, _orderingTheme$my_pro, _orderingTheme$my_pro2, _orderingTheme$my_pro3, _orderingTheme$my_pro4, _orderingTheme$my_pro5, _orderingTheme$my_pro6, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderingTheme$my_pro7, _orderingTheme$my_pro8, _orderingTheme$my_pro9, _orderingTheme$my_pro10, _orderingTheme$my_pro11, _orderingTheme$my_pro12, _theme$images4, _theme$images4$logos, _theme$images5, _theme$images5$logos, _orderState$options5, _orderState$options5$, _orderState$options6, _orderState$options6$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options7, _orderState$options8, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options9, _orderState$options9$, _configState$configs12, _configState$configs13, _orderState$options10, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options11, _orderState$options12, _configState$configs18, _configState$configs19, _orderState$options13, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options14, _orderState$options15, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
   var isHome = props.isHome,
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
@@ -257,15 +257,7 @@ var Header = function Header(props) {
       maximumAge: 0
     });
   }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location, pathname]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Header, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Header, {
     isChew: isChew
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftSide, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, {
     id: "left-side"
@@ -294,7 +286,7 @@ var Header = function Header(props) {
     height: isChew ? '20px' : '45px',
     src: isChew ? theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$logos = _theme$images3.logos) === null || _theme$images3$logos === void 0 ? void 0 : _theme$images3$logos.chewLogo : (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$my_pro7 = orderingTheme.my_products) === null || _orderingTheme$my_pro7 === void 0 ? void 0 : (_orderingTheme$my_pro8 = _orderingTheme$my_pro7.components) === null || _orderingTheme$my_pro8 === void 0 ? void 0 : (_orderingTheme$my_pro9 = _orderingTheme$my_pro8.images) === null || _orderingTheme$my_pro9 === void 0 ? void 0 : (_orderingTheme$my_pro10 = _orderingTheme$my_pro9.components) === null || _orderingTheme$my_pro10 === void 0 ? void 0 : (_orderingTheme$my_pro11 = _orderingTheme$my_pro10.logo) === null || _orderingTheme$my_pro11 === void 0 ? void 0 : (_orderingTheme$my_pro12 = _orderingTheme$my_pro11.components) === null || _orderingTheme$my_pro12 === void 0 ? void 0 : _orderingTheme$my_pro12.image) || (isHome ? theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$logos = _theme$images4.logos) === null || _theme$images4$logos === void 0 ? void 0 : _theme$images4$logos.isotypeInvert : theme === null || theme === void 0 ? void 0 : (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$logos = _theme$images5.logos) === null || _theme$images5$logos === void 0 ? void 0 : _theme$images5$logos.isotype),
     loading: "lazy"
-  }))), isShowOrderOptions && !props.isCustomLayout && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
+  }))), isShowOrderOptions && !props.isCustomLayout && windowSize.width >= 576 && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     id: "center-side",
     className: "left-header",
     isCustomerMode: isCustomerMode,
@@ -349,22 +341,23 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     isCustomerMode: isCustomerMode
   }, !auth && windowSize.width > 920 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    onClick: function onClick() {
-      return handleOpenLoginSignUp('login');
-    },
+    name: "signin",
+    highlight: isChew && 1,
     style: {
       whiteSpace: 'nowrap'
     },
-    name: "signin"
-  }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN) || 'Login')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
-      return handleOpenLoginSignUp('signup');
-    },
+      return handleOpenLoginSignUp('login');
+    }
+  }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN) || 'Login')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    name: "signup",
     highlight: 1,
     style: {
       whiteSpace: 'nowrap'
     },
-    name: "signup"
+    onClick: function onClick() {
+      return handleOpenLoginSignUp('signup');
+    }
   }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
     carts: cartsWithProducts,
@@ -398,6 +391,7 @@ var Header = function Header(props) {
       return handleClosePopover('user');
     }
   })), !isHideLanguages && /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))))), onlineStatus && isShowOrderOptions && !props.isCustomLayout && !isCustomerMode && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+    isChew: isChew,
     onClick: function onClick() {
       return openModal('address');
     }
@@ -407,11 +401,14 @@ var Header = function Header(props) {
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs14 = configState.configs) === null || _configState$configs14 === void 0 ? void 0 : (_configState$configs15 = _configState$configs14.max_days_preorder) === null || _configState$configs15 === void 0 ? void 0 : _configState$configs15.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs16 = configState.configs) === null || _configState$configs16 === void 0 ? void 0 : (_configState$configs17 = _configState$configs16.max_days_preorder) === null || _configState$configs17 === void 0 ? void 0 : _configState$configs17.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
-  })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  })) : windowSize.width >= 576 && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
     addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options11 = orderState.options) === null || _orderState$options11 === void 0 ? void 0 : (_orderState$options12 = _orderState$options11.address) === null || _orderState$options12 === void 0 ? void 0 : _orderState$options12.address,
     onClick: function onClick(variant) {
       return openModal(variant);
+    },
+    containerStyle: {
+      width: '80%'
     }
   }), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs18 = configState.configs) === null || _configState$configs18 === void 0 ? void 0 : (_configState$configs19 = _configState$configs18.preorder_status_enabled) === null || _configState$configs19 === void 0 ? void 0 : _configState$configs19.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
@@ -575,15 +572,7 @@ var Header = function Header(props) {
     business: preorderBusiness,
     handleClick: handleBusinessClick,
     showButton: true
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+  })));
 };
 exports.Header = Header;
 Header.defaultProps = {

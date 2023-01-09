@@ -111,7 +111,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
         user_review: orderCompleted.user_review && currentOrder.user_review,
         products: [orderCompleted.products, currentOrder.products].flat()
       });
-    }, {}) : order;
+    }) : order;
   });
   var orders = ordersReduced === null || ordersReduced === void 0 ? void 0 : ordersReduced.filter(function (order) {
     if (!(order !== null && order !== void 0 && order.cart_group_id)) return true;
