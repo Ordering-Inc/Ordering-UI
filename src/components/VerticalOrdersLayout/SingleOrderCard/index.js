@@ -43,19 +43,19 @@ const SingleOrderCardUI = (props) => {
           <>
             {order?.business?.length > 1 ? (
               <MultiLogosContainer>
-                {order?.business?.map((business, i) => (
-                  <React.Fragment key={business?.id}>
-                    {i > 1 ? (
-                      <p>
-                        + {order?.business?.length - 2}
-                      </p>
-                    ) : (
-                      <PastLogo isMulti>
-                        <img src={business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='55px' height='64px' loading='lazy' />
-                      </PastLogo>
-                    )}
-                  </React.Fragment>
+                {order?.business?.map((business, i) => i < 2 && (
+                  <PastLogo
+                    key={business?.id}
+                    isMulti
+                  >
+                    <img src={business?.logo || theme.images?.dummies?.businessLogo} alt='business-logo' width='55px' height='64px' loading='lazy' />
+                  </PastLogo>
                 ))}
+                {order?.business?.length > 1 && (order?.business?.length - 2) > 0 && (
+                  <p>
+                    + {order?.business?.length - 2}
+                  </p>
+                )}
               </MultiLogosContainer>
             ) : (
               <PastLogo>

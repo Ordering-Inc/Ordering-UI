@@ -13,7 +13,7 @@ export const BusinessBanner = styled.div`
   align-items: center;
   margin-bottom: 30px;
   position: relative;
-  @media (max-width: 481px) {
+  @media (max-width: 576px) {
     margin-bottom: 0px;
   }
 `

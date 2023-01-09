@@ -33,6 +33,10 @@ export const BusinessList = styled.div`
       width: calc(100vw - 40px);
       min-width: calc(100vw - 40px);
 
+      ${({ marginCard }) => marginCard && css`
+        margin: ${({ marginCard }) => marginCard} !important;
+      `}
+
       @media (min-width: 681px) {
         width: calc(50vw - 40px);
         min-width: calc(50vw - 40px);

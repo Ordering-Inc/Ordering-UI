@@ -141,7 +141,7 @@ export const HeaderContent = styled.div`
 `
 export const OrderContextUIWrapper = styled.div`
   flex: 1;
-  margin-left: 15px;
+  width: 100%;
   ${props => props.theme.rtl && css`
     margin-left: 0px;
     margin-right: 15px;
