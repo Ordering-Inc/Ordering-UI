@@ -185,6 +185,7 @@ export const WrapTags = styled.div`
   img {
     width: 30px;
     height: 30px;
+    margin-right: 5px;
   }
 `
 
