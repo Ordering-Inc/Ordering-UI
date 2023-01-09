@@ -91,7 +91,7 @@ const OrdersOptionUI = (props) => {
         review: orderCompleted.review && currentOrder.review,
         user_review: orderCompleted.user_review && currentOrder.user_review,
         products: [orderCompleted.products, currentOrder.products].flat()
-      }), {})
+      }))
     : order)
   const orders = ordersReduced?.filter(order => {
     if (!order?.cart_group_id) return true

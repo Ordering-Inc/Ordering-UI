@@ -154,9 +154,9 @@ const MultiCheckoutUI = (props) => {
   }, [validationFields, user, customerState])
 
   useEffect(() => {
-    if (openCarts.length) return
+    if (openCarts.length || cartGroup.loading) return
     onRedirectPage && onRedirectPage({ page: 'search' })
-  }, [openCarts])
+  }, [openCarts, cartGroup])
 
   return (
     <>
@@ -243,8 +243,10 @@ const MultiCheckoutUI = (props) => {
                   <Cart
                     isCartPending={cart?.status === 2}
                     cart={cart}
-                    isMultiCheckout={!isMultiDriverTips}
+                    isMultiCheckout={isMultiDriverTips}
                     isProducts={cart?.products?.length || 0}
+                    hideDeliveryFee={configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'}
+                    hideDriverTip={configs?.multi_business_checkout_show_combined_driver_tip?.value === '1'}
                   />
                   <DriverTipDivider />
                 </React.Fragment>
@@ -256,10 +258,20 @@ const MultiCheckoutUI = (props) => {
               )}
               {openCarts.length > 0 && (
                 <MultiCartPriceContainer totalFeeEnabled={totalFeeEnabled}>
-                  {totalCartsFee && configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1' && (
+                  {totalCartsFee &&
+                    configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1' &&
+                  (
                     <span>
                       <p>{t('TOTAL_DELIVERY_FEE', 'Total delivery fee')}</p>
                       <p>{parsePrice(totalCartsFee)}</p>
+                    </span>
+                  )}
+                  {openCarts.reduce((sum, cart) => sum + cart?.driver_tip, 0) > 0 &&
+                    configs?.multi_business_checkout_show_combined_driver_tip?.value === '1' &&
+                  (
+                    <span>
+                      <p>{t('DRIVER_TIP', 'Driver tip')}</p>
+                      <p>{parsePrice(openCarts.reduce((sum, cart) => sum + cart?.driver_tip, 0))}</p>
                     </span>
                   )}
                   <div>
