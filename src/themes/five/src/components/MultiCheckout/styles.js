@@ -118,6 +118,7 @@ export const DriverTipDivider = styled.div`
   }
 `
 export const MultiCartPriceContainer = styled.div`
+  margin-top: 38px;
   > div {
     display: flex;
     align-items: center;
@@ -133,7 +134,6 @@ export const MultiCartPriceContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 38px;
     margin-bottom: 5px;
   }
   p {

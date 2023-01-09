@@ -174,6 +174,7 @@ const MultiOrdersDetailsUI = (props) => {
           {orders.map(order => (
             <SingleOrderCard
               key={order.id}
+              getOrderStatus={getOrderStatus}
               order={order}
               showProgressBar={showBarInIndividual.includes(progressBarStyle)}
             />
