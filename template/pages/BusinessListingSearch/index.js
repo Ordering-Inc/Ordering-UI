@@ -104,3 +104,5 @@ export const BusinessListingSearch = (props) => {
     </>
   )
 }
+
+export default BusinessListingSearch

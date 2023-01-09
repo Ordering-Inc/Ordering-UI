@@ -27,7 +27,8 @@ import {
   Divider,
   AddressFormWrapper,
   LanguageSelectorWrapper,
-  HeaderSearchMode
+  HeaderSearchMode,
+  LeftSide
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -97,6 +98,7 @@ export const Header = (props) => {
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
   const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isHideLanguages = theme?.header?.components?.language_selector?.hidden
 
   const handleSuccessSignup = (user) => {
     login({
@@ -218,101 +220,103 @@ export const Header = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <HeaderContainer isChew={isChew}>
         <InnerHeader>
-          <LeftHeader id='left-side'>
-            <SidebarMenu
-              auth={auth}
-              isHideSignup={isHideSignup}
-              userCustomer={userCustomer}
-              isCustomerMode={isCustomerMode}
-            />
-            <LogoHeader
-              onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
-              isChew={isChew}
-            >
-              <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
-            </LogoHeader>
-          </LeftHeader>
-          {isShowOrderOptions && !props.isCustomLayout && (
-            <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode} isChew={isChew}>
-              {windowSize.width > 820 && isFarAway && (
-                <FarAwayMessage>
-                  <TiWarningOutline />
-                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
-                </FarAwayMessage>
-              )}
-              {isCustomerMode && (
-                <>
-                  <AddressMenu
-                    isCustomerMode={isCustomerMode}
-                    onClick={(e) => handleClickUserCustomer(e)}
-                  >
-                    <GeoAlt />
-                    <span>{orderState.options?.address?.address || t('LANG_WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}</span>
-                  </AddressMenu>
-                  <Divider />
-                </>
-              )}
-              {isCustomerMode && windowSize.width > 450 && (
-                <>
-                  <CustomerInfo
-                    onClick={(e) => handleClickUserCustomer(e)}
-                  >
-                    <span>
-                      <p>{userCustomer?.name} {userCustomer?.lastname}</p>
-                    </span>
-                    <span
-                      ref={clearCustomer}
-                    >
-                      <AiOutlineClose />
-                    </span>
-                  </CustomerInfo>
-                  <Divider />
-                </>
-              )}
-              {onlineStatus && windowSize.width > 820 && (
-                <>
-                  {!isCustomerMode && (
+          <LeftSide>
+            <LeftHeader id='left-side'>
+              <SidebarMenu
+                auth={auth}
+                isHideSignup={isHideSignup}
+                userCustomer={userCustomer}
+                isCustomerMode={isCustomerMode}
+              />
+              <LogoHeader
+                onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
+                isChew={isChew}
+              >
+                <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
+                <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
+              </LogoHeader>
+            </LeftHeader>
+            {isShowOrderOptions && !props.isCustomLayout && (
+              <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode} isChew={isChew}>
+                {windowSize.width > 820 && isFarAway && (
+                  <FarAwayMessage>
+                    <TiWarningOutline />
+                    <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
+                  </FarAwayMessage>
+                )}
+                {isCustomerMode && (
+                  <>
                     <AddressMenu
-                      onClick={() => openModal('address')}
+                      isCustomerMode={isCustomerMode}
+                      onClick={(e) => handleClickUserCustomer(e)}
                     >
                       <GeoAlt />
-                      <span>
-                        <p>
-                          {orderState.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
-                        </p>
-                      </span>
+                      <span>{orderState.options?.address?.address || t('LANG_WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}</span>
                     </AddressMenu>
-                  )}
-                  {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                    <MomentMenu
-                      onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                        ? null
-                        : () => openModal('moment')}
+                    <Divider />
+                  </>
+                )}
+                {isCustomerMode && windowSize.width > 450 && (
+                  <>
+                    <CustomerInfo
+                      onClick={(e) => handleClickUserCustomer(e)}
                     >
-                      <div>
-                        {orderState.options?.moment
-                          ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
-                          : t('ASAP_ABBREVIATION', 'ASAP')}
-                      </div>
-                    </MomentMenu>
-                  )}
-                </>
-              )}
-              {windowSize.width > 768 ? (
-                <OrderTypeSelectorHeader
-                  orderTypeList={orderTypeList}
-                  onClick={() => openModal('delivery')}
-                />
-              ) : (
-                <HeaderOption
-                  variant='delivery'
-                  onClick={(variant) => openModal(variant)}
-                  orderTypeList={orderTypeList}
-                />
-              )}
-            </Menu>
-          )}
+                      <span>
+                        <p>{userCustomer?.name} {userCustomer?.lastname}</p>
+                      </span>
+                      <span
+                        ref={clearCustomer}
+                      >
+                        <AiOutlineClose />
+                      </span>
+                    </CustomerInfo>
+                    <Divider />
+                  </>
+                )}
+                {onlineStatus && windowSize.width > 820 && (
+                  <>
+                    {!isCustomerMode && (
+                      <AddressMenu
+                        onClick={() => openModal('address')}
+                      >
+                        <GeoAlt />
+                        <span>
+                          <p>
+                            {orderState.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                          </p>
+                        </span>
+                      </AddressMenu>
+                    )}
+                    {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+                      <MomentMenu
+                        onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                          ? null
+                          : () => openModal('moment')}
+                      >
+                        <div>
+                          {orderState.options?.moment
+                            ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
+                            : t('ASAP_ABBREVIATION', 'ASAP')}
+                        </div>
+                      </MomentMenu>
+                    )}
+                  </>
+                )}
+                {windowSize.width > 768 ? (
+                  <OrderTypeSelectorHeader
+                    orderTypeList={orderTypeList}
+                    onClick={() => openModal('delivery')}
+                  />
+                ) : (
+                  <HeaderOption
+                    variant='delivery'
+                    onClick={(variant) => openModal(variant)}
+                    orderTypeList={orderTypeList}
+                  />
+                )}
+              </Menu>
+            )}
+          </LeftSide>
           {windowSize.width > 1200 && window.location.pathname === '/search' && (
             <HeaderSearchMode>
               <SearchBar
@@ -381,9 +385,11 @@ export const Header = (props) => {
                     </>
                   )
                 }
-                <LanguageSelectorWrapper>
-                  <LanguageSelector />
-                </LanguageSelectorWrapper>
+                {!isHideLanguages && (
+                  <LanguageSelectorWrapper>
+                    <LanguageSelector />
+                  </LanguageSelectorWrapper>
+                )}
               </Menu>
             </RightHeader>
           )}
@@ -623,3 +629,5 @@ export const Header = (props) => {
 Header.defaultProps = {
   isShowOrderOptions: true
 }
+
+export default Header

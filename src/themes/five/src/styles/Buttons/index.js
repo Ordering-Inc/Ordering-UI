@@ -36,9 +36,12 @@ export const Button = styled.button`
       padding-left: 15%
       ${props => props.theme?.rtl && css`
         padding-right: 15%;
-        padding-left: 0
+        padding-left: 0;
     `}
     }
+  `}
+  ${({ theme }) => theme?.general?.components?.buttons?.borderRadius && css`
+      border-radius: ${theme?.general?.components?.buttons?.borderRadius};
   `}
   ${({ outline }) => outline && css`
     background: #FFF;
@@ -259,3 +262,5 @@ export const Button = styled.button`
     `}
   `}
 `
+
+export default Button

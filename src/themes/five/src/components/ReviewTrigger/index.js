@@ -84,3 +84,5 @@ export const ReviewTrigger = (props) => {
     </>
   )
 }
+
+export default ReviewTrigger

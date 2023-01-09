@@ -18,86 +18,6 @@ export const BusinessBanner = styled.div`
   }
 `
 
-export const BusinessFeatures = styled.div`
-  position: absolute;
-  top: 10%;
-  width: 100%;
-  padding: 0 15px;
-  box-sizing: border-box;
-`
-
-export const AddressMenu = styled.div`
-  cursor: pointer;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  color: #344050;
-  font-weight: 600;
-  border-radius: 50px;
-  padding: 13px 19px;
-  margin-bottom: 10px;
-
-  span {
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  svg {
-    margin-right: 5px;
-    color: #B1BCCC;
-    ${props => props.theme?.rtl && css`
-      margin-left: 5px;
-      margin-right: 0;
-    `}
-  }
-`
-
-export const FeatureItems = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`
-
-export const ItemInline = styled.div`
-  > span #select-input {
-    background-color: #F8F9FA !important;
-    border: none;
-    border-radius: 7.6px;
-    svg {
-      font-size: 14px;
-    }
-    #list {
-      background-color: #fff;
-      border: none;
-      border-radius: 7.6px;
-
-      left: 0px;
-      right: initial;
-
-      ${props => props.theme.rtl && css`
-        left: initial;
-        right: 0px;
-      `}
-    }
-
-    > div:first-child {
-      font-size: 11px;
-    }
-  }
-
-  .moment-popover {
-    > div:first-child {
-      font-size: 11px;
-      padding: 4px 7px;
-      svg {
-        font-size: 14px;
-      }
-    }
-  }
-`
-
 export const BusinessSearch = styled.div`
     display: flex;
     background-color: #f8f9fa;
@@ -205,7 +125,7 @@ export const BusinessHeroImgStyled = styled.div`
   }
 
   @media (min-width: 821px) {
-    height: ${({ height }) => height || '650px'};
+    height: ${({ height, theme }) => theme?.business_listing_view?.components?.business_hero?.components?.styles?.height || height || '650px'};
   }
 `
 

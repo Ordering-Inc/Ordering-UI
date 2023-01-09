@@ -151,7 +151,7 @@ const ProductOptionsUI = (props) => {
   }
 
   const handleSaveProduct = () => {
-    const isErrors = Object.values(errors).length > 0
+    const isErrors = Object.values(errors)?.length > 0
     if (!isErrors) {
       handleSave && handleSave()
       return
@@ -212,7 +212,7 @@ const ProductOptionsUI = (props) => {
 
   const getOverFlowImage = (url) => {
     const keys = url.split('/')
-    const _videoId = keys[keys.length - 1]
+    const _videoId = keys[keys?.length - 1]
     const overFlowImg = 'http://img.youtube.com/vi/' + _videoId + '/0.jpg'
     return overFlowImg
   }
@@ -230,7 +230,7 @@ const ProductOptionsUI = (props) => {
 
   const scrollDown = () => {
     const adjustHeight = windowSize?.width > 768 ? 50 : 55
-    const isErrors = Object.values(errors).length > 0
+    const isErrors = Object.values(errors)?.length > 0
     if (!isErrors) {
       return
     }
@@ -272,8 +272,8 @@ const ProductOptionsUI = (props) => {
       if (product?.ingredients.length > 0 || product?.extras.length > 0) {
         const menuList = []
         if (product?.ingredients?.length > 0) menuList.push('ingredients')
-        product?.extras?.length > 0 && product.extras.sort((a, b) => a.rank - b.rank).forEach(extra => {
-          extra.options?.length > 0 && extra.options.sort((a, b) => a.rank - b.rank).forEach(option => {
+        product?.extras.length > 0 && product?.extras.sort((a, b) => a.rank - b.rank).forEach(extra => {
+          extra?.options.length > 0 && extra?.options.sort((a, b) => a.rank - b.rank).forEach(option => {
             showOption(option) && menuList.push(`id_${option?.id}`)
           })
         })
@@ -545,12 +545,12 @@ const ProductOptionsUI = (props) => {
             <Divider />
             <ProductEdition>
               {
-                (product?.ingredients.length > 0 || product?.extras.length > 0) && (
+                (product?.ingredients?.length > 0 || product?.extras?.length > 0) && (
                   <ProductTabContainer id='all'>
                     <Tabs>
                       <AutoScroll scrollId='optionList'>
                         {
-                          product?.ingredients.length > 0 && (
+                          product?.ingredients?.length > 0 && (
                             <Tab
                               key='ingredients'
                               id='menu_ingredients'
@@ -563,7 +563,7 @@ const ProductOptionsUI = (props) => {
                           )
                         }
                         {
-                          product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
+                          product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options?.sort((a, b) => a.rank - b.rank).map(option => {
                             return (
                               showOption(option) && (
                                 <Tab
@@ -584,9 +584,9 @@ const ProductOptionsUI = (props) => {
                   </ProductTabContainer>
                 )
               }
-              {product?.ingredients.length > 0 && (
+              {product?.ingredients?.length > 0 && (
                 <div id='ingredients'>
-                  {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
+                  {product?.ingredients?.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages.INGREDIENTS || 'Ingredients')}</SectionTitle>)}
                   <WrapperIngredients isProductSoldout={isSoldOut || maxProductQuantity <= 0}>
                     {product?.ingredients.map(ingredient => (
                       <ProductIngredient
@@ -602,7 +602,7 @@ const ProductOptionsUI = (props) => {
               )}
               <div>
                 {
-                  product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
+                  product?.extras?.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                     const currentState = productCart.options[`id:${option?.id}`] || {}
                     return (
                       <React.Fragment key={option?.id}>

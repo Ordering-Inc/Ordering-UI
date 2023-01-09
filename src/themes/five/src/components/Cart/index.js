@@ -67,7 +67,8 @@ const CartUI = (props) => {
     handleChangeComment,
     commentState,
     handleRemoveOfferClick,
-    setPreorderBusiness
+    setPreorderBusiness,
+    cart: cartMulticart
   } = props
 
   const theme = useTheme()
@@ -101,9 +102,10 @@ const CartUI = (props) => {
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
   const openCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && !cart?.wallets) || null) || []
 
-  const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
+  const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
-  const hideCartComments = orderingTheme?.theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount?.hidden
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -162,9 +164,9 @@ const CartUI = (props) => {
     }
 
     if (checkoutMultiBusinessEnabled && openCarts?.length > 1 && groupForTheCart) {
-      events.emit('go_to_page', { page: 'multi_cart', params: { cartUuid: cart.uuid, cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart } })
+      events.emit('go_to_page', { page: 'multi_cart', params: { cartUuid: cart?.uuid, cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart } })
     } else {
-      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart?.uuid } })
     }
     events.emit('cart_popover_closed')
     onClickCheckout && onClickCheckout()
@@ -218,7 +220,7 @@ const CartUI = (props) => {
 
   const getIncludedTaxes = () => {
     if (cart?.taxes === null) {
-      return cart.business.tax_type === 1 ? cart?.tax : 0
+      return cart?.business.tax_type === 1 ? cart?.tax : 0
     } else {
       return cart?.taxes.reduce((taxIncluded, tax) => {
         return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
@@ -298,6 +300,7 @@ const CartUI = (props) => {
                 onDeleteProduct={handleDeleteClick}
                 onEditProduct={handleEditProduct}
                 isStore={isStore}
+                viewString={viewString}
               />
             ))}
             {!cart?.valid_products && (
@@ -411,11 +414,11 @@ const CartUI = (props) => {
                     {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
                       <tr>
                         <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                        <td>{parsePrice(cart?.delivery_price)}</td>
+                        <td>{parsePrice(cart?.delivery_price_with_discount ?? cart?.delivery_price)}</td>
                       </tr>
                     )}
                     {
-                      cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
+                      !hideCartDiscount && cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
                         <tr key={offer.id}>
                           <td className='icon'>
                             {offer.name}
@@ -449,11 +452,11 @@ const CartUI = (props) => {
                     )}
                   </tbody>
                 </table>
-                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && (
+                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && !hideCartDiscount && (
                   <CouponContainer>
                     <CouponControl
-                      businessId={cart.business_id}
-                      price={cart.total}
+                      businessId={cart?.business_id}
+                      price={cart?.total}
                     />
                   </CouponContainer>
                 )}
@@ -643,17 +646,17 @@ const CartUI = (props) => {
             <TaxInformation
               type={openTaxModal.type}
               data={openTaxModal.data}
-              products={cart.products}
+              products={cart?.products}
               useKioskApp={useKioskApp}
             />
           </Modal>
           {(openUpselling || isUpselling) && (
             <UpsellingPage
               useKioskApp={useKioskApp}
-              businessId={cart.business_id}
+              businessId={cart?.business_id}
               isCustomMode={isCustomMode}
-              cartProducts={cart.products}
-              business={cart.business}
+              cartProducts={cart?.products}
+              business={cart?.business}
               handleUpsellingPage={handleUpsellingPage}
               openUpselling={openUpselling}
               canOpenUpselling={canOpenUpselling}
