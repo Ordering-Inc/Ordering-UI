@@ -165,6 +165,29 @@ export const WrapLogo = styled.div`
   `}
 `
 
+export const WrapTags = styled.div`
+  display: flex;
+  margin-left: 10px;
+
+  ${({ isBgimage }) => isBgimage && css`
+    width: 50px;
+  `}
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
+
+  div {
+    display: flex;
+    margin: auto;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
+`
+
 const CardLogoStyled = styled.div`
   box-sizing: border-box;
   position: relative;
