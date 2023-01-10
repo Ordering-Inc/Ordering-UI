@@ -75,7 +75,7 @@ export const CartContent = (props) => {
     }
 
     if (checkoutMultiBusinessEnabled && openCarts?.length > 1 && groupForTheCart) {
-      events.emit('go_to_page', { page: 'multi_cart', params: { cartUuid: cart?.uuid, cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart } })
+      events.emit('go_to_page', { page: 'multi_cart', params: { cartUuid: cart?.uuid ?? openCarts[0]?.uuid, cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart } })
     } else {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart?.uuid } })
     }
