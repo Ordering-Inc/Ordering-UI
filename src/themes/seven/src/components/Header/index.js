@@ -379,3 +379,5 @@ export const SignUpIcon = () => {
     </svg>
   )
 }
+
+export default Header

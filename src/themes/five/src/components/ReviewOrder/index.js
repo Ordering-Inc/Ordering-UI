@@ -247,3 +247,5 @@ export const ReviewOrder = (props) => {
 
   return <ReviewOrderController {...ReviewOrderProps} />
 }
+
+export default ReviewOrder
