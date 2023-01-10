@@ -27,7 +27,7 @@ var CardContainer = _styledComponents.default.div(_templateObject || (_templateO
   var productsRows = _ref4.productsRows;
   return productsRows ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    width: ", ";\n    margin: 10px;\n\n  "])), function () {
     return productsRows === 3 ? 'calc(33% - 20px)' : 'calc(50% - 20px)';
-  }) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: 100%;\n    margin: 10px 0px;\n    @media (min-width: 576px) {\n      margin: 10px;\n      width: calc(100% - 20px);\n    }\n\n  ", "\n  \n  "])), function (_ref5) {
+  }) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: 100%;\n    margin: 10px;\n    @media (min-width: 576px) {\n      margin: 10px;\n      width: calc(100% - 20px);\n    }\n\n  ", "\n  \n  "])), function (_ref5) {
     var isCartOnProductsList = _ref5.isCartOnProductsList;
     return isCartOnProductsList ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    @media (min-width: 993px) {\n      width: calc(50% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
       var _props$theme;

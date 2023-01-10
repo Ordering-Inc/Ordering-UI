@@ -26,6 +26,7 @@ var _dayjs = _interopRequireDefault(require("dayjs"));
 var _timezone = _interopRequireDefault(require("dayjs/plugin/timezone"));
 var _isBetween = _interopRequireDefault(require("dayjs/plugin/isBetween"));
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
+var _BsCaretLeftFill = _interopRequireDefault(require("@meronex/icons/bs/BsCaretLeftFill"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -57,7 +58,9 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     categoryState = props.categoryState,
     errorQuantityProducts = props.errorQuantityProducts,
     isCustomerMode = props.isCustomerMode,
-    categoryClicked = props.categoryClicked;
+    categoryClicked = props.categoryClicked,
+    categorySelected = props.categorySelected,
+    setCategoryClicked = props.setCategoryClicked;
   var business = businessState.business,
     loading = businessState.loading;
   var theme = (0, _styledComponents.useTheme)();
@@ -166,8 +169,13 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   }, [sortByValue]);
   var SearchComponent = function SearchComponent() {
     return /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
-      id: "search-component"
-    }, /*#__PURE__*/_react.default.createElement(_styles.SearchIconWrapper, {
+      id: "search-component",
+      isFlexEnd: windowSize.width >= 768
+    }, (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name) && windowSize.width < 768 && /*#__PURE__*/_react.default.createElement(_styles.CategorySelectedContainer, {
+      onClick: function onClick() {
+        return setCategoryClicked(false);
+      }
+    }, /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null), " ", categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name), /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SearchIconWrapper, {
       onClick: function onClick() {
         return setOpenSearchProducts(true);
       }
@@ -179,7 +187,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       onChange: function onChange(val) {
         return handleChangeSortBy && handleChangeSortBy(val);
       }
-    }));
+    })));
   };
   var SocialNetWork = function SocialNetWork(_ref) {
     var url = _ref.url,
@@ -193,7 +201,8 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   var BusinessInfoComponent = function BusinessInfoComponent() {
     var _business$ribbon, _business$ribbon2, _business$ribbon3, _business$ribbon4, _business$ribbon5, _business$ribbon6, _business$ribbon7, _business$city, _business$city2, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc, _business$professiona;
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, {
-      isChew: isChew
+      isChew: isChew,
+      isFlexEnd: windowSize.width >= 768
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
       className: "info"
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, {

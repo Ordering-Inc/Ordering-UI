@@ -12,6 +12,7 @@ var _AutoScroll = require("../../../../../components/AutoScroll");
 var _styledComponents = require("styled-components");
 var _styles = require("./styles");
 var _Tabs = require("../../styles/Tabs");
+var _useWindowSize = require("../../../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -43,6 +44,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     useKioskApp = props.useKioskApp,
     isProfessional = props.isProfessional;
   var theme = (0, _styledComponents.useTheme)();
+  var windowSize = (0, _useWindowSize.useWindowSize)();
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
@@ -133,14 +135,19 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     }
   };
   (0, _react.useEffect)(function () {
+    var _Object$values;
     if (typeof useKioskApp === 'undefined') return;
     var styleSheet = document.getElementById('styles').sheet;
+    if ((_Object$values = Object.values(styleSheet.cssRules)) !== null && _Object$values !== void 0 && _Object$values.length) {
+      styleSheet === null || styleSheet === void 0 ? void 0 : styleSheet.deleteRule(0);
+    }
     var disabledCustomWidth = isChew;
     var style0 = '.sticky-prod-cat {';
     style0 += 'position: fixed !important;';
     style0 += 'top: 0px !important;';
     style0 += 'left: 0px !important;';
     style0 += 'padding: 5px 5px 0px 5px !important;';
+    style0 += "width: calc(100% - ".concat(useKioskApp ? '50px' : windowSize.width >= 993 ? '155px' : '0px', ")!important;");
     !disabledCustomWidth && (style0 += "width: calc(100% - ".concat(useKioskApp ? '50px' : '155px', ") !important;"));
     style0 += '}';
     var style1 = '.sticky-search {';
@@ -157,7 +164,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     return function () {
       return window.removeEventListener('scroll', handleScroll);
     };
-  }, [useKioskApp, isChew]);
+  }, [useKioskApp, isChew, windowSize.width]);
   (0, _react.useEffect)(function () {
     var _business$professiona;
     if ((business === null || business === void 0 ? void 0 : (_business$professiona = business.professionals) === null || _business$professiona === void 0 ? void 0 : _business$professiona.length) > 0 && !useKioskApp) {

@@ -9,7 +9,6 @@ var _react = _interopRequireWildcard(require("react"));
 var _styledComponents = require("styled-components");
 var _orderingComponents = require("ordering-components");
 var _CgSearch = _interopRequireDefault(require("@meronex/icons/cg/CgSearch"));
-var _BsCaretLeftFill = _interopRequireDefault(require("@meronex/icons/bs/BsCaretLeftFill"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _BusinessBasicInformation = require("../BusinessBasicInformation");
 var _seven = require("../../../../seven");
@@ -33,6 +32,7 @@ var _OrderItAgain = require("../OrderItAgain");
 var _ProfessionalBusinessFilter = require("../ProfessionalBusinessFilter");
 var _PageBanner = require("../PageBanner");
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
+var _utils = require("../../../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -49,7 +49,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var layoutOne = 'groceries';
 var RenderProductsLayout = function RenderProductsLayout(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view5, _theme$business_view6, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _theme$business_view$5, _theme$business_view7, _theme$business_view8, _theme$business_view9, _theme$business_view10, _theme$business_view11, _theme$business_view12, _businessState$busine, _businessState$busine2, _business$professiona, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _business$professiona2, _business$previously_, _theme$defaultLanguag3, _theme$defaultLanguag4, _business$professiona3, _currentCart$products, _business$professiona4, _business$categories2, _theme$defaultLanguag5, _theme$defaultLanguag6, _business$previously_2, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
+  var _configs$use_parent_c, _configs$use_parent_c2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view5, _theme$business_view6, _orderingTheme$theme14, _orderingTheme$theme15, _orderingTheme$theme16, _orderingTheme$theme17, _orderingTheme$theme18, _theme$business_view$5, _theme$business_view7, _theme$business_view8, _theme$business_view9, _theme$business_view10, _theme$business_view11, _theme$business_view12, _businessState$busine, _businessState$busine2, _business$previously_, _business$professiona, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _business$professiona2, _theme$defaultLanguag3, _theme$defaultLanguag4, _business$professiona3, _currentCart$products, _business$professiona4, _business$categories2, _theme$defaultLanguag5, _theme$defaultLanguag6, _business$previously_2, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
   var errors = props.errors,
     isError = props.isError,
     isLoading = props.isLoading,
@@ -129,11 +129,23 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       return;
     }
     var productContainer = document.getElementsByClassName('bp-list')[0];
-    scrollTo(productContainer, 500, 1250);
+    (0, _utils.scrollTo)(productContainer, 500, 1250);
   };
   (0, _react.useEffect)(function () {
     handleSaveProduct();
   }, [categorySelected]);
+  (0, _react.useEffect)(function () {
+    if (windowSize.width < 993 && categoryClicked && document.getElementsByClassName('category-title')) {
+      var extraHeight = 80;
+      var top = document.getElementsByClassName('category-title')[0].offsetTop - extraHeight;
+      window.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      });
+    } else {
+      window.scroll(0, 0);
+    }
+  }, [categoryClicked]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList
   }, !hideBusinessNearCity && !useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.NearBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessesListing.BusinessesListing, {
@@ -155,7 +167,9 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     categoryState: categoryState,
     errorQuantityProducts: errorQuantityProducts,
     sortByValue: sortByValue,
-    categoryClicked: categoryClicked
+    categoryClicked: categoryClicked,
+    categorySelected: categorySelected,
+    setCategoryClicked: setCategoryClicked
   })), /*#__PURE__*/_react.default.createElement(_styles.PageBannerWrapper, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
     position: "web_business_page"
   })), !errorQuantityProducts && SearchProductsComponent && !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(SearchProductsComponent, {
@@ -167,7 +181,11 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       return handleChangeSortBy && handleChangeSortBy(val);
     },
     businessState: businessState
-  }))), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
+  }))), !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_ = business.previously_products) === null || _business$previously_ === void 0 ? void 0 : _business$previously_.length) > 0 && !hidePreviousOrdered && windowSize.width < 993 && !categoryClicked && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
+    onProductClick: onProductClick,
+    productList: business === null || business === void 0 ? void 0 : business.previously_products,
+    businessId: business === null || business === void 0 ? void 0 : business.id
+  }), !businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
     isCustomLayout: isCustomLayout || useKioskApp,
     id: "wrapper-categories"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, {
@@ -234,11 +252,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     }
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapContent, {
     id: "businessProductList"
-  }, !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_ = business.previously_products) === null || _business$previously_ === void 0 ? void 0 : _business$previously_.length) > 0 && !hidePreviousOrdered && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
-    onProductClick: onProductClick,
-    productList: business === null || business === void 0 ? void 0 : business.previously_products,
-    businessId: business === null || business === void 0 ? void 0 : business.id
-  }), /*#__PURE__*/_react.default.createElement(BusinessLayoutProductsList, {
+  }, /*#__PURE__*/_react.default.createElement(BusinessLayoutProductsList, {
     categories: [{
       id: null,
       name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.ALL) || 'All')
@@ -293,7 +307,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleChangeProfessionalSelected: handleChangeProfessionalSelected
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoriesContainer, {
     offSticky: true
-  }, !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !categoryClicked || windowSize.width >= 993 ? /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {
+  }, !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!categoryClicked || windowSize.width >= 993) && /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {
     component: "categories",
     categories: [{
       id: null,
@@ -313,14 +327,10 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     currentCart: currentCart,
     useKioskApp: useKioskApp,
     setCategoryClicked: setCategoryClicked
-  }) : /*#__PURE__*/_react.default.createElement(_styles.CategorySelectedContainer, {
-    onClick: function onClick() {
-      return setCategoryClicked(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null), " ", categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name))), (categoryClicked || windowSize.width >= 993) && /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapContent, {
+  }))), (categoryClicked || windowSize.width >= 993) && /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapContent, {
     isGroceries: true,
     id: "groceries"
-  }, !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_2 = business.previously_products) === null || _business$previously_2 === void 0 ? void 0 : _business$previously_2.length) > 0 && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
+  }, !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_2 = business.previously_products) === null || _business$previously_2 === void 0 ? void 0 : _business$previously_2.length) > 0 && windowSize.width >= 993 && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
     onProductClick: onProductClick,
     productList: business === null || business === void 0 ? void 0 : business.previously_products,
     businessId: business === null || business === void 0 ? void 0 : business.id,
