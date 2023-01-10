@@ -170,10 +170,10 @@ export const BusinessInfoContainer = styled.div`
   padding-left: 5px;
   padding-right: 5px;
   display: flex;
-  justify-content: space-between;
+  justify-content: ${props => props.isFlexEnd ? 'flex-end' : 'space-between'};
   flex-direction: column;
   box-sizing: border-box;
-  align-items: flex-end;
+  align-items: ${props => props.isFlexEnd ? 'flex-end' : 'space-between'};
 
   @media (min-width: 576px) {
     padding-top: 0px;
@@ -193,11 +193,15 @@ export const BusinessInfoContent = styled.div`
   width: 100%;
 `
 
+export const SearchWrapper = styled.div`
+  display: flex;
+`
+
 export const WrapperSearch = styled.div`
   margin: 15px 0px 0px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: ${props => props.isFlexEnd ? 'flex-end' : 'space-between'};
   box-sizing: border-box;
 
   .search-bar {
@@ -434,6 +438,24 @@ export const SocialList = styled.div`
     margin-right: -3px;
     margin-left: 0px;
   `}
+`
+
+export const CategorySelectedContainer = styled.div`
+  display: inline;
+  margin-left: 10px;
+  color: ${({ theme }) => theme?.colors?.primary};
+  padding-right: 5px;
+  cursor: pointer;
+  p{
+    margin: 0;
+  }
+  svg {
+    position: relative;
+    top: 2px;
+    margin-right: 3px;
+    width: 14px;
+    height: 14px;
+  }
 `
 
 export const IconWrapper = styled.a`
