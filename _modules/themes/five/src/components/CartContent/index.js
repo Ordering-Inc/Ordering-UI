@@ -118,18 +118,20 @@ var CartContent = function CartContent(props) {
       groupForTheCart = indexes[0];
     }
     if (checkoutMultiBusinessEnabled && (openCarts === null || openCarts === void 0 ? void 0 : openCarts.length) > 1 && groupForTheCart) {
+      var _cart$uuid, _openCarts$;
       events.emit('go_to_page', {
         page: 'multi_cart',
         params: {
-          cartUuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
+          cartUuid: (_cart$uuid = cart === null || cart === void 0 ? void 0 : cart.uuid) !== null && _cart$uuid !== void 0 ? _cart$uuid : (_openCarts$ = openCarts[0]) === null || _openCarts$ === void 0 ? void 0 : _openCarts$.uuid,
           cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart
         }
       });
     } else {
+      var _cart$uuid2, _openCarts$2;
       events.emit('go_to_page', {
         page: 'checkout',
         params: {
-          cartUuid: cart === null || cart === void 0 ? void 0 : cart.uuid
+          cartUuid: (_cart$uuid2 = cart === null || cart === void 0 ? void 0 : cart.uuid) !== null && _cart$uuid2 !== void 0 ? _cart$uuid2 : (_openCarts$2 = openCarts[0]) === null || _openCarts$2 === void 0 ? void 0 : _openCarts$2.uuid
         }
       });
     }
