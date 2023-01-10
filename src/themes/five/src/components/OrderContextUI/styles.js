@@ -8,6 +8,7 @@ export const Container = styled.div`
     padding: 0 15px;
     box-sizing: border-box;
   `}
+  margin-top: 10px;
 `
 
 export const AddressMenu = styled.div`

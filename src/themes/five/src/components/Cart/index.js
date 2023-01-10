@@ -68,7 +68,9 @@ const CartUI = (props) => {
     commentState,
     handleRemoveOfferClick,
     setPreorderBusiness,
-    cart: cartMulticart
+    cart: cartMulticart,
+    hideDeliveryFee,
+    hideDriverTip
   } = props
 
   const theme = useTheme()
@@ -411,7 +413,7 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
+                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && !hideDeliveryFee && (
                       <tr>
                         <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                         <td>{parsePrice(cart?.delivery_price_with_discount ?? cart?.delivery_price)}</td>
@@ -436,7 +438,7 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {cart?.driver_tip > 0 && (
+                    {cart?.driver_tip > 0 && !hideDriverTip && (
                       <tr>
                         <td>
                           {t('DRIVER_TIP', 'Driver tip')}{' '}

@@ -22,11 +22,17 @@ export const InnerHeader = styled.div`
     justify-content: flex-start;
   }
   #right-side {
-    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : '25%'};
+    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : '40%'};
     justify-content: flex-end;
   }
   #center-side {
     width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)'};
+  }
+
+  @media (min-width: 768px) {
+    #left-side {
+      width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : 'initial'};
+    }
   }
 
   @media (min-width: 1024px) {
@@ -139,7 +145,7 @@ export const Menu = styled.div`
     border: none;
     box-sizing: border-box;
     border-radius: ${props => props.isChew ? '8px' : '50px'};
-    margin: 0 15px;
+    margin: 0 20px;
     flex-grow: 1;
     padding: 0 10px;
     display: flex;
