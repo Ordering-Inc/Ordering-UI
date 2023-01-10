@@ -26,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SingleOrderCardUI = function SingleOrderCardUI(props) {
-  var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _getOrderStatus;
+  var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _theme$images3, _theme$images3$dummie, _order$business8, _order$business9, _order$business10, _order$business11, _order$business12, _getOrderStatus;
   var order = props.order,
     getOrderStatus = props.getOrderStatus,
     handleReorder = props.handleReorder,
@@ -48,10 +48,9 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     key: order.id,
     id: "order-card"
   }, /*#__PURE__*/_react.default.createElement(_styles2.OrderPastContent, null, (((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.length) > 1 ? /*#__PURE__*/_react.default.createElement(_styles2.MultiLogosContainer, null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.map(function (business, i) {
-    var _order$business4, _theme$images2, _theme$images2$dummie;
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: business === null || business === void 0 ? void 0 : business.id
-    }, i > 1 ? /*#__PURE__*/_react.default.createElement("p", null, "+ ", (order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.length) - 2) : /*#__PURE__*/_react.default.createElement(_styles2.PastLogo, {
+    var _theme$images2, _theme$images2$dummie;
+    return i < 2 && /*#__PURE__*/_react.default.createElement(_styles2.PastLogo, {
+      key: business === null || business === void 0 ? void 0 : business.id,
       isMulti: true
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: (business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo),
@@ -59,21 +58,21 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
       width: "55px",
       height: "64px",
       loading: "lazy"
-    })));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.PastLogo, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: ((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
+    }));
+  }), (order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.length) > 1 && (order === null || order === void 0 ? void 0 : (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.length) - 2 > 0 && /*#__PURE__*/_react.default.createElement("p", null, "+ ", (order === null || order === void 0 ? void 0 : (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.length) - 2)) : /*#__PURE__*/_react.default.createElement(_styles2.PastLogo, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: ((_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
     alt: "business-logo",
     width: "55px",
     height: "64px",
     loading: "lazy"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, (order === null || order === void 0 ? void 0 : (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.length) > 1 ? "".concat(t('GROUP_ORDER', 'Group Order'), " ").concat(t('No', 'No'), ". ").concat(order === null || order === void 0 ? void 0 : order.cart_group_id) : (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.name), !(order !== null && order !== void 0 && (_order$business8 = order.business) !== null && _order$business8 !== void 0 && _order$business8.length) && /*#__PURE__*/_react.default.createElement(_styles2.FavoriteWrapper, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformation, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessTitle, null, /*#__PURE__*/_react.default.createElement("h2", null, (order === null || order === void 0 ? void 0 : (_order$business8 = order.business) === null || _order$business8 === void 0 ? void 0 : _order$business8.length) > 1 ? "".concat(t('GROUP_ORDER', 'Group Order'), " ").concat(t('No', 'No'), ". ").concat(order === null || order === void 0 ? void 0 : order.cart_group_id) : (_order$business9 = order.business) === null || _order$business9 === void 0 ? void 0 : _order$business9.name), !(order !== null && order !== void 0 && (_order$business10 = order.business) !== null && _order$business10 !== void 0 && _order$business10.length) && /*#__PURE__*/_react.default.createElement(_styles2.FavoriteWrapper, {
     onClick: function onClick() {
       return handleChangeFavorite(order);
     },
     className: "favorite"
   }, order !== null && order !== void 0 && order.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), /*#__PURE__*/_react.default.createElement(_styles2.OrderInfo, null, (order === null || order === void 0 ? void 0 : order.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
     name: "order_number"
-  }, (order === null || order === void 0 ? void 0 : (_order$business9 = order.business) === null || _order$business9 === void 0 ? void 0 : _order$business9.length) > 1 ? "".concat(order === null || order === void 0 ? void 0 : (_order$business10 = order.business) === null || _order$business10 === void 0 ? void 0 : _order$business10.length, " ").concat(t('ORDERS', 'orders')) : "".concat(t('ORDER_NUM', 'Order No.'), " ").concat(order.id)), /*#__PURE__*/_react.default.createElement(_BsDot.default, {
+  }, (order === null || order === void 0 ? void 0 : (_order$business11 = order.business) === null || _order$business11 === void 0 ? void 0 : _order$business11.length) > 1 ? "".concat(order === null || order === void 0 ? void 0 : (_order$business12 = order.business) === null || _order$business12 === void 0 ? void 0 : _order$business12.length, " ").concat(t('ORDERS', 'orders')) : "".concat(t('ORDER_NUM', 'Order No.'), " ").concat(order.id)), /*#__PURE__*/_react.default.createElement(_BsDot.default, {
     className: "dot"
   })), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false

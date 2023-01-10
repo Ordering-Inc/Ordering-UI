@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var isSkeleton = props.isSkeleton,
     categories = props.categories,
     featured = props.featured,
@@ -43,6 +43,9 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     useKioskApp = props.useKioskApp,
     isProfessional = props.isProfessional;
   var theme = (0, _styledComponents.useTheme)();
+  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
+    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
+    orderingTheme = _useOrderingTheme2[0];
   var _useState = (0, _react.useState)({
       id: null
     }),
@@ -50,6 +53,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     selectedCategory = _useState2[0],
     setSelectedCateogry = _useState2[1];
   var scrollTopSpan = 60;
+  var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.type) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.toLowerCase()) === 'chew';
   var handleChangeCategory = function handleChangeCategory(category) {
     var _document$getElementB, _document$getElementB2;
     var isBlockScroll = window.location.search.includes('category') && window.location.search.includes('product');
@@ -131,12 +135,13 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   (0, _react.useEffect)(function () {
     if (typeof useKioskApp === 'undefined') return;
     var styleSheet = document.getElementById('styles').sheet;
+    var disabledCustomWidth = isChew;
     var style0 = '.sticky-prod-cat {';
     style0 += 'position: fixed !important;';
     style0 += 'top: 0px !important;';
     style0 += 'left: 0px !important;';
     style0 += 'padding: 5px 5px 0px 5px !important;';
-    style0 += "width: calc(100% - ".concat(useKioskApp ? '50px' : '155px', ") !important;");
+    !disabledCustomWidth && (style0 += "width: calc(100% - ".concat(useKioskApp ? '50px' : '155px', ") !important;"));
     style0 += '}';
     var style1 = '.sticky-search {';
     style1 += 'position: fixed !important;';
@@ -152,7 +157,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     return function () {
       return window.removeEventListener('scroll', handleScroll);
     };
-  }, [useKioskApp]);
+  }, [useKioskApp, isChew]);
   (0, _react.useEffect)(function () {
     var _business$professiona;
     if ((business === null || business === void 0 ? void 0 : (_business$professiona = business.professionals) === null || _business$professiona === void 0 ? void 0 : _business$professiona.length) > 0 && !useKioskApp) {

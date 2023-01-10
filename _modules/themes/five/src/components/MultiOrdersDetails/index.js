@@ -117,6 +117,7 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.map(function (order) {
     return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, {
       key: order.id,
+      getOrderStatus: getOrderStatus,
       order: order
     });
   })), !loading && (error || (orders === null || orders === void 0 ? void 0 : orders.length) === 0) && (error !== null && error !== void 0 && error.includes('ERROR_ACCESS_EXPIRED') ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

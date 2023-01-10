@@ -38,7 +38,7 @@ var EmptyBtnWrapper = _styledComponents.default.div(_templateObject9 || (_templa
 exports.EmptyBtnWrapper = EmptyBtnWrapper;
 var HeaderContent = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  .back-arrow {\n    font-size: 24px;\n    cursor: pointer;\n  }\n"])));
 exports.HeaderContent = HeaderContent;
-var OrderContextUIWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  flex: 1;\n  margin-left: 15px;\n  ", "\n"])), function (props) {
+var OrderContextUIWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  flex: 1;\n  width: 100%;\n  ", "\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 15px;\n  "])));
 });
 exports.OrderContextUIWrapper = OrderContextUIWrapper;
