@@ -48,7 +48,7 @@ export const OrderEta = (props) => {
     getEstimatedDeliveryTime()
     const interval = setInterval(() => {
       getEstimatedDeliveryTime()
-    }, 60000)
+    }, 1000)
     return () => clearInterval(interval)
   }, [order])
 
