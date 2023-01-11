@@ -92,11 +92,18 @@ export const QuantityControl = styled.div`
   svg {
     color: ${props => props.theme.colors.primary};
     font-size: 20px;
-    margin-right: 3px;
+    margin-right: 6px;
     ${props => props.theme?.rtl && css`
-      margin-left: 3px;
+      margin-left: 6px;
       margin-right: 0px;
     `}
+    @media (min-width: 425px) {
+      margin-right: 3px
+      ${props => props.theme?.rtl && css`
+        margin-right: 3px;
+        margin-left: 0px;
+    `}
+    }
   }
 
   svg[disabled] {
@@ -104,12 +111,20 @@ export const QuantityControl = styled.div`
   }
 
   svg:last-child {
-    margin-left: 3px;
+    margin-left: 6px;
     margin-right: 0;
     ${props => props.theme?.rtl && css`
-      margin-right: 3px;
+      margin-right: 6px;
       margin-left: 0px;
   `}
+    @media (min-width: 425px) {
+      margin-left: 3px;
+      margin-right: 0;
+      ${props => props.theme?.rtl && css`
+        margin-right: 3px;
+        margin-left: 0px;
+    `}
+    }
   }
 `
 
@@ -167,7 +182,12 @@ export const LeftOptionContainer = styled.div`
 
 export const RightOptionContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 25%;
   align-items: center;
   justify-content: space-between;
+
+  @media (min-width: 425px) {
+    flex-direction: row;
+  }
 `

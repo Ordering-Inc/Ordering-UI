@@ -251,3 +251,5 @@ export const ReviewDriver = (props) => {
 
   return <ReviewDriverController {...reviewDriverProps} />
 }
+
+export default ReviewDriver

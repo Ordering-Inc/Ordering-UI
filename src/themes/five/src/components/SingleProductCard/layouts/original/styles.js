@@ -42,7 +42,7 @@ export const CardContainer = styled.div`
 
   ` : css`
     width: 100%;
-    margin: 10px 0px;
+    margin: 10px;
     @media (min-width: 576px) {
       margin: 10px;
       width: calc(100% - 20px);
@@ -163,6 +163,30 @@ export const WrapLogo = styled.div`
     margin-right: 5px;
     margin-left: 0px;
   `}
+`
+
+export const WrapTags = styled.div`
+  display: flex;
+  margin-left: 10px;
+
+  ${({ isBgimage }) => isBgimage && css`
+    width: 50px;
+  `}
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
+
+  div {
+    display: flex;
+    margin: auto;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+  }
 `
 
 const CardLogoStyled = styled.div`

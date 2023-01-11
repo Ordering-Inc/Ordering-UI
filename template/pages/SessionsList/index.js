@@ -10,3 +10,5 @@ export const SessionsList = (props) => {
     </>
   )
 }
+
+export default SessionsList

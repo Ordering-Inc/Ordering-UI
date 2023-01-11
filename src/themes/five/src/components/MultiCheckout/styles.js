@@ -118,16 +118,23 @@ export const DriverTipDivider = styled.div`
   }
 `
 export const MultiCartPriceContainer = styled.div`
+  margin-top: 38px;
   > div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 38px;
+    margin-top: ${({ totalFeeEnabled }) => totalFeeEnabled ? '5px' : '38px'};
     margin-bottom: 5px;
     > h4 {
       font-size: 18px;
       margin: 0;
     }
+  }
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
   }
   p {
     font-size: 14px;

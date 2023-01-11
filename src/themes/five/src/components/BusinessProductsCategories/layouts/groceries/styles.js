@@ -16,7 +16,7 @@ export const CategoriesWrap = styled.div`
 export const CategoriesContainer = styled.div`
   display: flex;
   overflow-x: auto;
-  padding: 5px;
+  padding: 15px 0 0 0;
   padding-bottom: 0;
   background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
@@ -37,7 +37,7 @@ export const CategoriesContainer = styled.div`
   }
 
   @media (min-width: 381px) {
-    padding: 15px 15px 0 0;
+    padding: 5px;
   }
 `
 

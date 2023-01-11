@@ -6,7 +6,7 @@ import { ReviewProduct } from '../ReviewProduct'
 import { ReviewDriver } from '../ReviewDriver'
 
 import { useTheme } from 'styled-components'
-import { getGoogleMapImage } from '../../../../../utils'
+import { getGoogleMapImage, getOrderStatus } from '../../../../../utils'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
@@ -34,7 +34,6 @@ import {
 const SingleOrderCardUI = (props) => {
   const {
     order,
-    getOrderStatus,
     isBusinessesPage,
     handleReorder,
     customArray,
@@ -148,6 +147,7 @@ const SingleOrderCardUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <Container
         id='order-card'
+        w={screen.width - (screen.width < 411 ? -60 : 60)}
         isBusinessesPage={isBusinessesPage}
         isCustomerMode={isCustomerMode}
         onClick={(e) => handleClickCard(e, order)}
@@ -161,20 +161,18 @@ const SingleOrderCardUI = (props) => {
                 <>
                   {order?.business?.length > 1 ? (
                     <MultiLogosContainer>
-                      {order?.business?.map((business, i) => (
-                        <React.Fragment key={business?.id}>
-                          {i > 1 ? (
-                            <p>
-                              + {order?.business?.length - 2}
-                            </p>
-                          ) : (
-                            <BusinessLogoWrapper
-                              bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')}
-                              isMulti
-                            />
-                          )}
-                        </React.Fragment>
+                      {order?.business?.map((business, i) => i < 2 && (
+                        <BusinessLogoWrapper
+                          key={business?.id}
+                          bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')}
+                          isMulti
+                        />
                       ))}
+                      {order?.business?.length > 1 && (order?.business?.length - 2) > 0 && (
+                        <p>
+                          + {order?.business?.length - 2}
+                        </p>
+                      )}
                     </MultiLogosContainer>
                   ) : (
                     <BusinessLogoWrapper bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_400,c_limit')} />
