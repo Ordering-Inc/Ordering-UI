@@ -12,6 +12,7 @@ import { Button } from '../../styles/Buttons'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../Modal'
 import { Confirm } from '../Confirm'
+import { OrderEta } from '../OrderDetails/OrderEta'
 import {
   Container,
   Content,
@@ -231,7 +232,7 @@ const SingleOrderCardUI = (props) => {
                             ? order?.delivery_datetime_utc
                               ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY hh:mm A' })
                               : parseDate(order?.delivery_datetime, { utc: false })
-                            : order?.eta_time + 'min'
+                            : <OrderEta order={order} />
                         }
                       </p>
                     </>

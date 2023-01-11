@@ -6,10 +6,10 @@ import {
   OrderList as OrderListController
 } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
-import moment from 'moment'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
+import { OrderEta } from '../OrderDetails/OrderEta'
 import {
   OrderProgressContainer,
   OrderInfoWrapper,
@@ -30,7 +30,7 @@ const OrderProgressUI = (props) => {
     isCustomerMode
   } = props
   const [, t] = useLanguage()
-  const [{ optimizeImage, parseDate, parseTime }] = useUtils()
+  const [{ optimizeImage, parseTime }] = useUtils()
   const theme = useTheme()
   const [events] = useEvent()
   const [lastOrder, setLastOrder] = useState(null)
@@ -67,15 +67,6 @@ const OrderProgressUI = (props) => {
     const objectStatus = orderStatus.find((o) => o.key === status)
 
     return objectStatus && objectStatus
-  }
-
-  const convertDiffToHours = (time) => {
-    if (!time) return
-    const deliveryTime = lastOrder?.delivery_datetime_utc
-      ? parseDate(lastOrder?.delivery_datetime_utc, { outputFormat: 'YYYY-MM-DD hh:mm A' })
-      : parseDate(lastOrder?.delivery_datetime, { utc: false, outputFormat: 'YYYY-MM-DD hh:mm A' })
-    const returnedDate = moment(new Date(deliveryTime.replace(/-/g, '/'))).add(time, 'minutes').format('hh:mm A')
-    return returnedDate
   }
 
   const handleGoToPage = (index) => {
@@ -135,7 +126,7 @@ const OrderProgressUI = (props) => {
                       ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
                       : parseTime(lastOrder?.delivery_datetime, { utc: false })}
                       &nbsp;-&nbsp;
-                    {convertDiffToHours(lastOrder.eta_time)}
+                    <OrderEta order={lastOrder} outputFormat='hh:mm A' />
                   </span>
                 </TimeWrapper>
               </ProgressTextWrapper>
