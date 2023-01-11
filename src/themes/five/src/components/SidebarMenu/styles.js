@@ -162,7 +162,7 @@ export const MenuLinkIcon = styled.div`
     color: #000;
     width: 24px;
     height: 24px;
-    color: ${({ active, theme }) => active ? theme.colors.primary : theme.general?.components?.layout?.type === 'pfchangs' ? '#fff' : '#000'}
+    color: ${({ active, theme }) => active ? theme.colors.primary : theme.general?.components?.layout?.type === 'pfchangs' ? theme?.colors?.tertiary || '#FFF' : '#000'}
   }
 `
 
