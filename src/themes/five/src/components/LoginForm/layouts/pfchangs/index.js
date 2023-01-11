@@ -302,6 +302,7 @@ const LoginFormUI = (props) => {
                   active={isOtpCellphone}
                   borderBottom={isOtpCellphone}
                   activeColor={theme?.colors?.gold}
+                  fromLogin
                 >
                   {t('BY_OTP_CELLPHONE', 'by Otp Cellphone')}
                 </Tab>
@@ -310,6 +311,7 @@ const LoginFormUI = (props) => {
                   active={isOtpEmail}
                   borderBottom={isOtpEmail}
                   activeColor={theme?.colors?.gold}
+                  fromLogin
                 >
                   {t('BY_OTP_EMAIL', 'by Otp Email')}
                 </Tab>

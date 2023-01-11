@@ -189,7 +189,7 @@ export const TextInfo = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${({ active, theme }) => active ? theme.colors.primary : theme.general?.components?.layout?.type === 'pfchangs' ? '#fff' : '#000'}
+  color: ${({ active, theme }) => active ? theme.colors.primary : theme.general?.components?.layout?.type === 'pfchangs' ? theme?.colors?.tertiary || '#FFF' : '#000'}
 
   ${props => props.theme?.rtl && css`
     text-align: right;

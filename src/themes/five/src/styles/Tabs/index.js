@@ -47,7 +47,7 @@ export const Tab = styled.div`
     color: ${({ activeColor }) => activeColor || ''};
   `}
 
-  ${({ active }) => !active && css`
-    color: ${props => props.theme?.colors?.tertiary || props.theme.colors.darkGray};
+  ${({ active, fromLogin }) => !active && css`
+    color: ${props => fromLogin ? '#000000' : props.theme?.colors?.tertiary || props.theme.colors.darkGray};
   `}
 `
