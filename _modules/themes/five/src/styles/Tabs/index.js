@@ -52,10 +52,11 @@ var Tab = _styledComponents.default.div(_templateObject4 || (_templateObject4 = 
     return activeColor || '';
   });
 }, function (_ref12) {
-  var active = _ref12.active;
+  var active = _ref12.active,
+    fromLogin = _ref12.fromLogin;
   return !active && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     var _props$theme2, _props$theme2$colors;
-    return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : (_props$theme2$colors = _props$theme2.colors) === null || _props$theme2$colors === void 0 ? void 0 : _props$theme2$colors.tertiary) || props.theme.colors.darkGray;
+    return fromLogin ? '#000000' : ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : (_props$theme2$colors = _props$theme2.colors) === null || _props$theme2$colors === void 0 ? void 0 : _props$theme2$colors.tertiary) || props.theme.colors.darkGray;
   });
 });
 exports.Tab = Tab;

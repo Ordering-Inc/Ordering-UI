@@ -352,14 +352,16 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     active: isOtpCellphone,
     borderBottom: isOtpCellphone,
-    activeColor: theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold
+    activeColor: theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.gold,
+    fromLogin: true
   }, t('BY_OTP_CELLPHONE', 'by Otp Cellphone')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
     onClick: function onClick() {
       return handleChangeOtpType('email');
     },
     active: isOtpEmail,
     borderBottom: isOtpEmail,
-    activeColor: theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold
+    activeColor: theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold,
+    fromLogin: true
   }, t('BY_OTP_EMAIL', 'by Otp Email')))), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup
