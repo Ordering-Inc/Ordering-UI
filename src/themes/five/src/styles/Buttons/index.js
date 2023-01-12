@@ -47,6 +47,14 @@ export const Button = styled.button`
   ${({ theme }) => theme?.general?.components?.buttons?.borderRadius && css`
       border-radius: ${theme?.general?.components?.buttons?.borderRadius};
   `}
+  ${({ theme }) => Object.values(theme?.general?.components?.buttons?.shadow?.components || {}).some(val => !!val) && css`
+    box-shadow: 
+      ${theme?.general?.components?.buttons?.shadow?.components?.x || '0px'}
+      ${theme?.general?.components?.buttons?.shadow?.components?.y || '0px'}
+      ${theme?.general?.components?.buttons?.shadow?.components?.blur || '0px'}
+      ${theme?.general?.components?.buttons?.shadow?.components?.spread || '0px'}
+      ${theme?.general?.components?.buttons?.shadow?.components?.color || '#000'};
+  `}
   ${({ outline }) => outline && css`
     background: #FFF;
     color: #CCC;

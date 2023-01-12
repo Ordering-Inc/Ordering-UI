@@ -41,6 +41,7 @@ import {
   ListLink,
   ListItem
 } from './styles'
+import { useTheme } from 'styled-components'
 
 const LogoutActionUI = (props) => {
   const [, t] = useLanguage()
@@ -95,6 +96,7 @@ const UserProfileFormUI = (props) => {
   const [events] = useEvent()
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
+  const theme = useTheme()
   const [orderingTheme] = useOrderingTheme()
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
@@ -103,9 +105,9 @@ const UserProfileFormUI = (props) => {
   const inputRef = useRef(null)
   const windowSize = useWindowSize()
 
-  const showCustomerPicture = !orderingTheme?.theme?.profile?.components?.picture?.hidden
-  const showAddressList = !orderingTheme?.theme?.profile?.components?.address_list?.hidden
-  const userFormLayoutRow = orderingTheme?.theme?.profile?.components?.layout?.position === 'row'
+  const showCustomerPicture = !theme?.profile?.components?.picture?.hidden
+  const showAddressList = !theme?.profile?.components?.address_list?.hidden
+  const userFormLayoutRow = theme?.profile?.components?.layout?.position === 'row'
 
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
   const isAddressListNewPage = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
@@ -113,13 +115,20 @@ const UserProfileFormUI = (props) => {
     configs?.wallet_enabled?.value === '1' &&
     (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
 
+  const hideWallet = theme?.bar_menu?.components?.wallet?.hidden
+  const hideMessages = theme?.bar_menu?.components?.messages?.hidden
+  const hideHelp = theme?.bar_menu?.components?.help?.hidden
+  const hideFavorites = theme?.bar_menu?.components?.favortes?.hidden
+  const hideSession = theme?.bar_menu?.components?.sessions?.hidden
+  const hidePromotions = theme?.bar_menu?.components?.promotions?.hidden
+
   const profileOptions = [
-    { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: isWalletEnabled && !isCustomerMode },
-    { name: 'promotions', pathname: '/promotions', displayName: 'promotions', key: 'promotions', isActive: isPromotionsEnabled },
-    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !isCustomerMode },
-    { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true },
-    { name: 'sessions', pathname: '/sessions', displayName: 'sessions', key: 'sessions', isActive: true },
-    { name: 'favorite', pathname: '/favorite', displayName: 'favorites', key: 'favorites', isActive: true },
+    { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: !hideWallet && isWalletEnabled && !isCustomerMode },
+    { name: 'promotions', pathname: '/promotions', displayName: 'promotions', key: 'promotions', isActive: !hidePromotions && isPromotionsEnabled },
+    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !hideMessages && !isCustomerMode },
+    { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: !hideHelp },
+    { name: 'sessions', pathname: '/sessions', displayName: 'sessions', key: 'sessions', isActive: !hideSession },
+    { name: 'favorite', pathname: '/favorite', displayName: 'favorites', key: 'favorites', isActive: !hideFavorites },
     { name: 'addresses', pathname: '/profile/addresses', displayName: 'places', key: 'places', isActive: isAddressListNewPage }
   ]
 

@@ -1,329 +1,334 @@
-import React, { useRef, useState } from 'react'
-import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useConfig, useOrder, useUtils, useSession, SingleProductCard as SingleProductCardController } from 'ordering-components'
-import { shape } from '../../../../../../../utils'
-import { useIntersectionObserver } from '../../../../../../../hooks/useIntersectionObserver'
-import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
-import { useTheme } from 'styled-components'
-import { Modal } from '../../../Modal'
-import { LoginForm } from '../../../LoginForm'
-import { SignUpForm } from '../../../SignUpForm'
-import { ForgotPasswordForm } from '../../../ForgotPasswordForm'
-import { Alert } from '../../../Confirm'
+import React from 'react'
+import styled, { css } from 'styled-components'
 
-import {
-  CardContainer,
-  CardInfo,
-  WrapLogo,
-  WrapTags,
-  CardLogo,
-  SoldOut,
-  PriceWrapper,
-  QuantityContainer,
-  RibbonBox,
-  TitleWrapper,
-  LastOrder,
-  SkeletonCardInfo,
-  SkeletonCardLogo
-} from './styles'
-import { Button } from '../../../../styles/Buttons'
-
-const SingleProductCardUI = (props) => {
-  const {
-    product,
-    isSoldOut,
-    isSkeleton,
-    onProductClick,
-    isCartOnProductsList,
-    useCustomFunctionality,
-    onCustomClick,
-    customText,
-    customStyle,
-    useKioskApp,
-    productAddedToCartLength,
-    handleFavoriteProduct,
-    isFavorite,
-    isPreviously,
-    viewString
-  } = props
-
-  const [, t] = useLanguage()
-  const [$element, isObserved] = useIntersectionObserver()
-  const [stateConfig] = useConfig()
-  const [{ parsePrice, optimizeImage, parseDate }] = useUtils()
-  const [orderState] = useOrder()
-  const [{ auth }, { login }] = useSession()
-  const theme = useTheme()
-  const favoriteRef = useRef(null)
-
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalPageToShow, setModalPageToShow] = useState(null)
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
-
-  const editMode = typeof product?.code !== 'undefined'
-  const isObservedValidation = isObserved || useKioskApp
-
-  const removeToBalance = editMode ? product?.quantity : 0
-
-  const cartProducts = Object.values(orderState.carts).reduce((products, _cart) => [...products, ..._cart?.products], [])
-  const productBalance = cartProducts.reduce((sum, _product) => sum + (_product.id === product?.id ? _product.quantity : 0), 0)
-
-  const totalBalance = (productBalance || 0) - removeToBalance
-
-  const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
-
-  const hideAddButton = theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden ?? true
-  const hideProductDescription = theme?.business_view?.components?.products?.components?.product?.components?.description?.hidden
-  const hideProductLogo = viewString
-    ? theme?.[viewString]?.components?.cart?.components?.products?.image?.hidden
-    : theme?.business_view?.components?.products?.components?.product?.components?.image?.hidden
-
-  // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
-
-  let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - totalBalance
-  maxCartProductInventory = !isNaN(maxCartProductInventory) ? maxCartProductInventory : maxCartProductConfig
-
-  const maxProductQuantity = Math.min(maxCartProductConfig, maxCartProductInventory)
-
-  const handleClickProduct = (e) => {
-    if (favoriteRef?.current?.contains(e.target)) return
-    if (productAddedToCartLength && product?.maximum_per_order && productAddedToCartLength >= product?.maximum_per_order) {
-      setAlertState({
-        open: true,
-        content: [t('PRODUCT_ON_MAXIMUM_ORDER', 'The product is on maximum order')]
-      })
-      return
+export const CardContainer = styled.div`
+  ${({ isShowAddButt }) => css`
+    min-height: ${isShowAddButt ? '162px' : '110px'};
+  `}
+  background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
+  border: 1px solid #E9ECEF;
+  padding: 10px;
+  border-radius: 7.6px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  > div {
+    display: flex;
+    justify-content: space-between;
+    ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ? css`
+      flex-direction: row-reverse;
+    `
+    : css`
+      flex-direction: row;
+    `
+  }
+    align-items: center;
+    width: 100%;
+  }
+  button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 4px;
+  }
+  ${({ productsRows }) => productsRows ? css`
+    width: ${() => productsRows === 3 ? 'calc(33% - 20px)' : 'calc(50% - 20px)'};
+    margin: 10px 0;
+  ` : css`
+    width: 100%;
+    margin: 10px 0;
+    @media (min-width: 576px) {
+      margin: 10px;
+      width: calc(100% - 20px);
     }
-
-    if (isFavorite) {
-      onProductClick && onProductClick()
-      return
+  ${({ isCartOnProductsList }) => isCartOnProductsList ? css`
+    @media (min-width: 993px) {
+      width: calc(50% - 20px);
+      margin: 10px 20px 10px 0px;
+      ${props => props.theme?.rtl && css`
+        margin: 10px 0px 10px 20px;
+      `}
     }
-    (!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product, product?.business?.slug)) ||
-      (useCustomFunctionality && onCustomClick && onCustomClick())
-  }
+  ` : css`
+    @media (min-width: 681px) {
+      width: calc(49% - 20px);
+    }
+    @media (min-width: 1440px) {
+      width: calc(33% - 20px);
+      margin: 10px 20px 10px 0px;
+      ${props => props.theme?.rtl && css`
+        margin: 10px 0px 10px 20px;
+      `}
+    }
+  `}
+  
+  `}
+`
 
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
+export const SoldOut = styled.span`
+  font-weight: bold;
+  position: absolute;
+  background: #495057 0% 0% no-repeat padding-box;
+  padding: 5px 10px;
+  top: 7px;
+  border-radius: 2px 0px 0px 2px;
+  right: 0px;
+  color: white;
+  font-size: 12px;
+  ${props => props.theme?.rtl && css`
+    left: 0px;
+    right: initial;
+  `}
+  &:first-letter {
+    text-transform: uppercase;
   }
+  ${({ isBottom }) => isBottom && css`
+    bottom: 7px;
+    top: initial;
+  `}
+`
 
-  const handleChangeFavorite = () => {
-    if (auth) {
-      handleFavoriteProduct && handleFavoriteProduct(!product?.favorite)
-    } else {
-      setModalPageToShow('login')
-      setIsModalOpen(true)
+export const CardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 86px;
+  ${({ isBgimage }) => css`
+    width: ${isBgimage ? 'calc(100% - 90px)' : '100%'};
+  `}
+  > * {
+    margin: 3px;
+  }
+  p {
+    color: #909BA9;
+    text-align: left;
+    font-size: 10px;
+    ${props => props.theme?.rtl && css`
+      text-align: right;
+    `}
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    white-space: pre-wrap;
+  }
+  span {
+    color: ${props => props.theme.colors.darkTextColor};
+    font-size: 14px;
+  }
+  ${({ oneLine }) => oneLine && css`
+    p {
+      -webkit-line-clamp: 1;
+    }
+  `}
+  @media (min-width: 1024px) {
+    p {
+      font-size: 12px;
+    }
+    span {
+      font-size: 14px;
     }
   }
+`
 
-  const closeAuthModal = () => {
-    setIsModalOpen(false)
-    setModalPageToShow(null)
+export const WrapLogo = styled.div`
+  position: relative;
+  max-width: 86px;
+  max-height: 86px;
+  height: 86px;
+  ${({ isBgimage }) => isBgimage && css`
+    width: 86px;
+  `}
+  ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ? css`
+    margin-left: 5px;
+  `
+    : css`
+    margin-right: 5px;
+  `}
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
+`
+
+export const WrapTags = styled.div`
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow-x: auto;
+  ${({ isBgimage }) => isBgimage && css`
+    width: 50px;
+  `}
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
+  div {
+    display: flex;
+    margin: auto;
   }
-
-  const handleSuccessLogin = (user) => {
-    if (user) {
-      closeAuthModal()
-    }
+  ::-webkit-scrollbar {
+    display: none;
   }
-
-  const handleCustomModalClick = (e, { page }) => {
-    e.preventDefault()
-    setModalPageToShow(page)
+  img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
   }
+`
 
-  const handleSuccessSignup = (user) => {
-    login({
-      user,
-      token: user?.session?.access_token
-    })
+const CardLogoStyled = styled.div`
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  min-height: 86px;
+  border-radius: 10px;
+`
+export const CardLogo = (props) => {
+  const style = {}
+  if (props.bgimage) {
+    style.backgroundImage = `url(${props.bgimage})`
   }
-
+  if (props.soldOut) {
+    style.filter = 'brightness(70%)'
+  }
   return (
-    <>
-      <CardContainer
-        ref={$element}
-        soldOut={isSoldOut || maxProductQuantity <= 0}
-        onClick={handleClickProduct}
-        isCartOnProductsList={isCartOnProductsList}
-        style={useCustomFunctionality && customStyle}
-        className='product-card'
-        isShowAddButt={!useCustomFunctionality && !hideAddButton && !isSkeleton}
-      >
-        {isObservedValidation ? (
-          <div>
-            {!useCustomFunctionality && (
-              <>
-                {!isSkeleton && productAddedToCartLength > 0 && (
-                  <QuantityContainer>
-                    <span>{productAddedToCartLength}</span>
-                  </QuantityContainer>
-                )}
-                <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')} oneLine={isPreviously}>
-                  <TitleWrapper>
-                    {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-                    {!useKioskApp && !isPreviously && (
-                      !isSkeleton ? (
-                        <span onClick={() => handleChangeFavorite()} ref={favoriteRef}>
-                          {product?.favorite ? <Like /> : <DisLike />}
-                        </span>
-                      ) : (<Skeleton width={16} height={16} />)
-                    )}
-                  </TitleWrapper>
-                  {!isSkeleton ? (
-                    <PriceWrapper isOffPrice={product?.offer_price && product?.in_offer}>
-                      <span className='current-price'>{product?.price ? parsePrice(product?.price) : ''}</span>
-                      {!(isSoldOut || maxProductQuantity <= 0) && (
-                        <span className='off-price'>{product?.offer_price && product?.in_offer ? parsePrice(product?.offer_price) : ''}</span>
-                      )}
-                      {product?.tags && product?.tags.length > 0 && (
-                        <WrapTags>
-                          {product?.tags.map((tag, i) => (
-                            <div key={i}>
-                              <img src={tag.image ?? ''}></img>
-                            </div>
-                          ))}
-                        </WrapTags>
-                      )}
-                    </PriceWrapper>
-                  ) : (
-                    <Skeleton width={100} />
-                  )}
-                  {!hideProductDescription && (
-                    <>
-                      {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
-                    </>
-                  )}
-                  {isPreviously && (!isSkeleton ? (<LastOrder>{t('LAST_ORDERED_ON', 'Last ordered on')} {parseDate(product?.last_ordered_date, { outputFormat: 'MMM DD, YYYY' })}</LastOrder>) : (<Skeleton width={80} />))}
-                </CardInfo>
-                {!isSkeleton ? (
-                  <WrapLogo
-                    isBgimage={optimizeImage(!hideProductLogo ? product?.images || theme?.images?.dummies?.product : '', 'h_86,c_limit')}
-                  >
-                    {product?.ribbon?.enabled && (
-                      <RibbonBox
-                        bgColor={product?.ribbon?.color}
-                        isRoundRect={product?.ribbon?.shape === shape?.rectangleRound}
-                        isCapsule={product?.ribbon?.shape === shape?.capsuleShape}
-                      >
-                        {product?.ribbon?.text}
-                      </RibbonBox>
-                    )}
-                    <CardLogo
-                      className='image'
-                      soldOut={isSoldOut || maxProductQuantity <= 0}
-                      bgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}
-                    />
-                  </WrapLogo>
-                ) : (
-                  <Skeleton height={75} width={75} />
-                )}
-                {(isSoldOut || maxProductQuantity <= 0) && <SoldOut isBottom={product?.ribbon?.enabled}>{t('SOLD_OUT', 'SOLD OUT')}</SoldOut>}
-              </>
-            )}
-            {useCustomFunctionality && customText && (
-              <span style={{ fontSize: 16, fontWeight: 500 }}>{customText}</span>
-            )}
-          </div>
-        ) : (
-          <div>
-            <SkeletonCardInfo>
-              <Skeleton width={100} />
-              <Skeleton width={100} />
-              <Skeleton width={100} />
-            </SkeletonCardInfo>
-            <SkeletonCardLogo>
-              <Skeleton height={75} width={75} />
-            </SkeletonCardLogo>
-          </div>
-        )}
-        {!useCustomFunctionality && !hideAddButton && !isSkeleton && (
-          <Button outline color='primary' disabled={productAddedToCartLength && product?.maximum_per_order && productAddedToCartLength >= product?.maximum_per_order}>
-            {t('ADD', 'Add')}
-          </Button>
-        )}
-      </CardContainer>
-      <Modal
-        open={isModalOpen}
-        onRemove={() => closeAuthModal()}
-        onClose={() => closeAuthModal()}
-        width='50%'
-        authModal
-      >
-        {modalPageToShow === 'login' && (
-          <LoginForm
-            handleSuccessLogin={handleSuccessLogin}
-            elementLinkToSignup={
-              <a
-                onClick={
-                  (e) => handleCustomModalClick(e, { page: 'signup' })
-                } href='#'
-              >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
-              </a>
-            }
-            elementLinkToForgotPassword={
-              <a
-                onClick={
-                  (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
-                } href='#'
-              >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
-              </a>
-            }
-            useLoginByCellphone
-            isPopup
-          />
-        )}
-        {modalPageToShow === 'signup' && (
-          <SignUpForm
-            elementLinkToLogin={
-              <a
-                onClick={
-                  (e) => handleCustomModalClick(e, { page: 'login' })
-                } href='#'
-              >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
-              </a>
-            }
-            useLoginByCellphone
-            useChekoutFileds
-            handleSuccessSignup={handleSuccessSignup}
-            isPopup
-            closeModal={() => closeAuthModal()}
-          />
-        )}
-        {modalPageToShow === 'forgotpassword' && (
-          <ForgotPasswordForm
-            elementLinkToLogin={
-              <a
-                onClick={
-                  (e) => handleCustomModalClick(e, { page: 'login' })
-                } href='#'
-              >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
-              </a>
-            }
-            isPopup
-          />
-        )}
-      </Modal>
-      <Alert
-        title={t('PRODUCT', 'Product')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-    </>
+    <CardLogoStyled {...props} style={style}>
+      {props.children}
+    </CardLogoStyled>
   )
 }
 
-export const SingleProductCard = (props) => {
-  const singleProductCardProps = {
-    ...props,
-    UIComponent: SingleProductCardUI
+export const PriceWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  .current-price {
+    min-width: 64px
   }
-  return <SingleProductCardController {...singleProductCardProps} />
-}
+  .off-price {
+    font-size: 10px;
+    color: #909BA9;
+    margin-left: 5px;
+    text-decoration: line-through;
+    ${({ isOffPrice }) => isOffPrice && css`
+      min-width: 46px;
+    `}
+    ${props => props.theme.rtl && css`
+      margin-right: 5px;
+      margin-left: 0;
+    `}
+    @media (min-width: 1024px) {
+      font-size: 13px;
+      ${({ isOffPrice }) => isOffPrice && css`
+        min-width: 64px;
+      `}
+    }
+  }
+`
+
+export const QuantityContainer = styled.div`
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primaryContrast};
+  position: absolute;
+  left: 100%;
+  bottom: 100%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  transform: translate(-20px, 50%);
+  @media (min-width: 768px) {
+    transform: translate(-50%, 50%);
+  }
+`
+
+export const RibbonBox = styled.div`
+  position: absolute;
+  padding: 2px 8px;
+  box-sizing: border-box;
+  z-index: 10;
+  color: ${props => props.theme.colors.colorTextSignForm};
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 13px;
+  top: -4px;
+  right: -3px;
+  background-color: ${props => props.theme.colors.primary};
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  max-width: 70px;
+  word-break: break-all;
+  ${props => props.theme.rtl && css`
+    left: -3px;
+    right: initial;
+  `}
+  ${({ bgColor }) => bgColor && css`
+    background-color: ${bgColor};
+  `}
+  ${({ isRoundRect }) => isRoundRect && css`
+    border-radius: 7.6px;
+  `}
+  ${({ isCapsule }) => isCapsule && css`
+    border-radius: 50px;
+  `}
+`
+
+export const LastOrder = styled.span`
+  color: ${props => props.theme.colors.primary};
+  font-weight: 400;
+  font-size: 10px !important;
+  margin: 0px 3px;
+`
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h1 {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    color: ${props => props.theme.colors.headingColor};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0px;
+  }
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    svg {
+      color: ${props => props.theme.colors.danger500};
+      font-size: 16px;
+    }
+  }
+`
+export const SkeletonCardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 90px);
+  > * {
+    margin: 3px;
+  }
+`
+export const SkeletonCardLogo = styled.div`
+  max-width: 86px;
+  max-height: 86px;
+  width: 86px;
+  height: 86px;
+  margin-left: 5px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
+`
