@@ -30,6 +30,7 @@ import { OrderPreferencesSection } from './OrderPreferencesSections'
 import { PlaceSpot } from '../PlaceSpot'
 import { SendGiftCard } from '../GiftCard/SendGiftCard'
 import { Confirm } from '../Confirm'
+import { OrderEta } from './OrderEta'
 
 import {
   Container,
@@ -420,13 +421,11 @@ const OrderDetailsUI = (props) => {
                 )}
                 {!hideDeliveryDate && (
                   <p className='date'>
-                    {
-                      activeStatus.includes(order?.status)
-                        ? order?.eta_time + 'min'
-                        : order?.delivery_datetime_utc
-                          ? parseDate(order?.delivery_datetime_utc)
-                          : parseDate(order?.delivery_datetime, { utc: false })
-                    }
+                    {activeStatus.includes(order?.status) ? (
+                      <OrderEta order={order} />
+                    ) : (
+                      parseDate(order?.reporting_data?.at[`status:${order.status}`])
+                    )}
                   </p>
                 )}
                 {(acceptedStatus.includes(parseInt(order?.status, 10)) ||
