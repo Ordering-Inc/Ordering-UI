@@ -19,7 +19,7 @@ export const CardContainer = styled.div`
   > div {
     display: flex;
     justify-content: space-between;
-    ${({ theme }) => theme?.layouts?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
     ? css`
       flex-direction: row-reverse;
     `
@@ -152,7 +152,7 @@ export const WrapLogo = styled.div`
   ${({ isBgimage }) => isBgimage && css`
     width: 86px;
   `}
-  ${({ theme }) => theme?.layouts?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+  ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
     ? css`
     margin-left: 5px;
   `
