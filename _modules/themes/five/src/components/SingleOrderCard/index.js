@@ -18,6 +18,7 @@ var _Buttons = require("../../styles/Buttons");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Modal = require("../Modal");
 var _Confirm = require("../Confirm");
+var _OrderEta = require("../OrderDetails/OrderEta");
 var _styles = require("./styles");
 var _styles2 = require("../OrdersOption/styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -281,7 +282,9 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     outputFormat: 'MM/DD/YY hh:mm A'
   }) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
-  }) : (order === null || order === void 0 ? void 0 : order.eta_time) + 'min'))), !hideOrderStatus && /*#__PURE__*/_react.default.createElement("p", {
+  }) : /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
+    order: order
+  })))), !hideOrderStatus && /*#__PURE__*/_react.default.createElement("p", {
     className: "order-status"
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
