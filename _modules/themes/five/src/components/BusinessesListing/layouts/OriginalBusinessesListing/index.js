@@ -29,10 +29,10 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _AutoScroll = require("../../../AutoScroll");
 var _CitiesControl = require("../../../CitiesControl");
 var _OrderContextUI = require("../../../OrderContextUI");
+var _OrdersSection = require("./OrdersSection");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -50,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _configs$business_lis, _configs$business_lis2, _theme$images2, _theme$images2$genera, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _Object$values, _configs$business_lis3, _theme$images3, _theme$images3$genera, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _orderState$options5, _orderState$options5$, _businessesList$busin6, _businessesList$busin7, _props$afterComponent, _props$afterElements;
+  var _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _businessesList$busin3, _configs$business_lis, _configs$business_lis2, _theme$images2, _theme$images2$genera, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _Object$values, _configs$business_lis3, _theme$images3, _theme$images3$genera, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _orderState$options5, _orderState$options5$, _businessesList$busin6, _businessesList$busin7;
   var businessesList = props.businessesList,
     paginationProps = props.paginationProps,
     searchValue = props.searchValue,
@@ -128,9 +128,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   var hideCities = (_ref = (theme === null || theme === void 0 ? void 0 : (_theme$business_listi = theme.business_listing_view) === null || _theme$business_listi === void 0 ? void 0 : (_theme$business_listi2 = _theme$business_listi.components) === null || _theme$business_listi2 === void 0 ? void 0 : (_theme$business_listi3 = _theme$business_listi2.cities) === null || _theme$business_listi3 === void 0 ? void 0 : _theme$business_listi3.hidden) || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) !== 2) !== null && _ref !== void 0 ? _ref : true;
   var hideSearch = theme === null || theme === void 0 ? void 0 : (_theme$business_listi4 = theme.business_listing_view) === null || _theme$business_listi4 === void 0 ? void 0 : (_theme$business_listi5 = _theme$business_listi4.components) === null || _theme$business_listi5 === void 0 ? void 0 : (_theme$business_listi6 = _theme$business_listi5.search) === null || _theme$business_listi6 === void 0 ? void 0 : _theme$business_listi6.hidden;
   var hideFilter = (theme === null || theme === void 0 ? void 0 : (_theme$business_listi7 = theme.business_listing_view) === null || _theme$business_listi7 === void 0 ? void 0 : (_theme$business_listi8 = _theme$business_listi7.components) === null || _theme$business_listi8 === void 0 ? void 0 : (_theme$business_listi9 = _theme$business_listi8.filter) === null || _theme$business_listi9 === void 0 ? void 0 : _theme$business_listi9.hidden) || hideSearch;
+  var hideHero = theme === null || theme === void 0 ? void 0 : (_theme$business_listi10 = theme.business_listing_view) === null || _theme$business_listi10 === void 0 ? void 0 : (_theme$business_listi11 = _theme$business_listi10.components) === null || _theme$business_listi11 === void 0 ? void 0 : (_theme$business_listi12 = _theme$business_listi11.business_hero) === null || _theme$business_listi12 === void 0 ? void 0 : _theme$business_listi12.hidden;
+  var hidePreviousOrders = theme === null || theme === void 0 ? void 0 : (_theme$business_listi13 = theme.business_listing_view) === null || _theme$business_listi13 === void 0 ? void 0 : (_theme$business_listi14 = _theme$business_listi13.components) === null || _theme$business_listi14 === void 0 ? void 0 : (_theme$business_listi15 = _theme$business_listi14.previous_orders_block) === null || _theme$business_listi15 === void 0 ? void 0 : _theme$business_listi15.hidden;
+  var hideHighestBusiness = theme === null || theme === void 0 ? void 0 : (_theme$business_listi16 = theme.business_listing_view) === null || _theme$business_listi16 === void 0 ? void 0 : (_theme$business_listi17 = _theme$business_listi16.components) === null || _theme$business_listi17 === void 0 ? void 0 : (_theme$business_listi18 = _theme$business_listi17.highest_rated_business_block) === null || _theme$business_listi18 === void 0 ? void 0 : _theme$business_listi18.hidden;
   var hideSearchSection = hideCities && hideSearch && hideFilter;
-  var isAllCategoriesHidden = theme === null || theme === void 0 ? void 0 : (_theme$business_listi10 = theme.business_listing_view) === null || _theme$business_listi10 === void 0 ? void 0 : (_theme$business_listi11 = _theme$business_listi10.components) === null || _theme$business_listi11 === void 0 ? void 0 : (_theme$business_listi12 = _theme$business_listi11.categories) === null || _theme$business_listi12 === void 0 ? void 0 : _theme$business_listi12.hidden;
-  var businessesIds = isCustomLayout && businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
+  var isAllCategoriesHidden = theme === null || theme === void 0 ? void 0 : (_theme$business_listi19 = theme.business_listing_view) === null || _theme$business_listi19 === void 0 ? void 0 : (_theme$business_listi20 = _theme$business_listi19.components) === null || _theme$business_listi20 === void 0 ? void 0 : (_theme$business_listi21 = _theme$business_listi20.categories) === null || _theme$business_listi21 === void 0 ? void 0 : _theme$business_listi21.hidden;
+  var businessesIds = businessesList.businesses && ((_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business.id;
   }));
   var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.type) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.toLowerCase()) === 'chew';
@@ -216,36 +219,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     });
     setFavoriteIds(_toConsumableArray(new Set(ids)));
   }, [businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length]);
-  var OrdersSection = function OrdersSection(_ref2) {
-    var _getCustomArray;
-    var titleContent = _ref2.titleContent;
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCustomLayout && onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
-      horizontal: true,
-      isBusinessesPage: true,
-      onRedirectPage: onRedirectPage,
-      titleContent: t('CARTS', 'Carts'),
-      businessesIds: businessesIds,
-      customArray: (_getCustomArray = getCustomArray(orderState.carts)) === null || _getCustomArray === void 0 ? void 0 : _getCustomArray.filter(function (cart) {
-        return cart.products.length > 0;
-      }),
-      isCustomLayout: true,
-      isBusinessesLoading: businessesList.loading,
-      isCustomerMode: isCustomerMode,
-      franchiseId: props.franchiseId
-    }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
-      horizontal: true,
-      asDashboard: true,
-      isBusinessesPage: true,
-      businessesIds: businessesIds,
-      onRedirectPage: onRedirectPage,
-      userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
-      isCustomLayout: true,
-      titleContent: titleContent,
-      isBusinessesLoading: businessesList.loading,
-      isCustomerMode: isCustomerMode,
-      franchiseId: props.franchiseId
-    })));
-  };
   if (logosLayout) {
     var _businessesList$busin4, _businessesList$busin5;
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessLogosWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogosContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
@@ -268,19 +241,11 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       });
     })))));
   }
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, (windowSize.width < 576 || (configs === null || configs === void 0 ? void 0 : (_configs$business_lis = configs.business_listing_hide_image) === null || _configs$business_lis === void 0 ? void 0 : _configs$business_lis.value) !== '1' && !isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, (windowSize.width < 576 || (configs === null || configs === void 0 ? void 0 : (_configs$business_lis = configs.business_listing_hide_image) === null || _configs$business_lis === void 0 ? void 0 : _configs$business_lis.value) !== '1' && !isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
     isBusinessList: true
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$business_lis2 = configs.business_listing_hide_image) === null || _configs$business_lis2 === void 0 ? void 0 : _configs$business_lis2.value) !== '1' && !isChew && /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$business_lis2 = configs.business_listing_hide_image) === null || _configs$business_lis2 === void 0 ? void 0 : _configs$business_lis2.value) !== '1' && !isChew && !hideHero && /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
     bgimage: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.businessHero,
-    height: theme === null || theme === void 0 ? void 0 : (_theme$business_listi13 = theme.business_listing_view) === null || _theme$business_listi13 === void 0 ? void 0 : (_theme$business_listi14 = _theme$business_listi13.components) === null || _theme$business_listi14 === void 0 ? void 0 : (_theme$business_listi15 = _theme$business_listi14.business_hero) === null || _theme$business_listi15 === void 0 ? void 0 : (_theme$business_listi16 = _theme$business_listi15.style) === null || _theme$business_listi16 === void 0 ? void 0 : _theme$business_listi16.height
+    height: theme === null || theme === void 0 ? void 0 : (_theme$business_listi22 = theme.business_listing_view) === null || _theme$business_listi22 === void 0 ? void 0 : (_theme$business_listi23 = _theme$business_listi22.components) === null || _theme$business_listi23 === void 0 ? void 0 : (_theme$business_listi24 = _theme$business_listi23.business_hero) === null || _theme$business_listi24 === void 0 ? void 0 : (_theme$business_listi25 = _theme$business_listi24.style) === null || _theme$business_listi25 === void 0 ? void 0 : _theme$business_listi25.height
   })), !!((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) !== null && _Object$values !== void 0 && _Object$values.length) && /*#__PURE__*/_react.default.createElement(_OrderProgress.OrderProgress, {
     isChew: isChew,
     franchiseId: props.franchiseId,
@@ -289,9 +254,15 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isCustomerMode: isCustomerMode
   }), (configs === null || configs === void 0 ? void 0 : (_configs$business_lis3 = configs.business_listing_hide_image) === null || _configs$business_lis3 === void 0 ? void 0 : _configs$business_lis3.value) !== '1' && isChew && /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
     bgimage: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.businessHero,
-    height: theme === null || theme === void 0 ? void 0 : (_theme$business_listi17 = theme.business_listing_view) === null || _theme$business_listi17 === void 0 ? void 0 : (_theme$business_listi18 = _theme$business_listi17.components) === null || _theme$business_listi18 === void 0 ? void 0 : (_theme$business_listi19 = _theme$business_listi18.business_hero) === null || _theme$business_listi19 === void 0 ? void 0 : (_theme$business_listi20 = _theme$business_listi19.style) === null || _theme$business_listi20 === void 0 ? void 0 : _theme$business_listi20.height
-  }), isCustomerMode && /*#__PURE__*/_react.default.createElement(OrdersSection, {
-    titleContent: t('PREVIOUS_ORDERS', 'Previous orders')
+    height: theme === null || theme === void 0 ? void 0 : (_theme$business_listi26 = theme.business_listing_view) === null || _theme$business_listi26 === void 0 ? void 0 : (_theme$business_listi27 = _theme$business_listi26.components) === null || _theme$business_listi27 === void 0 ? void 0 : (_theme$business_listi28 = _theme$business_listi27.business_hero) === null || _theme$business_listi28 === void 0 ? void 0 : (_theme$business_listi29 = _theme$business_listi28.style) === null || _theme$business_listi29 === void 0 ? void 0 : _theme$business_listi29.height
+  }), isCustomerMode && !hidePreviousOrders && !businessesList.loading && /*#__PURE__*/_react.default.createElement(_OrdersSection.OrdersSection, {
+    titleContent: t('PREVIOUS_ORDERS', 'Previous orders'),
+    onRedirectPage: onRedirectPage,
+    businessesIds: businessesIds,
+    getCustomArray: getCustomArray,
+    businessesList: businessesList,
+    isCustomerMode: isCustomerMode,
+    userCustomer: userCustomer
   }), !isCustomerMode && !hideSearchSection && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout,
     isCustomerMode: isCustomerMode
@@ -324,13 +295,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     businessList: businessesList.businesses,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location,
     setErrors: setMapErrors
-  })), !isChew && hasHighRatedBusiness && !props.franchiseId && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
+  })), !isChew && hasHighRatedBusiness && !props.franchiseId && !hideHighestBusiness && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
     handleClickAddress: handleClickAddress,
     setHasHighRatedBusiness: setHasHighRatedBusiness,
     onBusinessClick: onBusinessClick,
     isCustomerMode: isCustomerMode,
     favoriteIds: favoriteIds,
-    setFavoriteIds: setFavoriteIds
+    setFavoriteIds: setFavoriteIds,
+    disabledCities: true
   }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
     position: "web_business_listing"
   }), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && !isAllCategoriesHidden && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
@@ -361,7 +333,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     businessList: businessesList.businesses,
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.location,
     setErrors: setMapErrors
-  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(OrdersSection, null), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!isCustomLayout && isCustomerMode && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin6 = businessesList.businesses) === null || _businessesList$busin6 === void 0 ? void 0 : _businessesList$busin6.length) > 0 || isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!isCustomLayout && isCustomerMode && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin6 = businessesList.businesses) === null || _businessesList$busin6 === void 0 ? void 0 : _businessesList$busin6.length) > 0 || isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && (businessesList === null || businessesList === void 0 ? void 0 : businessesList.fetched) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
@@ -397,7 +369,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       favoriteIds: favoriteIds,
       setFavoriteIds: setFavoriteIds
     });
-  }), businessesList.loading && _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.nextPageItems) > 4 ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
+  }), (businessesList.loading || !(businessesList !== null && businessesList !== void 0 && businessesList.fetched)) && _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.nextPageItems) > 4 ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
     var _orderState$options7;
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
@@ -445,14 +417,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return handleCloseAlerts();
     },
     closeOnBackdrop: false
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 var OriginalBusinessesListing = function OriginalBusinessesListing(props) {

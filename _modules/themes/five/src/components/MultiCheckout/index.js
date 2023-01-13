@@ -95,8 +95,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     alertState = _useState6[0],
     setAlertState = _useState6[1];
-  var maximumCarts = 5;
-  var isDisablePlaceOrderButton = !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id) || openCarts.length > maximumCarts || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa = paymethodSelected.paymethod) === null || _paymethodSelected$pa === void 0 ? void 0 : _paymethodSelected$pa.gateway) === 'stripe' && !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_data);
+  var isDisablePlaceOrderButton = !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id) || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa = paymethodSelected.paymethod) === null || _paymethodSelected$pa === void 0 ? void 0 : _paymethodSelected$pa.gateway) === 'stripe' && !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_data);
   var walletCarts = ((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
     var _cart$products;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (cart === null || cart === void 0 ? void 0 : cart.valid_schedule) && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.valid_maximum) && (cart === null || cart === void 0 ? void 0 : cart.valid_minimum) && (cart === null || cart === void 0 ? void 0 : cart.wallets);
@@ -232,7 +231,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     color: "primary",
     disabled: isDisablePlaceOrderButton || placing || (cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.loading),
     onClick: handlePlaceOrder
-  }, placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order'))), openCarts.length > maximumCarts && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_MAXIMUM_CARTS', 'You can only pay for a maximum of 5 carts, please discard one or more to continue.'))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('CHECKOUT ', 'Checkout'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

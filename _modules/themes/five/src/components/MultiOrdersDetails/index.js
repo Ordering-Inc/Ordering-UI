@@ -58,6 +58,12 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
+  var isTaxIncludedOnPrice = orders.every(function (_order) {
+    var _order$taxes, _order$taxes2;
+    return (_order$taxes = _order.taxes) !== null && _order$taxes !== void 0 && _order$taxes.length ? (_order$taxes2 = _order.taxes) === null || _order$taxes2 === void 0 ? void 0 : _order$taxes2.every(function (_tax) {
+      return _tax.type === 1;
+    }) : true;
+  });
   var walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -109,7 +115,7 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: order.id
     }, /*#__PURE__*/_react.default.createElement("td", null, t('ORDER', 'Order'), " #", order.id), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_order$summary$total = order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) !== null && _order$summary$total !== void 0 ? _order$summary$total : order === null || order === void 0 ? void 0 : order.total)));
-  }))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL_BEFORE_TAX', 'Total before tax'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.subtotal))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('ESTIMATED_TAX_TO_BE_COLLECTED', 'Estimated tax to be collected'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.tax))))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('PAYMENT_TOTAL', 'Payment total'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.total))))))), loading ? _toConsumableArray(Array(3).keys()).map(function (i) {
+  }))), !isTaxIncludedOnPrice && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL_BEFORE_TAX', 'Total before tax'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.subtotal))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('ESTIMATED_TAX_TO_BE_COLLECTED', 'Estimated tax to be collected'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.tax)))))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('PAYMENT_TOTAL', 'Payment total'), ":"), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(ordersSummary === null || ordersSummary === void 0 ? void 0 : ordersSummary.total))))))), loading ? _toConsumableArray(Array(3).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SingleOrderContainer, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
