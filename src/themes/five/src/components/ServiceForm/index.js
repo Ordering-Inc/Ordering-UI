@@ -150,9 +150,9 @@ const ServiceFormUI = (props) => {
       : [...professional?.busy_times]
     const valid = busyTimes.some(item => {
       return (moment.utc(item?.start).local().valueOf() <= moment(dateSelected).valueOf() &&
-        moment(dateSelected).valueOf() <= moment.utc(item?.end).local().valueOf()) ||
+        moment(dateSelected).valueOf() < moment.utc(item?.end).local().valueOf()) ||
         (moment.utc(item?.start).local().valueOf() <= moment(dateSelected).add(duration, 'minutes').valueOf() &&
-        moment(dateSelected).add(duration, 'minutes').valueOf() <= moment.utc(item?.end).local().valueOf())
+        moment(dateSelected).add(duration, 'minutes').valueOf() < moment.utc(item?.end).local().valueOf())
     })
     return valid
   }
