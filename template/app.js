@@ -659,7 +659,7 @@ export const App = () => {
                         />
                       )}
                   </Route>
-                  <Route exact path='/multi-cart/:cartUuid?/:cartGroup?'>
+                  <Route exact path='/multi-cart'>
                     {auth
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
