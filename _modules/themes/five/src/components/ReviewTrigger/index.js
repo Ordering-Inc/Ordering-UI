@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReviewTrigger = void 0;
+exports.default = exports.ReviewTrigger = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
@@ -98,3 +98,5 @@ var ReviewTrigger = function ReviewTrigger(props) {
   }));
 };
 exports.ReviewTrigger = ReviewTrigger;
+var _default = ReviewTrigger;
+exports.default = _default;

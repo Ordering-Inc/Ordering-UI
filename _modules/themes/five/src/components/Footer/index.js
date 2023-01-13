@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Footer = void 0;
+exports.default = exports.Footer = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _styles = require("./styles");
@@ -125,3 +125,5 @@ var Footer = function Footer(_ref) {
   }, ' ', t('ORDERING_CO', 'Ordering.co'))));
 };
 exports.Footer = Footer;
+var _default = Footer;
+exports.default = _default;

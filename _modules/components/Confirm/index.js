@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Confirm = exports.Alert = void 0;
+exports.default = exports.Confirm = exports.Alert = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 var _orderingComponents = require("ordering-components");
@@ -88,3 +88,5 @@ var Confirm = function Confirm(props) {
 exports.Confirm = Confirm;
 var Alert = Confirm;
 exports.Alert = Alert;
+var _default = Confirm;
+exports.default = _default;

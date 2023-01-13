@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReviewProduct = void 0;
+exports.default = exports.ReviewProduct = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _reactHookForm = require("react-hook-form");
@@ -267,3 +267,5 @@ var ReviewProduct = function ReviewProduct(props) {
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ReviewProduct, reviewProductProps);
 };
 exports.ReviewProduct = ReviewProduct;
+var _default = ReviewProduct;
+exports.default = _default;
