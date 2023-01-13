@@ -337,6 +337,7 @@ const BusinessProductsListingUI = (props) => {
           priceFilterValues={priceFilterValues}
           handleChangePriceFilterValues={handleChangePriceFilterValues}
           productToIdLoading={productToIdLoading}
+          handleUpdateProfessionals={handleUpdateProfessionals}
         />
 
         {
