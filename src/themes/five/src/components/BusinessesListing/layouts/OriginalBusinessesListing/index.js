@@ -347,7 +347,7 @@ const BusinessesListingUI = (props) => {
 
         <BusinessList>
           {
-            !businessesList.loading && businessesList.businesses.length === 0 && (
+            !businessesList.loading && businessesList.businesses.length === 0 && businessesList?.fetched && (
               <NotFoundSource
                 content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
               >
@@ -389,7 +389,7 @@ const BusinessesListingUI = (props) => {
               />
             ))
           }
-          {businessesList.loading && (
+          {(businessesList.loading || !businessesList?.fetched) && (
             [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
               <BusinessController
                 key={i}

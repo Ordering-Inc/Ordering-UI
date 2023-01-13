@@ -10,6 +10,12 @@ export const MultiCart = (props) => {
   const multiCheckoutProps = {
     ...props,
     onRedirectPage: (data) => events.emit('go_to_page', data),
+    handleOnRedirectMultiCheckout: (cartUuid) => {
+      events.emit('go_to_page', { page: 'multi_checkout', params: { cartUuid }, replace: true })
+    },
+    handleOnRedirectCheckout: (cartUuid) => {
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid }, replace: true })
+    },
     cartUuid,
     cartGroup
   }

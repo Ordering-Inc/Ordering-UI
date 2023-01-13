@@ -78,8 +78,7 @@ const MultiCheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const maximumCarts = 5
-  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || openCarts.length > maximumCarts || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data)
+  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data)
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
   const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
@@ -294,11 +293,6 @@ const MultiCheckoutUI = (props) => {
                 {placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
               </Button>
             </WrapperPlaceOrderButton>
-            {openCarts.length > maximumCarts && (
-              <WarningText>
-                {t('WARNING_MAXIMUM_CARTS', 'You can only pay for a maximum of 5 carts, please discard one or more to continue.')}
-              </WarningText>
-            )}
           </WrapperRightContainer>
 
           <Alert
