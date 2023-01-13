@@ -11,6 +11,7 @@ var _orderingComponents = require("ordering-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _ProfessionalInfo = require("../ProfessionalInfo");
 var _Modal = require("../Modal");
+var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -30,7 +31,10 @@ var SingleProfessionalCardUI = function SingleProfessionalCardUI(props) {
   var _professional$occupat, _professional$occupat2;
   var professional = props.professional,
     isSkeleton = props.isSkeleton,
-    handleFavoriteProfessional = props.handleFavoriteProfessional;
+    handleFavoriteProfessional = props.handleFavoriteProfessional,
+    isSmallPhoto = props.isSmallPhoto,
+    active = props.active,
+    handleProfessionalClick = props.handleProfessionalClick;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     auth = _useSession2[0].auth;
@@ -46,20 +50,31 @@ var SingleProfessionalCardUI = function SingleProfessionalCardUI(props) {
   var handleOpenProfileInfo = function handleOpenProfileInfo() {
     setOpen(true);
   };
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    active: active,
+    isCursor: !!handleProfessionalClick,
+    onClick: function onClick(e) {
+      return handleProfessionalClick && handleProfessionalClick(e, professional);
+    }
+  }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     style: {
       width: '86px',
       height: '86px'
     }
-  }) : /*#__PURE__*/_react.default.createElement(_styles.UserPhoto, {
-    bgimage: professional === null || professional === void 0 ? void 0 : professional.photo
-  }), /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }) : professional !== null && professional !== void 0 && professional.photo ? /*#__PURE__*/_react.default.createElement(_styles.UserPhoto, {
+    bgimage: professional === null || professional === void 0 ? void 0 : professional.photo,
+    isSmallPhoto: isSmallPhoto
+  }) : /*#__PURE__*/_react.default.createElement(_styles.UserDummyAvatarWrapper, {
+    isSmallPhoto: isSmallPhoto
+  }, /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 18,
     width: 120
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, professional === null || professional === void 0 ? void 0 : professional.name, " ", professional === null || professional === void 0 ? void 0 : professional.last_name)), isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15,
     width: 80
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (professional === null || professional === void 0 ? void 0 : (_professional$occupat = professional.occupation) === null || _professional$occupat === void 0 ? void 0 : _professional$occupat.name) && /*#__PURE__*/_react.default.createElement("p", null, professional === null || professional === void 0 ? void 0 : (_professional$occupat2 = professional.occupation) === null || _professional$occupat2 === void 0 ? void 0 : _professional$occupat2.name)), /*#__PURE__*/_react.default.createElement(_styles.ActionWrapper, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (professional === null || professional === void 0 ? void 0 : (_professional$occupat = professional.occupation) === null || _professional$occupat === void 0 ? void 0 : _professional$occupat.name) && /*#__PURE__*/_react.default.createElement("p", null, professional === null || professional === void 0 ? void 0 : (_professional$occupat2 = professional.occupation) === null || _professional$occupat2 === void 0 ? void 0 : _professional$occupat2.name)), /*#__PURE__*/_react.default.createElement(_styles.ActionWrapper, {
+    isSmallPhoto: isSmallPhoto
+  }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 16,
     height: 16
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -76,7 +91,8 @@ var SingleProfessionalCardUI = function SingleProfessionalCardUI(props) {
   }), /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return handleChangeFavorite();
-    }
+    },
+    className: "favorite"
   }, professional !== null && professional !== void 0 && professional.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: open,
     width: "760px",

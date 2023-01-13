@@ -85,7 +85,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     professionalSelected = props.professionalSelected,
     onBusinessClick = props.onBusinessClick,
     handleChangePriceFilterValues = props.handleChangePriceFilterValues,
-    priceFilterValues = props.priceFilterValues;
+    priceFilterValues = props.priceFilterValues,
+    handleUpdateProfessionals = props.handleUpdateProfessionals;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -201,7 +202,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.ProfessionalFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_ProfessionalFilter.ProfessionalFilter, {
     professionals: business === null || business === void 0 ? void 0 : business.professionals,
     professionalSelected: professionalSelected,
-    handleChangeProfessionalSelected: handleChangeProfessionalSelected
+    handleChangeProfessionalSelected: handleChangeProfessionalSelected,
+    handleUpdateProfessionals: handleUpdateProfessionals
   }))), /*#__PURE__*/_react.default.createElement("div", {
     style: {
       position: 'relative'
@@ -304,7 +306,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   }, /*#__PURE__*/_react.default.createElement(_ProfessionalFilter.ProfessionalFilter, {
     professionals: business === null || business === void 0 ? void 0 : business.professionals,
     professionalSelected: professionalSelected,
-    handleChangeProfessionalSelected: handleChangeProfessionalSelected
+    handleChangeProfessionalSelected: handleChangeProfessionalSelected,
+    handleUpdateProfessionals: handleUpdateProfessionals
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoriesContainer, {
     offSticky: true
   }, !((business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.length) === 0 && !categoryId) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!categoryClicked || windowSize.width >= 993) && /*#__PURE__*/_react.default.createElement(BusinessLayoutCategories, {

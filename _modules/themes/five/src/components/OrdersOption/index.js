@@ -11,7 +11,6 @@ var _moment3 = _interopRequireDefault(require("moment"));
 var _orderingComponents = require("ordering-components");
 var _HorizontalOrdersLayout = require("../HorizontalOrdersLayout");
 var _VerticalOrdersLayout = require("../../../../../components/VerticalOrdersLayout");
-var _styledComponents = require("styled-components");
 var _styles = require("./styles");
 var _PreviousBusinessOrdered = require("./PreviousBusinessOrdered");
 var _PreviousProductsOrdered = require("./PreviousProductsOrdered");
@@ -82,7 +81,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var theme = (0, _styledComponents.useTheme)();
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     carts = _useOrder2[0].carts;
@@ -97,20 +95,31 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var _orders = customArray || values || [];
   var uniqueOrders = [];
   var ordersReduced = _orders.map(function (order) {
-    var _orders$filter;
-    return order !== null && order !== void 0 && order.cart_group_id ? (_orders$filter = _orders.filter(function (_order) {
+    return order !== null && order !== void 0 && order.cart_group_id ? _orders.filter(function (_order) {
       return (_order === null || _order === void 0 ? void 0 : _order.cart_group_id) === (order === null || order === void 0 ? void 0 : order.cart_group_id);
-    })) === null || _orders$filter === void 0 ? void 0 : _orders$filter.reduce(function (orderCompleted, currentOrder) {
-      var _orderCompleted$summa, _currentOrder$summary;
-      return _objectSpread(_objectSpread({}, orderCompleted), {}, {
-        total: ((_orderCompleted$summa = orderCompleted.summary) === null || _orderCompleted$summa === void 0 ? void 0 : _orderCompleted$summa.total) + (currentOrder === null || currentOrder === void 0 ? void 0 : (_currentOrder$summary = currentOrder.summary) === null || _currentOrder$summary === void 0 ? void 0 : _currentOrder$summary.total),
-        business: [orderCompleted.business, currentOrder.business].flat(),
-        business_id: [orderCompleted.business_id, currentOrder.business_id].flat(),
-        id: [orderCompleted.id, currentOrder.id].flat(),
-        review: orderCompleted.review && currentOrder.review,
-        user_review: orderCompleted.user_review && currentOrder.user_review,
-        products: [orderCompleted.products, currentOrder.products].flat()
+    }).map(function (_o, _, _ordersList) {
+      var obj = _objectSpread(_objectSpread({}, _o), {}, {
+        id: _ordersList.map(function (o) {
+          return o.id;
+        }),
+        review: _o.review,
+        user_review: _o.user_review,
+        total: _ordersList.reduce(function (acc, o) {
+          return acc + o.summary.total;
+        }, 0),
+        business: _ordersList.map(function (o) {
+          return o.business;
+        }),
+        business_id: _ordersList.map(function (o) {
+          return o.business_id;
+        }),
+        products: _ordersList.map(function (o) {
+          return o.products;
+        })
       });
+      return obj;
+    }).find(function (o) {
+      return o;
     }) : order;
   });
   var orders = ordersReduced === null || ordersReduced === void 0 ? void 0 : ordersReduced.filter(function (order) {

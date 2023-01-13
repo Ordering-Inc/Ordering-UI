@@ -187,7 +187,11 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
   }, product !== null && product !== void 0 && product.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 16,
     height: 16
-  }))), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : ''), !(isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement("span", {
+  }))), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, {
+    isOffPrice: (product === null || product === void 0 ? void 0 : product.offer_price) && (product === null || product === void 0 ? void 0 : product.in_offer)
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: "current-price"
+  }, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : ''), !(isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement("span", {
     className: "off-price"
   }, product !== null && product !== void 0 && product.offer_price && product !== null && product !== void 0 && product.in_offer ? parsePrice(product === null || product === void 0 ? void 0 : product.offer_price) : ''), (product === null || product === void 0 ? void 0 : product.tags) && (product === null || product === void 0 ? void 0 : product.tags.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapTags, null, product === null || product === void 0 ? void 0 : product.tags.map(function (tag, i) {
     var _tag$image;
