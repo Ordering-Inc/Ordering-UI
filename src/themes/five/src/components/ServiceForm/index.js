@@ -328,7 +328,6 @@ const ServiceFormUI = (props) => {
                 </SelectedItem>
                 {isDropDown && (
                   <DropDownWrapper>
-                    <DropDownTitle>{t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')}</DropDownTitle>
                     {professionalListState?.professionals?.map((professional) => (
                       <SelectedItem
                         key={professional?.id}
