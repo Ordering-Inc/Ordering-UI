@@ -20,7 +20,6 @@ var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _TaxInformation = require("../TaxInformation");
 var _Inputs = require("../../styles/Inputs");
 var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
-var _CartStoresListing = require("../../../../franchise/src/components/CartStoresListing");
 var _DriverTips = require("../DriverTips");
 var _ServiceForm = require("../ServiceForm");
 var _styles = require("./styles");
@@ -31,10 +30,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -47,7 +42,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CartUI = function CartUI(props) {
-  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _Object$values, _orderState$carts, _props$cart, _theme$viewString, _theme$viewString$com, _theme$viewString$com2, _theme$viewString$com3, _theme$viewString$com4, _theme$viewString2, _theme$viewString2$co, _theme$viewString2$co2, _theme$viewString2$co3, _theme$viewString2$co4, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products2, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$delivery_price_, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options2, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_t2, _configs$driver_tip_u2, _configs$driver_tip_t3, _cart$payment_events, _cart$payment_events2, _cart$business2, _cart$business3, _curProduct$calendar_, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _orderState$carts, _props$cart, _theme$viewString, _theme$viewString$com, _theme$viewString$com2, _theme$viewString$com3, _theme$viewString$com4, _theme$viewString2, _theme$viewString2$co, _theme$viewString2$co2, _theme$viewString2$co3, _theme$viewString2$co4, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$delivery_price_, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options2, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_t2, _configs$driver_tip_u2, _configs$driver_tip_t3, _cart$payment_events, _cart$payment_events2, _cart$business2, _cart$business3, _curProduct$calendar_, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
   var currentCartUuid = props.currentCartUuid,
     clearCart = props.clearCart,
     isProducts = props.isProducts,
@@ -58,7 +53,6 @@ var CartUI = function CartUI(props) {
     onClickCheckout = props.onClickCheckout,
     isCheckout = props.isCheckout,
     useKioskApp = props.useKioskApp,
-    isMultiCheckout = props.isMultiCheckout,
     isCartPending = props.isCartPending,
     isCartPopover = props.isCartPopover,
     isForceOpenCart = props.isForceOpenCart,
@@ -89,9 +83,6 @@ var CartUI = function CartUI(props) {
     parsePrice = _useUtils2$.parsePrice,
     parseNumber = _useUtils2$.parseNumber,
     parseDate = _useUtils2$.parseDate;
-  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
     _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
     validationFields = _useValidationFields2[0];
@@ -141,17 +132,11 @@ var CartUI = function CartUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     isUpselling = _useState14[0],
     setIsUpselling = _useState14[1];
-  var _useState15 = (0, _react.useState)(false),
-    _useState16 = _slicedToArray(_useState15, 2),
-    openChangeStore = _useState16[0],
-    setOpenChangeStore = _useState16[1];
+  // const [openChangeStore, setOpenChangeStore] = useState(false)
+
   var businessUrlTemplate = (site === null || site === void 0 ? void 0 : site.business_url_template) || '/store/:business_slug';
   var isCouponEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.coupon) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
-  var checkoutMultiBusinessEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
-  var openCarts = ((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
-    var _cart$products;
-    return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (cart === null || cart === void 0 ? void 0 : cart.valid_schedule) && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.valid_maximum) && (cart === null || cart === void 0 ? void 0 : cart.valid_minimum) && !(cart !== null && cart !== void 0 && cart.wallets);
-  })) || null || [];
+  var isMultiCheckout = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var cart = cartMulticart || (orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat((_props$cart = props.cart) === null || _props$cart === void 0 ? void 0 : _props$cart.business_id)]);
   var viewString = isStore ? 'business_view' : 'header';
   var hideCartComments = theme === null || theme === void 0 ? void 0 : (_theme$viewString = theme[viewString]) === null || _theme$viewString === void 0 ? void 0 : (_theme$viewString$com = _theme$viewString.components) === null || _theme$viewString$com === void 0 ? void 0 : (_theme$viewString$com2 = _theme$viewString$com.cart) === null || _theme$viewString$com2 === void 0 ? void 0 : (_theme$viewString$com3 = _theme$viewString$com2.components) === null || _theme$viewString$com3 === void 0 ? void 0 : (_theme$viewString$com4 = _theme$viewString$com3.comments) === null || _theme$viewString$com4 === void 0 ? void 0 : _theme$viewString$com4.hidden;
@@ -184,72 +169,37 @@ var CartUI = function CartUI(props) {
     setModalIsOpen(true);
   };
   var handleClickCheckout = function handleClickCheckout() {
-    var _cart$group, _Object$values$filter, _Object$values$filter2;
-    var cartSelectedHasGroup = cart === null || cart === void 0 ? void 0 : (_cart$group = cart.group) === null || _cart$group === void 0 ? void 0 : _cart$group.uuid;
-    var cartFilterValidation = function cartFilterValidation(cart) {
+    var _Object$values;
+    var cartsAvailable = (_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
       return (cart === null || cart === void 0 ? void 0 : cart.valid) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2;
-    };
-    var cartsGroupLength = cartSelectedHasGroup ? (_Object$values$filter = Object.values(orderState.carts).filter(function (_cart) {
-      var _cart$group2;
-      return (_cart === null || _cart === void 0 ? void 0 : (_cart$group2 = _cart.group) === null || _cart$group2 === void 0 ? void 0 : _cart$group2.uuid) === cartSelectedHasGroup && cartFilterValidation(_cart);
-    })) === null || _Object$values$filter === void 0 ? void 0 : _Object$values$filter.length : 0;
-    if (cartsGroupLength > 1 && checkoutMultiBusinessEnabled) {
-      var _cart$group3;
-      events.emit('go_to_page', {
-        page: 'multi_checkout',
-        params: {
-          cartUuid: cart === null || cart === void 0 ? void 0 : (_cart$group3 = cart.group) === null || _cart$group3 === void 0 ? void 0 : _cart$group3.uuid
-        }
-      });
-      events.emit('cart_popover_closed');
-      return;
-    }
-    var cartGroupsCount = {};
-    // eslint-disable-next-line no-unused-expressions
-    (_Object$values$filter2 = Object.values(orderState.carts).filter(function (_cart) {
-      return cartFilterValidation(_cart);
-    })) === null || _Object$values$filter2 === void 0 ? void 0 : _Object$values$filter2.forEach(function (_cart) {
-      var _cart$group4;
-      if (cartGroupsCount[_cart === null || _cart === void 0 ? void 0 : (_cart$group4 = _cart.group) === null || _cart$group4 === void 0 ? void 0 : _cart$group4.uuid]) {
-        var _cart$group5;
-        cartGroupsCount[_cart === null || _cart === void 0 ? void 0 : (_cart$group5 = _cart.group) === null || _cart$group5 === void 0 ? void 0 : _cart$group5.uuid] += 1;
-      } else {
-        var _cart$group6;
-        cartGroupsCount[_cart === null || _cart === void 0 ? void 0 : (_cart$group6 = _cart.group) === null || _cart$group6 === void 0 ? void 0 : _cart$group6.uuid] = 1;
-      }
     });
-    var groupForTheCart;
-    var groupForAddCartArray = Object.keys(cartGroupsCount).filter(function (cartGroupUuid) {
-      return cartGroupsCount[cartGroupUuid] > 0 && cartGroupsCount[cartGroupUuid] < 5;
-    });
-    var max = Math.max.apply(Math, _toConsumableArray(groupForAddCartArray.map(function (uuid) {
-      return cartGroupsCount[uuid];
-    })));
-    var indexes = groupForAddCartArray.filter(function (uuid) {
-      return cartGroupsCount[uuid] === max;
-    });
-    if ((indexes === null || indexes === void 0 ? void 0 : indexes.length) > 1) {
-      groupForTheCart = indexes.find(function (uuid) {
-        return uuid !== 'undefined';
-      });
-    } else {
-      groupForTheCart = indexes[0];
-    }
-    if (checkoutMultiBusinessEnabled && (openCarts === null || openCarts === void 0 ? void 0 : openCarts.length) > 1 && groupForTheCart) {
-      events.emit('go_to_page', {
-        page: 'multi_cart',
-        params: {
-          cartUuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
-          cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart
-        }
-      });
-    } else {
+    if (cartsAvailable.length === 1) {
+      var _cartsAvailable$;
       events.emit('go_to_page', {
         page: 'checkout',
         params: {
-          cartUuid: cart === null || cart === void 0 ? void 0 : cart.uuid
+          cartUuid: (_cartsAvailable$ = cartsAvailable[0]) === null || _cartsAvailable$ === void 0 ? void 0 : _cartsAvailable$.uuid
         }
       });
+    } else {
+      var groupKeys = {};
+      cartsAvailable.forEach(function (_cart) {
+        var _cart$group, _cart$group2, _cart$group$uuid, _cart$group3;
+        groupKeys[_cart === null || _cart === void 0 ? void 0 : (_cart$group = _cart.group) === null || _cart$group === void 0 ? void 0 : _cart$group.uuid] ? groupKeys[_cart === null || _cart === void 0 ? void 0 : (_cart$group2 = _cart.group) === null || _cart$group2 === void 0 ? void 0 : _cart$group2.uuid] += 1 : groupKeys[(_cart$group$uuid = _cart === null || _cart === void 0 ? void 0 : (_cart$group3 = _cart.group) === null || _cart$group3 === void 0 ? void 0 : _cart$group3.uuid) !== null && _cart$group$uuid !== void 0 ? _cart$group$uuid : 'null'] = 1;
+      });
+      if (Object.keys(groupKeys).length === 1 && Object.keys(groupKeys)[0] === 'null' || Object.keys(groupKeys).length > 1) {
+        events.emit('go_to_page', {
+          page: 'multi_cart'
+        });
+      } else {
+        var _cartsAvailable$2, _cartsAvailable$2$gro;
+        events.emit('go_to_page', {
+          page: 'multi_checkout',
+          params: {
+            cartUuid: (_cartsAvailable$2 = cartsAvailable[0]) === null || _cartsAvailable$2 === void 0 ? void 0 : (_cartsAvailable$2$gro = _cartsAvailable$2.group) === null || _cartsAvailable$2$gro === void 0 ? void 0 : _cartsAvailable$2$gro.uuid
+          }
+        });
+      }
     }
     events.emit('cart_popover_closed');
     onClickCheckout && onClickCheckout();
@@ -337,9 +287,11 @@ var CartUI = function CartUI(props) {
       }
     });
   };
-  var handleChangeStore = function handleChangeStore() {
-    setOpenChangeStore(true);
-  };
+
+  // const handleChangeStore = () => {
+  //   setOpenChangeStore(true)
+  // }
+
   (0, _react.useEffect)(function () {
     if (isCustomMode) setIsUpselling(true);
   }, [isCustomMode]);
@@ -375,10 +327,11 @@ var CartUI = function CartUI(props) {
     total: cart === null || cart === void 0 ? void 0 : cart.total,
     handleClickCheckout: handleClickCheckout,
     checkoutButtonDisabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address),
-    setPreorderBusiness: setPreorderBusiness,
-    handleChangeStore: !useKioskApp && handleChangeStore,
+    setPreorderBusiness: setPreorderBusiness
+    // handleChangeStore={!useKioskApp && handleChangeStore}
+    ,
     isMultiCheckout: isMultiCheckout
-  }, (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
+  }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,
       isCartPending: isCartPending,
@@ -575,7 +528,7 @@ var CartUI = function CartUI(props) {
     style: {
       fontWeight: 'bold'
     }
-  }, parsePrice(cart === null || cart === void 0 ? void 0 : cart.balance))))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, parsePrice(cart === null || cart === void 0 ? void 0 : cart.balance))))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (!isMultiCheckout || isStore) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address) ? 'secundary' : 'primary',
     onClick: checkOutBtnClick,
     disabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address)

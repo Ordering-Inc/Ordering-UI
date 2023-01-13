@@ -373,7 +373,7 @@ var OrdersOption = function OrdersOption(props) {
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 3,
+      pageSize: getAllOrders || props.activeOrders ? 30 : 10,
       controlType: 'infinity'
     }
   });
