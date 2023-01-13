@@ -168,6 +168,8 @@ export const WrapLogo = styled.div`
 export const WrapTags = styled.div`
   display: flex;
   margin-left: 10px;
+  margin-right: 10px;
+  overflow-x: auto;
 
   ${({ isBgimage }) => isBgimage && css`
     width: 50px;
@@ -180,6 +182,9 @@ export const WrapTags = styled.div`
   div {
     display: flex;
     margin: auto;
+  }
+  ::-webkit-scrollbar {
+    display: none;
   }
 
   img {
@@ -218,12 +223,17 @@ export const PriceWrapper = styled.div`
   display: flex;
   align-items: center;
 
+  .current-price {
+    min-width: 64px
+  }
   .off-price {
     font-size: 10px;
     color: #909BA9;
     margin-left: 5px;
     text-decoration: line-through;
-
+    ${({ isOffPrice }) => isOffPrice && css`
+      min-width: 46px;
+    `}
     ${props => props.theme.rtl && css`
       margin-right: 5px;
       margin-left: 0;
@@ -231,6 +241,9 @@ export const PriceWrapper = styled.div`
 
     @media (min-width: 1024px) {
       font-size: 13px;
+      ${({ isOffPrice }) => isOffPrice && css`
+        min-width: 64px;
+      `}
     }
   }
 `
