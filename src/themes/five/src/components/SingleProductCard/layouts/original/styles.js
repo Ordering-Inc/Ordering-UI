@@ -18,6 +18,14 @@ export const CardContainer = styled.div`
   > div {
     display: flex;
     justify-content: space-between;
+    ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ? css`
+      flex-direction: row-reverse;
+    `
+    : css`
+      flex-direction: row;
+    `
+  }
     align-items: center;
     width: 100%;
   }
@@ -133,11 +141,43 @@ export const WrapLogo = styled.div`
   ${({ isBgimage }) => isBgimage && css`
     width: 86px;
   `}
-  margin-left: 5px;
+  ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ? css`
+    margin-left: 5px;
+  `
+    : css`
+    margin-right: 5px;
+  `}
   ${props => props.theme?.rtl && css`
     margin-right: 5px;
     margin-left: 0px;
   `}
+`
+
+export const WrapTags = styled.div`
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow-x: auto;
+  ${({ isBgimage }) => isBgimage && css`
+    width: 50px;
+  `}
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
+  div {
+    display: flex;
+    margin: auto;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+  }
 `
 
 const CardLogoStyled = styled.div`
@@ -168,17 +208,26 @@ export const CardLogo = (props) => {
 export const PriceWrapper = styled.div`
   display: flex;
   align-items: center;
+  .current-price {
+    min-width: 64px
+  }
   .off-price {
     font-size: 10px;
     color: #909BA9;
     margin-left: 5px;
     text-decoration: line-through;
+    ${({ isOffPrice }) => isOffPrice && css`
+      min-width: 46px;
+    `}
     ${props => props.theme.rtl && css`
       margin-right: 5px;
       margin-left: 0;
     `}
     @media (min-width: 1024px) {
       font-size: 13px;
+      ${({ isOffPrice }) => isOffPrice && css`
+        min-width: 64px;
+      `}
     }
   }
 `
@@ -194,7 +243,6 @@ export const QuantityContainer = styled.div`
   text-align: center;
   border-radius: 50%;
   transform: translate(-20px, 50%);
-
   @media (min-width: 768px) {
     transform: translate(-50%, 50%);
   }
@@ -218,7 +266,6 @@ export const RibbonBox = styled.div`
   overflow: hidden;
   max-width: 70px;
   word-break: break-all;
-
   ${props => props.theme.rtl && css`
     left: -3px;
     right: initial;
