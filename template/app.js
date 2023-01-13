@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import PWAPrompt from 'react-ios-pwa-prompt'
+import { useTheme, ThemeProvider } from 'styled-components'
+import loadable from '@loadable/component'
 import {
   Switch,
   Route,
@@ -6,64 +9,81 @@ import {
   Link,
   useLocation
 } from 'react-router-dom'
-import { useTheme, ThemeProvider } from 'styled-components'
-import PWAPrompt from 'react-ios-pwa-prompt'
 
-import { useSession, useApi, useLanguage, useOrder, Analytics, FacebookPixel, useConfig, AnalyticsSegment, useEvent, useOrderingTheme, useSite } from 'ordering-components'
-import { Header } from '../src/themes/five/src/components/Header'
-import { Header as HeaderKiosk } from '../src/themes/five/src/components/Header/layouts/Kiosk'
-import { Footer } from '../src/themes/five/src/components/Footer'
-import { NotNetworkConnectivity } from '../src/themes/five/src/components/NotNetworkConnectivity'
+import {
+  useSession,
+  useApi,
+  useLanguage,
+  useOrder,
+  Analytics,
+  FacebookPixel,
+  useConfig,
+  AnalyticsSegment,
+  useEvent,
+  useOrderingTheme,
+  useSite
+} from 'ordering-components'
 
-import { SpinnerLoader } from '../src/components/SpinnerLoader'
-import { Header as HeaderOld } from '../src/components/Header'
-import { Header as HeaderRed } from '../src/themes/seven/src/components/Header'
-import { Header as HeaderStarbucks } from '../src/themes/six/src/components/Header'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { useWindowSize } from '../src/hooks/useWindowSize'
-import { Alert } from '../src/components/Confirm'
-import { SmartAppBanner } from '../src/components/SmartAppBanner'
 
-import { NavigationBar } from '../src/themes/five/src/components/NavigationBar'
-import { Modal } from '../src/themes/five/src/components/Modal'
-
-import { ReviewTrigger } from '../src/themes/five/src/components/ReviewTrigger'
-import { ReviewOrder } from '../src/themes/five/src/components/ReviewOrder'
-import { ReviewProduct } from '../src/themes/five/src/components/ReviewProduct'
-import { ReviewDriver } from '../src/themes/five/src/components/ReviewDriver'
-import { SignUpApproval } from '../src/themes/five/src/components/SignUpApproval'
-
-import { AddressList } from './pages/AddressList'
-import { BusinessesList } from './pages/BusinessesList'
-import { BusinessProductsList } from './pages/BusinessProductsList'
-import { CheckoutPage } from './pages/Checkout'
-import { Cms } from './pages/Cms'
-import { HomePage } from './pages/Home'
-import { MyOrders } from './pages/MyOrders'
-import { OrderDetailsPage } from './pages/OrderDetails'
-import { PageNotFound } from './pages/PageNotFound'
-import { PagesList } from './pages/PagesList'
-import { Profile } from './pages/Profile'
-import { Wallets } from './pages/Wallets'
-import { MessagesList } from './pages/MessagesList'
-import { Help } from './pages/Help'
-import { Favorite } from './pages/Favorite'
-import { SessionsList } from './pages/SessionsList'
-import { SignUpBusiness } from './pages/SignUpBusiness'
-import { SignUpDriver } from './pages/SignUpDriver'
-import { UserVerification } from './pages/UserVerification'
-import { BusinessListingSearch } from './pages/BusinessListingSearch'
-import { ResetPassword } from './pages/ResetPassword'
-import { ScrollToTop } from './components/ScrollToTop'
-import { ListenPageChanges } from './components/ListenPageChanges'
-import { HelmetTags } from './components/HelmetTags'
 import settings from './config'
-import { Promotions } from './pages/Promotions'
-import { MultiCheckout } from './pages/MultiCheckout'
-import { MultiOrdersDetails } from './pages/MultiOrdersDetails'
-import { CancellationComponent } from '../src/components/CancellationComponent'
-import { Button } from '../src/themes/five/src/styles/Buttons'
+import { orderingThemeUpdated } from './components/OrderingThemeUpdated'
+
+import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { Input } from '../src/themes/five/src/styles/Inputs'
+
+const Header = loadable(() => import('../src/themes/five/src/components/Header'))
+const HeaderKiosk = loadable(() => import('../src/themes/five/src/components/Header/layouts/Kiosk'))
+const NotNetworkConnectivity = loadable(() => import('../src/themes/five/src/components/NotNetworkConnectivity'))
+const Footer = loadable(() => import('../src/themes/five/src/components/Footer'))
+const NavigationBar = loadable(() => import('../src/themes/five/src/components/NavigationBar'))
+const Modal = loadable(() => import('../src/themes/five/src/components/Modal'))
+const ReviewTrigger = loadable(() => import('../src/themes/five/src/components/ReviewTrigger'))
+const ReviewOrder = loadable(() => import('../src/themes/five/src/components/ReviewOrder'))
+const ReviewProduct = loadable(() => import('../src/themes/five/src/components/ReviewProduct'))
+const ReviewDriver = loadable(() => import('../src/themes/five/src/components/ReviewDriver'))
+const SignUpApproval = loadable(() => import('../src/themes/five/src/components/SignUpApproval'))
+const Button = loadable(() => import('../src/themes/five/src/styles/Buttons'))
+
+const Alert = loadable(() => import('../src/components/Confirm'))
+const HeaderOld = loadable(() => import('../src/components/Header'))
+
+const SmartAppBanner = loadable(() => import('../src/components/SmartAppBanner'))
+const CancellationComponent = loadable(() => import('../src/components/CancellationComponent'))
+
+const HeaderRed = loadable(() => import('../src/themes/seven/src/components/Header'))
+const HeaderStarbucks = loadable(() => import('../src/themes/six/src/components/Header'))
+
+const AddressList = loadable(() => import('./pages/AddressList'))
+const BusinessesList = loadable(() => import('./pages/BusinessesList'))
+const CheckoutPage = loadable(() => import('./pages/Checkout'))
+const Cms = loadable(() => import('./pages/Cms'))
+const HomePage = loadable(() => import('./pages/Home'))
+const MyOrders = loadable(() => import('./pages/MyOrders'))
+const OrderDetailsPage = loadable(() => import('./pages/OrderDetails'))
+const PageNotFound = loadable(() => import('./pages/PageNotFound'))
+const PagesList = loadable(() => import('./pages/PagesList'))
+const Profile = loadable(() => import('./pages/Profile'))
+const Wallets = loadable(() => import('./pages/Wallets'))
+const MessagesList = loadable(() => import('./pages/MessagesList'))
+const Help = loadable(() => import('./pages/Help'))
+const Favorite = loadable(() => import('./pages/Favorite'))
+const SessionsList = loadable(() => import('./pages/SessionsList'))
+const SignUpBusiness = loadable(() => import('./pages/SignUpBusiness'))
+const SignUpDriver = loadable(() => import('./pages/SignUpDriver'))
+const UserVerification = loadable(() => import('./pages/UserVerification'))
+const BusinessListingSearch = loadable(() => import('./pages/BusinessListingSearch'))
+const ResetPassword = loadable(() => import('./pages/ResetPassword'))
+const Promotions = loadable(() => import('./pages/Promotions'))
+const MultiCheckout = loadable(() => import('./pages/MultiCheckout'))
+const MultiCart = loadable(() => import('./pages/MultiCart'))
+const MultiOrdersDetails = loadable(() => import('./pages/MultiOrdersDetails'))
+const BusinessProductsList = loadable(() => import('./pages/BusinessProductsList'))
+
+const ScrollToTop = loadable(() => import('./components/ScrollToTop'))
+const ListenPageChanges = loadable(() => import('./components/ListenPageChanges'))
+const HelmetTags = loadable(() => import('./components/HelmetTags'))
 
 export const App = () => {
   const [{ auth, user }, { login }] = useSession()
@@ -81,6 +101,7 @@ export const App = () => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const windowSize = useWindowSize()
   const [businessSignUpSuccessed, setBusinessSignUpSuccessed] = useState({ open: false, content: {} })
+  const [searchValue, setSearchValue] = useState('')
   const [lastOrderReview, setLastOrderReview] = useState({
     isReviewOpen: false,
     order: null,
@@ -100,6 +121,38 @@ export const App = () => {
       ...theme.colors,
       ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color && { primary: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color }),
       ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color && { links: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color })
+    },
+    images: {
+      ...theme.images,
+      general: {
+        ...theme.images.general,
+        homeHero: orderingTheme?.theme?.homepage_view?.components?.homepage_header?.components?.image || theme.images?.general?.homeHero,
+        businessHero: orderingTheme?.theme?.business_listing_view?.components?.business_hero?.components?.image || theme.images?.general?.businessHero,
+        notFound: orderingTheme?.theme?.business_listing_view?.components?.not_found_source?.components?.image || theme.images?.general?.notFound,
+        emptyActiveOrders: orderingTheme?.theme?.orders?.components?.active_orders?.components?.not_found_source?.components?.image || theme.images?.general?.emptyActiveOrders,
+        emptyPastOrders: orderingTheme?.theme?.orders?.components?.past_orders?.components?.not_found_source?.components?.image,
+        notNetwork: orderingTheme?.theme?.no_internet?.components?.image || theme.images?.general?.notNetwork,
+        businessSignUpHero: orderingTheme?.theme?.business_signup?.components?.icon?.components?.image || theme.images?.general?.businessSignUpHero,
+        driverSignUpHero: orderingTheme?.theme?.driver_signup?.components?.icon?.components?.image || theme.images?.general?.driverSignUpHero
+      },
+      categories: {
+        ...theme.images.categories,
+        food: orderingTheme?.theme?.business_listing_view?.components?.categories?.components?.food?.image || theme.images.categories.categoryFood,
+        groceries: orderingTheme?.theme?.business_listing_view?.components?.categories?.components?.groceries?.image || theme.images.categories.categoryGroceries,
+        alcohol: orderingTheme?.theme?.business_listing_view?.components?.categories?.components?.alcohol?.image || theme.images.categories.categoryAlcohol,
+        laundry: orderingTheme?.theme?.business_listing_view?.components?.categories?.components?.laundry?.image || theme.images.categories.categoryLaundry,
+        all: orderingTheme?.theme?.business_listing_view?.components?.categories?.components?.all?.image || theme.images.categories.categoryAll
+      },
+      dummies: {
+        ...theme.images.dummies,
+        businessHeader: orderingTheme?.theme?.business_view?.components?.header?.components?.dummy_image || theme.images.dummies.businessHeader,
+        businessLogo: orderingTheme?.theme?.business_view?.components?.header?.components?.logo?.dummy_image || theme.images.dummies.businessLogo,
+        product: orderingTheme?.theme?.business_view?.components?.products?.components?.photo?.components?.dummy_image || theme.images.dummies.product
+      },
+      logos: {
+        ...theme.images.logos,
+        logotype: orderingTheme?.theme?.header?.components?.logo?.components?.image || theme.images.logos.logotype
+      }
     }
   }
 
@@ -140,6 +193,9 @@ export const App = () => {
   const isUserVerifyRequired = (isEmailVerifyRequired || isPhoneVerifyRequired) && !isKioskApp
   const isHideFooter = orderingTheme?.theme?.footer?.hidden
 
+  const isHome = location.pathname === '/' || location.pathname === '/home'
+  const isFooterPage = location.pathname === '/pages/footer' || isKioskApp || isHideFooter
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -151,9 +207,6 @@ export const App = () => {
     window.localStorage.setItem('front_version', configs?.front_version?.value)
     window.location.reload()
   }
-
-  const isHome = location.pathname === '/' || location.pathname === '/home'
-  const isFooterPage = location.pathname === '/pages/footer' || isKioskApp || isHideFooter
 
   const handleSuccessSignup = (user) => {
     if (!user?.enabled && (configs?.business_signup_enabled_default?.value === '0' || configs?.driver_signup_enabled_default?.value === '0')) {
@@ -278,6 +331,40 @@ export const App = () => {
   }
 
   useEffect(() => {
+    const link = document.createElement('link')
+    const oldLink = document.getElementById('favicon')
+    link.id = 'favicon'
+    link.rel = 'icon'
+    link.href = themeUpdated?.general?.components?.favicon
+    if (oldLink) {
+      document.head.removeChild(oldLink)
+    }
+    document.head.appendChild(link)
+    const fonts = Object.entries(themeUpdated?.general?.components?.fonts || {})
+    fonts.forEach(([name, fontFamily]) => {
+      const fontElement = window.document.getElementById(`${name}-font-styles`)
+      if (
+        (fontElement?.name !== fontFamily.name && fontFamily.name) ||
+        (fontElement?.href !== fontFamily?.href && fontFamily?.href)
+      ) {
+        window.document.body.removeChild(window.document.getElementById(`${name}-font-styles`))
+        const font = window.document.createElement('link')
+        font.id = `${name}-font-styles`
+        font.rel = 'stylesheet'
+        font.async = true
+        font.defer = true
+        font.name = fontFamily.name
+        font.href = fontFamily.href || `https://fonts.googleapis.com/css2?family=${fontFamily.name}:wght@${fontFamily.weights.join(';')}&display=swap`
+
+        window.document.body.appendChild(font)
+        if (name === 'primary') {
+          window.document.body.style.fontFamily = fontFamily.name
+        }
+      }
+    })
+  }, [themeUpdated])
+
+  useEffect(() => {
     if (!isShowReviewsPopupEnabled) return
     const _user = window.localStorage.getItem('user')
     const _token = window.localStorage.getItem('token')
@@ -367,13 +454,17 @@ export const App = () => {
       />
       {
         loaded && (
-          <ThemeProvider theme={themeUpdated}>
+          <ThemeProvider
+            theme={orderingThemeUpdated(theme, orderingTheme)}
+          >
             <ListenPageChanges />
             {!(isKioskApp && isHome) && (
               <HeaderComponent
                 isHome={isHome}
                 location={location}
                 isCustomLayout={singleBusinessConfig.isActive}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
               />
             )}
             <NotNetworkConnectivity />
@@ -507,7 +598,7 @@ export const App = () => {
                               <Redirect to='/verify' />
                             ) : (
                               orderStatus.options?.address?.location
-                                ? <BusinessesList />
+                                ? <BusinessesList searchValueCustom={searchValue} />
                                 : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                             )
                           )
@@ -553,7 +644,7 @@ export const App = () => {
                         />
                       )}
                   </Route>
-                  <Route path='/multi-checkout'>
+                  <Route exact path='/multi-checkout/:cartUuid?'>
                     {auth
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
@@ -568,7 +659,22 @@ export const App = () => {
                         />
                       )}
                   </Route>
-                  <Route path='/multi-orders'>
+                  <Route exact path='/multi-cart'>
+                    {auth
+                      ? isUserVerifyRequired
+                        ? <Redirect to='/verify' />
+                        : <MultiCart />
+                      : (
+                        <Redirect to={{
+                          pathname: singleBusinessConfig.isActive
+                            ? `/${singleBusinessConfig.businessSlug}`
+                            : '/',
+                          state: { from: location.pathname || null }
+                        }}
+                        />
+                      )}
+                  </Route>
+                  <Route exact path='/multi-orders/:orderId'>
                     {auth
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
@@ -648,20 +754,6 @@ export const App = () => {
                       <BusinessProductsList />
                     )}
                   </Route>
-                  <Route exact path='/:business_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
-                  </Route>
-                  <Route exact path='/:business_slug/:category_slug/:product_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
-                  </Route>
                   <Route exact path='/store/:business_slug'>
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
@@ -683,6 +775,27 @@ export const App = () => {
                       <BusinessProductsList />
                     )}
                   </Route>
+                  <Route exact path='/:business_slug'>
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <BusinessProductsList />
+                    )}
+                  </Route>
+                  <Route exact path='/:business_slug/:category_slug/:product_slug'>
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <BusinessProductsList />
+                    )}
+                  </Route>
+                  <Route exact path='/:business_slug/:category_slug'>
+                    {isUserVerifyRequired ? (
+                      <Redirect to='/verify' />
+                    ) : (
+                      <BusinessProductsList />
+                    )}
+                  </Route>
                   <Route path='*'>
                     <PageNotFound />
                   </Route>
@@ -695,7 +808,7 @@ export const App = () => {
             {(!isFooterPage || enabledPoweredByOrdering) && (
               <Footer isFooterPage={isFooterPage} />
             )}
-            {windowSize.width < 576 && onlineStatus && (
+            {(windowSize.width < 576 && onlineStatus) && (
               <NavigationBar />
             )}
             <Alert

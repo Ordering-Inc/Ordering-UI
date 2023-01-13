@@ -33,7 +33,7 @@ export const ListenPageChanges = ({ children }) => {
     checkout_list: '/checkout',
     multi_checkout: '/multi-checkout/:cartUuid',
     multi_orders: '/multi-orders/:orderId',
-    multi_cart: '/multi-cart/:cartUuid/:cartGroup',
+    multi_cart: '/multi-cart',
     business: businessUrl,
     business_slug: '/:store',
     product: productUrl,

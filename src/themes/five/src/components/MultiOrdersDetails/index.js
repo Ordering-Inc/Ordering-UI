@@ -35,6 +35,8 @@ const MultiOrdersDetailsUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
+  const isTaxIncludedOnPrice = orders.every(_order => _order.taxes?.length ? _order.taxes?.every(_tax => _tax.type === 1) : true)
+
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -124,19 +126,23 @@ const MultiOrdersDetailsUI = (props) => {
                   ))}
                 </tbody>
               </table>
-              <Divider />
-              <table>
-                <tbody>
-                  <tr>
-                    <td>{t('TOTAL_BEFORE_TAX', 'Total before tax')}:</td>
-                    <td>{parsePrice(ordersSummary?.subtotal)}</td>
-                  </tr>
-                  <tr>
-                    <td>{t('ESTIMATED_TAX_TO_BE_COLLECTED', 'Estimated tax to be collected')}:</td>
-                    <td>{parsePrice(ordersSummary?.tax)}</td>
-                  </tr>
-                </tbody>
-              </table>
+              {!isTaxIncludedOnPrice && (
+                <>
+                  <Divider />
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>{t('TOTAL_BEFORE_TAX', 'Total before tax')}:</td>
+                        <td>{parsePrice(ordersSummary?.subtotal)}</td>
+                      </tr>
+                      <tr>
+                        <td>{t('ESTIMATED_TAX_TO_BE_COLLECTED', 'Estimated tax to be collected')}:</td>
+                        <td>{parsePrice(ordersSummary?.tax)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </>
+              )}
               <Divider />
               <table>
                 <tbody>
