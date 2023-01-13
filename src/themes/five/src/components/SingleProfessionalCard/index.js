@@ -4,18 +4,23 @@ import { useSession, SingleProfessionalCard as SingleProfessionalCardController 
 import Skeleton from 'react-loading-skeleton'
 import { ProfessionalInfo } from '../ProfessionalInfo'
 import { Modal } from '../Modal'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import {
   Container,
   UserPhoto,
   InfoWrapper,
-  ActionWrapper
+  ActionWrapper,
+  UserDummyAvatarWrapper
 } from './styles'
 
 const SingleProfessionalCardUI = (props) => {
   const {
     professional,
     isSkeleton,
-    handleFavoriteProfessional
+    handleFavoriteProfessional,
+    isSmallPhoto,
+    active,
+    handleProfessionalClick
   } = props
 
   const [{ auth }] = useSession()
@@ -33,16 +38,22 @@ const SingleProfessionalCardUI = (props) => {
 
   return (
     <>
-      <Container>
+      <Container
+        active={active}
+        isCursor={!!handleProfessionalClick}
+        onClick={e => handleProfessionalClick && handleProfessionalClick(e, professional)}
+      >
         {isSkeleton ? (
           <Skeleton style={{ width: '86px', height: '86px' }} />
         ) : (
-          <UserPhoto bgimage={professional?.photo} />
+          professional?.photo
+            ? <UserPhoto bgimage={professional?.photo} isSmallPhoto={isSmallPhoto} />
+            : <UserDummyAvatarWrapper isSmallPhoto={isSmallPhoto}><FaUserAlt /></UserDummyAvatarWrapper>
         )}
         <InfoWrapper>
           <h4>{isSkeleton ? <Skeleton height={18} width={120} /> : <>{professional?.name} {professional?.last_name}</>}</h4>
           {isSkeleton ? <Skeleton height={15} width={80} /> : <>{professional?.occupation?.name && <p>{professional?.occupation?.name}</p>}</>}
-          <ActionWrapper>
+          <ActionWrapper isSmallPhoto={isSmallPhoto}>
             {isSkeleton ? (
               <>
                 <Skeleton width={16} height={16} />
@@ -51,7 +62,7 @@ const SingleProfessionalCardUI = (props) => {
             ) : (
               <>
                 <InfoCircle className='info' onClick={() => handleOpenProfileInfo()} />
-                <span onClick={() => handleChangeFavorite()}>
+                <span onClick={() => handleChangeFavorite()} className='favorite'>
                   {professional?.favorite ? <Like /> : <DisLike />}
                 </span>
               </>

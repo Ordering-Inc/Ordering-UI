@@ -5,8 +5,6 @@ import { useLanguage, useOrder, useEvent, OrderList } from 'ordering-components'
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
 
-import { useTheme } from 'styled-components'
-
 import {
   OptionTitle,
   OrdersContainer,
@@ -71,7 +69,6 @@ const OrdersOptionUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
   const [{ carts }] = useOrder()
   const [events] = useEvent()
   const { width } = useWindowSize()
@@ -82,16 +79,19 @@ const OrdersOptionUI = (props) => {
   const ordersReduced = _orders.map(order => order?.cart_group_id
     ? _orders
       .filter(_order => _order?.cart_group_id === order?.cart_group_id)
-      ?.reduce((orderCompleted, currentOrder) => ({
-        ...orderCompleted,
-        total: orderCompleted.summary?.total + currentOrder?.summary?.total,
-        business: [orderCompleted.business, currentOrder.business].flat(),
-        business_id: [orderCompleted.business_id, currentOrder.business_id].flat(),
-        id: [orderCompleted.id, currentOrder.id].flat(),
-        review: orderCompleted.review && currentOrder.review,
-        user_review: orderCompleted.user_review && currentOrder.user_review,
-        products: [orderCompleted.products, currentOrder.products].flat()
-      }))
+      .map((_o, _, _ordersList) => {
+        const obj = {
+          ..._o,
+          id: _ordersList.map(o => o.id),
+          review: _o.review,
+          user_review: _o.user_review,
+          total: _ordersList.reduce((acc, o) => acc + o.summary.total, 0),
+          business: _ordersList.map(o => o.business),
+          business_id: _ordersList.map(o => o.business_id),
+          products: _ordersList.map(o => o.products)
+        }
+        return obj
+      }).find(o => o)
     : order)
   const orders = ordersReduced?.filter(order => {
     if (!order?.cart_group_id) return true
