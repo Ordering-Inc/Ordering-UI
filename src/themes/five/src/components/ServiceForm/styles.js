@@ -225,14 +225,6 @@ export const SelectedItem = styled.div`
   `}
 `
 
-export const DropDownTitle = styled.h1`
-  margin-top: 0px;
-  margin-bottom: 18px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-`
-
 export const InfoWrapper = styled.div`
   display: flex;
   align-items: center;
