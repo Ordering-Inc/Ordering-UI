@@ -5,8 +5,6 @@ import { useLanguage, useOrder, useEvent, OrderList } from 'ordering-components'
 import { HorizontalOrdersLayout } from '../HorizontalOrdersLayout'
 import { VerticalOrdersLayout } from '../../../../../components/VerticalOrdersLayout'
 
-import { useTheme } from 'styled-components'
-
 import {
   OptionTitle,
   OrdersContainer,
@@ -27,6 +25,7 @@ import { SingleProductCard } from '../SingleProductCard'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { Alert } from '../Confirm'
 import { PreviousProfessionalOrdered } from './PreviousProfessionalOrdered'
+import { getOrderStatus } from '../../../../../utils'
 
 const OrdersOptionUI = (props) => {
   const {
@@ -70,7 +69,6 @@ const OrdersOptionUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
   const [{ carts }] = useOrder()
   const [events] = useEvent()
   const { width } = useWindowSize()
@@ -81,16 +79,19 @@ const OrdersOptionUI = (props) => {
   const ordersReduced = _orders.map(order => order?.cart_group_id
     ? _orders
       .filter(_order => _order?.cart_group_id === order?.cart_group_id)
-      ?.reduce((orderCompleted, currentOrder) => ({
-        ...orderCompleted,
-        total: orderCompleted.summary?.total + currentOrder?.summary?.total,
-        business: [orderCompleted.business, currentOrder.business].flat(),
-        business_id: [orderCompleted.business_id, currentOrder.business_id].flat(),
-        id: [orderCompleted.id, currentOrder.id].flat(),
-        review: orderCompleted.review && currentOrder.review,
-        user_review: orderCompleted.user_review && currentOrder.user_review,
-        products: [orderCompleted.products, currentOrder.products].flat()
-      }))
+      .map((_o, _, _ordersList) => {
+        const obj = {
+          ..._o,
+          id: _ordersList.map(o => o.id),
+          review: _o.review,
+          user_review: _o.user_review,
+          total: _ordersList.reduce((acc, o) => acc + o.summary.total, 0),
+          business: _ordersList.map(o => o.business),
+          business_id: _ordersList.map(o => o.business_id),
+          products: _ordersList.map(o => o.products)
+        }
+        return obj
+      }).find(o => o)
     : order)
   const orders = ordersReduced?.filter(order => {
     if (!order?.cart_group_id) return true
@@ -123,41 +124,6 @@ const OrdersOptionUI = (props) => {
   }
 
   const showSkeletons = (!isBusiness && !isProducts && loading) || (businesses?.loading && isBusiness) || (products?.length === 0 && isProducts && ((!businessesSearchList && loading) || businessesSearchList?.loading))
-
-  const getOrderStatus = (s) => {
-    const status = parseInt(s)
-    const orderStatus = [
-      { key: 0, value: t('PENDING', theme?.defaultLanguages?.PENDING || 'Pending') },
-      { key: 1, value: t('COMPLETED', theme?.defaultLanguages?.COMPLETED || 'Completed') },
-      { key: 2, value: t('REJECTED', theme?.defaultLanguages?.REJECTED || 'Rejected') },
-      { key: 3, value: t('DRIVER_IN_BUSINESS', theme?.defaultLanguages?.DRIVER_IN_BUSINESS || 'Driver in business') },
-      { key: 4, value: t('PREPARATION_COMPLETED', theme?.defaultLanguages?.PREPARATION_COMPLETED || 'Preparation Completed') },
-      { key: 5, value: t('REJECTED_BY_BUSINESS', theme?.defaultLanguages?.REJECTED_BY_BUSINESS || 'Rejected by business') },
-      { key: 6, value: t('REJECTED_BY_DRIVER', theme?.defaultLanguages?.REJECTED_BY_DRIVER || 'Rejected by Driver') },
-      { key: 7, value: t('ACCEPTED_BY_BUSINESS', theme?.defaultLanguages?.ACCEPTED_BY_BUSINESS || 'Accepted by business') },
-      { key: 8, value: t('ACCEPTED_BY_DRIVER', theme?.defaultLanguages?.ACCEPTED_BY_DRIVER || 'Accepted by driver') },
-      { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', theme?.defaultLanguages?.PICK_UP_COMPLETED_BY_DRIVER || 'Pick up completed by driver') },
-      { key: 10, value: t('PICK_UP_FAILED_BY_DRIVER', theme?.defaultLanguages?.PICK_UP_FAILED_BY_DRIVER || 'Pick up Failed by driver') },
-      { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', theme?.defaultLanguages?.DELIVERY_COMPLETED_BY_DRIVER || 'Delivery completed by driver') },
-      { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', theme?.defaultLanguages?.DELIVERY_FAILED_BY_DRIVER || 'Delivery Failed by driver') },
-      { key: 13, value: t('PREORDER', theme?.defaultLanguages?.PREORDER || 'PreOrder') },
-      { key: 14, value: t('ORDER_NOT_READY', theme?.defaultLanguages?.ORDER_NOT_READY || 'Order not ready') },
-      { key: 15, value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER || 'Order picked up completed by customer') },
-      { key: 16, value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_STATUS_CANCELLED_BY_CUSTOMER || 'Order cancelled by customer') },
-      { key: 17, value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_NOT_PICKEDUP_BY_CUSTOMER || 'Order not picked up by customer') },
-      { key: 18, value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS || 'Driver almost arrived to business') },
-      { key: 19, value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', theme?.defaultLanguages?.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER || 'Driver almost arrived to customer') },
-      { key: 20, value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS || 'Customer almost arrived to business') },
-      { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ARRIVED_BUSINESS || 'Customer arrived to business') },
-      { key: 22, value: t('ORDER_LOOKING_FOR_DRIVER', theme?.defaultLanguages?.ORDER_LOOKING_FOR_DRIVER || 'Looking for driver') },
-      { key: 23, value: t('ORDER_DRIVER_ON_WAY', theme?.defaultLanguages?.ORDER_DRIVER_ON_WAY || 'Driver on way') }
-    ]
-
-    const objectStatus = orderStatus.find((o) => o.key === status)
-
-    return objectStatus && objectStatus
-  }
-
   const onProductClick = (product, slug) => {
     if (slug) {
       onProductRedirect({
