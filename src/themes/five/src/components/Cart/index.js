@@ -19,6 +19,7 @@ import { Modal } from '../Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
+import { CartStoresListing } from '../../../../franchise/src/components/CartStoresListing'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { TaxInformation } from '../TaxInformation'
 import { TextArea } from '../../styles/Inputs'
@@ -92,7 +93,7 @@ const CartUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isUpselling, setIsUpselling] = useState(false)
-  // const [openChangeStore, setOpenChangeStore] = useState(false)
+  const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
 
@@ -233,9 +234,9 @@ const CartUI = (props) => {
     })
   }
 
-  // const handleChangeStore = () => {
-  //   setOpenChangeStore(true)
-  // }
+  const handleChangeStore = () => {
+    setOpenChangeStore(true)
+  }
 
   useEffect(() => {
     if (isCustomMode) setIsUpselling(true)
@@ -272,7 +273,7 @@ const CartUI = (props) => {
             handleClickCheckout={handleClickCheckout}
             checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
             setPreorderBusiness={setPreorderBusiness}
-            // handleChangeStore={!useKioskApp && handleChangeStore}
+            handleChangeStore={!useKioskApp && handleChangeStore}
             isMultiCheckout={isMultiCheckout}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
@@ -654,7 +655,7 @@ const CartUI = (props) => {
           )}
         </CartSticky>
 
-        {/* <Modal
+        <Modal
           width='70%'
           title={t('CHANGE_STORE', 'Change store')}
           open={openChangeStore}
@@ -670,7 +671,7 @@ const CartUI = (props) => {
             onClose={() => setOpenChangeStore(false)}
             handleCustomStoreRedirect={handleStoreRedirect}
           />
-        </Modal> */}
+        </Modal>
 
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
