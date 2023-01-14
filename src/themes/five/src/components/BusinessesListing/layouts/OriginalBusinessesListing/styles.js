@@ -13,88 +13,8 @@ export const BusinessBanner = styled.div`
   align-items: center;
   margin-bottom: 30px;
   position: relative;
-  @media (max-width: 481px) {
+  @media (max-width: 576px) {
     margin-bottom: 0px;
-  }
-`
-
-export const BusinessFeatures = styled.div`
-  position: absolute;
-  top: 10%;
-  width: 100%;
-  padding: 0 15px;
-  box-sizing: border-box;
-`
-
-export const AddressMenu = styled.div`
-  cursor: pointer;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  color: #344050;
-  font-weight: 600;
-  border-radius: 50px;
-  padding: 13px 19px;
-  margin-bottom: 10px;
-
-  span {
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  svg {
-    margin-right: 5px;
-    color: #B1BCCC;
-    ${props => props.theme?.rtl && css`
-      margin-left: 5px;
-      margin-right: 0;
-    `}
-  }
-`
-
-export const FeatureItems = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`
-
-export const ItemInline = styled.div`
-  > span #select-input {
-    background-color: #F8F9FA !important;
-    border: none;
-    border-radius: 7.6px;
-    svg {
-      font-size: 14px;
-    }
-    #list {
-      background-color: #fff;
-      border: none;
-      border-radius: 7.6px;
-
-      left: 0px;
-      right: initial;
-
-      ${props => props.theme.rtl && css`
-        left: initial;
-        right: 0px;
-      `}
-    }
-
-    > div:first-child {
-      font-size: 11px;
-    }
-  }
-
-  .moment-popover {
-    > div:first-child {
-      font-size: 11px;
-      padding: 4px 7px;
-      svg {
-        font-size: 14px;
-      }
-    }
   }
 `
 
@@ -205,7 +125,7 @@ export const BusinessHeroImgStyled = styled.div`
   }
 
   @media (min-width: 821px) {
-    height: ${({ height }) => height || '650px'};
+    height: ${({ height, theme }) => theme?.business_listing_view?.components?.business_hero?.components?.styles?.height || height || '650px'};
   }
 `
 
@@ -230,52 +150,10 @@ export const Divider = styled.div`
   width: 100%;
 `
 
-export const OrderProgressWrapper = styled.div`
-  padding: ${props => props.isChew ? '110px 20px 45px' : '45px 20px'};
-  margin: 0px;
-  @media (min-width: 768px) {
-      margin: 0 35px;
-      padding: 45px 20px;
-    }
-`
-
 export const SearchContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
-
-export const BusinessCityList = styled.div`
-
-`
-
-export const ButtonWrapper = styled.div`
-  position: relative;
-  svg {
-    position: absolute;
-    right: 10px;
-    top: 8px;
-    font-size: 25px;
-    color: #ffffff;
-  }
-  button {
-    width: 100%;
-    padding: 5px;
-  }
-`
-
-export const CityItem = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 15px 0px;
-  cursor: pointer;
-  span {
-    margin-right: 15px;
-  }
-  .city-checked{
-    color: ${props => props.theme.colors.primary};
-  }
 `
 
 export const BusinessLogosWrapper = styled.div`
@@ -283,20 +161,22 @@ export const BusinessLogosWrapper = styled.div`
   width: 100%;
 `
 
-
 const BusinessLogoStyled = styled.div`
-min-width: 100px;
-min-height: 100px;
-height: 100px;
-width: 100px;
-box-sizing: border-box;
-background-repeat: no-repeat, repeat;
-background-size: cover;
-object-fit: cover;
-background-position: center;
-border-radius: 7.6px;
-margin-right: 15px;
-cursor: pointer;
+  min-width: 100px;
+  min-height: 100px;
+  height: 100px;
+  width: 100px;
+  box-sizing: border-box;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  border-radius: 7.6px;
+  margin-right: 15px;
+  cursor: pointer;
+  ${props => props.isActive && css`
+    border: 2px solid ${props => props.theme.colors.primary};
+  `};
 `
 
 export const BusinessLogo = (props) => {
@@ -314,4 +194,9 @@ export const BusinessLogo = (props) => {
 export const BusinessLogosContainer = styled.div`
   display: flex;
   padding-bottom: 10px;
+`
+
+export const HeaderSearchMode = styled.div`
+  position: absolute;
+  width: 200px;
 `

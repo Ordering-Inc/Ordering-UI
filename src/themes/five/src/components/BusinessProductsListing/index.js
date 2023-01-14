@@ -14,7 +14,8 @@ import {
   useUtils,
   useSession,
   useSite,
-  useOrderingTheme
+  useOrderingTheme,
+  useConfig
 } from 'ordering-components'
 
 import {
@@ -25,7 +26,9 @@ import {
   BusinessCartContent,
   EmptyCart,
   EmptyBtnWrapper,
-  Title
+  Title,
+  HeaderContent,
+  OrderContextUIWrapper
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -41,6 +44,8 @@ import { Alert } from '../../../../../components/Confirm'
 import { FloatingButton } from '../../../../../components/FloatingButton'
 import { UpsellingPage } from '../../../../../components/UpsellingPage'
 import { ServiceForm } from '../ServiceForm'
+import { OrderContextUI } from '../OrderContextUI'
+
 const PIXELS_TO_SCROLL = 300
 
 const BusinessProductsListingUI = (props) => {
@@ -77,13 +82,15 @@ const BusinessProductsListingUI = (props) => {
     onChangeMetaTag,
     onBusinessClick,
     handleChangePriceFilterValues,
-    priceFilterValues
+    priceFilterValues,
+    handleUpdateProfessionals
   } = props
 
   const { business, loading, error } = businessState
+  const [{ configs }] = useConfig()
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }] = useOrder()
+  const [{ carts }, { addProduct, updateProduct }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const location = useLocation()
@@ -99,8 +106,11 @@ const BusinessProductsListingUI = (props) => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
   const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
+  const [productToIdLoading, setProductIdToLoading] = useState(null)
   const isMounted = useIsMounted()
 
+  const isQuickAddProduct = configs?.add_product_with_one_click?.value === '1'
+  const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
   const showViewOrderButton = !orderingTheme?.theme?.business_view?.components?.order_view_button?.hidden
@@ -114,25 +124,47 @@ const BusinessProductsListingUI = (props) => {
     setOpenBusinessInformation(true)
   }
 
-  const onProductClick = (product) => {
-    if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
-      if (site?.product_url_template) {
-        onProductRedirect({
-          slug: business?.slug,
-          product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
-          category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
-        })
-      } else {
-        onProductRedirect({
-          slug: business?.slug,
-          product: product.id,
-          category: product.category_id
-        })
+  const onProductClick = async (product) => {
+    if (product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct) {
+      setProductIdToLoading(product.id)
+      const isProductAddedToCart = currentCart?.products?.find(Cproduct => Cproduct.id === product.id)
+      const productQuantity = isProductAddedToCart?.quantity
+      const addCurrentProduct = {
+        ...product,
+        quantity: 1
       }
+      const updateCurrentProduct = {
+        id: product.id,
+        code: isProductAddedToCart?.code,
+        quantity: productQuantity + 1
+      }
+      const cartData = currentCart?.business_id ? currentCart : { business_id: business.id }
+      if (isProductAddedToCart) {
+        await updateProduct(updateCurrentProduct, cartData, isQuickAddProduct)
+      } else {
+        await addProduct(addCurrentProduct, cartData, isQuickAddProduct)
+      }
+      setProductIdToLoading(null)
+    } else {
+      if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
+        if (site?.product_url_template) {
+          onProductRedirect({
+            slug: business?.slug,
+            product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
+            category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
+          })
+        } else {
+          onProductRedirect({
+            slug: business?.slug,
+            product: product.id,
+            category: product.category_id
+          })
+        }
+      }
+      setCurProduct(product)
+      setModalIsOpen(true)
+      events.emit('product_clicked', product)
     }
-    setCurProduct(product)
-    setModalIsOpen(true)
-    events.emit('product_clicked', product)
   }
 
   const handlerProductAction = (product) => {
@@ -256,7 +288,15 @@ const BusinessProductsListingUI = (props) => {
     <>
       <ProductsContainer>
         {!props.useKioskApp && (
-          <ArrowLeft onClick={() => handleGoToBusinessList()} />
+          // <ArrowLeft onClick={() => handleGoToBusinessList()} />
+          <HeaderContent>
+            <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
+            {windowSize?.width < 576 && (
+              <OrderContextUIWrapper>
+                <OrderContextUI isCheckOut />
+              </OrderContextUIWrapper>
+            )}
+          </HeaderContent>
         )}
         <RenderProductsLayout
           errors={errors}
@@ -296,6 +336,8 @@ const BusinessProductsListingUI = (props) => {
           onBusinessClick={onBusinessClick}
           priceFilterValues={priceFilterValues}
           handleChangePriceFilterValues={handleChangePriceFilterValues}
+          productToIdLoading={productToIdLoading}
+          handleUpdateProfessionals={handleUpdateProfessionals}
         />
 
         {
@@ -332,7 +374,7 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </ProductsContainer>
-      {currentCart?.products?.length > 0 && auth && !isCartOpen && showViewOrderButton && (
+      {currentCart?.products?.length > 0 && auth && !isCartOpen && showViewOrderButton && !checkoutMultiBusinessEnabled && (
         <FloatingButton
           btnText={
             !currentCart?.valid_maximum ? (
@@ -430,6 +472,7 @@ const BusinessProductsListingUI = (props) => {
                 professionalList={business?.professionals}
                 professionalSelected={professionalSelected}
                 handleChangeProfessional={handleChangeProfessionalSelected}
+                handleUpdateProfessionals={handleUpdateProfessionals}
                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0) || 0}
               />
             ) : (

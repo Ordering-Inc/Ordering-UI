@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig, useOrderingTheme, useSite } from 'ordering-components'
+import {
+  Cart as CartController,
+  useOrder,
+  useLanguage,
+  useEvent,
+  useUtils,
+  useValidationFields,
+  useConfig,
+  useSite,
+  useCustomer
+} from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
@@ -13,7 +23,6 @@ import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { TaxInformation } from '../TaxInformation'
 import { TextArea } from '../../styles/Inputs'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
-import { CartStoresListing } from '../../../../franchise/src/components/CartStoresListing'
 import { DriverTips } from '../DriverTips'
 import { ServiceForm } from '../ServiceForm'
 import {
@@ -45,7 +54,6 @@ const CartUI = (props) => {
     onClickCheckout,
     isCheckout,
     useKioskApp,
-    isMultiCheckout,
     isCartPending,
     isCartPopover,
     isForceOpenCart,
@@ -56,7 +64,10 @@ const CartUI = (props) => {
     handleChangeComment,
     commentState,
     handleRemoveOfferClick,
-    setPreorderBusiness
+    setPreorderBusiness,
+    cart: cartMulticart,
+    hideDeliveryFee,
+    hideDriverTip
   } = props
 
   const theme = useTheme()
@@ -64,11 +75,11 @@ const CartUI = (props) => {
   const [orderState] = useOrder()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
-  const [orderingTheme] = useOrderingTheme()
   const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
   const [{ site }] = useSite()
   const windowSize = useWindowSize()
+  const [{ user }] = useCustomer()
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -81,17 +92,16 @@ const CartUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isUpselling, setIsUpselling] = useState(false)
-  const [openChangeStore, setOpenChangeStore] = useState(false)
+  // const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
-  const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
-  const openCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && !cart?.wallets) || null) || []
-
-  const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
+  const isMultiCheckout = configs?.checkout_multi_business_enabled?.value === '1'
+  const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
-  const hideCartComments = orderingTheme?.theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount?.hidden
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -122,10 +132,30 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    if (checkoutMultiBusinessEnabled && openCarts.length > 1) {
-      events.emit('go_to_page', { page: 'multi_checkout' })
+    const cartsAvailable = Object.values(orderState?.carts)?.filter(cart => cart?.valid && cart?.status !== 2)
+    if (cartsAvailable.length === 1) {
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cartsAvailable[0]?.uuid } })
     } else {
-      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
+      const groupKeys = {}
+      cartsAvailable.forEach(_cart => {
+        groupKeys[_cart?.group?.uuid]
+          ? groupKeys[_cart?.group?.uuid] += 1
+          : groupKeys[_cart?.group?.uuid ?? 'null'] = 1
+      })
+
+      if (
+        (Object.keys(groupKeys).length === 1 && Object.keys(groupKeys)[0] === 'null') ||
+        Object.keys(groupKeys).length > 1
+      ) {
+        events.emit('go_to_page', { page: 'multi_cart' })
+      } else {
+        events.emit('go_to_page', {
+          page: 'multi_checkout',
+          params: {
+            cartUuid: cartsAvailable[0]?.group?.uuid
+          }
+        })
+      }
     }
     events.emit('cart_popover_closed')
     onClickCheckout && onClickCheckout()
@@ -179,7 +209,7 @@ const CartUI = (props) => {
 
   const getIncludedTaxes = () => {
     if (cart?.taxes === null) {
-      return cart.business.tax_type === 1 ? cart?.tax : 0
+      return cart?.business.tax_type === 1 ? cart?.tax : 0
     } else {
       return cart?.taxes.reduce((taxIncluded, tax) => {
         return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
@@ -198,14 +228,14 @@ const CartUI = (props) => {
       title: t('OFFER', 'Offer'),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
-        handleRemoveOfferClick(id)
+        handleRemoveOfferClick(id, user?.id)
       }
     })
   }
 
-  const handleChangeStore = () => {
-    setOpenChangeStore(true)
-  }
+  // const handleChangeStore = () => {
+  //   setOpenChangeStore(true)
+  // }
 
   useEffect(() => {
     if (isCustomMode) setIsUpselling(true)
@@ -242,7 +272,7 @@ const CartUI = (props) => {
             handleClickCheckout={handleClickCheckout}
             checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
             setPreorderBusiness={setPreorderBusiness}
-            handleChangeStore={!useKioskApp && handleChangeStore}
+            // handleChangeStore={!useKioskApp && handleChangeStore}
             isMultiCheckout={isMultiCheckout}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
@@ -250,6 +280,7 @@ const CartUI = (props) => {
                 key={product.code}
                 isCartPending={isCartPending}
                 isCartProduct
+                isDisabledEdit={!cart?.business_id}
                 product={product}
                 isCheckout={isCheckout}
                 changeQuantity={changeQuantity}
@@ -258,6 +289,7 @@ const CartUI = (props) => {
                 onDeleteProduct={handleDeleteClick}
                 onEditProduct={handleEditProduct}
                 isStore={isStore}
+                viewString={viewString}
               />
             ))}
             {!cart?.valid_products && (
@@ -368,14 +400,14 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
+                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && !hideDeliveryFee && (
                       <tr>
                         <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                        <td>{parsePrice(cart?.delivery_price)}</td>
+                        <td>{parsePrice(cart?.delivery_price_with_discount ?? cart?.delivery_price)}</td>
                       </tr>
                     )}
                     {
-                      cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
+                      !hideCartDiscount && cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
                         <tr key={offer.id}>
                           <td className='icon'>
                             {offer.name}
@@ -393,7 +425,7 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {cart?.driver_tip > 0 && (
+                    {cart?.driver_tip > 0 && !hideDriverTip && (
                       <tr>
                         <td>
                           {t('DRIVER_TIP', 'Driver tip')}{' '}
@@ -409,11 +441,11 @@ const CartUI = (props) => {
                     )}
                   </tbody>
                 </table>
-                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && (
+                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && !hideCartDiscount && (
                   <CouponContainer>
                     <CouponControl
-                      businessId={cart.business_id}
-                      price={cart.total}
+                      businessId={cart?.business_id}
+                      price={cart?.total}
                     />
                   </CouponContainer>
                 )}
@@ -528,7 +560,7 @@ const CartUI = (props) => {
                 )}
               </OrderBill>
             )}
-            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
+            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (!isMultiCheckout || isStore) && (
               <CheckoutAction>
                 <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 <Button
@@ -603,17 +635,17 @@ const CartUI = (props) => {
             <TaxInformation
               type={openTaxModal.type}
               data={openTaxModal.data}
-              products={cart.products}
+              products={cart?.products}
               useKioskApp={useKioskApp}
             />
           </Modal>
           {(openUpselling || isUpselling) && (
             <UpsellingPage
               useKioskApp={useKioskApp}
-              businessId={cart.business_id}
+              businessId={cart?.business_id}
               isCustomMode={isCustomMode}
-              cartProducts={cart.products}
-              business={cart.business}
+              cartProducts={cart?.products}
+              business={cart?.business}
               handleUpsellingPage={handleUpsellingPage}
               openUpselling={openUpselling}
               canOpenUpselling={canOpenUpselling}
@@ -622,7 +654,7 @@ const CartUI = (props) => {
           )}
         </CartSticky>
 
-        <Modal
+        {/* <Modal
           width='70%'
           title={t('CHANGE_STORE', 'Change store')}
           open={openChangeStore}
@@ -638,7 +670,7 @@ const CartUI = (props) => {
             onClose={() => setOpenChangeStore(false)}
             handleCustomStoreRedirect={handleStoreRedirect}
           />
-        </Modal>
+        </Modal> */}
 
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (

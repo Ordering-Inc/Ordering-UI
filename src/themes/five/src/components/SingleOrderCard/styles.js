@@ -3,7 +3,7 @@ import React from 'react'
 
 export const Container = styled.div`
   cursor: pointer;
-  margin: 10px;
+  margin: 10px 0;
   position: relative;
   background: white;
   border-radius: 16px;
@@ -20,8 +20,8 @@ export const Container = styled.div`
     width: 300px;
     display: inline-block;
   ` : css`
-    min-width: 380px;
-    width: 380px;
+    min-width: ${({ w }) => w ?? 380}px;
+    width: ${({ w }) => w ?? 380}px;
     height: ${({ isBusinessesPage }) => isBusinessesPage && '300px'};
     max-height: ${({ isBusinessesPage }) => isBusinessesPage ? '300px' : '220px'};
   `}
@@ -54,6 +54,10 @@ export const Container = styled.div`
     width: 430px;
   }
 
+  @media (min-width: 768px) {
+    margin: 10px;
+  }
+
   @media(min-width: 993px){
     ${({ isBusinessesPage }) => isBusinessesPage && css`
       margin: 30px 20px;
@@ -66,13 +70,17 @@ export const Content = styled.div`
   display: flex;
   position: relative;
   border-radius: 16px;
-  padding: 10px;
+  padding: 0;
   ${({ isCustomerMode }) => isCustomerMode ? css`
     align-items: center;
   ` : css`
     align-items: flex-start;
     flex: 1;
   `}
+
+  @media (min-width: 768px) {
+    padding: 10px;
+  }
 `
 
 export const Price = styled.div`
@@ -135,18 +143,35 @@ const BusinessLogoWrapperStyled = styled.div`
   border-radius: 7.6px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 
-  margin-left: 8px;
+  margin-right: 8px;
+  margin-left: 0px;
 
   ${props => props.theme.rtl && css`
-    margin-left: 0px;
-    margin-right: 8px;
+    margin-left: 8px;
+    margin-right: 0px;
   `}
+
+  @media (min-width: 768px) {
+    margin-right: 0px;
+    margin-left: 8px;
+
+    ${props => props.theme.rtl && css`
+      margin-left: 0px;
+      margin-right: 8px;
+    `}
+  }
 
   @media (min-width: 576px) {
     width: 86px;
     min-width: 86px;
     height: 86px;
     min-height: 86px;
+    ${({ isMulti }) => isMulti && css`
+      width: 55px;
+      min-width: 55px;
+      height: 55px;
+      min-height: 55px;
+    `}
   }
 `
 
@@ -251,5 +276,13 @@ export const FavoriteWrapper = styled.div`
 export const ReviewWrapper = styled.div`
   .review-sent {
     border-radius: 7.6px;
+  }
+`
+
+export const MultiLogosContainer = styled.div`
+  display: flex;
+  align-items: center;
+  p {
+    white-space: nowrap;
   }
 `

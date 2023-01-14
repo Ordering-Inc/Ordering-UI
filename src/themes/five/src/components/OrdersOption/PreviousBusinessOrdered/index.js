@@ -1,5 +1,5 @@
 import React from 'react'
-import { useOrder } from 'ordering-components'
+import { useOrder, useOrderingTheme } from 'ordering-components'
 import { BusinessController } from '../../BusinessController'
 import { AutoScroll } from '../../AutoScroll'
 import { BusinessList, BusinessListWrapper } from './styles'
@@ -15,14 +15,17 @@ export const PreviousBusinessOrdered = (props) => {
   } = props
 
   const [orderState] = useOrder()
+  const [orderingTheme] = useOrderingTheme()
   const { width } = useWindowSize()
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+
   const onBusinessClick = (business) => {
     onRedirectPage({ page: 'business', params: { store: business.slug } })
   }
 
   return (
     <BusinessListWrapper isLoading={businesses?.loading}>
-      <BusinessList>
+      <BusinessList marginCard={isChew && '0 20px 0 0'}>
         <AutoScroll scrollId='searchlistorder'>
           {
             businesses?.result?.map((business, i) => (

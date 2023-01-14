@@ -46,3 +46,5 @@ export const OrderDetailsPage = (props) => {
     </>
   )
 }
+
+export default OrderDetailsPage

@@ -22,6 +22,7 @@ import {
 import { WalletTransactionItem } from '../WalletTransactionItem'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Tabs, Tab } from '../../styles/Tabs'
+import { GiftCardUI } from '../GiftCard/GiftCardUI'
 
 const WalletsUI = (props) => {
   const {
@@ -102,7 +103,7 @@ const WalletsUI = (props) => {
                   </span>
                 </BalanceElement>
               </SectionWrapper>
-
+              <GiftCardUI />
               <div className='transactions_list'>
                 {!transactionsList?.loading && transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.length > 0 && (
                   <>

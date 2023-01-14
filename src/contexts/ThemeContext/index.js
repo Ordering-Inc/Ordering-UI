@@ -47,6 +47,14 @@ export const ThemeProvider = ({ children, ...props }) => {
       ::-webkit-scrollbar-track {
         background: rgba(204, 204, 204, 0.3);
       }
+      #___reactour {
+        div{
+          color: rgba(0,0,0,0.5);
+          button svg {
+            display: none;
+          }
+        }
+      }
     }
     body {
       font-family: '${theme.fonts.primary?.name || 'Helvetica'}', sans-serif;
@@ -93,6 +101,7 @@ export const ThemeProvider = ({ children, ...props }) => {
         font.rel = 'stylesheet'
         font.async = true
         font.defer = true
+        font.name = fontFamily.name
         font.href = `https://fonts.googleapis.com/css2?family=${fontFamily.name}:wght@${fontFamily.weights.join(';')}&display=swap`
 
         window.document.body.appendChild(font)

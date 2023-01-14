@@ -4,20 +4,31 @@ import styled, { css } from 'styled-components'
 export const CardContainer = styled.div`
   ${({ isShowAddButt }) => css`
     min-height: ${isShowAddButt ? '162px' : '110px'};
-    max-height: ${isShowAddButt ? '162px' : '110px'};
   `}
   background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
   border: 1px solid #E9ECEF;
   padding: 10px;
   border-radius: 7.6px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   cursor: pointer;
   position: relative;
 
   > div {
     display: flex;
     justify-content: space-between;
+    ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ? css`
+      flex-direction: row-reverse;
+    `
+    : css`
+      flex-direction: row;
+    `
+  }
     align-items: center;
+    width: 100%;
   }
 
   button {
@@ -31,7 +42,7 @@ export const CardContainer = styled.div`
 
   ` : css`
     width: 100%;
-    margin: 10px 0px;
+    margin: 10px;
     @media (min-width: 576px) {
       margin: 10px;
       width: calc(100% - 20px);
@@ -89,15 +100,13 @@ export const SoldOut = styled.span`
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 86px;
   ${({ isBgimage }) => css`
     width: ${isBgimage ? 'calc(100% - 90px)' : '100%'};
   `}
   > * {
     margin: 3px;
   }
-  ${({ theme }) => theme?.business_view?.components?.products?.components?.layout?.type === 'pfchangs' && css`
-    
-  `}
   p {
     color: #909BA9;
     text-align: left;
@@ -137,17 +146,52 @@ export const CardInfo = styled.div`
 
 export const WrapLogo = styled.div`
   position: relative;
-  max-width: ${props => props.isProductList ? '100px' : '86px'};
-  max-height: ${props => props.isProductList ? '100px' : '86px'};
-  height: ${props => props.isProductList ? '100px' : '86px'};
+  max-width: 86px;
+  max-height: 86px;
+  height: 86px;
   ${({ isBgimage }) => isBgimage && css`
-    width: ${props => props.isProductList ? '100px' : '86px'};
+    width: 86px;
   `}
-  margin-left: 5px;
+  ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ? css`
+    margin-left: 5px;
+  `
+    : css`
+    margin-right: 5px;
+  `}
   ${props => props.theme?.rtl && css`
     margin-right: 5px;
     margin-left: 0px;
   `}
+`
+
+export const WrapTags = styled.div`
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow-x: auto;
+
+  ${({ isBgimage }) => isBgimage && css`
+    width: 50px;
+  `}
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
+
+  div {
+    display: flex;
+    margin: auto;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+  }
 `
 
 const CardLogoStyled = styled.div`
@@ -157,7 +201,7 @@ const CardLogoStyled = styled.div`
   background-size: cover;
   background-position: center;
   object-fit: cover;
-  min-height: ${props => props.isProductList ? '100px' : '86px'};
+  min-height: 86px;
   border-radius: 10px;
 `
 export const CardLogo = (props) => {
@@ -179,12 +223,17 @@ export const PriceWrapper = styled.div`
   display: flex;
   align-items: center;
 
+  .current-price {
+    min-width: 64px
+  }
   .off-price {
     font-size: 10px;
     color: #909BA9;
     margin-left: 5px;
     text-decoration: line-through;
-
+    ${({ isOffPrice }) => isOffPrice && css`
+      min-width: 46px;
+    `}
     ${props => props.theme.rtl && css`
       margin-right: 5px;
       margin-left: 0;
@@ -192,6 +241,9 @@ export const PriceWrapper = styled.div`
 
     @media (min-width: 1024px) {
       font-size: 13px;
+      ${({ isOffPrice }) => isOffPrice && css`
+        min-width: 64px;
+      `}
     }
   }
 `

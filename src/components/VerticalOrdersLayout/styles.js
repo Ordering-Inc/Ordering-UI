@@ -6,7 +6,11 @@ export const SingleCard = styled.div`
   display: flex;
   max-height: 100px;
   height: auto;
+  border-radius: 16px;
+  padding: 10px;
+  transition: all 0.3s ease;
   border-bottom: 1px solid #F5F6F6;
+  cursor: pointer;
 
   ${props => (
     props.theme.colors.backgroundPage === '#FFF' ||
@@ -23,6 +27,10 @@ export const SingleCard = styled.div`
   ) && css`
       border-top: none !important;
     `}
+  }
+
+  &:hover {
+    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;
   }
 `
 
@@ -54,6 +62,13 @@ export const FavoriteWrapper = styled.div`
 export const PastLogo = styled.div`
   width: 75px;
   height: 100%;
+  ${({ isMulti }) => isMulti && css`
+      width: 55px;
+      min-width: 55px;
+      height: 55px;
+      min-height: 55px;
+      margin: 3px;
+    `}
   img {
     width: 100%;
     height: 100%;
@@ -182,4 +197,9 @@ export const ReviewWrapper = styled.div`
   .review-sent {
     border-radius: 7.6px;
   }
+`
+
+export const MultiLogosContainer = styled.div`
+  display: flex;
+  align-items: center;
 `

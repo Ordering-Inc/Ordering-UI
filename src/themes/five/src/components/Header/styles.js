@@ -5,7 +5,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: ${props => props.isChew && props.theme.colors.primary};
+  background-color: ${props => (props.isChew && props.theme.colors.primary) || props.theme?.header?.components?.style?.backgroundColor};
   border-bottom: ${props => !props.isChew && css`1px solid #E9ECEF`};
 `
 
@@ -22,11 +22,17 @@ export const InnerHeader = styled.div`
     justify-content: flex-start;
   }
   #right-side {
-    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : '20%'};
+    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : '40%'};
     justify-content: flex-end;
   }
   #center-side {
     width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)'};
+  }
+
+  @media (min-width: 768px) {
+    #left-side {
+      width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : 'initial'};
+    }
   }
 
   @media (min-width: 1024px) {
@@ -63,7 +69,7 @@ export const LogoHeader = styled.div`
       margin-left: 0;
     `}
 
-    @media (min-width: 768px) {
+    @media (min-width: 769px) {
       width: ${props => props.imgW ?? '150px'};
       height: ${props => props.isChew && '35px'};
     }
@@ -75,7 +81,7 @@ export const LogoHeader = styled.div`
     }
   `}
 
-  @media (min-width: 768px) {
+  @media (min-width: 769px) {
     img:nth-child(1) {
       display: block;
     }
@@ -139,7 +145,7 @@ export const Menu = styled.div`
     border: none;
     box-sizing: border-box;
     border-radius: ${props => props.isChew ? '8px' : '50px'};
-    margin: 0 15px;
+    margin: 0 20px;
     flex-grow: 1;
     padding: 0 10px;
     display: flex;
@@ -155,17 +161,17 @@ export const Menu = styled.div`
 
     @media (min-width: 1024px) {
       padding: 0 20px;
-      margin: 0 70px;
+      margin-left: 45px;
     }
 
     @media (min-width: 1200px) {
       padding: 0 30px;
-      margin: 0 100px;
+      margin-left: 50px;
     }
 
     @media (min-width: 1500px) {
       padding: 0 30px;
-      margin: 0 130px;
+      margin: 0 75px;
     }
   }
 
@@ -470,5 +476,31 @@ export const LanguageSelectorWrapper = styled(InputGroup)`
   }
   #select-input {
     margin: 0px 10px 0 5px;
+  }
+`
+
+export const HeaderSearchMode = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  input {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @media (min-width: 1400px){
+    width: 300px;
+  }
+  @media (min-width: 1200px){
+    width: 250px;
+  }
+`
+
+export const LeftSide = styled.div`
+  display: flex;
+  width: 100%;
+  @media (min-width: 769px){
+    flex-direction: ${({ theme }) =>
+      theme?.header?.components?.logo?.components?.layout?.position === 'center' ? 'row-reverse' : 'row'};
+    width: 60%;
   }
 `

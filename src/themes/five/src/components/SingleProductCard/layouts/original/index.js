@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useConfig, useOrder, useUtils, useSession, useOrderingTheme, SingleProductCard as SingleProductCardController } from 'ordering-components'
+import { useLanguage, useConfig, useOrder, useUtils, useSession, SingleProductCard as SingleProductCardController } from 'ordering-components'
 import { shape } from '../../../../../../../utils'
 import { useIntersectionObserver } from '../../../../../../../hooks/useIntersectionObserver'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
@@ -15,6 +15,7 @@ import {
   CardContainer,
   CardInfo,
   WrapLogo,
+  WrapTags,
   CardLogo,
   SoldOut,
   PriceWrapper,
@@ -43,7 +44,7 @@ const SingleProductCardUI = (props) => {
     handleFavoriteProduct,
     isFavorite,
     isPreviously,
-    isProductList
+    viewString
   } = props
 
   const [, t] = useLanguage()
@@ -52,7 +53,6 @@ const SingleProductCardUI = (props) => {
   const [{ parsePrice, optimizeImage, parseDate }] = useUtils()
   const [orderState] = useOrder()
   const [{ auth }, { login }] = useSession()
-  const [orderingTheme] = useOrderingTheme()
   const theme = useTheme()
   const favoriteRef = useRef(null)
 
@@ -73,6 +73,11 @@ const SingleProductCardUI = (props) => {
   const maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance
 
   const hideAddButton = theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden ?? true
+  const hideProductDescription = theme?.business_view?.components?.products?.components?.product?.components?.description?.hidden
+  const hideProductLogo = viewString
+    ? theme?.[viewString]?.components?.cart?.components?.products?.image?.hidden
+    : theme?.business_view?.components?.products?.components?.product?.components?.image?.hidden
+
   // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
   let maxCartProductInventory = (product?.inventoried ? product?.quantity : undefined) - totalBalance
@@ -147,7 +152,6 @@ const SingleProductCardUI = (props) => {
         style={useCustomFunctionality && customStyle}
         className='product-card'
         isShowAddButt={!useCustomFunctionality && !hideAddButton && !isSkeleton}
-      // productsRows={productsRows}
       >
         {isObservedValidation ? (
           <div>
@@ -170,22 +174,34 @@ const SingleProductCardUI = (props) => {
                     )}
                   </TitleWrapper>
                   {!isSkeleton ? (
-                    <PriceWrapper>
-                      <span>{product?.price ? parsePrice(product?.price) : ''}</span>
+                    <PriceWrapper isOffPrice={product?.offer_price && product?.in_offer}>
+                      <span className='current-price'>{product?.price ? parsePrice(product?.price) : ''}</span>
                       {!(isSoldOut || maxProductQuantity <= 0) && (
                         <span className='off-price'>{product?.offer_price && product?.in_offer ? parsePrice(product?.offer_price) : ''}</span>
+                      )}
+                      {product?.tags && product?.tags.length > 0 && (
+                        <WrapTags>
+                          {product?.tags.map((tag, i) => (
+                            <div key={i}>
+                              <img src={tag.image ?? ''}></img>
+                            </div>
+                          ))}
+                        </WrapTags>
                       )}
                     </PriceWrapper>
                   ) : (
                     <Skeleton width={100} />
                   )}
-                  {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+                  {!hideProductDescription && (
+                    <>
+                      {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
+                    </>
+                  )}
                   {isPreviously && (!isSkeleton ? (<LastOrder>{t('LAST_ORDERED_ON', 'Last ordered on')} {parseDate(product?.last_ordered_date, { outputFormat: 'MMM DD, YYYY' })}</LastOrder>) : (<Skeleton width={80} />))}
                 </CardInfo>
                 {!isSkeleton ? (
                   <WrapLogo
-                    isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}
-                    isProductList={isProductList}
+                    isBgimage={optimizeImage(!hideProductLogo ? product?.images || theme?.images?.dummies?.product : '', 'h_86,c_limit')}
                   >
                     {product?.ribbon?.enabled && (
                       <RibbonBox
@@ -197,7 +213,6 @@ const SingleProductCardUI = (props) => {
                       </RibbonBox>
                     )}
                     <CardLogo
-                      isProductList={isProductList}
                       className='image'
                       soldOut={isSoldOut || maxProductQuantity <= 0}
                       bgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}

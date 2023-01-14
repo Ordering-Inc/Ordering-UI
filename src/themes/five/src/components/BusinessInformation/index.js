@@ -13,7 +13,6 @@ import {
   BusinessContent,
   SectionTitle,
   Map,
-  ScheduleBlock,
   ScheduleSection,
   ScheduleContainer,
   DeliveryInfo,
@@ -26,6 +25,8 @@ import {
   Divider
 } from './styles'
 import MdClose from '@meronex/icons/md/MdClose'
+import { ScheduleAccordion } from '../ScheduleAccordion'
+import { useTheme } from 'styled-components'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -39,22 +40,19 @@ export const BusinessInformationUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
-
-  const daysOfWeek = [
-    t('SUNDAY_ABBREVIATION', 'Sun'),
-    t('MONDAY_ABBREVIATION', 'Mon'),
-    t('TUESDAY_ABBREVIATION', 'Tues'),
-    t('WEDNESDAY_ABBREVIATION', 'Wed'),
-    t('THURSDAY_ABBREVIATION', 'Thur'),
-    t('FRIDAY_ABBREVIATION', 'Fri'),
-    t('SATURDAY_ABBREVIATION', 'Sat')
-  ]
   const [modalImage, setModalImage] = useState(false)
   const [image, setImage] = useState('')
-  const [orderingTheme] = useOrderingTheme()
+  const theme = useTheme()
 
-  const showLocation = !orderingTheme?.theme?.business_view?.components?.information?.components?.location?.hidden
-  const showSchedule = !orderingTheme?.theme?.business_view?.components?.information?.components?.schedule?.hidden
+  const hideLocation = theme?.business_view?.components?.information?.components?.location?.hidden
+  const hideSchedule = theme?.business_view?.components?.information?.components?.schedule?.hidden
+  const hideDescription = theme?.business_view?.components?.information?.components?.description?.hidden
+  const hideAbout = theme?.business_view?.components?.information?.components?.about?.hidden
+  const hideVideos = theme?.business_view?.components?.information?.components?.videos?.hidden
+  const hideDeliveryTime = theme?.business_view?.components?.information?.components?.delivery_time?.hidden
+  const hidePickupTime = theme?.business_view?.components?.information?.components?.pickup_time?.hidden
+  const hideImages = theme?.business_view?.components?.information?.components?.images?.hidden
+  const hideAddress = theme?.business_view?.components?.information?.components?.address?.hidden
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
@@ -80,20 +78,20 @@ export const BusinessInformationUI = (props) => {
         </ModalIcon>
         <BusinessContent>
           <BusinessTitle>{business?.name}</BusinessTitle>
-          {business.about && (
+          {!hideAbout && business.about && (
             <>
               <SectionTitle>{t('BUSINESS_ABOUT', 'Business short description')}</SectionTitle>
               <Description>{business.about}</Description>
             </>
           )}
-          {business.description && (
+          {!hideDescription && business.description && (
             <>
               <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business description')}</SectionTitle>
               <Description>{business.description}</Description>
             </>
           )}
           {
-            showLocation && (
+            !hideLocation && (
               <>
                 {businessLocation.location && (
                   <>
@@ -110,7 +108,7 @@ export const BusinessInformationUI = (props) => {
                   </>
                 )}
                 {
-                  business?.address && <BusinessAddress>{business?.address}</BusinessAddress>
+                  !hideAddress && business?.address && <BusinessAddress>{business?.address}</BusinessAddress>
                 }
                 <Divider />
               </>
@@ -118,24 +116,18 @@ export const BusinessInformationUI = (props) => {
           }
           {businessSchedule?.length > 0 && (
             <>
-              {showSchedule && (
+              {!hideSchedule && (
                 <>
                   <SectionTitle>{t('OPENING_TIME', 'Opening time')}</SectionTitle>
                   <ScheduleSection>
                     <ScheduleContainer>
                       {businessSchedule.map((schedule, i) => (
-                        <ScheduleBlock key={i}>
-                          <h4>{daysOfWeek[i]}</h4>
-                          {schedule.enabled ? (
-                            <div>
-                              <p>{scheduleFormatted(schedule.lapses[0].open)}</p>
-                              <div>-</div>
-                              <p>{scheduleFormatted(schedule.lapses[0].close)}</p>
-                            </div>
-                          ) : (
-                            <p className='close'>{t('CLOSED', 'Closed')}</p>
-                          )}
-                        </ScheduleBlock>
+                        <ScheduleAccordion
+                          key={i}
+                          weekIndex={i}
+                          scheduleFormatted={scheduleFormatted}
+                          schedule={schedule}
+                        />
                       ))}
                     </ScheduleContainer>
                   </ScheduleSection>
@@ -144,14 +136,18 @@ export const BusinessInformationUI = (props) => {
               )}
               <DeliveryInfo>
                 <div>
-                  <h5>{t('DELIVERY_TIME', 'Delivery Time')}: {convertHoursToMinutes(business?.delivery_time)}</h5>
-                  <h5>{t('PICKUP_TIME', 'Pickup Time')}: {convertHoursToMinutes(business?.pickup_time)}</h5>
+                  {!hideDeliveryTime && (
+                    <h5>{t('DELIVERY_TIME', 'Delivery Time')}: {convertHoursToMinutes(business?.delivery_time)}</h5>
+                  )}
+                  {!hidePickupTime && (
+                    <h5>{t('PICKUP_TIME', 'Pickup Time')}: {convertHoursToMinutes(business?.pickup_time)}</h5>
+                  )}
                 </div>
               </DeliveryInfo>
               <Divider />
             </>
           )}
-          {businessVideos?.length > 0 && (
+          {!hideVideos && businessVideos?.length > 0 && (
             <BusinessMediaContent>
               <SectionTitle>{t('VIDEOS', 'Videos')}</SectionTitle>
               <div>
@@ -162,7 +158,7 @@ export const BusinessInformationUI = (props) => {
             </BusinessMediaContent>
           )}
           <Divider />
-          {businessPhotos?.length > 0 && (
+          {!hideImages && businessPhotos?.length > 0 && (
             <BusinessMediaContent>
               <SectionTitle>{t('IMAGES', 'Images')}</SectionTitle>
               <div>

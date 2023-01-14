@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   padding-top: 5px;
-  margin-right: 30px;
+  margin: 0px;
   ${props => props.theme.rtl && css`
     margin-left: 30px;
     margin-right: 0px;
@@ -12,6 +12,10 @@ export const Container = styled.div`
     margin-right: 0px;
     margin-left: 0px;
   `}
+
+  @media (min-width: 993px) {
+    margin-right: 30px;
+  }
 `
 
 export const ContentHeader = styled.div`
@@ -53,6 +57,10 @@ export const ProductList = styled.div`
   flex-direction: row;
   box-sizing: border-box;
   align-items: center;
+
+  button {
+    padding: 0px;
+  }
 
   #orderItAgain > div {
     width: 350px;

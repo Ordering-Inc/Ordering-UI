@@ -12,6 +12,7 @@ import { BusinessItemAccordion } from './src/components/BusinessItemAccordion'
 import { BusinessPreorder } from './src/components/BusinessPreorder'
 import { BusinessMenuList } from './src/components/BusinessMenuList'
 import { BusinessProductsCategories } from './src/components/BusinessProductsCategories'
+import { ScheduleAccordion } from './src/components/ScheduleAccordion'
 import { BusinessProductsCategories as CategoriesLayoutGroceries } from './src/components/BusinessProductsCategories/layouts/groceries'
 import { BusinessProductsList } from './src/components/BusinessProductsList'
 import { BusinessProductsList as ProductListLayoutGroceries } from './src/components/BusinessProductsList/layouts/groceries'
@@ -107,10 +108,12 @@ import { SearchProducts } from './src/components/SearchProducts'
 import { MultiCartsPaymethodsAndWallets } from './src/components/MultiCartsPaymethodsAndWallets'
 import { ProfessionalProfile } from './src/components/ProfessionalProfile'
 import { OrderHistory } from './src/components/OrderDetails/OrderHistory'
+import { OrderContextUI } from './src/components/OrderContextUI'
 import { OrderBillSection } from './src/components/OrderDetails/OrderBillSection'
 import { OrderPreferencesSection } from './src/components/OrderDetails/OrderPreferencesSections'
 import { ActionsSection } from './src/components/OrderDetails/ActionsSection'
 import { ProductShare } from './src/components/ProductShare'
+import { MultiCart } from './src/components/MultiCart'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -175,6 +178,7 @@ export {
   Modal,
   NotFoundSource,
   NotNetworkConnectivity,
+  OrderContextUI,
   OrderDetails,
   OrderItAgain,
   OrderDetailsKiosk,
@@ -200,6 +204,7 @@ export {
   ReviewProfessional,
   RenderProductsLayout,
   ResetPassword,
+  ScheduleAccordion,
   SearchBar,
   SessionsList,
   SidebarMenu,
@@ -233,6 +238,7 @@ export {
   OrderPreferencesSection,
   ActionsSection,
   ProductShare,
+  MultiCart,
 
   // styles
   Button,

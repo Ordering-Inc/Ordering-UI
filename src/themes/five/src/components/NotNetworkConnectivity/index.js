@@ -61,3 +61,5 @@ export const NotNetworkConnectivity = (props) => {
     </>
   )
 }
+
+export default NotNetworkConnectivity

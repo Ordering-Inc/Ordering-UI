@@ -17,7 +17,8 @@ export const SearchBar = (props) => {
     lazyLoad,
     isCustomLayout,
     handleCustomEnter,
-    forwardRef
+    forwardRef,
+    starbucksStyle
   } = props
   const [theme] = useTheme()
   const [, t] = useLanguage()
@@ -84,6 +85,7 @@ export const SearchBar = (props) => {
         className={!isCustomLayout && 'search-bar'}
         isCustomLayout={isCustomLayout}
         hasValue={el.current?.value}
+        starbucksStyle={starbucksStyle}
       >
         <Input
           ref={(ref) => {

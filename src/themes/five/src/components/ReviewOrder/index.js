@@ -17,10 +17,10 @@ import {
   LogoAndReviewWrapper,
   CommentsList,
   CommentButton,
-  ContinueContainer
+  ContinueContainer,
+  MultiLogosContainer
 } from './styles'
 import { Alert } from '../Confirm'
-
 import { TextArea } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useTheme } from 'styled-components'
@@ -128,8 +128,16 @@ const ReviewOrderUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <>
         <LogoAndReviewWrapper>
-          <WrapperBusinessLogo>
-            {(order?.business?.logo || theme.images?.dummies?.businessLogo) && (
+          <WrapperBusinessLogo isMulti={order?.business?.length > 1}>
+            {order?.business?.length > 1 ? (
+              <MultiLogosContainer>
+                {order?.business?.map((business, i) => (
+                  <React.Fragment key={business?.id}>
+                    <BusinessLogo isMulti bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
+                  </React.Fragment>
+                ))}
+              </MultiLogosContainer>
+            ) : (
               <BusinessLogo bgimage={optimizeImage(order?.business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')} />
             )}
           </WrapperBusinessLogo>
@@ -239,3 +247,5 @@ export const ReviewOrder = (props) => {
 
   return <ReviewOrderController {...ReviewOrderProps} />
 }
+
+export default ReviewOrder

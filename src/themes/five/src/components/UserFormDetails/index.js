@@ -61,9 +61,9 @@ export const UserFormDetailsUI = (props) => {
   const [, { setUserCustomer }] = useCustomer()
   const [isChanged, setIsChanged] = useState(false)
   const emailInput = useRef(null)
-  
+
   const user = userData || userSession
-  
+
   const [notificationList, setNotificationList] = useState({
     email: formState?.result?.result
       ? !!formState?.result?.result?.settings?.email?.newsletter
@@ -75,12 +75,12 @@ export const UserFormDetailsUI = (props) => {
       ? !!formState?.result?.result?.settings?.notification?.newsletter
       : !!(formState?.changes?.settings?.notification?.newsletter ?? (user && user?.settings?.notification?.newsletter))
   })
-  
-  const showCustomerCellphone = !orderingTheme?.theme?.profile?.components?.cellphone?.hidden
-  const showCustomerPassword = !orderingTheme?.theme?.profile?.components?.password?.hidden
-  const showCustomerPromotions = !orderingTheme?.theme?.profile?.components?.promotions?.hidden
-  const showLangauges = !orderingTheme?.theme?.profile?.components?.languages?.hidden
-  const showNotifications = !orderingTheme?.theme?.profile?.components?.notification_settings?.hidden
+
+  const showCustomerCellphone = !theme?.profile?.components?.cellphone?.hidden
+  const showCustomerPassword = !theme?.profile?.components?.password?.hidden
+  const showCustomerPromotions = !theme?.profile?.components?.promotions?.hidden
+  const showLangauges = !theme?.profile?.components?.languages?.hidden
+  const showNotifications = !theme?.profile?.components?.notification_settings?.hidden
 
   const closeAlert = () => {
     setAlertState({
@@ -260,7 +260,7 @@ export const UserFormDetailsUI = (props) => {
 
   useEffect(() => {
     if (isChanged && userPhoneNumber && isValidPhoneNumber && formState?.changes?.country_phone_code && formState?.changes?.cellphone && configs?.verification_phone_required?.value === '1') {
-      setWillVerifyOtpState(true)
+      setWillVerifyOtpState && setWillVerifyOtpState(true)
     }
   }, [isValidPhoneNumber, userPhoneNumber, configs?.verification_phone_required?.value, isChanged])
 
@@ -275,9 +275,9 @@ export const UserFormDetailsUI = (props) => {
     })
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     isEdit && handleChangeNotifications(notificationList)
-  },[notificationList])
+  }, [notificationList])
 
   return (
     <>

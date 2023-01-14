@@ -134,23 +134,19 @@ const BusinessProductsListUI = (props) => {
               )}
             </HeaderWrapper>
             <ProductsListing>
-              {
-                productsCategorySelected
-                  ?.filter(product => product?.category_id === category?.id)
-                  ?.map((product, i) => (
-                    <SingleProductCard
-                      key={i}
-                      isProductList
-                      isSoldOut={(product.inventoried && !product.quantity)}
-                      product={product}
-                      useKioskApp={useKioskApp}
-                      businessId={businessId}
-                      onProductClick={onProductClick}
-                      isCartOnProductsList={isCartOnProductsList}
-                      handleUpdateProducts={handleUpdateProducts}
-                      productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
-                    />
-                  ))
+              {productsCategorySelected.map((product, i) => (
+                <SingleProductCard
+                  key={i}
+                  isSoldOut={(product.inventoried && !product.quantity)}
+                  product={product}
+                  useKioskApp={useKioskApp}
+                  businessId={businessId}
+                  onProductClick={onProductClick}
+                  isCartOnProductsList={isCartOnProductsList}
+                  handleUpdateProducts={handleUpdateProducts}
+                  productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                />
+              ))
               }
             </ProductsListing>
             {isSearchMode && category?.subcategories?.length > 0 && category?.subcategories?.filter(subcategory => productsCategorySelected?.some(product => product?.category_id === subcategory?.id))?.map(subcategory => (
@@ -160,7 +156,6 @@ const BusinessProductsListUI = (props) => {
                   {productsCategorySelected?.filter(product => product?.category_id === subcategory?.id)?.map((product, i) => (
                     <SingleProductCard
                       key={i}
-                      isProductList
                       isSoldOut={product.inventoried && !product.quantity}
                       businessId={businessId}
                       product={product}
@@ -188,7 +183,6 @@ const BusinessProductsListUI = (props) => {
                       {categoryState.products?.map((product, i) => product.featured && (
                         <SingleProductCard
                           key={i}
-                          isProductList
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
                           useKioskApp={useKioskApp}
@@ -199,6 +193,19 @@ const BusinessProductsListUI = (props) => {
                           productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                         />
                       ))}
+                      {!categoryState?.loading && categoryState?.products?.length > 9 && (
+                        <SingleProductCard
+                          useCustomFunctionality
+                          onCustomClick={() => onClickCategory(category)}
+                          isCartOnProductsList={isCartOnProductsList}
+                          handleUpdateProducts={handleUpdateProducts}
+                          customText={t('MORE', 'More')}
+                          customStyle={{
+                            display: 'flex',
+                            justifyContent: 'center'
+                          }}
+                        />
+                      )}
                     </ProductsListing>
                   </WrapAllCategories>
                 )
@@ -259,10 +266,9 @@ const BusinessProductsListUI = (props) => {
                       <ProductsListing isSubcategorySearch={isSubcategorySearch}>
                         {isSearchMode && category?.subcategories?.length > 0 ? (
                           <>
-                            {products?.filter(product => product?.category_id === category?.id)?.map((product, i) => (
+                            {products?.filter((product, i) => i < 9 && product?.category_id === category?.id)?.map((product, i) => (
                               <SingleProductCard
                                 key={i}
-                                isProductList
                                 isSoldOut={product.inventoried && !product.quantity}
                                 businessId={businessId}
                                 product={product}
@@ -273,14 +279,26 @@ const BusinessProductsListUI = (props) => {
                                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                               />
                             ))}
+                            {!categoryState?.loading && products?.length > 9 && (
+                              <SingleProductCard
+                                useCustomFunctionality
+                                onCustomClick={() => onClickCategory(category)}
+                                isCartOnProductsList={isCartOnProductsList}
+                                handleUpdateProducts={handleUpdateProducts}
+                                customText={t('MORE', 'More')}
+                                customStyle={{
+                                  display: 'flex',
+                                  justifyContent: 'center'
+                                }}
+                              />
+                            )}
                           </>
                         ) : (
                           <>
                             {
-                              products.map((product, i) => (
+                              products.filter((_, i) => i < 9).map((product, i) => (
                                 <SingleProductCard
                                   key={i}
-                                  isProductList
                                   isSoldOut={product.inventoried && !product.quantity}
                                   businessId={businessId}
                                   product={product}
@@ -292,6 +310,19 @@ const BusinessProductsListUI = (props) => {
                                 />
                               ))
                             }
+                            {!categoryState?.loading && products?.length > 9 && (
+                              <SingleProductCard
+                                useCustomFunctionality
+                                onCustomClick={() => onClickCategory(category)}
+                                isCartOnProductsList={isCartOnProductsList}
+                                handleUpdateProducts={handleUpdateProducts}
+                                customText={t('MORE', 'More')}
+                                customStyle={{
+                                  display: 'flex',
+                                  justifyContent: 'center'
+                                }}
+                              />
+                            )}
                           </>
                         )}
                         {
@@ -310,7 +341,6 @@ const BusinessProductsListUI = (props) => {
                             {products?.filter(product => product?.category_id === subcategory?.id)?.map((product, i) => (
                               <SingleProductCard
                                 key={i}
-                                isProductList
                                 isSoldOut={product.inventoried && !product.quantity}
                                 businessId={businessId}
                                 product={product}

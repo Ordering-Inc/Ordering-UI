@@ -28,9 +28,14 @@ export const HorizontalOrdersLayout = (props) => {
 
   const [, t] = useLanguage()
 
-  const ordersToShow = businessesIds
-    ? orders.filter(order => businessesIds?.includes(order?.business_id))
-    : orders
+  const ordersToShow = businessesIds && isCustomerMode
+    ? orders.filter(order =>
+      businessesIds?.includes(order?.business_id))
+    : businessesIds
+      ? orders.filter(order =>
+        businessesIds?.includes(order?.business_id) ||
+        JSON.stringify(businessesIds.sort((a, b) => a - b)) === JSON.stringify(order?.business?.map(business => business?.id).sort((a, b) => a - b)))
+      : orders
 
   const notOrders = isProducts || isBusiness
 
@@ -89,7 +94,7 @@ export const HorizontalOrdersLayout = (props) => {
           {orders.length > 0 && ordersToShow.map(order => (
             <SingleOrderCard
               {...props}
-              key={order.id}
+              key={order.id || order.id?.[0]}
               order={order}
             />
           ))}
