@@ -1,27 +1,23 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components'
-import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import { Heart as DisLike, HeartFill as Like, InfoCircle } from 'react-bootstrap-icons'
 import {
   Container,
   ProfessionalItem,
-  ProfessionalPhoto,
   ContentWrapper,
-  ProfessionalListing,
-  InfoWrapper,
-  HeartIconWrapper,
-  IconWrapper
+  ProfessionalListing
 } from './styles'
 import { Modal } from '../Modal'
 import { ProfessionalProfile } from '../ProfessionalProfile'
 import { AutoScroll } from '../AutoScroll'
 import { ProfessionalInfo } from '../ProfessionalInfo'
+import { SingleProfessionalCard } from '../SingleProfessionalCard'
 
 export const ProfessionalFilter = (props) => {
   const {
     professionals,
     professionalSelected,
-    handleChangeProfessionalSelected
+    handleChangeProfessionalSelected,
+    handleUpdateProfessionals
   } = props
 
   const [, t] = useLanguage()
@@ -30,20 +26,20 @@ export const ProfessionalFilter = (props) => {
   const [currentProfessional, setCurrentProfessional] = useState(null)
 
   const handleOpenProfile = (e, professional) => {
-    if (e.target.closest('.info')) return
+    if (e.target.closest('.info') || e.target.closest('.favorite')) return
     setCurrentProfessional(professional)
     setOpen(true)
-  }
-
-  const handleOpenReview = (professional) => {
-    setReviewOpen(true)
-    setCurrentProfessional(professional)
   }
 
   const handleCloseProfile = () => {
     setCurrentProfessional(null)
     setOpen(false)
     setReviewOpen(false)
+  }
+
+  const onUpdateProfessionals = (id, changes) => {
+    const updatedProfessional = professionals.find(professional => professional.id === id)
+    handleUpdateProfessionals({ ...updatedProfessional, ...changes })
   }
 
   return (
@@ -59,23 +55,15 @@ export const ProfessionalFilter = (props) => {
               >
                 <p>{t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')}</p>
               </ProfessionalItem>
-              {professionals.map((professional, i) => (
-                <ProfessionalItem
-                  key={i}
+              {professionals.map(professional => (
+                <SingleProfessionalCard
+                  isSmallPhoto
+                  handleProfessionalClick={handleOpenProfile}
                   active={professional?.id === professionalSelected?.id}
-                  onClick={(e) => handleOpenProfile(e, professional)}
-                >
-                  {professional?.photo ? <ProfessionalPhoto bgimage={professional?.photo} /> : <FaUserAlt />}
-                  <InfoWrapper>
-                    <p className='name'>{professional?.name} {professional?.lastname}</p>
-                    <IconWrapper>
-                      <InfoCircle className='info' onClick={() => handleOpenReview(professional)} />
-                      <HeartIconWrapper>
-                        {professional?.favorite ? <Like /> : <DisLike />}
-                      </HeartIconWrapper>
-                    </IconWrapper>
-                  </InfoWrapper>
-                </ProfessionalItem>
+                  key={professional.id}
+                  professional={professional}
+                  handleUpdateProfessionals={onUpdateProfessionals}
+                />
               ))}
             </AutoScroll>
           </ProfessionalListing>

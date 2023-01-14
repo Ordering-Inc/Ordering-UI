@@ -47,6 +47,7 @@ import Skeleton from 'react-loading-skeleton'
 import { AutoScroll } from '../../../AutoScroll'
 import { CitiesControl } from '../../../CitiesControl'
 import { OrderContextUI } from '../../../OrderContextUI'
+import { OrdersSection } from './OrdersSection'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -94,8 +95,7 @@ const BusinessesListingUI = (props) => {
   const hideHighestBusiness = theme?.business_listing_view?.components?.highest_rated_business_block?.hidden
   const hideSearchSection = hideCities && hideSearch && hideFilter
   const isAllCategoriesHidden = theme?.business_listing_view?.components?.categories?.hidden
-  const businessesIds = isCustomLayout &&
-    businessesList.businesses &&
+  const businessesIds = businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
   const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
@@ -179,44 +179,6 @@ const BusinessesListingUI = (props) => {
     setFavoriteIds([...new Set(ids)])
   }, [businessesList?.businesses?.length])
 
-  const OrdersSection = ({ titleContent }) => {
-    return (
-      <>
-        {isCustomLayout && onRedirectPage && (
-          <>
-            <OrdersOption
-              horizontal
-              isBusinessesPage
-              onRedirectPage={onRedirectPage}
-              titleContent={t('CARTS', 'Carts')}
-              businessesIds={businessesIds}
-              customArray={
-                getCustomArray(orderState.carts)?.filter(cart => cart.products.length > 0)
-              }
-              isCustomLayout
-              isBusinessesLoading={businessesList.loading}
-              isCustomerMode={isCustomerMode}
-              franchiseId={props.franchiseId}
-            />
-            <OrdersOption
-              horizontal
-              asDashboard
-              isBusinessesPage
-              businessesIds={businessesIds}
-              onRedirectPage={onRedirectPage}
-              userCustomerId={userCustomer?.id}
-              isCustomLayout
-              titleContent={titleContent}
-              isBusinessesLoading={businessesList.loading}
-              isCustomerMode={isCustomerMode}
-              franchiseId={props.franchiseId}
-            />
-          </>
-        )}
-      </>
-    )
-  }
-
   if (logosLayout) {
     return (
       <BusinessLogosWrapper>
@@ -274,8 +236,16 @@ const BusinessesListingUI = (props) => {
           height={theme?.business_listing_view?.components?.business_hero?.style?.height}
         />
       )}
-      {isCustomerMode && !hidePreviousOrders && (
-        <OrdersSection titleContent={t('PREVIOUS_ORDERS', 'Previous orders')} />
+      {isCustomerMode && !hidePreviousOrders && !businessesList.loading && (
+        <OrdersSection
+          titleContent={t('PREVIOUS_ORDERS', 'Previous orders')}
+          onRedirectPage={onRedirectPage}
+          businessesIds={businessesIds}
+          getCustomArray={getCustomArray}
+          businessesList={businessesList}
+          isCustomerMode={isCustomerMode}
+          userCustomer={userCustomer}
+        />
       )}
       {!isCustomerMode && !hideSearchSection && (
         <>
@@ -368,9 +338,6 @@ const BusinessesListingUI = (props) => {
           setErrors={setMapErrors}
         />
       )}
-      {!isCustomerMode && (
-        <OrdersSection />
-      )}
       <>
         {((!isCustomLayout && isCustomerMode && businessesList?.businesses?.length > 0) || isChew) && (
           <BusinessesTitle>
@@ -380,7 +347,7 @@ const BusinessesListingUI = (props) => {
 
         <BusinessList>
           {
-            !businessesList.loading && businessesList.businesses.length === 0 && (
+            !businessesList.loading && businessesList.businesses.length === 0 && businessesList?.fetched && (
               <NotFoundSource
                 content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
               >
@@ -396,33 +363,33 @@ const BusinessesListingUI = (props) => {
             )
           }
           {
-              businessesList.businesses?.map((business) => (
-                <BusinessController
-                  key={business.id}
-                  className='card'
-                  business={business}
-                  isBusinessOpen={business.open}
-                  handleCustomClick={handleBusinessClick}
-                  orderType={orderState?.options?.type}
-                  isCustomLayout={isCustomLayout}
-                  isCustomerMode={isCustomerMode}
-                  onPreorderBusiness={setPreorderBusiness}
-                  businessHeader={business?.header}
-                  businessFeatured={business?.featured}
-                  businessOffers={business?.offers}
-                  businessLogo={business?.logo}
-                  businessReviews={business?.reviews?.total}
-                  businessDeliveryPrice={business?.delivery_price}
-                  businessDeliveryTime={business?.delivery_time}
-                  businessPickupTime={business?.pickup_time}
-                  businessDistance={business?.distance}
-                  handleUpdateBusinessList={handleUpdateBusinessList}
-                  favoriteIds={favoriteIds}
-                  setFavoriteIds={setFavoriteIds}
-                />
-              ))
+            businessesList.businesses?.map((business) => (
+              <BusinessController
+                key={business.id}
+                className='card'
+                business={business}
+                isBusinessOpen={business.open}
+                handleCustomClick={handleBusinessClick}
+                orderType={orderState?.options?.type}
+                isCustomLayout={isCustomLayout}
+                isCustomerMode={isCustomerMode}
+                onPreorderBusiness={setPreorderBusiness}
+                businessHeader={business?.header}
+                businessFeatured={business?.featured}
+                businessOffers={business?.offers}
+                businessLogo={business?.logo}
+                businessReviews={business?.reviews?.total}
+                businessDeliveryPrice={business?.delivery_price}
+                businessDeliveryTime={business?.delivery_time}
+                businessPickupTime={business?.pickup_time}
+                businessDistance={business?.distance}
+                handleUpdateBusinessList={handleUpdateBusinessList}
+                favoriteIds={favoriteIds}
+                setFavoriteIds={setFavoriteIds}
+              />
+            ))
           }
-          {businessesList.loading && (
+          {(businessesList.loading || !businessesList?.fetched) && (
             [...Array(paginationProps?.nextPageItems > 4 ? paginationProps.nextPageItems : 8).keys()].map(i => (
               <BusinessController
                 key={i}

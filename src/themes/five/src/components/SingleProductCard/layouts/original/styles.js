@@ -19,7 +19,7 @@ export const CardContainer = styled.div`
   > div {
     display: flex;
     justify-content: space-between;
-    ${({ theme }) => theme?.layouts?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+    ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
     ? css`
       flex-direction: row-reverse;
     `
@@ -42,7 +42,7 @@ export const CardContainer = styled.div`
 
   ` : css`
     width: 100%;
-    margin: 10px 0px;
+    margin: 10px;
     @media (min-width: 576px) {
       margin: 10px;
       width: calc(100% - 20px);
@@ -152,7 +152,7 @@ export const WrapLogo = styled.div`
   ${({ isBgimage }) => isBgimage && css`
     width: 86px;
   `}
-  ${({ theme }) => theme?.layouts?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
+  ${({ theme }) => theme?.business_view?.components?.products?.components?.product?.components?.image?.position === 'right'
     ? css`
     margin-left: 5px;
   `
@@ -163,6 +163,35 @@ export const WrapLogo = styled.div`
     margin-right: 5px;
     margin-left: 0px;
   `}
+`
+
+export const WrapTags = styled.div`
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow-x: auto;
+
+  ${({ isBgimage }) => isBgimage && css`
+    width: 50px;
+  `}
+  ${props => props.theme?.rtl && css`
+    margin-right: 5px;
+    margin-left: 0px;
+  `}
+
+  div {
+    display: flex;
+    margin: auto;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+  }
 `
 
 const CardLogoStyled = styled.div`
@@ -194,12 +223,17 @@ export const PriceWrapper = styled.div`
   display: flex;
   align-items: center;
 
+  .current-price {
+    min-width: 64px
+  }
   .off-price {
     font-size: 10px;
     color: #909BA9;
     margin-left: 5px;
     text-decoration: line-through;
-
+    ${({ isOffPrice }) => isOffPrice && css`
+      min-width: 46px;
+    `}
     ${props => props.theme.rtl && css`
       margin-right: 5px;
       margin-left: 0;
@@ -207,6 +241,9 @@ export const PriceWrapper = styled.div`
 
     @media (min-width: 1024px) {
       font-size: 13px;
+      ${({ isOffPrice }) => isOffPrice && css`
+        min-width: 64px;
+      `}
     }
   }
 `

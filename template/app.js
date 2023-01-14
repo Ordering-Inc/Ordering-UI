@@ -331,7 +331,16 @@ export const App = () => {
   }
 
   useEffect(() => {
-    const fonts = Object.entries(themeUpdated?.layouts?.general?.components?.fonts || {})
+    const link = document.createElement('link')
+    const oldLink = document.getElementById('favicon')
+    link.id = 'favicon'
+    link.rel = 'icon'
+    link.href = themeUpdated?.general?.components?.favicon
+    if (oldLink) {
+      document.head.removeChild(oldLink)
+    }
+    document.head.appendChild(link)
+    const fonts = Object.entries(themeUpdated?.general?.components?.fonts || {})
     fonts.forEach(([name, fontFamily]) => {
       const fontElement = window.document.getElementById(`${name}-font-styles`)
       if (
@@ -650,7 +659,7 @@ export const App = () => {
                         />
                       )}
                   </Route>
-                  <Route exact path='/multi-cart/:cartUuid?/:cartGroup?'>
+                  <Route exact path='/multi-cart'>
                     {auth
                       ? isUserVerifyRequired
                         ? <Redirect to='/verify' />
