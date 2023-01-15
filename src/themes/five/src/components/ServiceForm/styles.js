@@ -213,7 +213,7 @@ export const SelectedItem = styled.div`
   ${({ isDropDown }) => isDropDown && css`
     border: none;
     padding: 12px 0px;
-    border-top: 1px solid ${props => props.theme.colors.gray200};
+    border-bottom: 1px solid ${props => props.theme.colors.gray200};
     border-radius: 0px;
     &:hover {
       background-color: ${props => props.theme.colors.grayDividerColor};
@@ -223,14 +223,6 @@ export const SelectedItem = styled.div`
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.gray200};
   `}
-`
-
-export const DropDownTitle = styled.h1`
-  margin-top: 0px;
-  margin-bottom: 18px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
 `
 
 export const InfoWrapper = styled.div`

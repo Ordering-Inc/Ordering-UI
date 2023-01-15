@@ -619,7 +619,7 @@ const CheckoutUI = (props) => {
           <span>{parsePrice(cart?.total)}</span>
           <Button
             color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
-            // disabled={isDisablePlaceOrderButton}
+            disabled={isDisablePlaceOrderButton}
             onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
           >
             {!cart?.valid_maximum ? (

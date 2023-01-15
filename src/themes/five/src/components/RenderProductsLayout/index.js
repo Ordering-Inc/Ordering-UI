@@ -85,7 +85,8 @@ export const RenderProductsLayout = (props) => {
     professionalSelected,
     onBusinessClick,
     handleChangePriceFilterValues,
-    priceFilterValues
+    priceFilterValues,
+    handleUpdateProfessionals
   } = props
 
   const theme = useTheme()
@@ -234,6 +235,7 @@ export const RenderProductsLayout = (props) => {
                           professionals={business?.professionals}
                           professionalSelected={professionalSelected}
                           handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                          handleUpdateProfessionals={handleUpdateProfessionals}
                         />
                       </ProfessionalFilterWrapper>
                     </>
@@ -364,6 +366,7 @@ export const RenderProductsLayout = (props) => {
                       professionals={business?.professionals}
                       professionalSelected={professionalSelected}
                       handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                      handleUpdateProfessionals={handleUpdateProfessionals}
                     />
                   </ProfessionalFilterWrapper>
                 )}
