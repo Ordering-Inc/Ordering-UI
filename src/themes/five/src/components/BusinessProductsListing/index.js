@@ -413,6 +413,7 @@ const BusinessProductsListingUI = (props) => {
                 isProducts={currentCart.products.length}
                 isCartOnProductsList={isCartOnProductsList}
                 handleCartOpen={(val) => setIsCartOpen(val)}
+                businessConfigs={business?.configs}
               />
             </>
           ) : (

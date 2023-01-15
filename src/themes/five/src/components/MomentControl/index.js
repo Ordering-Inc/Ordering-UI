@@ -26,7 +26,8 @@ import {
   DayName,
   DayNumber,
   TimeItem,
-  ClosedBusinessMsg
+  ClosedBusinessMsg,
+  CheckIcon
 } from './styles'
 import CgRadioCheck from '@meronex/icons/cg/CgRadioCheck'
 import { Button } from '../../styles/Buttons'
@@ -51,7 +52,14 @@ const MomentControlUI = (props) => {
     handleChangeDate,
     handleChangeTime,
     onClose,
-    isAppoint
+    isAppoint,
+    cateringPreorder,
+    isCart,
+    preorderLeadTime,
+    business,
+    getActualSchedule,
+    preorderMaximumDays,
+    preorderMinimumDays
   } = props
 
   const [{ configs }] = useConfig()
@@ -148,34 +156,59 @@ const MomentControlUI = (props) => {
     })
   }
 
+  const addMinutes = (numOfHours, date = new Date()) => {
+    const dateCopy = new Date(date.getTime())
+
+    dateCopy.setTime(dateCopy.getTime() + numOfHours * 60 * 1000)
+    // return hours and minutes
+    return dateCopy
+  }
+
   useEffect(() => {
     let _timeLists = []
     if (!scheduleList) {
-      _timeLists = hoursList.map(hour => {
-        return {
-          value: hour.startTime,
-          text: is12hours ? (
-            hour.startTime.includes('12')
-              ? `${hour.startTime}PM`
-              : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })
-          ) : (
-            parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'HH:mm' })
-          )
-        }
-      })
+      const schedule = business && getActualSchedule()
+      if (!schedule && cateringPreorder && business) {
+        setIsEnabled(false)
+        return
+      }
+      _timeLists = hoursList
+        .filter(hour => (!business || schedule?.lapses?.some(lapse =>
+          moment(dateSelected + ` ${hour.startTime}`) >= moment(dateSelected + ` ${lapse.open.hour}:${lapse.open.minute}`).add(preorderLeadTime, 'minutes') && moment(dateSelected + ` ${hour.endTime}`) <= moment(dateSelected + ` ${lapse.close.hour}:${lapse.close.minute}`))) &&
+          moment(dateSelected + ` ${hour.startTime}`) < moment(dateSelected + ` ${hour.endTime}`) &&
+          (moment(addMinutes(preorderLeadTime ?? 0)) < moment(dateSelected + ` ${hour.startTime}`) || !cateringPreorder))
+        .map(hour => {
+          return {
+            value: hour.startTime,
+            text: is12hours ? (
+              hour.startTime.includes('12')
+                ? `${hour.startTime}PM`
+                : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })
+            ) : (
+              parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'HH:mm' })
+            ),
+            endText: is12hours ? (
+              hour.endTime.includes('12')
+                ? `${hour.endTime}PM`
+                : parseTime(moment(hour.endTime, 'HH:mm'), { outputFormat: 'hh:mma' })
+            ) : (
+              parseTime(moment(hour.endTime, 'HH:mm'), { outputFormat: 'HH:mm' })
+            )
+          }
+        })
       setIsEnabled(true)
     } else {
       _timeLists = getTimes(dateSelected, scheduleList)
     }
     setTimeList(_timeLists)
-  }, [dateSelected, hoursList, scheduleList])
+  }, [dateSelected, hoursList, scheduleList, cateringPreorder])
 
   useEffect(() => {
-    handleCheckBoxChange(isAsap)
+    handleCheckBoxChange(isAsap && preorderMinimumDays === 0 && preorderLeadTime === 0)
   }, [isAsap])
 
   useEffect(() => {
-    if (!pathname.includes('store')) {
+    if (!pathname.includes('store') || isCart) {
       setScheduleList(null)
       return
     }
@@ -190,23 +223,21 @@ const MomentControlUI = (props) => {
 
   return (
     <div id='moment_control'>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       {!isAppoint && (
         <>
-          <Title>{t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')}</Title>
-          <CheckBoxWrapper
-            highlight={isAsap && isASP}
-            onClick={() => handleCheckBoxChange(true)}
-            isLoading={orderState?.loading}
-          >
-            {isASP ? <CheckedIcon /> : <CgRadioCheck />}
-            <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} - {t('DELIVERY_TIME', 'delivery time')})</span>
-          </CheckBoxWrapper>
+          {!isCart && (
+            <Title>{t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')}</Title>
+          )}
+          {preorderMinimumDays === 0 && preorderLeadTime === 0 && (
+            <CheckBoxWrapper
+              highlight={isAsap && isASP}
+              onClick={() => handleCheckBoxChange(true)}
+              isLoading={orderState?.loading}
+            >
+              {isASP ? <CheckedIcon /> : <CgRadioCheck />}
+              <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} - {t('DELIVERY_TIME', 'delivery time')})</span>
+            </CheckBoxWrapper>
+          )}
           <CheckBoxWrapper
             highlight={!isASP}
             onClick={() => handleCheckBoxChange(null)}
@@ -220,7 +251,7 @@ const MomentControlUI = (props) => {
         (!isASP || isAppoint) && (
           !props.isCustomLayout ? (
             <OrderTimeWrapper>
-              {!isAppoint && <p>{t('ORDER_TIME', 'Order time')}</p>}
+              {!isAppoint && !isCart && <p>{t('ORDER_TIME', 'Order time')}</p>}
               <DateWrapper>
                 <MonthYearLayer>
                   <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
@@ -253,7 +284,7 @@ const MomentControlUI = (props) => {
                     preventClicksPropagation={false}
                   >
                     {
-                      datesList.slice(0, Number(configs?.max_days_preorder?.value || 6, 10)).map(date => {
+                      datesList.slice(preorderMinimumDays || 0, Number(preorderMaximumDays ?? configs?.max_days_preorder?.value ?? 6, 10)).map(date => {
                         const dateParts = date.split('-')
                         const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
                         const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2)
@@ -280,8 +311,16 @@ const MomentControlUI = (props) => {
                         active={timeSelected === time.value}
                         onClick={() => handleChangeTime(time.value)}
                         isAppoint={isAppoint}
+                        cateringPreorder={cateringPreorder}
                       >
-                        <span>{time.text}</span>
+                        <span>
+                          <CheckIcon>
+                            {timeSelected === time.value ? <CheckedIcon cateringPreorder={cateringPreorder} /> : <CgRadioCheck />}
+                          </CheckIcon>
+                          <p>
+                            {time.text} - {time.endText}
+                          </p>
+                        </span>
                       </TimeItem>
                     ))}
                   </>
@@ -303,7 +342,7 @@ const MomentControlUI = (props) => {
           )
         )
       }
-      {!isAppoint && (
+      {!isAppoint && !isCart && (
         <ButtonWrapper>
           <Button
             color='primary'
@@ -314,12 +353,6 @@ const MomentControlUI = (props) => {
           </Button>
         </ButtonWrapper>
       )}
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </div>
   )
 }
