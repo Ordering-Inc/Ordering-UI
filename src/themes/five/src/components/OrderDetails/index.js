@@ -521,34 +521,6 @@ const OrderDetailsUI = (props) => {
             {!isGiftCardOrder && (
               <OrderBusiness>
                 <BusinessExternalWrapper>
-                  <BusinessWrapper
-                    w='calc(100% - 20px)'
-                  // borderBottom={!hideOrderActions}
-                  >
-                    <BtsOrderStatus>
-                      <div>
-                        <Button
-                          style={{ fontSize: 14 }}
-                          color={order?.status === 20 ? 'secundary' : 'primary'}
-                          onClick={() => handleChangeOrderStatus(20)}
-                          disabled={disableLeftButton.includes(order?.status)}
-                        >
-                          {getOrderStatus(20)?.value}
-                        </Button>
-                      </div>
-                      <div>
-                        <Button
-                          style={{ fontSize: 14 }}
-                          color={order?.status === 20 ? 'primary' : 'secundary'}
-                          disabled={disableRightButton.includes(order?.status)}
-                          onClick={() => handleChangeOrderStatus(21)}
-                        >
-                          {getOrderStatus(21)?.value}
-                        </Button>
-                      </div>
-                    </BtsOrderStatus>
-                  </BusinessWrapper>
-
                   {!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
                     <PlaceSpotWrapper>
                       <PlaceSpot
@@ -563,7 +535,7 @@ const OrderDetailsUI = (props) => {
                   {!hideOrderActions && (
                     <BusinessWrapper
                       w='calc(100% - 20px)'
-                      borderTop
+                      borderTop={!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type)}
                     >
                       <BtsOrderStatus>
                         <div>

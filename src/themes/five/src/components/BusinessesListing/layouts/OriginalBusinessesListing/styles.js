@@ -145,7 +145,7 @@ export const HightestRatedWrapper = styled.div`
 `
 
 export const Divider = styled.div`
-  background: #F8F9FA;
+  background: rgb(230, 234, 233);
   height: 8px;
   width: 100%;
 `
