@@ -391,7 +391,30 @@ const CartUI = (props) => {
                             )}
                             <IconContainer>
                               <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })} />
-                              <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              {!offer?.type && (
+                                <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              )}
+                            </IconContainer>
+                          </td>
+                          <td>
+                            - {parsePrice(offer?.summary?.discount)}
+                          </td>
+                        </tr>
+                      ))
+                    }
+                    {
+                      !hideCartDiscount && cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
+                        <tr key={offer.id}>
+                          <td className='icon'>
+                            {offer.name}
+                            {offer?.rate_type === 1 && (
+                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            )}
+                            <IconContainer>
+                              <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })} />
+                              {!offer?.type && (
+                                <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              )}
                             </IconContainer>
                           </td>
                           <td>
@@ -406,25 +429,6 @@ const CartUI = (props) => {
                         <td>{parsePrice(cart?.delivery_price_with_discount ?? cart?.delivery_price)}</td>
                       </tr>
                     )}
-                    {
-                      !hideCartDiscount && cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
-                        <tr key={offer.id}>
-                          <td className='icon'>
-                            {offer.name}
-                            {offer?.rate_type === 1 && (
-                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                            )}
-                            <IconContainer>
-                              <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })} />
-                              <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
-                            </IconContainer>
-                          </td>
-                          <td>
-                            - {parsePrice(offer?.summary?.discount)}
-                          </td>
-                        </tr>
-                      ))
-                    }
                     {cart?.driver_tip > 0 && !hideDriverTip && (
                       <tr>
                         <td>
