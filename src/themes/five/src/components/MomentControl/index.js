@@ -204,7 +204,7 @@ const MomentControlUI = (props) => {
   }, [dateSelected, hoursList, scheduleList, cateringPreorder])
 
   useEffect(() => {
-    handleCheckBoxChange(isAsap && preorderMinimumDays === 0 && preorderLeadTime === 0)
+    handleCheckBoxChange(isAsap && ((preorderMinimumDays === 0 && preorderLeadTime === 0) || !cateringPreorder))
   }, [isAsap])
 
   useEffect(() => {
@@ -228,7 +228,7 @@ const MomentControlUI = (props) => {
           {!isCart && (
             <Title>{t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')}</Title>
           )}
-          {preorderMinimumDays === 0 && preorderLeadTime === 0 && (
+          {((preorderMinimumDays === 0 && preorderLeadTime === 0) || !cateringPreorder) && (
             <CheckBoxWrapper
               highlight={isAsap && isASP}
               onClick={() => handleCheckBoxChange(true)}
@@ -284,7 +284,7 @@ const MomentControlUI = (props) => {
                     preventClicksPropagation={false}
                   >
                     {
-                      datesList.slice(preorderMinimumDays || 0, Number(preorderMaximumDays ?? configs?.max_days_preorder?.value ?? 6, 10)).map(date => {
+                      datesList.slice((cateringPreorder && preorderMinimumDays) || 0, Number(cateringPreorder ? preorderMaximumDays : configs?.max_days_preorder?.value ?? 6, 10)).map(date => {
                         const dateParts = date.split('-')
                         const _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
                         const dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2)
@@ -314,11 +314,13 @@ const MomentControlUI = (props) => {
                         cateringPreorder={cateringPreorder}
                       >
                         <span>
-                          <CheckIcon>
-                            {timeSelected === time.value ? <CheckedIcon cateringPreorder={cateringPreorder} /> : <CgRadioCheck />}
-                          </CheckIcon>
+                          {cateringPreorder && (
+                            <CheckIcon>
+                              {timeSelected === time.value ? <CheckedIcon cateringPreorder={cateringPreorder} /> : <CgRadioCheck />}
+                            </CheckIcon>
+                          )}
                           <p>
-                            {time.text} - {time.endText}
+                            {time.text} {cateringPreorder && `- ${time.endText}`}
                           </p>
                         </span>
                       </TimeItem>
