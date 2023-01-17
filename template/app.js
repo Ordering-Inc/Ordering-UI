@@ -32,7 +32,6 @@ import { orderingThemeUpdated } from './components/OrderingThemeUpdated'
 
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { Input } from '../src/themes/five/src/styles/Inputs'
-import { QueryLoginSpoonity } from '../src/themes/five/src/components/QueryLoginSpoonity'
 
 const Header = loadable(() => import('../src/themes/five/src/components/Header'))
 const HeaderKiosk = loadable(() => import('../src/themes/five/src/components/Header/layouts/Kiosk'))
@@ -110,23 +109,12 @@ export const App = () => {
     reviewStatus: { trigger: false, order: false, product: false, driver: false },
     reviewed: { isOrderReviewed: false, isProductReviewed: false, isDriverReviewed: false }
   })
-  const [oneSignalState, setOneSignalState] = useState({
-    notification_app: settings.notification_app
-  })
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isAllowUnaddressOrderType = unaddressedTypes.includes(orderStatus?.options?.type)
   const isShowReviewsPopupEnabled = configs?.show_reviews_popups_enabled?.value === '1'
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
   const isKioskApp = settings?.use_kiosk
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
-
-  let queryIntegrationToken
-  let queryIntegrationCode
-  if (location.search) {
-    const query = new URLSearchParams(location.search)
-    queryIntegrationCode = query.get('integration_code')
-    queryIntegrationToken = query.get('integration_token')
-  }
 
   const themeUpdated = {
     ...theme,
@@ -170,19 +158,14 @@ export const App = () => {
     }
   }
 
-  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeBusinessSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.business_slug
-  const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
-
   const businessesSlug = {
     marketplace: 'marketplace',
-    kiosk: updatedBusinessSlug,
-    business: updatedBusinessSlug
+    kiosk: settings?.businessSlug
   }
 
   const singleBusinessConfig = {
-    isActive: settings?.use_marketplace || updatedBusinessSlug || isKioskApp,
-    businessSlug: businessesSlug[isKioskApp ? 'kiosk' : settings?.use_marketplace ? 'marketplace' : 'business']
+    isActive: settings?.use_marketplace || isKioskApp,
+    businessSlug: businessesSlug[isKioskApp ? 'kiosk' : 'marketplace']
   }
 
   const signUpBusinesslayout = orderingTheme?.theme?.business_signup?.components?.layout?.type === 'old'
@@ -354,7 +337,7 @@ export const App = () => {
     const oldLink = document.getElementById('favicon')
     link.id = 'favicon'
     link.rel = 'icon'
-    link.href = themeUpdated?.general?.components?.favicon?.components?.image || themeUpdated?.general?.components?.favicon
+    link.href = themeUpdated?.general?.components?.favicon
     if (oldLink) {
       document.head.removeChild(oldLink)
     }
@@ -364,8 +347,7 @@ export const App = () => {
       const fontElement = window.document.getElementById(`${name}-font-styles`)
       if (
         (fontElement?.name !== fontFamily.name && fontFamily.name) ||
-        (fontElement?.href !== fontFamily?.href && fontFamily?.href) ||
-        (JSON.stringify(fontElement?.weights) !== JSON.stringify(fontFamily?.weights) && fontFamily?.weights)
+        (fontElement?.href !== fontFamily?.href && fontFamily?.href)
       ) {
         window.document.body.removeChild(window.document.getElementById(`${name}-font-styles`))
         const font = window.document.createElement('link')
@@ -374,8 +356,7 @@ export const App = () => {
         font.async = true
         font.defer = true
         font.name = fontFamily.name
-        const weights = typeof fontFamily?.weights === 'number' ? fontFamily?.weights : JSON.parse(fontFamily?.weights)?.join?.(';')
-        font.href = fontFamily.href || `https://fonts.googleapis.com/css2?family=${fontFamily?.name}:wght@${weights || [400]}&display=swap`
+        font.href = fontFamily.href || `https://fonts.googleapis.com/css2?family=${fontFamily.name}:wght@${fontFamily.weights.join(';')}&display=swap`
 
         window.document.body.appendChild(font)
         if (name === 'primary') {
@@ -425,8 +406,8 @@ export const App = () => {
   }, [configs, loaded])
 
   useEffect(() => {
-    if (isHome && (settings?.use_marketplace || updatedBusinessSlug)) {
-      goToPage('business', { store: settings?.use_marketplace ? 'marketplace' : updatedBusinessSlug })
+    if (isHome && settings?.use_marketplace) {
+      goToPage('business', { store: 'marketplace' })
     }
   }, [])
 
@@ -484,11 +465,8 @@ export const App = () => {
                 isHome={isHome}
                 location={location}
                 isCustomLayout={singleBusinessConfig.isActive}
-                singleBusinessConfig={singleBusinessConfig}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
-                businessSlug={updatedBusinessSlug}
-                notificationState={oneSignalState}
               />
             )}
             <NotNetworkConnectivity />
@@ -505,7 +483,7 @@ export const App = () => {
                         : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                           : singleBusinessConfig.isActive
-                            ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
+                            ? <Redirect to={singleBusinessConfig.isActive ? '' : '/search'} />
                             : <HomePage />
                     )}
                   </Route>
@@ -515,13 +493,9 @@ export const App = () => {
                     ) : (
                       isKioskApp
                         ? <HomePage />
-                        : queryIntegrationToken && queryIntegrationCode === 'spoonity'
-                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
-                          : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
-                            ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
-                            : singleBusinessConfig.isActive
-                              ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
-                              : <HomePage />
+                        : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
+                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
+                          : <HomePage />
                     )}
                   </Route>
                   <Route exact path='/wallets'>
@@ -616,30 +590,28 @@ export const App = () => {
                   </Route>
                   <Route exact path='/search'>
                     {
-                      isKioskApp || businessesSlug?.business
+                      isKioskApp
                         ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                        : queryIntegrationToken && queryIntegrationCode === 'spoonity'
-                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
-                          : (
-                            orderStatus.loading && !orderStatus.options?.address?.location ? (
-                              <SpinnerLoader />
+                        : (
+                          orderStatus.loading && !orderStatus.options?.address?.location ? (
+                            <SpinnerLoader />
+                          ) : (
+                            isUserVerifyRequired ? (
+                              <Redirect to='/verify' />
                             ) : (
-                              isUserVerifyRequired ? (
-                                <Redirect to='/verify' />
-                              ) : (
-                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !singleBusinessConfig.isActive
-                                  ? <BusinessesList searchValueCustom={searchValue} />
-                                  : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                              )
+                              (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
+                                ? <BusinessesList searchValueCustom={searchValue} />
+                                : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                             )
                           )
+                        )
                     }
                   </Route>
                   <Route exact path='/business_search'>
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !isKioskApp && !singleBusinessConfig.isActive ? (
+                      (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !isKioskApp ? (
                         <BusinessListingSearch />
                       ) : (
                         <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
