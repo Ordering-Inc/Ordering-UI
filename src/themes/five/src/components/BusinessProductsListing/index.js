@@ -317,6 +317,7 @@ const BusinessProductsListingUI = (props) => {
           categorySelected={categorySelected}
           openCategories={openCategories}
           openBusinessInformation={openBusinessInformation}
+          forceShowNearBusiness={props.forceShowNearBusiness}
           isCartOnProductsList={isCartOnProductsList && currentCart?.products?.length > 0}
           handleChangeSortBy={handleChangeSortBy}
           errorQuantityProducts={errorQuantityProducts}
