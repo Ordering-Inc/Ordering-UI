@@ -337,6 +337,7 @@ export const RenderProductsLayout = (props) => {
                             isProducts={currentCart.products.length}
                             isCartOnProductsList={isCartOnProductsList}
                             handleCartOpen={handleCartOpen}
+                            businessConfigs={business?.configs}
                           />
                         </>
                       ) : (
@@ -498,6 +499,7 @@ export const RenderProductsLayout = (props) => {
                 isProducts={currentCart.products.length}
                 isCartOnProductsList={isCartOnProductsList}
                 handleCartOpen={handleCartOpen}
+                businessConfigs={business?.configs}
               />
             </>
           ) : (
