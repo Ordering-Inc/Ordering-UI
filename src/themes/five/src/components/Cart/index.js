@@ -610,7 +610,7 @@ const CartUI = (props) => {
                 />
               </div>
             )}
-            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (!isMultiCheckout || isStore) && (
+            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid && (!isMultiCheckout || isStore) && (
               <CheckoutAction>
                 <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 <Button
