@@ -298,7 +298,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     isCartPending: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.status) === 2,
     isProducts: currentCart.products.length,
     isCartOnProductsList: isCartOnProductsList,
-    handleCartOpen: handleCartOpen
+    handleCartOpen: handleCartOpen,
+    businessConfigs: business === null || business === void 0 ? void 0 : business.configs
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyCart, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart'))))))), businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (business === null || business === void 0 ? void 0 : (_business$professiona4 = business.professionals) === null || _business$professiona4 === void 0 ? void 0 : _business$professiona4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProfessionalFilterWrapper, {
@@ -418,7 +419,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     isCartPending: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.status) === 2,
     isProducts: currentCart.products.length,
     isCartOnProductsList: isCartOnProductsList,
-    handleCartOpen: handleCartOpen
+    handleCartOpen: handleCartOpen,
+    businessConfigs: business === null || business === void 0 ? void 0 : business.configs
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyCart, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart')))))));

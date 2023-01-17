@@ -101,6 +101,7 @@ var CartContent = function CartContent(props) {
     onClick: handleClickCheckout,
     color: "primary"
   }, t('CHECKOUT', 'Checkout'))), isOrderStateCarts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && carts.map(function (cart) {
+    var _cart$business;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: cart.uuid
     }, cart.products.length > 0 && /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
@@ -113,7 +114,8 @@ var CartContent = function CartContent(props) {
       isProducts: cart.products.length,
       onClickCheckout: props.onClose,
       setPreorderBusiness: setPreorderBusiness,
-      isOpenCart: isOpenCart
+      isOpenCart: isOpenCart,
+      businessConfigs: cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.configs
     }));
   }), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0) && /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,

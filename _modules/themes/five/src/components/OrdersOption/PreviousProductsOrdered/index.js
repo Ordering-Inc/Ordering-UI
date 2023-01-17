@@ -20,7 +20,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PreviousProductsOrdered = function PreviousProductsOrdered(props) {
-  var _curProduct$business;
+  var _products$filter, _curProduct$business;
   var products = props.products,
     handleUpdateProducts = props.handleUpdateProducts,
     onBusinessClick = props.onBusinessClick;
@@ -40,13 +40,16 @@ var PreviousProductsOrdered = function PreviousProductsOrdered(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_styles.ProductsListContainer, {
     isLoading: (products === null || products === void 0 ? void 0 : products.length) < 1
-  }, /*#__PURE__*/_react.default.createElement(_styles.ProductsList, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, products === null || products === void 0 ? void 0 : products.map(function (product) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ProductsList, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, products === null || products === void 0 ? void 0 : (_products$filter = products.filter(function (product) {
     var _product$business;
+    return product === null || product === void 0 ? void 0 : (_product$business = product.business) === null || _product$business === void 0 ? void 0 : _product$business.available;
+  })) === null || _products$filter === void 0 ? void 0 : _products$filter.map(function (product) {
+    var _product$business2;
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
       isSoldOut: product.inventoried && !product.quantity,
       product: product,
-      businessId: product === null || product === void 0 ? void 0 : (_product$business = product.business) === null || _product$business === void 0 ? void 0 : _product$business.id,
+      businessId: product === null || product === void 0 ? void 0 : (_product$business2 = product.business) === null || _product$business2 === void 0 ? void 0 : _product$business2.id,
       handleUpdateProducts: handleUpdateProducts,
       onProductClick: function onProductClick(product) {
         return _onProductClick(product);

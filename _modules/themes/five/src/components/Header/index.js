@@ -51,7 +51,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$header, _theme$header$compone, _theme$header$compone2, _customerState$user, _orderState$options3, _orderState$options3$, _theme$images, _theme$images$logos, _orderingTheme$my_pro, _orderingTheme$my_pro2, _orderingTheme$my_pro3, _orderingTheme$my_pro4, _orderingTheme$my_pro5, _orderingTheme$my_pro6, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderingTheme$my_pro7, _orderingTheme$my_pro8, _orderingTheme$my_pro9, _orderingTheme$my_pro10, _orderingTheme$my_pro11, _orderingTheme$my_pro12, _theme$images4, _theme$images4$logos, _theme$images5, _theme$images5$logos, _orderState$options5, _orderState$options5$, _orderState$options6, _orderState$options6$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options7, _orderState$options8, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options9, _orderState$options9$, _configState$configs12, _configState$configs13, _orderState$options10, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options11, _orderState$options12, _configState$configs18, _configState$configs19, _orderState$options13, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options14, _orderState$options15, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$header, _theme$header$compone, _theme$header$compone2, _orderState$options, _orderState$options2, _customerState$user, _orderState$options5, _orderState$options5$, _theme$images, _theme$images$logos, _orderingTheme$my_pro, _orderingTheme$my_pro2, _orderingTheme$my_pro3, _orderingTheme$my_pro4, _orderingTheme$my_pro5, _orderingTheme$my_pro6, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderingTheme$my_pro7, _orderingTheme$my_pro8, _orderingTheme$my_pro9, _orderingTheme$my_pro10, _orderingTheme$my_pro11, _orderingTheme$my_pro12, _theme$images4, _theme$images4$logos, _theme$images5, _theme$images5$logos, _orderState$options7, _orderState$options7$, _orderState$options8, _orderState$options8$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options9, _orderState$options10, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options11, _orderState$options12, _configState$configs12, _configState$configs13, _orderState$options13, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options14, _orderState$options15, _configState$configs18, _configState$configs19, _orderState$options16, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options17, _orderState$options18, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
   var isHome = props.isHome,
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
@@ -145,13 +145,27 @@ var Header = function Header(props) {
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
-  var orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')];
+  var orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru'), '', t('CATERING_DELIVERY', 'Catering Delivery'), t('CATERING_PICKUP', 'Catering pickup')];
   var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
     return Number(value);
   })) || [];
   var isPreOrderSetting = (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.preorder_status_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
   var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.type) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.toLowerCase()) === 'chew';
   var isHideLanguages = theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.language_selector) === null || _theme$header$compone2 === void 0 ? void 0 : _theme$header$compone2.hidden;
+  var cateringTypeString = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 7 ? 'catering_delivery' : (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 8 ? 'catering_pickup' : null;
+  var splitCateringValue = function splitCateringValue(configName) {
+    var _Object$values, _Object$values$find, _Object$values$find$v, _Object$values$find$v2, _Object$values$find$v3;
+    return (_Object$values = Object.values(configState === null || configState === void 0 ? void 0 : configState.configs)) === null || _Object$values === void 0 ? void 0 : (_Object$values$find = _Object$values.find(function (config) {
+      return config.key === configName;
+    })) === null || _Object$values$find === void 0 ? void 0 : (_Object$values$find$v = _Object$values$find.value) === null || _Object$values$find$v === void 0 ? void 0 : (_Object$values$find$v2 = _Object$values$find$v.split('|')) === null || _Object$values$find$v2 === void 0 ? void 0 : (_Object$values$find$v3 = _Object$values$find$v2.find(function (val) {
+      return val.includes(cateringTypeString);
+    })) === null || _Object$values$find$v3 === void 0 ? void 0 : _Object$values$find$v3.split(',')[1];
+  };
+  var preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'));
+  var preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'));
+  var preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'));
+  var preorderMaximumDays = parseInt(splitCateringValue('preorder_maximum_days'));
+  var preorderMinimumDays = parseInt(splitCateringValue('preorder_minimum_days'));
   var handleSuccessSignup = function handleSuccessSignup(user) {
     var _user$session;
     login({
@@ -245,9 +259,9 @@ var Header = function Header(props) {
       return;
     }
     navigator.geolocation.getCurrentPosition(function (pos) {
-      var _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options2, _orderState$options2$, _orderState$options2$2;
+      var _orderState$options3, _orderState$options3$, _orderState$options3$2, _orderState$options4, _orderState$options4$, _orderState$options4$2;
       var crd = pos.coords;
-      var distance = (0, _utils.getDistance)(crd.latitude, crd.longitude, orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.location) === null || _orderState$options$a2 === void 0 ? void 0 : _orderState$options$a2.lat, orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : (_orderState$options2$2 = _orderState$options2$.location) === null || _orderState$options2$2 === void 0 ? void 0 : _orderState$options2$2.lng);
+      var distance = (0, _utils.getDistance)(crd.latitude, crd.longitude, orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : (_orderState$options3$2 = _orderState$options3$.location) === null || _orderState$options3$2 === void 0 ? void 0 : _orderState$options3$2.lat, orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : (_orderState$options4$2 = _orderState$options4$.location) === null || _orderState$options4$2 === void 0 ? void 0 : _orderState$options4$2.lng);
       if (distance > 20) setIsFarAway(true);else setIsFarAway(false);
     }, function (err) {
       console.warn("ERROR(".concat(err.code, "): ").concat(err.message));
@@ -256,7 +270,7 @@ var Header = function Header(props) {
       timeout: 5000,
       maximumAge: 0
     });
-  }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location, pathname]);
+  }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.location, pathname]);
   return /*#__PURE__*/_react.default.createElement(_styles.Header, {
     isChew: isChew
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftSide, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, {
@@ -268,9 +282,9 @@ var Header = function Header(props) {
     isCustomerMode: isCustomerMode
   }), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
-      var _orderState$options4, _orderState$options4$;
+      var _orderState$options6, _orderState$options6$;
       return handleGoToPage({
-        page: orderState !== null && orderState !== void 0 && (_orderState$options4 = orderState.options) !== null && _orderState$options4 !== void 0 && (_orderState$options4$ = _orderState$options4.address) !== null && _orderState$options4$ !== void 0 && _orderState$options4$.location && !isCustomerMode ? 'search' : 'home'
+        page: orderState !== null && orderState !== void 0 && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.location && !isCustomerMode ? 'search' : 'home'
       });
     },
     isChew: isChew
@@ -296,7 +310,7 @@ var Header = function Header(props) {
     onClick: function onClick(e) {
       return handleClickUserCustomer(e);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), /*#__PURE__*/_react.default.createElement("span", null, ((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.address) || t('LANG_WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), /*#__PURE__*/_react.default.createElement("span", null, ((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : (_orderState$options7$ = _orderState$options7.address) === null || _orderState$options7$ === void 0 ? void 0 : _orderState$options7$.address) || t('LANG_WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
     onClick: function onClick(e) {
       return handleClickUserCustomer(e);
     }
@@ -306,11 +320,11 @@ var Header = function Header(props) {
     onClick: function onClick() {
       return openModal('address');
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, ((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : (_orderState$options6$ = _orderState$options6.address) === null || _orderState$options6$ === void 0 ? void 0 : _orderState$options6$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')))), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.preorder_status_enabled) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === undefined) && /*#__PURE__*/_react.default.createElement(_styles.MomentMenu, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, ((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : (_orderState$options8$ = _orderState$options8.address) === null || _orderState$options8$ === void 0 ? void 0 : _orderState$options8$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')))), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.preorder_status_enabled) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === undefined) && /*#__PURE__*/_react.default.createElement(_styles.MomentMenu, {
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.max_days_preorder) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.max_days_preorder) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === 0 ? null : function () {
       return openModal('moment');
     }
-  }, /*#__PURE__*/_react.default.createElement("div", null, (_orderState$options7 = orderState.options) !== null && _orderState$options7 !== void 0 && _orderState$options7.moment ? parseDate((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.moment, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, (_orderState$options9 = orderState.options) !== null && _orderState$options9 !== void 0 && _orderState$options9.moment ? parseDate((_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : _orderState$options10.moment, {
     outputFormat: configState === null || configState === void 0 ? void 0 : (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 ? void 0 : (_configState$configs11 = _configState$configs10.dates_moment_format) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')))), windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     orderTypeList: orderTypeList,
@@ -395,15 +409,15 @@ var Header = function Header(props) {
     onClick: function onClick() {
       return openModal('address');
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : (_orderState$options9$ = _orderState$options9.address) === null || _orderState$options9$ === void 0 ? void 0 : _orderState$options9$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 ? void 0 : (_configState$configs13 = _configState$configs12.preorder_status_enabled) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options11 = orderState.options) === null || _orderState$options11 === void 0 ? void 0 : (_orderState$options12 = _orderState$options11.address) === null || _orderState$options12 === void 0 ? void 0 : _orderState$options12.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 ? void 0 : (_configState$configs13 = _configState$configs12.preorder_status_enabled) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
-    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : _orderState$options10.moment,
+    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options13 = orderState.options) === null || _orderState$options13 === void 0 ? void 0 : _orderState$options13.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs14 = configState.configs) === null || _configState$configs14 === void 0 ? void 0 : (_configState$configs15 = _configState$configs14.max_days_preorder) === null || _configState$configs15 === void 0 ? void 0 : _configState$configs15.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs16 = configState.configs) === null || _configState$configs16 === void 0 ? void 0 : (_configState$configs17 = _configState$configs16.max_days_preorder) === null || _configState$configs17 === void 0 ? void 0 : _configState$configs17.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
   })) : windowSize.width >= 576 && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
-    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options11 = orderState.options) === null || _orderState$options11 === void 0 ? void 0 : (_orderState$options12 = _orderState$options11.address) === null || _orderState$options12 === void 0 ? void 0 : _orderState$options12.address,
+    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options14 = orderState.options) === null || _orderState$options14 === void 0 ? void 0 : (_orderState$options15 = _orderState$options14.address) === null || _orderState$options15 === void 0 ? void 0 : _orderState$options15.address,
     onClick: function onClick(variant) {
       return openModal(variant);
     },
@@ -412,7 +426,7 @@ var Header = function Header(props) {
     }
   }), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs18 = configState.configs) === null || _configState$configs18 === void 0 ? void 0 : (_configState$configs19 = _configState$configs18.preorder_status_enabled) === null || _configState$configs19 === void 0 ? void 0 : _configState$configs19.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
-    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options13 = orderState.options) === null || _orderState$options13 === void 0 ? void 0 : _orderState$options13.moment,
+    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options16 = orderState.options) === null || _orderState$options16 === void 0 ? void 0 : _orderState$options16.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs20 = configState.configs) === null || _configState$configs20 === void 0 ? void 0 : (_configState$configs21 = _configState$configs20.max_days_preorder) === null || _configState$configs21 === void 0 ? void 0 : _configState$configs21.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs22 = configState.configs) === null || _configState$configs22 === void 0 ? void 0 : (_configState$configs23 = _configState$configs22.max_days_preorder) === null || _configState$configs23 === void 0 ? void 0 : _configState$configs23.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
@@ -423,7 +437,7 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
-    width: modalSelected === 'address' ? orderState !== null && orderState !== void 0 && (_orderState$options14 = orderState.options) !== null && _orderState$options14 !== void 0 && _orderState$options14.user_id ? '70%' : '50%' : '700px'
+    width: modalSelected === 'address' ? orderState !== null && orderState !== void 0 && (_orderState$options17 = orderState.options) !== null && _orderState$options17 !== void 0 && _orderState$options17.user_id ? '70%' : '50%' : '700px'
   }), modalSelected === 'cart' && /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
     carts: cartsWithProducts,
     isOrderStateCarts: !!orderState.carts,
@@ -440,7 +454,7 @@ var Header = function Header(props) {
     isCustomerMode: isCustomerMode
   }) : /*#__PURE__*/_react.default.createElement(_styles.AddressFormWrapper, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options15 = orderState.options) === null || _orderState$options15 === void 0 ? void 0 : _orderState$options15.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options18 = orderState.options) === null || _orderState$options18 === void 0 ? void 0 : _orderState$options18.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },
@@ -451,7 +465,13 @@ var Header = function Header(props) {
   }))), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, {
     onClose: function onClose() {
       return setModalIsOpen(false);
-    }
+    },
+    preorderLeadTime: preorderLeadTime,
+    preorderMaximumDays: preorderMaximumDays,
+    preorderMinimumDays: preorderMinimumDays,
+    preorderTimeRange: preorderTimeRange,
+    preorderSlotInterval: preorderSlotInterval,
+    cateringPreorder: !!cateringTypeString
   }), modalSelected === 'delivery' && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorContent.OrderTypeSelectorContent, {
     onClose: function onClose() {
       return setModalIsOpen(false);

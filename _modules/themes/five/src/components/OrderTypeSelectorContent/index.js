@@ -93,7 +93,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
 };
 exports.OrderTypeSelectorContentUI = OrderTypeSelectorContentUI;
 var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
-  var _theme$images, _theme$images$deliver, _theme$images2, _theme$images2$delive, _theme$images3, _theme$images3$delive, _theme$images4, _theme$images4$delive, _theme$images5, _theme$images5$delive;
+  var _theme$images, _theme$images$deliver, _theme$images2, _theme$images2$delive, _theme$images3, _theme$images3$delive, _theme$images4, _theme$images4$delive, _theme$images5, _theme$images5$delive, _theme$images6, _theme$images6$delive, _theme$images7, _theme$images7$delive;
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -125,6 +125,16 @@ var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
       text: t('DRIVE_THRU', 'Drive thru'),
       description: t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description'),
       image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$delive = _theme$images5.deliveryTypes) === null || _theme$images5$delive === void 0 ? void 0 : _theme$images5$delive.driveThru
+    }, {
+      value: 7,
+      text: t('CATERING_DELIVERY', 'Catering Delivery'),
+      description: t('ORDERTYPE_DESCRIPTION_CATERING_DELIVERY', 'Catering Delivery description'),
+      image: (_theme$images6 = theme.images) === null || _theme$images6 === void 0 ? void 0 : (_theme$images6$delive = _theme$images6.deliveryTypes) === null || _theme$images6$delive === void 0 ? void 0 : _theme$images6$delive.cateringDelivery
+    }, {
+      value: 8,
+      text: t('CATERING_PICKUP', 'Catering Pickup'),
+      description: t('ORDERTYPE_DESCRIPTION_CATERING_PICKUP', 'Catering Pickup description'),
+      image: (_theme$images7 = theme.images) === null || _theme$images7 === void 0 ? void 0 : (_theme$images7$delive = _theme$images7.deliveryTypes) === null || _theme$images7$delive === void 0 ? void 0 : _theme$images7$delive.cateringPickup
     }]
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderTypeControl, orderTypeProps);
