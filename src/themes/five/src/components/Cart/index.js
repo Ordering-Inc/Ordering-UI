@@ -402,6 +402,12 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
+                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && !hideDeliveryFee && (
+                      <tr>
+                        <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
+                        <td>{parsePrice(cart?.delivery_price)}</td>
+                      </tr>
+                    )}
                     {
                       !hideCartDiscount && cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
                         <tr key={offer.id}>
@@ -423,10 +429,10 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && !hideDeliveryFee && (
+                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && cart?.delivery_price_with_discount >= 0 && !hideDeliveryFee && (
                       <tr>
-                        <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                        <td>{parsePrice(cart?.delivery_price_with_discount ?? cart?.delivery_price)}</td>
+                        <td>{t('DELIVERY_FEE_AFTER_DISCOUNT', 'Delivery Fee After Discount')}</td>
+                        <td>{parsePrice(cart?.delivery_price_with_discount)}</td>
                       </tr>
                     )}
                     {cart?.driver_tip > 0 && !hideDriverTip && (
