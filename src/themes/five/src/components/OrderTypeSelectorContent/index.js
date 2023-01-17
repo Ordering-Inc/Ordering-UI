@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, OrderTypeControl, useOrder } from 'ordering-components'
+import { useLanguage, useOrder, OrderTypeControl } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import {
@@ -109,6 +109,18 @@ export const OrderTypeSelectorContent = (props) => {
         text: t('DRIVE_THRU', 'Drive thru'),
         description: t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description'),
         image: theme.images?.deliveryTypes?.driveThru
+      },
+      {
+        value: 7,
+        text: t('CATERING_DELIVERY', 'Catering Delivery'),
+        description: t('ORDERTYPE_DESCRIPTION_CATERING_DELIVERY', 'Catering Delivery description'),
+        image: theme.images?.deliveryTypes?.cateringDelivery
+      },
+      {
+        value: 8,
+        text: t('CATERING_PICKUP', 'Catering Pickup'),
+        description: t('ORDERTYPE_DESCRIPTION_CATERING_PICKUP', 'Catering Pickup description'),
+        image: theme.images?.deliveryTypes?.cateringPickup
       }
     ]
   }

@@ -19,6 +19,7 @@ import { Modal } from '../Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
+import { CartStoresListing } from '../../../../franchise/src/components/CartStoresListing'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { TaxInformation } from '../TaxInformation'
 import { TextArea } from '../../styles/Inputs'
@@ -41,6 +42,7 @@ import {
 import { verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 import MdCloseCircle from '@meronex/icons/ios/MdCloseCircle'
+import { MomentContent } from '../MomentContent'
 
 const CartUI = (props) => {
   const {
@@ -67,7 +69,8 @@ const CartUI = (props) => {
     setPreorderBusiness,
     cart: cartMulticart,
     hideDeliveryFee,
-    hideDriverTip
+    hideDriverTip,
+    businessConfigs
   } = props
 
   const theme = useTheme()
@@ -92,16 +95,29 @@ const CartUI = (props) => {
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
   const [isUpselling, setIsUpselling] = useState(false)
-  // const [openChangeStore, setOpenChangeStore] = useState(false)
+  const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
+  const cateringTypes = [7, 8]
   const isMultiCheckout = configs?.checkout_multi_business_enabled?.value === '1'
   const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
   const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
   const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount?.hidden
+  const cateringTypeString = orderState?.options?.type === 7
+    ? 'catering_delivery'
+    : orderState?.options?.type === 8
+      ? 'catering_pickup'
+      : null
+  const splitCateringValue = (configName) => businessConfigs.find(config => config.key === configName)?.value?.split('|')?.find(val => val.includes(cateringTypeString))?.split(',')[1]
+  const preorderSlotInterval = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_slot_interval'))
+  const preorderLeadTime = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_lead_time'))
+  const preorderTimeRange = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_time_range'))
+  const preorderMaximumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_maximum_days'))
+  const preorderMinimumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_minimum_days'))
+
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -233,9 +249,9 @@ const CartUI = (props) => {
     })
   }
 
-  // const handleChangeStore = () => {
-  //   setOpenChangeStore(true)
-  // }
+  const handleChangeStore = () => {
+    setOpenChangeStore(true)
+  }
 
   useEffect(() => {
     if (isCustomMode) setIsUpselling(true)
@@ -272,7 +288,7 @@ const CartUI = (props) => {
             handleClickCheckout={handleClickCheckout}
             checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
             setPreorderBusiness={setPreorderBusiness}
-            // handleChangeStore={!useKioskApp && handleChangeStore}
+            handleChangeStore={!useKioskApp && handleChangeStore}
             isMultiCheckout={isMultiCheckout}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
@@ -560,6 +576,20 @@ const CartUI = (props) => {
                 )}
               </OrderBill>
             )}
+            {cateringTypes.includes(orderState?.options?.type) && (
+              <div>
+                <MomentContent
+                  cateringPreorder
+                  isCart
+                  preorderSlotInterval={preorderSlotInterval}
+                  preorderLeadTime={preorderLeadTime}
+                  preorderTimeRange={preorderTimeRange}
+                  preorderMaximumDays={preorderMaximumDays}
+                  business={cart?.business}
+                  preorderMinimumDays={preorderMinimumDays}
+                />
+              </div>
+            )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (!isMultiCheckout || isStore) && (
               <CheckoutAction>
                 <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
@@ -654,7 +684,7 @@ const CartUI = (props) => {
           )}
         </CartSticky>
 
-        {/* <Modal
+        <Modal
           width='70%'
           title={t('CHANGE_STORE', 'Change store')}
           open={openChangeStore}
@@ -670,7 +700,7 @@ const CartUI = (props) => {
             onClose={() => setOpenChangeStore(false)}
             handleCustomStoreRedirect={handleStoreRedirect}
           />
-        </Modal> */}
+        </Modal>
 
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (

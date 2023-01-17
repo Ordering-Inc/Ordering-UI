@@ -94,11 +94,22 @@ export const Header = (props) => {
 
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
-  const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
+  const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru'), '', t('CATERING_DELIVERY', 'Catering Delivery'), t('CATERING_PICKUP', 'Catering pickup')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
   const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const isHideLanguages = theme?.header?.components?.language_selector?.hidden
+  const cateringTypeString = orderState?.options?.type === 7
+    ? 'catering_delivery'
+    : orderState?.options?.type === 8
+      ? 'catering_pickup'
+      : null
+  const splitCateringValue = (configName) => Object.values(configState?.configs)?.find(config => config.key === configName)?.value?.split('|')?.find(val => val.includes(cateringTypeString))?.split(',')[1]
+  const preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'))
+  const preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'))
+  const preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'))
+  const preorderMaximumDays = parseInt(splitCateringValue('preorder_maximum_days'))
+  const preorderMinimumDays = parseInt(splitCateringValue('preorder_minimum_days'))
 
   const handleSuccessSignup = (user) => {
     login({
@@ -485,6 +496,12 @@ export const Header = (props) => {
           {modalSelected === 'moment' && (
             <MomentContent
               onClose={() => setModalIsOpen(false)}
+              preorderLeadTime={preorderLeadTime}
+              preorderMaximumDays={preorderMaximumDays}
+              preorderMinimumDays={preorderMinimumDays}
+              preorderTimeRange={preorderTimeRange}
+              preorderSlotInterval={preorderSlotInterval}
+              cateringPreorder={!!cateringTypeString}
             />
           )}
           {modalSelected === 'delivery' && (

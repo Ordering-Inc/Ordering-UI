@@ -100,6 +100,7 @@ export const CartContent = (props) => {
                   onClickCheckout={props.onClose}
                   setPreorderBusiness={setPreorderBusiness}
                   isOpenCart={isOpenCart}
+                  businessConfigs={cart?.business?.configs}
                 />
               )}
             </React.Fragment>
