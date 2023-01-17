@@ -4,6 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles/Buttons'
 import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
 import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
+import { NotFoundSource } from '../../NotFoundSource'
 
 import {
   Container,
@@ -51,6 +52,9 @@ const PurchaseGiftCardUI = (props) => {
               <span>{product.name}</span>
             </GiftCardItem>
           ))}
+          {!productsListState.loading && productsListState.products.length === 0 && (
+            <NotFoundSource />
+          )}
         </GiftCardsWrapper>
       </GiftCardsListContainer>
       <ActionButtonContainer>
