@@ -40,6 +40,7 @@ export const GiftCardUI = (props) => {
       </ActionWrapper>
       <Modal
         width='700px'
+        padding='0px'
         open={openModal === 'purchase'}
         onClose={() => setOpenModal(null)}
       >
