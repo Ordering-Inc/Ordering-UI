@@ -30,7 +30,8 @@ import {
   PaymentMethodsList,
   PayCard,
   PayCardSelected,
-  CardItemContent
+  CardItemContent,
+  Container
 } from './styles'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
@@ -227,7 +228,6 @@ const PaymentOptionsUI = (props) => {
             setErrorCash={props.setErrorCash}
           />
         )}
-
         {isOpenMethod?.paymethod?.gateway === 'stripe' && isOpenMethod.paymethod?.gateway === 'stripe' && (
           <PaymentOptionStripe
             paymethod={isOpenMethod?.paymethod}
@@ -310,7 +310,12 @@ const PaymentOptionsUI = (props) => {
           className='modal-info'
           onClose={() => handlePaymethodClick(null)}
         >
-          {stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && (
+          {!isOpenMethod?.paymethod?.credentials?.publishable &&
+            <Container>
+              <p>{t('ADD_PUBLISHABLE_KEY', 'Please add a stripe key')}</p>
+            </Container>
+          }
+          {isOpenMethod?.paymethod?.credentials?.publishable && stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && (
             <StripeElementsForm
               methodsPay={methodsPay}
               paymethod={isOpenMethod?.paymethod?.gateway}

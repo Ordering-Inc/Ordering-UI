@@ -8,10 +8,9 @@ import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 export const MomentContent = (props) => {
-  const [{ configs }] = useConfig()
-  const limitDays = parseInt(configs?.max_days_preorder?.value, 10)
+  const [{ configs, loading }] = useConfig()
+  const limitDays = parseInt(props.preorderMaximumDays ?? configs?.max_days_preorder?.value, 10)
   const [orderState] = useOrder()
-
   const currentDate = new Date()
   const time = limitDays > 1
     ? currentDate.getTime() + ((limitDays - 1) * 24 * 60 * 60 * 1000)
@@ -36,10 +35,20 @@ export const MomentContent = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <Container isLoading={orderState?.loading}>
-        <MomentControl
-          {...momentProps}
-          onClose={props.onClose}
-        />
+        {((!props.cateringPreorder) || (!loading)) && (
+          <MomentControl
+            {...momentProps}
+            onClose={props.onClose}
+            cateringPreorder={props.cateringPreorder}
+            isCart={props.isCart}
+            preorderSlotInterval={props.preorderSlotInterval}
+            preorderLeadTime={props.preorderLeadTime}
+            preorderTimeRange={props.preorderTimeRange}
+            preorderMaximumDays={props.preorderMaximumDays}
+            preorderMinimumDays={props.preorderMinimumDays}
+            business={props.business}
+          />
+        )}
         {orderState?.loading && (
           <Layer height={momentControl?.height && `${momentControl?.height}px`}>
             {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (

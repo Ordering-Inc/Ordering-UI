@@ -3,7 +3,7 @@ import React from 'react'
 
 export const Container = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  border-radius: 7.6px;
   padding: 12px 14px;
   display: flex;
   align-items: center;
@@ -11,6 +11,13 @@ export const Container = styled.div`
   border: 1px solid ${props => props.theme.colors.gray200};
   box-sizing: border-box;
   margin: 10px;
+  min-width: 205px;
+  ${({ active }) => active && css`
+    border: 1px solid ${props => props.theme.colors.primary};
+  `}
+  ${({ isCursor }) => isCursor && css`
+    cursor: pointer;
+  `}
 `
 
 const UserPhotoStyled = styled.div`
@@ -20,10 +27,17 @@ const UserPhotoStyled = styled.div`
   background-size: cover;
   background-position: center;
   object-fit: cover;
-  min-height: 86px;
-  width: 86px;
-  height: 86px;
   border-radius: 4px;
+
+  ${({ isSmallPhoto }) => isSmallPhoto ? css`
+    min-height: 42px;
+    width: 42px;
+    height: 42px;
+  ` : css`
+    min-height: 86px;
+    width: 86px;
+    height: 86px;
+  `}
 
   ${({ isSkeleton }) => isSkeleton && css`
     background-color: ${props => props.theme.colors.gray200};
@@ -40,9 +54,20 @@ export const UserPhoto = (props) => {
     </UserPhotoStyled>
   )
 }
+export const UserDummyAvatarWrapper = styled.div`
+  svg {
+    ${({ isSmallPhoto }) => isSmallPhoto ? css`
+      width: 42px;
+      height: 42px;
+    ` : css`
+      width: 86px;
+      height: 86px;
+    `}
+  }
+`
 
 export const InfoWrapper = styled.div`
-  width: calc(100% - 106px);
+  width: calc(100% - 60px);
   margin-left: 20px;
   ${props => props.theme.rtl && css`
     margin-left: 0px;
@@ -66,7 +91,9 @@ export const InfoWrapper = styled.div`
 `
 
 export const ActionWrapper = styled.div`
-  margin-top: 15px;
+  ${({ isSmallPhoto }) => !isSmallPhoto && css`
+    margin-top: 15px;
+  `}
   display: flex;
   align-items: center;
   > .info {

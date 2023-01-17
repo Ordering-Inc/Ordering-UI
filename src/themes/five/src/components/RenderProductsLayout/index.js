@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
-import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 import { Cart3 } from 'react-bootstrap-icons'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
@@ -33,8 +32,7 @@ import {
   ProfessionalFilterWrapper,
   WrapperSearchAbsolute,
   NearBusiness,
-  PageBannerWrapper,
-  CategorySelectedContainer
+  PageBannerWrapper
 } from './styles'
 
 import { SearchProducts as SearchProductsOriginal } from '../../../../../themes/five/src/components/SearchProducts'
@@ -46,6 +44,7 @@ import { OrderItAgain } from '../OrderItAgain'
 import { ProfessionalBusinessFilter } from '../ProfessionalBusinessFilter'
 import { PageBanner } from '../PageBanner'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { scrollTo } from '../../../../../utils'
 
 const layoutOne = 'groceries'
 
@@ -86,7 +85,8 @@ export const RenderProductsLayout = (props) => {
     professionalSelected,
     onBusinessClick,
     handleChangePriceFilterValues,
-    priceFilterValues
+    priceFilterValues,
+    handleUpdateProfessionals
   } = props
 
   const theme = useTheme()
@@ -143,6 +143,19 @@ export const RenderProductsLayout = (props) => {
     handleSaveProduct()
   }, [categorySelected])
 
+  useEffect(() => {
+    if (windowSize.width < 993 && categoryClicked && document.getElementsByClassName('category-title')) {
+      const extraHeight = 80
+      const top = document.getElementsByClassName('category-title')[0].offsetTop - extraHeight
+      window.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      })
+    } else {
+      window.scroll(0, 0)
+    }
+  }, [categoryClicked])
+
   return (
     <>
       {!isLoading && business?.id && (
@@ -173,6 +186,8 @@ export const RenderProductsLayout = (props) => {
                 errorQuantityProducts={errorQuantityProducts}
                 sortByValue={sortByValue}
                 categoryClicked={categoryClicked}
+                categorySelected={categorySelected}
+                setCategoryClicked={setCategoryClicked}
               />
             )}
 
@@ -194,6 +209,13 @@ export const RenderProductsLayout = (props) => {
                 </WrapperSearch>
               </>
             )}
+            {!business?.loading && business?.previously_products?.length > 0 && !hidePreviousOrdered && windowSize.width < 993 && !categoryClicked && (
+              <OrderItAgain
+                onProductClick={onProductClick}
+                productList={business?.previously_products}
+                businessId={business?.id}
+              />
+            )}
             {!businessLayout.layoutOne && (
               <BusinessContent isCustomLayout={isCustomLayout || useKioskApp} id='wrapper-categories'>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
@@ -213,6 +235,7 @@ export const RenderProductsLayout = (props) => {
                           professionals={business?.professionals}
                           professionalSelected={professionalSelected}
                           handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                          handleUpdateProfessionals={handleUpdateProfessionals}
                         />
                       </ProfessionalFilterWrapper>
                     </>
@@ -268,13 +291,6 @@ export const RenderProductsLayout = (props) => {
                     )}
                   </div>
                   <WrapContent id='businessProductList'>
-                    {!business?.loading && business?.previously_products?.length > 0 && !hidePreviousOrdered && (
-                      <OrderItAgain
-                        onProductClick={onProductClick}
-                        productList={business?.previously_products}
-                        businessId={business?.id}
-                      />
-                    )}
                     <BusinessLayoutProductsList
                       categories={[
                         { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
@@ -321,6 +337,7 @@ export const RenderProductsLayout = (props) => {
                             isProducts={currentCart.products.length}
                             isCartOnProductsList={isCartOnProductsList}
                             handleCartOpen={handleCartOpen}
+                            businessConfigs={business?.configs}
                           />
                         </>
                       ) : (
@@ -349,6 +366,7 @@ export const RenderProductsLayout = (props) => {
                       professionals={business?.professionals}
                       professionalSelected={professionalSelected}
                       handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                      handleUpdateProfessionals={handleUpdateProfessionals}
                     />
                   </ProfessionalFilterWrapper>
                 )}
@@ -356,7 +374,7 @@ export const RenderProductsLayout = (props) => {
                   <BusinessCategoriesContainer offSticky>
                     {!(business?.categories?.length === 0 && !categoryId) && (
                       <>
-                        {(!categoryClicked || windowSize.width >= 993) ? (
+                        {(!categoryClicked || windowSize.width >= 993) && (
                           <BusinessLayoutCategories
                             component='categories'
                             categories={[
@@ -374,10 +392,6 @@ export const RenderProductsLayout = (props) => {
                             useKioskApp={useKioskApp}
                             setCategoryClicked={setCategoryClicked}
                           />
-                        ) : (
-                          <CategorySelectedContainer onClick={() => setCategoryClicked(false)}>
-                            <BsCaretLeftFill /> {categorySelected?.name}
-                          </CategorySelectedContainer>
                         )}
                       </>
                     )}
@@ -385,7 +399,7 @@ export const RenderProductsLayout = (props) => {
                   {(categoryClicked || windowSize.width >= 993) && (
                     <BusinessCategoryProductWrapper>
                       <WrapContent isGroceries id='groceries'>
-                        {!business?.loading && business?.previously_products?.length > 0 && (
+                        {!business?.loading && business?.previously_products?.length > 0 && windowSize.width >= 993 && (
                           <OrderItAgain
                             onProductClick={onProductClick}
                             productList={business?.previously_products}
@@ -485,6 +499,7 @@ export const RenderProductsLayout = (props) => {
                 isProducts={currentCart.products.length}
                 isCartOnProductsList={isCartOnProductsList}
                 handleCartOpen={handleCartOpen}
+                businessConfigs={business?.configs}
               />
             </>
           ) : (

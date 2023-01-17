@@ -7,7 +7,6 @@ import {
   useUtils,
   useValidationFields,
   useConfig,
-  useOrderingTheme,
   useSite,
   useCustomer
 } from 'ordering-components'
@@ -20,11 +19,11 @@ import { Modal } from '../Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'
 import { UpsellingPage } from '../UpsellingPage'
+import { CartStoresListing } from '../../../../franchise/src/components/CartStoresListing'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { TaxInformation } from '../TaxInformation'
 import { TextArea } from '../../styles/Inputs'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
-import { CartStoresListing } from '../../../../franchise/src/components/CartStoresListing'
 import { DriverTips } from '../DriverTips'
 import { ServiceForm } from '../ServiceForm'
 import {
@@ -43,6 +42,7 @@ import {
 import { verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 import MdCloseCircle from '@meronex/icons/ios/MdCloseCircle'
+import { MomentContent } from '../MomentContent'
 
 const CartUI = (props) => {
   const {
@@ -56,7 +56,6 @@ const CartUI = (props) => {
     onClickCheckout,
     isCheckout,
     useKioskApp,
-    isMultiCheckout,
     isCartPending,
     isCartPopover,
     isForceOpenCart,
@@ -68,7 +67,10 @@ const CartUI = (props) => {
     commentState,
     handleRemoveOfferClick,
     setPreorderBusiness,
-    cart: cartMulticart
+    cart: cartMulticart,
+    hideDeliveryFee,
+    hideDriverTip,
+    businessConfigs
   } = props
 
   const theme = useTheme()
@@ -76,7 +78,6 @@ const CartUI = (props) => {
   const [orderState] = useOrder()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
-  const [orderingTheme] = useOrderingTheme()
   const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
   const [{ site }] = useSite()
@@ -99,13 +100,24 @@ const CartUI = (props) => {
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
-  const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
-  const openCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && !cart?.wallets) || null) || []
-
+  const cateringTypes = [7, 8]
+  const isMultiCheckout = configs?.checkout_multi_business_enabled?.value === '1'
   const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
   const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
   const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount?.hidden
+  const cateringTypeString = orderState?.options?.type === 7
+    ? 'catering_delivery'
+    : orderState?.options?.type === 8
+      ? 'catering_pickup'
+      : null
+  const splitCateringValue = (configName) => businessConfigs.find(config => config.key === configName)?.value?.split('|')?.find(val => val.includes(cateringTypeString))?.split(',')[1]
+  const preorderSlotInterval = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_slot_interval'))
+  const preorderLeadTime = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_lead_time'))
+  const preorderTimeRange = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_time_range'))
+  const preorderMaximumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_maximum_days'))
+  const preorderMinimumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_minimum_days'))
+
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -136,37 +148,30 @@ const CartUI = (props) => {
   }
 
   const handleClickCheckout = () => {
-    const cartSelectedHasGroup = cart?.group?.uuid
-    const cartFilterValidation = cart => cart?.valid && cart?.status !== 2
-    const cartsGroupLength = cartSelectedHasGroup ? Object.values(orderState.carts).filter(_cart => _cart?.group?.uuid === cartSelectedHasGroup && cartFilterValidation(_cart))?.length : 0
-    if (cartsGroupLength > 1 && checkoutMultiBusinessEnabled) {
-      events.emit('go_to_page', { page: 'multi_checkout', params: { cartUuid: cart?.group?.uuid } })
-      events.emit('cart_popover_closed')
-      return
-    }
-    const cartGroupsCount = {}
-    // eslint-disable-next-line no-unused-expressions
-    Object.values(orderState.carts).filter(_cart => cartFilterValidation(_cart))?.forEach(_cart => {
-      if (cartGroupsCount[_cart?.group?.uuid]) {
-        cartGroupsCount[_cart?.group?.uuid] += 1
-      } else {
-        cartGroupsCount[_cart?.group?.uuid] = 1
-      }
-    })
-    let groupForTheCart
-    const groupForAddCartArray = Object.keys(cartGroupsCount).filter(cartGroupUuid => cartGroupsCount[cartGroupUuid] > 0 && cartGroupsCount[cartGroupUuid] < 5)
-    const max = Math.max(...groupForAddCartArray.map(uuid => cartGroupsCount[uuid]))
-    const indexes = groupForAddCartArray.filter(uuid => cartGroupsCount[uuid] === max)
-    if (indexes?.length > 1) {
-      groupForTheCart = indexes.find(uuid => uuid !== 'undefined')
+    const cartsAvailable = Object.values(orderState?.carts)?.filter(cart => cart?.valid && cart?.status !== 2)
+    if (cartsAvailable.length === 1) {
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cartsAvailable[0]?.uuid } })
     } else {
-      groupForTheCart = indexes[0]
-    }
+      const groupKeys = {}
+      cartsAvailable.forEach(_cart => {
+        groupKeys[_cart?.group?.uuid]
+          ? groupKeys[_cart?.group?.uuid] += 1
+          : groupKeys[_cart?.group?.uuid ?? 'null'] = 1
+      })
 
-    if (checkoutMultiBusinessEnabled && openCarts?.length > 1 && groupForTheCart) {
-      events.emit('go_to_page', { page: 'multi_cart', params: { cartUuid: cart?.uuid, cartGroup: groupForTheCart === 'undefined' ? 'create' : groupForTheCart } })
-    } else {
-      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart?.uuid } })
+      if (
+        (Object.keys(groupKeys).length === 1 && Object.keys(groupKeys)[0] === 'null') ||
+        Object.keys(groupKeys).length > 1
+      ) {
+        events.emit('go_to_page', { page: 'multi_cart' })
+      } else {
+        events.emit('go_to_page', {
+          page: 'multi_checkout',
+          params: {
+            cartUuid: cartsAvailable[0]?.group?.uuid
+          }
+        })
+      }
     }
     events.emit('cart_popover_closed')
     onClickCheckout && onClickCheckout()
@@ -411,7 +416,7 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && (
+                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && !hideDeliveryFee && (
                       <tr>
                         <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                         <td>{parsePrice(cart?.delivery_price_with_discount ?? cart?.delivery_price)}</td>
@@ -436,7 +441,7 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {cart?.driver_tip > 0 && (
+                    {cart?.driver_tip > 0 && !hideDriverTip && (
                       <tr>
                         <td>
                           {t('DRIVER_TIP', 'Driver tip')}{' '}
@@ -571,7 +576,21 @@ const CartUI = (props) => {
                 )}
               </OrderBill>
             )}
-            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (
+            {cateringTypes.includes(orderState?.options?.type) && (
+              <div>
+                <MomentContent
+                  cateringPreorder
+                  isCart
+                  preorderSlotInterval={preorderSlotInterval}
+                  preorderLeadTime={preorderLeadTime}
+                  preorderTimeRange={preorderTimeRange}
+                  preorderMaximumDays={preorderMaximumDays}
+                  business={cart?.business}
+                  preorderMinimumDays={preorderMinimumDays}
+                />
+              </div>
+            )}
+            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid_products && (!isMultiCheckout || isStore) && (
               <CheckoutAction>
                 <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 <Button
@@ -665,7 +684,7 @@ const CartUI = (props) => {
           )}
         </CartSticky>
 
-        {/* <Modal
+        <Modal
           width='70%'
           title={t('CHANGE_STORE', 'Change store')}
           open={openChangeStore}
@@ -681,7 +700,7 @@ const CartUI = (props) => {
             onClose={() => setOpenChangeStore(false)}
             handleCustomStoreRedirect={handleStoreRedirect}
           />
-        </Modal> */}
+        </Modal>
 
       </CartContainer>
       {props.afterComponents?.map((AfterComponent, i) => (

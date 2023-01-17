@@ -146,8 +146,7 @@ const BusinessProductsListUI = (props) => {
                   handleUpdateProducts={handleUpdateProducts}
                   productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                 />
-              ))
-              }
+              ))}
             </ProductsListing>
             {isSearchMode && category?.subcategories?.length > 0 && category?.subcategories?.filter(subcategory => productsCategorySelected?.some(product => product?.category_id === subcategory?.id))?.map(subcategory => (
               <SubcategorySearchContainer key={subcategory?.id}>

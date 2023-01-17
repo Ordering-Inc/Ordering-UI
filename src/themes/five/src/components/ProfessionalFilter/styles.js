@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import React from 'react'
 
 export const Container = styled.div`
   > h2 {
@@ -18,7 +17,7 @@ export const ProfessionalItem = styled.div`
   border: 1px solid ${props => props.theme.colors.gray200};
   border-radius: 7.6px;
   cursor: pointer;
-  margin: 0px 6px;
+  margin: 10px 6px;
   transition: all 0.3s linear;
   width: 205px;
   min-width: 205px;
@@ -54,35 +53,6 @@ export const ProfessionalItem = styled.div`
   `}
 `
 
-const ProfessionalPhotoStyled = styled.div`
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  background-position: center;
-  object-fit: cover;
-  height: 42px;
-  width: 42px;
-  min-width: 42px;
-  border-radius: 7.6px;
-  margin-right: 12px;
-  ${props => props.theme.rtl && css`
-    margin-left: 12px;
-    margin-right: 0px;
-  `}
-`
-export const ProfessionalPhoto = (props) => {
-  const style = {}
-  if (props.bgimage) {
-    style.backgroundImage = `url(${props.bgimage})`
-  }
-  return (
-    <ProfessionalPhotoStyled {...props} style={style}>
-      {props.children}
-    </ProfessionalPhotoStyled>
-  )
-}
-
 export const ContentWrapper = styled.div`
   overflow: auto hidden;
   width: 100%;
@@ -90,30 +60,4 @@ export const ContentWrapper = styled.div`
 
 export const ProfessionalListing = styled.div`
   display: flex;
-`
-
-export const InfoWrapper = styled.div`
-  width: calc(100% - 54px);
-`
-
-export const HeartIconWrapper = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  svg {
-    color: ${props => props.theme.colors.danger500};
-      font-size: 16px;
-  }
-`
-
-export const IconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  .info {
-    margin-right: 10px;
-    ${props => props.theme.rtl && css`
-      margin-left: 10px;
-      margin-right: 0px;
-    `}
-  }
 `

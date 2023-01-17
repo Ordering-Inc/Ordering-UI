@@ -553,6 +553,7 @@ const CheckoutUI = (props) => {
               isCheckout
               isProducts={cart?.products?.length || 0}
               viewString='checkout'
+              businessConfigs={businessConfigs}
             />
           </CartContainer>
         )}
@@ -606,13 +607,19 @@ const CheckoutUI = (props) => {
               {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
             </WarningText>
           )}
+
+        {!cart?.valid_preorder && (
+          <WarningText>
+            {t('INVALID_CART_MOMENT', 'Selected schedule time is invalid, please select a schedule into the business schedule interval.')}
+          </WarningText>
+        )}
       </WrapperRightContainer>
       {windowSize.width < 576 && !cartState.loading && cart && cart?.status !== 2 && (
         <MobileWrapperPlaceOrderButton>
           <span>{parsePrice(cart?.total)}</span>
           <Button
             color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
-            // disabled={isDisablePlaceOrderButton}
+            disabled={isDisablePlaceOrderButton}
             onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
           >
             {!cart?.valid_maximum ? (

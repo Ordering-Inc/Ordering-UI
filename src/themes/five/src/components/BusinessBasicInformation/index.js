@@ -35,7 +35,9 @@ import {
   SocialList,
   IconWrapper,
   BusinessInfoWrapper,
-  WrapperFloatingSearch
+  WrapperFloatingSearch,
+  CategorySelectedContainer,
+  SearchWrapper
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
 
@@ -43,6 +45,7 @@ import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import isBetween from 'dayjs/plugin/isBetween'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 
 dayjs.extend(timezone)
 dayjs.extend(isBetween)
@@ -63,7 +66,9 @@ export const BusinessBasicInformation = (props) => {
     categoryState,
     errorQuantityProducts,
     isCustomerMode,
-    categoryClicked
+    categoryClicked,
+    categorySelected,
+    setCategoryClicked
   } = props
   const { business, loading } = businessState
 
@@ -156,21 +161,28 @@ export const BusinessBasicInformation = (props) => {
 
   const SearchComponent = () => {
     return (
-      <WrapperSearch id='search-component'>
-        <SearchIconWrapper
-          onClick={() => setOpenSearchProducts(true)}
-        >
-          <CgSearch />
-        </SearchIconWrapper>
-        {!hideSort && (
-          <Select
-            notAsync
-            notReload
-            options={sortByOptions}
-            defaultValue={sortByValue}
-            onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
-          />
+      <WrapperSearch id='search-component' isFlexEnd={windowSize.width >= 768}>
+        {categorySelected?.name && windowSize.width < 768 && (
+          <CategorySelectedContainer onClick={() => setCategoryClicked(false)}>
+            <BsCaretLeftFill /> {categorySelected?.name}
+          </CategorySelectedContainer>
         )}
+        <SearchWrapper>
+          <SearchIconWrapper
+            onClick={() => setOpenSearchProducts(true)}
+          >
+            <CgSearch />
+          </SearchIconWrapper>
+          {!hideSort && (
+            <Select
+              notAsync
+              notReload
+              options={sortByOptions}
+              defaultValue={sortByValue}
+              onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
+            />
+          )}
+        </SearchWrapper>
       </WrapperSearch>
     )
   }
@@ -185,7 +197,7 @@ export const BusinessBasicInformation = (props) => {
 
   const BusinessInfoComponent = () => {
     return (
-      <BusinessInfoContainer isChew={isChew}>
+      <BusinessInfoContainer isChew={isChew} isFlexEnd={windowSize.width >= 768}>
         <BusinessInfoContent>
           <BusinessInfo className='info'>
             <BusinessInfoItem isInfoShrunken={isInfoShrunken}>

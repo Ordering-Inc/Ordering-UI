@@ -30,6 +30,7 @@ import { OrderPreferencesSection } from './OrderPreferencesSections'
 import { PlaceSpot } from '../PlaceSpot'
 import { SendGiftCard } from '../GiftCard/SendGiftCard'
 import { Confirm } from '../Confirm'
+import { OrderEta } from './OrderEta'
 
 import {
   Container,
@@ -130,7 +131,7 @@ const OrderDetailsUI = (props) => {
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
 
-  const hideOrderActions = order?.delivery_type !== 1
+  const hideOrderActions = order?.delivery_type === 1
   const isGiftCardOrder = !order?.business_id
 
   const isOriginalLayout = orderingTheme?.theme?.confirmation?.components?.layout?.type === 'original'
@@ -420,13 +421,11 @@ const OrderDetailsUI = (props) => {
                 )}
                 {!hideDeliveryDate && (
                   <p className='date'>
-                    {
-                      activeStatus.includes(order?.status)
-                        ? order?.eta_time + 'min'
-                        : order?.delivery_datetime_utc
-                          ? parseDate(order?.delivery_datetime_utc)
-                          : parseDate(order?.delivery_datetime, { utc: false })
-                    }
+                    {activeStatus.includes(order?.status) ? (
+                      <OrderEta order={order} />
+                    ) : (
+                      parseDate(order?.reporting_data?.at[`status:${order.status}`])
+                    )}
                   </p>
                 )}
                 {(acceptedStatus.includes(parseInt(order?.status, 10)) ||
@@ -487,33 +486,35 @@ const OrderDetailsUI = (props) => {
             {!isGiftCardOrder && (
               <OrderBusiness>
                 <BusinessExternalWrapper>
-                  <BusinessWrapper
-                    w='calc(100% - 20px)'
-                  // borderBottom={!hideOrderActions}
-                  >
-                    <BtsOrderStatus>
-                      <div>
-                        <Button
-                          style={{ fontSize: 14 }}
-                          color={order?.status === 20 ? 'secundary' : 'primary'}
-                          onClick={() => handleChangeOrderStatus(20)}
-                          disabled={disableLeftButton.includes(order?.status)}
-                        >
-                          {getOrderStatus(20)?.value}
-                        </Button>
-                      </div>
-                      <div>
-                        <Button
-                          style={{ fontSize: 14 }}
-                          color={order?.status === 20 ? 'primary' : 'secundary'}
-                          disabled={disableRightButton.includes(order?.status)}
-                          onClick={() => handleChangeOrderStatus(21)}
-                        >
-                          {getOrderStatus(21)?.value}
-                        </Button>
-                      </div>
-                    </BtsOrderStatus>
-                  </BusinessWrapper>
+                  {!hideOrderActions && (
+                    <BusinessWrapper
+                      w='calc(100% - 20px)'
+                    // borderBottom={!hideOrderActions}
+                    >
+                      <BtsOrderStatus>
+                        <div>
+                          <Button
+                            style={{ fontSize: 14 }}
+                            color={order?.status === 20 ? 'secundary' : 'primary'}
+                            onClick={() => handleChangeOrderStatus(20)}
+                            disabled={disableLeftButton.includes(order?.status)}
+                          >
+                            {getOrderStatus(20)?.value}
+                          </Button>
+                        </div>
+                        <div>
+                          <Button
+                            style={{ fontSize: 14 }}
+                            color={order?.status === 20 ? 'primary' : 'secundary'}
+                            disabled={disableRightButton.includes(order?.status)}
+                            onClick={() => handleChangeOrderStatus(21)}
+                          >
+                            {getOrderStatus(21)?.value}
+                          </Button>
+                        </div>
+                      </BtsOrderStatus>
+                    </BusinessWrapper>
+                  )}
 
                   {!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
                     <PlaceSpotWrapper>
@@ -524,36 +525,6 @@ const OrderDetailsUI = (props) => {
                         vehicleDefault={order?.vehicle}
                       />
                     </PlaceSpotWrapper>
-                  )}
-
-                  {!hideOrderActions && (
-                    <BusinessWrapper
-                      w='calc(100% - 20px)'
-                      borderTop
-                    >
-                      <BtsOrderStatus>
-                        <div>
-                          <Button
-                            style={{ fontSize: 14 }}
-                            color={order?.status === 20 ? 'secundary' : 'primary'}
-                            onClick={() => handleChangeOrderStatus(20)}
-                            disabled={order?.status === 20 || order?.status === 21}
-                          >
-                            {getOrderStatus(20)?.value}
-                          </Button>
-                        </div>
-                        <div>
-                          <Button
-                            style={{ fontSize: 14 }}
-                            color={order?.status === 20 ? 'primary' : 'secundary'}
-                            disabled={order?.status === 21}
-                            onClick={() => handleChangeOrderStatus(21)}
-                          >
-                            {getOrderStatus(21)?.value}
-                          </Button>
-                        </div>
-                      </BtsOrderStatus>
-                    </BusinessWrapper>
                   )}
                 </BusinessExternalWrapper>
                 {googleMapsApiKey && !hideBusinessMap && (
