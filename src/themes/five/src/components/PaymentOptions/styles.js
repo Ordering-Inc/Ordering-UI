@@ -14,6 +14,10 @@ export const PaymentMethodsList = styled.div`
   margin-left: -15px;
 `
 
+export const Container = styled.div`
+  margin: 0 auto;
+`
+
 export const PayCard = styled.div`
   width: calc(50% - 30px);
   cursor: pointer;
