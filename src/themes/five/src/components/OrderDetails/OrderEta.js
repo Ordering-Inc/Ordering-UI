@@ -31,11 +31,10 @@ export const OrderEta = (props) => {
 
       totalEta += nextStatusTimes
 
-      const currentStatusUpdated = parseDate(order?.reporting_data?.at[`status:${order.status}`])
-
-      const diffTimeAsMinutes = moment(currentStatusUpdated).add(order?.eta_current_status_time, 'minutes').diff(moment().utc(), 'minutes')
-      if (diffTimeAsMinutes < 0) {
-        totalEta += order?.eta_current_status_penalty_time
+      const diffTimeAsSeconds = moment.utc(order?.reporting_data?.at[`status:${order.status}`]).add(order?.eta_current_status_time, 'minutes').diff(moment().utc(), 'seconds')
+      const diffTimeAsMinutes = Math.ceil(diffTimeAsSeconds / 60)
+      if (diffTimeAsMinutes <= 0) {
+        totalEta += (Math.floor(Math.abs(diffTimeAsMinutes / order?.eta_current_status_time) + 1) * order?.eta_current_status_penalty_time)
       }
       _estimatedTime = parseDate(moment(_delivery).add(totalEta, 'minutes'))
     } else {
