@@ -13,6 +13,12 @@ export const Container = styled.div`
   }
 `
 
+export const WrapperContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`
+
 export const NotCarts = styled.div`
   height: 300px;
   display: flex;

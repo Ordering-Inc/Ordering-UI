@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
+import { BusinessProductsCategories as ProductsCategories, useOrderingTheme } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
 import { useTheme } from 'styled-components'
 
 import { CategoriesContainer } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 const BusinessProductsCategoriesUI = (props) => {
   const {
@@ -21,8 +22,12 @@ const BusinessProductsCategoriesUI = (props) => {
   } = props
 
   const theme = useTheme()
+  const windowSize = useWindowSize()
+  const [orderingTheme] = useOrderingTheme()
   const [selectedCategory, setSelectedCateogry] = useState({ id: null })
   const scrollTopSpan = 60
+
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const handleChangeCategory = (category) => {
     const isBlockScroll = window.location.search.includes('category') &&
@@ -118,12 +123,18 @@ const BusinessProductsCategoriesUI = (props) => {
     if (typeof useKioskApp === 'undefined') return
     const styleSheet = document.getElementById('styles').sheet
 
+    if (Object.values(styleSheet.cssRules)?.length) {
+      styleSheet?.deleteRule(0)
+    }
+    const disabledCustomWidth = isChew
+
     let style0 = '.sticky-prod-cat {'
     style0 += 'position: fixed !important;'
     style0 += 'top: 0px !important;'
     style0 += 'left: 0px !important;'
     style0 += 'padding: 5px 5px 0px 5px !important;'
-    style0 += `width: calc(100% - ${useKioskApp ? '50px' : '155px'}) !important;`
+    style0 += `width: calc(100% - ${useKioskApp ? '50px' : windowSize.width >= 993 ? '155px' : '0px'})!important;`
+    !disabledCustomWidth && (style0 += `width: calc(100% - ${useKioskApp ? '50px' : '155px'}) !important;`)
     style0 += '}'
 
     let style1 = '.sticky-search {'
@@ -140,7 +151,7 @@ const BusinessProductsCategoriesUI = (props) => {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [useKioskApp])
+  }, [useKioskApp, isChew, windowSize.width])
 
   useEffect(() => {
     if (business?.professionals?.length > 0 && !useKioskApp) {

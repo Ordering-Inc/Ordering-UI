@@ -61,7 +61,8 @@ const MultiCheckoutUI = (props) => {
     handlePaymethodDataChange,
     onRedirectPage,
     cartGroup,
-    cartUuid
+    cartUuid,
+    totalCartsFee
   } = props
 
   const [, t] = useLanguage()
@@ -77,11 +78,11 @@ const MultiCheckoutUI = (props) => {
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const maximumCarts = 5
-  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || openCarts.length > maximumCarts || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data)
+  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data)
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
   const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+  const totalFeeEnabled = configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
@@ -152,13 +153,13 @@ const MultiCheckoutUI = (props) => {
   }, [validationFields, user, customerState])
 
   useEffect(() => {
-    if (openCarts.length) return
+    if (openCarts.length || cartGroup.loading) return
     onRedirectPage && onRedirectPage({ page: 'search' })
-  }, [openCarts])
+  }, [openCarts, cartGroup])
 
   return (
     <>
-      {openCarts.length === 0 ? (
+      {!cartGroup?.loading && openCarts.length === 0 ? (
         <NotFoundSource
           content={t('CARTS_NOT_FOUND', 'You don’t have carts available')}
         />
@@ -241,8 +242,10 @@ const MultiCheckoutUI = (props) => {
                   <Cart
                     isCartPending={cart?.status === 2}
                     cart={cart}
-                    isMultiCheckout={!isMultiDriverTips}
+                    isMultiCheckout={isMultiDriverTips}
                     isProducts={cart?.products?.length || 0}
+                    hideDeliveryFee={configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'}
+                    hideDriverTip={configs?.multi_business_checkout_show_combined_driver_tip?.value === '1'}
                   />
                   <DriverTipDivider />
                 </React.Fragment>
@@ -253,7 +256,23 @@ const MultiCheckoutUI = (props) => {
                 </WarningText>
               )}
               {openCarts.length > 0 && (
-                <MultiCartPriceContainer>
+                <MultiCartPriceContainer totalFeeEnabled={totalFeeEnabled}>
+                  {totalCartsFee &&
+                    configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1' &&
+                  (
+                    <span>
+                      <p>{t('TOTAL_DELIVERY_FEE', 'Total delivery fee')}</p>
+                      <p>{parsePrice(totalCartsFee)}</p>
+                    </span>
+                  )}
+                  {openCarts.reduce((sum, cart) => sum + cart?.driver_tip, 0) > 0 &&
+                    configs?.multi_business_checkout_show_combined_driver_tip?.value === '1' &&
+                  (
+                    <span>
+                      <p>{t('DRIVER_TIP', 'Driver tip')}</p>
+                      <p>{parsePrice(openCarts.reduce((sum, cart) => sum + cart?.driver_tip, 0))}</p>
+                    </span>
+                  )}
                   <div>
                     <h4>{t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')}</h4>
                     <h4>{parsePrice(totalCartsPrice)}</h4>
@@ -274,11 +293,6 @@ const MultiCheckoutUI = (props) => {
                 {placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
               </Button>
             </WrapperPlaceOrderButton>
-            {openCarts.length > maximumCarts && (
-              <WarningText>
-                {t('WARNING_MAXIMUM_CARTS', 'You can only pay for a maximum of 5 carts, please discard one or more to continue.')}
-              </WarningText>
-            )}
           </WrapperRightContainer>
 
           <Alert

@@ -180,5 +180,12 @@
     "keywords": "test, dummy, data",
     "robots": "index, follow",
     "canonicalUrl": ""
+  },
+  "multi_cart": {
+    "title": "Multi Cart",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
   }
 }

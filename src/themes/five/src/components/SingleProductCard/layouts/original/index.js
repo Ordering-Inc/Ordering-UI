@@ -15,6 +15,7 @@ import {
   CardContainer,
   CardInfo,
   WrapLogo,
+  WrapTags,
   CardLogo,
   SoldOut,
   PriceWrapper,
@@ -173,10 +174,19 @@ const SingleProductCardUI = (props) => {
                     )}
                   </TitleWrapper>
                   {!isSkeleton ? (
-                    <PriceWrapper>
-                      <span>{product?.price ? parsePrice(product?.price) : ''}</span>
+                    <PriceWrapper isOffPrice={product?.offer_price && product?.in_offer}>
+                      <span className='current-price'>{product?.price ? parsePrice(product?.price) : ''}</span>
                       {!(isSoldOut || maxProductQuantity <= 0) && (
                         <span className='off-price'>{product?.offer_price && product?.in_offer ? parsePrice(product?.offer_price) : ''}</span>
+                      )}
+                      {product?.tags && product?.tags.length > 0 && (
+                        <WrapTags>
+                          {product?.tags.map((tag, i) => (
+                            <div key={i}>
+                              <img src={tag.image ?? ''}></img>
+                            </div>
+                          ))}
+                        </WrapTags>
                       )}
                     </PriceWrapper>
                   ) : (

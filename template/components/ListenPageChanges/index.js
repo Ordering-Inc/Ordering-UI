@@ -31,8 +31,9 @@ export const ListenPageChanges = ({ children }) => {
     order_detail: '/orders/:orderId',
     checkout: '/checkout/:cartUuid',
     checkout_list: '/checkout',
-    multi_checkout: '/multi-checkout',
-    multi_orders: '/multi-orders',
+    multi_checkout: '/multi-checkout/:cartUuid',
+    multi_orders: '/multi-orders/:orderId',
+    multi_cart: '/multi-cart',
     business: businessUrl,
     business_slug: '/:store',
     product: productUrl,
@@ -112,3 +113,5 @@ export const ListenPageChanges = ({ children }) => {
     </>
   )
 }
+
+export default ListenPageChanges

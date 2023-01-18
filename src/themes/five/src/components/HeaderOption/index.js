@@ -39,6 +39,7 @@ export const HeaderOption = (props) => {
         isChew={isChew}
         onClick={() => props.onClick(variant)}
         isHome={props.isHome}
+        style={props.containerStyle}
       >
         {variant === 'cart' && (
           <span>
@@ -47,10 +48,10 @@ export const HeaderOption = (props) => {
           </span>
         )}
         {variant === 'address' && (
-          <>
+          <span>
             <FaMapMarkerAlt id='icon' />
             {addressState || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
-          </>
+          </span>
         )}
         {variant === 'moment' && (
           <>
