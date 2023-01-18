@@ -44,10 +44,10 @@ var OrderEta = function OrderEta(props) {
         });
       }
       totalEta += nextStatusTimes;
-      var currentStatusUpdated = parseDate(order === null || order === void 0 ? void 0 : (_order$reporting_data = order.reporting_data) === null || _order$reporting_data === void 0 ? void 0 : _order$reporting_data.at["status:".concat(order.status)]);
-      var diffTimeAsMinutes = (0, _moment.default)(currentStatusUpdated).add(order === null || order === void 0 ? void 0 : order.eta_current_status_time, 'minutes').diff((0, _moment.default)().utc(), 'minutes');
-      if (diffTimeAsMinutes < 0) {
-        totalEta += order === null || order === void 0 ? void 0 : order.eta_current_status_penalty_time;
+      var diffTimeAsSeconds = _moment.default.utc(order === null || order === void 0 ? void 0 : (_order$reporting_data = order.reporting_data) === null || _order$reporting_data === void 0 ? void 0 : _order$reporting_data.at["status:".concat(order.status)]).add(order === null || order === void 0 ? void 0 : order.eta_current_status_time, 'minutes').diff((0, _moment.default)().utc(), 'seconds');
+      var diffTimeAsMinutes = Math.ceil(diffTimeAsSeconds / 60);
+      if (diffTimeAsMinutes <= 0) {
+        totalEta += Math.floor(Math.abs(diffTimeAsMinutes / (order === null || order === void 0 ? void 0 : order.eta_current_status_time)) + 1) * (order === null || order === void 0 ? void 0 : order.eta_current_status_penalty_time);
       }
       _estimatedTime = parseDate((0, _moment.default)(_delivery).add(totalEta, 'minutes'));
     } else {
