@@ -407,7 +407,9 @@ const CartUI = (props) => {
                             )}
                             <IconContainer>
                               <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })} />
-                              <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              {!offer?.type && (
+                                <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              )}
                             </IconContainer>
                           </td>
                           <td>
@@ -419,7 +421,7 @@ const CartUI = (props) => {
                     {orderState?.options?.type === 1 && cart?.delivery_price > 0 && !hideDeliveryFee && (
                       <tr>
                         <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                        <td>{parsePrice(cart?.delivery_price_with_discount ?? cart?.delivery_price)}</td>
+                        <td>{parsePrice(cart?.delivery_price)}</td>
                       </tr>
                     )}
                     {
@@ -432,7 +434,9 @@ const CartUI = (props) => {
                             )}
                             <IconContainer>
                               <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })} />
-                              <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              {!offer?.type && (
+                                <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              )}
                             </IconContainer>
                           </td>
                           <td>
@@ -441,6 +445,12 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
+                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && cart?.delivery_price_with_discount >= 0 && !hideDeliveryFee && (
+                      <tr>
+                        <td>{t('DELIVERY_FEE_AFTER_DISCOUNT', 'Delivery Fee After Discount')}</td>
+                        <td>{parsePrice(cart?.delivery_price_with_discount)}</td>
+                      </tr>
+                    )}
                     {cart?.driver_tip > 0 && !hideDriverTip && (
                       <tr>
                         <td>
