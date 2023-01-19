@@ -134,6 +134,7 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orders.map(function (order) {
     return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, {
       key: order.id,
+      isMultiOrders: true,
       getOrderStatus: _utils.getOrderStatus,
       order: order,
       showProgressBar: showBarInIndividual.includes(progressBarStyle)

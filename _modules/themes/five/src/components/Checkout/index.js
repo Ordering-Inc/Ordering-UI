@@ -728,6 +728,10 @@ var Checkout = function Checkout(props) {
   (0, _react.useEffect)(function () {
     if (token && cartUuid) {
       getOrder(cartUuid);
+    } else {
+      setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
+        loading: false
+      }));
     }
   }, [token, cartUuid]);
   var checkoutProps = _objectSpread(_objectSpread({}, props), {}, {

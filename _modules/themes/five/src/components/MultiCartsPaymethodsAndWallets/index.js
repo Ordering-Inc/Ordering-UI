@@ -41,7 +41,7 @@ var getPayIcon = function getPayIcon(method) {
     case 1:
       return /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cash, null);
     case 22:
-      return /*#__PURE__*/_react.default.createElement(_BilStripe.default, null);
+      return /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CreditCard, null);
     case 28:
       return /*#__PURE__*/_react.default.createElement(_FaCcStripe.default, null);
     case 31:

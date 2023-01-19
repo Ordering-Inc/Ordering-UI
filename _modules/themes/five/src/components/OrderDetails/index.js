@@ -559,8 +559,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleOpenReview
   }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.REVIEW_ORDER) || 'Review your Order'))))))), !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessExternalWrapper, null, !hideOrderActions && /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
-    w: "calc(100% - 20px)"
-    // borderBottom={!hideOrderActions}
+    w: "calc(100% - 20px)",
+    borderTop: !hideDeliveryType && placeSpotTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type)
   }, /*#__PURE__*/_react.default.createElement(_styles.BtsOrderStatus, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     style: {
       fontSize: 14
