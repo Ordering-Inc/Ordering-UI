@@ -168,6 +168,7 @@ const MultiOrdersDetailsUI = (props) => {
           {orders.map(order => (
             <SingleOrderCard
               key={order.id}
+              isMultiOrders
               getOrderStatus={getOrderStatus}
               order={order}
             />
