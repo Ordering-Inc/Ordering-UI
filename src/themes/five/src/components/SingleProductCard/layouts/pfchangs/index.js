@@ -122,6 +122,7 @@ const SingleProductCardUI = (props) => {
                     bgColor={product?.ribbon?.color}
                     isRoundRect={product?.ribbon?.shape === shape?.rectangleRound}
                     isCapsule={product?.ribbon?.shape === shape?.capsuleShape}
+                    hasProductCount={!useCustomFunctionality && productAddedToCartLength > 0}
                   >
                     {product?.ribbon?.text}
                   </RibbonBox>
