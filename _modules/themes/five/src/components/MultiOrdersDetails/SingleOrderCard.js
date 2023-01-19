@@ -196,7 +196,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
       params: {
         orderId: uuid
       },
-      replace: true
+      replace: !props.isMultiOrders
     });
   };
   var handleOpenMessages = function handleOpenMessages(data) {
