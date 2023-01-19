@@ -415,6 +415,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categorySelected: categorySelected,
     openCategories: openCategories,
     openBusinessInformation: openBusinessInformation,
+    forceShowNearBusiness: props.forceShowNearBusiness,
     isCartOnProductsList: isCartOnProductsList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.length) > 0,
     handleChangeSortBy: handleChangeSortBy,
     errorQuantityProducts: errorQuantityProducts,

@@ -149,7 +149,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   }, [categoryClicked]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isLoading && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_styles.WrappLayout, {
     isCartOnProductsList: isCartOnProductsList
-  }, !hideBusinessNearCity && !useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.NearBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessesListing.BusinessesListing, {
+  }, (!hideBusinessNearCity && !useKioskApp || props.forceShowNearBusiness) && /*#__PURE__*/_react.default.createElement(_styles.NearBusiness, null, /*#__PURE__*/_react.default.createElement(_BusinessesListing.BusinessesListing, {
     logosLayout: true,
     propsToFetch: ['id', 'logo', 'location', 'timezone', 'schedule', 'open', 'slug'],
     cityId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.city_id,
