@@ -38,7 +38,7 @@ export const MyOrders = (props) => {
   const hideBusinessTab = theme?.orders?.components?.business_tab?.hidden
 
   const MyOrdersMenu = [
-    { key: 'orders', value: t('ORDERS', 'Orders'), disabled: false},
+    { key: 'orders', value: t('ORDERS', 'Orders'), disabled: false },
     { key: 'business', value: t('BUSINESS', 'Business'), disabled: hideBusinessTab },
     { key: 'products', value: t('PRODUCTS', 'Products'), disabled: hideProductsTab }
   ]

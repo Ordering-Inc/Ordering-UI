@@ -553,6 +553,7 @@ const CheckoutUI = (props) => {
               isCheckout
               isProducts={cart?.products?.length || 0}
               viewString='checkout'
+              businessConfigs={businessConfigs}
             />
           </CartContainer>
         )}
@@ -606,6 +607,12 @@ const CheckoutUI = (props) => {
               {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
             </WarningText>
           )}
+
+        {!cart?.valid_preorder && (
+          <WarningText>
+            {t('INVALID_CART_MOMENT', 'Selected schedule time is invalid, please select a schedule into the business schedule interval.')}
+          </WarningText>
+        )}
       </WrapperRightContainer>
       {windowSize.width < 576 && !cartState.loading && cart && cart?.status !== 2 && (
         <MobileWrapperPlaceOrderButton>
@@ -811,6 +818,8 @@ export const Checkout = (props) => {
   useEffect(() => {
     if (token && cartUuid) {
       getOrder(cartUuid)
+    } else {
+      setCartState({ ...cartState, loading: false })
     }
   }, [token, cartUuid])
 

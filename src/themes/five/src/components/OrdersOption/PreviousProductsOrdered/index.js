@@ -35,7 +35,7 @@ export const PreviousProductsOrdered = (props) => {
     <ProductsListContainer isLoading={products?.length < 1}>
       <ProductsList>
         <AutoScroll>
-          {products?.map(product => (
+          {products?.filter(product => product?.business?.available)?.map(product => (
             <SingleProductCard
               key={product?.id}
               isSoldOut={(product.inventoried && !product.quantity)}

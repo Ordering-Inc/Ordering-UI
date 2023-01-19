@@ -11,7 +11,8 @@ import {
   PaymentOptions as PaymentOptionsController,
   useLanguage,
   useOrder,
-  useSession
+  useSession,
+  useValidationFields
 } from 'ordering-components'
 
 import { Modal } from '../Modal'
@@ -30,7 +31,8 @@ import {
   PaymentMethodsList,
   PayCard,
   PayCardSelected,
-  CardItemContent
+  CardItemContent,
+  Container
 } from './styles'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
@@ -100,8 +102,9 @@ const PaymentOptionsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
+  const [{ options }] = useOrder()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-
+  const [validationFields] = useValidationFields()
   const paymethodSelected = props.paySelected || props.paymethodSelected
 
   const methodsPay = ['google_pay', 'apple_pay']
@@ -116,11 +119,25 @@ const PaymentOptionsUI = (props) => {
   const supportedMethods = list?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
 
   const handlePaymentMethodClick = (paymethod) => {
+    if (paymethod?.gateway === 'paypal' &&
+      options.type === 1 &&
+      validationFields?.fields?.checkout?.driver_tip?.enabled &&
+      validationFields?.fields?.checkout?.driver_tip?.required &&
+      (Number(cart?.driver_tip) <= 0)
+    ) {
+      setAlertState({
+        open: true,
+        content: [t('DRIVER_TIPS_REQUIRED', 'Driver tips is required, please select a driver tip before select this paymethod')]
+      })
+      return
+    }
+
     if (cart?.balance > 0) {
       const isPopupMethod = popupMethods.includes(paymethod?.gateway)
       handlePaymethodClick(paymethod, isPopupMethod)
       return
     }
+
     setAlertState({
       open: true,
       content: [t('CART_BALANCE_ZERO', 'Sorry, the amount to pay is equal to zero and it is not necessary to select a payment method')]
@@ -227,7 +244,6 @@ const PaymentOptionsUI = (props) => {
             setErrorCash={props.setErrorCash}
           />
         )}
-
         {isOpenMethod?.paymethod?.gateway === 'stripe' && isOpenMethod.paymethod?.gateway === 'stripe' && (
           <PaymentOptionStripe
             paymethod={isOpenMethod?.paymethod}
@@ -310,7 +326,12 @@ const PaymentOptionsUI = (props) => {
           className='modal-info'
           onClose={() => handlePaymethodClick(null)}
         >
-          {stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && (
+          {!isOpenMethod?.paymethod?.credentials?.publishable &&
+            <Container>
+              <p>{t('ADD_PUBLISHABLE_KEY', 'Please add a stripe key')}</p>
+            </Container>
+          }
+          {isOpenMethod?.paymethod?.credentials?.publishable && stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && (
             <StripeElementsForm
               methodsPay={methodsPay}
               paymethod={isOpenMethod?.paymethod?.gateway}
