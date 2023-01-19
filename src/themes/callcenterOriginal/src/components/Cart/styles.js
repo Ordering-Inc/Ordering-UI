@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { lighten } from 'polished'
 
 export const CartContainer = styled.div`
-  border-bottom: 1px solid #F0F0F0;
+  /* border-bottom: 1px solid #F0F0F0; */
 `
 
 export const CartSticky = styled.div`
