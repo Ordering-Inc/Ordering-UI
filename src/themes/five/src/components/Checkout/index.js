@@ -818,6 +818,8 @@ export const Checkout = (props) => {
   useEffect(() => {
     if (token && cartUuid) {
       getOrder(cartUuid)
+    } else {
+      setCartState({ ...cartState, loading: false })
     }
   }, [token, cartUuid])
 

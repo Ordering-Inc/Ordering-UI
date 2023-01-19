@@ -48,7 +48,7 @@ const SingleOrderCardUI = (props) => {
   const hideIndividualButton = configs.multi_business_checkout_remove_individual_buttons?.value === '1'
 
   const handleGoToOrderDetails = (uuid) => {
-    events.emit('go_to_page', { page: 'order_detail', params: { orderId: uuid }, replace: true })
+    events.emit('go_to_page', { page: 'order_detail', params: { orderId: uuid }, replace: !props.isMultiOrders })
   }
 
   const handleOpenMessages = (data) => {

@@ -86,6 +86,9 @@ export const MultiCheckout = (props) => {
     cartUuid,
     errors,
     clearErrors: () => setErrors([]),
+    handleSearchRedirect: () => {
+      events.emit('go_to_page', { page: 'search' })
+    },
     onRedirectPage: (data) => events.emit('go_to_page', data),
     onPlaceOrderClick: (order) => {
       events.emit('go_to_page', { page: 'multi_orders', params: { orderId: order?.id } })

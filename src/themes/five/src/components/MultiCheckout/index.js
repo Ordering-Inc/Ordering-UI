@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useTheme } from 'styled-components'
 import {
   useLanguage,
   useUtils,
@@ -8,7 +9,6 @@ import {
   useSession,
   useValidationFields,
   useOrder,
-  useOrderingTheme,
   MultiCheckout as MultiCheckoutController
 } from 'ordering-components'
 
@@ -62,14 +62,15 @@ const MultiCheckoutUI = (props) => {
     onRedirectPage,
     cartGroup,
     cartUuid,
-    totalCartsFee
+    totalCartsFee,
+    handleSearchRedirect
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
   const [customerState] = useCustomer()
-  const [orderingTheme] = useOrderingTheme()
   const [validationFields] = useValidationFields()
   const [{ user }] = useSession()
   const [orderState] = useOrder()
@@ -80,8 +81,10 @@ const MultiCheckoutUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data)
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
-  const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isMultiDriverTips = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
+    ? JSON.parse(configs?.driver_tip_options?.value) || []
+    : configs?.driver_tip_options?.value || []
   const totalFeeEnabled = configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
@@ -159,9 +162,11 @@ const MultiCheckoutUI = (props) => {
 
   return (
     <>
-      {!cartGroup?.loading && openCarts.length === 0 ? (
+      {((!cartGroup?.loading && openCarts.length === 0) || !cartUuid) ? (
         <NotFoundSource
-          content={t('CARTS_NOT_FOUND', 'You don’t have carts available')}
+          content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
+          btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
+          onClickButton={handleSearchRedirect}
         />
       ) : (
         <Container>
