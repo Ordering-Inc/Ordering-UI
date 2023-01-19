@@ -476,7 +476,8 @@ const CartUI = (props) => {
                   </CouponContainer>
                 )}
                 {
-                  isMultiCheckout &&
+                  !isStore &&
+                  !isMultiCheckout &&
                   cart &&
                   cart?.business_id &&
                   orderState?.options?.type === 1 &&
