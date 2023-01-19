@@ -489,7 +489,7 @@ const OrderDetailsUI = (props) => {
                   {!hideOrderActions && (
                     <BusinessWrapper
                       w='calc(100% - 20px)'
-                    // borderBottom={!hideOrderActions}
+                      borderTop={!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type)}
                     >
                       <BtsOrderStatus>
                         <div>
