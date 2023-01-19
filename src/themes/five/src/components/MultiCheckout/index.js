@@ -201,6 +201,7 @@ const MultiCheckoutUI = (props) => {
               <PaymentMethodContainer>
                 <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
                 <MultiCartsPaymethodsAndWallets
+                  userId={props.userId}
                   openCarts={openCarts}
                   paymethodSelected={paymethodSelected}
                   handleSelectPaymethod={handleSelectPaymethod}
@@ -262,7 +263,7 @@ const MultiCheckoutUI = (props) => {
               )}
               {openCarts.length > 0 && (
                 <MultiCartPriceContainer totalFeeEnabled={totalFeeEnabled}>
-                  {totalCartsFee &&
+                  {!!totalCartsFee &&
                     configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1' &&
                   (
                     <span>

@@ -35,7 +35,6 @@ import { SearchBar } from '../../../SearchBar'
 
 import { BusinessTypeFilter } from '../../../BusinessTypeFilter'
 import { BusinessController } from '../../../BusinessController'
-import { OrdersOption } from '../../../OrdersOption'
 import { BusinessesMap } from '../../../../../../../components/BusinessesMap'
 
 import { HighestRated } from '../../../HighestRated'
@@ -327,6 +326,11 @@ const BusinessesListingUI = (props) => {
             )}
             {isCustomLayout && (
               <FiMap onClick={toggleMap} />
+            )}
+            {!hideCities && citiesState?.cities?.length > 0 && (
+              <Button color='primary' onClick={handleOpenCities}>
+                {citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)?.name || t('SELECT_A_CITY', 'Select a city')}
+              </Button>
             )}
           </WrapperSearch>
         </SearchContainer>

@@ -246,6 +246,7 @@ export const CustomerInfo = styled.div`
         text-overflow: ellipsis;
         white-space: nowrap;
         color: #909BA9;
+        margin: 0;
       }
       svg {       
         color: #748194; 
@@ -272,7 +273,18 @@ export const AddressMenu = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  flex: 0.8;
+  width: 50%;
+
+  span {
+    width: 85%;
+    p {
+      margin: 0;
+      padding: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
 
   svg {
     color: ${props => props.theme.colors?.lightGray};
@@ -282,6 +294,12 @@ export const AddressMenu = styled.div`
       margin-left: 10px;
       margin-right: 0;
     `}
+  }
+  @media (min-width: 765px) {
+    width: 80%;
+  }
+  @media (min-width: 820px) {
+    width: 50%;
   }
 `
 
