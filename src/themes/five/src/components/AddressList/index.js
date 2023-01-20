@@ -118,6 +118,9 @@ const AddressListUI = (props) => {
     })
     if (!found) {
       addresses.push(address)
+      events.emit('address_event', {page: 'new_address', params: { ...address } })
+    } else {
+      events.emit('address_event', {page: 'edit_address', params: { ...address } })
     }
     setAddressList({
       ...addressList,

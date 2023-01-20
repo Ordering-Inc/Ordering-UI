@@ -126,6 +126,8 @@ const CartUI = (props) => {
     } else {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart.uuid } })
     }
+
+    events.emit('go_to_checkout', { page: 'checkout', params: { cart: cart } })
     events.emit('cart_popover_closed')
     onClickCheckout && onClickCheckout()
   }
