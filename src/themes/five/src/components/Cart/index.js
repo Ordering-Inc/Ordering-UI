@@ -220,7 +220,6 @@ const CartUI = (props) => {
   }
 
   const checkOutBtnClick = (uuid) => {
-    console.log(uuid)
     handleClickCheckout(uuid)
   }
 
