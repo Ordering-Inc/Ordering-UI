@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { nanoid } from 'nanoid'
 import FiMinusCircle from '@meronex/icons/fi/FiMinusCircle'
 import FiPlusCircle from '@meronex/icons/fi/FiPlusCircle'
 import MdcPlayCircleOutline from '@meronex/icons/mdc/MdcPlayCircleOutline'
@@ -62,7 +63,8 @@ import {
   ProductTagsListContainer,
   ProductTagWrapper,
   VideoGalleryWrapper,
-  TitleWrapper
+  TitleWrapper,
+  GuestUserLink
 } from './styles'
 import { useTheme } from 'styled-components'
 import { Input, TextArea } from '../../styles/Inputs'
@@ -95,7 +97,9 @@ const ProductOptionsUI = (props) => {
     handleChangeSuboptionState,
     handleChangeCommentState,
     productAddedToCartLength,
-    handleFavoriteProduct
+    handleFavoriteProduct,
+    handleCreateGuestUser,
+    actionStatus
   } = props
 
   const { product, loading, error } = productObject
@@ -127,8 +131,12 @@ const ProductOptionsUI = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const galleryLength = gallery?.length + videoGallery?.length
 
+  const orderTypeList = ['delivery', 'pickup', 'eatin', 'curbside', 'drivethru', 'seatdelivery']
+
   const [{ configs }] = useConfig()
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const guestCheckoutEnabled = configs?.guest_checkout_enabled?.value === '1'
+  const orderTypeEnabled = configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderState?.options?.type - 1])
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -244,6 +252,11 @@ const ProductOptionsUI = (props) => {
         behavior: 'smooth'
       })
     }
+  }
+
+  const handleUpdateGuest = () => {
+    const guestToken = nanoid()
+    if (guestToken) handleCreateGuestUser({ guest_token: guestToken })
   }
 
   const handleSlideChange = () => {
@@ -662,7 +675,7 @@ const ProductOptionsUI = (props) => {
                   <MidComponent key={i} {...props} />))
               }
             </ProductEdition>
-            <ProductActions>
+            <ProductActions isColumn={(auth && !(orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)))}>
               <div className='price-amount-block'>
                 <div className='price'>
                   <h4>{productCart.total && parsePrice(productCart.total)}</h4>
@@ -754,6 +767,11 @@ const ProductOptionsUI = (props) => {
                 >
                   {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
                 </Button>
+              )}
+              {!auth && guestCheckoutEnabled && orderTypeEnabled && (
+                <GuestUserLink onClick={handleUpdateGuest}>
+                  {actionStatus?.loading ? <Skeleton height={25} width={70} /> : t('WITH_GUEST_USER', 'With Guest user')}
+                </GuestUserLink>
               )}
             </ProductActions>
           </ProductInfo>
