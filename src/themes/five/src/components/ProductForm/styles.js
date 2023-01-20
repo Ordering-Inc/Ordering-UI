@@ -627,4 +627,8 @@ export const GuestUserLink = styled.div`
     text-decoration: underline;
   }
   margin-left: 10px;
+  ${props => props.theme.rtl && css`
+    margin-left: 0;
+    margin-right: 10px;
+  `}
 `

@@ -18,7 +18,7 @@ import {
   useConfig
 } from 'ordering-components'
 
-import { scrollTo } from '../../../../../utils'
+import { scrollTo, orderTypeList } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import { ProductIngredient } from '../ProductIngredient'
@@ -131,12 +131,10 @@ const ProductOptionsUI = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const galleryLength = gallery?.length + videoGallery?.length
 
-  const orderTypeList = ['delivery', 'pickup', 'eatin', 'curbside', 'drivethru', 'seatdelivery']
-
   const [{ configs }] = useConfig()
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const guestCheckoutEnabled = configs?.guest_checkout_enabled?.value === '1'
-  const orderTypeEnabled = configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderState?.options?.type - 1])
+  const orderTypeEnabled = !orderTypeList[orderState?.options?.type - 1] || configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderState?.options?.type - 1])
 
   const closeModal = () => {
     setModalIsOpen(false)
