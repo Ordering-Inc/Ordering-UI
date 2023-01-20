@@ -119,6 +119,15 @@ var AddressListUI = function AddressListUI(props) {
     });
     if (!found) {
       addresses.push(address);
+      events.emit('address_event', {
+        page: 'new_address',
+        params: _objectSpread({}, address)
+      });
+    } else {
+      events.emit('address_event', {
+        page: 'edit_address',
+        params: _objectSpread({}, address)
+      });
     }
     setAddressList(_objectSpread(_objectSpread({}, addressList), {}, {
       addresses: addresses

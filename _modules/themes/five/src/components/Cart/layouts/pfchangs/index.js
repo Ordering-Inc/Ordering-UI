@@ -186,6 +186,12 @@ var CartUI = function CartUI(props) {
         }
       });
     }
+    events.emit('go_to_checkout', {
+      page: 'checkout',
+      params: {
+        cart: cart
+      }
+    });
     events.emit('cart_popover_closed');
     onClickCheckout && onClickCheckout();
   };
