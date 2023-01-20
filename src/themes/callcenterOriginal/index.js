@@ -1,5 +1,6 @@
 import { AccordionDropdown } from './src/components/AccordionDropdown'
 import { AddressDetails } from './src/components/AddressDetails'
+import { AdminAreaPopover } from './src/components/AdminAreaPopover'
 import { AddressForm } from './src/components/AddressForm'
 import { AddressList } from './src/components/AddressList'
 import { AppleLogin } from './src/components/AppleLogin'
@@ -81,6 +82,7 @@ import { Select } from './src/styles/Select'
 export {
   AccordionDropdown,
   AddressDetails,
+  AdminAreaPopover,
   AddressForm,
   AddressList,
   AppleLogin,

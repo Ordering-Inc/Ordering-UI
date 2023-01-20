@@ -8,7 +8,6 @@ import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
 import { LanguageSelector } from '../LanguageSelector'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
-import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 
 import {
   Header as HeaderContainer,
@@ -24,8 +23,7 @@ import {
   AddressMenu,
   MomentMenu,
   FarAwayMessage,
-  Divider,
-  AdminSection
+  Divider
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -170,319 +168,305 @@ export const Header = (props) => {
   }, [orderState?.options?.address?.location, pathname])
 
   return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <HeaderContainer>
-        <InnerHeader>
-          <LeftHeader>
-            <SidebarMenu
-              auth={auth}
-              isHideSignup={isHideSignup}
-              userCustomer={userCustomer}
-              isCustomerMode={isCustomerMode}
-            />
-            <LogoHeader
-              onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
-            >
-              <img alt='Logotype' width='170px' height='45px' src={theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
-            </LogoHeader>
-          </LeftHeader>
-          {isShowOrderOptions && (
-            <>
-              <Menu className='left-header' id='center-side'>
-                {windowSize.width > 820 && isFarAway && (
-                  <FarAwayMessage>
-                    <TiWarningOutline />
-                    <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
-                  </FarAwayMessage>
-                )}
-                <AddressMenu
-                  onClick={(e) => handleClickUserCustomer(e)}
-                >
-                  <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
-                </AddressMenu>
-                <Divider />
-                {isCustomerMode && windowSize.width > 450 && (
-                  <CustomerInfo
-                    onClick={(e) => handleClickUserCustomer(e)}
-                  >
-                    <span>
-                      <p>{userCustomer?.name} {userCustomer?.lastname}</p>
-                    </span>
-                    <span
-                      ref={clearCustomer}
-                    >
-                      <AiOutlineClose />
-                    </span>
-                  </CustomerInfo>
-                )}
-                <Divider />
-                {onlineStatus && windowSize.width > 820 && (
-                  <>
-                    {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                      <MomentMenu
-                        onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                          ? null
-                          : () => openModal('moment')}
-                      >
-                        <div>
-                          {orderState.options?.moment
-                            ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
-                            : t('ASAP_ABBREVIATION', 'ASAP')}
-                        </div>
-                      </MomentMenu>
-                    )}
-                  </>
-                )}
-                {windowSize.width > 768 ? (
-                  <OrderTypeSelectorHeader
-                    orderTypeList={orderTypeList}
-                    onClick={() => openModal('delivery')}
-                  />
-                ) : (
-                  <HeaderOption
-                    variant='delivery'
-                    onClick={(variant) => openModal(variant)}
-                    orderTypeList={orderTypeList}
-                  />
-                )}
-              </Menu>
-              {user?.level === 0 && (
-                <AdminAreaPopover
-                  withLogout
-                  isCustomerMode={isCustomerMode}
-                  open={openPopover.admin}
-                  onClick={() => handleTogglePopover('admin')}
-                  onClose={() => handleClosePopover('admin')}
-                />
-              )}
-            </>
-          )}
-          {onlineStatus && (
-            <RightHeader>
-              <Menu>
-                {
-                  !auth && windowSize.width > 920 && (
-                    <>
-                      <MenuLink onClick={() => handleOpenLoginSignUp('login')} style={{ whiteSpace: 'nowrap' }} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
-                      {!isHideSignup && (
-                        <MenuLink
-                          onClick={() => handleOpenLoginSignUp('signup')}
-                          highlight={1}
-                          style={{ whiteSpace: 'nowrap' }}
-                          name='signup'
-                        >
-                          {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
-                        </MenuLink>
-                      )}
-                    </>
-                  )
-                }
-                {
-                  auth && (
-                    <>
-                      {isShowOrderOptions && (
-                        windowSize.width > 768 ? (
-                          <CartPopover
-                            open={openPopover.cart}
-                            carts={cartsWithProducts}
-                            onClick={() => handleTogglePopover('cart')}
-                            onClose={() => handleClosePopover('cart')}
-                            auth={auth}
-                            location={location}
-                            isCustomerMode={isCustomerMode}
-                            setPreorderBusiness={setPreorderBusiness}
-                          />
-                        ) : (
-                          <HeaderOption
-                            variant='cart'
-                            totalCarts={cartsWithProducts?.length}
-                            onClick={(variant) => openModal(variant)}
-                          />
-                        )
-                      )}
-                      <LanguageSelector />
-                      {windowSize.width > 768 && (
-                        <UserPopover
-                          withLogout
-                          isCustomerMode={isCustomerMode}
-                          open={openPopover.user}
-                          onClick={() => handleTogglePopover('user')}
-                          onClose={() => handleClosePopover('user')}
-                        />
-                      )}
-                    </>
-                  )
-                }
-              </Menu>
-            </RightHeader>
-          )}
-        </InnerHeader>
-        {onlineStatus && isShowOrderOptions && (
-          windowSize.width > 768 && windowSize.width <= 820 ? (
-            <SubMenu>
-              {isFarAway && (
+    <HeaderContainer>
+      <InnerHeader>
+        <LeftHeader>
+          <SidebarMenu
+            auth={auth}
+            isHideSignup={isHideSignup}
+            userCustomer={userCustomer}
+            isCustomerMode={isCustomerMode}
+          />
+          <LogoHeader
+            onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
+          >
+            <img alt='Logotype' width='170px' height='45px' src={theme?.images?.logos?.logotype} loading='lazy' />
+            <img alt='Isotype' width='35px' height='45px' src={isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
+          </LogoHeader>
+        </LeftHeader>
+        {isShowOrderOptions && (
+          <>
+            <Menu className='left-header' id='center-side'>
+              {windowSize.width > 820 && isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />
                   <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
                 </FarAwayMessage>
               )}
               <AddressMenu
-                onClick={() => openModal('address')}
+                onClick={(e) => handleClickUserCustomer(e)}
               >
                 <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               </AddressMenu>
-              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                <HeaderOption
-                  variant='moment'
-                  momentState={orderState?.options?.moment}
-                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                    ? null
-                    : (variant) => openModal(variant)}
-                />
+              <Divider />
+              {isCustomerMode && windowSize.width > 450 && (
+                <CustomerInfo
+                  onClick={(e) => handleClickUserCustomer(e)}
+                >
+                  <span>
+                    <p>{userCustomer?.name} {userCustomer?.lastname}</p>
+                  </span>
+                  <span
+                    ref={clearCustomer}
+                  >
+                    <AiOutlineClose />
+                  </span>
+                </CustomerInfo>
               )}
-            </SubMenu>
-          ) : (
-            <SubMenu>
-              {isFarAway && (
-                <FarAwayMessage>
-                  <TiWarningOutline />
-                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
-                </FarAwayMessage>
+              <Divider />
+              {onlineStatus && windowSize.width > 820 && (
+                <>
+                  {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+                    <MomentMenu
+                      onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                        ? null
+                        : () => openModal('moment')}
+                    >
+                      <div>
+                        {orderState.options?.moment
+                          ? parseDate(orderState.options?.moment, { outputFormat: configState?.configs?.dates_moment_format?.value })
+                          : t('ASAP_ABBREVIATION', 'ASAP')}
+                      </div>
+                    </MomentMenu>
+                  )}
+                </>
               )}
-              <HeaderOption
-                variant='address'
-                addressState={orderState?.options?.address?.address?.split(',')?.[0]}
-                onClick={(variant) => openModal(variant)}
-              />
-              {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
-                <HeaderOption
-                  variant='moment'
-                  momentState={orderState?.options?.moment}
-                  onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
-                    ? null
-                    : (variant) => openModal(variant)}
-                />
-              )}
-            </SubMenu>
-          )
-        )}
-        {modalIsOpen && (
-          <Modal
-            title={(modalSelected === 'address') ? t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?') : null}
-            open={modalIsOpen}
-            onClose={() => setModalIsOpen(false)}
-            width='700px'
-          >
-            {modalSelected === 'cart' && (
-              <CartContent
-                carts={cartsWithProducts}
-                isOrderStateCarts={!!orderState.carts}
-                onClose={() => setModalIsOpen(false)}
-              />
-            )}
-            {modalSelected === 'address' && (
-              auth ? (
-                <AddressList
-                  isModal
-                  changeOrderAddressWithDefault
-                  userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-                  onCancel={() => setModalIsOpen(false)}
-                  onAccept={() => setModalIsOpen(false)}
+              {windowSize.width > 768 ? (
+                <OrderTypeSelectorHeader
+                  orderTypeList={orderTypeList}
+                  onClick={() => openModal('delivery')}
                 />
               ) : (
-                <AddressForm
-                  useValidationFileds
-                  address={orderState?.options?.address || {}}
-                  onCancel={() => setModalIsOpen(false)}
-                  onSaveAddress={() => setModalIsOpen(false)}
+                <HeaderOption
+                  variant='delivery'
+                  onClick={(variant) => openModal(variant)}
+                  orderTypeList={orderTypeList}
                 />
-              )
-            )}
-            {modalSelected === 'moment' && (
-              <MomentContent
-                onClose={() => setModalIsOpen(false)}
+              )}
+            </Menu>
+            {user?.level === 0 && (
+              <AdminAreaPopover
+                withLogout
+                isCustomerMode={isCustomerMode}
+                open={openPopover.admin}
+                onClick={() => handleTogglePopover('admin')}
+                onClose={() => handleClosePopover('admin')}
               />
             )}
-            {modalSelected === 'delivery' && (
-              <OrderTypeSelectorContent
-                onClose={() => setModalIsOpen(false)}
-                configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
-                defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
+          </>
+        )}
+        {onlineStatus && (
+          <RightHeader>
+            <Menu>
+              {
+                !auth && windowSize.width > 920 && (
+                  <>
+                    <MenuLink onClick={() => handleOpenLoginSignUp('login')} style={{ whiteSpace: 'nowrap' }} name='signin'>{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}</MenuLink>
+                    {!isHideSignup && (
+                      <MenuLink
+                        onClick={() => handleOpenLoginSignUp('signup')}
+                        highlight={1}
+                        style={{ whiteSpace: 'nowrap' }}
+                        name='signup'
+                      >
+                        {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
+                      </MenuLink>
+                    )}
+                  </>
+                )
+              }
+              {
+                auth && (
+                  <>
+                    {isShowOrderOptions && (
+                      windowSize.width > 768 ? (
+                        <CartPopover
+                          open={openPopover.cart}
+                          carts={cartsWithProducts}
+                          onClick={() => handleTogglePopover('cart')}
+                          onClose={() => handleClosePopover('cart')}
+                          auth={auth}
+                          location={location}
+                          isCustomerMode={isCustomerMode}
+                          setPreorderBusiness={setPreorderBusiness}
+                        />
+                      ) : (
+                        <HeaderOption
+                          variant='cart'
+                          totalCarts={cartsWithProducts?.length}
+                          onClick={(variant) => openModal(variant)}
+                        />
+                      )
+                    )}
+                    <LanguageSelector />
+                    {windowSize.width > 768 && (
+                      <UserPopover
+                        withLogout
+                        isCustomerMode={isCustomerMode}
+                        open={openPopover.user}
+                        onClick={() => handleTogglePopover('user')}
+                        onClose={() => handleClosePopover('user')}
+                      />
+                    )}
+                  </>
+                )
+              }
+            </Menu>
+          </RightHeader>
+        )}
+      </InnerHeader>
+      {onlineStatus && isShowOrderOptions && (
+        windowSize.width > 768 && windowSize.width <= 820 ? (
+          <SubMenu>
+            {isFarAway && (
+              <FarAwayMessage>
+                <TiWarningOutline />
+                <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
+              </FarAwayMessage>
+            )}
+            <AddressMenu
+              onClick={() => openModal('address')}
+            >
+              <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+            </AddressMenu>
+            {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+              <HeaderOption
+                variant='moment'
+                momentState={orderState?.options?.moment}
+                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                  ? null
+                  : (variant) => openModal(variant)}
               />
             )}
-          </Modal>
-        )}
-        {isCustomerMode && customerModalOpen && (
-          <Modal
-            open={customerModalOpen}
-            width='80%'
-            onClose={() => setCustomerModalOpen(false)}
-            padding='20px'
-            hideCloseDefault
-          >
-            <UserEdit>
-              <>
-                <UserDetails
-                  isAddressFormOpen={isAddressFormOpen}
-                  userData={customerState?.user}
-                  userId={customerState?.user?.id}
-                  isOpenUserData={isOpenUserData}
-                  isCustomerMode
-                  isModal
-                  setIsOpenUserData={setIsOpenUserData}
-                  onClose={() => setCustomerModalOpen(false)}
-                />
-                <AddressList
-                  isModal
-                  userId={customerState?.user?.id}
-                  changeOrderAddressWithDefault
-                  userCustomerSetup={customerState.user}
-                  isOpenUserData={isOpenUserData}
-                  setCustomerModalOpen={setCustomerModalOpen}
-                  setIsOpenUserData={setIsOpenUserData}
-                  setIsAddressFormOpen={setIsAddressFormOpen}
-                  isHeader
-                />
-              </>
-            </UserEdit>
-          </Modal>
-        )}
-        <Confirm
-          title={t('CUSTOMER', theme?.defaultLanguages?.CUSTOMER || 'Customer')}
-          content={confirm.content}
-          acceptText={t('ACCEPT', theme?.defaultLanguages?.ACCEPT || 'Accept')}
-          open={isCustomerMode && confirm.open}
-          onClose={() => setConfirm({ ...confirm, open: false })}
-          onCancel={() => setConfirm({ ...confirm, open: false })}
-          onAccept={confirm.handleOnAccept}
-          closeOnBackdrop={false}
-        />
+          </SubMenu>
+        ) : (
+          <SubMenu>
+            {isFarAway && (
+              <FarAwayMessage>
+                <TiWarningOutline />
+                <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
+              </FarAwayMessage>
+            )}
+            <HeaderOption
+              variant='address'
+              addressState={orderState?.options?.address?.address?.split(',')?.[0]}
+              onClick={(variant) => openModal(variant)}
+            />
+            {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+              <HeaderOption
+                variant='moment'
+                momentState={orderState?.options?.moment}
+                onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
+                  ? null
+                  : (variant) => openModal(variant)}
+              />
+            )}
+          </SubMenu>
+        )
+      )}
+      {modalIsOpen && (
         <Modal
-          open={!!preorderBusiness}
-          width='760px'
-          onClose={() => handleClosePreorder()}
+          title={(modalSelected === 'address') ? t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?') : null}
+          open={modalIsOpen}
+          onClose={() => setModalIsOpen(false)}
+          width='700px'
         >
-          <BusinessPreorder
-            business={preorderBusiness}
-            handleClick={handleBusinessClick}
-            showButton
-          />
+          {modalSelected === 'cart' && (
+            <CartContent
+              carts={cartsWithProducts}
+              isOrderStateCarts={!!orderState.carts}
+              onClose={() => setModalIsOpen(false)}
+            />
+          )}
+          {modalSelected === 'address' && (
+            auth ? (
+              <AddressList
+                isModal
+                changeOrderAddressWithDefault
+                userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+                onCancel={() => setModalIsOpen(false)}
+                onAccept={() => setModalIsOpen(false)}
+              />
+            ) : (
+              <AddressForm
+                useValidationFileds
+                address={orderState?.options?.address || {}}
+                onCancel={() => setModalIsOpen(false)}
+                onSaveAddress={() => setModalIsOpen(false)}
+              />
+            )
+          )}
+          {modalSelected === 'moment' && (
+            <MomentContent
+              onClose={() => setModalIsOpen(false)}
+            />
+          )}
+          {modalSelected === 'delivery' && (
+            <OrderTypeSelectorContent
+              onClose={() => setModalIsOpen(false)}
+              configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+              defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
+            />
+          )}
         </Modal>
-      </HeaderContainer>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
-    </>
+      )}
+      {isCustomerMode && customerModalOpen && (
+        <Modal
+          open={customerModalOpen}
+          width='80%'
+          onClose={() => setCustomerModalOpen(false)}
+          padding='20px'
+          hideCloseDefault
+        >
+          <UserEdit>
+            <>
+              <UserDetails
+                isAddressFormOpen={isAddressFormOpen}
+                userData={customerState?.user}
+                userId={customerState?.user?.id}
+                isOpenUserData={isOpenUserData}
+                isCustomerMode
+                isModal
+                setIsOpenUserData={setIsOpenUserData}
+                onClose={() => setCustomerModalOpen(false)}
+              />
+              <AddressList
+                isModal
+                userId={customerState?.user?.id}
+                changeOrderAddressWithDefault
+                userCustomerSetup={customerState.user}
+                isOpenUserData={isOpenUserData}
+                setCustomerModalOpen={setCustomerModalOpen}
+                setIsOpenUserData={setIsOpenUserData}
+                setIsAddressFormOpen={setIsAddressFormOpen}
+                isHeader
+              />
+            </>
+          </UserEdit>
+        </Modal>
+      )}
+      <Confirm
+        title={t('CUSTOMER', theme?.defaultLanguages?.CUSTOMER || 'Customer')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', theme?.defaultLanguages?.ACCEPT || 'Accept')}
+        open={isCustomerMode && confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
+      <Modal
+        open={!!preorderBusiness}
+        width='760px'
+        onClose={() => handleClosePreorder()}
+      >
+        <BusinessPreorder
+          business={preorderBusiness}
+          handleClick={handleBusinessClick}
+          showButton
+        />
+      </Modal>
+    </HeaderContainer>
   )
 }
 

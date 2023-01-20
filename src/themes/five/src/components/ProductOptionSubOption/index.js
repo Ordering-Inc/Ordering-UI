@@ -8,7 +8,6 @@ import BsCircleFill from '@meronex/icons/bs/BsCircleFill'
 import BsCircleHalf from '@meronex/icons/bs/BsCircleHalf'
 import BsDashCircle from '@meronex/icons/bs/BsDashCircle'
 import BsPlusCircle from '@meronex/icons/bs/BsPlusCircle'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 import {
   Container,
@@ -44,7 +43,6 @@ const ProductOptionSubOptionUI = (props) => {
   const price = option?.with_half_option && suboption?.half_price && state.position !== 'whole' ? suboption?.half_price : suboption?.price
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const { width } = useWindowSize()
   const [showMessage, setShowMessage] = useState(false)
   const [isDirty, setIsDirty] = useState(false)
 
@@ -114,7 +112,6 @@ const ProductOptionSubOptionUI = (props) => {
           )}
           <Text>
             <div>{suboption?.name}</div>
-            {showMessage && width > 576 && <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option?.max}`}</span>}
           </Text>
         </LeftOptionContainer>
         <RightOptionContainer>
@@ -161,7 +158,7 @@ const ProductOptionSubOptionUI = (props) => {
           )}
         </SuboptionPrice>
       </Container>
-      {showMessage && width < 576 && (
+      {showMessage && (
         <Text noMargin>
           <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option?.max}`}</span>
         </Text>
