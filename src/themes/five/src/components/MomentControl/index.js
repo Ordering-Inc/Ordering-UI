@@ -156,14 +156,6 @@ const MomentControlUI = (props) => {
     })
   }
 
-  const addMinutes = (numOfHours, date = new Date()) => {
-    const dateCopy = new Date(date.getTime())
-
-    dateCopy.setTime(dateCopy.getTime() + numOfHours * 60 * 1000)
-    // return hours and minutes
-    return dateCopy
-  }
-
   useEffect(() => {
     let _timeLists = []
     if (!scheduleList) {
@@ -176,7 +168,7 @@ const MomentControlUI = (props) => {
         .filter(hour => (!business || schedule?.lapses?.some(lapse =>
           moment(dateSelected + ` ${hour.startTime}`) >= moment(dateSelected + ` ${lapse.open.hour}:${lapse.open.minute}`).add(preorderLeadTime, 'minutes') && moment(dateSelected + ` ${hour.endTime}`) <= moment(dateSelected + ` ${lapse.close.hour}:${lapse.close.minute}`))) &&
           moment(dateSelected + ` ${hour.startTime}`) < moment(dateSelected + ` ${hour.endTime}`) &&
-          (moment(addMinutes(preorderLeadTime ?? 0)) < moment(dateSelected + ` ${hour.startTime}`) || !cateringPreorder))
+          (moment().add(preorderLeadTime, 'minutes') < moment(dateSelected + ` ${hour.startTime}`) || !cateringPreorder))
         .map(hour => {
           return {
             value: hour.startTime,
