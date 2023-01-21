@@ -21,7 +21,6 @@ export const CardWrapper = styled.div`
 `
 export const CardsContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   overflow-x: auto;
 `
 
