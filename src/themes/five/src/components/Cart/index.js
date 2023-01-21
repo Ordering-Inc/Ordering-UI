@@ -147,10 +147,10 @@ const CartUI = (props) => {
     setModalIsOpen(true)
   }
 
-  const handleClickCheckout = () => {
+  const handleClickCheckout = (uuid) => {
     const cartsAvailable = Object.values(orderState?.carts)?.filter(cart => cart?.valid && cart?.status !== 2)
-    if (cartsAvailable.length === 1) {
-      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cartsAvailable[0]?.uuid } })
+    if (cartsAvailable.length === 1 || !isMultiCheckout) {
+      events.emit('go_to_page', { page: 'checkout', params: { cartUuid: uuid } })
     } else {
       const groupKeys = {}
       cartsAvailable.forEach(_cart => {
@@ -219,8 +219,8 @@ const CartUI = (props) => {
     handleClickCheckout()
   }
 
-  const checkOutBtnClick = () => {
-    handleClickCheckout()
+  const checkOutBtnClick = (uuid) => {
+    handleClickCheckout(uuid)
   }
 
   const getIncludedTaxes = () => {
@@ -606,7 +606,7 @@ const CartUI = (props) => {
                 <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 <Button
                   color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
-                  onClick={checkOutBtnClick}
+                  onClick={() => checkOutBtnClick(cart?.uuid)}
                   disabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
                 >
                   {!cart?.valid_address ? (

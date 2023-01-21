@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: 30px;
 
   h2 {
     font-size: 24px;
@@ -16,12 +17,12 @@ export const Container = styled.div`
     line-height: 24px;
     margin-top: 0;
   }
-  > button {
-    height: 44px;
-  }
 `
 export const GiftCardsListContainer = styled.div`
-  margin-bottom: 40px;
+  padding: 30px 20px;
+`
+export const GiftCardsWrapper = styled.div`
+  margin-bottom: 10px;
 `
 export const GiftCardItem = styled.div`
   cursor: pointer;
@@ -48,5 +49,15 @@ export const IconControl = styled.div`
 
   svg[disabled] {
     color: ${props => props.theme.colors.lightGray};
+  }
+`
+export const ActionButtonContainer = styled.div`
+  position: sticky;
+  bottom: 0px;
+  background-color: ${props => props.theme.colors.backgroundPage};
+  padding: 15px 20px;
+  > button {
+    height: 44px;
+    width: 100%;
   }
 `

@@ -98,8 +98,8 @@ const RedeemGiftCardUI = (props) => {
             <p>{t('TYPE', 'Type')}: {redeemedGiftCard?.type}</p>
             <p>{t('AMOUNT', 'Amount')}: {parsePrice(redeemedGiftCard?.amount)}</p>
             <p>{t('FROM', 'From')}: {redeemedGiftCard?.receiver?.name} {redeemedGiftCard?.receiver?.lastname}</p>
-            <p>{t('TITLE', 'Title')}: {redeemedGiftCard?.title}</p>
-            <p>{t('MESSAGES', 'Messages')}: {redeemedGiftCard?.message}</p>
+            {redeemedGiftCard?.title && <p>{t('TITLE', 'Title')}: {redeemedGiftCard?.title}</p>}
+            {redeemedGiftCard?.message && <p>{t('MESSAGES', 'Messages')}: {redeemedGiftCard?.message}</p>}
             <Button
               color='primary'
               onClick={() => onClose()}
