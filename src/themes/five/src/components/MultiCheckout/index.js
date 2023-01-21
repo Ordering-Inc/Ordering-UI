@@ -71,6 +71,7 @@ const MultiCheckoutUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
   const [customerState] = useCustomer()
+  const [orderingTheme] = useOrderingTheme()
   const [validationFields] = useValidationFields()
   const [{ user }] = useSession()
   const [orderState] = useOrder()
@@ -81,7 +82,8 @@ const MultiCheckoutUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data)
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
-  const isMultiDriverTips = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew' ||
+    theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
