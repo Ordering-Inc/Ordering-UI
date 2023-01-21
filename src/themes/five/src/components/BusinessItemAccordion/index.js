@@ -246,7 +246,7 @@ export const BusinessItemAccordion = (props) => {
         {!setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && !isMultiCheckout && !checkoutMultiBusinessEnabled && (
           <PriceContainer>
             <h4>{parsePrice(total)}</h4>
-            <Button onClick={handleClickCheckout} color='primary'>{t('CHECKOUT', 'Checkout')}</Button>
+            <Button onClick={() => handleClickCheckout(uuid)} color='primary'>{t('CHECKOUT', 'Checkout')}</Button>
           </PriceContainer>
         )}
       </AccordionSection>
