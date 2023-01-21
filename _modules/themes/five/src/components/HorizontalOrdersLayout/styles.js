@@ -20,7 +20,7 @@ var Content = _styledComponents.default.div(_templateObject || (_templateObject 
 exports.Content = Content;
 var CardWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n"])));
 exports.CardWrapper = CardWrapper;
-var CardsContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  overflow-x: auto;\n"])));
+var CardsContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  overflow-x: auto;\n"])));
 exports.CardsContainer = CardsContainer;
 var Price = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 35%;\n\n  ", "\n\n  h2 {\n    font-size: 16px;\n    margin-block-end: ", ";\n    margin-block-start: 0.1em;\n    font-weight: normal;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: ", ";\n    color: #ff9300;\n    font-size: 0.8em;\n    overflow:hidden;\n    text-overflow: ellipsis;\n    margin-left: 5px;\n  }\n\n  p[name='view-cart']{\n    color: ", ";\n    cursor: pointer;\n  }\n\n  @media (min-width: 480px) {\n    ", "\n  }\n"])), function (_ref2) {
   var isCustomerMode = _ref2.isCustomerMode;

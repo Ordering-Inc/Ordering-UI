@@ -116,13 +116,6 @@ var MomentControlUI = function MomentControlUI(props) {
       }
     });
   };
-  var addMinutes = function addMinutes(numOfHours) {
-    var date = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new Date();
-    var dateCopy = new Date(date.getTime());
-    dateCopy.setTime(dateCopy.getTime() + numOfHours * 60 * 1000);
-    // return hours and minutes
-    return dateCopy;
-  };
   (0, _react.useEffect)(function () {
     var _timeLists = [];
     if (!scheduleList) {
@@ -135,7 +128,7 @@ var MomentControlUI = function MomentControlUI(props) {
         var _schedule$lapses;
         return (!business || (schedule === null || schedule === void 0 ? void 0 : (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.some(function (lapse) {
           return (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) >= (0, _moment.default)(dateSelected + " ".concat(lapse.open.hour, ":").concat(lapse.open.minute)).add(preorderLeadTime, 'minutes') && (0, _moment.default)(dateSelected + " ".concat(hour.endTime)) <= (0, _moment.default)(dateSelected + " ".concat(lapse.close.hour, ":").concat(lapse.close.minute));
-        }))) && (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) < (0, _moment.default)(dateSelected + " ".concat(hour.endTime)) && ((0, _moment.default)(addMinutes(preorderLeadTime !== null && preorderLeadTime !== void 0 ? preorderLeadTime : 0)) < (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) || !cateringPreorder);
+        }))) && (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) < (0, _moment.default)(dateSelected + " ".concat(hour.endTime)) && ((0, _moment.default)().add(preorderLeadTime, 'minutes') < (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) || !cateringPreorder);
       }).map(function (hour) {
         return {
           value: hour.startTime,
