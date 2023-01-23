@@ -201,6 +201,14 @@ var CheckoutUI = function CheckoutUI(props) {
     });
     setIsUserDetailsEdit(true);
   };
+  var handlePlaceOrderAsGuest = function handlePlaceOrderAsGuest() {
+    setIsOpen(false);
+    var body = {};
+    if (behalfName) {
+      body.on_behalf_of = behalfName;
+    }
+    handlerClickPlaceOrder && handlerClickPlaceOrder(null, body);
+  };
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -504,6 +512,7 @@ var CheckoutUI = function CheckoutUI(props) {
     isCheckout: true,
     isEdit: true,
     isModal: true,
+    handlePlaceOrderAsGuest: handlePlaceOrderAsGuest,
     onClose: function onClose() {
       setIsOpen(false);
       handlePlaceOrder();

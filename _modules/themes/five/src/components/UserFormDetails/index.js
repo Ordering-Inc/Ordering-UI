@@ -11,6 +11,7 @@ var _orderingComponents = require("ordering-components");
 var _reactHookForm = require("react-hook-form");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _styledComponents = require("styled-components");
+var _SignUpForm = require("../SignUpForm");
 var _styles = require("./styles");
 var _Switch = require("../../../../../styles/Switch");
 var _Inputs = require("../../styles/Inputs");
@@ -20,6 +21,7 @@ var _LanguageSelector = require("../../../../../components/LanguageSelector");
 var _Confirm = require("../Confirm");
 var _utils = require("../../../../../utils");
 var _Checkbox = require("../../../../../styles/Checkbox");
+var _Modal = _interopRequireDefault(require("../Modal"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -58,7 +60,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     handleChangePromotions = props.handleChangePromotions,
     isOldLayout = props.isOldLayout,
     requiredFields = props.requiredFields,
-    handleChangeNotifications = props.handleChangeNotifications;
+    handleChangeNotifications = props.handleChangeNotifications,
+    handlePlaceOrderAsGuest = props.handlePlaceOrderAsGuest;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -68,8 +71,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     configs = _useConfig2[0].configs;
   var theme = (0, _styledComponents.useTheme)();
   var _useSession = (0, _orderingComponents.useSession)(),
-    _useSession2 = _slicedToArray(_useSession, 1),
-    userSession = _useSession2[0].user;
+    _useSession2 = _slicedToArray(_useSession, 2),
+    userSession = _useSession2[0].user,
+    login = _useSession2[1].login;
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
@@ -95,16 +99,20 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     isChanged = _useState8[0],
     setIsChanged = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    modalIsOpen = _useState10[0],
+    setModalIsOpen = _useState10[1];
   var emailInput = (0, _react.useRef)(null);
   var user = userData || userSession;
-  var _useState9 = (0, _react.useState)({
+  var _useState11 = (0, _react.useState)({
       email: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? !!(formState !== null && formState !== void 0 && (_formState$result2 = formState.result) !== null && _formState$result2 !== void 0 && (_formState$result2$re = _formState$result2.result) !== null && _formState$result2$re !== void 0 && (_formState$result2$re2 = _formState$result2$re.settings) !== null && _formState$result2$re2 !== void 0 && (_formState$result2$re3 = _formState$result2$re2.email) !== null && _formState$result2$re3 !== void 0 && _formState$result2$re3.newsletter) : !!((_formState$changes$se = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$se2 = _formState$changes.settings) === null || _formState$changes$se2 === void 0 ? void 0 : (_formState$changes$se3 = _formState$changes$se2.email) === null || _formState$changes$se3 === void 0 ? void 0 : _formState$changes$se3.newsletter) !== null && _formState$changes$se !== void 0 ? _formState$changes$se : user && (user === null || user === void 0 ? void 0 : (_user$settings = user.settings) === null || _user$settings === void 0 ? void 0 : (_user$settings$email = _user$settings.email) === null || _user$settings$email === void 0 ? void 0 : _user$settings$email.newsletter)),
       sms: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? !!(formState !== null && formState !== void 0 && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && (_formState$result4$re = _formState$result4.result) !== null && _formState$result4$re !== void 0 && (_formState$result4$re2 = _formState$result4$re.settings) !== null && _formState$result4$re2 !== void 0 && (_formState$result4$re3 = _formState$result4$re2.sms) !== null && _formState$result4$re3 !== void 0 && _formState$result4$re3.newsletter) : !!((_formState$changes$se4 = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : (_formState$changes2$s = _formState$changes2.settings) === null || _formState$changes2$s === void 0 ? void 0 : (_formState$changes2$s2 = _formState$changes2$s.sms) === null || _formState$changes2$s2 === void 0 ? void 0 : _formState$changes2$s2.newsletter) !== null && _formState$changes$se4 !== void 0 ? _formState$changes$se4 : user && (user === null || user === void 0 ? void 0 : (_user$settings2 = user.settings) === null || _user$settings2 === void 0 ? void 0 : (_user$settings2$sms = _user$settings2.sms) === null || _user$settings2$sms === void 0 ? void 0 : _user$settings2$sms.newsletter)),
       notification: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? !!(formState !== null && formState !== void 0 && (_formState$result6 = formState.result) !== null && _formState$result6 !== void 0 && (_formState$result6$re = _formState$result6.result) !== null && _formState$result6$re !== void 0 && (_formState$result6$re2 = _formState$result6$re.settings) !== null && _formState$result6$re2 !== void 0 && (_formState$result6$re3 = _formState$result6$re2.notification) !== null && _formState$result6$re3 !== void 0 && _formState$result6$re3.newsletter) : !!((_formState$changes$se5 = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : (_formState$changes3$s = _formState$changes3.settings) === null || _formState$changes3$s === void 0 ? void 0 : (_formState$changes3$s2 = _formState$changes3$s.notification) === null || _formState$changes3$s2 === void 0 ? void 0 : _formState$changes3$s2.newsletter) !== null && _formState$changes$se5 !== void 0 ? _formState$changes$se5 : user && (user === null || user === void 0 ? void 0 : (_user$settings3 = user.settings) === null || _user$settings3 === void 0 ? void 0 : (_user$settings3$notif = _user$settings3.notification) === null || _user$settings3$notif === void 0 ? void 0 : _user$settings3$notif.newsletter))
     }),
-    _useState10 = _slicedToArray(_useState9, 2),
-    notificationList = _useState10[0],
-    setNotificationList = _useState10[1];
+    _useState12 = _slicedToArray(_useState11, 2),
+    notificationList = _useState12[0],
+    setNotificationList = _useState12[1];
   var showCustomerCellphone = !(theme !== null && theme !== void 0 && (_theme$profile = theme.profile) !== null && _theme$profile !== void 0 && (_theme$profile$compon = _theme$profile.components) !== null && _theme$profile$compon !== void 0 && (_theme$profile$compon2 = _theme$profile$compon.cellphone) !== null && _theme$profile$compon2 !== void 0 && _theme$profile$compon2.hidden);
   var showCustomerPassword = !(theme !== null && theme !== void 0 && (_theme$profile2 = theme.profile) !== null && _theme$profile2 !== void 0 && (_theme$profile2$compo = _theme$profile2.components) !== null && _theme$profile2$compo !== void 0 && (_theme$profile2$compo2 = _theme$profile2$compo.password) !== null && _theme$profile2$compo2 !== void 0 && _theme$profile2$compo2.hidden);
   var showCustomerPromotions = !(theme !== null && theme !== void 0 && (_theme$profile3 = theme.profile) !== null && _theme$profile3 !== void 0 && (_theme$profile3$compo = _theme$profile3.components) !== null && _theme$profile3$compo !== void 0 && (_theme$profile3$compo2 = _theme$profile3$compo.promotions) !== null && _theme$profile3$compo2 !== void 0 && _theme$profile3$compo2.hidden);
@@ -120,6 +128,14 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         error: false
       }
     });
+  };
+  var handleSuccessSignup = function handleSuccessSignup(user) {
+    var _user$session;
+    login({
+      user: user,
+      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+    });
+    handlePlaceOrderAsGuest && handlePlaceOrderAsGuest();
   };
   var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
   var setUserCellPhone = function setUserCellPhone() {
@@ -411,12 +427,24 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     color: "primary",
     type: "submit",
     disabled: formState.loading
-  }, formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')), requiredFields && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')), requiredFields && !(userSession !== null && userSession !== void 0 && userSession.guest_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "form-btn",
     color: "primary",
     type: "submit",
     disabled: formState.loading
-  }, formState.loading ? t('UPDATING', 'Updating...') : t('CONTINUE', 'Continue')))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
+  }, formState.loading ? t('UPDATING', 'Updating...') : t('CONTINUE', 'Continue'))), requiredFields && isCheckout && (userSession === null || userSession === void 0 ? void 0 : userSession.guest_id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    id: "form-btn",
+    color: "primary",
+    type: "button",
+    onClick: function onClick() {
+      return setModalIsOpen(true);
+    },
+    disabled: formState.loading
+  }, formState.loading ? t('UPDATING', 'Updating...') : t('SIGN_UP_AND_PLACE_ORDER', 'Sign up and place order')), /*#__PURE__*/_react.default.createElement(_styles.TextLinkWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return handlePlaceOrderAsGuest();
+    }
+  }, t('PLACE_ORDER_AS_GUEST', 'Place order as guest'))))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i
     });
@@ -432,7 +460,19 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), /*#__PURE__*/_react.default.createElement(_Modal.default, {
+    open: modalIsOpen,
+    onClose: function onClose() {
+      return setModalIsOpen(false);
+    },
+    width: "760px"
+  }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    useLoginByCellphone: true,
+    useChekoutFileds: true,
+    handleSuccessSignup: handleSuccessSignup,
+    isPopup: true,
+    isGuest: true
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

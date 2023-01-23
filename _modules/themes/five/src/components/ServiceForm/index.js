@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.ServiceForm = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _react2 = require("swiper/react");
+var _nanoid = require("nanoid");
 var _orderingComponents = require("ordering-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Confirm = require("../Confirm");
@@ -47,7 +48,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var maxDate = 40;
 var ServiceFormUI = function ServiceFormUI(props) {
-  var _configs$format_time, _professionalListStat3, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6;
+  var _configs$guest_checko, _orderState$options, _configs$allowed_orde, _configs$allowed_orde2, _orderState$options2, _configs$format_time, _professionalListStat3, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6;
   var productObject = props.productObject,
     professionalSelected = props.professionalSelected,
     handleSave = props.handleSave,
@@ -55,7 +56,9 @@ var ServiceFormUI = function ServiceFormUI(props) {
     maxProductQuantity = props.maxProductQuantity,
     productCart = props.productCart,
     isCartProduct = props.isCartProduct,
-    professionalListState = props.professionalListState;
+    professionalListState = props.professionalListState,
+    handleCreateGuestUser = props.handleCreateGuestUser,
+    actionStatus = props.actionStatus;
   var product = productObject.product,
     loading = productObject.loading,
     error = productObject.error;
@@ -66,6 +69,9 @@ var ServiceFormUI = function ServiceFormUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+    _useOrder2 = _slicedToArray(_useOrder, 1),
+    orderState = _useOrder2[0];
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
@@ -111,11 +117,19 @@ var ServiceFormUI = function ServiceFormUI(props) {
     _useState18 = _slicedToArray(_useState17, 2),
     datesList = _useState18[0],
     setDatesList = _useState18[1];
+  var guestCheckoutEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$guest_checko = configs.guest_checkout_enabled) === null || _configs$guest_checko === void 0 ? void 0 : _configs$guest_checko.value) === '1';
+  var orderTypeEnabled = !_utils.orderTypeList[(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) - 1] || (configs === null || configs === void 0 ? void 0 : (_configs$allowed_orde = configs.allowed_order_types_guest_checkout) === null || _configs$allowed_orde === void 0 ? void 0 : (_configs$allowed_orde2 = _configs$allowed_orde.value) === null || _configs$allowed_orde2 === void 0 ? void 0 : _configs$allowed_orde2.includes(_utils.orderTypeList[(orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) - 1]));
   var dropDownRef = (0, _react.useRef)();
   var is12Hours = (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12';
   var closeModal = function closeModal() {
     setModalIsOpen(false);
     setModalPageToShow('login');
+  };
+  var handleUpdateGuest = function handleUpdateGuest() {
+    var guestToken = (0, _nanoid.nanoid)();
+    if (guestToken) handleCreateGuestUser({
+      guest_token: guestToken
+    });
   };
   var handleSuccessLogin = function handleSuccessLogin(user) {
     if (user) {
@@ -415,7 +429,12 @@ var ServiceFormUI = function ServiceFormUI(props) {
     onClick: function onClick() {
       return setModalIsOpen(true);
     }
-  }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SOLD_OUT) || 'Sold out') : t('LOGIN_SIGNUP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN_SIGNUP) || 'Login / Sign Up')))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SOLD_OUT) || 'Sold out') : t('LOGIN_SIGNUP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.LOGIN_SIGNUP) || 'Login / Sign Up')), !auth && guestCheckoutEnabled && orderTypeEnabled && /*#__PURE__*/_react.default.createElement(_styles.GuestUserLink, {
+    onClick: handleUpdateGuest
+  }, actionStatus !== null && actionStatus !== void 0 && actionStatus.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 25,
+    width: 70
+  }) : t('WITH_GUEST_USER', 'With Guest user')))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return closeModal();
