@@ -139,13 +139,15 @@ export const BusinessInfoItem = styled.div`
       cursor: pointer;
       font-size: 14px;
       color: ${props => props.theme?.colors.primary};
-      text-decoration: underline;
       &:not(:last-child) {
         margin-right: 5px;
         ${props => props.theme?.rtl && css`
           margin-left: 5px;
           margin-right: 0;
         `}
+      }
+      &:hover {
+        text-decoration: underline;
       }
 
       &.dot {

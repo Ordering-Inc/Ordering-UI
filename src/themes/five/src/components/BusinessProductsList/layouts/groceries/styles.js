@@ -47,10 +47,12 @@ export const WrapAllCategories = styled.div`
       white-space: pre;
     }
     span {
-      color: ${props => props.theme.colors.primary};
-      text-decoration: underline;
+      color: ${props => props.theme.colors.primary};=
       margin-left: 10px;
       cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -150,11 +152,13 @@ export const CategoryDescripion = styled.div`
     }
     span {
       color: ${props => props.theme.colors.primary};
-      text-decoration: underline;
       margin-left: 10px;
       cursor: pointer;
       white-space: nowrap;
       overflow: visible;
+      &:hover {
+        text-decoration: underline;
+      }
     }
 `
 

@@ -80,10 +80,12 @@ export const CategoryDescription = styled.div`
     }
     span {
       color: ${props => props.theme.colors.primary};
-      text-decoration: underline;
       margin-left: 10px;
       cursor: pointer;
       white-space: nowrap;
+      &:hover {
+        text-decoration: underline;
+      }
     }
 `
 
