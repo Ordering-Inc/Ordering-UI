@@ -228,6 +228,11 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
+    if (categorySelected?.id === null) return
+    events.emit('category_selected', { page: 'business', params: { category: categorySelected, business: business?.slug } })
+  }, [categorySelected])
+
+  useEffect(() => {
     if (loading) return
     if (openProduct) {
       onChangeMetaTag && onChangeMetaTag(curProduct?.seo_title, curProduct?.seo_description, curProduct?.seo_keywords)
