@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useUtils, useLanguage, useSession, useConfig, ProductForm as ProductFormController } from 'ordering-components'
+import { nanoid } from 'nanoid'
+import { useUtils, useLanguage, useSession, useConfig, ProductForm as ProductFormController, useOrder } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
@@ -13,7 +14,7 @@ import { ChevronLeft, ChevronRight, ChevronDown } from 'react-bootstrap-icons'
 import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 import { Button } from '../../styles/Buttons'
 import moment from 'moment'
-import { getTimes } from '../../../../../utils'
+import { getTimes, orderTypeList } from '../../../../../utils'
 import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
@@ -47,7 +48,8 @@ import {
   DayNumber,
   TimeListWrapper,
   TimeItem,
-  ClosedBusinessMsg
+  ClosedBusinessMsg,
+  GuestUserLink
 } from './styles'
 SwiperCore.use([Navigation])
 
@@ -62,13 +64,16 @@ const ServiceFormUI = (props) => {
     maxProductQuantity,
     productCart,
     isCartProduct,
-    professionalListState
+    professionalListState,
+    handleCreateGuestUser,
+    actionStatus
   } = props
 
   const { product, loading, error } = productObject
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
+  const [orderState] = useOrder()
   const [{ parsePrice, parseDate }] = useUtils()
   const [{ auth }, { login }] = useSession()
   const [modalPageToShow, setModalPageToShow] = useState('login')
@@ -81,12 +86,20 @@ const ServiceFormUI = (props) => {
   const [isEnabled, setIsEnabled] = useState(false)
   const [datesList, setDatesList] = useState([])
 
+  const guestCheckoutEnabled = configs?.guest_checkout_enabled?.value === '1'
+  const orderTypeEnabled = !orderTypeList[orderState?.options?.type - 1] || configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderState?.options?.type - 1])
+
   const dropDownRef = useRef()
   const is12Hours = configs?.format_time?.value === '12'
 
   const closeModal = () => {
     setModalIsOpen(false)
     setModalPageToShow('login')
+  }
+
+  const handleUpdateGuest = () => {
+    const guestToken = nanoid()
+    if (guestToken) handleCreateGuestUser({ guest_token: guestToken })
   }
 
   const handleSuccessLogin = (user) => {
@@ -484,6 +497,11 @@ const ServiceFormUI = (props) => {
                 >
                   {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
                 </Button>
+              )}
+              {!auth && guestCheckoutEnabled && orderTypeEnabled && (
+                <GuestUserLink onClick={handleUpdateGuest}>
+                  {actionStatus?.loading ? <Skeleton height={25} width={70} /> : t('WITH_GUEST_USER', 'With Guest user')}
+                </GuestUserLink>
               )}
             </ButtonWrapper>
           </>

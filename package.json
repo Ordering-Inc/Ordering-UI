@@ -86,6 +86,7 @@
     "libphonenumber-js": "^1.9.4",
     "lodash": "^4.17.19",
     "moment": "^2.29.4",
+    "nanoid": "^4.0.0",
     "ordering-components": "github:Ordering-Inc/ordering-components#release",
     "polished": "^3.6.6",
     "react-bootstrap-icons": "^1.7.2",

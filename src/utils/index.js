@@ -358,6 +358,11 @@ export const priceList = [
 ]
 
 /**
+ * List of order type
+ */
+export const orderTypeList = ['delivery', 'pickup', 'eatin', 'curbside', 'drivethru', 'seatdelivery']
+
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
