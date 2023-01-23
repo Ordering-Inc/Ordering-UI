@@ -16,12 +16,15 @@ import {
   WrapContent,
   Transactions,
   LoyaltyContent,
-  LoyaltyWrapp
+  LoyaltyWrapp,
+  Title,
+  TabsContainer,
+  Tab
 } from './styles'
 
 import { WalletTransactionItem } from '../WalletTransactionItem'
 import { NotFoundSource } from '../../../../../components/NotFoundSource'
-import { Tabs, Tab } from '../../styles/Tabs'
+import { Tabs } from '../../styles/Tabs'
 import { GiftCardUI } from '../GiftCard/GiftCardUI'
 
 const WalletsUI = (props) => {
@@ -69,99 +72,102 @@ const WalletsUI = (props) => {
         !userLoyaltyLevel.loading &&
         !walletList.error &&
         walletList.wallets?.length > 0 &&
-      (
-        <>
-          <Tabs variant='primary' className='tabs'>
-            {walletList.wallets?.map(wallet => walletName[wallet.type]?.isActive && (
-              <Tab
-                key={wallet.id}
-                active={tabSelected === wallet.type}
-                onClick={() => handleChangeTab(wallet)}
-                borderBottom
-                className='tab_title'
-              >
-                {walletName[wallet.type]?.name}
-              </Tab>
-            ))}
-          </Tabs>
+        (
+          <>
+            <Title>{t('WALLETS', 'Wallets')}</Title>
+            <TabsContainer>
+              <Tabs variant='primary' className='tabs'>
+                {walletList.wallets?.map(wallet => walletName[wallet.type]?.isActive && (
+                  <Tab
+                    key={wallet.id}
+                    active={tabSelected === wallet.type}
+                    onClick={() => handleChangeTab(wallet)}
+                    borderBottom
+                    className='tab_title'
+                  >
+                    {walletName[wallet.type]?.name}
+                  </Tab>
+                ))}
+              </Tabs>
+            </TabsContainer>
 
-          <WrapContent>
-            <Transactions isLoyaltyLevel={!!loyaltyLevel}>
-              <SectionWrapper>
-                <BalanceElement>
-                  <h1>
-                    {
-                      currentWalletSelected?.type === 'cash'
-                        ? parsePrice(currentWalletSelected?.balance)
-                        : currentWalletSelected?.balance
-                    }
-                  </h1>
-                  <span>
-                    {currentWalletSelected?.type === 'cash'
-                      ? configs?.stripe_currency?.value
-                      : t('POINTS', 'Points')}
-                  </span>
-                </BalanceElement>
-              </SectionWrapper>
-              <GiftCardUI />
-              <div className='transactions_list'>
-                {!transactionsList?.loading && transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.length > 0 && (
-                  <>
-                    <h2 style={{ fontSize: 20 }}>{t('TRANSACTIONS_HISTORY', 'Transactions history')}</h2>
-                    <TransactionsWrapper>
-                      {transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.map((transaction, i) => (
-                        <WalletTransactionItem
-                          idx={i}
-                          type={currentWalletSelected?.type}
-                          key={transaction.id}
-                          item={transaction}
-                        />
+            <WrapContent>
+              <Transactions isLoyaltyLevel={!!loyaltyLevel}>
+                <SectionWrapper>
+                  <BalanceElement>
+                    <h1>
+                      {
+                        currentWalletSelected?.type === 'cash'
+                          ? parsePrice(currentWalletSelected?.balance)
+                          : currentWalletSelected?.balance
+                      }
+                    </h1>
+                    <span>
+                      {currentWalletSelected?.type === 'cash'
+                        ? configs?.stripe_currency?.value
+                        : t('POINTS', 'Points')}
+                    </span>
+                  </BalanceElement>
+                </SectionWrapper>
+                <GiftCardUI />
+                <div className='transactions_list'>
+                  {!transactionsList?.loading && transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.length > 0 && (
+                    <>
+                      <h2 style={{ fontSize: 20 }}>{t('TRANSACTIONS_HISTORY', 'Transactions history')}</h2>
+                      <TransactionsWrapper>
+                        {transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.map((transaction, i) => (
+                          <WalletTransactionItem
+                            idx={i}
+                            type={currentWalletSelected?.type}
+                            key={transaction.id}
+                            item={transaction}
+                          />
+                        ))}
+                      </TransactionsWrapper>
+                    </>
+                  )}
+
+                  {transactionsList?.loading && (
+                    <>
+                      {[...Array(8).keys()].map(i => (
+                        <SectionWrapper key={i} isLoading>
+                          <Skeleton height={40} />
+                        </SectionWrapper>
                       ))}
-                    </TransactionsWrapper>
-                  </>
-                )}
+                    </>
+                  )}
 
-                {transactionsList?.loading && (
-                  <>
-                    {[...Array(8).keys()].map(i => (
-                      <SectionWrapper key={i} isLoading>
-                        <Skeleton height={40} />
-                      </SectionWrapper>
-                    ))}
-                  </>
-                )}
+                  {!transactionsList?.loading &&
+                    (transactionsList?.error || !transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.length) &&
+                    (
+                      <NotFoundSource
+                        content={
+                          transactionsList?.error
+                            ? t('ERROR_NOT_FOUND_TRANSACTIONS', 'Sorry, an error has occurred')
+                            : t('NOT_FOUND_TRANSACTIONS', 'No transactions to show at this time.')
+                        }
+                      />
+                    )}
+                </div>
+              </Transactions>
 
-                {!transactionsList?.loading &&
-                  (transactionsList?.error || !transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.length) &&
-                (
-                  <NotFoundSource
-                    content={
-                      transactionsList?.error
-                        ? t('ERROR_NOT_FOUND_TRANSACTIONS', 'Sorry, an error has occurred')
-                        : t('NOT_FOUND_TRANSACTIONS', 'No transactions to show at this time.')
-                    }
-                  />
-                )}
-              </div>
-            </Transactions>
+              {!!loyaltyLevel && tabSelected === 'credit_point' && (
+                <LoyaltyContent>
+                  <LoyaltyWrapp>
+                    <span className='loyalty_title'>
+                      {t('LOYALTY_LEVEL_TITLE', 'Your level is')}:
+                    </span>
+                    <img src={loyaltyLevel.image ?? theme.images.dummies.loyaltyLevel} />
+                    <span className='loyalty_name'>
+                      {loyaltyLevel.name}
+                    </span>
+                  </LoyaltyWrapp>
+                </LoyaltyContent>
+              )}
+            </WrapContent>
 
-            {!!loyaltyLevel && tabSelected === 'credit_point' && (
-              <LoyaltyContent>
-                <LoyaltyWrapp>
-                  <span className='loyalty_title'>
-                    {t('LOYALTY_LEVEL_TITLE', 'Your level is')}:
-                  </span>
-                  <img src={loyaltyLevel.image ?? theme.images.dummies.loyaltyLevel} />
-                  <span className='loyalty_name'>
-                    {loyaltyLevel.name}
-                  </span>
-                </LoyaltyWrapp>
-              </LoyaltyContent>
-            )}
-          </WrapContent>
-
-        </>
-      )}
+          </>
+        )}
 
       {(walletList?.loading || userLoyaltyLevel.loading) && (
         <>
