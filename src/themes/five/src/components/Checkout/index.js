@@ -182,6 +182,15 @@ const CheckoutUI = (props) => {
     setIsUserDetailsEdit(true)
   }
 
+  const handlePlaceOrderAsGuest = () => {
+    setIsOpen(false)
+    const body = {}
+    if (behalfName) {
+      body.on_behalf_of = behalfName
+    }
+    handlerClickPlaceOrder && handlerClickPlaceOrder(null, body)
+  }
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -660,6 +669,7 @@ const CheckoutUI = (props) => {
           isCheckout
           isEdit
           isModal
+          handlePlaceOrderAsGuest={handlePlaceOrderAsGuest}
           onClose={() => {
             setIsOpen(false)
             handlePlaceOrder()

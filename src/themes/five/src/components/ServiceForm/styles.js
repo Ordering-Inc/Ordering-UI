@@ -461,3 +461,19 @@ export const ClosedBusinessMsg = styled.div`
   font-size: 16px;
   width: 100%;
 `
+
+export const GuestUserLink = styled.div`
+  font-size: 14px;
+  color: ${props => props.theme.colors.primary};
+  cursor: pointer;
+  margin: 15px 0;
+  white-space: nowrap;
+  &:hover {
+    text-decoration: underline;
+  }
+  margin-left: 10px;
+  ${props => props.theme.rtl && css`
+    margin-left: 0;
+    margin-right: 10px;
+  `}
+`
