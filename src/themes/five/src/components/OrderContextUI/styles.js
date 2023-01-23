@@ -2,8 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   ${({ isBusinessList }) => isBusinessList && css`
-    position: absolute;
-    top: 10%;
     width: 100%;
     padding: 0 15px;
     box-sizing: border-box;
