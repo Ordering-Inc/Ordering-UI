@@ -227,10 +227,10 @@ const BusinessProductsListingUI = (props) => {
     events.emit('get_current_view')
   }, [])
 
-  useEffect(() => {
-    if (categorySelected?.id === null) return
-    events.emit('category_selected', { page: 'business', params: { category: categorySelected, business: business?.slug } })
-  }, [categorySelected])
+  // useEffect(() => {
+  //   if (categorySelected?.id === null) return
+  //   events.emit('category_selected', { page: 'business', params: { category: categorySelected, business: business?.slug } })
+  // }, [categorySelected])
 
   useEffect(() => {
     if (loading) return

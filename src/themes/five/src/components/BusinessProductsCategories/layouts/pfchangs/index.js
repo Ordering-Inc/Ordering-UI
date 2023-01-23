@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
+import { BusinessProductsCategories as ProductsCategories, useEvent } from 'ordering-components'
 import { AutoScroll } from '../../../../../../../components/AutoScroll'
 
 import { CategoriesContainer, CategoriesWrapper, CategoryPFChangs, Diviver } from './styles'
@@ -26,7 +26,10 @@ const BusinessProductsCategoriesUI = (props) => {
   const [selectedCategory, setSelectedCategory] = useState({ id: null })
   const [centerAutoscroll, setCenterAutoscroll] = useState(false)
   const theme = useTheme()
+  const [events] = useEvent()
+
   const handleChangeCategory = (category) => {
+    events.emit('category_selected', { page: 'business', params: { category: category, business: business?.slug } })
     const isBlockScroll = window.location.search.includes('category') &&
       window.location.search.includes('product')
 
