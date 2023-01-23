@@ -57,9 +57,6 @@ export const MyOrders = (props) => {
       {hideOrders && !allEmpty && (
         <h2>{t('PREVIOUSLY_ORDERED', 'Previously ordered')}</h2>
       )}
-      {!hideOrders && !props.hideOptions && (
-        <ProfileOptions value='orders' />
-      )}
       <Container hideOrders={hideOrders}>
         {!hideOrders && (
           <h1>{layout === 'appointments' ? t('MY_APPOINTMENTS', 'My appointments') : t('MY_ORDERS', 'My orders')}</h1>
