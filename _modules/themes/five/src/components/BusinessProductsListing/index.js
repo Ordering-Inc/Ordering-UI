@@ -297,16 +297,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     }
     events.emit('get_current_view');
   }, []);
-  (0, _react.useEffect)(function () {
-    if ((categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === null) return;
-    events.emit('category_selected', {
-      page: 'business',
-      params: {
-        category: categorySelected,
-        business: business === null || business === void 0 ? void 0 : business.slug
-      }
-    });
-  }, [categorySelected]);
+
+  // useEffect(() => {
+  //   if (categorySelected?.id === null) return
+  //   events.emit('category_selected', { page: 'business', params: { category: categorySelected, business: business?.slug } })
+  // }, [categorySelected])
+
   (0, _react.useEffect)(function () {
     if (loading) return;
     if (openProduct) {

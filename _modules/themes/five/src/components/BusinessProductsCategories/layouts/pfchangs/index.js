@@ -52,8 +52,18 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     centerAutoscroll = _useState4[0],
     setCenterAutoscroll = _useState4[1];
   var theme = (0, _styledComponents.useTheme)();
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+    _useEvent2 = _slicedToArray(_useEvent, 1),
+    events = _useEvent2[0];
   var handleChangeCategory = function handleChangeCategory(category) {
     var _document$getElementB, _document$getElementB2;
+    events.emit('category_selected', {
+      page: 'business',
+      params: {
+        category: category,
+        business: business === null || business === void 0 ? void 0 : business.slug
+      }
+    });
     var isBlockScroll = window.location.search.includes('category') && window.location.search.includes('product');
     if (business !== null && business !== void 0 && business.lazy_load_products_recommended || PFChangsCategoriesLayout) {
       handlerClickCategory(_objectSpread({}, category));
