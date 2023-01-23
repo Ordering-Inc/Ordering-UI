@@ -486,11 +486,47 @@ const OrderDetailsUI = (props) => {
             {!isGiftCardOrder && (
               <OrderBusiness>
                 <BusinessExternalWrapper>
-                  {!hideOrderActions && (
-                    <BusinessWrapper
-                      w='calc(100% - 20px)'
-                      borderTop={!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type)}
-                    >
+                  <BusinessWrapper
+                    w='calc(100% - 20px)'
+                    borderTop={!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type)}
+                  >
+                    {isShowBusinessLogo && <img src={order?.business?.logo} />}
+                    <BusinessInfo>
+                      <h2>{order?.business?.name}</h2>
+                      <ActionsSection
+                        {...ActionsSectionProps}
+                        actionType='business'
+                        showPhone={!hideBusinessPhone}
+                        showMessages={!hideBusinessMessages}
+                      />
+                      {!hideBusinessEmail && (
+                        <p>{order?.business?.email}</p>
+                      )}
+                      {!hideBusinessPhone && (
+                        <p>{order?.business?.cellphone}</p>
+                      )}
+                      {!hideBusinessAddress && (
+                        <p>{order?.business?.address}</p>
+                      )}
+                      {order?.place?.name && (
+                        <PlaceSpotSection>
+                          <p>
+                            {yourSpotString}: {order?.place?.name}
+                          </p>
+                        </PlaceSpotSection>
+                      )}
+                      {hideOrderActions && (
+                        <DirectionButtonWrapper>
+                          <Button
+                            color='primary'
+                            onClick={() => window.open(`http://maps.google.com/?q=${order?.business?.address}`)}
+                          >
+                            {t('GET_DIRECTIONS', 'Get Directions')}
+                          </Button>
+                        </DirectionButtonWrapper>
+                      )}
+                    </BusinessInfo>
+                    {!hideOrderActions && (
                       <BtsOrderStatus>
                         <div>
                           <Button
@@ -513,8 +549,8 @@ const OrderDetailsUI = (props) => {
                           </Button>
                         </div>
                       </BtsOrderStatus>
-                    </BusinessWrapper>
-                  )}
+                    )}
+                  </BusinessWrapper>
 
                   {!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
                     <PlaceSpotWrapper>

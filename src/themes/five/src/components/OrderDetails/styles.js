@@ -99,7 +99,6 @@ export const BusinessWrapper = styled.div`
   }
 
   @media (min-width: 400px) {
-    flex-direction: row;
     width: ${props => props.w ?? '100%'};
   }
 `

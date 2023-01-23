@@ -96,7 +96,8 @@ const SignUpFormUI = (props) => {
     signUpTab,
     useSignUpFullDetails,
     useSignUpOtpEmail,
-    useSignUpOtpCellphone
+    useSignUpOtpCellphone,
+    isGuest
   } = props
   const [, t] = useLanguage()
   const [, { showToast }] = useToast()
@@ -181,7 +182,7 @@ const SignUpFormUI = (props) => {
     formMethods.clearErrors()
   }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
     if (!userPhoneNumber &&
       ((validationFields?.fields?.checkout?.cellphone?.enabled &&
@@ -645,7 +646,7 @@ const SignUpFormUI = (props) => {
               {elementLinkToLogin}
             </RedirectLink>
           )}
-          {Object.keys(configs).length > 0 && (
+          {Object.keys(configs).length > 0 && !isGuest && (
             configs?.business_signup_allow?.value === '1' || configs?.driver_signup_allow?.value === '1'
           ) && !isCustomerMode &&
             (
