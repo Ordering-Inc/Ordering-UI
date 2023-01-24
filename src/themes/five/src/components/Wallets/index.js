@@ -23,9 +23,9 @@ import {
 } from './styles'
 
 import { WalletTransactionItem } from '../WalletTransactionItem'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { Tabs } from '../../styles/Tabs'
 import { GiftCardUI } from '../GiftCard/GiftCardUI'
+import { NotFoundSource } from '../NotFoundSource'
 
 const WalletsUI = (props) => {
   const {
