@@ -84,6 +84,8 @@ export const BusinessListingSearchUI = (props) => {
   const [{ configs }] = useConfig()
   const maxDeliveryFeeOptions = [15, 25, 35, 'default']
   // const maxProductPriceOptions = [5, 10, 15, 'default']
+  const currency = configs.format_number_currency?.value
+  console.log(currency)
   const maxDistanceOptions = configs?.distance_unit?.value === 'km' ? [1000, 2000, 5000, 'default'] : [1609, 3218, 8046, 'default']
   const maxTimeOptions = [5, 15, 30, 'default']
   const sortItems = [
@@ -93,11 +95,11 @@ export const BusinessListingSearchUI = (props) => {
   ]
 
   const priceList = [
-    { level: '1', content: '$' },
-    { level: '2', content: '$$' },
-    { level: '3', content: '$$$' },
-    { level: '4', content: '$$$$' },
-    { level: '5', content: '$$$$$' }
+    { level: '1', content: `${currency}` },
+    { level: '2', content: `${Array(2).fill(currency).join('')}` },
+    { level: '3', content: `${Array(3).fill(currency).join('')}` },
+    { level: '4', content: `${Array(4).fill(currency).join('')}` },
+    { level: '5', content: `${Array(5).fill(currency).join('')}` }
   ]
 
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
