@@ -9,6 +9,7 @@ import {
   useSession,
   useValidationFields,
   useOrder,
+  useOrderingTheme,
   MultiCheckout as MultiCheckoutController
 } from 'ordering-components'
 
