@@ -54,7 +54,7 @@ export const BusinessCategoryProductWrapper = styled.div`
   }
 
   @media (min-width: 1000px) {
-    width: ${({ showCartOnProductList }) => showCartOnProductList ? '70%' : '85%'};
+    width: 70%;
   }
 `
 
