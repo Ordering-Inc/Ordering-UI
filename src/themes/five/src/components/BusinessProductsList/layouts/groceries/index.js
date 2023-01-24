@@ -119,7 +119,7 @@ const BusinessProductsListUI = (props) => {
                 )}
               </div>
               <ProductsListing>
-                {featProducts?.filter((p, index) => index < 9)?.map((product, i) => product.featured && (
+                {featProducts?.filter((p, index) => business?.food || index < 9)?.map((product, i) => product.featured && (
                   <SingleProductCard
                     key={i}
                     isSoldOut={(product?.inventoried && !product?.quantity)}
@@ -131,7 +131,7 @@ const BusinessProductsListUI = (props) => {
                     productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                   />
                 ))}
-                {!categoryState?.loading && featProducts?.length > 9 && (
+                {!business?.food && !categoryState?.loading && featProducts?.length > 9 && (
                   <SingleProductCard
                     useCustomFunctionality
                     onCustomClick={() => onClickCategory(category)}
@@ -206,7 +206,7 @@ const BusinessProductsListUI = (props) => {
                     </div>
                     <ProductsListing>
                       {
-                        products.filter((p, index) => index < 9).map((product, i) => (
+                        products.filter((p, index) => index < 9 || business?.food).map((product, i) => (
                           <SingleProductCard
                             key={i}
                             isSoldOut={product?.inventoried && !product?.quantity}
@@ -219,7 +219,7 @@ const BusinessProductsListUI = (props) => {
                           />
                         ))
                       }
-                      {!categoryState?.loading && products?.length > 9 && (
+                      {!business?.food && !categoryState?.loading && products?.length > 9 && (
                         <SingleProductCard
                           useCustomFunctionality
                           onCustomClick={() => onClickCategory(category)}
