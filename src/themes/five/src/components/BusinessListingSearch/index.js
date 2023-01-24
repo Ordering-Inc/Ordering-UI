@@ -37,7 +37,7 @@ import {
 import Skeleton from 'react-loading-skeleton'
 import { Check2, XLg as Close } from 'react-bootstrap-icons'
 import { SearchBar } from '../SearchBar'
-import { useLanguage, useOrder, useUtils, useSession, BusinessSearchList } from 'ordering-components'
+import { useLanguage, useOrder, useUtils, useSession, BusinessSearchList, useConfig } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { AutoScroll } from '../AutoScroll'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
@@ -81,9 +81,10 @@ export const BusinessListingSearchUI = (props) => {
   const [{ parsePrice, optimizeImage, parseDistance }] = useUtils()
   const [{ auth }] = useSession()
   const { width } = useWindowSize()
+  const [{ configs }] = useConfig()
   const maxDeliveryFeeOptions = [15, 25, 35, 'default']
   // const maxProductPriceOptions = [5, 10, 15, 'default']
-  const maxDistanceOptions = [1000, 2000, 5000, 'default']
+  const maxDistanceOptions = configs?.distance_unit?.value === 'km' ? [1000, 2000, 5000, 'default'] : [1609, 3218, 8046, 'default']
   const maxTimeOptions = [5, 15, 30, 'default']
   const sortItems = [
     { text: t('PICKED_FOR_YOU', 'Picked for you (default)'), value: 'distance' },

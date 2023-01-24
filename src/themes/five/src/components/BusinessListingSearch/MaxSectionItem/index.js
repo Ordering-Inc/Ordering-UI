@@ -1,6 +1,7 @@
-import { useLanguage, useUtils } from 'ordering-components'
+import { useConfig, useLanguage, useUtils } from 'ordering-components'
 import React from 'react'
 import { MaxFilterContainer, MaxItem, MaxItemContainer, ProgressBar, ProgressContentWrapper } from '../styles'
+import { capitalize } from '../../../../../../utils'
 
 export const MaxSectionItem = (props) => {
   const {
@@ -13,10 +14,18 @@ export const MaxSectionItem = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [{ configs }] = useConfig()
+
+  const distanceUnit = configs?.distance_unit?.value
+
+  const units = {
+    mi: 1609,
+    km: 1000
+  }
 
   const parseValue = (option) => {
     return filter === 'max_distance'
-      ? `${option / 1000} ${t('KM', 'Km')}`
+      ? `${(option / units[distanceUnit]).toFixed(0)} ${t(`${distanceUnit?.toUpperCase()}`, capitalize(distanceUnit))}`
       : filter === 'max_eta'
         ? `${option} ${t('MIN', 'min')}`
         : parsePrice(option)
