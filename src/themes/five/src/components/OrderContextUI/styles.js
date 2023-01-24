@@ -6,6 +6,10 @@ export const Container = styled.div`
     padding: 0 15px;
     box-sizing: border-box;
   `}
+  ${({ hero }) => hero && css`
+    position: absolute;
+    top: 10%;
+  `}
   margin-top: 10px;
 `
 
