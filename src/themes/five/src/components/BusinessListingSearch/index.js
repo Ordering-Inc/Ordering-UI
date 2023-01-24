@@ -54,6 +54,7 @@ import BisUpArrow from '@meronex/icons/bi/BisUpArrow'
 import { Modal } from '../Modal'
 import { ProductForm } from '../ProductForm'
 import { MaxSectionItem } from './MaxSectionItem'
+import { FilterAccordion } from './Accordion'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -159,58 +160,58 @@ export const BusinessListingSearchUI = (props) => {
       <FiltersContainer>
         <Filters>
           <SortContainer>
-            <h3>{t('SORT', 'Sort')}</h3>
-            {sortItems?.filter(item => !(orderState?.options?.type === 1 && item?.value === 'pickup_time') && !(orderState?.options?.type === 2 && item?.value === 'delivery_time'))?.map(item => (
-              <SortItem
-                key={item?.value}
-                onClick={() => handleChangeFilters('orderBy', item?.value)}
-                active={filters?.orderBy?.includes(item?.value)}
-              >
-                {item?.text}  {(filters?.orderBy?.includes(item?.value)) && <>{filters?.orderBy?.includes('-') ? <BisUpArrow /> : <BisDownArrow />}</>}
-              </SortItem>
-            ))}
-            {/* <SortItem onClick={() => handleChangeFilters('orderBy', 'default')}>{t('MOST_POPULAR', 'Most popular')}</SortItem>
-            <SortItem onClick={() => handleChangeFilters('orderBy', 'default')}>{t('RATING', 'Rating')}</SortItem> */}
-
+            <FilterAccordion title={t('SORT', 'Sort')}>
+              {sortItems?.filter(item => !(orderState?.options?.type === 1 && item?.value === 'pickup_time') && !(orderState?.options?.type === 2 && item?.value === 'delivery_time'))?.map(item => (
+                <SortItem
+                  key={item?.value}
+                  onClick={() => handleChangeFilters('orderBy', item?.value)}
+                  active={filters?.orderBy?.includes(item?.value)}
+                >
+                  {item?.text}  {(filters?.orderBy?.includes(item?.value)) && <>{filters?.orderBy?.includes('-') ? <BisUpArrow /> : <BisDownArrow />}</>}
+                </SortItem>
+              ))}
+            </FilterAccordion>
           </SortContainer>
           <BrandContainer>
-            <h3>{t('BRANDS', 'Brands')}</h3>
-            <BrandListWrapper>
-              {brandList?.loading && (
-                <>
-                  {[...Array(5).keys()].map(index => (
-                    <BrandItem key={index}>
-                      <Skeleton width={120} height={15} />
-                      <Skeleton width={16} height={16} />
-                    </BrandItem>
-                  ))}
-                </>
-              )}
-              {!brandList?.loading && brandList?.brands.map((brand, i) => brand?.enabled && (
-                <BrandItem key={i} onClick={() => handleChangeBrandFilter(brand?.id)}>
-                  <span>{brand?.name}</span>
-                  {filters?.franchise_ids?.includes(brand?.id) && <Check2 />}
-                </BrandItem>
-              ))}
-              {!brandList?.loading && ((brandList?.brands?.filter(brand => brand?.enabled))?.length === 0) && (
-                <NoResult>{t('NO_RESULTS_FOUND', 'Sorry, no results found')}</NoResult>
-              )}
-            </BrandListWrapper>
+            <FilterAccordion title={t('BRANDS', 'Brands')}>
+              <BrandListWrapper>
+                {brandList?.loading && (
+                  <>
+                    {[...Array(5).keys()].map(index => (
+                      <BrandItem key={index}>
+                        <Skeleton width={120} height={15} />
+                        <Skeleton width={16} height={16} />
+                      </BrandItem>
+                    ))}
+                  </>
+                )}
+                {!brandList?.loading && brandList?.brands.map((brand, i) => brand?.enabled && (
+                  <BrandItem key={i} onClick={() => handleChangeBrandFilter(brand?.id)}>
+                    <span>{brand?.name}</span>
+                    {filters?.franchise_ids?.includes(brand?.id) && <Check2 />}
+                  </BrandItem>
+                ))}
+                {!brandList?.loading && ((brandList?.brands?.filter(brand => brand?.enabled))?.length === 0) && (
+                  <NoResult>{t('NO_RESULTS_FOUND', 'Sorry, no results found')}</NoResult>
+                )}
+              </BrandListWrapper>
+            </FilterAccordion>
           </BrandContainer>
           <PriceFilterWrapper>
-            <h3>{t('PRICE_RANGE', 'Price range')}</h3>
-            <PriceFilterListWrapper>
-              {priceList.map((price, i) => (
-                <Button
-                  key={i}
-                  color={(filters?.price_level === price?.level) ? 'primary' : 'lightGray'}
-                  onClick={() => handleChangePriceRange(price?.level)}
-                >
-                  {price.content}
-                  {(filters?.price_level === price?.level) && <Close />}
-                </Button>
-              ))}
-            </PriceFilterListWrapper>
+            <FilterAccordion title={t('PRICE_RANGE', 'Price range')}>
+              <PriceFilterListWrapper>
+                {priceList.map((price, i) => (
+                  <Button
+                    key={i}
+                    color={(filters?.price_level === price?.level) ? 'primary' : 'lightGray'}
+                    onClick={() => handleChangePriceRange(price?.level)}
+                  >
+                    {price.content}
+                    {(filters?.price_level === price?.level) && <Close />}
+                  </Button>
+                ))}
+              </PriceFilterListWrapper>
+            </FilterAccordion>
           </PriceFilterWrapper>
           {orderState?.options?.type === 1 && (
             <MaxSectionItem
@@ -237,18 +238,14 @@ export const BusinessListingSearchUI = (props) => {
             filters={filters}
             handleChangeFilters={handleChangeFilters}
           />
-          {/* <MaxSectionItem
-              title={t('MAX_PRODUCT_PRICE', 'Max product price')}
-              options={maxProductPriceOptions}
-              filter='max_product_price'
-            /> */}
           <TagsContainer>
-            <h3>{t('BUSINESS_CATEGORIES', 'Business categories')}</h3>
-            <BusinessTypeFilter
-              isSearchMode
-              filters={filters}
-              handleChangeFilters={handleChangeFilters}
-            />
+            <FilterAccordion title={t('BUSINESS_CATEGORIES', 'Business categories')}>
+              <BusinessTypeFilter
+                isSearchMode
+                filters={filters}
+                handleChangeFilters={handleChangeFilters}
+              />
+            </FilterAccordion>
           </TagsContainer>
         </Filters>
         <FiltersResultContainer>

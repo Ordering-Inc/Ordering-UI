@@ -2,6 +2,7 @@ import { useConfig, useLanguage, useUtils } from 'ordering-components'
 import React from 'react'
 import { MaxFilterContainer, MaxItem, MaxItemContainer, ProgressBar, ProgressContentWrapper } from '../styles'
 import { capitalize } from '../../../../../../utils'
+import { FilterAccordion } from '../Accordion'
 
 export const MaxSectionItem = (props) => {
   const {
@@ -33,21 +34,22 @@ export const MaxSectionItem = (props) => {
 
   return (
     <MaxFilterContainer>
-      <h3>{title}</h3>
-      <ProgressContentWrapper>
-        <ProgressBar style={{ width: `${((options.indexOf(filters?.[filter]) / 3) * 100) ?? 100}%` }} />
-      </ProgressContentWrapper>
-      <MaxItemContainer>
-        {options.map((option, i) => (
-          <MaxItem
-            key={option}
-            active={filters?.[filter] === option || (option === 'default' && (filters?.[filter] === 'default' || !filters?.[filter]))}
-            onClick={() => handleChangeFilters(filter, option)}
-          >
-            {option === 'default' ? `${parseValue(options[i - 1])}+` : parseValue(option)}
-          </MaxItem>
-        ))}
-      </MaxItemContainer>
+      <FilterAccordion title={title}>
+        <ProgressContentWrapper>
+          <ProgressBar style={{ width: `${((options.indexOf(filters?.[filter]) / 3) * 100) ?? 100}%` }} />
+        </ProgressContentWrapper>
+        <MaxItemContainer>
+          {options.map((option, i) => (
+            <MaxItem
+              key={option}
+              active={filters?.[filter] === option || (option === 'default' && (filters?.[filter] === 'default' || !filters?.[filter]))}
+              onClick={() => handleChangeFilters(filter, option)}
+            >
+              {option === 'default' ? `${parseValue(options[i - 1])}+` : parseValue(option)}
+            </MaxItem>
+          ))}
+        </MaxItemContainer>
+      </FilterAccordion>
     </MaxFilterContainer>
   )
 }
