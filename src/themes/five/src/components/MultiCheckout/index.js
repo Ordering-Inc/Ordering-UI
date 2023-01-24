@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useTheme } from 'styled-components'
 import {
   useLanguage,
   useUtils,
@@ -9,7 +8,6 @@ import {
   useSession,
   useValidationFields,
   useOrder,
-  useOrderingTheme,
   MultiCheckout as MultiCheckoutController
 } from 'ordering-components'
 
@@ -67,12 +65,10 @@ const MultiCheckoutUI = (props) => {
     handleSearchRedirect
   } = props
 
-  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
   const [customerState] = useCustomer()
-  const [orderingTheme] = useOrderingTheme()
   const [validationFields] = useValidationFields()
   const [{ user }] = useSession()
   const [orderState] = useOrder()
@@ -83,8 +79,7 @@ const MultiCheckoutUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data)
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
-  const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew' ||
-    theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isMultiDriverTips = configs?.checkout_multi_business_enabled?.value === '1'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
@@ -251,7 +246,7 @@ const MultiCheckoutUI = (props) => {
                   <Cart
                     isCartPending={cart?.status === 2}
                     cart={cart}
-                    isMultiCheckout={isMultiDriverTips}
+                    isMultiCheckout
                     isProducts={cart?.products?.length || 0}
                     hideDeliveryFee={configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'}
                     hideDriverTip={configs?.multi_business_checkout_show_combined_driver_tip?.value === '1'}
