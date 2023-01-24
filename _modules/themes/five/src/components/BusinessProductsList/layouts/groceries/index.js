@@ -110,7 +110,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return onClickCategory(category);
       }
     }, t('MORE', 'More'))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, featProducts === null || featProducts === void 0 ? void 0 : (_featProducts$filter = featProducts.filter(function (p, index) {
-      return index < 9;
+      return (business === null || business === void 0 ? void 0 : business.food) || index < 9;
     })) === null || _featProducts$filter === void 0 ? void 0 : _featProducts$filter.map(function (product, i) {
       var _currentCart$products2;
       return product.featured && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
@@ -125,7 +125,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
         }, 0)
       });
-    }), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (featProducts === null || featProducts === void 0 ? void 0 : featProducts.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+    }), !(business !== null && business !== void 0 && business.food) && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (featProducts === null || featProducts === void 0 ? void 0 : featProducts.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       useCustomFunctionality: true,
       onCustomClick: function onCustomClick() {
         return onClickCategory(category);
@@ -174,7 +174,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return setOpenDescription(category);
       }
     }, t('VIEW_MORE', 'View more')))))), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.filter(function (p, index) {
-      return index < 9;
+      return index < 9 || (business === null || business === void 0 ? void 0 : business.food);
     }).map(function (product, i) {
       var _currentCart$products3;
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
@@ -189,7 +189,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
         }, 0)
       });
-    }), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (products === null || products === void 0 ? void 0 : products.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+    }), !(business !== null && business !== void 0 && business.food) && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (products === null || products === void 0 ? void 0 : products.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       useCustomFunctionality: true,
       onCustomClick: function onCustomClick() {
         return onClickCategory(category);

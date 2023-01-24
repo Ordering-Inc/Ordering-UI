@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
-  var _theme$defaultLanguag, _theme$defaultLanguag2;
+  var _configs$multi_busine, _getOrderStatus, _orders$, _getOrderStatus2, _orders$2, _theme$defaultLanguag, _theme$defaultLanguag2;
   var customer = props.customer,
     paymentEvents = props.paymentEvents,
     ordersSummary = props.ordersSummary,
@@ -51,6 +51,9 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parsePrice = _useUtils2[0].parsePrice;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -58,6 +61,9 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
+  var progressBarStyle = (_configs$multi_busine = configs.multi_business_checkout_progress_bar_style) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value;
+  var showBarInOrder = ['group', 'both'];
+  var showBarInIndividual = ['individual', 'both'];
   var isTaxIncludedOnPrice = orders.every(function (_order) {
     var _order$taxes, _order$taxes2;
     return (_order$taxes = _order.taxes) !== null && _order$taxes !== void 0 && _order$taxes.length ? (_order$taxes2 = _order.taxes) === null || _order$taxes2 === void 0 ? void 0 : _order$taxes2.every(function (_tax) {
@@ -110,7 +116,11 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
     style: {
       marginBottom: '50px'
     }
-  }) : /*#__PURE__*/_react.default.createElement(_styles.OrderSummary, null, /*#__PURE__*/_react.default.createElement("h3", null, t('ORDER_SUMMARY', 'Order summary')), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, orders.map(function (order) {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.OrderSummary, null, /*#__PURE__*/_react.default.createElement("h3", null, t('ORDER_SUMMARY', 'Order summary')), showBarInOrder.includes(progressBarStyle) && /*#__PURE__*/_react.default.createElement(_styles.StatusBarContainer, null, /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
+    percentage: (_getOrderStatus = (0, _utils.getOrderStatus)((_orders$ = orders[0]) === null || _orders$ === void 0 ? void 0 : _orders$.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
+  }), /*#__PURE__*/_react.default.createElement("p", {
+    className: "order-status"
+  }, (_getOrderStatus2 = (0, _utils.getOrderStatus)((_orders$2 = orders[0]) === null || _orders$2 === void 0 ? void 0 : _orders$2.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value)), /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, orders.map(function (order) {
     var _order$summary$total, _order$summary;
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: order.id
@@ -126,7 +136,8 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
       key: order.id,
       isMultiOrders: true,
       getOrderStatus: _utils.getOrderStatus,
-      order: order
+      order: order,
+      showProgressBar: showBarInIndividual.includes(progressBarStyle)
     });
   })), !loading && (error || (orders === null || orders === void 0 ? void 0 : orders.length) === 0) && (error !== null && error !== void 0 && error.includes('ERROR_ACCESS_EXPIRED') ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t(error[0], 'Sorry, the order has expired.')

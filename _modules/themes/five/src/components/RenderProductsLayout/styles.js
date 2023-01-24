@@ -27,25 +27,22 @@ var BusinessContent = _styledComponents.default.div(_templateObject5 || (_templa
   return props.isCustomLayout ? 0 : 30;
 });
 exports.BusinessContent = BusinessContent;
-var BusinessCategoryProductWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  /* Hide scrollbar for Chrome, Safari and Opera */\n  .category-lists::-webkit-scrollbar {\n    display: none;\n  }\n  /* Hide scrollbar for IE, Edge and Firefox */\n  .category-lists {\n    -ms-overflow-style: none;\n    scrollbar-width: none;\n  }\n  @media (min-width: 1000px) {\n    width: ", ";\n  }\n"])), function (_ref2) {
-  var showCartOnProductList = _ref2.showCartOnProductList;
-  return showCartOnProductList ? '70%' : '85%';
-});
+var BusinessCategoryProductWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n  /* Hide scrollbar for Chrome, Safari and Opera */\n  .category-lists::-webkit-scrollbar {\n    display: none;\n  }\n  /* Hide scrollbar for IE, Edge and Firefox */\n  .category-lists {\n    -ms-overflow-style: none;\n    scrollbar-width: none;\n  }\n  @media (min-width: 1000px) {\n    width: 70%;\n  }\n"])));
 exports.BusinessCategoryProductWrapper = BusinessCategoryProductWrapper;
 var BusinessCategoriesContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin: 0;\n  margin-right: 10px;\n  width: 100%;\n  ", "\n  @media (min-width: 993px) {\n    width: calc(31% - 25px);\n  }\n"])), function (props) {
   return !props.offSticky && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    top: 65px;\n    position: sticky;\n  "])));
 });
 exports.BusinessCategoriesContainer = BusinessCategoriesContainer;
-var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: 70px;\n  min-width: 325px;\n  height: fit-content;\n  @media (min-width: 769px) {\n    ", "\n  }\n  @media (min-width: 1000px) and (min-height: 600px) {\n    display: block;\n  }\n"])), function (_ref3) {
-  var isProfessional = _ref3.isProfessional;
+var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: 70px;\n  min-width: 325px;\n  height: fit-content;\n  @media (min-width: 769px) {\n    ", "\n  }\n  @media (min-width: 1000px) and (min-height: 600px) {\n    display: block;\n  }\n"])), function (_ref2) {
+  var isProfessional = _ref2.isProfessional;
   return isProfessional && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin-top: 0px;\n    "])));
 });
 exports.BusinessCartContainer = BusinessCartContainer;
-var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 30px;\n  position: relative;\n  margin-bottom: 30px;\n  max-height: ", ";\n  overflow: auto;\n  .product.accordion {\n    margin: 0;\n  }\n  /* .accordion.active {\n    padding-bottom: 10px;\n  } */\n  ", "\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref4) {
-  var maxHeight = _ref4.maxHeight;
+var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 30px;\n  position: relative;\n  margin-bottom: 30px;\n  max-height: ", ";\n  overflow: auto;\n  .product.accordion {\n    margin: 0;\n  }\n  /* .accordion.active {\n    padding-bottom: 10px;\n  } */\n  ", "\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref3) {
+  var maxHeight = _ref3.maxHeight;
   return "".concat(maxHeight, "px");
-}, function (_ref5) {
-  var isModal = _ref5.isModal;
+}, function (_ref4) {
+  var isModal = _ref4.isModal;
   return !isModal && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border: 1px solid #E9ECEF;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 7.6px;\n  "])));
 });
 exports.BusinessCartContent = BusinessCartContent;
@@ -65,8 +62,8 @@ var WrapperSearch = _styledComponents.default.div(_templateObject16 || (_templat
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      text-align: left;\n    "])));
 });
 exports.WrapperSearch = WrapperSearch;
-var ProfessionalFilterWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  padding-bottom: 35px;\n  ", "\n"])), function (_ref6) {
-  var isTop = _ref6.isTop;
+var ProfessionalFilterWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  padding-bottom: 35px;\n  ", "\n"])), function (_ref5) {
+  var isTop = _ref5.isTop;
   return isTop && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    margin-top: 30px;\n  "])));
 });
 exports.ProfessionalFilterWrapper = ProfessionalFilterWrapper;
@@ -78,9 +75,9 @@ var NearBusiness = _styledComponents.default.div(_templateObject22 || (_template
 exports.NearBusiness = NearBusiness;
 var PageBannerWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  > div {\n    border-radius: 8px;\n  }\n"])));
 exports.PageBannerWrapper = PageBannerWrapper;
-var CategorySelectedContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: inline;\n  margin-left: 10px;\n  color: ", ";\n  padding-right: 5px;\n  cursor: pointer;\n  p{\n    margin: 0;\n  }\n  svg {\n    position: relative;\n    top: 2px;\n    margin-right: 3px;\n    width: 14px;\n    height: 14px;\n  }\n"])), function (_ref7) {
+var CategorySelectedContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: inline;\n  margin-left: 10px;\n  color: ", ";\n  padding-right: 5px;\n  cursor: pointer;\n  p{\n    margin: 0;\n  }\n  svg {\n    position: relative;\n    top: 2px;\n    margin-right: 3px;\n    width: 14px;\n    height: 14px;\n  }\n"])), function (_ref6) {
   var _theme$colors;
-  var theme = _ref7.theme;
+  var theme = _ref6.theme;
   return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
 });
 exports.CategorySelectedContainer = CategorySelectedContainer;
