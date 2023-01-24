@@ -48,7 +48,8 @@ const BusinessProductsListUI = (props) => {
     subcategoriesSelected,
     onClickCategory,
     handleUpdateProducts,
-    isSearchMode
+    isSearchMode,
+    business
   } = props
 
   const [, t] = useLanguage()
@@ -192,7 +193,7 @@ const BusinessProductsListUI = (props) => {
                           productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                         />
                       ))}
-                      {!categoryState?.loading && categoryState?.products?.length > 9 && (
+                      {!business?.food && !categoryState?.loading && categoryState?.products?.length > 9 && (
                         <SingleProductCard
                           useCustomFunctionality
                           onCustomClick={() => onClickCategory(category)}
@@ -265,7 +266,7 @@ const BusinessProductsListUI = (props) => {
                       <ProductsListing isSubcategorySearch={isSubcategorySearch}>
                         {isSearchMode && category?.subcategories?.length > 0 ? (
                           <>
-                            {products?.filter((product, i) => i < 9 && product?.category_id === category?.id)?.map((product, i) => (
+                            {products?.filter((product, i) => (i < 9 && product?.category_id === category?.id) || business?.food)?.map((product, i) => (
                               <SingleProductCard
                                 key={i}
                                 isSoldOut={product.inventoried && !product.quantity}
@@ -278,7 +279,7 @@ const BusinessProductsListUI = (props) => {
                                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                               />
                             ))}
-                            {!categoryState?.loading && products?.length > 9 && (
+                            {!business?.food && !categoryState?.loading && products?.length > 9 && (
                               <SingleProductCard
                                 useCustomFunctionality
                                 onCustomClick={() => onClickCategory(category)}
@@ -295,7 +296,7 @@ const BusinessProductsListUI = (props) => {
                         ) : (
                           <>
                             {
-                              products.filter((_, i) => i < 9).map((product, i) => (
+                              products.filter((_, i) => i < 9 || business?.food).map((product, i) => (
                                 <SingleProductCard
                                   key={i}
                                   isSoldOut={product.inventoried && !product.quantity}
@@ -309,7 +310,7 @@ const BusinessProductsListUI = (props) => {
                                 />
                               ))
                             }
-                            {!categoryState?.loading && products?.length > 9 && (
+                            {!business?.food && !categoryState?.loading && products?.length > 9 && (
                               <SingleProductCard
                                 useCustomFunctionality
                                 onCustomClick={() => onClickCategory(category)}
