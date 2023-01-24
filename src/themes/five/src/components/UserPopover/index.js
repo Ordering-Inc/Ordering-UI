@@ -194,6 +194,7 @@ export const UserPopover = (props) => {
 
 const LogoutActionUI = (props) => {
   const [, t] = useLanguage()
+  const [events] = useEvent()
   const [, { deleteUserCustomer }] = useCustomer()
 
   const handleClick = () => {
@@ -210,6 +211,7 @@ const LogoutActionUI = (props) => {
     deleteUserCustomer(true)
     props.handleLogoutClick()
     props.onClose && props.onClose()
+    events.emit('go_to_page', { page: 'home' })
   }
   return (
     <PopoverListItem onClick={handleClick}>
