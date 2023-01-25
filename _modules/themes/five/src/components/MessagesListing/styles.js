@@ -57,7 +57,7 @@ var OrderHeader = _styledComponents.default.div(_templateObject15 || (_templateO
   return props.theme.colors.colorPage;
 });
 exports.OrderHeader = OrderHeader;
-var ViewDetails = _styledComponents.default.a(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  font-size: 12px;\n  text-decoration: underline;\n  margin: 0 10px;\n"])), function (props) {
+var ViewDetails = _styledComponents.default.a(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  font-size: 12px;\n  &:hover {\n        text-decoration: underline;\n      }\n  margin: 0 10px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.ViewDetails = ViewDetails;

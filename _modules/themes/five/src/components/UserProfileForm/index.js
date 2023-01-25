@@ -274,8 +274,6 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), !isHiddenAddress && !props.hideOptions && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
-    value: "account"
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
     mbottom: isHiddenAddress && 25
   }, showCustomerPicture && /*#__PURE__*/_react.default.createElement(_styles.UserImage, {

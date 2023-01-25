@@ -174,7 +174,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     onClick: function onClick() {
       return toggleIsEdit();
     }
-  }, t('CHANGE', 'Change')) : /*#__PURE__*/_react.default.createElement(_FcCancel.default, {
+  }, t('CHANGE_USER_DETAILS', 'Change customer details')) : /*#__PURE__*/_react.default.createElement(_FcCancel.default, {
     className: "cancel",
     onClick: function onClick() {
       return toggleEditState();

@@ -249,6 +249,9 @@ var LogoutActionUI = function LogoutActionUI(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
+  var _useEvent3 = (0, _orderingComponents.useEvent)(),
+    _useEvent4 = _slicedToArray(_useEvent3, 1),
+    events = _useEvent4[0];
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
     _useCustomer2 = _slicedToArray(_useCustomer, 2),
     deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
@@ -266,6 +269,9 @@ var LogoutActionUI = function LogoutActionUI(props) {
     deleteUserCustomer(true);
     props.handleLogoutClick();
     props.onClose && props.onClose();
+    events.emit('go_to_page', {
+      page: 'home'
+    });
   };
   return /*#__PURE__*/_react.default.createElement(_styles.PopoverListItem, {
     onClick: handleClick
