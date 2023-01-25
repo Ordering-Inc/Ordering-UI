@@ -10,11 +10,6 @@ export const UserProfileContainer = styled.div`
   text-align: center;
   width: 90%;
   margin: 25px auto ${props => props.mbottom ? `${props.mbottom}px` : 'auto'};
-
-  @media (min-width: 768px) {
-    align-items: flex-start;
-    flex-direction: row;
-  }
 `
 
 export const ProfileOptionsList = styled.div`

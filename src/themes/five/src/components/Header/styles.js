@@ -111,6 +111,7 @@ export const RightHeader = styled.div`
 export const Menu = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 10px;
 
   #select-input {
     border-radius: 7.6px;
@@ -475,7 +476,7 @@ export const LanguageSelectorWrapper = styled(InputGroup)`
     }
   }
   #select-input {
-    margin: 0px 10px 0 5px;
+    margin-left: 5px;
   }
 `
 
@@ -500,7 +501,7 @@ export const LeftSide = styled.div`
   width: 100%;
   @media (min-width: 769px){
     flex-direction: ${({ theme }) =>
-      theme?.header?.components?.logo?.components?.layout?.position === 'center' ? 'row-reverse' : 'row'};
+    theme?.header?.components?.logo?.components?.layout?.position === 'center' ? 'row-reverse' : 'row'};
     width: 60%;
   }
 `

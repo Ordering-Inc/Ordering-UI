@@ -76,8 +76,10 @@ export const OrderBill = styled.div`
       td:nth-child(2) {
         font-weight: bold;
         color: ${({ theme }) => theme.colors.primary};
-        text-decoration: underline;
         cursor: pointer;
+        &:hover {
+        text-decoration: underline;
+      }
       }
     }
   }

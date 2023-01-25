@@ -64,7 +64,6 @@ export const Help = (props) => {
                   }
                 </SubPageList>
                 <LastOrdersListWrapper>
-                  <h2>{t('LAST_ORDER', 'Last order')}</h2>
                   <LastOrders {...props} />
                 </LastOrdersListWrapper>
               </HelpContentWrapper>

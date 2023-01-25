@@ -258,9 +258,11 @@ export const CartHeader = styled.div`
   span {
     font-size: 13px;
     color: ${props => props.theme.colors.primary};
-    text-decoration: underline;
     cursor: pointer;
     user-select: none;
+    &:hover {
+        text-decoration: underline;
+      }
   }
 
   h1, span {

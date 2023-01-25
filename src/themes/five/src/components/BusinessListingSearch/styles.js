@@ -16,8 +16,27 @@ export const BusinessListingSearchContainer = styled.div`
   }
 `
 
+export const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  cursor: pointer;
+
+  h3 {
+    margin: 0 10px 0 0;
+  }
+
+  .rotate {
+    transform: rotate(180deg);
+  }
+
+  .accordion__icon {
+    transition: transform 0.6s ease;
+  }
+`
+
 export const FiltersContainer = styled.div`
-  
   flex-direction: column;
   @media (min-width: 993px){
     flex-direction: row;
@@ -32,7 +51,7 @@ export const Filters = styled.div`
   @media (min-width: 993px){
     width: 25%;
     max-width: 25%;
-    margin-right: 20px;
+    margin-right: 70px;
   }
 `
 
