@@ -244,6 +244,16 @@ const BusinessProductsListingUI = (props) => {
   }, [])
 
   useEffect(() => {
+    const handleClickedBannerProduct = () => {
+      handleUpdateInitialRender(true)
+    }
+    events.on('product_banner_clicked', handleClickedBannerProduct)
+    return () => {
+      events.off('product_banner_clicked', handleClickedBannerProduct)
+    }
+  }, [])
+
+  useEffect(() => {
     if (loading) return
     if (openProduct) {
       onChangeMetaTag && onChangeMetaTag(curProduct?.seo_title, curProduct?.seo_description, curProduct?.seo_keywords)
@@ -443,7 +453,7 @@ const BusinessProductsListingUI = (props) => {
         disableOverflowX
       >
 
-        {productModal.loading && !productModal.error && (
+        {productModal.loading && !productModal.error && !productModal.product && (
           <ProductLoading>
             <SkeletonItem>
               <Skeleton height={45} count={props.useKioskApp ? 12 : 8} />
