@@ -16,6 +16,7 @@ var _Modal = require("../Modal");
 var _CouponControl = require("../../../../../components/CouponControl");
 var _ProductForm = require("../ProductForm");
 var _UpsellingPage = require("../UpsellingPage");
+var _CartStoresListing = require("../../../../franchise/src/components/CartStoresListing");
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _TaxInformation = require("../TaxInformation");
 var _Inputs = require("../../styles/Inputs");
@@ -26,6 +27,7 @@ var _styles = require("./styles");
 var _utils = require("../../../../../utils");
 var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCircle"));
 var _MdCloseCircle = _interopRequireDefault(require("@meronex/icons/ios/MdCloseCircle"));
+var _MomentContent = require("../MomentContent");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -42,7 +44,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CartUI = function CartUI(props) {
-  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _orderState$carts, _props$cart, _theme$viewString, _theme$viewString$com, _theme$viewString$com2, _theme$viewString$com3, _theme$viewString$com4, _theme$viewString2, _theme$viewString2$co, _theme$viewString2$co2, _theme$viewString2$co3, _theme$viewString2$co4, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _orderState$options2, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_t2, _configs$driver_tip_u2, _configs$driver_tip_t3, _cart$payment_events, _cart$payment_events2, _cart$business2, _cart$business3, _curProduct$calendar_, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _orderState$carts, _props$cart, _theme$viewString, _theme$viewString$com, _theme$viewString$com2, _theme$viewString$com3, _theme$viewString$com4, _theme$viewString2, _theme$viewString2$co, _theme$viewString2$co2, _theme$viewString2$co3, _theme$viewString2$co4, _orderState$options, _orderState$options2, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options3, _cart$offers7, _cart$offers8, _cart$offers8$filter, _orderState$options4, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options5, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_t2, _configs$driver_tip_u2, _configs$driver_tip_t3, _cart$payment_events, _cart$payment_events2, _orderState$options6, _cart$business2, _cart$business3, _curProduct$calendar_, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
   var currentCartUuid = props.currentCartUuid,
     clearCart = props.clearCart,
     isProducts = props.isProducts,
@@ -66,7 +68,8 @@ var CartUI = function CartUI(props) {
     setPreorderBusiness = props.setPreorderBusiness,
     cartMulticart = props.cart,
     hideDeliveryFee = props.hideDeliveryFee,
-    hideDriverTip = props.hideDriverTip;
+    hideDriverTip = props.hideDriverTip,
+    businessConfigs = props.businessConfigs;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -132,15 +135,32 @@ var CartUI = function CartUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     isUpselling = _useState14[0],
     setIsUpselling = _useState14[1];
-  // const [openChangeStore, setOpenChangeStore] = useState(false)
-
+  var _useState15 = (0, _react.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    openChangeStore = _useState16[0],
+    setOpenChangeStore = _useState16[1];
   var businessUrlTemplate = (site === null || site === void 0 ? void 0 : site.business_url_template) || '/store/:business_slug';
   var isCouponEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.coupon) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
+  var cateringTypes = [7, 8];
   var isMultiCheckout = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var cart = cartMulticart || (orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat((_props$cart = props.cart) === null || _props$cart === void 0 ? void 0 : _props$cart.business_id)]);
   var viewString = isStore ? 'business_view' : 'header';
   var hideCartComments = theme === null || theme === void 0 ? void 0 : (_theme$viewString = theme[viewString]) === null || _theme$viewString === void 0 ? void 0 : (_theme$viewString$com = _theme$viewString.components) === null || _theme$viewString$com === void 0 ? void 0 : (_theme$viewString$com2 = _theme$viewString$com.cart) === null || _theme$viewString$com2 === void 0 ? void 0 : (_theme$viewString$com3 = _theme$viewString$com2.components) === null || _theme$viewString$com3 === void 0 ? void 0 : (_theme$viewString$com4 = _theme$viewString$com3.comments) === null || _theme$viewString$com4 === void 0 ? void 0 : _theme$viewString$com4.hidden;
   var hideCartDiscount = theme === null || theme === void 0 ? void 0 : (_theme$viewString2 = theme[viewString]) === null || _theme$viewString2 === void 0 ? void 0 : (_theme$viewString2$co = _theme$viewString2.components) === null || _theme$viewString2$co === void 0 ? void 0 : (_theme$viewString2$co2 = _theme$viewString2$co.cart) === null || _theme$viewString2$co2 === void 0 ? void 0 : (_theme$viewString2$co3 = _theme$viewString2$co2.components) === null || _theme$viewString2$co3 === void 0 ? void 0 : (_theme$viewString2$co4 = _theme$viewString2$co3.discount) === null || _theme$viewString2$co4 === void 0 ? void 0 : _theme$viewString2$co4.hidden;
+  var cateringTypeString = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 7 ? 'catering_delivery' : (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 8 ? 'catering_pickup' : null;
+  var splitCateringValue = function splitCateringValue(configName) {
+    var _businessConfigs$find, _businessConfigs$find2, _businessConfigs$find3, _businessConfigs$find4;
+    return (_businessConfigs$find = businessConfigs.find(function (config) {
+      return config.key === configName;
+    })) === null || _businessConfigs$find === void 0 ? void 0 : (_businessConfigs$find2 = _businessConfigs$find.value) === null || _businessConfigs$find2 === void 0 ? void 0 : (_businessConfigs$find3 = _businessConfigs$find2.split('|')) === null || _businessConfigs$find3 === void 0 ? void 0 : (_businessConfigs$find4 = _businessConfigs$find3.find(function (val) {
+      return val.includes(cateringTypeString);
+    })) === null || _businessConfigs$find4 === void 0 ? void 0 : _businessConfigs$find4.split(',')[1];
+  };
+  var preorderSlotInterval = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_slot_interval'));
+  var preorderLeadTime = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_lead_time'));
+  var preorderTimeRange = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_time_range'));
+  var preorderMaximumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_maximum_days'));
+  var preorderMinimumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_minimum_days'));
   var walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -168,17 +188,16 @@ var CartUI = function CartUI(props) {
     setCurProduct(product);
     setModalIsOpen(true);
   };
-  var handleClickCheckout = function handleClickCheckout() {
+  var handleClickCheckout = function handleClickCheckout(uuid) {
     var _Object$values;
     var cartsAvailable = (_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
       return (cart === null || cart === void 0 ? void 0 : cart.valid) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2;
     });
-    if (cartsAvailable.length === 1) {
-      var _cartsAvailable$;
+    if (cartsAvailable.length === 1 || !isMultiCheckout) {
       events.emit('go_to_page', {
         page: 'checkout',
         params: {
-          cartUuid: (_cartsAvailable$ = cartsAvailable[0]) === null || _cartsAvailable$ === void 0 ? void 0 : _cartsAvailable$.uuid
+          cartUuid: uuid
         }
       });
     } else {
@@ -192,11 +211,11 @@ var CartUI = function CartUI(props) {
           page: 'multi_cart'
         });
       } else {
-        var _cartsAvailable$2, _cartsAvailable$2$gro;
+        var _cartsAvailable$, _cartsAvailable$$grou;
         events.emit('go_to_page', {
           page: 'multi_checkout',
           params: {
-            cartUuid: (_cartsAvailable$2 = cartsAvailable[0]) === null || _cartsAvailable$2 === void 0 ? void 0 : (_cartsAvailable$2$gro = _cartsAvailable$2.group) === null || _cartsAvailable$2$gro === void 0 ? void 0 : _cartsAvailable$2$gro.uuid
+            cartUuid: (_cartsAvailable$ = cartsAvailable[0]) === null || _cartsAvailable$ === void 0 ? void 0 : (_cartsAvailable$$grou = _cartsAvailable$.group) === null || _cartsAvailable$$grou === void 0 ? void 0 : _cartsAvailable$$grou.uuid
           }
         });
       }
@@ -252,8 +271,8 @@ var CartUI = function CartUI(props) {
     setCanOpenUpselling(false);
     handleClickCheckout();
   };
-  var checkOutBtnClick = function checkOutBtnClick() {
-    handleClickCheckout();
+  var checkOutBtnClick = function checkOutBtnClick(uuid) {
+    handleClickCheckout(uuid);
   };
   var getIncludedTaxes = function getIncludedTaxes() {
     if ((cart === null || cart === void 0 ? void 0 : cart.taxes) === null) {
@@ -287,11 +306,9 @@ var CartUI = function CartUI(props) {
       }
     });
   };
-
-  // const handleChangeStore = () => {
-  //   setOpenChangeStore(true)
-  // }
-
+  var handleChangeStore = function handleChangeStore() {
+    setOpenChangeStore(true);
+  };
   (0, _react.useEffect)(function () {
     if (isCustomMode) setIsUpselling(true);
   }, [isCustomMode]);
@@ -327,9 +344,8 @@ var CartUI = function CartUI(props) {
     total: cart === null || cart === void 0 ? void 0 : cart.total,
     handleClickCheckout: handleClickCheckout,
     checkoutButtonDisabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address),
-    setPreorderBusiness: setPreorderBusiness
-    // handleChangeStore={!useKioskApp && handleChangeStore}
-    ,
+    setPreorderBusiness: setPreorderBusiness,
+    handleChangeStore: !useKioskApp && handleChangeStore,
     isMultiCheckout: isMultiCheckout
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
@@ -443,7 +459,7 @@ var CartUI = function CartUI(props) {
         return onRemoveOffer(offer === null || offer === void 0 ? void 0 : offer.id);
       }
     }))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 ? void 0 : (_offer$summary2 = offer.summary) === null || _offer$summary2 === void 0 ? void 0 : _offer$summary2.discount)));
-  })), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price) > 0 && !hideDeliveryFee && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.delivery_price))), !hideCartDiscount && (cart === null || cart === void 0 ? void 0 : (_cart$offers7 = cart.offers) === null || _cart$offers7 === void 0 ? void 0 : _cart$offers7.length) > 0 && (cart === null || cart === void 0 ? void 0 : (_cart$offers8 = cart.offers) === null || _cart$offers8 === void 0 ? void 0 : (_cart$offers8$filter = _cart$offers8.filter(function (offer) {
+  })), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price) > 0 && !hideDeliveryFee && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.delivery_price))), !hideCartDiscount && (cart === null || cart === void 0 ? void 0 : (_cart$offers7 = cart.offers) === null || _cart$offers7 === void 0 ? void 0 : _cart$offers7.length) > 0 && (cart === null || cart === void 0 ? void 0 : (_cart$offers8 = cart.offers) === null || _cart$offers8 === void 0 ? void 0 : (_cart$offers8$filter = _cart$offers8.filter(function (offer) {
     return (offer === null || offer === void 0 ? void 0 : offer.target) === 2;
   })) === null || _cart$offers8$filter === void 0 ? void 0 : _cart$offers8$filter.map(function (offer) {
     var _offer$summary3;
@@ -468,10 +484,10 @@ var CartUI = function CartUI(props) {
         return onRemoveOffer(offer === null || offer === void 0 ? void 0 : offer.id);
       }
     }))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 ? void 0 : (_offer$summary3 = offer.summary) === null || _offer$summary3 === void 0 ? void 0 : _offer$summary3.discount)));
-  })), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price) > 0 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price_with_discount) >= 0 && !hideDeliveryFee && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE_AFTER_DISCOUNT', 'Delivery Fee After Discount')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.delivery_price_with_discount))), (cart === null || cart === void 0 ? void 0 : cart.driver_tip) > 0 && !hideDriverTip && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip'), ' ', (cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate) > 0 && parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 2 && !parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_u = configs.driver_tip_use_custom) === null || _configs$driver_tip_u === void 0 ? void 0 : _configs$driver_tip_u.value, 10) && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate, parseNumber), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.driver_tip))))), isCouponEnabled && !isCartPending && (isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover) && !hideCartDiscount && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
+  })), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price) > 0 && (cart === null || cart === void 0 ? void 0 : cart.delivery_price_with_discount) >= 0 && !hideDeliveryFee && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE_AFTER_DISCOUNT', 'Delivery Fee After Discount')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.delivery_price_with_discount))), (cart === null || cart === void 0 ? void 0 : cart.driver_tip) > 0 && !hideDriverTip && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DRIVER_TIP', 'Driver tip'), ' ', (cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate) > 0 && parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 2 && !parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_u = configs.driver_tip_use_custom) === null || _configs$driver_tip_u === void 0 ? void 0 : _configs$driver_tip_u.value, 10) && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(cart === null || cart === void 0 ? void 0 : cart.driver_tip_rate, parseNumber), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.driver_tip))))), isCouponEnabled && !isCartPending && (isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover) && !hideCartDiscount && /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     price: cart === null || cart === void 0 ? void 0 : cart.total
-  })), !isStore && !isMultiCheckout && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.checkout) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.driver_tip) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.enabled) && driverTipsOptions.length > 0 && !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+  })), !isStore && !isMultiCheckout && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.checkout) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.driver_tip) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.enabled) && driverTipsOptions.length > 0 && !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
     isFixedPrice: parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t2 = configs.driver_tip_type) === null || _configs$driver_tip_t2 === void 0 ? void 0 : _configs$driver_tip_t2.value, 10) === 1,
@@ -487,7 +503,7 @@ var CartUI = function CartUI(props) {
     defaultValue: cart === null || cart === void 0 ? void 0 : cart.comment,
     placeholder: t('SPECIAL_COMMENTS', 'Special Comments'),
     onChange: function onChange(e) {
-      return handleChangeComment(e.target.value);
+      return handleChangeComment(e.target.value, user === null || user === void 0 ? void 0 : user.id);
     }
   }), (commentState === null || commentState === void 0 ? void 0 : commentState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Spinner, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
@@ -528,9 +544,20 @@ var CartUI = function CartUI(props) {
     style: {
       fontWeight: 'bold'
     }
-  }, parsePrice(cart === null || cart === void 0 ? void 0 : cart.balance))))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (!isMultiCheckout || isStore) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, parsePrice(cart === null || cart === void 0 ? void 0 : cart.balance))))), cateringTypes.includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.type) && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, {
+    cateringPreorder: true,
+    isCart: true,
+    preorderSlotInterval: preorderSlotInterval,
+    preorderLeadTime: preorderLeadTime,
+    preorderTimeRange: preorderTimeRange,
+    preorderMaximumDays: preorderMaximumDays,
+    business: cart === null || cart === void 0 ? void 0 : cart.business,
+    preorderMinimumDays: preorderMinimumDays
+  })), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (!isMultiCheckout || isStore) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address) ? 'secundary' : 'primary',
-    onClick: checkOutBtnClick,
+    onClick: function onClick() {
+      return checkOutBtnClick(cart === null || cart === void 0 ? void 0 : cart.uuid);
+    },
     disabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address)
   }, !(cart !== null && cart !== void 0 && cart.valid_address) ? t('OUT_OF_COVERAGE', 'Out of Coverage') : !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')))), !isStore && /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('PRODUCT', 'Product'),
@@ -608,6 +635,27 @@ var CartUI = function CartUI(props) {
     openUpselling: openUpselling,
     canOpenUpselling: canOpenUpselling,
     setCanOpenUpselling: setCanOpenUpselling
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    width: "70%",
+    title: t('CHANGE_STORE', 'Change store'),
+    open: openChangeStore,
+    padding: "20px",
+    closeOnBackdrop: true,
+    modalTitleStyle: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    onClose: function onClose() {
+      return setOpenChangeStore(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CartStoresListing.CartStoresListing, {
+    isStore: isStore,
+    pageChangeStore: "business",
+    cartuuid: cart === null || cart === void 0 ? void 0 : cart.uuid,
+    onClose: function onClose() {
+      return setOpenChangeStore(false);
+    },
+    handleCustomStoreRedirect: handleStoreRedirect
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

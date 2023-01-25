@@ -7,16 +7,19 @@ Object.defineProperty(exports, "__esModule", {
 exports.ProfessionalFilter = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
-var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
-var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
 var _Modal = require("../Modal");
 var _ProfessionalProfile = require("../ProfessionalProfile");
 var _AutoScroll = require("../AutoScroll");
 var _ProfessionalInfo = require("../ProfessionalInfo");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _SingleProfessionalCard = require("../SingleProfessionalCard");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -26,7 +29,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProfessionalFilter = function ProfessionalFilter(props) {
   var professionals = props.professionals,
     professionalSelected = props.professionalSelected,
-    handleChangeProfessionalSelected = props.handleChangeProfessionalSelected;
+    handleChangeProfessionalSelected = props.handleChangeProfessionalSelected,
+    handleUpdateProfessionals = props.handleUpdateProfessionals;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -43,18 +47,20 @@ var ProfessionalFilter = function ProfessionalFilter(props) {
     currentProfessional = _useState6[0],
     setCurrentProfessional = _useState6[1];
   var handleOpenProfile = function handleOpenProfile(e, professional) {
-    if (e.target.closest('.info')) return;
+    if (e.target.closest('.info') || e.target.closest('.favorite')) return;
     setCurrentProfessional(professional);
     setOpen(true);
-  };
-  var handleOpenReview = function handleOpenReview(professional) {
-    setReviewOpen(true);
-    setCurrentProfessional(professional);
   };
   var handleCloseProfile = function handleCloseProfile() {
     setCurrentProfessional(null);
     setOpen(false);
     setReviewOpen(false);
+  };
+  var onUpdateProfessionals = function onUpdateProfessionals(id, changes) {
+    var updatedProfessional = professionals.find(function (professional) {
+      return professional.id === id;
+    });
+    handleUpdateProfessionals(_objectSpread(_objectSpread({}, updatedProfessional), changes));
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PROFESSIONALS', 'Professionals')), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProfessionalListing, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: "professionalId"
@@ -63,23 +69,15 @@ var ProfessionalFilter = function ProfessionalFilter(props) {
     onClick: function onClick() {
       return handleChangeProfessionalSelected(null);
     }
-  }, /*#__PURE__*/_react.default.createElement("p", null, t('ANY_PROFESSIONAL_MEMBER', 'Any professional member'))), professionals.map(function (professional, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.ProfessionalItem, {
-      key: i,
+  }, /*#__PURE__*/_react.default.createElement("p", null, t('ANY_PROFESSIONAL_MEMBER', 'Any professional member'))), professionals.map(function (professional) {
+    return /*#__PURE__*/_react.default.createElement(_SingleProfessionalCard.SingleProfessionalCard, {
+      isSmallPhoto: true,
+      handleProfessionalClick: handleOpenProfile,
       active: (professional === null || professional === void 0 ? void 0 : professional.id) === (professionalSelected === null || professionalSelected === void 0 ? void 0 : professionalSelected.id),
-      onClick: function onClick(e) {
-        return handleOpenProfile(e, professional);
-      }
-    }, professional !== null && professional !== void 0 && professional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
-      bgimage: professional === null || professional === void 0 ? void 0 : professional.photo
-    }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
-      className: "name"
-    }, professional === null || professional === void 0 ? void 0 : professional.name, " ", professional === null || professional === void 0 ? void 0 : professional.lastname), /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, {
-      className: "info",
-      onClick: function onClick() {
-        return handleOpenReview(professional);
-      }
-    }), /*#__PURE__*/_react.default.createElement(_styles.HeartIconWrapper, null, professional !== null && professional !== void 0 && professional.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)))));
+      key: professional.id,
+      professional: professional,
+      handleUpdateProfessionals: onUpdateProfessionals
+    });
   }))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: open,
     width: "760px",

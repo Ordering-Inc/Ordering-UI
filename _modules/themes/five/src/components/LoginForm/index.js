@@ -400,6 +400,11 @@ var LoginFormUI = function LoginFormUI(props) {
       });
     }
   }, [recaptchaConfig]);
+  var preventWhiteSpaceOnKeyDown = function preventWhiteSpaceOnKeyDown(e) {
+    if (e.key === " ") {
+      e.preventDefault();
+    }
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -487,6 +492,7 @@ var LoginFormUI = function LoginFormUI(props) {
       required: loginTab === 'email' ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
       pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
     }),
+    onKeyDown: preventWhiteSpaceOnKeyDown,
     onChange: handleChangeInputEmail,
     autoComplete: "on",
     isError: (_formMethods$errors4 = formMethods.errors) === null || _formMethods$errors4 === void 0 ? void 0 : _formMethods$errors4.email

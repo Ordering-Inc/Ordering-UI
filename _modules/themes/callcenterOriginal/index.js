@@ -27,6 +27,12 @@ Object.defineProperty(exports, "AddressList", {
     return _AddressList.AddressList;
   }
 });
+Object.defineProperty(exports, "AdminAreaPopover", {
+  enumerable: true,
+  get: function get() {
+    return _AdminAreaPopover.AdminAreaPopover;
+  }
+});
 Object.defineProperty(exports, "AppleLogin", {
   enumerable: true,
   get: function get() {
@@ -485,6 +491,7 @@ Object.defineProperty(exports, "UserProfileForm", {
 });
 var _AccordionDropdown = require("./src/components/AccordionDropdown");
 var _AddressDetails = require("./src/components/AddressDetails");
+var _AdminAreaPopover = require("./src/components/AdminAreaPopover");
 var _AddressForm = require("./src/components/AddressForm");
 var _AddressList = require("./src/components/AddressList");
 var _AppleLogin = require("./src/components/AppleLogin");

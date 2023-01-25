@@ -178,15 +178,21 @@ var ServiceFormUI = function ServiceFormUI(props) {
     setDateSelected(_moment);
   };
   var isBusyTime = function isBusyTime(professional) {
-    var _professional$busy_ti, _product$duration;
-    if ((professional === null || professional === void 0 ? void 0 : (_professional$busy_ti = professional.busy_times) === null || _professional$busy_ti === void 0 ? void 0 : _professional$busy_ti.length) === 0 || !dateSelected) return false;
+    var _professional$schedul, _professional$schedul2, _product$duration, _professional$schedul3, _professional$schedul4, _professional$busy_ti;
+    if (!dateSelected) return false;
+    var startDay = (0, _moment2.default)(dateSelected).utc().format('d');
+    var isStartScheduleEnabled = professional === null || professional === void 0 ? void 0 : (_professional$schedul = professional.schedule) === null || _professional$schedul === void 0 ? void 0 : (_professional$schedul2 = _professional$schedul[startDay]) === null || _professional$schedul2 === void 0 ? void 0 : _professional$schedul2.enabled;
     var duration = (_product$duration = product === null || product === void 0 ? void 0 : product.duration) !== null && _product$duration !== void 0 ? _product$duration : 0;
+    var endDay = (0, _moment2.default)(dateSelected).add(duration - 1, 'minutes').utc().format('d');
+    var isEndScheduleEnabled = professional === null || professional === void 0 ? void 0 : (_professional$schedul3 = professional.schedule) === null || _professional$schedul3 === void 0 ? void 0 : (_professional$schedul4 = _professional$schedul3[endDay]) === null || _professional$schedul4 === void 0 ? void 0 : _professional$schedul4.enabled;
+    if (!isStartScheduleEnabled || !isEndScheduleEnabled) return true;
+    if ((professional === null || professional === void 0 ? void 0 : (_professional$busy_ti = professional.busy_times) === null || _professional$busy_ti === void 0 ? void 0 : _professional$busy_ti.length) === 0) return false;
     var busyTimes = isCartProduct ? professional === null || professional === void 0 ? void 0 : professional.busy_times.filter(function (item) {
       var _productCart$calendar, _productCart$calendar2;
       return !(item.start === (productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar = productCart.calendar_event) === null || _productCart$calendar === void 0 ? void 0 : _productCart$calendar.start) && item.end === (productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar2 = productCart.calendar_event) === null || _productCart$calendar2 === void 0 ? void 0 : _productCart$calendar2.end));
     }) : _toConsumableArray(professional === null || professional === void 0 ? void 0 : professional.busy_times);
     var valid = busyTimes.some(function (item) {
-      return _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(dateSelected).valueOf() && (0, _moment2.default)(dateSelected).valueOf() <= _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf() || _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(dateSelected).add(duration, 'minutes').valueOf() && (0, _moment2.default)(dateSelected).add(duration, 'minutes').valueOf() <= _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf();
+      return _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(dateSelected).valueOf() && (0, _moment2.default)(dateSelected).valueOf() < _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf() || _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(dateSelected).add(duration, 'minutes').valueOf() && (0, _moment2.default)(dateSelected).add(duration, 'minutes').valueOf() < _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf();
     });
     return valid;
   };
@@ -328,7 +334,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
     className: "status"
   }, t('BUSY_ON_SELECTED_TIME', 'Busy on selected time'))) : /*#__PURE__*/_react.default.createElement("span", {
     className: "status"
-  }, t('AVAILABLE', 'Available'))))) : /*#__PURE__*/_react.default.createElement("p", null, t('SELECT_PROFESSIONAL', 'Select professional')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, null)), isDropDown && /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DropDownTitle, null, t('ANY_PROFESSIONAL_MEMBER', 'Any professional member')), professionalListState === null || professionalListState === void 0 ? void 0 : (_professionalListStat3 = professionalListState.professionals) === null || _professionalListStat3 === void 0 ? void 0 : _professionalListStat3.map(function (professional) {
+  }, t('AVAILABLE', 'Available'))))) : /*#__PURE__*/_react.default.createElement("p", null, t('SELECT_PROFESSIONAL', 'Select professional')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, null)), isDropDown && /*#__PURE__*/_react.default.createElement(_styles.DropDownWrapper, null, professionalListState === null || professionalListState === void 0 ? void 0 : (_professionalListStat3 = professionalListState.professionals) === null || _professionalListStat3 === void 0 ? void 0 : _professionalListStat3.map(function (professional) {
     return /*#__PURE__*/_react.default.createElement(_styles.SelectedItem, {
       key: professional === null || professional === void 0 ? void 0 : professional.id,
       isDropDown: true,

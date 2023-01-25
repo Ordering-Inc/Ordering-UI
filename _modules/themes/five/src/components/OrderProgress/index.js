@@ -8,10 +8,10 @@ exports.OrderProgress = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _Buttons = require("../../styles/Buttons");
-var _moment = _interopRequireDefault(require("moment"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _styledComponents = require("styled-components");
 var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
+var _OrderEta = require("../OrderDetails/OrderEta");
 var _styles = require("./styles");
 var _utils = require("../../../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39,7 +39,6 @@ var OrderProgressUI = function OrderProgressUI(props) {
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
     optimizeImage = _useUtils2$.optimizeImage,
-    parseDate = _useUtils2$.parseDate,
     parseTime = _useUtils2$.parseTime;
   var theme = (0, _styledComponents.useTheme)();
   var _useEvent = (0, _orderingComponents.useEvent)(),
@@ -49,17 +48,6 @@ var OrderProgressUI = function OrderProgressUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     lastOrder = _useState2[0],
     setLastOrder = _useState2[1];
-  var convertDiffToHours = function convertDiffToHours(time) {
-    if (!time) return;
-    var deliveryTime = lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
-      outputFormat: 'YYYY-MM-DD hh:mm A'
-    }) : parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
-      utc: false,
-      outputFormat: 'YYYY-MM-DD hh:mm A'
-    });
-    var returnedDate = (0, _moment.default)(new Date(deliveryTime.replace(/-/g, '/'))).add(time, 'minutes').format('hh:mm A');
-    return returnedDate;
-  };
   var handleGoToPage = function handleGoToPage(index) {
     events.emit('go_to_page', {
       page: index,
@@ -98,7 +86,10 @@ var OrderProgressUI = function OrderProgressUI(props) {
     outputFormat: 'hh:mm A'
   }) : parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
     utc: false
-  }), "\xA0-\xA0", convertDiffToHours(lastOrder.eta_time))))))));
+  }), "\xA0-\xA0", /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
+    order: lastOrder,
+    outputFormat: "hh:mm A"
+  }))))))));
 };
 var OrderProgress = function OrderProgress(props) {
   var orderProgressProps = _objectSpread(_objectSpread({}, props), {}, {
