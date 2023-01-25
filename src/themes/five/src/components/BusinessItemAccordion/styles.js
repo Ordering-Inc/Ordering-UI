@@ -54,18 +54,19 @@ export const ContentInfo = styled.div`
 
     .go-store {
       user-select: none;
-      text-decoration: underline;
       color: ${props => props.theme.colors.primary};
       margin-right: 5px;
       ${props => props.theme?.rtl && css`
         margin-left: 5px;
         margin-right: 0;
       `}
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     .clear-cart {
       user-select: none;
-      text-decoration: underline;
       color: #d81212;
       margin-left: 5px;
       ${props => props.theme?.rtl && css`
@@ -74,6 +75,9 @@ export const ContentInfo = styled.div`
       `}
       &:first-letter {
         text-transform: uppercase;
+      }
+      &:hover {
+        text-decoration: underline;
       }
     }
 
@@ -85,12 +89,14 @@ export const ContentInfo = styled.div`
   }
   .change-store {
     cursor: pointer;
-    text-decoration: underline;
     color: ${props => props.theme.colors.primary};
     font-size: 12px;
     &:first-letter {
       text-transform: uppercase;
     }
+    &:hover {
+        text-decoration: underline;
+      }
   }
   ${props => props.theme?.rtl && css`
     margin-right: 10px;

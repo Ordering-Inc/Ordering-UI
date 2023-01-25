@@ -232,9 +232,6 @@ const UserProfileFormUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      {!isHiddenAddress && !props.hideOptions && (
-        <ProfileOptions value='account' />
-      )}
       <Container>
         <UserProfileContainer mbottom={isHiddenAddress && 25}>
           {showCustomerPicture && (

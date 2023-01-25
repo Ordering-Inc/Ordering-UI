@@ -167,7 +167,7 @@ const UserDetailsUI = (props) => {
               )}
               {cartStatus !== 2 && (
                 !isEdit ? (
-                  <span onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</span>
+                  <span onClick={() => toggleIsEdit()}>{t('CHANGE_USER_DETAILS', 'Change customer details')}</span>
                 ) : (
                   <FcCancel className='cancel' onClick={() => toggleEditState()} />
                 )
@@ -190,7 +190,7 @@ const UserDetailsUI = (props) => {
                   <CountryFlag>
                     {
                       userData?.country_phone_code && (
-                        <PhoneInput onChange={() => {}} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.cellphone}`)?.country} />
+                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.cellphone}`)?.country} />
                       )
                     }
                   </CountryFlag>

@@ -47,7 +47,7 @@ const AddressDetailsUI = (props) => {
           <Text>
             <h1>{addressToShow || orderState?.options?.address?.address}</h1>
             {orderState?.options?.type === 1 && !isCartPending &&
-              <span onClick={() => setOpenModal(true)}>{t('CHANGE', 'Change')}</span>}
+              <span onClick={() => setOpenModal(true)}>{t('CHANGE_ADDRESS', 'Change address')}</span>}
           </Text>
         </Header>
         {apiKey && (

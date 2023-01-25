@@ -23,6 +23,10 @@ export const Button = styled.button`
   }
   ${({ bgtransparent }) => bgtransparent && css`
       background: transparent !important;
+      &:hover {
+        background: ${darken(0.15, '#CCC')};
+        color: ${props => darken(0.15, props.theme.colors.primary)} !important;
+      }
   `}
   ${({ initialIcon }) => initialIcon && css`
     text-align: left;
