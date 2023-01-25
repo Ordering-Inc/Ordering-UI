@@ -47,12 +47,15 @@ export const Text = styled.div`
 
   span {
     font-size: 13px!important;
-    text-decoration: underline;
     cursor: pointer;
     user-select: none;
     color: ${props => props.theme.colors.primary};
     margin-left: 10px;
     font-weight: normal;
+
+    &:hover {
+        text-decoration: underline;
+      }
 
     ${props => props.theme?.rtl && css`
       margin-right: 10px;

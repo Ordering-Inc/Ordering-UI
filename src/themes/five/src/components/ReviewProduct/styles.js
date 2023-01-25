@@ -94,10 +94,10 @@ export const AddCommentHideShow = styled.p`
   transition: all 0.3s linear;
   color: #909BA9;
   font-size: 13px;
-
   &:hover {
-    color: ${props => props.theme?.colors.primary};
-  }
+        text-decoration: underline;
+        color: ${props => props.theme?.colors.primary};
+      }
   
   ${({ active }) => active && css`
     color: ${props => props.theme?.colors.primary};

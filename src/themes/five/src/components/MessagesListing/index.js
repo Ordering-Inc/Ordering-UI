@@ -4,8 +4,9 @@ import { useLanguage, useUtils, useEvent, OrderList as OrderListController, Orde
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import { NotFoundSource } from '../../../../../components/NotFoundSource'
 import { getOrderStatus } from '../../../../../utils'
+import { Messages } from '../Messages'
+import { NotFoundSource } from '../NotFoundSource'
 
 import {
   MessagesListingContainer,
@@ -33,7 +34,6 @@ import {
   DriverText,
   NotFoundSourceWrapper
 } from './styles'
-import { Messages } from '../Messages'
 
 const OrdersListingUI = (props) => {
   const {

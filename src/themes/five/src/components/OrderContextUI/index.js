@@ -67,7 +67,7 @@ export const OrderContextUI = (props) => {
 
   return (
     <>
-      <Container isBusinessList={isBusinessList}>
+      <Container isBusinessList={isBusinessList} hero={props.hideHero} >
         <AddressMenu
           onClick={() => handleClickAddress()}
           isCheckOut={isCheckOut}

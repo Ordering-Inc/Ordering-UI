@@ -10,7 +10,8 @@ export const NotFound = styled.div`
   margin: 20px auto;
 
   h1 {
-    font-size: 14px;
+    font-size: 20px;
+    opacity: 0.5;
     line-height: 24px;
     text-align: center;
     color: ${props => props.theme.colors?.headingColor};
@@ -24,7 +25,11 @@ export const NotFound = styled.div`
 `
 
 export const NotFoundImage = styled.div`
-  max-width: 300px;
+  svg {
+    width: 150px;
+    height: 120px;
+    opacity: 0.5;
+  }
 `
 
 export const ButtonWrapper = styled.div`

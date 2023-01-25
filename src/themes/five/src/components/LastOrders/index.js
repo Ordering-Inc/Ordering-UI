@@ -13,7 +13,6 @@ import {
   OrderInfoBlock,
   BusinessHeader
 } from './styles'
-import { NotFoundSource } from '../NotFoundSource'
 
 export const LastOrdersUI = (props) => {
   const {
@@ -39,33 +38,31 @@ export const LastOrdersUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <LastOrdersContainer>
-        {orderList?.loading && <Skeleton height={150} />}
-        {!orderList?.loading && orderList?.orders?.length > 0 && orderList?.orders.map((order, i) => (
-          <BusinessHeader key={i} bgimage={optimizeImage(order?.business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')}>
-            <OrderInfoBlock onClick={() => handleClickOrder(order?.uuid)}>
-              {order?.business?.name && (
-                <h4>{order?.business?.name}</h4>
-              )}
-              {(order?.delivery_datetime_utc || order?.delivery_datetime) && (
-                <p>
-                  <span>{t('TUTORIAL_ORDER_COMPLETED', 'Order Completed')} {('ON', 'on')} </span>
-                  {order?.delivery_datetime_utc
-                    ? parseDate(order?.delivery_datetime_utc)
-                    : parseDate(order?.delivery_datetime, { utc: false })}
-                </p>
-              )}
-            </OrderInfoBlock>
-          </BusinessHeader>
-        ))}
-        {!orderList?.loading && orderList?.orders?.length === 0 && (
-          <NotFoundSource
-            image={imageFails}
-            content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
-            conditioned
-          />
-        )}
-      </LastOrdersContainer>
+      {!orderList?.loading && orderList?.orders?.length > 0 && (
+        <>
+          <h2>{t('LAST_ORDER', 'Last order')}</h2>
+          <LastOrdersContainer>
+            {orderList?.loading && <Skeleton height={150} />}
+            {!orderList?.loading && orderList?.orders?.length > 0 && orderList?.orders.map((order, i) => (
+              <BusinessHeader key={i} bgimage={optimizeImage(order?.business?.header || theme.images?.dummies?.businessLogo, 'h_400,c_limit')}>
+                <OrderInfoBlock onClick={() => handleClickOrder(order?.uuid)}>
+                  {order?.business?.name && (
+                    <h4>{order?.business?.name}</h4>
+                  )}
+                  {(order?.delivery_datetime_utc || order?.delivery_datetime) && (
+                    <p>
+                      <span>{t('TUTORIAL_ORDER_COMPLETED', 'Order Completed')} {('ON', 'on')} </span>
+                      {order?.delivery_datetime_utc
+                        ? parseDate(order?.delivery_datetime_utc)
+                        : parseDate(order?.delivery_datetime, { utc: false })}
+                    </p>
+                  )}
+                </OrderInfoBlock>
+              </BusinessHeader>
+            ))}
+          </LastOrdersContainer>
+        </>
+      )}
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { useToast, ToastType } from 'ordering-components'
 
 const ToastBar = styled.div`
@@ -54,6 +54,8 @@ export const Toast = () => {
   const [toastConfig, { hideToast }] = useToast()
   const toastRef = useRef()
 
+  const theme = useTheme()
+
   useEffect(() => {
     if (!toastConfig && !toastRef.current) {
       return
@@ -78,7 +80,7 @@ export const Toast = () => {
 
   switch (type) {
     case ToastType.Info:
-      backgroundColor = '#6ba4ff'
+      backgroundColor = theme.colors.primary ?? backgroundColor
       break
     case ToastType.Error:
       backgroundColor = '#D83520'
