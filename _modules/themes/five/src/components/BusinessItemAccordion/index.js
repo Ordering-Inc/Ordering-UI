@@ -202,7 +202,9 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     onClick: handleChangeStore,
     className: "change-store"
   }, t('CHANGE_STORE', 'Change store')))), props.children), !setActive && !isClosed && !!isProducts && !checkoutButtonDisabled && !isMultiCheckout && !checkoutMultiBusinessEnabled && /*#__PURE__*/_react.default.createElement(_styles.PriceContainer, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    onClick: handleClickCheckout,
+    onClick: function onClick() {
+      return handleClickCheckout(uuid);
+    },
     color: "primary"
   }, t('CHECKOUT', 'Checkout')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({

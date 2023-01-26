@@ -62,7 +62,7 @@ var BusinessHeroImg = function BusinessHeroImg(props) {
 exports.BusinessHeroImg = BusinessHeroImg;
 var HightestRatedWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  padding: 50px 0 30px 0;\n"])));
 exports.HightestRatedWrapper = HightestRatedWrapper;
-var Divider = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  background: #F8F9FA;\n  height: 8px;\n  width: 100%;\n"])));
+var Divider = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  background: rgb(230, 234, 233);\n  height: 8px;\n  width: 100%;\n"])));
 exports.Divider = Divider;
 var SearchContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n"])));
 exports.SearchContainer = SearchContainer;
