@@ -141,7 +141,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     if ((_Object$values = Object.values(styleSheet.cssRules)) !== null && _Object$values !== void 0 && _Object$values.length) {
       styleSheet === null || styleSheet === void 0 ? void 0 : styleSheet.deleteRule(0);
     }
-    var disabledCustomWidth = isChew;
+    var disabledCustomWidth = isChew || !useKioskApp;
     var style0 = '.sticky-prod-cat {';
     style0 += 'position: fixed !important;';
     style0 += 'top: 0px !important;';
