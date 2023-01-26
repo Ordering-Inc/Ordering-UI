@@ -171,7 +171,7 @@ const MultiCheckoutUI = (props) => {
           <WrapperLeftContainer>
             <WrapperLeftContent>
               <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
-              <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
+              <h2 className='checkout-title'>{t('CHECKOUT', 'Checkout')}</h2>
 
               <AddressDetails
                 isMultiCheckout
