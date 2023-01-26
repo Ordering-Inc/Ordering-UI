@@ -155,7 +155,12 @@ export const TimeItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #E9ECEF;
+  ${({ isProfessional }) => isProfessional ? css`
+    background: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.primary};
+  ` : css`
+    background: ${props => props.theme.colors.gray200};
+  `}
   border-radius: 7.6px;
   padding: 5px 15px;
   margin: 12px;
@@ -171,6 +176,11 @@ export const TimeItem = styled.div`
 
   ${({ isDisabled }) => isDisabled && css`
     pointer-events: none;
+  `}
+  
+  ${({ busyTime }) => busyTime && css`
+    background: ${props => props.theme.colors.gray200};
+    color: ${props => props.theme.colors.lightGray};
   `}
 
   span {

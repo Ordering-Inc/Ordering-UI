@@ -439,8 +439,8 @@ export const TimeItem = styled.div`
   `}
 
   ${({ disabled }) => disabled && css`
-    background: ${props => props.theme.colors.disabled};
-    color: ${props => props.theme.colors.disabledContrast};
+    background: ${props => props.theme.colors.gray200};
+    color: ${props => props.theme.colors.lightGray};
   `}
 
   span {
