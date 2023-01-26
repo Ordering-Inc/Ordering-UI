@@ -136,21 +136,21 @@ export const bytesConverter = bytes => {
  */
 export const lightenDarkenColor = (color) => {
 
-  let r, g, b, hsp;
+  let r, g, b, hsp
   if (color.match(/^rgb/)) {
     // If HEX --> store the red, green, blue values in separate variables
-    color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+    color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/)
 
-    r = color[1];
-    g = color[2];
-    b = color[3];
+    r = color[1]
+    g = color[2]
+    b = color[3]
   } else {
     // If RGB --> Convert it to HEX
-    color = +("0x" + color.slice(1).replace(color.length < 5 && /./g, '$&$&'));
+    color = +("0x" + color.slice(1).replace(color.length < 5 && /./g, '$&$&'))
 
-    r = color >> 16;
-    g = color >> 8 & 255;
-    b = color & 255;
+    r = color >> 16
+    g = color >> 8 & 255
+    b = color & 255
   }
 
   // HSP (Highly Sensitive Poo) equation
@@ -158,13 +158,13 @@ export const lightenDarkenColor = (color) => {
     0.299 * (r * r) +
     0.587 * (g * g) +
     0.114 * (b * b)
-  );
+  )
 
   // Using the HSP value, determine whether the color is light or dark
   if (hsp > 197) {
-    return true; //is light color
+    return true //is light color
   } else {
-    return false;
+    return false
   }
 }
 
@@ -649,4 +649,30 @@ export const getOrderStatus = (s) => {
   ]
   const objectStatus = orderStatus.find((o) => o.key === status)
   return objectStatus && objectStatus
+}
+
+export const calendarLanguages = {
+  months: {
+    January: 'MONTH1',
+    February: 'MONTH2',
+    March: 'MONTH3',
+    April: 'MONTH4',
+    May: 'MONTH5',
+    June: 'MONTH6',
+    July: 'MONTH7',
+    August: 'MONTH8',
+    September: 'MONTH9',
+    October: 'MONTH10',
+    November: 'MONTH11',
+    December: 'MONTH12'
+  },
+  week: {
+    Mo: 'DAYMIN1',
+    Tu: 'DAYMIN2',
+    We: 'DAYMIN3',
+    Th: 'DAYMIN4',
+    Fr: 'DAYMIN5',
+    Sa: 'DAYMIN6',
+    Su: 'DAYMIN7'
+  }
 }
