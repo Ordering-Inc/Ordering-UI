@@ -27,6 +27,7 @@ import {
 import CgRadioCheck from '@meronex/icons/cg/CgRadioCheck'
 import CgRadioChecked from '@meronex/icons/cg/CgRadioChecked'
 import BiTimeFive from '@meronex/icons/bi/BiTimeFive'
+import { calendarLanguages } from '../../../../../utils'
 
 const MomentControlUI = (props) => {
   const {
@@ -67,18 +68,13 @@ const MomentControlUI = (props) => {
       setIsASP(true)
     } else setIsASP(false)
   }
-
   const handleRemoveDate = () => {
     !orderState.loading && handleAsap()
     setIsASP(true)
   }
 
-  const formatMonthYear = (date) => {
-    return moment(date).format('MMMM')
-  }
-
-  const formatShortWeekday = (date) => {
-    return moment(date).format('dd')
+  const formatWeekMonth = (obj, date) => {
+    return obj === 'month' ? t(calendarLanguages.months[moment(date).format('MMMM')], moment(date).format('MMMM')) : t(calendarLanguages.week[moment(date).format('dd')], moment(date).format('dd'))
   }
 
   const formatDay = (date) => {
@@ -133,7 +129,6 @@ const MomentControlUI = (props) => {
     }
   }, [hoursList])
 
-
   return (
     <div id='moment_control'>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -149,7 +144,7 @@ const MomentControlUI = (props) => {
         isLoading={orderState?.loading}
       >
         {isASP ? <CgRadioChecked /> : <CgRadioCheck />}
-        <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} - {t('DELIVERY_TIME', 'delivery time')})</span>
+        <span>{t('CHECKOUT_ASAP', 'ASAP') + ` (${t(moment().format('dddd')?.toLocaleUpperCase(), moment().format('dddd'))}, ${t(calendarLanguages.months[moment().format('MMMM')], moment().format('MMMM'))}${moment().format(' D, yyyy h:mm A')} - ${t('DELIVERY_TIME', 'delivery time')})`}</span>
       </CheckBoxWrapper>
       <CheckBoxWrapper
         highlight={!isASP}
@@ -183,8 +178,8 @@ const MomentControlUI = (props) => {
                 nextLabel={<MdKeyboardArrowRight />}
                 minDate={minDate}
                 maxDate={maxDate}
-                formatMonthYear={(locale, date) => formatMonthYear(date)}
-                formatShortWeekday={(locale, date) => formatShortWeekday(date)}
+                formatMonthYear={(locale, date) => formatWeekMonth('month', date)}
+                formatShortWeekday={(locale, date) => formatWeekMonth('week', date)}
                 formatDay={(locale, date) => formatDay(date)}
                 calendarType='US'
               />
