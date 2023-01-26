@@ -39,6 +39,7 @@ const PageBannerUI = (props) => {
         return events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}`, replace: true })
       }
     }
+    events.emit('product_banner_clicked')
     if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
       return events.emit('go_to_page', {
         page: 'product',
