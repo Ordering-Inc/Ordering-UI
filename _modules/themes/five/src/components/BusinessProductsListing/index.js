@@ -348,6 +348,15 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     events.emit('get_current_view');
   }, []);
   (0, _react.useEffect)(function () {
+    var handleClickedBannerProduct = function handleClickedBannerProduct() {
+      handleUpdateInitialRender(true);
+    };
+    events.on('product_banner_clicked', handleClickedBannerProduct);
+    return function () {
+      events.off('product_banner_clicked', handleClickedBannerProduct);
+    };
+  }, []);
+  (0, _react.useEffect)(function () {
     if (loading) return;
     if (openProduct) {
       onChangeMetaTag && onChangeMetaTag(curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_title, curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_description, curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_keywords);
@@ -504,7 +513,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     padding: "0",
     isProductForm: true,
     disableOverflowX: true
-  }, productModal.loading && !productModal.error && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_styles.ProductLoading, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonItem, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 45,
     count: props.useKioskApp ? 12 : 8
   }))), productModal.error && productModal.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

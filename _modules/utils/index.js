@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.orderTypeList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getOrderStatus = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.orderTypeList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getOrderStatus = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.calendarLanguages = exports.bytesConverter = void 0;
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -1026,3 +1026,29 @@ var getOrderStatus = function getOrderStatus(s) {
   return objectStatus && objectStatus;
 };
 exports.getOrderStatus = getOrderStatus;
+var calendarLanguages = {
+  months: {
+    January: 'MONTH1',
+    February: 'MONTH2',
+    March: 'MONTH3',
+    April: 'MONTH4',
+    May: 'MONTH5',
+    June: 'MONTH6',
+    July: 'MONTH7',
+    August: 'MONTH8',
+    September: 'MONTH9',
+    October: 'MONTH10',
+    November: 'MONTH11',
+    December: 'MONTH12'
+  },
+  week: {
+    Mo: 'DAYMIN1',
+    Tu: 'DAYMIN2',
+    We: 'DAYMIN3',
+    Th: 'DAYMIN4',
+    Fr: 'DAYMIN5',
+    Sa: 'DAYMIN6',
+    Su: 'DAYMIN7'
+  }
+};
+exports.calendarLanguages = calendarLanguages;
