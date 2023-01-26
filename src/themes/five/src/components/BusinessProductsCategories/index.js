@@ -126,7 +126,7 @@ const BusinessProductsCategoriesUI = (props) => {
     if (Object.values(styleSheet.cssRules)?.length) {
       styleSheet?.deleteRule(0)
     }
-    const disabledCustomWidth = isChew
+    const disabledCustomWidth = isChew || !useKioskApp
 
     let style0 = '.sticky-prod-cat {'
     style0 += 'position: fixed !important;'
