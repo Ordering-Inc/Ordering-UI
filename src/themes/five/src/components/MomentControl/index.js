@@ -158,7 +158,7 @@ const MomentControlUI = (props) => {
 
   useEffect(() => {
     let _timeLists = []
-    if (!scheduleList) {
+    if (!scheduleList || cateringPreorder) {
       const schedule = business && getActualSchedule()
       if (!schedule && cateringPreorder && business) {
         setIsEnabled(false)
@@ -246,7 +246,13 @@ const MomentControlUI = (props) => {
               {!isAppoint && !isCart && <p>{t('ORDER_TIME', 'Order time')}</p>}
               <DateWrapper>
                 <MonthYearLayer>
-                  <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
+                  <span>
+                    {
+                      datesList.slice((cateringPreorder && preorderMinimumDays) || 0, Number(cateringPreorder ? preorderMaximumDays : configs?.max_days_preorder?.value ?? 6, 10))?.length === 0
+                        ? moment(dateSelected).format('Do MMMM, yyyy')
+                        : moment(dateSelected).format('MMMM, yyyy')
+                    }
+                  </span>
                 </MonthYearLayer>
                 <DaysSwiper left={<BsCaretLeftFill />}>
                   <Swiper
@@ -319,7 +325,11 @@ const MomentControlUI = (props) => {
                     ))}
                   </>
                 ) : (
-                  <ClosedBusinessMsg>{t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')}</ClosedBusinessMsg>
+                  <ClosedBusinessMsg>
+                    {!business
+                      ? t('ERROR_SHEDULE_UNAVAILABLE', 'There are no schedules for this date')
+                      : t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')}
+                  </ClosedBusinessMsg>
                 )}
               </TimeListWrapper>
             </OrderTimeWrapper>
