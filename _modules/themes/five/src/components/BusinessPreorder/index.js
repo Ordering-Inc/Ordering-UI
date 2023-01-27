@@ -8,7 +8,7 @@ exports.BusinessPreorder = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _reactRouterDom = require("react-router-dom");
-var _moment = _interopRequireDefault(require("moment"));
+var _moment2 = _interopRequireDefault(require("moment"));
 var _styledComponents = require("styled-components");
 var _Select = require("../../styles/Select");
 var _Buttons = require("../../styles/Buttons");
@@ -98,8 +98,25 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     handleClick && handleClick(business);
   };
   var validateSelectedDate = function validateSelectedDate(curdate, menu) {
-    var day = (0, _moment.default)(curdate).format('d');
+    var day = (0, _moment2.default)(curdate).format('d');
     setIsEnabled(menu.schedule[day].enabled || false);
+  };
+  var getMomentTime = function getMomentTime(time) {
+    var _moment = (0, _moment2.default)("".concat((0, _moment2.default)(dateSelected).format('YYYY-MM-DD'), " ").concat(time), 'YYYY-MM-DD HH:mm').toDate();
+    return _moment;
+  };
+  var isBusyTime = function isBusyTime(professional, selectedMoment) {
+    var _professional$schedul, _professional$schedul2, _professional$busy_ti;
+    if (!selectedMoment) return false;
+    var startDay = (0, _moment2.default)(selectedMoment).utc().format('d');
+    var isStartScheduleEnabled = professional === null || professional === void 0 ? void 0 : (_professional$schedul = professional.schedule) === null || _professional$schedul === void 0 ? void 0 : (_professional$schedul2 = _professional$schedul[startDay]) === null || _professional$schedul2 === void 0 ? void 0 : _professional$schedul2.enabled;
+    if (!isStartScheduleEnabled) return true;
+    if ((professional === null || professional === void 0 ? void 0 : (_professional$busy_ti = professional.busy_times) === null || _professional$busy_ti === void 0 ? void 0 : _professional$busy_ti.length) === 0) return false;
+    var busyTimes = professional === null || professional === void 0 ? void 0 : professional.busy_times;
+    var valid = busyTimes.some(function (item) {
+      return _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(selectedMoment).valueOf() && (0, _moment2.default)(selectedMoment).valueOf() < _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf();
+    });
+    return valid;
   };
   var getTimeList = function getTimeList(curdate, menu) {
     validateSelectedDate(curdate, menu);
@@ -132,7 +149,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
   }))), !isProfessional && type === 'business_menu' && /*#__PURE__*/_react.default.createElement(_BusinessMenuList.BusinessMenuList, {
     businessId: business.id,
     setMenu: setMenu
-  }), (isPreOrderSetting || isProfessional) && /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, !isProfessional && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
+  }), (isPreOrderSetting || isProfessional) && /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, !isProfessional && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment2.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
     left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 0,
@@ -179,7 +196,9 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
       onClick: function onClick() {
         return handleChangeTime(time.value);
       },
-      isDisabled: isDisabled
+      isDisabled: isDisabled,
+      isProfessional: isProfessional,
+      busyTime: isProfessional && isBusyTime(business, getMomentTime(time.value))
     }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
   })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, !isProfessional ? t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment') : t('PROFESSIONAL_NOT_AVAILABLE', 'Professional is not available at the moment')))), !isPreOrderSetting && !isProfessional && /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')), showButton && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
