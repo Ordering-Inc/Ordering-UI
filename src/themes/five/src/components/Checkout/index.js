@@ -303,7 +303,7 @@ const CheckoutUI = (props) => {
               </h1>
             </WarningMessage>
           )}
-          <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
+          <h2 className='checkout-title'>{t('CHECKOUT', 'Checkout')}</h2>
 
           {!useKioskApp ? (
             <>
