@@ -93,6 +93,28 @@ const BusinessPreorderUI = (props) => {
     setIsEnabled(menu.schedule[day].enabled || false)
   }
 
+  const getMomentTime = (time) => {
+    const _moment = moment(`${moment(dateSelected).format('YYYY-MM-DD')} ${time}`, 'YYYY-MM-DD HH:mm').toDate()
+    return _moment
+  }
+
+  const isBusyTime = (professional, selectedMoment) => {
+    if (!selectedMoment) return false
+    const startDay = moment(selectedMoment).utc().format('d')
+    const isStartScheduleEnabled = professional?.schedule?.[startDay]?.enabled
+    if (!isStartScheduleEnabled) return true
+
+    if (professional?.busy_times?.length === 0) return false
+
+    const busyTimes = professional?.busy_times
+
+    const valid = busyTimes.some(item => {
+      return (moment.utc(item?.start).local().valueOf() <= moment(selectedMoment).valueOf() &&
+        moment(selectedMoment).valueOf() < moment.utc(item?.end).local().valueOf())
+    })
+    return valid
+  }
+
   const getTimeList = (curdate, menu) => {
     validateSelectedDate(curdate, menu)
     const dateParts = curdate.split('-')
@@ -208,6 +230,8 @@ const BusinessPreorderUI = (props) => {
                     active={timeSelected === time.value}
                     onClick={() => handleChangeTime(time.value)}
                     isDisabled={isDisabled}
+                    isProfessional={isProfessional}
+                    busyTime={isProfessional && isBusyTime(business, getMomentTime(time.value))}
                   >
                     <span>{time.text}</span>
                   </TimeItem>
