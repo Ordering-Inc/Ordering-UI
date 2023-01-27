@@ -421,7 +421,9 @@ export const TimeItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${props => props.theme.colors.gray200};
+  background: ${props => props.theme.colors.primaryContrast};
+  border: 1px solid transparent;
+  color: ${props => props.theme.colors.primary};
   border-radius: 7.6px;
   padding: 5px 15px;
   margin: 12px;
@@ -431,8 +433,14 @@ export const TimeItem = styled.div`
   user-select: none;
 
   ${({ active }) => active && css`
-    background: ${props => props.theme.colors.primaryContrast};
-    color: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primaryContrast};
+    border: 1px solid ${props => props.theme.colors.primary};
+  `}
+
+  ${({ disabled }) => disabled && css`
+    background: ${props => props.theme.colors.gray200};
+    color: ${props => props.theme.colors.lightGray};
   `}
 
   span {
