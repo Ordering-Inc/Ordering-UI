@@ -27,7 +27,7 @@ export const WalletTransactionItem = (props) => {
     : `:author ${item?.amount >= 0 ? 'Add' : 'Reduce'} money`
 
   const itemDescription = item?.description?.split(' ')
-  const order_id = itemDescription ? itemDescription?.pop() : ''
+  const order_id = itemDescription?.pop() ?? ''
 
   return (
     <Container>
@@ -52,7 +52,7 @@ export const WalletTransactionItem = (props) => {
       </MessageBlock>
       {!!item?.description && (
         <DescriptionBlock>
-          <span>{`${t('ACCUMULATION_CREDIT_POINT_BY_ORDER', itemDescription ? itemDescription?.join(' ') : 'Accumulation credit point by order')} ${order_id}`}</span>
+          <span>{`${t('ACCUMULATION_CREDIT_POINT_BY_ORDER', itemDescription?.join(' ') ?? 'Accumulation credit point by order')} ${order_id}`}</span>
         </DescriptionBlock>
       )}
       {!!item?.code && (
