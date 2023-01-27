@@ -134,19 +134,24 @@ const ServiceFormUI = (props) => {
     handleSave(values)
   }
 
+  const getMomentTime = (time) => {
+    const _moment = moment(`${moment(selectDate).format('YYYY-MM-DD')} ${time}`, 'YYYY-MM-DD HH:mm').toDate()
+    return _moment
+  }
+
   const handleChangeTime = (time) => {
     if (!time || time === timeSelected) return
-    const _moment = moment(`${moment(selectDate).format('YYYY-MM-DD')} ${time}`, 'YYYY-MM-DD HH:mm').toDate()
+    const _moment = getMomentTime(time)
     setTimeSelected(time)
     setDateSelected(_moment)
   }
 
-  const isBusyTime = (professional) => {
-    if (!dateSelected) return false
-    const startDay = moment(dateSelected).utc().format('d')
+  const isBusyTime = (professional, selectedMoment) => {
+    if (!selectedMoment) return false
+    const startDay = moment(selectedMoment).utc().format('d')
     const isStartScheduleEnabled = professional?.schedule?.[startDay]?.enabled
     const duration = product?.duration ?? 0
-    const endDay = moment(dateSelected).add(duration - 1, 'minutes').utc().format('d')
+    const endDay = moment(selectedMoment).add(duration - 1, 'minutes').utc().format('d')
     const isEndScheduleEnabled = professional?.schedule?.[endDay]?.enabled
     if (!isStartScheduleEnabled || !isEndScheduleEnabled) return true
 
@@ -156,10 +161,10 @@ const ServiceFormUI = (props) => {
       ? professional?.busy_times.filter(item => !(item.start === productCart?.calendar_event?.start && item.end === productCart?.calendar_event?.end))
       : [...professional?.busy_times]
     const valid = busyTimes.some(item => {
-      return (moment.utc(item?.start).local().valueOf() <= moment(dateSelected).valueOf() &&
-        moment(dateSelected).valueOf() < moment.utc(item?.end).local().valueOf()) ||
-        (moment.utc(item?.start).local().valueOf() <= moment(dateSelected).add(duration, 'minutes').valueOf() &&
-        moment(dateSelected).add(duration, 'minutes').valueOf() < moment.utc(item?.end).local().valueOf())
+      return (moment.utc(item?.start).local().valueOf() <= moment(selectedMoment).valueOf() &&
+        moment(selectedMoment).valueOf() < moment.utc(item?.end).local().valueOf()) ||
+        (moment.utc(item?.start).local().valueOf() < moment(selectedMoment).add(duration, 'minutes').valueOf() &&
+        moment(selectedMoment).add(duration, 'minutes').valueOf() < moment.utc(item?.end).local().valueOf())
     })
     return valid
   }
@@ -317,8 +322,8 @@ const ServiceFormUI = (props) => {
                       ) : <FaUserAlt />}
                       <NameWrapper>
                         <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
-                        <StatusInfo available={!isBusyTime(currentProfessional)}>
-                          {isBusyTime(currentProfessional) ? (
+                        <StatusInfo available={!isBusyTime(currentProfessional, dateSelected)}>
+                          {isBusyTime(currentProfessional, dateSelected) ? (
                             <>
                               <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
                             </>
@@ -350,8 +355,8 @@ const ServiceFormUI = (props) => {
                           ) : <FaUserAlt />}
                           <NameWrapper>
                             <p>{professional?.name} {professional?.lastname}</p>
-                            <StatusInfo available={!isBusyTime(professional)}>
-                              {isBusyTime(professional) ? (
+                            <StatusInfo available={!isBusyTime(professional, dateSelected)}>
+                              {isBusyTime(professional, dateSelected) ? (
                                 <>
                                   <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
                                 </>
@@ -435,6 +440,7 @@ const ServiceFormUI = (props) => {
                           <TimeItem
                             key={i}
                             active={timeSelected === time.value}
+                            disabled={isBusyTime(currentProfessional, getMomentTime(time.value))}
                             onClick={() => handleChangeTime(time.value)}
                           >
                             <span>{time.text}</span>
@@ -463,7 +469,7 @@ const ServiceFormUI = (props) => {
                 <Button
                   onClick={() => handleAddProduct()}
                   color='primary'
-                  disabled={isBusyTime(currentProfessional)}
+                  disabled={isBusyTime(currentProfessional, dateSelected)}
                 >
                   {t('BOOK', 'Book')}
                 </Button>
