@@ -434,7 +434,7 @@ export const TimeItem = styled.div`
 
   ${({ active }) => active && css`
     background: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.white};
+    color: ${props => props.theme.colors.primaryContrast};
     border: 1px solid ${props => props.theme.colors.primary};
   `}
 
