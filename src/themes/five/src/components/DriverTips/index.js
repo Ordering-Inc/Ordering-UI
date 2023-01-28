@@ -14,6 +14,7 @@ import { Button } from '../../styles/Buttons'
 
 const DriverTipsUI = (props) => {
   const {
+    isMulti,
     driverTip,
     driverTipsOptions,
     cart,
@@ -94,7 +95,7 @@ const DriverTipsUI = (props) => {
           {currentTip && (
             <DriverTipMessage>
               {t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount')}{!isFixedPriceType &&
-                ` (${driverTip}%)`}: {isFixedPriceType ? parsePrice(driverTip) : parsePrice(multiCartTipsAmmout ?? cart?.driver_tip)}
+                ` (${driverTip}%)`}: {parsePrice(isMulti ? multiCartTipsAmmout : isFixedPriceType ? driverTip : cart?.driver_tip)}
             </DriverTipMessage>
           )}
         </WrapperTips>

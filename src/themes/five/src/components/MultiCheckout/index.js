@@ -220,6 +220,7 @@ const MultiCheckoutUI = (props) => {
                     <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                     <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
                     <DriverTips
+                      isMulti
                       carts={openCarts}
                       businessIds={openCarts.map(cart => cart.business_id)}
                       driverTipsOptions={driverTipsOptions}
