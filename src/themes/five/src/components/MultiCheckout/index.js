@@ -220,7 +220,6 @@ const MultiCheckoutUI = (props) => {
                     <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
                     <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
                     <DriverTips
-                      isMulti
                       carts={openCarts}
                       businessIds={openCarts.map(cart => cart.business_id)}
                       driverTipsOptions={driverTipsOptions}
@@ -263,20 +262,20 @@ const MultiCheckoutUI = (props) => {
                 <MultiCartPriceContainer totalFeeEnabled={totalFeeEnabled}>
                   {!!totalCartsFee &&
                     configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1' &&
-                  (
-                    <span>
-                      <p>{t('TOTAL_DELIVERY_FEE', 'Total delivery fee')}</p>
-                      <p>{parsePrice(totalCartsFee)}</p>
-                    </span>
-                  )}
+                    (
+                      <span>
+                        <p>{t('TOTAL_DELIVERY_FEE', 'Total delivery fee')}</p>
+                        <p>{parsePrice(totalCartsFee)}</p>
+                      </span>
+                    )}
                   {openCarts.reduce((sum, cart) => sum + cart?.driver_tip, 0) > 0 &&
                     configs?.multi_business_checkout_show_combined_driver_tip?.value === '1' &&
-                  (
-                    <span>
-                      <p>{t('DRIVER_TIP', 'Driver tip')}</p>
-                      <p>{parsePrice(openCarts.reduce((sum, cart) => sum + cart?.driver_tip, 0))}</p>
-                    </span>
-                  )}
+                    (
+                      <span>
+                        <p>{t('DRIVER_TIP', 'Driver tip')}</p>
+                        <p>{parsePrice(openCarts.reduce((sum, cart) => sum + cart?.driver_tip, 0))}</p>
+                      </span>
+                    )}
                   <div>
                     <h4>{t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')}</h4>
                     <h4>{parsePrice(totalCartsPrice)}</h4>

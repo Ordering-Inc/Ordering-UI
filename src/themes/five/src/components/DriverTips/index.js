@@ -14,10 +14,10 @@ import { Button } from '../../styles/Buttons'
 
 const DriverTipsUI = (props) => {
   const {
-    isMulti,
     driverTip,
     driverTipsOptions,
     cart,
+    carts,
     isDriverTipUseCustom,
     handlerChangeOption
   } = props
@@ -40,6 +40,10 @@ const DriverTipsUI = (props) => {
     ? `${configs?.format_number_currency?.value}0`
     : `0${configs?.format_number_currency?.value}`
 
+  const multiCartTipsAmmout = carts?.reduce((total, cart) => {
+    return total + parseFloat(cart?.driver_tip || 0)
+  }, 0)
+
   return (
     <DriverTipContainer id='driver-tip-container'>
       <>
@@ -56,7 +60,7 @@ const DriverTipsUI = (props) => {
               {`${isFixedPriceType ? parsePrice(option) : `${option}%`}`}
             </TipCard>
           ))}
-          {(isDriverTipUseCustom && !isMulti) && (
+          {isDriverTipUseCustom && (
             <TipCard
               className={`${customTip ? 'active' : ''}`}
               onClick={() => setCustomTip(true)}
@@ -90,7 +94,7 @@ const DriverTipsUI = (props) => {
           {currentTip && (
             <DriverTipMessage>
               {t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount')}{!isFixedPriceType &&
-                ` (${driverTip}%)`}: {isFixedPriceType ? parsePrice(driverTip) : parsePrice(cart?.driver_tip)}
+                ` (${driverTip}%)`}: {isFixedPriceType ? parsePrice(driverTip) : parsePrice(multiCartTipsAmmout ?? cart?.driver_tip)}
             </DriverTipMessage>
           )}
         </WrapperTips>
