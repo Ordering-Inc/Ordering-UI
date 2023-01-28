@@ -29,6 +29,7 @@ var DriverTipsUI = function DriverTipsUI(props) {
     driverTip = props.driverTip,
     driverTipsOptions = props.driverTipsOptions,
     cart = props.cart,
+    carts = props.carts,
     isDriverTipUseCustom = props.isDriverTipUseCustom,
     handlerChangeOption = props.handlerChangeOption;
   var _useUtils = (0, _orderingComponents.useUtils)(),
@@ -57,6 +58,9 @@ var DriverTipsUI = function DriverTipsUI(props) {
     setvalue(e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value);
   };
   var placeholderCurrency = !isFixedPriceType ? "0%" : ((configs === null || configs === void 0 ? void 0 : (_configs$currency_pos = configs.currency_position) === null || _configs$currency_pos === void 0 ? void 0 : _configs$currency_pos.value) || 'left') === 'left' ? "".concat(configs === null || configs === void 0 ? void 0 : (_configs$format_numbe = configs.format_number_currency) === null || _configs$format_numbe === void 0 ? void 0 : _configs$format_numbe.value, "0") : "0".concat(configs === null || configs === void 0 ? void 0 : (_configs$format_numbe2 = configs.format_number_currency) === null || _configs$format_numbe2 === void 0 ? void 0 : _configs$format_numbe2.value);
+  var multiCartTipsAmmout = carts === null || carts === void 0 ? void 0 : carts.reduce(function (total, cart) {
+    return total + parseFloat((cart === null || cart === void 0 ? void 0 : cart.driver_tip) || 0);
+  }, 0);
   return /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, {
     id: "driver-tip-container"
   }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperTips, null, driverTipsOptions.map(function (option, i) {
@@ -68,7 +72,7 @@ var DriverTipsUI = function DriverTipsUI(props) {
         setCustomTip(false);
       }
     }, "".concat(isFixedPriceType ? parsePrice(option) : "".concat(option, "%")));
-  }), isDriverTipUseCustom && !isMulti && /*#__PURE__*/_react.default.createElement(_styles.TipCard, {
+  }), isDriverTipUseCustom && /*#__PURE__*/_react.default.createElement(_styles.TipCard, {
     className: "".concat(customTip ? 'active' : ''),
     onClick: function onClick() {
       return setCustomTip(true);
@@ -86,7 +90,7 @@ var DriverTipsUI = function DriverTipsUI(props) {
       handlerChangeOption(value);
       setvalue('');
     }
-  }, t('APPLY_TIP', 'Apply Tip')))), currentTip && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount'), !isFixedPriceType && " (".concat(driverTip, "%)"), ": ", isFixedPriceType ? parsePrice(driverTip) : parsePrice(cart === null || cart === void 0 ? void 0 : cart.driver_tip)))));
+  }, t('APPLY_TIP', 'Apply Tip')))), currentTip && /*#__PURE__*/_react.default.createElement(_styles.DriverTipMessage, null, t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount'), !isFixedPriceType && " (".concat(driverTip, "%)"), ": ", parsePrice(isMulti ? multiCartTipsAmmout : isFixedPriceType ? driverTip : cart === null || cart === void 0 ? void 0 : cart.driver_tip)))));
 };
 var DriverTips = function DriverTips(props) {
   var driverTipsProps = _objectSpread(_objectSpread({}, props), {}, {
