@@ -27,7 +27,8 @@ export const HorizontalOrdersLayout = (props) => {
     customArray,
     onRedirectPage,
     businessesIds,
-    isPreorders
+    isPreorders,
+    isCustomerMode
   } = props
 
   const orders = customArray || props.orders
@@ -37,9 +38,14 @@ export const HorizontalOrdersLayout = (props) => {
   const [{ configs }] = useConfig()
   const [{ parsePrice, parseDate }] = useUtils()
 
-  const ordersToShow = businessesIds
-    ? orders.filter(order => businessesIds?.includes(order?.business_id))
-    : orders
+  const ordersToShow = businessesIds && isCustomerMode
+    ? orders.filter(order =>
+      businessesIds?.includes(order?.business_id))
+    : businessesIds
+      ? orders.filter(order =>
+        businessesIds?.includes(order?.business_id) ||
+        JSON.stringify(businessesIds.sort((a, b) => a - b)) === JSON.stringify(order?.business?.map(business => business?.id).sort((a, b) => a - b)))
+      : orders
 
   const handleClickCard = (uuid) => {
     if (customArray) {
