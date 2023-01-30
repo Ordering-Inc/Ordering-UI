@@ -30,7 +30,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     customArray = props.customArray,
     onRedirectPage = props.onRedirectPage,
     businessesIds = props.businessesIds,
-    isPreorders = props.isPreorders;
+    isPreorders = props.isPreorders,
+    isCustomerMode = props.isCustomerMode;
   var orders = customArray || props.orders;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -44,8 +45,17 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     _useUtils2$ = _useUtils2[0],
     parsePrice = _useUtils2$.parsePrice,
     parseDate = _useUtils2$.parseDate;
-  var ordersToShow = businessesIds ? orders.filter(function (order) {
+  var ordersToShow = businessesIds && isCustomerMode ? orders.filter(function (order) {
     return businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id);
+  }) : businessesIds ? orders.filter(function (order) {
+    var _order$business;
+    return (businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id)) || JSON.stringify(businessesIds.sort(function (a, b) {
+      return a - b;
+    })) === JSON.stringify(order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.map(function (business) {
+      return business === null || business === void 0 ? void 0 : business.id;
+    }).sort(function (a, b) {
+      return a - b;
+    }));
   }) : orders;
   var handleClickCard = function handleClickCard(uuid) {
     if (customArray) {
@@ -75,7 +85,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         key: i
       }, props));
     }), orders.length > 0 && ordersToShow.map(function (order) {
-      var _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _order$summary, _getOrderStatus;
+      var _configs$google_maps_, _order$business2, _order$business3, _theme$images, _theme$images$dummies, _order$business4, _configs$google_maps_2, _order$business5, _theme$images2, _theme$images2$dummie, _order$business6, _theme$images3, _theme$images3$dummie, _order$business7, _order$summary, _getOrderStatus;
       return /*#__PURE__*/_react.default.createElement(_styles.Card, {
         key: order.id || order.uuid,
         id: "order-card",
@@ -86,18 +96,18 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       }, ((configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value) || isBusinessesPage) && /*#__PURE__*/_react.default.createElement(_styles.Map, {
         isBusinessesPage: isBusinessesPage
       }, /*#__PURE__*/_react.default.createElement("img", {
-        src: isBusinessesPage ? (order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.header) || (order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo) : (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.location, configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value),
+        src: isBusinessesPage ? (order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.header) || (order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo) : (0, _utils.getGoogleMapImage)(order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.location, configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value),
         alt: isBusinessesPage ? 'business_header' : 'google-maps-img',
         height: isBusinessesPage ? '200px' : '100px',
         width: "400px"
-      })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, (((_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo)) && !isBusinessesPage && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
-        src: ((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
+      })), /*#__PURE__*/_react.default.createElement(_styles.Content, null, (((_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo)) && !isBusinessesPage && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
+        src: ((_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
         alt: "business-logo",
         width: "75px",
         height: "75px"
       })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
         activeOrders: true
-      }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.name), /*#__PURE__*/_react.default.createElement("p", {
+      }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.name), /*#__PURE__*/_react.default.createElement("p", {
         name: "order_number"
       }, t('ORDER_NUMBER', 'Order No.'), " ", order.id), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
         utc: false
