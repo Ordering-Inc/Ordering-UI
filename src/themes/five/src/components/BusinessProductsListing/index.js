@@ -15,7 +15,8 @@ import {
   useSession,
   useSite,
   useOrderingTheme,
-  useConfig
+  useConfig,
+  useBusiness
 } from 'ordering-components'
 
 import {
@@ -90,13 +91,14 @@ const BusinessProductsListingUI = (props) => {
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }, { addProduct, updateProduct }] = useOrder()
+  const [{ carts, options }, { addProduct, updateProduct }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const location = useLocation()
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [{ site }] = useSite()
+  const [, { setBusiness }] = useBusiness()
   const [orderingTheme] = useOrderingTheme()
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
@@ -114,6 +116,8 @@ const BusinessProductsListingUI = (props) => {
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
   const showViewOrderButton = !orderingTheme?.theme?.business_view?.components?.order_view_button?.hidden
+  const cateringTypes = [7, 8]
+  const cateringPreorder = cateringTypes.includes(options?.type)
   const sortByOptions = [
     { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
     { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
@@ -293,6 +297,15 @@ const BusinessProductsListingUI = (props) => {
       adjustBusiness(adjustBusinessId)
     }
   }, [currentCart])
+
+  useEffect(() => {
+    if (cateringPreorder) {
+      setBusiness(business)
+    }
+    return () => {
+      setBusiness({})
+    }
+  }, [cateringPreorder, business])
 
   return (
     <>
