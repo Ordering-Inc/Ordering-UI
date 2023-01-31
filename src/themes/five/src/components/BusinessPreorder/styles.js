@@ -153,53 +153,75 @@ export const TimeListWrapper = styled.div`
 export const TimeItem = styled.div`
   cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  ${({ isProfessional }) => isProfessional ? css`
-    background: ${props => props.theme.colors.primaryContrast};
-    color: ${props => props.theme.colors.primary};
-  ` : css`
-    background: ${props => props.theme.colors.gray200};
-  `}
-  border-radius: 7.6px;
-  padding: 5px 15px;
-  margin: 12px;
-  width: calc(50% - 24px);
-  min-width: calc(50% - 24px);
-  box-sizing: border-box;
-  user-select: none;
-
+  span {
+    font-size: 14px;
+    white-space: nowrap;
+  }
   ${({ active }) => active && css`
     background: #F5F9FF;
     color: ${props => props.theme.colors.primary};
   `}
-
-  ${({ isDisabled }) => isDisabled && css`
-    pointer-events: none;
-  `}
-  
-  ${({ busyTime }) => busyTime && css`
-    background: ${props => props.theme.colors.gray200};
-    color: ${props => props.theme.colors.lightGray};
-  `}
-
-  span {
-    font-size: 14px;
-  }
-
-  @media (min-width: 400px) {
-    width: calc(33.33% - 24px);
-    min-width: calc(33.33% - 24px);
-  }
-
-  @media (min-width: 576px) {
-    width: calc(25% - 24px);
-    min-width: calc(25% - 24px);
-  }
-
-  @media (min-width: 769px) {
-    width: calc(16.66% - 24px);
-    min-width: calc(16.66% - 24px);
+${({ cateringPreorder }) => cateringPreorder ? css`
+    background: #fff;
+    width: 100%;
+    min-width: 100%;
+    height: 50px;
+    
+    span {
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      margin-left: 15px;
+      p{
+        position: relative;
+        bottom: 2px;
+      }
+    }
+    ${({ active }) => active && css`
+      background: #F5F9FF;
+      color: ${props => props.theme.colors.primary};
+      span {
+        p{
+          bottom: 0;
+          margin-left: 2px;
+        }
+      }
+    `}
+  ` : css`
+    justify-content: center;
+    align-items: center;
+    background: #E9ECEF;
+    border-radius: 7.6px;
+    padding: 5px 15px;
+    margin: 12px;
+    width: calc(50% - 24px);
+    min-width: calc(50% - 24px);
+    box-sizing: border-box;
+    user-select: none;
+      
+      @media (min-width: 400px) {
+        width: calc(33.33% - 24px);
+        min-width: calc(33.33% - 24px);
+      }
+      
+      @media (min-width: 576px) {
+      width: calc(25% - 24px);
+      min-width: calc(25% - 24px);
+      }
+      
+      @media (min-width: 769px) {
+        width: calc(33.33% - 24px);
+        min-width: calc(33.33% - 24px);
+        ${({ isAppoint }) => isAppoint && css`
+          width: calc(33.33% - 24px);
+          min-width: calc(33.33% - 24px);
+          span {
+            font-size: 12px;
+          }
+        `}
+      }
+    `
   }
 `
 
@@ -319,4 +341,32 @@ export const ClosedBusinessMsg = styled.div`
   text-align: center;
   font-size: 16px;
   width: 100%;
+`
+
+export const CheckIcon = styled.div`
+  margin-right: 20px;
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+`
+
+export const CheckedIcon = styled.div`
+  border-radius: 50%;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 6px solid ${props => props.theme.colors?.primary};
+  margin: 2px 12px 2px 2px;
+  ${props => props.theme.rtl && css`
+    margin: 2px 2px 2px 12px;
+  `}
+  ${({ cateringPreorder }) => cateringPreorder && css`
+    width: 21px;
+    min-width: 21px;
+    height: 21px;
+    margin: 0;
+    margin-left: 1px;
+  `}
 `

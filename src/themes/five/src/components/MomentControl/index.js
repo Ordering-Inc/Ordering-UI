@@ -159,13 +159,13 @@ const MomentControlUI = (props) => {
   useEffect(() => {
     let _timeLists = []
     if (!scheduleList || cateringPreorder) {
-      const schedule = business && getActualSchedule()
-      if (!schedule && cateringPreorder && business) {
+      const schedule = business && Object.keys(business || {})?.length > 0 && getActualSchedule()
+      if (!schedule && cateringPreorder & Object.keys(business)?.length > 0) {
         setIsEnabled(false)
         return
       }
       _timeLists = hoursList
-        .filter(hour => (!business || schedule?.lapses?.some(lapse =>
+        .filter(hour => (Object.keys(business || {})?.length === 0 || schedule?.lapses?.some(lapse =>
           moment(dateSelected + ` ${hour.startTime}`) >= moment(dateSelected + ` ${lapse.open.hour}:${lapse.open.minute}`).add(preorderLeadTime, 'minutes') && moment(dateSelected + ` ${hour.endTime}`) <= moment(dateSelected + ` ${lapse.close.hour}:${lapse.close.minute}`))) &&
           moment(dateSelected + ` ${hour.startTime}`) < moment(dateSelected + ` ${hour.endTime}`) &&
           (moment().add(preorderLeadTime, 'minutes') < moment(dateSelected + ` ${hour.startTime}`) || !cateringPreorder))
