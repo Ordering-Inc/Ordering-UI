@@ -166,6 +166,7 @@ const CheckoutUI = (props) => {
   const hideBusinessDetails = theme?.checkout?.components?.business?.hidden
   const hideBusinessMap = theme?.checkout?.components?.business?.components?.map?.hidden
   const hideCustomerDetails = theme?.checkout?.components?.customer?.hidden
+  const driverTipsField = !cartState.loading && cart && cart?.business_id && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.checkout?.driver_tip?.enabled && driverTipsOptions.length > 0 && !useKioskApp
 
   const handlePlaceOrder = () => {
     if (!userErrors.length && (!requiredFields?.length || allowedGuest)) {
@@ -502,38 +503,31 @@ const CheckoutUI = (props) => {
               />
             </WalletPaymentOptionContainer>
           )}
-
-          {
-            isMultiDriverTips &&
-            !cartState.loading &&
-            cart &&
-            cart?.business_id &&
-            options.type === 1 &&
-            cart?.status !== 2 &&
-            validationFields?.fields?.checkout?.driver_tip?.enabled &&
-            driverTipsOptions.length > 0 &&
-            !useKioskApp &&
-            (
-              <DriverTipContainer>
-                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-                <DriverTips
-                  businessId={cart?.business_id}
-                  driverTipsOptions={driverTipsOptions}
-                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                    ? cart?.driver_tip
-                    : cart?.driver_tip_rate}
-                  cart={cart}
-                  useOrderContext
-                />
-              </DriverTipContainer>
-            )
-          }
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
+
+        {
+          !!(!isMultiDriverTips && driverTipsField) &&
+          <>
+            <DriverTipContainer>
+              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+              <DriverTips
+                businessId={cart?.business_id}
+                driverTipsOptions={driverTipsOptions}
+                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                  ? cart?.driver_tip
+                  : cart?.driver_tip_rate}
+                cart={cart}
+                useOrderContext
+              />
+            </DriverTipContainer>
+            <DriverTipDivider />
+          </>
+        }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
             <PlaceSpot
@@ -547,38 +541,6 @@ const CheckoutUI = (props) => {
             />
           </SelectSpotContainer>
         )}
-        {
-          !isMultiDriverTips &&
-          !cartState.loading &&
-          cart &&
-          cart?.business_id &&
-          options.type === 1 &&
-          cart?.status !== 2 &&
-          validationFields?.fields?.checkout?.driver_tip?.enabled &&
-          driverTipsOptions.length > 0 &&
-          !useKioskApp &&
-          (
-            <>
-              <DriverTipContainer>
-                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-                <DriverTips
-                  businessId={cart?.business_id}
-                  driverTipsOptions={driverTipsOptions}
-                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                    ? cart?.driver_tip
-                    : cart?.driver_tip_rate}
-                  cart={cart}
-                  useOrderContext
-                />
-              </DriverTipContainer>
-              <DriverTipDivider />
-            </>
-          )
-        }
-
         {!cartState.loading && cart && (
           <CartContainer>
             <CartHeader>
@@ -598,6 +560,26 @@ const CheckoutUI = (props) => {
             />
           </CartContainer>
         )}
+        {
+          !!(isMultiDriverTips && driverTipsField) &&
+          (
+            <DriverTipContainer>
+              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+              <DriverTips
+                businessId={cart?.business_id}
+                driverTipsOptions={driverTipsOptions}
+                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                  ? cart?.driver_tip
+                  : cart?.driver_tip_rate}
+                cart={cart}
+                useOrderContext
+              />
+            </DriverTipContainer>
+          )
+        }
 
         {windowSize.width >= 576 && !cartState.loading && cart && cart?.status !== 2 && (
           <WrapperPlaceOrderButton>
