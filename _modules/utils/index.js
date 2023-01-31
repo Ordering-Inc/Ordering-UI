@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.orderTypeList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getOrderStatus = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.calendarLanguages = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.orderTypeList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getOrderStatus = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.getCateringValues = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.calendarLanguages = exports.bytesConverter = void 0;
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -1052,3 +1052,26 @@ var calendarLanguages = {
   }
 };
 exports.calendarLanguages = calendarLanguages;
+var getCateringValues = function getCateringValues(cateringTypeString, configs) {
+  var splitCateringValue = function splitCateringValue(configName) {
+    var _Object$values, _Object$values$find, _Object$values$find$v, _Object$values$find$v2, _Object$values$find$v3;
+    return (_Object$values = Object.values(configs || {})) === null || _Object$values === void 0 ? void 0 : (_Object$values$find = _Object$values.find(function (config) {
+      return (config === null || config === void 0 ? void 0 : config.key) === configName;
+    })) === null || _Object$values$find === void 0 ? void 0 : (_Object$values$find$v = _Object$values$find.value) === null || _Object$values$find$v === void 0 ? void 0 : (_Object$values$find$v2 = _Object$values$find$v.split('|')) === null || _Object$values$find$v2 === void 0 ? void 0 : (_Object$values$find$v3 = _Object$values$find$v2.find(function (val) {
+      return val.includes(cateringTypeString);
+    })) === null || _Object$values$find$v3 === void 0 ? void 0 : _Object$values$find$v3.split(',')[1];
+  };
+  var preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'));
+  var preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'));
+  var preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'));
+  var preorderMaximumDays = parseInt(splitCateringValue('preorder_maximum_days'));
+  var preorderMinimumDays = parseInt(splitCateringValue('preorder_minimum_days'));
+  return {
+    preorderSlotInterval: preorderSlotInterval,
+    preorderLeadTime: preorderLeadTime,
+    preorderTimeRange: preorderTimeRange,
+    preorderMaximumDays: preorderMaximumDays,
+    preorderMinimumDays: preorderMinimumDays
+  };
+};
+exports.getCateringValues = getCateringValues;
