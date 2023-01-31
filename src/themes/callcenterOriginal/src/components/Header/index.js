@@ -213,10 +213,9 @@ export const Header = (props) => {
                   </span>
                 </CustomerInfo>
               )}
-              <Divider />
               {onlineStatus && windowSize.width > 820 && (
                 <>
-                  {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+                  {(isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                     <MomentMenu
                       onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
                         ? null
