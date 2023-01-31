@@ -334,3 +334,18 @@ export const HeaderContent = styled.div`
     cursor: pointer;
   }
 `
+
+export const AuthButtonList = styled.div`
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 3px;
+  }
+  button {
+    width: 100%;
+    height: 44px;
+    margin-top: 22px;
+  }
+`
