@@ -681,3 +681,23 @@ export const calendarLanguages = {
     Su: 'DAYMIN7'
   }
 }
+
+export const getCateringValues = (cateringTypeString, configs) => {
+  const splitCateringValue = (configName) => Object.values(configs || {})
+    ?.find(config => config?.key === configName)
+    ?.value?.split('|')
+    ?.find(val => val.includes(cateringTypeString))?.split(',')[1]
+  const preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'))
+  const preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'))
+  const preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'))
+  const preorderMaximumDays = parseInt(splitCateringValue('preorder_maximum_days'))
+  const preorderMinimumDays = parseInt(splitCateringValue('preorder_minimum_days'))
+
+  return {
+    preorderSlotInterval,
+    preorderLeadTime,
+    preorderTimeRange,
+    preorderMaximumDays,
+    preorderMinimumDays
+  }
+}
