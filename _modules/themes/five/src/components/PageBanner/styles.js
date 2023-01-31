@@ -14,5 +14,5 @@ var BannerContainer = _styledComponents.default.div(_templateObject || (_templat
   return props.theme.images.general.leftArrow;
 });
 exports.BannerContainer = BannerContainer;
-var ImageWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding-top: 260px;\n  position: relative;\n  .banner-img {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n  }\n  @media (min-width: 768px) {\n    padding-top: 18%;\n  }\n"])));
+var ImageWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 100%;\n  padding-top: 260px;\n  position: relative;\n  .banner-img {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n  }\n  @media (min-width: 768px) {\n    padding-top: 18%;\n  }\n"])));
 exports.ImageWrapper = ImageWrapper;
