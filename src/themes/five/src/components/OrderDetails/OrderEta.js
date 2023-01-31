@@ -15,8 +15,8 @@ export const OrderEta = (props) => {
     let _estimatedTime
     let totalEta = 0
     const _delivery = order?.delivery_datetime_utc
-      ? parseDate(order?.delivery_datetime_utc)
-      : parseDate(order?.delivery_datetime)
+      ? order?.delivery_datetime_utc
+      : order?.delivery_datetime
     if (order?.eta_current_status_time) {
       const currentStatueEta = order?.eta_current_status_time
       totalEta += currentStatueEta

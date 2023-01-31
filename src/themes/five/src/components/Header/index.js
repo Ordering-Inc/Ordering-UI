@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useOrderingTheme } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useOrderingTheme, useBusiness } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
@@ -48,7 +48,7 @@ import { Confirm } from '../Confirm'
 import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
-import { getDistance } from '../../../../../utils'
+import { getDistance, getCateringValues } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { SearchBar } from '../SearchBar'
 
@@ -74,6 +74,7 @@ export const Header = (props) => {
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
   const [orderingTheme] = useOrderingTheme()
+  const [{ business }] = useBusiness()
 
   const clearCustomer = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -104,12 +105,8 @@ export const Header = (props) => {
     : orderState?.options?.type === 8
       ? 'catering_pickup'
       : null
-  const splitCateringValue = (configName) => Object.values(configState?.configs)?.find(config => config.key === configName)?.value?.split('|')?.find(val => val.includes(cateringTypeString))?.split(',')[1]
-  const preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'))
-  const preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'))
-  const preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'))
-  const preorderMaximumDays = parseInt(splitCateringValue('preorder_maximum_days'))
-  const preorderMinimumDays = parseInt(splitCateringValue('preorder_minimum_days'))
+
+  const cateringValues = getCateringValues(cateringTypeString, pathname.includes('store') && Object?.keys(business || {})?.length > 0 ? business?.configs : configState?.configs)
 
   const handleSuccessSignup = (user) => {
     login({
@@ -496,12 +493,9 @@ export const Header = (props) => {
           {modalSelected === 'moment' && (
             <MomentContent
               onClose={() => setModalIsOpen(false)}
-              preorderLeadTime={preorderLeadTime}
-              preorderMaximumDays={preorderMaximumDays}
-              preorderMinimumDays={preorderMinimumDays}
-              preorderTimeRange={preorderTimeRange}
-              preorderSlotInterval={preorderSlotInterval}
               cateringPreorder={!!cateringTypeString}
+              business={pathname.includes('store') && business}
+              {...cateringValues}
             />
           )}
           {modalSelected === 'delivery' && (
