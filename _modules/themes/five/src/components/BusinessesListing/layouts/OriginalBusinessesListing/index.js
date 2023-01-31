@@ -29,9 +29,11 @@ var _AutoScroll = require("../../../AutoScroll");
 var _CitiesControl = require("../../../CitiesControl");
 var _OrderContextUI = require("../../../OrderContextUI");
 var _OrdersSection = require("./OrdersSection");
+var _utils = require("../../../../../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -49,7 +51,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _businessesList$busin3, _configs$business_lis, _configs$business_lis2, _theme$images2, _theme$images2$genera, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _Object$values, _configs$business_lis3, _theme$images3, _theme$images3$genera, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options4, _orderState$options4$, _configs$advanced_bus2, _citiesState$cities4, _citiesState$cities5, _citiesState$cities5$, _orderState$options6, _orderState$options6$, _businessesList$busin6, _businessesList$busin7;
+  var _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderState$options2, _orderState$options3, _businessesList$busin3, _configs$business_lis, _configs$business_lis2, _theme$images2, _theme$images2$genera, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _Object$values, _configs$business_lis3, _theme$images3, _theme$images3$genera, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _citiesState$cities2, _citiesState$cities3, _citiesState$cities3$, _configs$advanced_bus, _orderState$options6, _orderState$options6$, _configs$advanced_bus2, _citiesState$cities4, _citiesState$cities5, _citiesState$cities5$, _orderState$options8, _orderState$options8$, _businessesList$busin6, _businessesList$busin7;
   var businessesList = props.businessesList,
     paginationProps = props.paginationProps,
     searchValue = props.searchValue,
@@ -136,6 +138,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return business.id;
   }));
   var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.type) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.toLowerCase()) === 'chew';
+  var cateringTypeString = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 7 ? 'catering_delivery' : (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 8 ? 'catering_pickup' : null;
+  var cateringValues = (preorderBusiness === null || preorderBusiness === void 0 ? void 0 : preorderBusiness.configs) && (0, _utils.getCateringValues)(cateringTypeString, preorderBusiness === null || preorderBusiness === void 0 ? void 0 : preorderBusiness.configs);
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle, _document$documentEle2, _businessesList$error;
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
@@ -201,8 +205,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }));
   };
   var handleChangeCity = function handleChangeCity(cityId) {
-    var _orderState$options2;
-    changeCityFilter(cityId === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.city_id) ? null : cityId);
+    var _orderState$options4;
+    changeCityFilter(cityId === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.city_id) ? null : cityId);
   };
   (0, _react.useEffect)(function () {
     if (preorderBusiness) setIsPreorder(true);
@@ -281,8 +285,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     color: "primary",
     onClick: handleOpenCities
   }, (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities3 = citiesState.cities) === null || _citiesState$cities3 === void 0 ? void 0 : (_citiesState$cities3$ = _citiesState$cities3.find(function (city) {
-    var _orderState$options3;
-    return (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.city_id);
+    var _orderState$options5;
+    return (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.city_id);
   })) === null || _citiesState$cities3$ === void 0 ? void 0 : _citiesState$cities3$.name) || t('SELECT_A_CITY', 'Select a city')), !hideFilter && (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
     onClick: function onClick() {
       return onRedirectPage({
@@ -293,7 +297,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: toggleMap
   })), activeMap && /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
-    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location,
+    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : (_orderState$options6$ = _orderState$options6.address) === null || _orderState$options6$ === void 0 ? void 0 : _orderState$options6$.location,
     setErrors: setMapErrors
   })), !isChew && hasHighRatedBusiness && !props.franchiseId && !hideHighestBusiness && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
     handleClickAddress: handleClickAddress,
@@ -333,11 +337,11 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     color: "primary",
     onClick: handleOpenCities
   }, (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities5 = citiesState.cities) === null || _citiesState$cities5 === void 0 ? void 0 : (_citiesState$cities5$ = _citiesState$cities5.find(function (city) {
-    var _orderState$options5;
-    return (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.city_id);
+    var _orderState$options7;
+    return (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.city_id);
   })) === null || _citiesState$cities5$ === void 0 ? void 0 : _citiesState$cities5$.name) || t('SELECT_A_CITY', 'Select a city')))), isCustomerMode && activeMap && /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
-    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : (_orderState$options6$ = _orderState$options6.address) === null || _orderState$options6$ === void 0 ? void 0 : _orderState$options6$.location,
+    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : (_orderState$options8$ = _orderState$options8.address) === null || _orderState$options8$ === void 0 ? void 0 : _orderState$options8$.location,
     setErrors: setMapErrors
   }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (!isCustomLayout && isCustomerMode && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin6 = businessesList.businesses) === null || _businessesList$busin6 === void 0 ? void 0 : _businessesList$busin6.length) > 0 || isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && businessesList.businesses.length === 0 && (businessesList === null || businessesList === void 0 ? void 0 : businessesList.fetched) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
@@ -351,14 +355,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       height: '44px'
     }
   }, t('CHANGE_ADDRESS', 'Select other Address'))), (_businessesList$busin7 = businessesList.businesses) === null || _businessesList$busin7 === void 0 ? void 0 : _businessesList$busin7.map(function (business) {
-    var _orderState$options7, _business$reviews;
+    var _orderState$options9, _business$reviews;
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
       className: "card",
       business: business,
       isBusinessOpen: business.open,
       handleCustomClick: handleBusinessClick,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.type,
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.type,
       isCustomLayout: isCustomLayout,
       isCustomerMode: isCustomerMode,
       onPreorderBusiness: setPreorderBusiness,
@@ -376,13 +380,13 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       setFavoriteIds: setFavoriteIds
     });
   }), (businessesList.loading || !(businessesList !== null && businessesList !== void 0 && businessesList.fetched)) && _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.nextPageItems) > 4 ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
-    var _orderState$options8;
+    var _orderState$options10;
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.type
+      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : _orderState$options10.type
     });
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isPreorder,
@@ -390,11 +394,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClose: function onClose() {
       return handleClosePreorder();
     }
-  }, /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, {
+  }, /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, _extends({
     business: preorderBusiness,
     handleClick: handleBusinessClick,
-    showButton: true
-  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    showButton: true,
+    cateringPreorder: !!cateringTypeString
+  }, cateringValues))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('SELECT_A_STORE', 'Select a store'),
     open: modals.citiesOpen,
     width: "70%",

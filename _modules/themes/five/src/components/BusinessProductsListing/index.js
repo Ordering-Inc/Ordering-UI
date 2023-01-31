@@ -92,10 +92,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     t = _useLanguage2[1];
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 2),
-    carts = _useOrder2[0].carts,
-    _useOrder2$ = _useOrder2[1],
-    addProduct = _useOrder2$.addProduct,
-    updateProduct = _useOrder2$.updateProduct;
+    _useOrder2$ = _useOrder2[0],
+    carts = _useOrder2$.carts,
+    options = _useOrder2$.options,
+    _useOrder2$2 = _useOrder2[1],
+    addProduct = _useOrder2$2.addProduct,
+    updateProduct = _useOrder2$2.updateProduct;
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parsePrice = _useUtils2[0].parsePrice;
@@ -110,6 +112,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var _useSite = (0, _orderingComponents.useSite)(),
     _useSite2 = _slicedToArray(_useSite, 1),
     site = _useSite2[0].site;
+  var _useBusiness = (0, _orderingComponents.useBusiness)(),
+    _useBusiness2 = _slicedToArray(_useBusiness, 2),
+    setBusiness = _useBusiness2[1].setBusiness;
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
@@ -158,6 +163,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
   var isLazy = businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended;
   var showViewOrderButton = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.business_view) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.order_view_button) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
+  var cateringTypes = [7, 8];
+  var cateringPreorder = cateringTypes.includes(options === null || options === void 0 ? void 0 : options.type);
   var sortByOptions = [{
     value: null,
     content: t('SORT_BY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SORT_BY) || 'Sort By'),
@@ -395,6 +402,14 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       adjustBusiness(adjustBusinessId);
     }
   }, [currentCart]);
+  (0, _react.useEffect)(function () {
+    if (cateringPreorder) {
+      setBusiness(business);
+    }
+    return function () {
+      setBusiness({});
+    };
+  }, [cateringPreorder, business]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !props.useKioskApp &&
   /*#__PURE__*/
   // <ArrowLeft onClick={() => handleGoToBusinessList()} />

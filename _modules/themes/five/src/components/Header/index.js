@@ -51,7 +51,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$header, _theme$header$compone, _theme$header$compone2, _orderState$options, _orderState$options2, _customerState$user, _orderState$options5, _orderState$options5$, _theme$images, _theme$images$logos, _orderingTheme$my_pro, _orderingTheme$my_pro2, _orderingTheme$my_pro3, _orderingTheme$my_pro4, _orderingTheme$my_pro5, _orderingTheme$my_pro6, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderingTheme$my_pro7, _orderingTheme$my_pro8, _orderingTheme$my_pro9, _orderingTheme$my_pro10, _orderingTheme$my_pro11, _orderingTheme$my_pro12, _theme$images4, _theme$images4$logos, _theme$images5, _theme$images5$logos, _orderState$options7, _orderState$options7$, _orderState$options8, _orderState$options8$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options9, _orderState$options10, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options11, _orderState$options12, _configState$configs12, _configState$configs13, _orderState$options13, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options14, _orderState$options15, _configState$configs18, _configState$configs19, _orderState$options16, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options17, _orderState$options18, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$header, _theme$header$compone, _theme$header$compone2, _orderState$options, _orderState$options2, _Object$keys, _customerState$user, _orderState$options5, _orderState$options5$, _theme$images, _theme$images$logos, _orderingTheme$my_pro, _orderingTheme$my_pro2, _orderingTheme$my_pro3, _orderingTheme$my_pro4, _orderingTheme$my_pro5, _orderingTheme$my_pro6, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderingTheme$my_pro7, _orderingTheme$my_pro8, _orderingTheme$my_pro9, _orderingTheme$my_pro10, _orderingTheme$my_pro11, _orderingTheme$my_pro12, _theme$images4, _theme$images4$logos, _theme$images5, _theme$images5$logos, _orderState$options7, _orderState$options7$, _orderState$options8, _orderState$options8$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options9, _orderState$options10, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options11, _orderState$options12, _configState$configs12, _configState$configs13, _orderState$options13, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options14, _orderState$options15, _configState$configs18, _configState$configs19, _orderState$options16, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options17, _orderState$options18, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
   var isHome = props.isHome,
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
@@ -93,6 +93,9 @@ var Header = function Header(props) {
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
+  var _useBusiness = (0, _orderingComponents.useBusiness)(),
+    _useBusiness2 = _slicedToArray(_useBusiness, 1),
+    business = _useBusiness2[0].business;
   var clearCustomer = (0, _react.useRef)(null);
   var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
@@ -153,19 +156,7 @@ var Header = function Header(props) {
   var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.type) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.toLowerCase()) === 'chew';
   var isHideLanguages = theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.language_selector) === null || _theme$header$compone2 === void 0 ? void 0 : _theme$header$compone2.hidden;
   var cateringTypeString = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 7 ? 'catering_delivery' : (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 8 ? 'catering_pickup' : null;
-  var splitCateringValue = function splitCateringValue(configName) {
-    var _Object$values, _Object$values$find, _Object$values$find$v, _Object$values$find$v2, _Object$values$find$v3;
-    return (_Object$values = Object.values(configState === null || configState === void 0 ? void 0 : configState.configs)) === null || _Object$values === void 0 ? void 0 : (_Object$values$find = _Object$values.find(function (config) {
-      return config.key === configName;
-    })) === null || _Object$values$find === void 0 ? void 0 : (_Object$values$find$v = _Object$values$find.value) === null || _Object$values$find$v === void 0 ? void 0 : (_Object$values$find$v2 = _Object$values$find$v.split('|')) === null || _Object$values$find$v2 === void 0 ? void 0 : (_Object$values$find$v3 = _Object$values$find$v2.find(function (val) {
-      return val.includes(cateringTypeString);
-    })) === null || _Object$values$find$v3 === void 0 ? void 0 : _Object$values$find$v3.split(',')[1];
-  };
-  var preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'));
-  var preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'));
-  var preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'));
-  var preorderMaximumDays = parseInt(splitCateringValue('preorder_maximum_days'));
-  var preorderMinimumDays = parseInt(splitCateringValue('preorder_minimum_days'));
+  var cateringValues = (0, _utils.getCateringValues)(cateringTypeString, pathname.includes('store') && (Object === null || Object === void 0 ? void 0 : (_Object$keys = Object.keys(business || {})) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0 ? business === null || business === void 0 ? void 0 : business.configs : configState === null || configState === void 0 ? void 0 : configState.configs);
   var handleSuccessSignup = function handleSuccessSignup(user) {
     var _user$session;
     login({
@@ -462,17 +453,13 @@ var Header = function Header(props) {
       return setModalIsOpen(false);
     },
     isCustomerMode: isCustomerMode
-  }))), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, {
+  }))), modalSelected === 'moment' && /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, _extends({
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
-    preorderLeadTime: preorderLeadTime,
-    preorderMaximumDays: preorderMaximumDays,
-    preorderMinimumDays: preorderMinimumDays,
-    preorderTimeRange: preorderTimeRange,
-    preorderSlotInterval: preorderSlotInterval,
-    cateringPreorder: !!cateringTypeString
-  }), modalSelected === 'delivery' && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorContent.OrderTypeSelectorContent, {
+    cateringPreorder: !!cateringTypeString,
+    business: pathname.includes('store') && business
+  }, cateringValues)), modalSelected === 'delivery' && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorContent.OrderTypeSelectorContent, {
     onClose: function onClose() {
       return setModalIsOpen(false);
     },

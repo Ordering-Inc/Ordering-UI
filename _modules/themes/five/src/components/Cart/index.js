@@ -148,19 +148,7 @@ var CartUI = function CartUI(props) {
   var hideCartComments = theme === null || theme === void 0 ? void 0 : (_theme$viewString = theme[viewString]) === null || _theme$viewString === void 0 ? void 0 : (_theme$viewString$com = _theme$viewString.components) === null || _theme$viewString$com === void 0 ? void 0 : (_theme$viewString$com2 = _theme$viewString$com.cart) === null || _theme$viewString$com2 === void 0 ? void 0 : (_theme$viewString$com3 = _theme$viewString$com2.components) === null || _theme$viewString$com3 === void 0 ? void 0 : (_theme$viewString$com4 = _theme$viewString$com3.comments) === null || _theme$viewString$com4 === void 0 ? void 0 : _theme$viewString$com4.hidden;
   var hideCartDiscount = theme === null || theme === void 0 ? void 0 : (_theme$viewString2 = theme[viewString]) === null || _theme$viewString2 === void 0 ? void 0 : (_theme$viewString2$co = _theme$viewString2.components) === null || _theme$viewString2$co === void 0 ? void 0 : (_theme$viewString2$co2 = _theme$viewString2$co.cart) === null || _theme$viewString2$co2 === void 0 ? void 0 : (_theme$viewString2$co3 = _theme$viewString2$co2.components) === null || _theme$viewString2$co3 === void 0 ? void 0 : (_theme$viewString2$co4 = _theme$viewString2$co3.discount) === null || _theme$viewString2$co4 === void 0 ? void 0 : _theme$viewString2$co4.hidden;
   var cateringTypeString = (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 7 ? 'catering_delivery' : (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 8 ? 'catering_pickup' : null;
-  var splitCateringValue = function splitCateringValue(configName) {
-    var _businessConfigs$find, _businessConfigs$find2, _businessConfigs$find3, _businessConfigs$find4;
-    return (_businessConfigs$find = businessConfigs.find(function (config) {
-      return config.key === configName;
-    })) === null || _businessConfigs$find === void 0 ? void 0 : (_businessConfigs$find2 = _businessConfigs$find.value) === null || _businessConfigs$find2 === void 0 ? void 0 : (_businessConfigs$find3 = _businessConfigs$find2.split('|')) === null || _businessConfigs$find3 === void 0 ? void 0 : (_businessConfigs$find4 = _businessConfigs$find3.find(function (val) {
-      return val.includes(cateringTypeString);
-    })) === null || _businessConfigs$find4 === void 0 ? void 0 : _businessConfigs$find4.split(',')[1];
-  };
-  var preorderSlotInterval = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_slot_interval'));
-  var preorderLeadTime = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_lead_time'));
-  var preorderTimeRange = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_time_range'));
-  var preorderMaximumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_maximum_days'));
-  var preorderMinimumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_minimum_days'));
+  var cateringValues = businessConfigs && (0, _utils.getCateringValues)(cateringTypeString, businessConfigs);
   var walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -544,16 +532,11 @@ var CartUI = function CartUI(props) {
     style: {
       fontWeight: 'bold'
     }
-  }, parsePrice(cart === null || cart === void 0 ? void 0 : cart.balance))))), cateringTypes.includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.type) && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, {
+  }, parsePrice(cart === null || cart === void 0 ? void 0 : cart.balance))))), cateringTypes.includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.type) && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_MomentContent.MomentContent, _extends({
     cateringPreorder: true,
     isCart: true,
-    preorderSlotInterval: preorderSlotInterval,
-    preorderLeadTime: preorderLeadTime,
-    preorderTimeRange: preorderTimeRange,
-    preorderMaximumDays: preorderMaximumDays,
-    business: cart === null || cart === void 0 ? void 0 : cart.business,
-    preorderMinimumDays: preorderMinimumDays
-  })), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (!isMultiCheckout || isStore) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    business: cart === null || cart === void 0 ? void 0 : cart.business
+  }, cateringValues))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (!isMultiCheckout || isStore) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address) ? 'secundary' : 'primary',
     onClick: function onClick() {
       return checkOutBtnClick(cart === null || cart === void 0 ? void 0 : cart.uuid);

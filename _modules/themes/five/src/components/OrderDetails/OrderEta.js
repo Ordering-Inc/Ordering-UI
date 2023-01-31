@@ -30,7 +30,7 @@ var OrderEta = function OrderEta(props) {
   var getEstimatedDeliveryTime = function getEstimatedDeliveryTime() {
     var _estimatedTime;
     var totalEta = 0;
-    var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime);
+    var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? order === null || order === void 0 ? void 0 : order.delivery_datetime_utc : order === null || order === void 0 ? void 0 : order.delivery_datetime;
     if (order !== null && order !== void 0 && order.eta_current_status_time) {
       var _order$reporting_data;
       var currentStatueEta = order === null || order === void 0 ? void 0 : order.eta_current_status_time;

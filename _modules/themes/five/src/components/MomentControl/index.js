@@ -119,14 +119,15 @@ var MomentControlUI = function MomentControlUI(props) {
   (0, _react.useEffect)(function () {
     var _timeLists = [];
     if (!scheduleList || cateringPreorder) {
-      var schedule = business && getActualSchedule();
-      if (!schedule && cateringPreorder && business) {
+      var _Object$keys, _Object$keys2;
+      var schedule = business && ((_Object$keys = Object.keys(business || {})) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0 && getActualSchedule();
+      if (!schedule && cateringPreorder & ((_Object$keys2 = Object.keys(business)) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) > 0) {
         setIsEnabled(false);
         return;
       }
       _timeLists = hoursList.filter(function (hour) {
-        var _schedule$lapses;
-        return (!business || (schedule === null || schedule === void 0 ? void 0 : (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.some(function (lapse) {
+        var _Object$keys3, _schedule$lapses;
+        return (((_Object$keys3 = Object.keys(business || {})) === null || _Object$keys3 === void 0 ? void 0 : _Object$keys3.length) === 0 || (schedule === null || schedule === void 0 ? void 0 : (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.some(function (lapse) {
           return (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) >= (0, _moment.default)(dateSelected + " ".concat(lapse.open.hour, ":").concat(lapse.open.minute)).add(preorderLeadTime, 'minutes') && (0, _moment.default)(dateSelected + " ".concat(hour.endTime)) <= (0, _moment.default)(dateSelected + " ".concat(lapse.close.hour, ":").concat(lapse.close.minute));
         }))) && (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) < (0, _moment.default)(dateSelected + " ".concat(hour.endTime)) && ((0, _moment.default)().add(preorderLeadTime, 'minutes') < (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) || !cateringPreorder);
       }).map(function (hour) {

@@ -23,6 +23,7 @@ var _swiper = _interopRequireWildcard(require("swiper"));
 require("swiper/swiper-bundle.min.css");
 require("swiper/swiper.min.css");
 var _utils = require("../../../../../utils");
+var _CgRadioCheck = _interopRequireDefault(require("@meronex/icons/cg/CgRadioCheck"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -52,12 +53,18 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     handleAsap = props.handleAsap,
     isProfessional = props.isProfessional,
     isDisabled = props.isDisabled,
-    maxDays = props.maxDays;
+    maxDays = props.maxDays,
+    hoursList = props.hoursList,
+    cateringPreorder = props.cateringPreorder,
+    preorderLeadTime = props.preorderLeadTime,
+    getActualSchedule = props.getActualSchedule;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
     pathname = _useLocation.pathname;
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
-    optimizeImage = _useUtils2[0].optimizeImage;
+    _useUtils2$ = _useUtils2[0],
+    optimizeImage = _useUtils2$.optimizeImage,
+    parseTime = _useUtils2$.parseTime;
   var theme = (0, _styledComponents.useTheme)();
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -126,10 +133,41 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     return times;
   };
   (0, _react.useEffect)(function () {
-    var selectedMenu = menu ? menu !== null && menu !== void 0 && menu.use_business_schedule ? business : menu : business;
-    var _times = getTimeList(dateSelected, selectedMenu);
-    setTimeList(_times);
-  }, [dateSelected, menu, business]);
+    if (cateringPreorder) {
+      var _Object$keys;
+      var schedule = business && getActualSchedule();
+      if (!schedule && cateringPreorder && ((_Object$keys = Object.keys(business)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0) {
+        setIsEnabled(false);
+        return;
+      }
+      var _timeLists = hoursList.filter(function (hour) {
+        var _Object$keys2, _schedule$lapses;
+        return (((_Object$keys2 = Object.keys(business || {})) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) === 0 || (schedule === null || schedule === void 0 ? void 0 : (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.some(function (lapse) {
+          return (0, _moment2.default)(dateSelected + " ".concat(hour.startTime)) >= (0, _moment2.default)(dateSelected + " ".concat(lapse.open.hour, ":").concat(lapse.open.minute)).add(preorderLeadTime, 'minutes') && (0, _moment2.default)(dateSelected + " ".concat(hour.endTime)) <= (0, _moment2.default)(dateSelected + " ".concat(lapse.close.hour, ":").concat(lapse.close.minute));
+        }))) && (0, _moment2.default)(dateSelected + " ".concat(hour.startTime)) < (0, _moment2.default)(dateSelected + " ".concat(hour.endTime)) && ((0, _moment2.default)().add(preorderLeadTime, 'minutes') < (0, _moment2.default)(dateSelected + " ".concat(hour.startTime)) || !cateringPreorder);
+      }).map(function (hour) {
+        return {
+          value: hour.startTime,
+          text: is12Hours ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment2.default)(hour.startTime, 'HH:mm'), {
+            outputFormat: 'hh:mma'
+          }) : parseTime((0, _moment2.default)(hour.startTime, 'HH:mm'), {
+            outputFormat: 'HH:mm'
+          }),
+          endText: is12Hours ? hour.endTime.includes('12') ? "".concat(hour.endTime, "PM") : parseTime((0, _moment2.default)(hour.endTime, 'HH:mm'), {
+            outputFormat: 'hh:mma'
+          }) : parseTime((0, _moment2.default)(hour.endTime, 'HH:mm'), {
+            outputFormat: 'HH:mm'
+          })
+        };
+      });
+      setIsEnabled(true);
+      setTimeList(_timeLists);
+    } else {
+      var selectedMenu = menu ? menu !== null && menu !== void 0 && menu.use_business_schedule ? business : menu : business;
+      var _times = getTimeList(dateSelected, selectedMenu);
+      setTimeList(_times);
+    }
+  }, [dateSelected, menu, business, cateringPreorder, hoursList]);
   (0, _react.useEffect)(function () {
     if (type === 'business_hours') setMenu(null);
   }, [type]);
@@ -139,7 +177,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessPreorderContainer, null, !isProfessional && /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('PREORDER', 'Preorder')), !isProfessional && /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
-  }), /*#__PURE__*/_react.default.createElement("p", null, business.name)), !isProfessional && isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_styles.PreorderTypeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PREORDER_TYPE', 'Preorder type')), /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  }), /*#__PURE__*/_react.default.createElement("p", null, business.name)), !isProfessional && isPreOrderSetting && !cateringPreorder && /*#__PURE__*/_react.default.createElement(_styles.PreorderTypeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PREORDER_TYPE', 'Preorder type')), /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     defaultValue: type,
     options: preOrderType,
     placeholder: t('SELECT_A_TYPE', 'Select a type'),
@@ -198,8 +236,11 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
       },
       isDisabled: isDisabled,
       isProfessional: isProfessional,
-      busyTime: isProfessional && isBusyTime(business, getMomentTime(time.value))
-    }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
+      busyTime: isProfessional && isBusyTime(business, getMomentTime(time.value)),
+      cateringPreorder: cateringPreorder
+    }, /*#__PURE__*/_react.default.createElement("span", null, cateringPreorder && /*#__PURE__*/_react.default.createElement(_styles.CheckIcon, null, timeSelected === time.value ? /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, {
+      cateringPreorder: cateringPreorder
+    }) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null)), /*#__PURE__*/_react.default.createElement("p", null, time.text, " ", cateringPreorder && "- ".concat(time.endText))));
   })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, !isProfessional ? t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment') : t('PROFESSIONAL_NOT_AVAILABLE', 'Professional is not available at the moment')))), !isPreOrderSetting && !isProfessional && /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')), showButton && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: goToBusinessPage,
