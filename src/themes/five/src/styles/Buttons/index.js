@@ -262,6 +262,30 @@ export const Button = styled.button`
       }
     `}
   `}
+  ${({ color }) => color === 'black' && css`
+    background: ${props => props.theme.colors.black};;
+    color: ${props => props.theme.colors.backgroundPage};
+    border-color: ${props => props.theme.colors.black};
+    &:active {
+      background: ${props => darken(0.05, props.theme.colors.black)};
+    }
+    &:hover {
+      background: ${props => darken(0.07, props.theme.colors.black)};
+    }
+    ${({ outline }) => outline && css`
+      background: ${props => props.theme.colors.backgroundPage};
+      color: ${props => props.theme.colors.black};
+      border-color: ${props => props.theme.colors.black};
+      &:active {
+        color: ${props => props.theme.colors.backgroundPage};
+        background: ${props => props.theme.colors.black};
+      }
+      &:hover {
+        background: ${props => darken(0.07, props.theme.colors.black)};
+        color: ${props => props.theme.colors.backgroundPage};
+      }
+    `}
+  `}
 `
 
 export default Button

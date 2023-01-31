@@ -46,7 +46,8 @@ import {
   WrapperActionsInput,
   MobileWrapperPlaceOrderButton,
   OrderContextUIWrapper,
-  HeaderContent
+  HeaderContent,
+  AuthButtonList
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -65,6 +66,8 @@ import { CartContent } from '../CartContent'
 import { Select } from '../../styles/Select'
 import { PlaceSpot } from '../PlaceSpot'
 import { OrderContextUI } from '../OrderContextUI'
+import { SignUpForm } from '../SignUpForm'
+import { LoginForm } from '../LoginForm'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -81,6 +84,7 @@ const CheckoutUI = (props) => {
     placing,
     cartState,
     useKioskApp,
+    loyaltyPlansState,
     businessDetails,
     paymethodSelected,
     handlePaymethodChange,
@@ -104,7 +108,7 @@ const CheckoutUI = (props) => {
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const [{ user }] = useSession()
+  const [{ user }, { login }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
   const [events] = useEvent()
@@ -120,6 +124,9 @@ const CheckoutUI = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [requiredFields, setRequiredFields] = useState([])
   const [isSuccess, setIsSuccess] = useState(false)
+  const [openModal, setOpenModal] = useState({ login: false, signup: false })
+  const [allowedGuest, setAllowedGuest] = useState(false)
+  const [cardList, setCardList] = useState([])
 
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isTableNumberEnabled = configs?.table_numer_enabled?.value
@@ -135,6 +142,7 @@ const CheckoutUI = (props) => {
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
+    (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0) ||
     placing ||
     errorCash ||
     loading ||
@@ -164,7 +172,7 @@ const CheckoutUI = (props) => {
   const driverTipsField = !cartState.loading && cart && cart?.business_id && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.checkout?.driver_tip?.enabled && driverTipsOptions.length > 0 && !useKioskApp
 
   const handlePlaceOrder = () => {
-    if (!userErrors.length && !requiredFields?.length) {
+    if (!userErrors.length && (!requiredFields?.length || allowedGuest)) {
       const body = {}
       if (behalfName) {
         body.on_behalf_of = behalfName
@@ -181,6 +189,15 @@ const CheckoutUI = (props) => {
       content: Object.values(userErrors).map(error => error)
     })
     setIsUserDetailsEdit(true)
+  }
+
+  const handlePlaceOrderAsGuest = () => {
+    setIsOpen(false)
+    const body = {}
+    if (behalfName) {
+      body.on_behalf_of = behalfName
+    }
+    handlerClickPlaceOrder && handlerClickPlaceOrder(null, body)
   }
 
   const closeAlert = () => {
@@ -231,6 +248,18 @@ const CheckoutUI = (props) => {
     }
 
     setUserErrors(errors)
+  }
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+    setOpenModal({ ...openModal, signup: false })
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) setOpenModal({ ...openModal, login: false })
   }
 
   const handleScrollTo = () => {
@@ -299,7 +328,7 @@ const CheckoutUI = (props) => {
 
           {!useKioskApp ? (
             <>
-              {cart?.business_id && (
+              {cart?.business_id && !hideBusinessMap && (
                 <>
                   {(businessDetails?.loading || cartState.loading) ? (
                     <div style={{ width: '100%', marginBottom: '20px' }}>
@@ -319,34 +348,51 @@ const CheckoutUI = (props) => {
                   )}
                 </>
               )}
-              <UserDetailsContainer>
-                <WrapperUserDetails>
-                  {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
-                    <div>
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                    </div>
-                  ) : (
-                    <UserDetails
-                      isUserDetailsEdit={isUserDetailsEdit}
-                      cartStatus={cart?.status}
-                      businessId={cart?.business_id}
-                      useValidationFields
-                      useDefualtSessionManager
-                      useSessionUser={!isCustomerMode}
-                      isCustomerMode={isCustomerMode}
-                      userData={isCustomerMode && customerState.user}
-                      userId={isCustomerMode && customerState?.user?.id}
-                      isSuccess={isSuccess}
-                      isCheckout
-                    />
-                  )}
-                </WrapperUserDetails>
-              </UserDetailsContainer>
-              {cart?.business_id && (
+              {!hideCustomerDetails && (
+                <UserDetailsContainer>
+                  <WrapperUserDetails>
+                    {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
+                      <div>
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      </div>
+                    ) : (
+                      (user?.guest_id && !allowedGuest) ? (
+                        <AuthButtonList>
+                          <h2>{t('CUSTOMER_DETAILS', 'Customer details')}</h2>
+                          <Button color='primary' onClick={() => setOpenModal({ ...openModal, signup: true })}>
+                            {t('SIGN_UP', 'Sign up')}
+                          </Button>
+                          <Button color='primary' outline onClick={() => setOpenModal({ ...openModal, login: true })}>
+                            {t('LOGIN', 'Login')}
+                          </Button>
+                          <Button color='black' outline onClick={() => setAllowedGuest(true)}>
+                            {t('CONTINUE_AS_GUEST', 'Continue as guest')}
+                          </Button>
+                        </AuthButtonList>
+                      ) : (
+                        <UserDetails
+                          isUserDetailsEdit={isUserDetailsEdit}
+                          cartStatus={cart?.status}
+                          businessId={cart?.business_id}
+                          useValidationFields
+                          useDefualtSessionManager
+                          useSessionUser={!isCustomerMode}
+                          isCustomerMode={isCustomerMode}
+                          userData={isCustomerMode && customerState.user}
+                          userId={isCustomerMode && customerState?.user?.id}
+                          isSuccess={isSuccess}
+                          isCheckout
+                        />
+                      )
+                    )}
+                  </WrapperUserDetails>
+                </UserDetailsContainer>
+              )}
+              {cart?.business_id && !hideBusinessDetails && (
                 <BusinessDetailsContainer>
                   {(businessDetails?.loading || cartState.loading) && !businessDetails?.error && (
                     <div>
@@ -363,7 +409,9 @@ const CheckoutUI = (props) => {
                     <div>
                       <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
                       <div>
-                        <p>{businessDetails?.business?.address}</p>
+                        {!hideBusinessAddress && (
+                          <p>{businessDetails?.business?.address}</p>
+                        )}
                         <p>{businessDetails?.business?.name}</p>
                         <p>{businessDetails?.business?.email}</p>
                         <p>{businessDetails?.business?.cellphone}</p>
@@ -446,6 +494,7 @@ const CheckoutUI = (props) => {
                 paySelected={paymethodSelected}
                 handlePlaceOrder={handlePlaceOrder}
                 onPlaceOrderClick={onPlaceOrderClick}
+                setCardList={setCardList}
               />
             </PaymentMethodContainer>
           )}
@@ -454,6 +503,7 @@ const CheckoutUI = (props) => {
             <WalletPaymentOptionContainer>
               <PaymentOptionWallet
                 cart={cart}
+                loyaltyPlansState={loyaltyPlansState}
                 businessConfigs={businessDetails?.business?.configs}
               />
             </WalletPaymentOptionContainer>
@@ -464,24 +514,24 @@ const CheckoutUI = (props) => {
 
         {
           !!(!isMultiDriverTips && driverTipsField) &&
-          <>
-            <DriverTipContainer>
-              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-              <DriverTips
-                businessId={cart?.business_id}
-                driverTipsOptions={driverTipsOptions}
-                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                  ? cart?.driver_tip
-                  : cart?.driver_tip_rate}
-                cart={cart}
-                useOrderContext
-              />
-            </DriverTipContainer>
-            <DriverTipDivider />
-          </>
+            <>
+              <DriverTipContainer>
+                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                <DriverTips
+                  businessId={cart?.business_id}
+                  driverTipsOptions={driverTipsOptions}
+                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate}
+                  cart={cart}
+                  useOrderContext
+                />
+              </DriverTipContainer>
+              <DriverTipDivider />
+            </>
         }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
@@ -510,6 +560,9 @@ const CheckoutUI = (props) => {
               useKioskApp={useKioskApp}
               isCheckout
               isProducts={cart?.products?.length || 0}
+              viewString='checkout'
+              businessConfigs={businessConfigs}
+              loyaltyRewardRate={loyaltyPlansState?.result?.find(loyal => loyal.type === 'credit_point')?.accumulation_rate ?? 0}
             />
           </CartContainer>
         )}
@@ -578,9 +631,15 @@ const CheckoutUI = (props) => {
           validationFields?.fields?.checkout?.driver_tip?.enabled &&
           validationFields?.fields?.checkout?.driver_tip?.required &&
           (Number(cart?.driver_tip) <= 0) &&
-        (
+          (
+            <WarningText>
+              {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
+            </WarningText>
+          )}
+
+        {!cart?.valid_preorder && (
           <WarningText>
-            {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
+            {t('INVALID_CART_MOMENT', 'Selected schedule time is invalid, please select a schedule into the business schedule interval.')}
           </WarningText>
         )}
       </WrapperRightContainer>
@@ -630,10 +689,37 @@ const CheckoutUI = (props) => {
           isCheckout
           isEdit
           isModal
+          handlePlaceOrderAsGuest={handlePlaceOrderAsGuest}
           onClose={() => {
             setIsOpen(false)
             handlePlaceOrder()
           }}
+        />
+      </Modal>
+      <Modal
+        open={openModal.signup}
+        width='760px'
+        padding='30px'
+        onClose={() => setOpenModal({ ...openModal, signup: false })}
+      >
+        <SignUpForm
+          useLoginByCellphone
+          useChekoutFileds
+          handleSuccessSignup={handleSuccessSignup}
+          isPopup
+          isGuest
+        />
+      </Modal>
+      <Modal
+        open={openModal.login}
+        width='760px'
+        padding='30px'
+        onClose={() => setOpenModal({ ...openModal, login: false })}
+      >
+        <LoginForm
+          handleSuccessLogin={handleSuccessLogin}
+          isPopup
+          isGuest
         />
       </Modal>
     </Container>
@@ -719,7 +805,8 @@ export const Checkout = (props) => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            'X-App-X': ordering.appId
           }
         })
         const content = await response.json()
