@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.TimeListWrapper = exports.TimeItem = exports.SwiperWrapper = exports.StatusInfo = exports.SkeletonBlock = exports.SelectedItem = exports.SectionHeader = exports.ScheduleWrapper = exports.ProfessionalSelectWrapper = exports.ProfessionalPhoto = exports.ProfessionalInfoWrapper = exports.PriceAndDuration = exports.OrderTimeWrapper = exports.NameWrapper = exports.MonthYearLayer = exports.InfoWrapper = exports.ImageWrapper = exports.HeaderInfoWrapper = exports.EmptyProfessional = exports.DropDownWrapper = exports.Divider = exports.DaysSwiper = exports.DayNumber = exports.DayName = exports.Day = exports.DateWrapper = exports.Container = exports.ClosedBusinessMsg = exports.ButtonWrapper = exports.ArrowButtonWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _react = _interopRequireDefault(require("react"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -133,16 +133,27 @@ var DayNumber = _styledComponents.default.div(_templateObject32 || (_templateObj
 exports.DayNumber = DayNumber;
 var TimeListWrapper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  margin-left: -12px;\n  width: calc(100% + 24px);\n  margin-top: 30px;\n  max-height: 250px;\n  overflow: auto;\n"])));
 exports.TimeListWrapper = TimeListWrapper;
-var TimeItem = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: ", ";\n  border-radius: 7.6px;\n  padding: 5px 15px;\n  margin: 12px;\n  width: calc(50% - 24px);\n  min-width: calc(50% - 24px);\n  box-sizing: border-box;\n  user-select: none;\n\n  ", "\n\n  span {\n    font-size: 14px;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 400px) {\n    width: calc(33.33% - 24px);\n    min-width: calc(33.33% - 24px);\n  }\n\n  @media (min-width: 576px) {\n    width: calc(25% - 24px);\n    min-width: calc(25% - 24px);\n  }\n\n  @media (min-width: 769px) {\n    width: calc(16.66% - 24px);\n    min-width: calc(16.66% - 24px);\n  }\n"])), function (props) {
-  return props.theme.colors.gray200;
+var TimeItem = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: ", ";\n  border: 1px solid transparent;\n  color: ", ";\n  border-radius: 7.6px;\n  padding: 5px 15px;\n  margin: 12px;\n  width: calc(50% - 24px);\n  min-width: calc(50% - 24px);\n  box-sizing: border-box;\n  user-select: none;\n\n  ", "\n\n  ", "\n\n  span {\n    font-size: 14px;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 400px) {\n    width: calc(33.33% - 24px);\n    min-width: calc(33.33% - 24px);\n  }\n\n  @media (min-width: 576px) {\n    width: calc(25% - 24px);\n    min-width: calc(25% - 24px);\n  }\n\n  @media (min-width: 769px) {\n    width: calc(16.66% - 24px);\n    min-width: calc(16.66% - 24px);\n  }\n"])), function (props) {
+  return props.theme.colors.primaryContrast;
+}, function (props) {
+  return props.theme.colors.primary;
 }, function (_ref6) {
   var active = _ref6.active;
-  return active && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border: 1px solid ", ";\n  "])), function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
     return props.theme.colors.primaryContrast;
   }, function (props) {
     return props.theme.colors.primary;
   });
+}, function (_ref7) {
+  var disabled = _ref7.disabled;
+  return disabled && (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n  "])), function (props) {
+    return props.theme.colors.gray200;
+  }, function (props) {
+    return props.theme.colors.lightGray;
+  });
 });
 exports.TimeItem = TimeItem;
-var ClosedBusinessMsg = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-size: 16px;\n  width: 100%;\n"])));
+var ClosedBusinessMsg = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-size: 16px;\n  width: 100%;\n"])));
 exports.ClosedBusinessMsg = ClosedBusinessMsg;

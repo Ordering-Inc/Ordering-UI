@@ -291,7 +291,7 @@ var CheckoutUI = function CheckoutUI(props) {
     isCheckOut: true
   }))), !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), /*#__PURE__*/_react.default.createElement("h2", {
     className: "checkout-title"
-  }, t('CHECK_OUT', 'Checkout')), !useKioskApp ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : cart.business_id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessDetails !== null && businessDetails !== void 0 && businessDetails.loading || cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
+  }, t('CHECKOUT', 'Checkout')), !useKioskApp ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : cart.business_id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessDetails !== null && businessDetails !== void 0 && businessDetails.loading || cartState.loading ? /*#__PURE__*/_react.default.createElement("div", {
     style: {
       width: '100%',
       marginBottom: '20px'

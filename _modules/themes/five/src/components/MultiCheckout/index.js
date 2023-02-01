@@ -174,7 +174,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     }
   }), /*#__PURE__*/_react.default.createElement("h2", {
     className: "checkout-title"
-  }, t('CHECK_OUT', 'Checkout')), /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
+  }, t('CHECKOUT', 'Checkout')), /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
     isMultiCheckout: true,
     openCarts: openCarts,
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,

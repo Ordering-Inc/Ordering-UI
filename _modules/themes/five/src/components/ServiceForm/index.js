@@ -171,19 +171,23 @@ var ServiceFormUI = function ServiceFormUI(props) {
     };
     handleSave(values);
   };
+  var getMomentTime = function getMomentTime(time) {
+    var _moment = (0, _moment2.default)("".concat((0, _moment2.default)(selectDate).format('YYYY-MM-DD'), " ").concat(time), 'YYYY-MM-DD HH:mm').toDate();
+    return _moment;
+  };
   var handleChangeTime = function handleChangeTime(time) {
     if (!time || time === timeSelected) return;
-    var _moment = (0, _moment2.default)("".concat((0, _moment2.default)(selectDate).format('YYYY-MM-DD'), " ").concat(time), 'YYYY-MM-DD HH:mm').toDate();
+    var _moment = getMomentTime(time);
     setTimeSelected(time);
     setDateSelected(_moment);
   };
-  var isBusyTime = function isBusyTime(professional) {
+  var isBusyTime = function isBusyTime(professional, selectedMoment) {
     var _professional$schedul, _professional$schedul2, _product$duration, _professional$schedul3, _professional$schedul4, _professional$busy_ti;
-    if (!dateSelected) return false;
-    var startDay = (0, _moment2.default)(dateSelected).utc().format('d');
+    if (!selectedMoment) return false;
+    var startDay = (0, _moment2.default)(selectedMoment).utc().format('d');
     var isStartScheduleEnabled = professional === null || professional === void 0 ? void 0 : (_professional$schedul = professional.schedule) === null || _professional$schedul === void 0 ? void 0 : (_professional$schedul2 = _professional$schedul[startDay]) === null || _professional$schedul2 === void 0 ? void 0 : _professional$schedul2.enabled;
     var duration = (_product$duration = product === null || product === void 0 ? void 0 : product.duration) !== null && _product$duration !== void 0 ? _product$duration : 0;
-    var endDay = (0, _moment2.default)(dateSelected).add(duration - 1, 'minutes').utc().format('d');
+    var endDay = (0, _moment2.default)(selectedMoment).add(duration - 1, 'minutes').utc().format('d');
     var isEndScheduleEnabled = professional === null || professional === void 0 ? void 0 : (_professional$schedul3 = professional.schedule) === null || _professional$schedul3 === void 0 ? void 0 : (_professional$schedul4 = _professional$schedul3[endDay]) === null || _professional$schedul4 === void 0 ? void 0 : _professional$schedul4.enabled;
     if (!isStartScheduleEnabled || !isEndScheduleEnabled) return true;
     if ((professional === null || professional === void 0 ? void 0 : (_professional$busy_ti = professional.busy_times) === null || _professional$busy_ti === void 0 ? void 0 : _professional$busy_ti.length) === 0) return false;
@@ -192,7 +196,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
       return !(item.start === (productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar = productCart.calendar_event) === null || _productCart$calendar === void 0 ? void 0 : _productCart$calendar.start) && item.end === (productCart === null || productCart === void 0 ? void 0 : (_productCart$calendar2 = productCart.calendar_event) === null || _productCart$calendar2 === void 0 ? void 0 : _productCart$calendar2.end));
     }) : _toConsumableArray(professional === null || professional === void 0 ? void 0 : professional.busy_times);
     var valid = busyTimes.some(function (item) {
-      return _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(dateSelected).valueOf() && (0, _moment2.default)(dateSelected).valueOf() < _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf() || _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(dateSelected).add(duration, 'minutes').valueOf() && (0, _moment2.default)(dateSelected).add(duration, 'minutes').valueOf() < _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf();
+      return _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() <= (0, _moment2.default)(selectedMoment).valueOf() && (0, _moment2.default)(selectedMoment).valueOf() < _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf() || _moment2.default.utc(item === null || item === void 0 ? void 0 : item.start).local().valueOf() < (0, _moment2.default)(selectedMoment).add(duration, 'minutes').valueOf() && (0, _moment2.default)(selectedMoment).add(duration, 'minutes').valueOf() < _moment2.default.utc(item === null || item === void 0 ? void 0 : item.end).local().valueOf();
     });
     return valid;
   };
@@ -329,8 +333,8 @@ var ServiceFormUI = function ServiceFormUI(props) {
   }, currentProfessional ? /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, currentProfessional !== null && currentProfessional !== void 0 && currentProfessional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
     bgimage: currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.photo
   }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.NameWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.name, " ", currentProfessional === null || currentProfessional === void 0 ? void 0 : currentProfessional.lastname), /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, {
-    available: !isBusyTime(currentProfessional)
-  }, isBusyTime(currentProfessional) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+    available: !isBusyTime(currentProfessional, dateSelected)
+  }, isBusyTime(currentProfessional, dateSelected) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "status"
   }, t('BUSY_ON_SELECTED_TIME', 'Busy on selected time'))) : /*#__PURE__*/_react.default.createElement("span", {
     className: "status"
@@ -345,8 +349,8 @@ var ServiceFormUI = function ServiceFormUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, professional !== null && professional !== void 0 && professional.photo ? /*#__PURE__*/_react.default.createElement(_styles.ProfessionalPhoto, {
       bgimage: professional === null || professional === void 0 ? void 0 : professional.photo
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.NameWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, professional === null || professional === void 0 ? void 0 : professional.name, " ", professional === null || professional === void 0 ? void 0 : professional.lastname), /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, {
-      available: !isBusyTime(professional)
-    }, isBusyTime(professional) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+      available: !isBusyTime(professional, dateSelected)
+    }, isBusyTime(professional, dateSelected) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
       className: "status"
     }, t('BUSY_ON_SELECTED_TIME', 'Busy on selected time'))) : /*#__PURE__*/_react.default.createElement("span", {
       className: "status"
@@ -395,6 +399,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.TimeItem, {
       key: i,
       active: timeSelected === time.value,
+      disabled: isBusyTime(currentProfessional, getMomentTime(time.value)),
       onClick: function onClick() {
         return handleChangeTime(time.value);
       }
@@ -406,7 +411,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
       return handleAddProduct();
     },
     color: "primary",
-    disabled: isBusyTime(currentProfessional)
+    disabled: isBusyTime(currentProfessional, dateSelected)
   }, t('BOOK', 'Book')), (!auth || isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add ".concat(!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''),
     color: "primary",
