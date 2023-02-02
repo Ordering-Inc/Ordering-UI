@@ -122,6 +122,14 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const onProductClick = (product) => {
+    let productPosition = null
+    if (businessState?.business?.categories && businessState?.business?.categories.length > 0) {
+      const category = businessState?.business?.categories.find(({ id }) => (id === product.category_id)).products.map((_product, index) => {
+        if (_product.id === product.id) {
+          productPosition = index + 1
+        }
+      })
+    }
     if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
       if (site?.product_url_template) {
         onProductRedirect({
@@ -139,7 +147,7 @@ const BusinessProductsListingUI = (props) => {
     }
     setCurProduct(product)
     setModalIsOpen(true)
-    events.emit('product_clicked', product)
+    events.emit('product_clicked', product, productPosition)
   }
 
   const handlerProductAction = (product) => {
@@ -231,6 +239,12 @@ const BusinessProductsListingUI = (props) => {
   //   if (categorySelected?.id === null) return
   //   events.emit('category_selected', { page: 'business', params: { category: categorySelected, business: business?.slug } })
   // }, [categorySelected])
+
+  useEffect(() => {
+    if (businessState?.business?.categories && businessState?.business?.categories.length > 0) {
+      events.emit('product-impressions', { page: 'all', params: { categories: businessState?.business?.categories } })
+    }
+  }, [businessState.business])
 
   useEffect(() => {
     if (loading) return

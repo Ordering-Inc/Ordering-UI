@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useApi } from 'ordering-components'
+import { useApi, useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
 export const Footer = () => {
@@ -7,6 +7,8 @@ export const Footer = () => {
   const [ordering] = useApi()
   const requestsState = {}
   const theme = useTheme()
+  const [events] = useEvent()
+
   const footerPageSlug = theme?.footer?.components?.slug
 
   const getPage = async () => {
@@ -27,6 +29,38 @@ export const Footer = () => {
       }
     }
   }
+
+
+    useEffect(() => {
+      if (!footerState.body) return
+
+      const socialSharing = [...window.document.getElementsByClassName('social-icon')] ?? null
+
+      const socialMedia = ['facebook', 'instagram', 'twitter']
+      let socialMediaOuterContainers = []
+      let socialMediaContainers = []
+      if (socialSharing) {
+        socialSharing.map((social) => {
+          if (socialMedia.includes(social.ariaLabel)) {
+            social.firstElementChild.ariaLabel = social.ariaLabel
+            social.firstElementChild.firstElementChild.ariaLabel = social.ariaLabel
+            socialMediaContainers.push(social.firstElementChild.firstElementChild)
+            socialMediaOuterContainers.push(social.firstElementChild)
+          }
+        })
+      }
+
+      const handleClick = (e) => {
+        if (socialMediaContainers.includes(e.target) || socialMediaOuterContainers.includes(e.target)) {
+          events.emit('social_media_click', { social: e.target.ariaLabel })
+        }
+      }
+      window.addEventListener('mouseup', handleClick)
+
+      return () => {
+        window.removeEventListener('mouseup', handleClick)
+      }
+    }, [footerState])
 
   useEffect(() => {
     getPage()

@@ -30,6 +30,8 @@ const BusinessProductsCategoriesUI = (props) => {
 
   const handleChangeCategory = (category) => {
     events.emit('category_selected', { page: 'business', params: { category: category, business: business?.slug } })
+    events.emit('product-impressions', { page: 'categoryProducts', params: { category: categories.find(({ id }) => id === category.id) } })
+
     const isBlockScroll = window.location.search.includes('category') &&
       window.location.search.includes('product')
 
