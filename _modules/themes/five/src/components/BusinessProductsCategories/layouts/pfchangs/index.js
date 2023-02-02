@@ -64,6 +64,15 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         business: business === null || business === void 0 ? void 0 : business.slug
       }
     });
+    events.emit('product-impressions', {
+      page: 'categoryProducts',
+      params: {
+        category: categories.find(function (_ref) {
+          var id = _ref.id;
+          return id === category.id;
+        })
+      }
+    });
     var isBlockScroll = window.location.search.includes('category') && window.location.search.includes('product');
     if (business !== null && business !== void 0 && business.lazy_load_products_recommended || PFChangsCategoriesLayout) {
       handlerClickCategory(_objectSpread({}, category));
@@ -85,10 +94,10 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   var TabComponent = function TabComponent(props) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, props.pfchangs ? /*#__PURE__*/_react.default.createElement(_pfchangs.Tab, props, props.children) : /*#__PURE__*/_react.default.createElement(_Tabs.Tab, props, props.children));
   };
-  var Category = function Category(_ref) {
+  var Category = function Category(_ref2) {
     var _theme$colors, _theme$colors2;
-    var category = _ref.category,
-      pfchangs = _ref.pfchangs;
+    var category = _ref2.category,
+      pfchangs = _ref2.pfchangs;
     return /*#__PURE__*/_react.default.createElement(TabComponent, {
       className: "center category".concat(subcategoriesLayout ? category === null || category === void 0 ? void 0 : category.id : category.id === ' featured' ? ' special' : ''),
       active: subcategoriesLayout ? (subcategorySelected === null || subcategorySelected === void 0 ? void 0 : subcategorySelected.id) === (category === null || category === void 0 ? void 0 : category.id) : business !== null && business !== void 0 && business.lazy_load_products_recommended ? (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id : (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === category.id,
@@ -102,8 +111,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       hover: subcategoriesLayout
     }, category.name);
   };
-  var ProductCategories = function ProductCategories(_ref2) {
-    var pfchangs = _ref2.pfchangs;
+  var ProductCategories = function ProductCategories(_ref3) {
+    var pfchangs = _ref3.pfchangs;
     return categories && categories.length && categories.map(function (category, i) {
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: category === null || category === void 0 ? void 0 : category.id

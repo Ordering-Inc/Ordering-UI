@@ -164,7 +164,19 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setOpenBusinessInformation(true);
   };
   var onProductClick = function onProductClick(product) {
-    var _business$professiona;
+    var _businessState$busine2, _businessState$busine3, _business$professiona;
+    var productPosition = null;
+    if (businessState !== null && businessState !== void 0 && (_businessState$busine2 = businessState.business) !== null && _businessState$busine2 !== void 0 && _businessState$busine2.categories && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.categories.length) > 0) {
+      var _businessState$busine4;
+      var category = businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.categories.find(function (_ref) {
+        var id = _ref.id;
+        return id === product.category_id;
+      }).products.map(function (_product, index) {
+        if (_product.id === product.id) {
+          productPosition = index + 1;
+        }
+      });
+    }
     if (!((product === null || product === void 0 ? void 0 : product.type) === 'service' && (business === null || business === void 0 ? void 0 : (_business$professiona = business.professionals) === null || _business$professiona === void 0 ? void 0 : _business$professiona.length) > 0)) {
       if (site !== null && site !== void 0 && site.product_url_template) {
         var _product$category;
@@ -183,7 +195,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     }
     setCurProduct(product);
     setModalIsOpen(true);
-    events.emit('product_clicked', product);
+    events.emit('product_clicked', product, productPosition);
   };
   var handlerProductAction = function handlerProductAction(product) {
     if (Object.keys(product).length) {
@@ -228,7 +240,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     });
   };
   var adjustBusiness = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(adjustBusinessId) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(adjustBusinessId) {
       var _carts$adjustBusiness;
       var _carts, products, unavailableProducts, alreadyRemoved;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -270,7 +282,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       }, _callee);
     }));
     return function adjustBusiness(_x) {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
   var handleCustomSave = function handleCustomSave() {
@@ -303,6 +315,18 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   //   events.emit('category_selected', { page: 'business', params: { category: categorySelected, business: business?.slug } })
   // }, [categorySelected])
 
+  (0, _react.useEffect)(function () {
+    var _businessState$busine5, _businessState$busine6;
+    if (businessState !== null && businessState !== void 0 && (_businessState$busine5 = businessState.business) !== null && _businessState$busine5 !== void 0 && _businessState$busine5.categories && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.categories.length) > 0) {
+      var _businessState$busine7;
+      events.emit('product-impressions', {
+        page: 'all',
+        params: {
+          categories: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.categories
+        }
+      });
+    }
+  }, [businessState.business]);
   (0, _react.useEffect)(function () {
     if (loading) return;
     if (openProduct) {
