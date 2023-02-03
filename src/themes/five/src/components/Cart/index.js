@@ -39,7 +39,7 @@ import {
   NoValidProductMessage,
   DriverTipContainer
 } from './styles'
-import { verifyDecimals } from '../../../../../utils'
+import { getCateringValues, verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 import MdCloseCircle from '@meronex/icons/ios/MdCloseCircle'
 import { MomentContent } from '../MomentContent'
@@ -111,12 +111,8 @@ const CartUI = (props) => {
     : orderState?.options?.type === 8
       ? 'catering_pickup'
       : null
-  const splitCateringValue = (configName) => businessConfigs.find(config => config.key === configName)?.value?.split('|')?.find(val => val.includes(cateringTypeString))?.split(',')[1]
-  const preorderSlotInterval = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_slot_interval'))
-  const preorderLeadTime = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_lead_time'))
-  const preorderTimeRange = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_time_range'))
-  const preorderMaximumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_maximum_days'))
-  const preorderMinimumDays = businessConfigs && cateringTypeString && parseInt(splitCateringValue('preorder_minimum_days'))
+
+  const cateringValues = businessConfigs && getCateringValues(cateringTypeString, businessConfigs)
 
   const walletName = {
     cash: {
@@ -592,12 +588,8 @@ const CartUI = (props) => {
                 <MomentContent
                   cateringPreorder
                   isCart
-                  preorderSlotInterval={preorderSlotInterval}
-                  preorderLeadTime={preorderLeadTime}
-                  preorderTimeRange={preorderTimeRange}
-                  preorderMaximumDays={preorderMaximumDays}
                   business={cart?.business}
-                  preorderMinimumDays={preorderMinimumDays}
+                  {...cateringValues}
                 />
               </div>
             )}

@@ -34,7 +34,9 @@ import {
   Day,
   DayName,
   DayNumber,
-  ClosedBusinessMsg
+  ClosedBusinessMsg,
+  CheckIcon,
+  CheckedIcon
 } from './styles'
 import { BusinessMenuList } from '../BusinessMenuList'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -44,6 +46,7 @@ import SwiperCore, {
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import { getTimes } from '../../../../../utils'
+import CgRadioCheck from '@meronex/icons/cg/CgRadioCheck'
 
 SwiperCore.use([Navigation])
 
@@ -61,11 +64,15 @@ const BusinessPreorderUI = (props) => {
     handleAsap,
     isProfessional,
     isDisabled,
-    maxDays
+    maxDays,
+    hoursList,
+    cateringPreorder,
+    preorderLeadTime,
+    getActualSchedule
   } = props
 
   const { pathname } = useLocation()
-  const [{ optimizeImage }] = useUtils()
+  const [{ optimizeImage, parseTime }] = useUtils()
   const theme = useTheme()
   const [{ configs }] = useConfig()
   const [orderState] = useOrder()
@@ -124,10 +131,44 @@ const BusinessPreorderUI = (props) => {
   }
 
   useEffect(() => {
-    const selectedMenu = menu ? (menu?.use_business_schedule ? business : menu) : business
-    const _times = getTimeList(dateSelected, selectedMenu)
-    setTimeList(_times)
-  }, [dateSelected, menu, business])
+    if (cateringPreorder) {
+      const schedule = business && getActualSchedule()
+      if (!schedule && cateringPreorder && Object.keys(business)?.length > 0) {
+        setIsEnabled(false)
+        return
+      }
+      const _timeLists = hoursList
+        .filter(hour => (Object.keys(business || {})?.length === 0 || schedule?.lapses?.some(lapse =>
+          moment(dateSelected + ` ${hour.startTime}`) >= moment(dateSelected + ` ${lapse.open.hour}:${lapse.open.minute}`).add(preorderLeadTime, 'minutes') && moment(dateSelected + ` ${hour.endTime}`) <= moment(dateSelected + ` ${lapse.close.hour}:${lapse.close.minute}`))) &&
+          moment(dateSelected + ` ${hour.startTime}`) < moment(dateSelected + ` ${hour.endTime}`) &&
+          (moment().add(preorderLeadTime, 'minutes') < moment(dateSelected + ` ${hour.startTime}`) || !cateringPreorder))
+        .map(hour => {
+          return {
+            value: hour.startTime,
+            text: is12Hours ? (
+              hour.startTime.includes('12')
+                ? `${hour.startTime}PM`
+                : parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'hh:mma' })
+            ) : (
+              parseTime(moment(hour.startTime, 'HH:mm'), { outputFormat: 'HH:mm' })
+            ),
+            endText: is12Hours ? (
+              hour.endTime.includes('12')
+                ? `${hour.endTime}PM`
+                : parseTime(moment(hour.endTime, 'HH:mm'), { outputFormat: 'hh:mma' })
+            ) : (
+              parseTime(moment(hour.endTime, 'HH:mm'), { outputFormat: 'HH:mm' })
+            )
+          }
+        })
+      setIsEnabled(true)
+      setTimeList(_timeLists)
+    } else {
+      const selectedMenu = menu ? (menu?.use_business_schedule ? business : menu) : business
+      const _times = getTimeList(dateSelected, selectedMenu)
+      setTimeList(_times)
+    }
+  }, [dateSelected, menu, business, cateringPreorder, hoursList])
 
   useEffect(() => {
     if (type === 'business_hours') setMenu(null)
@@ -147,7 +188,7 @@ const BusinessPreorderUI = (props) => {
           <p>{business.name}</p>
         </LogoWrapper>
       )}
-      {!isProfessional && isPreOrderSetting && (
+      {!isProfessional && isPreOrderSetting && !cateringPreorder && (
         <PreorderTypeWrapper>
           <p>{t('PREORDER_TYPE', 'Preorder type')}</p>
           <SelectWrapper>
@@ -232,8 +273,18 @@ const BusinessPreorderUI = (props) => {
                     isDisabled={isDisabled}
                     isProfessional={isProfessional}
                     busyTime={isProfessional && isBusyTime(business, getMomentTime(time.value))}
+                    cateringPreorder={cateringPreorder}
                   >
-                    <span>{time.text}</span>
+                    <span>
+                      {cateringPreorder && (
+                        <CheckIcon>
+                          {timeSelected === time.value ? <CheckedIcon cateringPreorder={cateringPreorder} /> : <CgRadioCheck />}
+                        </CheckIcon>
+                      )}
+                      <p>
+                        {time.text} {cateringPreorder && `- ${time.endText}`}
+                      </p>
+                    </span>
                   </TimeItem>
                 ))}
               </>

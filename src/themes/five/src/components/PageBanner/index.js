@@ -115,7 +115,7 @@ const PageBannerUI = (props) => {
           <Skeleton height={250} />
         </BannerContainer>
       ) : (
-        pageBannerState.banner?.items && (
+        pageBannerState.banner?.items?.length > 0 && (
           <BannerContainer>
             <Swiper
               navigation
