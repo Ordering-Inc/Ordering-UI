@@ -86,7 +86,9 @@ const LoginFormUI = (props) => {
     otpState,
     setOtpState,
     useLoginOtpEmail,
-    useLoginOtpCellphone
+    useLoginOtpCellphone,
+    handleLoginSpoonity,
+    useLoginSpoonity
   } = props
   const numOtpInputs = loginTab === 'otp' ? 6 : 4
   const [ordering, { setOrdering }] = useApi()
@@ -120,6 +122,8 @@ const LoginFormUI = (props) => {
   const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
   const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
 
+  const spoonityTitle = configs?.spoonity_title?.value
+
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
     (configs?.google_login_client_id?.value && configs?.google_login_auth_domain?.value && configs?.google_login_api_key?.value && googleLoginEnabled) ||
@@ -152,6 +156,10 @@ const LoginFormUI = (props) => {
         setOrdering({ ...ordering, project: projectName })
         localStorage.setItem('project_name', projectName)
         setSubmitted(true)
+        return
+      }
+      if (loginTab === 'spoonity') {
+        handleLoginSpoonity()
         return
       }
       handleButtonLoginClick()
@@ -241,6 +249,12 @@ const LoginFormUI = (props) => {
   const handleChangeOtpType = (type) => {
     handleChangeTab('otp')
     setOtpType(type)
+  }
+
+  const preventWhiteSpaceOnKeyDown = (e) => {
+    if (e.key === ' ') {
+      e.preventDefault()
+    }
   }
 
   useEffect(() => {
@@ -346,12 +360,6 @@ const LoginFormUI = (props) => {
     }
   }, [recaptchaConfig])
 
-  const preventWhiteSpaceOnKeyDown = (e) => {
-    if (e.key === " ") {
-      e.preventDefault()
-    }
-  }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -375,7 +383,7 @@ const LoginFormUI = (props) => {
             <Title>{t('LOGIN', 'Login')}</Title>
           )}
 
-          {((Number(useLoginByEmail) + Number(useLoginByCellphone) + Number(useLoginOtpEmail) + Number(useLoginOtpCellphone) > 1) && !loginWithOtpState && !willVerifyOtpState) && (
+          {((Number(useLoginByEmail) + Number(useLoginByCellphone) + Number(useLoginOtpEmail) + Number(useLoginOtpCellphone) + Number(useLoginSpoonity) > 1) && !loginWithOtpState && !willVerifyOtpState) && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 {useLoginByEmail && (
@@ -412,6 +420,15 @@ const LoginFormUI = (props) => {
                     borderBottom={isOtpCellphone}
                   >
                     {t('BY_OTP_CELLPHONE', 'by Otp Cellphone')}
+                  </Tab>
+                )}
+                {useLoginSpoonity && (
+                  <Tab
+                    onClick={() => handleChangeTab('spoonity')}
+                    active={loginTab === 'spoonity'}
+                    borderBottom={loginTab === 'spoonity'}
+                  >
+                    {spoonityTitle || t('BY_SPOONITY', 'by Spoonity')}
                   </Tab>
                 )}
               </Tabs>
@@ -455,7 +472,7 @@ const LoginFormUI = (props) => {
                 </InputBeforeIcon>
               </InputWrapper>
             )}
-            {(((useLoginByEmail && loginTab === 'email') || (loginTab === 'otp' && otpType === 'email')) && !willVerifyOtpState) && (
+            {(((useLoginByEmail && loginTab === 'email') || (loginTab === 'otp' && otpType === 'email') || (useLoginSpoonity && loginTab === 'spoonity')) && !willVerifyOtpState) && (
               <>
                 {formMethods?.errors?.email?.type === 'required' && (
                   <ValidationText>
@@ -474,7 +491,7 @@ const LoginFormUI = (props) => {
                     aria-label='email'
                     placeholder={t('EMAIL', 'Email')}
                     ref={formMethods.register({
-                      required: loginTab === 'email'
+                      required: loginTab === 'email' || loginTab === 'spoonity'
                         ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
                         : null,
                       pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
