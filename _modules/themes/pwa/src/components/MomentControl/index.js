@@ -20,6 +20,7 @@ var _styles = require("./styles");
 var _CgRadioCheck = _interopRequireDefault(require("@meronex/icons/cg/CgRadioCheck"));
 var _CgRadioChecked = _interopRequireDefault(require("@meronex/icons/cg/CgRadioChecked"));
 var _BiTimeFive = _interopRequireDefault(require("@meronex/icons/bi/BiTimeFive"));
+var _utils = require("../../../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -36,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MomentControlUI = function MomentControlUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _moment$format, _props$afterComponent, _props$afterElements;
   var isAsap = props.isAsap,
     datesList = props.datesList,
     hoursList = props.hoursList,
@@ -97,11 +98,8 @@ var MomentControlUI = function MomentControlUI(props) {
     !orderState.loading && handleAsap();
     setIsASP(true);
   };
-  var _formatMonthYear = function formatMonthYear(date) {
-    return (0, _moment.default)(date).format('MMMM');
-  };
-  var _formatShortWeekday = function formatShortWeekday(date) {
-    return (0, _moment.default)(date).format('dd');
+  var formatWeekMonth = function formatWeekMonth(obj, date) {
+    return obj === 'month' ? t(_utils.calendarLanguages.months[(0, _moment.default)(date).format('MMMM')], (0, _moment.default)(date).format('MMMM')) : t(_utils.calendarLanguages.week[(0, _moment.default)(date).format('dd')], (0, _moment.default)(date).format('dd'));
   };
   var _formatDay = function formatDay(date) {
     var minMon = (0, _moment.default)(minDate).format('MM');
@@ -160,7 +158,7 @@ var MomentControlUI = function MomentControlUI(props) {
       return handleCheckBoxChange(true);
     },
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioChecked.default, null) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP'), " (", (0, _moment.default)(new Date()).format('LLLL'), " - ", t('DELIVERY_TIME', 'delivery time'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioChecked.default, null) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP') + " (".concat(t((_moment$format = (0, _moment.default)().format('dddd')) === null || _moment$format === void 0 ? void 0 : _moment$format.toLocaleUpperCase(), (0, _moment.default)().format('dddd')), ", ").concat(t(_utils.calendarLanguages.months[(0, _moment.default)().format('MMMM')], (0, _moment.default)().format('MMMM'))).concat((0, _moment.default)().format(' D, yyyy h:mm A'), " - ").concat(t('DELIVERY_TIME', 'delivery time'), ")"))), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
     highlight: !isASP,
     onClick: function onClick() {
       return handleCheckBoxChange(null);
@@ -187,10 +185,10 @@ var MomentControlUI = function MomentControlUI(props) {
     minDate: minDate,
     maxDate: maxDate,
     formatMonthYear: function formatMonthYear(locale, date) {
-      return _formatMonthYear(date);
+      return formatWeekMonth('month', date);
     },
     formatShortWeekday: function formatShortWeekday(locale, date) {
-      return _formatShortWeekday(date);
+      return formatWeekMonth('week', date);
     },
     formatDay: function formatDay(locale, date) {
       return _formatDay(date);
