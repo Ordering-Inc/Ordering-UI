@@ -351,6 +351,7 @@ const MomentControlUI = (props) => {
           <Button
             color='primary'
             onClick={() => onClose()}
+            disabled={!timeSelected}
           >
             <span>{t('CONTINUE', 'Continue')}</span>
             <ArrowRight />

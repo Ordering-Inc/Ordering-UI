@@ -502,6 +502,7 @@ export const Header = (props) => {
               preorderTimeRange={preorderTimeRange}
               preorderSlotInterval={preorderSlotInterval}
               cateringPreorder={!!cateringTypeString}
+              isHeader
             />
           )}
           {modalSelected === 'delivery' && (
