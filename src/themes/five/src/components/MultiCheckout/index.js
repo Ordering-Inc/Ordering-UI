@@ -250,6 +250,7 @@ const MultiCheckoutUI = (props) => {
                     isProducts={cart?.products?.length || 0}
                     hideDeliveryFee={configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'}
                     hideDriverTip={configs?.multi_business_checkout_show_combined_driver_tip?.value === '1'}
+                    businessConfigs={cart?.business?.configs}
                   />
                   <DriverTipDivider />
                 </React.Fragment>

@@ -165,6 +165,10 @@ export const DaysSwiper = styled.div`
       left: 0px;
       right: auto;
     }
+    .swiper-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 `
 
