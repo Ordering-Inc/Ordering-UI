@@ -239,7 +239,7 @@ export const Header = (props) => {
           </LeftHeader>
           {isShowOrderOptions && !props.isCustomLayout && windowSize.width >= 576 && (
             <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode} isChew={isChew}>
-              {windowSize.width > 820 && isFarAway && (
+              {windowSize.width > 850 && isFarAway && (
                 <FarAwayMessage>
                   <TiWarningOutline />
                   <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
