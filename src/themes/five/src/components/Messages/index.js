@@ -96,6 +96,8 @@ const MessagesUI = (props) => {
   const buttonRef = useRef(null)
   const [modalImage, setModalImage] = useState({ open: false, src: '' })
   const imageRef = useRef(null)
+  const previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17]
+  const chatDisabled = previousStatus.includes(order?.status)
 
   const quickMessageList = [
     { key: 'message_1', text: t('CUSTOMER_MESSAGE_1', 'Lorem ipsum 1') },
@@ -302,7 +304,7 @@ const MessagesUI = (props) => {
   }
 
   const goToBusiness = (slug) => {
-    events.emit('go_to_page', { page: 'business', params: { business_slug: slug} })
+    events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
   }
 
   const MapMessages = ({ messages }) => {
@@ -660,14 +662,7 @@ const MessagesUI = (props) => {
               )
             }
           </Chat>
-          {(parseInt(order?.status) === 1 ||
-            parseInt(order?.status) === 2 ||
-            parseInt(order?.status) === 5 ||
-            parseInt(order?.status) === 6 ||
-            parseInt(order?.status) === 10 ||
-            parseInt(order?.status) === 11 ||
-            parseInt(order?.status) === 12
-          ) && driver
+          {chatDisabled
             ? (
               <NotSendMessage>
                 <MdcCloseOctagonOutline />
