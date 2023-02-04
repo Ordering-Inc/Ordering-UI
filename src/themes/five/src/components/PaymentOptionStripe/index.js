@@ -5,7 +5,7 @@ import {
   useSession,
   useLanguage
 } from 'ordering-components'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+import { Trash } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
@@ -196,15 +196,8 @@ export const PaymentCard = (props) => {
       <CardItemActions>
         <CardItemActionsWrapper ref={actionWrapperRef}>
           <span ref={cardActionsRef}>
-            <FiMoreVertical onClick={() => setIsShowActions(true)} />
+            <Trash color='#B1BCCC' onClick={() => handleDeleteCard()} />
           </span>
-          {
-            isShowActions && (
-              <ActionsContent>
-                <div className='delete' onClick={handleDeleteCard}>{t('DELETE', 'Delete')}</div>
-              </ActionsContent>
-            )
-          }
         </CardItemActionsWrapper>
       </CardItemActions>
     </CardItem>

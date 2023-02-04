@@ -515,7 +515,7 @@ const OrderDetailsUI = (props) => {
                           </p>
                         </PlaceSpotSection>
                       )}
-                      {hideOrderActions && (
+                      {!hideOrderActions && (
                         <DirectionButtonWrapper>
                           <Button
                             color='primary'
