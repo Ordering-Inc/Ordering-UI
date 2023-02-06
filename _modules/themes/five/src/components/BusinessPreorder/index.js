@@ -172,7 +172,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     if (type === 'business_hours') setMenu(null);
   }, [type]);
   (0, _react.useEffect)(function () {
-    if (pathname.includes('store') || isProfessional) return;
+    if (pathname.includes('store') || isProfessional || cateringPreorder) return;
     handleAsap && handleAsap();
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessPreorderContainer, null, !isProfessional && /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('PREORDER', 'Preorder')), !isProfessional && /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {

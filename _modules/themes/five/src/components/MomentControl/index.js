@@ -121,7 +121,7 @@ var MomentControlUI = function MomentControlUI(props) {
     if (!scheduleList || cateringPreorder) {
       var _Object$keys, _Object$keys2;
       var schedule = business && ((_Object$keys = Object.keys(business || {})) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0 && getActualSchedule();
-      if (!schedule && cateringPreorder & ((_Object$keys2 = Object.keys(business)) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) > 0) {
+      if (!schedule && cateringPreorder && ((_Object$keys2 = Object.keys(business)) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) > 0) {
         setIsEnabled(false);
         return;
       }
@@ -150,7 +150,7 @@ var MomentControlUI = function MomentControlUI(props) {
       _timeLists = getTimes(dateSelected, scheduleList);
     }
     setTimeList(_timeLists);
-  }, [dateSelected, hoursList, scheduleList, cateringPreorder]);
+  }, [dateSelected, hoursList, scheduleList, cateringPreorder, JSON.stringify(business)]);
   (0, _react.useEffect)(function () {
     handleCheckBoxChange(isAsap && (preorderMinimumDays === 0 && preorderLeadTime === 0 || !cateringPreorder));
   }, [isAsap]);
@@ -246,7 +246,8 @@ var MomentControlUI = function MomentControlUI(props) {
     color: "primary",
     onClick: function onClick() {
       return onClose();
-    }
+    },
+    disabled: !timeSelected
   }, /*#__PURE__*/_react.default.createElement("span", null, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRight, null))));
 };
 var MomentControl = function MomentControl(props) {

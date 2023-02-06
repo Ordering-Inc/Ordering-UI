@@ -458,6 +458,7 @@ var Header = function Header(props) {
       return setModalIsOpen(false);
     },
     cateringPreorder: !!cateringTypeString,
+    isHeader: true,
     business: pathname.includes('store') && business
   }, cateringValues)), modalSelected === 'delivery' && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorContent.OrderTypeSelectorContent, {
     onClose: function onClose() {
