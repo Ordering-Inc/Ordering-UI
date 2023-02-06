@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import IosCash from '@meronex/icons/ios/IosCash'
 import IosCard from '@meronex/icons/ios/IosCard'
@@ -12,7 +12,8 @@ import {
   PaymentOptions as PaymentOptionsController,
   useLanguage,
   useOrder,
-  useSession
+  useSession,
+  useValidationFields
 } from 'ordering-components'
 
 import { Modal } from '../Modal'
@@ -32,6 +33,7 @@ import {
   PayCardSelected,
   CardItemContent
 } from './styles'
+import { Alert } from '../Confirm'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
 const stripeRedirectOptions = [
@@ -89,7 +91,10 @@ const PaymentOptionsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
+  const [{ options }] = useOrder()
   const [{ loading: loadingOptions }] = useOrder()
+  const [validationFields] = useValidationFields()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const list = paymethodsList ? paymethodsList?.paymethods : paymethods?.map(pay => pay.paymethod)
 
@@ -100,6 +105,18 @@ const PaymentOptionsUI = (props) => {
   const stripeDirectMethods = ['stripe_direct', ...methodsPay]
 
   const handlePaymentMethodClick = (paymethod) => {
+    if (paymethod?.gateway === 'paypal' &&
+      options.type === 1 &&
+      validationFields?.fields?.checkout?.driver_tip?.enabled &&
+      validationFields?.fields?.checkout?.driver_tip?.required &&
+      (Number(cart?.driver_tip) <= 0)
+    ) {
+      setAlertState({
+        open: true,
+        content: [t('DRIVER_TIPS_REQUIRED', 'Driver tips is required, please select a driver tip before select this paymethod')]
+      })
+      return
+    }
     const isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod?.gateway)
     handlePaymethodClick(paymethod, isPopupMethod)
   }
@@ -128,6 +145,13 @@ const PaymentOptionsUI = (props) => {
       handlePlaceOrder()
     }
   }, [paymethodData, paymethodSelected])
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
 
   return (
     <>
@@ -326,6 +350,15 @@ const PaymentOptionsUI = (props) => {
             setCreateOrder={setCreateOrder}
           />
         </Modal>
+        <Alert
+          title={t('PAYMENT_METHODS', 'Payment methods')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
+          closeOnBackdrop={false}
+        />
       </PaymentMethodsContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

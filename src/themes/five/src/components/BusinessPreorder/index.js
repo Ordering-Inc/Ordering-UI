@@ -175,7 +175,7 @@ const BusinessPreorderUI = (props) => {
   }, [type])
 
   useEffect(() => {
-    if (pathname.includes('store') || isProfessional) return
+    if (pathname.includes('store') || isProfessional || cateringPreorder) return
     handleAsap && handleAsap()
   }, [])
 
