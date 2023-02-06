@@ -15,7 +15,9 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (_ref) {
   var bgtransparent = _ref.bgtransparent;
-  return bgtransparent && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      background: transparent !important;\n  "])));
+  return bgtransparent && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      background: transparent !important;\n      &:hover {\n        background: ", ";\n        color: ", " !important;\n      }\n  "])), (0, _polished.darken)(0.15, '#CCC'), function (props) {
+    return (0, _polished.darken)(0.15, props.theme.colors.primary);
+  });
 }, function (_ref2) {
   var initialIcon = _ref2.initialIcon;
   return initialIcon && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    text-align: left;\n    ", "\n    img{\n      vertical-align: middle;\n    }\n    span {\n      padding-left: 15%\n      ", "\n    }\n  "])), function (props) {

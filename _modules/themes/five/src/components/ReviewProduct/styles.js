@@ -43,7 +43,7 @@ var HandIconWrapper = _styledComponents.default.span(_templateObject7 || (_templ
 exports.HandIconWrapper = HandIconWrapper;
 var AdditionCommentsWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral([""])));
 exports.AdditionCommentsWrapper = AdditionCommentsWrapper;
-var AddCommentHideShow = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  text-decoration: underline;\n  text-align: center;\n  user-select: none;\n  cursor: pointer;\n  margin: 0;\n  transition: all 0.3s linear;\n  color: #909BA9;\n  font-size: 13px;\n\n  &:hover {\n    color: ", ";\n  }\n  \n  ", "\n"])), function (props) {
+var AddCommentHideShow = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  text-decoration: underline;\n  text-align: center;\n  user-select: none;\n  cursor: pointer;\n  margin: 0;\n  transition: all 0.3s linear;\n  color: #909BA9;\n  font-size: 13px;\n  &:hover {\n        text-decoration: underline;\n        color: ", ";\n      }\n  \n  ", "\n"])), function (props) {
   var _props$theme5;
   return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.colors.primary;
 }, function (_ref2) {

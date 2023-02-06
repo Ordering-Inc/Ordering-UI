@@ -57,11 +57,12 @@ function useIntersectionObserver() {
     }();
     if (!window.IntersectionObserver) loadPollyFill();
     var observer = new window.IntersectionObserver(function (entries) {
-      var isIntersecting = entries[0].isIntersecting;
-      if (isIntersecting) {
-        setIsObserved(true);
-        observer.disconnect();
-      }
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          setIsObserved(true);
+          observer.disconnect();
+        }
+      });
     });
     if ($element !== null && $element !== void 0 && $element.current) {
       observer.observe($element.current);

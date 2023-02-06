@@ -71,7 +71,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     onClick: function onClick() {
       return setOpenModal(true);
     }
-  }, t('CHANGE', 'Change')))), apiKey && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
+  }, t('CHANGE_ADDRESS', 'Change address')))), apiKey && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
     src: googleMapsUrl,
     id: "google-maps-image",
     alt: "google-maps-location",

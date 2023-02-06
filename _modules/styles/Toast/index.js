@@ -6,10 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Toast = void 0;
 var _react = _interopRequireWildcard(require("react"));
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _orderingComponents = require("ordering-components");
 var _templateObject, _templateObject2;
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -25,11 +24,13 @@ var ToastBar = _styledComponents.default.div(_templateObject || (_templateObject
 });
 var ToastContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n"])));
 var Toast = function Toast() {
+  var _theme$colors$primary;
   var _useToast = (0, _orderingComponents.useToast)(),
     _useToast2 = _slicedToArray(_useToast, 2),
     toastConfig = _useToast2[0],
     hideToast = _useToast2[1].hideToast;
   var toastRef = (0, _react.useRef)();
+  var theme = (0, _styledComponents.useTheme)();
   (0, _react.useEffect)(function () {
     if (!toastConfig && !toastRef.current) {
       return;
@@ -51,7 +52,7 @@ var Toast = function Toast() {
   var backgroundColor = '#6ba4ff';
   switch (type) {
     case _orderingComponents.ToastType.Info:
-      backgroundColor = '#6ba4ff';
+      backgroundColor = (_theme$colors$primary = theme.colors.primary) !== null && _theme$colors$primary !== void 0 ? _theme$colors$primary : backgroundColor;
       break;
     case _orderingComponents.ToastType.Error:
       backgroundColor = '#D83520';
