@@ -494,6 +494,7 @@ export const Header = (props) => {
             <MomentContent
               onClose={() => setModalIsOpen(false)}
               cateringPreorder={!!cateringTypeString}
+              isHeader
               business={pathname.includes('store') && business}
               {...cateringValues}
             />
