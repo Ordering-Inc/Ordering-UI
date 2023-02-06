@@ -160,7 +160,7 @@ const MomentControlUI = (props) => {
     let _timeLists = []
     if (!scheduleList || cateringPreorder) {
       const schedule = business && Object.keys(business || {})?.length > 0 && getActualSchedule()
-      if (!schedule && cateringPreorder & Object.keys(business)?.length > 0) {
+      if (!schedule && cateringPreorder && Object.keys(business)?.length > 0) {
         setIsEnabled(false)
         return
       }
@@ -193,7 +193,7 @@ const MomentControlUI = (props) => {
       _timeLists = getTimes(dateSelected, scheduleList)
     }
     setTimeList(_timeLists)
-  }, [dateSelected, hoursList, scheduleList, cateringPreorder])
+  }, [dateSelected, hoursList, scheduleList, cateringPreorder, JSON.stringify(business)])
 
   useEffect(() => {
     handleCheckBoxChange(isAsap && ((preorderMinimumDays === 0 && preorderLeadTime === 0) || !cateringPreorder))
@@ -351,6 +351,7 @@ const MomentControlUI = (props) => {
           <Button
             color='primary'
             onClick={() => onClose()}
+            disabled={!timeSelected}
           >
             <span>{t('CONTINUE', 'Continue')}</span>
             <ArrowRight />

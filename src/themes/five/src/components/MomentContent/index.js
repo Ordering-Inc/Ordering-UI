@@ -49,7 +49,7 @@ export const MomentContent = (props) => {
             business={props.business}
           />
         )}
-        {orderState?.loading && (
+        {orderState?.loading && !props.isHeader && (
           <Layer height={momentControl?.height && `${momentControl?.height}px`}>
             {(window.location.pathname !== '/search' || orderState?.options?.address?.location) && (
               <SpinnerLoader
