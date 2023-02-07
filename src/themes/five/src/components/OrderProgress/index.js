@@ -36,6 +36,8 @@ const OrderProgressUI = (props) => {
   const [events] = useEvent()
   const [lastOrder, setLastOrder] = useState(null)
 
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+
   const handleGoToPage = (index) => {
     events.emit('go_to_page', { page: index, params: { orderId: lastOrder?.uuid } })
   }
@@ -58,7 +60,11 @@ const OrderProgressUI = (props) => {
         <OrderProgressWrapper isChew={props.isChew}>
           <OrderProgressContainer>
             <OrderInfoWrapper>
-              <ProgressLogo bgimage={optimizeImage(lastOrder?.business?.logo || theme.images?.dummies?.businessLogo, 'h_91,c_limit')} />
+              <ProgressLogo
+                bgimage={orderList?.orders.length === 1
+                  ? optimizeImage(lastOrder?.business?.logo || theme.images?.dummies?.businessLogo, 'h_91,c_limit')
+                  : isChew ? theme.images.logos.chewLogo : theme.images.logos.logotype}
+              />
               <ProgressDescriptionWrapper>
                 <h2>{t('ORDER_IN_PROGRESS', 'Order in progress')}</h2>
                 <p>{t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')}</p>
@@ -114,7 +120,7 @@ export const OrderProgress = (props) => {
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 1,
+      pageSize: 10,
       controlType: 'infinity'
     }
   }
