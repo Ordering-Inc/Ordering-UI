@@ -36,6 +36,15 @@ export const WrapperLeftContent = styled.div`
     margin-bottom: 5px;
   }
 `
+
+export const CouponContainer = styled.div`
+  width: 100%;
+
+  input, button {
+    border-radius: 7.6px;
+  }
+`
+
 export const WrapperRightContainer = styled.div`
   width: 100%;
   background: #F8F9FA;
