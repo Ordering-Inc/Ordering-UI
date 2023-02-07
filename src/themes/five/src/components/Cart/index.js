@@ -485,6 +485,7 @@ const CartUI = (props) => {
                   validationFields?.fields?.checkout?.driver_tip?.enabled &&
                   driverTipsOptions.length > 0 &&
                   !useKioskApp &&
+                  !isCheckout &&
                   (
                     <>
                       <DriverTipContainer>
