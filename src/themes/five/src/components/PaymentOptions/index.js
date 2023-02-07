@@ -98,7 +98,8 @@ const PaymentOptionsUI = (props) => {
     setCreateOrder,
     onPlaceOrderClick,
     handlePlaceOrder,
-    paymethods
+    paymethods,
+    setCardList
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -246,6 +247,7 @@ const PaymentOptionsUI = (props) => {
         )}
         {(isOpenMethod?.paymethod?.gateway === 'stripe' || paymethodSelected?.gateway === 'stripe') && (
           <PaymentOptionStripe
+            setCardList={setCardList}
             paymethod={isOpenMethod?.paymethod}
             businessId={props.businessId}
             publicKey={isOpenMethod?.paymethod?.credentials?.publishable}

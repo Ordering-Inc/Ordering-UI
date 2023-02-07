@@ -125,6 +125,7 @@ const CheckoutUI = (props) => {
   const [isSuccess, setIsSuccess] = useState(false)
   const [openModal, setOpenModal] = useState({ login: false, signup: false })
   const [allowedGuest, setAllowedGuest] = useState(false)
+  const [cardList, setCardList] = useState([])
 
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isTableNumberEnabled = configs?.table_numer_enabled?.value
@@ -140,6 +141,7 @@ const CheckoutUI = (props) => {
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
+    (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0) ||
     placing ||
     errorCash ||
     loading ||
@@ -491,6 +493,7 @@ const CheckoutUI = (props) => {
                 paySelected={paymethodSelected}
                 handlePlaceOrder={handlePlaceOrder}
                 onPlaceOrderClick={onPlaceOrderClick}
+                setCardList={setCardList}
               />
             </PaymentMethodContainer>
           )}
