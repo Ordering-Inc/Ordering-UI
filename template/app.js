@@ -117,10 +117,12 @@ export const App = () => {
   const isKioskApp = settings?.use_kiosk
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
 
-  let queryToken
+  let queryIntegrationToken
+  let queryIntegrationCode
   if (location.search) {
     const query = new URLSearchParams(location.search)
-    queryToken = query.get('spoonity_token')
+    queryIntegrationCode = query.get('integration_code')
+    queryIntegrationToken = query.get('integration_token')
   }
 
   const themeUpdated = {
@@ -500,8 +502,8 @@ export const App = () => {
                     ) : (
                       isKioskApp
                         ? <HomePage />
-                        : queryToken
-                          ? <QueryLoginSpoonity token={queryToken} />
+                        : queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
                           : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                             ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                             : <HomePage />
