@@ -20,6 +20,7 @@ import { Alert } from '../Confirm'
 import { UserDetails } from '../UserDetails'
 import { AddressDetails } from '../AddressDetails'
 import { MultiCartsPaymethodsAndWallets } from '../MultiCartsPaymethodsAndWallets'
+import { CouponControl } from '../../../../../components/CouponControl'
 
 import {
   Container,
@@ -35,7 +36,8 @@ import {
   PaymentMethodContainer,
   WrapperPlaceOrderButton,
   WarningText,
-  DriverTipContainer
+  DriverTipContainer,
+  CouponContainer
 } from './styles'
 import { DriverTips } from '../DriverTips'
 
@@ -212,6 +214,23 @@ const MultiCheckoutUI = (props) => {
               </PaymentMethodContainer>
 
               {
+                validationFields?.fields?.checkout?.coupon?.enabled &&
+                openCarts.every(cart => cart.business_id && cart.status !== 2) &&
+                configs?.multi_business_checkout_coupon_input_style?.value === 'group' && (
+                  <DriverTipContainer>
+                    <h1>{t('DISCOUNT_COUPON', 'Discount coupon')}</h1>
+                    <CouponContainer>
+                      <CouponControl
+                        carts={openCarts}
+                        businessIds={openCarts.map(cart => cart.business_id)}
+                        price={openCarts.reduce((total, cart) => total + cart.total, 0)}
+                      />
+                    </CouponContainer>
+                  </DriverTipContainer>
+                )
+              }
+
+              {
                 isMultiDriverTips &&
                 orderState?.options.type === 1 &&
                 validationFields?.fields?.checkout?.driver_tip?.enabled &&
@@ -246,9 +265,10 @@ const MultiCheckoutUI = (props) => {
               {openCarts.map(cart => (
                 <React.Fragment key={cart.uuid}>
                   <Cart
-                    isCartPending={cart?.status === 2}
                     cart={cart}
                     isMultiCheckout
+                    isCartPending={cart?.status === 2}
+                    hideCouponInput={configs?.multi_business_checkout_coupon_input_style?.value === 'group'}
                     isProducts={cart?.products?.length || 0}
                     hideDeliveryFee={configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'}
                     hideDriverTip={configs?.multi_business_checkout_show_combined_driver_tip?.value === '1'}

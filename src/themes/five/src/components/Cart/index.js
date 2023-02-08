@@ -70,6 +70,7 @@ const CartUI = (props) => {
     cart: cartMulticart,
     hideDeliveryFee,
     hideDriverTip,
+    hideCouponInput,
     businessConfigs
   } = props
 
@@ -463,7 +464,10 @@ const CartUI = (props) => {
                     )}
                   </tbody>
                 </table>
-                {isCouponEnabled && !isCartPending && ((isCheckout || isCartPopover || isMultiCheckout) && !(isCheckout && isCartPopover)) && !hideCartDiscount && (
+                {isCouponEnabled && !isCartPending &&
+                  ((isCheckout || isCartPopover || isMultiCheckout) &&
+                  !(isCheckout && isCartPopover)) && !hideCartDiscount && !hideCouponInput &&
+                (
                   <CouponContainer>
                     <CouponControl
                       businessId={cart?.business_id}
@@ -481,6 +485,7 @@ const CartUI = (props) => {
                   validationFields?.fields?.checkout?.driver_tip?.enabled &&
                   driverTipsOptions.length > 0 &&
                   !useKioskApp &&
+                  !isCheckout &&
                   (
                     <>
                       <DriverTipContainer>

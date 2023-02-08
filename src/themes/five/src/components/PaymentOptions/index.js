@@ -48,7 +48,7 @@ const getPayIcon = (method) => {
     case 1:
       return <Cash />
     case 22:
-      return <BilStripe />
+      return <CreditCard />
     case 28:
       return <FaCcStripe />
     case 31:
