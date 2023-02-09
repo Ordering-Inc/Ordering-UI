@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderProgressUI = function OrderProgressUI(props) {
-  var _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2;
+  var _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2;
   var orderList = props.orderList,
     isCustomerMode = props.isCustomerMode;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -48,6 +48,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     lastOrder = _useState2[0],
     setLastOrder = _useState2[1];
+  var isChew = (theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.layout) === null || _theme$header$compone2 === void 0 ? void 0 : (_theme$header$compone3 = _theme$header$compone2.type) === null || _theme$header$compone3 === void 0 ? void 0 : _theme$header$compone3.toLowerCase()) === 'chew';
   var handleGoToPage = function handleGoToPage(index) {
     events.emit('go_to_page', {
       page: index,
@@ -71,7 +72,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
   })), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) > 0 && lastOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, {
     isChew: props.isChew
   }, /*#__PURE__*/_react.default.createElement(_styles.OrderProgressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressLogo, {
-    bgimage: optimizeImage((lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$business = lastOrder.business) === null || _lastOrder$business === void 0 ? void 0 : _lastOrder$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_91,c_limit')
+    bgimage: (orderList === null || orderList === void 0 ? void 0 : orderList.orders.length) === 1 ? optimizeImage((lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$business = lastOrder.business) === null || _lastOrder$business === void 0 ? void 0 : _lastOrder$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_91,c_limit') : isChew ? theme.images.logos.chewLogo : theme.images.logos.logotype
   }), /*#__PURE__*/_react.default.createElement(_styles.ProgressDescriptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_IN_PROGRESS', 'Order in progress')), /*#__PURE__*/_react.default.createElement("p", null, t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primaryContrast",
     naked: true,
@@ -98,7 +99,7 @@ var OrderProgress = function OrderProgress(props) {
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 1,
+      pageSize: 10,
       controlType: 'infinity'
     }
   });
