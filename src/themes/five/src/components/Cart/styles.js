@@ -50,6 +50,11 @@ export const OrderBill = styled.div`
         font-weight: bold;
         color: ${props => props.theme.colors.darkTextColor};
         font-size: 16px;
+
+        &#loyalty {
+          font-weight: normal;
+          font-size: 14px;
+        }
       }
     }
   }

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
+  MultiCheckout as MultiCheckoutController,
   useLanguage,
   useUtils,
   useCustomer,
   useConfig,
   useSession,
   useValidationFields,
-  useOrder,
-  MultiCheckout as MultiCheckoutController
+  useOrder
 } from 'ordering-components'
 
 import parsePhoneNumber from 'libphonenumber-js'
@@ -54,6 +54,7 @@ const MultiCheckoutUI = (props) => {
     placing,
     isCustomerMode,
     openCarts,
+    rewardRate,
     totalCartsPrice,
     handleGroupPlaceOrder,
     paymethodSelected,
@@ -88,6 +89,8 @@ const MultiCheckoutUI = (props) => {
   const totalFeeEnabled = configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
+
+  const loyaltyRewardValue = Math.round(openCarts.reduce((sum, cart) => sum + cart?.subtotal, 0) / rewardRate)
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
@@ -301,6 +304,12 @@ const MultiCheckoutUI = (props) => {
                     <h4>{t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')}</h4>
                     <h4>{parsePrice(totalCartsPrice)}</h4>
                   </div>
+                  {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && (
+                    <span>
+                      <p>&nbsp;</p>
+                      <p>{t('REWARD_LOYALTY_POINT', 'Reward :amount: on loyalty points').replace(':amount:', loyaltyRewardValue)}</p>
+                    </span>
+                  )}
                   <p>
                     {t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')}
                   </p>
