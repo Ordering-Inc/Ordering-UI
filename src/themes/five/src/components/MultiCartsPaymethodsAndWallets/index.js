@@ -136,10 +136,12 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
           publicKey={paymethodSelected?.paymethod?.credentials?.publishable}
           payType={paymethodSelected?.paymethod?.name}
           onSelectCard={handlePaymethodDataChange}
+          paymethodSelected={paymethodSelected?.data?.id}
+          setCardList={setCardList}
         />
       )}
 
-      {stripeOptions.includes(paymethodSelected?.paymethod?.gateway) && paymethodSelected?.paymethod_data?.card && (
+      {stripeOptions.includes(paymethodSelected?.paymethod?.gateway) && paymethodSelected?.paymethod_data?.card && paymethodSelected?.gateway !== 'stripe' && (
         <PayCardSelected>
           <CardItemContent>
             <span className='checks'>

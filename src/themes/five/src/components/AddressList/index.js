@@ -65,7 +65,8 @@ const AddressListUI = (props) => {
     isFromCheckout,
     setIsAddressFormOpen,
     isProfile,
-    isMobile
+    isMobile,
+    onCancel
   } = props
 
   const [, t] = useLanguage()
@@ -126,7 +127,7 @@ const AddressListUI = (props) => {
     handleCloseAddressForm()
   }
 
-  const handleSetAddress = (address) => {
+  const handleSetAddress = async (address) => {
     if (
       checkAddress(address) &&
       isCustomerMode &&
@@ -140,7 +141,8 @@ const AddressListUI = (props) => {
     }
 
     handleCloseAddressForm()
-    handleSetDefault(address, userCustomerSetup)
+    await handleSetDefault(address, userCustomerSetup)
+    onCancel && onCancel()
   }
 
   const handleDeleteClick = (address) => {

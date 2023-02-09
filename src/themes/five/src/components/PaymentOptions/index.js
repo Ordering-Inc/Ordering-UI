@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
+import BilStripe from '@meronex/icons/bi/BilStripe'
 import FaCcStripe from '@meronex/icons/fa/FaCcStripe'
 import FaStripeS from '@meronex/icons/fa/FaStripeS'
 import GrStripe from '@meronex/icons/gr/GrStripe'
@@ -19,6 +20,7 @@ import { Alert } from '../Confirm'
 import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
+import { PaymentOptionCard } from '../PaymentOptionCard'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../StripeRedirectForm'
 import { NotFoundSource } from '../NotFoundSource'
@@ -41,6 +43,8 @@ const stripeRedirectOptions = [
   { name: 'Giropay', value: 'giropay' },
   { name: 'iDEAL', value: 'ideal' }
 ]
+
+const cardsPaymethods = ['credomatic']
 
 const getPayIcon = (method) => {
   switch (method) {
@@ -97,7 +101,8 @@ const PaymentOptionsUI = (props) => {
     setCreateOrder,
     onPlaceOrderClick,
     handlePlaceOrder,
-    paymethods
+    paymethods,
+    setCardList
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -246,8 +251,9 @@ const PaymentOptionsUI = (props) => {
             setErrorCash={props.setErrorCash}
           />
         )}
-        {isOpenMethod?.paymethod?.gateway === 'stripe' && isOpenMethod.paymethod?.gateway === 'stripe' && (
+        {(isOpenMethod?.paymethod?.gateway === 'stripe' || paymethodSelected?.gateway === 'stripe') && (
           <PaymentOptionStripe
+            setCardList={setCardList}
             paymethod={isOpenMethod?.paymethod}
             businessId={props.businessId}
             publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
@@ -255,10 +261,28 @@ const PaymentOptionsUI = (props) => {
             payType={isOpenMethod?.paymethod?.name}
             onSelectCard={handlePaymethodDataChange}
             onCancel={() => handlePaymethodClick(null)}
+            paymethodSelected={paymethodSelected?.data?.id}
+            handlePaymentMethodClick={handlePaymentMethodClick}
           />
         )}
 
-        {stripeOptions.includes(paymethodSelected?.gateway) && paymethodData?.card && !isCustomerMode && (
+        {(cardsPaymethods.includes(isOpenMethod?.paymethod?.gateway) || cardsPaymethods.includes(paymethodSelected?.gateway)) && (
+          <PaymentOptionCard
+            setCardList={setCardList}
+            paymethod={isOpenMethod?.paymethod}
+            businessId={props.businessId}
+            publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
+            gateway={isOpenMethod?.paymethod?.gateway || paymethodSelected?.gateway}
+            onPaymentChange={onPaymentChange}
+            payType={isOpenMethod?.paymethod?.name}
+            onSelectCard={handlePaymethodDataChange}
+            onCancel={() => handlePaymethodClick(null)}
+            paymethodSelected={paymethodSelected?.data?.id}
+            handlePaymentMethodClick={handlePaymentMethodClick}
+          />
+        )}
+
+        {stripeOptions.includes(paymethodSelected?.gateway) && paymethodData?.card && !isCustomerMode && paymethodSelected?.gateway !== 'stripe' && (
           <PayCardSelected>
             <CardItemContent>
               <span className='checks'>
@@ -317,6 +341,7 @@ const PaymentOptionsUI = (props) => {
               payType={paymethodsList?.name}
               onSelectCard={handlePaymethodDataChange}
               onCancel={() => handlePaymethodClick(null)}
+              paymethodSelected={paymethodSelected}
             />
           )}
         </Modal>
