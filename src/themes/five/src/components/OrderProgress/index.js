@@ -63,7 +63,7 @@ const OrderProgressUI = (props) => {
               <ProgressLogo
                 bgimage={orderList?.orders.length === 1
                   ? optimizeImage(lastOrder?.business?.logo || theme.images?.dummies?.businessLogo, 'h_91,c_limit')
-                  : isChew ? theme.images.logos.chewLogo : theme.images.logos.logotype}
+                  : isChew ? theme.images.logos.chewLogoReverse : theme.images.logos.logotype}
               />
               <ProgressDescriptionWrapper>
                 <h2>{t('ORDER_IN_PROGRESS', 'Order in progress')}</h2>
