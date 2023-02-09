@@ -32,6 +32,7 @@ import { orderingThemeUpdated } from './components/OrderingThemeUpdated'
 
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { Input } from '../src/themes/five/src/styles/Inputs'
+import { QueryLoginSpoonity } from '../src/themes/five/src/components/QueryLoginSpoonity'
 
 const Header = loadable(() => import('../src/themes/five/src/components/Header'))
 const HeaderKiosk = loadable(() => import('../src/themes/five/src/components/Header/layouts/Kiosk'))
@@ -115,6 +116,14 @@ export const App = () => {
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
   const isKioskApp = settings?.use_kiosk
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
+
+  let queryIntegrationToken
+  let queryIntegrationCode
+  if (location.search) {
+    const query = new URLSearchParams(location.search)
+    queryIntegrationCode = query.get('integration_code')
+    queryIntegrationToken = query.get('integration_token')
+  }
 
   const themeUpdated = {
     ...theme,
@@ -493,9 +502,11 @@ export const App = () => {
                     ) : (
                       isKioskApp
                         ? <HomePage />
-                        : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
-                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
-                          : <HomePage />
+                        : queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
+                          : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
+                            ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
+                            : <HomePage />
                     )}
                   </Route>
                   <Route exact path='/wallets'>

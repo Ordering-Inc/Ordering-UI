@@ -155,7 +155,7 @@ export const Menu = styled.div`
     position: relative;
     height: 44px;
 
-    @media (min-width: 821px) {
+    @media (min-width: 850px) {
       border: 1px solid #DEE2E6;
       justify-content: space-between;
     }
@@ -226,7 +226,7 @@ export const Menu = styled.div`
   }
 
 
-  @media (min-width: 821px) {
+  @media (min-width: 850px) {
     .moment-popover,
     .address-popover {
       display: flex;
@@ -267,7 +267,7 @@ export const SubMenu = styled(InnerHeader)`
   margin: 0px;
   position: relative;
 
-  @media (min-width: 821px) {
+  @media (min-width: 850px) {
     display: none;
   }
 `
@@ -364,7 +364,7 @@ export const MomentMenu = styled.div`
   width: 200px;
   display: none;
   
-  @media (min-width: 821px) {
+  @media (min-width: 850px) {
     display: flex;
   }
 

@@ -98,7 +98,8 @@ const PaymentOptionsUI = (props) => {
     setCreateOrder,
     onPlaceOrderClick,
     handlePlaceOrder,
-    paymethods
+    paymethods,
+    setCardList
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -197,7 +198,7 @@ const PaymentOptionsUI = (props) => {
                     (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
                       <PayCard
                         isDisabled={isDisabled}
-                        className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
+                        className={`card ${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
                         onClick={() => handlePaymentMethodClick(paymethod)}
                       >
                         <div>
@@ -244,8 +245,9 @@ const PaymentOptionsUI = (props) => {
             setErrorCash={props.setErrorCash}
           />
         )}
-        {isOpenMethod?.paymethod?.gateway === 'stripe' && isOpenMethod.paymethod?.gateway === 'stripe' && (
+        {(isOpenMethod?.paymethod?.gateway === 'stripe' || paymethodSelected?.gateway === 'stripe') && (
           <PaymentOptionStripe
+            setCardList={setCardList}
             paymethod={isOpenMethod?.paymethod}
             businessId={props.businessId}
             publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
@@ -253,10 +255,12 @@ const PaymentOptionsUI = (props) => {
             payType={isOpenMethod?.paymethod?.name}
             onSelectCard={handlePaymethodDataChange}
             onCancel={() => handlePaymethodClick(null)}
+            paymethodSelected={paymethodSelected?.data?.id}
+            handlePaymentMethodClick={handlePaymentMethodClick}
           />
         )}
 
-        {stripeOptions.includes(paymethodSelected?.gateway) && paymethodData?.card && !isCustomerMode && (
+        {stripeOptions.includes(paymethodSelected?.gateway) && paymethodData?.card && !isCustomerMode && paymethodSelected?.gateway !== 'stripe' && (
           <PayCardSelected>
             <CardItemContent>
               <span className='checks'>
@@ -315,6 +319,7 @@ const PaymentOptionsUI = (props) => {
               payType={paymethodsList?.name}
               onSelectCard={handlePaymethodDataChange}
               onCancel={() => handlePaymethodClick(null)}
+              paymethodSelected={paymethodSelected}
             />
           )}
         </Modal>
@@ -328,7 +333,7 @@ const PaymentOptionsUI = (props) => {
         >
           {!isOpenMethod?.paymethod?.credentials?.publishable &&
             <Container>
-              <p>{t('ADD_PUBLISHABLE_KEY', 'Please add a stripe key')}</p>
+              <p>{t('ADD_PUBLISHABLE_KEY', 'Please add a publishable key')}</p>
             </Container>
           }
           {isOpenMethod?.paymethod?.credentials?.publishable && stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && (
