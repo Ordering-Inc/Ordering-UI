@@ -71,7 +71,8 @@ const CartUI = (props) => {
     hideDeliveryFee,
     hideDriverTip,
     hideCouponInput,
-    businessConfigs
+    businessConfigs,
+    loyaltyRewardRate
   } = props
 
   const theme = useTheme()
@@ -123,6 +124,8 @@ const CartUI = (props) => {
       name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
     }
   }
+
+  const loyaltyRewardValue = Math.round(cart?.subtotal / loyaltyRewardRate)
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -512,6 +515,12 @@ const CartUI = (props) => {
                       <td>{t('TOTAL', 'Total')}</td>
                       <td>{parsePrice(cart?.total >= 0 ? cart?.total : 0)}</td>
                     </tr>
+                    {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && (
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td id='loyalty'>{t('REWARD_LOYALTY_POINT', 'Reward :amount: on loyalty points').replace(':amount:', loyaltyRewardValue)}</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
                 {cart?.status !== 2 && !hideCartComments && (

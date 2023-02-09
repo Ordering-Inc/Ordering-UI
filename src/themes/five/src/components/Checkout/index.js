@@ -84,6 +84,7 @@ const CheckoutUI = (props) => {
     placing,
     cartState,
     useKioskApp,
+    loyaltyPlansState,
     businessDetails,
     paymethodSelected,
     handlePaymethodChange,
@@ -502,6 +503,7 @@ const CheckoutUI = (props) => {
             <WalletPaymentOptionContainer>
               <PaymentOptionWallet
                 cart={cart}
+                loyaltyPlansState={loyaltyPlansState}
                 businessConfigs={businessDetails?.business?.configs}
               />
             </WalletPaymentOptionContainer>
@@ -512,24 +514,24 @@ const CheckoutUI = (props) => {
 
         {
           !!(!isMultiDriverTips && driverTipsField) &&
-          <>
-            <DriverTipContainer>
-              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-              <DriverTips
-                businessId={cart?.business_id}
-                driverTipsOptions={driverTipsOptions}
-                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                  ? cart?.driver_tip
-                  : cart?.driver_tip_rate}
-                cart={cart}
-                useOrderContext
-              />
-            </DriverTipContainer>
-            <DriverTipDivider />
-          </>
+            <>
+              <DriverTipContainer>
+                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                <DriverTips
+                  businessId={cart?.business_id}
+                  driverTipsOptions={driverTipsOptions}
+                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate}
+                  cart={cart}
+                  useOrderContext
+                />
+              </DriverTipContainer>
+              <DriverTipDivider />
+            </>
         }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
@@ -560,6 +562,7 @@ const CheckoutUI = (props) => {
               isProducts={cart?.products?.length || 0}
               viewString='checkout'
               businessConfigs={businessConfigs}
+              loyaltyRewardRate={loyaltyPlansState?.result?.find(loyal => loyal.type === 'credit_point')?.accumulation_rate ?? 0}
             />
           </CartContainer>
         )}
