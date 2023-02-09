@@ -32,6 +32,7 @@ import { orderingThemeUpdated } from './components/OrderingThemeUpdated'
 
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { Input } from '../src/themes/five/src/styles/Inputs'
+import { QueryLoginSpoonity } from '../src/themes/five/src/components/QueryLoginSpoonity'
 
 const Header = loadable(() => import('../src/themes/five/src/components/Header'))
 const HeaderKiosk = loadable(() => import('../src/themes/five/src/components/Header/layouts/Kiosk'))
@@ -109,10 +110,20 @@ export const App = () => {
     reviewStatus: { trigger: false, order: false, product: false, driver: false },
     reviewed: { isOrderReviewed: false, isProductReviewed: false, isDriverReviewed: false }
   })
+  const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const isAllowUnaddressOrderType = unaddressedTypes.includes(orderStatus?.options?.type)
   const isShowReviewsPopupEnabled = configs?.show_reviews_popups_enabled?.value === '1'
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
   const isKioskApp = settings?.use_kiosk
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
+
+  let queryIntegrationToken
+  let queryIntegrationCode
+  if (location.search) {
+    const query = new URLSearchParams(location.search)
+    queryIntegrationCode = query.get('integration_code')
+    queryIntegrationToken = query.get('integration_token')
+  }
 
   const themeUpdated = {
     ...theme,
@@ -478,10 +489,10 @@ export const App = () => {
                     ) : (
                       isKioskApp
                         ? <HomePage />
-                        : orderStatus.options?.address?.location
+                        : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                           : singleBusinessConfig.isActive
-                            ? <Redirect to={singleBusinessConfig.isActive ? '' : '/search'} />
+                            ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
                             : <HomePage />
                     )}
                   </Route>
@@ -491,9 +502,13 @@ export const App = () => {
                     ) : (
                       isKioskApp
                         ? <HomePage />
-                        : orderStatus.options?.address?.location
-                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
-                          : <HomePage />
+                        : queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
+                          : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
+                            ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
+                            : singleBusinessConfig.isActive
+                              ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
+                              : <HomePage />
                     )}
                   </Route>
                   <Route exact path='/wallets'>
@@ -597,7 +612,7 @@ export const App = () => {
                             isUserVerifyRequired ? (
                               <Redirect to='/verify' />
                             ) : (
-                              orderStatus.options?.address?.location
+                              (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                                 ? <BusinessesList searchValueCustom={searchValue} />
                                 : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                             )
@@ -609,7 +624,7 @@ export const App = () => {
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      orderStatus.options?.address?.location && !isKioskApp ? (
+                      (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !isKioskApp ? (
                         <BusinessListingSearch />
                       ) : (
                         <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
