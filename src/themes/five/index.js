@@ -114,6 +114,7 @@ import { OrderPreferencesSection } from './src/components/OrderDetails/OrderPref
 import { ActionsSection } from './src/components/OrderDetails/ActionsSection'
 import { ProductShare } from './src/components/ProductShare'
 import { MultiCart } from './src/components/MultiCart'
+import { QueryLoginSpoonity } from './src/components/QueryLoginSpoonity'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -239,7 +240,7 @@ export {
   ActionsSection,
   ProductShare,
   MultiCart,
-
+  QueryLoginSpoonity,
   // styles
   Button,
   Input,
