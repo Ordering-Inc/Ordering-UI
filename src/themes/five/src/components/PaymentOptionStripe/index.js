@@ -168,6 +168,7 @@ export const PaymentCard = (props) => {
   const [isShowActions, setIsShowActions] = useState(false)
   const cardActionsRef = useRef(null)
   const actionWrapperRef = useRef(null)
+  const theme = useTheme()
 
   const handleClickOutside = (e) => {
     if (!isShowActions) return
@@ -223,7 +224,7 @@ export const PaymentCard = (props) => {
       <CardItemActions>
         <CardItemActionsWrapper ref={actionWrapperRef}>
           <span ref={cardActionsRef}>
-            <Trash color='#B1BCCC' onClick={() => handleDeleteCard()} />
+            <Trash color={theme.colors.lightGray} onClick={() => handleDeleteCard()} />
           </span>
         </CardItemActionsWrapper>
       </CardItemActions>
