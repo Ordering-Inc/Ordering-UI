@@ -76,10 +76,11 @@ const MultiCheckoutUI = (props) => {
   const [orderState] = useOrder()
   const history = useHistory()
 
+  const [cardList, setCardList] = useState([])
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data)
+  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data) || (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0)
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
   const isMultiDriverTips = configs?.checkout_multi_business_enabled?.value === '1'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
@@ -208,6 +209,7 @@ const MultiCheckoutUI = (props) => {
                   handleSelectWallet={handleSelectWallet}
                   handlePaymethodDataChange={handlePaymethodDataChange}
                   cartUuid={cartUuid}
+                  setCardList={setCardList}
                 />
               </PaymentMethodContainer>
 
