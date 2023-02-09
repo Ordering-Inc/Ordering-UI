@@ -46,6 +46,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
   var placing = props.placing,
     isCustomerMode = props.isCustomerMode,
     openCarts = props.openCarts,
+    rewardRate = props.rewardRate,
     totalCartsPrice = props.totalCartsPrice,
     handleGroupPlaceOrder = props.handleGroupPlaceOrder,
     paymethodSelected = props.paymethodSelected,
@@ -106,6 +107,9 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
   var isMultiDriverTips = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var totalFeeEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === '1' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o4 = configs.driver_tip_options) === null || _configs$driver_tip_o4 === void 0 ? void 0 : _configs$driver_tip_o4.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o5 = configs.driver_tip_options) === null || _configs$driver_tip_o5 === void 0 ? void 0 : _configs$driver_tip_o5.value) || [];
+  var loyaltyRewardValue = Math.round(openCarts.reduce(function (sum, cart) {
+    return sum + (cart === null || cart === void 0 ? void 0 : cart.subtotal);
+  }, 0) / rewardRate);
   var handlePlaceOrder = function handlePlaceOrder() {
     if (!userErrors.length) {
       handleGroupPlaceOrder && handleGroupPlaceOrder();
@@ -246,7 +250,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     return sum + (cart === null || cart === void 0 ? void 0 : cart.driver_tip);
   }, 0) > 0 && (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine7 = configs.multi_business_checkout_show_combined_driver_tip) === null || _configs$multi_busine7 === void 0 ? void 0 : _configs$multi_busine7.value) === '1' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER_TIP', 'Driver tip')), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(openCarts.reduce(function (sum, cart) {
     return sum + (cart === null || cart === void 0 ? void 0 : cart.driver_tip);
-  }, 0)))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(totalCartsPrice))), /*#__PURE__*/_react.default.createElement("p", null, t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')))), /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, 0)))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(totalCartsPrice))), !!loyaltyRewardValue && isFinite(loyaltyRewardValue) && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, "\xA0"), /*#__PURE__*/_react.default.createElement("p", null, t('REWARD_LOYALTY_POINT', 'Reward :amount: on loyalty points').replace(':amount:', loyaltyRewardValue))), /*#__PURE__*/_react.default.createElement("p", null, t('MULTI_CHECKOUT_DESCRIPTION', 'You will receive a receipt for each business. The payment is not combined between multiple stores. Each payment is processed by the store')))), /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     disabled: isDisablePlaceOrderButton || placing || (cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.loading),
     onClick: handlePlaceOrder

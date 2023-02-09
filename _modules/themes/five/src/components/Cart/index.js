@@ -70,7 +70,8 @@ var CartUI = function CartUI(props) {
     hideDeliveryFee = props.hideDeliveryFee,
     hideDriverTip = props.hideDriverTip,
     hideCouponInput = props.hideCouponInput,
-    businessConfigs = props.businessConfigs;
+    businessConfigs = props.businessConfigs,
+    loyaltyRewardRate = props.loyaltyRewardRate;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -158,6 +159,7 @@ var CartUI = function CartUI(props) {
       name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
     }
   };
+  var loyaltyRewardValue = Math.round((cart === null || cart === void 0 ? void 0 : cart.subtotal) / loyaltyRewardRate);
   var momentFormatted = !(orderState !== null && orderState !== void 0 && (_orderState$option = orderState.option) !== null && _orderState$option !== void 0 && _orderState$option.moment) ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$option2 = orderState.option) === null || _orderState$option2 === void 0 ? void 0 : _orderState$option2.moment, {
     outputFormat: 'YYYY-MM-DD HH:mm'
   });
@@ -486,7 +488,9 @@ var CartUI = function CartUI(props) {
     useOrderContext: true
   }))), /*#__PURE__*/_react.default.createElement("table", {
     className: "total"
-  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.total) >= 0 ? cart === null || cart === void 0 ? void 0 : cart.total : 0))))), (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && !hideCartComments && /*#__PURE__*/_react.default.createElement("table", {
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((cart === null || cart === void 0 ? void 0 : cart.total) >= 0 ? cart === null || cart === void 0 ? void 0 : cart.total : 0))), !!loyaltyRewardValue && isFinite(loyaltyRewardValue) && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, "\xA0"), /*#__PURE__*/_react.default.createElement("td", {
+    id: "loyalty"
+  }, t('REWARD_LOYALTY_POINT', 'Reward :amount: on loyalty points').replace(':amount:', loyaltyRewardValue))))), (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && !hideCartComments && /*#__PURE__*/_react.default.createElement("table", {
     className: "comments"
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('COMMENTS', 'Comments'))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement(_styles.CommentContainer, null, /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     defaultValue: cart === null || cart === void 0 ? void 0 : cart.comment,

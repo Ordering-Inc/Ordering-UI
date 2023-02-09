@@ -62,12 +62,13 @@ var mapConfigs = {
   }
 };
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _cardList$cards, _cartState$cart, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _theme$checkout, _theme$checkout$compo, _theme$checkout$compo2, _theme$checkout$compo3, _theme$checkout$compo4, _theme$checkout2, _theme$checkout2$comp, _theme$checkout2$comp2, _theme$checkout3, _theme$checkout3$comp, _theme$checkout3$comp2, _theme$checkout3$comp3, _theme$checkout3$comp4, _theme$checkout4, _theme$checkout4$comp, _theme$checkout4$comp2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _businessDetails$busi3, _businessDetails$busi4, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$busi11, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3;
+  var _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _cardList$cards, _cartState$cart, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _theme$checkout, _theme$checkout$compo, _theme$checkout$compo2, _theme$checkout$compo3, _theme$checkout$compo4, _theme$checkout2, _theme$checkout2$comp, _theme$checkout2$comp2, _theme$checkout3, _theme$checkout3$comp, _theme$checkout3$comp2, _theme$checkout3$comp3, _theme$checkout3$comp4, _theme$checkout4, _theme$checkout4$comp, _theme$checkout4$comp2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _businessDetails$busi3, _businessDetails$busi4, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$busi11, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _loyaltyPlansState$re, _loyaltyPlansState$re2, _loyaltyPlansState$re3, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
     cartState = props.cartState,
     useKioskApp = props.useKioskApp,
+    loyaltyPlansState = props.loyaltyPlansState,
     businessDetails = props.businessDetails,
     paymethodSelected = props.paymethodSelected,
     handlePaymethodChange = props.handlePaymethodChange,
@@ -484,6 +485,7 @@ var CheckoutUI = function CheckoutUI(props) {
     setCardList: setCardList
   })), isWalletEnabled && !(businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart,
+    loyaltyPlansState: loyaltyPlansState,
     businessConfigs: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi11 = businessDetails.business) === null || _businessDetails$busi11 === void 0 ? void 0 : _businessDetails$busi11.configs
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, !!(!isMultiDriverTips && driverTipsField) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
@@ -513,7 +515,10 @@ var CheckoutUI = function CheckoutUI(props) {
     isCheckout: true,
     isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) || 0,
     viewString: "checkout",
-    businessConfigs: businessConfigs
+    businessConfigs: businessConfigs,
+    loyaltyRewardRate: (_loyaltyPlansState$re = loyaltyPlansState === null || loyaltyPlansState === void 0 ? void 0 : (_loyaltyPlansState$re2 = loyaltyPlansState.result) === null || _loyaltyPlansState$re2 === void 0 ? void 0 : (_loyaltyPlansState$re3 = _loyaltyPlansState$re2.find(function (loyal) {
+      return loyal.type === 'credit_point';
+    })) === null || _loyaltyPlansState$re3 === void 0 ? void 0 : _loyaltyPlansState$re3.accumulation_rate) !== null && _loyaltyPlansState$re !== void 0 ? _loyaltyPlansState$re : 0
   })), !!(isMultiDriverTips && driverTipsField) && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
