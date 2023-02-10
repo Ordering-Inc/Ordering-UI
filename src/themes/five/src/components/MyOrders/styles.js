@@ -7,6 +7,7 @@ export const Container = styled.div`
   width: 100%;
   box-sizing: border-box;
   position: relative;
+  min-height: calc(100vh - 320px);
 
   > h1 {
     font-weight: 600;
@@ -21,9 +22,6 @@ export const Container = styled.div`
     ${({ hideOrders }) => !hideOrders ? css`
       padding: 40px;
       width: 100%;
-      @media (min-width: 993px) {
-        min-height: calc(100vh - 382px);
-      }
     ` : css`
       padding: 0;
       width: 100%;
@@ -78,7 +76,7 @@ export const NoOrdersWrapper = styled.div`
   padding: 50px 0px;
   position: absolute;
   box-sizing: border-box;
-  height: calc(100% - 120px);
+  min-height: calc(100% - 120px);
   width: 100%;
 
   > p {
