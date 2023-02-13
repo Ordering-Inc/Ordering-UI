@@ -26,6 +26,7 @@ var _PaymentOptionSquare = require("../PaymentOptionSquare");
 var _NotFoundSource = require("../NotFoundSource");
 var _utils = require("../../utils");
 var _styles = require("./styles");
+var _Confirm = require("../Confirm");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -110,7 +111,20 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     token = _useSession2[0].token;
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
-    loadingOptions = _useOrder2[0].loading;
+    options = _useOrder2[0].options;
+  var _useOrder3 = (0, _orderingComponents.useOrder)(),
+    _useOrder4 = _slicedToArray(_useOrder3, 1),
+    loadingOptions = _useOrder4[0].loading;
+  var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
+    _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
+    validationFields = _useValidationFields2[0];
+  var _useState = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    alertState = _useState2[0],
+    setAlertState = _useState2[1];
   var list = paymethodsList ? paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods : paymethods === null || paymethods === void 0 ? void 0 : paymethods.map(function (pay) {
     return pay.paymethod;
   });
@@ -118,6 +132,14 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
+    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6;
+    if ((paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) === 'paypal' && options.type === 1 && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.driver_tip) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie5 = _validationFields$fie4.checkout) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.driver_tip) !== null && _validationFields$fie6 !== void 0 && _validationFields$fie6.required && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0) {
+      setAlertState({
+        open: true,
+        content: [t('DRIVER_TIPS_REQUIRED', 'Driver tips is required, please select a driver tip before select this paymethod')]
+      });
+      return;
+    }
     var isPopupMethod = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'].includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway);
     handlePaymethodClick(paymethod, isPopupMethod);
   };
@@ -145,6 +167,12 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       handlePlaceOrder();
     }
   }, [paymethodData, paymethodSelected]);
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -292,7 +320,19 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     },
     onPlaceOrderClick: onPlaceOrderClick,
     setCreateOrder: setCreateOrder
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+    title: t('PAYMENT_METHODS', 'Payment methods'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
