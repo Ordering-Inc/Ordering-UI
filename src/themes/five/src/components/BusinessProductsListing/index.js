@@ -298,9 +298,10 @@ const BusinessProductsListingUI = (props) => {
     <>
       <ProductsContainer>
         {!props.useKioskApp && (
-          // <ArrowLeft onClick={() => handleGoToBusinessList()} />
           <HeaderContent>
-            <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
+            {!location.pathname.includes('/marketplace') &&
+              <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
+            }
             {windowSize?.width < 576 && (
               <OrderContextUIWrapper>
                 <OrderContextUI isCheckOut />
