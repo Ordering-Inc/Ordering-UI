@@ -2101,9 +2101,9 @@
     tslib "^2.4.1"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.50.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.50.0.tgz#8bc75728c9d0148c9efeae12a5886cc5d8e5a28a"
-  integrity sha512-1ht3CkdQ0wHmwHxJSs+F1WMdKs4YgZYwgQeszF5a+QsSbRg7GxS/RXaps+qYVHSG2TlI+StCcFupFyGGwiSVAw==
+  version "1.51.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.51.0.tgz#2b3ac29b6de87e1754c04d77c98a7eaa50a39ac0"
+  integrity sha512-aTMS9vSsi/tMXOr+RSM/VHt3e5txCHhyM/C5aPtq9HEFUw4EAODEAYXaTgWgzoWNYsTiOlTpw7410OG7T3CCZg==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics-core" "1.2.2"
@@ -5299,9 +5299,9 @@ default-require-extensions@^3.0.0:
     strip-bom "^4.0.0"
 
 define-properties@^1.1.2, define-properties@^1.1.3, define-properties@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.4.tgz#0b14d7bd7fbeb2f3572c3a7eda80ea5d57fb05b1"
-  integrity sha512-uckOqKcfaVvtBdsVkdPv3XjveQJsNQqmhXgRi8uhvWWuPYZCNlzT8qAyblUgNoXdHdjMTzAqeGjAoli8f+bzPA==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.2.0.tgz#52988570670c9eacedd8064f4a990f2405849bd5"
+  integrity sha512-xvqAVKGfT1+UAvPwKTVw/njhdQ8ZhXK4lI0bCIuCMrp2up9nPnaDftrLtmpTazqd1o+UY4zgzU+avtMbDP+ldA==
   dependencies:
     has-property-descriptors "^1.0.0"
     object-keys "^1.1.1"
@@ -5596,9 +5596,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.293"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.293.tgz#eaea755ad37a0f1759874a8597b33be62def2781"
-  integrity sha512-h7vBlhC83NsgC9UO3LOZx91xgstIrHk5iqMbZgnEArL5rHTM6HfsUZhnwb3oRnNetXM1741kB9SO7x9jLshz5A==
+  version "1.4.295"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.295.tgz#911d5df67542bf7554336142eb302c5ec90bba66"
+  integrity sha512-lEO94zqf1bDA3aepxwnWoHUjA8sZ+2owgcSZjYQy0+uOSEclJX0VieZC+r+wLpSxUHRd6gG32znTWmr+5iGzFw==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -9150,7 +9150,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a204df647801ea0f0c787190a51b9617c53d5ad8"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/c455fdd3e5e7840b2939676f05401c5721a6c116"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
