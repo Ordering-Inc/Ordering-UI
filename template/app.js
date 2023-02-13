@@ -492,7 +492,7 @@ export const App = () => {
                         : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                           : singleBusinessConfig.isActive
-                            ? <Redirect to={singleBusinessConfig.isActive ? '' : '/search'} />
+                            ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
                             : <HomePage />
                     )}
                   </Route>
@@ -506,7 +506,9 @@ export const App = () => {
                           ? <QueryLoginSpoonity token={queryIntegrationToken} />
                           : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                             ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
-                            : <HomePage />
+                            : singleBusinessConfig.isActive
+                              ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
+                              : <HomePage />
                     )}
                   </Route>
                   <Route exact path='/wallets'>
