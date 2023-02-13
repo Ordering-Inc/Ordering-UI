@@ -16,12 +16,7 @@ import { DropDownCircleImage } from '../../../../../components/Dropdown/style'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { capitalize } from '../../../../../utils'
 import AiOutlineMenu from '@meronex/icons/ai/AiOutlineMenu'
-
-const optionsDefault = [
-  { name: 'search', pathname: '/explore', displayName: 'My home', key: 'my_home' },
-  { name: 'business_search', pathname: '/business_search', displayName: 'Browse & Search', key: 'browse_search' },
-  { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders' }
-]
+import { useTheme } from 'styled-components'
 
 export const UserPopover = (props) => {
   const {
@@ -38,7 +33,7 @@ export const UserPopover = (props) => {
   const [{ configs }] = useConfig()
   const [orderingTheme] = useOrderingTheme()
   const [orderStatus] = useOrder()
-
+  const theme = useTheme()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
@@ -48,14 +43,30 @@ export const UserPopover = (props) => {
   const isAddressListNewPage = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
   const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
+  const hideBrowse = theme?.bar_menu?.components?.browse?.hidden
+  const hideOrders = theme?.bar_menu?.components?.orders?.hidden
+  const hideProfile = theme?.bar_menu?.components?.profile?.hidden
+  const hideWallet = theme?.bar_menu?.components?.wallet?.hidden
+  const hideMessages = theme?.bar_menu?.components?.messages?.hidden
+  const hideHelp = theme?.bar_menu?.components?.help?.hidden
+  const hideFavorites = theme?.bar_menu?.components?.favortes?.hidden
+  const hideSession = theme?.bar_menu?.components?.sessions?.hidden
+  const hidePromotions = theme?.bar_menu?.components?.promotions?.hidden
+
+  const optionsDefault = [
+    { name: 'search', pathname: '/explore', displayName: 'My home', key: 'my_home', isActive: true },
+    { name: 'business_search', pathname: '/business_search', displayName: 'Browse & Search', key: 'browse_search', isActive: !hideBrowse },
+    { name: 'orders', pathname: '/profile/orders', displayName: 'orders', key: 'orders', isActive: !hideOrders }
+  ]
+
   const extraOptions = [
-    { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: true },
-    { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: isWalletEnabled && !isCustomerMode },
-    { name: 'promotions', pathname: '/promotions', displayName: 'promotions', key: 'promotions', isActive: isPromotionsEnabled },
-    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !isCustomerMode },
-    { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: true },
-    { name: 'sessions', pathname: '/sessions', displayName: 'sessions', key: 'sessions', isActive: true },
-    { name: 'favorite', pathname: '/favorite', displayName: 'favorites', key: 'favorites', isActive: true },
+    { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account', isActive: !hideProfile },
+    { name: 'wallets', pathname: '/wallets', displayName: 'wallets', key: 'wallets', isActive: !hideWallet && isWalletEnabled && !isCustomerMode },
+    { name: 'promotions', pathname: '/promotions', displayName: 'promotions', key: 'promotions', isActive: !hidePromotions && isPromotionsEnabled },
+    { name: 'messages', pathname: '/messages', displayName: 'messages', key: 'messages', isActive: !hideMessages && !isCustomerMode },
+    { name: 'help', pathname: '/help', displayName: 'help', key: 'help', isActive: !hideHelp },
+    { name: 'sessions', pathname: '/sessions', displayName: 'sessions', key: 'sessions', isActive: !hideSession },
+    { name: 'favorite', pathname: '/favorite', displayName: 'favorites', key: 'favorites', isActive: !hideFavorites },
     { name: 'addresses', pathname: '/profile/addresses', displayName: 'places', key: 'places', isActive: isAddressListNewPage }
   ]
 
@@ -149,7 +160,7 @@ export const UserPopover = (props) => {
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
           {options && options.length > 0 && (
-            options.map((option, i) => (
+            options.filter(option => option.isActive).map((option, i) => (
               <PopoverListLink
                 key={i}
                 active={window.location.pathname === option.pathname}
