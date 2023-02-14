@@ -13,6 +13,7 @@ var _style = require("../../../../../components/Dropdown/style");
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _utils = require("../../../../../utils");
 var _AiOutlineMenu = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineMenu"));
+var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -28,24 +29,8 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var optionsDefault = [{
-  name: 'search',
-  pathname: '/explore',
-  displayName: 'My home',
-  key: 'my_home'
-}, {
-  name: 'business_search',
-  pathname: '/business_search',
-  displayName: 'Browse & Search',
-  key: 'browse_search'
-}, {
-  name: 'orders',
-  pathname: '/profile/orders',
-  displayName: 'orders',
-  key: 'orders'
-}];
 var UserPopover = function UserPopover(props) {
-  var _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
+  var _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _theme$bar_menu, _theme$bar_menu$compo, _theme$bar_menu$compo2, _theme$bar_menu2, _theme$bar_menu2$comp, _theme$bar_menu2$comp2, _theme$bar_menu3, _theme$bar_menu3$comp, _theme$bar_menu3$comp2, _theme$bar_menu4, _theme$bar_menu4$comp, _theme$bar_menu4$comp2, _theme$bar_menu5, _theme$bar_menu5$comp, _theme$bar_menu5$comp2, _theme$bar_menu6, _theme$bar_menu6$comp, _theme$bar_menu6$comp2, _theme$bar_menu7, _theme$bar_menu7$comp, _theme$bar_menu7$comp2, _theme$bar_menu8, _theme$bar_menu8$comp, _theme$bar_menu8$comp2, _theme$bar_menu9, _theme$bar_menu9$comp, _theme$bar_menu9$comp2, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
   var open = props.open,
     isHome = props.isHome,
     optionsList = props.optionsList,
@@ -70,6 +55,7 @@ var UserPopover = function UserPopover(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderStatus = _useOrder2[0];
+  var theme = (0, _styledComponents.useTheme)();
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
@@ -77,48 +63,76 @@ var UserPopover = function UserPopover(props) {
   var isPromotionsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off = configs.advanced_offers_module) === null || _configs$advanced_off === void 0 ? void 0 : _configs$advanced_off.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off2 = configs.advanced_offers_module) === null || _configs$advanced_off2 === void 0 ? void 0 : _configs$advanced_off2.value) === true;
   var isAddressListNewPage = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.profile) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.address_list) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.layout) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.position) === 'new_page';
   var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme2 = orderingTheme.theme) === null || _orderingTheme$theme2 === void 0 ? void 0 : (_orderingTheme$theme3 = _orderingTheme$theme2.header) === null || _orderingTheme$theme3 === void 0 ? void 0 : (_orderingTheme$theme4 = _orderingTheme$theme3.components) === null || _orderingTheme$theme4 === void 0 ? void 0 : (_orderingTheme$theme5 = _orderingTheme$theme4.layout) === null || _orderingTheme$theme5 === void 0 ? void 0 : (_orderingTheme$theme6 = _orderingTheme$theme5.type) === null || _orderingTheme$theme6 === void 0 ? void 0 : _orderingTheme$theme6.toLowerCase()) === 'chew';
+  var hideBrowse = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu = theme.bar_menu) === null || _theme$bar_menu === void 0 ? void 0 : (_theme$bar_menu$compo = _theme$bar_menu.components) === null || _theme$bar_menu$compo === void 0 ? void 0 : (_theme$bar_menu$compo2 = _theme$bar_menu$compo.browse) === null || _theme$bar_menu$compo2 === void 0 ? void 0 : _theme$bar_menu$compo2.hidden;
+  var hideOrders = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu2 = theme.bar_menu) === null || _theme$bar_menu2 === void 0 ? void 0 : (_theme$bar_menu2$comp = _theme$bar_menu2.components) === null || _theme$bar_menu2$comp === void 0 ? void 0 : (_theme$bar_menu2$comp2 = _theme$bar_menu2$comp.orders) === null || _theme$bar_menu2$comp2 === void 0 ? void 0 : _theme$bar_menu2$comp2.hidden;
+  var hideProfile = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu3 = theme.bar_menu) === null || _theme$bar_menu3 === void 0 ? void 0 : (_theme$bar_menu3$comp = _theme$bar_menu3.components) === null || _theme$bar_menu3$comp === void 0 ? void 0 : (_theme$bar_menu3$comp2 = _theme$bar_menu3$comp.profile) === null || _theme$bar_menu3$comp2 === void 0 ? void 0 : _theme$bar_menu3$comp2.hidden;
+  var hideWallet = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu4 = theme.bar_menu) === null || _theme$bar_menu4 === void 0 ? void 0 : (_theme$bar_menu4$comp = _theme$bar_menu4.components) === null || _theme$bar_menu4$comp === void 0 ? void 0 : (_theme$bar_menu4$comp2 = _theme$bar_menu4$comp.wallet) === null || _theme$bar_menu4$comp2 === void 0 ? void 0 : _theme$bar_menu4$comp2.hidden;
+  var hideMessages = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu5 = theme.bar_menu) === null || _theme$bar_menu5 === void 0 ? void 0 : (_theme$bar_menu5$comp = _theme$bar_menu5.components) === null || _theme$bar_menu5$comp === void 0 ? void 0 : (_theme$bar_menu5$comp2 = _theme$bar_menu5$comp.messages) === null || _theme$bar_menu5$comp2 === void 0 ? void 0 : _theme$bar_menu5$comp2.hidden;
+  var hideHelp = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu6 = theme.bar_menu) === null || _theme$bar_menu6 === void 0 ? void 0 : (_theme$bar_menu6$comp = _theme$bar_menu6.components) === null || _theme$bar_menu6$comp === void 0 ? void 0 : (_theme$bar_menu6$comp2 = _theme$bar_menu6$comp.help) === null || _theme$bar_menu6$comp2 === void 0 ? void 0 : _theme$bar_menu6$comp2.hidden;
+  var hideFavorites = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu7 = theme.bar_menu) === null || _theme$bar_menu7 === void 0 ? void 0 : (_theme$bar_menu7$comp = _theme$bar_menu7.components) === null || _theme$bar_menu7$comp === void 0 ? void 0 : (_theme$bar_menu7$comp2 = _theme$bar_menu7$comp.favortes) === null || _theme$bar_menu7$comp2 === void 0 ? void 0 : _theme$bar_menu7$comp2.hidden;
+  var hideSession = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu8 = theme.bar_menu) === null || _theme$bar_menu8 === void 0 ? void 0 : (_theme$bar_menu8$comp = _theme$bar_menu8.components) === null || _theme$bar_menu8$comp === void 0 ? void 0 : (_theme$bar_menu8$comp2 = _theme$bar_menu8$comp.sessions) === null || _theme$bar_menu8$comp2 === void 0 ? void 0 : _theme$bar_menu8$comp2.hidden;
+  var hidePromotions = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu9 = theme.bar_menu) === null || _theme$bar_menu9 === void 0 ? void 0 : (_theme$bar_menu9$comp = _theme$bar_menu9.components) === null || _theme$bar_menu9$comp === void 0 ? void 0 : (_theme$bar_menu9$comp2 = _theme$bar_menu9$comp.promotions) === null || _theme$bar_menu9$comp2 === void 0 ? void 0 : _theme$bar_menu9$comp2.hidden;
+  var optionsDefault = [{
+    name: 'search',
+    pathname: '/explore',
+    displayName: 'My home',
+    key: 'my_home',
+    isActive: true
+  }, {
+    name: 'business_search',
+    pathname: '/business_search',
+    displayName: 'Browse & Search',
+    key: 'browse_search',
+    isActive: !hideBrowse
+  }, {
+    name: 'orders',
+    pathname: '/profile/orders',
+    displayName: 'orders',
+    key: 'orders',
+    isActive: !hideOrders
+  }];
   var extraOptions = [{
     name: 'profile',
     pathname: '/profile',
     displayName: 'view account',
     key: 'view_account',
-    isActive: true
+    isActive: !hideProfile
   }, {
     name: 'wallets',
     pathname: '/wallets',
     displayName: 'wallets',
     key: 'wallets',
-    isActive: isWalletEnabled && !isCustomerMode
+    isActive: !hideWallet && isWalletEnabled && !isCustomerMode
   }, {
     name: 'promotions',
     pathname: '/promotions',
     displayName: 'promotions',
     key: 'promotions',
-    isActive: isPromotionsEnabled
+    isActive: !hidePromotions && isPromotionsEnabled
   }, {
     name: 'messages',
     pathname: '/messages',
     displayName: 'messages',
     key: 'messages',
-    isActive: !isCustomerMode
+    isActive: !hideMessages && !isCustomerMode
   }, {
     name: 'help',
     pathname: '/help',
     displayName: 'help',
     key: 'help',
-    isActive: true
+    isActive: !hideHelp
   }, {
     name: 'sessions',
     pathname: '/sessions',
     displayName: 'sessions',
     key: 'sessions',
-    isActive: true
+    isActive: !hideSession
   }, {
     name: 'favorite',
     pathname: '/favorite',
     displayName: 'favorites',
     key: 'favorites',
-    isActive: true
+    isActive: !hideFavorites
   }, {
     name: 'addresses',
     pathname: '/profile/addresses',
@@ -216,7 +230,9 @@ var UserPopover = function UserPopover(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
-  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, options && options.length > 0 && options.map(function (option, i) {
+  }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, options && options.length > 0 && options.filter(function (option) {
+    return option.isActive;
+  }).map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
       key: i,
       active: window.location.pathname === option.pathname,
