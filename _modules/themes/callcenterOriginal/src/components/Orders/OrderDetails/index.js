@@ -472,7 +472,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     currentTourStep: currentTourStep,
     setIsTourOpen: setIsTourOpen,
     printRef: printRef
-  }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
+  }), (order === null || order === void 0 ? void 0 : order.integration_id) && /*#__PURE__*/_react.default.createElement(_styles2.TicketContainer, null, /*#__PURE__*/_react.default.createElement("h5", null, t('TICKET', 'Ticket'), ":"), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.integration_id)), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
     isDisabled: isTourOpen && currentTourStep === 1
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false

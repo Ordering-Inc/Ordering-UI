@@ -11,6 +11,7 @@ var _BusinessesSelector = require("../BusinessesSelector");
 var _DriversGroupTypeSelector = require("../DriversGroupTypeSelector");
 var _DateTypeSelector = require("../DateTypeSelector");
 var _DriverSelector = require("../DriverSelector");
+var _AdminSelector = require("../AdminSelector");
 var _Shared = require("../../Shared");
 var _OrderStatusTypeSelector = require("../OrderStatusTypeSelector");
 var _DeliveryTypeSelector = require("../DeliveryTypeSelector");
@@ -54,7 +55,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleChangeOrderId = props.handleChangeOrderId,
     handleChangeCountryCode = props.handleChangeCountryCode,
-    handleChangeCurrency = props.handleChangeCurrency;
+    handleChangeCurrency = props.handleChangeCurrency,
+    handleChangeAdmin = props.handleChangeAdmin;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -122,6 +124,10 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
     filterValues: filterValues,
     handleChangeCurrency: handleChangeCurrency
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_AdminSelector.AdminSelector, {
+    isFilterView: true,
+    filterValues: filterValues,
+    handleChangeAdmin: handleChangeAdmin
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
