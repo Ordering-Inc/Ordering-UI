@@ -14,8 +14,8 @@ import {
   useUtils,
   useSession,
   useSite,
-  useOrderingTheme,
-  useConfig
+  useConfig,
+  useBusiness
 } from 'ordering-components'
 
 import {
@@ -90,14 +90,14 @@ const BusinessProductsListingUI = (props) => {
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ carts }, { addProduct, updateProduct }] = useOrder()
+  const [{ carts, options }, { addProduct, updateProduct }] = useOrder()
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const location = useLocation()
   const windowSize = useWindowSize()
   const [{ auth }] = useSession()
   const [{ site }] = useSite()
-  const [orderingTheme] = useOrderingTheme()
+  const [, { setBusiness }] = useBusiness()
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
@@ -113,7 +113,9 @@ const BusinessProductsListingUI = (props) => {
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
-  const showViewOrderButton = !orderingTheme?.theme?.business_view?.components?.order_view_button?.hidden
+  const showViewOrderButton = !theme?.business_view?.components?.order_view_button?.hidden
+  const cateringTypes = [7, 8]
+  const cateringPreorder = cateringTypes.includes(options?.type)
   const sortByOptions = [
     { value: null, content: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By'), showOnSelected: t('SORT_BY', theme?.defaultLanguages?.SORT_BY || 'Sort By') },
     { value: 'rank', content: t('RANK', theme?.defaultLanguages?.RANK || 'Rank'), showOnSelected: t('RANK', theme?.defaultLanguages?.RANK || 'Rank') },
@@ -187,12 +189,23 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleScroll = useCallback(() => {
+    const backArrowElement = document.getElementById('back-arrow')
+    if (backArrowElement) {
+      const limit = window.pageYOffset >= backArrowElement?.offsetTop && window.pageYOffset > 0
+      if (limit && windowSize.width < 993) {
+        const classAdded = backArrowElement.classList.contains('fixed-arrow')
+        !classAdded && backArrowElement.classList.add('fixed-arrow')
+      } else {
+        backArrowElement && backArrowElement.classList.remove('fixed-arrow')
+      }
+    }
+
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
     if (badScrollPosition || categoryState.loading || !hasMore) return
     getNextProducts({ isNextPage: true })
-  }, [categoryState])
+  }, [categoryState, windowSize.width])
 
   const handleChangePage = (data) => {
     if (Object.entries(data.query).length === 0 && openProduct) {
@@ -300,14 +313,25 @@ const BusinessProductsListingUI = (props) => {
     }
   }, [currentCart])
 
+  useEffect(() => {
+    if (cateringPreorder) {
+      setBusiness(business)
+    }
+    return () => {
+      setBusiness({})
+    }
+  }, [cateringPreorder, business])
+
   return (
     <>
       <ProductsContainer>
         {!props.useKioskApp && (
           <HeaderContent>
-            {!location.pathname.includes('/marketplace') &&
-              <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
-            }
+            {!location.pathname.includes('/marketplace') && (
+              <div id='back-arrow'>
+                <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
+              </div>
+            )}
             {windowSize?.width < 576 && (
               <OrderContextUIWrapper>
                 <OrderContextUI isCheckOut />
@@ -432,6 +456,7 @@ const BusinessProductsListingUI = (props) => {
                 isProducts={currentCart.products.length}
                 isCartOnProductsList={isCartOnProductsList}
                 handleCartOpen={(val) => setIsCartOpen(val)}
+                businessConfigs={business?.configs}
               />
             </>
           ) : (

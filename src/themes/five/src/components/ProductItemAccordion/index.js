@@ -63,7 +63,7 @@ export const ProductItemAccordion = (props) => {
   const productActionsDelete = useRef(null)
 
   const viewString = isConfirmationPage ? 'confirmation' : isStore ? 'business_view' : 'header'
-  const showProductImage = !orderingTheme?.theme?.[viewString]?.components?.cart?.components?.products?.components?.image?.hidden
+  const showProductImage = !theme?.[viewString]?.components?.cart?.components?.products?.components?.image?.hidden
 
   const productInfo = () => {
     if (isCartProduct) {

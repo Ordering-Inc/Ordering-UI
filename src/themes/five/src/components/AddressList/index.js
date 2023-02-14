@@ -88,11 +88,11 @@ const AddressListUI = (props) => {
         address.internal_number === obj.internal_number
       )))) || []
 
-  const showAddress = !orderingTheme?.theme?.profile?.components?.address_list?.components?.address?.hidden
-  const showIcons = !orderingTheme?.theme?.profile?.components?.address_list?.components?.icons?.hidden
-  const showZipcode = !orderingTheme?.theme?.profile?.components?.address_list?.components?.zipcode?.hidden
-  const showInternalNumber = !orderingTheme?.theme?.profile?.components?.address_list?.components?.internal_number?.hidden
-  const notFoundImage = orderingTheme?.theme?.profile?.components?.address_list?.components?.image
+  const showAddress = !theme?.profile?.components?.address_list?.components?.address?.hidden
+  const showIcons = !theme?.profile?.components?.address_list?.components?.icons?.hidden
+  const showZipcode = !theme?.profile?.components?.address_list?.components?.zipcode?.hidden
+  const showInternalNumber = !theme?.profile?.components?.address_list?.components?.internal_number?.hidden
+  const notFoundImage = theme?.profile?.components?.address_list?.components?.image
   const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
