@@ -837,6 +837,12 @@ Object.defineProperty(exports, "useOnlineStatus", {
     return _useOnlineStatus.useOnlineStatus;
   }
 });
+Object.defineProperty(exports, "useRecaptcha", {
+  enumerable: true,
+  get: function get() {
+    return _useRecaptcha.useRecaptcha;
+  }
+});
 Object.defineProperty(exports, "useTheme", {
   enumerable: true,
   get: function get() {
@@ -954,6 +960,7 @@ var _SearchProducts = require("./components/RenderProductsLayout/SearchProducts"
 var _ThemeContext = require("./contexts/ThemeContext");
 var _useOnlineStatus = require("./hooks/useOnlineStatus");
 var _useWindowSize = require("./hooks/useWindowSize");
+var _useRecaptcha = require("./hooks/useRecaptcha");
 var _useCountdownTimer = require("./hooks/useCountdownTimer");
 var _useIntersectionObserver = require("./hooks/useIntersectionObserver");
 var _useIsMounted = require("./hooks/useIsMounted");

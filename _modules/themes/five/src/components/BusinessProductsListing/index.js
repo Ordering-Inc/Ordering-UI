@@ -395,10 +395,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       adjustBusiness(adjustBusinessId);
     }
   }, [currentCart]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !props.useKioskApp &&
-  /*#__PURE__*/
-  // <ArrowLeft onClick={() => handleGoToBusinessList()} />
-  _react.default.createElement(_styles.HeaderContent, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !props.useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.HeaderContent, null, !location.pathname.includes('/marketplace') && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
     className: "back-arrow",
     onClick: function onClick() {
       return handleGoToBusinessList();

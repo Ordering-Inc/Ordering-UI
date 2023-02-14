@@ -1837,9 +1837,9 @@
     yargs "^16.2.0"
 
 "@grpc/proto-loader@^0.7.0":
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.7.4.tgz#4946a84fbf47c3ddd4e6a97acb79d69a9f47ebf2"
-  integrity sha512-MnWjkGwqQ3W8fx94/c1CwqLsNmHHv2t0CFn+9++6+cDphC1lolpg9M2OU0iebIjK//pBNX9e94ho+gjx6vz39w==
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.7.5.tgz#ee9e7488fa585dc6b0f7fe88cd39723a3e64c906"
+  integrity sha512-mfcTuMbFowq1wh/Rn5KQl6qb95M21Prej3bewD9dUQMurYGVckGO/Pbe2Ocwto6sD05b/mxZLspvqwx60xO2Rg==
   dependencies:
     "@types/long" "^4.0.1"
     lodash.camelcase "^4.3.0"
@@ -4444,9 +4444,9 @@ camelize@^1.0.0:
   integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
 
 caniuse-lite@^1.0.30001449:
-  version "1.0.30001451"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001451.tgz#2e197c698fc1373d63e1406d6607ea4617c613f1"
-  integrity sha512-XY7UbUpGRatZzoRft//5xOa69/1iGJRBlrieH6QYrkKLIFn3m7OVEJ81dSrKoy2BnKsdbX5cLrOispZNYo9v2w==
+  version "1.0.30001452"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001452.tgz#dff7b8bb834b3a91808f0a9ff0453abb1fbba02a"
+  integrity sha512-Lkp0vFjMkBB3GTpLR8zk4NwW5EdRdnitwYJHDOOKIU85x4ckYCPQ+9WlVvSVClHxVReefkUMtWZH2l9KGlD51w==
 
 canvg@^3.0.6:
   version "3.0.10"
@@ -9145,7 +9145,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/34ca6c5c8a803536f1af568a0dc0bc25ec1b2a08"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/616f3ac725b8f6344ee9f3cd68e95b4ebfdb64d8"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -10550,9 +10550,9 @@ sass-loader@^9.0.2:
     semver "^7.3.2"
 
 sass@^1.26.10:
-  version "1.58.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.58.0.tgz#ee8aea3ad5ea5c485c26b3096e2df6087d0bb1cc"
-  integrity sha512-PiMJcP33DdKtZ/1jSjjqVIKihoDc6yWmYr9K/4r3fVVIEDAluD0q7XZiRKrNJcPK3qkLRF/79DND1H5q1LBjgg==
+  version "1.58.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.58.1.tgz#17ab0390076a50578ed0733f1cc45429e03405f6"
+  integrity sha512-bnINi6nPXbP1XNRaranMFEBZWUfdW/AF16Ql5+ypRxfTvCRTTKrLsMIakyDcayUt2t/RZotmL4kgJwNH5xO+bg==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
