@@ -29,7 +29,8 @@ import {
   PlaceSpotContainer,
   RejectReasonsContainer,
   RejectReasonWrapper,
-  RejectReasonsList
+  RejectReasonsList,
+  TicketContainer
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -319,6 +320,12 @@ const OrderDetailsUI = (props) => {
             setIsTourOpen={setIsTourOpen}
             printRef={printRef}
           />
+          {order?.integration_id && (
+            <TicketContainer>
+              <h5>{t('TICKET', 'Ticket')}:</h5>
+              <p>{order?.integration_id}</p>
+            </TicketContainer>
+          )}
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>

@@ -248,3 +248,15 @@ export const RejectReasonWrapper = styled.div`
   background-color: ${props => lighten(0.4, props.theme.colors.danger)};
   color: ${props => props.theme.colors.danger};
 `
+
+export const TicketContainer = styled.div`
+  display: flex;
+
+  > h5 {
+    margin: 0px;
+    padding-right: 5px;
+  }
+  > p {
+    margin: 0px;
+  }
+`

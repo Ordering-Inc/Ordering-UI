@@ -4,6 +4,7 @@ import { BusinessesSelector } from '../BusinessesSelector'
 import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
 import { DriverSelector } from '../DriverSelector'
+import { AdminSelector } from '../AdminSelector'
 import { CitySelector, Modal } from '../../Shared'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
@@ -43,7 +44,8 @@ const OrdersFilterGroupUI = (props) => {
     handleChangeFilterValues,
     handleChangeOrderId,
     handleChangeCountryCode,
-    handleChangeCurrency
+    handleChangeCurrency,
+    handleChangeAdmin
   } = props
 
   const [, t] = useLanguage()
@@ -135,6 +137,13 @@ const OrdersFilterGroupUI = (props) => {
           <CurrencyFilter
             filterValues={filterValues}
             handleChangeCurrency={handleChangeCurrency}
+          />
+        </WrapperRow>
+        <WrapperRow>
+          <AdminSelector
+            isFilterView
+            filterValues={filterValues}
+            handleChangeAdmin={handleChangeAdmin}
           />
         </WrapperRow>
         <ButtonGroup>

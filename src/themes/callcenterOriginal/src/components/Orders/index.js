@@ -44,6 +44,7 @@ import { OrdersCards } from './OrdersCards'
 import { ReviewCustomer } from './ReviewCustomer'
 import { CountryFilter } from './CountryFilter'
 import { OrderToPrint } from './OrderToPrint'
+import { AdminSelector } from './AdminSelector'
 
 export {
   DeliveriesManager,
@@ -91,5 +92,6 @@ export {
   OrdersCards,
   ReviewCustomer,
   CountryFilter,
-  OrderToPrint
+  OrderToPrint,
+  AdminSelector
 }
