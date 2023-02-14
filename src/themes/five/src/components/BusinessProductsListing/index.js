@@ -14,7 +14,6 @@ import {
   useUtils,
   useSession,
   useSite,
-  useOrderingTheme,
   useConfig,
   useBusiness
 } from 'ordering-components'
@@ -99,7 +98,6 @@ const BusinessProductsListingUI = (props) => {
   const [{ auth }] = useSession()
   const [{ site }] = useSite()
   const [, { setBusiness }] = useBusiness()
-  const [orderingTheme] = useOrderingTheme()
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
@@ -115,7 +113,7 @@ const BusinessProductsListingUI = (props) => {
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
-  const showViewOrderButton = !orderingTheme?.theme?.business_view?.components?.order_view_button?.hidden
+  const showViewOrderButton = !theme?.business_view?.components?.order_view_button?.hidden
   const cateringTypes = [7, 8]
   const cateringPreorder = cateringTypes.includes(options?.type)
   const sortByOptions = [

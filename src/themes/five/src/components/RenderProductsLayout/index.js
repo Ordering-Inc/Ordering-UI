@@ -399,7 +399,7 @@ export const RenderProductsLayout = (props) => {
                   {(categoryClicked || windowSize.width >= 993) && (
                     <BusinessCategoryProductWrapper>
                       <WrapContent isGroceries id='groceries'>
-                        {!business?.loading && business?.previously_products?.length > 0 && windowSize.width >= 993 && (
+                        {!business?.loading && !hidePreviousOrdered && business?.previously_products?.length > 0 && windowSize.width >= 993 && (
                           <OrderItAgain
                             onProductClick={onProductClick}
                             productList={business?.previously_products}
