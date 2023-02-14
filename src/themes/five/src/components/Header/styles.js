@@ -70,6 +70,10 @@ export const LogoHeader = styled.div`
     `}
 
     @media (min-width: 769px) {
+      ${({ theme }) =>
+      ['center', 'right']?.includes(theme?.header?.components?.logo?.components?.layout?.position) && css`
+        margin-right: 30px;
+      `};
       width: ${props => props.imgW ?? '150px'};
       height: ${props => props.isChew && '35px'};
     }
@@ -501,7 +505,7 @@ export const LeftSide = styled.div`
   width: 100%;
   @media (min-width: 769px){
     flex-direction: ${({ theme }) =>
-    theme?.header?.components?.logo?.components?.layout?.position === 'center' ? 'row-reverse' : 'row'};
+    ['center', 'right']?.includes(theme?.header?.components?.logo?.components?.layout?.position) ? 'row-reverse' : 'row'};
     width: 60%;
   }
 `

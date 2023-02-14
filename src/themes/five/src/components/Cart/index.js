@@ -107,7 +107,7 @@ const CartUI = (props) => {
   const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
   const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
-  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount?.hidden
+  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount_coupon?.hidden
   const cateringTypeString = orderState?.options?.type === 7
     ? 'catering_delivery'
     : orderState?.options?.type === 8
@@ -654,6 +654,7 @@ const CartUI = (props) => {
                 categoryId={curProduct?.category_id}
                 productId={curProduct?.id}
                 onSave={handlerProductAction}
+                viewString={viewString}
               />
             ) : (
               <ServiceForm

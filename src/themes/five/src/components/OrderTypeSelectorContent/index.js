@@ -28,10 +28,10 @@ export const OrderTypeSelectorContentUI = (props) => {
     handleChangeOrderType && handleChangeOrderType(orderType)
   }
 
-  const orderTypeImage = (type) => theme?.header?.components?.order_types?.components?.[type]?.components?.image
-  const orderTypeTitle = (type) => theme?.header?.components?.order_types?.components?.[type]?.components?.title
-  const orderTypeDescription = (type) => theme?.header?.components?.order_types?.components?.[type]?.components?.description
-  const orderTypeCallAction = (type) => theme?.header?.components?.order_types?.components?.[type]?.components?.call_to_action
+  const orderTypeImage = (type) => theme?.order_types?.components?.[type]?.components?.image
+  const orderTypeTitle = (type) => theme?.order_types?.components?.[type]?.components?.title
+  const orderTypeDescription = (type) => theme?.order_types?.components?.[type]?.components?.description
+  const orderTypeCallAction = (type) => theme?.order_types?.components?.[type]?.components?.call_to_action
 
   return (
     <div className='order-type' style={{ overflow: 'hidden' }}>
@@ -51,10 +51,10 @@ export const OrderTypeSelectorContentUI = (props) => {
               onClick={() => handleClickOrderType(item.value)}
               active={orderStatus?.options?.type === item?.value}
             >
-              <OrderTypeTitle>{orderTypeTitle(item?.text) || item.text}</OrderTypeTitle>
-              <OrderTypeDescription>{orderTypeDescription(item?.text) || item.description}</OrderTypeDescription>
+              <OrderTypeTitle>{orderTypeTitle(item?.text?.replace(' ', '_')?.toLowerCase()) || item.text}</OrderTypeTitle>
+              <OrderTypeDescription>{orderTypeDescription(item?.text?.replace(' ', '_')?.toLowerCase()) || item.description}</OrderTypeDescription>
               <OrderStartWrapper>
-                <span>{orderTypeCallAction(item?.text) || t('START_MY_ORDER', 'start my order')}</span>
+                <span>{orderTypeCallAction(item?.text?.replace(' ', '_')?.toLowerCase()) || t('START_MY_ORDER', 'start my order')}</span>
                 <BsArrowRight />
               </OrderStartWrapper>
               <OrderTypeOverlay />
