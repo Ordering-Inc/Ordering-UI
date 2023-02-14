@@ -118,6 +118,7 @@ const SignUpFormUI = (props) => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
   const [fieldNumber, setFieldNumber] = useState(1)
+  const [currentPhoneNumber, setCurrentPhoneNumber] = useState(null)
 
   const showInputPhoneNumber = (validationFields?.fields?.checkout?.cellphone?.enabled ?? false) || configs?.verification_phone_required?.value === '1'
 
@@ -206,7 +207,12 @@ const SignUpFormUI = (props) => {
       generateOtpCode()
       return
     }
-    handleButtonSignupClick && handleButtonSignupClick()
+    handleButtonSignupClick &&
+    handleButtonSignupClick({
+      ...signupData,
+      cellphone:
+        currentPhoneNumber?.split(' ')[1]?.replace(/-/g, '') ?? signupData?.cellphone
+    })
     if (!formState.loading && formState.result.result && !formState.result.error) {
       handleSuccessSignup(formState.result.result)
     }
@@ -482,8 +488,10 @@ const SignUpFormUI = (props) => {
                         )}
                         <InputPhoneNumber
                           value={userPhoneNumber}
+                          currentCountryCode={signupData?.country_phone_code}
                           setValue={handleChangePhoneNumber}
                           handleIsValid={setIsValidPhoneNumber}
+                          setCurrentPhoneNumber={setCurrentPhoneNumber}
                           isError={formMethods.errors?.cellphone && !userPhoneNumber}
                         />
                       </>

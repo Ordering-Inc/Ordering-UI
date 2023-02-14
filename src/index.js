@@ -98,6 +98,7 @@ import { SearchProducts } from './components/RenderProductsLayout/SearchProducts
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { useOnlineStatus } from './hooks/useOnlineStatus'
 import { useWindowSize } from './hooks/useWindowSize'
+import { useRecaptcha } from './hooks/useRecaptcha'
 import { useCountdownTimer } from './hooks/useCountdownTimer'
 import { useIntersectionObserver } from './hooks/useIntersectionObserver'
 import { useIsMounted } from './hooks/useIsMounted'
@@ -241,6 +242,7 @@ export {
   // Hooks
   useOnlineStatus,
   useWindowSize,
+  useRecaptcha,
   useCountdownTimer,
   useIntersectionObserver,
   useIsMounted,
