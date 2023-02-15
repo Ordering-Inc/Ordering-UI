@@ -160,7 +160,17 @@ const MultiCheckoutUI = (props) => {
   }, [validationFields, user, customerState])
 
   useEffect(() => {
-    if (openCarts.length || cartGroup.loading) return
+    if (openCarts.length || cartGroup.loading) {
+      if (openCarts.length === 1) {
+        onRedirectPage && onRedirectPage({
+          page: 'checkout',
+          params: {
+            cartUuid: openCarts[0].uuid
+          }
+        })
+      }
+      return
+    }
     onRedirectPage && onRedirectPage({ page: 'search' })
   }, [openCarts, cartGroup])
 
