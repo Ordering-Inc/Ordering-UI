@@ -216,6 +216,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     handleSelectWallet: handleSelectWallet,
     handlePaymethodDataChange: handlePaymethodDataChange,
     cartUuid: cartUuid,
+    isCustomerMode: isCustomerMode,
     setCardList: setCardList
   })), (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : (_validationFields$fie10 = _validationFields$fie9.checkout) === null || _validationFields$fie10 === void 0 ? void 0 : (_validationFields$fie11 = _validationFields$fie10.coupon) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.enabled) && openCarts.every(function (cart) {
     return cart.business_id && cart.status !== 2;
