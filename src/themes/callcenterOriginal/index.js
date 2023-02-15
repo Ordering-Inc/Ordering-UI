@@ -72,6 +72,7 @@ import { UserPopover } from './src/components/UserPopover'
 import { UserProfileForm } from './src/components/UserProfileForm'
 import { Confirm } from './src/components/Confirm'
 import { LanguageSelector } from './src/components/LanguageSelector'
+import { AdminAreaPopover } from './src/components/AdminAreaPopover'
 import { DeliveriesManager } from './src/components/Orders/DeliveriesManager'
 import { DriversManager } from './src/components/Orders/DriversManager'
 import { OrdersManager } from './src/components/Orders/OrdersManager'
@@ -154,6 +155,7 @@ export {
   UserProfileForm,
   Confirm,
   LanguageSelector,
+  AdminAreaPopover,
   DeliveriesManager,
   DriversManager,
   OrdersManager,
