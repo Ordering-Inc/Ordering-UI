@@ -167,7 +167,17 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     }
   }, [validationFields, user, customerState]);
   (0, _react.useEffect)(function () {
-    if (openCarts.length || cartGroup.loading) return;
+    if (openCarts.length || cartGroup.loading) {
+      if (openCarts.length === 1) {
+        onRedirectPage && onRedirectPage({
+          page: 'checkout',
+          params: {
+            cartUuid: openCarts[0].uuid
+          }
+        });
+      }
+      return;
+    }
     onRedirectPage && onRedirectPage({
       page: 'search'
     });
