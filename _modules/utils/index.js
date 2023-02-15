@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.lightenDarkenColor = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = void 0;
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -332,9 +332,63 @@ var shape = {
 };
 
 /**
- * List of price to filter businesses
+ * Function to get formatted time list
+ * @param {*} selectedDate = selected Date
+ * @param {*} schedule = schedule list
+ * @param {*} is12Hours = variable for time format
  */
 exports.shape = shape;
+var getTimes = function getTimes(selectedDate, schedule, is12Hours) {
+  var date = new Date();
+  var times = [];
+  for (var k = 0; k < schedule[selectedDate.getDay()].lapses.length; k++) {
+    var open = {
+      hour: schedule[selectedDate.getDay()].lapses[k].open.hour,
+      minute: schedule[selectedDate.getDay()].lapses[k].open.minute
+    };
+    var close = {
+      hour: schedule[selectedDate.getDay()].lapses[k].close.hour,
+      minute: schedule[selectedDate.getDay()].lapses[k].close.minute
+    };
+    for (var i = open.hour; i <= close.hour; i++) {
+      if (date.getDate() !== selectedDate.getDate() || i >= date.getHours()) {
+        var hour = '';
+        var meridian = '';
+        if (is12Hours) {
+          if (i === 0) {
+            hour = '12';
+            meridian = ' ' + 'AM';
+          } else if (i > 0 && i < 12) {
+            hour = i < 10 ? '0' + i : i;
+            meridian = ' ' + 'AM';
+          } else if (i === 12) {
+            hour = '12';
+            meridian = ' ' + 'PM';
+          } else {
+            hour = i - 12 < 10 ? '0' + (i - 12) : "".concat(i - 12);
+            meridian = ' ' + 'PM';
+          }
+        } else {
+          hour = i < 10 ? '0' + i : i;
+        }
+        for (var j = i === open.hour ? open.minute : 0; j <= (i === close.hour ? close.minute : 59); j += 15) {
+          if (i !== date.getHours() || j >= date.getMinutes() || date.getDate() !== selectedDate.getDate()) {
+            times.push({
+              text: hour + ':' + (j < 10 ? '0' + j : j) + meridian,
+              value: (i < 10 ? '0' + i : i) + ':' + (j < 10 ? '0' + j : j)
+            });
+          }
+        }
+      }
+    }
+  }
+  return times;
+};
+
+/**
+ * List of price to filter businesses
+ */
+exports.getTimes = getTimes;
 var priceList = [{
   level: '1',
   content: '$'
@@ -818,4 +872,17 @@ var reviewCommentList = function reviewCommentList(type) {
   };
   return reviews[type];
 };
+
+/**
+ * Function to convert star rate in width to display
+ * @param {int} qualification star rate or qualification
+ */
 exports.reviewCommentList = reviewCommentList;
+var getStarWidth = function getStarWidth(qualification) {
+  if (qualification) {
+    return qualification / 5 * 100 + '%';
+  } else {
+    return '0%';
+  }
+};
+exports.getStarWidth = getStarWidth;

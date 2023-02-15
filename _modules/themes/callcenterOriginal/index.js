@@ -159,10 +159,22 @@ Object.defineProperty(exports, "Confirm", {
     return _Confirm.Confirm;
   }
 });
+Object.defineProperty(exports, "DeliveriesManager", {
+  enumerable: true,
+  get: function get() {
+    return _DeliveriesManager.DeliveriesManager;
+  }
+});
 Object.defineProperty(exports, "DriverTips", {
   enumerable: true,
   get: function get() {
     return _DriverTips.DriverTips;
+  }
+});
+Object.defineProperty(exports, "DriversManager", {
+  enumerable: true,
+  get: function get() {
+    return _DriversManager.DriversManager;
   }
 });
 Object.defineProperty(exports, "Footer", {
@@ -313,6 +325,12 @@ Object.defineProperty(exports, "OrderTypeSelectorHeader", {
   enumerable: true,
   get: function get() {
     return _OrderTypeSelectorHeader.OrderTypeSelectorHeader;
+  }
+});
+Object.defineProperty(exports, "OrdersManager", {
+  enumerable: true,
+  get: function get() {
+    return _OrdersManager.OrdersManager;
   }
 });
 Object.defineProperty(exports, "OrdersOption", {
@@ -538,6 +556,9 @@ var _UserPopover = require("./src/components/UserPopover");
 var _UserProfileForm = require("./src/components/UserProfileForm");
 var _Confirm = require("./src/components/Confirm");
 var _LanguageSelector = require("./src/components/LanguageSelector");
+var _DeliveriesManager = require("./src/components/Orders/DeliveriesManager");
+var _DriversManager = require("./src/components/Orders/DriversManager");
+var _OrdersManager = require("./src/components/Orders/OrdersManager");
 var _Buttons = require("./src/styles/Buttons");
 var _Inputs = require("./src/styles/Inputs");
 var _Select = require("./src/styles/Select");
