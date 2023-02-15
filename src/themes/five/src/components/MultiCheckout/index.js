@@ -221,6 +221,7 @@ const MultiCheckoutUI = (props) => {
                   handleSelectWallet={handleSelectWallet}
                   handlePaymethodDataChange={handlePaymethodDataChange}
                   cartUuid={cartUuid}
+                  isCustomerMode={isCustomerMode}
                 />
               </PaymentMethodContainer>
 

@@ -66,7 +66,9 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
     paymethodSelected,
     handleSelectPaymethod,
     handleSelectWallet,
-    handlePaymethodDataChange
+    handlePaymethodDataChange,
+    setCardList,
+    isCustomerMode
   } = props
 
   const [, t] = useLanguage()
@@ -98,14 +100,17 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
           ))
         ) : (
           paymethodsAndWallets.paymethods.map(paymethod => (
-            <PayCard
-              key={paymethod.id}
-              isActive={paymethodSelected?.id === paymethod.id}
-              onClick={() => handleSelectPaymethod({ ...paymethod, paymethod: { gateway: paymethod.gateway }, paymethod_id: paymethod?.id })}
-            >
-              <div>{getPayIcon(paymethod.id)}</div>
-              <p>{t(paymethod?.gateway.toUpperCase(), paymethod?.name)}</p>
-            </PayCard>
+            <React.Fragment key={paymethod.id}>
+              {(!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                <PayCard
+                  isActive={paymethodSelected?.id === paymethod.id}
+                  onClick={() => handleSelectPaymethod({ ...paymethod, paymethod: { gateway: paymethod.gateway }, paymethod_id: paymethod?.id })}
+                >
+                  <div>{getPayIcon(paymethod.id)}</div>
+                  <p>{t(paymethod?.gateway.toUpperCase(), paymethod?.name)}</p>
+                </PayCard>
+              )}
+            </React.Fragment>
           ))
         )}
       </PaymethodsListContainer>
@@ -136,40 +141,43 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
         </PayCardSelected>
       )}
 
-      <WalletPaymentOptionContainer>
-        {(paymethodsAndWallets.loading || walletsState.loading) ? (
-          <>
-            {[...Array(2).keys()].map(i => (
-              <div key={i}>
-                <Skeleton height={40} style={{ marginBottom: '20px' }} />
-              </div>
-            ))}
-          </>
-        ) : (
-          <>
-            {walletsState?.result?.filter(wallet => paymethodsAndWallets.wallets.find(item => item.type === wallet.type)).map((wallet, idx) => walletName[wallet.type]?.isActive && (
-              <WalletOptionContainer
-                key={wallet.type}
-                isBottomBorder={idx === paymethodsAndWallets.wallets?.length - 1}
-              >
-                <Checkbox
-                  name={`payment_option_${wallet.type}`}
-                  id={`custom-checkbox-${idx}`}
-                  disabled={wallet.balance === 0}
-                  value={`payment_option_${wallet.type}`}
-                  onChange={e => handleSelectWallet(e.target.checked, wallet)}
-                />
-                <label
-                  htmlFor={`custom-checkbox-${idx}`}
+      {!isCustomerMode && (
+        <WalletPaymentOptionContainer>
+          {(paymethodsAndWallets.loading || walletsState.loading) ? (
+            <>
+              {[...Array(2).keys()].map(i => (
+                <div key={i}>
+                  <Skeleton height={40} style={{ marginBottom: '20px' }} />
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              {walletsState?.result?.filter(wallet => paymethodsAndWallets.wallets.find(item => item.type === wallet.type)).map((wallet, idx) => walletName[wallet.type]?.isActive && (
+                <WalletOptionContainer
+                  key={wallet.type}
+                  isBottomBorder={idx === paymethodsAndWallets.wallets?.length - 1}
                 >
-                  {walletName[wallet.type]?.name}
-                </label>
-                <span>{parsePrice(wallet.balance)}</span>
-              </WalletOptionContainer>
-            ))}
-          </>
-        )}
-      </WalletPaymentOptionContainer>
+                  <Checkbox
+                    name={`payment_option_${wallet.type}`}
+                    id={`custom-checkbox-${idx}`}
+                    disabled={wallet.balance === 0}
+                    value={`payment_option_${wallet.type}`}
+                    onChange={e => handleSelectWallet(e.target.checked, wallet)}
+                  />
+                  <label
+                    htmlFor={`custom-checkbox-${idx}`}
+                  >
+                    {walletName[wallet.type]?.name}
+                  </label>
+                  <span>{parsePrice(wallet.balance)}</span>
+                </WalletOptionContainer>
+              ))}
+            </>
+          )}
+        </WalletPaymentOptionContainer>
+      )}
+
     </Container>
   )
 }
