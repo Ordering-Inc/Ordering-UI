@@ -294,6 +294,59 @@ export const shape = {
 }
 
 /**
+ * Function to get formatted time list
+ * @param {*} selectedDate = selected Date
+ * @param {*} schedule = schedule list
+ * @param {*} is12Hours = variable for time format
+ */
+export const getTimes = (selectedDate, schedule, is12Hours) => {
+  const date = new Date()
+  const times = []
+  for (let k = 0; k < schedule[selectedDate.getDay()].lapses.length; k++) {
+    const open = {
+      hour: schedule[selectedDate.getDay()].lapses[k].open.hour,
+      minute: schedule[selectedDate.getDay()].lapses[k].open.minute
+    }
+    const close = {
+      hour: schedule[selectedDate.getDay()].lapses[k].close.hour,
+      minute: schedule[selectedDate.getDay()].lapses[k].close.minute
+    }
+    for (let i = open.hour; i <= close.hour; i++) {
+      if (date.getDate() !== selectedDate.getDate() || i >= date.getHours()) {
+        let hour = ''
+        let meridian = ''
+        if (is12Hours) {
+          if (i === 0) {
+            hour = '12'
+            meridian = ' ' + 'AM'
+          } else if (i > 0 && i < 12) {
+            hour = (i < 10 ? '0' + i : i)
+            meridian = ' ' + 'AM'
+          } else if (i === 12) {
+            hour = '12'
+            meridian = ' ' + 'PM'
+          } else {
+            hour = ((i - 12 < 10) ? '0' + (i - 12) : `${(i - 12)}`)
+            meridian = ' ' + 'PM'
+          }
+        } else {
+          hour = i < 10 ? '0' + i : i
+        }
+        for (let j = (i === open.hour ? open.minute : 0); j <= (i === close.hour ? close.minute : 59); j += 15) {
+          if (i !== date.getHours() || j >= date.getMinutes() || date.getDate() !== selectedDate.getDate()) {
+            times.push({
+              text: hour + ':' + (j < 10 ? '0' + j : j) + meridian,
+              value: (i < 10 ? '0' + i : i) + ':' + (j < 10 ? '0' + j : j)
+            })
+          }
+        }
+      }
+    }
+  }
+  return times
+}
+
+/**
  * List of price to filter businesses
  */
 export const priceList = [
@@ -550,4 +603,16 @@ export const reviewCommentList = (type) => {
   }
 
   return reviews[type]
+}
+
+/**
+ * Function to convert star rate in width to display
+ * @param {int} qualification star rate or qualification
+ */
+export const getStarWidth = (qualification) => {
+  if (qualification) {
+    return qualification / 5 * 100 + '%'
+  } else {
+    return '0%'
+  }
 }
