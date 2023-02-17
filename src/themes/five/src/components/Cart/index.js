@@ -100,6 +100,7 @@ const CartUI = (props) => {
   const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
+  const isChewLayout = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const cateringTypes = [7, 8]
@@ -449,7 +450,7 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && cart?.delivery_price_with_discount >= 0 && !hideDeliveryFee && (
+                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && cart?.delivery_price_with_discount >= 0 && !hideDeliveryFee && isChewLayout && (
                       <tr>
                         <td>{t('DELIVERY_FEE_AFTER_DISCOUNT', 'Delivery Fee After Discount')}</td>
                         <td>{parsePrice(cart?.delivery_price_with_discount)}</td>
