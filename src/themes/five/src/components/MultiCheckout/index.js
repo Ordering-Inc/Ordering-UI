@@ -54,7 +54,7 @@ const MultiCheckoutUI = (props) => {
     placing,
     isCustomerMode,
     openCarts,
-    rewardRate,
+    loyaltyPlansState,
     totalCartsPrice,
     handleGroupPlaceOrder,
     paymethodSelected,
@@ -91,7 +91,13 @@ const MultiCheckoutUI = (props) => {
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
-  const loyaltyRewardValue = Math.round(openCarts.reduce((sum, cart) => sum + cart?.subtotal, 0) / rewardRate)
+  const creditPointPlan = loyaltyPlansState?.result?.find((loyal) => loyal.type === 'credit_point')
+  const businessIds = openCarts.map((cart) => cart.business_id)
+  const loyalBusinessIds = creditPointPlan?.businesses?.filter((b) => b.accumulates).map((item) => item.business_id) ?? []
+  const creditPointPlanOnBusiness = businessIds.every((bid) => loyalBusinessIds.includes(bid)) && creditPointPlan
+
+  const loyaltyRewardValue = creditPointPlanOnBusiness?.accumulation_rate
+    ? Math.round(openCarts.reduce((sum, cart) => sum + cart?.subtotal, 0) / creditPointPlanOnBusiness?.accumulation_rate) : 0
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
