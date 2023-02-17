@@ -172,6 +172,9 @@ const CheckoutUI = (props) => {
   const hideCustomerDetails = theme?.checkout?.components?.customer?.hidden
   const driverTipsField = !cartState.loading && cart && cart?.business_id && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.checkout?.driver_tip?.enabled && driverTipsOptions.length > 0 && !useKioskApp
 
+  const creditPointPlan = loyaltyPlansState?.result?.find(loyal => loyal.type === 'credit_point')
+  const creditPointPlanOnBusiness = creditPointPlan?.businesses?.find(b => b.business_id === cart?.business_id && b.accumulates)
+
   const handlePlaceOrder = () => {
     if (!userErrors.length && (!requiredFields?.length || allowedGuest)) {
       const body = {}
@@ -563,7 +566,10 @@ const CheckoutUI = (props) => {
               isProducts={cart?.products?.length || 0}
               viewString='checkout'
               businessConfigs={businessConfigs}
-              loyaltyRewardRate={loyaltyPlansState?.result?.find(loyal => loyal.type === 'credit_point')?.accumulation_rate ?? 0}
+              loyaltyRewardRate={
+                creditPointPlanOnBusiness?.accumulation_rate ??
+                  (!!creditPointPlanOnBusiness && creditPointPlan?.accumulation_rate) ?? 0
+              }
             />
           </CartContainer>
         )}
@@ -638,7 +644,7 @@ const CheckoutUI = (props) => {
             </WarningText>
           )}
 
-        {!cart?.valid_preorder && (
+        {cart?.valid_preorder !== undefined && !cart?.valid_preorder && (
           <WarningText>
             {t('INVALID_CART_MOMENT', 'Selected schedule time is invalid, please select a schedule into the business schedule interval.')}
           </WarningText>
