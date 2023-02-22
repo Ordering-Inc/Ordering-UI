@@ -233,7 +233,7 @@ const BusinessProductsListingUI = (props) => {
       }
       setModalIsOpen(true)
     }
-  }, [productModal])
+  }, [productModal, categoryId, productId, isInitialRender])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -252,6 +252,12 @@ const BusinessProductsListingUI = (props) => {
       events.off('product_banner_clicked', handleClickedBannerProduct)
     }
   }, [])
+
+  useEffect(() => {
+    if (!categoryId && !productId) {
+      setModalIsOpen(false)
+    }
+  }, [categoryId, productId])
 
   useEffect(() => {
     if (loading) return
