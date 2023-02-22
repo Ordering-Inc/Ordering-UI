@@ -5,8 +5,8 @@ import {
   useUtils,
   MultiCartsPaymethodsAndWallets as MultiCartsPaymethodsAndWalletsController
 } from 'ordering-components'
+import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
-import BilStripe from '@meronex/icons/bi/BilStripe'
 import FaCcStripe from '@meronex/icons/fa/FaCcStripe'
 import FaStripeS from '@meronex/icons/fa/FaStripeS'
 import GrStripe from '@meronex/icons/gr/GrStripe'
@@ -24,7 +24,9 @@ import {
   WalletPaymentOptionContainer,
   WalletOptionContainer,
   PayCardSelected,
-  CardItemContent
+  CardItemContent,
+  SectionLeft,
+  SectionLeftText
 } from './styles'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
@@ -61,6 +63,7 @@ const CreditCard2 = () => {
 const MultiCartsPaymethodsAndWalletsUI = (props) => {
   const {
     businessIds,
+    balance,
     paymethodsAndWallets,
     walletsState,
     paymethodSelected,
@@ -68,9 +71,11 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
     handleSelectWallet,
     handlePaymethodDataChange,
     setCardList,
+    walletsPaymethod,
     isCustomerMode
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
@@ -155,24 +160,53 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
             </>
           ) : (
             <>
-              {walletsState?.result?.filter(wallet => paymethodsAndWallets.wallets.find(item => item.type === wallet.type)).map((wallet, idx) => walletName[wallet.type]?.isActive && (
+              {walletsState?.result?.filter(wallet =>
+                paymethodsAndWallets.wallets.find(item => item.type === wallet.type))
+                .map((wallet, idx) => walletName[wallet.type]?.isActive &&
+              (
                 <WalletOptionContainer
                   key={wallet.type}
                   isBottomBorder={idx === paymethodsAndWallets.wallets?.length - 1}
                 >
-                  <Checkbox
-                    name={`payment_option_${wallet.type}`}
-                    id={`custom-checkbox-${idx}`}
-                    disabled={wallet.balance === 0}
-                    value={`payment_option_${wallet.type}`}
-                    onChange={e => handleSelectWallet(e.target.checked, wallet)}
-                  />
-                  <label
-                    htmlFor={`custom-checkbox-${idx}`}
-                  >
-                    {walletName[wallet.type]?.name}
-                  </label>
-                  <span>{parsePrice(wallet.balance)}</span>
+                  <SectionLeft>
+                    <Checkbox
+                      name={`payment_option_${wallet.type}`}
+                      id={`custom-checkbox-${idx}`}
+                      disabled={
+                        (balance === 0 && !walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id) ||
+                        wallet.balance === 0
+                      }
+                      value={`payment_option_${wallet.type}`}
+                      checked={!!walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id}
+                      onChange={() => handleSelectWallet(
+                        !walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id,
+                        wallet
+                      )}
+                    />
+                    <SectionLeftText>
+                      <label
+                        style={{
+                          color: (balance === 0 && !walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id) ||
+                            wallet.balance === 0 ? theme.colors.darkGray : 'black'
+                        }}
+                        htmlFor={`custom-checkbox-${idx}`}
+                      >
+                        {walletName[wallet.type]?.name}
+                      </label>
+                    </SectionLeftText>
+                  </SectionLeft>
+                  <div>
+                    {wallet.type === 'cash' && (
+                      <span>{parsePrice(wallet?.balance, { isTruncable: true })}</span>
+                    )}
+                    {wallet.type === 'credit_point' && (
+                      <span>
+                        <span style={{ color: theme.colors.primary }}>
+                          {`${wallet?.balance} ${t('POINTS', 'Points')}`}
+                        </span> {wallet?.balance > 0 && `= ${parsePrice(wallet?.balance / wallet?.redemption_rate, { isTruncable: true })}`}
+                      </span>
+                    )}
+                  </div>
                 </WalletOptionContainer>
               ))}
             </>

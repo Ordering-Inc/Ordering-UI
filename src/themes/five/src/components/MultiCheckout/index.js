@@ -8,7 +8,9 @@ import {
   useConfig,
   useSession,
   useValidationFields,
-  useOrder
+  useOrder,
+  useToast,
+  ToastType
 } from 'ordering-components'
 
 import parsePhoneNumber from 'libphonenumber-js'
@@ -65,6 +67,7 @@ const MultiCheckoutUI = (props) => {
     cartGroup,
     cartUuid,
     totalCartsFee,
+    walletState,
     handleSearchRedirect
   } = props
 
@@ -76,13 +79,20 @@ const MultiCheckoutUI = (props) => {
   const [{ user }] = useSession()
   const [orderState] = useOrder()
   const history = useHistory()
+  const [, { showToast }] = useToast()
 
   const [cardList, setCardList] = useState([])
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const isDisablePlaceOrderButton = !(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) || (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data) || (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0)
+
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
+  const isDisablePlaceOrderButton = cartGroup?.loading ||
+    (!(paymethodSelected?.paymethod_id || paymethodSelected?.wallet_id) && cartGroup?.result?.balance > 0) ||
+    (paymethodSelected?.paymethod?.gateway === 'stripe' && !paymethodSelected?.paymethod_data) ||
+    (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0) ||
+    walletCarts.length > 0
+
   const isMultiDriverTips = configs?.checkout_multi_business_enabled?.value === '1'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -180,6 +190,12 @@ const MultiCheckoutUI = (props) => {
     onRedirectPage && onRedirectPage({ page: 'search' })
   }, [openCarts, cartGroup])
 
+  useEffect(() => {
+    if (walletState.error) {
+      showToast(ToastType.Error, t(walletState.error, walletState.error?.[0]?.replace(/_/g, ' ')))
+    }
+  }, [walletState.error])
+
   return (
     <>
       {((!cartGroup?.loading && openCarts.length === 0) || !cartUuid) ? (
@@ -223,6 +239,8 @@ const MultiCheckoutUI = (props) => {
                 <MultiCartsPaymethodsAndWallets
                   userId={props.userId}
                   openCarts={openCarts}
+                  balance={cartGroup?.result?.balance}
+                  walletsPaymethod={cartGroup?.result?.wallets}
                   paymethodSelected={paymethodSelected}
                   handleSelectPaymethod={handleSelectPaymethod}
                   handleSelectWallet={handleSelectWallet}
