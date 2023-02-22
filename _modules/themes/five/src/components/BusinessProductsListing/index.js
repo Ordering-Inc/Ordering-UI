@@ -343,7 +343,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       }
       setModalIsOpen(true);
     }
-  }, [productModal]);
+  }, [productModal, categoryId, productId, isInitialRender]);
   (0, _react.useEffect)(function () {
     window.scrollTo(0, 0);
     if (categoryId && productId) {
@@ -360,6 +360,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       events.off('product_banner_clicked', handleClickedBannerProduct);
     };
   }, []);
+  (0, _react.useEffect)(function () {
+    if (!categoryId && !productId) {
+      setModalIsOpen(false);
+    }
+  }, [categoryId, productId]);
   (0, _react.useEffect)(function () {
     if (loading) return;
     if (openProduct) {
