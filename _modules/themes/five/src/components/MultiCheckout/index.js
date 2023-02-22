@@ -42,7 +42,7 @@ var mapConfigs = {
   }
 };
 var MultiCheckoutUI = function MultiCheckoutUI(props) {
-  var _paymethodSelected$pa, _cardList$cards, _Object$values, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _configs$google_maps_, _customerState$user, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2, _configs$multi_busine6, _configs$multi_busine7;
+  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _configs$google_maps_, _customerState$user, _cartGroup$result2, _cartGroup$result3, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2, _configs$multi_busine6, _configs$multi_busine7;
   var placing = props.placing,
     isCustomerMode = props.isCustomerMode,
     openCarts = props.openCarts,
@@ -57,6 +57,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     cartGroup = props.cartGroup,
     cartUuid = props.cartUuid,
     totalCartsFee = props.totalCartsFee,
+    walletState = props.walletState,
     handleSearchRedirect = props.handleSearchRedirect;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -80,6 +81,9 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
   var history = (0, _reactRouterDom.useHistory)();
+  var _useToast = (0, _orderingComponents.useToast)(),
+    _useToast2 = _slicedToArray(_useToast, 2),
+    showToast = _useToast2[1].showToast;
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     cardList = _useState2[0],
@@ -99,11 +103,11 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     alertState = _useState8[0],
     setAlertState = _useState8[1];
-  var isDisablePlaceOrderButton = !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id) || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa = paymethodSelected.paymethod) === null || _paymethodSelected$pa === void 0 ? void 0 : _paymethodSelected$pa.gateway) === 'stripe' && !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_data) || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && (cardList === null || cardList === void 0 ? void 0 : (_cardList$cards = cardList.cards) === null || _cardList$cards === void 0 ? void 0 : _cardList$cards.length) === 0;
   var walletCarts = ((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
     var _cart$products;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (cart === null || cart === void 0 ? void 0 : cart.valid_schedule) && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.valid_maximum) && (cart === null || cart === void 0 ? void 0 : cart.valid_minimum) && (cart === null || cart === void 0 ? void 0 : cart.wallets);
   })) || null || [];
+  var isDisablePlaceOrderButton = (cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.loading) || !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id) && (cartGroup === null || cartGroup === void 0 ? void 0 : (_cartGroup$result = cartGroup.result) === null || _cartGroup$result === void 0 ? void 0 : _cartGroup$result.balance) > 0 || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa = paymethodSelected.paymethod) === null || _paymethodSelected$pa === void 0 ? void 0 : _paymethodSelected$pa.gateway) === 'stripe' && !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_data) || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && (cardList === null || cardList === void 0 ? void 0 : (_cardList$cards = cardList.cards) === null || _cardList$cards === void 0 ? void 0 : _cardList$cards.length) === 0 || walletCarts.length > 0;
   var isMultiDriverTips = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var totalFeeEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === '1' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o4 = configs.driver_tip_options) === null || _configs$driver_tip_o4 === void 0 ? void 0 : _configs$driver_tip_o4.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o5 = configs.driver_tip_options) === null || _configs$driver_tip_o5 === void 0 ? void 0 : _configs$driver_tip_o5.value) || [];
@@ -196,6 +200,12 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       page: 'search'
     });
   }, [openCarts, cartGroup]);
+  (0, _react.useEffect)(function () {
+    if (walletState.error) {
+      var _walletState$error, _walletState$error$;
+      showToast(_orderingComponents.ToastType.Error, t(walletState.error, (_walletState$error = walletState.error) === null || _walletState$error === void 0 ? void 0 : (_walletState$error$ = _walletState$error[0]) === null || _walletState$error$ === void 0 ? void 0 : _walletState$error$.replace(/_/g, ' ')));
+    }
+  }, [walletState.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(cartGroup !== null && cartGroup !== void 0 && cartGroup.loading) && openCarts.length === 0 || !cartUuid ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
@@ -225,6 +235,8 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMENT_METHODS', 'Payment Methods')), /*#__PURE__*/_react.default.createElement(_MultiCartsPaymethodsAndWallets.MultiCartsPaymethodsAndWallets, {
     userId: props.userId,
     openCarts: openCarts,
+    balance: cartGroup === null || cartGroup === void 0 ? void 0 : (_cartGroup$result2 = cartGroup.result) === null || _cartGroup$result2 === void 0 ? void 0 : _cartGroup$result2.balance,
+    walletsPaymethod: cartGroup === null || cartGroup === void 0 ? void 0 : (_cartGroup$result3 = cartGroup.result) === null || _cartGroup$result3 === void 0 ? void 0 : _cartGroup$result3.wallets,
     paymethodSelected: paymethodSelected,
     handleSelectPaymethod: handleSelectPaymethod,
     handleSelectWallet: handleSelectWallet,

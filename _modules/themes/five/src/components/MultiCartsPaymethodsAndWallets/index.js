@@ -7,8 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.MultiCartsPaymethodsAndWallets = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _orderingComponents = require("ordering-components");
+var _styledComponents = require("styled-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-var _BilStripe = _interopRequireDefault(require("@meronex/icons/bi/BilStripe"));
 var _FaCcStripe = _interopRequireDefault(require("@meronex/icons/fa/FaCcStripe"));
 var _FaStripeS = _interopRequireDefault(require("@meronex/icons/fa/FaStripeS"));
 var _GrStripe = _interopRequireDefault(require("@meronex/icons/gr/GrStripe"));
@@ -71,6 +71,7 @@ var CreditCard2 = function CreditCard2() {
 var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI(props) {
   var _configs$wallet_cash_, _configs$wallet_credi, _paymethodSelected$pa, _paymethodSelected$pa2, _paymethodSelected$pa3, _paymethodSelected$pa4, _paymethodSelected$da, _paymethodSelected$pa5, _paymethodSelected$pa6, _paymethodSelected$pa7, _paymethodSelected$pa8, _paymethodSelected$pa9, _paymethodSelected$pa10, _walletsState$result;
   var businessIds = props.businessIds,
+    balance = props.balance,
     paymethodsAndWallets = props.paymethodsAndWallets,
     walletsState = props.walletsState,
     paymethodSelected = props.paymethodSelected,
@@ -78,7 +79,9 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
     handleSelectWallet = props.handleSelectWallet,
     handlePaymethodDataChange = props.handlePaymethodDataChange,
     setCardList = props.setCardList,
+    walletsPaymethod = props.walletsPaymethod,
     isCustomerMode = props.isCustomerMode;
+  var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -156,21 +159,42 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
       return item.type === wallet.type;
     });
   }).map(function (wallet, idx) {
-    var _walletName$wallet$ty, _paymethodsAndWallets, _walletName$wallet$ty2;
+    var _walletName$wallet$ty, _paymethodsAndWallets, _walletsPaymethod$fin, _walletsPaymethod$fin2, _walletsPaymethod$fin4, _walletName$wallet$ty2;
     return ((_walletName$wallet$ty = walletName[wallet.type]) === null || _walletName$wallet$ty === void 0 ? void 0 : _walletName$wallet$ty.isActive) && /*#__PURE__*/_react.default.createElement(_styles.WalletOptionContainer, {
       key: wallet.type,
       isBottomBorder: idx === ((_paymethodsAndWallets = paymethodsAndWallets.wallets) === null || _paymethodsAndWallets === void 0 ? void 0 : _paymethodsAndWallets.length) - 1
-    }, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.SectionLeft, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
       name: "payment_option_".concat(wallet.type),
       id: "custom-checkbox-".concat(idx),
-      disabled: wallet.balance === 0,
+      disabled: balance === 0 && !(walletsPaymethod !== null && walletsPaymethod !== void 0 && (_walletsPaymethod$fin = walletsPaymethod.find(function (walletPay) {
+        return walletPay.wallet_id === wallet.id;
+      })) !== null && _walletsPaymethod$fin !== void 0 && _walletsPaymethod$fin.id) || wallet.balance === 0,
       value: "payment_option_".concat(wallet.type),
-      onChange: function onChange(e) {
-        return handleSelectWallet(e.target.checked, wallet);
+      checked: !!(walletsPaymethod !== null && walletsPaymethod !== void 0 && (_walletsPaymethod$fin2 = walletsPaymethod.find(function (walletPay) {
+        return walletPay.wallet_id === wallet.id;
+      })) !== null && _walletsPaymethod$fin2 !== void 0 && _walletsPaymethod$fin2.id),
+      onChange: function onChange() {
+        var _walletsPaymethod$fin3;
+        return handleSelectWallet(!(walletsPaymethod !== null && walletsPaymethod !== void 0 && (_walletsPaymethod$fin3 = walletsPaymethod.find(function (walletPay) {
+          return walletPay.wallet_id === wallet.id;
+        })) !== null && _walletsPaymethod$fin3 !== void 0 && _walletsPaymethod$fin3.id), wallet);
       }
-    }), /*#__PURE__*/_react.default.createElement("label", {
+    }), /*#__PURE__*/_react.default.createElement(_styles.SectionLeftText, null, /*#__PURE__*/_react.default.createElement("label", {
+      style: {
+        color: balance === 0 && !(walletsPaymethod !== null && walletsPaymethod !== void 0 && (_walletsPaymethod$fin4 = walletsPaymethod.find(function (walletPay) {
+          return walletPay.wallet_id === wallet.id;
+        })) !== null && _walletsPaymethod$fin4 !== void 0 && _walletsPaymethod$fin4.id) || wallet.balance === 0 ? theme.colors.darkGray : 'black'
+      },
       htmlFor: "custom-checkbox-".concat(idx)
-    }, (_walletName$wallet$ty2 = walletName[wallet.type]) === null || _walletName$wallet$ty2 === void 0 ? void 0 : _walletName$wallet$ty2.name), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(wallet.balance)));
+    }, (_walletName$wallet$ty2 = walletName[wallet.type]) === null || _walletName$wallet$ty2 === void 0 ? void 0 : _walletName$wallet$ty2.name))), /*#__PURE__*/_react.default.createElement("div", null, wallet.type === 'cash' && /*#__PURE__*/_react.default.createElement("span", null, parsePrice(wallet === null || wallet === void 0 ? void 0 : wallet.balance, {
+      isTruncable: true
+    })), wallet.type === 'credit_point' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("span", {
+      style: {
+        color: theme.colors.primary
+      }
+    }, "".concat(wallet === null || wallet === void 0 ? void 0 : wallet.balance, " ").concat(t('POINTS', 'Points'))), " ", (wallet === null || wallet === void 0 ? void 0 : wallet.balance) > 0 && "= ".concat(parsePrice((wallet === null || wallet === void 0 ? void 0 : wallet.balance) / (wallet === null || wallet === void 0 ? void 0 : wallet.redemption_rate), {
+      isTruncable: true
+    })))));
   }))));
 };
 var MultiCartsPaymethodsAndWallets = function MultiCartsPaymethodsAndWallets(props) {
