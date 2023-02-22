@@ -83,6 +83,7 @@ export const WalletPaymentOptionContainer = styled.div`
 `
 export const WalletOptionContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-top: 1px solid ${(props) => props.theme.colors.gray200};
   ${(props) => props.isBottomBorder && css`
@@ -94,6 +95,17 @@ export const WalletOptionContainer = styled.div`
     flex: 1;
     margin: 0 10px;
   }
+`
+export const SectionLeft = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
+export const SectionLeftText = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
 `
 export const PayCardSelected = styled.div`
   padding: 30px 0px 0px;
