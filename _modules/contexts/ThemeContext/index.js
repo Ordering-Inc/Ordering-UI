@@ -67,6 +67,7 @@ var ThemeProvider = function ThemeProvider(_ref) {
         font.rel = 'stylesheet';
         font.async = true;
         font.defer = true;
+        font.name = fontFamily.name;
         font.href = fontFamily.href || "https://fonts.googleapis.com/css2?family=".concat(fontFamily.name, ":wght@").concat(fontFamily.weights.join(';'), "&display=swap");
         window.document.body.appendChild(font);
       }
