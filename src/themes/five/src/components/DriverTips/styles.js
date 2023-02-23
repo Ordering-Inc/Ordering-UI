@@ -15,7 +15,7 @@ export const TipCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
+  border-radius: 8px;
   border: 1px solid #E9ECEF;
   width: 62px;
   height: 62px;
@@ -25,7 +25,7 @@ export const TipCard = styled.div`
   font-size: 14px;
   color: #B1BCCC;
   transition: all 0.3s;
-
+  text-align: center;
   &.active {
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
