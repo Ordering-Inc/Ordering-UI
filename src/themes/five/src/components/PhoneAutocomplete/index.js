@@ -34,6 +34,7 @@ const PhoneAutocompleteUI = (props) => {
     customersPhones,
     setCustomersPhones,
     openModal,
+    limitPhoneLength,
     setOpenModal,
     onChangeNumber,
     setCustomerState,
@@ -88,7 +89,7 @@ const PhoneAutocompleteUI = (props) => {
       setInputValue(inputValue)
       onChangeNumber(inputValue)
     }
-    if ((inputValue && inputValue.length > 10) || !(/^[0-9]+$/.test(inputValue))) {
+    if ((inputValue && inputValue.length > limitPhoneLength) || !(/^[0-9]+$/.test(inputValue))) {
       return
     }
     setInputValue(inputValue)
@@ -107,12 +108,12 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const createNewUser = () => {
-    if ((optSelected && optSelected?.value?.length === 10) || (!optSelected && phone.length === 10)) {
+    if ((optSelected && optSelected?.value?.length === limitPhoneLength) || (!optSelected && phone.length === limitPhoneLength)) {
       setOpenModal({ ...openModal, signup: true })
     } else {
       setAlertState({
         open: true,
-        content: t('ERROR_MIN_CHARACTERS_PHONE', 'The Phone / Mobile must be 10 characters')
+        content: t('ERROR_MIN_CHARACTERS_PHONE', 'The Phone / Mobile must be :length: characters').replace(':length:', limitPhoneLength)
       })
     }
   }
@@ -238,4 +239,8 @@ export const PhoneAutocomplete = (props) => {
   }
 
   return <PhoneAutocompleteController {...phoneProps} />
+}
+
+PhoneAutocompleteUI.defaultProps = {
+  limitPhoneLength: 10
 }
