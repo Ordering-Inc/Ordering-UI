@@ -22,7 +22,7 @@ var OrderEta = function OrderEta(props) {
     outputFormat = props.outputFormat;
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
-    parseDate = _useUtils2[0].parseDate;
+    parseTime = _useUtils2[0].parseTime;
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     estimatedDeliveryTime = _useState2[0],
@@ -49,9 +49,9 @@ var OrderEta = function OrderEta(props) {
       if (diffTimeAsMinutes <= 0) {
         totalEta += Math.floor(Math.abs(diffTimeAsMinutes / (order === null || order === void 0 ? void 0 : order.eta_current_status_time)) + 1) * (order === null || order === void 0 ? void 0 : order.eta_current_status_penalty_time);
       }
-      _estimatedTime = parseDate((0, _moment.default)(_delivery).add(totalEta, 'minutes'));
+      _estimatedTime = (0, _moment.default)(_delivery).add(totalEta, 'minutes');
     } else {
-      _estimatedTime = parseDate((0, _moment.default)(_delivery).add(order === null || order === void 0 ? void 0 : order.eta_time, 'minutes'));
+      _estimatedTime = (0, _moment.default)(_delivery).add(order === null || order === void 0 ? void 0 : order.eta_time, 'minutes');
     }
     setEstimatedDeliveryTime(_estimatedTime);
   };
@@ -64,6 +64,8 @@ var OrderEta = function OrderEta(props) {
       return clearInterval(interval);
     };
   }, [order]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !outputFormat ? estimatedDeliveryTime : (0, _moment.default)(estimatedDeliveryTime).format(outputFormat));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !outputFormat ? parseTime(estimatedDeliveryTime) : parseTime(estimatedDeliveryTime, {
+    outputFormat: 'hh:mm A'
+  }));
 };
 exports.OrderEta = OrderEta;

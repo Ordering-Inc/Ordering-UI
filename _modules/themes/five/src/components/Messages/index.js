@@ -93,6 +93,8 @@ var MessagesUI = function MessagesUI(props) {
     modalImage = _useState4[0],
     setModalImage = _useState4[1];
   var imageRef = (0, _react.useRef)(null);
+  var previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17];
+  var chatDisabled = previousStatus.includes(order === null || order === void 0 ? void 0 : order.status);
   var quickMessageList = [{
     key: 'message_1',
     text: t('CUSTOMER_MESSAGE_1', 'Lorem ipsum 1')
@@ -455,7 +457,7 @@ var MessagesUI = function MessagesUI(props) {
     outputFormat: 'MMM DD, YYYY'
   }))), /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'Via'), ' ', /*#__PURE__*/_react.default.createElement("strong", null, order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')), ' ', /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, parseTime(order.created_at)))), /*#__PURE__*/_react.default.createElement(MapMessages, {
     messages: messagesToShow !== null && messagesToShow !== void 0 && (_messagesToShow$messa2 = messagesToShow.messages) !== null && _messagesToShow$messa2 !== void 0 && _messagesToShow$messa2.length ? messagesToShow : messages
-  }))), (parseInt(order === null || order === void 0 ? void 0 : order.status) === 1 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 2 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 5 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 6 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 10 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 11 || parseInt(order === null || order === void 0 ? void 0 : order.status) === 12) && driver ? /*#__PURE__*/_react.default.createElement(_styles.NotSendMessage, null, /*#__PURE__*/_react.default.createElement(_MdcCloseOctagonOutline.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('NOT_SEND_MESSAGES', 'You can\'t send messages because the order has ended'))) : /*#__PURE__*/_react.default.createElement(_styles.SendForm, null, /*#__PURE__*/_react.default.createElement(_styles.QuickMessageWrapper, null, quickMessageList.map(function (quickMessage, i) {
+  }))), chatDisabled ? /*#__PURE__*/_react.default.createElement(_styles.NotSendMessage, null, /*#__PURE__*/_react.default.createElement(_MdcCloseOctagonOutline.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('NOT_SEND_MESSAGES', 'You can\'t send messages because the order has ended'))) : /*#__PURE__*/_react.default.createElement(_styles.SendForm, null, /*#__PURE__*/_react.default.createElement(_styles.QuickMessageWrapper, null, quickMessageList.map(function (quickMessage, i) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: i,
       color: "secundary",

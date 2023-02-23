@@ -51,13 +51,13 @@ var PageBannerUI = function PageBannerUI(props) {
           params: {
             business_slug: slug
           },
-          replace: true
+          replace: false
         });
       } else {
         return events.emit('go_to_page', {
           page: 'business',
           search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(slug),
-          replace: true
+          replace: false
         });
       }
     }
@@ -70,7 +70,7 @@ var PageBannerUI = function PageBannerUI(props) {
           category_slug: category,
           product_slug: product
         },
-        replace: true
+        replace: false
       });
     }
     if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
@@ -82,7 +82,7 @@ var PageBannerUI = function PageBannerUI(props) {
           product_slug: product
         },
         search: "?".concat(businessParameter, "=").concat(slug),
-        replace: true
+        replace: false
       });
     }
     if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
@@ -95,7 +95,7 @@ var PageBannerUI = function PageBannerUI(props) {
           business_slug: slug
         },
         search: "?".concat(categoryParameter, "=").concat(category, "&").concat(productParameter, "=").concat(product),
-        replace: true
+        replace: false
       });
     }
     if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
@@ -108,7 +108,7 @@ var PageBannerUI = function PageBannerUI(props) {
           business_slug: slug
         },
         search: "?".concat(_categoryParameter, "=").concat(category, "&").concat(_productParameter, "=").concat(product),
-        replace: true
+        replace: false
       });
     }
   };
