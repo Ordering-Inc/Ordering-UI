@@ -12,7 +12,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var DriverTipContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: space-around;\n  flex-wrap: wrap;\n  margin-top: 20px;\n  padding-bottom: 20px;\n  width: 100%;\n"])));
 exports.DriverTipContainer = DriverTipContainer;
-var TipCard = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 50%;\n  border: 1px solid #E9ECEF;\n  width: 62px;\n  height: 62px;\n  min-width: 62px;\n  cursor: pointer;\n  text-transform: capitalize;\n  font-size: 14px;\n  color: #B1BCCC;\n  transition: all 0.3s;\n\n  &.active {\n    background-color: ", ";\n    color: ", ";\n  }\n"])), function (props) {
+var TipCard = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 8px;\n  border: 1px solid #E9ECEF;\n  width: 62px;\n  height: 62px;\n  min-width: 62px;\n  cursor: pointer;\n  text-transform: capitalize;\n  font-size: 14px;\n  color: #B1BCCC;\n  transition: all 0.3s;\n  text-align: center;\n  &.active {\n    background-color: ", ";\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primaryContrast;
