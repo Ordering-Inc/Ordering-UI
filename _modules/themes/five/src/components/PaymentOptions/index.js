@@ -121,6 +121,12 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+    _useOrder2 = _slicedToArray(_useOrder, 2),
+    orderState = _useOrder2[0],
+    _useOrder2$ = _useOrder2[1],
+    applyCoupon = _useOrder2$.applyCoupon,
+    removeOffer = _useOrder2$.removeOffer;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     token = _useSession2[0].token;
@@ -218,7 +224,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   }).map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: paymethod.id
-    }, (!isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
+    }, (!isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash' || paymethod.gateway === '100_coupon')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isDisabled: isDisabled,
       className: "card ".concat((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id ? 'active' : ''),
       onClick: function onClick() {
