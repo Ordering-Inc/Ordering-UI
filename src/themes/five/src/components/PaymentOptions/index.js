@@ -100,6 +100,8 @@ const PaymentOptionsUI = (props) => {
     hasCateringProducts
   } = props
   const [, t] = useLanguage()
+  const [orderState, { applyCoupon, removeOffer }] = useOrder()
+
   const [{ token }] = useSession()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -195,7 +197,7 @@ const PaymentOptionsUI = (props) => {
               supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
                 <React.Fragment key={paymethod.id}>
                   {
-                    (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                    (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash' || paymethod.gateway === '100_coupon'))) && (
                       <PayCard
                         isDisabled={isDisabled}
                         className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
