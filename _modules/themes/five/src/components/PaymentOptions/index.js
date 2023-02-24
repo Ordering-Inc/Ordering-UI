@@ -127,6 +127,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     _useOrder2$ = _useOrder2[1],
     applyCoupon = _useOrder2$.applyCoupon,
     removeOffer = _useOrder2$.removeOffer;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     token = _useSession2[0].token;
@@ -195,8 +198,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       handlePlaceOrder();
     }
     if (((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay' || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result) && (cart === null || cart === void 0 ? void 0 : cart.offers.length) > 0) {
-      var _configs, _configs$advanced_off;
-      if (!((_configs = configs) !== null && _configs !== void 0 && (_configs$advanced_off = _configs.advanced_offers_module) !== null && _configs$advanced_off !== void 0 && _configs$advanced_off.value)) {
+      var _configs$advanced_off;
+      if (!(configs !== null && configs !== void 0 && (_configs$advanced_off = configs.advanced_offers_module) !== null && _configs$advanced_off !== void 0 && _configs$advanced_off.value)) {
         applyCoupon({
           business_id: props === null || props === void 0 ? void 0 : props.businessId,
           coupon: null

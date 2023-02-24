@@ -11,7 +11,8 @@ import {
   PaymentOptions as PaymentOptionsController,
   useLanguage,
   useOrder,
-  useSession
+  useSession,
+  useConfig
 } from 'ordering-components'
 
 import { Modal } from '../Modal'
@@ -101,6 +102,7 @@ const PaymentOptionsUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState, { applyCoupon, removeOffer }] = useOrder()
+  const [{ configs }] = useConfig()
 
   const [{ token }] = useSession()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
