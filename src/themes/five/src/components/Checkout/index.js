@@ -167,7 +167,7 @@ const CheckoutUI = (props) => {
 
   const hideBusinessAddress = theme?.checkout?.components?.business?.components?.address?.hidden
   const hideBusinessDetails = theme?.checkout?.components?.business?.hidden
-  const hideBusinessMap = theme?.checkout?.components?.business?.components?.map?.hidden
+  const hideBusinessMap = theme?.checkout?.components?.map?.hidden
   const hideCustomerDetails = theme?.checkout?.components?.customer?.hidden
   const driverTipsField = !cartState.loading && cart && cart?.business_id && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.checkout?.driver_tip?.enabled && driverTipsOptions.length > 0 && !useKioskApp
 
