@@ -43,7 +43,7 @@ export const BannerContainer = styled.div`
 export const ImageWrapper = styled.div`
   cursor: pointer;
   width: 100%;
-  padding-top: 260px;
+  padding-top: 18%;
   position: relative;
   .banner-img {
     position: absolute;
@@ -52,8 +52,5 @@ export const ImageWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  @media (min-width: 768px) {
-    padding-top: 18%;
   }
 `
