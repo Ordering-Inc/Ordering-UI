@@ -3,10 +3,18 @@ import { QueryLoginSpoonity as QueryLoginSpoonityController, useLanguage } from 
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 
 const QueryLoginSpoonityUI = (props) => {
+  const {
+    userState
+  } = props
+
   const [, t] = useLanguage()
 
   return (
-    <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading Ordering Dashboard...')} />
+    <>
+      {userState?.loading ? (
+        <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading Ordering Dashboard...')} />
+      ) : null}
+    </>
   )
 }
 

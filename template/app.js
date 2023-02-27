@@ -607,19 +607,21 @@ export const App = () => {
                     {
                       isKioskApp
                         ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                        : (
-                          orderStatus.loading && !orderStatus.options?.address?.location ? (
-                            <SpinnerLoader />
-                          ) : (
-                            isUserVerifyRequired ? (
-                              <Redirect to='/verify' />
+                        : queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
+                          : (
+                            orderStatus.loading && !orderStatus.options?.address?.location ? (
+                              <SpinnerLoader />
                             ) : (
-                              (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
-                                ? <BusinessesList searchValueCustom={searchValue} />
-                                : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                              isUserVerifyRequired ? (
+                                <Redirect to='/verify' />
+                              ) : (
+                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
+                                  ? <BusinessesList searchValueCustom={searchValue} />
+                                  : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                              )
                             )
                           )
-                        )
                     }
                   </Route>
                   <Route exact path='/business_search'>
