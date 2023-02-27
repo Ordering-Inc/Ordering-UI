@@ -106,8 +106,21 @@ const MultiCheckoutUI = (props) => {
   const loyalBusinessIds = creditPointPlan?.businesses?.filter((b) => b.accumulates).map((item) => item.business_id) ?? []
   const creditPointPlanOnBusiness = businessIds.every((bid) => loyalBusinessIds.includes(bid)) && creditPointPlan
 
+  const getIncludedTaxes = (cart) => {
+    if (cart?.taxes === null || !cart?.taxes) {
+      return cart.business.tax_type === 1 ? cart?.tax : 0
+    } else {
+      return cart?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
   const loyaltyRewardValue = creditPointPlanOnBusiness?.accumulation_rate
-    ? Math.round(openCarts.reduce((sum, cart) => sum + cart?.subtotal, 0) / creditPointPlanOnBusiness?.accumulation_rate) : 0
+    ? Math.round(
+      openCarts.reduce((sum, cart) => sum + cart?.subtotal + getIncludedTaxes(cart), 0) /
+      creditPointPlanOnBusiness?.accumulation_rate
+    ) : 0
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {
