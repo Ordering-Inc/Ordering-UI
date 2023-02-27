@@ -160,7 +160,17 @@ var CartUI = function CartUI(props) {
       name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
     }
   };
-  var loyaltyRewardValue = Math.round((cart === null || cart === void 0 ? void 0 : cart.subtotal) / loyaltyRewardRate);
+  var getIncludedTaxes = function getIncludedTaxes() {
+    if ((cart === null || cart === void 0 ? void 0 : cart.taxes) === null) {
+      return (cart === null || cart === void 0 ? void 0 : cart.business.tax_type) === 1 ? cart === null || cart === void 0 ? void 0 : cart.tax : 0;
+    } else {
+      return cart === null || cart === void 0 ? void 0 : cart.taxes.reduce(function (taxIncluded, tax) {
+        var _tax$summary;
+        return taxIncluded + (tax.type === 1 ? (_tax$summary = tax.summary) === null || _tax$summary === void 0 ? void 0 : _tax$summary.tax : 0);
+      }, 0);
+    }
+  };
+  var loyaltyRewardValue = Math.round(((cart === null || cart === void 0 ? void 0 : cart.subtotal) + getIncludedTaxes()) / loyaltyRewardRate);
   var momentFormatted = !(orderState !== null && orderState !== void 0 && (_orderState$option = orderState.option) !== null && _orderState$option !== void 0 && _orderState$option.moment) ? t('RIGHT_NOW', 'Right Now') : parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$option2 = orderState.option) === null || _orderState$option2 === void 0 ? void 0 : _orderState$option2.moment, {
     outputFormat: 'YYYY-MM-DD HH:mm'
   });
@@ -265,16 +275,6 @@ var CartUI = function CartUI(props) {
   };
   var checkOutBtnClick = function checkOutBtnClick(uuid) {
     handleClickCheckout(uuid);
-  };
-  var getIncludedTaxes = function getIncludedTaxes() {
-    if ((cart === null || cart === void 0 ? void 0 : cart.taxes) === null) {
-      return (cart === null || cart === void 0 ? void 0 : cart.business.tax_type) === 1 ? cart === null || cart === void 0 ? void 0 : cart.tax : 0;
-    } else {
-      return cart === null || cart === void 0 ? void 0 : cart.taxes.reduce(function (taxIncluded, tax) {
-        var _tax$summary;
-        return taxIncluded + (tax.type === 1 ? (_tax$summary = tax.summary) === null || _tax$summary === void 0 ? void 0 : _tax$summary.tax : 0);
-      }, 0);
-    }
   };
   var getIncludedTaxesDiscounts = function getIncludedTaxesDiscounts() {
     var _cart$taxes, _cart$taxes$filter;

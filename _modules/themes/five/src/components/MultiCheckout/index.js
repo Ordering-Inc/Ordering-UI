@@ -125,8 +125,18 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
   var creditPointPlanOnBusiness = businessIds.every(function (bid) {
     return loyalBusinessIds.includes(bid);
   }) && creditPointPlan;
+  var getIncludedTaxes = function getIncludedTaxes(cart) {
+    if ((cart === null || cart === void 0 ? void 0 : cart.taxes) === null || !(cart !== null && cart !== void 0 && cart.taxes)) {
+      return cart.business.tax_type === 1 ? cart === null || cart === void 0 ? void 0 : cart.tax : 0;
+    } else {
+      return cart === null || cart === void 0 ? void 0 : cart.taxes.reduce(function (taxIncluded, tax) {
+        var _tax$summary;
+        return taxIncluded + (tax.type === 1 ? (_tax$summary = tax.summary) === null || _tax$summary === void 0 ? void 0 : _tax$summary.tax : 0);
+      }, 0);
+    }
+  };
   var loyaltyRewardValue = creditPointPlanOnBusiness !== null && creditPointPlanOnBusiness !== void 0 && creditPointPlanOnBusiness.accumulation_rate ? Math.round(openCarts.reduce(function (sum, cart) {
-    return sum + (cart === null || cart === void 0 ? void 0 : cart.subtotal);
+    return sum + (cart === null || cart === void 0 ? void 0 : cart.subtotal) + getIncludedTaxes(cart);
   }, 0) / (creditPointPlanOnBusiness === null || creditPointPlanOnBusiness === void 0 ? void 0 : creditPointPlanOnBusiness.accumulation_rate)) : 0;
   var handlePlaceOrder = function handlePlaceOrder() {
     if (!userErrors.length) {
