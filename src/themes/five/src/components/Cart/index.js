@@ -126,7 +126,17 @@ const CartUI = (props) => {
     }
   }
 
-  const loyaltyRewardValue = Math.round(cart?.subtotal / loyaltyRewardRate)
+  const getIncludedTaxes = () => {
+    if (cart?.taxes === null) {
+      return cart?.business.tax_type === 1 ? cart?.tax : 0
+    } else {
+      return cart?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
+  const loyaltyRewardValue = Math.round((cart?.subtotal + getIncludedTaxes()) / loyaltyRewardRate)
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -222,16 +232,6 @@ const CartUI = (props) => {
 
   const checkOutBtnClick = (uuid) => {
     handleClickCheckout(uuid)
-  }
-
-  const getIncludedTaxes = () => {
-    if (cart?.taxes === null) {
-      return cart?.business.tax_type === 1 ? cart?.tax : 0
-    } else {
-      return cart?.taxes.reduce((taxIncluded, tax) => {
-        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
-      }, 0)
-    }
   }
 
   const getIncludedTaxesDiscounts = () => {
