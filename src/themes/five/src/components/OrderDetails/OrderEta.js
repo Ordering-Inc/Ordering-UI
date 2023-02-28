@@ -8,7 +8,7 @@ export const OrderEta = (props) => {
     outputFormat
   } = props
 
-  const [{ parseTime }] = useUtils()
+  const [{ parseDate }] = useUtils()
   const [estimatedDeliveryTime, setEstimatedDeliveryTime] = useState(null)
 
   const getEstimatedDeliveryTime = () => {
@@ -36,10 +36,11 @@ export const OrderEta = (props) => {
       if (diffTimeAsMinutes <= 0) {
         totalEta += (Math.floor(Math.abs(diffTimeAsMinutes / order?.eta_current_status_time) + 1) * order?.eta_current_status_penalty_time)
       }
-      _estimatedTime = moment(_delivery).add(totalEta, 'minutes')
+      _estimatedTime = moment.utc(_delivery).add(totalEta, 'minutes')
     } else {
-      _estimatedTime = moment(_delivery).add(order?.eta_time, 'minutes')
+      _estimatedTime = moment.utc(_delivery).add(order?.eta_time, 'minutes')
     }
+    _estimatedTime = outputFormat ? moment(_estimatedTime).format(outputFormat) : parseDate(_estimatedTime, { utc: false })
     setEstimatedDeliveryTime(_estimatedTime)
   }
 
@@ -49,11 +50,11 @@ export const OrderEta = (props) => {
       getEstimatedDeliveryTime()
     }, 1000)
     return () => clearInterval(interval)
-  }, [order])
+  }, [order, outputFormat])
 
   return (
     <>
-      {!outputFormat ? parseTime(estimatedDeliveryTime) : parseTime(estimatedDeliveryTime, { outputFormat: 'hh:mm A' })}
+      {estimatedDeliveryTime}
     </>
   )
 }
