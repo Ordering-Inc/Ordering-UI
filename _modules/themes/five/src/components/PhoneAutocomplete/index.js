@@ -42,6 +42,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     customersPhones = props.customersPhones,
     setCustomersPhones = props.setCustomersPhones,
     openModal = props.openModal,
+    limitPhoneLength = props.limitPhoneLength,
     setOpenModal = props.setOpenModal,
     onChangeNumber = props.onChangeNumber,
     setCustomerState = props.setCustomerState,
@@ -131,7 +132,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       setInputValue(inputValue);
       onChangeNumber(inputValue);
     }
-    if (inputValue && inputValue.length > 10 || !/^[0-9]+$/.test(inputValue)) {
+    if (inputValue && inputValue.length > limitPhoneLength || !/^[0-9]+$/.test(inputValue)) {
       return;
     }
     setInputValue(inputValue);
@@ -158,14 +159,14 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   };
   var createNewUser = function createNewUser() {
     var _optSelected$value;
-    if (optSelected && (optSelected === null || optSelected === void 0 ? void 0 : (_optSelected$value = optSelected.value) === null || _optSelected$value === void 0 ? void 0 : _optSelected$value.length) === 10 || !optSelected && phone.length === 10) {
+    if (optSelected && (optSelected === null || optSelected === void 0 ? void 0 : (_optSelected$value = optSelected.value) === null || _optSelected$value === void 0 ? void 0 : _optSelected$value.length) === limitPhoneLength || !optSelected && phone.length === limitPhoneLength) {
       setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         signup: true
       }));
     } else {
       setAlertState({
         open: true,
-        content: t('ERROR_MIN_CHARACTERS_PHONE', 'The Phone / Mobile must be 10 characters')
+        content: t('ERROR_MIN_CHARACTERS_PHONE', 'The Phone / Mobile must be :length: characters').replace(':length:', limitPhoneLength)
       });
     }
   };
@@ -273,3 +274,6 @@ var PhoneAutocomplete = function PhoneAutocomplete(props) {
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PhoneAutocomplete, phoneProps);
 };
 exports.PhoneAutocomplete = PhoneAutocomplete;
+PhoneAutocompleteUI.defaultProps = {
+  limitPhoneLength: 10
+};
