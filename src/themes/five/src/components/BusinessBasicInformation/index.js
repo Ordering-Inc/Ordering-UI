@@ -36,7 +36,6 @@ import {
   IconWrapper,
   BusinessInfoWrapper,
   WrapperFloatingSearch,
-  CategorySelectedContainer,
   SearchWrapper
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
@@ -45,7 +44,6 @@ import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import isBetween from 'dayjs/plugin/isBetween'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 
 dayjs.extend(timezone)
 dayjs.extend(isBetween)
@@ -65,10 +63,7 @@ export const BusinessBasicInformation = (props) => {
     handleChangeSortBy,
     categoryState,
     errorQuantityProducts,
-    isCustomerMode,
-    categoryClicked,
-    categorySelected,
-    setCategoryClicked
+    isCustomerMode
   } = props
   const { business, loading } = businessState
 
@@ -161,12 +156,7 @@ export const BusinessBasicInformation = (props) => {
 
   const SearchComponent = () => {
     return (
-      <WrapperSearch id='search-component' isFlexEnd={windowSize.width >= 768}>
-        {categorySelected?.name && windowSize.width < 768 && (
-          <CategorySelectedContainer onClick={() => setCategoryClicked(false)}>
-            <BsCaretLeftFill /> {categorySelected?.name}
-          </CategorySelectedContainer>
-        )}
+      <WrapperSearch id='search-component'>
         <SearchWrapper>
           <SearchIconWrapper
             onClick={() => setOpenSearchProducts(true)}
@@ -367,7 +357,7 @@ export const BusinessBasicInformation = (props) => {
           !errorQuantityProducts &&
           !isInfoShrunken &&
           !business?.professionals?.length &&
-          (categoryClicked || windowSize.width >= 993) &&
+          // (categoryClicked || windowSize.width >= 993) &&
           (
             <SearchComponent />
           )}

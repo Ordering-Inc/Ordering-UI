@@ -189,12 +189,23 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleScroll = useCallback(() => {
+    const backArrowElement = document.getElementById('back-arrow')
+    if (backArrowElement) {
+      const limit = window.pageYOffset >= backArrowElement?.offsetTop && window.pageYOffset > 0
+      if (limit && windowSize.width < 993) {
+        const classAdded = backArrowElement.classList.contains('fixed-arrow')
+        !classAdded && backArrowElement.classList.add('fixed-arrow')
+      } else {
+        backArrowElement && backArrowElement.classList.remove('fixed-arrow')
+      }
+    }
+
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
     if (badScrollPosition || categoryState.loading || !hasMore) return
     getNextProducts({ isNextPage: true })
-  }, [categoryState])
+  }, [categoryState, windowSize.width])
 
   const handleChangePage = (data) => {
     if (Object.entries(data.query).length === 0 && openProduct) {
@@ -316,9 +327,11 @@ const BusinessProductsListingUI = (props) => {
       <ProductsContainer>
         {!props.useKioskApp && (
           <HeaderContent>
-            {!location.pathname.includes('/marketplace') &&
-              <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
-            }
+            {!location.pathname.includes('/marketplace') && (
+              <div id='back-arrow'>
+                <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
+              </div>
+            )}
             {windowSize?.width < 576 && (
               <OrderContextUIWrapper>
                 <OrderContextUI isCheckOut />
