@@ -155,7 +155,14 @@ export const HeaderContent = styled.div`
     z-index: 1001;
     width: 100vw;
     background-color: ${props => props.theme.colors.backgroundPage};
-    padding: 13px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    ${props => props.theme?.rtl ? css`
+      padding-right: 10px;
+    ` : css`
+      padding-left: 10px;
+    `}
   }
 `
 export const OrderContextUIWrapper = styled.div`

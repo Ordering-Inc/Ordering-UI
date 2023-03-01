@@ -132,20 +132,32 @@ export const BusinessBasicInformation = (props) => {
 
   const handleScroll = () => {
     const searchElement = document.getElementById('search-component')
-    if (!searchElement) return
-    const limit = window.pageYOffset >= searchElement?.offsetTop && window.pageYOffset > 0
-    if (limit) {
-      const classAdded = searchElement.classList.contains('fixed-search')
-      !classAdded && searchElement.classList.add('fixed-search')
-    } else {
-      searchElement && searchElement.classList.remove('fixed-search')
+    if (searchElement) {
+      const limit = window.pageYOffset >= searchElement?.offsetTop && window.pageYOffset > 0
+      if (limit) {
+        const classAdded = searchElement.classList.contains('fixed-search')
+        !classAdded && searchElement.classList.add('fixed-search')
+      } else {
+        searchElement && searchElement.classList.remove('fixed-search')
+      }
+    }
+
+    const businessNameElement = document.getElementById('business_name')
+    if (businessNameElement) {
+      const limit = window.pageYOffset >= (businessNameElement?.offsetTop - 55) && window.pageYOffset > 0
+      if (limit && windowSize.width < 993) {
+        const classAdded = businessNameElement.classList.contains('fixed-name')
+        !classAdded && businessNameElement.classList.add('fixed-name')
+      } else {
+        businessNameElement && businessNameElement.classList.remove('fixed-name')
+      }
     }
   }
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [windowSize?.width])
 
   useEffect(() => {
     window.scroll({
@@ -193,7 +205,7 @@ export const BusinessBasicInformation = (props) => {
             <BusinessInfoItem isInfoShrunken={isInfoShrunken}>
               {!loading ? (
                 <TitleWrapper>
-                  <h2 className='bold'>{business?.name}</h2>
+                  <h2 className='bold' id='business_name'>{business?.name}</h2>
                   {business?.ribbon?.enabled && (
                     <RibbonBox
                       bgColor={business?.ribbon?.color}
