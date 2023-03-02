@@ -18,6 +18,7 @@ import { useTheme } from 'styled-components'
 export const MyOrders = (props) => {
   const {
     hideOrders,
+    isFromBusinessListingSearch,
     businessesSearchList,
     onProductRedirect
   } = props
@@ -57,7 +58,7 @@ export const MyOrders = (props) => {
       {hideOrders && !allEmpty && (
         <h2>{t('PREVIOUSLY_ORDERED', 'Previously ordered')}</h2>
       )}
-      <Container hideOrders={hideOrders}>
+      <Container hideOrders={hideOrders} initialHeight={isFromBusinessListingSearch}>
         {!hideOrders && (
           <h1>{layout === 'appointments' ? t('MY_APPOINTMENTS', 'My appointments') : t('MY_ORDERS', 'My orders')}</h1>
         )}

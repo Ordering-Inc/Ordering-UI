@@ -7,7 +7,9 @@ export const Container = styled.div`
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  min-height: calc(100vh - 320px);
+  ${({ initialHeight }) => !initialHeight && css`
+    min-height: calc(100vh - 320px);
+  `}
 
   > h1 {
     font-weight: 600;
