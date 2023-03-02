@@ -107,7 +107,7 @@ const CartUI = (props) => {
   const isMultiCheckout = configs?.checkout_multi_business_enabled?.value === '1'
   const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
-  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden || !validationFields?.fields?.checkout?.comments?.enabled
   const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount_coupon?.hidden
   const cateringTypeString = orderState?.options?.type === 7
     ? 'catering_delivery'
