@@ -268,6 +268,16 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle, _document$documentEle2;
+    var backArrowElement = document.getElementById('back-arrow');
+    if (backArrowElement) {
+      var limit = window.pageYOffset >= (backArrowElement === null || backArrowElement === void 0 ? void 0 : backArrowElement.offsetTop) && window.pageYOffset > 0;
+      if (limit && windowSize.width < 993) {
+        var classAdded = backArrowElement.classList.contains('fixed-arrow');
+        !classAdded && backArrowElement.classList.add('fixed-arrow');
+      } else {
+        backArrowElement && backArrowElement.classList.remove('fixed-arrow');
+      }
+    }
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;
     var badScrollPosition = innerHeightScrolltop < ((_document$documentEle2 = document.documentElement) === null || _document$documentEle2 === void 0 ? void 0 : _document$documentEle2.offsetHeight);
     var hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage);
@@ -275,7 +285,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     getNextProducts({
       isNextPage: true
     });
-  }, [categoryState]);
+  }, [categoryState, windowSize.width]);
   var handleChangePage = function handleChangePage(data) {
     if (Object.entries(data.query).length === 0 && openProduct) {
       setModalIsOpen(false);
@@ -412,12 +422,14 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       setBusiness({});
     };
   }, [cateringPreorder, business]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !props.useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.HeaderContent, null, !location.pathname.includes('/marketplace') && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !props.useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.HeaderContent, null, !location.pathname.includes('/marketplace') && /*#__PURE__*/_react.default.createElement("div", {
+    id: "back-arrow"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
     className: "back-arrow",
     onClick: function onClick() {
       return handleGoToBusinessList();
     }
-  }), (windowSize === null || windowSize === void 0 ? void 0 : windowSize.width) < 576 && /*#__PURE__*/_react.default.createElement(_styles.OrderContextUIWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
+  })), (windowSize === null || windowSize === void 0 ? void 0 : windowSize.width) < 576 && /*#__PURE__*/_react.default.createElement(_styles.OrderContextUIWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
     isCheckOut: true
   }))), /*#__PURE__*/_react.default.createElement(_RenderProductsLayout.RenderProductsLayout, {
     errors: errors,

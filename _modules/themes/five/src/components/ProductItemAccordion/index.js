@@ -185,7 +185,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, {
     color: "#B1BCCC"
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+  })), onDeleteProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);
@@ -193,7 +193,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
     color: "#B1BCCC"
-  }))))) : /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+  }))))) : /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, onDeleteProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);
@@ -209,7 +209,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, {
     color: "#B1BCCC"
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+  })), onDeleteProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);
@@ -217,7 +217,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
     color: "#B1BCCC"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))), !(product !== null && product !== void 0 && product.valid_menu) && isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))), !(product !== null && product !== void 0 && product.valid_menu) && isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, onDeleteProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);

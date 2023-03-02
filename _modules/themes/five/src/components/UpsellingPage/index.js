@@ -131,7 +131,8 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       return setShowUpSelling(false);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapAutoScroll, null, /*#__PURE__*/_react.default.createElement(_styles.HorizontalUpsellingContainer, null, !upsellingProducts.loading ? /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    scrollId: "upSelling"
+    scrollId: "upSelling",
+    isColumnMode: upsellingProducts.products.length === 1
   }, !upsellingProducts.error && upsellingProducts.products.length > 0 ? upsellingProducts.products.map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.HorizontalItem, {
       key: product.id,

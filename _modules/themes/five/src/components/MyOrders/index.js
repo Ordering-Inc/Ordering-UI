@@ -28,6 +28,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MyOrders = function MyOrders(props) {
   var _theme$orders, _theme$orders$compone, _theme$orders$compone2, _theme$orders2, _theme$orders2$compon, _theme$orders2$compon2, _theme$orders3, _theme$orders3$compon, _theme$orders3$compon2, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var hideOrders = props.hideOrders,
+    isFromBusinessListingSearch = props.isFromBusinessListingSearch,
     businessesSearchList = props.businessesSearchList,
     onProductRedirect = props.onProductRedirect;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -86,7 +87,8 @@ var MyOrders = function MyOrders(props) {
       key: i
     }, props));
   }), hideOrders && !allEmpty && /*#__PURE__*/_react.default.createElement("h2", null, t('PREVIOUSLY_ORDERED', 'Previously ordered')), /*#__PURE__*/_react.default.createElement(_styles.Container, {
-    hideOrders: hideOrders
+    hideOrders: hideOrders,
+    initialHeight: isFromBusinessListingSearch
   }, !hideOrders && /*#__PURE__*/_react.default.createElement("h1", null, layout === 'appointments' ? t('MY_APPOINTMENTS', 'My appointments') : t('MY_ORDERS', 'My orders')), !allEmpty && /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
     className: "category-lists"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {

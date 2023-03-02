@@ -182,7 +182,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       return handleChangeSortBy && handleChangeSortBy(val);
     },
     businessState: businessState
-  }))), !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_ = business.previously_products) === null || _business$previously_ === void 0 ? void 0 : _business$previously_.length) > 0 && !hidePreviousOrdered && windowSize.width < 993 && !categoryClicked && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
+  }))), !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_ = business.previously_products) === null || _business$previously_ === void 0 ? void 0 : _business$previously_.length) > 0 && !hidePreviousOrdered && !categoryClicked && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
     onProductClick: onProductClick,
     productList: business === null || business === void 0 ? void 0 : business.previously_products,
     businessId: business === null || business === void 0 ? void 0 : business.id

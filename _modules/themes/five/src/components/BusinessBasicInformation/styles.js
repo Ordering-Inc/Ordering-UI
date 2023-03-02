@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.WrapperSearch = exports.WrapperFloatingSearch = exports.WrapperBusinessLogo = exports.TitleWrapper = exports.SocialList = exports.SearchWrapper = exports.SearchIconWrapper = exports.SearchComponentContainer = exports.RibbonBox = exports.IconWrapper = exports.CategorySelectedContainer = exports.BusinessMoreDetail = exports.BusinessLogo = exports.BusinessInfoWrapper = exports.BusinessInfoItem = exports.BusinessInfoContent = exports.BusinessInfoContainer = exports.BusinessInfo = exports.BusinessDetail = exports.BusinessContent = exports.BusinessContainer = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -70,9 +70,7 @@ var BusinessInfoContent = _styledComponents.default.div(_templateObject15 || (_t
 exports.BusinessInfoContent = BusinessInfoContent;
 var SearchWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 exports.SearchWrapper = SearchWrapper;
-var WrapperSearch = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: center;\n  justify-content: ", ";\n  box-sizing: border-box;\n\n  .search-bar {\n    margin-right: 10px;\n    ", "\n    input {\n      width: 100%;\n\n      @media (min-width: 500px) {\n        width: 250px;\n      }\n    }\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n\n  #select-input {\n    background-color: transparent !important;\n    border: none;\n    color: #748194 !important;\n\n    #list {\n      border-radius: 8px;\n    }\n  }\n  &.fixed-search {\n    position: fixed;\n    top: 0;\n    left: 0;\n    z-index: 1002;\n    width: 100vw;\n    margin-top: 0px;\n    background-color: ", ";\n    padding: 10px;\n  }\n"])), function (props) {
-  return props.isFlexEnd ? 'flex-end' : 'space-between';
-}, function (props) {
+var WrapperSearch = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 15px 0px 0px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  box-sizing: border-box;\n  z-index: 1002;\n\n  .search-bar {\n    margin-right: 10px;\n    ", "\n    input {\n      width: 100%;\n\n      @media (min-width: 500px) {\n        width: 250px;\n      }\n    }\n  }\n\n  div:last-child {\n    text-align: right;\n\n    ", "\n  }\n\n  #select-input {\n    background-color: transparent !important;\n    border: none;\n    color: #748194 !important;\n\n    #list {\n      border-radius: 8px;\n    }\n  }\n  &.fixed-search {\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 1002;\n    width: fit-content;\n    margin-top: 0px;\n    background-color: ", ";\n    padding: 10px;\n  }\n\n  @media (min-width: 993px) {\n    &.fixed-search {\n      left: 0;\n      width: 100vw;\n    }\n  }\n"])), function (props) {
   var _props$theme4;
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "])));
 }, function (props) {
@@ -112,64 +110,67 @@ var BusinessMoreDetail = _styledComponents.default.div(_templateObject27 || (_te
   return props.position ? 'black' : 'white';
 });
 exports.BusinessMoreDetail = BusinessMoreDetail;
-var TitleWrapper = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n\n  h2 {\n    font-size: 24px;\n    line-height: 36px;\n    margin: 0 0 10px 0;\n    font-weight: 600;\n    width: 100%;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    @media (min-width: 768px) {\n      font-size: 32px;\n    }\n  }\n"])));
+var TitleWrapper = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n\n  h2 {\n    font-size: 24px;\n    line-height: 36px;\n    margin: 0 0 10px 0;\n    font-weight: 600;\n    width: 100%;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    &.fixed-name {\n      z-index: 1002;\n      position: fixed;\n      top: 0;\n      width: calc(100vw - 190px);\n      padding: 10px 0;\n      font-size: 18px;\n      ", "\n    }\n    @media (min-width: 768px) {\n      font-size: 32px;\n    }\n  }\n"])), function (props) {
+  var _props$theme11;
+  return (_props$theme11 = props.theme) !== null && _props$theme11 !== void 0 && _props$theme11.rtl ? (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n        right: 50px;\n      "]))) : (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n        left: 50px;\n      "])));
+});
 exports.TitleWrapper = TitleWrapper;
-var RibbonBox = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  background-color: ", ";\n  max-width: 200px;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  overflow: hidden;\n  margin-left: 5px;\n  margin-bottom: 10px;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
+var RibbonBox = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  background-color: ", ";\n  max-width: 200px;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  overflow: hidden;\n  margin-left: 5px;\n  margin-bottom: 10px;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.colorTextSignForm;
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 5px;\n  "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 5px;\n  "])));
 }, function (_ref4) {
   var bgColor = _ref4.bgColor;
-  return bgColor && (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
+  return bgColor && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
 }, function (_ref5) {
   var isRoundRect = _ref5.isRoundRect;
-  return isRoundRect && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+  return isRoundRect && (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
 }, function (_ref6) {
   var isCapsule = _ref6.isCapsule;
-  return isCapsule && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
+  return isCapsule && (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
 }, function (_ref7) {
   var colorText = _ref7.colorText;
-  return colorText && (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), colorText ? 'black' : 'white');
+  return colorText && (0, _styledComponents.css)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), colorText ? 'black' : 'white');
 }, function (_ref8) {
   var borderRibbon = _ref8.borderRibbon;
-  return borderRibbon && (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), borderRibbon ? 'black' : 'white');
+  return borderRibbon && (0, _styledComponents.css)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), borderRibbon ? 'black' : 'white');
 });
 exports.RibbonBox = RibbonBox;
-var SearchIconWrapper = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  background-color: ", ";\n  width: 36px;\n  height: 36px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  svg {\n    font-size: 18px;\n  }\n"])), function (props) {
+var SearchIconWrapper = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  background-color: ", ";\n  width: 36px;\n  height: 36px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  svg {\n    font-size: 18px;\n  }\n"])), function (props) {
   return props.theme.colors.gray200;
 });
 exports.SearchIconWrapper = SearchIconWrapper;
-var SearchComponentContainer = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10px;\n  right: 60px;\n  color: ", ";\n  #select-input {\n    color: #FFFFFF !important;\n  }\n  svg {\n    color: #FFFFFF;\n  }\n"])), function (_ref9) {
+var SearchComponentContainer = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10px;\n  right: 60px;\n  color: ", ";\n  #select-input {\n    color: #FFFFFF !important;\n  }\n  svg {\n    color: #FFFFFF;\n  }\n"])), function (_ref9) {
   var theme = _ref9.theme;
   return theme.colors.white;
 });
 exports.SearchComponentContainer = SearchComponentContainer;
-var SocialList = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-left: -3px;\n  ", "\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n    margin-right: -3px;\n    margin-left: 0px;\n  "])));
+var SocialList = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-left: -3px;\n  ", "\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    margin-right: -3px;\n    margin-left: 0px;\n  "])));
 });
 exports.SocialList = SocialList;
-var CategorySelectedContainer = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: inline;\n  margin-left: 10px;\n  color: ", ";\n  padding-right: 5px;\n  cursor: pointer;\n  p{\n    margin: 0;\n  }\n  svg {\n    position: relative;\n    top: 2px;\n    margin-right: 3px;\n    width: 14px;\n    height: 14px;\n  }\n"])), function (_ref10) {
+var CategorySelectedContainer = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  display: inline;\n  margin-left: 10px;\n  color: ", ";\n  padding-right: 5px;\n  cursor: pointer;\n  p{\n    margin: 0;\n  }\n  svg {\n    position: relative;\n    top: 2px;\n    margin-right: 3px;\n    width: 14px;\n    height: 14px;\n  }\n"])), function (_ref10) {
   var _theme$colors;
   var theme = _ref10.theme;
   return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
 });
 exports.CategorySelectedContainer = CategorySelectedContainer;
-var IconWrapper = _styledComponents.default.a(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  margin: 0px 3px 10px 3px;\n  border-radius: 3px;\n  border: 0.5px solid ", ";\n  width: 27px;\n  height: 27px;\n  min-width: 27px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  transition: all 0.2s linear;\n\n  ", "\n\n  svg {\n    height: 18px;\n    font-size: 18px;\n    transition: all 0.2s ease-in;\n    color: ", ";\n  }\n  &:hover {\n    background-color: ", ";\n    svg {\n      transform: scale(1.07);\n    }\n  }\n"])), function (props) {
+var IconWrapper = _styledComponents.default.a(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  margin: 0px 3px 10px 3px;\n  border-radius: 3px;\n  border: 0.5px solid ", ";\n  width: 27px;\n  height: 27px;\n  min-width: 27px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  transition: all 0.2s linear;\n\n  ", "\n\n  svg {\n    height: 18px;\n    font-size: 18px;\n    transition: all 0.2s ease-in;\n    color: ", ";\n  }\n  &:hover {\n    background-color: ", ";\n    svg {\n      transform: scale(1.07);\n    }\n  }\n"])), function (props) {
   return props.theme.colors.gray200;
 }, function (_ref11) {
   var isSkeleton = _ref11.isSkeleton;
-  return isSkeleton && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n    border: none;\n  "])));
+  return isSkeleton && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n    border: none;\n  "])));
 }, function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.gray200;
 });
 exports.IconWrapper = IconWrapper;
-var BusinessInfoWrapper = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  @media (min-width: 768px) {\n    flex-direction: column;\n  }\n"])));
+var BusinessInfoWrapper = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  @media (min-width: 768px) {\n    flex-direction: column;\n  }\n"])));
 exports.BusinessInfoWrapper = BusinessInfoWrapper;
-var WrapperFloatingSearch = _styledComponents.default.div(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  position: absolute;\n  color: ", ";\n  display: flex;\n  background: rgba(0,0,0,0.2);\n  top: 80px;\n  right: 10px;\n  width: 80%;\n  border-bottom: 1px solid #FFFFFF;\n  #select-input {\n    color: #FFFFFF !important;\n    background: transparent;\n  }\n  svg, span {\n    color: #FFFFFF !important;\n  }\n  @media (min-width: 681px){\n    top: 23px;\n    right: 60px;\n    width: 300px;\n    input {\n      width: 80%;\n    }\n  }\n"])), function (_ref12) {
+var WrapperFloatingSearch = _styledComponents.default.div(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  position: absolute;\n  color: ", ";\n  display: flex;\n  background: rgba(0,0,0,0.2);\n  top: 80px;\n  right: 10px;\n  width: 80%;\n  border-bottom: 1px solid #FFFFFF;\n  #select-input {\n    color: #FFFFFF !important;\n    background: transparent;\n  }\n  svg, span {\n    color: #FFFFFF !important;\n  }\n  @media (min-width: 681px){\n    top: 23px;\n    right: 60px;\n    width: 300px;\n    input {\n      width: 80%;\n    }\n  }\n"])), function (_ref12) {
   var theme = _ref12.theme;
   return theme.colors.white;
 });
