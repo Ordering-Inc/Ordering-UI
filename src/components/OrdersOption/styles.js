@@ -243,6 +243,7 @@ export const ImageNotFound = styled.div`
 `
 
 export const BusinessInformation = styled.div`
+  width: 80%;
   display: inline-flex;
   flex-direction: column;
   flex: 1;
