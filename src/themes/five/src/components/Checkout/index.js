@@ -346,7 +346,7 @@ const CheckoutUI = (props) => {
                     </div>
                   ) : (
                     <AddressDetails
-                      location={businessDetails?.business?.location}
+                      location={options?.address?.location}
                       businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
                       isCartPending={cart?.status === 2}
                       businessId={cart?.business_id}
