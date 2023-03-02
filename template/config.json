@@ -1,5 +1,6 @@
 {
   "app_id": "ordering-react",
+	"notification_app": "orderingapp",
   "app_name": "Ordering",
   "project": "luisv4",
   "api": {
