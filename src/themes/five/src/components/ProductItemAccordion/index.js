@@ -224,13 +224,15 @@ export const ProductItemAccordion = (props) => {
                           <Pencil color='#B1BCCC' />
                         </ProductActionsEdit>
                       )}
-                      <ProductActionsDelete
-                        ref={productActionsDelete}
-                        onClick={() => onDeleteProduct(product)}
-                        disabled={orderState.loading}
-                      >
-                        <Trash color='#B1BCCC' />
-                      </ProductActionsDelete>
+                      {onDeleteProduct && (
+                        <ProductActionsDelete
+                          ref={productActionsDelete}
+                          onClick={() => onDeleteProduct(product)}
+                          disabled={orderState.loading}
+                        >
+                          <Trash color='#B1BCCC' />
+                        </ProductActionsDelete>
+                      )}
                     </ProductActions>
                   )}
                 </ProductPriceSection>
@@ -238,13 +240,15 @@ export const ProductItemAccordion = (props) => {
             </>
           ) : (
             <ProductActions>
-              <ProductActionsDelete
-                ref={productActionsDelete}
-                onClick={() => onDeleteProduct(product)}
-                disabled={orderState.loading}
-              >
-                <Trash color='#B1BCCC' />
-              </ProductActionsDelete>
+              {onDeleteProduct && (
+                <ProductActionsDelete
+                  ref={productActionsDelete}
+                  onClick={() => onDeleteProduct(product)}
+                  disabled={orderState.loading}
+                >
+                  <Trash color='#B1BCCC' />
+                </ProductActionsDelete>
+              )}
             </ProductActions>
           )}
 
@@ -260,13 +264,15 @@ export const ProductItemAccordion = (props) => {
                     <Pencil color='#B1BCCC' />
                   </ProductActionsEdit>
                 )}
-                <ProductActionsDelete
-                  ref={productActionsDelete}
-                  onClick={() => onDeleteProduct(product)}
-                  disabled={orderState.loading}
-                >
-                  <Trash color='#B1BCCC' />
-                </ProductActionsDelete>
+                {onDeleteProduct && (
+                  <ProductActionsDelete
+                    ref={productActionsDelete}
+                    onClick={() => onDeleteProduct(product)}
+                    disabled={orderState.loading}
+                  >
+                    <Trash color='#B1BCCC' />
+                  </ProductActionsDelete>
+                )}
               </ProductActions>
               <ProductNotAvailable>
                 {t('NOT_AVAILABLE', 'Not available')}
@@ -277,13 +283,15 @@ export const ProductItemAccordion = (props) => {
           {!product?.valid_menu && isCartProduct && !isCartPending && (
             <ProductError>
               <ProductActions>
-                <ProductActionsDelete
-                  ref={productActionsDelete}
-                  onClick={() => onDeleteProduct(product)}
-                  disabled={orderState.loading}
-                >
-                  <Trash color='#D81212' />
-                </ProductActionsDelete>
+                {onDeleteProduct && (
+                  <ProductActionsDelete
+                    ref={productActionsDelete}
+                    onClick={() => onDeleteProduct(product)}
+                    disabled={orderState.loading}
+                  >
+                    <Trash color='#D81212' />
+                  </ProductActionsDelete>
+                )}
               </ProductActions>
               <ProductNotAvailable>
                 {t('NOT_AVAILABLE', 'Not available')}
