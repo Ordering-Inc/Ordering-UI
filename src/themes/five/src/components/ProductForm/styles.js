@@ -358,8 +358,13 @@ export const ProductActions = styled.div`
 
   #address_control {
     button.add {
-      width: 100%;
+      width: calc(100% - 20px) !important;
+      margin: 10px 10px 0 10px;
     }
+  }
+  
+  div#address_list {
+    padding: 0;
   }
 
   @media (min-width: 577px) {

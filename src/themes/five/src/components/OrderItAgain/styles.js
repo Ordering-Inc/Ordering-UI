@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  padding-top: 5px;
+  padding-top: 25px;
   margin: 0px;
   ${props => props.theme.rtl && css`
     margin-left: 30px;

@@ -5,7 +5,7 @@ export const CategoriesContainer = styled.div`
   overflow-x: auto;
   padding: 5px 0px 0px 0px;
   background: ${props => props.theme.colors.backgroundPage};
-  z-index: 1002;
+  z-index: 1000;
   position: absolute;
   top: 0;
   border-bottom: 1px solid #D9D9D9;

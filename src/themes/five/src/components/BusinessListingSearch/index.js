@@ -32,10 +32,11 @@ import {
   NoResult,
   PriceFilterWrapper,
   PriceFilterListWrapper,
-  PreviouslyOrderedContainer
+  PreviouslyOrderedContainer,
+  SearchBarContainer
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
-import { Check2, XLg as Close } from 'react-bootstrap-icons'
+import { Check2, XLg as Close, Funnel } from 'react-bootstrap-icons'
 import { SearchBar } from '../SearchBar'
 import { useLanguage, useOrder, useUtils, useSession, BusinessSearchList, useConfig } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
@@ -79,6 +80,7 @@ export const BusinessListingSearchUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [curProduct, setCurProduct] = useState({ business: null, product: null })
+  const [openFilter, setOpenFilter] = useState(false)
   const [{ parsePrice, optimizeImage, parseDistance }] = useUtils()
   const [{ auth }] = useSession()
   const { width } = useWindowSize()
@@ -104,7 +106,6 @@ export const BusinessListingSearchUI = (props) => {
 
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
   const currentCart = Object.values(orderState?.carts).find(cart => cart?.business?.slug === curProduct?.business?.slug) ?? {}
-
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -144,110 +145,125 @@ export const BusinessListingSearchUI = (props) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 
+  const filtersComponent = () => {
+    return (
+      <Filters>
+        <SortContainer>
+          <FilterAccordion title={t('SORT', 'Sort')}>
+            {sortItems?.filter(item => !(orderState?.options?.type === 1 && item?.value === 'pickup_time') && !(orderState?.options?.type === 2 && item?.value === 'delivery_time'))?.map(item => (
+              <SortItem
+                key={item?.value}
+                onClick={() => handleChangeFilters('orderBy', item?.value)}
+                active={filters?.orderBy?.includes(item?.value)}
+              >
+                {item?.text}  {(filters?.orderBy?.includes(item?.value)) && <>{filters?.orderBy?.includes('-') ? <BisUpArrow /> : <BisDownArrow />}</>}
+              </SortItem>
+            ))}
+          </FilterAccordion>
+        </SortContainer>
+        <BrandContainer>
+          <FilterAccordion title={t('BRANDS', 'Brands')}>
+            <BrandListWrapper>
+              {brandList?.loading && (
+                <>
+                  {[...Array(5).keys()].map(index => (
+                    <BrandItem key={index}>
+                      <Skeleton width={120} height={15} />
+                      <Skeleton width={16} height={16} />
+                    </BrandItem>
+                  ))}
+                </>
+              )}
+              {!brandList?.loading && brandList?.brands.map((brand, i) => brand?.enabled && (
+                <BrandItem key={i} onClick={() => handleChangeBrandFilter(brand?.id)}>
+                  <span>{brand?.name}</span>
+                  {filters?.franchise_ids?.includes(brand?.id) && <Check2 />}
+                </BrandItem>
+              ))}
+              {!brandList?.loading && ((brandList?.brands?.filter(brand => brand?.enabled))?.length === 0) && (
+                <NoResult>{t('NO_RESULTS_FOUND', 'Sorry, no results found')}</NoResult>
+              )}
+            </BrandListWrapper>
+          </FilterAccordion>
+        </BrandContainer>
+        <PriceFilterWrapper>
+          <FilterAccordion title={t('PRICE_RANGE', 'Price range')}>
+            <PriceFilterListWrapper>
+              {priceList.map((price, i) => (
+                <Button
+                  key={i}
+                  color={(filters?.price_level === price?.level) ? 'primary' : 'lightGray'}
+                  onClick={() => handleChangePriceRange(price?.level)}
+                >
+                  {price.content}
+                  {(filters?.price_level === price?.level) && <Close />}
+                </Button>
+              ))}
+            </PriceFilterListWrapper>
+          </FilterAccordion>
+        </PriceFilterWrapper>
+        {orderState?.options?.type === 1 && (
+          <MaxSectionItem
+            title={t('MAX_DELIVERY_FEE', 'Max delivery fee')}
+            options={maxDeliveryFeeOptions}
+            filter='max_delivery_price'
+            filters={filters}
+            handleChangeFilters={handleChangeFilters}
+          />
+        )}
+        {[1, 2].includes(orderState?.options?.type) && (
+          <MaxSectionItem
+            title={orderState?.options?.type === 1 ? t('MAX_DELIVERY_TIME', 'Max delivery time') : t('MAX_PICKUP_TIME', 'Max pickup time')}
+            options={maxTimeOptions}
+            filter='max_eta'
+            filters={filters}
+            handleChangeFilters={handleChangeFilters}
+          />
+        )}
+        <MaxSectionItem
+          title={t('MAX_DISTANCE', 'Max distance')}
+          options={maxDistanceOptions}
+          filter='max_distance'
+          filters={filters}
+          handleChangeFilters={handleChangeFilters}
+        />
+        <TagsContainer>
+          <FilterAccordion title={t('BUSINESS_CATEGORIES', 'Business categories')}>
+            <BusinessTypeFilter
+              isSearchMode
+              filters={filters}
+              handleChangeFilters={handleChangeFilters}
+            />
+          </FilterAccordion>
+        </TagsContainer>
+      </Filters>
+    )
+  }
+
   return (
     <BusinessListingSearchContainer>
       <BusinessesTitle>
         {t('SEARCH', 'Search')}
       </BusinessesTitle>
-      <SearchBar
-        lazyLoad
-        isCustomLayout
-        forceFocus
-        placeholder={`${t('SEARCH_BUSINESSES', 'Search Businesses')} / ${t('PLEASE_TYPE_AT_LEAST_3_CHARACTERS', 'Please type at least 3 characters')}`}
-        onSearch={(val) => handleChangeTermValue(val)}
-        search={termValue}
-      />
+      <SearchBarContainer>
+        <SearchBar
+          lazyLoad
+          isCustomLayout
+          forceFocus
+          placeholder={`${t('SEARCH_BUSINESSES', 'Search Businesses')} / ${t('PLEASE_TYPE_AT_LEAST_3_CHARACTERS', 'Please type at least 3 characters')}`}
+          onSearch={(val) => handleChangeTermValue(val)}
+          search={termValue}
+        />
+        {width <= 768 && (
+          <Funnel onClick={() => setOpenFilter(true)} />
+        )}
+      </SearchBarContainer>
       <FiltersContainer>
-        <Filters>
-          <SortContainer>
-            <FilterAccordion title={t('SORT', 'Sort')}>
-              {sortItems?.filter(item => !(orderState?.options?.type === 1 && item?.value === 'pickup_time') && !(orderState?.options?.type === 2 && item?.value === 'delivery_time'))?.map(item => (
-                <SortItem
-                  key={item?.value}
-                  onClick={() => handleChangeFilters('orderBy', item?.value)}
-                  active={filters?.orderBy?.includes(item?.value)}
-                >
-                  {item?.text}  {(filters?.orderBy?.includes(item?.value)) && <>{filters?.orderBy?.includes('-') ? <BisUpArrow /> : <BisDownArrow />}</>}
-                </SortItem>
-              ))}
-            </FilterAccordion>
-          </SortContainer>
-          <BrandContainer>
-            <FilterAccordion title={t('BRANDS', 'Brands')}>
-              <BrandListWrapper>
-                {brandList?.loading && (
-                  <>
-                    {[...Array(5).keys()].map(index => (
-                      <BrandItem key={index}>
-                        <Skeleton width={120} height={15} />
-                        <Skeleton width={16} height={16} />
-                      </BrandItem>
-                    ))}
-                  </>
-                )}
-                {!brandList?.loading && brandList?.brands.map((brand, i) => brand?.enabled && (
-                  <BrandItem key={i} onClick={() => handleChangeBrandFilter(brand?.id)}>
-                    <span>{brand?.name}</span>
-                    {filters?.franchise_ids?.includes(brand?.id) && <Check2 />}
-                  </BrandItem>
-                ))}
-                {!brandList?.loading && ((brandList?.brands?.filter(brand => brand?.enabled))?.length === 0) && (
-                  <NoResult>{t('NO_RESULTS_FOUND', 'Sorry, no results found')}</NoResult>
-                )}
-              </BrandListWrapper>
-            </FilterAccordion>
-          </BrandContainer>
-          <PriceFilterWrapper>
-            <FilterAccordion title={t('PRICE_RANGE', 'Price range')}>
-              <PriceFilterListWrapper>
-                {priceList.map((price, i) => (
-                  <Button
-                    key={i}
-                    color={(filters?.price_level === price?.level) ? 'primary' : 'lightGray'}
-                    onClick={() => handleChangePriceRange(price?.level)}
-                  >
-                    {price.content}
-                    {(filters?.price_level === price?.level) && <Close />}
-                  </Button>
-                ))}
-              </PriceFilterListWrapper>
-            </FilterAccordion>
-          </PriceFilterWrapper>
-          {orderState?.options?.type === 1 && (
-            <MaxSectionItem
-              title={t('MAX_DELIVERY_FEE', 'Max delivery fee')}
-              options={maxDeliveryFeeOptions}
-              filter='max_delivery_price'
-              filters={filters}
-              handleChangeFilters={handleChangeFilters}
-            />
-          )}
-          {[1, 2].includes(orderState?.options?.type) && (
-            <MaxSectionItem
-              title={orderState?.options?.type === 1 ? t('MAX_DELIVERY_TIME', 'Max delivery time') : t('MAX_PICKUP_TIME', 'Max pickup time')}
-              options={maxTimeOptions}
-              filter='max_eta'
-              filters={filters}
-              handleChangeFilters={handleChangeFilters}
-            />
-          )}
-          <MaxSectionItem
-            title={t('MAX_DISTANCE', 'Max distance')}
-            options={maxDistanceOptions}
-            filter='max_distance'
-            filters={filters}
-            handleChangeFilters={handleChangeFilters}
-          />
-          <TagsContainer>
-            <FilterAccordion title={t('BUSINESS_CATEGORIES', 'Business categories')}>
-              <BusinessTypeFilter
-                isSearchMode
-                filters={filters}
-                handleChangeFilters={handleChangeFilters}
-              />
-            </FilterAccordion>
-          </TagsContainer>
-        </Filters>
+        {width > 768 && (
+          <>
+            {filtersComponent()}
+          </>
+        )}
         <FiltersResultContainer>
           {auth && termValue?.length === 0 && (
             <PreviouslyOrderedContainer>
@@ -432,6 +448,15 @@ export const BusinessListingSearchUI = (props) => {
           />
         )}
       </Modal>
+      {width <= 768 && (
+        <Modal
+          open={openFilter}
+          onClose={() => setOpenFilter(false)}
+          title={t('FILTERS', 'Filters')}
+        >
+          {filtersComponent()}
+        </Modal>
+      )}
     </BusinessListingSearchContainer>
   )
 }
