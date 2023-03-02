@@ -749,6 +749,7 @@ const ProductOptionsUI = (props) => {
                 ) : (
                   <AddressList
                     isModal
+                    isProfile
                     userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
                     addressList={isNaN(userCustomer?.id) ? user.addresses : null}
                     isProductForm

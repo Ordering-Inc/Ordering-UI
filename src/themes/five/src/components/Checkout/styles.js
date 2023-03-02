@@ -349,3 +349,19 @@ export const AuthButtonList = styled.div`
     margin-top: 22px;
   }
 `
+export const Flag = styled.span`
+  font-size: 13px;
+  margin: 0px;
+  text-transform: capitalize;
+  color: #E63757;
+  font-weight: 500;
+
+  @media (min-width: 381px) {
+    font-size: 14px;
+  }
+`
+export const SectionTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`

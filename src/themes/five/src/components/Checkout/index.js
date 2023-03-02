@@ -47,7 +47,9 @@ import {
   MobileWrapperPlaceOrderButton,
   OrderContextUIWrapper,
   HeaderContent,
-  AuthButtonList
+  AuthButtonList,
+  Flag,
+  SectionTitleContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -474,7 +476,10 @@ const CheckoutUI = (props) => {
 
           {!cartState.loading && cart && (
             <PaymentMethodContainer className='paymentsContainer'>
-              <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+              <SectionTitleContainer>
+                <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+                <Flag>{t('REQUIRED', 'Required')}</Flag>
+              </SectionTitleContainer>
               {!cartState.loading && cart?.status === 4 && (
                 <WarningMessage style={{ marginTop: 20 }}>
                   <VscWarning />

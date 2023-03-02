@@ -6,10 +6,17 @@ export const Container = styled.div`
   margin: 10px 0;
   position: relative;
   background: white;
-  border-radius: 16px;
   display: inline-block;
   text-align: left;
   transition: all 0.3s ease;
+  padding: 10px;
+  border-radius: 8px;
+
+  ${props => props.theme.rtl ? css`
+    margin-left: 15px;
+  ` : css`
+    margin-right: 15px;
+  `}
 
   > span {
     display: flex;
@@ -56,6 +63,7 @@ export const Container = styled.div`
 
   @media (min-width: 768px) {
     margin: 10px;
+    border-radius: 16px;
   }
 
   @media(min-width: 993px){
