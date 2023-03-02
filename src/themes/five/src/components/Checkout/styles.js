@@ -319,10 +319,16 @@ export const MobileWrapperPlaceOrderButton = styled.div`
 export const OrderContextUIWrapper = styled.div`
   flex: 1;
   margin-left: 15px;
+  max-width: 85%;
+
   ${props => props.theme.rtl && css`
     margin-left: 0px;
     margin-right: 15px;
   `}
+
+  @media (min-width: 480px) {
+    max-width: 90%;
+  }
 `
 
 export const HeaderContent = styled.div`
