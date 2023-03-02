@@ -252,6 +252,7 @@ export const BusinessListingSearchUI = (props) => {
           {auth && termValue?.length === 0 && (
             <PreviouslyOrderedContainer>
               <MyOrders
+                isFromBusinessListingSearch
                 hideOrders
                 businessesSearchList={businessesSearchList}
                 onRedirectPage={onRedirectPage}
