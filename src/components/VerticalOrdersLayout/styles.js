@@ -76,15 +76,20 @@ export const PastLogo = styled.div`
     object-fit: contain;
   }
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 10px;
+  display: none;
+
+  @media (min-width: 480px) {
+    display: block;
+  }
 `
 
 export const WrapperBusinessTitle = styled.div`
-  width: 80%;
+  width: 95%;
   display: flex;
   gap: 10px;
 
   @media (min-width: 480px) {
-    width: 95%;
+    width: 80%;
   }
 `
 
