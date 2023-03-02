@@ -38,11 +38,11 @@ export const CardContainer = styled.div`
   }
   ${({ productsRows }) => productsRows ? css`
     width: ${() => productsRows === 3 ? 'calc(33% - 20px)' : 'calc(50% - 20px)'};
-    margin: 10px;
+    margin: 10px 0;
 
   ` : css`
     width: 100%;
-    margin: 10px;
+    margin: 10px 0;
     @media (min-width: 576px) {
       margin: 10px;
       width: calc(100% - 20px);

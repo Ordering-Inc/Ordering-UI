@@ -131,7 +131,7 @@ const UpsellingPageUI = (props) => {
               <HorizontalUpsellingContainer>
                 {
                   !upsellingProducts.loading ? (
-                    <AutoScroll scrollId='upSelling'>
+                    <AutoScroll scrollId='upSelling' isColumnMode={upsellingProducts.products.length === 1}>
                       {
                         (!upsellingProducts.error && upsellingProducts.products.length > 0) ? upsellingProducts.products.map((product, i) => (
                           <HorizontalItem key={product.id} name={product.name}>

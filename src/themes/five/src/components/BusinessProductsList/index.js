@@ -87,7 +87,7 @@ const BusinessProductsListUI = (props) => {
                 onClick={() => onClickSubcategory(null, category)}
                 color={allsubcategorySelected ? 'primary' : 'lightGray'}
               >
-                {t('ALL', 'All')} {allsubcategorySelected && <Close />}
+                {t('ALL', 'All')}
               </Button>
             </ContainerButton>
             {category?.subcategories?.map(subcategory => {

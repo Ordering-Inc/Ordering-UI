@@ -148,6 +148,22 @@ export const HeaderContent = styled.div`
     font-size: 24px;
     cursor: pointer;
   }
+  .fixed-arrow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    width: 100vw;
+    background-color: ${props => props.theme.colors.backgroundPage};
+    height: 56px;
+    display: flex;
+    align-items: center;
+    ${props => props.theme?.rtl ? css`
+      padding-right: 10px;
+    ` : css`
+      padding-left: 10px;
+    `}
+  }
 `
 export const OrderContextUIWrapper = styled.div`
   flex: 1;
