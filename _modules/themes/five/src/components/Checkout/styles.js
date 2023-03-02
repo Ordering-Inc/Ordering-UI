@@ -70,7 +70,7 @@ var WrapperActionsInput = _styledComponents.default.div(_templateObject23 || (_t
 exports.WrapperActionsInput = WrapperActionsInput;
 var MobileWrapperPlaceOrderButton = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  position: fixed;\n  width: 100vw;\n  left: 0;\n  bottom: 0;\n  background-color: white;\n  padding: 15px 25px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n  z-index: 1006;\n  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);\n\n  span {\n    font-weight: 600;\n    font-size: 16px;\n\n    @media (min-width: 1200px) {\n      font-size: 18px;\n      padding-left: 20px;\n    }\n  }\n\n  button {\n    min-height: 44px;\n    border-radius: 7.6px;\n  }\n"])));
 exports.MobileWrapperPlaceOrderButton = MobileWrapperPlaceOrderButton;
-var OrderContextUIWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  flex: 1;\n  margin-left: 15px;\n  ", "\n"])), function (props) {
+var OrderContextUIWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  flex: 1;\n  margin-left: 15px;\n  max-width: 85%;\n\n  ", "\n\n  @media (min-width: 480px) {\n    max-width: 90%;\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 15px;\n  "])));
 });
 exports.OrderContextUIWrapper = OrderContextUIWrapper;
