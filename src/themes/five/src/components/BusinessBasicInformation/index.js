@@ -36,7 +36,6 @@ import {
   IconWrapper,
   BusinessInfoWrapper,
   WrapperFloatingSearch,
-  CategorySelectedContainer,
   SearchWrapper
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
@@ -45,7 +44,6 @@ import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import isBetween from 'dayjs/plugin/isBetween'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
-import BsCaretLeftFill from '@meronex/icons/bs/BsCaretLeftFill'
 
 dayjs.extend(timezone)
 dayjs.extend(isBetween)
@@ -65,10 +63,7 @@ export const BusinessBasicInformation = (props) => {
     handleChangeSortBy,
     categoryState,
     errorQuantityProducts,
-    isCustomerMode,
-    categoryClicked,
-    categorySelected,
-    setCategoryClicked
+    isCustomerMode
   } = props
   const { business, loading } = businessState
 
@@ -137,20 +132,32 @@ export const BusinessBasicInformation = (props) => {
 
   const handleScroll = () => {
     const searchElement = document.getElementById('search-component')
-    if (!searchElement) return
-    const limit = window.pageYOffset >= searchElement?.offsetTop && window.pageYOffset > 0
-    if (limit) {
-      const classAdded = searchElement.classList.contains('fixed-search')
-      !classAdded && searchElement.classList.add('fixed-search')
-    } else {
-      searchElement && searchElement.classList.remove('fixed-search')
+    if (searchElement) {
+      const limit = window.pageYOffset >= searchElement?.offsetTop && window.pageYOffset > 0
+      if (limit) {
+        const classAdded = searchElement.classList.contains('fixed-search')
+        !classAdded && searchElement.classList.add('fixed-search')
+      } else {
+        searchElement && searchElement.classList.remove('fixed-search')
+      }
+    }
+
+    const businessNameElement = document.getElementById('business_name')
+    if (businessNameElement) {
+      const limit = window.pageYOffset >= (businessNameElement?.offsetTop - 55) && window.pageYOffset > 0
+      if (limit && windowSize.width < 993) {
+        const classAdded = businessNameElement.classList.contains('fixed-name')
+        !classAdded && businessNameElement.classList.add('fixed-name')
+      } else {
+        businessNameElement && businessNameElement.classList.remove('fixed-name')
+      }
     }
   }
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [windowSize?.width])
 
   useEffect(() => {
     window.scroll({
@@ -161,12 +168,7 @@ export const BusinessBasicInformation = (props) => {
 
   const SearchComponent = () => {
     return (
-      <WrapperSearch id='search-component' isFlexEnd={windowSize.width >= 768}>
-        {categorySelected?.name && windowSize.width < 768 && (
-          <CategorySelectedContainer onClick={() => setCategoryClicked(false)}>
-            <BsCaretLeftFill /> {categorySelected?.name}
-          </CategorySelectedContainer>
-        )}
+      <WrapperSearch id='search-component'>
         <SearchWrapper>
           <SearchIconWrapper
             onClick={() => setOpenSearchProducts(true)}
@@ -203,7 +205,7 @@ export const BusinessBasicInformation = (props) => {
             <BusinessInfoItem isInfoShrunken={isInfoShrunken}>
               {!loading ? (
                 <TitleWrapper>
-                  <h2 className='bold'>{business?.name}</h2>
+                  <h2 className='bold' id='business_name'>{business?.name}</h2>
                   {business?.ribbon?.enabled && (
                     <RibbonBox
                       bgColor={business?.ribbon?.color}
@@ -367,7 +369,7 @@ export const BusinessBasicInformation = (props) => {
           !errorQuantityProducts &&
           !isInfoShrunken &&
           !business?.professionals?.length &&
-          (categoryClicked || windowSize.width >= 993) &&
+          // (categoryClicked || windowSize.width >= 993) &&
           (
             <SearchComponent />
           )}

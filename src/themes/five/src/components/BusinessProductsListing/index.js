@@ -14,7 +14,6 @@ import {
   useUtils,
   useSession,
   useSite,
-  useOrderingTheme,
   useConfig,
   useBusiness
 } from 'ordering-components'
@@ -99,7 +98,6 @@ const BusinessProductsListingUI = (props) => {
   const [{ auth }] = useSession()
   const [{ site }] = useSite()
   const [, { setBusiness }] = useBusiness()
-  const [orderingTheme] = useOrderingTheme()
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
   const [openUpselling, setOpenUpselling] = useState(false)
@@ -115,7 +113,7 @@ const BusinessProductsListingUI = (props) => {
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
-  const showViewOrderButton = !orderingTheme?.theme?.business_view?.components?.order_view_button?.hidden
+  const showViewOrderButton = !theme?.business_view?.components?.order_view_button?.hidden
   const cateringTypes = [7, 8]
   const cateringPreorder = cateringTypes.includes(options?.type)
   const sortByOptions = [
@@ -191,12 +189,23 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleScroll = useCallback(() => {
+    const backArrowElement = document.getElementById('back-arrow')
+    if (backArrowElement) {
+      const limit = window.pageYOffset >= backArrowElement?.offsetTop && window.pageYOffset > 0
+      if (limit && windowSize.width < 993) {
+        const classAdded = backArrowElement.classList.contains('fixed-arrow')
+        !classAdded && backArrowElement.classList.add('fixed-arrow')
+      } else {
+        backArrowElement && backArrowElement.classList.remove('fixed-arrow')
+      }
+    }
+
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
     const hasMore = !(categoryState.pagination.totalPages === categoryState.pagination.currentPage)
     if (badScrollPosition || categoryState.loading || !hasMore) return
     getNextProducts({ isNextPage: true })
-  }, [categoryState])
+  }, [categoryState, windowSize.width])
 
   const handleChangePage = (data) => {
     if (Object.entries(data.query).length === 0 && openProduct) {
@@ -237,7 +246,7 @@ const BusinessProductsListingUI = (props) => {
       }
       setModalIsOpen(true)
     }
-  }, [productModal])
+  }, [productModal, categoryId, productId, isInitialRender])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -256,6 +265,12 @@ const BusinessProductsListingUI = (props) => {
       events.off('product_banner_clicked', handleClickedBannerProduct)
     }
   }, [])
+
+  useEffect(() => {
+    if (!categoryId && !productId) {
+      setModalIsOpen(false)
+    }
+  }, [categoryId, productId])
 
   useEffect(() => {
     if (loading) return
@@ -312,9 +327,11 @@ const BusinessProductsListingUI = (props) => {
       <ProductsContainer>
         {!props.useKioskApp && (
           <HeaderContent>
-            {!location.pathname.includes('/marketplace') &&
-              <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
-            }
+            {!location.pathname.includes('/marketplace') && (
+              <div id='back-arrow'>
+                <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
+              </div>
+            )}
             {windowSize?.width < 576 && (
               <OrderContextUIWrapper>
                 <OrderContextUI isCheckOut />

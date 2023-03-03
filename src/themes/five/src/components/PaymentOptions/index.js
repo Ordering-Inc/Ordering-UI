@@ -192,27 +192,27 @@ const PaymentOptionsUI = (props) => {
         <PaymentMethodsList className='payments-list'>
           {!(paymethodsList.loading || isLoading) &&
             supportedMethods.length > 0 && (
-              supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
-                <React.Fragment key={paymethod.id}>
-                  {
-                    (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
-                      <PayCard
-                        isDisabled={isDisabled}
-                        className={`card ${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
-                        onClick={() => handlePaymentMethodClick(paymethod)}
-                      >
-                        <div>
-                          {getPayIcon(paymethod.id)}
-                        </div>
-                        <p>
-                          {t(paymethod.gateway.toUpperCase(), paymethod.name)}
-                        </p>
-                      </PayCard>
-                    )
-                  }
-                </React.Fragment>
-              ))
-            )}
+            supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
+              <React.Fragment key={paymethod.id}>
+                {
+                  (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                    <PayCard
+                      isDisabled={isDisabled}
+                      className={`card ${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
+                      onClick={() => handlePaymentMethodClick(paymethod)}
+                    >
+                      <div>
+                        {getPayIcon(paymethod.id)}
+                      </div>
+                      <p>
+                        {t(paymethod.gateway.toUpperCase(), paymethod.name)}
+                      </p>
+                    </PayCard>
+                  )
+                }
+              </React.Fragment>
+            ))
+          )}
 
           {(paymethodsList.loading || isLoading) && (
             [...Array(5).keys()].map(i => (
@@ -334,8 +334,7 @@ const PaymentOptionsUI = (props) => {
           {!isOpenMethod?.paymethod?.credentials?.publishable &&
             <Container>
               <p>{t('ADD_PUBLISHABLE_KEY', 'Please add a publishable key')}</p>
-            </Container>
-          }
+            </Container>}
           {isOpenMethod?.paymethod?.credentials?.publishable && stripeDirectMethods?.includes(isOpenMethod?.paymethod?.gateway) && (
             <StripeElementsForm
               methodsPay={methodsPay}

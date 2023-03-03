@@ -47,7 +47,9 @@ import {
   MobileWrapperPlaceOrderButton,
   OrderContextUIWrapper,
   HeaderContent,
-  AuthButtonList
+  AuthButtonList,
+  Flag,
+  SectionTitleContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -132,13 +134,16 @@ const CheckoutUI = (props) => {
   const isTableNumberEnabled = configs?.table_numer_enabled?.value
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
   const isWalletCreditPointsEnabled = businessConfigs.find(config => config.key === 'wallet_credit_point_enabled')?.value === '1'
-  const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp
+  const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' &&
+    (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp && !isCustomerMode
   const isMultiDriverTips = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
   const isGiftCardCart = !cart?.business_id
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
+
+  const validateCommentsCartField = validationFields?.fields?.checkout?.comments?.enabled && validationFields?.fields?.checkout?.comments?.required && (cart?.comment === null || cart?.comment?.trim().length === 0)
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -153,7 +158,8 @@ const CheckoutUI = (props) => {
     (options.type === 1 &&
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
       validationFields?.fields?.checkout?.driver_tip?.required &&
-      (Number(cart?.driver_tip) <= 0))
+      (Number(cart?.driver_tip) <= 0)) ||
+    (validateCommentsCartField)
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -167,9 +173,12 @@ const CheckoutUI = (props) => {
 
   const hideBusinessAddress = theme?.checkout?.components?.business?.components?.address?.hidden
   const hideBusinessDetails = theme?.checkout?.components?.business?.hidden
-  const hideBusinessMap = theme?.checkout?.components?.business?.components?.map?.hidden
+  const hideBusinessMap = theme?.checkout?.components?.map?.hidden
   const hideCustomerDetails = theme?.checkout?.components?.customer?.hidden
   const driverTipsField = !cartState.loading && cart && cart?.business_id && options.type === 1 && cart?.status !== 2 && validationFields?.fields?.checkout?.driver_tip?.enabled && driverTipsOptions.length > 0 && !useKioskApp
+
+  const creditPointPlan = loyaltyPlansState?.result?.find(loyal => loyal.type === 'credit_point')
+  const creditPointPlanOnBusiness = creditPointPlan?.businesses?.find(b => b.business_id === cart?.business_id && b.accumulates)
 
   const handlePlaceOrder = () => {
     if (!userErrors.length && (!requiredFields?.length || allowedGuest)) {
@@ -470,7 +479,10 @@ const CheckoutUI = (props) => {
 
           {!cartState.loading && cart && (
             <PaymentMethodContainer className='paymentsContainer'>
-              <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+              <SectionTitleContainer>
+                <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+                <Flag>{t('REQUIRED', 'Required')}</Flag>
+              </SectionTitleContainer>
               {!cartState.loading && cart?.status === 4 && (
                 <WarningMessage style={{ marginTop: 20 }}>
                   <VscWarning />
@@ -562,7 +574,10 @@ const CheckoutUI = (props) => {
               isProducts={cart?.products?.length || 0}
               viewString='checkout'
               businessConfigs={businessConfigs}
-              loyaltyRewardRate={loyaltyPlansState?.result?.find(loyal => loyal.type === 'credit_point')?.accumulation_rate ?? 0}
+              loyaltyRewardRate={
+                creditPointPlanOnBusiness?.accumulation_rate ??
+                  (!!creditPointPlanOnBusiness && creditPointPlan?.accumulation_rate) ?? 0
+              }
             />
           </CartContainer>
         )}
@@ -637,7 +652,13 @@ const CheckoutUI = (props) => {
             </WarningText>
           )}
 
-        {!cart?.valid_preorder && (
+        {validateCommentsCartField && (
+          <WarningText>
+            {t('WARNING_INVALID_CART_COMMENTS', 'Cart comments is required.')}
+          </WarningText>
+        )}
+
+        {cart?.valid_preorder !== undefined && !cart?.valid_preorder && (
           <WarningText>
             {t('INVALID_CART_MOMENT', 'Selected schedule time is invalid, please select a schedule into the business schedule interval.')}
           </WarningText>

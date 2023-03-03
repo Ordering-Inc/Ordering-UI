@@ -100,14 +100,15 @@ const CartUI = (props) => {
   const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
+  const isChewLayout = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const cateringTypes = [7, 8]
   const isMultiCheckout = configs?.checkout_multi_business_enabled?.value === '1'
   const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
-  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
-  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount?.hidden
+  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden || !validationFields?.fields?.checkout?.comments?.enabled
+  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount_coupon?.hidden
   const cateringTypeString = orderState?.options?.type === 7
     ? 'catering_delivery'
     : orderState?.options?.type === 8
@@ -125,7 +126,17 @@ const CartUI = (props) => {
     }
   }
 
-  const loyaltyRewardValue = Math.round(cart?.subtotal / loyaltyRewardRate)
+  const getIncludedTaxes = () => {
+    if (cart?.taxes === null) {
+      return cart?.business.tax_type === 1 ? cart?.tax : 0
+    } else {
+      return cart?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
+  const loyaltyRewardValue = Math.round((cart?.subtotal + getIncludedTaxes()) / loyaltyRewardRate)
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -221,16 +232,6 @@ const CartUI = (props) => {
 
   const checkOutBtnClick = (uuid) => {
     handleClickCheckout(uuid)
-  }
-
-  const getIncludedTaxes = () => {
-    if (cart?.taxes === null) {
-      return cart?.business.tax_type === 1 ? cart?.tax : 0
-    } else {
-      return cart?.taxes.reduce((taxIncluded, tax) => {
-        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
-      }, 0)
-    }
   }
 
   const getIncludedTaxesDiscounts = () => {
@@ -418,10 +419,10 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && !hideDeliveryFee && (
+                    {orderState?.options?.type === 1 && cart?.delivery_price_with_discount > 0 && !hideDeliveryFee && (
                       <tr>
                         <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-                        <td>{parsePrice(cart?.delivery_price)}</td>
+                        <td>{parsePrice(cart?.delivery_price_with_discount)}</td>
                       </tr>
                     )}
                     {
@@ -445,12 +446,6 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {orderState?.options?.type === 1 && cart?.delivery_price > 0 && cart?.delivery_price_with_discount >= 0 && !hideDeliveryFee && (
-                      <tr>
-                        <td>{t('DELIVERY_FEE_AFTER_DISCOUNT', 'Delivery Fee After Discount')}</td>
-                        <td>{parsePrice(cart?.delivery_price_with_discount)}</td>
-                      </tr>
-                    )}
                     {cart?.driver_tip > 0 && !hideDriverTip && (
                       <tr>
                         <td>
@@ -654,6 +649,7 @@ const CartUI = (props) => {
                 categoryId={curProduct?.category_id}
                 productId={curProduct?.id}
                 onSave={handlerProductAction}
+                viewString={viewString}
               />
             ) : (
               <ServiceForm

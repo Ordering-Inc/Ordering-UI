@@ -34,9 +34,9 @@ const PageBannerUI = (props) => {
   const onProductRedirect = ({ slug, category, product }) => {
     if (!category && !product) {
       if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
-        return events.emit('go_to_page', { page: 'business', params: { business_slug: slug }, replace: true })
+        return events.emit('go_to_page', { page: 'business', params: { business_slug: slug }, replace: false })
       } else {
-        return events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}`, replace: true })
+        return events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}`, replace: false })
       }
     }
     events.emit('product_banner_clicked')
@@ -48,7 +48,7 @@ const PageBannerUI = (props) => {
           category_slug: category,
           product_slug: product
         },
-        replace: true
+        replace: false
       })
     }
     if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
@@ -60,7 +60,7 @@ const PageBannerUI = (props) => {
           product_slug: product
         },
         search: `?${businessParameter}=${slug}`,
-        replace: true
+        replace: false
       })
     }
     if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
@@ -73,7 +73,7 @@ const PageBannerUI = (props) => {
           business_slug: slug
         },
         search: `?${categoryParameter}=${category}&${productParameter}=${product}`,
-        replace: true
+        replace: false
       })
     }
     if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
@@ -86,7 +86,7 @@ const PageBannerUI = (props) => {
           business_slug: slug
         },
         search: `?${categoryParameter}=${category}&${productParameter}=${product}`,
-        replace: true
+        replace: false
       })
     }
   }

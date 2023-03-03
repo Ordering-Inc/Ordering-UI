@@ -135,6 +135,7 @@ const ProductOptionsUI = (props) => {
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const guestCheckoutEnabled = configs?.guest_checkout_enabled?.value === '1'
   const orderTypeEnabled = !orderTypeList[orderState?.options?.type - 1] || configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderState?.options?.type - 1])
+  const hideProductDescription = theme?.business_view?.components?.products?.components?.product?.components?.description?.hidden
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -537,7 +538,7 @@ const ProductOptionsUI = (props) => {
                   )}
                 </ProductMeta>
               </Properties>
-              {product?.description && (
+              {product?.description && !hideProductDescription && (
                 <ProductDescription>
                   <LinkableText
                     text={product?.description}
@@ -749,6 +750,7 @@ const ProductOptionsUI = (props) => {
                   <>
                     <AddressList
                       isModal
+                      isProfile
                       userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
                       addressList={isNaN(userCustomer?.id) ? user.addresses : null}
                       isProductForm

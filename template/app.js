@@ -346,7 +346,7 @@ export const App = () => {
     const oldLink = document.getElementById('favicon')
     link.id = 'favicon'
     link.rel = 'icon'
-    link.href = themeUpdated?.general?.components?.favicon
+    link.href = themeUpdated?.general?.components?.favicon?.components?.image || themeUpdated?.general?.components?.favicon
     if (oldLink) {
       document.head.removeChild(oldLink)
     }
@@ -356,7 +356,8 @@ export const App = () => {
       const fontElement = window.document.getElementById(`${name}-font-styles`)
       if (
         (fontElement?.name !== fontFamily.name && fontFamily.name) ||
-        (fontElement?.href !== fontFamily?.href && fontFamily?.href)
+        (fontElement?.href !== fontFamily?.href && fontFamily?.href) ||
+        (JSON.stringify(fontElement?.weights) !== JSON.stringify(fontFamily?.weights) && fontFamily?.weights)
       ) {
         window.document.body.removeChild(window.document.getElementById(`${name}-font-styles`))
         const font = window.document.createElement('link')
@@ -365,7 +366,8 @@ export const App = () => {
         font.async = true
         font.defer = true
         font.name = fontFamily.name
-        font.href = fontFamily.href || `https://fonts.googleapis.com/css2?family=${fontFamily.name}:wght@${fontFamily.weights.join(';')}&display=swap`
+        const weights = typeof fontFamily?.weights === 'number' ? fontFamily?.weights : JSON.parse(fontFamily?.weights)?.join?.(';')
+        font.href = fontFamily.href || `https://fonts.googleapis.com/css2?family=${fontFamily?.name}:wght@${weights || [400]}&display=swap`
 
         window.document.body.appendChild(font)
         if (name === 'primary') {
@@ -605,19 +607,21 @@ export const App = () => {
                     {
                       isKioskApp
                         ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                        : (
-                          orderStatus.loading && !orderStatus.options?.address?.location ? (
-                            <SpinnerLoader />
-                          ) : (
-                            isUserVerifyRequired ? (
-                              <Redirect to='/verify' />
+                        : queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
+                          : (
+                            orderStatus.loading && !orderStatus.options?.address?.location ? (
+                              <SpinnerLoader />
                             ) : (
-                              (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
-                                ? <BusinessesList searchValueCustom={searchValue} />
-                                : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                              isUserVerifyRequired ? (
+                                <Redirect to='/verify' />
+                              ) : (
+                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
+                                  ? <BusinessesList searchValueCustom={searchValue} />
+                                  : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                              )
                             )
                           )
-                        )
                     }
                   </Route>
                   <Route exact path='/business_search'>

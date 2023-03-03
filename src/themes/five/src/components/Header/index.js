@@ -234,7 +234,7 @@ export const Header = (props) => {
               isChew={isChew}
             >
               <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
+              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (isHome && windowSize.width < 576 ? theme?.images?.logos?.isotypeInvert : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && !props.isCustomLayout && windowSize.width >= 576 && (
