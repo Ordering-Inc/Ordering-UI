@@ -406,11 +406,11 @@ const AddressListUI = (props) => {
   )
 }
 
-export const AddressList = (props) => {
+export const AddressList = React.memo((props) => {
   const addressListProps = {
     ...props,
     UIComponent: AddressListUI
   }
 
   return <AddressListController {...addressListProps} />
-}
+})
