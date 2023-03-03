@@ -747,16 +747,13 @@ const ProductOptionsUI = (props) => {
                     {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
                   </Button>
                 ) : (
-                  <>
-                    <AddressList
-                      isModal
-                      isProfile
-                      userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-                      addressList={isNaN(userCustomer?.id) ? user.addresses : null}
-                      isProductForm
-                    />
-                    <div />
-                  </>
+                  <AddressList
+                    isModal
+                    isProfile
+                    userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+                    addressList={isNaN(userCustomer?.id) ? user.addresses : null}
+                    isProductForm
+                  />
                 )
               )}
 
