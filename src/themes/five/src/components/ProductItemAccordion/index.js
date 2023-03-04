@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import {
   Pencil,
@@ -107,6 +107,14 @@ export const ProductItemAccordion = (props) => {
     const pos = position ? `(${position})` : ''
     return `${quantity} x ${name} ${pos} +${price}`
   }
+
+  useEffect(() => {
+    if (setActive === 'active') {
+      setHeightState(
+        `${content.current.scrollHeight}px`
+      )
+    }
+  }, [product, setActive])
 
   return (
     <>
