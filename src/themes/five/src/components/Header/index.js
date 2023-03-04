@@ -225,6 +225,7 @@ export const Header = (props) => {
         <LeftSide>
           <LeftHeader id='left-side'>
             <SidebarMenu
+              notificationState={notificationState}
               auth={auth}
               isHideSignup={isHideSignup}
               userCustomer={userCustomer}
