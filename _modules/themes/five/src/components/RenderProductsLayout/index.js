@@ -285,7 +285,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleUpdateProducts: handleUpdateProducts,
     professionalSelected: professionalSelected,
     handleChangeProfessionalSelected: handleChangeProfessionalSelected
-  }))), showCartOnProductList && /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, {
+  }))), windowSize.width >= 1000 && windowSize.height >= 600 && showCartOnProductList && /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, {
     isProfessional: (business === null || business === void 0 ? void 0 : (_business$professiona3 = business.professionals) === null || _business$professiona3 === void 0 ? void 0 : _business$professiona3.length) > 0 && !useKioskApp
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, {
     maxHeight: window.innerHeight - 100

@@ -49,7 +49,7 @@ var CitiesControl = function CitiesControl(props) {
       marginBottom: '10px'
     }
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cities === null || cities === void 0 ? void 0 : cities.map(function (city) {
-    return /*#__PURE__*/_react.default.createElement(_styles.CityItem, {
+    return (city === null || city === void 0 ? void 0 : city.enabled) && /*#__PURE__*/_react.default.createElement(_styles.CityItem, {
       key: city === null || city === void 0 ? void 0 : city.id,
       onClick: function onClick() {
         return setCityState((city === null || city === void 0 ? void 0 : city.id) === cityState ? null : city === null || city === void 0 ? void 0 : city.id);
