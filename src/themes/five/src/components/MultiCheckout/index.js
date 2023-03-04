@@ -108,7 +108,7 @@ const MultiCheckoutUI = (props) => {
 
   const getIncludedTaxes = (cart) => {
     if (cart?.taxes === null || !cart?.taxes) {
-      return cart.business.tax_type === 1 ? cart?.tax : 0
+      return cart?.business?.tax_type === 1 ? cart?.tax : 0
     } else {
       return cart?.taxes.reduce((taxIncluded, tax) => {
         return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
@@ -116,11 +116,12 @@ const MultiCheckoutUI = (props) => {
     }
   }
 
-  const loyaltyRewardValue = creditPointPlanOnBusiness?.accumulation_rate
-    ? Math.round(
-      openCarts.reduce((sum, cart) => sum + cart?.subtotal + getIncludedTaxes(cart), 0) /
-      creditPointPlanOnBusiness?.accumulation_rate
-    ) : 0
+  const subtotalAmount = openCarts.reduce((sum, cart) => sum + (cart?.subtotal + getIncludedTaxes(cart)), 0) *
+    creditPointPlanOnBusiness?.accumulation_rate
+
+  const loyaltyRewardValue = (creditPointPlanOnBusiness?.accumulation_rate
+    ? (Math.trunc(subtotalAmount * 100) / 100).toFixed(configs.format_number_decimal_length?.value ?? 2)
+    : 0)
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {

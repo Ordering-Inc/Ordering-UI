@@ -54,3 +54,29 @@ export const Title = styled.h1`
     text-align: left;
   }
 `
+
+export const MultiCartPriceContainer = styled.div`
+  margin-top: 38px;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    > h4 {
+      font-size: 18px;
+      margin: 0;
+    }
+  }
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  p {
+    font-size: 14px;
+    color: ${props => props.theme.colors.darkGray};
+    margin: 0;
+  }
+`
