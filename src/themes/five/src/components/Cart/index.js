@@ -100,7 +100,6 @@ const CartUI = (props) => {
   const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
-  const isChewLayout = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const cateringTypes = [7, 8]
@@ -136,7 +135,9 @@ const CartUI = (props) => {
     }
   }
 
-  const loyaltyRewardValue = Math.round((cart?.subtotal + getIncludedTaxes()) / loyaltyRewardRate)
+  const loyaltyRewardValue = ((
+    Math.trunc(((cart?.subtotal + getIncludedTaxes()) * loyaltyRewardRate) * 100) / 100
+  ).toFixed(configs.format_number_decimal_length?.value ?? 2), 10)
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -510,7 +511,7 @@ const CartUI = (props) => {
                       <td>{t('TOTAL', 'Total')}</td>
                       <td>{parsePrice(cart?.total >= 0 ? cart?.total : 0)}</td>
                     </tr>
-                    {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && (
+                    {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && !isMultiCheckout && (
                       <tr>
                         <td>&nbsp;</td>
                         <td id='loyalty'>{t('REWARD_LOYALTY_POINT', 'Reward :amount: on loyalty points').replace(':amount:', loyaltyRewardValue)}</td>
