@@ -321,7 +321,7 @@ export const RenderProductsLayout = (props) => {
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
-                {showCartOnProductList && (
+                {(windowSize.width >= 1000 && windowSize.height >= 600) && showCartOnProductList && (
                   <BusinessCartContainer isProfessional={business?.professionals?.length > 0 && !useKioskApp}>
                     <BusinessCartContent maxHeight={window.innerHeight - 100}>
                       {currentCart?.products?.length > 0 ? (
