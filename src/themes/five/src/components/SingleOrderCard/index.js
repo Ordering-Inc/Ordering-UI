@@ -266,7 +266,7 @@ const SingleOrderCardUI = (props) => {
                   {t('REVIEW', 'Review')}
                 </Button>
               )}
-              {order.cart && !hideReorderButton && (
+              {order.cart && typeof order?.id === 'number' && !hideReorderButton && (
                 <Button color='primary' className='reorder' outline onClick={() => handleClickReorder(order)}>
                   {cartState?.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
                 </Button>
