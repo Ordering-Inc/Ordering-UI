@@ -40,7 +40,7 @@ export const OrderEta = (props) => {
     } else {
       _estimatedTime = moment.utc(_delivery).add(order?.eta_time, 'minutes')
     }
-    _estimatedTime = outputFormat ? moment(_estimatedTime).format(outputFormat) : parseDate(_estimatedTime, { utc: false })
+    _estimatedTime = outputFormat ? moment(_estimatedTime).local().format(outputFormat) : parseDate(_estimatedTime, { utc: false })
     setEstimatedDeliveryTime(_estimatedTime)
   }
 
