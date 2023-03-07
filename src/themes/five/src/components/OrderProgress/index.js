@@ -96,7 +96,7 @@ const OrderProgressUI = (props) => {
                   <span>{t('ESTIMATED_DELIVERY', 'Estimated delivery')}:&nbsp;</span>
                   <span>
                     {lastOrder?.delivery_datetime_utc
-                      ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A', utc: false })
+                      ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
                       : parseTime(lastOrder?.delivery_datetime, { utc: false })}
                     &nbsp;-&nbsp;
                     <OrderEta order={lastOrder} outputFormat='hh:mm A' />
