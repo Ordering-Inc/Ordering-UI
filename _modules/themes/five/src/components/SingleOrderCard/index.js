@@ -299,7 +299,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     onClick: function onClick() {
       return handleClickReview(order);
     }
-  }, t('REVIEW', 'Review')), order.cart && !hideReorderButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('REVIEW', 'Review')), order.cart && typeof (order === null || order === void 0 ? void 0 : order.id) === 'number' && !hideReorderButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     className: "reorder",
     outline: true,

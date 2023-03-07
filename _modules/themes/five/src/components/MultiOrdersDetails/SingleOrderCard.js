@@ -13,6 +13,7 @@ var _AiFillExclamationCircle = _interopRequireDefault(require("@meronex/icons/ai
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Buttons = require("../../styles/Buttons");
 var _Modal = require("../Modal");
+var _OrderEta = require("../OrderDetails/OrderEta");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -29,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SingleOrderCardUI = function SingleOrderCardUI(props) {
-  var _configs$multi_busine, _orderTypes$find, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business4, _order$business5, _getOrderStatus, _getOrderStatus2, _order$summary$total, _order$summary;
+  var _configs$multi_busine, _orderTypes$find, _order$reporting_data, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business4, _order$business5, _getOrderStatus, _getOrderStatus2, _order$summary$total, _order$summary;
   var orderTypes = props.orderTypes,
     readMessages = props.readMessages,
     messages = props.messages,
@@ -67,6 +68,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     unreadAlert = _useState4[0],
     setUnreadAlert = _useState4[1];
   var hideIndividualButton = ((_configs$multi_busine = configs.multi_business_checkout_remove_individual_buttons) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === '1';
+  var activeStatus = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23];
   var handleGoToOrderDetails = function handleGoToOrderDetails(uuid) {
     events.emit('go_to_page', {
       page: 'order_detail',
@@ -111,9 +113,9 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     return (order === null || order === void 0 ? void 0 : order.delivery_type) === (type === null || type === void 0 ? void 0 : type.value);
   })) === null || _orderTypes$find === void 0 ? void 0 : _orderTypes$find.text, ":"), /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
-  }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
-    utc: false
-  })))), !hideIndividualButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, activeStatus.includes(order === null || order === void 0 ? void 0 : order.status) ? /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
+    order: order
+  }) : parseDate(order === null || order === void 0 ? void 0 : (_order$reporting_data = order.reporting_data) === null || _order$reporting_data === void 0 ? void 0 : _order$reporting_data.at["status:".concat(order.status)])))), !hideIndividualButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     onClick: function onClick() {
