@@ -196,7 +196,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setCurProduct(product);
     setModalIsOpen(true);
     events.emit('product_clicked', product, productPosition);
-    if (product !== null && product !== void 0 && product.featured) events.emit('product_promotion_clicked', product, true);
+    if (product !== null && product !== void 0 && product.featured) events.emit('product_promotion_clicked', product);
   };
   var handlerProductAction = function handlerProductAction(product) {
     if (Object.keys(product).length) {

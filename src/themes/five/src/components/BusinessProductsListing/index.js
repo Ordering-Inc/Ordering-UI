@@ -148,7 +148,7 @@ const BusinessProductsListingUI = (props) => {
     setCurProduct(product)
     setModalIsOpen(true)
     events.emit('product_clicked', product, productPosition)
-    if (product?.featured) events.emit('product_promotion_clicked', product, true)
+    if (product?.featured) events.emit('product_promotion_clicked', product)
   }
 
   const handlerProductAction = (product) => {
