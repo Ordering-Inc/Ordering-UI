@@ -361,6 +361,10 @@ const CheckoutUI = (props) => {
     }
   }, [hasCateringProducts])
 
+  useEffect(() => {
+    events.emit('in-checkout', cart)
+  }, [])
+
   const CartComponent = layout === 'pfchangs'
     ? CartPF
     : Cart

@@ -470,12 +470,12 @@ const OrderDetailsUI = (props) => {
 
   return (
     <Container pfchangs={layout === 'pfchangs'}>
-      {!!configs?.segment_track_id?.value && (
+      {/* {!!configs?.segment_track_id?.value && (
         <AnalyticsSegment
           writeKey={configs?.segment_track_id?.value}
           customData={segmentCustomData}
         />
-      )}
+      )} */}
       {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
         <WrapperContainer>
           <WrapperLeftContainer>
