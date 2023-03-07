@@ -424,7 +424,7 @@ const OrderDetailsUI = (props) => {
                     {activeStatus.includes(order?.status) ? (
                       <OrderEta order={order} />
                     ) : (
-                      parseDate(order?.reporting_data?.at[`status:${order.status}`])
+                      parseDate(order?.reporting_data?.at[`status:${order.status}`], { outputFormat: `YYYY-MM-DD ${configs?.general_hour_format?.value}` })
                     )}
                   </p>
                 )}
