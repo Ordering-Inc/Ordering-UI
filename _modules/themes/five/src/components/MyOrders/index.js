@@ -14,6 +14,7 @@ var _MdClose = _interopRequireDefault(require("@meronex/icons/ios/MdClose"));
 var _reactRouterDom = require("react-router-dom");
 var _styles = require("./styles");
 var _Tabs = require("../../styles/Tabs");
+var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -25,18 +26,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MyOrders = function MyOrders(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$orders, _theme$orders$compone, _theme$orders$compone2, _theme$orders2, _theme$orders2$compon, _theme$orders2$compon2, _theme$orders3, _theme$orders3$compon, _theme$orders3$compon2, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var hideOrders = props.hideOrders,
+    isFromBusinessListingSearch = props.isFromBusinessListingSearch,
     businessesSearchList = props.businessesSearchList,
     onProductRedirect = props.onProductRedirect;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var history = (0, _reactRouterDom.useHistory)();
-  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
-  var layout = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.orders) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : _orderingTheme$theme$3.type) || 'original';
+  var theme = (0, _styledComponents.useTheme)();
+  var layout = (theme === null || theme === void 0 ? void 0 : (_theme$orders = theme.orders) === null || _theme$orders === void 0 ? void 0 : (_theme$orders$compone = _theme$orders.components) === null || _theme$orders$compone === void 0 ? void 0 : (_theme$orders$compone2 = _theme$orders$compone.layout) === null || _theme$orders$compone2 === void 0 ? void 0 : _theme$orders$compone2.type) || 'original';
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isEmptyActive = _useState2[0],
@@ -61,15 +61,20 @@ var MyOrders = function MyOrders(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     businessOrderIds = _useState12[0],
     setBusinessOrderIds = _useState12[1];
+  var hideProductsTab = theme === null || theme === void 0 ? void 0 : (_theme$orders2 = theme.orders) === null || _theme$orders2 === void 0 ? void 0 : (_theme$orders2$compon = _theme$orders2.components) === null || _theme$orders2$compon === void 0 ? void 0 : (_theme$orders2$compon2 = _theme$orders2$compon.products_tab) === null || _theme$orders2$compon2 === void 0 ? void 0 : _theme$orders2$compon2.hidden;
+  var hideBusinessTab = theme === null || theme === void 0 ? void 0 : (_theme$orders3 = theme.orders) === null || _theme$orders3 === void 0 ? void 0 : (_theme$orders3$compon = _theme$orders3.components) === null || _theme$orders3$compon === void 0 ? void 0 : (_theme$orders3$compon2 = _theme$orders3$compon.business_tab) === null || _theme$orders3$compon2 === void 0 ? void 0 : _theme$orders3$compon2.hidden;
   var MyOrdersMenu = [{
     key: 'orders',
-    value: t('ORDERS', 'Orders')
+    value: t('ORDERS', 'Orders'),
+    disabled: false
   }, {
     key: 'business',
-    value: t('BUSINESS', 'Business')
+    value: t('BUSINESS', 'Business'),
+    disabled: hideBusinessTab
   }, {
     key: 'products',
-    value: t('PRODUCTS', 'Products')
+    value: t('PRODUCTS', 'Products'),
+    disabled: hideProductsTab
   }];
   var notOrderOptions = ['business', 'products', 'professionals'];
   var allEmpty = isEmptyActive && isEmptyPast && isEmptyPreorder || (isEmptyBusinesses || (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) === 0) && hideOrders;
@@ -82,13 +87,14 @@ var MyOrders = function MyOrders(props) {
       key: i
     }, props));
   }), hideOrders && !allEmpty && /*#__PURE__*/_react.default.createElement("h2", null, t('PREVIOUSLY_ORDERED', 'Previously ordered')), /*#__PURE__*/_react.default.createElement(_styles.Container, {
-    hideOrders: hideOrders
+    hideOrders: hideOrders,
+    initialHeight: isFromBusinessListingSearch
   }, !hideOrders && /*#__PURE__*/_react.default.createElement("h1", null, layout === 'appointments' ? t('MY_APPOINTMENTS', 'My appointments') : t('MY_ORDERS', 'My orders')), !allEmpty && /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
     className: "category-lists"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
   }, MyOrdersMenu.filter(function (option) {
-    return !hideOrders || option.key !== 'orders';
+    return (!hideOrders || option.key !== 'orders') && !option.disabled;
   }).map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
       key: option.key,

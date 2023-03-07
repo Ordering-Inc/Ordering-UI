@@ -21,6 +21,7 @@ var _utils = require("../../../../../utils");
 var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 var _styles = require("./styles");
+var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -68,7 +69,7 @@ var ListItemLogout = function ListItemLogout() {
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.LogoutAction, logoutActionProps);
 };
 var UserProfileFormUI = function UserProfileFormUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _configs$advanced_off, _configs$advanced_off2, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _formState$changes5, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
+  var _theme$profile, _theme$profile$compon, _theme$profile$compon2, _theme$profile2, _theme$profile2$compo, _theme$profile2$compo2, _theme$profile3, _theme$profile3$compo, _theme$profile3$compo2, _configs$advanced_off, _configs$advanced_off2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _theme$bar_menu, _theme$bar_menu$compo, _theme$bar_menu$compo2, _theme$bar_menu2, _theme$bar_menu2$comp, _theme$bar_menu2$comp2, _theme$bar_menu3, _theme$bar_menu3$comp, _theme$bar_menu3$comp2, _theme$bar_menu4, _theme$bar_menu4$comp, _theme$bar_menu4$comp2, _theme$bar_menu5, _theme$bar_menu5$comp, _theme$bar_menu5$comp2, _theme$bar_menu6, _theme$bar_menu6$comp, _theme$bar_menu6$comp2, _formState$changes5, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result, _formState$changes9, _formState$changes10, _props$afterComponent, _props$afterElements;
   var userData = props.userData,
     handleButtonUpdateClick = props.handleButtonUpdateClick,
     handlechangeImage = props.handlechangeImage,
@@ -92,6 +93,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
+  var theme = (0, _styledComponents.useTheme)();
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
@@ -112,48 +114,54 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     setAlertState = _useState4[1];
   var inputRef = (0, _react.useRef)(null);
   var windowSize = (0, _useWindowSize.useWindowSize)();
-  var showCustomerPicture = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.profile) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.picture) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
-  var showAddressList = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.profile) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.address_list) !== null && _orderingTheme$theme5 !== void 0 && _orderingTheme$theme5.hidden);
-  var userFormLayoutRow = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme6 = orderingTheme.theme) === null || _orderingTheme$theme6 === void 0 ? void 0 : (_orderingTheme$theme7 = _orderingTheme$theme6.profile) === null || _orderingTheme$theme7 === void 0 ? void 0 : (_orderingTheme$theme8 = _orderingTheme$theme7.components) === null || _orderingTheme$theme8 === void 0 ? void 0 : (_orderingTheme$theme9 = _orderingTheme$theme8.layout) === null || _orderingTheme$theme9 === void 0 ? void 0 : _orderingTheme$theme9.position) === 'row';
+  var showCustomerPicture = !(theme !== null && theme !== void 0 && (_theme$profile = theme.profile) !== null && _theme$profile !== void 0 && (_theme$profile$compon = _theme$profile.components) !== null && _theme$profile$compon !== void 0 && (_theme$profile$compon2 = _theme$profile$compon.picture) !== null && _theme$profile$compon2 !== void 0 && _theme$profile$compon2.hidden);
+  var showAddressList = !(theme !== null && theme !== void 0 && (_theme$profile2 = theme.profile) !== null && _theme$profile2 !== void 0 && (_theme$profile2$compo = _theme$profile2.components) !== null && _theme$profile2$compo !== void 0 && (_theme$profile2$compo2 = _theme$profile2$compo.address_list) !== null && _theme$profile2$compo2 !== void 0 && _theme$profile2$compo2.hidden);
+  var userFormLayoutRow = (theme === null || theme === void 0 ? void 0 : (_theme$profile3 = theme.profile) === null || _theme$profile3 === void 0 ? void 0 : (_theme$profile3$compo = _theme$profile3.components) === null || _theme$profile3$compo === void 0 ? void 0 : (_theme$profile3$compo2 = _theme$profile3$compo.layout) === null || _theme$profile3$compo2 === void 0 ? void 0 : _theme$profile3$compo2.position) === 'row';
   var isPromotionsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off = configs.advanced_offers_module) === null || _configs$advanced_off === void 0 ? void 0 : _configs$advanced_off.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$advanced_off2 = configs.advanced_offers_module) === null || _configs$advanced_off2 === void 0 ? void 0 : _configs$advanced_off2.value) === true;
-  var isAddressListNewPage = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme10 = orderingTheme.theme) === null || _orderingTheme$theme10 === void 0 ? void 0 : (_orderingTheme$theme11 = _orderingTheme$theme10.profile) === null || _orderingTheme$theme11 === void 0 ? void 0 : (_orderingTheme$theme12 = _orderingTheme$theme11.components) === null || _orderingTheme$theme12 === void 0 ? void 0 : (_orderingTheme$theme13 = _orderingTheme$theme12.address_list) === null || _orderingTheme$theme13 === void 0 ? void 0 : (_orderingTheme$theme14 = _orderingTheme$theme13.components) === null || _orderingTheme$theme14 === void 0 ? void 0 : (_orderingTheme$theme15 = _orderingTheme$theme14.layout) === null || _orderingTheme$theme15 === void 0 ? void 0 : _orderingTheme$theme15.position) === 'new_page';
+  var isAddressListNewPage = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.profile) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.address_list) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.layout) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.position) === 'new_page';
   var isWalletEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$cash_wallet = configs.cash_wallet) === null || _configs$cash_wallet === void 0 ? void 0 : _configs$cash_wallet.value) && (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && ((configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1');
+  var hideWallet = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu = theme.bar_menu) === null || _theme$bar_menu === void 0 ? void 0 : (_theme$bar_menu$compo = _theme$bar_menu.components) === null || _theme$bar_menu$compo === void 0 ? void 0 : (_theme$bar_menu$compo2 = _theme$bar_menu$compo.wallet) === null || _theme$bar_menu$compo2 === void 0 ? void 0 : _theme$bar_menu$compo2.hidden;
+  var hideMessages = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu2 = theme.bar_menu) === null || _theme$bar_menu2 === void 0 ? void 0 : (_theme$bar_menu2$comp = _theme$bar_menu2.components) === null || _theme$bar_menu2$comp === void 0 ? void 0 : (_theme$bar_menu2$comp2 = _theme$bar_menu2$comp.messages) === null || _theme$bar_menu2$comp2 === void 0 ? void 0 : _theme$bar_menu2$comp2.hidden;
+  var hideHelp = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu3 = theme.bar_menu) === null || _theme$bar_menu3 === void 0 ? void 0 : (_theme$bar_menu3$comp = _theme$bar_menu3.components) === null || _theme$bar_menu3$comp === void 0 ? void 0 : (_theme$bar_menu3$comp2 = _theme$bar_menu3$comp.help) === null || _theme$bar_menu3$comp2 === void 0 ? void 0 : _theme$bar_menu3$comp2.hidden;
+  var hideFavorites = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu4 = theme.bar_menu) === null || _theme$bar_menu4 === void 0 ? void 0 : (_theme$bar_menu4$comp = _theme$bar_menu4.components) === null || _theme$bar_menu4$comp === void 0 ? void 0 : (_theme$bar_menu4$comp2 = _theme$bar_menu4$comp.favortes) === null || _theme$bar_menu4$comp2 === void 0 ? void 0 : _theme$bar_menu4$comp2.hidden;
+  var hideSession = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu5 = theme.bar_menu) === null || _theme$bar_menu5 === void 0 ? void 0 : (_theme$bar_menu5$comp = _theme$bar_menu5.components) === null || _theme$bar_menu5$comp === void 0 ? void 0 : (_theme$bar_menu5$comp2 = _theme$bar_menu5$comp.sessions) === null || _theme$bar_menu5$comp2 === void 0 ? void 0 : _theme$bar_menu5$comp2.hidden;
+  var hidePromotions = theme === null || theme === void 0 ? void 0 : (_theme$bar_menu6 = theme.bar_menu) === null || _theme$bar_menu6 === void 0 ? void 0 : (_theme$bar_menu6$comp = _theme$bar_menu6.components) === null || _theme$bar_menu6$comp === void 0 ? void 0 : (_theme$bar_menu6$comp2 = _theme$bar_menu6$comp.promotions) === null || _theme$bar_menu6$comp2 === void 0 ? void 0 : _theme$bar_menu6$comp2.hidden;
   var profileOptions = [{
     name: 'wallets',
     pathname: '/wallets',
     displayName: 'wallets',
     key: 'wallets',
-    isActive: isWalletEnabled && !isCustomerMode
+    isActive: !hideWallet && isWalletEnabled && !isCustomerMode
   }, {
     name: 'promotions',
     pathname: '/promotions',
     displayName: 'promotions',
     key: 'promotions',
-    isActive: isPromotionsEnabled
+    isActive: !hidePromotions && isPromotionsEnabled
   }, {
     name: 'messages',
     pathname: '/messages',
     displayName: 'messages',
     key: 'messages',
-    isActive: !isCustomerMode
+    isActive: !hideMessages && !isCustomerMode
   }, {
     name: 'help',
     pathname: '/help',
     displayName: 'help',
     key: 'help',
-    isActive: true
+    isActive: !hideHelp
   }, {
     name: 'sessions',
     pathname: '/sessions',
     displayName: 'sessions',
     key: 'sessions',
-    isActive: true
+    isActive: !hideSession
   }, {
     name: 'favorite',
     pathname: '/favorite',
     displayName: 'favorites',
     key: 'favorites',
-    isActive: true
+    isActive: !hideFavorites
   }, {
     name: 'addresses',
     pathname: '/profile/addresses',

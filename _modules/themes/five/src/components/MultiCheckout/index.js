@@ -42,7 +42,7 @@ var mapConfigs = {
   }
 };
 var MultiCheckoutUI = function MultiCheckoutUI(props) {
-  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _configs$google_maps_, _customerState$user, _cartGroup$result2, _cartGroup$result3, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2, _configs$multi_busine6, _configs$multi_busine7;
+  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _configs$format_numbe, _configs$format_numbe2, _configs$google_maps_, _customerState$user, _cartGroup$result2, _cartGroup$result3, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2, _configs$multi_busine6, _configs$multi_busine7;
   var placing = props.placing,
     isCustomerMode = props.isCustomerMode,
     openCarts = props.openCarts,
@@ -127,7 +127,8 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
   }) && creditPointPlan;
   var getIncludedTaxes = function getIncludedTaxes(cart) {
     if ((cart === null || cart === void 0 ? void 0 : cart.taxes) === null || !(cart !== null && cart !== void 0 && cart.taxes)) {
-      return cart.business.tax_type === 1 ? cart === null || cart === void 0 ? void 0 : cart.tax : 0;
+      var _cart$business;
+      return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.tax_type) === 1 ? cart === null || cart === void 0 ? void 0 : cart.tax : 0;
     } else {
       return cart === null || cart === void 0 ? void 0 : cart.taxes.reduce(function (taxIncluded, tax) {
         var _tax$summary;
@@ -135,9 +136,10 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       }, 0);
     }
   };
-  var loyaltyRewardValue = creditPointPlanOnBusiness !== null && creditPointPlanOnBusiness !== void 0 && creditPointPlanOnBusiness.accumulation_rate ? Math.round(openCarts.reduce(function (sum, cart) {
-    return sum + (cart === null || cart === void 0 ? void 0 : cart.subtotal) + getIncludedTaxes(cart);
-  }, 0) / (creditPointPlanOnBusiness === null || creditPointPlanOnBusiness === void 0 ? void 0 : creditPointPlanOnBusiness.accumulation_rate)) : 0;
+  var subtotalAmount = openCarts.reduce(function (sum, cart) {
+    return sum + ((cart === null || cart === void 0 ? void 0 : cart.subtotal) + getIncludedTaxes(cart));
+  }, 0) * (creditPointPlanOnBusiness === null || creditPointPlanOnBusiness === void 0 ? void 0 : creditPointPlanOnBusiness.accumulation_rate);
+  var loyaltyRewardValue = creditPointPlanOnBusiness !== null && creditPointPlanOnBusiness !== void 0 && creditPointPlanOnBusiness.accumulation_rate ? (Math.trunc(subtotalAmount * 100) / 100).toFixed((_configs$format_numbe = (_configs$format_numbe2 = configs.format_number_decimal_length) === null || _configs$format_numbe2 === void 0 ? void 0 : _configs$format_numbe2.value) !== null && _configs$format_numbe !== void 0 ? _configs$format_numbe : 2) : 0;
   var handlePlaceOrder = function handlePlaceOrder() {
     if (!userErrors.length) {
       handleGroupPlaceOrder && handleGroupPlaceOrder();
@@ -278,7 +280,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     driverTip: parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t2 = configs.driver_tip_type) === null || _configs$driver_tip_t2 === void 0 ? void 0 : _configs$driver_tip_t2.value, 10) === 1 ? (_openCarts$ = openCarts[0]) === null || _openCarts$ === void 0 ? void 0 : _openCarts$.driver_tip : (_openCarts$2 = openCarts[0]) === null || _openCarts$2 === void 0 ? void 0 : _openCarts$2.driver_tip_rate,
     useOrderContext: true
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CartHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MOBILE_FRONT_YOUR_ORDER', 'Your order'))), openCarts.map(function (cart) {
-    var _configs$multi_busine3, _cart$products2, _configs$multi_busine4, _configs$multi_busine5, _cart$business;
+    var _configs$multi_busine3, _cart$products2, _configs$multi_busine4, _configs$multi_busine5, _cart$business2;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: cart.uuid
     }, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
@@ -289,7 +291,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) || 0,
       hideDeliveryFee: (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine4 = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine4 === void 0 ? void 0 : _configs$multi_busine4.value) === '1',
       hideDriverTip: (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine5 = configs.multi_business_checkout_show_combined_driver_tip) === null || _configs$multi_busine5 === void 0 ? void 0 : _configs$multi_busine5.value) === '1',
-      businessConfigs: cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.configs
+      businessConfigs: cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.configs
     }), /*#__PURE__*/_react.default.createElement(_styles.DriverTipDivider, null));
   }), walletCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_PARTIAL_WALLET_CARTS', 'Important: One or more carts can`t be completed due a partial payment with cash/points wallet and requires to be paid individually')), openCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, {
     totalFeeEnabled: totalFeeEnabled

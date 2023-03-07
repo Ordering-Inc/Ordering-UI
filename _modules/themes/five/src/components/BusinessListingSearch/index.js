@@ -250,6 +250,7 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     filters: filters,
     handleChangeFilters: handleChangeFilters
   })))), /*#__PURE__*/_react.default.createElement(_styles.FiltersResultContainer, null, auth && (termValue === null || termValue === void 0 ? void 0 : termValue.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.PreviouslyOrderedContainer, null, /*#__PURE__*/_react.default.createElement(_MyOrders.MyOrders, {
+    isFromBusinessListingSearch: true,
     hideOrders: true,
     businessesSearchList: businessesSearchList,
     onRedirectPage: onRedirectPage,

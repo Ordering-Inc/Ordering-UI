@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperContainer = exports.Title = exports.NotCarts = exports.Container = void 0;
+exports.WrapperContainer = exports.Title = exports.NotCarts = exports.MultiCartPriceContainer = exports.Container = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 0px 10px;\n\n  div:not(:last-child) {\n    padding-bottom: 5px;\n  }\n\n  @media (min-width: 769px) {\n    margin-bottom: 10px;\n    padding: 15px;\n  }\n"])));
@@ -18,3 +18,7 @@ var Title = _styledComponents.default.h1(_templateObject4 || (_templateObject4 =
   return props.theme.colors.darkTextColor;
 });
 exports.Title = Title;
+var MultiCartPriceContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-top: 38px;\n  > div {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    margin-top: 5px;\n    margin-bottom: 5px;\n    > h4 {\n      font-size: 18px;\n      margin: 0;\n    }\n  }\n  > span {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    margin-bottom: 5px;\n  }\n  p {\n    font-size: 14px;\n    color: ", ";\n    margin: 0;\n  }\n"])), function (props) {
+  return props.theme.colors.darkGray;
+});
+exports.MultiCartPriceContainer = MultiCartPriceContainer;

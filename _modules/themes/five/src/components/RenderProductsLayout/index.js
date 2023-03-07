@@ -182,7 +182,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       return handleChangeSortBy && handleChangeSortBy(val);
     },
     businessState: businessState
-  }))), !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_ = business.previously_products) === null || _business$previously_ === void 0 ? void 0 : _business$previously_.length) > 0 && !hidePreviousOrdered && windowSize.width < 993 && !categoryClicked && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
+  }))), !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_ = business.previously_products) === null || _business$previously_ === void 0 ? void 0 : _business$previously_.length) > 0 && !hidePreviousOrdered && !categoryClicked && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
     onProductClick: onProductClick,
     productList: business === null || business === void 0 ? void 0 : business.previously_products,
     businessId: business === null || business === void 0 ? void 0 : business.id
@@ -285,7 +285,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleUpdateProducts: handleUpdateProducts,
     professionalSelected: professionalSelected,
     handleChangeProfessionalSelected: handleChangeProfessionalSelected
-  }))), showCartOnProductList && /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, {
+  }))), windowSize.width >= 1000 && windowSize.height >= 600 && showCartOnProductList && /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, {
     isProfessional: (business === null || business === void 0 ? void 0 : (_business$professiona3 = business.professionals) === null || _business$professiona3 === void 0 ? void 0 : _business$professiona3.length) > 0 && !useKioskApp
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, {
     maxHeight: window.innerHeight - 100
@@ -334,7 +334,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   }))), (categoryClicked || windowSize.width >= 993) && /*#__PURE__*/_react.default.createElement(_styles.BusinessCategoryProductWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapContent, {
     isGroceries: true,
     id: "groceries"
-  }, !(business !== null && business !== void 0 && business.loading) && (business === null || business === void 0 ? void 0 : (_business$previously_2 = business.previously_products) === null || _business$previously_2 === void 0 ? void 0 : _business$previously_2.length) > 0 && windowSize.width >= 993 && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
+  }, !(business !== null && business !== void 0 && business.loading) && !hidePreviousOrdered && (business === null || business === void 0 ? void 0 : (_business$previously_2 = business.previously_products) === null || _business$previously_2 === void 0 ? void 0 : _business$previously_2.length) > 0 && windowSize.width >= 993 && /*#__PURE__*/_react.default.createElement(_OrderItAgain.OrderItAgain, {
     onProductClick: onProductClick,
     productList: business === null || business === void 0 ? void 0 : business.previously_products,
     businessId: business === null || business === void 0 ? void 0 : business.id,

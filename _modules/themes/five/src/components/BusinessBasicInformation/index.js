@@ -26,7 +26,6 @@ var _dayjs = _interopRequireDefault(require("dayjs"));
 var _timezone = _interopRequireDefault(require("dayjs/plugin/timezone"));
 var _isBetween = _interopRequireDefault(require("dayjs/plugin/isBetween"));
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
-var _BsCaretLeftFill = _interopRequireDefault(require("@meronex/icons/bs/BsCaretLeftFill"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -57,10 +56,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     handleChangeSortBy = props.handleChangeSortBy,
     categoryState = props.categoryState,
     errorQuantityProducts = props.errorQuantityProducts,
-    isCustomerMode = props.isCustomerMode,
-    categoryClicked = props.categoryClicked,
-    categorySelected = props.categorySelected,
-    setCategoryClicked = props.setCategoryClicked;
+    isCustomerMode = props.isCustomerMode;
   var business = businessState.business,
     loading = businessState.loading;
   var theme = (0, _styledComponents.useTheme)();
@@ -146,13 +142,24 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   }, [openSearchProducts]);
   var handleScroll = function handleScroll() {
     var searchElement = document.getElementById('search-component');
-    if (!searchElement) return;
-    var limit = window.pageYOffset >= (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) && window.pageYOffset > 0;
-    if (limit) {
-      var classAdded = searchElement.classList.contains('fixed-search');
-      !classAdded && searchElement.classList.add('fixed-search');
-    } else {
-      searchElement && searchElement.classList.remove('fixed-search');
+    if (searchElement) {
+      var limit = window.pageYOffset >= (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) && window.pageYOffset > 0;
+      if (limit) {
+        var classAdded = searchElement.classList.contains('fixed-search');
+        !classAdded && searchElement.classList.add('fixed-search');
+      } else {
+        searchElement && searchElement.classList.remove('fixed-search');
+      }
+    }
+    var businessNameElement = document.getElementById('business_name');
+    if (businessNameElement) {
+      var _limit = window.pageYOffset >= (businessNameElement === null || businessNameElement === void 0 ? void 0 : businessNameElement.offsetTop) - 55 && window.pageYOffset > 0;
+      if (_limit && windowSize.width < 993) {
+        var _classAdded = businessNameElement.classList.contains('fixed-name');
+        !_classAdded && businessNameElement.classList.add('fixed-name');
+      } else {
+        businessNameElement && businessNameElement.classList.remove('fixed-name');
+      }
     }
   };
   (0, _react.useEffect)(function () {
@@ -160,7 +167,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     return function () {
       return window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [windowSize === null || windowSize === void 0 ? void 0 : windowSize.width]);
   (0, _react.useEffect)(function () {
     window.scroll({
       top: window.scrollY - 1,
@@ -169,13 +176,8 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   }, [sortByValue]);
   var SearchComponent = function SearchComponent() {
     return /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
-      id: "search-component",
-      isFlexEnd: windowSize.width >= 768
-    }, (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name) && windowSize.width < 768 && /*#__PURE__*/_react.default.createElement(_styles.CategorySelectedContainer, {
-      onClick: function onClick() {
-        return setCategoryClicked(false);
-      }
-    }, /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null), " ", categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name), /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SearchIconWrapper, {
+      id: "search-component"
+    }, /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SearchIconWrapper, {
       onClick: function onClick() {
         return setOpenSearchProducts(true);
       }
@@ -208,7 +210,8 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, {
       isInfoShrunken: isInfoShrunken
     }, !loading ? /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h2", {
-      className: "bold"
+      className: "bold",
+      id: "business_name"
     }, business === null || business === void 0 ? void 0 : business.name), (business === null || business === void 0 ? void 0 : (_business$ribbon = business.ribbon) === null || _business$ribbon === void 0 ? void 0 : _business$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
       bgColor: business === null || business === void 0 ? void 0 : (_business$ribbon2 = business.ribbon) === null || _business$ribbon2 === void 0 ? void 0 : _business$ribbon2.color,
       colorText: (0, _utils.lightenDarkenColor)(business === null || business === void 0 ? void 0 : (_business$ribbon3 = business.ribbon) === null || _business$ribbon3 === void 0 ? void 0 : _business$ribbon3.color),
@@ -284,7 +287,10 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
       }
     }, t('REVIEWS', 'Reviews'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: isCustomerMode ? 100 : 150
-    })))), !hideSearch && ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && !(business !== null && business !== void 0 && (_business$professiona = business.professionals) !== null && _business$professiona !== void 0 && _business$professiona.length) && (categoryClicked || windowSize.width >= 993) && /*#__PURE__*/_react.default.createElement(SearchComponent, null));
+    })))), !hideSearch && ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && !isInfoShrunken && !(business !== null && business !== void 0 && (_business$professiona = business.professionals) !== null && _business$professiona !== void 0 && _business$professiona.length) &&
+    /*#__PURE__*/
+    // (categoryClicked || windowSize.width >= 993) &&
+    _react.default.createElement(SearchComponent, null));
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

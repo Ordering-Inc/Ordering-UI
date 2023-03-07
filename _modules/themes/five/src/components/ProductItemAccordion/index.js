@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _orderingTheme$theme$7, _props$beforeElements, _props$beforeComponen, _product$valid, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _product$calendar_eve, _configs$format_time, _product$calendar_eve2, _configs$format_time2, _props$afterComponent, _props$afterElements;
+  var _theme$viewString, _theme$viewString$com, _theme$viewString$com2, _theme$viewString$com3, _theme$viewString$com4, _theme$viewString$com5, _theme$viewString$com6, _props$beforeElements, _props$beforeComponen, _product$valid, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _product$calendar_eve, _configs$format_time, _product$calendar_eve2, _configs$format_time2, _props$afterComponent, _props$afterElements;
   var isDisabledEdit = props.isDisabledEdit,
     isCartPending = props.isCartPending,
     isCartProduct = props.isCartProduct,
@@ -81,7 +81,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
   var viewString = isConfirmationPage ? 'confirmation' : isStore ? 'business_view' : 'header';
-  var showProductImage = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme[viewString]) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cart) !== null && _orderingTheme$theme$3 !== void 0 && (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) !== null && _orderingTheme$theme$4 !== void 0 && (_orderingTheme$theme$5 = _orderingTheme$theme$4.products) !== null && _orderingTheme$theme$5 !== void 0 && (_orderingTheme$theme$6 = _orderingTheme$theme$5.components) !== null && _orderingTheme$theme$6 !== void 0 && (_orderingTheme$theme$7 = _orderingTheme$theme$6.image) !== null && _orderingTheme$theme$7 !== void 0 && _orderingTheme$theme$7.hidden);
+  var showProductImage = !(theme !== null && theme !== void 0 && (_theme$viewString = theme[viewString]) !== null && _theme$viewString !== void 0 && (_theme$viewString$com = _theme$viewString.components) !== null && _theme$viewString$com !== void 0 && (_theme$viewString$com2 = _theme$viewString$com.cart) !== null && _theme$viewString$com2 !== void 0 && (_theme$viewString$com3 = _theme$viewString$com2.components) !== null && _theme$viewString$com3 !== void 0 && (_theme$viewString$com4 = _theme$viewString$com3.products) !== null && _theme$viewString$com4 !== void 0 && (_theme$viewString$com5 = _theme$viewString$com4.components) !== null && _theme$viewString$com5 !== void 0 && (_theme$viewString$com6 = _theme$viewString$com5.image) !== null && _theme$viewString$com6 !== void 0 && _theme$viewString$com6.hidden);
   var productInfo = function productInfo() {
     if (isCartProduct) {
       var _product$ingredients, _product$options;
@@ -185,7 +185,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, {
     color: "#B1BCCC"
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+  })), onDeleteProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);
@@ -193,7 +193,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
     color: "#B1BCCC"
-  }))))) : /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+  }))))) : /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, onDeleteProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);
@@ -209,7 +209,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, {
     color: "#B1BCCC"
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+  })), onDeleteProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);
@@ -217,7 +217,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
     color: "#B1BCCC"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))), !(product !== null && product !== void 0 && product.valid_menu) && isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductNotAvailable, null, t('NOT_AVAILABLE', 'Not available'))), !(product !== null && product !== void 0 && product.valid_menu) && isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, onDeleteProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
     ref: productActionsDelete,
     onClick: function onClick() {
       return onDeleteProduct(product);
