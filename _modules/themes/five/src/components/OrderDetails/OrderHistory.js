@@ -18,6 +18,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderHistory = function OrderHistory(props) {
+  var _configs$general_hour;
   var messages = props.messages,
     order = props.order,
     handleOpenReview = props.handleOpenReview,
@@ -29,6 +30,9 @@ var OrderHistory = function OrderHistory(props) {
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseDate = _useUtils2[0].parseDate;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var getLogisticTagStatus = function getLogisticTagStatus(status) {
     switch (status) {
       case 0:
@@ -107,13 +111,13 @@ var OrderHistory = function OrderHistory(props) {
     }
   };
   return /*#__PURE__*/_react.default.createElement(_styles.OrderHistoryContainer, null, !(messages !== null && messages !== void 0 && messages.loading) && order && /*#__PURE__*/_react.default.createElement(_styles.HistoryItemWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckCircleFill, null), /*#__PURE__*/_react.default.createElement(_styles.DetailWrapper, null, /*#__PURE__*/_react.default.createElement("h3", null, t('ORDER_PLACED', 'Order placed'), " ", ' ', t('VIA', 'Via'), ' ', order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order.created_at, {
-    outputFormat: 'MMM DD, hh:mm A'
+    outputFormat: "MMM DD, ".concat(configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.value)
   })))), messages && (messages === null || messages === void 0 ? void 0 : messages.messages.map(function (message, i) {
-    var _message$change, _message$change2, _message$driver, _message$driver2;
+    var _message$change, _message$change2, _message$driver, _message$driver2, _configs$general_hour2;
     return message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.HistoryItemWrapper, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckCircleFill, null), /*#__PURE__*/_react.default.createElement(_styles.DetailWrapper, null, ((_message$change = message.change) === null || _message$change === void 0 ? void 0 : _message$change.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement("h3", null, ((_message$change2 = message.change) === null || _message$change2 === void 0 ? void 0 : _message$change2.attribute) === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : t(getStatus(parseInt(message.change.new, 10)))) : /*#__PURE__*/_react.default.createElement("h3", null, message.change.new ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver = message.driver) === null || _message$driver === void 0 ? void 0 : _message$driver.name, " ", ' ', " ", ((_message$driver2 = message.driver) === null || _message$driver2 === void 0 ? void 0 : _message$driver2.lastname) && message.driver.lastname, " "), t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVER_UNASSIGNED', 'Driver unassigned'))), /*#__PURE__*/_react.default.createElement("p", null, parseDate(message.created_at, {
-      outputFormat: 'MMM DD, hh:mm A'
+      outputFormat: "MMM DD, ".concat(configs === null || configs === void 0 ? void 0 : (_configs$general_hour2 = configs.general_hour_format) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.value)
     }))));
   })), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleReview,
