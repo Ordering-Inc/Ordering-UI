@@ -135,9 +135,8 @@ const CartUI = (props) => {
     }
   }
 
-  const loyaltyRewardValue = ((
-    Math.trunc(((cart?.subtotal + getIncludedTaxes()) * loyaltyRewardRate) * 100) / 100
-  ).toFixed(configs.format_number_decimal_length?.value ?? 2), 10)
+  const clearAmount = (value) => parseFloat((Math.trunc(value * 100) / 100).toFixed(configs.format_number_decimal_length?.value ?? 2))
+  const loyaltyRewardValue = clearAmount((cart?.subtotal + getIncludedTaxes()) * loyaltyRewardRate)
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -511,7 +510,7 @@ const CartUI = (props) => {
                       <td>{t('TOTAL', 'Total')}</td>
                       <td>{parsePrice(cart?.total >= 0 ? cart?.total : 0)}</td>
                     </tr>
-                    {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && !isMultiCheckout && (
+                    {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && isCheckout && (
                       <tr>
                         <td>&nbsp;</td>
                         <td id='loyalty'>{t('REWARD_LOYALTY_POINT', 'Reward :amount: on loyalty points').replace(':amount:', loyaltyRewardValue)}</td>
