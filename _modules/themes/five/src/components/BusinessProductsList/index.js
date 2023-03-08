@@ -105,7 +105,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return onClickSubcategory(null, category);
       },
       color: allsubcategorySelected ? 'primary' : 'lightGray'
-    }, t('ALL', 'All'), " ", allsubcategorySelected && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.map(function (subcategory) {
+    }, t('ALL', 'All'))), category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.map(function (subcategory) {
       var isSubcategorySelected = subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.find(function (_subcategory) {
         return (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
       });

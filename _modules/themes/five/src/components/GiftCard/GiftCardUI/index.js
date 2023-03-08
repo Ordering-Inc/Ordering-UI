@@ -44,6 +44,7 @@ var GiftCardUI = function GiftCardUI(props) {
     }
   }, t('REDEEM_GIFT_CARD', 'Redeem gift card'))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "700px",
+    padding: "0px",
     open: openModal === 'purchase',
     onClose: function onClose() {
       return setOpenModal(null);

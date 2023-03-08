@@ -197,7 +197,8 @@ var AddressListUI = function AddressListUI(props) {
   var AddressListCallcenterLayout = function AddressListCallcenterLayout(_ref) {
     var children = _ref.children;
     return /*#__PURE__*/_react.default.createElement(_styles.AddressHalfContainer, null, /*#__PURE__*/_react.default.createElement(_styles.List, {
-      halfWidth: addressOpen
+      halfWidth: addressOpen,
+      id: "address_list"
     }, children), addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
       isCustomerMode: isCustomerMode
     }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
