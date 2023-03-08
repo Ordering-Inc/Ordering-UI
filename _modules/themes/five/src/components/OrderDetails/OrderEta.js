@@ -53,7 +53,7 @@ var OrderEta = function OrderEta(props) {
     } else {
       _estimatedTime = _moment.default.utc(_delivery).add(order === null || order === void 0 ? void 0 : order.eta_time, 'minutes');
     }
-    _estimatedTime = outputFormat ? (0, _moment.default)(_estimatedTime).format(outputFormat) : parseDate(_estimatedTime, {
+    _estimatedTime = outputFormat ? (0, _moment.default)(_estimatedTime).local().format(outputFormat) : parseDate(_estimatedTime, {
       utc: false
     });
     setEstimatedDeliveryTime(_estimatedTime);

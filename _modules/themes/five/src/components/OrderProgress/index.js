@@ -84,8 +84,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
       width: (_getOrderStatus = (0, _utils.getOrderStatus)(lastOrder.status)) !== null && _getOrderStatus !== void 0 && _getOrderStatus.percentage ? "".concat((0, _utils.getOrderStatus)(lastOrder.status).percentage, "%") : '0%'
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, (_getOrderStatus2 = (0, _utils.getOrderStatus)(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_DELIVERY', 'Estimated delivery'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
-    outputFormat: 'hh:mm A',
-    utc: false
+    outputFormat: 'hh:mm A'
   }) : parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
     utc: false
   }), "\xA0-\xA0", /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
