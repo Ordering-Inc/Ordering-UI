@@ -12,7 +12,7 @@ export const OrderEta = (props) => {
   const [estimatedDeliveryTime, setEstimatedDeliveryTime] = useState(null)
 
   const getEstimatedDeliveryTime = () => {
-    let _estimatedTime
+    let _estimatedTime = null
     let totalEta = 0
     const _delivery = order?.delivery_datetime_utc
       ? order?.delivery_datetime_utc
@@ -40,6 +40,7 @@ export const OrderEta = (props) => {
     } else {
       _estimatedTime = moment.utc(_delivery).add(order?.eta_time, 'minutes')
     }
+    if (order?.delivered_in) { _estimatedTime = moment.utc(_delivery).add(order?.delivered_in, 'minutes')}
     _estimatedTime = outputFormat ? moment(_estimatedTime).local().format(outputFormat) : parseDate(_estimatedTime, { utc: false })
     setEstimatedDeliveryTime(_estimatedTime)
   }
