@@ -108,7 +108,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     onClick: function onClick() {
       return setOrderSelected(order);
     }
-  }, !!(order !== null && order !== void 0 && order.review) ? t('REVIEWED', 'Reviewed') : t('REVIEW', 'Review')), !hideReorderButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, !!(order !== null && order !== void 0 && order.review) ? t('REVIEWED', 'Reviewed') : t('REVIEW', 'Review')), !hideReorderButton && typeof (order === null || order === void 0 ? void 0 : order.id) === 'number' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     className: "reorder",
     outline: true,

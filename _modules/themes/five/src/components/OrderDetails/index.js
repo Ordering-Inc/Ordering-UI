@@ -181,7 +181,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var acceptedStatus = [1, 2, 5, 6, 10, 11, 12];
   var completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
   var placeSpotTypes = [3, 4, 5];
-  var activeStatus = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23];
+  var activeStatus = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23];
   var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var enabledPoweredByOrdering = configs === null || configs === void 0 ? void 0 : (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
   var hideOrderActions = (order === null || order === void 0 ? void 0 : order.delivery_type) === 1;
