@@ -48,6 +48,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     lastOrder = _useState2[0],
     setLastOrder = _useState2[1];
+  var statusToShow = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21];
   var isChew = (theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.layout) === null || _theme$header$compone2 === void 0 ? void 0 : (_theme$header$compone3 = _theme$header$compone2.type) === null || _theme$header$compone3 === void 0 ? void 0 : _theme$header$compone3.toLowerCase()) === 'chew';
   var handleGoToPage = function handleGoToPage(index) {
     events.emit('go_to_page', {
@@ -62,7 +63,17 @@ var OrderProgressUI = function OrderProgressUI(props) {
       var sortedOrders = orderList.orders.sort(function (a, b) {
         return a.id > b.id ? -1 : 1;
       });
-      setLastOrder(sortedOrders[0]);
+      var orderInProgress = sortedOrders.find(function (_ref) {
+        var status = _ref.status;
+        return statusToShow.includes(status);
+      });
+      var _lastOrder = null;
+      if (orderInProgress) {
+        _lastOrder = orderInProgress;
+      } else {
+        _lastOrder = sortedOrders[0];
+      }
+      setLastOrder(_lastOrder);
     }
   }, [orderList === null || orderList === void 0 ? void 0 : orderList.orders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderList === null || orderList === void 0 ? void 0 : orderList.loading) && /*#__PURE__*/_react.default.createElement(_styles.OrderProgressWrapper, {
@@ -73,7 +84,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     isChew: props.isChew
   }, /*#__PURE__*/_react.default.createElement(_styles.OrderProgressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressLogo, {
     bgimage: (orderList === null || orderList === void 0 ? void 0 : orderList.orders.length) === 1 ? optimizeImage((lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$business = lastOrder.business) === null || _lastOrder$business === void 0 ? void 0 : _lastOrder$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_91,c_limit') : isChew ? theme.images.logos.chewLogoReverse : theme.images.logos.logotype
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProgressDescriptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_IN_PROGRESS', 'Order in progress')), /*#__PURE__*/_react.default.createElement("p", null, t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProgressDescriptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, statusToShow.includes(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status) ? t('ORDER_IN_PROGRESS', 'Order in progress') : t('ORDER', 'Order')), statusToShow.includes(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status) && /*#__PURE__*/_react.default.createElement("p", null, t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primaryContrast",
     naked: true,
     onClick: function onClick() {
@@ -83,7 +94,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     style: {
       width: (_getOrderStatus = (0, _utils.getOrderStatus)(lastOrder.status)) !== null && _getOrderStatus !== void 0 && _getOrderStatus.percentage ? "".concat((0, _utils.getOrderStatus)(lastOrder.status).percentage, "%") : '0%'
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, (_getOrderStatus2 = (0, _utils.getOrderStatus)(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_DELIVERY', 'Estimated delivery'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, (_getOrderStatus2 = (0, _utils.getOrderStatus)(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, (lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_type) === 1 ? t('ESTIMATED_DELIVERY', 'Estimated delivery') : t('ESTIMATED_TIME', 'Estimated time'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
     outputFormat: 'hh:mm A'
   }) : parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
     utc: false
@@ -95,7 +106,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
 var OrderProgress = function OrderProgress(props) {
   var orderProgressProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrderProgressUI,
-    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21, 22, 23],
+    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
