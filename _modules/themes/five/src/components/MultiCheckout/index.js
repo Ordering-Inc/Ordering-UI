@@ -42,7 +42,7 @@ var mapConfigs = {
   }
 };
 var MultiCheckoutUI = function MultiCheckoutUI(props) {
-  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _configs$format_numbe, _configs$format_numbe2, _configs$google_maps_, _customerState$user, _cartGroup$result2, _cartGroup$result3, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2, _configs$multi_busine6, _configs$multi_busine7;
+  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _loyaltyPlansState$re, _creditPointGeneralPl, _creditPointGeneralPl2, _configs$google_maps_, _customerState$user, _cartGroup$result2, _cartGroup$result3, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2, _configs$multi_busine6, _configs$multi_busine7;
   var placing = props.placing,
     isCustomerMode = props.isCustomerMode,
     openCarts = props.openCarts,
@@ -111,20 +111,19 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
   var isMultiDriverTips = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var totalFeeEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === '1' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o4 = configs.driver_tip_options) === null || _configs$driver_tip_o4 === void 0 ? void 0 : _configs$driver_tip_o4.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o5 = configs.driver_tip_options) === null || _configs$driver_tip_o5 === void 0 ? void 0 : _configs$driver_tip_o5.value) || [];
-  var creditPointPlan = loyaltyPlansState === null || loyaltyPlansState === void 0 ? void 0 : (_loyaltyPlansState$re = loyaltyPlansState.result) === null || _loyaltyPlansState$re === void 0 ? void 0 : _loyaltyPlansState$re.find(function (loyal) {
+  var creditPointGeneralPlan = loyaltyPlansState === null || loyaltyPlansState === void 0 ? void 0 : (_loyaltyPlansState$re = loyaltyPlansState.result) === null || _loyaltyPlansState$re === void 0 ? void 0 : _loyaltyPlansState$re.find(function (loyal) {
     return loyal.type === 'credit_point';
   });
-  var businessIds = openCarts.map(function (cart) {
-    return cart.business_id;
-  });
-  var loyalBusinessIds = (_creditPointPlan$busi = creditPointPlan === null || creditPointPlan === void 0 ? void 0 : (_creditPointPlan$busi2 = creditPointPlan.businesses) === null || _creditPointPlan$busi2 === void 0 ? void 0 : _creditPointPlan$busi2.filter(function (b) {
+  var loyalBusinessAvailable = (_creditPointGeneralPl = creditPointGeneralPlan === null || creditPointGeneralPlan === void 0 ? void 0 : (_creditPointGeneralPl2 = creditPointGeneralPlan.businesses) === null || _creditPointGeneralPl2 === void 0 ? void 0 : _creditPointGeneralPl2.filter(function (b) {
     return b.accumulates;
-  }).map(function (item) {
-    return item.business_id;
-  })) !== null && _creditPointPlan$busi !== void 0 ? _creditPointPlan$busi : [];
-  var creditPointPlanOnBusiness = businessIds.every(function (bid) {
-    return loyalBusinessIds.includes(bid);
-  }) && creditPointPlan;
+  })) !== null && _creditPointGeneralPl !== void 0 ? _creditPointGeneralPl : [];
+  var accumulationRateBusiness = function accumulationRateBusiness(businessId) {
+    var _loyalBusinessAvailab, _loyalBusinessAvailab2, _creditPointGeneralPl3;
+    var value = (_loyalBusinessAvailab = loyalBusinessAvailable === null || loyalBusinessAvailable === void 0 ? void 0 : (_loyalBusinessAvailab2 = loyalBusinessAvailable.find(function (loyal) {
+      return loyal.business_id === businessId;
+    })) === null || _loyalBusinessAvailab2 === void 0 ? void 0 : _loyalBusinessAvailab2.accumulation_rate) !== null && _loyalBusinessAvailab !== void 0 ? _loyalBusinessAvailab : 0;
+    return value || ((_creditPointGeneralPl3 = creditPointGeneralPlan === null || creditPointGeneralPlan === void 0 ? void 0 : creditPointGeneralPlan.accumulation_rate) !== null && _creditPointGeneralPl3 !== void 0 ? _creditPointGeneralPl3 : 0);
+  };
   var getIncludedTaxes = function getIncludedTaxes(cart) {
     if ((cart === null || cart === void 0 ? void 0 : cart.taxes) === null || !(cart !== null && cart !== void 0 && cart.taxes)) {
       var _cart$business;
@@ -136,10 +135,13 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       }, 0);
     }
   };
-  var subtotalAmount = openCarts.reduce(function (sum, cart) {
-    return sum + ((cart === null || cart === void 0 ? void 0 : cart.subtotal) + getIncludedTaxes(cart));
-  }, 0) * (creditPointPlanOnBusiness === null || creditPointPlanOnBusiness === void 0 ? void 0 : creditPointPlanOnBusiness.accumulation_rate);
-  var loyaltyRewardValue = creditPointPlanOnBusiness !== null && creditPointPlanOnBusiness !== void 0 && creditPointPlanOnBusiness.accumulation_rate ? (Math.trunc(subtotalAmount * 100) / 100).toFixed((_configs$format_numbe = (_configs$format_numbe2 = configs.format_number_decimal_length) === null || _configs$format_numbe2 === void 0 ? void 0 : _configs$format_numbe2.value) !== null && _configs$format_numbe !== void 0 ? _configs$format_numbe : 2) : 0;
+  var clearAmount = function clearAmount(value) {
+    var _configs$format_numbe, _configs$format_numbe2;
+    return parseFloat((Math.trunc(value * 100) / 100).toFixed((_configs$format_numbe = (_configs$format_numbe2 = configs.format_number_decimal_length) === null || _configs$format_numbe2 === void 0 ? void 0 : _configs$format_numbe2.value) !== null && _configs$format_numbe !== void 0 ? _configs$format_numbe : 2));
+  };
+  var loyaltyRewardValue = openCarts.reduce(function (sum, cart) {
+    return sum + clearAmount(((cart === null || cart === void 0 ? void 0 : cart.subtotal) + getIncludedTaxes(cart)) * accumulationRateBusiness(cart === null || cart === void 0 ? void 0 : cart.business_id));
+  }, 0);
   var handlePlaceOrder = function handlePlaceOrder() {
     if (!userErrors.length) {
       handleGroupPlaceOrder && handleGroupPlaceOrder();
