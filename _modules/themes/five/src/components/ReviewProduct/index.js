@@ -225,12 +225,17 @@ var ReviewProductUI = function ReviewProductUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.ReviewProductContainer, {
     onSubmit: handleSubmit(onSubmit)
-  }, (order === null || order === void 0 ? void 0 : order.products) && order.products.length > 0 && order.products.map(function (product, i) {
-    return !(product !== null && product !== void 0 && product.deleted) && /*#__PURE__*/_react.default.createElement(SingleProductReview, _extends({}, props, {
+  }, (order === null || order === void 0 ? void 0 : order.products) && order.products.length > 0 && (order === null || order === void 0 ? void 0 : order.products.map(function (productsOrder) {
+    return productsOrder !== null && productsOrder !== void 0 && productsOrder.length ? productsOrder === null || productsOrder === void 0 ? void 0 : productsOrder.map(function (product, i) {
+      return !(product !== null && product !== void 0 && product.deleted) && /*#__PURE__*/_react.default.createElement(SingleProductReview, _extends({}, props, {
+        key: i,
+        product: product
+      }));
+    }) : !(productsOrder !== null && productsOrder !== void 0 && productsOrder.deleted) && /*#__PURE__*/_react.default.createElement(SingleProductReview, _extends({}, props, {
       key: i,
-      product: product
+      product: productsOrder
     }));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, null, /*#__PURE__*/_react.default.createElement("span", {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: closeReviewProduct
   }, t('SKIP', 'Skip')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !formState.loading ? 'primary' : 'secondary',
