@@ -116,9 +116,13 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   // }
 
   var handleBusinessClick = function handleBusinessClick(e) {
-    var _favoriteRef$current;
+    var _favoriteRef$current, _business$menus;
     if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
-    if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business);else handleClick(business);
+    var hasMenu = business === null || business === void 0 ? void 0 : (_business$menus = business.menus) === null || _business$menus === void 0 ? void 0 : _business$menus.filter(function (menu) {
+      var _menu$products;
+      return (menu === null || menu === void 0 ? void 0 : menu.enabled) && (menu === null || menu === void 0 ? void 0 : (_menu$products = menu.products) === null || _menu$products === void 0 ? void 0 : _menu$products.length) > 0;
+    }).length;
+    if (onPreorderBusiness && (!isBusinessOpen || !hasMenu)) onPreorderBusiness(business);else handleClick(business);
   };
   var handleChangeFavorite = function handleChangeFavorite() {
     if (auth) {
