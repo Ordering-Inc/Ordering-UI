@@ -9,7 +9,7 @@ export const ProductsContainer = styled.div`
     cursor: pointer;
     margin-bottom: 5px;
   }
-  div {
+  > div {
     background-color: ${({ theme }) => theme?.business_view?.components?.style?.backgroundColor};
   }
 

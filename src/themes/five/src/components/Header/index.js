@@ -88,6 +88,8 @@ export const Header = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
 
+  const isMulticheckoutPage = window.location.pathname?.includes('/multi-checkout')
+
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
   const windowSize = useWindowSize()
@@ -362,16 +364,20 @@ export const Header = (props) => {
                   <>
                     {isShowOrderOptions && (
                       windowSize.width > 768 ? (
-                        <CartPopover
-                          open={openPopover.cart}
-                          carts={cartsWithProducts}
-                          onClick={() => handleTogglePopover('cart')}
-                          onClose={() => handleClosePopover('cart')}
-                          auth={auth}
-                          location={location}
-                          isCustomerMode={isCustomerMode}
-                          setPreorderBusiness={setPreorderBusiness}
-                        />
+                        <>
+                          {!isMulticheckoutPage ? (
+                            <CartPopover
+                              open={openPopover.cart}
+                              carts={cartsWithProducts}
+                              onClick={() => handleTogglePopover('cart')}
+                              onClose={() => handleClosePopover('cart')}
+                              auth={auth}
+                              location={location}
+                              isCustomerMode={isCustomerMode}
+                              setPreorderBusiness={setPreorderBusiness}
+                            />
+                          ) : null}
+                        </>
                       ) : (
                         <HeaderOption
                           variant='cart'
