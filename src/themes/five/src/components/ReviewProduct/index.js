@@ -70,10 +70,10 @@ const SingleProductReview = (props) => {
     const _comment = _comments + extraComment
     let found = false
     const _changes = formState.changes.map(item => {
-      if (item?.product_id === product[0]?.product_id) {
+      if (item?.product_id === product?.product_id) {
         found = true
         return {
-          product_id: product[0]?.product_id,
+          product_id: product?.product_id,
           comment: _comment,
           qualification: isLike ? 5 : 1
         }
@@ -82,7 +82,7 @@ const SingleProductReview = (props) => {
     })
     if (!found) {
       _changes.push({
-        product_id: product[0]?.product_id,
+        product_id: product?.product_id,
         comment: _comment,
         qualification: isLike ? 5 : 1
       })
@@ -92,13 +92,13 @@ const SingleProductReview = (props) => {
 
   return (
     <SingleProductReviewContainer>
-      {(product[0]?.images || theme.images?.dummies?.businessLogo) && (
+      {(product?.images || theme.images?.dummies?.businessLogo) && (
         <WrapperProductLogo>
-          <ProductLogo bgimage={product[0]?.images || theme.images?.dummies?.businessLogo} />
+          <ProductLogo bgimage={product?.images || theme.images?.dummies?.businessLogo} />
         </WrapperProductLogo>
       )}
       <HandReviewWrapper>
-        <p>{product[0]?.name}</p>
+        <p>{product?.name}</p>
         <HandReviewContent>
           <HandIconWrapper onClick={() => setIsLike(true)} active={isLike}>
             <AiOutlineLike />
