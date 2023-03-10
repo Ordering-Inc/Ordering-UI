@@ -209,12 +209,20 @@ const ReviewProductUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <ReviewProductContainer onSubmit={handleSubmit(onSubmit)}>
-        {order?.products && order.products.length > 0 && order.products.map((product, i) => !product?.deleted && (
-          <SingleProductReview
-            {...props}
-            key={i}
-            product={product}
-          />
+        {order?.products && order.products.length > 0 && order?.products.map(productsOrder => (
+          productsOrder?.length ?  productsOrder?.map((product, i) => !product?.deleted && (
+             <SingleProductReview
+              {...props}
+              key={i}
+              product={product}
+            />
+          )) : !productsOrder?.deleted && (
+            <SingleProductReview
+              {...props}
+              key={i}
+              product={productsOrder}
+            />
+          )
         ))}
         <ActionBlock>
           <span onClick={closeReviewProduct}>{t('SKIP', 'Skip')}</span>
