@@ -29,6 +29,7 @@ export const OrderContextUI = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
 
   const handleTogglePopover = (type) => {
     setOpenPopover({
@@ -79,14 +80,16 @@ export const OrderContextUI = (props) => {
           <ItemInline>
             <OrderTypeSelectorHeader configTypes={configTypes} />
           </ItemInline>
-          <ItemInline>
-            <MomentPopover
-              open={openPopover.moment}
-              onClick={() => handleTogglePopover('moment')}
-              onClose={() => handleClosePopover('moment')}
-              isBanner
-            />
-          </ItemInline>
+          {isPreOrderSetting && (
+            <ItemInline>
+              <MomentPopover
+                open={openPopover.moment}
+                onClick={() => handleTogglePopover('moment')}
+                onClose={() => handleClosePopover('moment')}
+                isBanner
+              />
+            </ItemInline>
+          )}
         </FeatureItems>
       </Container>
       <Modal
