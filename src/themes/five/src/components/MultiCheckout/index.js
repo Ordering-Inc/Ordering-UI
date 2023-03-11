@@ -101,11 +101,18 @@ const MultiCheckoutUI = (props) => {
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
+  const methodsPay = ['global_google_pay', 'global_apple_pay']
   const creditPointPlan = loyaltyPlansState?.result?.find((loyal) => loyal.type === 'credit_point')
   const businessIds = openCarts.map((cart) => cart.business_id)
   const loyalBusinessIds = creditPointPlan?.businesses?.filter((b) => b.accumulates).map((item) => item.business_id) ?? []
   const creditPointPlanOnBusiness = businessIds.every((bid) => loyalBusinessIds.includes(bid)) && creditPointPlan
-  const methodsPay = ['global_google_pay', 'global_apple_pay']
+  const creditPointGeneralPlan = loyaltyPlansState?.result?.find((loyal) => loyal.type === 'credit_point')
+  const loyalBusinessAvailable = creditPointGeneralPlan?.businesses?.filter((b) => b.accumulates) ?? []
+
+  const accumulationRateBusiness = (businessId) => {
+    const value = loyalBusinessAvailable?.find((loyal) => loyal.business_id === businessId)?.accumulation_rate ?? 0
+    return value || (creditPointGeneralPlan?.accumulation_rate ?? 0)
+  }
 
   const getIncludedTaxes = (cart) => {
     if (cart?.taxes === null || !cart?.taxes) {
@@ -117,12 +124,8 @@ const MultiCheckoutUI = (props) => {
     }
   }
 
-  const subtotalAmount = openCarts.reduce((sum, cart) => sum + (cart?.subtotal + getIncludedTaxes(cart)), 0) *
-    creditPointPlanOnBusiness?.accumulation_rate
-
-  const loyaltyRewardValue = (creditPointPlanOnBusiness?.accumulation_rate
-    ? (Math.trunc(subtotalAmount * 100) / 100).toFixed(configs.format_number_decimal_length?.value ?? 2)
-    : 0)
+  const clearAmount = (value) => parseFloat((Math.trunc(value * 100) / 100).toFixed(configs.format_number_decimal_length?.value ?? 2))
+  const loyaltyRewardValue = openCarts.reduce((sum, cart) => sum + clearAmount((cart?.subtotal + getIncludedTaxes(cart)) * accumulationRateBusiness(cart?.business_id)), 0)
 
   const handlePlaceOrder = () => {
     if (!userErrors.length) {

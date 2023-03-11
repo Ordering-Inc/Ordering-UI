@@ -12,6 +12,7 @@ import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
 import { Phone, Chat } from 'react-bootstrap-icons'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
+import { OrderEta } from '../OrderDetails/OrderEta'
 
 import {
   SingleOrderContainer,
@@ -46,6 +47,8 @@ const SingleOrderCardUI = (props) => {
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
   const hideIndividualButton = configs.multi_business_checkout_remove_individual_buttons?.value === '1'
+
+  const activeStatus = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23]
 
   const handleGoToOrderDetails = (uuid) => {
     events.emit('go_to_page', { page: 'order_detail', params: { orderId: uuid }, replace: !props.isMultiOrders })
@@ -84,11 +87,11 @@ const SingleOrderCardUI = (props) => {
               {orderTypes?.find(type => order?.delivery_type === type?.value)?.text}:
             </p>
             <p className='date'>
-              {
-                order?.delivery_datetime_utc
-                  ? parseDate(order?.delivery_datetime_utc)
-                  : parseDate(order?.delivery_datetime, { utc: false })
-              }
+              {activeStatus.includes(order?.status) ? (
+                <OrderEta order={order} />
+              ) : (
+                parseDate(order?.reporting_data?.at[`status:${order.status}`])
+              )}
             </p>
           </div>
         </div>
