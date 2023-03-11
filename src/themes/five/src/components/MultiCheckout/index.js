@@ -105,6 +105,7 @@ const MultiCheckoutUI = (props) => {
   const businessIds = openCarts.map((cart) => cart.business_id)
   const loyalBusinessIds = creditPointPlan?.businesses?.filter((b) => b.accumulates).map((item) => item.business_id) ?? []
   const creditPointPlanOnBusiness = businessIds.every((bid) => loyalBusinessIds.includes(bid)) && creditPointPlan
+  const methodsPay = ['global_google_pay', 'global_apple_pay']
 
   const getIncludedTaxes = (cart) => {
     if (cart?.taxes === null || !cart?.taxes) {
@@ -210,6 +211,15 @@ const MultiCheckoutUI = (props) => {
     }
   }, [walletState.error])
 
+  useEffect(() => {
+    if (methodsPay.includes(paymethodSelected?.paymethod?.gateway) && typeof paymethodSelected?.paymethod_data === 'string') {
+      const hasSource = JSON.parse(paymethodSelected?.paymethod_data)?.source_id
+      if (hasSource) {
+        handlePlaceOrder()
+      }
+    }
+  }, [paymethodSelected])
+
   return (
     <>
       {((!cartGroup?.loading && openCarts.length === 0) || !cartUuid) ? (
@@ -261,7 +271,9 @@ const MultiCheckoutUI = (props) => {
                   handlePaymethodDataChange={handlePaymethodDataChange}
                   cartUuid={cartUuid}
                   isCustomerMode={isCustomerMode}
+                  cartGroup={cartGroup}
                   setCardList={setCardList}
+                  handlePlaceOrder={handlePlaceOrder}
                 />
               </PaymentMethodContainer>
 
