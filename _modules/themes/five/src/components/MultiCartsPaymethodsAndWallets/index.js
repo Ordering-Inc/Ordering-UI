@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.MultiCartsPaymethodsAndWallets = void 0;
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -19,7 +19,11 @@ var _Checkbox = require("../../../../../styles/Checkbox");
 var _PaymentOptionStripe = require("../PaymentOptionStripe");
 var _utils = require("../../../../../utils");
 var _styles = require("./styles");
+var _StripeElementsForm = require("../StripeElementsForm");
+var _Modal = _interopRequireDefault(require("../Modal"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -69,7 +73,7 @@ var CreditCard2 = function CreditCard2() {
   }));
 };
 var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI(props) {
-  var _configs$wallet_cash_, _configs$wallet_credi, _paymethodSelected$pa, _paymethodSelected$pa2, _paymethodSelected$pa3, _paymethodSelected$pa4, _paymethodSelected$da, _paymethodSelected$pa5, _paymethodSelected$pa6, _paymethodSelected$pa7, _paymethodSelected$pa8, _paymethodSelected$pa9, _paymethodSelected$pa10, _walletsState$result;
+  var _configs$wallet_cash_, _configs$wallet_credi, _paymethodSelected$pa, _paymethodSelected$pa2, _paymethodSelected$pa3, _paymethodSelected$pa4, _paymethodSelected$da, _paymethodSelected$pa5, _paymethodSelected$pa6, _paymethodSelected$pa7, _paymethodSelected$pa8, _paymethodSelected$pa9, _paymethodSelected$pa10, _walletsState$result, _paymethodSelected$pa11, _paymethodSelected$da2, _paymethodSelected$da3, _paymethodSelected$pa12, _paymethodSelected$pa13, _paymethodSelected$da4, _paymethodSelected$da5;
   var businessIds = props.businessIds,
     balance = props.balance,
     paymethodsAndWallets = props.paymethodsAndWallets,
@@ -80,7 +84,9 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
     handlePaymethodDataChange = props.handlePaymethodDataChange,
     setCardList = props.setCardList,
     walletsPaymethod = props.walletsPaymethod,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    handlePlaceOrder = props.handlePlaceOrder,
+    cartGroup = props.cartGroup;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -91,8 +97,14 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parsePrice = _useUtils2[0].parsePrice;
+  var _useState = (0, _react.useState)(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    openPaymethod = _useState2[0],
+    setOpenPaymethod = _useState2[1];
   var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
   var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
+  var methodsPay = ['global_google_pay', 'global_apple_pay'];
+  var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
   var walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet'),
@@ -121,12 +133,13 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
     }, (!isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isActive: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id,
       onClick: function onClick() {
-        return handleSelectPaymethod(_objectSpread(_objectSpread({}, paymethod), {}, {
+        handleSelectPaymethod(_objectSpread(_objectSpread({}, paymethod), {}, {
           paymethod: {
             gateway: paymethod.gateway
           },
           paymethod_id: paymethod === null || paymethod === void 0 ? void 0 : paymethod.id
         }));
+        setOpenPaymethod(paymethod);
       }
     }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : paymethod.name))));
   })), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa = paymethodSelected.paymethod) === null || _paymethodSelected$pa === void 0 ? void 0 : _paymethodSelected$pa.gateway) === 'stripe' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
@@ -195,7 +208,25 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
     }, "".concat(wallet === null || wallet === void 0 ? void 0 : wallet.balance, " ").concat(t('POINTS', 'Points'))), " ", (wallet === null || wallet === void 0 ? void 0 : wallet.balance) > 0 && "= ".concat(parsePrice((wallet === null || wallet === void 0 ? void 0 : wallet.balance) / (wallet === null || wallet === void 0 ? void 0 : wallet.redemption_rate), {
       isTruncable: true
     })))));
-  }))));
+  }))), /*#__PURE__*/_react.default.createElement(_Modal.default, {
+    title: t('ADD_CARD', 'Add card'),
+    open: (stripeDirectMethods === null || stripeDirectMethods === void 0 ? void 0 : stripeDirectMethods.includes(openPaymethod === null || openPaymethod === void 0 ? void 0 : openPaymethod.gateway)) && !(paymethodSelected !== null && paymethodSelected !== void 0 && (_paymethodSelected$pa11 = paymethodSelected.paymethod_data) !== null && _paymethodSelected$pa11 !== void 0 && _paymethodSelected$pa11.id),
+    className: "modal-info",
+    onClose: function onClose() {
+      return setOpenPaymethod(null);
+    }
+  }, !(paymethodSelected !== null && paymethodSelected !== void 0 && (_paymethodSelected$da2 = paymethodSelected.data) !== null && _paymethodSelected$da2 !== void 0 && _paymethodSelected$da2.publishable) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PUBLISHABLE_KEY', 'Please add a publishable key'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da3 = paymethodSelected.data) === null || _paymethodSelected$da3 === void 0 ? void 0 : _paymethodSelected$da3.publishable) && (stripeDirectMethods === null || stripeDirectMethods === void 0 ? void 0 : stripeDirectMethods.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa12 = paymethodSelected.paymethod) === null || _paymethodSelected$pa12 === void 0 ? void 0 : _paymethodSelected$pa12.gateway)) && /*#__PURE__*/_react.default.createElement(_StripeElementsForm.StripeElementsForm, {
+    methodsPay: methodsPay,
+    paymethod: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa13 = paymethodSelected.paymethod) === null || _paymethodSelected$pa13 === void 0 ? void 0 : _paymethodSelected$pa13.gateway,
+    businessId: props.businessId,
+    cartGroup: cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.result,
+    publicKey: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da4 = paymethodSelected.data) === null || _paymethodSelected$da4 === void 0 ? void 0 : _paymethodSelected$da4.publishable) || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da5 = paymethodSelected.data) === null || _paymethodSelected$da5 === void 0 ? void 0 : _paymethodSelected$da5.publishable_key),
+    handleSource: handlePaymethodDataChange,
+    onCancel: function onCancel() {
+      return setOpenPaymethod(null);
+    },
+    handlePlaceOrder: handlePlaceOrder
+  })));
 };
 var MultiCartsPaymethodsAndWallets = function MultiCartsPaymethodsAndWallets(props) {
   var multiCartsPaymethodsAndWalletsProps = _objectSpread(_objectSpread({}, props), {}, {

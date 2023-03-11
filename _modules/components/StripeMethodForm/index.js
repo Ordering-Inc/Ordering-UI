@@ -31,11 +31,15 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
   var cart = props.cart,
     handleSource = props.handleSource,
     handleCancel = props.handleCancel,
-    paymethod = props.paymethod;
+    paymethod = props.paymethod,
+    cartGroup = props.cartGroup;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var stripe = (0, _reactStripeJs.useStripe)();
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     paymentRequest = _useState2[0],
@@ -44,15 +48,24 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     methodUnavailable = _useState4[0],
     setMethodUnavailable = _useState4[1];
+  var googlePayMethods = ['google_pay', 'global_google_pay'];
   (0, _react.useEffect)(function () {
     if (stripe) {
-      var _cart$business;
+      var _configs$stripe_curre, _configs$stripe_curre2, _configs$stripe_curre3, _cart$business2;
+      var cartNames = '';
+      if (cartGroup) {
+        // eslint-disable-next-line no-unused-expressions
+        cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.carts.map(function (cart, i) {
+          var _cart$business, _cartNames, _cartNames$carts;
+          return cartNames = "".concat(cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.name, " ").concat(i !== ((_cartNames = cartNames) === null || _cartNames === void 0 ? void 0 : (_cartNames$carts = _cartNames.carts) === null || _cartNames$carts === void 0 ? void 0 : _cartNames$carts.length) && ', ');
+        });
+      }
       var pr = stripe.paymentRequest({
         country: 'US',
-        currency: 'usd',
+        currency: (configs === null || configs === void 0 ? void 0 : (_configs$stripe_curre = configs.stripe_currency) === null || _configs$stripe_curre === void 0 ? void 0 : (_configs$stripe_curre2 = _configs$stripe_curre.value) === null || _configs$stripe_curre2 === void 0 ? void 0 : (_configs$stripe_curre3 = _configs$stripe_curre2.toLowerCase) === null || _configs$stripe_curre3 === void 0 ? void 0 : _configs$stripe_curre3.call(_configs$stripe_curre2)) || 'usd',
         total: {
-          label: cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.name,
-          amount: Math.floor(((cart === null || cart === void 0 ? void 0 : cart.balance) || (cart === null || cart === void 0 ? void 0 : cart.total)) * 100)
+          label: cartNames || (cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.name),
+          amount: Math.floor(((cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.balance) || (cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.total) || (cart === null || cart === void 0 ? void 0 : cart.balance) || (cart === null || cart === void 0 ? void 0 : cart.total)) * 100)
         },
         requestPayerName: true,
         requestPayerEmail: true
@@ -67,12 +80,11 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
       pr.on('paymentmethod', /*#__PURE__*/function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
           var _e$paymentMethod, _e$paymentMethod2;
+          var data;
           return _regeneratorRuntime().wrap(function _callee$(_context) {
             while (1) switch (_context.prev = _context.next) {
               case 0:
-                e.complete('success');
-                handleCancel();
-                handleSource(_objectSpread(_objectSpread({}, e === null || e === void 0 ? void 0 : (_e$paymentMethod = e.paymentMethod) === null || _e$paymentMethod === void 0 ? void 0 : _e$paymentMethod.card), {}, {
+                data = _objectSpread(_objectSpread({}, e === null || e === void 0 ? void 0 : (_e$paymentMethod = e.paymentMethod) === null || _e$paymentMethod === void 0 ? void 0 : _e$paymentMethod.card), {}, {
                   id: e.paymentMethod.id,
                   type: e.paymentMethod.type,
                   source_id: e === null || e === void 0 ? void 0 : (_e$paymentMethod2 = e.paymentMethod) === null || _e$paymentMethod2 === void 0 ? void 0 : _e$paymentMethod2.id,
@@ -80,8 +92,11 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
                     brand: e.paymentMethod.card.brand,
                     last4: e.paymentMethod.card.last4
                   }
-                }));
-              case 3:
+                });
+                e.complete('success');
+                handleCancel();
+                handleSource(cartGroup ? JSON.stringify(data) : data);
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -93,7 +108,7 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
       }());
     }
   }, [stripe]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, methodUnavailable ? /*#__PURE__*/_react.default.createElement("h2", null, paymethod === 'google_pay' ? t('GOOGLE_PAY_UNAVAILABLE', 'Google pay unavailable') : t('APPLE_PAY_UNAVAILABLE', 'Apple pay unavailable')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, paymentRequest ? /*#__PURE__*/_react.default.createElement(_reactStripeJs.PaymentRequestButtonElement, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, methodUnavailable ? /*#__PURE__*/_react.default.createElement("h2", null, googlePayMethods.includes(paymethod) ? t('GOOGLE_PAY_UNAVAILABLE', 'Google pay unavailable') : t('APPLE_PAY_UNAVAILABLE', 'Apple pay unavailable')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, paymentRequest ? /*#__PURE__*/_react.default.createElement(_reactStripeJs.PaymentRequestButtonElement, {
     options: {
       paymentRequest: paymentRequest
     }

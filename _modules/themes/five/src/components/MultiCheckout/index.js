@@ -42,7 +42,7 @@ var mapConfigs = {
   }
 };
 var MultiCheckoutUI = function MultiCheckoutUI(props) {
-  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _loyaltyPlansState$re, _creditPointGeneralPl, _creditPointGeneralPl2, _configs$google_maps_, _customerState$user, _cartGroup$result2, _cartGroup$result3, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2, _configs$multi_busine6, _configs$multi_busine7;
+  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _loyaltyPlansState$re2, _creditPointGeneralPl, _creditPointGeneralPl2, _configs$google_maps_, _customerState$user, _cartGroup$result2, _cartGroup$result3, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2, _configs$multi_busine6, _configs$multi_busine7;
   var placing = props.placing,
     isCustomerMode = props.isCustomerMode,
     openCarts = props.openCarts,
@@ -111,7 +111,22 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
   var isMultiDriverTips = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var totalFeeEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === '1' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o4 = configs.driver_tip_options) === null || _configs$driver_tip_o4 === void 0 ? void 0 : _configs$driver_tip_o4.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o5 = configs.driver_tip_options) === null || _configs$driver_tip_o5 === void 0 ? void 0 : _configs$driver_tip_o5.value) || [];
-  var creditPointGeneralPlan = loyaltyPlansState === null || loyaltyPlansState === void 0 ? void 0 : (_loyaltyPlansState$re = loyaltyPlansState.result) === null || _loyaltyPlansState$re === void 0 ? void 0 : _loyaltyPlansState$re.find(function (loyal) {
+  var methodsPay = ['global_google_pay', 'global_apple_pay'];
+  var creditPointPlan = loyaltyPlansState === null || loyaltyPlansState === void 0 ? void 0 : (_loyaltyPlansState$re = loyaltyPlansState.result) === null || _loyaltyPlansState$re === void 0 ? void 0 : _loyaltyPlansState$re.find(function (loyal) {
+    return loyal.type === 'credit_point';
+  });
+  var businessIds = openCarts.map(function (cart) {
+    return cart.business_id;
+  });
+  var loyalBusinessIds = (_creditPointPlan$busi = creditPointPlan === null || creditPointPlan === void 0 ? void 0 : (_creditPointPlan$busi2 = creditPointPlan.businesses) === null || _creditPointPlan$busi2 === void 0 ? void 0 : _creditPointPlan$busi2.filter(function (b) {
+    return b.accumulates;
+  }).map(function (item) {
+    return item.business_id;
+  })) !== null && _creditPointPlan$busi !== void 0 ? _creditPointPlan$busi : [];
+  var creditPointPlanOnBusiness = businessIds.every(function (bid) {
+    return loyalBusinessIds.includes(bid);
+  }) && creditPointPlan;
+  var creditPointGeneralPlan = loyaltyPlansState === null || loyaltyPlansState === void 0 ? void 0 : (_loyaltyPlansState$re2 = loyaltyPlansState.result) === null || _loyaltyPlansState$re2 === void 0 ? void 0 : _loyaltyPlansState$re2.find(function (loyal) {
     return loyal.type === 'credit_point';
   });
   var loyalBusinessAvailable = (_creditPointGeneralPl = creditPointGeneralPlan === null || creditPointGeneralPlan === void 0 ? void 0 : (_creditPointGeneralPl2 = creditPointGeneralPlan.businesses) === null || _creditPointGeneralPl2 === void 0 ? void 0 : _creditPointGeneralPl2.filter(function (b) {
@@ -220,6 +235,16 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       showToast(_orderingComponents.ToastType.Error, t(walletState.error, (_walletState$error = walletState.error) === null || _walletState$error === void 0 ? void 0 : (_walletState$error$ = _walletState$error[0]) === null || _walletState$error$ === void 0 ? void 0 : _walletState$error$.replace(/_/g, ' ')));
     }
   }, [walletState.error]);
+  (0, _react.useEffect)(function () {
+    var _paymethodSelected$pa2;
+    if (methodsPay.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$pa2 = paymethodSelected.paymethod) === null || _paymethodSelected$pa2 === void 0 ? void 0 : _paymethodSelected$pa2.gateway) && typeof (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.paymethod_data) === 'string') {
+      var _JSON$parse;
+      var hasSource = (_JSON$parse = JSON.parse(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.paymethod_data)) === null || _JSON$parse === void 0 ? void 0 : _JSON$parse.source_id;
+      if (hasSource) {
+        handlePlaceOrder();
+      }
+    }
+  }, [paymethodSelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(cartGroup !== null && cartGroup !== void 0 && cartGroup.loading) && openCarts.length === 0 || !cartUuid ? /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
@@ -257,7 +282,9 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     handlePaymethodDataChange: handlePaymethodDataChange,
     cartUuid: cartUuid,
     isCustomerMode: isCustomerMode,
-    setCardList: setCardList
+    cartGroup: cartGroup,
+    setCardList: setCardList,
+    handlePlaceOrder: handlePlaceOrder
   })), (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : (_validationFields$fie10 = _validationFields$fie9.checkout) === null || _validationFields$fie10 === void 0 ? void 0 : (_validationFields$fie11 = _validationFields$fie10.coupon) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.enabled) && openCarts.every(function (cart) {
     return cart.business_id && cart.status !== 2;
   }) && (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine2 = configs.multi_business_checkout_coupon_input_style) === null || _configs$multi_busine2 === void 0 ? void 0 : _configs$multi_busine2.value) === 'group' && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DISCOUNT_COUPON', 'Discount coupon')), /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {

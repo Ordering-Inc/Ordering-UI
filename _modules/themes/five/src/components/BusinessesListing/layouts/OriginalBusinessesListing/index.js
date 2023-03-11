@@ -150,7 +150,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     var hasMore = !(paginationProps.totalPages === paginationProps.currentPage);
     if (badScrollPosition || businessesList.loading || ((_businessesList$error = businessesList.error) === null || _businessesList$error === void 0 ? void 0 : _businessesList$error.length) > 0 || !hasMore) return;
     getBusinesses();
-  }, [businessesList.loading, paginationProps]);
+  }, [businessesList, paginationProps]);
   (0, _react.useEffect)(function () {
     window.addEventListener('scroll', handleScroll);
     return function () {
