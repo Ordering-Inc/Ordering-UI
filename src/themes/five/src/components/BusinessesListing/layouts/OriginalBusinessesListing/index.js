@@ -113,7 +113,7 @@ const BusinessesListingUI = (props) => {
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (badScrollPosition || businessesList.loading || businessesList.error?.length > 0 || !hasMore) return
     getBusinesses()
-  }, [businessesList.loading, paginationProps])
+  }, [businessesList, paginationProps])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
