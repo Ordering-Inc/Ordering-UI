@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   useLanguage,
   useConfig,
@@ -28,6 +28,8 @@ import {
   SectionLeft,
   SectionLeftText
 } from './styles'
+import { StripeElementsForm } from '../StripeElementsForm'
+import Modal from '../Modal'
 
 const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect']
 
@@ -72,17 +74,21 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
     handlePaymethodDataChange,
     setCardList,
     walletsPaymethod,
-    isCustomerMode
+    isCustomerMode,
+    handlePlaceOrder,
+    cartGroup
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
+  const [openPaymethod, setOpenPaymethod] = useState(null)
 
   const isWalletCashEnabled = configs?.wallet_cash_enabled?.value === '1'
   const isWalletPointsEnabled = configs?.wallet_credit_point_enabled?.value === '1'
-
+  const methodsPay = ['global_google_pay', 'global_apple_pay']
+  const stripeDirectMethods = ['stripe_direct', ...methodsPay]
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet'),
@@ -109,7 +115,10 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
               {(!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
                 <PayCard
                   isActive={paymethodSelected?.id === paymethod.id}
-                  onClick={() => handleSelectPaymethod({ ...paymethod, paymethod: { gateway: paymethod.gateway }, paymethod_id: paymethod?.id })}
+                  onClick={() => {
+                    handleSelectPaymethod({ ...paymethod, paymethod: { gateway: paymethod.gateway }, paymethod_id: paymethod?.id })
+                    setOpenPaymethod(paymethod)
+                  }}
                 >
                   <div>{getPayIcon(paymethod.id)}</div>
                   <p>{t(paymethod?.gateway.toUpperCase(), paymethod?.name)}</p>
@@ -161,57 +170,80 @@ const MultiCartsPaymethodsAndWalletsUI = (props) => {
               {walletsState?.result?.filter(wallet =>
                 paymethodsAndWallets.wallets.find(item => item.type === wallet.type))
                 .map((wallet, idx) => walletName[wallet.type]?.isActive &&
-              (
-                <WalletOptionContainer
-                  key={wallet.type}
-                  isBottomBorder={idx === paymethodsAndWallets.wallets?.length - 1}
-                >
-                  <SectionLeft>
-                    <Checkbox
-                      name={`payment_option_${wallet.type}`}
-                      id={`custom-checkbox-${idx}`}
-                      disabled={
-                        (balance === 0 && !walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id) ||
-                        wallet.balance === 0
-                      }
-                      value={`payment_option_${wallet.type}`}
-                      checked={!!walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id}
-                      onChange={() => handleSelectWallet(
-                        !walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id,
-                        wallet
-                      )}
-                    />
-                    <SectionLeftText>
-                      <label
-                        style={{
-                          color: (balance === 0 && !walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id) ||
-                            wallet.balance === 0 ? theme.colors.darkGray : 'black'
-                        }}
-                        htmlFor={`custom-checkbox-${idx}`}
-                      >
-                        {walletName[wallet.type]?.name}
-                      </label>
-                    </SectionLeftText>
-                  </SectionLeft>
-                  <div>
-                    {wallet.type === 'cash' && (
-                      <span>{parsePrice(wallet?.balance, { isTruncable: true })}</span>
-                    )}
-                    {wallet.type === 'credit_point' && (
-                      <span>
-                        <span style={{ color: theme.colors.primary }}>
-                          {`${wallet?.balance} ${t('POINTS', 'Points')}`}
-                        </span> {wallet?.balance > 0 && `= ${parsePrice(wallet?.balance / wallet?.redemption_rate, { isTruncable: true })}`}
-                      </span>
-                    )}
-                  </div>
-                </WalletOptionContainer>
-              ))}
+                  (
+                    <WalletOptionContainer
+                      key={wallet.type}
+                      isBottomBorder={idx === paymethodsAndWallets.wallets?.length - 1}
+                    >
+                      <SectionLeft>
+                        <Checkbox
+                          name={`payment_option_${wallet.type}`}
+                          id={`custom-checkbox-${idx}`}
+                          disabled={
+                            (balance === 0 && !walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id) ||
+                            wallet.balance === 0
+                          }
+                          value={`payment_option_${wallet.type}`}
+                          checked={!!walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id}
+                          onChange={() => handleSelectWallet(
+                            !walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id,
+                            wallet
+                          )}
+                        />
+                        <SectionLeftText>
+                          <label
+                            style={{
+                              color: (balance === 0 && !walletsPaymethod?.find(walletPay => walletPay.wallet_id === wallet.id)?.id) ||
+                                wallet.balance === 0 ? theme.colors.darkGray : 'black'
+                            }}
+                            htmlFor={`custom-checkbox-${idx}`}
+                          >
+                            {walletName[wallet.type]?.name}
+                          </label>
+                        </SectionLeftText>
+                      </SectionLeft>
+                      <div>
+                        {wallet.type === 'cash' && (
+                          <span>{parsePrice(wallet?.balance, { isTruncable: true })}</span>
+                        )}
+                        {wallet.type === 'credit_point' && (
+                          <span>
+                            <span style={{ color: theme.colors.primary }}>
+                              {`${wallet?.balance} ${t('POINTS', 'Points')}`}
+                            </span> {wallet?.balance > 0 && `= ${parsePrice(wallet?.balance / wallet?.redemption_rate, { isTruncable: true })}`}
+                          </span>
+                        )}
+                      </div>
+                    </WalletOptionContainer>
+                  ))}
             </>
           )}
         </WalletPaymentOptionContainer>
       )}
-
+      {/* Stripe direct, Google pay, Apple pay */}
+      <Modal
+        title={t('ADD_CARD', 'Add card')}
+        open={stripeDirectMethods?.includes(openPaymethod?.gateway) && !paymethodSelected?.paymethod_data?.id}
+        className='modal-info'
+        onClose={() => setOpenPaymethod(null)}
+      >
+        {!paymethodSelected?.data?.publishable &&
+          <Container>
+            <p>{t('ADD_PUBLISHABLE_KEY', 'Please add a publishable key')}</p>
+          </Container>}
+        {paymethodSelected?.data?.publishable && stripeDirectMethods?.includes(paymethodSelected?.paymethod?.gateway) && (
+          <StripeElementsForm
+            methodsPay={methodsPay}
+            paymethod={paymethodSelected?.paymethod?.gateway}
+            businessId={props.businessId}
+            cartGroup={cartGroup?.result}
+            publicKey={paymethodSelected?.data?.publishable || paymethodSelected?.data?.publishable_key}
+            handleSource={handlePaymethodDataChange}
+            onCancel={() => setOpenPaymethod(null)}
+            handlePlaceOrder={handlePlaceOrder}
+          />
+        )}
+      </Modal>
     </Container>
   )
 }

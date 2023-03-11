@@ -112,10 +112,13 @@ const PaymentOptionsUI = (props) => {
 
   const includeKioskPaymethods = ['cash', 'card_delivery']
 
+  const multiCheckoutMethods = ['global_google_pay', 'global_apple_pay']
+
   const list = paymethodsList ? paymethodsList?.paymethods : paymethods?.map(pay => pay.paymethod)
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
-  const supportedMethods = list?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
+
+  const supportedMethods = list?.filter(p => !multiCheckoutMethods.includes(p.gateway))?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
 
   const handlePaymentMethodClick = (paymethod) => {
     if (paymethod?.gateway === 'paypal' &&
@@ -176,7 +179,7 @@ const PaymentOptionsUI = (props) => {
     if (methodsPay.includes(paymethodSelected?.gateway) && paymethodData?.id && paymethodSelected?.data?.card) {
       handlePlaceOrder()
     }
-  }, [paymethodData, paymethodSelected])
+  }, [JSON.stringify(paymethodData), paymethodSelected])
 
   return (
     <>
