@@ -215,9 +215,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     var _isOpenMethod$paymeth;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: paymethod.id
-    }, (!isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
+    }, (!isCustomerMode && paymethod.gateway || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isDisabled: isDisabled,
-      className: "card ".concat(((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) || (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth === void 0 ? void 0 : _isOpenMethod$paymeth.id)) === paymethod.id ? 'active' : ''),
+      className: "".concat(((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) || (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth === void 0 ? void 0 : _isOpenMethod$paymeth.id)) === paymethod.id ? 'active' : ''),
       onClick: function onClick() {
         return handlePaymentMethodClick(paymethod);
       }
