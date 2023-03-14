@@ -198,7 +198,7 @@ const PaymentOptionsUI = (props) => {
             supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
               <React.Fragment key={paymethod.id}>
                 {
-                  (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                  ((!isCustomerMode && paymethod.gateway) || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
                     <PayCard
                       isDisabled={isDisabled}
                       className={`card ${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}

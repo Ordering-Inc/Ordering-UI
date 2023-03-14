@@ -476,6 +476,7 @@ export const App = () => {
                 isHome={isHome}
                 location={location}
                 isCustomLayout={singleBusinessConfig.isActive}
+                singleBusinessConfig={singleBusinessConfig}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
               />
@@ -616,7 +617,7 @@ export const App = () => {
                               isUserVerifyRequired ? (
                                 <Redirect to='/verify' />
                               ) : (
-                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
+                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !singleBusinessConfig.isActive
                                   ? <BusinessesList searchValueCustom={searchValue} />
                                   : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                               )
