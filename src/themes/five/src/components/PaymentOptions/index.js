@@ -201,7 +201,7 @@ const PaymentOptionsUI = (props) => {
                   ((!isCustomerMode && paymethod.gateway) || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
                     <PayCard
                       isDisabled={isDisabled}
-                      className={`card ${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
+                      className={`${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
                       onClick={() => handlePaymentMethodClick(paymethod)}
                     >
                       <div>
