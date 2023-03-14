@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderProgressUI = function OrderProgressUI(props) {
-  var _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2;
+  var _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2, _configs$general_hour, _lastOrder$reporting_, _configs$general_hour2;
   var orderList = props.orderList,
     isCustomerMode = props.isCustomerMode;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -39,7 +39,11 @@ var OrderProgressUI = function OrderProgressUI(props) {
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
     optimizeImage = _useUtils2$.optimizeImage,
-    parseTime = _useUtils2$.parseTime;
+    parseTime = _useUtils2$.parseTime,
+    parseDate = _useUtils2$.parseDate;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var theme = (0, _styledComponents.useTheme)();
   var _useEvent = (0, _orderingComponents.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -48,7 +52,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     lastOrder = _useState2[0],
     setLastOrder = _useState2[1];
-  var statusToShow = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21];
+  var statusToShow = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23];
   var isChew = (theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.layout) === null || _theme$header$compone2 === void 0 ? void 0 : (_theme$header$compone3 = _theme$header$compone2.type) === null || _theme$header$compone3 === void 0 ? void 0 : _theme$header$compone3.toLowerCase()) === 'chew';
   var handleGoToPage = function handleGoToPage(index) {
     events.emit('go_to_page', {
@@ -98,9 +102,11 @@ var OrderProgressUI = function OrderProgressUI(props) {
     outputFormat: 'hh:mm A'
   }) : parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
     utc: false
-  }), "\xA0-\xA0", /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
+  }), "\xA0-\xA0", statusToShow.includes(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status) ? /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
     order: lastOrder,
-    outputFormat: "hh:mm A"
+    outputFormat: (configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.value) || 'HH:mm'
+  }) : parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$reporting_ = lastOrder.reporting_data) === null || _lastOrder$reporting_ === void 0 ? void 0 : _lastOrder$reporting_.at["status:".concat(lastOrder.status)], {
+    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$general_hour2 = configs.general_hour_format) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.value
   }))))))));
 };
 var OrderProgress = function OrderProgress(props) {
