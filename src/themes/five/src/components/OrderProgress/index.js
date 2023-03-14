@@ -3,6 +3,7 @@ import {
   useLanguage,
   useUtils,
   useEvent,
+  useConfig,
   OrderList as OrderListController
 } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
@@ -31,11 +32,12 @@ const OrderProgressUI = (props) => {
     isCustomerMode
   } = props
   const [, t] = useLanguage()
-  const [{ optimizeImage, parseTime }] = useUtils()
+  const [{ optimizeImage, parseTime, parseDate }] = useUtils()
+  const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
   const [lastOrder, setLastOrder] = useState(null)
-  const statusToShow = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21]
+  const statusToShow = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23]
 
   const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
@@ -110,7 +112,11 @@ const OrderProgressUI = (props) => {
                       ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A' })
                       : parseTime(lastOrder?.delivery_datetime, { utc: false })}
                     &nbsp;-&nbsp;
-                    <OrderEta order={lastOrder} outputFormat='hh:mm A' />
+                    {statusToShow.includes(lastOrder?.status) ? (
+                      <OrderEta order={lastOrder} outputFormat={configs?.general_hour_format?.value || 'HH:mm'} />
+                    ) : (
+                      parseDate(lastOrder?.reporting_data?.at[`status:${lastOrder.status}`], { outputFormat: configs?.general_hour_format?.value })
+                    )}
                   </span>
                 </TimeWrapper>
               </ProgressTextWrapper>
