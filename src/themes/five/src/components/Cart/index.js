@@ -505,7 +505,7 @@ const CartUI = (props) => {
                           <TextArea
                             defaultValue={cart?.comment}
                             placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
-                            onChange={(e) => handleChangeComment(e.target.value)}
+                            onChange={(e) => handleChangeComment(e.target.value, user?.id)}
                           />
                           {commentState?.loading && (
                             <Spinner>
