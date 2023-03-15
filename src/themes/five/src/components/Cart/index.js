@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig, useOrderingTheme, useSite } from 'ordering-components'
+import { Cart as CartController, useOrder, useLanguage, useEvent, useUtils, useValidationFields, useConfig, useOrderingTheme, useSite, useCustomer } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
 import { ProductItemAccordion } from '../ProductItemAccordion'
 import { BusinessItemAccordion } from '../BusinessItemAccordion'
@@ -69,6 +69,7 @@ const CartUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ site }] = useSite()
   const windowSize = useWindowSize()
+  const [{ user }] = useCustomer()
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -198,7 +199,7 @@ const CartUI = (props) => {
       title: t('OFFER', 'Offer'),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
-        handleRemoveOfferClick(id)
+        handleRemoveOfferClick(id, user?.id)
       }
     })
   }
@@ -465,7 +466,7 @@ const CartUI = (props) => {
                           <TextArea
                             defaultValue={cart?.comment}
                             placeholder={t('SPECIAL_COMMENTS', 'Special Comments')}
-                            onChange={(e) => handleChangeComment(e.target.value)}
+                            onChange={(e) => handleChangeComment(e.target.value, user?.id)}
                           />
                           {commentState?.loading && (
                             <Spinner>
