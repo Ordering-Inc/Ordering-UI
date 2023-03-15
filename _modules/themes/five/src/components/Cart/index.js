@@ -529,7 +529,7 @@ var CartUI = function CartUI(props) {
     defaultValue: cart === null || cart === void 0 ? void 0 : cart.comment,
     placeholder: t('SPECIAL_COMMENTS', 'Special Comments'),
     onChange: function onChange(e) {
-      return handleChangeComment(e.target.value);
+      return handleChangeComment(e.target.value, user === null || user === void 0 ? void 0 : user.id);
     }
   }), (commentState === null || commentState === void 0 ? void 0 : commentState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Spinner, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
