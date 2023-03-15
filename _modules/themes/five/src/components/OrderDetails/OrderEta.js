@@ -51,7 +51,10 @@ var OrderEta = function OrderEta(props) {
       }
       _estimatedTime = _moment.default.utc(_delivery).add(totalEta, 'minutes');
     } else {
-      var _etaTime = order !== null && order !== void 0 && order.delivered_in ? (order === null || order === void 0 ? void 0 : order.delivered_in) + (order === null || order === void 0 ? void 0 : order.eta_time) : order === null || order === void 0 ? void 0 : order.eta_time;
+      var timesToAdd = 0;
+      if (order !== null && order !== void 0 && order.delivered_in) timesToAdd += order === null || order === void 0 ? void 0 : order.delivered_in;
+      if (order !== null && order !== void 0 && order.prepared_in) timesToAdd += order === null || order === void 0 ? void 0 : order.prepared_in;
+      var _etaTime = (order === null || order === void 0 ? void 0 : order.eta_time) + timesToAdd;
       _estimatedTime = _moment.default.utc(_delivery).add(_etaTime, 'minutes');
     }
     _estimatedTime = outputFormat ? (0, _moment.default)(_estimatedTime).local().format(outputFormat) : parseDate(_estimatedTime, {
