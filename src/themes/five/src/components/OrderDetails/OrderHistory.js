@@ -130,11 +130,17 @@ export const OrderHistory = (props) => {
                   ? getLogisticTagStatus(parseInt(message.change.new, 10))
                   : message.change?.attribute === 'delivered_in' ? (
                     <h3>
-                        <strong>{t('TIME_ADDED_BY_DRIVER', 'Time added by driver')}</strong><br />
-                        {formatSeconds(parseInt(message.change.new, 10))}
+                      <strong>{t('TIME_ADDED_BY_DRIVER', 'Time added by driver')}</strong><br />
+                      {formatSeconds(parseInt(message.change.new, 10))}
                     </h3>
                   )
-                    :t(getStatus(parseInt(message.change.new, 10)))
+                    : message.change?.attribute === 'prepared_in' ? (
+                      <h3>
+                        <strong>{t('TIME_ADDED_BY_BUSINESS', 'Time added by business')}</strong><br />
+                        {formatSeconds(parseInt(message.change.new, 10))}
+                      </h3>
+                    )
+                      : t(getStatus(parseInt(message.change.new, 10)))
                 }
               </h3>
             ) : (
