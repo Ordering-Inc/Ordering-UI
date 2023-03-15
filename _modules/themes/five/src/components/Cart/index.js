@@ -93,6 +93,9 @@ var CartUI = function CartUI(props) {
     _useSite2 = _slicedToArray(_useSite, 1),
     site = _useSite2[0].site;
   var windowSize = (0, _useWindowSize.useWindowSize)();
+  var _useCustomer = (0, _orderingComponents.useCustomer)(),
+    _useCustomer2 = _slicedToArray(_useCustomer, 1),
+    user = _useCustomer2[0].user;
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var _useState = (0, _react.useState)({
       open: false,
@@ -265,7 +268,7 @@ var CartUI = function CartUI(props) {
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
-        handleRemoveOfferClick(id);
+        handleRemoveOfferClick(id, user === null || user === void 0 ? void 0 : user.id);
       }
     });
   };
@@ -464,7 +467,7 @@ var CartUI = function CartUI(props) {
     defaultValue: cart === null || cart === void 0 ? void 0 : cart.comment,
     placeholder: t('SPECIAL_COMMENTS', 'Special Comments'),
     onChange: function onChange(e) {
-      return handleChangeComment(e.target.value);
+      return handleChangeComment(e.target.value, user === null || user === void 0 ? void 0 : user.id);
     }
   }), (commentState === null || commentState === void 0 ? void 0 : commentState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Spinner, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
