@@ -345,7 +345,9 @@ const CartUI = (props) => {
                             )}
                             <IconContainer>
                               <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })} />
-                              <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              {!!offer?.id && (
+                                <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              )}
                             </IconContainer>
                           </td>
                           <td>
@@ -408,7 +410,7 @@ const CartUI = (props) => {
                             )}
                             <IconContainer>
                               <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })} />
-                              {!offer?.type && (
+                              {!!offer?.id && (
                                 <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
                               )}
                             </IconContainer>
@@ -435,7 +437,7 @@ const CartUI = (props) => {
                             )}
                             <IconContainer>
                               <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })} />
-                              {!offer?.type && (
+                              {!!offer?.id && (
                                 <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
                               )}
                             </IconContainer>
