@@ -380,7 +380,7 @@ var CartUI = function CartUI(props) {
           type: 'offer_target_1'
         });
       }
-    }), /*#__PURE__*/_react.default.createElement(_MdCloseCircle.default, {
+    }), !!(offer !== null && offer !== void 0 && offer.id) && /*#__PURE__*/_react.default.createElement(_MdCloseCircle.default, {
       size: "24",
       color: theme.colors.primary,
       onClick: function onClick() {
@@ -447,7 +447,7 @@ var CartUI = function CartUI(props) {
           type: 'offer_target_3'
         });
       }
-    }), !(offer !== null && offer !== void 0 && offer.type) && /*#__PURE__*/_react.default.createElement(_MdCloseCircle.default, {
+    }), !!(offer !== null && offer !== void 0 && offer.id) && /*#__PURE__*/_react.default.createElement(_MdCloseCircle.default, {
       size: "24",
       color: theme.colors.primary,
       onClick: function onClick() {
@@ -472,7 +472,7 @@ var CartUI = function CartUI(props) {
           type: 'offer_target_2'
         });
       }
-    }), !(offer !== null && offer !== void 0 && offer.type) && /*#__PURE__*/_react.default.createElement(_MdCloseCircle.default, {
+    }), !!(offer !== null && offer !== void 0 && offer.id) && /*#__PURE__*/_react.default.createElement(_MdCloseCircle.default, {
       size: "24",
       color: theme.colors.primary,
       onClick: function onClick() {
