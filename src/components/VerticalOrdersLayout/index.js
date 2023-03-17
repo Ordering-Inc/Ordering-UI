@@ -20,7 +20,8 @@ export const VerticalOrdersLayout = (props) => {
     orders,
     pagination,
     loadMoreOrders,
-    handleUpdateOrderList
+    handleUpdateOrderList,
+    setRefreshOrders
   } = props
 
   const [, t] = useLanguage()
@@ -58,6 +59,7 @@ export const VerticalOrdersLayout = (props) => {
   const handleCloseReivew = () => {
     setReviewStatus({ order: false, product: false, driver: false })
     setIsReviewOpen(false)
+    setRefreshOrders(true)
   }
 
   const handleClickReview = (order) => {
