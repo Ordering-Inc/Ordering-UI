@@ -28,13 +28,27 @@ var OrderEta = function OrderEta(props) {
     estimatedDeliveryTime = _useState2[0],
     setEstimatedDeliveryTime = _useState2[1];
   var getEstimatedDeliveryTime = function getEstimatedDeliveryTime() {
-    var _estimatedTime = null;
+    var estimatedUtcTime = null;
     var totalEta = 0;
+    if (order !== null && order !== void 0 && order.delivered_in) totalEta += order === null || order === void 0 ? void 0 : order.delivered_in;
+    if (order !== null && order !== void 0 && order.prepared_in) totalEta += order === null || order === void 0 ? void 0 : order.prepared_in;
+    if ((order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && order !== null && order !== void 0 && order.eta_drive_time) {
+      totalEta += order === null || order === void 0 ? void 0 : order.eta_drive_time;
+    }
     var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? order === null || order === void 0 ? void 0 : order.delivery_datetime_utc : order === null || order === void 0 ? void 0 : order.delivery_datetime;
     if (order !== null && order !== void 0 && order.eta_current_status_time) {
       var _order$reporting_data;
       var currentStatueEta = order === null || order === void 0 ? void 0 : order.eta_current_status_time;
       totalEta += currentStatueEta;
+      var previousStatusTimes = 0;
+      if (order !== null && order !== void 0 && order.eta_previous_status_times) {
+        Object.keys(order.eta_previous_status_times).map(function (key) {
+          if (!key.includes('status_penalty')) {
+            previousStatusTimes += order.eta_previous_status_times[key];
+          }
+        });
+      }
+      totalEta += previousStatusTimes;
       var nextStatusTimes = 0;
       if (order !== null && order !== void 0 && order.eta_next_status_times) {
         Object.keys(order.eta_next_status_times).map(function (key) {
@@ -49,15 +63,11 @@ var OrderEta = function OrderEta(props) {
       if (diffTimeAsMinutes <= 0) {
         totalEta += Math.floor(Math.abs(diffTimeAsMinutes / (order === null || order === void 0 ? void 0 : order.eta_current_status_time)) + 1) * (order === null || order === void 0 ? void 0 : order.eta_current_status_penalty_time);
       }
-      _estimatedTime = _moment.default.utc(_delivery).add(totalEta, 'minutes');
     } else {
-      var timesToAdd = 0;
-      if (order !== null && order !== void 0 && order.delivered_in) timesToAdd += order === null || order === void 0 ? void 0 : order.delivered_in;
-      if (order !== null && order !== void 0 && order.prepared_in) timesToAdd += order === null || order === void 0 ? void 0 : order.prepared_in;
-      var _etaTime = (order === null || order === void 0 ? void 0 : order.eta_time) + timesToAdd;
-      _estimatedTime = _moment.default.utc(_delivery).add(_etaTime, 'minutes');
+      totalEta = (order === null || order === void 0 ? void 0 : order.eta_time) + totalEta;
     }
-    _estimatedTime = outputFormat ? (0, _moment.default)(_estimatedTime).local().format(outputFormat) : parseDate(_estimatedTime, {
+    estimatedUtcTime = _moment.default.utc(_delivery).add(totalEta, 'minutes');
+    var _estimatedTime = outputFormat ? (0, _moment.default)(estimatedUtcTime).local().format(outputFormat) : parseDate(estimatedUtcTime, {
       utc: false
     });
     setEstimatedDeliveryTime(_estimatedTime);
