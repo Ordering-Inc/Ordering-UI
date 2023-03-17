@@ -29,7 +29,8 @@ var VerticalOrdersLayout = function VerticalOrdersLayout(props) {
   var orders = props.orders,
     pagination = props.pagination,
     loadMoreOrders = props.loadMoreOrders,
-    handleUpdateOrderList = props.handleUpdateOrderList;
+    handleUpdateOrderList = props.handleUpdateOrderList,
+    setRefreshOrders = props.setRefreshOrders;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -108,6 +109,7 @@ var VerticalOrdersLayout = function VerticalOrdersLayout(props) {
       driver: false
     });
     setIsReviewOpen(false);
+    setRefreshOrders(true);
   };
   var handleClickReview = function handleClickReview(order) {
     handleOpenReview && handleOpenReview();
