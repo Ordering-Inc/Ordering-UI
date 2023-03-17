@@ -65,7 +65,8 @@ const OrdersOptionUI = (props) => {
     handleUpdateProfessionals,
     businesses,
     handleUpdateBusinesses,
-    getPage
+    getPage,
+    loadOrders,
   } = props
 
   const [, t] = useLanguage()
@@ -73,6 +74,7 @@ const OrdersOptionUI = (props) => {
   const [events] = useEvent()
   const { width } = useWindowSize()
   const { loading, error, orders: values } = orderList
+  const [refreshOrders , setRefreshOrders] = useState(false)
 
   const _orders = customArray || values || []
   const uniqueOrders = []
@@ -185,6 +187,13 @@ const OrdersOptionUI = (props) => {
       }
     }
   }, [reorderState])
+
+  useEffect(() => {
+		if (refreshOrders) {
+			loadOrders(false, false, false, true)
+			setRefreshOrders(false)
+		}
+	}, [refreshOrders])
 
   return (
     <>
@@ -340,6 +349,7 @@ const OrdersOptionUI = (props) => {
             getOrderStatus={getOrderStatus}
             handleReorder={handleReorder}
             handleUpdateOrderList={handleUpdateOrderList}
+            setRefreshOrders={setRefreshOrders}
           />
         )
       )}
