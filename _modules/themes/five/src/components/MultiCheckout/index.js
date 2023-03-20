@@ -42,7 +42,7 @@ var mapConfigs = {
   }
 };
 var MultiCheckoutUI = function MultiCheckoutUI(props) {
-  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _cartGroup$result2, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _loyaltyPlansState$re2, _creditPointGeneralPl, _creditPointGeneralPl2, _configs$google_maps_, _customerState$user, _cartGroup$result3, _cartGroup$result4, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _openCarts$2, _configs$multi_busine6, _configs$multi_busine7;
+  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _cartGroup$result2, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _loyaltyPlansState$re2, _creditPointGeneralPl, _creditPointGeneralPl2, _configs$google_maps_, _customerState$user, _cartGroup$result3, _cartGroup$result4, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _configs$multi_busine2, _validationFields$fie12, _validationFields$fie13, _validationFields$fie14, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _configs$multi_busine6, _configs$multi_busine7;
   var placing = props.placing,
     isCustomerMode = props.isCustomerMode,
     openCarts = props.openCarts,
@@ -306,7 +306,9 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     driverTipsOptions: driverTipsOptions,
     isFixedPrice: parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 1,
     isDriverTipUseCustom: !!parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_u = configs.driver_tip_use_custom) === null || _configs$driver_tip_u === void 0 ? void 0 : _configs$driver_tip_u.value, 10),
-    driverTip: parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t2 = configs.driver_tip_type) === null || _configs$driver_tip_t2 === void 0 ? void 0 : _configs$driver_tip_t2.value, 10) === 1 ? (_openCarts$ = openCarts[0]) === null || _openCarts$ === void 0 ? void 0 : _openCarts$.driver_tip : (_openCarts$2 = openCarts[0]) === null || _openCarts$2 === void 0 ? void 0 : _openCarts$2.driver_tip_rate,
+    driverTip: parseInt(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_t2 = configs.driver_tip_type) === null || _configs$driver_tip_t2 === void 0 ? void 0 : _configs$driver_tip_t2.value, 10) === 1 ? openCarts === null || openCarts === void 0 ? void 0 : openCarts.reduce(function (sum, cart) {
+      return sum + (cart === null || cart === void 0 ? void 0 : cart.driver_tip);
+    }, 0) : (_openCarts$ = openCarts[0]) === null || _openCarts$ === void 0 ? void 0 : _openCarts$.driver_tip_rate,
     useOrderContext: true
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CartHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MOBILE_FRONT_YOUR_ORDER', 'Your order'))), openCarts.map(function (cart) {
     var _configs$multi_busine3, _cart$products2, _configs$multi_busine4, _configs$multi_busine5, _cart$business2;
