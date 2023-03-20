@@ -315,7 +315,7 @@ const MultiCheckoutUI = (props) => {
                       isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
                       isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
                       driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                        ? openCarts[0]?.driver_tip
+                        ? openCarts?.reduce((sum, cart) => sum + cart?.driver_tip, 0)
                         : openCarts[0]?.driver_tip_rate}
                       useOrderContext
                     />
