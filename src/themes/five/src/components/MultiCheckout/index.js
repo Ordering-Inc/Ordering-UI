@@ -57,7 +57,6 @@ const MultiCheckoutUI = (props) => {
     isCustomerMode,
     openCarts,
     loyaltyPlansState,
-    totalCartsPrice,
     handleGroupPlaceOrder,
     paymethodSelected,
     handleSelectPaymethod,
@@ -101,6 +100,7 @@ const MultiCheckoutUI = (props) => {
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
+  const totalCartsPrice = cartGroup?.result?.balance
   const methodsPay = ['global_google_pay', 'global_apple_pay']
   const creditPointPlan = loyaltyPlansState?.result?.find((loyal) => loyal.type === 'credit_point')
   const businessIds = openCarts.map((cart) => cart.business_id)
