@@ -13,9 +13,7 @@ export const InputPhoneNumber = (props) => {
     setValue,
     handleIsValid,
     disabled,
-    isError,
-    currentCountryCode,
-    setCurrentPhoneNumber
+    isError
   } = props
 
   const [, t] = useLanguage()
@@ -35,10 +33,6 @@ export const InputPhoneNumber = (props) => {
 
   useEffect(() => {
     if (value) {
-      setCurrentPhoneNumber &&
-      setCurrentPhoneNumber(
-        `+${currentCountryCode} ${phoneRef?.current?.defaultValue?.replace(/ /g, '')}`
-      )
       handleIsValid && handleIsValid(isValidPhoneNumber(value))
     }
   }, [value])
