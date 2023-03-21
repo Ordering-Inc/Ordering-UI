@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PaymentOptionStripe = exports.PaymentCard = void 0;
+exports.PaymentOptionStripeUI = exports.PaymentOptionStripe = exports.PaymentCard = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponents = require("ordering-components");
@@ -44,7 +44,8 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     _handleCardClick = props.handleCardClick,
     handleNewCard = props.handleNewCard,
     paymethodSelected = props.paymethodSelected,
-    cardSelected = props.cardSelected;
+    cardSelected = props.cardSelected,
+    gateway = props.gateway;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     token = _useSession2[0].token;
@@ -63,6 +64,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     addCartOpen = _useState4[0],
     setAddCardOpen = _useState4[1];
+  var paymethodsWithoutSaveCards = ['credomatic'];
   var _handleNewCard = function _handleNewCard(card) {
     setAddCardOpen(false);
     handleNewCard(card);
@@ -81,7 +83,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   };
   (0, _react.useEffect)(function () {
     var _cardsList$cards;
-    if (!(cardsList !== null && cardsList !== void 0 && cardsList.loading) && (cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$cards = cardsList.cards) === null || _cardsList$cards === void 0 ? void 0 : _cardsList$cards.length) === 0) {
+    if (!(cardsList !== null && cardsList !== void 0 && cardsList.loading) && (cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$cards = cardsList.cards) === null || _cardsList$cards === void 0 ? void 0 : _cardsList$cards.length) === 0 && !paymethodsWithoutSaveCards.includes(gateway)) {
       setAddCardOpen(true);
     }
   }, [cardsList === null || cardsList === void 0 ? void 0 : cardsList.loading]);
@@ -110,7 +112,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
       cardSelected: cardSelected,
       paymethodSelected: paymethodSelected
     }));
-  })), token && !cardsList.loading && /*#__PURE__*/_react.default.createElement(_styles.AddNewCard, null, /*#__PURE__*/_react.default.createElement("span", {
+  })), token && !cardsList.loading && !paymethodsWithoutSaveCards.includes(gateway) && /*#__PURE__*/_react.default.createElement(_styles.AddNewCard, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setAddCardOpen(true);
     }
@@ -164,6 +166,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     }, AfterElement);
   }));
 };
+exports.PaymentOptionStripeUI = PaymentOptionStripeUI;
 var PaymentCard = function PaymentCard(props) {
   var handleDeleteCard = props.handleDeleteCard,
     card = props.card,
@@ -190,25 +193,25 @@ var PaymentCard = function PaymentCard(props) {
     var _actionWrapperRef$cur;
     if ((_actionWrapperRef$cur = actionWrapperRef.current) !== null && _actionWrapperRef$cur !== void 0 && _actionWrapperRef$cur.contains(e.target)) return;
     handleCardClick(card);
-    onSelectCard({
+    onSelectCard && onSelectCard(_objectSpread(_objectSpread({}, cardSelected), {}, {
       id: card.id,
       type: 'card',
       card: {
         brand: card.brand,
         last4: card.last4
       }
-    });
+    }));
   };
   (0, _react.useEffect)(function () {
     if (!cardSelected) return;
-    onSelectCard({
+    onSelectCard && onSelectCard(_objectSpread(_objectSpread({}, cardSelected), {}, {
       id: cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.id,
       type: 'card',
       card: {
         brand: cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.brand,
         last4: cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.last4
       }
-    });
+    }));
   }, [cardSelected]);
   (0, _react.useEffect)(function () {
     window.addEventListener('click', handleClickOutside);
