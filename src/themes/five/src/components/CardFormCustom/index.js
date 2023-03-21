@@ -64,7 +64,6 @@ export const CardFormCustom = (props) => {
     }
     handleNewCard(card)
     setAddCardOpen(false)
-    console.log(card)
   }
 
   return (
