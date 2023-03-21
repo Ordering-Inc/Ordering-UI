@@ -256,7 +256,8 @@ export const ContinueContainer = styled.div`
   display: flex;
   align-items: center;
   p{
-    flex: 1
+    flex: 1;
+    margin: 0;
   }
 `
 
