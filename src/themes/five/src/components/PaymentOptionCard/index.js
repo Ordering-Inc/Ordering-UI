@@ -1,10 +1,9 @@
-import { useLanguage, useSession } from 'ordering-components'
+import { PaymentOptionStripe, useLanguage, useSession } from 'ordering-components'
 import React, { useEffect, useState } from 'react'
 import { CardFormCustom } from '../CardFormCustom'
 import Modal from '../Modal'
 import { PaymentOptionStripeUI } from '../PaymentOptionStripe'
 import { AddNewCard } from '../PaymentOptionStripe/styles'
-import { PaymentOptionStripe } from './test'
 
 const PaymentOptionCardUI = (props) => {
   const {
