@@ -82,7 +82,7 @@ const PhoneAutocompleteUI = (props) => {
   }, [customersPhones?.error])
 
   const onInputChange = (inputValue, { action }) => {
-    if (action === 'menu-close' || action === 'input-blur' || action === 'set-value') {
+    if (action === 'menu-close' || action === 'input-blur' || action === 'set-value' || inputValue.charAt(0) === '0') {
       return
     }
     if (!inputValue) {
