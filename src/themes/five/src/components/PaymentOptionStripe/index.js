@@ -27,20 +27,23 @@ import {
   CardItemActionsWrapper
 } from './styles'
 
-const PaymentOptionStripeUI = (props) => {
+export const PaymentOptionStripeUI = (props) => {
   const {
     deleteCard,
     cardsList,
     handleCardClick,
     handleNewCard,
     paymethodSelected,
-    cardSelected
+    cardSelected,
+    gateway
   } = props
   const [{ token }] = useSession()
   const [, t] = useLanguage()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const [addCartOpen, setAddCardOpen] = useState(false)
+
+  const paymethodsWithoutSaveCards = ['credomatic']
 
   const _handleNewCard = (card) => {
     setAddCardOpen(false)
@@ -59,7 +62,7 @@ const PaymentOptionStripeUI = (props) => {
   }
 
   useEffect(() => {
-    if (!cardsList?.loading && cardsList?.cards?.length === 0) {
+    if (!cardsList?.loading && cardsList?.cards?.length === 0 && !paymethodsWithoutSaveCards.includes(gateway)) {
       setAddCardOpen(true)
     }
   }, [cardsList?.loading])
@@ -103,7 +106,7 @@ const PaymentOptionStripeUI = (props) => {
             )}
           </>
         )}
-        {token && !cardsList.loading && (
+        {token && !cardsList.loading && !paymethodsWithoutSaveCards.includes(gateway) && (
           <AddNewCard>
             <span onClick={() => setAddCardOpen(true)}>{t('ADD_NEW_CARD', 'Add new card')}</span>
           </AddNewCard>
@@ -181,7 +184,8 @@ export const PaymentCard = (props) => {
   const handleChangeDefaultCard = (e) => {
     if (actionWrapperRef.current?.contains(e.target)) return
     handleCardClick(card)
-    onSelectCard({
+    onSelectCard && onSelectCard({
+      ...cardSelected,
       id: card.id,
       type: 'card',
       card: {
@@ -193,7 +197,8 @@ export const PaymentCard = (props) => {
 
   useEffect(() => {
     if (!cardSelected) return
-    onSelectCard({
+    onSelectCard && onSelectCard({
+      ...cardSelected,
       id: cardSelected?.id,
       type: 'card',
       card: {
