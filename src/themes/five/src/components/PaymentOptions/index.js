@@ -20,6 +20,7 @@ import { Alert } from '../Confirm'
 import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
+import { PaymentOptionCard } from '../PaymentOptionCard'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../StripeRedirectForm'
 import { NotFoundSource } from '../NotFoundSource'
@@ -42,6 +43,8 @@ const stripeRedirectOptions = [
   { name: 'Giropay', value: 'giropay' },
   { name: 'iDEAL', value: 'ideal' }
 ]
+
+const cardsPaymethods = ['credomatic']
 
 const getPayIcon = (method) => {
   switch (method) {
@@ -192,27 +195,27 @@ const PaymentOptionsUI = (props) => {
         <PaymentMethodsList className='payments-list'>
           {!(paymethodsList.loading || isLoading) &&
             supportedMethods.length > 0 && (
-            supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
-              <React.Fragment key={paymethod.id}>
-                {
-                  (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
-                    <PayCard
-                      isDisabled={isDisabled}
-                      className={`card ${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
-                      onClick={() => handlePaymentMethodClick(paymethod)}
-                    >
-                      <div>
-                        {getPayIcon(paymethod.id)}
-                      </div>
-                      <p>
-                        {t(paymethod.gateway.toUpperCase(), paymethod.name)}
-                      </p>
-                    </PayCard>
-                  )
-                }
-              </React.Fragment>
-            ))
-          )}
+              supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
+                <React.Fragment key={paymethod.id}>
+                  {
+                    (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                      <PayCard
+                        isDisabled={isDisabled}
+                        className={`card ${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
+                        onClick={() => handlePaymentMethodClick(paymethod)}
+                      >
+                        <div>
+                          {getPayIcon(paymethod.id)}
+                        </div>
+                        <p>
+                          {t(paymethod.gateway.toUpperCase(), paymethod.name)}
+                        </p>
+                      </PayCard>
+                    )
+                  }
+                </React.Fragment>
+              ))
+            )}
 
           {(paymethodsList.loading || isLoading) && (
             [...Array(5).keys()].map(i => (
@@ -251,6 +254,22 @@ const PaymentOptionsUI = (props) => {
             paymethod={isOpenMethod?.paymethod}
             businessId={props.businessId}
             publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
+            onPaymentChange={onPaymentChange}
+            payType={isOpenMethod?.paymethod?.name}
+            onSelectCard={handlePaymethodDataChange}
+            onCancel={() => handlePaymethodClick(null)}
+            paymethodSelected={paymethodSelected?.data?.id}
+            handlePaymentMethodClick={handlePaymentMethodClick}
+          />
+        )}
+
+        {(cardsPaymethods.includes(isOpenMethod?.paymethod?.gateway) || cardsPaymethods.includes(paymethodSelected?.gateway)) && (
+          <PaymentOptionCard
+            setCardList={setCardList}
+            paymethod={isOpenMethod?.paymethod}
+            businessId={props.businessId}
+            publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
+            gateway={isOpenMethod?.paymethod?.gateway || paymethodSelected?.gateway}
             onPaymentChange={onPaymentChange}
             payType={isOpenMethod?.paymethod?.name}
             onSelectCard={handlePaymethodDataChange}
