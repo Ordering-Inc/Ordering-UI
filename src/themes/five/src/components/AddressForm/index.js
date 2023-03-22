@@ -70,6 +70,7 @@ const AddressFormUI = (props) => {
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
   const isEditing = !!addressState.address?.id
+  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const [locationChange, setLocationChange] = useState(
     isEditing
@@ -424,6 +425,7 @@ const AddressFormUI = (props) => {
                       handleChangeAddressMap={handleChangeAddress}
                       setErrors={setMapErrors}
                       maxLimitLocation={parseInt(maxLimitLocation, 10)}
+                      isSetInputs={isChew}
                     />
                   </WrapperMap>
                 )}
