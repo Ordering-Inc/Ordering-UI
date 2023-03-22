@@ -4979,9 +4979,9 @@ cosmiconfig@^7.0.0:
     yaml "^1.10.0"
 
 country-flag-icons@^1.5.4:
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.5.6.tgz#b0e3d9d073e3b4209f6665c4ce11fa4c96ebf019"
-  integrity sha512-3B7OhCaZpedwBchhwN/9islnjamULbWfjMbkgAcDUma4EoXp+kqJfmcs9czeDWN2+/YdaGZTlpaYsdYWoPcrKQ==
+  version "1.5.7"
+  resolved "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.5.7.tgz#f1f2ddf14f3cbf01cba6746374aeba94db35d4b4"
+  integrity sha512-AdvXhMcmSp7nBSkpGfW4qR/luAdRUutJqya9PuwRbsBzuoknThfultbv7Ib6fWsHXC43Es/4QJ8gzQQdBNm75A==
 
 create-ecdh@^4.0.0:
   version "4.0.4"
