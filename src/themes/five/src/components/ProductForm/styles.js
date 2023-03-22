@@ -398,7 +398,7 @@ export const ProductActions = styled.div`
     }
 
     div.incdec-control {
-      padding-right: 18%;
+      margin-right: 18%;
       &.show-weight-unit{
         width: 30%;
       }
