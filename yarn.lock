@@ -4979,9 +4979,9 @@ cosmiconfig@^7.0.0:
     yaml "^1.10.0"
 
 country-flag-icons@^1.5.4:
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.5.6.tgz#b0e3d9d073e3b4209f6665c4ce11fa4c96ebf019"
-  integrity sha512-3B7OhCaZpedwBchhwN/9islnjamULbWfjMbkgAcDUma4EoXp+kqJfmcs9czeDWN2+/YdaGZTlpaYsdYWoPcrKQ==
+  version "1.5.7"
+  resolved "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.5.7.tgz#f1f2ddf14f3cbf01cba6746374aeba94db35d4b4"
+  integrity sha512-AdvXhMcmSp7nBSkpGfW4qR/luAdRUutJqya9PuwRbsBzuoknThfultbv7Ib6fWsHXC43Es/4QJ8gzQQdBNm75A==
 
 create-ecdh@^4.0.0:
   version "4.0.4"
@@ -5609,9 +5609,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.334"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.334.tgz#eacdcb1145534202d569610c5915b63a3fec0eb9"
-  integrity sha512-laZ1odk+TRen6q0GeyQx/JEkpD3iSZT7ewopCpKqg9bTjP1l8XRfU3Bg20CFjNPZkp5+NDBl3iqd4o/kPO+Vew==
+  version "1.4.335"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.335.tgz#69c08baa608bbb58e290d83320190fa82c835efe"
+  integrity sha512-l/eowQqTnrq3gu+WSrdfkhfNHnPgYqlKAwxz7MTOj6mom19vpEDHNXl6dxDxyTiYuhemydprKr/HCrHfgk+OfQ==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -9164,7 +9164,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a44482c5b00938187e339eb4be81acf3e4a90e92"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/eb60c80a0c24122be1aa26ef9e640fffffff9018"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -10038,9 +10038,9 @@ react-loading-skeleton@^2.1.1:
     "@emotion/core" "^10.0.22"
 
 react-onclickoutside@^6.12.2:
-  version "6.12.2"
-  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.12.2.tgz#8e6cf80c7d17a79f2c908399918158a7b02dda01"
-  integrity sha512-NMXGa223OnsrGVp5dJHkuKxQ4czdLmXSp5jSV9OqiCky9LOpPATn3vLldc+q5fK3gKbEHvr7J1u0yhBh/xYkpA==
+  version "6.13.0"
+  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.13.0.tgz#e165ea4e5157f3da94f4376a3ab3e22a565f4ffc"
+  integrity sha512-ty8So6tcUpIb+ZE+1HAhbLROvAIJYyJe/1vRrrcmW+jLsaM+/powDRqxzo6hSh9CuRZGSL1Q8mvcF5WRD93a0A==
 
 react-otp-input@^2.3.0:
   version "2.4.0"
