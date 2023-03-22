@@ -3,7 +3,7 @@ import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Modal } from '../Modal'
-import {
+import {  
   Checkout as CheckoutController,
   useOrder,
   useSession,
@@ -21,7 +21,6 @@ import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useHistory } from 'react-router-dom'
 import { ArrowLeft } from 'react-bootstrap-icons'
-
 import {
   Container,
   WrapperLeftContainer,
@@ -129,7 +128,7 @@ const CheckoutUI = (props) => {
   const [openModal, setOpenModal] = useState({ login: false, signup: false })
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
-
+  const cardsMethods = ['stripe', 'credomatic']
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isTableNumberEnabled = configs?.table_numer_enabled?.value
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
@@ -147,7 +146,7 @@ const CheckoutUI = (props) => {
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
-    (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0) ||
+    (cardsMethods.includes(paymethodSelected?.gateway) && cardList?.cards?.length === 0) ||
     placing ||
     errorCash ||
     loading ||
@@ -526,24 +525,24 @@ const CheckoutUI = (props) => {
 
         {
           !!(!isMultiDriverTips && driverTipsField) &&
-            <>
-              <DriverTipContainer>
-                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-                <DriverTips
-                  businessId={cart?.business_id}
-                  driverTipsOptions={driverTipsOptions}
-                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                    ? cart?.driver_tip
-                    : cart?.driver_tip_rate}
-                  cart={cart}
-                  useOrderContext
-                />
-              </DriverTipContainer>
-              <DriverTipDivider />
-            </>
+          <>
+            <DriverTipContainer>
+              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+              <DriverTips
+                businessId={cart?.business_id}
+                driverTipsOptions={driverTipsOptions}
+                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                  ? cart?.driver_tip
+                  : cart?.driver_tip_rate}
+                cart={cart}
+                useOrderContext
+              />
+            </DriverTipContainer>
+            <DriverTipDivider />
+          </>
         }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
@@ -576,7 +575,7 @@ const CheckoutUI = (props) => {
               businessConfigs={businessConfigs}
               loyaltyRewardRate={
                 creditPointPlanOnBusiness?.accumulation_rate ??
-                  (!!creditPointPlanOnBusiness && creditPointPlan?.accumulation_rate) ?? 0
+                (!!creditPointPlanOnBusiness && creditPointPlan?.accumulation_rate) ?? 0
               }
             />
           </CartContainer>
@@ -838,8 +837,18 @@ export const Checkout = (props) => {
         handleOrderRedirect(result.order.uuid)
         setCartState({ ...cartState, loading: false })
       } else if (result.status === 2) {
+        let credomaticData = null
+        if (result?.paymethod_data?.gateway === 'credomatic') {
+          const urlParams = new URLSearchParams(window.location.search)
+          const paramsObj = Object.fromEntries(urlParams.entries())
+          credomaticData = {
+            credomatic: {
+              ...paramsObj
+            }
+          }
+        }
         try {
-          const confirmCartRes = await confirmCart(cartUuid)
+          const confirmCartRes = await confirmCart(cartUuid, credomaticData)
           if (confirmCartRes.error) {
             setAlertState({
               open: true,
