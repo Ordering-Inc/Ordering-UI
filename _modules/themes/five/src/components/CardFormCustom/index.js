@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.CardFormCustom = void 0;
 var _react = _interopRequireWildcard(require("react"));
-var _reactCreditCardComponent = _interopRequireDefault(require("react-credit-card-component"));
-require("react-credit-card-component/dist/styles-compiled.css");
+var _reactCreditCards = _interopRequireDefault(require("react-credit-cards-2"));
+require("react-credit-cards-2/es/styles-compiled.css");
 var _cardUtils = require("./cardUtils");
 var _reactHookForm = require("react-hook-form");
 var _Inputs = require("../../styles/Inputs");
@@ -79,7 +79,7 @@ var CardFormCustom = function CardFormCustom(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_styles.FormContainer, {
     id: "PaymentForm"
-  }, /*#__PURE__*/_react.default.createElement(_reactCreditCardComponent.default, {
+  }, /*#__PURE__*/_react.default.createElement(_reactCreditCards.default, {
     cvc: formState.cvc,
     expiry: formState.expiry,
     focused: formState.focus,
