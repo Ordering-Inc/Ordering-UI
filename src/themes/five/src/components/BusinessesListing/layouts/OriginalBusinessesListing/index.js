@@ -235,7 +235,6 @@ const BusinessesListingUI = (props) => {
           )}
         </BusinessBanner>
       )}
-      {!!Object.values(orderState?.carts)?.length && (
         <OrderProgress
           isChew={isChew}
           franchiseId={props.franchiseId}
@@ -243,7 +242,6 @@ const BusinessesListingUI = (props) => {
           asDashboard={isCustomerMode}
           isCustomerMode={isCustomerMode}
         />
-      )}
       {(configs?.business_listing_hide_image?.value !== '1' && isChew) && (
         <BusinessHeroImg
           bgimage={theme.images?.general?.businessHero}
