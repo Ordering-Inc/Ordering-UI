@@ -47,7 +47,7 @@ const OrderProgressUI = (props) => {
 
   useEffect(() => {
     if (orderList?.orders.length > 0) {
-      const sortedOrders = orderList.orders.sort((a, b) => a.id > b.id ? -1 : 1)
+      const sortedOrders = orderList.orders.filter(order => !!order?.business).sort((a, b) => a.id > b.id ? -1 : 1)
       const orderInProgress = sortedOrders.find(({ status }) => (statusToShow.includes(status)))
 
       let _lastOrder = null
