@@ -64,7 +64,9 @@ var OrderProgressUI = function OrderProgressUI(props) {
   };
   (0, _react.useEffect)(function () {
     if ((orderList === null || orderList === void 0 ? void 0 : orderList.orders.length) > 0) {
-      var sortedOrders = orderList.orders.sort(function (a, b) {
+      var sortedOrders = orderList.orders.filter(function (order) {
+        return !!(order !== null && order !== void 0 && order.business);
+      }).sort(function (a, b) {
         return a.id > b.id ? -1 : 1;
       });
       var orderInProgress = sortedOrders.find(function (_ref) {
