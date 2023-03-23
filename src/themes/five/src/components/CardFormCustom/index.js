@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Card from 'react-credit-card-component'
-import 'react-credit-card-component/dist/styles-compiled.css'
+import Card from 'react-credit-cards-2'
+import 'react-credit-cards-2/es/styles-compiled.css'
 import {
   formatCreditCardNumber,
   formatCVC,
