@@ -83,8 +83,11 @@ const BusinessProductsListingUI = (props) => {
     onBusinessClick,
     handleChangePriceFilterValues,
     priceFilterValues,
-    handleUpdateProfessionals
+    handleUpdateProfessionals,
+    isCustomerMode,
   } = props
+  
+  console.log('please',isCustomerMode)
 
   const { business, loading, error } = businessState
   const [{ configs }] = useConfig()
@@ -380,6 +383,7 @@ const BusinessProductsListingUI = (props) => {
           handleChangePriceFilterValues={handleChangePriceFilterValues}
           productToIdLoading={productToIdLoading}
           handleUpdateProfessionals={handleUpdateProfessionals}
+          isCustomerMode={isCustomerMode}
         />
 
         {

@@ -38,7 +38,8 @@ const BusinessProductsListUI = (props) => {
     categoriesState,
     onClickCategory,
     currentCart,
-    handleUpdateProducts
+    handleUpdateProducts,
+    isCustomerMode
   } = props
 
   const [, t] = useLanguage()
@@ -92,6 +93,7 @@ const BusinessProductsListUI = (props) => {
                   isCartOnProductsList={isCartOnProductsList}
                   handleUpdateProducts={handleUpdateProducts}
                   productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                  isCustomerMode={isCustomerMode}
                 />
               ))
             }
@@ -129,6 +131,7 @@ const BusinessProductsListUI = (props) => {
                     handleUpdateProducts={handleUpdateProducts}
                     isCartOnProductsList={isCartOnProductsList}
                     productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                    isCustomerMode={isCustomerMode}
                   />
                 ))}
                 {!business?.food && !categoryState?.loading && featProducts?.length > 9 && (
@@ -216,6 +219,7 @@ const BusinessProductsListUI = (props) => {
                             handleUpdateProducts={handleUpdateProducts}
                             isCartOnProductsList={isCartOnProductsList}
                             productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                            isCustomerMode={isCustomerMode}
                           />
                         ))
                       }

@@ -252,8 +252,6 @@ export const CustomerInfo = styled.div`
         color: #748194; 
         margin: 0;
         font-size: 20px;
-        position: absolute;
-        right: 0;
       }
     }
   }

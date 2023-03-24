@@ -86,7 +86,8 @@ export const RenderProductsLayout = (props) => {
     onBusinessClick,
     handleChangePriceFilterValues,
     priceFilterValues,
-    handleUpdateProfessionals
+    handleUpdateProfessionals,
+    isCustomerMode,
   } = props
 
   const theme = useTheme()
@@ -318,6 +319,7 @@ export const RenderProductsLayout = (props) => {
                       handleUpdateProducts={handleUpdateProducts}
                       professionalSelected={professionalSelected}
                       handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                      isCustomerMode={isCustomerMode}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
@@ -431,6 +433,7 @@ export const RenderProductsLayout = (props) => {
                           handleUpdateProducts={handleUpdateProducts}
                           professionalSelected={professionalSelected}
                           handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                          isCustomerMode={isCustomerMode}
                         />
                       </WrapContent>
                     </BusinessCategoryProductWrapper>
@@ -474,6 +477,7 @@ export const RenderProductsLayout = (props) => {
                 isBusinessLoading={isLoading}
                 handleUpdateProducts={handleUpdateProducts}
                 errorQuantityProducts={errorQuantityProducts}
+                isCustomerMode={isCustomerMode}
               />
             </WrapContent>
           )}
