@@ -299,9 +299,18 @@ const AddressFormUI = (props) => {
 
     if (isEditing) {
       if (formState?.changes?.location) {
-        const prevLocation = { lat: Math.trunc(locationChange?.lat), lng: Math.trunc(locationChange?.lng) }
-        const newLocation = { lat: Math.trunc(formState?.changes?.location?.lat), lng: Math.trunc(formState?.changes?.location?.lng) }
-        if (prevLocation.lat !== newLocation.lat && prevLocation.lng !== newLocation.lng) {
+        const prevLocation = {
+          lat: locationChange?.lat?.toFixed(5),
+          lng: locationChange?.lng?.toFixed(5)
+        }
+        const newLocation = {
+          lat: formState?.changes?.location?.lat?.toFixed(5),
+          lng: formState?.changes?.location?.lng?.toFixed(5)
+        }
+        if (
+					prevLocation?.lat !== newLocation?.lat &&
+					prevLocation?.lng !== newLocation?.lng
+        ) {
           setLocationChange(formState?.changes?.location)
         }
       }
