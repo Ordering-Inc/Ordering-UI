@@ -32,6 +32,7 @@ import { orderingThemeUpdated } from './components/OrderingThemeUpdated'
 
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { Input } from '../src/themes/five/src/styles/Inputs'
+import { QueryLoginSpoonity } from '../src/themes/five/src/components/QueryLoginSpoonity'
 
 const Header = loadable(() => import('../src/themes/five/src/components/Header'))
 const HeaderKiosk = loadable(() => import('../src/themes/five/src/components/Header/layouts/Kiosk'))
@@ -109,12 +110,23 @@ export const App = () => {
     reviewStatus: { trigger: false, order: false, product: false, driver: false },
     reviewed: { isOrderReviewed: false, isProductReviewed: false, isDriverReviewed: false }
   })
+  const [oneSignalState, setOneSignalState] = useState({
+    notification_app: settings.notification_app
+  })
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isAllowUnaddressOrderType = unaddressedTypes.includes(orderStatus?.options?.type)
   const isShowReviewsPopupEnabled = configs?.show_reviews_popups_enabled?.value === '1'
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
   const isKioskApp = settings?.use_kiosk
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
+
+  let queryIntegrationToken
+  let queryIntegrationCode
+  if (location.search) {
+    const query = new URLSearchParams(location.search)
+    queryIntegrationCode = query.get('integration_code')
+    queryIntegrationToken = query.get('integration_token')
+  }
 
   const themeUpdated = {
     ...theme,
@@ -337,7 +349,7 @@ export const App = () => {
     const oldLink = document.getElementById('favicon')
     link.id = 'favicon'
     link.rel = 'icon'
-    link.href = themeUpdated?.general?.components?.favicon
+    link.href = themeUpdated?.general?.components?.favicon?.components?.image || themeUpdated?.general?.components?.favicon
     if (oldLink) {
       document.head.removeChild(oldLink)
     }
@@ -347,7 +359,8 @@ export const App = () => {
       const fontElement = window.document.getElementById(`${name}-font-styles`)
       if (
         (fontElement?.name !== fontFamily.name && fontFamily.name) ||
-        (fontElement?.href !== fontFamily?.href && fontFamily?.href)
+        (fontElement?.href !== fontFamily?.href && fontFamily?.href) ||
+        (JSON.stringify(fontElement?.weights) !== JSON.stringify(fontFamily?.weights) && fontFamily?.weights)
       ) {
         window.document.body.removeChild(window.document.getElementById(`${name}-font-styles`))
         const font = window.document.createElement('link')
@@ -356,7 +369,8 @@ export const App = () => {
         font.async = true
         font.defer = true
         font.name = fontFamily.name
-        font.href = fontFamily.href || `https://fonts.googleapis.com/css2?family=${fontFamily.name}:wght@${fontFamily.weights.join(';')}&display=swap`
+        const weights = typeof fontFamily?.weights === 'number' ? fontFamily?.weights : JSON.parse(fontFamily?.weights)?.join?.(';')
+        font.href = fontFamily.href || `https://fonts.googleapis.com/css2?family=${fontFamily?.name}:wght@${weights || [400]}&display=swap`
 
         window.document.body.appendChild(font)
         if (name === 'primary') {
@@ -432,6 +446,59 @@ export const App = () => {
     }
   }, [orderStatus])
 
+  const oneSignalSetup = () => {
+    const OneSignal = window.OneSignal || []
+    const initConfig = {
+      appId: configs?.onesignal_orderingweb_id?.value,
+      // allowLocalhostAsSecureOrigin: true,
+      notificationClickHandlerAction: 'navigate'
+    }
+
+    OneSignal.push(function () {
+      OneSignal.SERVICE_WORKER_PARAM = { scope: '/push/onesignal/' }
+      OneSignal.SERVICE_WORKER_PATH = 'push/onesignal/OneSignalSDKWorker.js'
+      OneSignal.SERVICE_WORKER_UPDATER_PATH = 'push/onesignal/OneSignalSDKWorker.js'
+      OneSignal.init(initConfig)
+
+      const onNotificationClicked = function (data) {
+        if (data?.additionalData?.order_uuid) {
+          history.push(`/orders/${data?.additionalData?.order_uuid}`)
+        }
+      }
+      const handler = function (data) {
+        onNotificationClicked(data)
+        OneSignal.addListenerForNotificationOpened(handler)
+      }
+      OneSignal.addListenerForNotificationOpened(handler)
+
+      OneSignal.on('subscriptionChange', function (isSubscribed) {
+        console.log("The user's subscription state is now:", isSubscribed)
+        if (isSubscribed) {
+          OneSignal.getUserId((userId) => {
+            const data = {
+              ...oneSignalState,
+              notification_token: userId
+            }
+            setOneSignalState(data)
+          })
+        }
+      })
+
+      OneSignal.getUserId((userId) => {
+        const data = {
+          ...oneSignalState,
+          notification_token: userId
+        }
+        setOneSignalState(data)
+      })
+    })
+  }
+
+  useEffect(() => {
+    if (configLoading) return
+    oneSignalSetup()
+  }, [configLoading])
+
   return settings.isCancellation ? (
     <CancellationComponent
       ButtonComponent={Button}
@@ -465,8 +532,10 @@ export const App = () => {
                 isHome={isHome}
                 location={location}
                 isCustomLayout={singleBusinessConfig.isActive}
+                singleBusinessConfig={singleBusinessConfig}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
+                notificationState={oneSignalState}
               />
             )}
             <NotNetworkConnectivity />
@@ -479,12 +548,12 @@ export const App = () => {
                       <Redirect to='/verify' />
                     ) : (
                       isKioskApp
-                        ? <HomePage />
+                        ? <HomePage notificationState={oneSignalState} />
                         : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                           : singleBusinessConfig.isActive
-                            ? <Redirect to={singleBusinessConfig.isActive ? '' : '/search'} />
-                            : <HomePage />
+                            ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
+                            : <HomePage notificationState={oneSignalState} />
                     )}
                   </Route>
                   <Route exact path='/'>
@@ -492,10 +561,14 @@ export const App = () => {
                       <Redirect to='/verify' />
                     ) : (
                       isKioskApp
-                        ? <HomePage />
-                        : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
-                          ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
-                          : <HomePage />
+                        ? <HomePage notificationState={oneSignalState} />
+                        : queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
+                          : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
+                            ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
+                            : singleBusinessConfig.isActive
+                              ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
+                              : <HomePage notificationState={oneSignalState} />
                     )}
                   </Route>
                   <Route exact path='/wallets'>
@@ -592,19 +665,21 @@ export const App = () => {
                     {
                       isKioskApp
                         ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
-                        : (
-                          orderStatus.loading && !orderStatus.options?.address?.location ? (
-                            <SpinnerLoader />
-                          ) : (
-                            isUserVerifyRequired ? (
-                              <Redirect to='/verify' />
+                        : queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
+                          : (
+                            orderStatus.loading && !orderStatus.options?.address?.location ? (
+                              <SpinnerLoader />
                             ) : (
-                              (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
-                                ? <BusinessesList searchValueCustom={searchValue} />
-                                : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                              isUserVerifyRequired ? (
+                                <Redirect to='/verify' />
+                              ) : (
+                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !singleBusinessConfig.isActive
+                                  ? <BusinessesList searchValueCustom={searchValue} />
+                                  : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
+                              )
                             )
                           )
-                        )
                     }
                   </Route>
                   <Route exact path='/business_search'>

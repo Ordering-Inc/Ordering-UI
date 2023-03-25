@@ -40,7 +40,7 @@ import {
 } from './styles'
 
 export const SidebarMenu = (props) => {
-  const { auth, isHideSignup, userCustomer, isCustomerMode } = props
+  const { auth, isHideSignup, userCustomer, isCustomerMode, notificationState } = props
   const [, { login }] = useSession()
   const [events] = useEvent()
   const [{ configs }] = useConfig()
@@ -540,6 +540,7 @@ export const SidebarMenu = (props) => {
           >
             {modalPageToShow === 'login' && (
               <LoginForm
+                notificationState={notificationState}
                 handleSuccessLogin={handleSuccessLogin}
                 elementLinkToSignup={
                   <a
@@ -563,6 +564,7 @@ export const SidebarMenu = (props) => {
             )}
             {modalPageToShow === 'signup' && (
               <SignUpForm
+                notificationState={notificationState}
                 elementLinkToLogin={
                   <a
                     onClick={

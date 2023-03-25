@@ -230,6 +230,7 @@ export const Header = (props) => {
         <LeftSide>
           <LeftHeader id='left-side'>
             <SidebarMenu
+              notificationState={notificationState}
               auth={auth}
               isHideSignup={isHideSignup}
               userCustomer={userCustomer}
@@ -569,6 +570,7 @@ export const Header = (props) => {
         >
           {modalPageToShow === 'login' && (
             <LoginForm
+              notificationState={notificationState}
               handleSuccessLogin={handleSuccessLogin}
               elementLinkToSignup={
                 <a
@@ -592,6 +594,7 @@ export const Header = (props) => {
           )}
           {modalPageToShow === 'signup' && (
             <SignUpForm
+              notificationState={notificationState}
               elementLinkToLogin={
                 <a
                   onClick={
