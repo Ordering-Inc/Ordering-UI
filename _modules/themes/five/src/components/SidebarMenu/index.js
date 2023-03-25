@@ -45,7 +45,8 @@ var SidebarMenu = function SidebarMenu(props) {
   var auth = props.auth,
     isHideSignup = props.isHideSignup,
     userCustomer = props.userCustomer,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    notificationState = props.notificationState;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 2),
     login = _useSession2[1].login;
@@ -290,6 +291,7 @@ var SidebarMenu = function SidebarMenu(props) {
     },
     width: "50%"
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+    notificationState: notificationState,
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {
@@ -310,6 +312,7 @@ var SidebarMenu = function SidebarMenu(props) {
     useLoginByCellphone: true,
     isPopup: true
   }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    notificationState: notificationState,
     elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {
         return handleCustomModalClick(e, {
