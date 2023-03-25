@@ -175,7 +175,7 @@ export const OrderBillSection = (props) => {
               </tr>
             ))
           }
-          {order?.summary?.delivery_price > 0 && (
+          {typeof order?.summary?.delivery_price === 'number' && (
             <tr>
               <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
               <td>{parsePrice(order?.summary?.delivery_price)}</td>
