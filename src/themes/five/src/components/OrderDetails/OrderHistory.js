@@ -1,8 +1,8 @@
 import React from 'react'
-import { useLanguage, useUtils } from 'ordering-components'
+import { useLanguage, useUtils, useConfig } from 'ordering-components'
 import { ArrowRight, CheckCircleFill } from 'react-bootstrap-icons'
 import { Button } from '../../styles/Buttons'
-import { getTraduction } from '../../../../../utils'
+import { formatSeconds, getTraduction } from '../../../../../utils'
 import {
   OrderHistoryContainer,
   HistoryItemWrapper,
@@ -21,6 +21,7 @@ export const OrderHistory = (props) => {
 
   const [, t] = useLanguage()
   const [{ parseDate }] = useUtils()
+  const [{ configs }] = useConfig()
 
   const getLogisticTagStatus = (status) => {
     switch (status) {
@@ -113,7 +114,7 @@ export const OrderHistory = (props) => {
               {t('VIA', 'Via')}{' '}
               {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
             </h3>
-            <p>{parseDate(order.created_at, { outputFormat: 'MMM DD, hh:mm A' })}</p>
+            <p>{parseDate(order.created_at, { outputFormat: `MMM DD, ${configs?.general_hour_format?.value}` })}</p>
           </DetailWrapper>
         </HistoryItemWrapper>
       )}
@@ -127,7 +128,19 @@ export const OrderHistory = (props) => {
               <h3>
                 {message.change?.attribute === 'logistic_status'
                   ? getLogisticTagStatus(parseInt(message.change.new, 10))
-                  : t(getStatus(parseInt(message.change.new, 10)))
+                  : message.change?.attribute === 'delivered_in' ? (
+                    <h3>
+                      <strong>{t('TIME_ADDED_BY_DRIVER', 'Time added by driver')}</strong><br />
+                      {formatSeconds(parseInt(message.change.new, 10))}
+                    </h3>
+                  )
+                    : message.change?.attribute === 'prepared_in' ? (
+                      <h3>
+                        <strong>{t('TIME_ADDED_BY_BUSINESS', 'Time added by business')}</strong><br />
+                        {formatSeconds(parseInt(message.change.new, 10))}
+                      </h3>
+                    )
+                      : t(getStatus(parseInt(message.change.new, 10)))
                 }
               </h3>
             ) : (
@@ -140,7 +153,7 @@ export const OrderHistory = (props) => {
                 ) : <>{t('DRIVER_UNASSIGNED', 'Driver unassigned')}</>}
               </h3>
             )}
-            <p>{parseDate(message.created_at, { outputFormat: 'MMM DD, hh:mm A' })}</p>
+            <p>{parseDate(message.created_at, { outputFormat: `MMM DD, ${configs?.general_hour_format?.value}` })}</p>
           </DetailWrapper>
         </HistoryItemWrapper>
       ))}

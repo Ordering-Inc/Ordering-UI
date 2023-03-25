@@ -87,7 +87,8 @@ const BusinessesListingUI = (props) => {
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [favoriteIds, setFavoriteIds] = useState([])
-  const hideCities = (theme?.business_listing_view?.components?.cities?.hidden || orderState?.options?.type !== 2) ?? true
+  const allCitiesDisabled = citiesState?.cities?.every(city => !city.enabled)
+  const hideCities = (theme?.business_listing_view?.components?.cities?.hidden || orderState?.options?.type !== 2 || allCitiesDisabled) ?? true
   const hideSearch = theme?.business_listing_view?.components?.search?.hidden
   const hideFilter = theme?.business_listing_view?.components?.filter?.hidden || hideSearch
   const hideHero = theme?.business_listing_view?.components?.business_hero?.hidden
@@ -112,7 +113,7 @@ const BusinessesListingUI = (props) => {
     const hasMore = !(paginationProps.totalPages === paginationProps.currentPage)
     if (badScrollPosition || businessesList.loading || businessesList.error?.length > 0 || !hasMore) return
     getBusinesses()
-  }, [businessesList.loading, paginationProps])
+  }, [businessesList, paginationProps])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -186,6 +187,12 @@ const BusinessesListingUI = (props) => {
     setFavoriteIds([...new Set(ids)])
   }, [businessesList?.businesses?.length])
 
+  useEffect(() => {
+    if (!citiesState?.cities?.length || !orderState?.options?.city_id) return
+    const selectedCity = citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)
+    if (!selectedCity || !selectedCity?.enabled) changeCityFilter(null)
+  }, [citiesState, orderState?.options?.city_id])
+
   if (logosLayout) {
     return (
       <BusinessLogosWrapper>
@@ -218,7 +225,7 @@ const BusinessesListingUI = (props) => {
       {(windowSize.width < 576 || (configs?.business_listing_hide_image?.value !== '1' && !isChew)) && (
         <BusinessBanner>
           {windowSize.width < 576 && (
-            <OrderContextUI isBusinessList hideHero={!hideHero} />
+            <OrderContextUI isBusinessList hideHero={(!!configs?.business_listing_hide_image?.value && !hideHero)} />
           )}
           {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && !hideHero && (
             <BusinessHeroImg
@@ -228,7 +235,6 @@ const BusinessesListingUI = (props) => {
           )}
         </BusinessBanner>
       )}
-      {!!Object.values(orderState?.carts)?.length && (
         <OrderProgress
           isChew={isChew}
           franchiseId={props.franchiseId}
@@ -236,7 +242,6 @@ const BusinessesListingUI = (props) => {
           asDashboard={isCustomerMode}
           isCustomerMode={isCustomerMode}
         />
-      )}
       {(configs?.business_listing_hide_image?.value !== '1' && isChew) && (
         <BusinessHeroImg
           bgimage={theme.images?.general?.businessHero}

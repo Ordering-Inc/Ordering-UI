@@ -195,7 +195,7 @@ const AddressListUI = (props) => {
   const AddressListCallcenterLayout = ({ children }) => {
     return (
       <AddressHalfContainer>
-        <List halfWidth={addressOpen}>
+        <List halfWidth={addressOpen} id='address_list'>
           {children}
         </List>
         {addressOpen && (
@@ -406,11 +406,11 @@ const AddressListUI = (props) => {
   )
 }
 
-export const AddressList = (props) => {
+export const AddressList = React.memo((props) => {
   const addressListProps = {
     ...props,
     UIComponent: AddressListUI
   }
 
   return <AddressListController {...addressListProps} />
-}
+})

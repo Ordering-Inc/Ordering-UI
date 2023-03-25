@@ -319,10 +319,16 @@ export const MobileWrapperPlaceOrderButton = styled.div`
 export const OrderContextUIWrapper = styled.div`
   flex: 1;
   margin-left: 15px;
+  max-width: 85%;
+
   ${props => props.theme.rtl && css`
     margin-left: 0px;
     margin-right: 15px;
   `}
+
+  @media (min-width: 480px) {
+    max-width: 90%;
+  }
 `
 
 export const HeaderContent = styled.div`
@@ -348,4 +354,20 @@ export const AuthButtonList = styled.div`
     height: 44px;
     margin-top: 22px;
   }
+`
+export const Flag = styled.span`
+  font-size: 13px;
+  margin: 0px;
+  text-transform: capitalize;
+  color: #E63757;
+  font-weight: 500;
+
+  @media (min-width: 381px) {
+    font-size: 14px;
+  }
+`
+export const SectionTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `

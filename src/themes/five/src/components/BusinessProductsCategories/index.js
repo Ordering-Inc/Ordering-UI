@@ -105,7 +105,12 @@ const BusinessProductsCategoriesUI = (props) => {
     const navbar = document.getElementById('category-lists')
     const search = document.getElementById('WrapperSearchAbsolute')
     const wrapperCategories = document.getElementById('wrapper-categories')
-    const limit = window.pageYOffset >= wrapperCategories?.offsetTop && window.pageYOffset > 0
+    let limit
+    if (windowSize.width >= 993) {
+      limit = window.pageYOffset >= wrapperCategories?.offsetTop && window.pageYOffset > 0
+    } else {
+      limit = window.pageYOffset >= (wrapperCategories?.offsetTop - 56) && window.pageYOffset > 0
+    }
 
     if (limit) {
       const classAdded = navbar.classList.contains('sticky-prod-cat')
@@ -130,7 +135,7 @@ const BusinessProductsCategoriesUI = (props) => {
 
     let style0 = '.sticky-prod-cat {'
     style0 += 'position: fixed !important;'
-    style0 += 'top: 0px !important;'
+    style0 += `top: ${windowSize.width >= 993 ? '0px' : '56px'} !important;`
     style0 += 'left: 0px !important;'
     style0 += 'padding: 5px 5px 0px 5px !important;'
     style0 += `width: calc(100% - ${useKioskApp ? '50px' : windowSize.width >= 993 ? '155px' : '0px'})!important;`

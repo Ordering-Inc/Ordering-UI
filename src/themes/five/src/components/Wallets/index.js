@@ -109,7 +109,9 @@ const WalletsUI = (props) => {
                     </span>
                   </BalanceElement>
                 </SectionWrapper>
-                <GiftCardUI />
+                {currentWalletSelected?.type === 'cash' && (
+                  <GiftCardUI />
+                )}
                 <div className='transactions_list'>
                   {!transactionsList?.loading && transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.length > 0 && (
                     <>

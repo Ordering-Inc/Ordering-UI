@@ -207,12 +207,7 @@ const SignUpFormUI = (props) => {
       generateOtpCode()
       return
     }
-    handleButtonSignupClick &&
-    handleButtonSignupClick({
-      ...signupData,
-      cellphone:
-        currentPhoneNumber?.split(' ')[1]?.replace(/-/g, '') ?? signupData?.cellphone
-    })
+    handleButtonSignupClick && handleButtonSignupClick()
     if (!formState.loading && formState.result.result && !formState.result.error) {
       handleSuccessSignup(formState.result.result)
     }

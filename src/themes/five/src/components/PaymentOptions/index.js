@@ -20,6 +20,7 @@ import { Alert } from '../Confirm'
 import { PaymentOptionCash } from '../PaymentOptionCash'
 import { PaymentOptionStripe } from '../PaymentOptionStripe'
 import { PaymentOptionPaypal } from '../../../../../components/PaymentOptionPaypal'
+import { PaymentOptionCard } from '../PaymentOptionCard'
 import { StripeElementsForm } from '../StripeElementsForm'
 import { StripeRedirectForm } from '../StripeRedirectForm'
 import { NotFoundSource } from '../NotFoundSource'
@@ -42,6 +43,8 @@ const stripeRedirectOptions = [
   { name: 'Giropay', value: 'giropay' },
   { name: 'iDEAL', value: 'ideal' }
 ]
+
+const cardsPaymethods = ['credomatic']
 
 const getPayIcon = (method) => {
   switch (method) {
@@ -114,10 +117,13 @@ const PaymentOptionsUI = (props) => {
 
   const includeKioskPaymethods = ['cash', 'card_delivery']
 
+  const multiCheckoutMethods = ['global_google_pay', 'global_apple_pay']
+
   const list = paymethodsList ? paymethodsList?.paymethods : paymethods?.map(pay => pay.paymethod)
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
-  const supportedMethods = list?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
+
+  const supportedMethods = list?.filter(p => !multiCheckoutMethods.includes(p.gateway))?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
 
   const handlePaymentMethodClick = (paymethod) => {
     if (paymethod?.gateway === 'paypal' &&
@@ -178,7 +184,7 @@ const PaymentOptionsUI = (props) => {
     if (methodsPay.includes(paymethodSelected?.gateway) && paymethodData?.id && paymethodSelected?.data?.card) {
       handlePlaceOrder()
     }
-  }, [paymethodData, paymethodSelected])
+  }, [JSON.stringify(paymethodData), paymethodSelected])
 
   return (
     <>
@@ -195,10 +201,10 @@ const PaymentOptionsUI = (props) => {
             supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
               <React.Fragment key={paymethod.id}>
                 {
-                  (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                  ((!isCustomerMode && paymethod.gateway) || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
                     <PayCard
                       isDisabled={isDisabled}
-                      className={`card ${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
+                      className={`${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
                       onClick={() => handlePaymentMethodClick(paymethod)}
                     >
                       <div>
@@ -251,6 +257,22 @@ const PaymentOptionsUI = (props) => {
             paymethod={isOpenMethod?.paymethod}
             businessId={props.businessId}
             publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
+            onPaymentChange={onPaymentChange}
+            payType={isOpenMethod?.paymethod?.name}
+            onSelectCard={handlePaymethodDataChange}
+            onCancel={() => handlePaymethodClick(null)}
+            paymethodSelected={paymethodSelected?.data?.id}
+            handlePaymentMethodClick={handlePaymentMethodClick}
+          />
+        )}
+
+        {(cardsPaymethods.includes(isOpenMethod?.paymethod?.gateway) || cardsPaymethods.includes(paymethodSelected?.gateway)) && (
+          <PaymentOptionCard
+            setCardList={setCardList}
+            paymethod={isOpenMethod?.paymethod}
+            businessId={props.businessId}
+            publicKey={isOpenMethod?.paymethod?.credentials?.publishable}
+            gateway={isOpenMethod?.paymethod?.gateway || paymethodSelected?.gateway}
             onPaymentChange={onPaymentChange}
             payType={isOpenMethod?.paymethod?.name}
             onSelectCard={handlePaymethodDataChange}

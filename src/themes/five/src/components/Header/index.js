@@ -89,6 +89,8 @@ export const Header = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
 
+  const isMulticheckoutPage = window.location.pathname?.includes('/multi-checkout')
+
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
   const windowSize = useWindowSize()
@@ -239,7 +241,7 @@ export const Header = (props) => {
               <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (isHome && windowSize.width < 576 ? theme?.images?.logos?.isotypeInvert : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
-          {isShowOrderOptions && !props.isCustomLayout && windowSize.width >= 576 && (
+          {isShowOrderOptions && windowSize.width >= 576 && (
             <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode} isChew={isChew}>
               {windowSize.width > 850 && isFarAway && (
                 <FarAwayMessage>
@@ -364,16 +366,20 @@ export const Header = (props) => {
                   <>
                     {isShowOrderOptions && (
                       windowSize.width > 768 ? (
-                        <CartPopover
-                          open={openPopover.cart}
-                          carts={cartsWithProducts}
-                          onClick={() => handleTogglePopover('cart')}
-                          onClose={() => handleClosePopover('cart')}
-                          auth={auth}
-                          location={location}
-                          isCustomerMode={isCustomerMode}
-                          setPreorderBusiness={setPreorderBusiness}
-                        />
+                        <>
+                          {!isMulticheckoutPage ? (
+                            <CartPopover
+                              open={openPopover.cart}
+                              carts={cartsWithProducts}
+                              onClick={() => handleTogglePopover('cart')}
+                              onClose={() => handleClosePopover('cart')}
+                              auth={auth}
+                              location={location}
+                              isCustomerMode={isCustomerMode}
+                              setPreorderBusiness={setPreorderBusiness}
+                            />
+                          ) : null}
+                        </>
                       ) : (
                         <HeaderOption
                           variant='cart'

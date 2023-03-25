@@ -1,15 +1,17 @@
 import React from 'react'
 import { useLanguage, SmartAppBanner as SmartAppBannerController } from 'ordering-components'
 import SmartBanner from 'react-smartbanner'
+import { useTheme } from 'styled-components'
 
 const SmartAppBanneUI = (props) => {
   const [, t] = useLanguage()
+  const theme = useTheme()
 
   return (
     <>
       <SmartBanner
-        title={t('MOBILE_APPNAME', 'Ordering app')}
-        author={t('MOBILE_APPNAME_AUTHOR', 'Ordering, Inc.')}
+        title={t('MOBILE_APPNAME', theme?.defaultLanguages?.MOBILE_APPNAME || 'Ordering app')}
+        author={t('MOBILE_APPNAME_AUTHOR', theme?.defaultLanguages?.MOBILE_APPNAME_AUTHOR || 'Ordering, Inc.')}
         daysHidden={7}
         daysReminder={15}
         button={t('VIEW', 'View')}

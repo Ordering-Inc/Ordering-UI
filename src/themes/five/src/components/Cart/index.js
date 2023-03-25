@@ -100,14 +100,13 @@ const CartUI = (props) => {
   const [openChangeStore, setOpenChangeStore] = useState(false)
 
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
-  const isChewLayout = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
   const cateringTypes = [7, 8]
   const isMultiCheckout = configs?.checkout_multi_business_enabled?.value === '1'
   const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
-  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden || !validationFields?.fields?.checkout?.comments?.enabled
   const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount_coupon?.hidden
   const cateringTypeString = orderState?.options?.type === 7
     ? 'catering_delivery'
@@ -136,7 +135,8 @@ const CartUI = (props) => {
     }
   }
 
-  const loyaltyRewardValue = Math.round((cart?.subtotal + getIncludedTaxes()) / loyaltyRewardRate)
+  const clearAmount = (value) => parseFloat((Math.trunc(value * 100) / 100).toFixed(configs.format_number_decimal_length?.value ?? 2))
+  const loyaltyRewardValue = clearAmount((cart?.subtotal + getIncludedTaxes()) * loyaltyRewardRate)
 
   const momentFormatted = !orderState?.option?.moment
     ? t('RIGHT_NOW', 'Right Now')
@@ -345,7 +345,9 @@ const CartUI = (props) => {
                             )}
                             <IconContainer>
                               <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })} />
-                              <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              {!!offer?.id && (
+                                <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                              )}
                             </IconContainer>
                           </td>
                           <td>
@@ -408,7 +410,7 @@ const CartUI = (props) => {
                             )}
                             <IconContainer>
                               <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })} />
-                              {!offer?.type && (
+                              {!!offer?.id && (
                                 <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
                               )}
                             </IconContainer>
@@ -435,7 +437,7 @@ const CartUI = (props) => {
                             )}
                             <IconContainer>
                               <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })} />
-                              {!offer?.type && (
+                              {!!offer?.id && (
                                 <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
                               )}
                             </IconContainer>
@@ -510,7 +512,7 @@ const CartUI = (props) => {
                       <td>{t('TOTAL', 'Total')}</td>
                       <td>{parsePrice(cart?.total >= 0 ? cart?.total : 0)}</td>
                     </tr>
-                    {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && (
+                    {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && isCheckout && (
                       <tr>
                         <td>&nbsp;</td>
                         <td id='loyalty'>{t('REWARD_LOYALTY_POINT', 'Reward :amount: on loyalty points').replace(':amount:', loyaltyRewardValue)}</td>

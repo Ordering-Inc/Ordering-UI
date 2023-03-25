@@ -48,7 +48,11 @@ export const FiltersContainer = styled.div`
 export const Filters = styled.div`
   width: 100%;
   max-width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+
   @media (min-width: 993px){
+    padding: 0;
     width: 25%;
     max-width: 25%;
     margin-right: 70px;
@@ -434,4 +438,18 @@ export const PriceFilterListWrapper = styled.div`
 
 export const PreviouslyOrderedContainer = styled.div`
 
+`
+export const SearchBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 26px;
+    color: ${props => props.theme.colors.primary};
+    ${props => props.theme.rtl ? css`
+    margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
+  }
 `

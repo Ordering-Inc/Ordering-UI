@@ -9,7 +9,7 @@ export const ProductsContainer = styled.div`
     cursor: pointer;
     margin-bottom: 5px;
   }
-  div {
+  > div {
     background-color: ${({ theme }) => theme?.business_view?.components?.style?.backgroundColor};
   }
 
@@ -147,6 +147,22 @@ export const HeaderContent = styled.div`
   .back-arrow {
     font-size: 24px;
     cursor: pointer;
+  }
+  .fixed-arrow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    width: 100vw;
+    background-color: ${props => props.theme.colors.backgroundPage};
+    height: 56px;
+    display: flex;
+    align-items: center;
+    ${props => props.theme?.rtl ? css`
+      padding-right: 10px;
+    ` : css`
+      padding-left: 10px;
+    `}
   }
 `
 export const OrderContextUIWrapper = styled.div`

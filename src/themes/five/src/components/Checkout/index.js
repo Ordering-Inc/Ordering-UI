@@ -3,7 +3,7 @@ import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Modal } from '../Modal'
-import {
+import {  
   Checkout as CheckoutController,
   useOrder,
   useSession,
@@ -21,7 +21,6 @@ import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useHistory } from 'react-router-dom'
 import { ArrowLeft } from 'react-bootstrap-icons'
-
 import {
   Container,
   WrapperLeftContainer,
@@ -47,7 +46,9 @@ import {
   MobileWrapperPlaceOrderButton,
   OrderContextUIWrapper,
   HeaderContent,
-  AuthButtonList
+  AuthButtonList,
+  Flag,
+  SectionTitleContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -127,7 +128,7 @@ const CheckoutUI = (props) => {
   const [openModal, setOpenModal] = useState({ login: false, signup: false })
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
-
+  const cardsMethods = ['stripe', 'credomatic']
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isTableNumberEnabled = configs?.table_numer_enabled?.value
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
@@ -141,9 +142,11 @@ const CheckoutUI = (props) => {
   const isGiftCardCart = !cart?.business_id
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
+  const validateCommentsCartField = validationFields?.fields?.checkout?.comments?.enabled && validationFields?.fields?.checkout?.comments?.required && (cart?.comment === null || cart?.comment?.trim().length === 0)
+
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
-    (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0) ||
+    (cardsMethods.includes(paymethodSelected?.gateway) && cardList?.cards?.length === 0) ||
     placing ||
     errorCash ||
     loading ||
@@ -154,7 +157,8 @@ const CheckoutUI = (props) => {
     (options.type === 1 &&
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
       validationFields?.fields?.checkout?.driver_tip?.required &&
-      (Number(cart?.driver_tip) <= 0))
+      (Number(cart?.driver_tip) <= 0)) ||
+    (validateCommentsCartField)
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -241,7 +245,7 @@ const CheckoutUI = (props) => {
     if (userSelected && userSelected?.cellphone) {
       if (userSelected?.country_phone_code) {
         let phone = null
-        phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone}`
+        phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone.replace(`+${userSelected?.country_phone_code}`, '')}`
         const phoneNumber = parsePhoneNumber(phone)
         if (!phoneNumber?.isValid()) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'))
@@ -341,7 +345,7 @@ const CheckoutUI = (props) => {
                     </div>
                   ) : (
                     <AddressDetails
-                      location={businessDetails?.business?.location}
+                      location={options?.address?.location}
                       businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
                       isCartPending={cart?.status === 2}
                       businessId={cart?.business_id}
@@ -474,7 +478,10 @@ const CheckoutUI = (props) => {
 
           {!cartState.loading && cart && (
             <PaymentMethodContainer className='paymentsContainer'>
-              <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+              <SectionTitleContainer>
+                <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+                <Flag>{t('REQUIRED', 'Required')}</Flag>
+              </SectionTitleContainer>
               {!cartState.loading && cart?.status === 4 && (
                 <WarningMessage style={{ marginTop: 20 }}>
                   <VscWarning />
@@ -518,24 +525,24 @@ const CheckoutUI = (props) => {
 
         {
           !!(!isMultiDriverTips && driverTipsField) &&
-            <>
-              <DriverTipContainer>
-                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-                <DriverTips
-                  businessId={cart?.business_id}
-                  driverTipsOptions={driverTipsOptions}
-                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                    ? cart?.driver_tip
-                    : cart?.driver_tip_rate}
-                  cart={cart}
-                  useOrderContext
-                />
-              </DriverTipContainer>
-              <DriverTipDivider />
-            </>
+          <>
+            <DriverTipContainer>
+              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+              <DriverTips
+                businessId={cart?.business_id}
+                driverTipsOptions={driverTipsOptions}
+                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                  ? cart?.driver_tip
+                  : cart?.driver_tip_rate}
+                cart={cart}
+                useOrderContext
+              />
+            </DriverTipContainer>
+            <DriverTipDivider />
+          </>
         }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
@@ -568,7 +575,7 @@ const CheckoutUI = (props) => {
               businessConfigs={businessConfigs}
               loyaltyRewardRate={
                 creditPointPlanOnBusiness?.accumulation_rate ??
-                  (!!creditPointPlanOnBusiness && creditPointPlan?.accumulation_rate) ?? 0
+                (!!creditPointPlanOnBusiness && creditPointPlan?.accumulation_rate) ?? 0
               }
             />
           </CartContainer>
@@ -643,6 +650,12 @@ const CheckoutUI = (props) => {
               {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
             </WarningText>
           )}
+
+        {validateCommentsCartField && (
+          <WarningText>
+            {t('WARNING_INVALID_CART_COMMENTS', 'Cart comments is required.')}
+          </WarningText>
+        )}
 
         {cart?.valid_preorder !== undefined && !cart?.valid_preorder && (
           <WarningText>
@@ -824,8 +837,18 @@ export const Checkout = (props) => {
         handleOrderRedirect(result.order.uuid)
         setCartState({ ...cartState, loading: false })
       } else if (result.status === 2) {
+        let credomaticData = null
+        if (result?.paymethod_data?.gateway === 'credomatic') {
+          const urlParams = new URLSearchParams(window.location.search)
+          const paramsObj = Object.fromEntries(urlParams.entries())
+          credomaticData = {
+            credomatic: {
+              ...paramsObj
+            }
+          }
+        }
         try {
-          const confirmCartRes = await confirmCart(cartUuid)
+          const confirmCartRes = await confirmCart(cartUuid, credomaticData)
           if (confirmCartRes.error) {
             setAlertState({
               open: true,

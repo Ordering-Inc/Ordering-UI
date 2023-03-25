@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 import {
   Pencil,
@@ -107,6 +107,14 @@ export const ProductItemAccordion = (props) => {
     const pos = position ? `(${position})` : ''
     return `${quantity} x ${name} ${pos} +${price}`
   }
+
+  useEffect(() => {
+    if (setActive === 'active') {
+      setHeightState(
+        `${content.current.scrollHeight}px`
+      )
+    }
+  }, [product, setActive])
 
   return (
     <>
@@ -224,13 +232,15 @@ export const ProductItemAccordion = (props) => {
                           <Pencil color='#B1BCCC' />
                         </ProductActionsEdit>
                       )}
-                      <ProductActionsDelete
-                        ref={productActionsDelete}
-                        onClick={() => onDeleteProduct(product)}
-                        disabled={orderState.loading}
-                      >
-                        <Trash color='#B1BCCC' />
-                      </ProductActionsDelete>
+                      {onDeleteProduct && (
+                        <ProductActionsDelete
+                          ref={productActionsDelete}
+                          onClick={() => onDeleteProduct(product)}
+                          disabled={orderState.loading}
+                        >
+                          <Trash color='#B1BCCC' />
+                        </ProductActionsDelete>
+                      )}
                     </ProductActions>
                   )}
                 </ProductPriceSection>
@@ -238,13 +248,15 @@ export const ProductItemAccordion = (props) => {
             </>
           ) : (
             <ProductActions>
-              <ProductActionsDelete
-                ref={productActionsDelete}
-                onClick={() => onDeleteProduct(product)}
-                disabled={orderState.loading}
-              >
-                <Trash color='#B1BCCC' />
-              </ProductActionsDelete>
+              {onDeleteProduct && (
+                <ProductActionsDelete
+                  ref={productActionsDelete}
+                  onClick={() => onDeleteProduct(product)}
+                  disabled={orderState.loading}
+                >
+                  <Trash color='#B1BCCC' />
+                </ProductActionsDelete>
+              )}
             </ProductActions>
           )}
 
@@ -260,13 +272,15 @@ export const ProductItemAccordion = (props) => {
                     <Pencil color='#B1BCCC' />
                   </ProductActionsEdit>
                 )}
-                <ProductActionsDelete
-                  ref={productActionsDelete}
-                  onClick={() => onDeleteProduct(product)}
-                  disabled={orderState.loading}
-                >
-                  <Trash color='#B1BCCC' />
-                </ProductActionsDelete>
+                {onDeleteProduct && (
+                  <ProductActionsDelete
+                    ref={productActionsDelete}
+                    onClick={() => onDeleteProduct(product)}
+                    disabled={orderState.loading}
+                  >
+                    <Trash color='#B1BCCC' />
+                  </ProductActionsDelete>
+                )}
               </ProductActions>
               <ProductNotAvailable>
                 {t('NOT_AVAILABLE', 'Not available')}
@@ -277,13 +291,15 @@ export const ProductItemAccordion = (props) => {
           {!product?.valid_menu && isCartProduct && !isCartPending && (
             <ProductError>
               <ProductActions>
-                <ProductActionsDelete
-                  ref={productActionsDelete}
-                  onClick={() => onDeleteProduct(product)}
-                  disabled={orderState.loading}
-                >
-                  <Trash color='#D81212' />
-                </ProductActionsDelete>
+                {onDeleteProduct && (
+                  <ProductActionsDelete
+                    ref={productActionsDelete}
+                    onClick={() => onDeleteProduct(product)}
+                    disabled={orderState.loading}
+                  >
+                    <Trash color='#D81212' />
+                  </ProductActionsDelete>
+                )}
               </ProductActions>
               <ProductNotAvailable>
                 {t('NOT_AVAILABLE', 'Not available')}

@@ -3,6 +3,7 @@ import {
   useLanguage,
   useUtils,
   useEvent,
+  useConfig,
   OrderList as OrderListController
 } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
@@ -31,10 +32,12 @@ const OrderProgressUI = (props) => {
     isCustomerMode
   } = props
   const [, t] = useLanguage()
-  const [{ optimizeImage, parseTime }] = useUtils()
+  const [{ optimizeImage, parseTime, parseDate }] = useUtils()
+  const [{ configs }] = useConfig()
   const theme = useTheme()
   const [events] = useEvent()
   const [lastOrder, setLastOrder] = useState(null)
+  const statusToShow = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23]
 
   const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
@@ -44,8 +47,16 @@ const OrderProgressUI = (props) => {
 
   useEffect(() => {
     if (orderList?.orders.length > 0) {
-      const sortedOrders = orderList.orders.sort((a, b) => a.id > b.id ? -1 : 1)
-      setLastOrder(sortedOrders[0])
+      const sortedOrders = orderList.orders.filter(order => !!order?.business).sort((a, b) => a.id > b.id ? -1 : 1)
+      const orderInProgress = sortedOrders.find(({ status }) => (statusToShow.includes(status)))
+
+      let _lastOrder = null
+      if (orderInProgress) {
+        _lastOrder = orderInProgress
+      } else {
+        _lastOrder = sortedOrders[0]
+      }
+      setLastOrder(_lastOrder)
     }
   }, [orderList?.orders])
 
@@ -66,8 +77,10 @@ const OrderProgressUI = (props) => {
                   : isChew ? theme.images.logos.chewLogoReverse : theme.images.logos.logotype}
               />
               <ProgressDescriptionWrapper>
-                <h2>{t('ORDER_IN_PROGRESS', 'Order in progress')}</h2>
-                <p>{t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')}</p>
+                <h2>{statusToShow.includes(lastOrder?.status) ? t('ORDER_IN_PROGRESS', 'Order in progress') : t('ORDER', 'Order')}</h2>
+                {statusToShow.includes(lastOrder?.status) && (
+                  <p>{t('RESTAURANT_PREPARING_YOUR_ORDER', 'The restaurant is preparing your order')}</p>
+                )}
                 <Button
                   color='primaryContrast'
                   naked
@@ -93,13 +106,17 @@ const OrderProgressUI = (props) => {
               <ProgressTextWrapper>
                 <StatusWrapper>{getOrderStatus(lastOrder?.status)?.value}</StatusWrapper>
                 <TimeWrapper>
-                  <span>{t('ESTIMATED_DELIVERY', 'Estimated delivery')}:&nbsp;</span>
+                  <span>{lastOrder?.delivery_type === 1 ? t('ESTIMATED_DELIVERY', 'Estimated delivery') : t('ESTIMATED_TIME', 'Estimated time')}:&nbsp;</span>
                   <span>
                     {lastOrder?.delivery_datetime_utc
-                      ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A', utc: false })
+                      ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: configs?.general_hour_format?.value || 'HH:mm' })
                       : parseTime(lastOrder?.delivery_datetime, { utc: false })}
                     &nbsp;-&nbsp;
-                    <OrderEta order={lastOrder} outputFormat='hh:mm A' />
+                    {statusToShow.includes(lastOrder?.status) ? (
+                      <OrderEta order={lastOrder} outputFormat={configs?.general_hour_format?.value || 'HH:mm'} />
+                    ) : (
+                      parseDate(lastOrder?.reporting_data?.at[`status:${lastOrder.status}`], { outputFormat: configs?.general_hour_format?.value })
+                    )}
                   </span>
                 </TimeWrapper>
               </ProgressTextWrapper>
@@ -116,7 +133,7 @@ export const OrderProgress = (props) => {
   const orderProgressProps = {
     ...props,
     UIComponent: OrderProgressUI,
-    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21, 22, 23],
+    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23],
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
