@@ -25,7 +25,7 @@ import { AddressList } from '../../../AddressList'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 
 export const OriginalHomeHero = (props) => {
-  const { onFindBusiness } = props
+  const { onFindBusiness, notificationState } = props
 
   const [{ auth }, { login }] = useSession()
   const [orderState] = useOrder()
@@ -194,6 +194,7 @@ export const OriginalHomeHero = (props) => {
         >
           {modalPageToShow === 'login' && (
             <LoginForm
+              notificationState={notificationState}
               handleSuccessLogin={handleSuccessLogin}
               elementLinkToSignup={
                 <a
@@ -217,6 +218,7 @@ export const OriginalHomeHero = (props) => {
           )}
           {modalPageToShow === 'signup' && (
             <SignUpForm
+              notificationState={notificationState}
               elementLinkToLogin={
                 <a
                   onClick={
