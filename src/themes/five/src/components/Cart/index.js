@@ -421,7 +421,7 @@ const CartUI = (props) => {
                         </tr>
                       ))
                     }
-                    {orderState?.options?.type === 1 && cart?.delivery_price_with_discount > 0 && !hideDeliveryFee && (
+                    {orderState?.options?.type === 1 && !hideDeliveryFee && (
                       <tr>
                         <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
                         <td>{parsePrice(cart?.delivery_price_with_discount)}</td>
