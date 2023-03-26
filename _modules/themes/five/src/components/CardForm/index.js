@@ -37,7 +37,8 @@ var CARD_ELEMENT_OPTIONS = {
       color: '#fa755a',
       iconColor: '#fa755a'
     }
-  }
+  },
+  showIcon: true
 };
 var CardFormUI = function CardFormUI(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;

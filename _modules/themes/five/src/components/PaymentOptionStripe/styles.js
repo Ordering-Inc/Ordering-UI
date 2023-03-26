@@ -22,7 +22,9 @@ var CardItem = _styledComponents.default.div(_templateObject4 || (_templateObjec
   return isCursor && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    cursor: pointer;\n\n    &:hover {\n      background-color: #F8F9FA;\n    }\n  "])));
 });
 exports.CardItem = CardItem;
-var CardItemContent = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > div {\n    display: flex;\n    align-items: center;\n    margin-right: 13px;\n    ", "\n\n    img {\n      width: 24px;\n      height: 20px;\n    }\n  }\n\n  span {\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
+var CardItemContent = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  \n  .checks svg {\n    color: ", ";\n    font-size: 22px;\n  }\n\n  > div {\n    display: flex;\n    align-items: center;\n    margin: 0 13px 0 5px;\n    ", "\n\n    img {\n      width: 24px;\n      height: 20px;\n    }\n  }\n\n  span {\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
   var _props$theme2;
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-left: 13px;\n      margin-right: 0;\n    "])));
 }, function (props) {

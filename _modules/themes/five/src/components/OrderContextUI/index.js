@@ -111,7 +111,8 @@ var OrderContextUI = function OrderContextUI(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, {
     isBusinessList: isBusinessList,
-    hero: props.hideHero
+    hero: props.hideHero,
+    isCheckOut: isCheckOut
   }, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
       return handleClickAddress();
