@@ -5014,6 +5014,11 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+credit-card-type@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/credit-card-type/-/credit-card-type-8.3.0.tgz#f93c187c9362411544158c91d552efcc443aa87a"
+  integrity sha512-czfZUpQ7W9CDxZL4yFLb1kFtM/q2lTOY975hL2aO+DC8+GRNDVSXVCHXhVFZPxiUKmQCZbFP8vIhxx5TBQaThw==
+
 cross-spawn@^6.0.0, cross-spawn@^6.0.5:
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
@@ -8402,6 +8407,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+luhn@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/luhn/-/luhn-2.4.1.tgz#9cf501c5d0e9f7ee79504338ae71c9bcc67c304a"
+  integrity sha512-p1eEWSb2RJAfv+BzrPEUqbUXV1H3ylHEAOk9yDM1L12ojD6OQQGrE29DqKLa0XYluJTIwXIOFmyzVOme3QSyww==
+
 magic-string@^0.25.0, magic-string@^0.25.7:
   version "0.25.9"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.9.tgz#de7f9faf91ef8a1c91d02c2e5314c8277dbcdd1c"
@@ -9164,7 +9174,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/bf1c863d1ad2d1743fee09f82ba6e26e755f2a99"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/56c5af191888807b8cfad6d4893ced30435124da"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -9485,7 +9495,7 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-payment@^2.4.6:
+payment@^2.3.0, payment@^2.4.6:
   version "2.4.6"
   resolved "https://registry.yarnpkg.com/payment/-/payment-2.4.6.tgz#a69bfae5ee6edb2210d8c9f7720ee702359a40f5"
   integrity sha512-QSCAa1yQSkqbe4Ghac3sSA5SQ+Cxc3e4xwCxxun5NT6hUSWsNXXlN8KCCY0kAFFXBP9C7DrfyXP4REB7nPJa8g==
@@ -9961,12 +9971,14 @@ react-calendar@^3.3.1:
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
 
-react-credit-card-component@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-credit-card-component/-/react-credit-card-component-1.0.2.tgz#7bf682b3b6c5cef658316817e4aa52b3e774f439"
-  integrity sha512-v6nSf62TaICcd9LnrVCCO7BotX569472AZbIvuiY3fASt7fQGEQOfmftK8Uu2PNmpXl5Z8Sr2Iz6uj1mOFsJIg==
+react-credit-cards-2@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-credit-cards-2/-/react-credit-cards-2-0.10.0.tgz#06c661e2261a6ad44185f44e6b00e7e04c2c4995"
+  integrity sha512-B4GNVl6huDGK7Qc9ASof1kXRJjmQSmzZzpD9yUG9/SsCSa1drSVisbqTPjB+9IvyF2NGY3NZliNVzzi2zO7JNg==
   dependencies:
-    payment "^2.4.6"
+    credit-card-type "^8.3.0"
+    luhn "^2.4.1"
+    payment "^2.3.0"
 
 react-datepicker@^4.1.1:
   version "4.10.0"
