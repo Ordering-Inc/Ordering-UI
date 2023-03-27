@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderProgressUI = function OrderProgressUI(props) {
-  var _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2, _configs$general_hour, _lastOrder$reporting_, _configs$general_hour2;
+  var _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2, _configs$general_hour, _configs$general_hour2, _lastOrder$reporting_, _configs$general_hour3;
   var orderList = props.orderList,
     isCustomerMode = props.isCustomerMode;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -101,15 +101,14 @@ var OrderProgressUI = function OrderProgressUI(props) {
       width: (_getOrderStatus = (0, _utils.getOrderStatus)(lastOrder.status)) !== null && _getOrderStatus !== void 0 && _getOrderStatus.percentage ? "".concat((0, _utils.getOrderStatus)(lastOrder.status).percentage, "%") : '0%'
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, (_getOrderStatus2 = (0, _utils.getOrderStatus)(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, (lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_type) === 1 ? t('ESTIMATED_DELIVERY', 'Estimated delivery') : t('ESTIMATED_TIME', 'Estimated time'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
-    outputFormat: 'hh:mm A',
-    utc: false
+    outputFormat: (configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.value) || 'HH:mm'
   }) : parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
     utc: false
   }), "\xA0-\xA0", statusToShow.includes(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status) ? /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
     order: lastOrder,
-    outputFormat: (configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.value) || 'HH:mm'
+    outputFormat: (configs === null || configs === void 0 ? void 0 : (_configs$general_hour2 = configs.general_hour_format) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.value) || 'HH:mm'
   }) : parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : (_lastOrder$reporting_ = lastOrder.reporting_data) === null || _lastOrder$reporting_ === void 0 ? void 0 : _lastOrder$reporting_.at["status:".concat(lastOrder.status)], {
-    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$general_hour2 = configs.general_hour_format) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.value
+    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$general_hour3 = configs.general_hour_format) === null || _configs$general_hour3 === void 0 ? void 0 : _configs$general_hour3.value
   }))))))));
 };
 var OrderProgress = function OrderProgress(props) {
