@@ -2041,9 +2041,9 @@
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
 "@react-native-async-storage/async-storage@^1.13.1":
-  version "1.17.12"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.12.tgz#a39e4df5b06795ce49b2ca5b7ca9b8faadf8e621"
-  integrity sha512-BXg4OxFdjPTRt+8MvN6jz4muq0/2zII3s7HeT/11e4Zeh3WCgk/BleLzUcDfVqF3OzFHUqEkSrb76d6Ndjd/Nw==
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.18.0.tgz#0cc05bcf715c7ab9edd5783bbe04b5e755ed30b1"
+  integrity sha512-E1KYIXlJTm4NUw1bRPdYueRdp8e//7pLb2i8JY+YIYSOxFi0usycFDXkkGgPqvfn7nW6o2G2TZvXUYpBVHenWA==
   dependencies:
     merge-options "^3.0.4"
 
@@ -4452,9 +4452,9 @@ camelize@^1.0.0:
   integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
 
 caniuse-lite@^1.0.30001449:
-  version "1.0.30001469"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001469.tgz#3dd505430c8522fdc9f94b4a19518e330f5c945a"
-  integrity sha512-Rcp7221ScNqQPP3W+lVOYDyjdR6dC+neEQCttoNr5bAyz54AboB4iwpnWgyi8P4YUsPybVzT4LgWiBbI3drL4g==
+  version "1.0.30001470"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001470.tgz#09c8e87c711f75ff5d39804db2613dd593feeb10"
+  integrity sha512-065uNwY6QtHCBOExzbV6m236DDhYCCtPmQUCoQtwkVqzud8v5QPidoMr6CoMkC2nfp6nksjttqWQRRh75LqUmA==
 
 canvg@^3.0.6:
   version "3.0.10"
@@ -8789,9 +8789,9 @@ nan@^2.12.1:
   integrity sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==
 
 nanoid@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-4.0.1.tgz#398d7ccfdbf9faf2231b2ca7e8fff5dbca6a509b"
-  integrity sha512-udKGtCCUafD3nQtJg9wBhRP3KMbPglUsgV5JVsXhvyBs/oefqb4sqMEhKBBgqZncYowu58p1prsZQBYvAj/Gww==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-4.0.2.tgz#140b3c5003959adbebf521c170f282c5e7f9fb9e"
+  integrity sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -9164,7 +9164,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/3226a04bdf3e164eb3dc7541073aa0aec89ed8ff"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/bf1c863d1ad2d1743fee09f82ba6e26e755f2a99"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
