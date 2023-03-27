@@ -109,7 +109,7 @@ const OrderProgressUI = (props) => {
                   <span>{lastOrder?.delivery_type === 1 ? t('ESTIMATED_DELIVERY', 'Estimated delivery') : t('ESTIMATED_TIME', 'Estimated time')}:&nbsp;</span>
                   <span>
                     {lastOrder?.delivery_datetime_utc
-                      ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A', utc: false })
+                      ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: configs?.general_hour_format?.value || 'HH:mm' })
                       : parseTime(lastOrder?.delivery_datetime, { utc: false })}
                     &nbsp;-&nbsp;
                     {statusToShow.includes(lastOrder?.status) ? (
