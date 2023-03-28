@@ -11,7 +11,8 @@ import {
   useSession,
   useToast, ToastType,
   ReCaptcha,
-  useApi
+  useApi,
+  useOptimizationLoad
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
@@ -96,6 +97,7 @@ const LoginFormUI = (props) => {
   const theme = useTheme()
   const [, { showToast }] = useToast()
   const [{ configs }] = useConfig()
+  const [optimizationLoad] = useOptimizationLoad()
   const formMethods = useForm()
   const [recaptchaConfig] = useRecaptcha(enableReCaptcha)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -118,9 +120,9 @@ const LoginFormUI = (props) => {
     scope: 'profile'
   }
 
-  const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
-  const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
-  const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
+  const googleLoginEnabled = optimizationLoad?.result?.configs?.google_login_enabled?.value === '1'
+  const facebookLoginEnabled = optimizationLoad?.result?.configs?.facebook_login_enabled?.value === '1'
+  const appleLoginEnabled = optimizationLoad?.result?.configs?.apple_login_enabled?.value === '1'
 
   const spoonityTitle = configs?.spoonity_title?.value
 

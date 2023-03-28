@@ -61,7 +61,8 @@ export const Header = (props) => {
     isCustomerMode,
     searchValue,
     setSearchValue,
-    businessSlug
+    businessSlug,
+    notificationState
   } = props
 
   const { pathname } = useLocation()
@@ -230,6 +231,7 @@ export const Header = (props) => {
         <LeftSide>
           <LeftHeader id='left-side'>
             <SidebarMenu
+              notificationState={notificationState}
               auth={auth}
               isHideSignup={isHideSignup}
               userCustomer={userCustomer}
@@ -567,6 +569,7 @@ export const Header = (props) => {
         >
           {modalPageToShow === 'login' && (
             <LoginForm
+              notificationState={notificationState}
               handleSuccessLogin={handleSuccessLogin}
               elementLinkToSignup={
                 <a
@@ -590,6 +593,7 @@ export const Header = (props) => {
           )}
           {modalPageToShow === 'signup' && (
             <SignUpForm
+              notificationState={notificationState}
               elementLinkToLogin={
                 <a
                   onClick={

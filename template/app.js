@@ -110,6 +110,9 @@ export const App = () => {
     reviewStatus: { trigger: false, order: false, product: false, driver: false },
     reviewed: { isOrderReviewed: false, isProductReviewed: false, isDriverReviewed: false }
   })
+  const [oneSignalState, setOneSignalState] = useState({
+    notification_app: settings.notification_app
+  })
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isAllowUnaddressOrderType = unaddressedTypes.includes(orderStatus?.options?.type)
   const isShowReviewsPopupEnabled = configs?.show_reviews_popups_enabled?.value === '1'
@@ -444,6 +447,59 @@ export const App = () => {
     }
   }, [orderStatus])
 
+  const oneSignalSetup = () => {
+    const OneSignal = window.OneSignal || []
+    const initConfig = {
+      appId: configs?.onesignal_orderingweb_id?.value,
+      // allowLocalhostAsSecureOrigin: true,
+      notificationClickHandlerAction: 'navigate'
+    }
+
+    OneSignal.push(function () {
+      OneSignal.SERVICE_WORKER_PARAM = { scope: '/push/onesignal/' }
+      OneSignal.SERVICE_WORKER_PATH = 'push/onesignal/OneSignalSDKWorker.js'
+      OneSignal.SERVICE_WORKER_UPDATER_PATH = 'push/onesignal/OneSignalSDKWorker.js'
+      OneSignal.init(initConfig)
+
+      const onNotificationClicked = function (data) {
+        if (data?.additionalData?.order_uuid) {
+          history.push(`/orders/${data?.additionalData?.order_uuid}`)
+        }
+      }
+      const handler = function (data) {
+        onNotificationClicked(data)
+        OneSignal.addListenerForNotificationOpened(handler)
+      }
+      OneSignal.addListenerForNotificationOpened(handler)
+
+      OneSignal.on('subscriptionChange', function (isSubscribed) {
+        console.log("The user's subscription state is now:", isSubscribed)
+        if (isSubscribed) {
+          OneSignal.getUserId((userId) => {
+            const data = {
+              ...oneSignalState,
+              notification_token: userId
+            }
+            setOneSignalState(data)
+          })
+        }
+      })
+
+      OneSignal.getUserId((userId) => {
+        const data = {
+          ...oneSignalState,
+          notification_token: userId
+        }
+        setOneSignalState(data)
+      })
+    })
+  }
+
+  useEffect(() => {
+    if (configLoading) return
+    oneSignalSetup()
+  }, [configLoading])
+
   return settings.isCancellation ? (
     <CancellationComponent
       ButtonComponent={Button}
@@ -481,6 +537,7 @@ export const App = () => {
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
                 businessSlug={settings?.businessSlug}
+                notificationState={oneSignalState}
               />
             )}
             <NotNetworkConnectivity />
@@ -493,12 +550,12 @@ export const App = () => {
                       <Redirect to='/verify' />
                     ) : (
                       isKioskApp
-                        ? <HomePage />
+                        ? <HomePage notificationState={oneSignalState} />
                         : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                           : singleBusinessConfig.isActive
                             ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
-                            : <HomePage />
+                            : <HomePage notificationState={oneSignalState} />
                     )}
                   </Route>
                   <Route exact path='/'>
@@ -506,14 +563,14 @@ export const App = () => {
                       <Redirect to='/verify' />
                     ) : (
                       isKioskApp
-                        ? <HomePage />
+                        ? <HomePage notificationState={oneSignalState} />
                         : queryIntegrationToken && queryIntegrationCode === 'spoonity'
                           ? <QueryLoginSpoonity token={queryIntegrationToken} />
                           : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                             ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                             : singleBusinessConfig.isActive
                               ? <Redirect to={`/${singleBusinessConfig.businessSlug}`} />
-                              : <HomePage />
+                              : <HomePage notificationState={oneSignalState} />
                     )}
                   </Route>
                   <Route exact path='/wallets'>
