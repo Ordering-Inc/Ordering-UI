@@ -515,7 +515,7 @@ var AddressFormUI = function AddressFormUI(props) {
         });
       },
       autoComplete: "new-field",
-      maxLength: 250
+      maxLength: 100
     })));
   }), !formState.loading && formState.error && /*#__PURE__*/_react.default.createElement("p", {
     style: {
