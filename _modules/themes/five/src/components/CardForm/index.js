@@ -41,7 +41,7 @@ var CARD_ELEMENT_OPTIONS = {
   showIcon: true
 };
 var CardFormUI = function CardFormUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _validationFields$che, _validationFields$che2, _validationFields$che3, _validationFields$che4, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var error = props.error,
     errorExpiry = props.errorExpiry,
     errorCvc = props.errorCvc,
@@ -50,10 +50,16 @@ var CardFormUI = function CardFormUI(props) {
     handleChange = props.handleChange,
     isSplitForm = props.isSplitForm,
     handleChangeExpiry = props.handleChangeExpiry,
-    handleChangeCvc = props.handleChangeCvc;
+    handleChangeCvc = props.handleChangeCvc,
+    errorZipcode = props.errorZipcode;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
+    _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
+    validationFields = _useValidationFields2[0];
+  var zipCodeEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$che = validationFields.checkout) === null || _validationFields$che === void 0 ? void 0 : (_validationFields$che2 = _validationFields$che.zipcode) === null || _validationFields$che2 === void 0 ? void 0 : _validationFields$che2.enabled;
+  var zipCodeRequired = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$che3 = validationFields.checkout) === null || _validationFields$che3 === void 0 ? void 0 : (_validationFields$che4 = _validationFields$che3.zipcode) === null || _validationFields$che4 === void 0 ? void 0 : _validationFields$che4.required;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -76,7 +82,14 @@ var CardFormUI = function CardFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, errorExpiry)), /*#__PURE__*/_react.default.createElement(_styles.CardCvcField, null, /*#__PURE__*/_react.default.createElement("label", null, t('CVC', 'CVC')), /*#__PURE__*/_react.default.createElement(_reactStripeJs.CardCvcElement, {
     options: CARD_ELEMENT_OPTIONS,
     onChange: handleChangeCvc
-  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, errorCvc))))), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, errorCvc))), zipCodeEnabled && /*#__PURE__*/_react.default.createElement(_styles.CardZipcodeField, null, /*#__PURE__*/_react.default.createElement("label", null, t('ZIPCODE', 'Zipcode')), /*#__PURE__*/_react.default.createElement(_styles.ZipcodeField, {
+    name: "zipcode",
+    placeholder: "".concat(t('ZIPCODE', 'Zipcode')).concat(zipCodeRequired ? '*' : ''),
+    options: CARD_ELEMENT_OPTIONS,
+    onChange: handleChange,
+    pattern: "[0-9]",
+    type: "number"
+  }), errorZipcode && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('ZIPCODE_IS_INCOMPLETED', 'The zipcode is incompleted.'))))), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
     disabled: loading
