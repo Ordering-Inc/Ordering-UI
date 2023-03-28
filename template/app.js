@@ -169,12 +169,13 @@ export const App = () => {
 
   const businessesSlug = {
     marketplace: 'marketplace',
-    kiosk: settings?.businessSlug
+    kiosk: settings?.businessSlug,
+    business: settings?.businessSlug
   }
 
   const singleBusinessConfig = {
-    isActive: settings?.use_marketplace || isKioskApp,
-    businessSlug: businessesSlug[isKioskApp ? 'kiosk' : 'marketplace']
+    isActive: settings?.use_marketplace || settings?.businessSlug || isKioskApp,
+    businessSlug: businessesSlug[isKioskApp ? 'kiosk' : settings?.use_marketplace ? 'marketplace' : 'business']
   }
 
   const signUpBusinesslayout = orderingTheme?.theme?.business_signup?.components?.layout?.type === 'old'
@@ -417,8 +418,8 @@ export const App = () => {
   }, [configs, loaded])
 
   useEffect(() => {
-    if (isHome && settings?.use_marketplace) {
-      goToPage('business', { store: 'marketplace' })
+    if (isHome && (settings?.use_marketplace || settings?.businessSlug)) {
+      goToPage('business', { store: settings?.use_marketplace ? 'marketplace' : settings?.businessSlug })
     }
   }, [])
 
@@ -479,6 +480,7 @@ export const App = () => {
                 singleBusinessConfig={singleBusinessConfig}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
+                businessSlug={settings?.businessSlug}
               />
             )}
             <NotNetworkConnectivity />
@@ -606,7 +608,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/search'>
                     {
-                      isKioskApp
+                      isKioskApp || businessesSlug?.business
                         ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                         : queryIntegrationToken && queryIntegrationCode === 'spoonity'
                           ? <QueryLoginSpoonity token={queryIntegrationToken} />
@@ -629,7 +631,7 @@ export const App = () => {
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !isKioskApp ? (
+                      (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !isKioskApp && !singleBusinessConfig.businessSlug ? (
                         <BusinessListingSearch />
                       ) : (
                         <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
