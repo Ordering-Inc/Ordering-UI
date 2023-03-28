@@ -1,7 +1,6 @@
 import React from 'react'
 import { CardCvcElement, CardElement, CardExpiryElement, CardNumberElement } from '@stripe/react-stripe-js'
-import { CardForm as CardFormController, useLanguage } from 'ordering-components'
-
+import { CardForm as CardFormController, useLanguage, useValidationFields } from 'ordering-components'
 import {
   FormStripe,
   FormRow,
@@ -10,7 +9,9 @@ import {
   CardNumberField,
   CardExpiryCvcField,
   CardExpiryField,
-  CardCvcField
+  CardCvcField,
+  CardZipcodeField,
+  ZipcodeField
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -43,11 +44,14 @@ const CardFormUI = (props) => {
     handleChange,
     isSplitForm,
     handleChangeExpiry,
-    handleChangeCvc
+    handleChangeCvc,
+    errorZipcode
   } = props
 
   const [, t] = useLanguage()
-
+  const [validationFields] = useValidationFields()
+  const zipCodeEnabled = validationFields?.checkout?.zipcode?.enabled
+  const zipCodeRequired = validationFields?.checkout?.zipcode?.required
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -93,6 +97,22 @@ const CardFormUI = (props) => {
                   <ErrorMessage>{errorCvc}</ErrorMessage>
                 </CardCvcField>
               </CardExpiryCvcField>
+              {zipCodeEnabled && (
+                <CardZipcodeField>
+                  <label>{t('ZIPCODE', 'Zipcode')}</label>
+                  <ZipcodeField
+                    name='zipcode'
+                    placeholder={`${t('ZIPCODE', 'Zipcode')}${zipCodeRequired ? '*' : ''}`}
+                    options={CARD_ELEMENT_OPTIONS}
+                    onChange={handleChange}
+                    pattern='[0-9]'
+                    type='number'
+                  />
+                  {errorZipcode && (
+                    <ErrorMessage>{t('ZIPCODE_IS_INCOMPLETED', 'The zipcode is incompleted.')}</ErrorMessage>
+                  )}
+                </CardZipcodeField>
+              )}
             </>
           }
         </FormRow>
