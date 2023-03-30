@@ -622,7 +622,8 @@ var Checkout = function Checkout(props) {
     handleOrderRedirect = props.handleOrderRedirect,
     handleCheckoutRedirect = props.handleCheckoutRedirect,
     handleSearchRedirect = props.handleSearchRedirect,
-    handleCheckoutListRedirect = props.handleCheckoutListRedirect;
+    handleCheckoutListRedirect = props.handleCheckoutListRedirect,
+    businessSlug = props.businessSlug;
   var _useOrder3 = (0, _orderingComponents.useOrder)(),
     _useOrder4 = _slicedToArray(_useOrder3, 2),
     orderState = _useOrder4[0],
@@ -671,6 +672,10 @@ var Checkout = function Checkout(props) {
     var _cart$products3;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);
   })) || null);
+  var carts = businessSlug ? cartsWithProducts.filter(function (cart) {
+    var _cart$business6;
+    return (cart === null || cart === void 0 ? void 0 : (_cart$business6 = cart.business) === null || _cart$business6 === void 0 ? void 0 : _cart$business6.slug) === businessSlug || businessSlug === (cart === null || cart === void 0 ? void 0 : cart.business_id);
+  }) : cartsWithProducts;
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -713,7 +718,7 @@ var Checkout = function Checkout(props) {
           case 0:
             _context.prev = 0;
             result = {};
-            cart = cartsWithProducts.find(function (cart) {
+            cart = carts.find(function (cart) {
               return cart.uuid === cartId;
             });
             userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
@@ -853,12 +858,12 @@ var Checkout = function Checkout(props) {
     isResetPaymethod: isResetPaymethod,
     setIsResetPaymethod: setIsResetPaymethod
   });
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartUuid && orderState.carts && cartsWithProducts && (cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length) === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartUuid && orderState.carts && carts && (carts === null || carts === void 0 ? void 0 : carts.length) === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
     onClickButton: handleSearchRedirect
-  }), !cartUuid && orderState.carts && cartsWithProducts && (cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.CartsList, null, /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
-    carts: cartsWithProducts,
+  }), !cartUuid && orderState.carts && carts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.CartsList, null, /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+    carts: carts,
     isOrderStateCarts: !!orderState.carts,
     isForceOpenCart: true
   })), cartUuid && cartState.error && ((_cartState$error = cartState.error) === null || _cartState$error === void 0 ? void 0 : _cartState$error.length) > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

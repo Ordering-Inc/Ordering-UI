@@ -59,6 +59,7 @@ var Header = function Header(props) {
     isCustomerMode = props.isCustomerMode,
     searchValue = props.searchValue,
     setSearchValue = props.setSearchValue,
+    businessSlug = props.businessSlug,
     notificationState = props.notificationState;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
     pathname = _useLocation.pathname;
@@ -147,6 +148,10 @@ var Header = function Header(props) {
     var _cart$products;
     return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0;
   }) || null;
+  var carts = businessSlug ? cartsWithProducts.filter(function (cart) {
+    var _cart$business;
+    return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === businessSlug || businessSlug === (cart === null || cart === void 0 ? void 0 : cart.business_id);
+  }) : cartsWithProducts;
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
@@ -368,7 +373,7 @@ var Header = function Header(props) {
     }
   }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isMulticheckoutPage ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
-    carts: cartsWithProducts,
+    carts: carts,
     onClick: function onClick() {
       return handleTogglePopover('cart');
     },
@@ -381,7 +386,7 @@ var Header = function Header(props) {
     setPreorderBusiness: setPreorderBusiness
   }) : null) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "cart",
-    totalCarts: cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length,
+    totalCarts: carts === null || carts === void 0 ? void 0 : carts.length,
     onClick: function onClick(variant) {
       return openModal(variant);
     }
@@ -433,7 +438,7 @@ var Header = function Header(props) {
     },
     width: modalSelected === 'address' ? orderState !== null && orderState !== void 0 && (_orderState$options17 = orderState.options) !== null && _orderState$options17 !== void 0 && _orderState$options17.user_id ? '70%' : '50%' : '700px'
   }), modalSelected === 'cart' && /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
-    carts: cartsWithProducts,
+    carts: carts,
     isOrderStateCarts: !!orderState.carts,
     onClose: function onClose() {
       return setModalIsOpen(false);
