@@ -82,11 +82,11 @@ export const BusinessProductsList = (props) => {
     ...props,
     ordering,
     avoidBusinessLoading: true,
-    isCustomLayout: settings?.use_marketplace,
+    isCustomLayout: settings?.use_marketplace || settings?.businessSlug,
     useKioskApp: settings?.use_kiosk,
     isSearchByName: true,
     isSearchByDescription: true,
-    slug: businessSlug,
+    slug: settings?.businessSlug || businessSlug,
     categoryId,
     productId,
     businessProps: [
@@ -127,7 +127,8 @@ export const BusinessProductsList = (props) => {
       'pinterest_profile',
       'whatsapp_number',
       'snapchat_profile',
-      'previously_products'
+      'previously_products',
+      'configs'
     ],
     handleSearchRedirect: () => {
       events.emit('go_to_page', { page: 'search' })
