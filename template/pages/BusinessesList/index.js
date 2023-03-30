@@ -16,6 +16,7 @@ export const BusinessesList = (props) => {
     isSearchByName: true,
     isSearchByDescription: true,
     franchiseId: settings?.franchiseSlug,
+    businessId: settings?.businessSlug,
     onBusinessClick: (business) => {
       if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
         events.emit('go_to_page', { page: 'business', params: { business_slug: business.slug } })

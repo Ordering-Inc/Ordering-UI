@@ -3,7 +3,7 @@ import VscWarning from '@meronex/icons/vsc/VscWarning'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Modal } from '../Modal'
-import {  
+import {
   Checkout as CheckoutController,
   useOrder,
   useSession,
@@ -755,7 +755,8 @@ export const Checkout = (props) => {
     handleOrderRedirect,
     handleCheckoutRedirect,
     handleSearchRedirect,
-    handleCheckoutListRedirect
+    handleCheckoutListRedirect,
+    businessSlug
   } = props
 
   const [orderState, { confirmCart }] = useOrder()
@@ -772,7 +773,9 @@ export const Checkout = (props) => {
   const [isResetPaymethod, setIsResetPaymethod] = useState(false)
 
   const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length) || null)
-
+  const carts = businessSlug
+    ? cartsWithProducts.filter((cart) => cart?.business?.slug === businessSlug || businessSlug === cart?.business_id)
+    : cartsWithProducts
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -812,7 +815,7 @@ export const Checkout = (props) => {
   const getOrder = async (cartId) => {
     try {
       let result = {}
-      const cart = cartsWithProducts.find(cart => cart.uuid === cartId)
+      const cart = carts.find(cart => cart.uuid === cartId)
       const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
       if (cart && !userCustomer) {
         result = { ...cart }
@@ -920,17 +923,17 @@ export const Checkout = (props) => {
 
   return (
     <>
-      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length === 0 && (
+      {!cartUuid && orderState.carts && carts && carts?.length === 0 && (
         <NotFoundSource
           content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
           btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
           onClickButton={handleSearchRedirect}
         />
       )}
-      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length > 0 && (
+      {!cartUuid && orderState.carts && carts && carts?.length > 0 && (
         <CartsList>
           <CartContent
-            carts={cartsWithProducts}
+            carts={carts}
             isOrderStateCarts={!!orderState.carts}
             isForceOpenCart
           />

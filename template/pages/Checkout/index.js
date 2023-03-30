@@ -101,6 +101,7 @@ export const CheckoutPage = (props) => {
     useValidationFields: true,
     validationFieldsType: 'checkout',
     useKioskApp: settings?.use_kiosk,
+    businessSlug: settings?.businessSlug,
     onPlaceOrderClick: (data, paymethod, cart) => {
       if (cart?.order?.uuid) {
         if (orderState?.options?.moment) {
