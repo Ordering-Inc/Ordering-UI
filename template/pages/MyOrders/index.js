@@ -16,6 +16,7 @@ export const MyOrders = (props) => {
   const ordersProps = {
     ...props,
     franchiseId: settings?.franchiseSlug,
+    businessId: settings?.businessSlug,
     hideOptions: windowSize.width < 576,
     onRedirectPage: (data) => {
       if (data.page === 'business') {
