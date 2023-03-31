@@ -400,7 +400,7 @@ export const ProductActions = styled.div`
     div.incdec-control {
       margin-right: 18%;
       &.show-weight-unit{
-        width: 30%;
+        width: 40%;
       }
     }
   }
