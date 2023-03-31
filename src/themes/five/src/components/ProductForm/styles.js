@@ -298,7 +298,7 @@ export const ProductActions = styled.div`
   }
 
   div.incdec-control {
-    width: 135px;
+    width: 195px;
     display: flex;
     justify-content: space-around;
     align-items: center;
