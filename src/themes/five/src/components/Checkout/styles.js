@@ -568,6 +568,11 @@ export const Row = styled.div`
   width: 100%;
   margin: 20px 0;
 `
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
 
 export const InputContainer = styled.div`
   flex: 1;

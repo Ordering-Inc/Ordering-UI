@@ -56,13 +56,14 @@ import {
   RewardDisclaimerContainer,
   CardForm,
   Row,
+  Column,
   InputContainer,
   PayCardSelected,
   CardItemContent
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
-import { Input } from '../../styles/Inputs'
+import { Input, TextArea } from '../../styles/Inputs'
 
 import { NotFoundSource } from '../NotFoundSource'
 
@@ -126,19 +127,23 @@ const CheckoutUI = (props) => {
   const theme = useTheme()
   const [validationFields] = useValidationFields()
   // const [{ options, loading }, { changePaymethod }] = useOrder()
-  const [{ options, loading }] = useOrder()
+  const [{ options, loading }, { refreshOrderOptions }] = useOrder()
+  const [ordering] = useApi()
+
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const [{ user }] = useSession()
+  const [{ user, token }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
   const [events] = useEvent()
   const history = useHistory()
   const [openCardCSV, setOpenCardCSV] = useState(false)
+  const [openAddressNotes, setOpenAddressNotes] = useState(false)
   const [values, setValues] = useState({
     cardSecurityCode: '',
+    addressNotes: ''
   })
-  const [errorsCSV, setErrorsCSV] = useState({})
+  const [errorsCheckout, setErrorsCheckout] = useState({})
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
@@ -296,13 +301,46 @@ const CheckoutUI = (props) => {
     })
   }
 
+  const checkAddressNote = (isCSV) => {
+    if (!options?.address?.address_notes) {
+      setOpenAddressNotes(true)
+      return
+    }
+    isCSV ? setOpenCardCSV(true) : handlePlaceOrder()
+  }
+
+  const handleSubmitAddressNotes = e => {
+    e.preventDefault()
+    const numeroPalabras = values?.addressNotes?.split(' ').length
+    if (values.addressNotes === '' || numeroPalabras < 3) {
+      setErrorsCheckout({ addressNotes: false, addressBorder: true })
+      return
+    }
+    saveAddress({ address_notes: values.addressNotes })
+    refreshOrderOptions()
+    setOpenAddressNotes(false)
+    paymethodSelected?.gateway === 'openpay' && isCSVPopup ? setOpenCardCSV(true) : handlePlaceOrder()
+  }
+  const saveAddress = async (values) => {
+    try {
+      const { content } = await ordering
+        .users(user.id)
+        .addresses(options?.address?.id)
+        .save({ ...values }, { token })
+      if (!content.error) {
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
   const handleSubmit = e => {
     e.preventDefault()
     if ((paymethodSelected?.data?.brandCardName === 'american_express' && values.cardSecurityCode.length !== 4) || (paymethodSelected?.data?.brandCardName !== 'american_express' && values.cardSecurityCode.length !== 3)) {
-      setErrorsCSV({csv: false, border: true})
+      setErrorsCheckout({ csv: false, border: true })
     } else {
-      setErrorsCSV({})
+      setErrorsCheckout({})
       setOpenCardCSV(false)
+      setOpenAddressNotes(false)
       handlePlaceOrder(values?.cardSecurityCode)
       setValues({ cardSecurityCode: '' })
     }
@@ -739,7 +777,7 @@ const CheckoutUI = (props) => {
             <Button
               color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
               disabled={isDisablePlaceOrderButton}
-              onClick={() => (paymethodSelected?.gateway === 'openpay' && isCSVPopup) ? setOpenCardCSV(true) : handlePlaceOrder()}
+              onClick={() => (paymethodSelected?.gateway === 'openpay' && isCSVPopup) ? checkAddressNote(true) : checkAddressNote()}
             >
               {!cart?.valid_maximum ? (
                 `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
@@ -832,44 +870,70 @@ const CheckoutUI = (props) => {
         />
       </Modal>
       <Modal
-        title={t('CSV_DESCRIPTION', 'CSV_DESCRIPTION')}
+        title={openCardCSV ? t('CSV_DESCRIPTION', 'CSV_DESCRIPTION') : t('ADD_NOTES_TO_ADDRESS', 'ADD_NOTES_TO_ADDRESS') }
         className='modal-info'
-        open={openCardCSV}
-        onClose={() => setOpenCardCSV(false)}
+        open={openAddressNotes || openCardCSV}
+        onClose={() => {
+          setOpenAddressNotes(false)
+          setOpenCardCSV(false)
+        }}
+        width='70%'
       >
-        <CardForm>
-          <PayCardSelected>
-            <CardItemContent>
-              <span className='brand'>
-                <img src={getIconCard(paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName)} alt={paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName} />
-              </span>
-              <span>
-                XXXX-XXXX-XXXX-{paymethodSelected?.data?.card?.last4}
-              </span>
-            </CardItemContent>
-          </PayCardSelected>
-          <Row>
-            <InputContainer isValid={errorsCSV.csv} showBorder={errorsCSV.border}>
-              <Input
-                name='cardSecurityCode'
-                id='csv'
-                type={'password'}
-                minLength={3}
-                maxLength={paymethodSelected?.data && paymethodSelected?.data?.brandCardName !== 'american_express' ? 3 : 4}
-                onChange={handleChange}
-                placeholder='CVV'
-                onKeyPress={(e) => {
-                  if (!/[0-9]/.test(e.key)) {
-                    e.preventDefault();
-                  }
-                }}
-              />
-            </InputContainer>
-          </Row>
-          <Button onClick={handleSubmit} color='primary'>
-            {t('CONTINUE', 'CONTINUE')}
-          </Button>
-        </CardForm>
+        {openCardCSV && (
+          <CardForm>
+            <PayCardSelected>
+              <CardItemContent>
+                <span className='brand'>
+                  <img src={getIconCard(paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName)} alt={paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName} />
+                </span>
+                <span>
+                  XXXX-XXXX-XXXX-{paymethodSelected?.data?.card?.last4}
+                </span>
+              </CardItemContent>
+            </PayCardSelected>
+            <Row>
+              <InputContainer isValid={errorsCheckout.csv} showBorder={errorsCheckout.border}>
+                <Input
+                  name='cardSecurityCode'
+                  id='csv'
+                  type={'password'}
+                  minLength={3}
+                  maxLength={paymethodSelected?.data && paymethodSelected?.data?.brandCardName !== 'american_express' ? 3 : 4}
+                  onChange={handleChange}
+                  placeholder='CVV'
+                  onKeyPress={(e) => {
+                    if (!/[0-9]/.test(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
+                />
+              </InputContainer>
+            </Row>
+            <Button onClick={handleSubmit} color='primary'>
+              {t('CONTINUE', 'CONTINUE')}
+            </Button>
+          </CardForm>
+        )}
+        {openAddressNotes && (
+          <CardForm>
+            <Column>
+              <p>{t('ENTER_REFERENCE', 'ENTER_REFERENCE')}</p>
+              <InputContainer isValid={errorsCheckout.addressNotes} showBorder={errorsCheckout.addressBorder}>
+                <TextArea
+                  name='addressNotes'
+                  id='addressNotes'
+                  type='text'
+                  maxLength={100}
+                  onChange={handleChange}
+                  placeholder={t('ADDRESS_NOTES', 'Address Notes')}
+                />
+              </InputContainer>
+            </Column>
+            <Button onClick={handleSubmitAddressNotes} color='primary'>
+              {t('CONTINUE', 'CONTINUE')}
+            </Button>
+          </CardForm>
+        )}
       </Modal>
     </Container>
   )
