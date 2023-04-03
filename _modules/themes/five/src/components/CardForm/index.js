@@ -41,7 +41,7 @@ var CARD_ELEMENT_OPTIONS = {
   showIcon: true
 };
 var CardFormUI = function CardFormUI(props) {
-  var _validationFields$che, _validationFields$che2, _validationFields$che3, _validationFields$che4, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var error = props.error,
     errorExpiry = props.errorExpiry,
     errorCvc = props.errorCvc,
@@ -58,8 +58,8 @@ var CardFormUI = function CardFormUI(props) {
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
     _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
     validationFields = _useValidationFields2[0];
-  var zipCodeEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$che = validationFields.checkout) === null || _validationFields$che === void 0 ? void 0 : (_validationFields$che2 = _validationFields$che.zipcode) === null || _validationFields$che2 === void 0 ? void 0 : _validationFields$che2.enabled;
-  var zipCodeRequired = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$che3 = validationFields.checkout) === null || _validationFields$che3 === void 0 ? void 0 : (_validationFields$che4 = _validationFields$che3.zipcode) === null || _validationFields$che4 === void 0 ? void 0 : _validationFields$che4.required;
+  var zipCodeEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.card) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.zipcode) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
+  var zipCodeRequired = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.card) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.zipcode) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
