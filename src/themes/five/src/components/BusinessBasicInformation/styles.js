@@ -249,7 +249,7 @@ export const WrapperSearch = styled.div`
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 1002;
+    z-index: 10001;
     width: fit-content;
     margin-top: 0px;
     background-color: ${props => props.theme.colors.backgroundPage};
@@ -260,6 +260,7 @@ export const WrapperSearch = styled.div`
     &.fixed-search {
       left: 0;
       width: 100vw;
+      z-index: 1002;
     }
   }
 `

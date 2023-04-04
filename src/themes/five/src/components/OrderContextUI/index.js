@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage, useOrder, useConfig, useSession } from 'ordering-components'
 import { MomentPopover } from '../../../../pwa/src/components/MomentPopover'
 import { OrderTypeSelectorHeader } from '../../../../../components/OrderTypeSelectorHeader'
@@ -13,6 +13,7 @@ import {
   FeatureItems,
   ItemInline
 } from './styles'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 export const OrderContextUI = (props) => {
   const { isCheckOut, setMapErrors, isCustomerMode, isBusinessList } = props
@@ -25,7 +26,7 @@ export const OrderContextUI = (props) => {
   const [openPopover, setOpenPopover] = useState({})
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-
+  const windowSize = useWindowSize()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
@@ -66,6 +67,12 @@ export const OrderContextUI = (props) => {
     }
   }
 
+  useEffect(() => {
+    const handleCloseallPopovers = () => handleClosePopover('moment')
+    window.addEventListener('scroll', handleCloseallPopovers)
+    return () => window.removeEventListener('scroll', handleCloseallPopovers)
+  }, [])
+
   return (
     <>
       <Container isBusinessList={isBusinessList} hero={props.hideHero} isCheckOut={isCheckOut}>
@@ -78,7 +85,7 @@ export const OrderContextUI = (props) => {
         </AddressMenu>
         <FeatureItems>
           <ItemInline>
-            <OrderTypeSelectorHeader configTypes={configTypes} />
+            <OrderTypeSelectorHeader configTypes={configTypes} autoCloseWhenScroll={windowSize.width < 576} />
           </ItemInline>
           {isPreOrderSetting && (
             <ItemInline>

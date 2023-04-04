@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton'
-import { StarFill, Facebook, Tiktok, Pinterest, Whatsapp, Instagram, Snapchat } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
@@ -8,12 +6,9 @@ import { BusinessInformation } from '../BusinessInformation'
 import { BusinessReviews } from '../BusinessReviews'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
-import { useUtils, useOrder, useLanguage, useConfig } from 'ordering-components'
+import { useUtils, useLanguage } from 'ordering-components'
 
-import { convertHoursToMinutes, shape, lightenDarkenColor } from '../../../../../utils'
-import { Select } from '../../styles/Select'
 import { MomentContent } from '../MomentContent'
-import CgSearch from '@meronex/icons/cg/CgSearch'
 import { SearchProducts } from '../SearchProducts'
 import { SearchProducts as SearchProductsStarbucks } from '../../../../six/src/components/BusinessProductsListing/SearchProducts'
 import {
@@ -21,22 +16,10 @@ import {
   BusinessContent,
   WrapperBusinessLogo,
   BusinessLogo,
-  BusinessInfo,
-  BusinessInfoItem,
-  BusinessInfoContainer,
-  BusinessInfoContent,
-  WrapperSearch,
-  BusinessDetail,
   BusinessMoreDetail,
-  TitleWrapper,
-  RibbonBox,
-  SearchIconWrapper,
   SearchComponentContainer,
-  SocialList,
-  IconWrapper,
   BusinessInfoWrapper,
-  WrapperFloatingSearch,
-  SearchWrapper
+  WrapperFloatingSearch
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
 
@@ -44,6 +27,8 @@ import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import isBetween from 'dayjs/plugin/isBetween'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { BusinessInfoComponent } from './BusinessInfoComponent'
+import { SearchComponent } from './SearchComponent'
 
 dayjs.extend(timezone)
 dayjs.extend(isBetween)
@@ -68,31 +53,37 @@ export const BusinessBasicInformation = (props) => {
   const { business, loading } = businessState
 
   const theme = useTheme()
-  const [orderState] = useOrder()
   const [, t] = useLanguage()
-  const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
+  const [{ optimizeImage }] = useUtils()
   const windowSize = useWindowSize()
   const [isBusinessReviews, setIsBusinessReviews] = useState(false)
   const [isPreOrder, setIsPreOrder] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
-  const [{ configs }] = useConfig()
-  const isPreOrderSetting = configs?.preorder_status_enabled?.value === '1'
 
   const hideLogo = theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
-  const hideDeliveryFee = theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
-  const hideTime = theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
-  const hideReviews = theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
-  const hideReviewsPopup = theme?.business_view?.components?.header?.components?.reviews?.hidden
-  const hideDistance = theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
-  const hideSort = theme?.business_view?.components?.header?.components?.business?.components?.sort?.hidden
   const hideInfoIcon = theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
 
   const isInfoShrunken = theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
   const searchLayout = theme?.business_view?.components?.product_search?.components?.layout?.type
-  const hideCity = theme?.business_view?.components?.header?.components?.business?.components?.city?.hidden
   const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
-  const layoutsWithOldSearch = ['starbucks', 'old', 'floating']
-  const hideSearch = layoutsWithOldSearch.includes(theme?.business_view?.components?.product_search?.components?.layout?.type)
+
+  const businessInfoComponentProps = {
+    isChew,
+    loading,
+    business,
+    isInfoShrunken,
+    isCustomerMode,
+    setIsPreOrder,
+    setIsBusinessReviews,
+    categoryState,
+    searchValue,
+    errorQuantityProducts,
+    setOpenSearchProducts,
+    handleChangeSortBy,
+    sortByValue,
+    sortByOptions
+  }
+
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -166,217 +157,6 @@ export const BusinessBasicInformation = (props) => {
     })
   }, [sortByValue])
 
-  const SearchComponent = () => {
-    return (
-      <WrapperSearch id='search-component'>
-        <SearchWrapper>
-          <SearchIconWrapper
-            onClick={() => setOpenSearchProducts(true)}
-          >
-            <CgSearch />
-          </SearchIconWrapper>
-          {!hideSort && (
-            <Select
-              notAsync
-              notReload
-              options={sortByOptions}
-              defaultValue={sortByValue}
-              onChange={(val) => handleChangeSortBy && handleChangeSortBy(val)}
-            />
-          )}
-        </SearchWrapper>
-      </WrapperSearch>
-    )
-  }
-
-  const SocialNetWork = ({ url, icon }) => {
-    return (
-      <IconWrapper href={url} target='_blank' rel='noopener noreferrer'>
-        {icon}
-      </IconWrapper>
-    )
-  }
-
-  const BusinessInfoComponent = () => {
-    return (
-      <BusinessInfoContainer isChew={isChew} isFlexEnd={windowSize.width >= 768}>
-        <BusinessInfoContent>
-          <BusinessInfo className='info'>
-            <BusinessInfoItem isInfoShrunken={isInfoShrunken}>
-              {!loading ? (
-                <TitleWrapper>
-                  <h2 className='bold' id='business_name'>{business?.name}</h2>
-                  {business?.ribbon?.enabled && (
-                    <RibbonBox
-                      bgColor={business?.ribbon?.color}
-                      colorText={lightenDarkenColor(business?.ribbon?.color)}
-                      borderRibbon={lightenDarkenColor(business?.ribbon?.color)}
-                      isRoundRect={business?.ribbon?.shape === shape?.rectangleRound}
-                      isCapsule={business?.ribbon?.shape === shape?.capsuleShape}
-                    >
-                      {business?.ribbon?.text}
-                    </RibbonBox>
-                  )}
-                </TitleWrapper>
-              ) : (
-                <Skeleton width={isCustomerMode ? 100 : 150} height={isCustomerMode ? 35 : 'auto'} />
-              )}
-              {typeof hideCity !== 'undefined' && !hideCity && business?.city?.name && (
-                <>
-                  {!loading ? (
-                    <p className='type'>{business?.city?.name}</p>
-                  ) : (
-                    <Skeleton width={isCustomerMode ? 100 : 150} />
-                  )}
-                </>
-              )}
-              {!loading ? (
-                <SocialList>
-                  {business?.facebook_profile && (
-                    <SocialNetWork
-                      url={business?.facebook_profile}
-                      icon={<Facebook />}
-                    />
-                  )}
-                  {business?.instagram_profile && (
-                    <SocialNetWork
-                      url={business?.instagram_profile}
-                      icon={<Instagram />}
-                    />
-                  )}
-                  {business?.tiktok_profile && (
-                    <SocialNetWork
-                      url={business?.tiktok_profile}
-                      icon={<Tiktok />}
-                    />
-                  )}
-                  {business?.pinterest_profile && (
-                    <SocialNetWork
-                      url={business?.pinterest_profile}
-                      icon={<Pinterest />}
-                    />
-                  )}
-                  {business?.whatsapp_number && (
-                    <SocialNetWork
-                      url={business?.whatsapp_number}
-                      icon={<Whatsapp />}
-                    />
-                  )}
-                  {business?.snapchat_profile && (
-                    <SocialNetWork
-                      url={business?.snapchat_profile}
-                      icon={<Snapchat />}
-                    />
-                  )}
-                </SocialList>
-              ) : (
-                <SocialList>
-                  {[...Array(5).keys()].map(i => (
-                    <IconWrapper isSkeleton key={i}>
-                      <Skeleton width={27} height={27} />
-                    </IconWrapper>
-                  ))}
-                </SocialList>
-              )}
-              <BusinessDetail isSkeleton={loading}>
-                {orderState?.options.type === 1 && !hideDeliveryFee && (
-                  <>
-                    {!loading ? (
-                      <>
-                        <h5>
-                          <span>{t('DELIVERY_FEE', 'Delivery fee')}</span>
-                          {business && parsePrice(business?.delivery_price || 0)}
-                        </h5>
-                        <span className='dot'>•</span>
-                      </>
-                    ) : (
-                      <Skeleton width={isCustomerMode ? 70 : 50} />
-                    )}
-                  </>
-                )}
-                {!hideTime && (
-                  <>
-                    {!loading ? (
-                      <>
-                        {orderState?.options?.type === 1 ? (
-                          <>
-                            <h5>
-                              {convertHoursToMinutes(business?.delivery_time)}
-                            </h5>
-                            <span className='dot'>•</span>
-                          </>
-                        ) : (
-                          <>
-                            <h5>
-                              {convertHoursToMinutes(business?.pickup_time)}
-                            </h5>
-                            <span className='dot'>•</span>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <Skeleton width={isCustomerMode ? 70 : 50} />
-                    )}
-                  </>
-                )}
-                {!hideDistance && (
-                  <>
-                    {!loading ? (
-                      <>
-                        <h5>
-                          {parseDistance(business?.distance || 0)}
-                        </h5>
-                        <span className='dot'>•</span>
-                      </>
-                    ) : (
-                      <Skeleton width={isCustomerMode ? 70 : 50} />
-                    )}
-                  </>
-                )}
-                {!hideReviews && (
-                  <>
-                    {!loading ? (
-                      <div className='review'>
-                        <StarFill className='start' />
-                        <p>{business?.reviews?.total}</p>
-                      </div>
-                    ) : (
-                      <Skeleton width={isCustomerMode ? 100 : 50} />
-                    )}
-                  </>
-                )}
-              </BusinessDetail>
-              {
-                !loading ? (
-                  <div className='preorder-Reviews'>
-                    {isPreOrderSetting && (
-                      <>
-                        <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
-                        <span className='dot'>•</span>
-                      </>
-                    )}
-                    {business.reviews?.reviews && !hideReviewsPopup && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
-                  </div>
-                ) : (
-                  <Skeleton width={isCustomerMode ? 100 : 150} />
-                )
-              }
-            </BusinessInfoItem>
-          </BusinessInfo>
-        </BusinessInfoContent>
-        {!hideSearch &&
-          (categoryState?.products?.length !== 0 || searchValue) &&
-          !errorQuantityProducts &&
-          !isInfoShrunken &&
-          !business?.professionals?.length &&
-          // (categoryClicked || windowSize.width >= 993) &&
-          (
-            <SearchComponent />
-          )}
-      </BusinessInfoContainer>
-    )
-  }
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -401,7 +181,10 @@ export const BusinessBasicInformation = (props) => {
       )}
       <BusinessInfoWrapper>
         {(!isInfoShrunken && !isChew) && (
-          <BusinessInfoComponent />
+          <BusinessInfoComponent
+            {...businessInfoComponentProps}
+
+          />
         )}
         {(business?.header || business?.logo || loading || isInfoShrunken) && (
           <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open} isChew={isChew}>
@@ -416,13 +199,20 @@ export const BusinessBasicInformation = (props) => {
               </BusinessContent>
             )}
             {(isInfoShrunken || isChew) && (
-              <BusinessInfoComponent />
+              <BusinessInfoComponent
+                {...businessInfoComponentProps}
+              />
             )}
             {!loading && (
               <>
                 {isInfoShrunken && (
                   <SearchComponentContainer>
-                    <SearchComponent />
+                    <SearchComponent
+                      setOpenSearchProducts={setOpenSearchProducts}
+                      handleChangeSortBy={handleChangeSortBy}
+                      sortByValue={sortByValue}
+                      sortByOptions={sortByOptions}
+                    />
                   </SearchComponentContainer>
                 )}
                 {searchLayout === 'floating' && (
