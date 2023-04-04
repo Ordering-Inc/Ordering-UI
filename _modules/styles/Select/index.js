@@ -24,7 +24,9 @@ var Select = function Select(props) {
     defaultValue = props.defaultValue,
     onChange = props.onChange,
     notAsync = props.notAsync,
-    notReload = props.notReload;
+    notReload = props.notReload,
+    autoCloseWhenScroll = props.autoCloseWhenScroll,
+    zIndex = props.zIndex;
   var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -64,9 +66,18 @@ var Select = function Select(props) {
     }
   };
   (0, _react.useEffect)(function () {
+    var handleCloseSelect = function handleCloseSelect() {
+      return setOpen(false);
+    };
     document.addEventListener('mouseup', closeSelect);
     document.addEventListener('keydown', handleKeyDown);
+    if (autoCloseWhenScroll) {
+      window.addEventListener('scroll', handleCloseSelect);
+    }
     return function () {
+      if (autoCloseWhenScroll) {
+        window.removeEventListener('scroll', handleCloseSelect);
+      }
       document.removeEventListener('mouseup', closeSelect);
       document.removeEventListener('keydown', handleKeyDown);
     };
@@ -96,7 +107,8 @@ var Select = function Select(props) {
   }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, placeholder || ''), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_BsChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     id: "list",
     position: "right",
-    ref: dropdownReference
+    ref: dropdownReference,
+    zIndex: zIndex
   }, options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
       id: "item",
