@@ -172,7 +172,7 @@ export const RenderProductsLayout = (props) => {
             </NearBusiness>
           )}
           <div className='bp-list'>
-            {!isCustomLayout && !useKioskApp && (
+            {!useKioskApp && (
               <BusinessBasicInformationComponent
                 {...props}
                 businessState={businessState}
