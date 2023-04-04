@@ -224,7 +224,7 @@ const BusinessProductsListingUI = (props) => {
   }
   const adjustBusiness = async (adjustBusinessId) => {
     const _carts = carts?.[adjustBusinessId]
-    const products = carts?.[adjustBusinessId]?.products
+    const products = carts?.[adjustBusinessId]?.products || []
     const unavailableProducts = products.filter(product => product.valid !== true)
     const alreadyRemoved = sessionStorage.getItem('already-removed')
     sessionStorage.removeItem('already-removed')
