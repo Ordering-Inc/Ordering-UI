@@ -50,8 +50,9 @@ const CardFormUI = (props) => {
 
   const [, t] = useLanguage()
   const [validationFields] = useValidationFields()
-  const zipCodeEnabled = validationFields?.checkout?.zipcode?.enabled
-  const zipCodeRequired = validationFields?.checkout?.zipcode?.required
+  const zipCodeEnabled = validationFields?.fields?.card?.zipcode?.enabled
+  const zipCodeRequired = validationFields?.fields?.card?.zipcode?.required
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
