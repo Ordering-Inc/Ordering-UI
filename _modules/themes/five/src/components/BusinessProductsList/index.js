@@ -363,7 +363,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     onClickButton: function onClickButton() {
       return !searchValue ? handleSearchRedirect() : handleClearSearch('');
     }
-  })), errors && errors.length > 0 && errors.map(function (e, i) {
+  })), errors && errors.length > 0 && (typeof errors === 'string' ? [errors] : errors).map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, "ERROR: [", e, "]");
