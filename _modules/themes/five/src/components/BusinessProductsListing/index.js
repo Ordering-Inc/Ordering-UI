@@ -310,7 +310,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             _carts = carts === null || carts === void 0 ? void 0 : carts[adjustBusinessId];
-            products = carts === null || carts === void 0 ? void 0 : (_carts$adjustBusiness = carts[adjustBusinessId]) === null || _carts$adjustBusiness === void 0 ? void 0 : _carts$adjustBusiness.products;
+            products = (carts === null || carts === void 0 ? void 0 : (_carts$adjustBusiness = carts[adjustBusinessId]) === null || _carts$adjustBusiness === void 0 ? void 0 : _carts$adjustBusiness.products) || [];
             unavailableProducts = products.filter(function (product) {
               return product.valid !== true;
             });

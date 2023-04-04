@@ -15,6 +15,7 @@ var _AddressForm = require("../AddressForm");
 var _AddressList = require("../AddressList");
 var _Confirm = require("../Confirm");
 var _styles = require("./styles");
+var _useWindowSize = require("../../../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -66,6 +67,7 @@ var OrderContextUI = function OrderContextUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     alertState = _useState6[0],
     setAlertState = _useState6[1];
+  var windowSize = (0, _useWindowSize.useWindowSize)();
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
     return Number(value);
@@ -109,6 +111,15 @@ var OrderContextUI = function OrderContextUI(props) {
       }));
     }
   };
+  (0, _react.useEffect)(function () {
+    var handleCloseallPopovers = function handleCloseallPopovers() {
+      return handleClosePopover('moment');
+    };
+    window.addEventListener('scroll', handleCloseallPopovers);
+    return function () {
+      return window.removeEventListener('scroll', handleCloseallPopovers);
+    };
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, {
     isBusinessList: isBusinessList,
     hero: props.hideHero,
@@ -119,7 +130,8 @@ var OrderContextUI = function OrderContextUI(props) {
     },
     isCheckOut: isCheckOut
   }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), /*#__PURE__*/_react.default.createElement("span", null, ((_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address) || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?'))), /*#__PURE__*/_react.default.createElement(_styles.FeatureItems, null, /*#__PURE__*/_react.default.createElement(_styles.ItemInline, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
-    configTypes: configTypes
+    configTypes: configTypes,
+    autoCloseWhenScroll: windowSize.width < 576
   })), isPreOrderSetting && /*#__PURE__*/_react.default.createElement(_styles.ItemInline, null, /*#__PURE__*/_react.default.createElement(_MomentPopover.MomentPopover, {
     open: openPopover.moment,
     onClick: function onClick() {

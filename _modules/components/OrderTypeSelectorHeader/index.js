@@ -31,9 +31,11 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
     typeSelected = props.typeSelected,
     defaultValue = props.defaultValue,
     configTypes = props.configTypes,
-    orderTypes = props.orderTypes;
+    orderTypes = props.orderTypes,
+    autoCloseWhenScroll = props.autoCloseWhenScroll;
   var defaultType = configTypes !== null && configTypes !== void 0 && configTypes.includes(typeSelected) ? null : configTypes === null || configTypes === void 0 ? void 0 : configTypes[0];
   return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    autoCloseWhenScroll: autoCloseWhenScroll,
     options: configTypes ? orderTypes.filter(function (type) {
       return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
     }) : orderTypes,

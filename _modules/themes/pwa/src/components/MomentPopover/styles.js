@@ -17,7 +17,7 @@ var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObje
   return isBanner && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    background: #F8F9FA;\n    border-radius: 7.6px;\n    padding: 4px 8px;\n  "])));
 });
 exports.HeaderItem = HeaderItem;
-var PopoverBody = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  background-color: #FFF;\n  color: #333;\n  padding: 15px;\n  padding-top: 30px;\n  border-radius: 10px;\n  max-width: 500px;\n  z-index: 1001;\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n  #moment_control h1{\n    margin-bottom: 30px;\n  }\n"])));
+var PopoverBody = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  background-color: #FFF;\n  color: #333;\n  padding: 15px;\n  padding-top: 30px;\n  border-radius: 10px;\n  max-width: 500px;\n  z-index: 10002;\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n  #moment_control h1{\n    margin-bottom: 30px;\n  }\n  @media (min-width: 576px) {\n    z-index: 1001;\n  }\n"])));
 exports.PopoverBody = PopoverBody;
 var PopoverArrow = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 0; \n  height: 0; \n  border-left: 7px solid transparent;\n  border-right: 7px solid transparent;\n  border-bottom: 8px solid #FFF;\n  top: -8px;\n"])));
 exports.PopoverArrow = PopoverArrow;

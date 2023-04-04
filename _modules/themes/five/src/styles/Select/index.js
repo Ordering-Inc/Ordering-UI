@@ -28,7 +28,8 @@ var Select = function Select(props) {
     notReload = props.notReload,
     CustomArrow = props.CustomArrow,
     isHomeStyle = props.isHomeStyle,
-    disableOneOption = props.disableOneOption;
+    disableOneOption = props.disableOneOption,
+    zIndex = props.zIndex;
   var isHome = window.location.pathname === '/' || window.location.pathname === '/home' || isHomeStyle;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -106,7 +107,8 @@ var Select = function Select(props) {
     id: "list",
     position: "right",
     ref: dropdownReference,
-    isHome: isHome
+    isHome: isHome,
+    zIndex: zIndex
   }, options.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
       id: "item",

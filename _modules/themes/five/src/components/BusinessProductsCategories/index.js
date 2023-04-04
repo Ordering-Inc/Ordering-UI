@@ -112,7 +112,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
           categoryListsElement.scrollTo({
             top: 0,
             left: moveAmount,
-            behavior: 'smooth'
+            behavior: 'auto'
           });
         }
         setSelectedCateogry(category);
