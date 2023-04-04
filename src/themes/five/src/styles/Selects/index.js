@@ -37,7 +37,7 @@ export const Options = styled.div`
   position: absolute;
   background-color: #CCC;
   margin-top: 7px;
-  z-index: 10000;
+  z-index: ${({ zIndex }) => zIndex || 10002};
   border-width: 1px;
   border-style: solid;
   border-color: #CCC;
