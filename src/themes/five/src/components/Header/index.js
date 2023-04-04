@@ -61,6 +61,7 @@ export const Header = (props) => {
     isCustomerMode,
     searchValue,
     setSearchValue,
+    businessSlug,
     notificationState
   } = props
 
@@ -92,6 +93,9 @@ export const Header = (props) => {
   const isMulticheckoutPage = window.location.pathname?.includes('/multi-checkout')
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
+  const carts = businessSlug
+    ? cartsWithProducts.filter((cart) => cart?.business?.slug === businessSlug || businessSlug === cart?.business_id)
+    : cartsWithProducts
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
@@ -370,7 +374,7 @@ export const Header = (props) => {
                           {!isMulticheckoutPage ? (
                             <CartPopover
                               open={openPopover.cart}
-                              carts={cartsWithProducts}
+                              carts={carts}
                               onClick={() => handleTogglePopover('cart')}
                               onClose={() => handleClosePopover('cart')}
                               auth={auth}
@@ -383,7 +387,7 @@ export const Header = (props) => {
                       ) : (
                         <HeaderOption
                           variant='cart'
-                          totalCarts={cartsWithProducts?.length}
+                          totalCarts={carts?.length}
                           onClick={(variant) => openModal(variant)}
                         />
                       )
@@ -472,7 +476,7 @@ export const Header = (props) => {
         >
           {modalSelected === 'cart' && (
             <CartContent
-              carts={cartsWithProducts}
+              carts={carts}
               isOrderStateCarts={!!orderState.carts}
               onClose={() => setModalIsOpen(false)}
             />
