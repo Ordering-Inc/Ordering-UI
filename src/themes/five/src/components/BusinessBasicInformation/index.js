@@ -48,7 +48,8 @@ export const BusinessBasicInformation = (props) => {
     handleChangeSortBy,
     categoryState,
     errorQuantityProducts,
-    isCustomerMode
+    isCustomerMode,
+    isCustomLayout
   } = props
   const { business, loading } = businessState
 
@@ -81,7 +82,8 @@ export const BusinessBasicInformation = (props) => {
     setOpenSearchProducts,
     handleChangeSortBy,
     sortByValue,
-    sortByOptions
+    sortByOptions,
+    isCustomLayout
   }
 
   const getBusinessType = () => {

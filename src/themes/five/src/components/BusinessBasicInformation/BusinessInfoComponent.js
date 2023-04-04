@@ -24,7 +24,8 @@ export const BusinessInfoComponent = (props) => {
     setOpenSearchProducts,
     handleChangeSortBy,
     sortByValue,
-    sortByOptions
+    sortByOptions,
+    isCustomLayout
   } = props
   const theme = useTheme()
   const [orderState] = useOrder()
@@ -55,7 +56,7 @@ export const BusinessInfoComponent = (props) => {
         <BusinessInfo className='info'>
           <BusinessInfoItem isInfoShrunken={isInfoShrunken}>
             {!loading ? (
-              <TitleWrapper>
+              <TitleWrapper isCustomLayout={isCustomLayout}>
                 <h2 className='bold' id='business_name'>{business?.name}</h2>
                 {business?.ribbon?.enabled && (
                   <RibbonBox
