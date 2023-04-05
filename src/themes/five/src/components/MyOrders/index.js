@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useSession } from 'ordering-components'
+import { useLanguage, useSession, useApi } from 'ordering-components'
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { OrdersOption } from '../OrdersOption'
 import { Button } from '../../styles/Buttons'
@@ -27,6 +27,7 @@ export const MyOrders = (props) => {
   const history = useHistory()
   const theme = useTheme()
   const [{ user, token }] = useSession()
+  const [ordering] = useApi()
   const [selectItem, setSelectItem] = useState('all')
   const [isEmptyActive, setIsEmptyActive] = useState(false)
   const [isEmptyPast, setIsEmptyPast] = useState(false)
@@ -35,6 +36,8 @@ export const MyOrders = (props) => {
   const [isEmptyBusinesses, setIsEmptyBusinesses] = useState(false)
   const [businessOrderIds, setBusinessOrderIds] = useState([])
   const [wowPointsList, setWowPointsList] = useState([])
+  const isAlsea = ordering.project === 'alsea'
+
   const filterList = [
     { key: 'all', value: t('ALL', 'All') },
     { key: 'active', value: t('ACTIVE', 'Active') },
@@ -58,14 +61,14 @@ export const MyOrders = (props) => {
 
   const getWowPoints = async () => {
     try {
-      const response = await fetch(`https://alsea-plugins-staging.ordering.co/alseaplatform/wowcheckin_allowed.php?email=${user?.email}`, {
+      const response = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-temp'}.ordering.co/alseaplatform/wowcheckin_allowed.php?email=${user?.email}`, {
         method: 'GET',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       })
       const result = await response.json()
       if (result.content.allowed) {
-        const responsePoints = await fetch('https://alsea-plugins-staging.ordering.co/alseaplatform/wow_movimientos_amount.php', {
+        const responsePoints = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-temp'}.ordering.co/alseaplatform/wow_movimientos_amount.php`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

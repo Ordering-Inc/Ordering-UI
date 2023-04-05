@@ -225,6 +225,9 @@ const SingleOrderCardUI = (props) => {
               </div>
             )}
             <p className='order-status'>{isSkeleton ? <Skeleton width={80} /> : getOrderStatus(order.status)?.value}</p>
+            {order?.acelerador_wow?.acelerador_points && (
+              <p className='order-acelerador'>{isSkeleton ? <Skeleton width={80} /> : order?.acelerador_wow?.acelerador}</p>
+            )}
           </BusinessInformation>
           {!isCustomerMode && (
             <Price isBusinessesPage={isBusinessesPage}>
@@ -263,11 +266,14 @@ const SingleOrderCardUI = (props) => {
               </>
             )}
           </FavoriteWrapper>
-          {order?.wow_points && (
-            <WowPointsWrapper>
+          <WowPointsWrapper>
+            {order?.wow_points && (
               <p className='order-wowpoints'>{isSkeleton ? <Skeleton width={80} /> : `+${order?.wow_points || 0} ${t('PTS', 'pts')}`}</p>
-            </WowPointsWrapper>
-          )}
+            )}
+            {order?.acelerador_wow?.acelerador_points && (
+              <p className='order-aceleradorpoints'>{isSkeleton ? <Skeleton width={80} /> : `+${order?.acelerador_wow?.acelerador_points || 0} ${t('PTS', 'pts')}`}</p>
+            )}
+          </WowPointsWrapper>
         </Content>
       </Container>
       {isReviewOpen && (

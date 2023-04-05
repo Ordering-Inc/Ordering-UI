@@ -82,6 +82,10 @@ export const Content = styled.div`
         color: ${theme?.colors?.gold};
         width: 230px;
       }
+      .order-acelerador {
+        color: #008F64;
+        width: 230px;
+      }
       .orders-detail {
         margin-top: 5px;
       }
@@ -292,10 +296,13 @@ export const ReviewWrapper = styled.div`
 export const WowPointsWrapper = styled.div`
   position: absolute;
   right: 10px;
-  top: 58px;
+  top: 65%;
   p{
     color: ${({ theme }) => theme?.colors?.gold};
     margin: 0;
     font-size: 14px;
+  }
+  .order-aceleradorpoints {
+    color: #008F64;
   }
 `
