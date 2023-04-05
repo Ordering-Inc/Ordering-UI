@@ -92,11 +92,19 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var imageFails = activeOrders ? (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyActiveOrders : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.emptyPastOrders;
   var _orders = customArray || values || [];
   var orders = pastOrders && (wowPointsList === null || wowPointsList === void 0 ? void 0 : wowPointsList.length) > 0 ? _orders.map(function (order) {
-    var _wowPointsList$find;
+    var _wowPointsList$find, _wowPointsList$find2, _wowPointsList$find3;
     return _objectSpread(_objectSpread({}, order), {}, {
       wow_points: (_wowPointsList$find = wowPointsList.find(function (wowOrder) {
         return wowOrder.ordering_id === (order === null || order === void 0 ? void 0 : order.id);
-      })) === null || _wowPointsList$find === void 0 ? void 0 : _wowPointsList$find.points
+      })) === null || _wowPointsList$find === void 0 ? void 0 : _wowPointsList$find.points,
+      acelerador_wow: {
+        acelerador: (_wowPointsList$find2 = wowPointsList.find(function (wowOrder) {
+          return wowOrder.ordering_id === (order === null || order === void 0 ? void 0 : order.id);
+        })) === null || _wowPointsList$find2 === void 0 ? void 0 : _wowPointsList$find2.acelerador,
+        acelerador_points: (_wowPointsList$find3 = wowPointsList.find(function (wowOrder) {
+          return wowOrder.ordering_id === (order === null || order === void 0 ? void 0 : order.id);
+        })) === null || _wowPointsList$find3 === void 0 ? void 0 : _wowPointsList$find3.acelerador_points
+      }
     });
   }) : _orders;
   var isShowTitles = businessesIds ? orders && orders.length > 0 && !orders.map(function (order) {

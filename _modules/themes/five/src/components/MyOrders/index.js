@@ -44,6 +44,9 @@ var MyOrders = function MyOrders(props) {
     _useSession2$ = _useSession2[0],
     user = _useSession2$.user,
     token = _useSession2$.token;
+  var _useApi = (0, _orderingComponents.useApi)(),
+    _useApi2 = _slicedToArray(_useApi, 1),
+    ordering = _useApi2[0];
   var _useState = (0, _react.useState)('all'),
     _useState2 = _slicedToArray(_useState, 2),
     selectItem = _useState2[0],
@@ -76,6 +79,7 @@ var MyOrders = function MyOrders(props) {
     _useState16 = _slicedToArray(_useState15, 2),
     wowPointsList = _useState16[0],
     setWowPointsList = _useState16[1];
+  var isAlsea = ordering.project === 'alsea';
   var filterList = [{
     key: 'all',
     value: t('ALL', 'All')
@@ -113,7 +117,7 @@ var MyOrders = function MyOrders(props) {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return fetch("https://alsea-plugins-staging.ordering.co/alseaplatform/wowcheckin_allowed.php?email=".concat(user === null || user === void 0 ? void 0 : user.email), {
+              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-temp', ".ordering.co/alseaplatform/wowcheckin_allowed.php?email=").concat(user === null || user === void 0 ? void 0 : user.email), {
                 method: 'GET',
                 'Content-Type': 'application/json',
                 Authorization: "Bearer ".concat(token)
@@ -129,7 +133,7 @@ var MyOrders = function MyOrders(props) {
                 break;
               }
               _context.next = 10;
-              return fetch('https://alsea-plugins-staging.ordering.co/alseaplatform/wow_movimientos_amount.php', {
+              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-temp', ".ordering.co/alseaplatform/wow_movimientos_amount.php"), {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'

@@ -38,7 +38,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SingleOrderCardUI = function SingleOrderCardUI(props) {
-  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _props$beforeElements, _props$beforeComponen, _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _theme$images4, _theme$images4$dummie, _order$business7, _order$summary, _order$business8, _getOrderStatus, _order$summary2, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _orderingTheme$theme9, _props$beforeElements, _props$beforeComponen, _configs$google_maps_, _order$business, _order$business2, _theme$images, _theme$images$dummies, _order$business3, _configs$google_maps_2, _order$business4, _theme$images2, _theme$images2$dummie, _order$business5, _theme$images3, _theme$images3$dummie, _order$business6, _theme$images4, _theme$images4$dummie, _order$business7, _order$summary, _order$business8, _getOrderStatus, _order$acelerador_wow, _order$acelerador_wow2, _order$summary2, _order$acelerador_wow3, _order$acelerador_wow4, _props$afterComponent, _props$afterElements;
   var order = props.order,
     getOrderStatus = props.getOrderStatus,
     isBusinessesPage = props.isBusinessesPage,
@@ -283,7 +283,11 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     className: "order-status"
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
-  }) : (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.Price, {
+  }) : (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), (order === null || order === void 0 ? void 0 : (_order$acelerador_wow = order.acelerador_wow) === null || _order$acelerador_wow === void 0 ? void 0 : _order$acelerador_wow.acelerador_points) && /*#__PURE__*/_react.default.createElement("p", {
+    className: "order-acelerador"
+  }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 80
+  }) : order === null || order === void 0 ? void 0 : (_order$acelerador_wow2 = order.acelerador_wow) === null || _order$acelerador_wow2 === void 0 ? void 0 : _order$acelerador_wow2.acelerador)), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.Price, {
     isBusinessesPage: isBusinessesPage
   }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
@@ -309,11 +313,15 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 20,
     height: 20
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, order !== null && order !== void 0 && order.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), (order === null || order === void 0 ? void 0 : order.wow_points) && /*#__PURE__*/_react.default.createElement(_styles.WowPointsWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, order !== null && order !== void 0 && order.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), /*#__PURE__*/_react.default.createElement(_styles.WowPointsWrapper, null, (order === null || order === void 0 ? void 0 : order.wow_points) && /*#__PURE__*/_react.default.createElement("p", {
     className: "order-wowpoints"
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80
-  }) : "+".concat((order === null || order === void 0 ? void 0 : order.wow_points) || 0, " ").concat(t('PTS', 'pts')))))), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }) : "+".concat((order === null || order === void 0 ? void 0 : order.wow_points) || 0, " ").concat(t('PTS', 'pts'))), (order === null || order === void 0 ? void 0 : (_order$acelerador_wow3 = order.acelerador_wow) === null || _order$acelerador_wow3 === void 0 ? void 0 : _order$acelerador_wow3.acelerador_points) && /*#__PURE__*/_react.default.createElement("p", {
+    className: "order-aceleradorpoints"
+  }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 80
+  }) : "+".concat((order === null || order === void 0 ? void 0 : (_order$acelerador_wow4 = order.acelerador_wow) === null || _order$acelerador_wow4 === void 0 ? void 0 : _order$acelerador_wow4.acelerador_points) || 0, " ").concat(t('PTS', 'pts')))))), isReviewOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isReviewOpen,
     onClose: handleCloseReivew,
     title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', 'Loading...')
