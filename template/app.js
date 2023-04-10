@@ -170,14 +170,18 @@ export const App = () => {
     }
   }
 
+  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
+  const websiteThemeBusinessSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.business_slug
+  const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
+
   const businessesSlug = {
     marketplace: 'marketplace',
-    kiosk: settings?.businessSlug,
-    business: settings?.businessSlug
+    kiosk: updatedBusinessSlug,
+    business: updatedBusinessSlug
   }
 
   const singleBusinessConfig = {
-    isActive: settings?.use_marketplace || settings?.businessSlug || isKioskApp,
+    isActive: settings?.use_marketplace || updatedBusinessSlug || isKioskApp,
     businessSlug: businessesSlug[isKioskApp ? 'kiosk' : settings?.use_marketplace ? 'marketplace' : 'business']
   }
 
@@ -421,8 +425,8 @@ export const App = () => {
   }, [configs, loaded])
 
   useEffect(() => {
-    if (isHome && (settings?.use_marketplace || settings?.businessSlug)) {
-      goToPage('business', { store: settings?.use_marketplace ? 'marketplace' : settings?.businessSlug })
+    if (isHome && (settings?.use_marketplace || updatedBusinessSlug)) {
+      goToPage('business', { store: settings?.use_marketplace ? 'marketplace' : updatedBusinessSlug })
     }
   }, [])
 
@@ -483,7 +487,7 @@ export const App = () => {
                 singleBusinessConfig={singleBusinessConfig}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
-                businessSlug={settings?.businessSlug}
+                businessSlug={updatedBusinessSlug}
                 notificationState={oneSignalState}
               />
             )}
