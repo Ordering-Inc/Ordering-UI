@@ -79,7 +79,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onBusinessClick = props.onBusinessClick,
     handleChangePriceFilterValues = props.handleChangePriceFilterValues,
     priceFilterValues = props.priceFilterValues,
-    handleUpdateProfessionals = props.handleUpdateProfessionals;
+    handleUpdateProfessionals = props.handleUpdateProfessionals,
+    isCustomLayout = props.isCustomLayout;
   var business = businessState.business,
     loading = businessState.loading,
     error = businessState.error;
@@ -422,7 +423,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       setBusiness({});
     };
   }, [cateringPreorder, business]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !props.useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.HeaderContent, null, !location.pathname.includes('/marketplace') && /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !props.useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.HeaderContent, null, !isCustomLayout && !location.pathname.includes('/marketplace') && /*#__PURE__*/_react.default.createElement("div", {
     id: "back-arrow"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
     className: "back-arrow",
@@ -444,8 +445,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     businessState: businessState,
     sortByOptions: sortByOptions,
     categoryState: categoryState,
+    isCustomLayout: isCustomLayout,
     categoriesState: props.categoriesState,
-    isCustomLayout: props.isCustomLayout,
     useKioskApp: props.useKioskApp,
     categorySelected: categorySelected,
     openCategories: openCategories,
