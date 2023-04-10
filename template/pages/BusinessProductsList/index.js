@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
-import { useApi, useEvent, useSite } from 'ordering-components'
+import { useApi, useEvent, useSite, useOrderingTheme } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/themes/five/src/components/BusinessProductsListing'
 import { HelmetTags } from '../../components/HelmetTags'
 import { capitalize } from '../../../src/utils'
@@ -10,6 +10,12 @@ import { checkSiteUrl } from '../../Utils'
 export const BusinessProductsList = (props) => {
   const [{ site }] = useSite()
   const { search } = useLocation()
+  const [orderingTheme] = useOrderingTheme()
+
+  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
+  const websiteThemeBusinessSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.business_slug
+  const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
+
   const [helmetMetaTags, setHelmetMetaTags] = useState({
     title: '',
     description: '',
@@ -19,7 +25,7 @@ export const BusinessProductsList = (props) => {
   let businessSlug = ''
   const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
   const productUrlTemplate = checkSiteUrl(site?.product_url_template, '/store/:business_slug?category=:category_id&product=:product_id')
-  
+
   if (businessUrlTemplate.includes('?')) {
     const businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '')
     const params = new URLSearchParams(search)
@@ -82,11 +88,11 @@ export const BusinessProductsList = (props) => {
     ...props,
     ordering,
     avoidBusinessLoading: true,
-    isCustomLayout: settings?.use_marketplace || settings?.businessSlug,
+    isCustomLayout: settings?.use_marketplace || updatedBusinessSlug,
     useKioskApp: settings?.use_kiosk,
     isSearchByName: true,
     isSearchByDescription: true,
-    slug: settings?.businessSlug || businessSlug,
+    slug: updatedBusinessSlug || businessSlug,
     categoryId,
     productId,
     businessProps: [
