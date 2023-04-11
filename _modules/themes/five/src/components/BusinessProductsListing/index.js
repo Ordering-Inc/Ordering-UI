@@ -525,7 +525,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products8 = currentCart.products) === null || _currentCart$products8 === void 0 ? void 0 : _currentCart$products8.reduce(function (productsLength, Cproduct) {
       var _ref4;
       return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === ((_ref4 = productModal.product || curProduct) === null || _ref4 === void 0 ? void 0 : _ref4.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-    }, 0)) || 0
+    }, 0)) || 0,
+    brand_id: business === null || business === void 0 ? void 0 : business.brand_id
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState === null || alertState === void 0 ? void 0 : alertState.open,

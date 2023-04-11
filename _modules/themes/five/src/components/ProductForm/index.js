@@ -71,7 +71,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     handleChangeSuboptionState = props.handleChangeSuboptionState,
     handleChangeCommentState = props.handleChangeCommentState,
     productAddedToCartLength = props.productAddedToCartLength,
-    handleFavoriteProduct = props.handleFavoriteProduct;
+    handleFavoriteProduct = props.handleFavoriteProduct,
+    brand_id = props.brand_id;
   var product = productObject.product,
     loading = productObject.loading,
     error = productObject.error;
@@ -101,6 +102,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   var _useSite = (0, _orderingComponents.useSite)(),
     _useSite2 = _slicedToArray(_useSite, 1),
     site = _useSite2[0].site;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var productUrlTemplate = site === null || site === void 0 ? void 0 : site.product_url_template;
   var _useState3 = (0, _react.useState)(null),
     _useState4 = _slicedToArray(_useState3, 2),
@@ -146,18 +150,19 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     _useState22 = _slicedToArray(_useState21, 2),
     pricePerWeightUnit = _useState22[0],
     setPricePerWeightUnit = _useState22[1];
-  var _useState23 = (0, _react.useState)({
+  var _useState23 = (0, _react.useState)(true),
+    _useState24 = _slicedToArray(_useState23, 2),
+    isShowCommentsByBrand = _useState24[0],
+    setShowCommentsByBrand = _useState24[1];
+  var _useState25 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState24 = _slicedToArray(_useState23, 2),
-    alertState = _useState24[0],
-    setAlertState = _useState24[1];
+    _useState26 = _slicedToArray(_useState25, 2),
+    alertState = _useState26[0],
+    setAlertState = _useState26[1];
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var galleryLength = (gallery === null || gallery === void 0 ? void 0 : gallery.length) + (videoGallery === null || videoGallery === void 0 ? void 0 : videoGallery.length);
-  var _useConfig = (0, _orderingComponents.useConfig)(),
-    _useConfig2 = _slicedToArray(_useConfig, 1),
-    configs = _useConfig2[0].configs;
   var unaddressedTypes = (configs === null || configs === void 0 ? void 0 : (_configs$unaddressed_ = configs.unaddressed_order_types_allowed) === null || _configs$unaddressed_ === void 0 ? void 0 : _configs$unaddressed_.value.split('|').map(function (value) {
     return Number(value);
   })) || [];
@@ -278,6 +283,16 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       }
     });
   };
+  (0, _react.useEffect)(function () {
+    var _configs$special_note, _configs$special_note2;
+    if (!configs && !(configs !== null && configs !== void 0 && configs.special_notes_per_brand) && !(configs !== null && configs !== void 0 && (_configs$special_note = configs.special_notes_per_brand) !== null && _configs$special_note !== void 0 && _configs$special_note.value)) return;
+    var snpb_dictionary = JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$special_note2 = configs.special_notes_per_brand) === null || _configs$special_note2 === void 0 ? void 0 : _configs$special_note2.value);
+    var special_notes_per_brand = {};
+    snpb_dictionary.forEach(function (brand_note) {
+      special_notes_per_brand['brand_' + brand_note.brand_id] = brand_note.enabled;
+    });
+    setShowCommentsByBrand(!!special_notes_per_brand["brand_".concat(brand_id)]);
+  }, [configs === null || configs === void 0 ? void 0 : configs.special_notes_per_brand]);
   (0, _react.useEffect)(function () {
     if (isScrollAvailable) {
       setIsScrollAvailable(false);
@@ -601,12 +616,13 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         });
       }))));
     });
-  })), !(product !== null && product !== void 0 && product.hide_special_instructions) && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('COMMENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SPECIAL_COMMENT) || 'COMMENTS')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
+  })), isShowCommentsByBrand && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('COMMENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SPECIAL_COMMENT) || 'COMMENTS')), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 4,
     placeholder: t('SPECIAL_COMMENT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.SPECIAL_COMMENT) || 'Special comment'),
     defaultValue: productCart.comment,
     onChange: handleChangeCommentState,
-    disabled: !(productCart && !isSoldOut && maxProductQuantity)
+    disabled: !(productCart && !isSoldOut && maxProductQuantity),
+    maxLength: 60
   })), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
