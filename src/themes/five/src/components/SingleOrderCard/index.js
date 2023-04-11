@@ -254,9 +254,9 @@ const SingleOrderCardUI = (props) => {
               }
             </Price>
           )}
-          {pastOrders && !isCustomerMode && (
-            <ButtonWrapper>
-              {!isOrderReviewed && !isFavorite && (!order?.review || (order.driver && !order?.user_review)) && !hideReviewOrderButton && (
+          {pastOrders && (
+            <ButtonWrapper isCustomerMode={isCustomerMode}>
+              {!isOrderReviewed && !isFavorite && (!order?.review || (order.driver && !order?.user_review)) && !hideReviewOrderButton && !isCustomerMode && (
                 <Button
                   outline
                   color='primary'
@@ -273,7 +273,7 @@ const SingleOrderCardUI = (props) => {
               )}
             </ButtonWrapper>
           )}
-          {!order?.business?.length && !hideFavorite && (
+          {!order?.business?.length && !hideFavorite && !isCustomerMode && (
             <FavoriteWrapper onClick={() => handleChangeFavorite(order)} className='favorite'>
               {isSkeleton ? <Skeleton width={20} height={20} /> : (
                 <>
