@@ -55,7 +55,7 @@ const MomentControlUI = (props) => {
   } = props
 
   const [{ configs }] = useConfig()
-  const is12hours = configs?.dates_moment_format?.value?.includes('hh:mm')
+  const is12hours = configs?.general_hour_format?.value?.includes('hh:mm')
   const [{ parseTime }] = useUtils()
   const { pathname } = useLocation()
   const [, t] = useLanguage()
