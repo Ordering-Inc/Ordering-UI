@@ -82,7 +82,7 @@ export const ThemeProvider = ({ children, ...props }) => {
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 2000;
+      z-index: 20002;
     }
     .popup-component {
       background-color: rgba(0, 0, 0, 0.3);
