@@ -37,7 +37,7 @@ export const OrderDetailsHeader = (props) => {
   const [, t] = useLanguage()
   const [{ user }] = useSession()
 
-  const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
+  const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'openpay']
 
   const walletName = {
     cash: {
@@ -120,9 +120,13 @@ export const OrderDetailsHeader = (props) => {
               </span>
               {stripePaymethods.includes(event?.data?.gateway) && (
                 <>
-                  <span> (</span>
-                  <StripeLink href={`https://dashboard.stripe.com/payments/${event?.data?.result?.pay_data}`} target='_blank'>{event?.data?.result?.pay_data}</StripeLink>
-                  <span>) </span>
+                  {!order?.paymethod?.gateway == 'openpay' && (
+                    <>
+                      <span> (</span>
+                      <StripeLink href={`https://dashboard.stripe.com/payments/${event?.data?.result?.pay_data}`} target='_blank'>{event?.data?.result?.pay_data}</StripeLink>
+                      <span>) </span>
+                    </>
+                  )}
                   <span> ({order?.refund_data ? t('REFUNDED', 'Refunded') : t('MOBILE_SUCCESS', 'Success')}) </span>
                 </>
               )}
@@ -134,9 +138,13 @@ export const OrderDetailsHeader = (props) => {
             <span>{order?.paymethod?.name}</span>
             {stripePaymethods.includes(order?.paymethod?.gateway) && (
               <>
-                <span> (</span>
-                <StripeLink href={`https://dashboard.stripe.com/payments/${order?.pay_data}`} target='_blank'>{order?.pay_data}</StripeLink>
-                <span>) </span>
+                {!order?.paymethod?.gateway == 'openpay' && (
+                  <>
+                    <span> (</span>
+                    <StripeLink href={`https://dashboard.stripe.com/payments/${order?.pay_data}`} target='_blank'>{order?.pay_data}</StripeLink>
+                    <span>) </span>
+                  </>
+                )}
                 <span> ({order?.refund_data ? t('REFUNDED', 'Refunded') : t('MOBILE_SUCCESS', 'Success')}) </span>
               </>
             )}

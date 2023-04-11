@@ -95,7 +95,8 @@ const ProductOptionsUI = (props) => {
     handleChangeSuboptionState,
     handleChangeCommentState,
     productAddedToCartLength,
-    handleFavoriteProduct
+    handleFavoriteProduct,
+    brand_id
   } = props
 
   const { product, loading, error } = productObject
@@ -108,6 +109,8 @@ const ProductOptionsUI = (props) => {
   const [{ optimizeImage, parsePrice }] = useUtils()
   const theme = useTheme()
   const [{ site }] = useSite()
+  const [{ configs }] = useConfig()
+
   const productUrlTemplate = site?.product_url_template
   const [urlToShare, setUrlToShare] = useState(null)
   const [modalPageToShow, setModalPageToShow] = useState('login')
@@ -123,13 +126,12 @@ const ProductOptionsUI = (props) => {
     pieces: true
   })
   const [pricePerWeightUnit, setPricePerWeightUnit] = useState(null)
+  const [isShowCommentsByBrand, setShowCommentsByBrand] = useState(true)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const galleryLength = gallery?.length + videoGallery?.length
 
-  const [{ configs }] = useConfig()
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
-
   const closeModal = () => {
     setModalIsOpen(false)
     setModalPageToShow('login')
@@ -257,6 +259,16 @@ const ProductOptionsUI = (props) => {
       }
     })
   }
+
+  useEffect(() => {
+    if (!configs && !configs?.special_notes_per_brand && !configs?.special_notes_per_brand?.value) return
+    const snpb_dictionary = JSON.parse(configs?.special_notes_per_brand?.value);
+    let special_notes_per_brand = {}
+    snpb_dictionary.forEach((brand_note) => {
+      special_notes_per_brand['brand_' + brand_note.brand_id] = brand_note.enabled;
+    });
+    setShowCommentsByBrand(!!special_notes_per_brand[`brand_${brand_id}`])
+  }, [configs?.special_notes_per_brand])
 
   useEffect(() => {
     if (isScrollAvailable) {
@@ -639,7 +651,7 @@ const ProductOptionsUI = (props) => {
                   }))
                 }
               </div>
-              {!product?.hide_special_instructions && (
+              {isShowCommentsByBrand && (
                 <ProductComment>
                   <SectionTitle>{t('COMMENTS', theme?.defaultLanguages?.SPECIAL_COMMENT || 'COMMENTS')}</SectionTitle>
                   <TextArea
@@ -648,6 +660,7 @@ const ProductOptionsUI = (props) => {
                     defaultValue={productCart.comment}
                     onChange={handleChangeCommentState}
                     disabled={!(productCart && !isSoldOut && maxProductQuantity)}
+                    maxLength={60}
                   />
                 </ProductComment>
               )}

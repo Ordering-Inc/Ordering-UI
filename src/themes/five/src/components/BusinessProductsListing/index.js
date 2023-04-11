@@ -471,6 +471,7 @@ const BusinessProductsListingUI = (props) => {
                 handleUpdateProducts={handleUpdateProducts}
                 onSave={handlerProductAction}
                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0) || 0}
+                brand_id={business?.brand_id}
               />
             )}
           </>
