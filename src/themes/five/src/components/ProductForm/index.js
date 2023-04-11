@@ -99,7 +99,8 @@ const ProductOptionsUI = (props) => {
     productAddedToCartLength,
     handleFavoriteProduct,
     handleCreateGuestUser,
-    actionStatus
+    actionStatus,
+    isCustomerMode
   } = props
 
   const { product, loading, error } = productObject
@@ -500,9 +501,11 @@ const ProductOptionsUI = (props) => {
                 <ProductName>
                   <span>{product?.name}</span>
                 </ProductName>
+                {!isCustomerMode && (
                 <span className='favorite' onClick={() => handleChangeFavorite()} >
                   {product?.favorite ? <Like /> : <DisLike />}
                 </span>
+                )}
               </TitleWrapper>
               <Properties>
                 {isHaveWeight ? (
