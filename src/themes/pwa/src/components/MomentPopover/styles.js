@@ -32,10 +32,13 @@ export const PopoverBody = styled.div`
   padding-top: 30px;
   border-radius: 10px;
   max-width: 500px;
-  z-index: 1001;
+  z-index: 10002;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
   #moment_control h1{
     margin-bottom: 30px;
+  }
+  @media (min-width: 576px) {
+    z-index: 1001;
   }
 `
 

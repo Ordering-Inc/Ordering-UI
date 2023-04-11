@@ -60,7 +60,9 @@ export const Header = (props) => {
     isHideSignup,
     isCustomerMode,
     searchValue,
-    setSearchValue
+    setSearchValue,
+    businessSlug,
+    notificationState
   } = props
 
   const { pathname } = useLocation()
@@ -91,6 +93,9 @@ export const Header = (props) => {
   const isMulticheckoutPage = window.location.pathname?.includes('/multi-checkout')
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
+  const carts = businessSlug
+    ? cartsWithProducts.filter((cart) => cart?.business?.slug === businessSlug || businessSlug === cart?.business_id)
+    : cartsWithProducts
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
@@ -226,6 +231,7 @@ export const Header = (props) => {
         <LeftSide>
           <LeftHeader id='left-side'>
             <SidebarMenu
+              notificationState={notificationState}
               auth={auth}
               isHideSignup={isHideSignup}
               userCustomer={userCustomer}
@@ -236,7 +242,7 @@ export const Header = (props) => {
               isChew={isChew}
             >
               <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (isHome && windowSize.width < 576 ? theme?.images?.logos?.isotypeInvert : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
+              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (windowSize.width <= 768 ? theme?.images?.logos?.isotypeInvert : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && windowSize.width >= 576 && (
@@ -368,7 +374,7 @@ export const Header = (props) => {
                           {!isMulticheckoutPage ? (
                             <CartPopover
                               open={openPopover.cart}
-                              carts={cartsWithProducts}
+                              carts={carts}
                               onClick={() => handleTogglePopover('cart')}
                               onClose={() => handleClosePopover('cart')}
                               auth={auth}
@@ -381,7 +387,7 @@ export const Header = (props) => {
                       ) : (
                         <HeaderOption
                           variant='cart'
-                          totalCarts={cartsWithProducts?.length}
+                          totalCarts={carts?.length}
                           onClick={(variant) => openModal(variant)}
                         />
                       )
@@ -470,7 +476,7 @@ export const Header = (props) => {
         >
           {modalSelected === 'cart' && (
             <CartContent
-              carts={cartsWithProducts}
+              carts={carts}
               isOrderStateCarts={!!orderState.carts}
               onClose={() => setModalIsOpen(false)}
             />
@@ -563,6 +569,7 @@ export const Header = (props) => {
         >
           {modalPageToShow === 'login' && (
             <LoginForm
+              notificationState={notificationState}
               handleSuccessLogin={handleSuccessLogin}
               elementLinkToSignup={
                 <a
@@ -586,6 +593,7 @@ export const Header = (props) => {
           )}
           {modalPageToShow === 'signup' && (
             <SignUpForm
+              notificationState={notificationState}
               elementLinkToLogin={
                 <a
                   onClick={

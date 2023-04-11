@@ -279,7 +279,7 @@ const BusinessProductsListUI = (props) => {
       }
 
       {errors && errors.length > 0 && (
-        errors.map((e, i) => (
+        (typeof errors === 'string' ? [errors] : errors).map((e, i) => (
           <ErrorMessage key={i}>ERROR: [{e}]</ErrorMessage>
         ))
       )}

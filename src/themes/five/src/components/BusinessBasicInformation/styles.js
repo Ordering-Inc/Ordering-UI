@@ -249,7 +249,7 @@ export const WrapperSearch = styled.div`
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 1002;
+    z-index: 10001;
     width: fit-content;
     margin-top: 0px;
     background-color: ${props => props.theme.colors.backgroundPage};
@@ -260,6 +260,7 @@ export const WrapperSearch = styled.div`
     &.fixed-search {
       left: 0;
       width: 100vw;
+      z-index: 1002;
     }
   }
 `
@@ -370,17 +371,26 @@ export const TitleWrapper = styled.div`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    background: ${({ theme }) => theme?.colors?.white};
     &.fixed-name {
       z-index: 1002;
       position: fixed;
       top: 0;
-      width: calc(100vw - 190px);
       padding: 10px 0;
       font-size: 18px;
-      ${props => props.theme?.rtl ? css`
+      ${({ isCustomLayout }) => !isCustomLayout ? css`
+        width: calc(100vw - 190px);
+        ${props => props.theme?.rtl ? css`
         right: 50px;
-      ` : css`
+        ` : css`
         left: 50px;
+        `}
+      ` : css`
+      ${props => props.theme?.rtl ? css`
+          right: 10px;
+          ` : css`
+          left: 10px;
+        `}
       `}
     }
     @media (min-width: 768px) {

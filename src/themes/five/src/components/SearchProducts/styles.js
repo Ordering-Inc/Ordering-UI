@@ -6,7 +6,7 @@ export const Container = styled.div`
   top: 0px;
   width: 100vw;
   height: 100vh;
-  z-index: 2000;
+  z-index: 10002;
 `
 export const BackDropContainer = styled.div`
   background: rgba(0,0,0,0.3);

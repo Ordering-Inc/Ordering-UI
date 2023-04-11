@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { LanguageSelector as LanguageSelectorController } from 'ordering-components'
 import { Select } from '../../styles/Select'
 import { Container } from './styles'
@@ -40,6 +40,7 @@ const LanguageSelectorUI = (props) => {
           src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${transformLanguageToCountry(currentLanguage)}.svg`}
         />
         <Select
+          zIndex={20000}
           isHomeStyle
           options={languagesState?.loading ? defaultLanguages : _languages}
           defaultValue={languagesState?.loading ? defaultCurrentLanguage : currentLanguage}
