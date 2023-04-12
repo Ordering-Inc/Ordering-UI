@@ -505,7 +505,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     businessId: business === null || business === void 0 ? void 0 : business.id,
     onSave: handlerProductAction,
     closeModalProductForm: closeModalProductForm,
-    handleCustomSave: handleCustomSave
+    handleCustomSave: handleCustomSave,
+    brand_id: business === null || business === void 0 ? void 0 : business.brand_id
   }))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('ERROR', 'Error'),
     open: alertState === null || alertState === void 0 ? void 0 : alertState.open,

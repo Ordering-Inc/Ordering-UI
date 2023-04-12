@@ -66,7 +66,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     handleChangeSuboptionState = props.handleChangeSuboptionState,
     handleChangeCommentState = props.handleChangeCommentState,
     closeModalProductForm = props.closeModalProductForm,
-    handleCustomSave = props.handleCustomSave;
+    handleCustomSave = props.handleCustomSave,
+    brand_id = props.brand_id;
   var product = productObject.product,
     loading = productObject.loading,
     error = productObject.error;
@@ -96,6 +97,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   var _useApi = (0, _orderingComponents.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useState3 = (0, _react.useState)('login'),
     _useState4 = _slicedToArray(_useState3, 2),
     modalPageToShow = _useState4[0],
@@ -117,14 +121,18 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     showRedFlags = _useState12[0],
     setShowRedFlags = _useState12[1];
+  var _useState13 = (0, _react.useState)(true),
+    _useState14 = _slicedToArray(_useState13, 2),
+    isShowCommentsByBrand = _useState14[0],
+    setShowCommentsByBrand = _useState14[1];
   var isAlsea = ordering.project === 'alsea';
-  var _useState13 = (0, _react.useState)({
+  var _useState15 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState14 = _slicedToArray(_useState13, 2),
-    alertState = _useState14[0],
-    setAlertState = _useState14[1];
+    _useState16 = _slicedToArray(_useState15, 2),
+    alertState = _useState16[0],
+    setAlertState = _useState16[1];
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var _closeModal = function closeModal(deleteUser) {
     setModalIsOpen(false);
@@ -287,6 +295,16 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       setOtpDataUser(null);
     }
   }, [auth]);
+  (0, _react.useEffect)(function () {
+    var _configs$special_note, _configs$special_note2;
+    if (!configs && !(configs !== null && configs !== void 0 && configs.special_notes_per_brand) && !(configs !== null && configs !== void 0 && (_configs$special_note = configs.special_notes_per_brand) !== null && _configs$special_note !== void 0 && _configs$special_note.value)) return;
+    var snpbDictionary = JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$special_note2 = configs.special_notes_per_brand) === null || _configs$special_note2 === void 0 ? void 0 : _configs$special_note2.value);
+    var specialNotesPerBrand = {};
+    snpbDictionary.forEach(function (brandNote) {
+      specialNotesPerBrand['brand_' + brandNote.brand_id] = brandNote.enabled;
+    });
+    setShowCommentsByBrand(!!specialNotesPerBrand["brand_".concat(brand_id)]);
+  }, [configs === null || configs === void 0 ? void 0 : configs.special_notes_per_brand]);
   return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
     className: "product-container",
     ref: productContainerRef,
@@ -384,13 +402,13 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         });
       }))));
     });
-  })), !(product !== null && product !== void 0 && product.hide_special_instructions) && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('NAME', 'Name'), " (", t('NO_SPECIAL_INSTRUCTIONS', 'no special instructions'), "):"), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
+  })), isShowCommentsByBrand && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('NAME', 'Name'), " (", t('NO_SPECIAL_INSTRUCTIONS', 'no special instructions'), "):"), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 1,
     placeholder: "".concat(t('ENTER_RECIPIENT', 'Enter recipient'), " (32 ").concat(t('CHARACTER_LIMIT', 'Character limit'), ")"),
     defaultValue: productCart.comment,
     onChange: handleChangeCommentState,
     disabled: !(productCart && !isSoldOut && maxProductQuantity),
-    maxLength: 32
+    maxLength: 60
   }))), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "price-amount-block"
   }, productCart && !isSoldOut && maxProductQuantity > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
