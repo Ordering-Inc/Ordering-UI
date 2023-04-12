@@ -286,12 +286,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   (0, _react.useEffect)(function () {
     var _configs$special_note, _configs$special_note2;
     if (!configs && !(configs !== null && configs !== void 0 && configs.special_notes_per_brand) && !(configs !== null && configs !== void 0 && (_configs$special_note = configs.special_notes_per_brand) !== null && _configs$special_note !== void 0 && _configs$special_note.value)) return;
-    var snpb_dictionary = JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$special_note2 = configs.special_notes_per_brand) === null || _configs$special_note2 === void 0 ? void 0 : _configs$special_note2.value);
-    var special_notes_per_brand = {};
-    snpb_dictionary.forEach(function (brand_note) {
-      special_notes_per_brand['brand_' + brand_note.brand_id] = brand_note.enabled;
+    var snpbDictionary = JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$special_note2 = configs.special_notes_per_brand) === null || _configs$special_note2 === void 0 ? void 0 : _configs$special_note2.value);
+    var specialNotesPerBrand = {};
+    snpbDictionary.forEach(function (brandNote) {
+      specialNotesPerBrand['brand_' + brandNote.brand_id] = brandNote.enabled;
     });
-    setShowCommentsByBrand(!!special_notes_per_brand["brand_".concat(brand_id)]);
+    setShowCommentsByBrand(!!specialNotesPerBrand["brand_".concat(brand_id)]);
   }, [configs === null || configs === void 0 ? void 0 : configs.special_notes_per_brand]);
   (0, _react.useEffect)(function () {
     if (isScrollAvailable) {

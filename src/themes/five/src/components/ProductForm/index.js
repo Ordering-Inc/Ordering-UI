@@ -262,12 +262,12 @@ const ProductOptionsUI = (props) => {
 
   useEffect(() => {
     if (!configs && !configs?.special_notes_per_brand && !configs?.special_notes_per_brand?.value) return
-    const snpb_dictionary = JSON.parse(configs?.special_notes_per_brand?.value);
-    let special_notes_per_brand = {}
-    snpb_dictionary.forEach((brand_note) => {
-      special_notes_per_brand['brand_' + brand_note.brand_id] = brand_note.enabled;
-    });
-    setShowCommentsByBrand(!!special_notes_per_brand[`brand_${brand_id}`])
+    const snpbDictionary = JSON.parse(configs?.special_notes_per_brand?.value);
+    const specialNotesPerBrand = {}
+    snpbDictionary.forEach((brandNote) => {
+      specialNotesPerBrand['brand_' + brandNote.brand_id] = brandNote.enabled;
+    })
+    setShowCommentsByBrand(!!specialNotesPerBrand[`brand_${brand_id}`])
   }, [configs?.special_notes_per_brand])
 
   useEffect(() => {
