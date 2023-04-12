@@ -235,13 +235,13 @@ const BusinessesListingUI = (props) => {
           )}
         </BusinessBanner>
       )}
-        <OrderProgress
-          isChew={isChew}
-          franchiseId={props.franchiseId}
-          userCustomerId={userCustomer?.id}
-          asDashboard={isCustomerMode}
-          isCustomerMode={isCustomerMode}
-        />
+      <OrderProgress
+        isChew={isChew}
+        franchiseId={props.franchiseId}
+        userCustomerId={userCustomer?.id}
+        asDashboard={isCustomerMode}
+        isCustomerMode={isCustomerMode}
+      />
       {(configs?.business_listing_hide_image?.value !== '1' && isChew) && (
         <BusinessHeroImg
           bgimage={theme.images?.general?.businessHero}
@@ -269,7 +269,7 @@ const BusinessesListingUI = (props) => {
                 isCustomLayout={isCustomLayout}
                 placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
                 onSearch={handleChangeSearch}
-                handleCustomEnter={() => onRedirectPage({ page: 'business_search' })}
+                handleCustomEnter={() => configs?.advanced_business_search_enabled?.value === '1' ? onRedirectPage({ page: 'business_search' }) : null}
               />
             )}
             {!hideCities && citiesState?.cities?.length > 0 && (
