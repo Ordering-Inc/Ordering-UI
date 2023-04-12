@@ -78,7 +78,7 @@ export const OrderContextUI = (props) => {
       <Container isBusinessList={isBusinessList} hero={props.hideHero} isCheckOut={isCheckOut}>
         <AddressMenu
           onClick={() => handleClickAddress()}
-          isCheckOut={isCheckOut}
+          isCheckOut={isCheckOut || !props.hideHero}
         >
           <FaMapMarkerAlt />
           <span>{orderState.options?.address?.address || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}</span>
