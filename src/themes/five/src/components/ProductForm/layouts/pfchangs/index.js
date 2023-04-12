@@ -12,7 +12,8 @@ import {
   useLanguage,
   useOrder,
   useUtils,
-  useApi
+  useApi,
+  useConfig
 } from 'ordering-components'
 
 import { scrollTo } from '../../../../../../../utils'
@@ -83,7 +84,8 @@ const ProductOptionsUI = (props) => {
     handleChangeSuboptionState,
     handleChangeCommentState,
     closeModalProductForm,
-    handleCustomSave
+    handleCustomSave,
+    brand_id
   } = props
 
   const { product, loading, error } = productObject
@@ -96,12 +98,16 @@ const ProductOptionsUI = (props) => {
   const [{ optimizeImage, parsePrice }] = useUtils()
   const theme = useTheme()
   const [ordering] = useApi()
+  const [{ configs }] = useConfig()
+
   const [modalPageToShow, setModalPageToShow] = useState('login')
   const productContainerRef = useRef(null)
   const [gallery, setGallery] = useState([])
   const [isScrollAvailable, setIsScrollAvailable] = useState(false)
   const [otpDataUser, setOtpDataUser] = useState(null)
   const [showRedFlags, setShowRedFlags] = useState(false)
+  const [isShowCommentsByBrand, setShowCommentsByBrand] = useState(true)
+
   const isAlsea = ordering.project === 'alsea'
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -248,6 +254,16 @@ const ProductOptionsUI = (props) => {
     }
   }, [auth])
 
+  useEffect(() => {
+    if (!configs && !configs?.special_notes_per_brand && !configs?.special_notes_per_brand?.value) return
+    const snpbDictionary = JSON.parse(configs?.special_notes_per_brand?.value);
+    const specialNotesPerBrand = {}
+    snpbDictionary.forEach((brandNote) => {
+      specialNotesPerBrand['brand_' + brandNote.brand_id] = brandNote.enabled;
+    })
+    setShowCommentsByBrand(!!specialNotesPerBrand[`brand_${brand_id}`])
+  }, [configs?.special_notes_per_brand])
+
   return (
     <ProductContainer
       className='product-container'
@@ -385,7 +401,7 @@ const ProductOptionsUI = (props) => {
                   }))
                 }
               </div>
-              {!product?.hide_special_instructions && (
+              {isShowCommentsByBrand && (
                 <ProductComment>
                   <SectionTitle>{t('NAME', 'Name')} ({t('NO_SPECIAL_INSTRUCTIONS', 'no special instructions')}):</SectionTitle>
                   <TextArea
@@ -394,7 +410,7 @@ const ProductOptionsUI = (props) => {
                     defaultValue={productCart.comment}
                     onChange={handleChangeCommentState}
                     disabled={!(productCart && !isSoldOut && maxProductQuantity)}
-                    maxLength={32}
+                    maxLength={60}
                   />
                 </ProductComment>
               )}

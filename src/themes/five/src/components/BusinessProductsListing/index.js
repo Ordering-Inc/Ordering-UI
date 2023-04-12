@@ -484,6 +484,7 @@ const BusinessProductsListingUI = (props) => {
                 onSave={handlerProductAction}
                 closeModalProductForm={closeModalProductForm}
                 handleCustomSave={handleCustomSave}
+                brand_id={business?.brand_id}
               />
             )}
           </>
