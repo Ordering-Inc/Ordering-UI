@@ -87,8 +87,6 @@ const BusinessProductsListingUI = (props) => {
     isCustomerMode,
     isCustomLayout
   } = props
-  
-  console.log('please',isCustomerMode)
 
   const { business, loading, error } = businessState
   const [{ configs }] = useConfig()

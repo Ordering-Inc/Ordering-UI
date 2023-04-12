@@ -48,8 +48,6 @@ const SingleProductCardUI = (props) => {
     isCustomerMode
   } = props
 
-  console.log(isCustomerMode)
-
   const [, t] = useLanguage()
   const [$element, isObserved] = useIntersectionObserver()
   const [stateConfig] = useConfig()

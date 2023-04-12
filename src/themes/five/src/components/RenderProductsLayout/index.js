@@ -319,7 +319,6 @@ export const RenderProductsLayout = (props) => {
                       handleUpdateProducts={handleUpdateProducts}
                       professionalSelected={professionalSelected}
                       handleChangeProfessionalSelected={handleChangeProfessionalSelected}
-                      isCustomerMode={isCustomerMode}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
@@ -433,7 +432,6 @@ export const RenderProductsLayout = (props) => {
                           handleUpdateProducts={handleUpdateProducts}
                           professionalSelected={professionalSelected}
                           handleChangeProfessionalSelected={handleChangeProfessionalSelected}
-                          isCustomerMode={isCustomerMode}
                         />
                       </WrapContent>
                     </BusinessCategoryProductWrapper>
@@ -463,6 +461,7 @@ export const RenderProductsLayout = (props) => {
                   isSkeleton
                   categories={[]}
                   openBusinessInformation={openBusinessInformation}
+                  isCustomerMode={isCustomerMode}
                 />
               </div>
             </BusinessCategoryProductWrapper>
@@ -477,7 +476,6 @@ export const RenderProductsLayout = (props) => {
                 isBusinessLoading={isLoading}
                 handleUpdateProducts={handleUpdateProducts}
                 errorQuantityProducts={errorQuantityProducts}
-                isCustomerMode={isCustomerMode}
               />
             </WrapContent>
           )}

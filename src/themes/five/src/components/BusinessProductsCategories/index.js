@@ -18,8 +18,11 @@ const BusinessProductsCategoriesUI = (props) => {
     handlerClickCategory,
     categorySelected,
     useKioskApp,
-    isProfessional
+    isProfessional,
+    isCustomerMode
   } = props
+
+  // console.log(isCustomerMode)
 
   const theme = useTheme()
   const windowSize = useWindowSize()
@@ -123,6 +126,9 @@ const BusinessProductsCategoriesUI = (props) => {
       search && search.classList.remove('sticky-search')
     }
   }
+
+  console.log(isCustomerMode)
+  console.log(typeof useKioskApp)
 
   useEffect(() => {
     if (typeof useKioskApp === 'undefined') return
