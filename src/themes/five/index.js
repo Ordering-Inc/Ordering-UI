@@ -115,6 +115,9 @@ import { ActionsSection } from './src/components/OrderDetails/ActionsSection'
 import { ProductShare } from './src/components/ProductShare'
 import { MultiCart } from './src/components/MultiCart'
 import { QueryLoginSpoonity } from './src/components/QueryLoginSpoonity'
+import { Confirm } from './src/components/Confirm'
+import { TaxInformation } from './src/components/TaxInformation'
+import { SendGiftCard } from './src/components/GiftCard/SendGiftCard'
 
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
@@ -241,6 +244,9 @@ export {
   ProductShare,
   MultiCart,
   QueryLoginSpoonity,
+  Confirm,
+  TaxInformation,
+  SendGiftCard,
   // styles
   Button,
   Input,
