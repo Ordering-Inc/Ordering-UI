@@ -18,11 +18,8 @@ const BusinessProductsCategoriesUI = (props) => {
     handlerClickCategory,
     categorySelected,
     useKioskApp,
-    isProfessional,
-    isCustomerMode
+    isProfessional
   } = props
-
-  // console.log(isCustomerMode)
 
   const theme = useTheme()
   const windowSize = useWindowSize()
@@ -127,12 +124,8 @@ const BusinessProductsCategoriesUI = (props) => {
     }
   }
 
-  console.log(isCustomerMode)
-  console.log(typeof useKioskApp)
-
   useEffect(() => {
-    if (typeof useKioskApp === 'undefined') return
-    const styleSheet = document.getElementById('styles').sheet
+    const styleSheet = document.getElementById('styles')?.sheet
 
     if (Object.values(styleSheet.cssRules)?.length) {
       styleSheet?.deleteRule(0)
