@@ -246,3 +246,14 @@ export const PageBannerWrapper = styled.div`
     border-radius: 8px;
   }
 `
+
+export const BackButton = styled.div`
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    svg {
+      margin-right: 10px;
+    }
+  }
+`
