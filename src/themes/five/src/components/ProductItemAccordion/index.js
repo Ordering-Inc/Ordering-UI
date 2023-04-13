@@ -83,8 +83,6 @@ export const ProductItemAccordion = (props) => {
     return product
   }
 
-  console.log(productInfo())
-
   const toggleAccordion = (e) => {
     const isActionsClick = productSelect.current?.contains(e.target) || productActionsEdit.current?.contains(e.target) || productActionsDelete.current?.contains(e.target)
     if ((!product?.valid_menu && isCartProduct) || isActionsClick) return
