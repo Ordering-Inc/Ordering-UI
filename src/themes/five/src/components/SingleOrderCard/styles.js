@@ -200,7 +200,7 @@ export const BusinessLogoWrapper = (props) => {
 export const ButtonWrapper = styled.div`
   position: absolute;
   right: 0px;
-  top: 4px;
+  ${({ isCustomerMode }) => isCustomerMode ? css`bottom: 4px;` : css`top: 4px;`}
   display: flex;
   align-items: center;
 

@@ -69,7 +69,6 @@ export const Header = (props) => {
   const [customerModalOpen, setCustomerModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-  const [isFarAway, setIsFarAway] = useState(false)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
@@ -148,25 +147,6 @@ export const Header = (props) => {
     }
   }, [JSON.stringify(orderState?.options?.address?.address)])
 
-  useEffect(() => {
-    if (!(pathname.includes('/search') || pathname.includes('/checkout'))) {
-      setIsFarAway(false)
-      return
-    }
-    navigator.geolocation.getCurrentPosition((pos) => {
-      const crd = pos.coords
-      const distance = getDistance(crd.latitude, crd.longitude, orderState?.options?.address?.location?.lat, orderState?.options?.address?.location?.lng)
-      if (distance > 20) setIsFarAway(true)
-      else setIsFarAway(false)
-    }, (err) => {
-      console.warn(`ERROR(${err.code}): ${err.message}`)
-    }, {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    })
-  }, [orderState?.options?.address?.location, pathname])
-
   return (
     <HeaderContainer>
       <InnerHeader>
@@ -187,16 +167,10 @@ export const Header = (props) => {
         {isShowOrderOptions && (
           <>
             <Menu className='left-header' id='center-side'>
-              {windowSize.width > 820 && isFarAway && (
-                <FarAwayMessage>
-                  <TiWarningOutline />
-                  <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
-                </FarAwayMessage>
-              )}
               <AddressMenu
                 onClick={(e) => handleClickUserCustomer(e)}
               >
-                <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                <GeoAlt /> <span><p>{orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}</p></span>
               </AddressMenu>
               <Divider />
               {isCustomerMode && windowSize.width > 450 && (
@@ -317,12 +291,6 @@ export const Header = (props) => {
       {onlineStatus && isShowOrderOptions && (
         windowSize.width > 768 && windowSize.width <= 820 ? (
           <SubMenu>
-            {isFarAway && (
-              <FarAwayMessage>
-                <TiWarningOutline />
-                <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
-              </FarAwayMessage>
-            )}
             <AddressMenu
               onClick={() => openModal('address')}
             >
@@ -340,12 +308,6 @@ export const Header = (props) => {
           </SubMenu>
         ) : (
           <SubMenu>
-            {isFarAway && (
-              <FarAwayMessage>
-                <TiWarningOutline />
-                <span>{t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address')}</span>
-              </FarAwayMessage>
-            )}
             <HeaderOption
               variant='address'
               addressState={orderState?.options?.address?.address?.split(',')?.[0]}

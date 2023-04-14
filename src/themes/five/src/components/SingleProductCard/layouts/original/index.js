@@ -44,7 +44,8 @@ const SingleProductCardUI = (props) => {
     handleFavoriteProduct,
     isFavorite,
     isPreviously,
-    viewString
+    viewString,
+    isCustomerMode
   } = props
 
   const [, t] = useLanguage()
@@ -165,7 +166,7 @@ const SingleProductCardUI = (props) => {
                 <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')} oneLine={isPreviously}>
                   <TitleWrapper>
                     {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-                    {!useKioskApp && !isPreviously && (
+                    {(!useKioskApp && !isPreviously && isCustomerMode) && (
                       !isSkeleton ? (
                         <span onClick={() => handleChangeFavorite()} ref={favoriteRef}>
                           {product?.favorite ? <Like /> : <DisLike />}
