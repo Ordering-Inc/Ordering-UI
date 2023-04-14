@@ -96,7 +96,7 @@ var WrapperIngredients = _styledComponents.default.div(_templateObject25 || (_te
   return isProductSoldout && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    border-radius: 10px;\n    pointer-events: none;\n    background: hsl(0, 0%, 72%);\n  "])));
 });
 exports.WrapperIngredients = WrapperIngredients;
-var ProductTabContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 0px;\n  background: white;\n  z-index: 9999996;\n  overflow: scroll hidden;\n  width: 100%;\n  ::-webkit-scrollbar {\n    height: 0px;\n  }\n\n  #optionList {\n    > div {\n      white-space: nowrap;\n      max-width: 200px;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      padding: 10px 0px;\n      margin-right: 25px;\n      ", "\n    }\n  }\n"])), function (props) {
+var ProductTabContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid #E9ECEF;\n  position: sticky;\n  top: 50px;\n  background: white;\n  z-index: 9999996;\n  overflow: scroll hidden;\n  width: 100%;\n  ::-webkit-scrollbar {\n    height: 0px;\n  }\n\n  #optionList {\n    > div {\n      white-space: nowrap;\n      max-width: 200px;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      padding: 10px 0px;\n      margin-right: 25px;\n      ", "\n    }\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n        margin-right: 0px;\n        margin-left: 25px;\n      "])));
 });
 exports.ProductTabContainer = ProductTabContainer;

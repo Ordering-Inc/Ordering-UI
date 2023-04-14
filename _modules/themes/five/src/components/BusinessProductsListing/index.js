@@ -273,7 +273,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     var backArrowElement = document.getElementById('back-arrow');
     if (backArrowElement) {
       var limit = window.pageYOffset >= (backArrowElement === null || backArrowElement === void 0 ? void 0 : backArrowElement.offsetTop) && window.pageYOffset > 0;
-      if (limit && windowSize.width < 993) {
+      if (limit) {
         var classAdded = backArrowElement.classList.contains('fixed-arrow');
         !classAdded && backArrowElement.classList.add('fixed-arrow');
       } else {

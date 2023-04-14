@@ -150,7 +150,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     var businessNameElement = document.getElementById('business_name');
     if (businessNameElement) {
       var _limit = window.pageYOffset >= (businessNameElement === null || businessNameElement === void 0 ? void 0 : businessNameElement.offsetTop) - 55 && window.pageYOffset > 0;
-      if (_limit && windowSize.width < 993) {
+      if (_limit) {
         var _classAdded = businessNameElement.classList.contains('fixed-name');
         !_classAdded && businessNameElement.classList.add('fixed-name');
       } else {
