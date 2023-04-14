@@ -125,8 +125,7 @@ const BusinessProductsCategoriesUI = (props) => {
   }
 
   useEffect(() => {
-    if (typeof useKioskApp === 'undefined') return
-    const styleSheet = document.getElementById('styles').sheet
+    const styleSheet = document.getElementById('styles')?.sheet
 
     if (Object.values(styleSheet.cssRules)?.length) {
       styleSheet?.deleteRule(0)

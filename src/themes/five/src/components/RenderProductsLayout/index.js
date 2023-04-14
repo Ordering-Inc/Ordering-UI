@@ -87,7 +87,8 @@ export const RenderProductsLayout = (props) => {
     onBusinessClick,
     handleChangePriceFilterValues,
     priceFilterValues,
-    handleUpdateProfessionals
+    handleUpdateProfessionals,
+    isCustomerMode,
   } = props
 
   const theme = useTheme()
@@ -473,6 +474,7 @@ export const RenderProductsLayout = (props) => {
                   isSkeleton
                   categories={[]}
                   openBusinessInformation={openBusinessInformation}
+                  isCustomerMode={isCustomerMode}
                 />
               </div>
             </BusinessCategoryProductWrapper>
