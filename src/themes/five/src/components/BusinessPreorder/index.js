@@ -84,7 +84,7 @@ const BusinessPreorderUI = (props) => {
   const [timeList, setTimeList] = useState([])
   const [isEnabled, setIsEnabled] = useState(false)
 
-  const is12Hours = configs?.dates_moment_format?.value?.includes('hh:mm')
+  const is12Hours = configs?.general_hour_format?.value?.includes('hh:mm')
   const isPreOrderSetting = configs?.preorder_status_enabled?.value === '1'
   const preOrderType = [
     { value: 'business_menu', content: <TypeContent>{t('BUSINESS_MENU', 'Business menu')}</TypeContent> },
