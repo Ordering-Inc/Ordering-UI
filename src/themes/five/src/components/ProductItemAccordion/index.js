@@ -324,7 +324,7 @@ export const ProductItemAccordion = (props) => {
           )}
           {productInfo().options.length > 0 && (
             <ProductOptionsList>
-              {productInfo().options.map(option => (
+              {productInfo().options.sort((a, b) => a.rank - b.rank).map(option => (
                 <li key={option.id}>
                   <p>{option.name}</p>
                   <ProductOptionsList className='suboption'>

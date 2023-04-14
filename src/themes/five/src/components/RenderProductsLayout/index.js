@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
-import { Cart3 } from 'react-bootstrap-icons'
+import { Cart3, ArrowLeft } from 'react-bootstrap-icons'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
 import { BusinessBasicInformation as BusinessBasicInformationStarbucks } from '../../../../six'
@@ -32,7 +32,8 @@ import {
   ProfessionalFilterWrapper,
   WrapperSearchAbsolute,
   NearBusiness,
-  PageBannerWrapper
+  PageBannerWrapper,
+  BackButton
 } from './styles'
 
 import { SearchProducts as SearchProductsOriginal } from '../../../../../themes/five/src/components/SearchProducts'
@@ -86,7 +87,8 @@ export const RenderProductsLayout = (props) => {
     onBusinessClick,
     handleChangePriceFilterValues,
     priceFilterValues,
-    handleUpdateProfessionals
+    handleUpdateProfessionals,
+    isCustomerMode,
   } = props
 
   const theme = useTheme()
@@ -241,7 +243,7 @@ export const RenderProductsLayout = (props) => {
                     </>
                   )}
                   <div style={{ position: 'relative' }}>
-                    {!(business?.categories?.length === 0 && !categoryId) && (
+                    {!(business?.categories?.length === 0 && !categoryId) && !categorySelected?.id && (
                       <BusinessLayoutCategories
                         categories={[
                           { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
@@ -258,6 +260,18 @@ export const RenderProductsLayout = (props) => {
                         wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
                         isProfessional={business?.professionals?.length > 0 && !useKioskApp}
                       />
+                    )}
+                    {!(business?.categories?.length === 0 && !categoryId) && categorySelected?.id && (
+                      <BackButton>
+                        <Button
+                          color='primary'
+                          initialIcon
+                          onClick={() => onClickCategory({ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') })}
+                        >
+                          <ArrowLeft />
+                          <div>{t('GO_TO_ALL_CATEGORIES', 'Go to all categories')}</div>
+                        </Button>
+                      </BackButton>
                     )}
                     {useKioskApp && (
                       <WrapperSearchAbsolute id='WrapperSearchAbsolute'>
@@ -460,6 +474,7 @@ export const RenderProductsLayout = (props) => {
                   isSkeleton
                   categories={[]}
                   openBusinessInformation={openBusinessInformation}
+                  isCustomerMode={isCustomerMode}
                 />
               </div>
             </BusinessCategoryProductWrapper>
