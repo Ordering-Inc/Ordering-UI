@@ -16,7 +16,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 }, function (_ref2) {
   var hero = _ref2.hero,
     isCheckOut = _ref2.isCheckOut;
-  return !(hero || isCheckOut) && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 10%;\n  "])));
+  return hero && !isCheckOut && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 10%;\n  "])));
 });
 exports.Container = Container;
 var AddressMenu = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  display: flex;\n  align-items: center;\n  background-color: ", ";\n  font-weight: 600;\n  border-radius: 50px;\n  padding: 13px 19px;\n  margin-bottom: 10px;\n  ", "\n\n  span {\n    width: 100%;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n  svg {\n    margin-right: 5px;\n    color: ", ";\n    ", "\n  }\n"])), function (props) {
