@@ -561,3 +561,15 @@ export const WrapperFloatingSearch = styled.div`
     }
   }
 `
+
+export const BackButton = styled.div`
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;}
+    margin-top: 10px;
+    svg {
+      margin-right: 10px;
+    }
+  }
+`

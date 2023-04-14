@@ -19,7 +19,8 @@ import {
   BusinessMoreDetail,
   SearchComponentContainer,
   BusinessInfoWrapper,
-  WrapperFloatingSearch
+  WrapperFloatingSearch,
+  BackButton
 } from './styles'
 import { BusinessPreorder } from '../BusinessPreorder'
 
@@ -29,6 +30,8 @@ import isBetween from 'dayjs/plugin/isBetween'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { BusinessInfoComponent } from './BusinessInfoComponent'
 import { SearchComponent } from './SearchComponent'
+import { ArrowLeft } from 'react-bootstrap-icons'
+import Button from '../../styles/Buttons'
 
 dayjs.extend(timezone)
 dayjs.extend(isBetween)
@@ -49,7 +52,9 @@ export const BusinessBasicInformation = (props) => {
     categoryState,
     errorQuantityProducts,
     isCustomerMode,
-    isCustomLayout
+    isCustomLayout,
+    setCategoryClicked,
+    categoryClicked
   } = props
   const { business, loading } = businessState
 
@@ -157,7 +162,7 @@ export const BusinessBasicInformation = (props) => {
       top: window.scrollY - 1,
       left: 0
     })
-  }, [sortByValue])
+  }, [sortByValue]) 
 
   return (
     <>
@@ -243,6 +248,18 @@ export const BusinessBasicInformation = (props) => {
           </BusinessMoreDetail>
         )}
       </BusinessInfoWrapper>
+      {(windowSize.width <= 768 && categoryClicked) && (
+          <BackButton>
+          <Button
+            color='primary'
+            initialIcon
+            onClick={() => setCategoryClicked(false)}
+          >
+            <ArrowLeft />
+            <div>{t('GO_TO_ALL_CATEGORIES', 'Go to all categories')}</div>
+          </Button>
+        </BackButton>
+        )}
       <Modal
         width='70%'
         open={openBusinessInformation}
