@@ -41,7 +41,8 @@
     "links": "#2C7BE5",
     "success500": "#00D27A",
     "secondaryDark": "#414954",
-    "black": "#000000"
+    "black": "#000000",
+    "white": "#FFFFFF"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",

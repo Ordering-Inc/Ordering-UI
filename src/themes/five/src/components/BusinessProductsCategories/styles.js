@@ -11,7 +11,7 @@ export const CategoriesContainer = styled.div`
   border-bottom: 1px solid #D9D9D9;
   text-align: center;
   width: ${props => props.w || '100%'};
-
+  box-sizing: border-box;
   div.category {
     text-overflow: ellipsis;
     white-space: nowrap;

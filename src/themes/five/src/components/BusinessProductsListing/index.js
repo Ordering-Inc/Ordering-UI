@@ -193,7 +193,7 @@ const BusinessProductsListingUI = (props) => {
     const backArrowElement = document.getElementById('back-arrow')
     if (backArrowElement) {
       const limit = window.pageYOffset >= backArrowElement?.offsetTop && window.pageYOffset > 0
-      if (limit && windowSize.width < 993) {
+      if (limit) {
         const classAdded = backArrowElement.classList.contains('fixed-arrow')
         !classAdded && backArrowElement.classList.add('fixed-arrow')
       } else {

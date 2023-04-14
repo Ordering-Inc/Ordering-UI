@@ -152,7 +152,7 @@ export const HeaderContent = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1001;
+    z-index: 10001;
     width: 100vw;
     background-color: ${props => props.theme.colors.backgroundPage};
     height: 56px;
@@ -163,6 +163,9 @@ export const HeaderContent = styled.div`
     ` : css`
       padding-left: 10px;
     `}
+    @media (min-width: 993px){
+      width: 100px;
+    }
   }
 `
 export const OrderContextUIWrapper = styled.div`

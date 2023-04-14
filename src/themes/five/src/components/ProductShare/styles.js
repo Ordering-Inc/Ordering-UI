@@ -7,7 +7,7 @@ export const IconShare = styled.div`
   font-size: 22px;
   right: 16px;
   left: 10px;
-  z-index: 9999995;
+  z-index: 9999999;
   background: rgba(255,255,255,0.5);
   height: 30px;
   border-radius: 50%;
