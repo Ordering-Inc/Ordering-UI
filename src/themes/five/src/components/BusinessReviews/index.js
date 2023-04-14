@@ -1,6 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { BusinessReviews as BusinessReviewController, useLanguage, useOrderingTheme } from 'ordering-components'
+import { BusinessReviews as BusinessReviewController, useLanguage } from 'ordering-components'
 import { useTheme } from '../../../../../contexts/ThemeContext'
 import moment from 'moment'
 
@@ -30,7 +30,6 @@ export const BusinessReviewsUI = (props) => {
   const { stars, reviewsList, handleClickOption, onChangeReview } = props
   const [, t] = useLanguage()
   const [theme] = useTheme()
-  const [orderingTheme] = useOrderingTheme()
   const handleOnChange = (evt) => {
     if (evt.target.value) onChangeReview(evt.target.value)
     else onChangeReview('')
@@ -39,10 +38,10 @@ export const BusinessReviewsUI = (props) => {
     if (raiting) handleClickOption(raiting)
   }
 
-  const showRanking = !orderingTheme?.theme?.business_view?.components?.review?.components?.ranking?.hidden
-  const showReviewDate = !orderingTheme?.theme?.business_view?.components?.review?.components?.review_date?.hidden
-  const showCustomerComments = !orderingTheme?.theme?.business_view?.components?.review?.components?.customer_comments?.hidden
-  const showSearch = !orderingTheme?.theme?.business_view?.components?.review?.components?.search?.hidden
+  const showRanking = !theme?.business_view?.components?.review?.components?.ranking?.hidden
+  const showReviewDate = !theme?.business_view?.components?.review?.components?.review_date?.hidden
+  const showCustomerComments = !theme?.business_view?.components?.review?.components?.customer_comments?.hidden
+  const showSearch = !theme?.business_view?.components?.review?.components?.search?.hidden
   const hideElement = !(!showReviewDate && !showCustomerComments)
 
   const reviewPoints = [1, 2, 3, 4, 5]
