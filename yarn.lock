@@ -2088,22 +2088,22 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@segment/analytics-core@1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.2.3.tgz#729c5b72d6d940341ea8cba9d3ff3eef39baef7a"
-  integrity sha512-/B4f4Hxmwd9WpEba/ChYkUwhILz5cPhG4Sto03IlLc8vbV7gAOCGH021EKvU3Wv70WlRK6EgJkuDLPnRl2a2aA==
+"@segment/analytics-core@1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.2.4.tgz#a01f0c87246292e0b9790e12c73d2f7e5fceb168"
+  integrity sha512-M16osD6+z/bQPSVCZdlU+BAhCk968ppi+SGxU2gVa4B196Qr8SEkBPr3NxUCGTSoULo4/T+k8Ea5cF+pXlgf6Q==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     dset "^3.1.2"
     tslib "^2.4.1"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.51.3"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.51.3.tgz#4720691d2bac43bb8390d4a7a15881e52dc9529f"
-  integrity sha512-c22GDz6rrhliIsgtLQjEcRiZdqb70+0hEyfTI6YpRXZzEXBwdJybO5ZCD7NRlVFHf/qXp1qcjHuQ5xyOGr2lJg==
+  version "1.51.4"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.51.4.tgz#c1130df7b48f6931e6ab91bb44d6e1e8c296c9c2"
+  integrity sha512-1p1r89f+IXn+vHNCeukDeCBOjs66K5TrKI1IuGv0Y3uMXJpvUnLQpcrFtHoqmK4QYzpEdwhiRxcIQbGcSsWcaA==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
-    "@segment/analytics-core" "1.2.3"
+    "@segment/analytics-core" "1.2.4"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
     "@segment/tsub" "1.0.1"
@@ -4922,16 +4922,16 @@ copy-webpack-plugin@^6.3.2:
     webpack-sources "^1.4.3"
 
 core-js-compat@^3.1.1, core-js-compat@^3.25.1:
-  version "3.30.0"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.30.0.tgz#99aa2789f6ed2debfa1df3232784126ee97f4d80"
-  integrity sha512-P5A2h/9mRYZFIAP+5Ab8ns6083IyVpSclU74UNvbGVQ8VM7n3n3/g2yF3AkKQ9NXz2O+ioxLbEWKnDtgsFamhg==
+  version "3.30.1"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.30.1.tgz#961541e22db9c27fc48bfc13a3cafa8734171dfe"
+  integrity sha512-d690npR7MC6P0gq4npTl5n2VQeNAmUrJ90n+MHiKS7W2+xno4o3F5GDEuylSdi6EJ3VssibSGXOa1r3YXD3Mhw==
   dependencies:
     browserslist "^4.21.5"
 
 core-js@^3.6.0, core-js@^3.8.3:
-  version "3.30.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.30.0.tgz#64ac6f83bc7a49fd42807327051701d4b1478dea"
-  integrity sha512-hQotSSARoNh1mYPi9O2YaWeiq/cEB95kOrFb4NCrO4RIFt1qqNpKsaE+vy/L3oiqvND5cThqXzUU3r9F7Efztg==
+  version "3.30.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.30.1.tgz#fc9c5adcc541d8e9fa3e381179433cbf795628ba"
+  integrity sha512-ZNS5nbiSwDTq4hFosEDqm65izl2CWmLz0hARJMyNQBgkUZMIF51cQiMvIQKA6hvuaeWxQDP3hEedM1JZIgTldQ==
 
 core-util-is@1.0.2:
   version "1.0.2"
@@ -5611,9 +5611,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.359"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.359.tgz#5c4d13cb08032469fcd6bd36457915caa211356b"
-  integrity sha512-OoVcngKCIuNXtZnsYoqlCvr0Cf3NIPzDIgwUfI9bdTFjXCrr79lI0kwQstLPZ7WhCezLlGksZk/BFAzoXC7GDw==
+  version "1.4.362"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.362.tgz#1dfd7a076fc4785a16941f06410d0668e1a7a1aa"
+  integrity sha512-PYzAoScDfUcAwZfJQvr6hK2xXzLsMocj/Wuz6LpW6TZQNVv9TflBSB+UoEPuFujc478BgAxCoCFarcVPmjzsog==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"

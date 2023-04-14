@@ -74,7 +74,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     productAddedToCartLength = props.productAddedToCartLength,
     handleFavoriteProduct = props.handleFavoriteProduct,
     handleCreateGuestUser = props.handleCreateGuestUser,
-    actionStatus = props.actionStatus;
+    actionStatus = props.actionStatus,
+    isCustomerMode = props.isCustomerMode;
   var product = productObject.product,
     loading = productObject.loading,
     error = productObject.error;
@@ -518,7 +519,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     variant: "rect",
     height: 200
-  })), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name)), /*#__PURE__*/_react.default.createElement("span", {
+  })), !loading && !error && product && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductFormTitle, null, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name)), !isCustomerMode && /*#__PURE__*/_react.default.createElement("span", {
     className: "favorite",
     onClick: function onClick() {
       return handleChangeFavorite();

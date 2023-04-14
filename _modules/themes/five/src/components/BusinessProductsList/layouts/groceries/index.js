@@ -48,7 +48,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     categoriesState = props.categoriesState,
     onClickCategory = props.onClickCategory,
     currentCart = props.currentCart,
-    handleUpdateProducts = props.handleUpdateProducts;
+    handleUpdateProducts = props.handleUpdateProducts,
+    isCustomerMode = props.isCustomerMode;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -88,7 +89,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       handleUpdateProducts: handleUpdateProducts,
       productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.reduce(function (productsLength, Cproduct) {
         return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-      }, 0)
+      }, 0),
+      isCustomerMode: isCustomerMode
     });
   }))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) === 'featured';
@@ -123,7 +125,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         isCartOnProductsList: isCartOnProductsList,
         productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.reduce(function (productsLength, Cproduct) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-        }, 0)
+        }, 0),
+        isCustomerMode: isCustomerMode
       });
     }), !(business !== null && business !== void 0 && business.food) && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (featProducts === null || featProducts === void 0 ? void 0 : featProducts.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       useCustomFunctionality: true,
@@ -187,7 +190,8 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         isCartOnProductsList: isCartOnProductsList,
         productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.reduce(function (productsLength, Cproduct) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-        }, 0)
+        }, 0),
+        isCustomerMode: isCustomerMode
       });
     }), !(business !== null && business !== void 0 && business.food) && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (products === null || products === void 0 ? void 0 : products.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       useCustomFunctionality: true,

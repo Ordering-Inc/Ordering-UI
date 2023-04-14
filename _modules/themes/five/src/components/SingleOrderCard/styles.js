@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.TitleContainer = exports.ReviewWrapper = exports.Price = exports.MultiLogosContainer = exports.Map = exports.Logo = exports.FavoriteWrapper = exports.Content = exports.Container = exports.ButtonWrapper = exports.BusinessLogoWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _react = _interopRequireDefault(require("react"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -86,7 +86,10 @@ var BusinessLogoWrapper = function BusinessLogoWrapper(props) {
   }), props.children);
 };
 exports.BusinessLogoWrapper = BusinessLogoWrapper;
-var ButtonWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 0px;\n  top: 4px;\n  display: flex;\n  align-items: center;\n\n  button {\n    border-radius: 50px;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 4px 8px;\n    border: 1px solid ", ";\n    margin: 5px;\n\n    &.reorder {\n      background: ", ";\n      &:hover {\n        background: ", ";\n      }\n    }\n  }\n"])), function (props) {
+var ButtonWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 0px;\n  ", "\n  display: flex;\n  align-items: center;\n\n  button {\n    border-radius: 50px;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 4px 8px;\n    border: 1px solid ", ";\n    margin: 5px;\n\n    &.reorder {\n      background: ", ";\n      &:hover {\n        background: ", ";\n      }\n    }\n  }\n"])), function (_ref14) {
+  var isCustomerMode = _ref14.isCustomerMode;
+  return isCustomerMode ? (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["bottom: 4px;"]))) : (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["top: 4px;"])));
+}, function (props) {
   return props.theme.colors.primaryContrast;
 }, function (props) {
   return props.theme.colors.primaryContrast;
@@ -94,34 +97,34 @@ var ButtonWrapper = _styledComponents.default.div(_templateObject21 || (_templat
   return props.theme.colors.primary;
 });
 exports.ButtonWrapper = ButtonWrapper;
-var Logo = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 55px;\n  height: 55px;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  border-radius: 7.6px;\n\n  img {\n    width: 100%;\n    height: 100%;\n    border-radius: 7.6px;\n  }\n\n  @media (min-width: 480px){\n    width: 86px;\n    height: 86px;\n  }\n"])));
+var Logo = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  width: 55px;\n  height: 55px;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  border-radius: 7.6px;\n\n  img {\n    width: 100%;\n    height: 100%;\n    border-radius: 7.6px;\n  }\n\n  @media (min-width: 480px){\n    width: 86px;\n    height: 86px;\n  }\n"])));
 exports.Logo = Logo;
-var TitleContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
+var TitleContainer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
 exports.TitleContainer = TitleContainer;
-var Map = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n  min-height: ", ";\n  img{\n    width: 100%;\n    height: 100%;\n    border-top-left-radius: 16px;\n    border-top-right-radius: 16px;\n    border-radius: ", ";\n    image-rendering: -webkit-optimize-contrast;\n    object-fit: cover;\n  }\n  @media(min-width: 480px){\n    height: ", ";\n    min-height: ", "\n  }\n"])), function (_ref14) {
-  var isBusinessesPage = _ref14.isBusinessesPage;
-  return isBusinessesPage ? '200px' : '88px';
-}, function (_ref15) {
+var Map = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n  min-height: ", ";\n  img{\n    width: 100%;\n    height: 100%;\n    border-top-left-radius: 16px;\n    border-top-right-radius: 16px;\n    border-radius: ", ";\n    image-rendering: -webkit-optimize-contrast;\n    object-fit: cover;\n  }\n  @media(min-width: 480px){\n    height: ", ";\n    min-height: ", "\n  }\n"])), function (_ref15) {
   var isBusinessesPage = _ref15.isBusinessesPage;
-  return isBusinessesPage && '175px';
+  return isBusinessesPage ? '200px' : '88px';
 }, function (_ref16) {
   var isBusinessesPage = _ref16.isBusinessesPage;
-  return isBusinessesPage && '16px';
+  return isBusinessesPage && '175px';
 }, function (_ref17) {
   var isBusinessesPage = _ref17.isBusinessesPage;
-  return isBusinessesPage ? '200px' : '100px';
+  return isBusinessesPage && '16px';
 }, function (_ref18) {
   var isBusinessesPage = _ref18.isBusinessesPage;
+  return isBusinessesPage ? '200px' : '100px';
+}, function (_ref19) {
+  var isBusinessesPage = _ref19.isBusinessesPage;
   return isBusinessesPage && '200px';
 });
 exports.Map = Map;
-var FavoriteWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  position: absolute;\n  cursor: pointer;\n  display: flex;\n  z-index: 10;\n  align-items: center;\n  justify-content: center;\n  top: 41px;\n  right: 10px;\n  ", "\n  svg {\n    color: ", ";\n    font-size: 16px;\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    left: 10px;\n    right: initial;\n  "])));
+var FavoriteWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  position: absolute;\n  cursor: pointer;\n  display: flex;\n  z-index: 10;\n  align-items: center;\n  justify-content: center;\n  top: 41px;\n  right: 10px;\n  ", "\n  svg {\n    color: ", ";\n    font-size: 16px;\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    left: 10px;\n    right: initial;\n  "])));
 }, function (props) {
   return props.theme.colors.danger500;
 });
 exports.FavoriteWrapper = FavoriteWrapper;
-var ReviewWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  .review-sent {\n    border-radius: 7.6px;\n  }\n"])));
+var ReviewWrapper = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  .review-sent {\n    border-radius: 7.6px;\n  }\n"])));
 exports.ReviewWrapper = ReviewWrapper;
-var MultiLogosContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  p {\n    white-space: nowrap;\n  }\n"])));
+var MultiLogosContainer = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  p {\n    white-space: nowrap;\n  }\n"])));
 exports.MultiLogosContainer = MultiLogosContainer;

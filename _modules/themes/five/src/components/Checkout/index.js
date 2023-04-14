@@ -248,7 +248,7 @@ var CheckoutUI = function CheckoutUI(props) {
     var _validationFields$fie16, _validationFields$fie17, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _configs$verification;
     setUserErrors([]);
     var errors = [];
-    var notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes'];
+    var notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes', 'comments'];
     var userSelected = isCustomerMode ? customerState.user : user;
     var _requiredFields = [];
     Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie16 = validationFields.fields) === null || _validationFields$fie16 === void 0 ? void 0 : _validationFields$fie16.checkout).map(function (field) {

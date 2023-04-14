@@ -171,6 +171,12 @@ Object.defineProperty(exports, "Checkout", {
     return _Checkout.Checkout;
   }
 });
+Object.defineProperty(exports, "Confirm", {
+  enumerable: true,
+  get: function get() {
+    return _Confirm.Confirm;
+  }
+});
 Object.defineProperty(exports, "DriverTips", {
   enumerable: true,
   get: function get() {
@@ -621,6 +627,12 @@ Object.defineProperty(exports, "Select", {
     return _Select.Select;
   }
 });
+Object.defineProperty(exports, "SendGiftCard", {
+  enumerable: true,
+  get: function get() {
+    return _SendGiftCard.SendGiftCard;
+  }
+});
 Object.defineProperty(exports, "ServiceForm", {
   enumerable: true,
   get: function get() {
@@ -691,6 +703,12 @@ Object.defineProperty(exports, "Switch", {
   enumerable: true,
   get: function get() {
     return _Switch.Switch;
+  }
+});
+Object.defineProperty(exports, "TaxInformation", {
+  enumerable: true,
+  get: function get() {
+    return _TaxInformation.TaxInformation;
   }
 });
 Object.defineProperty(exports, "TextArea", {
@@ -864,6 +882,9 @@ var _ActionsSection = require("./src/components/OrderDetails/ActionsSection");
 var _ProductShare = require("./src/components/ProductShare");
 var _MultiCart = require("./src/components/MultiCart");
 var _QueryLoginSpoonity = require("./src/components/QueryLoginSpoonity");
+var _Confirm = require("./src/components/Confirm");
+var _TaxInformation = require("./src/components/TaxInformation");
+var _SendGiftCard = require("./src/components/GiftCard/SendGiftCard");
 var _Buttons = require("./src/styles/Buttons");
 var _Inputs = require("./src/styles/Inputs");
 var _Select = require("./src/styles/Select");

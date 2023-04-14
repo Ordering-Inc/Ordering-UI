@@ -53,7 +53,8 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     handleFavoriteProduct = props.handleFavoriteProduct,
     isFavorite = props.isFavorite,
     isPreviously = props.isPreviously,
-    viewString = props.viewString;
+    viewString = props.viewString,
+    isCustomerMode = props.isCustomerMode;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -179,7 +180,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     oneLine: isPreviously
   }, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), !useKioskApp && !isPreviously && (!isSkeleton ? /*#__PURE__*/_react.default.createElement("span", {
+  }), !useKioskApp && !isPreviously && isCustomerMode && (!isSkeleton ? /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return handleChangeFavorite();
     },

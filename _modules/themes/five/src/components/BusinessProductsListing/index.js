@@ -80,6 +80,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleChangePriceFilterValues = props.handleChangePriceFilterValues,
     priceFilterValues = props.priceFilterValues,
     handleUpdateProfessionals = props.handleUpdateProfessionals,
+    isCustomerMode = props.isCustomerMode,
     isCustomLayout = props.isCustomLayout;
   var business = businessState.business,
     loading = businessState.loading,
@@ -474,7 +475,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     priceFilterValues: priceFilterValues,
     handleChangePriceFilterValues: handleChangePriceFilterValues,
     productToIdLoading: productToIdLoading,
-    handleUpdateProfessionals: handleUpdateProfessionals
+    handleUpdateProfessionals: handleUpdateProfessionals,
+    isCustomerMode: isCustomerMode
   }), isMounted && !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.SEARCH_REDIRECT) || 'Go to Businesses'),
@@ -570,6 +572,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
     handleUpdateProducts: handleUpdateProducts,
     onSave: handlerProductAction,
+    isCustomerMode: isCustomerMode,
     productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products8 = currentCart.products) === null || _currentCart$products8 === void 0 ? void 0 : _currentCart$products8.reduce(function (productsLength, Cproduct) {
       var _ref4;
       return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === ((_ref4 = productModal.product || curProduct) === null || _ref4 === void 0 ? void 0 : _ref4.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
