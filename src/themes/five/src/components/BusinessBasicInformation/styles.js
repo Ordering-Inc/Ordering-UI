@@ -260,7 +260,7 @@ export const WrapperSearch = styled.div`
     &.fixed-search {
       left: 0;
       width: 100vw;
-      z-index: 1002;
+      z-index: 10000;
     }
   }
 `
@@ -373,13 +373,13 @@ export const TitleWrapper = styled.div`
     text-overflow: ellipsis;
     background: ${({ theme }) => theme?.colors?.white};
     &.fixed-name {
-      z-index: 1002;
+      z-index: 10001;
       position: fixed;
       top: 0;
       padding: 10px 0;
       font-size: 18px;
       ${({ isCustomLayout }) => !isCustomLayout ? css`
-        width: calc(100vw - 190px);
+        width: calc(100vw - 200px);
         ${props => props.theme?.rtl ? css`
         right: 50px;
         ` : css`

@@ -143,7 +143,7 @@ export const BusinessBasicInformation = (props) => {
     const businessNameElement = document.getElementById('business_name')
     if (businessNameElement) {
       const limit = window.pageYOffset >= (businessNameElement?.offsetTop - 55) && window.pageYOffset > 0
-      if (limit && windowSize.width < 993) {
+      if (limit) {
         const classAdded = businessNameElement.classList.contains('fixed-name')
         !classAdded && businessNameElement.classList.add('fixed-name')
       } else {

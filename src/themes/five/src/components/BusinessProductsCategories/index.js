@@ -134,12 +134,12 @@ const BusinessProductsCategoriesUI = (props) => {
 
     let style0 = '.sticky-prod-cat {'
     style0 += 'position: fixed !important;'
-    style0 += `top: ${windowSize.width >= 993 ? '0px' : '56px'} !important;`
+    style0 += `top: ${useKioskApp ? '0px' : '56px'} !important;`
     style0 += 'left: 0px !important;'
     style0 += 'z-index: 9999 !important;'
-    style0 += 'padding: 5px 5px 0px 5px !important;'
-    style0 += `width: calc(100% - ${useKioskApp ? '50px' : windowSize.width >= 993 ? '155px' : '0px'})!important;`
-    !disabledCustomWidth && (style0 += `width: calc(100% - ${useKioskApp ? '50px' : '155px'}) !important;`)
+    style0 += 'padding: 5px 5px 0px 20px !important;'
+    style0 += 'width: 100% !important;'
+    !disabledCustomWidth && (style0 += `width: calc(100% - ${useKioskApp ? '50px' : '0px'}) !important;`)
     style0 += '}'
 
     let style1 = '.sticky-search {'

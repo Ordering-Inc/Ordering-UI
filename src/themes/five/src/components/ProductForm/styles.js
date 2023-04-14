@@ -439,7 +439,7 @@ export const WrapperIngredients = styled.div`
 export const ProductTabContainer = styled.div`
   border-bottom: 1px solid #E9ECEF;
   position: sticky;
-  top: 0px;
+  top: 50px;
   background: white;
   z-index: 9999996;
   overflow: scroll hidden;
