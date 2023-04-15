@@ -57,6 +57,7 @@ const MultiCheckoutUI = (props) => {
     isCustomerMode,
     openCarts,
     loyaltyPlansState,
+    totalCartsPrice,
     handleGroupPlaceOrder,
     paymethodSelected,
     handleSelectPaymethod,
@@ -100,12 +101,6 @@ const MultiCheckoutUI = (props) => {
     ? JSON.parse(configs?.driver_tip_options?.value) || []
     : configs?.driver_tip_options?.value || []
 
-  const totalCartsPrice = cartGroup?.result?.balance
-  const methodsPay = ['global_google_pay', 'global_apple_pay']
-  const creditPointPlan = loyaltyPlansState?.result?.find((loyal) => loyal.type === 'credit_point')
-  const businessIds = openCarts.map((cart) => cart.business_id)
-  const loyalBusinessIds = creditPointPlan?.businesses?.filter((b) => b.accumulates).map((item) => item.business_id) ?? []
-  const creditPointPlanOnBusiness = businessIds.every((bid) => loyalBusinessIds.includes(bid)) && creditPointPlan
   const creditPointGeneralPlan = loyaltyPlansState?.result?.find((loyal) => loyal.type === 'credit_point')
   const loyalBusinessAvailable = creditPointGeneralPlan?.businesses?.filter((b) => b.accumulates) ?? []
 
@@ -214,15 +209,6 @@ const MultiCheckoutUI = (props) => {
     }
   }, [walletState.error])
 
-  useEffect(() => {
-    if (methodsPay.includes(paymethodSelected?.paymethod?.gateway) && typeof paymethodSelected?.paymethod_data === 'string') {
-      const hasSource = JSON.parse(paymethodSelected?.paymethod_data)?.source_id
-      if (hasSource) {
-        handlePlaceOrder()
-      }
-    }
-  }, [paymethodSelected])
-
   return (
     <>
       {((!cartGroup?.loading && openCarts.length === 0) || !cartUuid) ? (
@@ -274,9 +260,7 @@ const MultiCheckoutUI = (props) => {
                   handlePaymethodDataChange={handlePaymethodDataChange}
                   cartUuid={cartUuid}
                   isCustomerMode={isCustomerMode}
-                  cartGroup={cartGroup}
                   setCardList={setCardList}
-                  handlePlaceOrder={handlePlaceOrder}
                 />
               </PaymentMethodContainer>
 
@@ -315,7 +299,7 @@ const MultiCheckoutUI = (props) => {
                       isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
                       isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
                       driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                        ? openCarts?.reduce((sum, cart) => sum + cart?.driver_tip, 0)
+                        ? openCarts[0]?.driver_tip
                         : openCarts[0]?.driver_tip_rate}
                       useOrderContext
                     />

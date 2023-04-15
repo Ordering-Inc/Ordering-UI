@@ -48,11 +48,8 @@ export const FiltersContainer = styled.div`
 export const Filters = styled.div`
   width: 100%;
   max-width: 100%;
-  padding: 0 10px;
-  box-sizing: border-box;
 
   @media (min-width: 993px){
-    padding: 0;
     width: 25%;
     max-width: 25%;
     margin-right: 70px;

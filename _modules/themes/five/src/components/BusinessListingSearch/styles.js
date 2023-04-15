@@ -19,7 +19,7 @@ var Title = _styledComponents.default.div(_templateObject2 || (_templateObject2 
 exports.Title = Title;
 var FiltersContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  @media (min-width: 993px){\n    flex-direction: row;\n    display: flex;\n    width: 100%;\n  }\n"])));
 exports.FiltersContainer = FiltersContainer;
-var Filters = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 100%;\n  padding: 0 10px;\n  box-sizing: border-box;\n\n  @media (min-width: 993px){\n    padding: 0;\n    width: 25%;\n    max-width: 25%;\n    margin-right: 70px;\n  }\n"])));
+var Filters = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 100%;\n\n  @media (min-width: 993px){\n    width: 25%;\n    max-width: 25%;\n    margin-right: 70px;\n  }\n"])));
 exports.Filters = Filters;
 var FiltersResultContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 100%;\n  @media (min-width: 993px){\n    width: 75%;\n    max-width: 75%;\n  }\n"])));
 exports.FiltersResultContainer = FiltersResultContainer;

@@ -20,7 +20,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ScheduleAccordion = function ScheduleAccordion(props) {
   var _schedule$lapses;
-  var timeFormated = props.timeFormated,
+  var scheduleFormatted = props.scheduleFormatted,
     schedule = props.schedule,
     weekIndex = props.weekIndex;
   var _useState = (0, _react.useState)(false),
@@ -42,8 +42,8 @@ var ScheduleAccordion = function ScheduleAccordion(props) {
     }
   }, schedule === null || schedule === void 0 ? void 0 : (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.map(function (lapse, i) {
     return schedule !== null && schedule !== void 0 && schedule.enabled ? /*#__PURE__*/_react.default.createElement("p", {
-      key: "".concat(i, "-").concat(timeFormated(lapse.open))
-    }, timeFormated(lapse.open) + ' - ' + timeFormated(lapse.close)) : /*#__PURE__*/_react.default.createElement(_styles.ClosedSchedule, null, t('CLOSED', 'Closed'));
+      key: "".concat(i, "-").concat(scheduleFormatted(lapse.open))
+    }, scheduleFormatted(lapse.open) + ' - ' + scheduleFormatted(lapse.close)) : /*#__PURE__*/_react.default.createElement(_styles.ClosedSchedule, null, t('CLOSED', 'Closed'));
   }))));
 };
 exports.ScheduleAccordion = ScheduleAccordion;

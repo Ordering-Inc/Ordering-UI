@@ -26,9 +26,6 @@ export const HomePage = (props) => {
   const [events] = useEvent()
   const [{ site }] = useSite()
   const [{ theme }] = useOrderingTheme()
-  const websiteThemeType = theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeBusinessSlug = theme?.my_products?.components?.website_theme?.components?.business_slug
-  const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
 
   const requestsState = {}
   const isKioskApp = settings?.use_kiosk
@@ -41,9 +38,9 @@ export const HomePage = (props) => {
 
   const handleGoToBusiness = () => {
     if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
-      events.emit('go_to_page', { page: 'business', params: { business_slug: updatedBusinessSlug } })
+      events.emit('go_to_page', { page: 'business', params: { business_slug: settings?.businessSlug } })
     } else {
-      events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${updatedBusinessSlug}` })
+      events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${settings?.businessSlug}` })
     }
   }
 

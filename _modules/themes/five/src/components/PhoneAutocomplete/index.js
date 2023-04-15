@@ -125,7 +125,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }, [customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.error]);
   var onInputChange = function onInputChange(inputValue, _ref) {
     var action = _ref.action;
-    if (action === 'menu-close' || action === 'input-blur' || action === 'set-value' || inputValue.charAt(0) === '0') {
+    if (action === 'menu-close' || action === 'input-blur' || action === 'set-value') {
       return;
     }
     if (!inputValue) {

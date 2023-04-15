@@ -27,7 +27,9 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     setValue = props.setValue,
     handleIsValid = props.handleIsValid,
     disabled = props.disabled,
-    isError = props.isError;
+    isError = props.isError,
+    currentCountryCode = props.currentCountryCode,
+    setCurrentPhoneNumber = props.setCurrentPhoneNumber;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -49,6 +51,8 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
   };
   (0, _react.useEffect)(function () {
     if (value) {
+      var _phoneRef$current, _phoneRef$current$def;
+      setCurrentPhoneNumber && setCurrentPhoneNumber("+".concat(currentCountryCode, " ").concat(phoneRef === null || phoneRef === void 0 ? void 0 : (_phoneRef$current = phoneRef.current) === null || _phoneRef$current === void 0 ? void 0 : (_phoneRef$current$def = _phoneRef$current.defaultValue) === null || _phoneRef$current$def === void 0 ? void 0 : _phoneRef$current$def.replace(/ /g, '')));
       handleIsValid && handleIsValid(isValidPhoneNumber(value));
     }
   }, [value]);

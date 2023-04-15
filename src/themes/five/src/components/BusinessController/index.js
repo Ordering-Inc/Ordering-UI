@@ -95,8 +95,8 @@ const BusinessControllerUI = (props) => {
 
   const handleBusinessClick = (e) => {
     if (favoriteRef?.current?.contains(e.target)) return
-    const hasMenu = business?.menus?.filter(menu => menu?.enabled && menu?.products?.length > 0).length
-    if (onPreorderBusiness && (!isBusinessOpen || !hasMenu)) onPreorderBusiness(business)
+
+    if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business)
     else handleClick(business)
   }
 

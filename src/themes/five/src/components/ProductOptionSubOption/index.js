@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   ProductOptionSuboption as ProductSubOptionController,
   useUtils,
@@ -37,8 +37,7 @@ const ProductOptionSubOptionUI = (props) => {
     toggleSelect,
     changePosition,
     isSoldOut,
-    setIsScrollAvailable,
-    onChange
+    setIsScrollAvailable
   } = props
 
   const disableIncrement = option?.limit_suboptions_by_max ? (balance === option?.max || state.quantity === suboption.max) : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
@@ -47,7 +46,7 @@ const ProductOptionSubOptionUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const { width } = useWindowSize()
   const [showMessage, setShowMessage] = useState(false)
-  const dirtyRef = useRef(null)
+  const [isDirty, setIsDirty] = useState(false)
 
   const handleIncrement = (e) => {
     e.stopPropagation()
@@ -65,8 +64,8 @@ const ProductOptionSubOptionUI = (props) => {
   }
 
   const handleSuboptionClick = () => {
-    dirtyRef.current = true
     toggleSelect()
+    setIsDirty(true)
     if (balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1) && !state.selected) {
       setShowMessage(true)
     }
@@ -79,17 +78,12 @@ const ProductOptionSubOptionUI = (props) => {
   }, [balance])
 
   useEffect(() => {
-    if (balance === option?.max && state?.selected && dirtyRef) {
-      dirtyRef.current = false
+    if (balance === option?.max && state?.selected && isDirty) {
+      setIsDirty(false)
       setIsScrollAvailable(true)
     }
   }, [state?.selected])
 
-  useEffect(() => {
-    if (dirtyRef?.current || !suboption?.preselected || !option?.respect_to) return
-    const newState = { ...state, selected: suboption?.preselected, quantity: state.selected ? 0 : 1 }
-    onChange(newState, suboption, option)
-  }, [suboption, dirtyRef, option])
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (

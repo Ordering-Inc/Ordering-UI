@@ -83,8 +83,7 @@ const BusinessProductsListingUI = (props) => {
     onBusinessClick,
     handleChangePriceFilterValues,
     priceFilterValues,
-    handleUpdateProfessionals,
-    isCustomLayout
+    handleUpdateProfessionals
   } = props
 
   const { business, loading, error } = businessState
@@ -225,7 +224,7 @@ const BusinessProductsListingUI = (props) => {
   }
   const adjustBusiness = async (adjustBusinessId) => {
     const _carts = carts?.[adjustBusinessId]
-    const products = carts?.[adjustBusinessId]?.products || []
+    const products = carts?.[adjustBusinessId]?.products
     const unavailableProducts = products.filter(product => product.valid !== true)
     const alreadyRemoved = sessionStorage.getItem('already-removed')
     sessionStorage.removeItem('already-removed')
@@ -328,7 +327,7 @@ const BusinessProductsListingUI = (props) => {
       <ProductsContainer>
         {!props.useKioskApp && (
           <HeaderContent>
-            {!isCustomLayout && !location.pathname.includes('/marketplace') && (
+            {!location.pathname.includes('/marketplace') && (
               <div id='back-arrow'>
                 <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
               </div>
@@ -353,8 +352,8 @@ const BusinessProductsListingUI = (props) => {
           businessState={businessState}
           sortByOptions={sortByOptions}
           categoryState={categoryState}
-          isCustomLayout={isCustomLayout}
           categoriesState={props.categoriesState}
+          isCustomLayout={props.isCustomLayout}
           useKioskApp={props.useKioskApp}
           categorySelected={categorySelected}
           openCategories={openCategories}

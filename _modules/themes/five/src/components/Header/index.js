@@ -51,16 +51,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Header = function Header(props) {
-  var _window$location$path, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$header, _theme$header$compone, _theme$header$compone2, _orderState$options, _orderState$options2, _Object$keys, _customerState$user, _orderState$options5, _orderState$options5$, _theme$images, _theme$images$logos, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _theme$images5, _theme$images5$logos, _orderState$options7, _orderState$options7$, _orderState$options8, _orderState$options8$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options9, _orderState$options10, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options11, _orderState$options12, _configState$configs12, _configState$configs13, _orderState$options13, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options14, _orderState$options15, _configState$configs18, _configState$configs19, _orderState$options16, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options17, _orderState$options18, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$header, _theme$header$compone, _theme$header$compone2, _orderState$options, _orderState$options2, _Object$keys, _customerState$user, _orderState$options5, _orderState$options5$, _theme$images, _theme$images$logos, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _orderingTheme$theme8, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$images4, _theme$images4$logos, _orderingTheme$theme9, _orderingTheme$theme10, _orderingTheme$theme11, _orderingTheme$theme12, _orderingTheme$theme13, _orderingTheme$theme14, _orderingTheme$theme15, _theme$images5, _theme$images5$logos, _orderState$options7, _orderState$options7$, _orderState$options8, _orderState$options8$, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options9, _orderState$options10, _configState$configs10, _configState$configs11, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options11, _orderState$options12, _configState$configs12, _configState$configs13, _orderState$options13, _configState$configs14, _configState$configs15, _configState$configs16, _configState$configs17, _orderState$options14, _orderState$options15, _configState$configs18, _configState$configs19, _orderState$options16, _configState$configs20, _configState$configs21, _configState$configs22, _configState$configs23, _orderState$options17, _orderState$options18, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
   var isHome = props.isHome,
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
     isHideSignup = props.isHideSignup,
     isCustomerMode = props.isCustomerMode,
     searchValue = props.searchValue,
-    setSearchValue = props.setSearchValue,
-    businessSlug = props.businessSlug,
-    notificationState = props.notificationState;
+    setSearchValue = props.setSearchValue;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
     pathname = _useLocation.pathname;
   var _useEvent = (0, _orderingComponents.useEvent)(),
@@ -143,15 +141,10 @@ var Header = function Header(props) {
     _useState22 = _slicedToArray(_useState21, 2),
     isFarAway = _useState22[0],
     setIsFarAway = _useState22[1];
-  var isMulticheckoutPage = (_window$location$path = window.location.pathname) === null || _window$location$path === void 0 ? void 0 : _window$location$path.includes('/multi-checkout');
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
     return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0;
   }) || null;
-  var carts = businessSlug ? cartsWithProducts.filter(function (cart) {
-    var _cart$business;
-    return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === businessSlug || businessSlug === (cart === null || cart === void 0 ? void 0 : cart.business_id);
-  }) : cartsWithProducts;
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
@@ -296,9 +289,9 @@ var Header = function Header(props) {
     alt: "Isotype",
     width: isChew ? '70px' : '35px',
     height: isChew ? '20px' : '45px',
-    src: isChew ? theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$logos = _theme$images3.logos) === null || _theme$images3$logos === void 0 ? void 0 : _theme$images3$logos.chewLogo : windowSize.width <= 768 ? theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$logos = _theme$images4.logos) === null || _theme$images4$logos === void 0 ? void 0 : _theme$images4$logos.isotypeInvert : (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme9 = orderingTheme.theme) === null || _orderingTheme$theme9 === void 0 ? void 0 : (_orderingTheme$theme10 = _orderingTheme$theme9.my_products) === null || _orderingTheme$theme10 === void 0 ? void 0 : (_orderingTheme$theme11 = _orderingTheme$theme10.components) === null || _orderingTheme$theme11 === void 0 ? void 0 : (_orderingTheme$theme12 = _orderingTheme$theme11.images) === null || _orderingTheme$theme12 === void 0 ? void 0 : (_orderingTheme$theme13 = _orderingTheme$theme12.components) === null || _orderingTheme$theme13 === void 0 ? void 0 : (_orderingTheme$theme14 = _orderingTheme$theme13.logo) === null || _orderingTheme$theme14 === void 0 ? void 0 : (_orderingTheme$theme15 = _orderingTheme$theme14.components) === null || _orderingTheme$theme15 === void 0 ? void 0 : _orderingTheme$theme15.image) || (theme === null || theme === void 0 ? void 0 : (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$logos = _theme$images5.logos) === null || _theme$images5$logos === void 0 ? void 0 : _theme$images5$logos.isotype),
+    src: isChew ? theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$logos = _theme$images3.logos) === null || _theme$images3$logos === void 0 ? void 0 : _theme$images3$logos.chewLogo : isHome && windowSize.width < 576 ? theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$logos = _theme$images4.logos) === null || _theme$images4$logos === void 0 ? void 0 : _theme$images4$logos.isotypeInvert : (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme9 = orderingTheme.theme) === null || _orderingTheme$theme9 === void 0 ? void 0 : (_orderingTheme$theme10 = _orderingTheme$theme9.my_products) === null || _orderingTheme$theme10 === void 0 ? void 0 : (_orderingTheme$theme11 = _orderingTheme$theme10.components) === null || _orderingTheme$theme11 === void 0 ? void 0 : (_orderingTheme$theme12 = _orderingTheme$theme11.images) === null || _orderingTheme$theme12 === void 0 ? void 0 : (_orderingTheme$theme13 = _orderingTheme$theme12.components) === null || _orderingTheme$theme13 === void 0 ? void 0 : (_orderingTheme$theme14 = _orderingTheme$theme13.logo) === null || _orderingTheme$theme14 === void 0 ? void 0 : (_orderingTheme$theme15 = _orderingTheme$theme14.components) === null || _orderingTheme$theme15 === void 0 ? void 0 : _orderingTheme$theme15.image) || (theme === null || theme === void 0 ? void 0 : (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$logos = _theme$images5.logos) === null || _theme$images5$logos === void 0 ? void 0 : _theme$images5$logos.isotype),
     loading: "lazy"
-  }))), isShowOrderOptions && windowSize.width >= 576 && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
+  }))), isShowOrderOptions && !props.isCustomLayout && windowSize.width >= 576 && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     id: "center-side",
     className: "left-header",
     isCustomerMode: isCustomerMode,
@@ -370,9 +363,9 @@ var Header = function Header(props) {
     onClick: function onClick() {
       return handleOpenLoginSignUp('signup');
     }
-  }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isMulticheckoutPage ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
+  }, t('SIGN_UP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.SIGN_UP) || 'Sign up'))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowOrderOptions && (windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
     open: openPopover.cart,
-    carts: carts,
+    carts: cartsWithProducts,
     onClick: function onClick() {
       return handleTogglePopover('cart');
     },
@@ -383,9 +376,9 @@ var Header = function Header(props) {
     location: location,
     isCustomerMode: isCustomerMode,
     setPreorderBusiness: setPreorderBusiness
-  }) : null) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "cart",
-    totalCarts: carts === null || carts === void 0 ? void 0 : carts.length,
+    totalCarts: cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length,
     onClick: function onClick(variant) {
       return openModal(variant);
     }
@@ -437,7 +430,7 @@ var Header = function Header(props) {
     },
     width: modalSelected === 'address' ? orderState !== null && orderState !== void 0 && (_orderState$options17 = orderState.options) !== null && _orderState$options17 !== void 0 && _orderState$options17.user_id ? '70%' : '50%' : '700px'
   }), modalSelected === 'cart' && /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
-    carts: carts,
+    carts: cartsWithProducts,
     isOrderStateCarts: !!orderState.carts,
     onClose: function onClose() {
       return setModalIsOpen(false);

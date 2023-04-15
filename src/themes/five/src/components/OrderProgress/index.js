@@ -3,7 +3,6 @@ import {
   useLanguage,
   useUtils,
   useEvent,
-  useConfig,
   OrderList as OrderListController
 } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
@@ -32,12 +31,11 @@ const OrderProgressUI = (props) => {
     isCustomerMode
   } = props
   const [, t] = useLanguage()
-  const [{ optimizeImage, parseTime, parseDate }] = useUtils()
-  const [{ configs }] = useConfig()
+  const [{ optimizeImage, parseTime }] = useUtils()
   const theme = useTheme()
   const [events] = useEvent()
   const [lastOrder, setLastOrder] = useState(null)
-  const statusToShow = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23]
+  const statusToShow = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21]
 
   const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
@@ -47,7 +45,7 @@ const OrderProgressUI = (props) => {
 
   useEffect(() => {
     if (orderList?.orders.length > 0) {
-      const sortedOrders = orderList.orders.filter(order => !!order?.business).sort((a, b) => a.id > b.id ? -1 : 1)
+      const sortedOrders = orderList.orders.sort((a, b) => a.id > b.id ? -1 : 1)
       const orderInProgress = sortedOrders.find(({ status }) => (statusToShow.includes(status)))
 
       let _lastOrder = null
@@ -109,14 +107,10 @@ const OrderProgressUI = (props) => {
                   <span>{lastOrder?.delivery_type === 1 ? t('ESTIMATED_DELIVERY', 'Estimated delivery') : t('ESTIMATED_TIME', 'Estimated time')}:&nbsp;</span>
                   <span>
                     {lastOrder?.delivery_datetime_utc
-                      ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: configs?.general_hour_format?.value || 'HH:mm' })
+                      ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: 'hh:mm A', utc: false })
                       : parseTime(lastOrder?.delivery_datetime, { utc: false })}
                     &nbsp;-&nbsp;
-                    {statusToShow.includes(lastOrder?.status) ? (
-                      <OrderEta order={lastOrder} outputFormat={configs?.general_hour_format?.value || 'HH:mm'} />
-                    ) : (
-                      parseDate(lastOrder?.reporting_data?.at[`status:${lastOrder.status}`], { outputFormat: configs?.general_hour_format?.value })
-                    )}
+                    <OrderEta order={lastOrder} outputFormat='hh:mm A' />
                   </span>
                 </TimeWrapper>
               </ProgressTextWrapper>

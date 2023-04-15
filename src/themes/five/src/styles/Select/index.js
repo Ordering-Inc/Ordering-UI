@@ -21,8 +21,7 @@ export const Select = (props) => {
     notReload,
     CustomArrow,
     isHomeStyle,
-    disableOneOption,
-    zIndex
+    disableOneOption
   } = props
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home' || isHomeStyle
@@ -106,7 +105,7 @@ export const Select = (props) => {
           </Selected>
         )}
         {open && options && (
-          <Options id='list' position='right' ref={dropdownReference} isHome={isHome} zIndex={zIndex}>
+          <Options id='list' position='right' ref={dropdownReference} isHome={isHome}>
             {
               options.map((option, i) => (
                 <Option

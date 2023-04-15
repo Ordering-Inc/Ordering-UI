@@ -267,8 +267,7 @@ var SidebarMenu = function SidebarMenu(props) {
     }
   })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
-      handleOpenLoginSignUp('login');
-      actionSidebar(false);
+      return handleOpenLoginSignUp('login');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
     active: modalPageToShow === 'login'
@@ -276,8 +275,7 @@ var SidebarMenu = function SidebarMenu(props) {
     active: modalPageToShow === 'login'
   }, t('SIGN_IN', 'Sign in'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
-      handleOpenLoginSignUp('signup');
-      actionSidebar(false);
+      return handleOpenLoginSignUp('signup');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
     active: modalPageToShow === 'signup'

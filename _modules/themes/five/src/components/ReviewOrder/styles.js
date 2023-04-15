@@ -95,7 +95,7 @@ var CommentButton = (0, _styledComponents.default)(_Buttons.Button)(_templateObj
   });
 });
 exports.CommentButton = CommentButton;
-var ContinueContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  p{\n    flex: 1;\n    margin: 0;\n  }\n"])));
+var ContinueContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  p{\n    flex: 1\n  }\n"])));
 exports.ContinueContainer = ContinueContainer;
 var MultiLogosContainer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-around;\n"])));
 exports.MultiLogosContainer = MultiLogosContainer;

@@ -475,10 +475,7 @@ export const SidebarMenu = (props) => {
           {!auth && (
             <>
               <MenuLink
-                onClick={() => {
-                  handleOpenLoginSignUp('login')
-                  actionSidebar(false)
-                }}
+                onClick={() => handleOpenLoginSignUp('login')}
               >
                 <WrappContent>
                   <MenuLinkIcon
@@ -502,10 +499,7 @@ export const SidebarMenu = (props) => {
               </MenuLink>
               {!isHideSignup && (
                 <MenuLink
-                  onClick={() => {
-                    handleOpenLoginSignUp('signup')
-                    actionSidebar(false)
-                  }}
+                  onClick={() => handleOpenLoginSignUp('signup')}
                 >
                   <WrappContent>
                     <MenuLinkIcon

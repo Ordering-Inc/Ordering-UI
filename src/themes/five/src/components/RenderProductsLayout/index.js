@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
-import { Cart3, ArrowLeft } from 'react-bootstrap-icons'
+import { Cart3 } from 'react-bootstrap-icons'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessBasicInformation as BusinessBasicInformationRed } from '../../../../seven'
 import { BusinessBasicInformation as BusinessBasicInformationStarbucks } from '../../../../six'
@@ -32,8 +32,7 @@ import {
   ProfessionalFilterWrapper,
   WrapperSearchAbsolute,
   NearBusiness,
-  PageBannerWrapper,
-  BackButton
+  PageBannerWrapper
 } from './styles'
 
 import { SearchProducts as SearchProductsOriginal } from '../../../../../themes/five/src/components/SearchProducts'
@@ -161,7 +160,7 @@ export const RenderProductsLayout = (props) => {
     <>
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
-          {((!hideBusinessNearCity && !useKioskApp) || props.forceShowNearBusiness) && !isCustomLayout && (
+          {((!hideBusinessNearCity && !useKioskApp) || props.forceShowNearBusiness) && (
             <NearBusiness>
               <BusinessesListing
                 logosLayout
@@ -173,7 +172,7 @@ export const RenderProductsLayout = (props) => {
             </NearBusiness>
           )}
           <div className='bp-list'>
-            {!useKioskApp && (
+            {!isCustomLayout && !useKioskApp && (
               <BusinessBasicInformationComponent
                 {...props}
                 businessState={businessState}
@@ -242,7 +241,7 @@ export const RenderProductsLayout = (props) => {
                     </>
                   )}
                   <div style={{ position: 'relative' }}>
-                    {!(business?.categories?.length === 0 && !categoryId) && !categorySelected?.id && (
+                    {!(business?.categories?.length === 0 && !categoryId) && (
                       <BusinessLayoutCategories
                         categories={[
                           { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
@@ -259,18 +258,6 @@ export const RenderProductsLayout = (props) => {
                         wContainerStyle={useKioskApp && 'calc(100% - 50px)'}
                         isProfessional={business?.professionals?.length > 0 && !useKioskApp}
                       />
-                    )}
-                    {!(business?.categories?.length === 0 && !categoryId) && categorySelected?.id && (
-                      <BackButton>
-                        <Button
-                          color='primary'
-                          initialIcon
-                          onClick={() => onClickCategory({ id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') })}
-                        >
-                          <ArrowLeft />
-                          <div>{t('GO_TO_ALL_CATEGORIES', 'Go to all categories')}</div>
-                        </Button>
-                      </BackButton>
                     )}
                     {useKioskApp && (
                       <WrapperSearchAbsolute id='WrapperSearchAbsolute'>

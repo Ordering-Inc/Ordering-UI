@@ -35,16 +35,11 @@ export const CardItem = styled.div`
 export const CardItemContent = styled.div`
   display: flex;
   align-items: center;
-  
-  .checks svg {
-    color: ${props => props.theme.colors.primary};
-    font-size: 22px;
-  }
 
   > div {
     display: flex;
     align-items: center;
-    margin: 0 13px 0 5px;
+    margin-right: 13px;
     ${props => props.theme?.rtl && css`
       margin-left: 13px;
       margin-right: 0;

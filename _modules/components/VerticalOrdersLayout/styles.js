@@ -31,7 +31,7 @@ var PastLogo = _styledComponents.default.div(_templateObject7 || (_templateObjec
   return isMulti && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      width: 55px;\n      min-width: 55px;\n      height: 55px;\n      min-height: 55px;\n      margin: 3px;\n    "])));
 });
 exports.PastLogo = PastLogo;
-var WrapperBusinessTitle = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 80%;\n  display: flex;\n  gap: 10px;\n\n  @media (min-width: 480px) {\n    width: 95%;\n  }\n"])));
+var WrapperBusinessTitle = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 95%;\n  display: flex;\n  gap: 10px;\n\n  @media (min-width: 480px) {\n    width: 80%;\n  }\n"])));
 exports.WrapperBusinessTitle = WrapperBusinessTitle;
 var Reorder = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 20%;\n  text-align: center;\n  align-items: center;\n  justify-content: center;\n  font-size: 0.8em;\n\n  button {\n    border-radius: 8px;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 10px;\n    overflow: inherit;\n    text-overflow: inherit;\n    border: 1px solid ", ";\n    margin: 5px 0;\n\n    &.reorder {\n      background: ", ";\n      &:hover {\n        background: ", ";\n      }\n    }\n  }\n\n  ", "\n\n  p {\n    color: #53ad26;\n    margin-block-start: 0;\n    margin-block-end: 0;\n    text-overflow: ellipsis;\n    display: -webkit-box;\n    -webkit-line-clamp: 2; /* number of lines to show */\n    -webkit-box-orient: vertical;\n  }\n  @media (min-width: 480px){\n    font-size: 1em;\n    button{\n      width: 90%;\n      font-size: 0.9em;\n    }\n    flex-direction: row;\n    gap: 10px;\n    margin-right: 25px;\n  }\n\n  @media (min-width: 768px){\n    ", "\n    button{\n      width: 80%;\n    }\n  }\n\n  @media (min-width: 1024px){\n    button{\n      width: 50%;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.primaryContrast;
@@ -55,5 +55,5 @@ var WrappButton = _styledComponents.default.div(_templateObject15 || (_templateO
 exports.WrappButton = WrappButton;
 var ReviewWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  .review-sent {\n    border-radius: 7.6px;\n  }\n"])));
 exports.ReviewWrapper = ReviewWrapper;
-var MultiLogosContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: none;\n  align-items: center;\n\n  @media (min-width: 480px) {\n    display: flex;\n  }\n"])));
+var MultiLogosContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 exports.MultiLogosContainer = MultiLogosContainer;

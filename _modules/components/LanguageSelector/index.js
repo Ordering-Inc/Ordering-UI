@@ -34,7 +34,6 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     return a.content > b.content ? 1 : b.content > a.content ? -1 : 0;
   });
   return _languages && _languages.length > 1 ? /*#__PURE__*/_react.default.createElement(_Select.Select, {
-    zIndex: 10002,
     options: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultLanguages : _languages,
     defaultValue: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultCurrentLanguage : currentLanguage,
     onChange: function onChange(languageId) {

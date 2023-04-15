@@ -21,17 +21,14 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
   });
 });
 exports.Option = Option;
-var Options = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #CCC;\n  margin-top: 7px;\n  z-index: ", ";\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  border-radius: 15px;\n  overflow: hidden;\n\n  ", "\n  ", "\n"])), function (_ref2) {
-  var zIndex = _ref2.zIndex;
-  return zIndex || 10002;
-}, function (_ref3) {
-  var position = _ref3.position;
+var Options = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #CCC;\n  margin-top: 7px;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #CCC;\n  border-radius: 15px;\n  overflow: hidden;\n\n  ", "\n  ", "\n"])), function (_ref2) {
+  var position = _ref2.position;
   return (position === null || position === void 0 ? void 0 : position.toLowerCase()) === 'left' && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    left: 0;\n    margin-left: -1px;\n    ", "\n  "])), function (props) {
     var _props$theme2;
     return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin-right: -1px;\n        margin-left: 0px;\n        right: 0;\n        left: initial\n    "])));
   });
-}, function (_ref4) {
-  var position = _ref4.position;
+}, function (_ref3) {
+  var position = _ref3.position;
   return (position === null || position === void 0 ? void 0 : position.toLowerCase()) === 'right' && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    right: 0;\n    margin-right: -1px;\n    ", "\n  "])), function (props) {
     var _props$theme3;
     return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        margin-left: -1px;\n        margin-right: 0px;\n        left: 0;\n        right: initial;\n    "])));

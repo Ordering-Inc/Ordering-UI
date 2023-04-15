@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { PaymentRequestButtonElement, useStripe } from '@stripe/react-stripe-js'
-import { CardForm as CardFormController, useConfig, useLanguage } from 'ordering-components'
+import { CardForm as CardFormController, useLanguage } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { Container } from './styles'
 export const StripeMethodFormUI = (props) => {
@@ -8,33 +8,22 @@ export const StripeMethodFormUI = (props) => {
     cart,
     handleSource,
     handleCancel,
-    paymethod,
-    cartGroup
+    paymethod
   } = props
 
   const [, t] = useLanguage()
   const stripe = useStripe()
-  const [{ configs }] = useConfig()
   const [paymentRequest, setPaymentRequest] = useState(null)
   const [methodUnavailable, setMethodUnavailable] = useState(false)
 
-  const googlePayMethods = ['google_pay', 'global_google_pay']
-
   useEffect(() => {
     if (stripe) {
-      let cartNames = ''
-      if (cartGroup) {
-        // eslint-disable-next-line no-unused-expressions
-        cartGroup?.carts.map((cart, i) => (
-          cartNames = `${cart?.business?.name} ${i !== cartNames?.carts?.length && ', '}`
-        ))
-      }
       const pr = stripe.paymentRequest({
         country: 'US',
-        currency: configs?.stripe_currency?.value?.toLowerCase?.() || 'usd',
+        currency: 'usd',
         total: {
-          label: cartNames || cart?.business?.name,
-          amount: Math.floor((cartGroup?.balance || cartGroup?.total || cart?.balance || cart?.total) * 100)
+          label: cart?.business?.name,
+          amount: Math.floor((cart?.balance || cart?.total) * 100)
         },
         requestPayerName: true,
         requestPayerEmail: true
@@ -47,7 +36,9 @@ export const StripeMethodFormUI = (props) => {
         }
       })
       pr.on('paymentmethod', async (e) => {
-        const data = {
+        e.complete('success')
+        handleCancel()
+        handleSource({
           ...e?.paymentMethod?.card,
           id: e.paymentMethod.id,
           type: e.paymentMethod.type,
@@ -56,10 +47,7 @@ export const StripeMethodFormUI = (props) => {
             brand: e.paymentMethod.card.brand,
             last4: e.paymentMethod.card.last4
           }
-        }
-        e.complete('success')
-        handleCancel()
-        handleSource(cartGroup ? JSON.stringify(data) : data)
+        })
       })
     }
   }, [stripe])
@@ -67,7 +55,7 @@ export const StripeMethodFormUI = (props) => {
   return (
     <Container>
       {methodUnavailable ? (
-        <h2>{googlePayMethods.includes(paymethod) ? t('GOOGLE_PAY_UNAVAILABLE', 'Google pay unavailable') : t('APPLE_PAY_UNAVAILABLE', 'Apple pay unavailable')}</h2>
+        <h2>{paymethod === 'google_pay' ? t('GOOGLE_PAY_UNAVAILABLE', 'Google pay unavailable') : t('APPLE_PAY_UNAVAILABLE', 'Apple pay unavailable')}</h2>
       ) : (
         <>
           {paymentRequest ? (

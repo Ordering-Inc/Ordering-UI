@@ -6,7 +6,7 @@ export const Container = styled.div`
     padding: 0 15px;
     box-sizing: border-box;
   `}
-  ${({ hero, isCheckOut }) => (hero && !isCheckOut) && css`
+  ${({ hero }) => hero && css`
     position: absolute;
     top: 10%;
   `}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useLanguage, useOrder, useConfig, useSession } from 'ordering-components'
 import { MomentPopover } from '../../../../pwa/src/components/MomentPopover'
 import { OrderTypeSelectorHeader } from '../../../../../components/OrderTypeSelectorHeader'
@@ -13,7 +13,6 @@ import {
   FeatureItems,
   ItemInline
 } from './styles'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 export const OrderContextUI = (props) => {
   const { isCheckOut, setMapErrors, isCustomerMode, isBusinessList } = props
@@ -26,11 +25,10 @@ export const OrderContextUI = (props) => {
   const [openPopover, setOpenPopover] = useState({})
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const windowSize = useWindowSize()
+
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
-  const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
 
   const handleTogglePopover = (type) => {
     setOpenPopover({
@@ -67,36 +65,28 @@ export const OrderContextUI = (props) => {
     }
   }
 
-  useEffect(() => {
-    const handleCloseallPopovers = () => handleClosePopover('moment')
-    window.addEventListener('scroll', handleCloseallPopovers)
-    return () => window.removeEventListener('scroll', handleCloseallPopovers)
-  }, [])
-
   return (
     <>
-      <Container isBusinessList={isBusinessList} hero={props.hideHero} isCheckOut={isCheckOut}>
+      <Container isBusinessList={isBusinessList} hero={props.hideHero} >
         <AddressMenu
           onClick={() => handleClickAddress()}
-          isCheckOut={isCheckOut || !props.hideHero}
+          isCheckOut={isCheckOut}
         >
           <FaMapMarkerAlt />
           <span>{orderState.options?.address?.address || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}</span>
         </AddressMenu>
         <FeatureItems>
           <ItemInline>
-            <OrderTypeSelectorHeader configTypes={configTypes} autoCloseWhenScroll={windowSize.width < 576} />
+            <OrderTypeSelectorHeader configTypes={configTypes} />
           </ItemInline>
-          {isPreOrderSetting && (
-            <ItemInline>
-              <MomentPopover
-                open={openPopover.moment}
-                onClick={() => handleTogglePopover('moment')}
-                onClose={() => handleClosePopover('moment')}
-                isBanner
-              />
-            </ItemInline>
-          )}
+          <ItemInline>
+            <MomentPopover
+              open={openPopover.moment}
+              onClick={() => handleTogglePopover('moment')}
+              onClose={() => handleClosePopover('moment')}
+              isBanner
+            />
+          </ItemInline>
         </FeatureItems>
       </Container>
       <Modal

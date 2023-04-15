@@ -237,9 +237,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       className: "ingredient",
       key: ingredient.id
     }, /*#__PURE__*/_react.default.createElement("span", null, t('NO', 'No'), " ", ingredient.name));
-  })), productInfo().options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, productInfo().options.sort(function (a, b) {
-    return a.rank - b.rank;
-  }).map(function (option) {
+  })), productInfo().options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, productInfo().options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: option.id
     }, /*#__PURE__*/_react.default.createElement("p", null, option.name), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, {

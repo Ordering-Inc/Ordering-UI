@@ -40,10 +40,6 @@ export const CardCvcField = styled.div`
   color: #ADB2B9;
 `
 
-export const CardZipcodeField = styled.div`
-  color: #ADB2B9;
-`
-
 export const CardNumberField = styled.div`
   width: 100%;
   color: #ADB2B9;
@@ -101,35 +97,4 @@ export const FormActions = styled.div`
       opacity: 0.5;
     }
   }
-`
-
-export const ZipcodeField = styled.input`
-  font-weight: 500;
-  font-size: 16px;
-  box-sizing: border-box;
-  width: 100% !important;
-  &:-webkit-autofill {
-    color: '#fce883'
-  }
-  &::placeholder {
-    font-weight: 500
-  }
-  &:focus(){
-    box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,
-      rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
-    -webkit-transition: all 150ms ease;
-    transition: all 150ms ease;
-  }
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  /* Firefox */
-  &[type=number] {
-    -moz-appearance: textfield;
-  }
-  
 `

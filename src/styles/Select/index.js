@@ -18,9 +18,7 @@ export const Select = (props) => {
     defaultValue,
     onChange,
     notAsync,
-    notReload,
-    autoCloseWhenScroll,
-    zIndex
+    notReload
   } = props
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
@@ -51,16 +49,9 @@ export const Select = (props) => {
   }
 
   useEffect(() => {
-    const handleCloseSelect = () => setOpen(false)
     document.addEventListener('mouseup', closeSelect)
     document.addEventListener('keydown', handleKeyDown)
-    if (autoCloseWhenScroll) {
-      window.addEventListener('scroll', handleCloseSelect)
-    }
     return () => {
-      if (autoCloseWhenScroll) {
-        window.removeEventListener('scroll', handleCloseSelect)
-      }
       document.removeEventListener('mouseup', closeSelect)
       document.removeEventListener('keydown', handleKeyDown)
     }
@@ -109,7 +100,7 @@ export const Select = (props) => {
           </Selected>
         )}
         {open && options && (
-          <Options id='list' position='right' ref={dropdownReference} zIndex={zIndex}>
+          <Options id='list' position='right' ref={dropdownReference}>
             {
               options.map(option => (
                 <Option

@@ -8,21 +8,17 @@ export const BusinessContainer = styled.div`
   box-sizing: border-box;
   position: relative;
   max-height: 324px;
-  height: 150px;
+  height: 324px;
   background-repeat: no-repeat, repeat;
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  min-height: 150px;
+  min-height: 200px;
   justify-content: start;
   align-items: flex-end;
 
   ${props => props.isSkeleton && css`
     background-color: #cccccc;
-  `}
-
-  ${props => props.bgimage && props.isChew && css`
-    height: 180px;
   `}
 
   ${props => props.bgimage && (!props.isClosed && !props.isChew) && css`
@@ -49,8 +45,6 @@ export const BusinessContainer = styled.div`
 
   @media (min-width: 576px) {
     border-radius: 7.6px;
-    height: 324px;
-    min-height: 200px;
   }
 
 
@@ -60,8 +54,8 @@ export const BusinessContent = styled.div`
   margin: 0;
   margin-left: 35px;
   margin-bottom: -35px;
-  max-height: 70px;
-  width: 70px;
+  max-height: 80px;
+  width: 80px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
   @media (min-width: 576px) {
@@ -77,10 +71,10 @@ export const BusinessContent = styled.div`
 `
 
 export const WrapperBusinessLogo = styled.div`
-  max-width: 70px;
-  max-height: 70px;
-  width: 70px;
-  height: 70px;
+  max-width: 80px;
+  max-height: 80px;
+  width: 80px;
+  height: 80px;
 
   @media (min-width: 576px) {
     max-width: 124px;
@@ -100,7 +94,7 @@ const BusinessLogoStyled = styled.div`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  min-height: 70px;
+  min-height: 80px;
   border-radius: 7.6px;
   @media (min-width: 576px) {
     min-height: 124px;
@@ -249,7 +243,7 @@ export const WrapperSearch = styled.div`
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 10001;
+    z-index: 1002;
     width: fit-content;
     margin-top: 0px;
     background-color: ${props => props.theme.colors.backgroundPage};
@@ -260,7 +254,6 @@ export const WrapperSearch = styled.div`
     &.fixed-search {
       left: 0;
       width: 100vw;
-      z-index: 1002;
     }
   }
 `
@@ -371,26 +364,17 @@ export const TitleWrapper = styled.div`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background: ${({ theme }) => theme?.colors?.white};
     &.fixed-name {
       z-index: 1002;
       position: fixed;
       top: 0;
+      width: calc(100vw - 190px);
       padding: 10px 0;
       font-size: 18px;
-      ${({ isCustomLayout }) => !isCustomLayout ? css`
-        width: calc(100vw - 190px);
-        ${props => props.theme?.rtl ? css`
-        right: 50px;
-        ` : css`
-        left: 50px;
-        `}
-      ` : css`
       ${props => props.theme?.rtl ? css`
-          right: 10px;
-          ` : css`
-          left: 10px;
-        `}
+        right: 50px;
+      ` : css`
+        left: 50px;
       `}
     }
     @media (min-width: 768px) {

@@ -38,7 +38,6 @@ var RedeemGiftCardUI = function RedeemGiftCardUI(props) {
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parsePrice = _useUtils2[0].parsePrice;
   var _useForm = (0, _reactHookForm.useForm)(),
-    control = _useForm.control,
     register = _useForm.register,
     handleSubmit = _useForm.handleSubmit,
     errors = _useForm.errors;
@@ -49,17 +48,8 @@ var RedeemGiftCardUI = function RedeemGiftCardUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
-  var codeRef = (0, _react.useRef)(null);
   var onSubmit = function onSubmit(values) {
     handleApply(values);
-  };
-  var handleChangeCode = function handleChangeCode(event) {
-    var string = event.target.value;
-    string = string.replace(/-/g, '');
-    if (!string) return;
-    var codeSlices = string.match(/.{1,4}/g);
-    string = codeSlices.join('-');
-    codeRef.current.value = string;
   };
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
@@ -80,26 +70,14 @@ var RedeemGiftCardUI = function RedeemGiftCardUI(props) {
   }, [actionState.error]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, !redeemedGiftCard ? /*#__PURE__*/_react.default.createElement(_styles.FormContainer, {
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement("h2", null, t('REDEEM_GIFT_CARD', 'Redeem a gift card')), /*#__PURE__*/_react.default.createElement(_styles.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('GIFT_CARD_CODE', 'Gift card code')), /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
+  }, /*#__PURE__*/_react.default.createElement("h2", null, t('REDEEM_GIFT_CARD', 'Redeem a gift card')), /*#__PURE__*/_react.default.createElement(_styles.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('GIFT_CARD_CODE', 'Gift card code')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "code",
-    control: control,
-    render: function render(_ref) {
-      var _onChange = _ref.onChange,
-        value = _ref.value;
-      return /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-        placeholder: "XXXX-XXXX-XXXX-XXXX",
-        type: "text",
-        autoComplete: "off",
-        ref: codeRef,
-        onChange: function onChange(e) {
-          _onChange(e.target.value);
-          handleChangeCode(e);
-        }
-      });
-    },
-    rules: {
+    placeholder: "0000 0000",
+    type: "text",
+    ref: register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Code is required').replace('_attribute_', t('CODE', 'Code'))
-    }
+    }),
+    autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "password",
     type: "password",

@@ -137,9 +137,6 @@ export const CartContent = (props) => {
                   <h4>{t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')}</h4>
                   <h4>{parsePrice(totalCartsPrice)}</h4>
                 </div>
-                <span>
-                  <p>{t('CART_GROUP_MESSAGE_ALERT', 'Discounts may be applied at the time of payment for this group.')}</p>
-                </span>
               </MultiCartPriceContainer>
             )}
           </>

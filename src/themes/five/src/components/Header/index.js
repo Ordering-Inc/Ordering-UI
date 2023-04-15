@@ -59,9 +59,7 @@ export const Header = (props) => {
     isHideSignup,
     isCustomerMode,
     searchValue,
-    setSearchValue,
-    businessSlug,
-    notificationState
+    setSearchValue
   } = props
 
   const { pathname } = useLocation()
@@ -89,12 +87,7 @@ export const Header = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
 
-  const isMulticheckoutPage = window.location.pathname?.includes('/multi-checkout')
-
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
-  const carts = businessSlug
-    ? cartsWithProducts.filter((cart) => cart?.business?.slug === businessSlug || businessSlug === cart?.business_id)
-    : cartsWithProducts
 
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
@@ -240,10 +233,10 @@ export const Header = (props) => {
               isChew={isChew}
             >
               <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (windowSize.width <= 768 ? theme?.images?.logos?.isotypeInvert : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
+              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (isHome && windowSize.width < 576 ? theme?.images?.logos?.isotypeInvert : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
-          {isShowOrderOptions && windowSize.width >= 576 && (
+          {isShowOrderOptions && !props.isCustomLayout && windowSize.width >= 576 && (
             <Menu id='center-side' className='left-header' isCustomerMode={isCustomerMode} isChew={isChew}>
               {windowSize.width > 850 && isFarAway && (
                 <FarAwayMessage>
@@ -368,24 +361,20 @@ export const Header = (props) => {
                   <>
                     {isShowOrderOptions && (
                       windowSize.width > 768 ? (
-                        <>
-                          {!isMulticheckoutPage ? (
-                            <CartPopover
-                              open={openPopover.cart}
-                              carts={carts}
-                              onClick={() => handleTogglePopover('cart')}
-                              onClose={() => handleClosePopover('cart')}
-                              auth={auth}
-                              location={location}
-                              isCustomerMode={isCustomerMode}
-                              setPreorderBusiness={setPreorderBusiness}
-                            />
-                          ) : null}
-                        </>
+                        <CartPopover
+                          open={openPopover.cart}
+                          carts={cartsWithProducts}
+                          onClick={() => handleTogglePopover('cart')}
+                          onClose={() => handleClosePopover('cart')}
+                          auth={auth}
+                          location={location}
+                          isCustomerMode={isCustomerMode}
+                          setPreorderBusiness={setPreorderBusiness}
+                        />
                       ) : (
                         <HeaderOption
                           variant='cart'
-                          totalCarts={carts?.length}
+                          totalCarts={cartsWithProducts?.length}
                           onClick={(variant) => openModal(variant)}
                         />
                       )
@@ -474,7 +463,7 @@ export const Header = (props) => {
         >
           {modalSelected === 'cart' && (
             <CartContent
-              carts={carts}
+              carts={cartsWithProducts}
               isOrderStateCarts={!!orderState.carts}
               onClose={() => setModalIsOpen(false)}
             />

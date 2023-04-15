@@ -32,7 +32,7 @@ export const CitiesControl = (props) => {
           <Skeleton height={40} count={3} style={{ marginBottom: '10px' }} />
         ) : (
           <>
-            {cities?.map(city => city?.enabled && (
+            {cities?.map(city => (
               <CityItem key={city?.id} onClick={() => setCityState(city?.id === cityState ? null : city?.id)}>
                 <span className='radio'>
                   {city?.id === cityState

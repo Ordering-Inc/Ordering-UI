@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage, useUtils, RedeemGiftCard as RedeemGiftCardController } from 'ordering-components'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Alert } from '../../Confirm'
 import { Button } from '../../../styles/Buttons'
 import { Input } from '../../../styles/Inputs'
@@ -22,21 +22,11 @@ const RedeemGiftCardUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const { control, register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const codeRef = useRef(null)
 
   const onSubmit = (values) => {
     handleApply(values)
-  }
-
-  const handleChangeCode = (event) => {
-    let string = event.target.value
-    string = string.replace(/-/g, '')
-    if (!string) return
-    const codeSlices = string.match(/.{1,4}/g)
-    string = codeSlices.join('-')
-    codeRef.current.value = string
   }
 
   useEffect(() => {
@@ -63,24 +53,14 @@ const RedeemGiftCardUI = (props) => {
           <h2>{t('REDEEM_GIFT_CARD', 'Redeem a gift card')}</h2>
           <FormController>
             <label>{t('GIFT_CARD_CODE', 'Gift card code')}</label>
-            <Controller
+            <Input
               name='code'
-              control={control}
-              render={({ onChange, value }) => (
-                <Input
-                  placeholder='XXXX-XXXX-XXXX-XXXX'
-                  type='text'
-                  autoComplete='off'
-                  ref={codeRef}
-                  onChange={e => {
-                    onChange(e.target.value)
-                    handleChangeCode(e)
-                  }}
-                />
-              )}
-              rules={{
+              placeholder='0000 0000'
+              type='text'
+              ref={register({
                 required: t('VALIDATION_ERROR_REQUIRED', 'Code is required').replace('_attribute_', t('CODE', 'Code'))
-              }}
+              })}
+              autoComplete='off'
             />
           </FormController>
           <FormController>

@@ -167,7 +167,6 @@ var CheckoutUI = function CheckoutUI(props) {
     _useState22 = _slicedToArray(_useState21, 2),
     cardList = _useState22[0],
     setCardList = _useState22[1];
-  var cardsMethods = ['stripe', 'credomatic'];
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
   var isTableNumberEnabled = configs === null || configs === void 0 ? void 0 : (_configs$table_numer_ = configs.table_numer_enabled) === null || _configs$table_numer_ === void 0 ? void 0 : _configs$table_numer_.value;
   var isWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
@@ -184,7 +183,7 @@ var CheckoutUI = function CheckoutUI(props) {
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
   var validateCommentsCartField = (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.comments) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.checkout) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.comments) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required) && ((cart === null || cart === void 0 ? void 0 : cart.comment) === null || (cart === null || cart === void 0 ? void 0 : (_cart$comment = cart.comment) === null || _cart$comment === void 0 ? void 0 : _cart$comment.trim().length) === 0);
-  var isDisablePlaceOrderButton = !(cart !== null && cart !== void 0 && cart.valid) || !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 || cardsMethods.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && (cardList === null || cardList === void 0 ? void 0 : (_cardList$cards = cardList.cards) === null || _cardList$cards === void 0 ? void 0 : _cardList$cards.length) === 0 || placing || errorCash || loading || isTableNumberEnabled === '1' && (options === null || options === void 0 ? void 0 : options.type) === 3 && !(cartState !== null && cartState !== void 0 && (_cartState$cart = cartState.cart) !== null && _cartState$cart !== void 0 && _cartState$cart.spot_number || cart !== null && cart !== void 0 && cart.spot_number || placeSpotNumber) || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ||
+  var isDisablePlaceOrderButton = !(cart !== null && cart !== void 0 && cart.valid) || !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && (cardList === null || cardList === void 0 ? void 0 : (_cardList$cards = cardList.cards) === null || _cardList$cards === void 0 ? void 0 : _cardList$cards.length) === 0 || placing || errorCash || loading || isTableNumberEnabled === '1' && (options === null || options === void 0 ? void 0 : options.type) === 3 && !(cartState !== null && cartState !== void 0 && (_cartState$cart = cartState.cart) !== null && _cartState$cart !== void 0 && _cartState$cart.spot_number || cart !== null && cart !== void 0 && cart.spot_number || placeSpotNumber) || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ||
   // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
   options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie7 = validationFields.fields) === null || _validationFields$fie7 === void 0 ? void 0 : (_validationFields$fie8 = _validationFields$fie7.checkout) === null || _validationFields$fie8 === void 0 ? void 0 : (_validationFields$fie9 = _validationFields$fie8.driver_tip) === null || _validationFields$fie9 === void 0 ? void 0 : _validationFields$fie9.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie10 = validationFields.fields) === null || _validationFields$fie10 === void 0 ? void 0 : (_validationFields$fie11 = _validationFields$fie10.checkout) === null || _validationFields$fie11 === void 0 ? void 0 : (_validationFields$fie12 = _validationFields$fie11.driver_tip) === null || _validationFields$fie12 === void 0 ? void 0 : _validationFields$fie12.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 || validateCommentsCartField;
   var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
@@ -265,7 +264,7 @@ var CheckoutUI = function CheckoutUI(props) {
     if (userSelected && userSelected !== null && userSelected !== void 0 && userSelected.cellphone) {
       if (userSelected !== null && userSelected !== void 0 && userSelected.country_phone_code) {
         var phone = null;
-        phone = "+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code).concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.cellphone.replace("+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code), ''));
+        phone = "+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code).concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.cellphone);
         var phoneNumber = (0, _libphonenumberJs.default)(phone);
         if (!(phoneNumber !== null && phoneNumber !== void 0 && phoneNumber.isValid())) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'));
@@ -622,8 +621,7 @@ var Checkout = function Checkout(props) {
     handleOrderRedirect = props.handleOrderRedirect,
     handleCheckoutRedirect = props.handleCheckoutRedirect,
     handleSearchRedirect = props.handleSearchRedirect,
-    handleCheckoutListRedirect = props.handleCheckoutListRedirect,
-    businessSlug = props.businessSlug;
+    handleCheckoutListRedirect = props.handleCheckoutListRedirect;
   var _useOrder3 = (0, _orderingComponents.useOrder)(),
     _useOrder4 = _slicedToArray(_useOrder3, 2),
     orderState = _useOrder4[0],
@@ -672,10 +670,6 @@ var Checkout = function Checkout(props) {
     var _cart$products3;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);
   })) || null);
-  var carts = businessSlug ? cartsWithProducts.filter(function (cart) {
-    var _cart$business6;
-    return (cart === null || cart === void 0 ? void 0 : (_cart$business6 = cart.business) === null || _cart$business6 === void 0 ? void 0 : _cart$business6.slug) === businessSlug || businessSlug === (cart === null || cart === void 0 ? void 0 : cart.business_id);
-  }) : cartsWithProducts;
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -712,13 +706,13 @@ var Checkout = function Checkout(props) {
   }, [errors]);
   var getOrder = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(cartId) {
-      var _result$order, result, cart, userCustomer, url, response, content, _result, _result$paymethod_dat, credomaticData, urlParams, paramsObj, _confirmCartRes$resul, confirmCartRes, _cart, spotNumberFromStorage, _JSON$parse, _JSON$parse2, _cart2, _cart2$business, spotNumber, slug;
+      var _result$order, result, cart, userCustomer, url, response, content, _confirmCartRes$resul, confirmCartRes, _cart, spotNumberFromStorage, _JSON$parse, _JSON$parse2, _cart2, _cart2$business, spotNumber, slug;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             result = {};
-            cart = carts.find(function (cart) {
+            cart = cartsWithProducts.find(function (cart) {
               return cart.uuid === cartId;
             });
             userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
@@ -759,25 +753,17 @@ var Checkout = function Checkout(props) {
             setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
               loading: false
             }));
-            _context.next = 43;
+            _context.next = 41;
             break;
           case 22:
             if (!(result.status === 2)) {
-              _context.next = 39;
+              _context.next = 37;
               break;
             }
-            credomaticData = null;
-            if (((_result = result) === null || _result === void 0 ? void 0 : (_result$paymethod_dat = _result.paymethod_data) === null || _result$paymethod_dat === void 0 ? void 0 : _result$paymethod_dat.gateway) === 'credomatic') {
-              urlParams = new URLSearchParams(window.location.search);
-              paramsObj = Object.fromEntries(urlParams.entries());
-              credomaticData = {
-                credomatic: _objectSpread({}, paramsObj)
-              };
-            }
-            _context.prev = 25;
-            _context.next = 28;
-            return confirmCart(cartUuid, credomaticData);
-          case 28:
+            _context.prev = 23;
+            _context.next = 26;
+            return confirmCart(cartUuid);
+          case 26:
             confirmCartRes = _context.sent;
             if (confirmCartRes.error) {
               setAlertState({
@@ -793,19 +779,19 @@ var Checkout = function Checkout(props) {
               loading: false,
               cart: result
             }));
-            _context.next = 37;
+            _context.next = 35;
             break;
-          case 34:
-            _context.prev = 34;
-            _context.t0 = _context["catch"](25);
+          case 32:
+            _context.prev = 32;
+            _context.t0 = _context["catch"](23);
             setAlertState({
               open: true,
               content: [_context.t0.message]
             });
-          case 37:
-            _context.next = 43;
+          case 35:
+            _context.next = 41;
             break;
-          case 39:
+          case 37:
             _cart = Array.isArray(result) ? null : result;
             spotNumberFromStorage = window.localStorage.getItem('table_number');
             if (spotNumberFromStorage) {
@@ -822,21 +808,21 @@ var Checkout = function Checkout(props) {
               cart: _cart,
               error: _cart ? null : result
             }));
-          case 43:
-            _context.next = 48;
+          case 41:
+            _context.next = 46;
             break;
-          case 45:
-            _context.prev = 45;
+          case 43:
+            _context.prev = 43;
             _context.t1 = _context["catch"](0);
             setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
               loading: false,
               error: [_context.t1.toString()]
             }));
-          case 48:
+          case 46:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 45], [25, 34]]);
+      }, _callee, null, [[0, 43], [23, 32]]);
     }));
     return function getOrder(_x2) {
       return _ref2.apply(this, arguments);
@@ -858,12 +844,12 @@ var Checkout = function Checkout(props) {
     isResetPaymethod: isResetPaymethod,
     setIsResetPaymethod: setIsResetPaymethod
   });
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartUuid && orderState.carts && carts && (carts === null || carts === void 0 ? void 0 : carts.length) === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !cartUuid && orderState.carts && cartsWithProducts && (cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length) === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.'),
     btnTitle: t('SEARCH_REDIRECT', 'Go to Businesses'),
     onClickButton: handleSearchRedirect
-  }), !cartUuid && orderState.carts && carts && (carts === null || carts === void 0 ? void 0 : carts.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.CartsList, null, /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
-    carts: carts,
+  }), !cartUuid && orderState.carts && cartsWithProducts && (cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.CartsList, null, /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+    carts: cartsWithProducts,
     isOrderStateCarts: !!orderState.carts,
     isForceOpenCart: true
   })), cartUuid && cartState.error && ((_cartState$error = cartState.error) === null || _cartState$error === void 0 ? void 0 : _cartState$error.length) > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {

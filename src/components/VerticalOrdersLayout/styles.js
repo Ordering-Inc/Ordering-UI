@@ -84,12 +84,12 @@ export const PastLogo = styled.div`
 `
 
 export const WrapperBusinessTitle = styled.div`
-  width: 80%;
+  width: 95%;
   display: flex;
   gap: 10px;
 
   @media (min-width: 480px) {
-    width: 95%;
+    width: 80%;
   }
 `
 
@@ -209,10 +209,6 @@ export const ReviewWrapper = styled.div`
 `
 
 export const MultiLogosContainer = styled.div`
-  display: none;
+  display: flex;
   align-items: center;
-
-  @media (min-width: 480px) {
-    display: flex;
-  }
 `

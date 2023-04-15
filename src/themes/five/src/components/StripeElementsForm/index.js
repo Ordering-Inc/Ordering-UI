@@ -22,8 +22,7 @@ const StripeElementsFormUI = (props) => {
     paymethod,
     cart,
     handlePlaceOrder,
-    methodsPay,
-    cartGroup
+    methodsPay
   } = props
   const [, t] = useLanguage()
   return (
@@ -39,7 +38,6 @@ const StripeElementsFormUI = (props) => {
           {methodsPay?.includes(paymethod) ? (
             <StripeMethodForm
               cart={cart}
-              cartGroup={cartGroup}
               handleSource={handleSource}
               onNewCard={onNewCard}
               toSave={toSave}

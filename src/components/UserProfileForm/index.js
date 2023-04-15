@@ -164,7 +164,8 @@ const UserProfileFormUI = (props) => {
               ) : (
                 <UserData>
                   <h1>
-                    {showCustomerName && (userData?.name || user?.name)} {showCustomerLastName && (userData?.lastname || user?.lastname)}
+                    {showCustomerName && (userData?.name || user?.name)}
+                    {showCustomerLastName && (userData?.lastname || user?.lastname)}
                   </h1>
                   <p>{(showCustomerEmail && (userData?.email || user.email))}</p>
                   {(showCustomerCellphone && (userData?.cellphone || user?.cellphone)) && (

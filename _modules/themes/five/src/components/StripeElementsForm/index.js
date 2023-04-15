@@ -37,8 +37,7 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
     paymethod = props.paymethod,
     cart = props.cart,
     handlePlaceOrder = props.handlePlaceOrder,
-    methodsPay = props.methodsPay,
-    cartGroup = props.cartGroup;
+    methodsPay = props.methodsPay;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -54,7 +53,6 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
     stripe: (0, _pure.loadStripe)(publicKey)
   }, methodsPay !== null && methodsPay !== void 0 && methodsPay.includes(paymethod) ? /*#__PURE__*/_react.default.createElement(_StripeMethodForm.StripeMethodForm, {
     cart: cart,
-    cartGroup: cartGroup,
     handleSource: handleSource,
     onNewCard: onNewCard,
     toSave: toSave,

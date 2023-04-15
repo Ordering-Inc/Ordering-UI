@@ -37,11 +37,10 @@ var CARD_ELEMENT_OPTIONS = {
       color: '#fa755a',
       iconColor: '#fa755a'
     }
-  },
-  showIcon: true
+  }
 };
 var CardFormUI = function CardFormUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var error = props.error,
     errorExpiry = props.errorExpiry,
     errorCvc = props.errorCvc,
@@ -50,16 +49,10 @@ var CardFormUI = function CardFormUI(props) {
     handleChange = props.handleChange,
     isSplitForm = props.isSplitForm,
     handleChangeExpiry = props.handleChangeExpiry,
-    handleChangeCvc = props.handleChangeCvc,
-    errorZipcode = props.errorZipcode;
+    handleChangeCvc = props.handleChangeCvc;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
-    _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
-    validationFields = _useValidationFields2[0];
-  var zipCodeEnabled = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.card) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.zipcode) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled;
-  var zipCodeRequired = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.card) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.zipcode) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -82,14 +75,7 @@ var CardFormUI = function CardFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, errorExpiry)), /*#__PURE__*/_react.default.createElement(_styles.CardCvcField, null, /*#__PURE__*/_react.default.createElement("label", null, t('CVC', 'CVC')), /*#__PURE__*/_react.default.createElement(_reactStripeJs.CardCvcElement, {
     options: CARD_ELEMENT_OPTIONS,
     onChange: handleChangeCvc
-  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, errorCvc))), zipCodeEnabled && /*#__PURE__*/_react.default.createElement(_styles.CardZipcodeField, null, /*#__PURE__*/_react.default.createElement("label", null, t('ZIPCODE', 'Zipcode')), /*#__PURE__*/_react.default.createElement(_styles.ZipcodeField, {
-    name: "zipcode",
-    placeholder: "".concat(t('ZIPCODE', 'Zipcode')).concat(zipCodeRequired ? '*' : ''),
-    options: CARD_ELEMENT_OPTIONS,
-    onChange: handleChange,
-    pattern: "[0-9]",
-    type: "number"
-  }), errorZipcode && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('ZIPCODE_IS_INCOMPLETED', 'The zipcode is incompleted.'))))), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, errorCvc))))), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
     disabled: loading

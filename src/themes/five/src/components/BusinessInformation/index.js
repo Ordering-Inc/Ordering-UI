@@ -27,7 +27,6 @@ import {
 import MdClose from '@meronex/icons/md/MdClose'
 import { ScheduleAccordion } from '../ScheduleAccordion'
 import { useTheme } from 'styled-components'
-import moment from 'moment'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -54,12 +53,11 @@ export const BusinessInformationUI = (props) => {
   const hidePickupTime = theme?.business_view?.components?.information?.components?.pickup_time?.hidden
   const hideImages = theme?.business_view?.components?.information?.components?.images?.hidden
   const hideAddress = theme?.business_view?.components?.information?.components?.address?.hidden
-  const formatTime = configs?.general_hour_format?.value
 
-	const checkTime = (val) => (val < 10 ? `0${val}` : val);
-	const timeFormated = (time) => {
-		return moment(`1900-01-01 ${checkTime(time.hour)}:${checkTime(time.minute)}`).format(formatTime)
-	}
+  const scheduleFormatted = ({ hour, minute }) => {
+    const checkTime = (val) => val < 10 ? `0${val}` : val
+    return `${checkTime(hour)}:${checkTime(minute)}`
+  }
 
   const handleModalImage = (src) => {
     setImage(src)
@@ -127,7 +125,7 @@ export const BusinessInformationUI = (props) => {
                         <ScheduleAccordion
                           key={i}
                           weekIndex={i}
-                          timeFormated={timeFormated}
+                          scheduleFormatted={scheduleFormatted}
                           schedule={schedule}
                         />
                       ))}

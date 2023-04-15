@@ -13,7 +13,7 @@ import IosArrowDown from '@meronex/icons/ios/IosArrowDown'
 export const ScheduleAccordion = (props) => {
 
 	const {
-		timeFormated,
+		scheduleFormatted,
 		schedule,
 		weekIndex
 	} = props
@@ -43,10 +43,10 @@ export const ScheduleAccordion = (props) => {
 				<HoursWrappers style={{ display: isActive ? 'flex' : 'none', paddingLeft: 60 }}>
 					{schedule?.lapses?.map((lapse, i) => (
 						schedule?.enabled ?
-							<p key={`${i}-${timeFormated(lapse.open)}`}>
-								{timeFormated(lapse.open) +
+							<p key={`${i}-${scheduleFormatted(lapse.open)}`}>
+								{scheduleFormatted(lapse.open) +
 									' - ' +
-									timeFormated(lapse.close)}
+									scheduleFormatted(lapse.close)}
 							</p>
 							:
 							<ClosedSchedule>

@@ -44,7 +44,7 @@ export const PopoverBody = styled.div`
   border-radius: 10px;
   max-width: 500px;
   min-width: 300px !important;
-  z-index: 10002;
+  z-index: 1001;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
 `
 

@@ -298,7 +298,7 @@ export const ProductActions = styled.div`
   }
 
   div.incdec-control {
-    width: 195px;
+    width: 135px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -398,9 +398,9 @@ export const ProductActions = styled.div`
     }
 
     div.incdec-control {
-      margin-right: 18%;
+      padding-right: 18%;
       &.show-weight-unit{
-        width: 40%;
+        width: 30%;
       }
     }
   }

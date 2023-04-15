@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSite, useEvent, useOrderingTheme } from 'ordering-components'
+import { useSite, useEvent } from 'ordering-components'
 import { MyOrders as MyOrdersController } from '../../../src/themes/five/src/components/MyOrders'
 import { HelmetTags } from '../../components/HelmetTags'
 import settings from '../../config'
@@ -9,21 +9,13 @@ import { useWindowSize } from '../../../src/hooks/useWindowSize'
 export const MyOrders = (props) => {
   const [events] = useEvent()
   const [{ site }] = useSite()
-  const [orderingTheme] = useOrderingTheme()
-  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeBusinessSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.business_slug
-  const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
-  const websiteThemeFranchiseSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.franchise_slug
-  const updatedFranchiseSlug = (websiteThemeType === 'franchise' && websiteThemeFranchiseSlug) || settings?.franchiseSlug
-
   const windowSize = useWindowSize()
   const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
   const productUrlTemplate = checkSiteUrl(site?.product_url_template, '/store/:business_slug?category=:category_id&product=:product_id')
 
   const ordersProps = {
     ...props,
-    franchiseId: updatedFranchiseSlug,
-    businessId: updatedBusinessSlug,
+    franchiseId: settings?.franchiseSlug,
     hideOptions: windowSize.width < 576,
     onRedirectPage: (data) => {
       if (data.page === 'business') {

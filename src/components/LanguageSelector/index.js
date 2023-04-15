@@ -22,7 +22,6 @@ const LanguageSelectorUI = (props) => {
   return (
     _languages && _languages.length > 1 ? (
       <Select
-        zIndex={10002}
         options={languagesState?.loading ? defaultLanguages : _languages}
         defaultValue={languagesState?.loading ? defaultCurrentLanguage : currentLanguage}
         onChange={(languageId) => handleChangeLanguage(languageId)}

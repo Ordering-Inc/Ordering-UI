@@ -14,8 +14,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
     typeSelected,
     defaultValue,
     configTypes,
-    orderTypes,
-    autoCloseWhenScroll
+    orderTypes
   } = props
 
   const defaultType = configTypes?.includes(typeSelected) ? null : configTypes?.[0]
@@ -23,7 +22,6 @@ const OrderTypeSelectorHeaderUI = (props) => {
   return (
     <OrderTypeWrapper>
         <Select
-          autoCloseWhenScroll={autoCloseWhenScroll}
           options={configTypes
             ? orderTypes.filter(type => configTypes?.includes(type.value))
             : orderTypes

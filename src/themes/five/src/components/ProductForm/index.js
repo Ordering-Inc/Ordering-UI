@@ -345,6 +345,7 @@ const ProductOptionsUI = (props) => {
       setIsHaveWeight(true)
       setPricePerWeightUnit(product?.price / product?.weight)
     }
+
   }, [product])
 
   useEffect(() => {

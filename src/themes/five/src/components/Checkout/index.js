@@ -21,6 +21,7 @@ import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useHistory } from 'react-router-dom'
 import { ArrowLeft } from 'react-bootstrap-icons'
+
 import {
   Container,
   WrapperLeftContainer,
@@ -128,7 +129,7 @@ const CheckoutUI = (props) => {
   const [openModal, setOpenModal] = useState({ login: false, signup: false })
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
-  const cardsMethods = ['stripe', 'credomatic']
+
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isTableNumberEnabled = configs?.table_numer_enabled?.value
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
@@ -146,7 +147,7 @@ const CheckoutUI = (props) => {
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
-    (cardsMethods.includes(paymethodSelected?.gateway) && cardList?.cards?.length === 0) ||
+    (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0) ||
     placing ||
     errorCash ||
     loading ||
@@ -245,7 +246,7 @@ const CheckoutUI = (props) => {
     if (userSelected && userSelected?.cellphone) {
       if (userSelected?.country_phone_code) {
         let phone = null
-        phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone.replace(`+${userSelected?.country_phone_code}`, '')}`
+        phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone}`
         const phoneNumber = parsePhoneNumber(phone)
         if (!phoneNumber?.isValid()) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'))
@@ -525,24 +526,24 @@ const CheckoutUI = (props) => {
 
         {
           !!(!isMultiDriverTips && driverTipsField) &&
-          <>
-            <DriverTipContainer>
-              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-              <DriverTips
-                businessId={cart?.business_id}
-                driverTipsOptions={driverTipsOptions}
-                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                  ? cart?.driver_tip
-                  : cart?.driver_tip_rate}
-                cart={cart}
-                useOrderContext
-              />
-            </DriverTipContainer>
-            <DriverTipDivider />
-          </>
+            <>
+              <DriverTipContainer>
+                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                <DriverTips
+                  businessId={cart?.business_id}
+                  driverTipsOptions={driverTipsOptions}
+                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate}
+                  cart={cart}
+                  useOrderContext
+                />
+              </DriverTipContainer>
+              <DriverTipDivider />
+            </>
         }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
@@ -575,7 +576,7 @@ const CheckoutUI = (props) => {
               businessConfigs={businessConfigs}
               loyaltyRewardRate={
                 creditPointPlanOnBusiness?.accumulation_rate ??
-                (!!creditPointPlanOnBusiness && creditPointPlan?.accumulation_rate) ?? 0
+                  (!!creditPointPlanOnBusiness && creditPointPlan?.accumulation_rate) ?? 0
               }
             />
           </CartContainer>
@@ -755,8 +756,7 @@ export const Checkout = (props) => {
     handleOrderRedirect,
     handleCheckoutRedirect,
     handleSearchRedirect,
-    handleCheckoutListRedirect,
-    businessSlug
+    handleCheckoutListRedirect
   } = props
 
   const [orderState, { confirmCart }] = useOrder()
@@ -773,9 +773,7 @@ export const Checkout = (props) => {
   const [isResetPaymethod, setIsResetPaymethod] = useState(false)
 
   const cartsWithProducts = orderState?.carts && (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length) || null)
-  const carts = businessSlug
-    ? cartsWithProducts.filter((cart) => cart?.business?.slug === businessSlug || businessSlug === cart?.business_id)
-    : cartsWithProducts
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -815,7 +813,7 @@ export const Checkout = (props) => {
   const getOrder = async (cartId) => {
     try {
       let result = {}
-      const cart = carts.find(cart => cart.uuid === cartId)
+      const cart = cartsWithProducts.find(cart => cart.uuid === cartId)
       const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
       if (cart && !userCustomer) {
         result = { ...cart }
@@ -840,18 +838,8 @@ export const Checkout = (props) => {
         handleOrderRedirect(result.order.uuid)
         setCartState({ ...cartState, loading: false })
       } else if (result.status === 2) {
-        let credomaticData = null
-        if (result?.paymethod_data?.gateway === 'credomatic') {
-          const urlParams = new URLSearchParams(window.location.search)
-          const paramsObj = Object.fromEntries(urlParams.entries())
-          credomaticData = {
-            credomatic: {
-              ...paramsObj
-            }
-          }
-        }
         try {
-          const confirmCartRes = await confirmCart(cartUuid, credomaticData)
+          const confirmCartRes = await confirmCart(cartUuid)
           if (confirmCartRes.error) {
             setAlertState({
               open: true,
@@ -923,17 +911,17 @@ export const Checkout = (props) => {
 
   return (
     <>
-      {!cartUuid && orderState.carts && carts && carts?.length === 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length === 0 && (
         <NotFoundSource
           content={t('NOT_FOUND_CARTS', 'Sorry, You don\'t seem to have any carts.')}
           btnTitle={t('SEARCH_REDIRECT', 'Go to Businesses')}
           onClickButton={handleSearchRedirect}
         />
       )}
-      {!cartUuid && orderState.carts && carts && carts?.length > 0 && (
+      {!cartUuid && orderState.carts && cartsWithProducts && cartsWithProducts?.length > 0 && (
         <CartsList>
           <CartContent
-            carts={carts}
+            carts={cartsWithProducts}
             isOrderStateCarts={!!orderState.carts}
             isForceOpenCart
           />

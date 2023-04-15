@@ -77,8 +77,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     handleUpdateProfessionals = props.handleUpdateProfessionals,
     businesses = props.businesses,
     handleUpdateBusinesses = props.handleUpdateBusinesses,
-    getPage = props.getPage,
-    loadOrders = props.loadOrders;
+    getPage = props.getPage;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -93,10 +92,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   var loading = orderList.loading,
     error = orderList.error,
     values = orderList.orders;
-  var _useState = (0, _react.useState)(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    refreshOrders = _useState2[0],
-    setRefreshOrders = _useState2[1];
   var _orders = customArray || values || [];
   var uniqueOrders = [];
   var ordersReduced = _orders.map(function (order) {
@@ -141,17 +136,17 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   }).every(function (i) {
     return !i;
   }) : orders.length > 0;
-  var _useState3 = (0, _react.useState)(true),
-    _useState4 = _slicedToArray(_useState3, 2),
-    loadingOrders = _useState4[0],
-    setLoadingOrders = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+  var _useState = (0, _react.useState)(true),
+    _useState2 = _slicedToArray(_useState, 2),
+    loadingOrders = _useState2[0],
+    setLoadingOrders = _useState2[1];
+  var _useState3 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    alertState = _useState6[0],
-    setAlertState = _useState6[1];
+    _useState4 = _slicedToArray(_useState3, 2),
+    alertState = _useState4[0],
+    setAlertState = _useState4[1];
   var closeOrderModal = function closeOrderModal(e) {
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
     if (outsideModal) {
@@ -243,12 +238,6 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       }
     }
   }, [reorderState]);
-  (0, _react.useEffect)(function () {
-    if (refreshOrders) {
-      loadOrders(false, false, false, true);
-      setRefreshOrders(false);
-    }
-  }, [refreshOrders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -356,8 +345,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     onRedirectPage: onRedirectPage,
     getOrderStatus: _utils.getOrderStatus,
     handleReorder: handleReorder,
-    handleUpdateOrderList: handleUpdateOrderList,
-    setRefreshOrders: setRefreshOrders
+    handleUpdateOrderList: handleUpdateOrderList
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('MY_ORDERS', 'My orders'),
     content: alertState.content,
