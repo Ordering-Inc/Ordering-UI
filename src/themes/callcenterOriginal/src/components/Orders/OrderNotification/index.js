@@ -70,9 +70,11 @@ const OrderNotificationUI = (props) => {
     }
     toast(content, toastConfigure)
     const sound = document.getElementById('notification-sound')
-    sound.muted = false
-    sound.play()
-    setRegisterOrderIds([])
+    if (sound?.muted && sound?.play) {
+      sound.muted = false
+      sound.play()
+      setRegisterOrderIds([])
+    }
   }
 
   useEffect(() => {
@@ -83,7 +85,7 @@ const OrderNotificationUI = (props) => {
   useEffect(() => {
     const sound = document.getElementById('notification-sound')
     const interval = setInterval(() => {
-      if (notificationModalOpen) {
+      if (notificationModalOpen && sound?.muted && sound?.play) {
         sound.muted = false
         sound.play()
       }
