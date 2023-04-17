@@ -422,7 +422,7 @@ const OrderDetailsUI = (props) => {
                 {!hideDeliveryDate && (
                   <p className='date'>
                     {activeStatus.includes(order?.status) ? (
-                      <OrderEta order={order} />
+                      <OrderEta order={order} outputFormat={`YYYY-MM-DD ${configs?.general_hour_format?.value}`} />
                     ) : (
                       parseDate(order?.reporting_data?.at[`status:${order.status}`], { outputFormat: `YYYY-MM-DD ${configs?.general_hour_format?.value}` })
                     )}
