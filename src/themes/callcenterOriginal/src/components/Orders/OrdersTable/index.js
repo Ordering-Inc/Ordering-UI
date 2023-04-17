@@ -270,7 +270,9 @@ export const OrdersTable = (props) => {
   const handleDragEnd = () => {
     const elements = document.getElementsByClassName('ghostDragging')
     while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0])
+      if (elements?.[0]?.parentNode?.contains(elements?.[0])) {
+        elements[0].parentNode.removeChild(elements[0])
+      }
     }
     setDragOverd('')
   }
@@ -310,109 +312,109 @@ export const OrdersTable = (props) => {
             <thead>
               <tr>
                 {allowColumns && (Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)?.length === 0 ?
-                (
-                  <th className='orderPrice' key={`noDragTh-${i}`}>
-                    <ColumnAllowSettingPopover
-                      allowColumns={allowColumns}
-                      optionsDefault={optionsDefault}
-                      handleChangeAllowColumns={handleChangeAllowColumns}
-                      isOrder
-                    />
-                  </th>
-                ) : (
-                  Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)
-                  .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
-                  .map((column, i, array) => {
-                    if (column === 'slaBar') {
-                      return
-                    }
-                    if (column === 'orderNumber') {
-                      return (
-                        <React.Fragment key={i}>
-                          <th
-                            className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
-                            key={`noDragTh-${i}`}
-                            colSpan={allowColumns?.slaBar?.visable ? 2 : 1}
-                          >
-                            <CheckBox
-                              isChecked={!orderList.loading && isAllChecked}
-                              onClick={() => handleSelecteAllOrder()}
-                              className='orderCheckBox'
-                            >
-                              {(!orderList.loading && isAllChecked) ? (
-                                <RiCheckboxFill />
-                              ) : (
-                                <RiCheckboxBlankLine />
+                  (
+                    <th className='orderPrice' key={`noDragTh-${i}`}>
+                      <ColumnAllowSettingPopover
+                        allowColumns={allowColumns}
+                        optionsDefault={optionsDefault}
+                        handleChangeAllowColumns={handleChangeAllowColumns}
+                        isOrder
+                      />
+                    </th>
+                  ) : (
+                    Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)
+                      .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
+                      .map((column, i, array) => {
+                        if (column === 'slaBar') {
+                          return
+                        }
+                        if (column === 'orderNumber') {
+                          return (
+                            <React.Fragment key={i}>
+                              <th
+                                className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
+                                key={`noDragTh-${i}`}
+                                colSpan={allowColumns?.slaBar?.visable ? 2 : 1}
+                              >
+                                <CheckBox
+                                  isChecked={!orderList.loading && isAllChecked}
+                                  onClick={() => handleSelecteAllOrder()}
+                                  className='orderCheckBox'
+                                >
+                                  {(!orderList.loading && isAllChecked) ? (
+                                    <RiCheckboxFill />
+                                  ) : (
+                                    <RiCheckboxBlankLine />
+                                  )}
+                                </CheckBox>
+                                {t('ORDER', 'Order')}
+                              </th>
+                              {column === [...array].pop() && (
+                                <th className='orderPrice' key={`noDragTh-${i}`}>
+                                  <ColumnAllowSettingPopover
+                                    allowColumns={allowColumns}
+                                    optionsDefault={optionsDefault}
+                                    handleChangeAllowColumns={handleChangeAllowColumns}
+                                    isOrder
+                                  />
+                                </th>
                               )}
-                            </CheckBox>
-                            {t('ORDER', 'Order')}
-                          </th>
-                          {column === [...array].pop() && (
-                            <th className='orderPrice' key={`noDragTh-${i}`}>
-                              <ColumnAllowSettingPopover
-                                allowColumns={allowColumns}
-                                optionsDefault={optionsDefault}
-                                handleChangeAllowColumns={handleChangeAllowColumns}
-                                isOrder
-                              />
-                            </th>
-                          )}
-                        </React.Fragment>
-                      )
-                    }
-                    if (column === 'total' || (column !== 'total' && column === [...array].pop())) {
-                      return (
-                        <React.Fragment key={i}>
-                          {(column !== 'total' && column === [...array].pop()) && (
-                            <DragTh
-                              key={`dragTh-${i}`}
-                              onDragOver={e => handleDragOver?.(e, column)}
-                              onDrop={e => handleDrop(e, column)}
-                              onDragEnd={e => handleDragEnd(e)}
-                              colSpan={allowColumns[column]?.colSpan ?? 1}
-                              className={allowColumns[column]?.className}
-                              selectedDragOver={column === dragOverd}
-                            >
-                              <div draggable onDragStart={e => handleDragStart?.(e, column)}>
-                                <img
-                                  src={theme.images.icons?.sixDots}
-                                  alt='six dots'
+                            </React.Fragment>
+                          )
+                        }
+                        if (column === 'total' || (column !== 'total' && column === [...array].pop())) {
+                          return (
+                            <React.Fragment key={i}>
+                              {(column !== 'total' && column === [...array].pop()) && (
+                                <DragTh
+                                  key={`dragTh-${i}`}
+                                  onDragOver={e => handleDragOver?.(e, column)}
+                                  onDrop={e => handleDrop(e, column)}
+                                  onDragEnd={e => handleDragEnd(e)}
+                                  colSpan={allowColumns[column]?.colSpan ?? 1}
+                                  className={allowColumns[column]?.className}
+                                  selectedDragOver={column === dragOverd}
+                                >
+                                  <div draggable onDragStart={e => handleDragStart?.(e, column)}>
+                                    <img
+                                      src={theme.images.icons?.sixDots}
+                                      alt='six dots'
+                                    />
+                                    <span>{allowColumns[column]?.title}</span>
+                                  </div>
+                                </DragTh>
+                              )}
+                              <th className='orderPrice' key={`noDragTh-${i}`}>
+                                <ColumnAllowSettingPopover
+                                  allowColumns={allowColumns}
+                                  optionsDefault={optionsDefault}
+                                  handleChangeAllowColumns={handleChangeAllowColumns}
+                                  isOrder
                                 />
-                                <span>{allowColumns[column]?.title}</span>
-                              </div>
-                            </DragTh>
-                          )}
-                          <th className='orderPrice' key={`noDragTh-${i}`}>
-                            <ColumnAllowSettingPopover
-                              allowColumns={allowColumns}
-                              optionsDefault={optionsDefault}
-                              handleChangeAllowColumns={handleChangeAllowColumns}
-                              isOrder
-                            />
-                          </th>
-                        </React.Fragment>
-                      )
-                    }
-                    return (column !== 'timer' || (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress'))) && (
-                      <DragTh
-                        key={`dragTh-${i}`}
-                        onDragOver={e => handleDragOver?.(e, column)}
-                        onDrop={e => handleDrop(e, column)}
-                        onDragEnd={e => handleDragEnd(e)}
-                        colSpan={allowColumns[column]?.colSpan ?? 1}
-                        className={allowColumns[column]?.className}
-                        selectedDragOver={column === dragOverd}
-                      >
-                        <div draggable onDragStart={e => handleDragStart?.(e, column)}>
-                          <img
-                            src={theme.images.icons?.sixDots}
-                            alt='six dots'
-                          />
-                          <span>{allowColumns[column]?.title}</span>
-                        </div>
-                      </DragTh>)
-                  })
-                ))}
+                              </th>
+                            </React.Fragment>
+                          )
+                        }
+                        return (column !== 'timer' || (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress'))) && (
+                          <DragTh
+                            key={`dragTh-${i}`}
+                            onDragOver={e => handleDragOver?.(e, column)}
+                            onDrop={e => handleDrop(e, column)}
+                            onDragEnd={e => handleDragEnd(e)}
+                            colSpan={allowColumns[column]?.colSpan ?? 1}
+                            className={allowColumns[column]?.className}
+                            selectedDragOver={column === dragOverd}
+                          >
+                            <div draggable onDragStart={e => handleDragStart?.(e, column)}>
+                              <img
+                                src={theme.images.icons?.sixDots}
+                                alt='six dots'
+                              />
+                              <span>{allowColumns[column]?.title}</span>
+                            </div>
+                          </DragTh>)
+                      })
+                  ))}
               </tr>
             </thead>
           )}
