@@ -315,7 +315,10 @@ var OrdersTable = function OrdersTable(props) {
   var handleDragEnd = function handleDragEnd() {
     var elements = document.getElementsByClassName('ghostDragging');
     while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0]);
+      var _elements$, _elements$$parentNode;
+      if (elements !== null && elements !== void 0 && (_elements$ = elements[0]) !== null && _elements$ !== void 0 && (_elements$$parentNode = _elements$.parentNode) !== null && _elements$$parentNode !== void 0 && _elements$$parentNode.contains(elements === null || elements === void 0 ? void 0 : elements[0])) {
+        elements[0].parentNode.removeChild(elements[0]);
+      }
     }
     setDragOverd('');
   };

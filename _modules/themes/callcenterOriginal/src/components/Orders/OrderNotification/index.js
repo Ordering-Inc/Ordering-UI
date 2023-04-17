@@ -86,9 +86,11 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     };
     (0, _reactToastify.toast)(content, toastConfigure);
     var sound = document.getElementById('notification-sound');
-    sound.muted = false;
-    sound.play();
-    setRegisterOrderIds([]);
+    if (sound !== null && sound !== void 0 && sound.muted && sound !== null && sound !== void 0 && sound.play) {
+      sound.muted = false;
+      sound.play();
+      setRegisterOrderIds([]);
+    }
   };
   (0, _react.useEffect)(function () {
     if (registerOrderIds.length > 0) return;
@@ -97,7 +99,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
   (0, _react.useEffect)(function () {
     var sound = document.getElementById('notification-sound');
     var interval = setInterval(function () {
-      if (notificationModalOpen) {
+      if (notificationModalOpen && sound !== null && sound !== void 0 && sound.muted && sound !== null && sound !== void 0 && sound.play) {
         sound.muted = false;
         sound.play();
       }

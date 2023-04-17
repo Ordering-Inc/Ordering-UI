@@ -24,15 +24,15 @@ var SearchBar = function SearchBar(props) {
   var onChangeSearch = function onChangeSearch(e) {
     clearTimeout(timeout);
     timeout = setTimeout(function () {
-      onSearch(e.target.value);
+      onSearch && onSearch(e.target.value);
     }, 750);
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
-        onSearch(e.target.value);
+        onSearch && onSearch(e.target.value);
       } else {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-          onSearch(e.target.value);
+          onSearch && onSearch(e.target.value);
         }, 750);
       }
     }
