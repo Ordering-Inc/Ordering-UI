@@ -125,11 +125,11 @@ const PaymentOptionWalletUI = (props) => {
                 </SectionLeft>
                 <div>
                   {wallet.type === 'cash' && (
-                    <span>{parsePrice(wallet?.balance, { isTruncable: true })}</span>
+                    <span>{parsePrice(wallet?.balance)}</span>
                   )}
                   {wallet.type === 'credit_point' && (
                     <span>
-                      <span style={{ color: theme.colors.primary }}>{`${wallet?.balance} ${t('POINTS', 'Points')}`}</span> {wallet?.balance > 0 && `= ${parsePrice(wallet?.balance / wallet?.redemption_rate, { isTruncable: true })}`}
+                      <span style={{ color: theme.colors.primary }}>{`${wallet?.balance} ${t('POINTS', 'Points')}`}</span> {wallet?.balance > 0 && `= ${parsePrice(wallet?.balance / wallet?.redemption_rate)}`}
                     </span>
                   )}
                 </div>
