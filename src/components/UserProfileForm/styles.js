@@ -29,7 +29,6 @@ export const UserImage = styled.div`
 
   @media (min-width: 768px){
     width: auto;
-    align-items: flex-end;
   }
 `
 
