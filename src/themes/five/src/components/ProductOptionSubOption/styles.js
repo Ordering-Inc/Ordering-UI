@@ -38,7 +38,7 @@ export const Text = styled.div`
   color: #555;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0 5px;
+  margin: 0 8px;
 
   div {
     overflow: hidden;
@@ -74,6 +74,8 @@ export const SubOptionThumbnail = styled.div`
   background-repeat: no-repeat, repeat;
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   background-size: cover;
   object-fit: cover;
   background-position: center;
