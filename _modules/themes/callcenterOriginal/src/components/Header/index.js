@@ -373,7 +373,9 @@ var Header = function Header(props) {
     },
     padding: "20px",
     hideCloseDefault: true
-  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, {
+    isOpenUserData: isOpenUserData
+  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     isAddressFormOpen: isAddressFormOpen,
     userData: customerState === null || customerState === void 0 ? void 0 : customerState.user,
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.id,

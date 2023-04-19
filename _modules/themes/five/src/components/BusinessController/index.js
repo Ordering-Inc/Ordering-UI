@@ -116,13 +116,17 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   // }
 
   var handleBusinessClick = function handleBusinessClick(e) {
-    var _favoriteRef$current, _business$menus;
+    var _favoriteRef$current, _business$menus, _business$menus_share;
     if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
-    var hasMenu = business === null || business === void 0 ? void 0 : (_business$menus = business.menus) === null || _business$menus === void 0 ? void 0 : _business$menus.filter(function (menu) {
+    var hasMenu = (business === null || business === void 0 ? void 0 : (_business$menus = business.menus) === null || _business$menus === void 0 ? void 0 : _business$menus.filter(function (menu) {
       var _menu$products;
       return (menu === null || menu === void 0 ? void 0 : menu.enabled) && (menu === null || menu === void 0 ? void 0 : (_menu$products = menu.products) === null || _menu$products === void 0 ? void 0 : _menu$products.length) > 0;
-    }).length;
-    if (onPreorderBusiness && (!isBusinessOpen || !hasMenu)) onPreorderBusiness(business);else handleClick(business);
+    }).length) === 0;
+    var hasSharedMenu = (business === null || business === void 0 ? void 0 : (_business$menus_share = business.menus_shared) === null || _business$menus_share === void 0 ? void 0 : _business$menus_share.filter(function (menu) {
+      var _menu$products2;
+      return (menu === null || menu === void 0 ? void 0 : menu.enabled) && (menu === null || menu === void 0 ? void 0 : (_menu$products2 = menu.products) === null || _menu$products2 === void 0 ? void 0 : _menu$products2.length) > 0;
+    }).length) === 0;
+    if (onPreorderBusiness && (!isBusinessOpen || hasMenu && hasSharedMenu)) onPreorderBusiness(business);else handleClick(business);
   };
   var handleChangeFavorite = function handleChangeFavorite() {
     if (auth) {

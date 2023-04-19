@@ -346,9 +346,9 @@ var Header = function Header(props) {
     },
     handleCustomEnter: function handleCustomEnter() {
       var _configState$configs12, _configState$configs13;
-      return !businessSlug && (configState === null || configState === void 0 ? void 0 : (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 ? void 0 : (_configState$configs13 = _configState$configs12.advanced_business_search_enabled) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === '1' ? events.emit('go_to_page', {
+      return (configState === null || configState === void 0 ? void 0 : (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 ? void 0 : (_configState$configs13 = _configState$configs12.advanced_business_search_enabled) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === '0' || businessSlug ? null : events.emit('go_to_page', {
         page: 'business_search'
-      }) : null;
+      });
     }
   })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, {
     id: "right-side"

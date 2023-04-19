@@ -37,10 +37,10 @@ var ModalIcon = _styledComponents.default.span(_templateObject8 || (_templateObj
 exports.ModalIcon = ModalIcon;
 var TitleContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 0;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n  ", "\n"])), function (_ref) {
   var isAddressFormOpen = _ref.isAddressFormOpen;
-  return isAddressFormOpen && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      h1{ \n        width: 75%;\n      }\n  "])));
+  return isAddressFormOpen && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      h1{\n        width: 75%;\n      }\n  "])));
 });
 exports.TitleContainer = TitleContainer;
 var CountryFlag = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin-right: 5px;\n  .PhoneInputCountryIcon {\n    width: 25px;\n  }\n  .PhoneInputInput {\n    display: none;\n  }\n  .PhoneInputCountrySelect {\n    display: none;\n  }\n"])));
 exports.CountryFlag = CountryFlag;
-var PhoneContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  height: 30px;\n"])));
+var PhoneContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  height: 30px;\n  \n  p {\n    margin: 0;\n  }\n"])));
 exports.PhoneContainer = PhoneContainer;

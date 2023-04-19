@@ -320,7 +320,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     favoriteIds: favoriteIds,
     setFavoriteIds: setFavoriteIds,
     disabledCities: true
-  }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
     position: "web_business_listing"
   }), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && !isAllCategoriesHidden && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     images: props.images,

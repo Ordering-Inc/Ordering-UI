@@ -68,7 +68,7 @@ var ProductShareUI = function ProductShareUI(props) {
     onClick: handleClickShare
   }), /*#__PURE__*/_react.default.createElement(_styles.ShareButtons, {
     ref: contentElement,
-    className: "a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style",
+    className: "a2a_kit a2a_kit_size_32 a2a_vertical_style",
     "data-a2a-url": urlToShare,
     showShareButton: showShareButton
   }, /*#__PURE__*/_react.default.createElement(_styles.CopyButton, {

@@ -61,7 +61,7 @@ var BusinessActions = _styledComponents.default.div(_templateObject14 || (_templ
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n        margin-left: 5px;\n        margin-right: 0;\n    "])));
 });
 exports.BusinessActions = BusinessActions;
-var PriceContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  button{ \n    padding: 10px 30px;\n    min-width: 150px;\n    width: 50%;\n    height: 50px;\n  }\n"])));
+var PriceContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  h4 {\n    font-size: 16px;\n  }\n  button{ \n    padding: 10px 30px;\n    min-width: 150px;\n    width: 50%;\n    height: 50px;\n  }\n"])));
 exports.PriceContainer = PriceContainer;
 var BusinessLogoStyled = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 75px;\n  height: 75px;\n  min-height: 75px;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: contain;\n  object-fit: contain;\n  background-position: center;\n  border-radius: 10px;\n"])));
 var BusinessLogo = function BusinessLogo(props) {
