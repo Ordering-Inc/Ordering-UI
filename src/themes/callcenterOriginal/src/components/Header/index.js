@@ -379,7 +379,7 @@ export const Header = (props) => {
           padding='20px'
           hideCloseDefault
         >
-          <UserEdit>
+          <UserEdit isOpenUserData={isOpenUserData}>
             <>
               <UserDetails
                 isAddressFormOpen={isAddressFormOpen}

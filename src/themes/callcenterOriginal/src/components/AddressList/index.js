@@ -193,7 +193,7 @@ const AddressListUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
         <AddressHalfContainer>
-          <List halfWidth={addressOpen}>
+        <List halfWidth={addressOpen} isOpenUserData={isOpenUserData} isHeader={isHeader}>
             {
               (!isPopover || !addressOpen) && (
                 <Button
@@ -294,7 +294,7 @@ const AddressListUI = (props) => {
             )}
           </List>
           {!isPopover && addressOpen && (
-            <AddressFormContainer isOpenUserData={isOpenUserData} isHeader={isHeader}>
+            <AddressFormContainer>
               <TitleFormContainer>
                 <CloseIcon>
                   <MdClose onClick={() => handleCloseAddressForm()} />

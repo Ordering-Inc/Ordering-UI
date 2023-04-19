@@ -95,8 +95,9 @@ const BusinessControllerUI = (props) => {
 
   const handleBusinessClick = (e) => {
     if (favoriteRef?.current?.contains(e.target)) return
-    const hasMenu = business?.menus?.filter(menu => menu?.enabled && menu?.products?.length > 0).length
-    if (onPreorderBusiness && (!isBusinessOpen || !hasMenu)) onPreorderBusiness(business)
+    const hasMenu = business?.menus?.filter(menu => menu?.enabled && menu?.products?.length > 0).length === 0
+    const hasSharedMenu = business?.menus_shared?.filter(menu => menu?.enabled && menu?.products?.length > 0).length === 0
+    if (onPreorderBusiness && (!isBusinessOpen || (hasMenu && hasSharedMenu))) onPreorderBusiness(business)
     else handleClick(business)
   }
 
