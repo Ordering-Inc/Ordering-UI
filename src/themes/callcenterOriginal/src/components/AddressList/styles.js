@@ -196,17 +196,18 @@ export const AddressHalfContainer = styled.div`
 export const List = styled.div`
   width: ${({ halfWidth }) => halfWidth ? '50%' : '100%'};
   padding-right: 10px;
-  button { 
+  position: sticky;
+  right: 0;
+  top: 0;
+  margin-top: 222px;
+  button {
     width: 100%;
   }
 `
 
 export const AddressFormContainer = styled.div`
   width: 50%;
-  position: sticky;
-  right: 0;
-  top: 0;
-  margin-top: ${({ isOpenUserData, isHeader }) => isOpenUserData ? '-30px' : isHeader ? '-222px' : '-190px'};
+  z-index: 10;
   height: 100%;
   padding-left: 10px;
 `

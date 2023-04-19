@@ -133,6 +133,10 @@ export const WrappBtn = styled.div`
 
   button {
     min-width: 130px;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `
 

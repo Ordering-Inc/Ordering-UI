@@ -220,6 +220,9 @@ export const PriceContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  h4 {
+    font-size: 16px;
+  }
   button{ 
     padding: 10px 30px;
     min-width: 150px;

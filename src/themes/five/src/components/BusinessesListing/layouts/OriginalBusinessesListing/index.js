@@ -309,7 +309,9 @@ const BusinessesListingUI = (props) => {
         </HightestRatedWrapper>
       )}
 
-      <PageBanner position='web_business_listing' />
+      {!isCustomerMode && (
+        <PageBanner position='web_business_listing' />
+      )}
 
       {(((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && !isAllCategoriesHidden) && (
         <BusinessTypeFilter
