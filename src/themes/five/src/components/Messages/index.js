@@ -4,7 +4,6 @@ import {
   Messages as MessagesController,
   useUtils,
   useLanguage,
-  useSession,
   useEvent
 } from 'ordering-components'
 import { useForm } from 'react-hook-form'
@@ -15,14 +14,10 @@ import {
   HeaderProfile,
   Image,
   Chat,
-  BubbleCustomer,
   MessageCustomer,
-  MyName,
   MessageBusiness,
-  BubbleBusines,
   SkeletonBubbleCustomer,
   SkeletonBubbleBusiness,
-  ChatImage,
   TimeofSent,
   SendForm,
   Send,
@@ -43,7 +38,6 @@ import {
   InputWrapper,
   MessageContentWrapper,
   MessageCreatedDate,
-  TimeofSentByAdmin,
   NotSendMessage,
   QuickMessageWrapper,
   ProfileMessageHeader,
@@ -63,6 +57,7 @@ import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import { bytesConverter, getTraduction } from '../../../../../utils'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
+import { MapMessages } from './MapMessages'
 
 const filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime']
 
@@ -90,7 +85,6 @@ const MessagesUI = (props) => {
   const [, t] = useLanguage()
   const { handleSubmit, register, errors, setValue } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [{ user }] = useSession()
   const [events] = useEvent()
   const [{ parseDate, parseTime }] = useUtils()
   const buttonRef = useRef(null)
@@ -307,173 +301,6 @@ const MessagesUI = (props) => {
     events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
   }
 
-  const MapMessages = ({ messages }) => {
-    return (
-      <>
-        {props.beforeElements?.map((BeforeElement, i) => (
-          <React.Fragment key={i}>
-            {BeforeElement}
-          </React.Fragment>))}
-        {props.beforeComponents?.map((BeforeComponent, i) => (
-          <BeforeComponent key={i} {...props} />))}
-        {messages?.messages.map((message) => (
-          <React.Fragment key={message.id}>
-            {message.type === 1 && (
-              <MessageContentWrapper key={message.id}>
-                {message.change?.attribute !== 'driver_id' ? (
-                  <>
-                    <MessageCreatedDate>
-                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
-                    </MessageCreatedDate>
-                    <MessageConsole>
-                      <BubbleConsole>
-                        {t('ORDER', 'Order')} {' '}
-                        <strong>{t(message.change.attribute.toUpperCase(), message.change.attribute.replace('_', ' '))}</strong> {' '}
-                        {t('CHANGED_FROM', 'Changed from')} {' '}
-                        {filterSpecialStatus.includes(message.change.attribute) ? (
-                          <>
-                            {message.change.old === null ? <strong>0</strong> : (
-                              <>
-                                <strong>{message.change.old}</strong> {' '}
-                              </>
-                            )}
-                            <> {t('TO', 'to')} {' '} <strong>{message.change.new}</strong> {t('MINUTES', 'Minutes')}</>
-                          </>
-                        ) : (
-                          <>
-                            {message.change.old !== null && (
-                              <>
-                                <strong>{message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
-                              </>
-                            )}
-                            <> {t('TO', 'to')} {' '} <strong>{message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : t(getStatus(parseInt(message.change.new, 10)))}</strong> </>
-                          </>
-                        )}
-                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
-                      </BubbleConsole>
-                    </MessageConsole>
-                  </>
-                ) : (
-                  <>
-                    <MessageCreatedDate>
-                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
-                    </MessageCreatedDate>
-                    <MessageConsole>
-                      <BubbleConsole>
-                        {message.change.new ? (
-                          <>
-                            <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname} </strong>
-                            {t('WAS_ASSIGNED_AS_DRIVER', 'Was assigned as driver')}
-                            {message.comment && (<><br /> {message.comment.length}</>)}
-                          </>
-                        ) : <>{t('DRIVER_UNASSIGNED', 'Driver unassigned')}</>}
-                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
-                      </BubbleConsole>
-                    </MessageConsole>
-                  </>
-                )}
-              </MessageContentWrapper>
-
-            )}
-            {(messagesToShow?.messages?.length || (message?.can_see?.includes('2') && business) || (message?.can_see?.includes('4') && driver)) && (
-              <>
-                {message.type === 2 && user?.id === message.author_id && (
-                  <MessageContentWrapper>
-                    <MessageCreatedDate>
-                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
-                    </MessageCreatedDate>
-                    <MessageCustomer>
-                      <BubbleCustomer>
-                        <strong>
-                          <MyName>
-                            {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                          </MyName>
-                        </strong>
-                        {message.comment}
-                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
-                      </BubbleCustomer>
-                    </MessageCustomer>
-                  </MessageContentWrapper>
-                )}
-                {message.type === 3 && user.id === message.author_id && (
-                  <MessageContentWrapper>
-                    <MessageCreatedDate>
-                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
-                    </MessageCreatedDate>
-                    <MessageCustomer>
-                      <BubbleCustomer name='image'>
-                        <strong>
-                          <MyName>
-                            {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                          </MyName>
-                        </strong>
-                        <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
-                        {message.comment && (
-                          <>
-                            {message.comment}
-                          </>
-                        )}
-                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
-                      </BubbleCustomer>
-                    </MessageCustomer>
-                  </MessageContentWrapper>
-
-                )}
-                {message.type === 2 && user?.id !== message.author_id && (
-                  <MessageContentWrapper>
-                    <MessageCreatedDate>
-                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
-                    </MessageCreatedDate>
-                    <MessageBusiness>
-                      <BubbleBusines>
-                        <strong>
-                          <MyName>
-                            {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                          </MyName>
-                        </strong>
-                        {message.comment}
-                        <TimeofSentByAdmin>{parseTime(message.created_at)}</TimeofSentByAdmin>
-                      </BubbleBusines>
-                    </MessageBusiness>
-                  </MessageContentWrapper>
-                )}
-                {message.type === 3 && user.id !== message.author_id && (
-                  <MessageContentWrapper>
-                    <MessageCreatedDate>
-                      <span>{parseDate(message.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
-                    </MessageCreatedDate>
-                    <MessageBusiness>
-                      <BubbleBusines name='image'>
-                        <strong>
-                          <MyName>
-                            {message.author.name} ({order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level)})
-                          </MyName>
-                        </strong>
-                        <ChatImage><img src={message.source} onClick={() => handleModalImage(message.source)} alt='chat-image' width='168px' height='300px' /></ChatImage>
-                        {message.comment && (
-                          <>
-                            {message.comment}
-                          </>
-                        )}
-                        <TimeofSent>{parseTime(message.created_at)}</TimeofSent>
-                      </BubbleBusines>
-                    </MessageBusiness>
-                  </MessageContentWrapper>
-                )}
-              </>
-            )}
-          </React.Fragment>
-        ))}
-        {props.afterComponents?.map((AfterComponent, i) => (
-          <AfterComponent key={i} {...props} />))}
-        {props.afterElements?.map((AfterElement, i) => (
-          <React.Fragment key={i}>
-            {AfterElement}
-          </React.Fragment>))}
-      </>
-    )
-  }
-
   return (
     <MessagesContainer profileMessages={profileMessages}>
       <MessagesLayoutWrapper>
@@ -657,7 +484,18 @@ const MessagesUI = (props) => {
                       <TimeofSent>{parseTime(order.created_at)}</TimeofSent>
                     </BubbleConsole>
                   </MessageConsole>
-                  <MapMessages messages={messagesToShow?.messages?.length ? messagesToShow : messages} />
+                  <MapMessages
+                    messages={messagesToShow?.messages?.length ? messagesToShow : messages}
+                    messagesToShow={messagesToShow}
+                    order={order}
+                    filterSpecialStatus={filterSpecialStatus}
+                    handleModalImage={handleModalImage}
+                    getLevel={getLevel}
+                    business={business}
+                    driver={driver}
+                    getLogisticTagStatus={getLogisticTagStatus}
+                    getStatus={getStatus}
+                  />
                 </MessageContentWrapper>
               )
             }
