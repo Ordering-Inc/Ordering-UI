@@ -89,7 +89,7 @@ export const TitleContainer = styled.div`
     font-size: 24px;
   }
   ${({ isAddressFormOpen }) => isAddressFormOpen && css`
-      h1{ 
+      h1{
         width: 75%;
       }
   `}
@@ -112,4 +112,8 @@ export const PhoneContainer = styled.div`
   display: flex;
   align-items: center;
   height: 30px;
+  
+  p {
+    margin: 0;
+  }
 `

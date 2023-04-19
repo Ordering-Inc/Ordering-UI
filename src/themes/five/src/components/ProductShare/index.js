@@ -61,7 +61,7 @@ const ProductShareUI = (props) => {
         )}
         <ShareButtons
           ref={contentElement}
-          className='a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style'
+          className='a2a_kit a2a_kit_size_32 a2a_vertical_style'
           data-a2a-url={urlToShare}
           showShareButton={showShareButton}
         >

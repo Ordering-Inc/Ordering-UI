@@ -49,7 +49,6 @@ export const IconShare = styled.div`
 
     &:nth-child(1) > svg {
       background-color: white;
-      padding: 5px;
       border-radius: 9px;
       margin: 5px 0px;
     }
@@ -75,8 +74,7 @@ export const ShareButtons = styled.div`
 
   @media (min-width: 1201px) {
     top: 35px;
-    left: 0px;
-    right: 0px;
+    left: -8px;
   }
 `
 export const CopyButton = styled.a`

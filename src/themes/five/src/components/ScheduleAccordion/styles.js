@@ -14,6 +14,10 @@ export const DropdownWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+
+  > h4 {
+    font-size: 16px;
+  }
 `
 export const HoursWrappers = styled.div`
   flex-direction: column;

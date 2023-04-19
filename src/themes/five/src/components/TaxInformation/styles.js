@@ -6,6 +6,9 @@ export const TaxInformationContainer = styled.div`
     margin: 10px;
     text-align: center;
   }
+  h3{
+    font-size: 18px;
+  }
 `
 
 export const ProductContainer = styled.div`
