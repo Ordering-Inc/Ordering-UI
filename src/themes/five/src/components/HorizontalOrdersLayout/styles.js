@@ -21,7 +21,22 @@ export const CardWrapper = styled.div`
 `
 export const CardsContainer = styled.div`
   display: flex;
-  overflow-x: auto;
+`
+
+export const CardsContainerWrapper = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  overflow: auto hidden;
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ${({ isLoading }) => isLoading && css`
+    ::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
+  `}
 `
 
 export const Price = styled.div`
