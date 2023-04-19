@@ -1,12 +1,14 @@
 import React from 'react'
 import {
   CardWrapper,
-  CardsContainer
+  CardsContainer,
+  CardsContainerWrapper
 } from './styles'
 import { OrdersContainer } from '../OrdersOption/styles'
 
 import { SingleOrderCard } from '../SingleOrderCard'
 import { Pagination } from '../Pagination'
+import { AutoScroll } from '../AutoScroll'
 
 export const HorizontalOrdersLayout = (props) => {
   const {
@@ -38,15 +40,19 @@ export const HorizontalOrdersLayout = (props) => {
         isBusinessesPage={isBusinessesPage}
       >
         <CardWrapper>
-          <CardsContainer>
-            {orders.length > 0 && ordersToShow.map((order, i) => (
-              <SingleOrderCard
-                {...props}
-                key={order.id || order.id?.[0] || i}
-                order={order}
-              />
-            ))}
-          </CardsContainer>
+          <CardsContainerWrapper>
+            <CardsContainer>
+              <AutoScroll scrollId='orderScroll'>
+                {orders.length > 0 && ordersToShow.map((order, i) => (
+                  <SingleOrderCard
+                    {...props}
+                    key={order.id || order.id?.[0] || i}
+                    order={order}
+                  />
+                ))}
+              </AutoScroll>
+            </CardsContainer>
+          </CardsContainerWrapper>
           {orders.length > 0 && ordersToShow.length > 0 && (
             <Pagination
               currentPage={pagination.currentPage}
