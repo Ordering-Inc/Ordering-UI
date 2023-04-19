@@ -332,7 +332,9 @@ export const Header = (props) => {
               placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
               starbucksStyle
               onSearch={(value) => setSearchValue(value)}
-              handleCustomEnter={() => !businessSlug && configState?.configs?.advanced_business_search_enabled?.value === '1' ? events.emit('go_to_page', { page: 'business_search' }) : null}
+              handleCustomEnter={() => configState?.configs?.advanced_business_search_enabled?.value === '0' || businessSlug
+                ? null
+                : events.emit('go_to_page', { page: 'business_search' })}
             />
           </HeaderSearchMode>
         )}
