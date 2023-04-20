@@ -214,7 +214,7 @@ const CheckoutUI = (props) => {
   const handlePlaceOrder = (csvID) => {
     if (!userErrors.length && !requiredFields?.length) {
       const body = {}
-      let paymentOptions = null
+      let paymentOptions = {}
       if (behalfName) {
         body.on_behalf_of = behalfName
       }
@@ -224,7 +224,7 @@ const CheckoutUI = (props) => {
           ...brandInformation
         }
       }
-      if (csvID) body.externalcardid = csvID
+      if (csvID) paymentOptions.externalcardid = csvID
       handlerClickPlaceOrder && handlerClickPlaceOrder(paymentOptions, body)
       return
     }

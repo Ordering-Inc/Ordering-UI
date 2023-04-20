@@ -99,6 +99,9 @@ export const TextArea = styled.textarea`
   padding: 7px 15px;
   outline: none;
   resize: none;
+  width: auto;
+  width: -webkit-fill-available;
+
   &:focus {
     border-color: ${() => darken(0.07, '#CCC')};
   }
