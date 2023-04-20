@@ -30,7 +30,8 @@ import {
   MenuLinkIcon,
   MenuLinkText,
   TextInfo,
-  MenuLinkSeparator
+  MenuLinkSeparator,
+  MobileMessage
 } from './styles'
 
 export const SidebarMenu = (props) => {
@@ -44,6 +45,7 @@ export const SidebarMenu = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
+  const [showMessage, setShowMessage] = useState(false)
 
   const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
 
@@ -100,6 +102,13 @@ export const SidebarMenu = (props) => {
     }
   }, [width])
 
+  useEffect(() => {
+    if(!isCustomerMode) return
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      setShowMessage(true)
+    }
+  }, [])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -108,6 +117,14 @@ export const SidebarMenu = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
+        {showMessage && (
+        <MobileMessage>
+          <div>
+            <CloseIcon onClick={() => setShowMessage(false)} />
+            {t('FOR_THE_BEST_EXPERIENCE_WHILE_SETTING_UP', 'For the best experience while setting up your project, we recommend using a computer.')}
+          </div>
+        </MobileMessage>
+      )}
       <Container auth={auth}>
         <IconContent
           isHome={isHome}
