@@ -70,7 +70,7 @@ const ResetPasswordUI = (props) => {
     } else if (!formState.loading && formState.result?.result?.length) {
       setAlertState({
         open: true,
-        content: formState.result?.result === 'OK' ? t('PASSWORD_RESET_SUCCESS', 'Password changed successfully') : t(formState.result?.result, 'Password changed successfully')
+        content: t('PASSWORD_RESET_SUCCESS', 'Password changed successfully')
       })
     }
     if (!formState.loading && formState.result?.result?.length > 0 && !formState.result.error) {
