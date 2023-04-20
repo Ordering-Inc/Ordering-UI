@@ -56,7 +56,7 @@ var InputGroupLeft = _styledComponents.default.div(_templateObject9 || (_templat
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        margin-right: -7px;\n        margin-left: 0;\n    "])));
 });
 exports.InputGroupLeft = InputGroupLeft;
-var TextArea = _styledComponents.default.textarea(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: ", ";\n  border-radius: ", ";\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n  ", "\n\n  ", "\n\n  ", "\n"])), function (_ref9) {
+var TextArea = _styledComponents.default.textarea(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #010300;\n  border: ", ";\n  border-radius: ", ";\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n  resize: none;\n  width: auto;\n  width: -webkit-fill-available;\n\n  &:focus {\n    border-color: ", ";\n  }\n  ", "\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #DBDCDB;\n  }\n  &:-ms-input-placeholder {\n    color: #DBDCDB;\n  }\n  ", "\n\n  ", "\n\n  ", "\n"])), function (_ref9) {
   var pfchangs = _ref9.pfchangs;
   return pfchangs ? 'none' : '1px solid #DBDCDB';
 }, function (_ref10) {

@@ -233,7 +233,7 @@ var CheckoutUI = function CheckoutUI(props) {
   var handlePlaceOrder = function handlePlaceOrder(csvID) {
     if (!userErrors.length && !(requiredFields !== null && requiredFields !== void 0 && requiredFields.length)) {
       var body = {};
-      var paymentOptions = null;
+      var paymentOptions = {};
       if (behalfName) {
         body.on_behalf_of = behalfName;
       }
@@ -242,7 +242,7 @@ var CheckoutUI = function CheckoutUI(props) {
           email: user === null || user === void 0 ? void 0 : user.email
         }, brandInformation);
       }
-      if (csvID) body.externalcardid = csvID;
+      if (csvID) paymentOptions.externalcardid = csvID;
       handlerClickPlaceOrder && handlerClickPlaceOrder(paymentOptions, body);
       return;
     }
