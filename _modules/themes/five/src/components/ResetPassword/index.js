@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ResetPasswordUI = function ResetPasswordUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$images, _theme$images$logos, _formState$result7, _formState$result7$re, _formState$result8, _formState$result8$re, _theme$images2, _theme$images2$logos, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _theme$images, _theme$images$logos, _formState$result5, _formState$result5$re, _formState$result6, _formState$result6$re, _theme$images2, _theme$images2$logos, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
   var code = props.code,
     random = props.random,
     formState = props.formState,
@@ -79,7 +79,7 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     }
   };
   (0, _react.useEffect)(function () {
-    var _formState$result, _formState$result3, _formState$result3$re, _formState$result6, _formState$result6$re;
+    var _formState$result, _formState$result3, _formState$result3$re, _formState$result4, _formState$result4$re;
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
       setAlertState({
@@ -87,13 +87,12 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
         content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
     } else if (!formState.loading && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && (_formState$result3$re = _formState$result3.result) !== null && _formState$result3$re !== void 0 && _formState$result3$re.length) {
-      var _formState$result4, _formState$result5;
       setAlertState({
         open: true,
-        content: ((_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result) === 'OK' ? t('PASSWORD_RESET_SUCCESS', 'Password changed successfully') : t((_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result, 'Password changed successfully')
+        content: t('PASSWORD_RESET_SUCCESS', 'Password changed successfully')
       });
     }
-    if (!formState.loading && ((_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : (_formState$result6$re = _formState$result6.result) === null || _formState$result6$re === void 0 ? void 0 : _formState$result6$re.length) > 0 && !formState.result.error) {
+    if (!formState.loading && ((_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.length) > 0 && !formState.result.error) {
       setOpenAuthModal(true);
     }
   }, [formState]);
@@ -168,8 +167,8 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "submit",
-    color: formState.loading || (_formState$result7 = formState.result) !== null && _formState$result7 !== void 0 && (_formState$result7$re = _formState$result7.result) !== null && _formState$result7$re !== void 0 && _formState$result7$re.length ? 'secondary' : 'primary',
-    disabled: formState.loading || ((_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : (_formState$result8$re = _formState$result8.result) === null || _formState$result8$re === void 0 ? void 0 : _formState$result8$re.length)
+    color: formState.loading || (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && (_formState$result5$re = _formState$result5.result) !== null && _formState$result5$re !== void 0 && _formState$result5$re.length ? 'secondary' : 'primary',
+    disabled: formState.loading || ((_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : (_formState$result6$re = _formState$result6.result) === null || _formState$result6$re === void 0 ? void 0 : _formState$result6$re.length)
   }, !formState.loading ? t('CHANGE_PASSWORD', 'Change password') : t('LOADING', 'Loading')))) : /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype,
     alt: "Logo",
