@@ -172,7 +172,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     categoryClicked: categoryClicked,
     categorySelected: categorySelected,
     setCategoryClicked: setCategoryClicked
-  })), /*#__PURE__*/_react.default.createElement(_styles.PageBannerWrapper, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
+  })), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.PageBannerWrapper, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
     position: "web_business_page"
   })), !errorQuantityProducts && SearchProductsComponent && !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(SearchProductsComponent, {
     handleChangeSearch: handleChangeSearch,
