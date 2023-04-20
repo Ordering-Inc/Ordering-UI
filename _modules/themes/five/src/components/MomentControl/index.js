@@ -38,7 +38,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var MomentControlUI = function MomentControlUI(props) {
-  var _configs$dates_moment, _configs$dates_moment2, _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _props$afterComponent, _props$afterElements;
+  var _configs$general_hour, _configs$general_hour2, _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _props$afterComponent, _props$afterElements;
   var isAsap = props.isAsap,
     datesList = props.datesList,
     hoursList = props.hoursList,
@@ -52,7 +52,7 @@ var MomentControlUI = function MomentControlUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var is12hours = configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : (_configs$dates_moment2 = _configs$dates_moment.value) === null || _configs$dates_moment2 === void 0 ? void 0 : _configs$dates_moment2.includes('hh:mm');
+  var is12hours = configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : (_configs$general_hour2 = _configs$general_hour.value) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.includes('hh:mm');
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseTime = _useUtils2[0].parseTime;

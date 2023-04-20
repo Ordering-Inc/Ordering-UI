@@ -21,7 +21,7 @@ var IconControl = _styledComponents.default.div(_templateObject2 || (_templateOb
   return props.theme.colors.lightGray;
 });
 exports.IconControl = IconControl;
-var Text = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex: 1 1 auto;\n  display: flex;\n  font-weight: 300;\n  color: #555;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 0 5px;\n\n  div {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 14px;\n    color: ", ";\n  }\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
+var Text = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex: 1 1 auto;\n  display: flex;\n  font-weight: 300;\n  color: #555;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 0 8px;\n\n  div {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    font-size: 14px;\n    color: ", ";\n  }\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.darkGray;
 }, function (props) {
   return props.theme.colors.primary;
@@ -33,7 +33,7 @@ var Text = _styledComponents.default.div(_templateObject4 || (_templateObject4 =
   return noMargin && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    span {\n      margin: 0;\n    }\n  "])));
 });
 exports.Text = Text;
-var SubOptionThumbnail = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: inline-block;\n  border-radius: 8px;\n  background-image: url(", ");\n  background-repeat: no-repeat, repeat;\n  width: 40px;\n  height: 40px;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  justify-content: center;\n  align-items: center;\n"])), function (_ref2) {
+var SubOptionThumbnail = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: inline-block;\n  border-radius: 8px;\n  background-image: url(", ");\n  background-repeat: no-repeat, repeat;\n  width: 40px;\n  height: 40px;\n  min-width: 40px;\n  min-height: 40px;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  justify-content: center;\n  align-items: center;\n"])), function (_ref2) {
   var src = _ref2.src;
   return src;
 });

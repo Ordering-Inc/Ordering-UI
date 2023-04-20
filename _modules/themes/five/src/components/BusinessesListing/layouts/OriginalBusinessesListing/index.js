@@ -51,7 +51,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _citiesState$cities, _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderState$options2, _orderState$options3, _businessesList$busin3, _orderState$options7, _configs$business_lis, _configs$business_lis2, _configs$business_lis3, _theme$images2, _theme$images2$genera, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _configs$business_lis4, _theme$images3, _theme$images3$genera, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _citiesState$cities5, _citiesState$cities6, _citiesState$cities6$, _configs$advanced_bus, _orderState$options9, _orderState$options9$, _configs$advanced_bus2, _citiesState$cities7, _citiesState$cities8, _citiesState$cities8$, _orderState$options11, _orderState$options12, _businessesList$busin6, _businessesList$busin7;
+  var _citiesState$cities, _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderState$options2, _orderState$options3, _businessesList$busin3, _orderState$options7, _configs$business_lis, _configs$business_lis2, _configs$business_lis3, _theme$images2, _theme$images2$genera, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _configs$business_lis4, _theme$images3, _theme$images3$genera, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _citiesState$cities5, _citiesState$cities6, _citiesState$cities6$, _configs$advanced_bus2, _orderState$options9, _orderState$options9$, _configs$advanced_bus3, _citiesState$cities7, _citiesState$cities8, _citiesState$cities8$, _orderState$options11, _orderState$options12, _businessesList$busin6, _businessesList$busin7;
   var businessesList = props.businessesList,
     paginationProps = props.paginationProps,
     searchValue = props.searchValue,
@@ -289,9 +289,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch,
     handleCustomEnter: function handleCustomEnter() {
-      return onRedirectPage({
+      var _configs$advanced_bus;
+      return (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' ? onRedirectPage({
         page: 'business_search'
-      });
+      }) : null;
     }
   }), !hideCities && (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities5 = citiesState.cities) === null || _citiesState$cities5 === void 0 ? void 0 : _citiesState$cities5.length) > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
@@ -299,7 +300,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities6 = citiesState.cities) === null || _citiesState$cities6 === void 0 ? void 0 : (_citiesState$cities6$ = _citiesState$cities6.find(function (city) {
     var _orderState$options8;
     return (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.city_id);
-  })) === null || _citiesState$cities6$ === void 0 ? void 0 : _citiesState$cities6$.name) || t('SELECT_A_CITY', 'Select a city')), !hideFilter && (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
+  })) === null || _citiesState$cities6$ === void 0 ? void 0 : _citiesState$cities6$.name) || t('SELECT_A_CITY', 'Select a city')), !hideFilter && (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus2 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus2 === void 0 ? void 0 : _configs$advanced_bus2.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
     onClick: function onClick() {
       return onRedirectPage({
         page: 'business_search'
@@ -337,7 +338,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isCustomLayout: isCustomLayout,
     placeholder: t('SEARCH_BUSINESSES', 'Search Businesses'),
     onSearch: handleChangeSearch
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus2 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus2 === void 0 ? void 0 : _configs$advanced_bus2.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
+  }), (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus3 = configs.advanced_business_search_enabled) === null || _configs$advanced_bus3 === void 0 ? void 0 : _configs$advanced_bus3.value) === '1' && /*#__PURE__*/_react.default.createElement(_FiFilter.default, {
     onClick: function onClick() {
       return onRedirectPage({
         page: 'business_search'

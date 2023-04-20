@@ -39,7 +39,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var BusinessPreorderUI = function BusinessPreorderUI(props) {
-  var _configs$dates_moment, _configs$dates_moment2, _configs$preorder_sta, _theme$images, _theme$images$dummies, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _orderState$options, _orderState$options$a;
+  var _configs$general_hour, _configs$general_hour2, _configs$preorder_sta, _theme$images, _theme$images$dummies, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _orderState$options, _orderState$options$a;
   var business = props.business,
     handleClick = props.handleClick,
     datesList = props.datesList,
@@ -85,7 +85,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     isEnabled = _useState8[0],
     setIsEnabled = _useState8[1];
-  var is12Hours = configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : (_configs$dates_moment2 = _configs$dates_moment.value) === null || _configs$dates_moment2 === void 0 ? void 0 : _configs$dates_moment2.includes('hh:mm');
+  var is12Hours = configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : (_configs$general_hour2 = _configs$general_hour.value) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.includes('hh:mm');
   var isPreOrderSetting = (configs === null || configs === void 0 ? void 0 : (_configs$preorder_sta = configs.preorder_status_enabled) === null || _configs$preorder_sta === void 0 ? void 0 : _configs$preorder_sta.value) === '1';
   var preOrderType = [{
     value: 'business_menu',
