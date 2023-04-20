@@ -51,7 +51,6 @@ export const SidebarMenu = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
-  const [showMessage, setShowMessage] = useState(false)
 
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
@@ -118,13 +117,6 @@ export const SidebarMenu = (props) => {
     }
   }, [width])
 
-  useEffect(() => {
-    if(!isCustomerMode) return
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      setShowMessage(true)
-    }
-  }, [])
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -133,14 +125,6 @@ export const SidebarMenu = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-        {showMessage && (
-        <MobileMessage>
-          <div>
-            <CloseIcon onClick={() => setShowMessage(false)} />
-            {t('FOR_THE_BEST_EXPERIENCE_WHILE_SETTING_UP', 'For the best experience while setting up your project, we recommend using a computer.')}
-          </div>
-        </MobileMessage>
-      )}
       <Container auth={auth}>
         <IconContent
           aria-label='menu'

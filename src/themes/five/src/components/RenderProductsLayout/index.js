@@ -193,9 +193,11 @@ export const RenderProductsLayout = (props) => {
               />
             )}
 
-            <PageBannerWrapper>
-              <PageBanner position='web_business_page' />
-            </PageBannerWrapper>
+              {!isCustomerMode && (
+                <PageBannerWrapper>
+                  <PageBanner position='web_business_page' />
+                </PageBannerWrapper>
+              )}
 
             {!errorQuantityProducts && SearchProductsComponent && !useKioskApp && (
               <>
