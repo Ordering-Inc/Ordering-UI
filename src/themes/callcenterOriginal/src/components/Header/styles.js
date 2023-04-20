@@ -262,7 +262,7 @@ export const UserEdit = styled.div`
   > :first-child{
      margin-bottom: 20px;
      width: 100%;
-     ${props => props.isOpenUserData && css`
+     ${props => !props.isOpenUserData && css`
      position: absolute;
      `
   }

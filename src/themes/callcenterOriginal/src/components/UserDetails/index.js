@@ -37,8 +37,7 @@ const UserDetailsUI = (props) => {
     isModal,
     setIsOpenUserData,
     isAddressFormOpen,
-    onClose,
-    isOpenUserData
+    onClose
   } = props
 
   const [, t] = useLanguage()
@@ -52,7 +51,7 @@ const UserDetailsUI = (props) => {
   }, [isUserDetailsEdit])
 
   useEffect(() => {
-    setIsOpenUserData && setIsOpenUserData(!isOpenUserData)
+    setIsOpenUserData && setIsOpenUserData(isEdit)
   }, [isEdit])
 
   const toggleEditState = () => {

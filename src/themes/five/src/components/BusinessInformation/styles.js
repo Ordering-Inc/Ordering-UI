@@ -163,7 +163,7 @@ export const DeliveryInfo = styled.div`
   justify-content: flex-start;
   margin-top: 10px;
 
-  >h5 {
+  h5 {
     font-size: 16px;
   }
 
