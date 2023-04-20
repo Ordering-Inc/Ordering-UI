@@ -133,9 +133,10 @@ const BusinessProductsListingUI = (props) => {
       setProductIdToLoading(product.id)
       const isProductAddedToCart = currentCart?.products?.find(Cproduct => Cproduct.id === product.id)
       const productQuantity = isProductAddedToCart?.quantity
+      const minimumPerOrder = product?.minimum_per_order || 1
       const addCurrentProduct = {
         ...product,
-        quantity: 1
+        quantity: minimumPerOrder
       }
       const updateCurrentProduct = {
         id: product.id,
