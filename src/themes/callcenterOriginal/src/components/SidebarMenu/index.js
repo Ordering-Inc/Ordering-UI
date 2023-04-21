@@ -19,6 +19,7 @@ import { Modal } from '../Modal'
 import { SignUpForm } from '../SignUpForm'
 import { LoginForm } from '../LoginForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
+import { X as CloseIcon } from 'react-bootstrap-icons'
 
 import {
   Container,
