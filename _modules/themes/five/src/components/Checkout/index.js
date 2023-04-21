@@ -242,7 +242,7 @@ var CheckoutUI = function CheckoutUI(props) {
           email: user === null || user === void 0 ? void 0 : user.email
         }, brandInformation);
       }
-      if (csvID) paymentOptions.externalcardid = csvID;
+      if (csvID) paymentOptions.data.externalcardid = csvID;
       handlerClickPlaceOrder && handlerClickPlaceOrder(paymentOptions, body);
       return;
     }

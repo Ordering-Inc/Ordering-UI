@@ -224,7 +224,7 @@ const CheckoutUI = (props) => {
           ...brandInformation
         }
       }
-      if (csvID) paymentOptions.externalcardid = csvID
+      if (csvID) paymentOptions.data.externalcardid = csvID
       handlerClickPlaceOrder && handlerClickPlaceOrder(paymentOptions, body)
       return
     }
