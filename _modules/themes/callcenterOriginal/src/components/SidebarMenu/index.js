@@ -24,6 +24,7 @@ var _Modal = require("../Modal");
 var _SignUpForm = require("../SignUpForm");
 var _LoginForm = require("../LoginForm");
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -132,7 +133,7 @@ var SidebarMenu = function SidebarMenu(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), showMessage && /*#__PURE__*/_react.default.createElement(_styles.MobileMessage, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(CloseIcon, {
+  }), showMessage && /*#__PURE__*/_react.default.createElement(_styles.MobileMessage, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, {
     onClick: function onClick() {
       return setShowMessage(false);
     }
