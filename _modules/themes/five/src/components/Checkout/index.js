@@ -243,11 +243,11 @@ var CheckoutUI = function CheckoutUI(props) {
         }, brandInformation);
       }
       if (csvID) {
-        paymentOptions = {
+        paymentOptions = _objectSpread(_objectSpread({}, paymentOptions), {}, {
           data: {
             externalcardid: csvID
           }
-        };
+        });
       }
       handlerClickPlaceOrder && handlerClickPlaceOrder(paymentOptions, body);
       return;

@@ -226,6 +226,7 @@ const CheckoutUI = (props) => {
       }
       if (csvID) {
         paymentOptions = {
+          ...paymentOptions,
           data: {
             externalcardid: csvID
           }
