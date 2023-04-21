@@ -58,8 +58,8 @@ const SingleOrderCardUI = (props) => {
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
-  const [isProductReviewed, setIsProductReviewed] = useState(false)
-  const [isDriverReviewed, setIsDriverReviewed] = useState(false)
+  const [isProductReviewed, setIsProductReviewed] = useState(true) // set to false to enable product review in myorders
+  const [isDriverReviewed, setIsDriverReviewed] = useState(true)
   const ConfirmComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
     ? ConfirmPFChangs
     : Confirm

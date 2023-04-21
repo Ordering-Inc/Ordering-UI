@@ -105,8 +105,8 @@ const OrderDetailsUI = (props) => {
   const [orderingTheme] = useOrderingTheme()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
-  const [isProductReviewed, setIsProductReviewed] = useState(false)
-  const [isDriverReviewed, setIsDriverReviewed] = useState(false)
+  const [isProductReviewed, setIsProductReviewed] = useState(true) // set to false to enable product review in order details
+  const [isDriverReviewed, setIsDriverReviewed] = useState(true)
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [reviewStatus, setReviewStatus] = useState({ order: false, product: false, driver: false })
