@@ -423,6 +423,7 @@ const CheckoutUI = (props) => {
                         <p>{businessDetails?.business?.name}</p>
                         <p>{businessDetails?.business?.email}</p>
                         <p>{businessDetails?.business?.cellphone}</p>
+                        {businessDetails?.business?.address_notes && <p>{businessDetails?.business?.address_notes}</p>}
                       </div>
                     </div>
                   )}
