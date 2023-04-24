@@ -22,6 +22,7 @@ import {
   ImageContainer,
   BusinessTitle,
   BusinessAddress,
+  BusinessAddressNotes,
   Divider
 } from './styles'
 import MdClose from '@meronex/icons/md/MdClose'
@@ -112,6 +113,7 @@ export const BusinessInformationUI = (props) => {
                 {
                   !hideAddress && business?.address && <BusinessAddress>{business?.address}</BusinessAddress>
                 }
+                {business?.address_notes && <BusinessAddressNotes>{business?.address_notes}</BusinessAddressNotes>}
                 <Divider />
               </>
             )

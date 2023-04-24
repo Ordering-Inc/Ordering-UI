@@ -106,6 +106,7 @@ export const BusinessProductsList = (props) => {
       'ribbon',
       'description',
       'address',
+      'address_notes',
       'location',
       'timezone',
       'schedule',
