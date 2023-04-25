@@ -120,15 +120,15 @@ const PageBannerUI = (props) => {
             <Swiper
               navigation
               spaceBetween={0}
+              shortSwipes={false}
               loop={pageBannerState.banner?.items.length > 1}
             >
               {pageBannerState.banner?.items.map((img, i) => (
                 <SwiperSlide
                   key={i}
+                  onClick={() => handleGoToPage(img?.action)}
                 >
-                  <ImageWrapper
-                    onClick={() => handleGoToPage(img?.action)}
-                  >
+                  <ImageWrapper>
                     <img src={img.url} className='banner-img' alt='' />
                   </ImageWrapper>
                 </SwiperSlide>
