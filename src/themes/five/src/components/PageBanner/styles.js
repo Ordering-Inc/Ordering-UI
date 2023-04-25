@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const BannerContainer = styled.div`
   width: 100%;
-  margin: 40px 0;
+  margin: 40px 0 20px;
   overflow: hidden;
   .swiper-slide {
     /* position: relative; */
