@@ -140,15 +140,15 @@ var PageBannerUI = function PageBannerUI(props) {
   })) : ((_pageBannerState$bann = pageBannerState.banner) === null || _pageBannerState$bann === void 0 ? void 0 : (_pageBannerState$bann2 = _pageBannerState$bann.items) === null || _pageBannerState$bann2 === void 0 ? void 0 : _pageBannerState$bann2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     navigation: true,
     spaceBetween: 0,
+    shortSwipes: false,
     loop: ((_pageBannerState$bann3 = pageBannerState.banner) === null || _pageBannerState$bann3 === void 0 ? void 0 : _pageBannerState$bann3.items.length) > 1
   }, (_pageBannerState$bann4 = pageBannerState.banner) === null || _pageBannerState$bann4 === void 0 ? void 0 : _pageBannerState$bann4.items.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles.ImageWrapper, {
+      key: i,
       onClick: function onClick() {
         return handleGoToPage(img === null || img === void 0 ? void 0 : img.action);
       }
-    }, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.ImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
       src: img.url,
       className: "banner-img",
       alt: ""

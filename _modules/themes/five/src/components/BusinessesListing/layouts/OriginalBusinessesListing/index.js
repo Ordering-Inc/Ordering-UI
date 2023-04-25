@@ -256,7 +256,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       });
     })))));
   }
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, (windowSize.width < 576 || (configs === null || configs === void 0 ? void 0 : (_configs$business_lis = configs.business_listing_hide_image) === null || _configs$business_lis === void 0 ? void 0 : _configs$business_lis.value) !== '1' && !isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, !isCustomerMode &&
+  /*#__PURE__*/
+  // Keep this banner at the top
+  _react.default.createElement(_PageBanner.PageBanner, {
+    position: "web_business_listing"
+  }), (windowSize.width < 576 || (configs === null || configs === void 0 ? void 0 : (_configs$business_lis = configs.business_listing_hide_image) === null || _configs$business_lis === void 0 ? void 0 : _configs$business_lis.value) !== '1' && !isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
     isBusinessList: true,
     hideHero: (configs === null || configs === void 0 ? void 0 : (_configs$business_lis2 = configs.business_listing_hide_image) === null || _configs$business_lis2 === void 0 ? void 0 : _configs$business_lis2.value) !== '1' && !isChew && !hideHero
   }), (configs === null || configs === void 0 ? void 0 : (_configs$business_lis3 = configs.business_listing_hide_image) === null || _configs$business_lis3 === void 0 ? void 0 : _configs$business_lis3.value) !== '1' && !isChew && !hideHero && /*#__PURE__*/_react.default.createElement(_styles.BusinessHeroImg, {
@@ -313,6 +318,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : (_orderState$options9$ = _orderState$options9.address) === null || _orderState$options9$ === void 0 ? void 0 : _orderState$options9$.location,
     setErrors: setMapErrors
   })), !isChew && hasHighRatedBusiness && !props.franchiseId && !hideHighestBusiness && /*#__PURE__*/_react.default.createElement(_styles.HightestRatedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_HighestRated.HighestRated, {
+    propsToFetch: props.propsToFetch,
     handleClickAddress: handleClickAddress,
     setHasHighRatedBusiness: setHasHighRatedBusiness,
     onBusinessClick: onBusinessClick,
@@ -320,9 +326,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     favoriteIds: favoriteIds,
     setFavoriteIds: setFavoriteIds,
     disabledCities: true
-  }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
-    position: "web_business_listing"
-  }), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && !isAllCategoriesHidden && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && !isAllCategoriesHidden && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     images: props.images,
     businessTypes: props.businessTypes,
     defaultBusinessType: props.defaultBusinessType,
