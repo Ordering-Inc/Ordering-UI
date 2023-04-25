@@ -23,6 +23,8 @@ var _isBetween = _interopRequireDefault(require("dayjs/plugin/isBetween"));
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _BusinessInfoComponent = require("./BusinessInfoComponent");
 var _SearchComponent = require("./SearchComponent");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _Buttons = _interopRequireDefault(require("../../styles/Buttons"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -50,7 +52,9 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     categoryState = props.categoryState,
     errorQuantityProducts = props.errorQuantityProducts,
     isCustomerMode = props.isCustomerMode,
-    isCustomLayout = props.isCustomLayout;
+    isCustomLayout = props.isCustomLayout,
+    setCategoryClicked = props.setCategoryClicked,
+    categoryClicked = props.categoryClicked;
   var business = businessState.business,
     loading = businessState.loading;
   var theme = (0, _styledComponents.useTheme)();
@@ -217,7 +221,13 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     onClick: function onClick() {
       return setOpenBusinessInformation(true);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }))), windowSize.width <= 768 && categoryClicked && /*#__PURE__*/_react.default.createElement(_styles.BackButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.default, {
+    color: "primary",
+    initialIcon: true,
+    onClick: function onClick() {
+      return setCategoryClicked(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, null), /*#__PURE__*/_react.default.createElement("div", null, t('GO_TO_ALL_CATEGORIES', 'Go to all categories')))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     open: openBusinessInformation,
     onClose: setOpenBusinessInformation,
