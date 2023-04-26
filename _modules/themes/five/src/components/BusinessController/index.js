@@ -116,13 +116,9 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   // }
 
   var handleBusinessClick = function handleBusinessClick(e) {
-    var _favoriteRef$current, _business$menus;
+    var _favoriteRef$current;
     if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
-    var hasMenu = business === null || business === void 0 ? void 0 : (_business$menus = business.menus) === null || _business$menus === void 0 ? void 0 : _business$menus.filter(function (menu) {
-      var _menu$products;
-      return (menu === null || menu === void 0 ? void 0 : menu.enabled) && (menu === null || menu === void 0 ? void 0 : (_menu$products = menu.products) === null || _menu$products === void 0 ? void 0 : _menu$products.length) > 0;
-    }).length;
-    if (onPreorderBusiness && (!isBusinessOpen || !hasMenu)) onPreorderBusiness(business);else handleClick(business);
+    if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business);else handleClick(business);
   };
   var handleChangeFavorite = function handleChangeFavorite() {
     if (auth) {
@@ -198,7 +194,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "reviews"
   }, /*#__PURE__*/_react.default.createElement(_BisStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, businessReviews !== null && businessReviews !== void 0 ? businessReviews : business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  })), !hideBusinessFavorite && /*#__PURE__*/_react.default.createElement(_styles.FavoriteWrapper, {
+  })), !hideBusinessFavorite && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.FavoriteWrapper, {
     ref: favoriteRef,
     onClick: handleChangeFavorite
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessState !== null && businessState !== void 0 && (_businessState$busine2 = businessState.business) !== null && _businessState$busine2 !== void 0 && _businessState$busine2.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

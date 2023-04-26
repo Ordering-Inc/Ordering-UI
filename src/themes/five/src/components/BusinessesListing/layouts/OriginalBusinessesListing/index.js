@@ -229,7 +229,7 @@ const BusinessesListingUI = (props) => {
       {(windowSize.width < 576 || (configs?.business_listing_hide_image?.value !== '1' && !isChew)) && (
         <BusinessBanner>
           {windowSize.width < 576 && (
-            <OrderContextUI isBusinessList hideHero={(!!configs?.business_listing_hide_image?.value !== '1' && !hideHero)} />
+            <OrderContextUI isBusinessList hideHero={(configs?.business_listing_hide_image?.value !== '1' && !isChew) && !hideHero} />
           )}
           {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && !hideHero && (
             <BusinessHeroImg

@@ -3132,9 +3132,9 @@
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
-  version "18.16.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.0.tgz#4668bc392bb6938637b47e98b1f2ed5426f33316"
-  integrity sha512-BsAaKhB+7X+H4GnSjGhJG9Qi8Tw+inU9nJDwmD5CgOmBLEI6ArdhikpLX7DjbjDRDTbqZzU2LSQNZg8WGPiSZQ==
+  version "18.16.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.1.tgz#5db121e9c5352925bb1f1b892c4ae620e3526799"
+  integrity sha512-DZxSZWXxFfOlx7k7Rv4LAyiMroaxa3Ly/7OOzZO8cBNho0YzAi4qlbrx8W27JGqG57IgR/6J7r+nOJWw6kcvZA==
 
 "@types/node@12.12.50":
   version "12.12.50"
@@ -5611,9 +5611,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.372"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.372.tgz#7888ac92ccb9556627c3a37eba3b89ee5ac345f8"
-  integrity sha512-MrlFq/j+TYHOjeWsWGYfzevc25HNeJdsF6qaLFrqBTRWZQtWkb1myq/Q2veLWezVaa5OcSZ99CFwTT4aF4Mung==
+  version "1.4.373"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.373.tgz#58eb1c180e56550fdbf8cd6e4f04a84abd414bb9"
+  integrity sha512-whGyixOVSRlyOBQDsRH9xltFaMij2/+DQRdaYahCq0P/fiVnAVGaW7OVsFnEjze/qUo298ez9C46gnALpo6ukg==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -10615,9 +10615,9 @@ sass-loader@^9.0.2:
     semver "^7.3.2"
 
 sass@^1.26.10:
-  version "1.62.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.62.0.tgz#3686b2195b93295d20765135e562366b33ece37d"
-  integrity sha512-Q4USplo4pLYgCi+XlipZCWUQz5pkg/ruSSgJ0WRDSb/+3z9tXUOkQ7QPYn4XrhZKYAK4HlpaQecRwKLJX6+DBg==
+  version "1.62.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.62.1.tgz#caa8d6bf098935bc92fc73fa169fb3790cacd029"
+  integrity sha512-NHpxIzN29MXvWiuswfc1W3I0N8SXBd8UR26WntmDlRYf0bSADnwnOjsyMZ3lMezSlArD33Vs3YFhp7dWvL770A==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"

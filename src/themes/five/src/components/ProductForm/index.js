@@ -99,7 +99,8 @@ const ProductOptionsUI = (props) => {
     productAddedToCartLength,
     handleFavoriteProduct,
     handleCreateGuestUser,
-    actionStatus
+    actionStatus,
+    isCustomerMode
   } = props
 
   const { product, loading, error } = productObject
@@ -283,30 +284,34 @@ const ProductOptionsUI = (props) => {
       const extraHeight = 60
       if (product?.ingredients.length > 0 || product?.extras.length > 0) {
         const menuList = []
-        if (product?.ingredients?.length > 0) menuList.push('ingredients')
-        product?.extras.length > 0 && product?.extras.sort((a, b) => a.rank - b.rank).forEach(extra => {
-          extra?.options.length > 0 && extra?.options.sort((a, b) => a.rank - b.rank).forEach(option => {
+        if (product?.ingredients?.length > 0) {
+          menuList.push('ingredients')
+        }
+        ((product?.extras.length > 0 && product?.extras) || []).sort((a, b) => a.rank - b.rank).forEach(extra => {
+          ((extra?.options.length > 0 && extra?.options) || []).sort((a, b) => a.rank - b.rank).forEach(option => {
             showOption(option) && menuList.push(`id_${option?.id}`)
           })
         })
-        menuList.forEach(menu => {
+        menuList.length && menuList.forEach(menu => {
           const elementTop = scrollElement.scrollTop
-          const topPos = document.getElementById(menu).offsetTop
-          if (Math.abs(elementTop - topPos) < extraHeight) {
-            setTabValue(menu)
-            const elementLeft = document.getElementById(`menu_${menu}`).offsetLeft
-            const scrollLeft = document.getElementById('all').scrollLeft
-            if (elementLeft < scrollLeft) {
-              document.getElementById('all').scrollTo({
-                left: elementLeft,
-                behavior: 'smooth'
-              })
-            }
-            if (elementLeft < scrollLeft + scrollElement.clientWidth) {
-              document.getElementById('all').scrollTo({
-                left: elementLeft - scrollElement.clientWidth / 2,
-                behavior: 'smooth'
-              })
+          if (document.getElementById(menu)) {
+            const topPos = document.getElementById(menu).offsetTop
+            if (Math.abs(elementTop - topPos) < extraHeight) {
+              setTabValue(menu)
+              const elementLeft = document.getElementById(`menu_${menu}`).offsetLeft
+              const scrollLeft = document.getElementById('all').scrollLeft
+              if (elementLeft < scrollLeft) {
+                document.getElementById('all').scrollTo({
+                  left: elementLeft,
+                  behavior: 'smooth'
+                })
+              }
+              if (elementLeft < scrollLeft + scrollElement.clientWidth) {
+                document.getElementById('all').scrollTo({
+                  left: elementLeft - scrollElement.clientWidth / 2,
+                  behavior: 'smooth'
+                })
+              }
             }
           }
         })
@@ -500,9 +505,11 @@ const ProductOptionsUI = (props) => {
                 <ProductName>
                   <span>{product?.name}</span>
                 </ProductName>
-                <span className='favorite' onClick={() => handleChangeFavorite()} >
-                  {product?.favorite ? <Like /> : <DisLike />}
-                </span>
+                {!isCustomerMode && (
+                  <span className='favorite' onClick={() => handleChangeFavorite()}>
+                    {product?.favorite ? <Like /> : <DisLike />}
+                  </span>
+                )}
               </TitleWrapper>
               <Properties>
                 {isHaveWeight ? (
@@ -545,14 +552,16 @@ const ProductOptionsUI = (props) => {
                 </ProductDescription>
               )}
             </ProductFormTitle>
-            <ProductTagsListContainer>
-              {product.tags.map(tag => (
-                <ProductTagWrapper key={tag.id}>
-                  <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
-                  <span>{tag.name}</span>
-                </ProductTagWrapper>
-              ))}
-            </ProductTagsListContainer>
+            {product?.tags?.length > 0 && (
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
+            )}
             <Divider />
             <ProductEdition>
               {
