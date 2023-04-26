@@ -284,13 +284,15 @@ const ProductOptionsUI = (props) => {
       const extraHeight = 60
       if (product?.ingredients.length > 0 || product?.extras.length > 0) {
         const menuList = []
-        if (product?.ingredients?.length > 0) menuList.push('ingredients')
-        product?.extras.length > 0 && product?.extras.sort((a, b) => a.rank - b.rank).forEach(extra => {
-          extra?.options.length > 0 && extra?.options.sort((a, b) => a.rank - b.rank).forEach(option => {
+        if (product?.ingredients?.length > 0) {
+          menuList.push('ingredients')
+        }
+        ((product?.extras.length > 0 && product?.extras) || []).sort((a, b) => a.rank - b.rank).forEach(extra => {
+          ((extra?.options.length > 0 && extra?.options) || []).sort((a, b) => a.rank - b.rank).forEach(option => {
             showOption(option) && menuList.push(`id_${option?.id}`)
           })
         })
-        menuList.forEach(menu => {
+        menuList.length && menuList.forEach(menu => {
           const elementTop = scrollElement.scrollTop
           const topPos = document.getElementById(menu).offsetTop
           if (Math.abs(elementTop - topPos) < extraHeight) {
@@ -502,9 +504,9 @@ const ProductOptionsUI = (props) => {
                   <span>{product?.name}</span>
                 </ProductName>
                 {!isCustomerMode && (
-                <span className='favorite' onClick={() => handleChangeFavorite()} >
-                  {product?.favorite ? <Like /> : <DisLike />}
-                </span>
+                  <span className='favorite' onClick={() => handleChangeFavorite()}>
+                    {product?.favorite ? <Like /> : <DisLike />}
+                  </span>
                 )}
               </TitleWrapper>
               <Properties>
