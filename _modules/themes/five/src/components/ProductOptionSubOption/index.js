@@ -85,8 +85,10 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
   }, [balance]);
   (0, _react.useEffect)(function () {
     if (balance === (option === null || option === void 0 ? void 0 : option.max) && state !== null && state !== void 0 && state.selected && dirtyRef) {
-      dirtyRef.current = false;
-      setIsScrollAvailable(true);
+      if ((dirtyRef === null || dirtyRef === void 0 ? void 0 : dirtyRef.current) !== null) {
+        dirtyRef.current = false;
+        setIsScrollAvailable(true);
+      }
     }
   }, [state === null || state === void 0 ? void 0 : state.selected]);
   (0, _react.useEffect)(function () {

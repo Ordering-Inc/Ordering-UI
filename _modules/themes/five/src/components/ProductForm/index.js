@@ -55,7 +55,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation, _swiper.Thumbs]);
 var ProductOptionsUI = function ProductOptionsUI(props) {
-  var _configs$unaddressed_, _configs$guest_checko, _orderState$options, _configs$allowed_orde, _configs$allowed_orde2, _orderState$options2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _theme$business_view$5, _theme$business_view$6, _theme$defaultLanguag, _product$ingredients2, _product$extras, _product$ingredients3, _product$ingredients4, _product$ingredients5, _product$extras2, _theme$defaultLanguag2, _theme$defaultLanguag3, _props$afterMidElemen, _props$afterMidCompon, _orderState$options3, _orderState$options4, _orderState$options5, _orderState$options6, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _orderState$options7, _orderState$options8, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _error$;
+  var _configs$unaddressed_, _configs$guest_checko, _orderState$options, _configs$allowed_orde, _configs$allowed_orde2, _orderState$options2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _theme$business_view$5, _theme$business_view$6, _theme$defaultLanguag, _product$tags, _product$ingredients2, _product$extras, _product$ingredients3, _product$ingredients4, _product$ingredients5, _product$extras2, _theme$defaultLanguag2, _theme$defaultLanguag3, _props$afterMidElemen, _props$afterMidCompon, _orderState$options3, _orderState$options4, _orderState$options5, _orderState$options6, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _orderState$options7, _orderState$options8, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _error$;
   var businessSlug = props.businessSlug,
     editMode = props.editMode,
     isSoldOut = props.isSoldOut,
@@ -305,34 +305,38 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       if ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || (product === null || product === void 0 ? void 0 : product.extras.length) > 0) {
         var _product$ingredients;
         var menuList = [];
-        if ((product === null || product === void 0 ? void 0 : (_product$ingredients = product.ingredients) === null || _product$ingredients === void 0 ? void 0 : _product$ingredients.length) > 0) menuList.push('ingredients');
-        (product === null || product === void 0 ? void 0 : product.extras.length) > 0 && (product === null || product === void 0 ? void 0 : product.extras.sort(function (a, b) {
+        if ((product === null || product === void 0 ? void 0 : (_product$ingredients = product.ingredients) === null || _product$ingredients === void 0 ? void 0 : _product$ingredients.length) > 0) {
+          menuList.push('ingredients');
+        }
+        ((product === null || product === void 0 ? void 0 : product.extras.length) > 0 && (product === null || product === void 0 ? void 0 : product.extras) || []).sort(function (a, b) {
           return a.rank - b.rank;
         }).forEach(function (extra) {
-          (extra === null || extra === void 0 ? void 0 : extra.options.length) > 0 && (extra === null || extra === void 0 ? void 0 : extra.options.sort(function (a, b) {
+          ((extra === null || extra === void 0 ? void 0 : extra.options.length) > 0 && (extra === null || extra === void 0 ? void 0 : extra.options) || []).sort(function (a, b) {
             return a.rank - b.rank;
           }).forEach(function (option) {
             showOption(option) && menuList.push("id_".concat(option === null || option === void 0 ? void 0 : option.id));
-          }));
-        }));
-        menuList.forEach(function (menu) {
+          });
+        });
+        menuList.length && menuList.forEach(function (menu) {
           var elementTop = scrollElement.scrollTop;
-          var topPos = document.getElementById(menu).offsetTop;
-          if (Math.abs(elementTop - topPos) < extraHeight) {
-            setTabValue(menu);
-            var elementLeft = document.getElementById("menu_".concat(menu)).offsetLeft;
-            var scrollLeft = document.getElementById('all').scrollLeft;
-            if (elementLeft < scrollLeft) {
-              document.getElementById('all').scrollTo({
-                left: elementLeft,
-                behavior: 'smooth'
-              });
-            }
-            if (elementLeft < scrollLeft + scrollElement.clientWidth) {
-              document.getElementById('all').scrollTo({
-                left: elementLeft - scrollElement.clientWidth / 2,
-                behavior: 'smooth'
-              });
+          if (document.getElementById(menu)) {
+            var topPos = document.getElementById(menu).offsetTop;
+            if (Math.abs(elementTop - topPos) < extraHeight) {
+              setTabValue(menu);
+              var elementLeft = document.getElementById("menu_".concat(menu)).offsetLeft;
+              var scrollLeft = document.getElementById('all').scrollLeft;
+              if (elementLeft < scrollLeft) {
+                document.getElementById('all').scrollTo({
+                  left: elementLeft,
+                  behavior: 'smooth'
+                });
+              }
+              if (elementLeft < scrollLeft + scrollElement.clientWidth) {
+                document.getElementById('all').scrollTo({
+                  left: elementLeft - scrollElement.clientWidth / 2,
+                  behavior: 'smooth'
+                });
+              }
             }
           }
         });
@@ -530,7 +534,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     className: "calories"
   }, product === null || product === void 0 ? void 0 : product.calories, ' ', "cal"), /*#__PURE__*/_react.default.createElement("span", null, "\xA0\xB7\xA0")), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && /*#__PURE__*/_react.default.createElement(_styles.SkuContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('SKU', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SKU) || 'Sku'), "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.sku)), (product === null || product === void 0 ? void 0 : product.sku) && (product === null || product === void 0 ? void 0 : product.sku) !== '-1' && (product === null || product === void 0 ? void 0 : product.sku) !== '1' && (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement("span", null, "\xA0\xB7\xA0"), (product === null || product === void 0 ? void 0 : product.estimated_person) && /*#__PURE__*/_react.default.createElement(_styles.EstimatedPersons, null, /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.estimated_person, "\xA0"), /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_PERSONS', 'persons'))))), (product === null || product === void 0 ? void 0 : product.description) && !hideProductDescription && /*#__PURE__*/_react.default.createElement(_styles.ProductDescription, null, /*#__PURE__*/_react.default.createElement(_LinkableText.LinkableText, {
     text: product === null || product === void 0 ? void 0 : product.description
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ProductTagsListContainer, null, product.tags.map(function (tag) {
+  }))), (product === null || product === void 0 ? void 0 : (_product$tags = product.tags) === null || _product$tags === void 0 ? void 0 : _product$tags.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductTagsListContainer, null, product.tags.map(function (tag) {
     var _theme$images2, _theme$images2$dummie;
     return /*#__PURE__*/_react.default.createElement(_styles.ProductTagWrapper, {
       key: tag.id

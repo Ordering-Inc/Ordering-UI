@@ -118,9 +118,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   var handleBusinessClick = function handleBusinessClick(e) {
     var _favoriteRef$current;
     if (favoriteRef !== null && favoriteRef !== void 0 && (_favoriteRef$current = favoriteRef.current) !== null && _favoriteRef$current !== void 0 && _favoriteRef$current.contains(e.target)) return;
-    var hasMenu = (business === null || business === void 0 ? void 0 : business.available_menus_count) > 0;
-    var hasSharedMenu = (business === null || business === void 0 ? void 0 : business.available_menus_shared_count) > 0;
-    if (onPreorderBusiness && (!isBusinessOpen || hasMenu && hasSharedMenu)) onPreorderBusiness(business);else handleClick(business);
+    if (onPreorderBusiness && !isBusinessOpen) onPreorderBusiness(business);else handleClick(business);
   };
   var handleChangeFavorite = function handleChangeFavorite() {
     if (auth) {
