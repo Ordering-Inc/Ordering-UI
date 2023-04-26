@@ -34,6 +34,7 @@ import {
 
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
+import { useTheme } from 'styled-components'
 
 const inputNames = [
   { name: 'address', code: 'Address' },
@@ -63,14 +64,14 @@ const AddressFormUI = (props) => {
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
-  const [orderingTheme] = useOrderingTheme()
+  const theme = useTheme()
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
   const isEditing = !!addressState.address?.id
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const [locationChange, setLocationChange] = useState(
     isEditing
@@ -78,8 +79,8 @@ const AddressFormUI = (props) => {
       : formState.changes?.location ?? null
   )
 
-  const isHideMap = orderingTheme?.theme?.address?.components?.map?.hidden
-  const isHideIcons = orderingTheme?.theme?.address?.components?.icons?.hidden
+  const isHideMap = theme?.address?.components?.map?.hidden
+  const isHideIcons = theme?.address?.components?.icons?.hidden
 
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
@@ -253,7 +254,7 @@ const AddressFormUI = (props) => {
   }
 
   const showFieldWithTheme = (name) => {
-    return !orderingTheme?.theme?.header?.components?.address_form?.components?.[name]?.hidden
+    return !theme?.address?.components?.[name]?.hidden
   }
 
   useEffect(() => {

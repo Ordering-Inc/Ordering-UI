@@ -78,8 +78,10 @@ const ProductOptionSubOptionUI = (props) => {
 
   useEffect(() => {
     if (balance === option?.max && state?.selected && dirtyRef) {
-      dirtyRef.current = false
-      setIsScrollAvailable(true)
+      if (dirtyRef?.current !== null) {
+        dirtyRef.current = false
+        setIsScrollAvailable(true)
+      }
     }
   }, [state?.selected])
 
