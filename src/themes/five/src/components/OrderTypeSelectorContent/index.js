@@ -28,11 +28,11 @@ export const OrderTypeSelectorContentUI = (props) => {
     handleChangeOrderType && handleChangeOrderType(orderType)
   }
 
+  const titleOrdertype = theme?.order_types?.components?.title_menu
   const orderTypeImage = (type) => theme?.order_types?.components?.[type]?.components?.image
   const orderTypeTitle = (type) => theme?.order_types?.components?.[type]?.components?.title
   const orderTypeDescription = (type) => theme?.order_types?.components?.[type]?.components?.description
   const orderTypeCallAction = (type) => theme?.order_types?.components?.[type]?.components?.call_to_action
-
   return (
     <div className='order-type' style={{ overflow: 'hidden' }}>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -42,7 +42,7 @@ export const OrderTypeSelectorContentUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <OrderTypeSelectorContainer>
-        <OrderTypeListTitle>{t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')}</OrderTypeListTitle>
+        <OrderTypeListTitle>{titleOrdertype || t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')}</OrderTypeListTitle>
         {
           orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value)) : orderTypes).map((item, i) => (
             <OrderTypeListItemContainer
