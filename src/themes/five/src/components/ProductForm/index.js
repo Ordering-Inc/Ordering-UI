@@ -294,22 +294,24 @@ const ProductOptionsUI = (props) => {
         })
         menuList.length && menuList.forEach(menu => {
           const elementTop = scrollElement.scrollTop
-          const topPos = document.getElementById(menu).offsetTop
-          if (Math.abs(elementTop - topPos) < extraHeight) {
-            setTabValue(menu)
-            const elementLeft = document.getElementById(`menu_${menu}`).offsetLeft
-            const scrollLeft = document.getElementById('all').scrollLeft
-            if (elementLeft < scrollLeft) {
-              document.getElementById('all').scrollTo({
-                left: elementLeft,
-                behavior: 'smooth'
-              })
-            }
-            if (elementLeft < scrollLeft + scrollElement.clientWidth) {
-              document.getElementById('all').scrollTo({
-                left: elementLeft - scrollElement.clientWidth / 2,
-                behavior: 'smooth'
-              })
+          if (document.getElementById(menu)) {
+            const topPos = document.getElementById(menu).offsetTop
+            if (Math.abs(elementTop - topPos) < extraHeight) {
+              setTabValue(menu)
+              const elementLeft = document.getElementById(`menu_${menu}`).offsetLeft
+              const scrollLeft = document.getElementById('all').scrollLeft
+              if (elementLeft < scrollLeft) {
+                document.getElementById('all').scrollTo({
+                  left: elementLeft,
+                  behavior: 'smooth'
+                })
+              }
+              if (elementLeft < scrollLeft + scrollElement.clientWidth) {
+                document.getElementById('all').scrollTo({
+                  left: elementLeft - scrollElement.clientWidth / 2,
+                  behavior: 'smooth'
+                })
+              }
             }
           }
         })
@@ -550,14 +552,16 @@ const ProductOptionsUI = (props) => {
                 </ProductDescription>
               )}
             </ProductFormTitle>
-            <ProductTagsListContainer>
-              {product.tags.map(tag => (
-                <ProductTagWrapper key={tag.id}>
-                  <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
-                  <span>{tag.name}</span>
-                </ProductTagWrapper>
-              ))}
-            </ProductTagsListContainer>
+            {product?.tags?.length > 0 && (
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
+            )}
             <Divider />
             <ProductEdition>
               {
