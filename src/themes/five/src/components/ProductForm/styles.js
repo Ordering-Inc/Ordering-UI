@@ -94,7 +94,7 @@ export const SwiperWrapper = styled.div`
       }
     `}
   }
-  
+
 
   .swiper {
     width: 100%;
@@ -362,7 +362,7 @@ export const ProductActions = styled.div`
       margin: 10px 10px 0 10px;
     }
   }
-  
+
   div#address_list {
     padding: 0;
   }
@@ -439,7 +439,7 @@ export const WrapperIngredients = styled.div`
 export const ProductTabContainer = styled.div`
   border-bottom: 1px solid #E9ECEF;
   position: sticky;
-  top: 50px;
+  top: 0px;
   background: white;
   z-index: 9999996;
   overflow: scroll hidden;
@@ -587,7 +587,7 @@ export const WeightUnitSwitch = styled.div`
   flex-direction: column;
   width: auto;
   margin-left: 10px;
-  
+
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
     margin-left: 0;
@@ -601,7 +601,7 @@ export const WeightUnitItem = styled.span`
   line-height: 18px;
   padding: 2px 6px;
   cursor: pointer;
-  
+
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.primary}15;
     border-radius: 3px;
