@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useOrder, useConfig, useSession } from 'ordering-components'
+import { useLanguage, useOrder, useConfig, useSession, useBusiness } from 'ordering-components'
 import { MomentPopover } from '../../../../pwa/src/components/MomentPopover'
 import { OrderTypeSelectorHeader } from '../../../../../components/OrderTypeSelectorHeader'
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
@@ -14,24 +14,38 @@ import {
   ItemInline
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
+import { MomentContent } from '../MomentContent'
+import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
+import { getCateringValues } from '../../../../../utils'
+import { useLocation } from 'react-router-dom'
 
 export const OrderContextUI = (props) => {
   const { isCheckOut, setMapErrors, isCustomerMode, isBusinessList } = props
 
+  const { pathname } = useLocation()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [configState] = useConfig()
   const [{ auth }] = useSession()
+  const [{ business }] = useBusiness()
 
   const [openPopover, setOpenPopover] = useState({})
   const [modals, setModals] = useState({ listOpen: false, formOpen: false, citiesOpen: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [modalSelected, setModalSelected] = useState(null)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
   const windowSize = useWindowSize()
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
 
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
+  const cateringTypeString = orderState?.options?.type === 7
+    ? 'catering_delivery'
+    : orderState?.options?.type === 8
+      ? 'catering_pickup'
+      : null
 
+  const cateringValues = getCateringValues(cateringTypeString, pathname.includes('store') && Object?.keys(business || {})?.length > 0 ? business?.configs : configState?.configs)
   const handleTogglePopover = (type) => {
     setOpenPopover({
       ...openPopover,
@@ -67,6 +81,11 @@ export const OrderContextUI = (props) => {
     }
   }
 
+  const openModal = (opt) => {
+    setModalSelected(opt)
+    setModalIsOpen(true)
+  }
+
   useEffect(() => {
     const handleCloseallPopovers = () => handleClosePopover('moment')
     window.addEventListener('scroll', handleCloseallPopovers)
@@ -84,13 +103,14 @@ export const OrderContextUI = (props) => {
           <span>{orderState.options?.address?.address || t('WHERE_DO_WE_DELIVERY', 'Where do we delivery?')}</span>
         </AddressMenu>
         <FeatureItems>
-          <ItemInline>
+          <ItemInline onClick={() => openModal('delivery')}>
             <OrderTypeSelectorHeader configTypes={configTypes} autoCloseWhenScroll={windowSize.width < 576} />
           </ItemInline>
           {isPreOrderSetting && (
-            <ItemInline>
+            <ItemInline onClick={() => openModal('moment')}>
               <MomentPopover
                 open={openPopover.moment}
+                onCustomClick={() => openModal('moment')}
                 onClick={() => handleTogglePopover('moment')}
                 onClose={() => handleClosePopover('moment')}
                 isBanner
@@ -99,6 +119,30 @@ export const OrderContextUI = (props) => {
           )}
         </FeatureItems>
       </Container>
+      {modalIsOpen && (
+        <Modal
+          open={modalIsOpen}
+          onClose={() => setModalIsOpen(false)}
+          width={orderState?.options?.user_id ? '70%' : '50%'}
+        >
+          {modalSelected === 'moment' && (
+            <MomentContent
+              onClose={() => setModalIsOpen(false)}
+              cateringPreorder={!!cateringTypeString}
+              isHeader
+              business={pathname.includes('store') && business}
+              {...cateringValues}
+            />
+          )}
+          {modalSelected === 'delivery' && (
+            <OrderTypeSelectorContent
+              onClose={() => setModalIsOpen(false)}
+              configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+              defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
+            />
+          )}
+        </Modal>
+      )}
       <Modal
         title={t('ADDRESS_FORM', 'Address Form')}
         open={modals.formOpen}
