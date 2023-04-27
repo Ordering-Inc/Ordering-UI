@@ -9,6 +9,8 @@ import { LoginForm } from '../LoginForm'
 import { SignUpForm } from '../SignUpForm'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { convertHoursToMinutes, lightenDarkenColor, shape } from '../../../../../utils'
+import BiCar from '@meronex/icons/bi/BiCar'
+import BiBasket from '@meronex/icons/bi/BiBasket'
 
 import {
   ContainerCard,
@@ -133,7 +135,7 @@ const BusinessControllerUI = (props) => {
     })
   }
 
-  const hasInformationLength = (business?.available_drivers?.length + business?.busy_drivers?.length + business?.active_orders?.length) > 0
+  const hasInformationLength = !!business?.idle_drivers_count || !!business?.busy_drivers_count || !!business?.activated_orders
 
   if (typeButton) {
     return (
@@ -275,28 +277,22 @@ const BusinessControllerUI = (props) => {
                   )}
                   {isCustomerMode && hasInformationLength && (
                     <CallCenterInformation>
-                      {business?.available_drivers?.length > 0 && (
-                        <CallCenterInformationBullet>
-                          <InfoLength>
-                            {business?.available_drivers?.length}
-                          </InfoLength>
-                          <InfoDescription>{t('OPEN_ORDERS', 'Open orders')}</InfoDescription>
+                      {business?.idle_drivers_count > 0 && (
+                        <CallCenterInformationBullet bgcolor='green'>
+                          <BiCar />
+                          {business?.idle_drivers_count}
                         </CallCenterInformationBullet>
                       )}
-                      {business?.busy_drivers?.length > 0 && (
-                        <CallCenterInformationBullet>
-                          <InfoLength>
-                            {business?.busy_drivers?.length}
-                          </InfoLength>
-                          <InfoDescription>{t('BUSY_DRIVERS', 'Busy drivers')}</InfoDescription>
+                      {business?.busy_drivers_count > 0 && (
+                        <CallCenterInformationBullet bgcolor='red'>
+                          <BiCar />
+                          {business?.busy_drivers_count}
                         </CallCenterInformationBullet>
                       )}
-                      {business?.active_orders?.length > 0 && (
-                        <CallCenterInformationBullet>
-                          <InfoLength>
-                            {business?.active_orders?.length}
-                          </InfoLength>
-                          <InfoDescription>{t('AVAILABLE_DRIVERS', 'Avalable drivers')}</InfoDescription>
+                      {business?.activated_orders > 0 && (
+                        <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
+                          <BiBasket />
+                          {business?.activated_orders}
                         </CallCenterInformationBullet>
                       )}
                     </CallCenterInformation>

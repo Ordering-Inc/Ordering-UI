@@ -342,6 +342,11 @@ export const Medadata = styled.div`
 export const CallCenterInformation = styled.div`
   display: flex;
   flex-direction: column;
+  position: absolute;
+  right: 0;
+  bottom: 43px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   div{
     justify-content: space-evenly;
   }
@@ -352,16 +357,12 @@ export const CallCenterInformationBullet = styled.div`
   padding: 2px;
   margin-bottom: 2px;
   border-radius: 16px;
+  background: ${({ bgcolor }) => bgcolor};
+  width: 50px;
+  color: #fff;
   svg{
     font-size: 18px;
   }
-  ${({ isCustomerMode }) => isCustomerMode ? css`
-    flex-direction: column;
-    ` : css`
-    width: 50px;
-    background: ${({ bgcolor }) => bgcolor};
-    color: #fff;
-  `}
 `
 
 export const BusinessLogoWrapper = styled.div`
