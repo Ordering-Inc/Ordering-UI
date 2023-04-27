@@ -110,6 +110,7 @@ export const BusinessInfoItem = styled.div`
     display: flex;
     justify-content: space-between;
 
+
     h5 {
       font-weight: 300;
       svg{
@@ -153,6 +154,18 @@ export const BusinessInfoItem = styled.div`
 
       &.type {
         font-weight: 300;
+      }
+    }
+
+    &.information {
+      span {
+        user-select: none;
+        cursor: pointer;
+        font-size: 14px;
+        color: ${props => props.theme?.colors.primary};
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 

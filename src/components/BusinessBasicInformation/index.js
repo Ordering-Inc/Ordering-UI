@@ -4,7 +4,6 @@ import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import FaStar from '@meronex/icons/fa/FaStar'
-import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
 import { useTheme } from 'styled-components'
 
 import { Modal } from '../Modal'
@@ -152,16 +151,14 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 )}
-
-                {!loading && (
-                  <h5>
-                    <BsExclamationCircle
-                      className='popup'
-                      onClick={() => setOpenBusinessInformation(true)}
-                    />
-                  </h5>
-                )}
               </div>
+              {!loading && (
+                <div className='information'>
+                  <span onClick={() => setOpenBusinessInformation(true)}>
+                    {t('INFORMATION', 'Information')}
+                  </span>
+                </div>
+              )}
             </BusinessInfoItem>
           </BusinessInfo>
         </BusinessContent>
