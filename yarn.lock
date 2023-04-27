@@ -5611,9 +5611,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.374"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.374.tgz#091b2de9d80b970f9b5e689675ea62622cd1d74b"
-  integrity sha512-dNP9tQNTrjgVlSXMqGaj0BdrCS+9pcUvy5/emB6x8kh0YwCoDZ0Z4ce1+7aod+KhybHUd5o5LgKrc5al4kVmzQ==
+  version "1.4.375"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.375.tgz#69e5928454b0dacde07972310bd526b4516ba507"
+  integrity sha512-czSmDyWG5qmb4TcwD5lhVDP6viDPtHfrIzw0CnzisRpziiUaq+ffptBHs70d9YkFtrxzaDvOmFPeVRVNwMt2rQ==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -9177,7 +9177,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/7ec0d4bca0ecfd13cb49ac53f8f4ffd3e82f885d"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/e31a8729bab8c8e23fad55fd5e6e84d5aaee1d62"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

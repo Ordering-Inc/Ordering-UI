@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.WrapperBusinessLogo = exports.WrapperBusinessCard = exports.RibbonBox = exports.Medadata = exports.InfoLength = exports.InfoDescription = exports.FavoriteWrapper = exports.ContainerCard = exports.Categories = exports.CardOverlay = exports.CallCenterInformationBullet = exports.CallCenterInformation = exports.BusinessTags = exports.BusinessStarInfo = exports.BusinessName = exports.BusinessLogoWrapper = exports.BusinessLogo = exports.BusinessInfoItem = exports.BusinessInfo = exports.BusinessHero = exports.BusinessHeader = exports.BusinessContent = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -120,54 +120,51 @@ var Medadata = _styledComponents.default.div(_templateObject26 || (_templateObje
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
 });
 exports.Medadata = Medadata;
-var CallCenterInformation = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  div{\n    justify-content: space-evenly;\n  }\n"])));
+var CallCenterInformation = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  position: absolute;\n  right: 0;\n  bottom: 43px;\n  margin-right: 10px;\n  margin-bottom: 10px;\n  div{\n    justify-content: space-evenly;\n  }\n"])));
 exports.CallCenterInformation = CallCenterInformation;
-var CallCenterInformationBullet = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 2px;\n  margin-bottom: 2px;\n  border-radius: 16px;\n  svg{\n    font-size: 18px;\n  }\n  ", "\n"])), function (_ref16) {
-  var isCustomerMode = _ref16.isCustomerMode;
-  return isCustomerMode ? (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    flex-direction: column;\n    "]))) : (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    width: 50px;\n    background: ", ";\n    color: #fff;\n  "])), function (_ref17) {
-    var bgcolor = _ref17.bgcolor;
-    return bgcolor;
-  });
+var CallCenterInformationBullet = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 2px;\n  margin-bottom: 2px;\n  border-radius: 16px;\n  background: ", ";\n  width: 50px;\n  color: #fff;\n  svg{\n    font-size: 18px;\n  }\n"])), function (_ref16) {
+  var bgcolor = _ref16.bgcolor;
+  return bgcolor;
 });
 exports.CallCenterInformationBullet = CallCenterInformationBullet;
-var BusinessLogoWrapper = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: -20px;\n  margin-bottom: 10px;\n"])));
+var BusinessLogoWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: -20px;\n  margin-bottom: 10px;\n"])));
 exports.BusinessLogoWrapper = BusinessLogoWrapper;
-var BusinessStarInfo = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  .reviews {\n    display: flex;\n    align-items: center;\n    svg {\n      margin-right: 3px;\n      font-size: 22px;\n      color: #414954;\n      ", "\n    }\n    span {\n      font-size: 15px;\n      color: #414954;\n    }\n  }\n"])), function (props) {
+var BusinessStarInfo = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  .reviews {\n    display: flex;\n    align-items: center;\n    svg {\n      margin-right: 3px;\n      font-size: 22px;\n      color: #414954;\n      ", "\n    }\n    span {\n      font-size: 15px;\n      color: #414954;\n    }\n  }\n"])), function (props) {
   var _props$theme5;
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n        margin-left: 3px;\n        margin-right: 0;\n    "])));
+  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n        margin-left: 3px;\n        margin-right: 0;\n    "])));
 });
 exports.BusinessStarInfo = BusinessStarInfo;
-var CardOverlay = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2);\n  border-radius: 7.6px;\n  z-index: 1;\n"])));
+var CardOverlay = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2);\n  border-radius: 7.6px;\n  z-index: 1;\n"])));
 exports.CardOverlay = CardOverlay;
-var InfoLength = _styledComponents.default.p(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  font-weight: 600;\n"])));
+var InfoLength = _styledComponents.default.p(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  font-weight: 600;\n"])));
 exports.InfoLength = InfoLength;
-var InfoDescription = _styledComponents.default.p(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  font-size: 12px;\n"])));
+var InfoDescription = _styledComponents.default.p(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  font-size: 12px;\n"])));
 exports.InfoDescription = InfoDescription;
-var RibbonBox = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  position: absolute;\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  top: -4px;\n  right: -3px;\n  background-color: ", ";\n  max-width: 180px;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1;\n  overflow: hidden;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
+var RibbonBox = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  position: absolute;\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  top: -4px;\n  right: -3px;\n  background-color: ", ";\n  max-width: 180px;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1;\n  overflow: hidden;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.colorTextSignForm;
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n    left: -3px;\n    right: initial;\n  "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n    left: -3px;\n    right: initial;\n  "])));
+}, function (_ref17) {
+  var bgColor = _ref17.bgColor;
+  return bgColor && (0, _styledComponents.css)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
 }, function (_ref18) {
-  var bgColor = _ref18.bgColor;
-  return bgColor && (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
+  var isRoundRect = _ref18.isRoundRect;
+  return isRoundRect && (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
 }, function (_ref19) {
-  var isRoundRect = _ref19.isRoundRect;
-  return isRoundRect && (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+  var isCapsule = _ref19.isCapsule;
+  return isCapsule && (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
 }, function (_ref20) {
-  var isCapsule = _ref20.isCapsule;
-  return isCapsule && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
+  var colorText = _ref20.colorText;
+  return colorText && (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), colorText ? 'black' : 'white');
 }, function (_ref21) {
-  var colorText = _ref21.colorText;
-  return colorText && (0, _styledComponents.css)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), colorText ? 'black' : 'white');
-}, function (_ref22) {
-  var borderRibbon = _ref22.borderRibbon;
-  return borderRibbon && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), borderRibbon ? 'black' : 'white');
+  var borderRibbon = _ref21.borderRibbon;
+  return borderRibbon && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), borderRibbon ? 'black' : 'white');
 });
 exports.RibbonBox = RibbonBox;
-var FavoriteWrapper = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  margin-left: 15px;\n  ", "\n\n  svg {\n    font-size: 16px;\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n    margin-left: 0px;\n  "])));
+var FavoriteWrapper = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  margin-left: 15px;\n  ", "\n\n  svg {\n    font-size: 16px;\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n    margin-left: 0px;\n  "])));
 }, function (props) {
   return props.theme.colors.danger500;
 });
