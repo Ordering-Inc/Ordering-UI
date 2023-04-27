@@ -57,10 +57,18 @@ export const BusinessInformationUI = (props) => {
   const hideAddress = theme?.business_view?.components?.information?.components?.address?.hidden
   const formatTime = configs?.general_hour_format?.value
 
-	const checkTime = (val) => (val < 10 ? `0${val}` : val);
-	const timeFormated = (time) => {
-		return moment(`1900-01-01 ${checkTime(time.hour)}:${checkTime(time.minute)}`).format(formatTime)
-	}
+  const fillStyle = {
+    fillColor: theme.colors.primary,
+    strokeColor: theme.colors.darkPrimaryColor,
+    fillOpacity: 0.2,
+    strokeWeight: 2,
+    editable: false
+  }
+
+  const checkTime = (val) => (val < 10 ? `0${val}` : val)
+  const timeFormated = (time) => {
+    return moment(`1900-01-01 ${checkTime(time.hour)}:${checkTime(time.minute)}`).format(formatTime)
+  }
 
   const handleModalImage = (src) => {
     setImage(src)
@@ -105,6 +113,8 @@ export const BusinessInformationUI = (props) => {
                           apiKey={configs?.google_maps_api_key?.value}
                           location={businessLocation.location}
                           mapControls={businessLocation.googleMapsControls || business.googleMapsControls}
+                          businessZones={business?.zones}
+                          fillStyle={fillStyle}
                         />
                       </Map>
                     )}
