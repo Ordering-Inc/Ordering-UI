@@ -9,6 +9,7 @@ var _styles = require("./styles");
 var _styles2 = require("../OrdersOption/styles");
 var _SingleOrderCard = require("../SingleOrderCard");
 var _Pagination = require("../Pagination");
+var _AutoScroll = require("../AutoScroll");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
@@ -36,13 +37,15 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     activeOrders: true,
     ordersLength: (orders === null || orders === void 0 ? void 0 : orders.length) <= 1,
     isBusinessesPage: isBusinessesPage
-  }, /*#__PURE__*/_react.default.createElement(_styles.CardWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CardsContainer, null, orders.length > 0 && ordersToShow.map(function (order, i) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.CardWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CardsContainerWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CardsContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+    scrollId: "orderScroll"
+  }, orders.length > 0 && ordersToShow.map(function (order, i) {
     var _order$id;
     return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, _extends({}, props, {
       key: order.id || ((_order$id = order.id) === null || _order$id === void 0 ? void 0 : _order$id[0]) || i,
       order: order
     }));
-  })), orders.length > 0 && ordersToShow.length > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+  })))), orders.length > 0 && ordersToShow.length > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: pagination.currentPage,
     totalPages: Math.ceil(pagination === null || pagination === void 0 ? void 0 : pagination.totalPages),
     handleChangePage: handleChangePage

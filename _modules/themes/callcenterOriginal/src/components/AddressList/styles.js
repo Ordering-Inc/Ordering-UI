@@ -54,16 +54,12 @@ var AddressTitle = _styledComponents.default.span(_templateObject13 || (_templat
 exports.AddressTitle = AddressTitle;
 var AddressHalfContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n"])));
 exports.AddressHalfContainer = AddressHalfContainer;
-var List = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: ", ";\n  padding-right: 10px;\n  button { \n    width: 100%;\n  }\n"])), function (_ref2) {
+var List = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: ", ";\n  padding-right: 10px;\n  position: sticky;\n  right: 0;\n  top: 0;\n  margin-top: 222px;\n  button {\n    width: 100%;\n  }\n"])), function (_ref2) {
   var halfWidth = _ref2.halfWidth;
   return halfWidth ? '50%' : '100%';
 });
 exports.List = List;
-var AddressFormContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: 50%;\n  position: sticky;\n  right: 0;\n  top: 0;\n  margin-top: ", ";\n  height: 100%;\n  padding-left: 10px;\n"])), function (_ref3) {
-  var isOpenUserData = _ref3.isOpenUserData,
-    isHeader = _ref3.isHeader;
-  return isOpenUserData ? '-30px' : isHeader ? '-222px' : '-190px';
-});
+var AddressFormContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: 50%;\n  z-index: 10;\n  height: 100%;\n  padding-left: 10px;\n"])));
 exports.AddressFormContainer = AddressFormContainer;
 var CloseIcon = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  svg{\n    width: 30px;\n    height: 30px;\n  }\n"])));
 exports.CloseIcon = CloseIcon;

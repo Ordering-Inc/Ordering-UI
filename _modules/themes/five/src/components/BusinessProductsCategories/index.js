@@ -140,9 +140,8 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     }
   };
   (0, _react.useEffect)(function () {
-    var _Object$values;
-    if (typeof useKioskApp === 'undefined') return;
-    var styleSheet = document.getElementById('styles').sheet;
+    var _document$getElementB6, _Object$values;
+    var styleSheet = (_document$getElementB6 = document.getElementById('styles')) === null || _document$getElementB6 === void 0 ? void 0 : _document$getElementB6.sheet;
     if ((_Object$values = Object.values(styleSheet.cssRules)) !== null && _Object$values !== void 0 && _Object$values.length) {
       styleSheet === null || styleSheet === void 0 ? void 0 : styleSheet.deleteRule(0);
     }

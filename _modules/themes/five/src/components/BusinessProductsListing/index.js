@@ -80,6 +80,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleChangePriceFilterValues = props.handleChangePriceFilterValues,
     priceFilterValues = props.priceFilterValues,
     handleUpdateProfessionals = props.handleUpdateProfessionals,
+    isCustomerMode = props.isCustomerMode,
     isCustomLayout = props.isCustomLayout;
   var business = businessState.business,
     loading = businessState.loading,
@@ -181,12 +182,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
   var onProductClick = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(product) {
-      var _currentCart$products, isProductAddedToCart, productQuantity, addCurrentProduct, updateCurrentProduct, cartData, _business$professiona, _product$category;
+      var _currentCart$products, isProductAddedToCart, productQuantity, minimumPerOrder, addCurrentProduct, updateCurrentProduct, cartData, _business$professiona, _product$category;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             if (!(product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct)) {
-              _context.next = 17;
+              _context.next = 18;
               break;
             }
             setProductIdToLoading(product.id);
@@ -194,8 +195,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
               return Cproduct.id === product.id;
             });
             productQuantity = isProductAddedToCart === null || isProductAddedToCart === void 0 ? void 0 : isProductAddedToCart.quantity;
+            minimumPerOrder = (product === null || product === void 0 ? void 0 : product.minimum_per_order) || 1;
             addCurrentProduct = _objectSpread(_objectSpread({}, product), {}, {
-              quantity: 1
+              quantity: minimumPerOrder
             });
             updateCurrentProduct = {
               id: product.id,
@@ -206,22 +208,22 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
               business_id: business.id
             };
             if (!isProductAddedToCart) {
-              _context.next = 12;
+              _context.next = 13;
               break;
             }
-            _context.next = 10;
+            _context.next = 11;
             return updateProduct(updateCurrentProduct, cartData, isQuickAddProduct);
-          case 10:
-            _context.next = 14;
+          case 11:
+            _context.next = 15;
             break;
-          case 12:
-            _context.next = 14;
+          case 13:
+            _context.next = 15;
             return addProduct(addCurrentProduct, cartData, isQuickAddProduct);
-          case 14:
+          case 15:
             setProductIdToLoading(null);
-            _context.next = 21;
+            _context.next = 22;
             break;
-          case 17:
+          case 18:
             if (!((product === null || product === void 0 ? void 0 : product.type) === 'service' && (business === null || business === void 0 ? void 0 : (_business$professiona = business.professionals) === null || _business$professiona === void 0 ? void 0 : _business$professiona.length) > 0)) {
               if (site !== null && site !== void 0 && site.product_url_template) {
                 onProductRedirect({
@@ -240,7 +242,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
             setCurProduct(product);
             setModalIsOpen(true);
             events.emit('product_clicked', product);
-          case 21:
+          case 22:
           case "end":
             return _context.stop();
         }
@@ -474,7 +476,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     priceFilterValues: priceFilterValues,
     handleChangePriceFilterValues: handleChangePriceFilterValues,
     productToIdLoading: productToIdLoading,
-    handleUpdateProfessionals: handleUpdateProfessionals
+    handleUpdateProfessionals: handleUpdateProfessionals,
+    isCustomerMode: isCustomerMode
   }), isMounted && !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.SEARCH_REDIRECT) || 'Go to Businesses'),
@@ -570,6 +573,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
     handleUpdateProducts: handleUpdateProducts,
     onSave: handlerProductAction,
+    isCustomerMode: isCustomerMode,
     productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products8 = currentCart.products) === null || _currentCart$products8 === void 0 ? void 0 : _currentCart$products8.reduce(function (productsLength, Cproduct) {
       var _ref4;
       return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === ((_ref4 = productModal.product || curProduct) === null || _ref4 === void 0 ? void 0 : _ref4.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);

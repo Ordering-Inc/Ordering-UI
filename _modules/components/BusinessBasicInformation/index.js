@@ -10,7 +10,6 @@ var _FiClock = _interopRequireDefault(require("@meronex/icons/fi/FiClock"));
 var _GrLocation = _interopRequireDefault(require("@meronex/icons/gr/GrLocation"));
 var _GrDeliver = _interopRequireDefault(require("@meronex/icons/gr/GrDeliver"));
 var _FaStar = _interopRequireDefault(require("@meronex/icons/fa/FaStar"));
-var _BsExclamationCircle = _interopRequireDefault(require("@meronex/icons/bs/BsExclamationCircle"));
 var _styledComponents = require("styled-components");
 var _Modal = require("../Modal");
 var _BusinessInformation = require("../BusinessInformation");
@@ -103,12 +102,13 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     width: 70
   })), (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && showDeliveryFee && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  })), !loading && /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_BsExclamationCircle.default, {
-    className: "popup",
+  }))), !loading && /*#__PURE__*/_react.default.createElement("div", {
+    className: "information"
+  }, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setOpenBusinessInformation(true);
     }
-  })))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, t('INFORMATION', 'Information')))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     open: openBusinessInformation,
     onClose: setOpenBusinessInformation,

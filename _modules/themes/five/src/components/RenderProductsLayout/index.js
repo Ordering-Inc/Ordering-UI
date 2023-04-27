@@ -86,7 +86,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     onBusinessClick = props.onBusinessClick,
     handleChangePriceFilterValues = props.handleChangePriceFilterValues,
     priceFilterValues = props.priceFilterValues,
-    handleUpdateProfessionals = props.handleUpdateProfessionals;
+    handleUpdateProfessionals = props.handleUpdateProfessionals,
+    isCustomerMode = props.isCustomerMode;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -171,7 +172,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     categoryClicked: categoryClicked,
     categorySelected: categorySelected,
     setCategoryClicked: setCategoryClicked
-  })), /*#__PURE__*/_react.default.createElement(_styles.PageBannerWrapper, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
+  })), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.PageBannerWrapper, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
     position: "web_business_page"
   })), !errorQuantityProducts && SearchProductsComponent && !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(SearchProductsComponent, {
     handleChangeSearch: handleChangeSearch,
@@ -397,7 +398,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   }, /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, {
     isSkeleton: true,
     categories: [],
-    openBusinessInformation: openBusinessInformation
+    openBusinessInformation: openBusinessInformation,
+    isCustomerMode: isCustomerMode
   })))), (categoryClicked || windowSize.width >= 993) && /*#__PURE__*/_react.default.createElement(_styles.WrapContent, null, /*#__PURE__*/_react.default.createElement(_BusinessProductsList.BusinessProductsList, {
     categories: [],
     useKioskApp: useKioskApp,

@@ -12,7 +12,7 @@ var AccordionSection = _styledComponents.default.div(_templateObject || (_templa
 exports.AccordionSection = AccordionSection;
 var Accordion = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n"])));
 exports.Accordion = Accordion;
-var DropdownWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  gap: 10px;\n"])));
+var DropdownWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  gap: 10px;\n\n  > h4 {\n    font-size: 16px;\n  }\n"])));
 exports.DropdownWrapper = DropdownWrapper;
 var HoursWrappers = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex-direction: column;\n\n  p {\n    margin: 0px 0px 10px 0px;\n  }\n"])));
 exports.HoursWrappers = HoursWrappers;

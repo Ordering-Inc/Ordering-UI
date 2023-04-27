@@ -24,6 +24,7 @@ var _Modal = require("../Modal");
 var _SignUpForm = require("../SignUpForm");
 var _LoginForm = require("../LoginForm");
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -68,6 +69,10 @@ var SidebarMenu = function SidebarMenu(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     modalPageToShow = _useState6[0],
     setModalPageToShow = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    showMessage = _useState8[0],
+    setShowMessage = _useState8[1];
   var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
   var closeModal = function closeModal() {
     setModalIsOpen(false);
@@ -114,6 +119,12 @@ var SidebarMenu = function SidebarMenu(props) {
       }
     }
   }, [width]);
+  (0, _react.useEffect)(function () {
+    if (!isCustomerMode) return;
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      setShowMessage(true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -122,7 +133,11 @@ var SidebarMenu = function SidebarMenu(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
+  }), showMessage && /*#__PURE__*/_react.default.createElement(_styles.MobileMessage, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, {
+    onClick: function onClick() {
+      return setShowMessage(false);
+    }
+  }), t('FOR_THE_BEST_EXPERIENCE_WHILE_SETTING_UP', 'For the best experience while setting up your project, we recommend using a computer.'))), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     auth: auth
   }, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
     isHome: isHome,
