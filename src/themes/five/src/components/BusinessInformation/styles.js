@@ -93,7 +93,7 @@ export const SectionTitle = styled.h3`
 export const Map = styled.div`
   width: calc(100% + 20px);
   margin-left: -10px;
-  height: 250px;
+  height: 300px;
   > div {
     position: relative !important;
     width: 100% !important;

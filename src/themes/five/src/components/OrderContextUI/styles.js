@@ -50,6 +50,9 @@ export const FeatureItems = styled.div`
 `
 
 export const ItemInline = styled.div`
+  > * {
+    pointer-events: none;
+  }
   > span #select-input {
     background-color: ${props => props.theme.colors.grayDividerColor} !important;
     border: none;
