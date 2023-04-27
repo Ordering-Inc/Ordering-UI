@@ -183,6 +183,13 @@ export const BusinessInfoContainer = styled.div`
   box-sizing: border-box;
   align-items: ${props => props.isFlexEnd ? 'flex-end' : 'space-between'};
 
+  #business_name {
+    ${({ isChew }) => isChew && css`
+        background: none;
+      `
+    }
+  }
+
   @media (min-width: 576px) {
     padding-top: 0px;
     padding-left: 0px;
