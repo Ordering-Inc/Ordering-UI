@@ -293,9 +293,11 @@ const SignUpFormUI = (props) => {
   useEffect(() => {
     if (useChekoutFileds && validationFields?.loading) return
     let fieldnum = 0
-    sortInputFields({ values: validationFields?.fields?.checkout }).forEach(field => {
-      if (showField && showField(field.code) && field.code !== 'email') fieldnum += 1
-    })
+    if (validationFields?.fields?.checkout) {
+      sortInputFields({ values: validationFields?.fields?.checkout }).forEach(field => {
+        if (showField && showField(field.code) && field.code !== 'email') fieldnum += 1
+      })
+    }
     setFieldNumber(fieldnum)
   }, [validationFields])
 
