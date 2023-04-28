@@ -342,6 +342,7 @@ const OrderDetailsUI = (props) => {
   }
 
   const preorderMetafieldEnabled = order?.metafields?.find(metafield => metafield.key === 'preorder')?.value
+  const uberDirectPin = Array.isArray(order?.metafields) && order?.metafields?.find(({ key }) => (key === 'pin'))
 
   useEffect(() => {
     if (driverLocation) {
@@ -506,6 +507,11 @@ const OrderDetailsUI = (props) => {
                 {showDeliveryDate && (
                   <p className='date'>
                     {dateTimeETA}
+                  </p>
+                )}
+                {uberDirectPin && (
+                  <p className='types'>
+                    Pin: {uberDirectPin?.value}
                   </p>
                 )}
                 {preorderMetafieldEnabled && (
