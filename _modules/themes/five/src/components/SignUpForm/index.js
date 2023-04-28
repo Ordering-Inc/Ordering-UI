@@ -51,7 +51,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _configs$facebook_log, _configs$facebook_log2, _configs$google_login, _configs$google_login2, _configs$facebook_log3, _configs$facebook_log4, _configs$apple_login_, _configs$apple_login_2, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _configs$google_login3, _configs$facebook_log5, _configs$facebook_log6, _configs$facebook_id, _configs$google_login4, _configs$google_login5, _configs$google_login6, _configs$apple_login_3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _formMethods$errors16, _formMethods$errors17, _formMethods$errors18, _formMethods$errors19, _formMethods$errors20, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _formMethods$errors21, _formMethods$errors22, _formMethods$errors23, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$driver_signu2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_4, _configs$google_login7, _configs$google_login8, _configs$google_login9, _props$afterComponent, _props$afterElements;
+  var _configs$facebook_log, _configs$facebook_log2, _configs$google_login, _configs$google_login2, _configs$facebook_log3, _configs$facebook_log4, _configs$apple_login_, _configs$apple_login_2, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _configs$google_login3, _configs$facebook_log5, _configs$facebook_log6, _configs$facebook_id, _configs$google_login4, _configs$google_login5, _configs$google_login6, _configs$apple_login_3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie13, _validationFields$fie14, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _formMethods$errors16, _formMethods$errors17, _formMethods$errors18, _formMethods$errors19, _formMethods$errors20, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _formMethods$errors21, _formMethods$errors22, _formMethods$errors23, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$driver_signu2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_4, _configs$google_login7, _configs$google_login8, _configs$google_login9, _props$afterComponent, _props$afterElements;
   var handleChangeInput = props.handleChangeInput,
     handleButtonSignupClick = props.handleButtonSignupClick,
     handleReCaptcha = props.handleReCaptcha,
@@ -333,11 +333,14 @@ var SignUpFormUI = function SignUpFormUI(props) {
     var _validationFields$fie11;
     if (useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) return;
     var fieldnum = 0;
-    (0, _utils.sortInputFields)({
-      values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout
-    }).forEach(function (field) {
-      if (showField && showField(field.code) && field.code !== 'email') fieldnum += 1;
-    });
+    if (validationFields !== null && validationFields !== void 0 && (_validationFields$fie11 = validationFields.fields) !== null && _validationFields$fie11 !== void 0 && _validationFields$fie11.checkout) {
+      var _validationFields$fie12;
+      (0, _utils.sortInputFields)({
+        values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie12 = validationFields.fields) === null || _validationFields$fie12 === void 0 ? void 0 : _validationFields$fie12.checkout
+      }).forEach(function (field) {
+        if (showField && showField(field.code) && field.code !== 'email') fieldnum += 1;
+      });
+    }
     setFieldNumber(fieldnum);
   }, [validationFields]);
   (0, _react.useEffect)(function () {
@@ -420,8 +423,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie12 = validationFields.fields) === null || _validationFields$fie12 === void 0 ? void 0 : _validationFields$fie12.checkout) && (0, _utils.sortInputFields)({
-    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie13 = validationFields.fields) === null || _validationFields$fie13 === void 0 ? void 0 : _validationFields$fie13.checkout
+  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie13 = validationFields.fields) === null || _validationFields$fie13 === void 0 ? void 0 : _validationFields$fie13.checkout) && (0, _utils.sortInputFields)({
+    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie14 = validationFields.fields) === null || _validationFields$fie14 === void 0 ? void 0 : _validationFields$fie14.checkout
   }).map(function (field) {
     var _formMethods$errors, _formMethods$errors$e, _formMethods$errors2, _formMethods$errors2$, _formMethods$errors3, _formMethods$errors3$, _formMethods$errors4, _formMethods$errors5, _formMethods$errors6, _formMethods$errors7, _formMethods$errors8;
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
