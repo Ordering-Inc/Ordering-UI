@@ -273,7 +273,9 @@ const BusinessesListingUI = (props) => {
                 isCustomLayout={isCustomLayout}
                 placeholder={t('SEARCH_BUSINESSES', 'Search Businesses')}
                 onSearch={handleChangeSearch}
-                handleCustomEnter={() => configs?.advanced_business_search_enabled?.value === '1' ? onRedirectPage({ page: 'business_search' }) : null}
+                handleCustomEnter={() => configs?.advanced_business_search_enabled?.value === '0'
+                  ? null
+                  : onRedirectPage({ page: 'business_search' })}
               />
             )}
             {!hideCities && citiesState?.cities?.length > 0 && (
