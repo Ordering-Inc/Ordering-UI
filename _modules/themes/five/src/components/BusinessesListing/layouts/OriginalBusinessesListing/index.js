@@ -295,9 +295,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onSearch: handleChangeSearch,
     handleCustomEnter: function handleCustomEnter() {
       var _configs$advanced_bus;
-      return (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '1' ? onRedirectPage({
+      return (configs === null || configs === void 0 ? void 0 : (_configs$advanced_bus = configs.advanced_business_search_enabled) === null || _configs$advanced_bus === void 0 ? void 0 : _configs$advanced_bus.value) === '0' ? null : onRedirectPage({
         page: 'business_search'
-      }) : null;
+      });
     }
   }), !hideCities && (citiesState === null || citiesState === void 0 ? void 0 : (_citiesState$cities5 = citiesState.cities) === null || _citiesState$cities5 === void 0 ? void 0 : _citiesState$cities5.length) > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
