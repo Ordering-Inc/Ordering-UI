@@ -116,6 +116,7 @@ const BusinessProductsListingUI = (props) => {
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
   const showViewOrderButton = !theme?.business_view?.components?.order_view_button?.hidden
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const cateringTypes = [7, 8]
   const cateringPreorder = cateringTypes.includes(options?.type)
   const sortByOptions = [
@@ -193,8 +194,19 @@ const BusinessProductsListingUI = (props) => {
 
   const handleScroll = useCallback(() => {
     const backArrowElement = document.getElementById('back-arrow')
+    const searchElement = document.getElementById('search-component')
     if (backArrowElement) {
       const limit = window.pageYOffset >= backArrowElement?.offsetTop && window.pageYOffset > 0
+      const limitWidth = window.pageYOffset >= searchElement?.offsetTop + 40 && window.pageYOffset > 0
+      if (isChew) {
+        if (limit && !limitWidth) {
+          const classWidthAdded = backArrowElement.classList.contains('fixed-arrow-width')
+          !classWidthAdded && backArrowElement.classList.add('fixed-arrow-width')
+        } else {
+          backArrowElement && backArrowElement.classList.remove('fixed-arrow-width')
+        }
+      }
+
       if (limit) {
         const classAdded = backArrowElement.classList.contains('fixed-arrow')
         !classAdded && backArrowElement.classList.add('fixed-arrow')

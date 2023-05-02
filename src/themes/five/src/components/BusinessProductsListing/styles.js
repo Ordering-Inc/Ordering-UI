@@ -167,6 +167,9 @@ export const HeaderContent = styled.div`
       width: 100px;
     }
   }
+  .fixed-arrow-width{
+    width: 100vw;      
+  }
 `
 export const OrderContextUIWrapper = styled.div`
   flex: 1;
