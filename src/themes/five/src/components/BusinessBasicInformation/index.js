@@ -131,7 +131,7 @@ export const BusinessBasicInformation = (props) => {
   const handleScroll = () => {
     const searchElement = document.getElementById('search-component')
     if (searchElement) {
-      const limit = window.pageYOffset >= searchElement?.offsetTop && window.pageYOffset > 0
+      const limit = window.pageYOffset >= (isChew ? searchElement?.offsetTop + 40 : searchElement?.offsetTop) && window.pageYOffset > 0
       if (limit) {
         const classAdded = searchElement.classList.contains('fixed-search')
         !classAdded && searchElement.classList.add('fixed-search')
@@ -142,7 +142,7 @@ export const BusinessBasicInformation = (props) => {
 
     const businessNameElement = document.getElementById('business_name')
     if (businessNameElement) {
-      const limit = window.pageYOffset >= (businessNameElement?.offsetTop - 55) && window.pageYOffset > 0
+      const limit = window.pageYOffset >= (isChew && searchElement ? searchElement?.offsetTop + 40 : (businessNameElement?.offsetTop - 55)) && window.pageYOffset > 0
       if (limit) {
         const classAdded = businessNameElement.classList.contains('fixed-name')
         !classAdded && businessNameElement.classList.add('fixed-name')
@@ -162,7 +162,7 @@ export const BusinessBasicInformation = (props) => {
       top: window.scrollY - 1,
       left: 0
     })
-  }, [sortByValue]) 
+  }, [sortByValue])
 
   return (
     <>
@@ -249,7 +249,7 @@ export const BusinessBasicInformation = (props) => {
         )}
       </BusinessInfoWrapper>
       {(windowSize.width <= 768 && categoryClicked) && (
-          <BackButton>
+        <BackButton>
           <Button
             color='primary'
             initialIcon
@@ -259,7 +259,7 @@ export const BusinessBasicInformation = (props) => {
             <div>{t('GO_TO_ALL_CATEGORIES', 'Go to all categories')}</div>
           </Button>
         </BackButton>
-        )}
+      )}
       <Modal
         width='70%'
         open={openBusinessInformation}
