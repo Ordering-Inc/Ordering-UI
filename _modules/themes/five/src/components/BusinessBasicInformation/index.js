@@ -139,7 +139,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   var handleScroll = function handleScroll() {
     var searchElement = document.getElementById('search-component');
     if (searchElement) {
-      var limit = window.pageYOffset >= (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) && window.pageYOffset > 0;
+      var limit = window.pageYOffset >= (isChew ? (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) + 40 : searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) && window.pageYOffset > 0;
       if (limit) {
         var classAdded = searchElement.classList.contains('fixed-search');
         !classAdded && searchElement.classList.add('fixed-search');
@@ -149,7 +149,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     }
     var businessNameElement = document.getElementById('business_name');
     if (businessNameElement) {
-      var _limit = window.pageYOffset >= (businessNameElement === null || businessNameElement === void 0 ? void 0 : businessNameElement.offsetTop) - 55 && window.pageYOffset > 0;
+      var _limit = window.pageYOffset >= (isChew && searchElement ? (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) + 40 : (businessNameElement === null || businessNameElement === void 0 ? void 0 : businessNameElement.offsetTop) - 55) && window.pageYOffset > 0;
       if (_limit) {
         var _classAdded = businessNameElement.classList.contains('fixed-name');
         !_classAdded && businessNameElement.classList.add('fixed-name');
