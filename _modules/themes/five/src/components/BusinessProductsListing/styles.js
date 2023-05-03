@@ -42,7 +42,7 @@ var EmptyBtnWrapper = _styledComponents.default.div(_templateObject9 || (_templa
   return props.theme.colors.darkTextColor;
 });
 exports.EmptyBtnWrapper = EmptyBtnWrapper;
-var HeaderContent = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  .back-arrow {\n    font-size: 24px;\n    cursor: pointer;\n  }\n  .fixed-arrow {\n    position: fixed;\n    top: 0;\n    left: 0;\n    z-index: 10001;\n    width: 100vw;\n    background-color: ", ";\n    height: 56px;\n    display: flex;\n    align-items: center;\n    ", "\n    @media (min-width: 993px){\n      width: 100px;\n    }\n  }\n"])), function (props) {
+var HeaderContent = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  .back-arrow {\n    font-size: 24px;\n    cursor: pointer;\n  }\n  .fixed-arrow {\n    position: fixed;\n    top: 0;\n    left: 0;\n    z-index: 10001;\n    width: 100vw;\n    background-color: ", ";\n    height: 56px;\n    display: flex;\n    align-items: center;\n    ", "\n    @media (min-width: 993px){\n      width: 100px;\n    }\n  }\n  .fixed-arrow-width{\n    width: 100vw;      \n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (props) {
   var _props$theme;
