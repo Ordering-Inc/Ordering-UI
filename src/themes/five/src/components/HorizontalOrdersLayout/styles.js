@@ -26,7 +26,6 @@ export const CardsContainer = styled.div`
 export const CardsContainerWrapper = styled.div`
   margin-bottom: 10px;
   display: flex;
-  overflow: auto hidden;
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
