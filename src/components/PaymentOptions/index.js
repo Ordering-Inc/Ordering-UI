@@ -87,7 +87,9 @@ const PaymentOptionsUI = (props) => {
     onPlaceOrderClick,
     setCreateOrder,
     handlePlaceOrder,
-    paymethods
+    paymethods,
+    userErrors,
+    handleCheckoutValidationError
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -105,6 +107,10 @@ const PaymentOptionsUI = (props) => {
   const stripeDirectMethods = ['stripe_direct', ...methodsPay]
 
   const handlePaymentMethodClick = (paymethod) => {
+    if (paymethod?.gateway === 'paypal' && userErrors?.length > 0) {
+      handleCheckoutValidationError()
+      return
+    }
     if (paymethod?.gateway === 'paypal' &&
       options.type === 1 &&
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
