@@ -111,8 +111,12 @@ export const OrderHistory = (props) => {
           <DetailWrapper>
             <h3>
               {t('ORDER_PLACED', 'Order placed')} {' '}
-              {t('VIA', 'Via')}{' '}
-              {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
+              {!props.hideViaText && (
+                <>
+                  {t('VIA', 'Via')}{' '}
+                  {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
+                </>
+              )}
             </h3>
             <p>{parseDate(order.created_at, { outputFormat: `MMM DD, ${configs?.general_hour_format?.value}` })}</p>
           </DetailWrapper>

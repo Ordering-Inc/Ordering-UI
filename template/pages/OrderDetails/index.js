@@ -27,6 +27,7 @@ export const OrderDetailsPage = (props) => {
     ...props,
     orderId,
     hashKey,
+    hideViaText: settings?.project === 'chewproject',
     urlToShare: (hashKey) => hashKey ? `${window.location.origin}/orders/${orderId}?hash=${hashKey}` : null,
     handleOrderRedirect: () => {
       history.push('/profile/orders')
