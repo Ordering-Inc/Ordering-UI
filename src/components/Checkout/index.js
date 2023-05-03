@@ -100,17 +100,21 @@ const CheckoutUI = (props) => {
     }
   })
 
-  const handlePlaceOrder = () => {
-    setCreateOrder(true)
-    if (!userErrors.length) {
-      handlerClickPlaceOrder && handlerClickPlaceOrder()
-      return
-    }
+  const handleCheckoutValidationError = () => {
     setAlertState({
       open: true,
       content: Object.values(userErrors).map(error => error)
     })
     setIsUserDetailsEdit(true)
+  }
+
+  const handlePlaceOrder = () => {
+    if (!userErrors.length) {
+      setCreateOrder(true)
+      handlerClickPlaceOrder && handlerClickPlaceOrder()
+      return
+    }
+    handleCheckoutValidationError()
   }
 
   const closeAlert = () => {
@@ -394,6 +398,8 @@ const CheckoutUI = (props) => {
                 handlePlaceOrder={handlePlaceOrder}
                 onPlaceOrderClick={onPlaceOrderClick}
                 setCreateOrder={setCreateOrder}
+                userErrors={userErrors}
+                handleCheckoutValidationError={handleCheckoutValidationError}
               />
             </PaymentMethodContainer>
           )}
