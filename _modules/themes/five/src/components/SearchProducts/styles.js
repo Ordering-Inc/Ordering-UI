@@ -44,7 +44,7 @@ var CancelButton = _styledComponents.default.div(_templateObject10 || (_template
 exports.CancelButton = CancelButton;
 var LogoHeader = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: none;  \n  @media (min-width: 768px) {\n    cursor: pointer;\n    display: flex;\n  }\n"])));
 exports.LogoHeader = LogoHeader;
-var BusinessProductsListContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  padding: 30px 0;\n  max-height: calc(100vh - 88px);\n  overflow: auto;\n"])), function (props) {
+var BusinessProductsListContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  max-height: calc(100vh - 88px);\n  overflow: auto;\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 });
 exports.BusinessProductsListContainer = BusinessProductsListContainer;

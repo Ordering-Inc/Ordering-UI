@@ -81,7 +81,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     priceFilterValues = props.priceFilterValues,
     handleUpdateProfessionals = props.handleUpdateProfessionals,
     isCustomerMode = props.isCustomerMode,
-    isCustomLayout = props.isCustomLayout;
+    isCustomLayout = props.isCustomLayout,
+    notFound = props.notFound,
+    setNotFound = props.setNotFound;
   var business = businessState.business,
     loading = businessState.loading,
     error = businessState.error;
@@ -266,6 +268,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleUpdateInitialRender(false);
     updateProductModal(null);
     setCurProduct(null);
+    setNotFound(false);
     onProductRedirect({
       slug: business === null || business === void 0 ? void 0 : business.slug
     });
@@ -559,7 +562,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     count: props.useKioskApp ? 12 : 8
   }))), productModal.error && productModal.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_productModal$error$ = productModal.error[0]) === null || _productModal$error$ === void 0 ? void 0 : _productModal$error$.message) || productModal.error[0]
-  }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && notFound && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('ERROR_GET_PRODUCT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ERROR_GET_PRODUCT) || 'Sorry, we couldn\'t find the requested product.')
   }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((productModal === null || productModal === void 0 ? void 0 : (_productModal$product2 = productModal.product) === null || _productModal$product2 === void 0 ? void 0 : _productModal$product2.type) === 'service' || (curProduct === null || curProduct === void 0 ? void 0 : curProduct.type) === 'service') && (business === null || business === void 0 ? void 0 : (_business$professiona2 = business.professionals) === null || _business$professiona2 === void 0 ? void 0 : _business$professiona2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_ServiceForm.ServiceForm, {
     businessSlug: business === null || business === void 0 ? void 0 : business.slug,
