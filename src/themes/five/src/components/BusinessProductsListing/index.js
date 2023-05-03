@@ -85,7 +85,9 @@ const BusinessProductsListingUI = (props) => {
     priceFilterValues,
     handleUpdateProfessionals,
     isCustomerMode,
-    isCustomLayout
+    isCustomLayout,
+    notFound,
+    setNotFound
   } = props
 
   const { business, loading, error } = businessState
@@ -187,6 +189,7 @@ const BusinessProductsListingUI = (props) => {
     handleUpdateInitialRender(false)
     updateProductModal(null)
     setCurProduct(null)
+    setNotFound(false)
     onProductRedirect({
       slug: business?.slug
     })
@@ -513,8 +516,7 @@ const BusinessProductsListingUI = (props) => {
             content={productModal.error[0]?.message || productModal.error[0]}
           />
         )}
-
-        {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && (
+        {isInitialRender && !productModal.loading && !productModal.error && !productModal.product && notFound && (
           <NotFoundSource
             content={t('ERROR_GET_PRODUCT', theme?.defaultLanguages?.ERROR_GET_PRODUCT || 'Sorry, we couldn\'t find the requested product.')}
           />
