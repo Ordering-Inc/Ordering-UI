@@ -213,7 +213,7 @@ export const RenderProductsLayout = (props) => {
                 </WrapperSearch>
               </>
             )}
-            {!business?.loading && business?.previously_products?.length > 0 && !hidePreviousOrdered && !categoryClicked && (
+            {!business?.loading && business?.previously_products?.length > 0 && !hidePreviousOrdered && windowSize.width < 993 && !categoryClicked && (
               <OrderItAgain
                 onProductClick={onProductClick}
                 productList={business?.previously_products}

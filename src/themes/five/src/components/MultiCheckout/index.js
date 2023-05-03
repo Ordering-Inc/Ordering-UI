@@ -108,6 +108,9 @@ const MultiCheckoutUI = (props) => {
   const creditPointPlanOnBusiness = businessIds.every((bid) => loyalBusinessIds.includes(bid)) && creditPointPlan
   const creditPointGeneralPlan = loyaltyPlansState?.result?.find((loyal) => loyal.type === 'credit_point')
   const loyalBusinessAvailable = creditPointGeneralPlan?.businesses?.filter((b) => b.accumulates) ?? []
+  const isWalletEnabled = (configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' &&
+    (configs?.wallet_cash_enabled?.value === '1' ||
+    configs?.wallet_credit_point_enabled?.value === '1'))
 
   const accumulationRateBusiness = (businessId) => {
     const value = loyalBusinessAvailable?.find((loyal) => loyal.business_id === businessId)?.accumulation_rate ?? 0
@@ -371,7 +374,7 @@ const MultiCheckoutUI = (props) => {
                     <h4>{t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')}</h4>
                     <h4>{parsePrice(totalCartsPrice)}</h4>
                   </div>
-                  {!!loyaltyRewardValue && isFinite(loyaltyRewardValue) && (
+                  {isWalletEnabled && !!loyaltyRewardValue && isFinite(loyaltyRewardValue) && (
                     <span>
                       <p>&nbsp;</p>
                       <p>{t('REWARD_LOYALTY_POINT', 'Reward :amount: on loyalty points').replace(':amount:', loyaltyRewardValue)}</p>
