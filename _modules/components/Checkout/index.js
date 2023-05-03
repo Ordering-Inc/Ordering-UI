@@ -133,12 +133,7 @@ var CheckoutUI = function CheckoutUI(props) {
       showOnSelected: t(option === null || option === void 0 ? void 0 : option.name.toUpperCase().replace(/\s/g, '_'), option === null || option === void 0 ? void 0 : option.name)
     };
   }));
-  var handlePlaceOrder = function handlePlaceOrder() {
-    setCreateOrder(true);
-    if (!userErrors.length) {
-      handlerClickPlaceOrder && handlerClickPlaceOrder();
-      return;
-    }
+  var handleCheckoutValidationError = function handleCheckoutValidationError() {
     setAlertState({
       open: true,
       content: Object.values(userErrors).map(function (error) {
@@ -146,6 +141,14 @@ var CheckoutUI = function CheckoutUI(props) {
       })
     });
     setIsUserDetailsEdit(true);
+  };
+  var handlePlaceOrder = function handlePlaceOrder() {
+    if (!userErrors.length) {
+      setCreateOrder(true);
+      handlerClickPlaceOrder && handlerClickPlaceOrder();
+      return;
+    }
+    handleCheckoutValidationError();
   };
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -385,7 +388,9 @@ var CheckoutUI = function CheckoutUI(props) {
     setCardData: setCardData,
     handlePlaceOrder: handlePlaceOrder,
     onPlaceOrderClick: onPlaceOrderClick,
-    setCreateOrder: setCreateOrder
+    setCreateOrder: setCreateOrder,
+    userErrors: userErrors,
+    handleCheckoutValidationError: handleCheckoutValidationError
   })), (_props$beforeElements8 = props.beforeElementsSectionSix) === null || _props$beforeElements8 === void 0 ? void 0 : _props$beforeElements8.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

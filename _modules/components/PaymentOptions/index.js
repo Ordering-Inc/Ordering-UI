@@ -102,7 +102,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     onPlaceOrderClick = props.onPlaceOrderClick,
     setCreateOrder = props.setCreateOrder,
     handlePlaceOrder = props.handlePlaceOrder,
-    paymethods = props.paymethods;
+    paymethods = props.paymethods,
+    userErrors = props.userErrors,
+    handleCheckoutValidationError = props.handleCheckoutValidationError;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -133,6 +135,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
     var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6;
+    if ((paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) === 'paypal' && (userErrors === null || userErrors === void 0 ? void 0 : userErrors.length) > 0) {
+      handleCheckoutValidationError();
+      return;
+    }
     if ((paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) === 'paypal' && options.type === 1 && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.driver_tip) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie5 = _validationFields$fie4.checkout) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.driver_tip) !== null && _validationFields$fie6 !== void 0 && _validationFields$fie6.required && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0) {
       setAlertState({
         open: true,
