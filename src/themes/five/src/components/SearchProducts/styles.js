@@ -99,7 +99,6 @@ export const LogoHeader = styled.div`
 `
 export const BusinessProductsListContainer = styled.div`
   background-color: ${props => props.theme.colors.backgroundPage};
-  padding: 30px 0;
   max-height: calc(100vh - 88px);
   overflow: auto;
 `

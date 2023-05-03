@@ -314,7 +314,7 @@ export const ProductActions = styled.div`
   div.price-amount-block {
     display: flex;
     justify-content: space-between;
-    width: 70%
+    width: 80%
   }
 
   svg {
