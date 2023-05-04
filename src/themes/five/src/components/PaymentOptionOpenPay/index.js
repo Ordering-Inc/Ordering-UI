@@ -26,6 +26,7 @@ import {
 } from './styles'
 import { Button } from '../../styles/Buttons'
 import { Input } from '../../styles/Inputs'
+import valid from 'card-validator'
 
 const PaymentOptionOpenPayUI = (props) => {
   const {
@@ -39,6 +40,8 @@ const PaymentOptionOpenPayUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const [addCartOpen, setAddCardOpen] = useState(false)
+  const [sizeCsv, setSizeCsv] = useState(4)
+
   const [values, setValues] = useState({
     cardName: '',
     cardNumber: '',
@@ -94,6 +97,12 @@ const PaymentOptionOpenPayUI = (props) => {
       border: true
     })
   }
+
+  useEffect(() => {
+    const creditCard = valid.number(values.cardNumber)
+    if (!creditCard.isValid) return
+    setSizeCsv(creditCard?.card?.code?.size)
+  }, [values?.cardNumber])
 
   return (
     <>
@@ -189,7 +198,7 @@ const PaymentOptionOpenPayUI = (props) => {
                   name='cardSecurityCode'
                   data-openpay-card='cvv2'
                   id='cvv2'
-                  maxLength={4}
+                  maxLength={sizeCsv}
                   onChange={handleChange}
                   placeholder='CVV'
                 />

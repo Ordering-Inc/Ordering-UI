@@ -23,7 +23,7 @@ export default function validateInfo (values) {
   // Card CVV expiration
   if (values.cardSecurityCode === null || !values.cardSecurityCode.trim()) {
     errors.message = 'CREDIT_CARD_CVC_IS_NOT_COMPLETE'
-  } else if (creditCard.cvv.isValid || values.cardSecurityCode?.length === 4) {
+  } else if (values.cardSecurityCode?.length === creditCard?.card?.code?.size) {
     errors.ccvv = true
   } else {
     errors.message = 'CREDIT_CARD_CVC_IS_INVALID'
