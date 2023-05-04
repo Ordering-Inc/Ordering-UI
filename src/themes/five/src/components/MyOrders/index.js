@@ -61,14 +61,14 @@ export const MyOrders = (props) => {
 
   const getWowPoints = async () => {
     try {
-      const response = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-temp'}.ordering.co/alseaplatform/wowcheckin_allowed.php?email=${user?.email}`, {
+      const response = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-development'}.ordering.co/alseaplatform/wowcheckin_allowed.php?email=${user?.email}`, {
         method: 'GET',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       })
       const result = await response.json()
       if (result.content.allowed) {
-        const responsePoints = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-temp'}.ordering.co/alseaplatform/wow_movimientos_amount.php`, {
+        const responsePoints = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-development'}.ordering.co/alseaplatform/wow_movimientos_amount.php`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

@@ -194,7 +194,7 @@ const ProductOptionsUI = (props) => {
 
   const deleteOtpUser = async () => {
     try {
-      await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-temp'}.ordering.co/alseaplatform/delete_new_user.php`, {
+      await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-development'}.ordering.co/alseaplatform/delete_new_user.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
