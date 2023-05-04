@@ -69,7 +69,8 @@ import {
   OrderStatusAndLinkContainer,
   LinkWrapper,
   MapWrapper,
-  BusinessExternalWrapper
+  BusinessExternalWrapper,
+  IframeContainer
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
@@ -343,6 +344,7 @@ const OrderDetailsUI = (props) => {
 
   const preorderMetafieldEnabled = order?.metafields?.find(metafield => metafield.key === 'preorder')?.value
   const uberDirectPin = Array.isArray(order?.metafields) && order?.metafields?.find(({ key }) => (key === 'pin'))
+  const externalTrack = Array.isArray(order?.metafields) && !!order?.metafields?.find(({ key }) => (key === 'data_driver')) && JSON.parse(order?.metafields?.find(({ key }) => (key === 'data_driver')).value)
 
   useEffect(() => {
     if (driverLocation) {
@@ -395,7 +397,7 @@ const OrderDetailsUI = (props) => {
     return () => {
       clearInterval(intervalETA)
     }
-  }, [loading]);
+  }, [loading])
 
   const ButtonComponent = layout === 'pfchangs'
     ? ButtonPF
@@ -511,7 +513,7 @@ const OrderDetailsUI = (props) => {
                 )}
                 {uberDirectPin && (
                   <p className='types'>
-                    Pin: {uberDirectPin?.value}
+                    {t('UBER_PIN', 'Pin')}: {uberDirectPin?.value}
                   </p>
                 )}
                 {preorderMetafieldEnabled && (
@@ -549,9 +551,14 @@ const OrderDetailsUI = (props) => {
               </TitleContainer>
               {showDeliveryProgress && (
                 <>
-                  <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                  {!externalTrack && (<StatusBar percentage={getOrderStatus(order?.status)?.percentage} />)}
+                  {externalTrack && (
+                    <IframeContainer>
+                      <iframe src={externalTrack.link_location} width='100%' height='100%' sandbox='allow-scripts allow-modal' />
+                    </IframeContainer>
+                  )}
                   <OrderStatusAndLinkContainer>
-                    <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
+                    {!externalTrack && (<p className='order-status'>{getOrderStatus(order?.status)?.value}</p>)}
                     <LinkWrapper>
                       <ReviewOrderLink
                         active

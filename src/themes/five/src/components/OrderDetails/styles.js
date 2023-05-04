@@ -771,3 +771,8 @@ export const BusinessExternalWrapper = styled.div`
     width: 50%;
   }
 `
+export const IframeContainer = styled.div`
+  display: flex;
+  height: 600px;
+  padding-bottom: 20px;
+`
