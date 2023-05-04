@@ -17,6 +17,7 @@ var _ValidateInfo = _interopRequireDefault(require("./ValidateInfo"));
 var _styles = require("./styles");
 var _Buttons = require("../../styles/Buttons");
 var _Inputs = require("../../styles/Inputs");
+var _cardValidator = _interopRequireDefault(require("card-validator"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -58,7 +59,11 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     addCartOpen = _useState4[0],
     setAddCardOpen = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)(4),
+    _useState6 = _slicedToArray(_useState5, 2),
+    sizeCsv = _useState6[0],
+    setSizeCsv = _useState6[1];
+  var _useState7 = (0, _react.useState)({
       cardName: '',
       cardNumber: '',
       cardMonth: '',
@@ -66,13 +71,13 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
       cardSecurityCode: '',
       focus: ''
     }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    values = _useState6[0],
-    setValues = _useState6[1];
-  var _useState7 = (0, _react.useState)({}),
     _useState8 = _slicedToArray(_useState7, 2),
-    errors = _useState8[0],
-    setErrors = _useState8[1];
+    values = _useState8[0],
+    setValues = _useState8[1];
+  var _useState9 = (0, _react.useState)({}),
+    _useState10 = _slicedToArray(_useState9, 2),
+    errors = _useState10[0],
+    setErrors = _useState10[1];
   var _handleDeleteCard = function handleDeleteCard(card) {
     setConfirm({
       open: true,
@@ -114,6 +119,12 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
       border: true
     }));
   };
+  (0, _react.useEffect)(function () {
+    var _creditCard$card, _creditCard$card$code;
+    var creditCard = _cardValidator.default.number(values.cardNumber);
+    if (!creditCard.isValid) return;
+    setSizeCsv(creditCard === null || creditCard === void 0 ? void 0 : (_creditCard$card = creditCard.card) === null || _creditCard$card === void 0 ? void 0 : (_creditCard$card$code = _creditCard$card.code) === null || _creditCard$card$code === void 0 ? void 0 : _creditCard$card$code.size);
+  }, [values === null || values === void 0 ? void 0 : values.cardNumber]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -196,7 +207,7 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     name: "cardSecurityCode",
     "data-openpay-card": "cvv2",
     id: "cvv2",
-    maxLength: 4,
+    maxLength: sizeCsv,
     onChange: handleChange,
     placeholder: "CVV"
   }))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -256,10 +267,10 @@ var PaymentCard = function PaymentCard(props) {
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
   var theme = (0, _styledComponents.useTheme)();
-  var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    isShowActions = _useState10[0],
-    setIsShowActions = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isShowActions = _useState12[0],
+    setIsShowActions = _useState12[1];
   var cardActionsRef = (0, _react.useRef)(null);
   var actionWrapperRef = (0, _react.useRef)(null);
   var getIconCard = function getIconCard() {

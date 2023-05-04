@@ -267,7 +267,7 @@ var Header = function Header(props) {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-temp', ".ordering.co/alseaplatform/delete_new_user.php"), {
+              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-development', ".ordering.co/alseaplatform/delete_new_user.php"), {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'

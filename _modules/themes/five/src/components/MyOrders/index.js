@@ -117,7 +117,7 @@ var MyOrders = function MyOrders(props) {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-temp', ".ordering.co/alseaplatform/wowcheckin_allowed.php?email=").concat(user === null || user === void 0 ? void 0 : user.email), {
+              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-development', ".ordering.co/alseaplatform/wowcheckin_allowed.php?email=").concat(user === null || user === void 0 ? void 0 : user.email), {
                 method: 'GET',
                 'Content-Type': 'application/json',
                 Authorization: "Bearer ".concat(token)
@@ -133,7 +133,7 @@ var MyOrders = function MyOrders(props) {
                 break;
               }
               _context.next = 10;
-              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-temp', ".ordering.co/alseaplatform/wow_movimientos_amount.php"), {
+              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-development', ".ordering.co/alseaplatform/wow_movimientos_amount.php"), {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
