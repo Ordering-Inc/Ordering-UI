@@ -50,7 +50,8 @@ export const UserFormDetailsUI = (props) => {
     isOldLayout,
     requiredFields,
     handleChangeNotifications,
-    handlePlaceOrderAsGuest
+    handlePlaceOrderAsGuest,
+    isAllowGuest
   } = props
 
   const formMethods = useForm()
@@ -488,11 +489,13 @@ export const UserFormDetailsUI = (props) => {
                 >
                   {formState.loading ? t('UPDATING', 'Updating...') : t('SIGN_UP_AND_PLACE_ORDER', 'Sign up and place order')}
                 </Button>
-                <TextLinkWrapper>
-                  <span onClick={() => handlePlaceOrderAsGuest()}>
-                    {t('PLACE_ORDER_AS_GUEST', 'Place order as guest')}
-                  </span>
-                </TextLinkWrapper>
+                {isAllowGuest && (
+                  <TextLinkWrapper>
+                    <span onClick={() => handlePlaceOrderAsGuest()}>
+                      {t('PLACE_ORDER_AS_GUEST', 'Place order as guest')}
+                    </span>
+                  </TextLinkWrapper>
+                )}
               </>
             )}
           </>
