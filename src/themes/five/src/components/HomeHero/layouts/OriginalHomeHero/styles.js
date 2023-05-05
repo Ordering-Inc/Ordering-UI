@@ -275,5 +275,6 @@ export const PoweredByOrdering = styled.div`
   margin-top: 10px;
   a{
     font-weight: 600;
+    margin-left: 5px;
   }
 `
