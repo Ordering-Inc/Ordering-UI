@@ -64,7 +64,8 @@ import {
   ProductTagWrapper,
   VideoGalleryWrapper,
   TitleWrapper,
-  GuestUserLink
+  GuestUserLink,
+  LoadingWrapper
 } from './styles'
 import { useTheme } from 'styled-components'
 import { Input, TextArea } from '../../styles/Inputs'
@@ -683,103 +684,111 @@ const ProductOptionsUI = (props) => {
               }
             </ProductEdition>
             <ProductActions isColumn={(auth && !(orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)))}>
-              <div className='price-amount-block'>
-                <div className='price'>
-                  <h4>{productCart.total && parsePrice(productCart.total)}</h4>
-                  {product?.minimum_per_order && (productCart?.quantity + productAddedToCartLength) <= product?.minimum_per_order && productCart?.quantity !== 1 && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
-                  {product?.maximum_per_order && (productCart?.quantity + productAddedToCartLength) >= product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
-                </div>
-                {
-                  productCart && !isSoldOut && maxProductQuantity > 0 && (
-                    <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
-                      <FiMinusCircle
-                        onClick={decrement}
-                        className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut || ((productCart?.quantity + productAddedToCartLength) <= product?.minimum_per_order) ? 'disabled' : ''}`}
-                      />
-                      {
-                        qtyBy?.pieces && (
-                          <Input
-                            className='qty'
-                            value={productCart?.quantity || ''}
-                            onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
-                            onKeyPress={(e) => {
-                              if (!/^[0-9.]$/.test(e.key)) {
-                                e.preventDefault()
-                              }
-                            }}
-                          />
-                        )
-                      }
-                      {qtyBy?.weight_unit && (
-                        <Input className='qty' value={(productCart.quantity * product?.weight).toFixed(2)} />
-                      )}
-                      <FiPlusCircle
-                        onClick={increment}
-                        className={`${maxProductQuantity <= 0 || (productCart?.quantity + productAddedToCartLength) >= maxProductQuantity || ((productCart?.quantity + productAddedToCartLength) >= product?.maximum_per_order && product?.maximum_per_order) || isSoldOut ? 'disabled' : ''}`}
-                      />
-                      {isHaveWeight && (
-                        <WeightUnitSwitch>
-                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
-                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
-                        </WeightUnitSwitch>
-                      )}
+              {(actionStatus?.loading || orderState.loading) ? (
+                <LoadingWrapper>
+                  <Skeleton height={35} width={150} />
+                </LoadingWrapper>
+              ) : (
+                <>
+                  <div className='price-amount-block'>
+                    <div className='price'>
+                      <h4>{productCart.total && parsePrice(productCart.total)}</h4>
+                      {product?.minimum_per_order && (productCart?.quantity + productAddedToCartLength) <= product?.minimum_per_order && productCart?.quantity !== 1 && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
+                      {product?.maximum_per_order && (productCart?.quantity + productAddedToCartLength) >= product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
                     </div>
-                  )
-                }
-              </div>
+                    {
+                      productCart && !isSoldOut && maxProductQuantity > 0 && (
+                        <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
+                          <FiMinusCircle
+                            onClick={decrement}
+                            className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut || ((productCart?.quantity + productAddedToCartLength) <= product?.minimum_per_order) ? 'disabled' : ''}`}
+                          />
+                          {
+                            qtyBy?.pieces && (
+                              <Input
+                                className='qty'
+                                value={productCart?.quantity || ''}
+                                onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
+                                onKeyPress={(e) => {
+                                  if (!/^[0-9.]$/.test(e.key)) {
+                                    e.preventDefault()
+                                  }
+                                }}
+                              />
+                            )
+                          }
+                          {qtyBy?.weight_unit && (
+                            <Input className='qty' value={(productCart.quantity * product?.weight).toFixed(2)} />
+                          )}
+                          <FiPlusCircle
+                            onClick={increment}
+                            className={`${maxProductQuantity <= 0 || (productCart?.quantity + productAddedToCartLength) >= maxProductQuantity || ((productCart?.quantity + productAddedToCartLength) >= product?.maximum_per_order && product?.maximum_per_order) || isSoldOut ? 'disabled' : ''}`}
+                          />
+                          {isHaveWeight && (
+                            <WeightUnitSwitch>
+                              <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
+                              <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
+                            </WeightUnitSwitch>
+                          )}
+                        </div>
+                      )
+                    }
+                  </div>
 
-              {productCart && !isSoldOut && maxProductQuantity > 0 && auth && (orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)) && (
-                <Button
-                  className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
-                  color='primary'
-                  onClick={() => handleSaveProduct()}
-                  disabled={orderState.loading || productCart?.quantity === 0 || (product?.minimum_per_order && ((productCart?.quantity + productAddedToCartLength) < product?.minimum_per_order)) || (product?.maximum_per_order && ((productCart?.quantity + productAddedToCartLength) > product?.maximum_per_order))}
-                >
-                  {orderState.loading ? (
-                    <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
-                  ) : (
-                    <span>
-                      {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD', theme?.defaultLanguages?.ADD || 'Add')}
-                    </span>
+                  {productCart && !isSoldOut && maxProductQuantity > 0 && auth && (orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)) && (
+                    <Button
+                      className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
+                      color='primary'
+                      onClick={() => handleSaveProduct()}
+                      disabled={orderState.loading || productCart?.quantity === 0 || (product?.minimum_per_order && ((productCart?.quantity + productAddedToCartLength) < product?.minimum_per_order)) || (product?.maximum_per_order && ((productCart?.quantity + productAddedToCartLength) > product?.maximum_per_order))}
+                    >
+                      {orderState.loading ? (
+                        <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
+                      ) : (
+                        <span>
+                          {editMode ? t('UPDATE', theme?.defaultLanguages?.UPDATE || 'Update') : t('ADD', theme?.defaultLanguages?.ADD || 'Add')}
+                        </span>
+                      )}
+                    </Button>
                   )}
-                </Button>
-              )}
 
-              {auth && !(orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)) && (
-                orderState.loading ? (
-                  <Button
-                    className='add'
-                    color='primary'
-                    disabled
-                  >
-                    {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
-                  </Button>
-                ) : (
-                  <AddressList
-                    isModal
-                    isProfile
-                    userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-                    addressList={isNaN(userCustomer?.id) ? user.addresses : null}
-                    isProductForm
-                  />
-                )
-              )}
+                  {auth && !(orderState.options?.address_id || unaddressedTypes.includes(orderState?.options?.type)) && (
+                    orderState.loading ? (
+                      <Button
+                        className='add'
+                        color='primary'
+                        disabled
+                      >
+                        {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
+                      </Button>
+                    ) : (
+                      <AddressList
+                        isModal
+                        isProfile
+                        userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+                        addressList={isNaN(userCustomer?.id) ? user.addresses : null}
+                        isProductForm
+                      />
+                    )
+                  )}
 
-              {(!auth || isSoldOut || maxProductQuantity <= 0) && (
-                <Button
-                  className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
-                  color='primary'
-                  outline
-                  disabled={isSoldOut || maxProductQuantity <= 0}
-                  onClick={() => setModalIsOpen(true)}
-                >
-                  {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
-                </Button>
-              )}
-              {!auth && guestCheckoutEnabled && orderTypeEnabled && (
-                <GuestUserLink onClick={handleUpdateGuest}>
-                  {actionStatus?.loading ? <Skeleton height={25} width={70} /> : t('WITH_GUEST_USER', 'With Guest user')}
-                </GuestUserLink>
+                  {(!auth || isSoldOut || maxProductQuantity <= 0) && (
+                    <Button
+                      className={`add ${!(productCart && !isSoldOut && maxProductQuantity > 0) ? 'soldout' : ''}`}
+                      color='primary'
+                      outline
+                      disabled={isSoldOut || maxProductQuantity <= 0}
+                      onClick={() => setModalIsOpen(true)}
+                    >
+                      {isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', theme?.defaultLanguages?.SOLD_OUT || 'Sold out') : t('LOGIN_SIGNUP', theme?.defaultLanguages?.LOGIN_SIGNUP || 'Login / Sign Up')}
+                    </Button>
+                  )}
+                  {!auth && guestCheckoutEnabled && orderTypeEnabled && (
+                    <GuestUserLink onClick={handleUpdateGuest}>
+                      {t('WITH_GUEST_USER', 'With Guest user')}
+                    </GuestUserLink>
+                  )}
+                </>
               )}
             </ProductActions>
           </ProductInfo>
