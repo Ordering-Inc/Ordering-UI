@@ -180,7 +180,8 @@ const CheckoutUI = (props) => {
   const creditPointPlanOnBusiness = creditPointPlan?.businesses?.find(b => b.business_id === cart?.business_id && b.accumulates)
 
   const handlePlaceOrder = () => {
-    if (!userErrors.length && (!requiredFields?.length || allowedGuest)) {
+    if (!userErrors.length && (!requiredFields?.length ||
+        (allowedGuest && (paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery')))) {
       const body = {}
       if (behalfName) {
         body.on_behalf_of = behalfName
@@ -711,6 +712,7 @@ const CheckoutUI = (props) => {
           isEdit
           isModal
           handlePlaceOrderAsGuest={handlePlaceOrderAsGuest}
+          isAllowGuest={paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery'}
           onClose={() => {
             setIsOpen(false)
             handlePlaceOrder()

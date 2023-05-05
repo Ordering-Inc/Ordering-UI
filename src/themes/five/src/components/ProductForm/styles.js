@@ -637,3 +637,9 @@ export const GuestUserLink = styled.div`
     margin-right: 10px;
   `}
 `
+
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
