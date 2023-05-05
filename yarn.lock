@@ -2090,22 +2090,22 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@segment/analytics-core@1.2.4":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.2.4.tgz#a01f0c87246292e0b9790e12c73d2f7e5fceb168"
-  integrity sha512-M16osD6+z/bQPSVCZdlU+BAhCk968ppi+SGxU2gVa4B196Qr8SEkBPr3NxUCGTSoULo4/T+k8Ea5cF+pXlgf6Q==
+"@segment/analytics-core@1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.2.5.tgz#bd17034be9393aa245a684f137a7950debee240b"
+  integrity sha512-T+AyZe4eKAO08T138RcvCTqUCT609H07VQL6+kh58VJiIalowrnqSdWf9rc+AsUMvPnxUOsnyGBOqNdZ5KNqYw==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     dset "^3.1.2"
     tslib "^2.4.1"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.51.6"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.51.6.tgz#56c99782fc333025906dbf8f5efd9b7f9f87c197"
-  integrity sha512-SiuuCHLq2sWM3fwF0peQ9J9Ku+FAbsx5XsGl9pL4rfHoaItlQuBETxkmT3BD2YltFxhr4FCQ5+phdT0/X5QUFA==
+  version "1.51.7"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.51.7.tgz#f0d3c9b06b2ff5e46802a0ec8e9f676b41bd3658"
+  integrity sha512-WXrgQPkB4MBa4Op4X1SKZL/WEBX3vM04jChHClXZK3QcMAezy4A0vblcHK9vtm8RGOuiickVuemU7ZN3/iaGPA==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
-    "@segment/analytics-core" "1.2.4"
+    "@segment/analytics-core" "1.2.5"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
     "@segment/tsub" "1.0.1"
@@ -3134,9 +3134,9 @@
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
-  version "18.16.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.3.tgz#6bda7819aae6ea0b386ebc5b24bdf602f1b42b01"
-  integrity sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==
+  version "20.0.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.0.0.tgz#081d9afd28421be956c1a47ced1c9a0034b467e2"
+  integrity sha512-cD2uPTDnQQCVpmRefonO98/PPijuOnnEy5oytWJFPY1N9aJCz2wJ5kSGWO+zJoed2cY2JxQh6yBuUq4vIn61hw==
 
 "@types/node@12.12.50":
   version "12.12.50"
@@ -5624,9 +5624,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.381"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.381.tgz#d4c66f4182fbb199a66e807ead82b1e18e8aba88"
-  integrity sha512-jSbS1KRmmGO6SwssmVQpCy1jENfCJT6hN36W6Dxj5HXUj59cUn6yd4gv5113mfATo6aEj/mPUTkMZmNknFXj6Q==
+  version "1.4.384"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.384.tgz#5c23b5579930dec9af2a93edafddbe991542eace"
+  integrity sha512-I97q0MmRAAqj53+a8vZsDkEXBZki+ehYAOPzwtQzALip52aEp2+BJqHFtTlsfjoqVZYwPpHC8wM6MbsSZQ/Eqw==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -8175,10 +8175,10 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-libphonenumber-js@^1.10.28, libphonenumber-js@^1.9.17, libphonenumber-js@^1.9.4:
-  version "1.10.28"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.28.tgz#cae7e929cad96cee5ecc9449027192ecba39ee72"
-  integrity sha512-1eAgjLrZA0+2Wgw4hs+4Q/kEBycxQo8ZLYnmOvZ3AlM8ImAVAJgDPlZtISLEzD1vunc2q8s2Pn7XwB7I8U3Kzw==
+libphonenumber-js@^1.10.30, libphonenumber-js@^1.9.17, libphonenumber-js@^1.9.4:
+  version "1.10.30"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.30.tgz#c0559d6c58dc1a7f189b88b7b23354c98b182848"
+  integrity sha512-PLGc+xfrQrkya/YK2/5X+bPpxRmyJBHM+xxz9krUdSgk4Vs2ZwxX5/Ow0lv3r9PDlDtNWb4u+it8MY5rZ0IyGw==
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
@@ -10096,14 +10096,14 @@ react-otp-input@^2.3.0:
   integrity sha512-AIgl7u4sS9BTNCxX1xlaS5fPWay/Zml8Ho5LszXZKXrH1C/TiFsTQGmtl13UecQYO3mSF3HUzG2rrDf0sjEFmg==
 
 react-phone-number-input@^3.1.6:
-  version "3.2.20"
-  resolved "https://registry.yarnpkg.com/react-phone-number-input/-/react-phone-number-input-3.2.20.tgz#695ce6b024d754243848f2c013f875c52d0eb2de"
-  integrity sha512-UuLTcD83dzsTbQtgEubXPo50UYv2/k5VnnPFYXW2hXqHY2XNTGw7lqfm73dQ7TYrddOyEKoePbzyDfmysPDvsw==
+  version "3.2.21"
+  resolved "https://registry.yarnpkg.com/react-phone-number-input/-/react-phone-number-input-3.2.21.tgz#faa90962bc63f9141ce4e96feb802b11696277f2"
+  integrity sha512-hsv1HbLS98kIEAx9u9/rk5RSfFRy/Prn/RLgRiZI+8MGxEpJZQ2CooUThPvXzhkjsa+YokM+PbHk8Zsoi5c7aQ==
   dependencies:
     classnames "^2.3.1"
     country-flag-icons "^1.5.4"
     input-format "^0.3.8"
-    libphonenumber-js "^1.10.28"
+    libphonenumber-js "^1.10.30"
     prop-types "^15.8.1"
 
 react-popper@^2.2.3, react-popper@^2.3.0:

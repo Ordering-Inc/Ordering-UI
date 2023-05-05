@@ -209,7 +209,7 @@ var CheckoutUI = function CheckoutUI(props) {
     return b.business_id === (cart === null || cart === void 0 ? void 0 : cart.business_id) && b.accumulates;
   });
   var handlePlaceOrder = function handlePlaceOrder() {
-    if (!userErrors.length && (!(requiredFields !== null && requiredFields !== void 0 && requiredFields.length) || allowedGuest)) {
+    if (!userErrors.length && (!(requiredFields !== null && requiredFields !== void 0 && requiredFields.length) || allowedGuest && ((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'card_delivery'))) {
       var body = {};
       if (behalfName) {
         body.on_behalf_of = behalfName;
@@ -580,6 +580,7 @@ var CheckoutUI = function CheckoutUI(props) {
     isEdit: true,
     isModal: true,
     handlePlaceOrderAsGuest: handlePlaceOrderAsGuest,
+    isAllowGuest: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'card_delivery',
     onClose: function onClose() {
       setIsOpen(false);
       handlePlaceOrder();

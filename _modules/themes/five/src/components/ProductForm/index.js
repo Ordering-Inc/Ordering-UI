@@ -635,7 +635,10 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }, props));
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductActions, {
     isColumn: auth && !((_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && _orderState$options3.address_id || unaddressedTypes.includes(orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type))
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, actionStatus !== null && actionStatus !== void 0 && actionStatus.loading || orderState.loading ? /*#__PURE__*/_react.default.createElement(_styles.LoadingWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 35,
+    width: 150
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "price-amount-block"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "price"
@@ -698,10 +701,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
   }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.SOLD_OUT) || 'Sold out') : t('LOGIN_SIGNUP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.LOGIN_SIGNUP) || 'Login / Sign Up')), !auth && guestCheckoutEnabled && orderTypeEnabled && /*#__PURE__*/_react.default.createElement(_styles.GuestUserLink, {
     onClick: handleUpdateGuest
-  }, actionStatus !== null && actionStatus !== void 0 && actionStatus.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 25,
-    width: 70
-  }) : t('WITH_GUEST_USER', 'With Guest user'))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, t('WITH_GUEST_USER', 'With Guest user')))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return closeModal();
