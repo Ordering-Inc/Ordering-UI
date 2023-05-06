@@ -166,7 +166,7 @@ var OriginalHomeHero = function OriginalHomeHero(props) {
     onClick: handleFindBusinesses
   }, t('FIND_BUSINESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.FIND_BUSINESSES) || 'Find businesses')))), windowSize.width < 576 && !auth && isShowLoginAccount && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, enabledPoweredByOrdering && /*#__PURE__*/_react.default.createElement(_styles.PoweredByOrdering, null, t('POWERED_BY', 'Powered by'), /*#__PURE__*/_react.default.createElement("a", {
     href: "https://www.ordering.co"
-  }, ' ', t('ORDERING_CO', 'Ordering.co'))), /*#__PURE__*/_react.default.createElement(_styles.UseAccount, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, t('YOUR_ACCOUNT', 'Use your account')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('ORDERING_CO', 'Ordering.co'))), /*#__PURE__*/_react.default.createElement(_styles.UseAccount, null, /*#__PURE__*/_react.default.createElement(_styles.SectionHeader, null, t('YOUR_ACCOUNT', 'Use your account')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
