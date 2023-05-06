@@ -390,7 +390,7 @@ const OrderDetailsUI = (props) => {
                   <PoweredByOrdering>
                     {t('POWERED_BY', 'Powered by')}
                     <a href='https://www.ordering.co'>
-                      {' '}{t('ORDERING_CO', 'Ordering.co')}
+                      {t('ORDERING_CO', 'Ordering.co')}
                     </a>
                   </PoweredByOrdering>
                 )}
