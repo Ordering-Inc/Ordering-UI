@@ -805,6 +805,7 @@ export const PoweredByOrdering = styled.p`
   margin-bottom: 10px;
   a{
     font-weight: 600;
+    margin-left: 5px;
   }
   a:hover{
     text-decoration: underline;
