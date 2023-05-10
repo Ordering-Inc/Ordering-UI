@@ -187,5 +187,5 @@ var ProfessionalBlock = _styledComponents.default.div(_templateObject66 || (_tem
 exports.ProfessionalBlock = ProfessionalBlock;
 var PlaceSpotWrapper = _styledComponents.default.div(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["\n  @media (min-width: 768px) {\n    width: calc(100% - 20px);\n  }\n"])));
 exports.PlaceSpotWrapper = PlaceSpotWrapper;
-var PoweredByOrdering = _styledComponents.default.p(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin: 0;\n  display: flex;\n  justify-content: center;\n  white-space: pre !important;\n  margin-bottom: 10px;\n  a{\n    font-weight: 600;\n  }\n  a:hover{\n    text-decoration: underline;\n  }\n"])));
+var PoweredByOrdering = _styledComponents.default.p(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin: 0;\n  display: flex;\n  justify-content: center;\n  white-space: pre !important;\n  margin-bottom: 10px;\n  a{\n    font-weight: 600;\n    margin-left: 5px;\n  }\n  a:hover{\n    text-decoration: underline;\n  }\n"])));
 exports.PoweredByOrdering = PoweredByOrdering;

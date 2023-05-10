@@ -79,5 +79,5 @@ var LogoWrapper = _styledComponents.default.div(_templateObject20 || (_templateO
 exports.LogoWrapper = LogoWrapper;
 var HeroContent = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  button{\n    font-size: 12px;\n    line-height: 18px;\n    padding: 10px 16px;\n    margin-bottom: 45px;\n    white-space: nowrap;\n\n    @media (min-width: 576px) {\n      padding-top: 5px;\n      padding-bottom: 5px;\n      font-size: 18px;\n      width: 180px;\n      line-height: initial;\n    }\n  }\n"])));
 exports.HeroContent = HeroContent;
-var PoweredByOrdering = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin-top: 10px;\n  a{\n    font-weight: 600;\n  }\n"])));
+var PoweredByOrdering = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin-top: 10px;\n  a{\n    font-weight: 600;\n    margin-left: 5px;\n  }\n"])));
 exports.PoweredByOrdering = PoweredByOrdering;
