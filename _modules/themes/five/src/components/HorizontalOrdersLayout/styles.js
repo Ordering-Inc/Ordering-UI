@@ -22,7 +22,7 @@ var CardWrapper = _styledComponents.default.div(_templateObject4 || (_templateOb
 exports.CardWrapper = CardWrapper;
 var CardsContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 exports.CardsContainer = CardsContainer;
-var CardsContainerWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  display: flex;\n  overflow: auto hidden;\n  ::-webkit-scrollbar {\n    width: 6px;\n    height: 6px;\n  }\n  ", "\n"])), function (_ref2) {
+var CardsContainerWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  display: flex;\n  ::-webkit-scrollbar {\n    width: 6px;\n    height: 6px;\n  }\n  ", "\n"])), function (_ref2) {
   var isLoading = _ref2.isLoading;
   return isLoading && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    ::-webkit-scrollbar {\n      width: 0px;\n      height: 0px;\n    }\n  "])));
 });

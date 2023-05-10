@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _props$beforeElements, _props$beforeComponen, _category$subcategori2, _category$subcategori3, _category$subcategori4, _category$subcategori5, _categoryState$produc2, _categoryState$produc3, _categoryState$produc4, _props$afterComponent, _props$afterElements;
+  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _props$beforeElements, _props$beforeComponen, _category$subcategori2, _category$subcategori3, _category$subcategori4, _category$subcategori5, _categoryState$produc2, _categoryState$produc3, _categoryState$produc4, _categoryState$produc9, _props$afterComponent, _props$afterElements;
   var errors = props.errors,
     businessId = props.businessId,
     isLazy = props.isLazy,
@@ -357,7 +357,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       key: "skeleton:".concat(i),
       isSkeleton: true
     });
-  })), !categoryState.loading && !isBusinessLoading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && !isBusinessLoading && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc9 = categoryState.products) === null || _categoryState$produc9 === void 0 ? void 0 : _categoryState$produc9.length) === 0 && !(!searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
     btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
     onClickButton: function onClickButton() {
