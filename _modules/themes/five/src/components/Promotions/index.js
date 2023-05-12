@@ -85,7 +85,7 @@ var PromotionsUI = function PromotionsUI(props) {
   });
   var targetString = (offerSelected === null || offerSelected === void 0 ? void 0 : offerSelected.target) === 1 ? t('SUBTOTAL', 'Subtotal') : (offerSelected === null || offerSelected === void 0 ? void 0 : offerSelected.target) === 2 ? t('DELIVERY_FEE', 'Delivery fee') : t('SERVICE_FEE', 'Service fee');
   return /*#__PURE__*/_react.default.createElement(_styles.PromotionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PromotionTitle, null, t('PROMOTIONS', 'Promotions')), /*#__PURE__*/_react.default.createElement(_styles.SearchBarContainer, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
-    placeholder: t('SEARCH_OFFERS', 'Search offers'),
+    placeholder: t('SEARCH_PROMOTION', 'Search promotion'),
     onSearch: handleSearchValue
   })), (offersState === null || offersState === void 0 ? void 0 : offersState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (key, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SingleOfferContainer, {
