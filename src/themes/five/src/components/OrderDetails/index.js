@@ -554,7 +554,7 @@ const OrderDetailsUI = (props) => {
                   {!externalTrack && (<StatusBar percentage={getOrderStatus(order?.status)?.percentage} />)}
                   {externalTrack && (
                     <IframeContainer>
-                      <iframe src={externalTrack.link_location} width='100%' height='100%' allowFullScreen loading='true' sandbox='allow-scripts allow-modals allow-same-origin allow-popups allow-forms' referrerPolicy='same-origin origin-when-cross-origin' />
+                      <iframe src={externalTrack.link_location} width='100%' height='100%' loading='true' sandbox='allow-scripts allow-modals allow-same-origin allow-popups allow-forms' referrerPolicy='same-origin origin-when-cross-origin' />
                     </IframeContainer>
                   )}
                   <OrderStatusAndLinkContainer>

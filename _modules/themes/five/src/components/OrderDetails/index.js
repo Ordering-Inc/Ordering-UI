@@ -709,7 +709,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     src: externalTrack.link_location,
     width: "100%",
     height: "100%",
-    sandbox: "allow-scripts allow-modal"
+    loading: "true",
+    sandbox: "allow-scripts allow-modals allow-same-origin allow-popups allow-forms",
+    referrerPolicy: "same-origin origin-when-cross-origin"
   })), /*#__PURE__*/_react.default.createElement(_styles.OrderStatusAndLinkContainer, null, !externalTrack && /*#__PURE__*/_react.default.createElement("p", {
     className: "order-status"
   }, (_getOrderStatus2 = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.LinkWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
