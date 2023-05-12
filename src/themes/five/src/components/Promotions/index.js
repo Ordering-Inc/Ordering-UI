@@ -70,7 +70,7 @@ const PromotionsUI = (props) => {
       </PromotionTitle>
       <SearchBarContainer>
         <SearchBar
-          placeholder={t('SEARCH_OFFERS', 'Search offers')}
+          placeholder={t('SEARCH_PROMOTION', 'Search promotion')}
           onSearch={handleSearchValue}
         />
       </SearchBarContainer>
