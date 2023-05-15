@@ -154,7 +154,8 @@ var CheckoutUI = function CheckoutUI(props) {
     setIsSuccess = _useState16[1];
   var _useState17 = (0, _react.useState)({
       login: false,
-      signup: false
+      signup: false,
+      isGuest: false
     }),
     _useState18 = _slicedToArray(_useState17, 2),
     openModal = _useState18[0],
@@ -168,6 +169,7 @@ var CheckoutUI = function CheckoutUI(props) {
     cardList = _useState22[0],
     setCardList = _useState22[1];
   var cardsMethods = ['stripe', 'credomatic'];
+  var stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect'];
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
   var isTableNumberEnabled = configs === null || configs === void 0 ? void 0 : (_configs$table_numer_ = configs.table_numer_enabled) === null || _configs$table_numer_ === void 0 ? void 0 : _configs$table_numer_.value;
   var isWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
@@ -209,6 +211,13 @@ var CheckoutUI = function CheckoutUI(props) {
     return b.business_id === (cart === null || cart === void 0 ? void 0 : cart.business_id) && b.accumulates;
   });
   var handlePlaceOrder = function handlePlaceOrder() {
+    if (stripePaymethods.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && user !== null && user !== void 0 && user.guest_id) {
+      setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+        signup: true,
+        isGuest: true
+      }));
+      return;
+    }
     if (!userErrors.length && (!(requiredFields !== null && requiredFields !== void 0 && requiredFields.length) || allowedGuest && ((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'card_delivery'))) {
       var body = {};
       if (behalfName) {
@@ -282,8 +291,10 @@ var CheckoutUI = function CheckoutUI(props) {
       user: user,
       token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
     });
+    (openModal === null || openModal === void 0 ? void 0 : openModal.isGuest) && handlePlaceOrderAsGuest();
     setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
-      signup: false
+      signup: false,
+      isGuest: false
     }));
   };
   var handleSuccessLogin = function handleSuccessLogin(user) {
@@ -591,7 +602,8 @@ var CheckoutUI = function CheckoutUI(props) {
     padding: "30px",
     onClose: function onClose() {
       return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
-        signup: false
+        signup: false,
+        isGuest: false
       }));
     }
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
