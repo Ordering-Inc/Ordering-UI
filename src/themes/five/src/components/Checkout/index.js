@@ -125,10 +125,11 @@ const CheckoutUI = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [requiredFields, setRequiredFields] = useState([])
   const [isSuccess, setIsSuccess] = useState(false)
-  const [openModal, setOpenModal] = useState({ login: false, signup: false })
+  const [openModal, setOpenModal] = useState({ login: false, signup: false, isGuest: false })
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
   const cardsMethods = ['stripe', 'credomatic']
+  const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isTableNumberEnabled = configs?.table_numer_enabled?.value
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
@@ -180,6 +181,11 @@ const CheckoutUI = (props) => {
   const creditPointPlanOnBusiness = creditPointPlan?.businesses?.find(b => b.business_id === cart?.business_id && b.accumulates)
 
   const handlePlaceOrder = () => {
+    if (stripePaymethods.includes(paymethodSelected?.gateway) && user?.guest_id) {
+      setOpenModal({ ...openModal, signup: true, isGuest: true })
+      return
+    }
+
     if (!userErrors.length && (!requiredFields?.length ||
         (allowedGuest && (paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery')))) {
       const body = {}
@@ -264,7 +270,8 @@ const CheckoutUI = (props) => {
       user,
       token: user?.session?.access_token
     })
-    setOpenModal({ ...openModal, signup: false })
+    openModal?.isGuest && handlePlaceOrderAsGuest()
+    setOpenModal({ ...openModal, signup: false, isGuest: false })
   }
 
   const handleSuccessLogin = (user) => {
@@ -723,7 +730,7 @@ const CheckoutUI = (props) => {
         open={openModal.signup}
         width='760px'
         padding='30px'
-        onClose={() => setOpenModal({ ...openModal, signup: false })}
+        onClose={() => setOpenModal({ ...openModal, signup: false, isGuest: false })}
       >
         <SignUpForm
           useLoginByCellphone
