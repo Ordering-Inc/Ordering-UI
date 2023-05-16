@@ -76,7 +76,7 @@ import {
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
 
-import { getGoogleMapImage, getOrderStatus } from '../../../../../utils'
+import { getGoogleMapImage, getOrderStatuPickUp, getOrderStatus } from '../../../../../utils'
 import { OrderHistory } from './OrderHistory'
 import { ReviewProfessional } from '../ReviewProfessional'
 import { OrderActionsSection } from './OrderActionsSection'
@@ -378,6 +378,8 @@ const OrderDetailsUI = (props) => {
   const disableLeftButton = [1, 2, 5, 15, 16, 17, 20, 21]
   const disableRightButton = [1, 2, 5, 15, 16, 17, 21]
 
+  const progressBarObjt = order?.delivery_type && order?.delivery_type === 2 ? getOrderStatuPickUp : getOrderStatus
+
   return (
     <Container>
       {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
@@ -458,9 +460,9 @@ const OrderDetailsUI = (props) => {
               </TitleContainer>
               {!hideDeliveryProgress && !isGiftCardOrder && (
                 <>
-                  <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                  <StatusBar percentage={progressBarObjt(order?.status)?.percentage} />
                   <OrderStatusAndLinkContainer>
-                    <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
+                    <p className='order-status'>{progressBarObjt(order?.status)?.value}</p>
                     <LinkWrapper>
                       <ReviewOrderLink
                         active
@@ -535,7 +537,7 @@ const OrderDetailsUI = (props) => {
                             onClick={() => handleChangeOrderStatus(20)}
                             disabled={disableLeftButton.includes(order?.status)}
                           >
-                            {getOrderStatus(20)?.value}
+                            {progressBarObjt(20)?.value}
                           </Button>
                         </div>
                         <div>
@@ -545,7 +547,7 @@ const OrderDetailsUI = (props) => {
                             disabled={disableRightButton.includes(order?.status)}
                             onClick={() => handleChangeOrderStatus(21)}
                           >
-                            {getOrderStatus(21)?.value}
+                            {progressBarObjt(21)?.value}
                           </Button>
                         </div>
                       </BtsOrderStatus>
