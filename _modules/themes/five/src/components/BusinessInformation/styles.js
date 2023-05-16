@@ -41,7 +41,7 @@ var SectionTitle = _styledComponents.default.h3(_templateObject8 || (_templateOb
   return props.theme.colors.darkTextColor;
 });
 exports.SectionTitle = SectionTitle;
-var Map = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: calc(100% + 20px);\n  margin-left: -10px;\n  height: 250px;\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n  }\n  @media(min-width: 768px){\n    width: calc(100% + 40px);\n    margin-left: -20px;\n  }\n"])));
+var Map = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: calc(100% + 20px);\n  margin-left: -10px;\n  height: 300px;\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n  }\n  @media(min-width: 768px){\n    width: calc(100% + 40px);\n    margin-left: -20px;\n  }\n"])));
 exports.Map = Map;
 var ScheduleSection = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-bottom: 35px;\n"])));
 exports.ScheduleSection = ScheduleSection;

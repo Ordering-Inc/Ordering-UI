@@ -122,6 +122,11 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     var pos = position ? "(".concat(position, ")") : '';
     return "".concat(quantity, " x ").concat(name, " ").concat(pos, " +").concat(price);
   };
+  (0, _react.useEffect)(function () {
+    if (setActive === 'active') {
+      setHeightState("".concat(content.current.scrollHeight, "px"));
+    }
+  }, [product, setActive]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

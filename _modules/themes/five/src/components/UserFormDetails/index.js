@@ -61,7 +61,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     isOldLayout = props.isOldLayout,
     requiredFields = props.requiredFields,
     handleChangeNotifications = props.handleChangeNotifications,
-    handlePlaceOrderAsGuest = props.handlePlaceOrderAsGuest;
+    handlePlaceOrderAsGuest = props.handlePlaceOrderAsGuest,
+    isAllowGuest = props.isAllowGuest;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -440,7 +441,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return setModalIsOpen(true);
     },
     disabled: formState.loading
-  }, formState.loading ? t('UPDATING', 'Updating...') : t('SIGN_UP_AND_PLACE_ORDER', 'Sign up and place order')), /*#__PURE__*/_react.default.createElement(_styles.TextLinkWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+  }, formState.loading ? t('UPDATING', 'Updating...') : t('SIGN_UP_AND_PLACE_ORDER', 'Sign up and place order')), isAllowGuest && /*#__PURE__*/_react.default.createElement(_styles.TextLinkWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return handlePlaceOrderAsGuest();
     }
