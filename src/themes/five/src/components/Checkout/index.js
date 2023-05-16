@@ -128,6 +128,7 @@ const CheckoutUI = (props) => {
   const [openModal, setOpenModal] = useState({ login: false, signup: false, isGuest: false })
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
+  const [paymethodClicked, setPaymethodClicked] = useState(null)
   const cardsMethods = ['stripe', 'credomatic']
   const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
   const businessConfigs = businessDetails?.business?.configs ?? []
@@ -187,7 +188,7 @@ const CheckoutUI = (props) => {
     }
 
     if (!userErrors.length && (!requiredFields?.length ||
-        (allowedGuest && (paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery')))) {
+      (allowedGuest && (paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery')))) {
       const body = {}
       if (behalfName) {
         body.on_behalf_of = behalfName
@@ -515,6 +516,10 @@ const CheckoutUI = (props) => {
                 handlePlaceOrder={handlePlaceOrder}
                 onPlaceOrderClick={onPlaceOrderClick}
                 setCardList={setCardList}
+                requiredFields={requiredFields}
+                openUserModal={setIsOpen}
+                paymethodClicked={paymethodClicked}
+                setPaymethodClicked={setPaymethodClicked}
               />
             </PaymentMethodContainer>
           )}
@@ -722,7 +727,14 @@ const CheckoutUI = (props) => {
           isAllowGuest={paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery'}
           onClose={() => {
             setIsOpen(false)
-            handlePlaceOrder()
+            if (paymethodClicked) {
+              setPaymethodClicked({
+                ...paymethodClicked,
+                confirmed: true
+              })
+            } else {
+              handlePlaceOrder()
+            }
           }}
         />
       </Modal>
