@@ -102,7 +102,11 @@ const PaymentOptionsUI = (props) => {
     onPlaceOrderClick,
     handlePlaceOrder,
     paymethods,
-    setCardList
+    setCardList,
+    requiredFields,
+    openUserModal,
+    paymethodClicked,
+    setPaymethodClicked
   } = props
   const [, t] = useLanguage()
   const [{ token }] = useSession()
@@ -135,6 +139,14 @@ const PaymentOptionsUI = (props) => {
       setAlertState({
         open: true,
         content: [t('DRIVER_TIPS_REQUIRED', 'Driver tips is required, please select a driver tip before select this paymethod')]
+      })
+      return
+    }
+    if (paymethod?.gateway === 'paypal' && requiredFields.length > 0) {
+      openUserModal && openUserModal(true)
+      setPaymethodClicked({
+        confirmed: false,
+        paymethod
       })
       return
     }
@@ -185,6 +197,12 @@ const PaymentOptionsUI = (props) => {
       handlePlaceOrder()
     }
   }, [JSON.stringify(paymethodData), paymethodSelected])
+
+  useEffect(() => {
+    if (paymethodClicked?.confirmed) {
+      handlePaymethodClick(paymethodClicked?.paymethod)
+    }
+  }, [paymethodClicked?.confirmed])
 
   return (
     <>
