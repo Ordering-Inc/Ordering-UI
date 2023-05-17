@@ -22,7 +22,7 @@ export const MapMessages = (props) => {
     <>
       {messages?.messages.map((message) => (
         <React.Fragment key={message.id}>
-          {message.type === 1 && (
+          {message.type === 1 && message?.change?.attribute !== 'driver_group_id' && (
             <MessageContentWrapper key={message.id}>
               {message.change?.attribute !== 'driver_id' ? (
                 <>
