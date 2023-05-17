@@ -146,6 +146,9 @@ const CheckoutUI = (props) => {
 
   const validateCommentsCartField = validationFields?.fields?.checkout?.comments?.enabled && validationFields?.fields?.checkout?.comments?.required && (cart?.comment === null || cart?.comment?.trim().length === 0)
 
+  const validateZipcodeCard =
+    validationFields?.fields?.card?.zipcode?.enabled && validationFields?.fields?.card?.zipcode?.required && !paymethodSelected?.data?.card?.zipcode
+
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
     (cardsMethods.includes(paymethodSelected?.gateway) && cardList?.cards?.length === 0) ||
@@ -160,7 +163,8 @@ const CheckoutUI = (props) => {
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
       validationFields?.fields?.checkout?.driver_tip?.required &&
       (Number(cart?.driver_tip) <= 0)) ||
-    (validateCommentsCartField)
+    (validateCommentsCartField) ||
+    validateZipcodeCard
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -671,6 +675,11 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
+        {validateZipcodeCard && (
+          <WarningText>
+            {t('WARNING_CARD_ZIPCODE_REQUIRED', 'Your card selected has not zipcode')}
+          </WarningText>
+        )}
         {cart?.valid_preorder !== undefined && !cart?.valid_preorder && (
           <WarningText>
             {t('INVALID_CART_MOMENT', 'Selected schedule time is invalid, please select a schedule into the business schedule interval.')}
