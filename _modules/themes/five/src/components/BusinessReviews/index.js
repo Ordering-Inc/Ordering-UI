@@ -8,7 +8,7 @@ exports.BusinessReviewsUI = exports.BusinessReviews = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponents = require("ordering-components");
-var _ThemeContext = require("../../../../../contexts/ThemeContext");
+var _styledComponents = require("styled-components");
 var _moment = _interopRequireDefault(require("moment"));
 var _styles = require("./styles");
 var _BsFillStarFill = _interopRequireDefault(require("@meronex/icons/bs/BsFillStarFill"));
@@ -39,18 +39,16 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useTheme = (0, _ThemeContext.useTheme)(),
-    _useTheme2 = _slicedToArray(_useTheme, 1),
-    theme = _useTheme2[0];
+  var theme = (0, _styledComponents.useTheme)();
   var handleOnChange = function handleOnChange(evt) {
     if (evt.target.value) onChangeReview(evt.target.value);else onChangeReview('');
   };
   var handleClickRaiting = function handleClickRaiting(raiting) {
     if (raiting) handleClickOption(raiting);
   };
-  var showRanking = !(theme !== null && theme !== void 0 && (_theme$business_view = theme.business_view) !== null && _theme$business_view !== void 0 && (_theme$business_view$ = _theme$business_view.components) !== null && _theme$business_view$ !== void 0 && (_theme$business_view$2 = _theme$business_view$.review) !== null && _theme$business_view$2 !== void 0 && (_theme$business_view$3 = _theme$business_view$2.components) !== null && _theme$business_view$3 !== void 0 && (_theme$business_view$4 = _theme$business_view$3.ranking) !== null && _theme$business_view$4 !== void 0 && _theme$business_view$4.hidden);
-  var showReviewDate = !(theme !== null && theme !== void 0 && (_theme$business_view2 = theme.business_view) !== null && _theme$business_view2 !== void 0 && (_theme$business_view3 = _theme$business_view2.components) !== null && _theme$business_view3 !== void 0 && (_theme$business_view4 = _theme$business_view3.review) !== null && _theme$business_view4 !== void 0 && (_theme$business_view5 = _theme$business_view4.components) !== null && _theme$business_view5 !== void 0 && (_theme$business_view6 = _theme$business_view5.review_date) !== null && _theme$business_view6 !== void 0 && _theme$business_view6.hidden);
-  var showCustomerComments = !(theme !== null && theme !== void 0 && (_theme$business_view7 = theme.business_view) !== null && _theme$business_view7 !== void 0 && (_theme$business_view8 = _theme$business_view7.components) !== null && _theme$business_view8 !== void 0 && (_theme$business_view9 = _theme$business_view8.review) !== null && _theme$business_view9 !== void 0 && (_theme$business_view10 = _theme$business_view9.components) !== null && _theme$business_view10 !== void 0 && (_theme$business_view11 = _theme$business_view10.customer_comments) !== null && _theme$business_view11 !== void 0 && _theme$business_view11.hidden);
+  var showRanking = !(theme !== null && theme !== void 0 && (_theme$business_view = theme.business_view) !== null && _theme$business_view !== void 0 && (_theme$business_view$ = _theme$business_view.components) !== null && _theme$business_view$ !== void 0 && (_theme$business_view$2 = _theme$business_view$.reviews) !== null && _theme$business_view$2 !== void 0 && (_theme$business_view$3 = _theme$business_view$2.components) !== null && _theme$business_view$3 !== void 0 && (_theme$business_view$4 = _theme$business_view$3.ranking) !== null && _theme$business_view$4 !== void 0 && _theme$business_view$4.hidden);
+  var showReviewDate = !(theme !== null && theme !== void 0 && (_theme$business_view2 = theme.business_view) !== null && _theme$business_view2 !== void 0 && (_theme$business_view3 = _theme$business_view2.components) !== null && _theme$business_view3 !== void 0 && (_theme$business_view4 = _theme$business_view3.reviews) !== null && _theme$business_view4 !== void 0 && (_theme$business_view5 = _theme$business_view4.components) !== null && _theme$business_view5 !== void 0 && (_theme$business_view6 = _theme$business_view5.review_date) !== null && _theme$business_view6 !== void 0 && _theme$business_view6.hidden);
+  var showCustomerComments = !(theme !== null && theme !== void 0 && (_theme$business_view7 = theme.business_view) !== null && _theme$business_view7 !== void 0 && (_theme$business_view8 = _theme$business_view7.components) !== null && _theme$business_view8 !== void 0 && (_theme$business_view9 = _theme$business_view8.reviews) !== null && _theme$business_view9 !== void 0 && (_theme$business_view10 = _theme$business_view9.components) !== null && _theme$business_view10 !== void 0 && (_theme$business_view11 = _theme$business_view10.customer_comments) !== null && _theme$business_view11 !== void 0 && _theme$business_view11.hidden);
   var showSearch = !(theme !== null && theme !== void 0 && (_theme$business_view12 = theme.business_view) !== null && _theme$business_view12 !== void 0 && (_theme$business_view13 = _theme$business_view12.components) !== null && _theme$business_view13 !== void 0 && (_theme$business_view14 = _theme$business_view13.review) !== null && _theme$business_view14 !== void 0 && (_theme$business_view15 = _theme$business_view14.components) !== null && _theme$business_view15 !== void 0 && (_theme$business_view16 = _theme$business_view15.search) !== null && _theme$business_view16 !== void 0 && _theme$business_view16.hidden);
   var hideElement = !(!showReviewDate && !showCustomerComments);
   var reviewPoints = [1, 2, 3, 4, 5];
