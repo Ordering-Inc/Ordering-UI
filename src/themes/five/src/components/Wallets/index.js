@@ -19,13 +19,13 @@ import {
   LoyaltyWrapp,
   Title,
   TabsContainer,
-  Tab
+  Tab,
+  NotFoundText
 } from './styles'
 
 import { WalletTransactionItem } from '../WalletTransactionItem'
 import { Tabs } from '../../styles/Tabs'
 import { GiftCardUI } from '../GiftCard/GiftCardUI'
-import { NotFoundSource } from '../NotFoundSource'
 
 const WalletsUI = (props) => {
   const {
@@ -138,18 +138,6 @@ const WalletsUI = (props) => {
                       ))}
                     </>
                   )}
-
-                  {!transactionsList?.loading &&
-                    (transactionsList?.error || !transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.length) &&
-                    (
-                      <NotFoundSource
-                        content={
-                          transactionsList?.error
-                            ? t('ERROR_NOT_FOUND_TRANSACTIONS', 'Sorry, an error has occurred')
-                            : t('NOT_FOUND_TRANSACTIONS', 'No transactions to show at this time.')
-                        }
-                      />
-                    )}
                 </div>
               </Transactions>
 
@@ -188,14 +176,29 @@ const WalletsUI = (props) => {
         </>
       )}
 
+      {!transactionsList?.loading &&
+        (transactionsList?.error || !transactionsList.list?.[`wallet:${currentWalletSelected?.id}`]?.length) &&
+        !walletList.loading &&
+        !userLoyaltyLevel.loading &&
+        !walletList.error &&
+        walletList.wallets?.length > 0 &&
+        (
+          <NotFoundText>
+            {
+              transactionsList?.error
+                ? t('ERROR_NOT_FOUND_TRANSACTIONS', 'Sorry, an error has occurred')
+                : t('NOT_FOUND_TRANSACTIONS', 'No transactions to show at this time.')
+            }
+          </NotFoundText>
+        )}
       {!walletList?.loading && !userLoyaltyLevel.loading && (walletList?.error || !walletList?.wallets?.length) && (
-        <NotFoundSource
-          content={
+        <NotFoundText>
+          {
             walletList?.error
               ? t('ERROR_NOT_FOUND_WALLETS', 'Sorry, an error has occurred')
               : t('NOT_FOUND_WALLETS', 'No wallets to show at this time.')
           }
-        />
+        </NotFoundText>
       )}
     </Container>
   )

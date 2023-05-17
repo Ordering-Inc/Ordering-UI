@@ -493,10 +493,15 @@ export const HeaderSearchMode = styled.div`
     text-overflow: ellipsis;
   }
   @media (min-width: 1400px){
-    width: 300px;
+    width: 350px;
   }
   @media (min-width: 1200px){
-    width: 250px;
+    width: 300px;
+    div {
+      > span {
+        padding: 7px 0;
+      }
+    }
   }
 `
 

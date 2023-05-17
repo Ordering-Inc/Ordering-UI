@@ -84,7 +84,7 @@ const RedeemGiftCardUI = (props) => {
             />
           </FormController>
           <FormController>
-            <label>{t('PASSWORD', 'Password')}</label>
+            <label>{t('GIFT_CARD_PASSWORD', 'Gift card password')}</label>
             <Input
               name='password'
               type='password'
