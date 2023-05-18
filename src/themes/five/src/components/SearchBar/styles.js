@@ -15,8 +15,12 @@ export const BusinessSearch = styled.div`
     background-size: 30px 18px;
     box-sizing: border-box;
     padding-left: 30px;
-    padding-right: 50px;
+    padding-right: 20px;
     background-color: ${props => props.theme?.colors?.backgroundPage};
+
+    ${({ hasValue }) => hasValue && css`
+      padding-right: 50px;
+    `}
 
     ${props => props.theme?.rtl ? css`
       background-position: right center;
