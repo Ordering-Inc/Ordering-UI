@@ -348,7 +348,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     orders: orders.filter(function (order) {
       return orderStatus.includes(order.status);
     }).sort(function (a, b) {
-      return (0, _moment3.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf() - (0, _moment3.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf();
+      return (0, _moment3.default)(a === null || a === void 0 ? void 0 : a.delivery_datetime_utc).valueOf() - (0, _moment3.default)(b === null || b === void 0 ? void 0 : b.delivery_datetime_utc).valueOf();
     }),
     pagination: pagination,
     customArray: customArray,
