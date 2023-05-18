@@ -786,7 +786,7 @@ const ProductOptionsUI = (props) => {
                   )}
                   {!auth && guestCheckoutEnabled && orderTypeEnabled && (
                     <GuestUserLink onClick={handleUpdateGuest}>
-                      {t('WITH_GUEST_USER', 'With Guest user')}
+                      {t('AS_GUEST_USER', 'As guest user')}
                     </GuestUserLink>
                   )}
                 </>
