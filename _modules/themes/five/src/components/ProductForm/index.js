@@ -701,7 +701,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
   }, isSoldOut || maxProductQuantity <= 0 ? t('SOLD_OUT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.SOLD_OUT) || 'Sold out') : t('LOGIN_SIGNUP', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.LOGIN_SIGNUP) || 'Login / Sign Up')), !auth && guestCheckoutEnabled && orderTypeEnabled && /*#__PURE__*/_react.default.createElement(_styles.GuestUserLink, {
     onClick: handleUpdateGuest
-  }, t('WITH_GUEST_USER', 'With Guest user')))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, t('AS_GUEST_USER', 'As guest user')))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return closeModal();
