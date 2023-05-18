@@ -119,7 +119,11 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     onPlaceOrderClick = props.onPlaceOrderClick,
     handlePlaceOrder = props.handlePlaceOrder,
     paymethods = props.paymethods,
-    setCardList = props.setCardList;
+    setCardList = props.setCardList,
+    requiredFields = props.requiredFields,
+    openUserModal = props.openUserModal,
+    paymethodClicked = props.paymethodClicked,
+    setPaymethodClicked = props.setPaymethodClicked;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -159,6 +163,14 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       setAlertState({
         open: true,
         content: [t('DRIVER_TIPS_REQUIRED', 'Driver tips is required, please select a driver tip before select this paymethod')]
+      });
+      return;
+    }
+    if ((paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) === 'paypal' && requiredFields.length > 0) {
+      openUserModal && openUserModal(true);
+      setPaymethodClicked({
+        confirmed: false,
+        paymethod: paymethod
       });
       return;
     }
@@ -206,6 +218,11 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       handlePlaceOrder();
     }
   }, [JSON.stringify(paymethodData), paymethodSelected]);
+  (0, _react.useEffect)(function () {
+    if (paymethodClicked !== null && paymethodClicked !== void 0 && paymethodClicked.confirmed) {
+      handlePaymethodClick(paymethodClicked === null || paymethodClicked === void 0 ? void 0 : paymethodClicked.paymethod);
+    }
+  }, [paymethodClicked === null || paymethodClicked === void 0 ? void 0 : paymethodClicked.confirmed]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

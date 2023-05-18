@@ -274,6 +274,7 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftSide, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, {
     id: "left-side"
   }, /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
+    notificationState: notificationState,
     auth: auth,
     isHideSignup: isHideSignup,
     userCustomer: userCustomer,
@@ -516,6 +517,7 @@ var Header = function Header(props) {
     authModal: true,
     closeOnBackdrop: true
   }, modalPageToShow === 'login' && /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+    notificationState: notificationState,
     handleSuccessLogin: handleSuccessLogin,
     elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {
@@ -536,6 +538,7 @@ var Header = function Header(props) {
     useLoginByCellphone: true,
     isPopup: true
   }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    notificationState: notificationState,
     elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {
         return handleCustomModalClick(e, {

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.orderTypeList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getOrderStatus = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.getCateringValues = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.calendarLanguages = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.orderTypeList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.getCateringValues = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.calendarLanguages = exports.bytesConverter = void 0;
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -1026,6 +1026,85 @@ var getOrderStatus = function getOrderStatus(s) {
   return objectStatus && objectStatus;
 };
 exports.getOrderStatus = getOrderStatus;
+var getOrderStatuPickUp = function getOrderStatuPickUp(s) {
+  var _theme$defaultLanguag25, _theme$defaultLanguag26, _theme$defaultLanguag27, _theme$defaultLanguag28, _theme$defaultLanguag29, _theme$defaultLanguag30, _theme$defaultLanguag31, _theme$defaultLanguag32, _theme$defaultLanguag33, _theme$defaultLanguag34, _theme$defaultLanguag35, _theme$defaultLanguag36, _theme$defaultLanguag37;
+  var _useLanguage9 = (0, _orderingComponents.useLanguage)(),
+    _useLanguage10 = _slicedToArray(_useLanguage9, 2),
+    t = _useLanguage10[1];
+  var theme = (0, _styledComponents.useTheme)();
+  var status = parseInt(s);
+  var orderStatus = [{
+    key: 0,
+    value: t('PENDING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag25 = theme.defaultLanguages) === null || _theme$defaultLanguag25 === void 0 ? void 0 : _theme$defaultLanguag25.PENDING) || 'Pending'),
+    slug: 'PENDING',
+    percentage: 10
+  }, {
+    key: 1,
+    value: t('COMPLETED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.COMPLETED) || 'Completed'),
+    slug: 'COMPLETED',
+    percentage: 100
+  }, {
+    key: 2,
+    value: t('REJECTED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag27 = theme.defaultLanguages) === null || _theme$defaultLanguag27 === void 0 ? void 0 : _theme$defaultLanguag27.REJECTED) || 'Rejected'),
+    slug: 'REJECTED',
+    percentage: 0
+  }, {
+    key: 4,
+    value: t('PREPARATION_COMPLETED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag28 = theme.defaultLanguages) === null || _theme$defaultLanguag28 === void 0 ? void 0 : _theme$defaultLanguag28.PREPARATION_COMPLETED) || 'Preparation Completed'),
+    slug: 'PREPARATION_COMPLETED',
+    percentage: 50
+  }, {
+    key: 5,
+    value: t('REJECTED_BY_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag29 = theme.defaultLanguages) === null || _theme$defaultLanguag29 === void 0 ? void 0 : _theme$defaultLanguag29.REJECTED_BY_BUSINESS) || 'Rejected by business'),
+    slug: 'REJECTED_BY_BUSINESS',
+    percentage: 0
+  }, {
+    key: 7,
+    value: t('ACCEPTED_BY_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag30 = theme.defaultLanguages) === null || _theme$defaultLanguag30 === void 0 ? void 0 : _theme$defaultLanguag30.ACCEPTED_BY_BUSINESS) || 'Accepted by business'),
+    slug: 'ACCEPTED_BY_BUSINESS',
+    percentage: 30
+  }, {
+    key: 13,
+    value: t('PREORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag31 = theme.defaultLanguages) === null || _theme$defaultLanguag31 === void 0 ? void 0 : _theme$defaultLanguag31.PREORDER) || 'PreOrder'),
+    slug: 'PREORDER',
+    percentage: 0
+  }, {
+    key: 14,
+    value: t('ORDER_NOT_READY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag32 = theme.defaultLanguages) === null || _theme$defaultLanguag32 === void 0 ? void 0 : _theme$defaultLanguag32.ORDER_NOT_READY) || 'Order not ready'),
+    slug: 'ORDER_NOT_READY',
+    percentage: 30
+  }, {
+    key: 15,
+    value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag33 = theme.defaultLanguages) === null || _theme$defaultLanguag33 === void 0 ? void 0 : _theme$defaultLanguag33.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER) || 'Order picked up completed by customer'),
+    slug: 'ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER',
+    percentage: 100
+  }, {
+    key: 16,
+    value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag34 = theme.defaultLanguages) === null || _theme$defaultLanguag34 === void 0 ? void 0 : _theme$defaultLanguag34.ORDER_STATUS_CANCELLED_BY_CUSTOMER) || 'Order cancelled by customer'),
+    slug: 'ORDER_STATUS_CANCELLED_BY_CUSTOMER',
+    percentage: 0
+  }, {
+    key: 17,
+    value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag35 = theme.defaultLanguages) === null || _theme$defaultLanguag35 === void 0 ? void 0 : _theme$defaultLanguag35.ORDER_NOT_PICKEDUP_BY_CUSTOMER) || 'Order not picked up by customer'),
+    slug: 'ORDER_NOT_PICKEDUP_BY_CUSTOMER',
+    percentage: 0
+  }, {
+    key: 20,
+    value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag36 = theme.defaultLanguages) === null || _theme$defaultLanguag36 === void 0 ? void 0 : _theme$defaultLanguag36.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) || 'Customer almost arrived to business'),
+    slug: 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS',
+    percentage: 70
+  }, {
+    key: 21,
+    value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag37 = theme.defaultLanguages) === null || _theme$defaultLanguag37 === void 0 ? void 0 : _theme$defaultLanguag37.ORDER_CUSTOMER_ARRIVED_BUSINESS) || 'Customer arrived to business'),
+    slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS',
+    percentage: 90
+  }];
+  var objectStatus = orderStatus.find(function (o) {
+    return o.key === status;
+  });
+  return objectStatus && objectStatus;
+};
+exports.getOrderStatuPickUp = getOrderStatuPickUp;
 var calendarLanguages = {
   months: {
     January: 'MONTH1',

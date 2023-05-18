@@ -168,6 +168,10 @@ var CheckoutUI = function CheckoutUI(props) {
     _useState22 = _slicedToArray(_useState21, 2),
     cardList = _useState22[0],
     setCardList = _useState22[1];
+  var _useState23 = (0, _react.useState)(null),
+    _useState24 = _slicedToArray(_useState23, 2),
+    paymethodClicked = _useState24[0],
+    setPaymethodClicked = _useState24[1];
   var cardsMethods = ['stripe', 'credomatic'];
   var stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect'];
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
@@ -501,7 +505,11 @@ var CheckoutUI = function CheckoutUI(props) {
     paySelected: paymethodSelected,
     handlePlaceOrder: handlePlaceOrder,
     onPlaceOrderClick: onPlaceOrderClick,
-    setCardList: setCardList
+    setCardList: setCardList,
+    requiredFields: requiredFields,
+    openUserModal: setIsOpen,
+    paymethodClicked: paymethodClicked,
+    setPaymethodClicked: setPaymethodClicked
   })), isWalletEnabled && !(businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart,
     loyaltyPlansState: loyaltyPlansState,
@@ -594,7 +602,13 @@ var CheckoutUI = function CheckoutUI(props) {
     isAllowGuest: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'card_delivery',
     onClose: function onClose() {
       setIsOpen(false);
-      handlePlaceOrder();
+      if (paymethodClicked) {
+        setPaymethodClicked(_objectSpread(_objectSpread({}, paymethodClicked), {}, {
+          confirmed: true
+        }));
+      } else {
+        handlePlaceOrder();
+      }
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.signup,
@@ -650,37 +664,37 @@ var Checkout = function Checkout(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
-  var _useState23 = (0, _react.useState)({
+  var _useState25 = (0, _react.useState)({
       loading: true,
       error: null,
       cart: null
     }),
-    _useState24 = _slicedToArray(_useState23, 2),
-    cartState = _useState24[0],
-    setCartState = _useState24[1];
-  var _useState25 = (0, _react.useState)(false),
     _useState26 = _slicedToArray(_useState25, 2),
-    openUpselling = _useState26[0],
-    setOpenUpselling = _useState26[1];
+    cartState = _useState26[0],
+    setCartState = _useState26[1];
   var _useState27 = (0, _react.useState)(false),
     _useState28 = _slicedToArray(_useState27, 2),
-    canOpenUpselling = _useState28[0],
-    setCanOpenUpselling = _useState28[1];
-  var _useState29 = (0, _react.useState)(null),
+    openUpselling = _useState28[0],
+    setOpenUpselling = _useState28[1];
+  var _useState29 = (0, _react.useState)(false),
     _useState30 = _slicedToArray(_useState29, 2),
-    currentCart = _useState30[0],
-    setCurrentCart = _useState30[1];
-  var _useState31 = (0, _react.useState)({
+    canOpenUpselling = _useState30[0],
+    setCanOpenUpselling = _useState30[1];
+  var _useState31 = (0, _react.useState)(null),
+    _useState32 = _slicedToArray(_useState31, 2),
+    currentCart = _useState32[0],
+    setCurrentCart = _useState32[1];
+  var _useState33 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState32 = _slicedToArray(_useState31, 2),
-    alertState = _useState32[0],
-    setAlertState = _useState32[1];
-  var _useState33 = (0, _react.useState)(false),
     _useState34 = _slicedToArray(_useState33, 2),
-    isResetPaymethod = _useState34[0],
-    setIsResetPaymethod = _useState34[1];
+    alertState = _useState34[0],
+    setAlertState = _useState34[1];
+  var _useState35 = (0, _react.useState)(false),
+    _useState36 = _slicedToArray(_useState35, 2),
+    isResetPaymethod = _useState36[0],
+    setIsResetPaymethod = _useState36[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);
