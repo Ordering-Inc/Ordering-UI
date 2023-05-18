@@ -129,8 +129,10 @@ const PaymentOptionsUI = (props) => {
 
   const supportedMethods = list?.filter(p => !multiCheckoutMethods.includes(p.gateway))?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
 
+  const paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay']
+
   const handlePaymentMethodClick = (paymethod) => {
-    if (paymethod?.gateway === 'paypal' &&
+    if (paymethodsFieldRequired.includes(paymethod?.gateway) &&
       options.type === 1 &&
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
       validationFields?.fields?.checkout?.driver_tip?.required &&
@@ -142,7 +144,7 @@ const PaymentOptionsUI = (props) => {
       })
       return
     }
-    if (paymethod?.gateway === 'paypal' && requiredFields.length > 0) {
+    if (paymethodsFieldRequired.includes(paymethod?.gateway) && requiredFields.length > 0) {
       openUserModal && openUserModal(true)
       setPaymethodClicked({
         confirmed: false,
