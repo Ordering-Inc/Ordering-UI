@@ -1,6 +1,24 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+export const BlockContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${props => props.externalTrack && css`
+    width: 100%;
+    @media (min-width: 940px) {
+      width: 60%;
+    }
+  `}
+`
+export const TrackContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 940px) {
+    flex-direction: row;
+  }
+`
 export const Container = styled.div`
   width: 100%;
   display: flex;
@@ -771,8 +789,23 @@ export const BusinessExternalWrapper = styled.div`
     width: 50%;
   }
 `
+export const IframeMainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 690px;
+  padding-bottom: 20px;
+  width: 100%;
+  @media (min-width: 940px) {
+    height: auto;
+    width: 40%;
+  }
+`
 export const IframeContainer = styled.div`
   display: flex;
-  height: 600px;
-  padding-bottom: 20px;
+  height: -webkit-fill-available;
+  padding-bottom: 5px;
+  width: 395px;
+  @media (min-width: 940px) {
+    padding-right: 10px;
+  }
 `

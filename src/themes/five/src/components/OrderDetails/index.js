@@ -70,7 +70,10 @@ import {
   LinkWrapper,
   MapWrapper,
   BusinessExternalWrapper,
-  IframeContainer
+  IframeContainer,
+  TrackContainer,
+  BlockContainer,
+  IframeMainContainer
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
@@ -482,195 +485,201 @@ const OrderDetailsUI = (props) => {
       {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
         <WrapperContainer>
           <WrapperLeftContainer>
-            <OrderInfo>
-              <TitleContainer pfchangs={layout === 'pfchangs'}>
-                <OrderIdSec>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</OrderIdSec>
-                {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && layout !== 'pfchangs' && (
-                  <Content className='order-content'>
-                    <ShareOrder>
-                      <div className='wrap'>
-                        <ProductShare
-                          defaultUrl={urlToShare(order?.hash_key)}
-                        />
-                      </div>
-                    </ShareOrder>
-                  </Content>
-                )}
-                {order?.status !== 0 && order?.integration_id && (
-                  <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
-                )}
-                {showDeliveryType && (
-                  <p className='types'>
-                    {isService
-                      ? t('SERVICE_AT_HOME', 'Service at home')
-                      : orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
-                  </p>
-                )}
-                {showDeliveryDate && (
-                  <p className='date'>
-                    {dateTimeETA}
-                  </p>
-                )}
-                {uberDirectPin && (
-                  <p className='types'>
-                    {t('UBER_PIN', 'Pin')}: {uberDirectPin?.value}
-                  </p>
-                )}
-                {preorderMetafieldEnabled && (
-                  <p className='types'>{t('DISCLAIMER_CATERING', 'Disclaimer Catering')}</p>
-                )}
-                {
-                  (
-                    acceptedStatus.includes(parseInt(order?.status, 10)) ||
-                    !layout.includes(defaultLayoutThemes)
-                  ) && (
-                    <ReOrder>
-                      <ButtonComponent
-                        color='primary'
-                        outline
-                        onClick={() => handleStartNewOrder(order.id)}
-                        disabled={reorderState?.loading}
-                      >
-                        {t('START_NEW_ORDER', 'Start new order')}
-                      </ButtonComponent>
-                      {completedStatus.includes(parseInt(order?.status, 10)) && (
-                        <ButtonComponent
-                          color='primary'
-                          outline
-                          onClick={() => handleReorder(order.id)}
-                          disabled={reorderState?.loading}
-                        >
-                          {reorderState?.loading
-                            ? t('LOADING', 'Loading...')
-                            : t('REORDER', 'Reorder')}
-                        </ButtonComponent>
-                      )}
-                    </ReOrder>
-                  )
-                }
-              </TitleContainer>
-              {showDeliveryProgress && (
-                <>
-                  {!externalTrack && (<StatusBar percentage={getOrderStatus(order?.status)?.percentage} />)}
-                  {externalTrack && (
-                    <IframeContainer>
-                      <iframe src={externalTrack.link_location} width='100%' height='100%' loading='true' sandbox='allow-scripts allow-modals allow-same-origin allow-popups allow-forms' referrerPolicy='same-origin origin-when-cross-origin' />
-                    </IframeContainer>
+            <TrackContainer>
+              {externalTrack && (
+                <IframeMainContainer>
+                  <IframeContainer>
+                    <iframe src={externalTrack.link_location} width='100%' height='100%' loading='true' sandbox='allow-scripts allow-modals allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox' referrerPolicy='same-origin origin-when-cross-origin' />
+                  </IframeContainer>
+                </IframeMainContainer>
+              )}
+              <BlockContainer externalTrack={externalTrack}>
+                <OrderInfo>
+                  <TitleContainer pfchangs={layout === 'pfchangs'}>
+                    <OrderIdSec>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</OrderIdSec>
+                    {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && layout !== 'pfchangs' && (
+                      <Content className='order-content'>
+                        <ShareOrder>
+                          <div className='wrap'>
+                            <ProductShare
+                              defaultUrl={urlToShare(order?.hash_key)}
+                            />
+                          </div>
+                        </ShareOrder>
+                      </Content>
+                    )}
+                    {order?.status !== 0 && order?.integration_id && (
+                      <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                    )}
+                    {showDeliveryType && (
+                      <p className='types'>
+                        {isService
+                          ? t('SERVICE_AT_HOME', 'Service at home')
+                          : orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
+                      </p>
+                    )}
+                    {showDeliveryDate && (
+                      <p className='date'>
+                        {dateTimeETA}
+                      </p>
+                    )}
+                    {uberDirectPin && (
+                      <p className='types'>
+                        {t('UBER_PIN', 'Pin')}: {uberDirectPin?.value}
+                      </p>
+                    )}
+                    {preorderMetafieldEnabled && (
+                      <p className='types'>{t('DISCLAIMER_CATERING', 'Disclaimer Catering')}</p>
+                    )}
+                    {
+                      (
+                        acceptedStatus.includes(parseInt(order?.status, 10)) ||
+                        !layout.includes(defaultLayoutThemes)
+                      ) && (
+                        <ReOrder>
+                          <ButtonComponent
+                            color='primary'
+                            outline
+                            onClick={() => handleStartNewOrder(order.id)}
+                            disabled={reorderState?.loading}
+                          >
+                            {t('START_NEW_ORDER', 'Start new order')}
+                          </ButtonComponent>
+                          {completedStatus.includes(parseInt(order?.status, 10)) && (
+                            <ButtonComponent
+                              color='primary'
+                              outline
+                              onClick={() => handleReorder(order.id)}
+                              disabled={reorderState?.loading}
+                            >
+                              {reorderState?.loading
+                                ? t('LOADING', 'Loading...')
+                                : t('REORDER', 'Reorder')}
+                            </ButtonComponent>
+                          )}
+                        </ReOrder>
+                      )
+                    }
+                  </TitleContainer>
+                  {showDeliveryProgress && (
+                    <>
+                      {!externalTrack && (<StatusBar percentage={getOrderStatus(order?.status)?.percentage} />)}
+                      <OrderStatusAndLinkContainer>
+                        {!externalTrack && (<p className='order-status'>{getOrderStatus(order?.status)?.value}</p>)}
+                        <LinkWrapper>
+                          <ReviewOrderLink
+                            active
+                            isMargin
+                          >
+                            <span onClick={() => setIsOrderHistory(true)}>{t('VIEW_DETAILS', 'View details')}</span>
+                          </ReviewOrderLink>
+                          <ReviewOrderLink
+                            className='Review-order'
+                            active={
+                              acceptedStatus.includes(parseInt(order?.status, 10)) &&
+                              (!order?.review || (order.driver && !order?.user_review)) &&
+                              (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
+                            }
+                          >
+                            <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                          </ReviewOrderLink>
+                        </LinkWrapper>
+                      </OrderStatusAndLinkContainer>
+                    </>
                   )}
-                  <OrderStatusAndLinkContainer>
-                    {!externalTrack && (<p className='order-status'>{getOrderStatus(order?.status)?.value}</p>)}
-                    <LinkWrapper>
-                      <ReviewOrderLink
-                        active
-                        isMargin
-                      >
-                        <span onClick={() => setIsOrderHistory(true)}>{t('VIEW_DETAILS', 'View details')}</span>
-                      </ReviewOrderLink>
-                      <ReviewOrderLink
-                        className='Review-order'
-                        active={
-                          acceptedStatus.includes(parseInt(order?.status, 10)) &&
-                          (!order?.review || (order.driver && !order?.user_review)) &&
-                          (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)
-                        }
-                      >
-                        <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                      </ReviewOrderLink>
-                    </LinkWrapper>
-                  </OrderStatusAndLinkContainer>
-                </>
-              )}
-            </OrderInfo>
-            <OrderBusiness pfchangs={layout === 'pfchangs'}>
-              <BusinessExternalWrapper>
-                <BusinessWrapper
-                  w='calc(100% - 20px)'
-                // borderBottom={showOrderActions}
-                >
-                  {isShowBusinessLogo && <img src={order?.business?.logo} />}
-                  <BusinessInfo>
-                    <h2>{order?.business?.name}</h2>
-                    <ActionsSection
-                      {...ActionsSectionProps}
-                      actionType='business'
-                      showPhone={showBusinessPhone}
-                      showMessages={showBusinessMessages}
-                    />
-                    {showBusinessEmail && (
-                      <p>{order?.business?.email}</p>
-                    )}
-                    {showBusinessPhone && (
-                      <p>{order?.business?.cellphone}</p>
-                    )}
-                    {showBusinessAddress && (
-                      <p>{order?.business?.address}</p>
-                    )}
-                    {order?.place?.name && (
-                      <PlaceSpotSection>
-                        <p>
-                          {yourSpotString}: {order?.place?.name}
-                        </p>
-                      </PlaceSpotSection>
-                    )}
-                  </BusinessInfo>
-                </BusinessWrapper>
+                </OrderInfo>
+                <OrderBusiness pfchangs={layout === 'pfchangs'}>
+                  <BusinessExternalWrapper>
+                    <BusinessWrapper
+                      w='calc(100% - 20px)'
+                    // borderBottom={showOrderActions}
+                    >
+                      {isShowBusinessLogo && <img src={order?.business?.logo} />}
+                      <BusinessInfo>
+                        <h2>{order?.business?.name}</h2>
+                        <ActionsSection
+                          {...ActionsSectionProps}
+                          actionType='business'
+                          showPhone={showBusinessPhone}
+                          showMessages={showBusinessMessages}
+                        />
+                        {showBusinessEmail && (
+                          <p>{order?.business?.email}</p>
+                        )}
+                        {showBusinessPhone && (
+                          <p>{order?.business?.cellphone}</p>
+                        )}
+                        {showBusinessAddress && (
+                          <p>{order?.business?.address}</p>
+                        )}
+                        {order?.place?.name && (
+                          <PlaceSpotSection>
+                            <p>
+                              {yourSpotString}: {order?.place?.name}
+                            </p>
+                          </PlaceSpotSection>
+                        )}
+                      </BusinessInfo>
+                    </BusinessWrapper>
 
-                {showDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
-                  <BusinessWrapper
-                    w='calc(100% - 20px)'
-                    borderTop
-                  >
-                    <PlaceSpot
-                      isInputMode
-                      cart={order}
-                      containerStyle={{ width: 'calc(100% - 20px)' }}
-                      spotNumberDefault={order?.spot_number}
-                      vehicleDefault={order?.vehicle}
-                    />
-                  </BusinessWrapper>
-                )}
+                    {showDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
+                      <BusinessWrapper
+                        w='calc(100% - 20px)'
+                        borderTop
+                      >
+                        <PlaceSpot
+                          isInputMode
+                          cart={order}
+                          containerStyle={{ width: 'calc(100% - 20px)' }}
+                          spotNumberDefault={order?.spot_number}
+                          vehicleDefault={order?.vehicle}
+                        />
+                      </BusinessWrapper>
+                    )}
 
-                {showOrderActions && (
-                  <BusinessWrapper
-                    w='calc(100% - 20px)'
-                    borderTop
-                  >
-                    <BtsOrderStatus>
-                      <div>
-                        <ButtonComponent
-                          style={{ fontSize: 14 }}
-                          color={order?.status === 20 ? 'secundary' : 'primary'}
-                          onClick={() => handleChangeOrderStatus(20)}
-                          disabled={order?.status === 20}
-                        >
-                          {getOrderStatus(20)?.value}
-                        </ButtonComponent>
-                      </div>
-                      <div>
-                        <ButtonComponent
-                          style={{ fontSize: 14 }}
-                          color={order?.status === 20 ? 'primary' : 'secundary'}
-                          disabled={order?.status === 21}
-                          onClick={() => handleChangeOrderStatus(21)}
-                        >
-                          {getOrderStatus(21)?.value}
-                        </ButtonComponent>
-                      </div>
-                    </BtsOrderStatus>
-                  </BusinessWrapper>
-                )}
-              </BusinessExternalWrapper>
-              {googleMapsApiKey && (
-                <MapWrapper>
-                  <OrderMapSection
-                    isMapImg
-                    validStatuses={[order?.status]}
-                    location={order?.business?.location}
-                    mapStyle={{ width: '100%' }}
-                  />
-                </MapWrapper>
-              )}
-            </OrderBusiness>
+                    {showOrderActions && (
+                      <BusinessWrapper
+                        w='calc(100% - 20px)'
+                        borderTop
+                      >
+                        <BtsOrderStatus>
+                          <div>
+                            <ButtonComponent
+                              style={{ fontSize: 14 }}
+                              color={order?.status === 20 ? 'secundary' : 'primary'}
+                              onClick={() => handleChangeOrderStatus(20)}
+                              disabled={order?.status === 20}
+                            >
+                              {getOrderStatus(20)?.value}
+                            </ButtonComponent>
+                          </div>
+                          <div>
+                            <ButtonComponent
+                              style={{ fontSize: 14 }}
+                              color={order?.status === 20 ? 'primary' : 'secundary'}
+                              disabled={order?.status === 21}
+                              onClick={() => handleChangeOrderStatus(21)}
+                            >
+                              {getOrderStatus(21)?.value}
+                            </ButtonComponent>
+                          </div>
+                        </BtsOrderStatus>
+                      </BusinessWrapper>
+                    )}
+                  </BusinessExternalWrapper>
+                  {googleMapsApiKey && (
+                    <MapWrapper>
+                      <OrderMapSection
+                        isMapImg
+                        validStatuses={[order?.status]}
+                        location={order?.business?.location}
+                        mapStyle={{ width: '100%' }}
+                      />
+                    </MapWrapper>
+                  )}
+                </OrderBusiness>
+              </BlockContainer>
+            </TrackContainer>
             <OrderCustomer>
               <BusinessWrapper>
                 {order?.customer?.photo && (
