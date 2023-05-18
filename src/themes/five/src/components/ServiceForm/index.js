@@ -500,7 +500,7 @@ const ServiceFormUI = (props) => {
               )}
               {!auth && guestCheckoutEnabled && orderTypeEnabled && (
                 <GuestUserLink onClick={handleUpdateGuest}>
-                  {actionStatus?.loading ? <Skeleton height={25} width={70} /> : t('WITH_GUEST_USER', 'With Guest user')}
+                  {actionStatus?.loading ? <Skeleton height={25} width={70} /> : t('AS_GUEST_USER', 'As guest user')}
                 </GuestUserLink>
               )}
             </ButtonWrapper>
