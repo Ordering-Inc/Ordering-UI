@@ -135,6 +135,7 @@ export const OrderProgress = (props) => {
     UIComponent: OrderProgressUI,
     orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23],
     useDefualtSessionManager: true,
+    noGiftCardOrders: true,
     paginationSettings: {
       initialPage: 1,
       pageSize: 10,
