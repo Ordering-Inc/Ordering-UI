@@ -35,7 +35,7 @@ const RedeemGiftCardUI = (props) => {
     string = string.replace(/-/g, '')
     if (!string) return
     const codeSlices = string.match(/.{1,4}/g)
-    string = codeSlices.join('-')
+    string = codeSlices.join('-').toUpperCase()
     codeRef.current.value = string
   }
 
@@ -73,7 +73,7 @@ const RedeemGiftCardUI = (props) => {
                   autoComplete='off'
                   ref={codeRef}
                   onChange={e => {
-                    onChange(e.target.value)
+                    onChange((e.target.value).toUpperCase())
                     handleChangeCode(e)
                   }}
                 />
