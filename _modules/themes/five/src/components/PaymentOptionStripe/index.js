@@ -38,7 +38,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _cardsList$error$, _cardsList$cards2, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _props$beforeElements, _props$beforeComponen, _cardsList$error$, _cardsList$cards2, _props$afterComponent, _props$afterElements;
   var deleteCard = props.deleteCard,
     cardsList = props.cardsList,
     _handleCardClick = props.handleCardClick,
@@ -52,6 +52,9 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
+    _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
+    validationFields = _useValidationFields2[0];
   var _useState = (0, _react.useState)({
       open: false,
       content: null,
@@ -64,6 +67,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     addCartOpen = _useState4[0],
     setAddCardOpen = _useState4[1];
+  var validateZipcodeCard = (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.card) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.zipcode) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.card) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.zipcode) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required);
   var paymethodsWithoutSaveCards = ['credomatic'];
   var _handleNewCard = function _handleNewCard(card) {
     setAddCardOpen(false);
@@ -110,7 +114,8 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
       defaultSelected: i === 0,
       active: (paymethodSelected || (cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.id)) === card.id,
       cardSelected: cardSelected,
-      paymethodSelected: paymethodSelected
+      paymethodSelected: paymethodSelected,
+      validateZipcodeCard: validateZipcodeCard
     }));
   })), token && !cardsList.loading && !paymethodsWithoutSaveCards.includes(gateway) && /*#__PURE__*/_react.default.createElement(_styles.AddNewCard, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
@@ -173,11 +178,15 @@ var PaymentCard = function PaymentCard(props) {
     handleCardClick = props.handleCardClick,
     onSelectCard = props.onSelectCard,
     active = props.active,
-    cardSelected = props.cardSelected;
+    cardSelected = props.cardSelected,
+    validateZipcodeCard = props.validateZipcodeCard;
   var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
     isShowActions = _useState6[0],
     setIsShowActions = _useState6[1];
+  var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
+    _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+    t = _useLanguage4[1];
   var cardActionsRef = (0, _react.useRef)(null);
   var actionWrapperRef = (0, _react.useRef)(null);
   var theme = (0, _styledComponents.useTheme)();
@@ -191,25 +200,28 @@ var PaymentCard = function PaymentCard(props) {
   };
   var handleChangeDefaultCard = function handleChangeDefaultCard(e) {
     var _actionWrapperRef$cur;
-    if ((_actionWrapperRef$cur = actionWrapperRef.current) !== null && _actionWrapperRef$cur !== void 0 && _actionWrapperRef$cur.contains(e.target)) return;
+    if ((_actionWrapperRef$cur = actionWrapperRef.current) !== null && _actionWrapperRef$cur !== void 0 && _actionWrapperRef$cur.contains(e.target) || !(card !== null && card !== void 0 && card.zipcode) && validateZipcodeCard) return;
     handleCardClick(card);
     onSelectCard && onSelectCard(_objectSpread(_objectSpread({}, cardSelected), {}, {
       id: card.id,
       type: 'card',
       card: {
         brand: card.brand,
-        last4: card.last4
+        last4: card.last4,
+        zipcode: card.zipcode
       }
     }));
   };
   (0, _react.useEffect)(function () {
+    var _cardSelected$card, _cardSelected$card2, _cardSelected$card3;
     if (!cardSelected) return;
     onSelectCard && onSelectCard(_objectSpread(_objectSpread({}, cardSelected), {}, {
       id: cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.id,
       type: 'card',
       card: {
-        brand: cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.brand,
-        last4: cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.last4
+        brand: cardSelected === null || cardSelected === void 0 ? void 0 : (_cardSelected$card = cardSelected.card) === null || _cardSelected$card === void 0 ? void 0 : _cardSelected$card.brand,
+        last4: cardSelected === null || cardSelected === void 0 ? void 0 : (_cardSelected$card2 = cardSelected.card) === null || _cardSelected$card2 === void 0 ? void 0 : _cardSelected$card2.last4,
+        zipcode: cardSelected === null || cardSelected === void 0 ? void 0 : (_cardSelected$card3 = cardSelected.card) === null || _cardSelected$card3 === void 0 ? void 0 : _cardSelected$card3.zipcode
       }
     }));
   }, [cardSelected]);
@@ -221,13 +233,14 @@ var PaymentCard = function PaymentCard(props) {
   }, [isShowActions]);
   return /*#__PURE__*/_react.default.createElement(_styles.CardItem, {
     onClick: handleChangeDefaultCard,
-    isCursor: true
+    isCursor: true,
+    invalid: !(card !== null && card !== void 0 && card.zipcode) && validateZipcodeCard
   }, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "checks"
   }, active ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
     src: (0, _utils.getIconCard)(card === null || card === void 0 ? void 0 : card.brand),
     alt: card === null || card === void 0 ? void 0 : card.brand
-  })), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", card === null || card === void 0 ? void 0 : card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemActionsWrapper, {
+  })), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", card === null || card === void 0 ? void 0 : card.last4), !(card !== null && card !== void 0 && card.zipcode) && validateZipcodeCard && /*#__PURE__*/_react.default.createElement("p", null, "(", t('MISSING_ZIPCODE', 'Missing zipcode'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemActionsWrapper, {
     ref: actionWrapperRef
   }, /*#__PURE__*/_react.default.createElement("span", {
     ref: cardActionsRef
