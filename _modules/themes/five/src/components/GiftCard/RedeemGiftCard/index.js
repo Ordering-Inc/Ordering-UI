@@ -58,7 +58,7 @@ var RedeemGiftCardUI = function RedeemGiftCardUI(props) {
     string = string.replace(/-/g, '');
     if (!string) return;
     var codeSlices = string.match(/.{1,4}/g);
-    string = codeSlices.join('-');
+    string = codeSlices.join('-').toUpperCase();
     codeRef.current.value = string;
   };
   (0, _react.useEffect)(function () {
@@ -92,7 +92,7 @@ var RedeemGiftCardUI = function RedeemGiftCardUI(props) {
         autoComplete: "off",
         ref: codeRef,
         onChange: function onChange(e) {
-          _onChange(e.target.value);
+          _onChange(e.target.value.toUpperCase());
           handleChangeCode(e);
         }
       });
