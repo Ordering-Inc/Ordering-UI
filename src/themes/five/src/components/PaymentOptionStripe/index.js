@@ -3,7 +3,8 @@ import Skeleton from 'react-loading-skeleton'
 import {
   PaymentOptionStripe as PaymentOptionStripeController,
   useSession,
-  useLanguage
+  useLanguage,
+  useValidationFields
 } from 'ordering-components'
 import IosRadioButtonOn from '@meronex/icons/ios/IosRadioButtonOn'
 import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
@@ -39,9 +40,12 @@ export const PaymentOptionStripeUI = (props) => {
   } = props
   const [{ token }] = useSession()
   const [, t] = useLanguage()
+  const [validationFields] = useValidationFields()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const [addCartOpen, setAddCardOpen] = useState(false)
+  const validateZipcodeCard =
+    validationFields?.fields?.card?.zipcode?.enabled && validationFields?.fields?.card?.zipcode?.required
 
   const paymethodsWithoutSaveCards = ['credomatic']
 
@@ -102,6 +106,7 @@ export const PaymentOptionStripeUI = (props) => {
                 active={(paymethodSelected || cardSelected?.id) === card.id}
                 cardSelected={cardSelected}
                 paymethodSelected={paymethodSelected}
+                validateZipcodeCard={validateZipcodeCard}
               />
             )}
           </>
@@ -165,10 +170,12 @@ export const PaymentCard = (props) => {
     handleCardClick,
     onSelectCard,
     active,
-    cardSelected
+    cardSelected,
+    validateZipcodeCard
   } = props
 
   const [isShowActions, setIsShowActions] = useState(false)
+  const [, t] = useLanguage()
   const cardActionsRef = useRef(null)
   const actionWrapperRef = useRef(null)
   const theme = useTheme()
@@ -182,7 +189,7 @@ export const PaymentCard = (props) => {
   }
 
   const handleChangeDefaultCard = (e) => {
-    if (actionWrapperRef.current?.contains(e.target)) return
+    if (actionWrapperRef.current?.contains(e.target) || (!card?.zipcode && validateZipcodeCard)) return
     handleCardClick(card)
     onSelectCard && onSelectCard({
       ...cardSelected,
@@ -190,7 +197,8 @@ export const PaymentCard = (props) => {
       type: 'card',
       card: {
         brand: card.brand,
-        last4: card.last4
+        last4: card.last4,
+        zipcode: card.zipcode
       }
     })
   }
@@ -202,8 +210,9 @@ export const PaymentCard = (props) => {
       id: cardSelected?.id,
       type: 'card',
       card: {
-        brand: cardSelected?.brand,
-        last4: cardSelected?.last4
+        brand: cardSelected?.card?.brand,
+        last4: cardSelected?.card?.last4,
+        zipcode: cardSelected?.card?.zipcode
       }
     })
   }, [cardSelected])
@@ -214,7 +223,7 @@ export const PaymentCard = (props) => {
   }, [isShowActions])
 
   return (
-    <CardItem onClick={handleChangeDefaultCard} isCursor>
+    <CardItem onClick={handleChangeDefaultCard} isCursor invalid={!card?.zipcode && validateZipcodeCard}>
       <CardItemContent>
         <span className='checks'>
           {active ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
@@ -225,6 +234,11 @@ export const PaymentCard = (props) => {
         <span>
           XXXX-XXXX-XXXX-{card?.last4}
         </span>
+        {!card?.zipcode && validateZipcodeCard && (
+          <p>
+            ({t('MISSING_ZIPCODE', 'Missing zipcode')})
+          </p>
+        )}
       </CardItemContent>
       <CardItemActions>
         <CardItemActionsWrapper ref={actionWrapperRef}>

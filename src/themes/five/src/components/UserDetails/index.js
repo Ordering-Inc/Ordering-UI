@@ -45,7 +45,8 @@ const UserDetailsUI = (props) => {
     verifyPhoneState,
     requiredFields,
     setFormState,
-    setIsSuccess
+    setIsSuccess,
+    isCheckoutPlace
   } = props
 
   const [, t] = useLanguage()
@@ -126,11 +127,11 @@ const UserDetailsUI = (props) => {
   }, [willVerifyOtpState])
 
   useEffect(() => {
-    if (!isEdit && requiredFields) {
+    if (isCheckoutPlace && requiredFields?.length === 0) {
       setIsSuccess && setIsSuccess(true)
       onClose && onClose()
     }
-  }, [isEdit, requiredFields])
+  }, [isCheckoutPlace, requiredFields])
 
   return (
     <>

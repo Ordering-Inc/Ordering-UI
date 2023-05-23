@@ -24,7 +24,7 @@ import {
   TimeWrapper,
   OrderProgressWrapper
 } from './styles'
-import { getOrderStatus } from '../../../../../utils'
+import { getOrderStatuPickUp, getOrderStatus } from '../../../../../utils'
 
 const OrderProgressUI = (props) => {
   const {
@@ -59,6 +59,8 @@ const OrderProgressUI = (props) => {
       setLastOrder(_lastOrder)
     }
   }, [orderList?.orders])
+
+  const progressBarObjt = lastOrder?.delivery_type && lastOrder?.delivery_type === 2 ? getOrderStatuPickUp : getOrderStatus
 
   return (
     <>
@@ -101,10 +103,10 @@ const OrderProgressUI = (props) => {
             </OrderInfoWrapper>
             <ProgressBarWrapper>
               <ProgressContentWrapper>
-                <ProgressBar style={{ width: getOrderStatus(lastOrder.status)?.percentage ? `${getOrderStatus(lastOrder.status).percentage}%` : '0%' }} />
+                <ProgressBar style={{ width: progressBarObjt(lastOrder.status)?.percentage ? `${progressBarObjt(lastOrder.status).percentage}%` : '0%' }} />
               </ProgressContentWrapper>
               <ProgressTextWrapper>
-                <StatusWrapper>{getOrderStatus(lastOrder?.status)?.value}</StatusWrapper>
+                <StatusWrapper>{progressBarObjt(lastOrder?.status)?.value}</StatusWrapper>
                 <TimeWrapper>
                   <span>{lastOrder?.delivery_type === 1 ? t('ESTIMATED_DELIVERY', 'Estimated delivery') : t('ESTIMATED_TIME', 'Estimated time')}:&nbsp;</span>
                   <span>
@@ -135,6 +137,7 @@ export const OrderProgress = (props) => {
     UIComponent: OrderProgressUI,
     orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23],
     useDefualtSessionManager: true,
+    noGiftCardOrders: true,
     paginationSettings: {
       initialPage: 1,
       pageSize: 10,

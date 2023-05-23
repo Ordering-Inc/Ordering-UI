@@ -102,10 +102,14 @@ const PaymentOptionsUI = (props) => {
     onPlaceOrderClick,
     handlePlaceOrder,
     paymethods,
-    setCardList
+    setCardList,
+    requiredFields,
+    openUserModal,
+    paymethodClicked,
+    setPaymethodClicked
   } = props
   const [, t] = useLanguage()
-  const [{ token }] = useSession()
+  const [{ token, user }] = useSession()
   const [{ options }] = useOrder()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [validationFields] = useValidationFields()
@@ -125,8 +129,10 @@ const PaymentOptionsUI = (props) => {
 
   const supportedMethods = list?.filter(p => !multiCheckoutMethods.includes(p.gateway))?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
 
+  const paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay']
+
   const handlePaymentMethodClick = (paymethod) => {
-    if (paymethod?.gateway === 'paypal' &&
+    if (paymethodsFieldRequired.includes(paymethod?.gateway) &&
       options.type === 1 &&
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
       validationFields?.fields?.checkout?.driver_tip?.required &&
@@ -138,8 +144,16 @@ const PaymentOptionsUI = (props) => {
       })
       return
     }
+    if (paymethodsFieldRequired.includes(paymethod?.gateway) && requiredFields.length > 0) {
+      openUserModal && openUserModal(true)
+      setPaymethodClicked({
+        confirmed: false,
+        paymethod
+      })
+      return
+    }
 
-    if (cart?.balance > 0) {
+    if (cart?.balance > 0 || user?.guest_id) {
       const isPopupMethod = popupMethods.includes(paymethod?.gateway)
       handlePaymethodClick(paymethod, isPopupMethod)
       return
@@ -185,6 +199,12 @@ const PaymentOptionsUI = (props) => {
       handlePlaceOrder()
     }
   }, [JSON.stringify(paymethodData), paymethodSelected])
+
+  useEffect(() => {
+    if (paymethodClicked?.confirmed) {
+      handlePaymethodClick(paymethodClicked?.paymethod)
+    }
+  }, [paymethodClicked?.confirmed])
 
   return (
     <>

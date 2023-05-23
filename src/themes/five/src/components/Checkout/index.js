@@ -128,6 +128,7 @@ const CheckoutUI = (props) => {
   const [openModal, setOpenModal] = useState({ login: false, signup: false, isGuest: false })
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
+  const [paymethodClicked, setPaymethodClicked] = useState(null)
   const cardsMethods = ['stripe', 'credomatic']
   const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
   const businessConfigs = businessDetails?.business?.configs ?? []
@@ -145,6 +146,9 @@ const CheckoutUI = (props) => {
 
   const validateCommentsCartField = validationFields?.fields?.checkout?.comments?.enabled && validationFields?.fields?.checkout?.comments?.required && (cart?.comment === null || cart?.comment?.trim().length === 0)
 
+  const validateZipcodeCard =
+    validationFields?.fields?.card?.zipcode?.enabled && validationFields?.fields?.card?.zipcode?.required && paymethodSelected?.gateway === 'stripe' && paymethodSelected?.data?.card && !paymethodSelected?.data?.card?.zipcode
+
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
     (cardsMethods.includes(paymethodSelected?.gateway) && cardList?.cards?.length === 0) ||
@@ -159,7 +163,8 @@ const CheckoutUI = (props) => {
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
       validationFields?.fields?.checkout?.driver_tip?.required &&
       (Number(cart?.driver_tip) <= 0)) ||
-    (validateCommentsCartField)
+    (validateCommentsCartField) ||
+    validateZipcodeCard
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -187,7 +192,7 @@ const CheckoutUI = (props) => {
     }
 
     if (!userErrors.length && (!requiredFields?.length ||
-        (allowedGuest && (paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery')))) {
+      (allowedGuest && (paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery')))) {
       const body = {}
       if (behalfName) {
         body.on_behalf_of = behalfName
@@ -515,6 +520,10 @@ const CheckoutUI = (props) => {
                 handlePlaceOrder={handlePlaceOrder}
                 onPlaceOrderClick={onPlaceOrderClick}
                 setCardList={setCardList}
+                requiredFields={requiredFields}
+                openUserModal={setIsOpen}
+                paymethodClicked={paymethodClicked}
+                setPaymethodClicked={setPaymethodClicked}
               />
             </PaymentMethodContainer>
           )}
@@ -666,6 +675,11 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
+        {validateZipcodeCard && (
+          <WarningText>
+            {t('WARNING_CARD_ZIPCODE_REQUIRED', 'Your card selected has not zipcode')}
+          </WarningText>
+        )}
         {cart?.valid_preorder !== undefined && !cart?.valid_preorder && (
           <WarningText>
             {t('INVALID_CART_MOMENT', 'Selected schedule time is invalid, please select a schedule into the business schedule interval.')}
@@ -716,13 +730,21 @@ const CheckoutUI = (props) => {
           requiredFields={requiredFields}
           setIsSuccess={setIsSuccess}
           isCheckout
+          isCheckoutPlace
           isEdit
           isModal
           handlePlaceOrderAsGuest={handlePlaceOrderAsGuest}
           isAllowGuest={paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery'}
           onClose={() => {
             setIsOpen(false)
-            handlePlaceOrder()
+            if (paymethodClicked) {
+              setPaymethodClicked({
+                ...paymethodClicked,
+                confirmed: true
+              })
+            } else {
+              handlePlaceOrder()
+            }
           }}
         />
       </Modal>

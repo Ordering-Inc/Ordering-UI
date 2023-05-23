@@ -341,7 +341,7 @@ const OrdersOptionUI = (props) => {
         ) : (
           <VerticalOrdersLayout
             reorderLoading={reorderState?.loading}
-            orders={orders.filter(order => orderStatus.includes(order.status)).sort((a, b) => moment(b?.delivery_datetime_utc).valueOf() - moment(a?.delivery_datetime_utc).valueOf())}
+            orders={orders.filter(order => orderStatus.includes(order.status)).sort((a, b) => moment(a?.delivery_datetime_utc).valueOf() - moment(b?.delivery_datetime_utc).valueOf())}
             pagination={pagination}
             customArray={customArray}
             loadMoreOrders={loadMoreOrders}

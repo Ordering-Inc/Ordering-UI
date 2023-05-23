@@ -761,7 +761,7 @@ const ProductOptionsUI = (props) => {
                       >
                         {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
                       </Button>
-                    ) : (
+                    ) : (!orderState?.options?.address && (
                       <AddressList
                         isModal
                         isProfile
@@ -769,6 +769,7 @@ const ProductOptionsUI = (props) => {
                         addressList={isNaN(userCustomer?.id) ? user.addresses : null}
                         isProductForm
                       />
+                    )
                     )
                   )}
 
@@ -785,7 +786,7 @@ const ProductOptionsUI = (props) => {
                   )}
                   {!auth && guestCheckoutEnabled && orderTypeEnabled && (
                     <GuestUserLink onClick={handleUpdateGuest}>
-                      {t('WITH_GUEST_USER', 'With Guest user')}
+                      {t('AS_GUEST_USER', 'As guest user')}
                     </GuestUserLink>
                   )}
                 </>

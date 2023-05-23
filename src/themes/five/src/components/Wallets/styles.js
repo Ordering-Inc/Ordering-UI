@@ -113,7 +113,7 @@ export const Transactions = styled.div`
 
   @media (min-width: 768px) {
     width: 60%;
-    margin: ${(props) => props.isLoyaltyLevel ? 0 : '0 auto'};
+    margin: 0;
 
     .transactions_list h2 {
       text-align: left;
@@ -150,4 +150,11 @@ export const LoyaltyWrapp = styled.div`
     text-transform: uppercase;
     color: ${(props) => props.theme.colors.primary}
   }
+`
+
+export const NotFoundText = styled.h1`
+  font-size: 18px;
+  opacity: 0.5;
+  text-align: center;
+  color: #344050;
 `

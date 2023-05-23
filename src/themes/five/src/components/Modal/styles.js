@@ -18,7 +18,7 @@ export const ModalDialog = styled.div`
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
-  height: ${({ height }) => height || '100%'};;
+  height: ${({ height }) => height || '100%'};
   max-height: 100vh;
   overflow: auto;
   overflow-x: ${({ disableOverflowX }) => disableOverflowX ? 'hidden' : 'auto'};
@@ -34,8 +34,8 @@ export const ModalDialog = styled.div`
       height: 100%;
       min-width: 0px;
       width: 0%;
-      right: ${slideBarPosition !== 'left' ? 0 : 'initial'};
-      left: ${slideBarPosition === 'left' ? 0 : 'initial'};
+      right: ${slideBarPosition === 'right' ? 0 : 'initial'};
+      left: ${slideBarPosition !== 'right' ? 0 : 'initial'};
 
       ${open ? css`
         animation: slide-in 0.25s forwards;

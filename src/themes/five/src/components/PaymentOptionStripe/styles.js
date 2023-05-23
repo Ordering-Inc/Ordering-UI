@@ -30,6 +30,10 @@ export const CardItem = styled.div`
       background-color: #F8F9FA;
     }
   `}
+
+  ${({ invalid }) => invalid && css`
+    opacity: 0.7;
+  `}
 `
 
 export const CardItemContent = styled.div`
@@ -60,6 +64,11 @@ export const CardItemContent = styled.div`
     font-size: 14px;
     color: ${props => props.theme?.colors.headingColor};
   }
+  p {
+      margin: 0;
+      margin-left: 20px;
+      color: ${({ theme }) => theme?.colors?.danger500}
+    }
 `
 
 export const CardItemActions = styled.div`
