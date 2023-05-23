@@ -147,7 +147,7 @@ const CheckoutUI = (props) => {
   const validateCommentsCartField = validationFields?.fields?.checkout?.comments?.enabled && validationFields?.fields?.checkout?.comments?.required && (cart?.comment === null || cart?.comment?.trim().length === 0)
 
   const validateZipcodeCard =
-    validationFields?.fields?.card?.zipcode?.enabled && validationFields?.fields?.card?.zipcode?.required && !paymethodSelected?.data?.card?.zipcode
+    validationFields?.fields?.card?.zipcode?.enabled && validationFields?.fields?.card?.zipcode?.required && paymethodSelected?.gateway === 'stripe' && paymethodSelected?.data?.card && !paymethodSelected?.data?.card?.zipcode
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -730,6 +730,7 @@ const CheckoutUI = (props) => {
           requiredFields={requiredFields}
           setIsSuccess={setIsSuccess}
           isCheckout
+          isCheckoutPlace
           isEdit
           isModal
           handlePlaceOrderAsGuest={handlePlaceOrderAsGuest}
