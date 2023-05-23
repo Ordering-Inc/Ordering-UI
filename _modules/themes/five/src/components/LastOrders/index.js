@@ -89,7 +89,8 @@ var LastOrders = function LastOrders(props) {
       initialPage: 1,
       pageSize: 1,
       controlType: 'infinity'
-    }
+    },
+    noGiftCardOrders: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderList, lastOrdersProps);
 };

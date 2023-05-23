@@ -157,16 +157,17 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   })) === null || _list$filter === void 0 ? void 0 : _list$filter.filter(function (p) {
     return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
   });
+  var paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay'];
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
     var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6;
-    if ((paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) === 'paypal' && options.type === 1 && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.driver_tip) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie5 = _validationFields$fie4.checkout) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.driver_tip) !== null && _validationFields$fie6 !== void 0 && _validationFields$fie6.required && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0) {
+    if (paymethodsFieldRequired.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) && options.type === 1 && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.driver_tip) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie5 = _validationFields$fie4.checkout) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.driver_tip) !== null && _validationFields$fie6 !== void 0 && _validationFields$fie6.required && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0) {
       setAlertState({
         open: true,
         content: [t('DRIVER_TIPS_REQUIRED', 'Driver tips is required, please select a driver tip before select this paymethod')]
       });
       return;
     }
-    if ((paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) === 'paypal' && requiredFields.length > 0) {
+    if (paymethodsFieldRequired.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) && requiredFields.length > 0) {
       openUserModal && openUserModal(true);
       setPaymethodClicked({
         confirmed: false,
