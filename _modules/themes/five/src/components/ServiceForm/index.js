@@ -439,7 +439,7 @@ var ServiceFormUI = function ServiceFormUI(props) {
   }, actionStatus !== null && actionStatus !== void 0 && actionStatus.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 25,
     width: 70
-  }) : t('WITH_GUEST_USER', 'With Guest user')))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }) : t('AS_GUEST_USER', 'As guest user')))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
       return closeModal();
