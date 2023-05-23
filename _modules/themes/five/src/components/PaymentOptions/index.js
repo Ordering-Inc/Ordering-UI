@@ -129,7 +129,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     t = _useLanguage2[1];
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
-    token = _useSession2[0].token;
+    _useSession2$ = _useSession2[0],
+    token = _useSession2$.token,
+    user = _useSession2$.user;
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     options = _useOrder2[0].options;
@@ -175,7 +177,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       });
       return;
     }
-    if ((cart === null || cart === void 0 ? void 0 : cart.balance) > 0) {
+    if ((cart === null || cart === void 0 ? void 0 : cart.balance) > 0 || user !== null && user !== void 0 && user.guest_id) {
       var isPopupMethod = popupMethods.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway);
       handlePaymethodClick(paymethod, isPopupMethod);
       return;
