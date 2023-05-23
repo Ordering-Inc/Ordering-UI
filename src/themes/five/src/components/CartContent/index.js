@@ -83,14 +83,14 @@ export const CartContent = (props) => {
   return (
     <>
       <Container>
-        {!isSlideBar && (
-          <WrapperContainer>
+        <WrapperContainer>
+          {!isSlideBar && (
             <Title>{t('YOUR_CART', 'Your cart')}</Title>
-            {checkoutMultiBusinessEnabled && carts?.length > 0 && (
-              <Button onClick={handleClickCheckout} color='primary'>{t('CHECKOUT', 'Checkout')}</Button>
-            )}
-          </WrapperContainer>
-        )}
+          )}
+          {checkoutMultiBusinessEnabled && carts?.length > 0 && (
+            <Button onClick={handleClickCheckout} color='primary'>{t('CHECKOUT', 'Checkout')}</Button>
+          )}
+        </WrapperContainer>
         {isOrderStateCarts && carts?.length > 0 && (
           <>
             {carts.map(cart => (

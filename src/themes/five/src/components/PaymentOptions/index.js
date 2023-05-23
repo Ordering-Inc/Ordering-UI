@@ -109,7 +109,7 @@ const PaymentOptionsUI = (props) => {
     setPaymethodClicked
   } = props
   const [, t] = useLanguage()
-  const [{ token }] = useSession()
+  const [{ token, user }] = useSession()
   const [{ options }] = useOrder()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [validationFields] = useValidationFields()
@@ -153,7 +153,7 @@ const PaymentOptionsUI = (props) => {
       return
     }
 
-    if (cart?.balance > 0) {
+    if (cart?.balance > 0 || user?.guest_id) {
       const isPopupMethod = popupMethods.includes(paymethod?.gateway)
       handlePaymethodClick(paymethod, isPopupMethod)
       return

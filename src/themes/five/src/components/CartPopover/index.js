@@ -42,7 +42,7 @@ export const CartPopover = (props) => {
 
   const { styles, attributes } = popper
 
-  const isSlideBar = orderingTheme?.theme?.header?.components?.cart?.open_strategy?.type === 'slide'
+  const isSlideBar = theme?.header?.components?.cart?.components?.open_strategy?.type === 'slide'
 
   useEffect(() => {
     // forceUpdate && forceUpdate()
@@ -115,7 +115,7 @@ export const CartPopover = (props) => {
             onClose={props.onClose}
             hideCloseDefault
             isSlideBar
-            slideBarPosition={orderingTheme?.theme?.header?.components?.cart?.open_strategy?.position}
+            slideBarPosition={theme?.header?.components?.cart?.components?.open_strategy?.position}
           >
             <TitleContainer>
               <Title>{t('MY_CART', 'My cart')}</Title>
