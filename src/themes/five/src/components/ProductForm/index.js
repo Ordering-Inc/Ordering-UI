@@ -761,7 +761,7 @@ const ProductOptionsUI = (props) => {
                       >
                         {t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}
                       </Button>
-                    ) : (
+                    ) : (!orderState?.options?.address && (
                       <AddressList
                         isModal
                         isProfile
@@ -769,6 +769,7 @@ const ProductOptionsUI = (props) => {
                         addressList={isNaN(userCustomer?.id) ? user.addresses : null}
                         isProductForm
                       />
+                    )
                     )
                   )}
 
