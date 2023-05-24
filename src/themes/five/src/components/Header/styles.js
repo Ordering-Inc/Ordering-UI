@@ -161,9 +161,6 @@ export const Menu = styled.div`
       margin: 0 75px;
     }
   }
-  > *:not(:last-child) {
-    margin: 0 5px;
-  }
   > span {
     #select-input {
       background: transparent !important;
