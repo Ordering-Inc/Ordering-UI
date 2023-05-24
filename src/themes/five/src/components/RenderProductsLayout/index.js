@@ -102,11 +102,11 @@ export const RenderProductsLayout = (props) => {
   const [categoryClicked, setCategoryClicked] = useState(false)
   const isUseParentCategory = (configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1') && !useKioskApp
   const BusinessBasicInformationComponent =
-    orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'red'
+    theme?.business_view?.components?.header?.components?.layout?.type === 'red'
       ? BusinessBasicInformationRed
-      : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'starbucks'
+      : theme?.business_view?.components?.header?.components?.layout?.type === 'starbucks'
         ? BusinessBasicInformationStarbucks
-        : orderingTheme?.theme?.business_view?.components?.header?.components?.layout?.type === 'old'
+        : theme?.business_view?.components?.header?.components?.layout?.type === 'old'
           ? BusinessBasicInformationOld
           : BusinessBasicInformation
 
@@ -193,11 +193,11 @@ export const RenderProductsLayout = (props) => {
               />
             )}
 
-              {!isCustomerMode && (
-                <PageBannerWrapper>
-                  <PageBanner position='web_business_page' />
-                </PageBannerWrapper>
-              )}
+            {!isCustomerMode && (
+              <PageBannerWrapper>
+                <PageBanner position='web_business_page' />
+              </PageBannerWrapper>
+            )}
 
             {!errorQuantityProducts && SearchProductsComponent && !useKioskApp && (
               <>

@@ -165,6 +165,9 @@ export const HeaderContent = styled.div`
     `}
     @media (min-width: 993px){
       width: 100px;
+      ${({ useFullWidth }) => useFullWidth && css`
+        width: 100vw;
+      `}
     }
   }
   .fixed-arrow-width{

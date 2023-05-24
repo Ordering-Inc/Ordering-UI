@@ -118,6 +118,9 @@ const BusinessProductsListingUI = (props) => {
   const currentCart = Object.values(carts).find(cart => cart?.business?.slug === business?.slug) ?? {}
   const isLazy = businessState?.business?.lazy_load_products_recommended
   const showViewOrderButton = !theme?.business_view?.components?.order_view_button?.hidden
+  const headerThemeType = theme?.business_view?.components?.header?.components?.layout?.type
+  const searchThemeType = theme?.business_view?.components?.product_search?.components?.layout?.type
+  const fullWidthArrowThemes = ['starbucks', 'old', 'red']
   const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const cateringTypes = [7, 8]
   const cateringPreorder = cateringTypes.includes(options?.type)
@@ -344,7 +347,7 @@ const BusinessProductsListingUI = (props) => {
     <>
       <ProductsContainer>
         {!props.useKioskApp && (
-          <HeaderContent>
+          <HeaderContent useFullWidth={fullWidthArrowThemes.includes(searchThemeType) || fullWidthArrowThemes.includes(headerThemeType)}>
             {!isCustomLayout && !location.pathname.includes('/marketplace') && (
               <div id='back-arrow'>
                 <ArrowLeft className='back-arrow' onClick={() => handleGoToBusinessList()} />
