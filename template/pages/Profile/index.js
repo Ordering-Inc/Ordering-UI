@@ -1,9 +1,9 @@
 import React from 'react'
-import { useOrderingTheme } from 'ordering-components'
 import { UserProfileForm as UserProfileFormOriginal } from '../../../src/themes/five/src/components/UserProfileForm'
 import { UserProfileForm as UserProfileFormOld } from '../../../src/components/UserProfileForm'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
+import { useTheme } from 'styled-components'
 
 export const Profile = (props) => {
   const windowSize = useWindowSize()
@@ -15,8 +15,8 @@ export const Profile = (props) => {
     hideOptions: windowSize.width < 576
   }
 
-  const [orderingTheme] = useOrderingTheme()
-  const layout = orderingTheme?.theme?.profile?.components?.layout?.type
+  const theme = useTheme()
+  const layout = theme?.profile?.components?.layout?.type
 
   return (
     <>
