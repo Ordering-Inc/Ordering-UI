@@ -19,6 +19,9 @@ import { ArrowLeft } from 'react-bootstrap-icons'
 import { Button } from '../../styles/Buttons'
 import { Cart } from '../Cart'
 import { Alert } from '../Confirm'
+import { Modal } from '../Modal'
+import { SignUpForm } from '../SignUpForm'
+import { LoginForm } from '../LoginForm'
 import { UserDetails } from '../UserDetails'
 import { AddressDetails } from '../AddressDetails'
 import { MultiCartsPaymethodsAndWallets } from '../MultiCartsPaymethodsAndWallets'
@@ -39,7 +42,8 @@ import {
   WrapperPlaceOrderButton,
   WarningText,
   DriverTipContainer,
-  CouponContainer
+  CouponContainer,
+  AuthButtonList
 } from './styles'
 import { DriverTips } from '../DriverTips'
 
@@ -75,7 +79,7 @@ const MultiCheckoutUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [customerState] = useCustomer()
   const [validationFields] = useValidationFields()
-  const [{ user }] = useSession()
+  const [{ user }, { login }] = useSession()
   const [orderState] = useOrder()
   const history = useHistory()
   const [, { showToast }] = useToast()
@@ -83,6 +87,11 @@ const MultiCheckoutUI = (props) => {
   const [cardList, setCardList] = useState([])
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
+  const [requiredFields, setRequiredFields] = useState([])
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [allowedGuest, setAllowedGuest] = useState(false)
+  const [openModal, setOpenModal] = useState({ login: false, signup: false, isGuest: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
@@ -102,6 +111,7 @@ const MultiCheckoutUI = (props) => {
 
   const totalCartsPrice = cartGroup?.result?.balance
   const methodsPay = ['global_google_pay', 'global_apple_pay']
+  const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
   const creditPointPlan = loyaltyPlansState?.result?.find((loyal) => loyal.type === 'credit_point')
   const businessIds = openCarts.map((cart) => cart.business_id)
   const loyalBusinessIds = creditPointPlan?.businesses?.filter((b) => b.accumulates).map((item) => item.business_id) ?? []
@@ -131,8 +141,18 @@ const MultiCheckoutUI = (props) => {
   const loyaltyRewardValue = openCarts.reduce((sum, cart) => sum + clearAmount((cart?.subtotal + getIncludedTaxes(cart)) * accumulationRateBusiness(cart?.business_id)), 0)
 
   const handlePlaceOrder = () => {
-    if (!userErrors.length) {
+    if (stripePaymethods.includes(paymethodSelected?.gateway) && user?.guest_id) {
+      setOpenModal({ ...openModal, signup: true, isGuest: true })
+      return
+    }
+
+    if (!userErrors.length && (!requiredFields?.length ||
+      (allowedGuest && (paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery')))) {
       handleGroupPlaceOrder && handleGroupPlaceOrder()
+      return
+    }
+    if (requiredFields?.length) {
+      setIsOpen(true)
       return
     }
     setAlertState({
@@ -140,6 +160,11 @@ const MultiCheckoutUI = (props) => {
       content: Object.values(userErrors).map(error => error)
     })
     setIsUserDetailsEdit(true)
+  }
+
+  const handlePlaceOrderAsGuest = () => {
+    setIsOpen(false)
+    handleGroupPlaceOrder && handleGroupPlaceOrder()
   }
 
   const closeAlert = () => {
@@ -155,11 +180,12 @@ const MultiCheckoutUI = (props) => {
     const errors = []
     const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes']
     const userSelected = isCustomerMode ? customerState.user : user
+    const _requiredFields = []
 
     Object.values(validationFields?.fields?.checkout).map(field => {
       if (field?.enabled && field?.required && !notFields.includes(field.code)) {
         if (userSelected && !userSelected[field?.code]) {
-          errors.push(t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `The field ${field?.name} is required`))
+          _requiredFields.push(field?.code)
         }
       }
     })
@@ -171,8 +197,9 @@ const MultiCheckoutUI = (props) => {
         validationFields?.fields?.checkout?.cellphone?.required) ||
         configs?.verification_phone_required?.value === '1')
     ) {
-      errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'))
+      _requiredFields.push('cellphone')
     }
+    setRequiredFields(_requiredFields)
 
     if (userSelected && userSelected?.cellphone) {
       if (userSelected?.country_phone_code) {
@@ -188,6 +215,19 @@ const MultiCheckoutUI = (props) => {
     }
 
     setUserErrors(errors)
+  }
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+    openModal?.isGuest && handlePlaceOrderAsGuest()
+    setOpenModal({ ...openModal, signup: false, isGuest: false })
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) setOpenModal({ ...openModal, login: false })
   }
 
   useEffect(() => {
@@ -251,16 +291,32 @@ const MultiCheckoutUI = (props) => {
 
               <UserDetailsContainer>
                 <WrapperUserDetails>
-                  <UserDetails
-                    isUserDetailsEdit={isUserDetailsEdit}
-                    useValidationFields
-                    useDefualtSessionManager
-                    useSessionUser={!isCustomerMode}
-                    isCustomerMode={isCustomerMode}
-                    userData={isCustomerMode && customerState.user}
-                    userId={isCustomerMode && customerState?.user?.id}
-                    isCheckout
-                  />
+                  {(user?.guest_id && !allowedGuest) ? (
+                    <AuthButtonList>
+                      <h2>{t('CUSTOMER_DETAILS', 'Customer details')}</h2>
+                      <Button color='primary' onClick={() => setOpenModal({ ...openModal, signup: true })}>
+                        {t('SIGN_UP', 'Sign up')}
+                      </Button>
+                      <Button color='primary' outline onClick={() => setOpenModal({ ...openModal, login: true })}>
+                        {t('LOGIN', 'Login')}
+                      </Button>
+                      <Button color='black' outline onClick={() => setAllowedGuest(true)}>
+                        {t('CONTINUE_AS_GUEST', 'Continue as guest')}
+                      </Button>
+                    </AuthButtonList>
+                  ) : (
+                    <UserDetails
+                      isUserDetailsEdit={isUserDetailsEdit}
+                      useValidationFields
+                      useDefualtSessionManager
+                      useSessionUser={!isCustomerMode}
+                      isCustomerMode={isCustomerMode}
+                      userData={isCustomerMode && customerState.user}
+                      userId={isCustomerMode && customerState?.user?.id}
+                      isCheckout
+                      isSuccess={isSuccess}
+                    />
+                  )}
                 </WrapperUserDetails>
               </UserDetailsContainer>
 
@@ -407,6 +463,59 @@ const MultiCheckoutUI = (props) => {
             onAccept={() => closeAlert()}
             closeOnBackdrop={false}
           />
+          <Modal
+            open={isOpen}
+            width='760px'
+            padding='30px'
+            onClose={() => setIsOpen(false)}
+          >
+            <UserDetails
+              isUserDetailsEdit={isUserDetailsEdit}
+              useValidationFields
+              useDefualtSessionManager
+              useSessionUser={!isCustomerMode}
+              isCustomerMode={isCustomerMode}
+              userData={isCustomerMode && customerState.user}
+              userId={isCustomerMode && customerState?.user?.id}
+              requiredFields={requiredFields}
+              setIsSuccess={setIsSuccess}
+              isCheckout
+              isEdit
+              isModal
+              handlePlaceOrderAsGuest={handlePlaceOrderAsGuest}
+              isAllowGuest={paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery'}
+              onClose={() => {
+                setIsOpen(false)
+                handlePlaceOrder()
+              }}
+            />
+          </Modal>
+          <Modal
+            open={openModal.signup}
+            width='760px'
+            padding='30px'
+            onClose={() => setOpenModal({ ...openModal, signup: false, isGuest: false })}
+          >
+            <SignUpForm
+              useLoginByCellphone
+              useChekoutFileds
+              handleSuccessSignup={handleSuccessSignup}
+              isPopup
+              isGuest
+            />
+          </Modal>
+          <Modal
+            open={openModal.login}
+            width='760px'
+            padding='30px'
+            onClose={() => setOpenModal({ ...openModal, login: false })}
+          >
+            <LoginForm
+              handleSuccessLogin={handleSuccessLogin}
+              isPopup
+              isGuest
+            />
+          </Modal>
         </Container>
       )}
     </>

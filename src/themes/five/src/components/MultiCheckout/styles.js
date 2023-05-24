@@ -173,3 +173,18 @@ export const WarningText = styled.p`
   color: ${props => props.theme.colors.danger500};
   font-size: 14px;
 `
+
+export const AuthButtonList = styled.div`
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 3px;
+  }
+  button {
+    width: 100%;
+    height: 44px;
+    margin-top: 22px;
+  }
+`
