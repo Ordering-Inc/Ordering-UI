@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Title = exports.SkeletonItem = exports.ProductsContainer = exports.ProductLoading = exports.OrderContextUIWrapper = exports.MobileCartViewWrapper = exports.HeaderContent = exports.EmptyCart = exports.EmptyBtnWrapper = exports.BusinessCartContent = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -42,14 +42,17 @@ var EmptyBtnWrapper = _styledComponents.default.div(_templateObject9 || (_templa
   return props.theme.colors.darkTextColor;
 });
 exports.EmptyBtnWrapper = EmptyBtnWrapper;
-var HeaderContent = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  .back-arrow {\n    font-size: 24px;\n    cursor: pointer;\n  }\n  .fixed-arrow {\n    position: fixed;\n    top: 0;\n    left: 0;\n    z-index: 10001;\n    width: 100vw;\n    background-color: ", ";\n    height: 56px;\n    display: flex;\n    align-items: center;\n    ", "\n    @media (min-width: 993px){\n      width: 100px;\n    }\n  }\n  .fixed-arrow-width{\n    width: 100vw;      \n  }\n"])), function (props) {
+var HeaderContent = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  .back-arrow {\n    font-size: 24px;\n    cursor: pointer;\n  }\n  .fixed-arrow {\n    position: fixed;\n    top: 0;\n    left: 0;\n    z-index: 10001;\n    width: 100vw;\n    background-color: ", ";\n    height: 56px;\n    display: flex;\n    align-items: center;\n    ", "\n    @media (min-width: 993px){\n      width: 100px;\n      ", "\n    }\n  }\n  .fixed-arrow-width{\n    width: 100vw;      \n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (props) {
   var _props$theme;
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      padding-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      padding-left: 10px;\n    "])));
+}, function (_ref4) {
+  var useFullWidth = _ref4.useFullWidth;
+  return useFullWidth && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n        width: 100vw;\n      "])));
 });
 exports.HeaderContent = HeaderContent;
-var OrderContextUIWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  flex: 1;\n  width: 100%;\n  ", "\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 15px;\n  "])));
+var OrderContextUIWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  flex: 1;\n  width: 100%;\n  ", "\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 15px;\n  "])));
 });
 exports.OrderContextUIWrapper = OrderContextUIWrapper;

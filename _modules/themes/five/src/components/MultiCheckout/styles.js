@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperPlaceOrderButton = exports.WrapperLeftContent = exports.WrapperLeftContainer = exports.WarningText = exports.UserDetailsContainer = exports.PaymentMethodContainer = exports.MultiCartPriceContainer = exports.DriverTipDivider = exports.DriverTipContainer = exports.CouponContainer = exports.Container = exports.CartHeader = exports.CartContainer = void 0;
+exports.WrapperUserDetails = exports.WrapperRightContainer = exports.WrapperPlaceOrderButton = exports.WrapperLeftContent = exports.WrapperLeftContainer = exports.WarningText = exports.UserDetailsContainer = exports.PaymentMethodContainer = exports.MultiCartPriceContainer = exports.DriverTipDivider = exports.DriverTipContainer = exports.CouponContainer = exports.Container = exports.CartHeader = exports.CartContainer = exports.AuthButtonList = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  flex-direction: column;\n  min-height: auto;\n\n  @media (min-width: 769px) {\n    flex-direction: row;\n  }\n\n  @media (min-width: 993px) {\n    min-height: calc(100vh - 337px);\n    box-sizing: border-box;\n  }\n"])));
@@ -52,3 +52,5 @@ var WarningText = _styledComponents.default.p(_templateObject15 || (_templateObj
   return props.theme.colors.danger500;
 });
 exports.WarningText = WarningText;
+var AuthButtonList = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  h2 {\n    font-weight: 600;\n    font-size: 20px;\n    margin-bottom: 3px;\n  }\n  button {\n    width: 100%;\n    height: 44px;\n    margin-top: 22px;\n  }\n"])));
+exports.AuthButtonList = AuthButtonList;
