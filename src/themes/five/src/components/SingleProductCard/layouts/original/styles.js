@@ -5,7 +5,7 @@ export const CardContainer = styled.div`
   ${({ isShowAddButt }) => css`
     min-height: ${isShowAddButt ? '162px' : '110px'};
   `}
-  background: ${({ soldOut }) => soldOut ? '#6c757d33' : '#FFF'};
+  background: ${({ soldOut, theme }) => soldOut ? '#6c757d33' : theme?.colors?.backgroundPage};
   border: 1px solid #E9ECEF;
   padding: 10px;
   border-radius: 7.6px;
