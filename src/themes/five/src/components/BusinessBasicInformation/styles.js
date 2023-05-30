@@ -378,7 +378,7 @@ export const TitleWrapper = styled.div`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background: ${({ theme }) => theme?.colors?.white};
+    background: ${({ theme }) => theme?.colors?.backgroundPage};
     &.fixed-name {
       z-index: 10001;
       position: fixed;
