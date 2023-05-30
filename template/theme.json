@@ -260,6 +260,27 @@
             },
             "schedule": {
               "hidden": false
+            },
+            "about": {
+              "hidden": false
+            },
+            "address": {
+              "hidden": false
+            },
+            "delivery_time": {
+              "hidden": false
+            },
+            "description": {
+              "hidden": false
+            },
+            "images": {
+              "hidden": false
+            },
+            "pickup_time": {
+              "hidden": false
+            },
+            "videos": {
+              "hidden": false
             }
           }
         },

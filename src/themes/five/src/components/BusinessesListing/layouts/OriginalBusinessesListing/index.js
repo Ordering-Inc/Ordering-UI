@@ -283,9 +283,6 @@ const BusinessesListingUI = (props) => {
                 {citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)?.name || t('SELECT_A_CITY', 'Select a city')}
               </Button>
             )}
-            {!hideFilter && configs?.advanced_business_search_enabled?.value === '1' && (
-              <FiFilter onClick={() => onRedirectPage({ page: 'business_search' })} />
-            )}
             {isCustomLayout && (
               <FiMap onClick={toggleMap} />
             )}
