@@ -298,7 +298,7 @@ export const ProductActions = styled.div`
   }
 
   div.incdec-control {
-    width: 195px;
+    width: 130px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -308,6 +308,10 @@ export const ProductActions = styled.div`
       width: 25px;
       height: 25px;
       cursor: pointer;
+    }
+
+    @media (min-width: 577px) {
+      width: 195px;
     }
   }
 
