@@ -52,7 +52,8 @@ var UserDetailsUI = function UserDetailsUI(props) {
     verifyPhoneState = props.verifyPhoneState,
     requiredFields = props.requiredFields,
     setFormState = props.setFormState,
-    setIsSuccess = props.setIsSuccess;
+    setIsSuccess = props.setIsSuccess,
+    isCheckoutPlace = props.isCheckoutPlace;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -140,11 +141,11 @@ var UserDetailsUI = function UserDetailsUI(props) {
     handleSendOtp();
   }, [willVerifyOtpState]);
   (0, _react.useEffect)(function () {
-    if (!isEdit && requiredFields) {
+    if (isCheckoutPlace && (requiredFields === null || requiredFields === void 0 ? void 0 : requiredFields.length) === 0) {
       setIsSuccess && setIsSuccess(true);
       onClose && onClose();
     }
-  }, [isEdit, requiredFields]);
+  }, [isCheckoutPlace, requiredFields]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

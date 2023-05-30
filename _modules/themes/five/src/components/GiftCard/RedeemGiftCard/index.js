@@ -100,7 +100,7 @@ var RedeemGiftCardUI = function RedeemGiftCardUI(props) {
     rules: {
       required: t('VALIDATION_ERROR_REQUIRED', 'Code is required').replace('_attribute_', t('CODE', 'Code'))
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('GIFT_CARD_PASSWORD', 'Gift card password')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "password",
     type: "password",
     ref: register({

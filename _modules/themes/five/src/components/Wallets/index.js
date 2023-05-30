@@ -13,7 +13,6 @@ var _styles = require("./styles");
 var _WalletTransactionItem = require("../WalletTransactionItem");
 var _Tabs = require("../../styles/Tabs");
 var _GiftCardUI = require("../GiftCard/GiftCardUI");
-var _NotFoundSource = require("../NotFoundSource");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -33,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var WalletsUI = function WalletsUI(props) {
-  var _ref, _walletList$wallets, _walletList$wallets2, _userLoyaltyLevel$loy, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _transactionsList$lis5, _transactionsList$lis6, _loyaltyLevel$image, _walletList$wallets5;
+  var _ref, _walletList$wallets, _walletList$wallets2, _userLoyaltyLevel$loy, _walletList$wallets3, _walletList$wallets4, _configs$stripe_curre, _transactionsList$lis, _transactionsList$lis2, _transactionsList$lis3, _transactionsList$lis4, _loyaltyLevel$image, _transactionsList$lis5, _transactionsList$lis6, _walletList$wallets5, _walletList$wallets6;
   var walletList = props.walletList,
     userLoyaltyLevel = props.userLoyaltyLevel,
     transactionsList = props.transactionsList,
@@ -110,9 +109,7 @@ var WalletsUI = function WalletsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 40
     }));
-  })), !(transactionsList !== null && transactionsList !== void 0 && transactionsList.loading) && ((transactionsList === null || transactionsList === void 0 ? void 0 : transactionsList.error) || !((_transactionsList$lis5 = transactionsList.list) !== null && _transactionsList$lis5 !== void 0 && (_transactionsList$lis6 = _transactionsList$lis5["wallet:".concat(currentWalletSelected === null || currentWalletSelected === void 0 ? void 0 : currentWalletSelected.id)]) !== null && _transactionsList$lis6 !== void 0 && _transactionsList$lis6.length)) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: transactionsList !== null && transactionsList !== void 0 && transactionsList.error ? t('ERROR_NOT_FOUND_TRANSACTIONS', 'Sorry, an error has occurred') : t('NOT_FOUND_TRANSACTIONS', 'No transactions to show at this time.')
-  }))), !!loyaltyLevel && tabSelected === 'credit_point' && /*#__PURE__*/_react.default.createElement(_styles.LoyaltyContent, null, /*#__PURE__*/_react.default.createElement(_styles.LoyaltyWrapp, null, /*#__PURE__*/_react.default.createElement("span", {
+  })))), !!loyaltyLevel && tabSelected === 'credit_point' && /*#__PURE__*/_react.default.createElement(_styles.LoyaltyContent, null, /*#__PURE__*/_react.default.createElement(_styles.LoyaltyWrapp, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "loyalty_title"
   }, t('LOYALTY_LEVEL_TITLE', 'Your level is'), ":"), /*#__PURE__*/_react.default.createElement("img", {
     src: (_loyaltyLevel$image = loyaltyLevel.image) !== null && _loyaltyLevel$image !== void 0 ? _loyaltyLevel$image : theme.images.dummies.loyaltyLevel
@@ -150,9 +147,7 @@ var WalletsUI = function WalletsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 40
     }));
-  }))), !(walletList !== null && walletList !== void 0 && walletList.loading) && !userLoyaltyLevel.loading && ((walletList === null || walletList === void 0 ? void 0 : walletList.error) || !(walletList !== null && walletList !== void 0 && (_walletList$wallets5 = walletList.wallets) !== null && _walletList$wallets5 !== void 0 && _walletList$wallets5.length)) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: walletList !== null && walletList !== void 0 && walletList.error ? t('ERROR_NOT_FOUND_WALLETS', 'Sorry, an error has occurred') : t('NOT_FOUND_WALLETS', 'No wallets to show at this time.')
-  }));
+  }))), !(transactionsList !== null && transactionsList !== void 0 && transactionsList.loading) && ((transactionsList === null || transactionsList === void 0 ? void 0 : transactionsList.error) || !((_transactionsList$lis5 = transactionsList.list) !== null && _transactionsList$lis5 !== void 0 && (_transactionsList$lis6 = _transactionsList$lis5["wallet:".concat(currentWalletSelected === null || currentWalletSelected === void 0 ? void 0 : currentWalletSelected.id)]) !== null && _transactionsList$lis6 !== void 0 && _transactionsList$lis6.length)) && !walletList.loading && !userLoyaltyLevel.loading && !walletList.error && ((_walletList$wallets5 = walletList.wallets) === null || _walletList$wallets5 === void 0 ? void 0 : _walletList$wallets5.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.NotFoundText, null, transactionsList !== null && transactionsList !== void 0 && transactionsList.error ? t('ERROR_NOT_FOUND_TRANSACTIONS', 'Sorry, an error has occurred') : t('NOT_FOUND_TRANSACTIONS', 'No transactions to show at this time.')), !(walletList !== null && walletList !== void 0 && walletList.loading) && !userLoyaltyLevel.loading && ((walletList === null || walletList === void 0 ? void 0 : walletList.error) || !(walletList !== null && walletList !== void 0 && (_walletList$wallets6 = walletList.wallets) !== null && _walletList$wallets6 !== void 0 && _walletList$wallets6.length)) && /*#__PURE__*/_react.default.createElement(_styles.NotFoundText, null, walletList !== null && walletList !== void 0 && walletList.error ? t('ERROR_NOT_FOUND_WALLETS', 'Sorry, an error has occurred') : t('NOT_FOUND_WALLETS', 'No wallets to show at this time.')));
 };
 var Wallets = function Wallets(props) {
   var _configs$wallet_cash_, _configs$wallet_credi;
