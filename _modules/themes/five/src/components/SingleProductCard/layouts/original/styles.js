@@ -17,8 +17,10 @@ var CardContainer = _styledComponents.default.div(_templateObject || (_templateO
   var isShowAddButt = _ref.isShowAddButt;
   return (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    min-height: ", ";\n  "])), isShowAddButt ? '162px' : '110px');
 }, function (_ref2) {
-  var soldOut = _ref2.soldOut;
-  return soldOut ? '#6c757d33' : '#FFF';
+  var _theme$colors;
+  var soldOut = _ref2.soldOut,
+    theme = _ref2.theme;
+  return soldOut ? '#6c757d33' : theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.backgroundPage;
 }, function (_ref3) {
   var _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _theme$business_view$5, _theme$business_view$6;
   var theme = _ref3.theme;
