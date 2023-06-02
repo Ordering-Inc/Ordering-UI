@@ -106,8 +106,6 @@ const CardFormUI = (props) => {
                     placeholder={`${t('ZIPCODE', 'Zipcode')}${zipCodeRequired ? '*' : ''}`}
                     options={CARD_ELEMENT_OPTIONS}
                     onChange={handleChange}
-                    pattern='[0-9]'
-                    type='number'
                   />
                   {errorZipcode && (
                     <ErrorMessage>{t('ZIPCODE_IS_INCOMPLETED', 'The zipcode is incompleted.')}</ErrorMessage>
