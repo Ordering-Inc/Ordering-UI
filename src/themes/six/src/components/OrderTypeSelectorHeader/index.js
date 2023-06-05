@@ -135,14 +135,14 @@ export const OrderTypeSelectorHeader = (props) => {
         value: 4,
         content: <Option><GiFoodTruck /><ContentOption>{t('CURBSIDE', 'Curbside')}</ContentOption></Option>,
         showOnSelected: <Option><GiFoodTruck /><SelectedOption>{t('CURBSIDE', 'Curbside')}</SelectedOption></Option>,
-        itemcontent: <OrderType><FaCarSide /><ItemContent>{t('DRIVE_THRU', 'Drive thru')}</ItemContent></OrderType>,
+        itemcontent: <OrderType><FaCarSide /><ItemContent>{t('CURBSIDE', 'Curbside')}</ItemContent></OrderType>,
         itemdescription: <OrderDescription>{t('ORDERTYPE_DESCRIPTION_CURBSIDE', 'Curbside description')}</OrderDescription>
       },
       {
         value: 5,
         content: <Option><FaCarSide /><ContentOption>{t('DRIVE_THRU', 'Drive thru')}</ContentOption></Option>,
         showOnSelected: <Option><FaCarSide /><SelectedOption>{t('DRIVE_THRU', 'Drive thru')}</SelectedOption></Option>,
-        itemcontent: <OrderType><GiFoodTruck /><ItemContent>{t('CURBSIDE', 'Curbside')}</ItemContent></OrderType>,
+        itemcontent: <OrderType><GiFoodTruck /><ItemContent>{t('DRIVE_THRU', 'Drive thru')}</ItemContent></OrderType>,
         itemdescription: <OrderDescription>{t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description')}</OrderDescription>
       }
     ]
