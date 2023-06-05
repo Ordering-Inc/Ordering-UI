@@ -115,35 +115,35 @@ export const OrderTypeSelectorHeader = (props) => {
         content: <Option><MdcTruckDeliveryOutline /><ContentOption>{t('DELIVERY', 'Delivery')}</ContentOption></Option>,
         showOnSelected: <Option><MdcTruckDeliveryOutline /><SelectedOption>{t('DELIVERY', 'Delivery')}</SelectedOption></Option>,
         itemcontent: <OrderType><MdcTruckDeliveryOutline /><ItemContent>{t('DELIVERY', 'Delivery')}</ItemContent></OrderType>,
-        itemdescription: <OrderDescription>{t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.')}</OrderDescription>
+        itemdescription: <OrderDescription>{t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description')}</OrderDescription>
       },
-      {
+      { 
         value: 2,
         content: <Option><FaTruckPickup /><ContentOption>{t('PICKUP', 'Pickup')}</ContentOption></Option>,
         showOnSelected: <Option><FaTruckPickup /><SelectedOption>{t('PICKUP', 'Pickup')}</SelectedOption></Option>,
         itemcontent: <OrderType><FaTruckPickup /><ItemContent>{t('PICKUP', 'Pickup')}</ItemContent></OrderType>,
-        itemdescription: <OrderDescription>{t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.')}</OrderDescription>
+        itemdescription: <OrderDescription>{t('ORDERTYPE_DESCRIPTION_PICKUP', 'Pickup description')}</OrderDescription>
       },
       {
         value: 3,
         content: <Option><AiFillShop /><ContentOption>{t('EAT_IN', 'Eat in')}</ContentOption></Option>,
         showOnSelected: <Option><AiFillShop /><SelectedOption>{t('EAT_IN', 'Eat in')}</SelectedOption></Option>,
         itemcontent: <OrderType><AiFillShop /><ItemContent>{t('EAT_IN', 'Eat in')}</ItemContent></OrderType>,
-        itemdescription: <OrderDescription>{t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.')}</OrderDescription>
+        itemdescription: <OrderDescription>{t('ORDERTYPE_DESCRIPTION_EATIN', 'Eat in description')}</OrderDescription>
       },
       {
         value: 4,
         content: <Option><GiFoodTruck /><ContentOption>{t('CURBSIDE', 'Curbside')}</ContentOption></Option>,
         showOnSelected: <Option><GiFoodTruck /><SelectedOption>{t('CURBSIDE', 'Curbside')}</SelectedOption></Option>,
         itemcontent: <OrderType><FaCarSide /><ItemContent>{t('DRIVE_THRU', 'Drive thru')}</ItemContent></OrderType>,
-        itemdescription: <OrderDescription>{t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.')}</OrderDescription>
+        itemdescription: <OrderDescription>{t('ORDERTYPE_DESCRIPTION_CURBSIDE', 'Curbside description')}</OrderDescription>
       },
       {
         value: 5,
         content: <Option><FaCarSide /><ContentOption>{t('DRIVE_THRU', 'Drive thru')}</ContentOption></Option>,
         showOnSelected: <Option><FaCarSide /><SelectedOption>{t('DRIVE_THRU', 'Drive thru')}</SelectedOption></Option>,
         itemcontent: <OrderType><GiFoodTruck /><ItemContent>{t('CURBSIDE', 'Curbside')}</ItemContent></OrderType>,
-        itemdescription: <OrderDescription>{t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.')}</OrderDescription>
+        itemdescription: <OrderDescription>{t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description')}</OrderDescription>
       }
     ]
   }
