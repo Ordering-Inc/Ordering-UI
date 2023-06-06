@@ -109,31 +109,31 @@ var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_MdcTruckDeliveryOutline.default, null), /*#__PURE__*/_react.default.createElement(_styles.ContentOption, null, t('DELIVERY', 'Delivery'))),
       showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_MdcTruckDeliveryOutline.default, null), /*#__PURE__*/_react.default.createElement(_styles.SelectedOption, null, t('DELIVERY', 'Delivery'))),
       itemcontent: /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_MdcTruckDeliveryOutline.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemContent, null, t('DELIVERY', 'Delivery'))),
-      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.'))
+      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description'))
     }, {
       value: 2,
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_FaTruckPickup.default, null), /*#__PURE__*/_react.default.createElement(_styles.ContentOption, null, t('PICKUP', 'Pickup'))),
       showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_FaTruckPickup.default, null), /*#__PURE__*/_react.default.createElement(_styles.SelectedOption, null, t('PICKUP', 'Pickup'))),
       itemcontent: /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_FaTruckPickup.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemContent, null, t('PICKUP', 'Pickup'))),
-      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.'))
+      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('ORDERTYPE_DESCRIPTION_PICKUP', 'Pickup description'))
     }, {
       value: 3,
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_AiFillShop.default, null), /*#__PURE__*/_react.default.createElement(_styles.ContentOption, null, t('EAT_IN', 'Eat in'))),
       showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_AiFillShop.default, null), /*#__PURE__*/_react.default.createElement(_styles.SelectedOption, null, t('EAT_IN', 'Eat in'))),
       itemcontent: /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_AiFillShop.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemContent, null, t('EAT_IN', 'Eat in'))),
-      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.'))
+      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('ORDERTYPE_DESCRIPTION_EATIN', 'Eat in description'))
     }, {
       value: 4,
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_GiFoodTruck.default, null), /*#__PURE__*/_react.default.createElement(_styles.ContentOption, null, t('CURBSIDE', 'Curbside'))),
       showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_GiFoodTruck.default, null), /*#__PURE__*/_react.default.createElement(_styles.SelectedOption, null, t('CURBSIDE', 'Curbside'))),
-      itemcontent: /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_FaCarSide.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemContent, null, t('DRIVE_THRU', 'Drive thru'))),
-      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.'))
+      itemcontent: /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_FaCarSide.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemContent, null, t('CURBSIDE', 'Curbside'))),
+      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('ORDERTYPE_DESCRIPTION_CURBSIDE', 'Curbside description'))
     }, {
       value: 5,
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_FaCarSide.default, null), /*#__PURE__*/_react.default.createElement(_styles.ContentOption, null, t('DRIVE_THRU', 'Drive thru'))),
       showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_FaCarSide.default, null), /*#__PURE__*/_react.default.createElement(_styles.SelectedOption, null, t('DRIVE_THRU', 'Drive thru'))),
-      itemcontent: /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_GiFoodTruck.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemContent, null, t('CURBSIDE', 'Curbside'))),
-      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('TYPE_DESCRIPTION', 'Amet minim mollit non deserunt ullamco est sit aliqua.'))
+      itemcontent: /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_GiFoodTruck.default, null), /*#__PURE__*/_react.default.createElement(_styles.ItemContent, null, t('DRIVE_THRU', 'Drive thru'))),
+      itemdescription: /*#__PURE__*/_react.default.createElement(_styles.OrderDescription, null, t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description'))
     }]
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderTypeControl, orderTypeProps);
