@@ -86,9 +86,7 @@ var CardFormUI = function CardFormUI(props) {
     name: "zipcode",
     placeholder: "".concat(t('ZIPCODE', 'Zipcode')).concat(zipCodeRequired ? '*' : ''),
     options: CARD_ELEMENT_OPTIONS,
-    onChange: handleChange,
-    pattern: "[0-9]",
-    type: "number"
+    onChange: handleChange
   }), errorZipcode && /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('ZIPCODE_IS_INCOMPLETED', 'The zipcode is incompleted.'))))), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     type: "submit",
