@@ -13,7 +13,8 @@ export const CartContent = (props) => {
     isOrderStateCarts,
     isCartPopover,
     isForceOpenCart,
-    setPreorderBusiness
+    setPreorderBusiness,
+    isCustomerMode
   } = props
 
   const [, t] = useLanguage()
@@ -95,6 +96,7 @@ export const CartContent = (props) => {
                 isProducts={cart.products.length}
                 onClickCheckout={props.onClose}
                 setPreorderBusiness={setPreorderBusiness}
+                isCustomerMode={isCustomerMode}
               />
             )}
           </React.Fragment>
