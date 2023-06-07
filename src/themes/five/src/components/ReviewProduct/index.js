@@ -33,6 +33,8 @@ const SingleProductReview = (props) => {
     formState
   } = props
 
+  console.log('product', product)
+
   const [, t] = useLanguage()
   const theme = useTheme()
   const [isLike, setIsLike] = useState(true)
@@ -218,8 +220,8 @@ const ReviewProductUI = (props) => {
             />
           )) : !productsOrder?.deleted && (
             <SingleProductReview
-              {...props}
-              key={i}
+              {...props} 
+              key={productsOrder?.id}
               product={productsOrder}
             />
           )
