@@ -66,7 +66,7 @@ const OrdersOptionUI = (props) => {
     businesses,
     handleUpdateBusinesses,
     getPage,
-    loadOrders,
+    loadOrders
   } = props
 
   const [, t] = useLanguage()
@@ -74,7 +74,7 @@ const OrdersOptionUI = (props) => {
   const [events] = useEvent()
   const { width } = useWindowSize()
   const { loading, error, orders: values } = orderList
-  const [refreshOrders , setRefreshOrders] = useState(false)
+  const [refreshOrders, setRefreshOrders] = useState(false)
 
   const _orders = customArray || values || []
   const uniqueOrders = []
@@ -189,11 +189,11 @@ const OrdersOptionUI = (props) => {
   }, [reorderState])
 
   useEffect(() => {
-		if (refreshOrders) {
-			loadOrders(false, false, false, true)
-			setRefreshOrders(false)
-		}
-	}, [refreshOrders])
+    if (refreshOrders) {
+      loadOrders(false, false, false, true)
+      setRefreshOrders(false)
+    }
+  }, [refreshOrders])
 
   return (
     <>
@@ -336,6 +336,7 @@ const OrdersOptionUI = (props) => {
             isCustomerMode={isCustomerMode}
             isBusiness={isBusiness}
             isProducts={isProducts}
+            titleContent={titleContent}
             handleChangePage={handleChangePage}
           />
         ) : (
@@ -386,7 +387,7 @@ export const OrdersOption = (props) => {
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: (getAllOrders || props.activeOrders) ? 30 : 10,
+      pageSize: (getAllOrders || (props.activeOrders && !props.isBusinessesPage)) ? 30 : 10,
       controlType: 'infinity'
     }
   }
