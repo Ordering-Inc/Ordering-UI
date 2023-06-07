@@ -5,20 +5,17 @@ import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useTheme } from 'styled-components'
 import { SignUpForm } from '../SignUpForm'
-import DatePicker from 'react-datepicker'
 
 import {
   FormInput,
   ActionsForm,
   SkeletonForm,
   InputGroup,
-  Divider,
   InputPhoneNumberWrapper,
   LanguageSelectorWrapper,
   SwitchWrapper,
   NotificationsGroupSwitchWrapper,
-  TextLinkWrapper,
-  DateContainer
+  TextLinkWrapper
 } from './styles'
 
 import { Switch } from '../../../../../styles/Switch'
@@ -29,9 +26,9 @@ import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { Alert } from '../Confirm'
 import { sortInputFields } from '../../../../../utils'
-import { Checkbox } from '../../../../../styles/Checkbox'
 import Modal from '../Modal'
 import moment from 'moment'
+import { DatePickerUI } from '../DatePicker'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -386,15 +383,7 @@ export const UserFormDetailsUI = (props) => {
             {showInputBirthday && (
               <InputPhoneNumberWrapper>
                 <p>{t('BIRTHDATE', 'Birthdate')}</p>
-                <DateContainer>
-                  <DatePicker
-                    selected={birthdate}
-                    placeholderText='yyyy/mm/dd'
-                    className='date'
-                    name='birthdate'
-                    onChange={_handleChangeDate}
-                  />
-                </DateContainer>
+                <DatePickerUI birthdate={birthdate} handleChangeDate={_handleChangeDate}/>
               </InputPhoneNumberWrapper>
             )}
             {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('cellphone')) || !requiredFields) && (
