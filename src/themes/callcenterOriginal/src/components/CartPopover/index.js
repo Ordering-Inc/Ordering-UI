@@ -95,6 +95,7 @@ export const CartPopover = (props) => {
       </HeaderItem>
       <PopoverBody className='cart-popover' ref={popperElement} style={popStyle} {...attributes.popper}>
         <CartContent
+          isCustomerMode={isCustomerMode}
           isCartPopover
           isOpenCart={open}
           onClick={props.onClick}
