@@ -40,7 +40,8 @@ export const BusinessItemAccordion = (props) => {
     checkoutButtonDisabled,
     setPreorderBusiness,
     handleChangeStore,
-    isMultiCheckout
+    isMultiCheckout,
+    isGiftCart
   } = props
 
   const [orderState] = useOrder()
@@ -147,7 +148,9 @@ export const BusinessItemAccordion = (props) => {
               <BusinessInfo>
                 {!hideBusinessLogo && (
                   <WrapperBusinessLogo>
-                    <BusinessLogo bgimage={business?.logo || theme.images?.dummies?.businessLogo} />
+                    <BusinessLogo
+                      bgimage={!isGiftCart ? (business?.logo || theme.images?.dummies?.businessLogo) : theme.images?.logos?.isotype}
+                    />
                   </WrapperBusinessLogo>
                 )}
                 <ContentInfo className='info' isStore={isStore}>
@@ -168,7 +171,7 @@ export const BusinessItemAccordion = (props) => {
                     </TimeContainer>
                   )}
                   <div>
-                    {handleStoreRedirect && !isCartOnProductsList && !isStore && (
+                    {handleStoreRedirect && !isCartOnProductsList && !isStore && !isGiftCart && (
                       <span
                         ref={businessStore}
                         onClick={() => isClosed ? handleOpenBusinessMenu(business) : handleStoreRedirect(business?.slug)}
@@ -179,7 +182,7 @@ export const BusinessItemAccordion = (props) => {
                     )}
                     {!isClosed && !!isProducts && !isCartPending && (
                       <>
-                        {!isStore && <span>•</span>}
+                        {!isStore && !isGiftCart && <span>•</span>}
                         <span
                           ref={businessDelete}
                           onClick={() => handleClearProducts()}
