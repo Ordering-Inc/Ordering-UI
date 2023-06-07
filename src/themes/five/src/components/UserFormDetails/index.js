@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useTheme } from 'styled-components'
 import { SignUpForm } from '../SignUpForm'
+import DatePicker from 'react-datepicker'
 
 import {
   FormInput,
@@ -16,7 +17,8 @@ import {
   LanguageSelectorWrapper,
   SwitchWrapper,
   NotificationsGroupSwitchWrapper,
-  TextLinkWrapper
+  TextLinkWrapper,
+  DateContainer
 } from './styles'
 
 import { Switch } from '../../../../../styles/Switch'
@@ -29,6 +31,7 @@ import { Alert } from '../Confirm'
 import { sortInputFields } from '../../../../../utils'
 import { Checkbox } from '../../../../../styles/Checkbox'
 import Modal from '../Modal'
+import moment from 'moment'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -67,8 +70,8 @@ export const UserFormDetailsUI = (props) => {
   const [isChanged, setIsChanged] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const emailInput = useRef(null)
-
   const user = userData || userSession
+  const [birthdate, setBirthdate] = useState(user?.birthdate ? moment(user?.birthdate, 'YYYY-MM-DD').toDate() : null)
 
   const [notificationList, setNotificationList] = useState({
     email: formState?.result?.result
@@ -105,6 +108,7 @@ export const UserFormDetailsUI = (props) => {
   }
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const showInputBirthday = validationFields?.fields?.checkout?.birthdate?.enabled ?? false
 
   const setUserCellPhone = (isEdit = false) => {
     if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
@@ -216,6 +220,12 @@ export const UserFormDetailsUI = (props) => {
     return !orderingTheme?.theme?.profile?.components?.[name]?.hidden
   }
 
+  const _handleChangeDate = (date) => {
+    setBirthdate(date)
+    const _birthdate = moment(date).format('YYYY-MM-DD')
+    handleChangeInput({ target: { name: 'birthdate', value: _birthdate } })
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -258,6 +268,14 @@ export const UserFormDetailsUI = (props) => {
         : formState?.changes?.email ?? (user && user?.email) ?? '')
     }
   }, [validationFields, emailInput.current])
+
+  useEffect(() => {
+    if (!validationFields.loading && birthdate) {
+      formMethods.setValue('birthdate', formState?.result?.result
+        ? formState?.result?.result?.birthdate
+        : formState?.changes?.birthdate ?? (user && user?.birthdate) ?? '')
+    }
+  }, [validationFields, birthdate])
 
   useEffect(() => {
     if (requiredFields) return
@@ -364,6 +382,20 @@ export const UserFormDetailsUI = (props) => {
                   )}
                 </React.Fragment>
               )
+            )}
+            {showInputBirthday && (
+              <InputPhoneNumberWrapper>
+                <p>{t('BIRTHDATE', 'Birthdate')}</p>
+                <DateContainer>
+                  <DatePicker
+                    selected={birthdate}
+                    placeholderText='yyyy/mm/dd'
+                    className='date'
+                    name='birthdate'
+                    onChange={_handleChangeDate}
+                  />
+                </DateContainer>
+              </InputPhoneNumberWrapper>
             )}
             {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('cellphone')) || !requiredFields) && (
               <InputPhoneNumberWrapper>
