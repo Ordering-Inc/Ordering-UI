@@ -342,6 +342,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     isCustomerMode: isCustomerMode,
     isBusiness: isBusiness,
     isProducts: isProducts,
+    titleContent: titleContent,
     handleChangePage: handleChangePage
   }) : /*#__PURE__*/_react.default.createElement(_VerticalOrdersLayout.VerticalOrdersLayout, {
     reorderLoading: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading,
@@ -394,7 +395,7 @@ var OrdersOption = function OrdersOption(props) {
     useDefualtSessionManager: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: getAllOrders || props.activeOrders ? 30 : 10,
+      pageSize: getAllOrders || props.activeOrders && !props.isBusinessesPage ? 30 : 10,
       controlType: 'infinity'
     }
   });

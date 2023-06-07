@@ -26,7 +26,8 @@ var CartContent = function CartContent(props) {
     isOrderStateCarts = props.isOrderStateCarts,
     isCartPopover = props.isCartPopover,
     isForceOpenCart = props.isForceOpenCart,
-    setPreorderBusiness = props.setPreorderBusiness;
+    setPreorderBusiness = props.setPreorderBusiness,
+    isCustomerMode = props.isCustomerMode;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -111,7 +112,8 @@ var CartContent = function CartContent(props) {
       currentCartUuid: currentCartUuid,
       isProducts: cart.products.length,
       onClickCheckout: props.onClose,
-      setPreorderBusiness: setPreorderBusiness
+      setPreorderBusiness: setPreorderBusiness,
+      isCustomerMode: isCustomerMode
     }));
   }), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0) && /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,

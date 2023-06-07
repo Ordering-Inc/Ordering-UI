@@ -124,6 +124,7 @@ var CartPopover = function CartPopover(props) {
     ref: popperElement,
     style: popStyle
   }, attributes.popper), /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+    isCustomerMode: isCustomerMode,
     isCartPopover: true,
     isOpenCart: open,
     onClick: props.onClick,

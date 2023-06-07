@@ -216,6 +216,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, [preorderBusiness]);
   (0, _react.useEffect)(function () {
     var _businessesList$busin2;
+    setActiveMap(false);
     if (!(businessesList !== null && businessesList !== void 0 && (_businessesList$busin2 = businessesList.businesses) !== null && _businessesList$busin2 !== void 0 && _businessesList$busin2.length)) return;
     var ids = _toConsumableArray(favoriteIds);
     businessesList.businesses.forEach(function (business) {
