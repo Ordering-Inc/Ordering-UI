@@ -4,17 +4,21 @@ import { DateContainer } from './styles'
 
 export const DatePickerUI = props => {
 
-  const { birthdate, handleChangeDate } = props
+  const { value, onChange, placeholderText, name} = props
 
   return (
     <DateContainer>
       <DatePicker
-        selected={birthdate}
-        placeholderText='yyyy/mm/dd'
-        className='date'
-        name='birthdate'
-        onChange={handleChangeDate}
+        selected={value}
+        placeholderText={placeholderText}
+        name={name}
+        onChange={onChange}
       />
     </DateContainer>
   )
+}
+
+DatePickerUI.defaultProps = {
+  placeholderText: 'yyyy/mm/dd',
+  name: 'date',
 }

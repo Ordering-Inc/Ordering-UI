@@ -383,7 +383,7 @@ export const UserFormDetailsUI = (props) => {
             {showInputBirthday && (
               <InputPhoneNumberWrapper>
                 <p>{t('BIRTHDATE', 'Birthdate')}</p>
-                <DatePickerUI birthdate={birthdate} handleChangeDate={_handleChangeDate}/>
+                <DatePickerUI value={birthdate} onChange={_handleChangeDate} name={'birthdate'}/>
               </InputPhoneNumberWrapper>
             )}
             {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('cellphone')) || !requiredFields) && (
