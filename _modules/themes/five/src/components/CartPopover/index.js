@@ -157,7 +157,8 @@ var CartPopover = function CartPopover(props) {
     setPreorderBusiness: setPreorderBusiness,
     isOpenCart: open,
     onClick: props.onClick,
-    isSlideBar: isSlideBar
+    isSlideBar: isSlideBar,
+    isCustomerMode: isCustomerMode
   })) : /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "cart-popover",
     ref: popperElement,
@@ -169,7 +170,8 @@ var CartPopover = function CartPopover(props) {
     onClose: props.onClose,
     setPreorderBusiness: setPreorderBusiness,
     isOpenCart: open,
-    onClick: props.onClick
+    onClick: props.onClick,
+    isCustomerMode: isCustomerMode
   }), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",
     ref: arrowElement,
