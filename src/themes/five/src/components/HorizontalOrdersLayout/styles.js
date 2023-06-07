@@ -21,11 +21,18 @@ export const CardWrapper = styled.div`
 `
 export const CardsContainer = styled.div`
   display: flex;
+  ${({ isBusinessesPage }) => isBusinessesPage && css`
+    box-sizing: border-box;
+  `}
 `
 
 export const CardsContainerWrapper = styled.div`
   margin-bottom: 10px;
   display: flex;
+  ${({ isBusinessesPage }) => isBusinessesPage && css`
+    overflow: scroll hidden;
+    width: 100%;
+  `}
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
