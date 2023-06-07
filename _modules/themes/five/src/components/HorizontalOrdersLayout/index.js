@@ -18,7 +18,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     customArray = props.customArray,
     businessesIds = props.businessesIds,
     isCustomerMode = props.isCustomerMode,
-    handleChangePage = props.handleChangePage;
+    handleChangePage = props.handleChangePage,
+    titleContent = props.titleContent;
   var orders = customArray || props.orders;
   var ordersToShow = businessesIds && isCustomerMode ? orders.filter(function (order) {
     return businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id);
@@ -33,12 +34,16 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     }));
   }) : orders;
   return orders.length > 0 && ordersToShow.length > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.OrdersContainer, {
-    id: "orders-container",
+    id: isBusinessesPage && titleContent ? "".concat(titleContent, "-container") : 'orders-container',
     activeOrders: true,
     ordersLength: (orders === null || orders === void 0 ? void 0 : orders.length) <= 1,
     isBusinessesPage: isBusinessesPage
-  }, /*#__PURE__*/_react.default.createElement(_styles.CardWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CardsContainerWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CardsContainer, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
-    scrollId: "orderScroll"
+  }, /*#__PURE__*/_react.default.createElement(_styles.CardWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CardsContainerWrapper, {
+    isBusinessesPage: isBusinessesPage
+  }, /*#__PURE__*/_react.default.createElement(_styles.CardsContainer, {
+    isBusinessesPage: isBusinessesPage
+  }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+    scrollId: isBusinessesPage && titleContent ? "".concat(titleContent, "Scroll") : 'orderScroll'
   }, orders.length > 0 && ordersToShow.map(function (order, i) {
     var _order$id;
     return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, _extends({}, props, {

@@ -43,6 +43,19 @@ var OrdersSection = function OrdersSection(props) {
     isCustomerMode: isCustomerMode,
     franchiseId: props.franchiseId
   }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    activeOrders: true,
+    horizontal: true,
+    asDashboard: true,
+    isBusinessesPage: true,
+    titleContent: t('ACTIVE_ORDERS', 'Active orders'),
+    businessesIds: businessesIds,
+    onRedirectPage: onRedirectPage,
+    userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
+    isCustomLayout: true,
+    isBusinessesLoading: businessesList.loading,
+    isCustomerMode: isCustomerMode,
+    franchiseId: props.franchiseId
+  }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
     pastOrders: true,
     horizontal: true,
     asDashboard: true,
