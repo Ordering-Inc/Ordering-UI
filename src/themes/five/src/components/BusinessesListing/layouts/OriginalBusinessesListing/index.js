@@ -177,6 +177,7 @@ const BusinessesListingUI = (props) => {
   }, [preorderBusiness])
 
   useEffect(() => {
+    setActiveMap(false)
     if (!businessesList?.businesses?.length) return
     const ids = [...favoriteIds]
     businessesList.businesses.forEach(business => {
