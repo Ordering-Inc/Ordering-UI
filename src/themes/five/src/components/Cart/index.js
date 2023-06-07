@@ -296,6 +296,7 @@ const CartUI = (props) => {
             setPreorderBusiness={setPreorderBusiness}
             handleChangeStore={!useKioskApp && handleChangeStore}
             isMultiCheckout={isMultiCheckout}
+            isGiftCart={!cart?.business_id}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
