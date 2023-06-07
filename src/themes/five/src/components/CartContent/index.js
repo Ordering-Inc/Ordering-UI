@@ -14,7 +14,8 @@ export const CartContent = (props) => {
     isForceOpenCart,
     setPreorderBusiness,
     isOpenCart,
-    isSlideBar
+    isSlideBar,
+    isCustomerMode
   } = props
 
   const [, t] = useLanguage()
@@ -111,6 +112,7 @@ export const CartContent = (props) => {
                     hideCouponInput={configs?.multi_business_checkout_coupon_input_style?.value === 'group'}
                     hideDeliveryFee={configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'}
                     hideDriverTip={configs?.multi_business_checkout_show_combined_driver_tip?.value === '1'}
+                    isCustomerMode={isCustomerMode}
                   />
                 )}
               </React.Fragment>

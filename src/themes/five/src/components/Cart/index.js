@@ -72,7 +72,8 @@ const CartUI = (props) => {
     hideDriverTip,
     hideCouponInput,
     businessConfigs,
-    loyaltyRewardRate
+    loyaltyRewardRate,
+    isCustomerMode
   } = props
 
   const theme = useTheme()
@@ -189,10 +190,14 @@ const CartUI = (props) => {
   }
 
   const handleStoreRedirect = (slug) => {
-    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
-      events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
+    if (isCustomerMode) {
+      events.emit('go_to_page', { page: 'business', params: { store: slug } })
     } else {
-      events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}` })
+      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+        events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
+      } else {
+        events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}` })
+      }
     }
 
     if (windowSize.width <= 768) {
@@ -466,15 +471,15 @@ const CartUI = (props) => {
                 </table>
                 {isCouponEnabled && !isCartPending &&
                   ((isCheckout || isCartPopover || isMultiCheckout) &&
-                  !(isCheckout && isCartPopover)) && !hideCartDiscount && !hideCouponInput &&
-                (
-                  <CouponContainer>
-                    <CouponControl
-                      businessId={cart?.business_id}
-                      price={cart?.total}
-                    />
-                  </CouponContainer>
-                )}
+                    !(isCheckout && isCartPopover)) && !hideCartDiscount && !hideCouponInput &&
+                  (
+                    <CouponContainer>
+                      <CouponControl
+                        businessId={cart?.business_id}
+                        price={cart?.total}
+                      />
+                    </CouponContainer>
+                  )}
                 {
                   !isStore &&
                   !isMultiCheckout &&

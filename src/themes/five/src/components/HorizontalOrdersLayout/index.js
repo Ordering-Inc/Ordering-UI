@@ -54,7 +54,7 @@ export const HorizontalOrdersLayout = (props) => {
               </AutoScroll>
             </CardsContainer>
           </CardsContainerWrapper>
-          {orders.length > 0 && ordersToShow.length > 0 && (
+          {orders.length > 0 && ordersToShow.length > 0 && Math.ceil(pagination?.totalPages) > 1 && (
             <Pagination
               currentPage={pagination.currentPage}
               totalPages={Math.ceil(pagination?.totalPages)}

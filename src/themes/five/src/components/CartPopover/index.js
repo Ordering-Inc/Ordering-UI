@@ -132,6 +132,7 @@ export const CartPopover = (props) => {
               isOpenCart={open}
               onClick={props.onClick}
               isSlideBar={isSlideBar}
+              isCustomerMode={isCustomerMode}
             />
           </Modal>
         ) : (
@@ -144,6 +145,7 @@ export const CartPopover = (props) => {
               setPreorderBusiness={setPreorderBusiness}
               isOpenCart={open}
               onClick={props.onClick}
+              isCustomerMode={isCustomerMode}
             />
             <PopoverArrow key='arrow' ref={arrowElement} style={styles.arrow} />
           </PopoverBody>
