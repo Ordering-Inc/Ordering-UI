@@ -17,7 +17,8 @@ export const HorizontalOrdersLayout = (props) => {
     customArray,
     businessesIds,
     isCustomerMode,
-    handleChangePage
+    handleChangePage,
+    titleContent
   } = props
 
   const orders = customArray || props.orders
@@ -34,15 +35,15 @@ export const HorizontalOrdersLayout = (props) => {
   return (
     orders.length > 0 && ordersToShow.length > 0 ? (
       <OrdersContainer
-        id='orders-container'
+        id={isBusinessesPage && titleContent ? `${titleContent}-container` : 'orders-container'}
         activeOrders
         ordersLength={orders?.length <= 1}
         isBusinessesPage={isBusinessesPage}
       >
         <CardWrapper>
-          <CardsContainerWrapper>
-            <CardsContainer>
-              <AutoScroll scrollId='orderScroll'>
+          <CardsContainerWrapper isBusinessesPage={isBusinessesPage}>
+            <CardsContainer isBusinessesPage={isBusinessesPage}>
+              <AutoScroll scrollId={isBusinessesPage && titleContent ? `${titleContent}Scroll` : 'orderScroll'}>
                 {orders.length > 0 && ordersToShow.map((order, i) => (
                   <SingleOrderCard
                     {...props}

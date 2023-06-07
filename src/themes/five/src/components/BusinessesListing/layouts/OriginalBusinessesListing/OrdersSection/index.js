@@ -32,6 +32,20 @@ export const OrdersSection = (props) => {
             franchiseId={props.franchiseId}
           />
           <OrdersOption
+            activeOrders
+            horizontal
+            asDashboard
+            isBusinessesPage
+            titleContent={t('ACTIVE_ORDERS', 'Active orders')}
+            businessesIds={businessesIds}
+            onRedirectPage={onRedirectPage}
+            userCustomerId={userCustomer?.id}
+            isCustomLayout
+            isBusinessesLoading={businessesList.loading}
+            isCustomerMode={isCustomerMode}
+            franchiseId={props.franchiseId}
+          />
+          <OrdersOption
             pastOrders
             horizontal
             asDashboard
