@@ -53,7 +53,7 @@ export const Header = (props) => {
     isCustomerMode,
     isLinkedToAdmin,
     notificationState,
-    isTemplateFive
+    useModalMode
   } = props
 
   const { pathname } = useLocation()
@@ -282,9 +282,9 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 870 && !isCustomerMode && (
                     <>
-                      <MenuLink onClick={() => isTemplateFive ? handleOpenLoginSignUp('login') : handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</MenuLink>
+                      <MenuLink onClick={() => useModalMode ? handleOpenLoginSignUp('login') : handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</MenuLink>
                       {!isHideSignup && (
-                        <MenuLink onClick={() => isTemplateFive ? handleOpenLoginSignUp('signup') : handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}</MenuLink>
+                        <MenuLink onClick={() => useModalMode ? handleOpenLoginSignUp('signup') : handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}</MenuLink>
                       )}
                     </>
                   )

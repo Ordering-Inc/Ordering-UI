@@ -542,7 +542,7 @@ export const App = () => {
                 setSearchValue={setSearchValue}
                 businessSlug={updatedBusinessSlug}
                 notificationState={oneSignalState}
-                isTemplateFive
+                useModalMode
               />
             )}
             <NotNetworkConnectivity />
