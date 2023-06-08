@@ -1447,9 +1447,9 @@
   integrity sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==
 
 "@emotion/react@^11.1.1":
-  version "11.11.0"
-  resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.11.0.tgz#408196b7ef8729d8ad08fc061b03b046d1460e02"
-  integrity sha512-ZSK3ZJsNkwfjT3JpDAWJZlrGD81Z3ytNDsxw1LKq1o+xkmO5pnWfr6gmCC8gHEFf3nSSX/09YrG67jybNPxSUw==
+  version "11.11.1"
+  resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.11.1.tgz#b2c36afac95b184f73b08da8c214fdf861fa4157"
+  integrity sha512-5mlW1DquU5HaxjLkfkGN1GA/fvVGdyHURRiX/0FHl2cfIfRxSOfmxEH5YS43edp0OldZrZ+dkBKbngxcNCdZvA==
   dependencies:
     "@babel/runtime" "^7.18.3"
     "@emotion/babel-plugin" "^11.11.0"
@@ -2180,22 +2180,22 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@segment/analytics-core@1.2.5":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.2.5.tgz#bd17034be9393aa245a684f137a7950debee240b"
-  integrity sha512-T+AyZe4eKAO08T138RcvCTqUCT609H07VQL6+kh58VJiIalowrnqSdWf9rc+AsUMvPnxUOsnyGBOqNdZ5KNqYw==
+"@segment/analytics-core@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.3.0.tgz#677d1087af44d31266ddf60f72f93b5d5693c933"
+  integrity sha512-ujScWZH49NK1hYlp2/EMw45nOPEh+pmTydAnR6gSkRNucZD4fuinvpPL03rmFCw8ibaMuKLAdgPJfQ0gkLKZ5A==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     dset "^3.1.2"
     tslib "^2.4.1"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.52.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.52.0.tgz#998cb4a6e3a268c26ab0c8c092a48507de367e17"
-  integrity sha512-g78N32oK0dlzskvK36X4Ep1snQo7lzyHRE5R4gI1dVOq3BGd+i4Nv2gpzDCymSxBWs8dtVHaZtBLdPeuLCuYIA==
+  version "1.53.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.53.0.tgz#05dce27ce20a9abb3f9ea2d6e6d67667c82f2a9d"
+  integrity sha512-7bzUjxGuccQpDx7CrteAx4yM2eDosjheQLySLBi6cz25EwPbBPb2X+ZzBUZIfLA0V0Co0zWaE6xXzVw8X5zSpQ==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
-    "@segment/analytics-core" "1.2.5"
+    "@segment/analytics-core" "1.3.0"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
     "@segment/tsub" "^2.0.0"
@@ -5714,9 +5714,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.411:
-  version "1.4.422"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.422.tgz#b04d0a209889f46858a4ab05f737fb81b99fec91"
-  integrity sha512-OQMid0IRbJv27BhlPiBK8CfGzjeq4ZCBSmpwNi1abyS8w17/BajOUu7hBI49ptDTBCz9NRFbORhWvt41dF7dwg==
+  version "1.4.425"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.425.tgz#399df13091b836d28283a545c25c8e4d9da86da8"
+  integrity sha512-wv1NufHxu11zfDbY4fglYQApMswleE9FL/DSeyOyauVXDZ+Kco96JK/tPfBUaDqfRarYp2WH2hJ/5UnVywp9Jg==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -9281,7 +9281,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/3596aed19e55bc0966c7093e5887a0b173a98f65"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/9eda083a3cf4efe88527f0b42147a9f17093cb07"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -10262,11 +10262,9 @@ react-smartbanner@^5.1.4:
     ua-parser-js "^0.7.9"
 
 react-to-print@^2.12.3:
-  version "2.14.12"
-  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.12.tgz#e3ecddca2a03eddef1773ffb7c1a63c140f44036"
-  integrity sha512-qFJAwvDFd95Z+FWNqitt+HaB1/z+Zdd0MMrNOPUSus3fG32vqv512yB+HXhQ94J3HKoyqaIg44v0Zfc6xUBqlg==
-  dependencies:
-    prop-types "^15.8.1"
+  version "2.14.13"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.13.tgz#cd0349f7ef93c8af5120fac0ef6c4f3d100df490"
+  integrity sha512-PqUGgTRZvkyBzWgaZHVBECWPX2nGEc3HOUy6WNXof6HT4yTFI92wtIkqQtr4jfvHbadqjwTgzgh6vgN8KXlWWw==
 
 react-transition-group@^4.3.0:
   version "4.4.5"
@@ -10719,9 +10717,9 @@ sass-loader@^9.0.2:
     semver "^7.3.2"
 
 sass@^1.26.10:
-  version "1.62.1"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.62.1.tgz#caa8d6bf098935bc92fc73fa169fb3790cacd029"
-  integrity sha512-NHpxIzN29MXvWiuswfc1W3I0N8SXBd8UR26WntmDlRYf0bSADnwnOjsyMZ3lMezSlArD33Vs3YFhp7dWvL770A==
+  version "1.63.2"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.63.2.tgz#75f7d9a8e67d1d5b98a989507f4d98b6067b1f75"
+  integrity sha512-u56TU0AIFqMtauKl/OJ1AeFsXqRHkgO7nCWmHaDwfxDo9GUMSqBA4NEh6GMuh1CYVM7zuROYtZrHzPc2ixK+ww==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -10754,9 +10752,9 @@ schema-utils@^2.6.5, schema-utils@^2.7.0:
     ajv-keywords "^3.5.2"
 
 schema-utils@^3.0.0:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-3.1.2.tgz#36c10abca6f7577aeae136c804b0c741edeadc99"
-  integrity sha512-pvjEHOgWc9OWA/f/DE3ohBWTD6EleVLf7iFUkoSwAxttdBhB9QUebQgxER2kWueOvRJXPHNnyrvvh9eZINB8Eg==
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-3.2.0.tgz#7dff4881064a4f22c09f0c6a1457feb820fd0636"
+  integrity sha512-0zTyLGyDJYd/MBxG1AhJkKa6fpEBds4OQO2ut0w7OYG+ZGhGea09lijvzsqegYSik88zc7cUtIlnnO+/BvD6gQ==
   dependencies:
     "@types/json-schema" "^7.0.8"
     ajv "^6.12.5"

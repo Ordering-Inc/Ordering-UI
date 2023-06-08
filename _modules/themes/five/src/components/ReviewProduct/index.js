@@ -232,7 +232,7 @@ var ReviewProductUI = function ReviewProductUI(props) {
         product: product
       }));
     }) : !(productsOrder !== null && productsOrder !== void 0 && productsOrder.deleted) && /*#__PURE__*/_react.default.createElement(SingleProductReview, _extends({}, props, {
-      key: i,
+      key: productsOrder === null || productsOrder === void 0 ? void 0 : productsOrder.id,
       product: productsOrder
     }));
   })), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, null, /*#__PURE__*/_react.default.createElement("span", {
