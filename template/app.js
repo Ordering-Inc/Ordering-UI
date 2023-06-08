@@ -536,6 +536,7 @@ export const App = () => {
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
                 notificationState={oneSignalState}
+                useModalMode
               />
             )}
             <NotNetworkConnectivity />
