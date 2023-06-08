@@ -70,7 +70,7 @@ const BusinessesListingUI = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [favoriteIds, setFavoriteIds] = useState([])
   const distanceOptions = [1000, 5000, 10000, 15000, 20000, 25000, 'default']
-  const [distanceSelected, setDistanceSelected] = useState('default')
+  const [distanceSelected, setDistanceSelected] = useState(25000)
   const businessNearestLength = businessesSearchList.businesses?.filter(business => !citySelected || business?.city_id === citySelected?.id)?.length
 
   const handleFindBusinesses = () => {
@@ -137,7 +137,7 @@ const BusinessesListingUI = (props) => {
         business,
         t('GO_TO_THE_STORE', 'Go to the store'),
         business?.cellphone || business?.phone || '',
-        business?.open && businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) ? 'block' : 'none'
+        business?.open && (businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) || business?.delivery_zone) ? 'block' : 'none'
       ),
       id: business?.id,
       address: business?.address
@@ -299,7 +299,7 @@ const BusinessesListingUI = (props) => {
                     <>
                       {
                         businessesSearchList.businesses?.filter(business => business?.city_id === city?.id)?.map((business) => (
-                          <SingleBusinessController key={business?.id} business={business} showGoToStore={businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id)} />
+                          <SingleBusinessController key={business?.id} business={business} showGoToStore={(businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) || business?.delivery_zone)} />
                         ))
                       }
                       {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
@@ -321,7 +321,7 @@ const BusinessesListingUI = (props) => {
           <>
             {
               filterByAddress && !filterByCity && orderState?.options?.address?.location && businessesSearchList.businesses?.sort((a, b) => sortBusinessFunction(a, b))?.map((business) => (
-                <SingleBusinessController key={business?.id} business={business} showGoToStore={business?.open && businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id)} />
+                <SingleBusinessController key={business?.id} business={business} showGoToStore={business?.open && (businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) || business?.delivery_zone)} />
               ))
             }
           </>
