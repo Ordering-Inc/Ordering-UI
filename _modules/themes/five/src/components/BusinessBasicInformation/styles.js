@@ -118,7 +118,7 @@ exports.BusinessMoreDetail = BusinessMoreDetail;
 var TitleWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n\n  h2 {\n    font-size: 24px;\n    line-height: 36px;\n    margin: 0 0 10px 0;\n    font-weight: 600;\n    width: 100%;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    background: ", ";\n    &.fixed-name {\n      z-index: 10001;\n      position: fixed;\n      top: 0;\n      padding: 10px 0;\n      font-size: 18px;\n      ", "\n    }\n    @media (min-width: 768px) {\n      font-size: 32px;\n    }\n  }\n"])), function (_ref5) {
   var _theme$colors;
   var theme = _ref5.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.white;
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.backgroundPage;
 }, function (_ref6) {
   var isCustomLayout = _ref6.isCustomLayout;
   return !isCustomLayout ? (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n        width: calc(100vw - 200px);\n        ", "\n      "])), function (props) {
