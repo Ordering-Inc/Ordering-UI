@@ -585,7 +585,8 @@ export const BusinessProductsListing = (props) => {
     ...props,
     UIComponent: BusinessProductsListingUI,
     isInitialRender,
-    handleUpdateInitialRender: (val) => setIsInitialRender(val)
+    handleUpdateInitialRender: (val) => setIsInitialRender(val),
+    isFetchAllProducts: true
   }
 
   return (
