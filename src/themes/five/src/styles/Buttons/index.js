@@ -55,6 +55,24 @@ export const Button = styled.button`
       ${theme?.general?.components?.buttons?.shadow?.components?.spread || '0px'}
       ${theme?.general?.components?.buttons?.shadow?.components?.color || '#000'};
   `}
+  ${({ theme }) => theme?.general?.components?.buttons?.color && css`
+    background: ${theme?.general?.components?.buttons?.color} !important;
+    &:active {
+      background: ${({ theme }) => darken(0.07, theme?.general?.components?.buttons?.color)} !important;
+    }
+    &:hover {
+      background: ${({ theme }) => darken(0.07, theme?.general?.components?.buttons?.color)} !important;
+    }
+  `}
+  ${({ theme }) => theme?.general?.components?.buttons?.buttonTextColor && css`
+    color: ${theme?.general?.components?.buttons?.buttonTextColor} !important;
+    &:active {
+      color: ${({ theme }) => darken(0.07, theme?.general?.components?.buttons?.buttonTextColor)} !important;
+    }
+    &:hover {
+      color: ${({ theme }) => darken(0.07, theme?.general?.components?.buttons?.buttonTextColor)} !important;
+    }
+  `}
   ${({ outline }) => outline && css`
     background: #FFF;
     color: #CCC;
