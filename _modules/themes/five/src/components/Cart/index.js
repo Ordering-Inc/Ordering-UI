@@ -71,7 +71,8 @@ var CartUI = function CartUI(props) {
     hideDriverTip = props.hideDriverTip,
     hideCouponInput = props.hideCouponInput,
     businessConfigs = props.businessConfigs,
-    loyaltyRewardRate = props.loyaltyRewardRate;
+    loyaltyRewardRate = props.loyaltyRewardRate,
+    isCustomerMode = props.isCustomerMode;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -229,18 +230,27 @@ var CartUI = function CartUI(props) {
     onClickCheckout && onClickCheckout();
   };
   var handleStoreRedirect = function handleStoreRedirect(slug) {
-    if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+    if (isCustomerMode) {
       events.emit('go_to_page', {
         page: 'business',
         params: {
-          business_slug: slug
+          store: slug
         }
       });
     } else {
-      events.emit('go_to_page', {
-        page: 'business',
-        search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(slug)
-      });
+      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+        events.emit('go_to_page', {
+          page: 'business',
+          params: {
+            business_slug: slug
+          }
+        });
+      } else {
+        events.emit('go_to_page', {
+          page: 'business',
+          search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(slug)
+        });
+      }
     }
     if (windowSize.width <= 768) {
       onClickCheckout && onClickCheckout();

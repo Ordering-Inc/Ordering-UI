@@ -50,7 +50,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
       key: order.id || ((_order$id = order.id) === null || _order$id === void 0 ? void 0 : _order$id[0]) || i,
       order: order
     }));
-  })))), orders.length > 0 && ordersToShow.length > 0 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+  })))), orders.length > 0 && ordersToShow.length > 0 && Math.ceil(pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) > 1 && /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: pagination.currentPage,
     totalPages: Math.ceil(pagination === null || pagination === void 0 ? void 0 : pagination.totalPages),
     handleChangePage: handleChangePage
