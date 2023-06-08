@@ -39,6 +39,9 @@ import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../UserDetails'
 import { Confirm } from '../Confirm'
+import { LoginForm } from '../../themes/five/src/components/LoginForm'
+import { SignUpForm } from '../../themes/five/src/components/SignUpForm'
+import { ForgotPasswordForm } from '../../themes/five/src/components/ForgotPasswordForm'
 
 export const Header = (props) => {
   const {
@@ -48,13 +51,15 @@ export const Header = (props) => {
     isShowOrderOptions,
     isHideSignup,
     isCustomerMode,
-    isLinkedToAdmin
+    isLinkedToAdmin,
+    notificationState,
+    isTemplateFive
   } = props
 
   const { pathname } = useLocation()
   const [events] = useEvent()
   const [, t] = useLanguage()
-  const [{ auth }] = useSession()
+  const [{ auth }, { login }] = useSession()
   const [orderState, { refreshOrderOptions }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
@@ -67,6 +72,8 @@ export const Header = (props) => {
   const [modalSelected, setModalSelected] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
+  const [authModalOpen, setAuthModalOpen] = useState(false)
+  const [modalPageToShow, setModalPageToShow] = useState(null)
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
@@ -101,6 +108,16 @@ export const Header = (props) => {
     setModalIsOpen(true)
   }
 
+  const handleCustomModalClick = (e, { page }) => {
+    e.preventDefault()
+    setModalPageToShow(page)
+  }
+
+  const closeAuthModal = () => {
+    setAuthModalOpen(false)
+    setModalPageToShow(null)
+  }
+
   const handleTogglePopover = (type) => {
     setOpenPopover({
       ...openPopover,
@@ -126,6 +143,28 @@ export const Header = (props) => {
     if (isCustomerMode && pathname.includes('/orders')) {
       deleteUserCustomer(true)
       refreshOrderOptions()
+    }
+  }
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) {
+      closeAuthModal()
+    }
+  }
+
+  const handleOpenLoginSignUp = (index) => {
+    if (isCustomerMode) {
+      events.emit('go_to_page', { page: 'home' })
+    } else {
+      setModalPageToShow(index)
+      setAuthModalOpen(true)
     }
   }
 
@@ -243,9 +282,9 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 870 && !isCustomerMode && (
                     <>
-                      <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</MenuLink>
+                      <MenuLink onClick={() => isTemplateFive ? handleOpenLoginSignUp('login') : handleGoToPage({ page: 'signin' })} name='signin'>{t('SIGN_IN', theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</MenuLink>
                       {!isHideSignup && (
-                        <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}</MenuLink>
+                        <MenuLink onClick={() => isTemplateFive ? handleOpenLoginSignUp('signup') : handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}</MenuLink>
                       )}
                     </>
                   )
@@ -402,6 +441,72 @@ export const Header = (props) => {
                 </>
               )}
             </UserEdit>
+          </Modal>
+        )}
+        {authModalOpen && !auth && (
+          <Modal
+            open={authModalOpen}
+            onRemove={() => closeAuthModal()}
+            onClose={() => closeAuthModal()}
+            width='50%'
+            authModal
+            closeOnBackdrop
+          >
+            {modalPageToShow === 'login' && (
+              <LoginForm
+                notificationState={notificationState}
+                handleSuccessLogin={handleSuccessLogin}
+                elementLinkToSignup={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'signup' })
+                    } href='#'
+                  >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
+                  </a>
+                }
+                elementLinkToForgotPassword={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                    } href='#'
+                  >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+                  </a>
+                }
+                useLoginByCellphone
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'signup' && (
+              <SignUpForm
+                notificationState={notificationState}
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                  </a>
+                }
+                useLoginByCellphone
+                useChekoutFileds
+                handleSuccessSignup={handleSuccessSignup}
+                isPopup
+                closeModal={() => closeAuthModal()}
+              />
+            )}
+            {modalPageToShow === 'forgotpassword' && (
+              <ForgotPasswordForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                  </a>
+                }
+                isPopup
+              />
+            )}
           </Modal>
         )}
         <Confirm
