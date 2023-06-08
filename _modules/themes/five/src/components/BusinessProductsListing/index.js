@@ -633,7 +633,8 @@ var BusinessProductsListing = function BusinessProductsListing(props) {
     isInitialRender: isInitialRender,
     handleUpdateInitialRender: function handleUpdateInitialRender(val) {
       return setIsInitialRender(val);
-    }
+    },
+    isFetchAllProducts: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessAndProductList, businessProductslistingProps);
 };
