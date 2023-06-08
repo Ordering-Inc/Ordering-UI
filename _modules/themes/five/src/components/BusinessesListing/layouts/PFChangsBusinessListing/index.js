@@ -102,7 +102,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     favoriteIds = _useState14[0],
     setFavoriteIds = _useState14[1];
   var distanceOptions = [1000, 5000, 10000, 15000, 20000, 25000, 'default'];
-  var _useState15 = (0, _react.useState)('default'),
+  var _useState15 = (0, _react.useState)(25000),
     _useState16 = _slicedToArray(_useState15, 2),
     distanceSelected = _useState16[0],
     setDistanceSelected = _useState16[1];
@@ -192,9 +192,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return _objectSpread(_objectSpread({}, business === null || business === void 0 ? void 0 : business.location), {}, {
         icon: (business === null || business === void 0 ? void 0 : business.logo) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
         slug: business === null || business === void 0 ? void 0 : business.slug,
-        markerPopup: markerPopup(business, t('GO_TO_THE_STORE', 'Go to the store'), (business === null || business === void 0 ? void 0 : business.cellphone) || (business === null || business === void 0 ? void 0 : business.phone) || '', business !== null && business !== void 0 && business.open && businessesInsideZone !== null && businessesInsideZone !== void 0 && (_businessesInsideZone = businessesInsideZone.businesses) !== null && _businessesInsideZone !== void 0 && _businessesInsideZone.find(function (_business) {
+        markerPopup: markerPopup(business, t('GO_TO_THE_STORE', 'Go to the store'), (business === null || business === void 0 ? void 0 : business.cellphone) || (business === null || business === void 0 ? void 0 : business.phone) || '', business !== null && business !== void 0 && business.open && (businessesInsideZone !== null && businessesInsideZone !== void 0 && (_businessesInsideZone = businessesInsideZone.businesses) !== null && _businessesInsideZone !== void 0 && _businessesInsideZone.find(function (_business) {
           return (_business === null || _business === void 0 ? void 0 : _business.id) === (business === null || business === void 0 ? void 0 : business.id);
-        }) ? 'block' : 'none'),
+        }) || business !== null && business !== void 0 && business.delivery_zone) ? 'block' : 'none'),
         id: business === null || business === void 0 ? void 0 : business.id,
         address: business === null || business === void 0 ? void 0 : business.address
       });
@@ -347,9 +347,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return /*#__PURE__*/_react.default.createElement(SingleBusinessController, {
         key: business === null || business === void 0 ? void 0 : business.id,
         business: business,
-        showGoToStore: businessesInsideZone === null || businessesInsideZone === void 0 ? void 0 : (_businessesInsideZone2 = businessesInsideZone.businesses) === null || _businessesInsideZone2 === void 0 ? void 0 : _businessesInsideZone2.find(function (_business) {
+        showGoToStore: (businessesInsideZone === null || businessesInsideZone === void 0 ? void 0 : (_businessesInsideZone2 = businessesInsideZone.businesses) === null || _businessesInsideZone2 === void 0 ? void 0 : _businessesInsideZone2.find(function (_business) {
           return (_business === null || _business === void 0 ? void 0 : _business.id) === (business === null || business === void 0 ? void 0 : business.id);
-        })
+        })) || (business === null || business === void 0 ? void 0 : business.delivery_zone)
       });
     }), (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) < (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.LoadMoreButtonCityWrap, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
       onClick: function onClick() {
@@ -364,9 +364,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(SingleBusinessController, {
       key: business === null || business === void 0 ? void 0 : business.id,
       business: business,
-      showGoToStore: (business === null || business === void 0 ? void 0 : business.open) && (businessesInsideZone === null || businessesInsideZone === void 0 ? void 0 : (_businessesInsideZone3 = businessesInsideZone.businesses) === null || _businessesInsideZone3 === void 0 ? void 0 : _businessesInsideZone3.find(function (_business) {
+      showGoToStore: (business === null || business === void 0 ? void 0 : business.open) && ((businessesInsideZone === null || businessesInsideZone === void 0 ? void 0 : (_businessesInsideZone3 = businessesInsideZone.businesses) === null || _businessesInsideZone3 === void 0 ? void 0 : _businessesInsideZone3.find(function (_business) {
         return (_business === null || _business === void 0 ? void 0 : _business.id) === (business === null || business === void 0 ? void 0 : business.id);
-      }))
+      })) || (business === null || business === void 0 ? void 0 : business.delivery_zone))
     });
   }))), filterByAddress && businessesSearchList.loading && _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.nextPageItems) > 4 ? 30 : 8).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessContainer, {
