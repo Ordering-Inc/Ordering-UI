@@ -65,7 +65,7 @@ export const convertHoursToMinutes = (time) => {
   if (!time) return '0min'
   const [hour, minute] = time.split(':')
   const result = (parseInt(hour, 10) * 60) + parseInt(minute, 10)
-  return `${result}${t('MIN', 'min')}`
+  return `${result}${t('TIME_MINUTES', 'min')}`
 }
 
 /**
