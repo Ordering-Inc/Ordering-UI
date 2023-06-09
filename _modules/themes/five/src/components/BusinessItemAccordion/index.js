@@ -179,7 +179,7 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
       return handleClearProducts();
     },
     className: "clear-cart"
-  }, t('CLEAR_CART', 'Clear cart')))), isBusinessChangeEnabled && handleChangeStore && /*#__PURE__*/_react.default.createElement("span", {
+  }, t('CLEAR_CART', 'Clear cart')))), isBusinessChangeEnabled && handleChangeStore && !isGiftCart && /*#__PURE__*/_react.default.createElement("span", {
     ref: changeStore,
     onClick: handleChangeStore,
     className: "change-store"
