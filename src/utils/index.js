@@ -62,7 +62,7 @@ export const formatUrlVideo = (url) => {
  */
 export const convertHoursToMinutes = (time) => {
   const [, t] = useLanguage()
-  if (!time) return '0min'
+  if (!time) return `0 ${t('TIME_MINUTES', 'min')}`
   const [hour, minute] = time.split(':')
   const result = (parseInt(hour, 10) * 60) + parseInt(minute, 10)
   return `${result}${t('TIME_MINUTES', 'min')}`
