@@ -193,7 +193,7 @@ export const BusinessItemAccordion = (props) => {
                       </>
                     )}
                   </div>
-                  {isBusinessChangeEnabled && handleChangeStore && (
+                  {isBusinessChangeEnabled && handleChangeStore && !isGiftCart && (
                     <span
                       ref={changeStore}
                       onClick={handleChangeStore}
