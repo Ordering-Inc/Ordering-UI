@@ -50,6 +50,7 @@ import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { getDistance, getCateringValues } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { SearchBar } from '../SearchBar'
+import { Button } from '../../styles/Buttons'
 
 export const Header = (props) => {
   const {
@@ -354,14 +355,14 @@ export const Header = (props) => {
                       {t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
                     </MenuLink>
                     {!isHideSignup && (
-                      <MenuLink
+                      <Button
+                        type='button'
+                        color='primary'
                         name='signup'
-                        highlight={1}
-                        style={{ whiteSpace: 'nowrap' }}
                         onClick={() => handleOpenLoginSignUp('signup')}
                       >
                         {t('SIGN_UP', theme?.defaultLanguages?.SIGN_UP || 'Sign up')}
-                      </MenuLink>
+                      </Button>
                     )}
                   </>
                 )
