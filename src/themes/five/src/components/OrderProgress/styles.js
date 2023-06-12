@@ -69,6 +69,7 @@ export const ProgressLogoStyled = styled.div`
 export const ProgressLogo = (props) => {
   const style = {}
   style.backgroundImage = `url(${props.bgimage})`
+  style.backgroundSize = 'contain'
 
   return (
     <ProgressLogoStyled {...props} style={style}>
