@@ -43,6 +43,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseDate = _useUtils2[0].parseDate;
+  var isGiftCardOrder = !(order !== null && order !== void 0 && order.business_id);
   var handleChangeFavorite = function handleChangeFavorite(order) {
     handleFavoriteOrder && handleFavoriteOrder(!(order !== null && order !== void 0 && order.favorite));
   };
@@ -100,7 +101,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     utc: false
   }))), !hideOrderStatus && /*#__PURE__*/_react.default.createElement("p", {
     className: "status"
-  }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value))), /*#__PURE__*/_react.default.createElement(_styles2.Reorder, null, !hideReviewOrderButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value))), !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles2.Reorder, null, !hideReviewOrderButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     disabled: !!(order !== null && order !== void 0 && order.review),
     color: "primary",
