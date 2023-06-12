@@ -111,14 +111,18 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     birthdate = _useState12[0],
     setBirthdate = _useState12[1];
-  var _useState13 = (0, _react.useState)({
+  var _useState13 = (0, _react.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    openCalendar = _useState14[0],
+    setOpenCalendar = _useState14[1];
+  var _useState15 = (0, _react.useState)({
       email: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? !!(formState !== null && formState !== void 0 && (_formState$result2 = formState.result) !== null && _formState$result2 !== void 0 && (_formState$result2$re = _formState$result2.result) !== null && _formState$result2$re !== void 0 && (_formState$result2$re2 = _formState$result2$re.settings) !== null && _formState$result2$re2 !== void 0 && (_formState$result2$re3 = _formState$result2$re2.email) !== null && _formState$result2$re3 !== void 0 && _formState$result2$re3.newsletter) : !!((_formState$changes$se = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$se2 = _formState$changes.settings) === null || _formState$changes$se2 === void 0 ? void 0 : (_formState$changes$se3 = _formState$changes$se2.email) === null || _formState$changes$se3 === void 0 ? void 0 : _formState$changes$se3.newsletter) !== null && _formState$changes$se !== void 0 ? _formState$changes$se : user && (user === null || user === void 0 ? void 0 : (_user$settings = user.settings) === null || _user$settings === void 0 ? void 0 : (_user$settings$email = _user$settings.email) === null || _user$settings$email === void 0 ? void 0 : _user$settings$email.newsletter)),
       sms: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? !!(formState !== null && formState !== void 0 && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && (_formState$result4$re = _formState$result4.result) !== null && _formState$result4$re !== void 0 && (_formState$result4$re2 = _formState$result4$re.settings) !== null && _formState$result4$re2 !== void 0 && (_formState$result4$re3 = _formState$result4$re2.sms) !== null && _formState$result4$re3 !== void 0 && _formState$result4$re3.newsletter) : !!((_formState$changes$se4 = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : (_formState$changes2$s = _formState$changes2.settings) === null || _formState$changes2$s === void 0 ? void 0 : (_formState$changes2$s2 = _formState$changes2$s.sms) === null || _formState$changes2$s2 === void 0 ? void 0 : _formState$changes2$s2.newsletter) !== null && _formState$changes$se4 !== void 0 ? _formState$changes$se4 : user && (user === null || user === void 0 ? void 0 : (_user$settings2 = user.settings) === null || _user$settings2 === void 0 ? void 0 : (_user$settings2$sms = _user$settings2.sms) === null || _user$settings2$sms === void 0 ? void 0 : _user$settings2$sms.newsletter)),
       notification: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? !!(formState !== null && formState !== void 0 && (_formState$result6 = formState.result) !== null && _formState$result6 !== void 0 && (_formState$result6$re = _formState$result6.result) !== null && _formState$result6$re !== void 0 && (_formState$result6$re2 = _formState$result6$re.settings) !== null && _formState$result6$re2 !== void 0 && (_formState$result6$re3 = _formState$result6$re2.notification) !== null && _formState$result6$re3 !== void 0 && _formState$result6$re3.newsletter) : !!((_formState$changes$se5 = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : (_formState$changes3$s = _formState$changes3.settings) === null || _formState$changes3$s === void 0 ? void 0 : (_formState$changes3$s2 = _formState$changes3$s.notification) === null || _formState$changes3$s2 === void 0 ? void 0 : _formState$changes3$s2.newsletter) !== null && _formState$changes$se5 !== void 0 ? _formState$changes$se5 : user && (user === null || user === void 0 ? void 0 : (_user$settings3 = user.settings) === null || _user$settings3 === void 0 ? void 0 : (_user$settings3$notif = _user$settings3.notification) === null || _user$settings3$notif === void 0 ? void 0 : _user$settings3$notif.newsletter))
     }),
-    _useState14 = _slicedToArray(_useState13, 2),
-    notificationList = _useState14[0],
-    setNotificationList = _useState14[1];
+    _useState16 = _slicedToArray(_useState15, 2),
+    notificationList = _useState16[0],
+    setNotificationList = _useState16[1];
   var showCustomerCellphone = !(theme !== null && theme !== void 0 && (_theme$profile = theme.profile) !== null && _theme$profile !== void 0 && (_theme$profile$compon = _theme$profile.components) !== null && _theme$profile$compon !== void 0 && (_theme$profile$compon2 = _theme$profile$compon.cellphone) !== null && _theme$profile$compon2 !== void 0 && _theme$profile$compon2.hidden);
   var showCustomerPassword = !(theme !== null && theme !== void 0 && (_theme$profile2 = theme.profile) !== null && _theme$profile2 !== void 0 && (_theme$profile2$compo = _theme$profile2.components) !== null && _theme$profile2$compo !== void 0 && (_theme$profile2$compo2 = _theme$profile2$compo.password) !== null && _theme$profile2$compo2 !== void 0 && _theme$profile2$compo2.hidden);
   var showCustomerPromotions = !(theme !== null && theme !== void 0 && (_theme$profile3 = theme.profile) !== null && _theme$profile3 !== void 0 && (_theme$profile3$compo = _theme$profile3.components) !== null && _theme$profile3$compo !== void 0 && (_theme$profile3$compo2 = _theme$profile3$compo.promotions) !== null && _theme$profile3$compo2 !== void 0 && _theme$profile3$compo2.hidden);
@@ -264,6 +268,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         value: _birthdate
       }
     });
+    setOpenCalendar(false);
   };
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
@@ -394,7 +399,15 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     })));
-  }), showInputBirthday && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('BIRTHDATE', 'Birthdate')), /*#__PURE__*/_react.default.createElement(_DatePicker.DatePickerUI, {
+  }), showInputBirthday && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('BIRTHDATE', 'Birthdate')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    borderBottom: true,
+    className: "form",
+    value: (0, _moment.default)(birthdate).format('YYYY/MM/DD'),
+    autoComplete: "off",
+    onFocus: function onFocus() {
+      return setOpenCalendar(true);
+    }
+  }), openCalendar && /*#__PURE__*/_react.default.createElement(_DatePicker.DatePickerUI, {
     value: birthdate,
     onChange: _handleChangeDate,
     name: 'birthdate'

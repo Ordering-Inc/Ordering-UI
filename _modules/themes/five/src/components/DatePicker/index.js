@@ -5,23 +5,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DatePickerUI = void 0;
 var _react = _interopRequireDefault(require("react"));
-var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
 var _styles = require("./styles");
+var _reactDateRange = require("react-date-range");
+require("react-date-range/dist/styles.css");
+require("react-date-range/dist/theme/default.css");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var DatePickerUI = function DatePickerUI(props) {
   var value = props.value,
     onChange = props.onChange,
-    placeholderText = props.placeholderText,
     name = props.name;
-  return /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
-    selected: value,
-    placeholderText: placeholderText,
+  return /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, /*#__PURE__*/_react.default.createElement(_reactDateRange.Calendar, {
+    date: value,
     name: name,
     onChange: onChange
   }));
 };
 exports.DatePickerUI = DatePickerUI;
 DatePickerUI.defaultProps = {
-  placeholderText: 'yyyy/mm/dd',
   name: 'date'
 };
