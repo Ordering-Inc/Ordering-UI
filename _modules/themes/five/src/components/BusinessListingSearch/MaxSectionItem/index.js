@@ -38,7 +38,7 @@ var MaxSectionItem = function MaxSectionItem(props) {
     km: 1000
   };
   var parseValue = function parseValue(option) {
-    return filter === 'max_distance' ? "".concat((option / units[distanceUnit]).toFixed(0), " ").concat(t("".concat(distanceUnit === null || distanceUnit === void 0 ? void 0 : distanceUnit.toUpperCase()), (0, _utils.capitalize)(distanceUnit))) : filter === 'max_eta' ? "".concat(option, " ").concat(t('MIN', 'min')) : parsePrice(option);
+    return filter === 'max_distance' ? "".concat((option / units[distanceUnit]).toFixed(0), " ").concat(t("".concat(distanceUnit === null || distanceUnit === void 0 ? void 0 : distanceUnit.toUpperCase()), (0, _utils.capitalize)(distanceUnit))) : filter === 'max_eta' ? "".concat(option, " ").concat(t('TIME_MIN', 'min')) : parsePrice(option);
   };
   return /*#__PURE__*/_react.default.createElement(_styles.MaxFilterContainer, null, /*#__PURE__*/_react.default.createElement(_Accordion.FilterAccordion, {
     title: title

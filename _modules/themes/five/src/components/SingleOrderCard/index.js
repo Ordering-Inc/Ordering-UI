@@ -101,6 +101,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isDriverReviewed = _useState12[0],
     setIsDriverReviewed = _useState12[1];
+  var isGiftCardOrder = !(order !== null && order !== void 0 && order.business_id);
   var handleClickCard = function handleClickCard(e, order) {
     if (e.target.closest('.favorite') || e.target.closest('.review') || e.target.closest('.reorder')) return;
     if (customArray) {
@@ -292,7 +293,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     isBusinessesPage: isBusinessesPage
   }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
-  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$business15 = order.business) === null || _order$business15 === void 0 ? void 0 : _order$business15.length) > 1 ? order === null || order === void 0 ? void 0 : order.total : (order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, {
+  }) : parsePrice((order === null || order === void 0 ? void 0 : (_order$business15 = order.business) === null || _order$business15 === void 0 ? void 0 : _order$business15.length) > 1 ? order === null || order === void 0 ? void 0 : order.total : (order === null || order === void 0 ? void 0 : (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total)))), pastOrders && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, {
     isCustomerMode: isCustomerMode
   }, !isOrderReviewed && !isFavorite && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && !hideReviewOrderButton && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
