@@ -28,7 +28,7 @@ export const MaxSectionItem = (props) => {
     return filter === 'max_distance'
       ? `${(option / units[distanceUnit]).toFixed(0)} ${t(`${distanceUnit?.toUpperCase()}`, capitalize(distanceUnit))}`
       : filter === 'max_eta'
-        ? `${option} ${t('MIN', 'min')}`
+        ? `${option} ${t('TIME_MIN', 'min')}`
         : parsePrice(option)
   }
 
