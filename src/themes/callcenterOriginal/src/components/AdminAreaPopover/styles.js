@@ -2,11 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  border-radius: 7.6px;
-  padding: 7px 13px;
-  margin: 0 10px;
 
   ${({ isOpen }) => isOpen && css`
     background: #F8F9FA;
@@ -125,17 +120,23 @@ export const RoundMark = styled.div`
 export const AdminSection = styled.div`
   border: 1px solid ${({ theme }) => theme?.colors?.primary};
   background: #fff;
-  height: 30px;
-  width: 120px;
   color: ${({ theme }) => theme?.colors?.primary};
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 5px;
+  height: 35px;
   cursor: pointer;
   p {
-    margin: 0;
+    margin: auto;
     font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 20px;
+  }
+  @media (min-width: 1200px) {
+    p {
+      min-width: 100px;
+    }
   }
   svg{
     width: 14px;

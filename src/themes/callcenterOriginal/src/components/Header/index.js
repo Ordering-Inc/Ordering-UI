@@ -204,16 +204,10 @@ export const Header = (props) => {
                   )}
                 </>
               )}
-              {windowSize.width > 768 ? (
+              {windowSize.width > 557 && (
                 <OrderTypeSelectorHeader
                   orderTypeList={orderTypeList}
                   onClick={() => openModal('delivery')}
-                />
-              ) : (
-                <HeaderOption
-                  variant='delivery'
-                  onClick={(variant) => openModal(variant)}
-                  orderTypeList={orderTypeList}
                 />
               )}
             </Menu>
