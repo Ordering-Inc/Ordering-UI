@@ -29,7 +29,6 @@ import { sortInputFields } from '../../../../../utils'
 import Modal from '../Modal'
 import moment from 'moment'
 import { DatePickerUI } from '../DatePicker'
-import { Calendar4 } from 'react-bootstrap-icons/dist'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -225,8 +224,6 @@ export const UserFormDetailsUI = (props) => {
     handleChangeInput({ target: { name: 'birthdate', value: _birthdate } })
     setOpenCalendar(false)
   }
-
-  console.log(birthdate)
 
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
