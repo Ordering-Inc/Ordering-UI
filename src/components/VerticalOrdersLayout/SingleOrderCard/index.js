@@ -34,6 +34,8 @@ const SingleOrderCardUI = (props) => {
   const [, t] = useLanguage()
   const [{ parseDate }] = useUtils()
 
+  const isGiftCardOrder = !order?.business_id
+
   const handleChangeFavorite = (order) => {
     handleFavoriteOrder && handleFavoriteOrder(!order?.favorite)
   }
@@ -110,24 +112,26 @@ const SingleOrderCardUI = (props) => {
           )}
         </BusinessInformation>
       </OrderPastContent>
-      <Reorder>
-        {!hideReviewOrderButton && (
-          <Button
-            outline
-            disabled={!!order?.review}
-            color='primary'
-            className='review'
-            onClick={() => setOrderSelected(order)}
-          >
-            {!!order?.review ? t('REVIEWED', 'Reviewed') : t('REVIEW', 'Review')}
-          </Button>
-        )}
-        {!hideReorderButton && typeof order?.id === 'number' && (
-          <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
-            {orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
-          </Button>
-        )}
-      </Reorder>
+      {!isGiftCardOrder && (
+        <Reorder>
+          {!hideReviewOrderButton && (
+            <Button
+              outline
+              disabled={!!order?.review}
+              color='primary'
+              className='review'
+              onClick={() => setOrderSelected(order)}
+            >
+              {!!order?.review ? t('REVIEWED', 'Reviewed') : t('REVIEW', 'Review')}
+            </Button>
+          )}
+          {!hideReorderButton && typeof order?.id === 'number' && (
+            <Button color='primary' className='reorder' outline onClick={() => handleReorder(order.id)}>
+              {orderID === order.id && reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
+            </Button>
+          )}
+        </Reorder>
+      )}
     </SingleCard>
   )
 }

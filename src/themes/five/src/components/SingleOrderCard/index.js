@@ -59,6 +59,8 @@ const SingleOrderCardUI = (props) => {
   const [isProductReviewed, setIsProductReviewed] = useState(false)
   const [isDriverReviewed, setIsDriverReviewed] = useState(false)
 
+  const isGiftCardOrder = !order?.business_id
+
   const handleClickCard = (e, order) => {
     if (e.target.closest('.favorite') || e.target.closest('.review') || e.target.closest('.reorder')) return
 
@@ -254,7 +256,7 @@ const SingleOrderCardUI = (props) => {
               }
             </Price>
           )}
-          {pastOrders && (
+          {pastOrders && !isGiftCardOrder && (
             <ButtonWrapper isCustomerMode={isCustomerMode}>
               {!isOrderReviewed && !isFavorite && (!order?.review || (order.driver && !order?.user_review)) && !hideReviewOrderButton && !isCustomerMode && (
                 <Button
