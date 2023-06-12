@@ -69,6 +69,7 @@ export const UserFormDetailsUI = (props) => {
   const emailInput = useRef(null)
   const user = userData || userSession
   const [birthdate, setBirthdate] = useState(user?.birthdate ? moment(user?.birthdate, 'YYYY-MM-DD').toDate() : null)
+  const [openCalendar, setOpenCalendar] = useState(false)
 
   const [notificationList, setNotificationList] = useState({
     email: formState?.result?.result
@@ -221,6 +222,7 @@ export const UserFormDetailsUI = (props) => {
     setBirthdate(date)
     const _birthdate = moment(date).format('YYYY-MM-DD')
     handleChangeInput({ target: { name: 'birthdate', value: _birthdate } })
+    setOpenCalendar(false)
   }
 
   useEffect(() => {
@@ -383,7 +385,16 @@ export const UserFormDetailsUI = (props) => {
             {showInputBirthday && (
               <InputPhoneNumberWrapper>
                 <p>{t('BIRTHDATE', 'Birthdate')}</p>
+                <Input
+                  borderBottom
+                  className='form'
+                  value={moment(birthdate).format('YYYY/MM/DD')}
+                  autoComplete='off'
+                  onFocus={() => setOpenCalendar(true)}
+                />
+                {openCalendar && (
                 <DatePickerUI value={birthdate} onChange={_handleChangeDate} name={'birthdate'}/>
+                )}
               </InputPhoneNumberWrapper>
             )}
             {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('cellphone')) || !requiredFields) && (
