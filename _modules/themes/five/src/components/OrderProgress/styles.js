@@ -29,6 +29,7 @@ exports.ProgressLogoStyled = ProgressLogoStyled;
 var ProgressLogo = function ProgressLogo(props) {
   var style = {};
   style.backgroundImage = "url(".concat(props.bgimage, ")");
+  style.backgroundSize = 'contain';
   return /*#__PURE__*/_react.default.createElement(ProgressLogoStyled, _extends({}, props, {
     style: style
   }), props.children);
