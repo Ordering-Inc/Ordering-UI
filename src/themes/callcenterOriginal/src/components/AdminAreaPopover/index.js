@@ -91,7 +91,6 @@ export const AdminAreaPopover = (props) => {
           </p>
           <BisDownArrow />
         </AdminSection>
-
       </HeaderItem>
       <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
         <PopoverList>
