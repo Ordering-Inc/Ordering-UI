@@ -234,17 +234,11 @@ var Header = function Header(props) {
     }
   }, /*#__PURE__*/_react.default.createElement("div", null, (_orderState$options4 = orderState.options) !== null && _orderState$options4 !== void 0 && _orderState$options4.moment ? parseDate((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.moment, {
     outputFormat: configState === null || configState === void 0 ? void 0 : (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 ? void 0 : (_configState$configs11 = _configState$configs10.dates_moment_format) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value
-  }) : t('ASAP_ABBREVIATION', 'ASAP')))), windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
+  }) : t('ASAP_ABBREVIATION', 'ASAP')))), windowSize.width > 576 && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     orderTypeList: orderTypeList,
     onClick: function onClick() {
       return openModal('delivery');
     }
-  }) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
-    variant: "delivery",
-    onClick: function onClick(variant) {
-      return openModal(variant);
-    },
-    orderTypeList: orderTypeList
   })), (user === null || user === void 0 ? void 0 : user.level) === 0 && /*#__PURE__*/_react.default.createElement(_AdminAreaPopover.AdminAreaPopover, {
     withLogout: true,
     isCustomerMode: isCustomerMode,
