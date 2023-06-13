@@ -222,7 +222,7 @@ const BusinessProductsListUI = (props) => {
             const products = subcategoriesSelected?.length > 0
               ? _products?.filter(product =>
                 !subcategoriesSelected?.find(subcategory => subcategory?.parent_category_id === category?.id) ||
-                subcategoriesSelected?.some(subcategory => subcategory.id === product?.category_id))
+                subcategoriesSelected.some(subcategory => subcategory?.id === product?.category_id || subcategory?.children?.reduce((prev, cur) => [...prev, cur?.category_id], [])?.includes(product?.category_id)))
               : _products
             const shortCategoryDescription = category?.description?.length > 200 ? `${category?.description?.substring(0, 200)}...` : category?.description
             const isSubcategorySearch = isSearchMode && category?.subcategories?.length > 0 && category?.subcategories?.some(subcategory => products?.some(product => product?.category_id === subcategory?.id))
