@@ -178,8 +178,21 @@ export const Menu = styled.div`
   }
 
   .order-type {
-    padding: 0 10px;
+    padding: 0 5px;
 
+    > div {
+      min-width: auto;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 40px;
+    }
+
+    @media (min-width: 1123px) {
+      padding: 0 10px;
+      > div {
+        min-width: fit-content;
+      }
+    }
     @media (min-width: 1200px) {
       padding: 0 20px;
     }
