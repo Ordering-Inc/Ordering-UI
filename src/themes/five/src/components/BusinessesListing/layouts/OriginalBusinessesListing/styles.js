@@ -200,3 +200,9 @@ export const HeaderSearchMode = styled.div`
   position: absolute;
   width: 200px;
 `
+
+export const AddressFormWrapper = styled.div`
+  @media (min-width: 450px) {
+    margin-top: 20px;
+  }
+`
