@@ -8,6 +8,7 @@ import {
   useConfig,
   useOrder,
   useCustomer,
+  useSession,
   GoogleMapsMap,
   useOrderingTheme
 } from 'ordering-components'
@@ -103,6 +104,7 @@ const OrderDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const theme = useTheme()
+  const [{ token }] = useSession()
   const [events] = useEvent()
   const [{ parsePrice, parseDate }] = useUtils()
   const [, { deleteUserCustomer }] = useCustomer()
@@ -124,7 +126,7 @@ const OrderDetailsUI = (props) => {
   const [isShowBusinessLogo, setIsShowBusinessLogo] = useState(true)
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
-  const acceptedStatus = [1, 2, 5, 6, 10, 11, 12]
+  const acceptedStatus = [1, 2, 5, 6, 10, 11, 12, 16]
   const completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const placeSpotTypes = [3, 4, 5]
   const activeStatus = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23]
@@ -369,6 +371,10 @@ const OrderDetailsUI = (props) => {
     const _isService = order.products.some(product => product.type === 'service')
     setIsService(_isService)
     businessLogoUrlValidation()
+    props.openBChatByParam && setOpenMessages({
+      ...openMessages,
+      business: !!props.openBChatByParam
+    })
   }, [order])
 
   useEffect(() => {
@@ -470,16 +476,18 @@ const OrderDetailsUI = (props) => {
                       >
                         <span onClick={() => setIsOrderHistory(true)}>{t('VIEW_DETAILS', 'View details')}</span>
                       </ReviewOrderLink>
-                      <ReviewOrderLink
-                        className='Review-order'
-                        active={
-                          acceptedStatus.includes(parseInt(order?.status, 10)) &&
-                          (!order?.review || (order.driver && !order?.user_review)) &&
-                          (!isOrderReviewed || !isProductReviewed || (isService && !isProReviewed) || !isDriverReviewed)
-                        }
-                      >
-                        <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                      </ReviewOrderLink>
+                      {(!props.isCustomerMode || (props.isCustomerMode && !!props.hashKey && !token)) && (
+                        <ReviewOrderLink
+                          className='Review-order'
+                          active={
+                            acceptedStatus.includes(parseInt(order?.status, 10)) &&
+                            (!order?.review || (order.driver && !order?.user_review)) &&
+                            (!isOrderReviewed || !isProductReviewed || (isService && !isProReviewed) || !isDriverReviewed)
+                          }
+                        >
+                          <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                        </ReviewOrderLink>
+                      )}
                     </LinkWrapper>
                   </OrderStatusAndLinkContainer>
                 </>
