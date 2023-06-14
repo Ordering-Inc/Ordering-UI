@@ -30,6 +30,8 @@ var _CitiesControl = require("../../../CitiesControl");
 var _OrderContextUI = require("../../../OrderContextUI");
 var _OrdersSection = require("./OrdersSection");
 var _utils = require("../../../../../../../utils");
+var _AddressList = require("../../../AddressList");
+var _AddressForm = require("../../../AddressForm");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -51,7 +53,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _citiesState$cities, _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderState$options2, _orderState$options3, _businessesList$busin3, _orderState$options7, _configs$business_lis, _configs$business_lis2, _configs$business_lis3, _theme$images2, _theme$images2$genera, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _configs$business_lis4, _theme$images3, _theme$images3$genera, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _citiesState$cities5, _citiesState$cities6, _citiesState$cities6$, _orderState$options9, _orderState$options9$, _configs$advanced_bus2, _citiesState$cities7, _citiesState$cities8, _citiesState$cities8$, _orderState$options11, _orderState$options12, _businessesList$busin6, _businessesList$busin7;
+  var _citiesState$cities, _ref, _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _orderState$options, _theme$business_listi4, _theme$business_listi5, _theme$business_listi6, _theme$business_listi7, _theme$business_listi8, _theme$business_listi9, _theme$business_listi10, _theme$business_listi11, _theme$business_listi12, _theme$business_listi13, _theme$business_listi14, _theme$business_listi15, _theme$business_listi16, _theme$business_listi17, _theme$business_listi18, _theme$business_listi19, _theme$business_listi20, _theme$business_listi21, _businessesList$busin, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderState$options2, _orderState$options3, _businessesList$busin3, _orderState$options7, _configs$business_lis, _configs$business_lis2, _configs$business_lis3, _theme$images2, _theme$images2$genera, _theme$business_listi22, _theme$business_listi23, _theme$business_listi24, _theme$business_listi25, _configs$business_lis4, _theme$images3, _theme$images3$genera, _theme$business_listi26, _theme$business_listi27, _theme$business_listi28, _theme$business_listi29, _citiesState$cities5, _citiesState$cities6, _citiesState$cities6$, _orderState$options9, _orderState$options9$, _configs$advanced_bus2, _citiesState$cities7, _citiesState$cities8, _citiesState$cities8$, _orderState$options11, _orderState$options12, _businessesList$busin6, _businessesList$busin7, _orderState$options15;
   var businessesList = props.businessesList,
     paginationProps = props.paginationProps,
     searchValue = props.searchValue,
@@ -257,10 +259,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       });
     })))));
   }
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, !isCustomerMode &&
-  /*#__PURE__*/
-  // Keep this banner at the top
-  _react.default.createElement(_PageBanner.PageBanner, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
     position: "web_business_listing"
   }), (windowSize.width < 576 || (configs === null || configs === void 0 ? void 0 : (_configs$business_lis = configs.business_listing_hide_image) === null || _configs$business_lis === void 0 ? void 0 : _configs$business_lis.value) !== '1' && !isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
     isBusinessList: true,
@@ -428,7 +427,42 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
         citiesOpen: false
       }));
     }
-  })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, _extends({}, !auth && {
+    title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')
+  }, {
+    open: modals.formOpen || modals.listOpen,
+    width: "70%",
+    onClose: function onClose() {
+      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        formOpen: false,
+        listOpen: false
+      }));
+    }
+  }), modals.listOpen ? /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    isModal: true,
+    changeOrderAddressWithDefault: true,
+    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
+    onCancel: function onCancel() {
+      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        listOpen: false
+      }));
+    },
+    isCustomerMode: isCustomerMode
+  }) : /*#__PURE__*/_react.default.createElement(_styles.AddressFormWrapper, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+    useValidationFileds: true,
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options15 = orderState.options) === null || _orderState$options15 === void 0 ? void 0 : _orderState$options15.address) || {},
+    onCancel: function onCancel() {
+      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        formOpen: false
+      }));
+    },
+    onSaveAddress: function onSaveAddress() {
+      return setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        formOpen: false
+      }));
+    },
+    isCustomerMode: isCustomerMode
+  }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: !mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

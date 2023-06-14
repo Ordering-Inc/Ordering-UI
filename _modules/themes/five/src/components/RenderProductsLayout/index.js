@@ -172,7 +172,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     categoryClicked: categoryClicked,
     categorySelected: categorySelected,
     setCategoryClicked: setCategoryClicked
-  })), !isCustomerMode && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.id) && /*#__PURE__*/_react.default.createElement(_styles.PageBannerWrapper, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
+  })), (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.id) && /*#__PURE__*/_react.default.createElement(_styles.PageBannerWrapper, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
     position: "web_business_page",
     businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.id
   })), !errorQuantityProducts && SearchProductsComponent && !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(SearchProductsComponent, {
