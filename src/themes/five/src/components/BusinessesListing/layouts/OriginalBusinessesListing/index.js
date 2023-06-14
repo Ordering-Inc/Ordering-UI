@@ -223,9 +223,7 @@ const BusinessesListingUI = (props) => {
 
   return (
     <BusinessContainer>
-      {!isCustomerMode && ( // Keep this banner at the top
-        <PageBanner position='web_business_listing' />
-      )}
+      <PageBanner position='web_business_listing' />
 
       {(windowSize.width < 576 || (configs?.business_listing_hide_image?.value !== '1' && !isChew)) && (
         <BusinessBanner>
