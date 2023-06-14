@@ -127,7 +127,6 @@ const BusinessesListingUI = (props) => {
     if (auth) {
       setModals({ ...modals, listOpen: true })
     } else {
-      console.log('enrto')
       setModals({ ...modals, formOpen: true })
     }
   }
