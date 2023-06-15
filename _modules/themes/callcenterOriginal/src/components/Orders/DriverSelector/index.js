@@ -188,13 +188,27 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       optionInnerMaxHeight: "150px",
       onChange: function onChange(driver) {
         return handleChangeDriver(driver);
+      },
+      isShowSearchBar: true,
+      searchBarIsCustomLayout: true,
+      searchBarIsNotLazyLoad: true,
+      searchValue: searchValue,
+      handleChangeSearch: function handleChangeSearch(val) {
+        return setSearchValue(val);
       }
     }) : /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
       defaultValue: "default",
       options: driversLoading,
       optionInnerMargin: "10px",
       optionInnerMaxHeight: "150px",
-      className: "driver-select"
+      className: "driver-select",
+      isShowSearchBar: true,
+      searchBarIsCustomLayout: true,
+      searchBarIsNotLazyLoad: true,
+      searchValue: searchValue,
+      handleChangeSearch: function handleChangeSearch(val) {
+        return setSearchValue(val);
+      }
     }));
   } else {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isFirstSelect ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {

@@ -80,7 +80,7 @@ var DateTypeSelector = function DateTypeSelector(props) {
   var _handleChangeFromDate = function _handleChangeFromDate(date) {
     setStartDate(date);
     if (date !== null) {
-      handleChangeFromDate((0, _dayjs.default)(date).format('YYYY-MM-DD'));
+      handleChangeFromDate((0, _dayjs.default)(date).format('YYYY-MM-DD 00:00:00'));
     } else {
       handleChangeFromDate(null);
     }
@@ -88,7 +88,7 @@ var DateTypeSelector = function DateTypeSelector(props) {
   var _handleChangeEndDate = function _handleChangeEndDate(date) {
     setEndDate(date);
     if (date !== null) {
-      handleChangeEndDate((0, _dayjs.default)(date).format('YYYY-MM-DD'));
+      handleChangeEndDate((0, _dayjs.default)(date).format('YYYY-MM-DD 23:59:59'));
     } else {
       handleChangeEndDate(null);
     }

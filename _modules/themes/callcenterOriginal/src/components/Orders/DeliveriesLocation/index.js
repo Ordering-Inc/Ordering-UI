@@ -69,10 +69,6 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
   var mapRef = (0, _react.useRef)(null);
   var mapFit = function mapFit() {
     var _bounds$getNorthEast, _bounds$getNorthEast$, _bounds$getNorthEast2, _bounds$getNorthEast3, _bounds$getSouthWest, _bounds$getSouthWest$, _bounds$getSouthWest2, _bounds$getSouthWest3;
-    var _onlineDrivers = driversList.drivers.filter(function (driver) {
-      return driver.enabled && driver.available && !driver.busy;
-    });
-    setActiveDrivers(_onlineDrivers);
     var bounds = new window.google.maps.LatLngBounds();
     if (interActionMapOrder === null) {
       if (driversList.drivers.length === 1) {
@@ -159,6 +155,10 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
   // Fit bounds on mount, and when the markers change
   (0, _react.useEffect)(function () {
     if (driversList.loading || driversList.drivers.length === 0 || mapLoaded) return;
+    var _onlineDrivers = driversList.drivers.filter(function (driver) {
+      return driver.enabled && driver.available && !driver.busy;
+    });
+    setActiveDrivers(_onlineDrivers);
     if (interActionMapOrder !== null) {
       var _iterator3 = _createForOfIteratorHelper(driversList.drivers),
         _step3;
@@ -184,6 +184,7 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
     setMapFitted(false);
   }, [interActionMapOrder]);
   var handleMapChange = function handleMapChange(data) {
+    if (!(data !== null && data !== void 0 && data.zoom)) return;
     setMapZoom(data === null || data === void 0 ? void 0 : data.zoom);
   };
   return /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {

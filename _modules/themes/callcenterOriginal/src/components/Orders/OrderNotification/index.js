@@ -31,7 +31,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _reactToastify.toast.configure();
 var OrderNotificationUI = function OrderNotificationUI(props) {
-  var isOnlyDelivery = props.isOnlyDelivery;
+  var isOnlyDelivery = props.isOnlyDelivery,
+    customerId = props.customerId;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -50,7 +51,17 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     registerOrderIds = _useState4[0],
     setRegisterOrderIds = _useState4[1];
+  var _useState5 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    alertState = _useState6[0],
+    setAlertState = _useState6[1];
   var handleNotification = function handleNotification(order) {
+    var _order$products, _order$products$;
+    if ((order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : (_order$products$ = _order$products[0]) === null || _order$products$ === void 0 ? void 0 : _order$products$.type) === 'gift_card') return;
+    if (customerId && (order === null || order === void 0 ? void 0 : order.customer_id) !== customerId) return;
     if (isOnlyDelivery && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) return;
     var _registerOrderIds = _toConsumableArray(registerOrderIds);
     if (!_registerOrderIds.includes(order.id)) {
@@ -86,11 +97,9 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     };
     (0, _reactToastify.toast)(content, toastConfigure);
     var sound = document.getElementById('notification-sound');
-    if (sound !== null && sound !== void 0 && sound.muted && sound !== null && sound !== void 0 && sound.play) {
-      sound.muted = false;
-      sound.play();
-      setRegisterOrderIds([]);
-    }
+    sound.muted = false;
+    sound.play();
+    setRegisterOrderIds([]);
   };
   (0, _react.useEffect)(function () {
     if (registerOrderIds.length > 0) return;
@@ -99,7 +108,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
   (0, _react.useEffect)(function () {
     var sound = document.getElementById('notification-sound');
     var interval = setInterval(function () {
-      if (notificationModalOpen && sound !== null && sound !== void 0 && sound.muted && sound !== null && sound !== void 0 && sound.play) {
+      if (notificationModalOpen) {
         sound.muted = false;
         sound.play();
       }
@@ -118,7 +127,13 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     return function () {
       events.off('order_added', handleNotification);
     };
-  }, [configState, registerOrderIds]);
+  }, [configState, registerOrderIds, customerId]);
+  (0, _react.useEffect)(function () {
+    setAlertState({
+      open: true,
+      content: t('SOUND_WILL_BE_PLAYED', 'The sound will be played on this page whenever a new order is received.')
+    });
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "750px",
     open: notificationModalOpen,
@@ -130,7 +145,35 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     return /*#__PURE__*/_react.default.createElement("p", {
       key: orderId
     }, t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', "".concat(orderId)));
-  }))));
+  }))), /*#__PURE__*/_react.default.createElement("audio", {
+    id: "notification-sound",
+    muted: true
+  }, /*#__PURE__*/_react.default.createElement("source", {
+    src: theme.sounds.notificationOgg,
+    type: "audio/ogg"
+  }), /*#__PURE__*/_react.default.createElement("source", {
+    src: theme.sounds.notificationMp3,
+    type: "audio/mpeg"
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    width: "700px",
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  }));
 };
 var OrderNotification = function OrderNotification(props) {
   var orderNotificationProps = _objectSpread(_objectSpread({}, props), {}, {

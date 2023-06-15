@@ -41,9 +41,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     citiesList = props.citiesList,
     ordersStatusGroup = props.ordersStatusGroup,
     filterValues = props.filterValues,
-    deletedOrderId = props.deletedOrderId,
+    deletedOrderIds = props.deletedOrderIds,
     startMulitOrderStatusChange = props.startMulitOrderStatusChange,
-    startMulitOrderDelete = props.startMulitOrderDelete,
     handleChangeSearch = props.handleChangeSearch,
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleOrdersStatusGroupFilter = props.handleOrdersStatusGroupFilter,
@@ -56,7 +55,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
     handleCustomOrderDetail = props.handleCustomOrderDetail,
     setSelectedOrderIds = props.setSelectedOrderIds,
-    numberOfOrdersByStatus = props.numberOfOrdersByStatus;
+    numberOfOrdersByStatus = props.numberOfOrdersByStatus,
+    allowColumns = props.allowColumns,
+    setAllowColumns = props.setAllowColumns;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -166,10 +167,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleBackRedirect();
   };
   (0, _react.useEffect)(function () {
-    if (startMulitOrderStatusChange || startMulitOrderDelete) {
+    if (startMulitOrderStatusChange) {
       setTotalSelectedOrder(selectedOrderIds.length);
     }
-  }, [startMulitOrderStatusChange, startMulitOrderDelete]);
+  }, [startMulitOrderStatusChange]);
   (0, _react.useEffect)(function () {
     if (selectedOrderIds.length === 0) {
       setTimeout(function () {
@@ -185,7 +186,6 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
         handleBackRedirect();
       } else {
         setOrderDetailId(id);
-        onOrderRedirect && onOrderRedirect(id);
         setIsOpenOrderDetail(true);
       }
     }
@@ -223,9 +223,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
     numberOfOrdersByStatus: numberOfOrdersByStatus
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, {
-    isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, {
     isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
   }, /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
     ordersStatusGroup: ordersStatusGroup,
@@ -235,7 +233,11 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
     filterValues: filterValues,
     handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,
-    handleDeleteMultiOrders: handleDeleteMultiOrders
+    handleDeleteMultiOrders: handleDeleteMultiOrders,
+    handleOpenCustomOrderDetail: function handleOpenCustomOrderDetail(id) {
+      setOrderDetailId(id);
+      setIsOpenOrderDetail(true);
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersInnerContent, {
     className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapItemView, null, /*#__PURE__*/_react.default.createElement(_OrdersDashboard.OrdersDashboard, {
@@ -246,7 +248,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     searchValue: searchValue,
     filterValues: filterValues,
     selectedOrderIds: selectedOrderIds,
-    deletedOrderId: deletedOrderId,
+    deletedOrderIds: deletedOrderIds,
     driversList: driversList,
     ordersStatusGroup: ordersStatusGroup,
     selectedSubOrderStatus: selectedSubOrderStatus,
@@ -260,7 +262,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setIsTourOpen: setIsTourOpen,
     setFilterModalOpen: setFilterModalOpen,
     timeStatus: timeStatus,
-    slaSettingTime: slaSettingTime
+    slaSettingTime: slaSettingTime,
+    allowColumns: allowColumns,
+    setAllowColumns: setAllowColumns
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,
@@ -276,7 +280,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setIsTourFlag: setIsTourFlag,
     setIsTourOpen: setIsTourOpen,
     drivers: driversList.drivers
-  }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
+  }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, {
+    customerId: props.customerId
+  }), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
     isTourOpen: isTourOpen,
     setIsTourOpen: setIsTourOpen,
     currentStep: currentTourStep,

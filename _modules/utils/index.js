@@ -3,9 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.orderTypeList = exports.lightenDarkenColor = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.getCateringValues = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.calendarLanguages = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.scrollTo = exports.reviewCommentList = exports.priceList = exports.orderTypeList = exports.lightenDarkenColor = exports.getUniqueId = exports.getTraduction = exports.getTimes = exports.getStarWidth = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getLocale = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.getCurrenySymbol = exports.getCateringValues = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.findExitingCode = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.checkSiteUrl = exports.capitalize = exports.calendarLanguages = exports.bytesConverter = void 0;
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
+var _currency = require("../config/currency.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -1154,3 +1155,42 @@ var getCateringValues = function getCateringValues(cateringTypeString, configs) 
   };
 };
 exports.getCateringValues = getCateringValues;
+var getCurrenySymbol = function getCurrenySymbol(code) {
+  var _CURRENCY$code$symbol, _CURRENCY$code;
+  return (_CURRENCY$code$symbol = _currency.CURRENCY === null || _currency.CURRENCY === void 0 ? void 0 : (_CURRENCY$code = _currency.CURRENCY[code]) === null || _CURRENCY$code === void 0 ? void 0 : _CURRENCY$code.symbol) !== null && _CURRENCY$code$symbol !== void 0 ? _CURRENCY$code$symbol : code;
+};
+
+/**
+ * Function to get unique id
+ */
+exports.getCurrenySymbol = getCurrenySymbol;
+var getUniqueId = function getUniqueId() {
+  var dateString = Date.now().toString(36);
+  var randomness = Math.random().toString(36).substr(2);
+  return dateString + randomness;
+};
+
+/**
+ * Function to get language settins by language code
+ * @param {string} code // language code
+ * @param {any} locales // language settings
+ */
+exports.getUniqueId = getUniqueId;
+var getLocale = function getLocale(code, locales) {
+  var locale = locales === null || locales === void 0 ? void 0 : locales[code];
+  if (code === 'es-419-1' || code === 'es-419-2') locale = locales === null || locales === void 0 ? void 0 : locales.es;
+  if (code === 'zh-CN') locale = locales === null || locales === void 0 ? void 0 : locales.zhCN;
+  if (code === 'ar') locale = locales === null || locales === void 0 ? void 0 : locales.arSA;
+  if (code === 'kn') locale = locales === null || locales === void 0 ? void 0 : locales.ta;
+  if (code === 'km') locale = locales === null || locales === void 0 ? void 0 : locales.th;
+  if (!locale) return locales === null || locales === void 0 ? void 0 : locales.enUS;
+  return locale;
+};
+exports.getLocale = getLocale;
+var findExitingCode = function findExitingCode(countryCode) {
+  var code = _orderingComponents.CODES.find(function (code) {
+    return code.countryCode === (countryCode || '').toUpperCase();
+  });
+  return code === null || code === void 0 ? void 0 : code.countryCode;
+};
+exports.findExitingCode = findExitingCode;

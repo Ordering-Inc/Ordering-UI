@@ -40,12 +40,16 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
     width = _useWindowSize.width;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    isMenuOpen = _useState2[0],
-    setIsMenuOpen = _useState2[1];
+    isExpand = _useState2[0],
+    setIsExpand = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    isOpenDriverOrderDetails = _useState4[0],
-    setIsOpenDriverOrderDetails = _useState4[1];
+    isMenuOpen = _useState4[0],
+    setIsMenuOpen = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isOpenDriverOrderDetails = _useState6[0],
+    setIsOpenDriverOrderDetails = _useState6[1];
   var actionSidebar = function actionSidebar(value) {
     if (!value) {
       props.onClose();
@@ -88,6 +92,14 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
       props.onClose() && props.onClose();
     }
   };
+  var expandSideBar = function expandSideBar() {
+    var element = document.getElementById('driver_lateral_bar');
+    if (!element) return;
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     if (!open) return;
     document.addEventListener('keydown', onCloseSidebar);
@@ -97,7 +109,12 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
   }, [open]);
   return /*#__PURE__*/_react.default.createElement(_styles.LateralBarContainer, {
     id: "driver_lateral_bar"
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, width > 576 && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return expandSideBar();
+    }
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return props.onClose();
