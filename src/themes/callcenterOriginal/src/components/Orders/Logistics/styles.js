@@ -7,6 +7,12 @@ export const WraaperLogs = styled.div`
   justify-content: center;
   font-size: 0.8em;
   border-radius: 97px;
+
+  > button {
+    margin-bottom: 15px;
+    font-size: 14px;
+    padding: 0 25px;
+  }
 `
 export const BubbleConsole = styled.div`
   border-radius: 5px;

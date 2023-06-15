@@ -29,21 +29,20 @@ export const BarContainer = styled.div`
     right: 0;
     padding-right: ${({ moveDistance }) => moveDistance ? `${moveDistance}px` : '0px'};
   `}
+`
 
-  > button {
-    position: absolute;
-    z-index: 10;
-    top: 20px;
-    ${props => props.theme?.rtl ? css`
-      left: ${({ moveDistance }) => moveDistance ? `${moveDistance + 20}px` : '20px'};
-    ` : css`
-      right: ${({ moveDistance }) => moveDistance ? `${moveDistance + 20}px` : '20px'};
-    `}
-  }
-
+export const IconButtonWrapper = styled.div`
+  position: absolute;
+  z-index: 10;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  ${props => props.theme?.rtl ? css`
+    left: ${({ moveDistance }) => moveDistance ? `${moveDistance + 20}px` : '20px'};
+  ` : css`
+    right: ${({ moveDistance }) => moveDistance ? `${moveDistance + 20}px` : '20px'};
+  `}
   ${({ IconTop }) => IconTop && css`
-    > button {
-      top: ${IconTop}
-    }
+    top: ${IconTop}
   `}
 `

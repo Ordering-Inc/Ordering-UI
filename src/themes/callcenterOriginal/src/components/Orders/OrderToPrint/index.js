@@ -4,6 +4,7 @@ import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { OrderBill } from '../OrderBill'
+import { getCurrenySymbol } from '../../../../../../utils'
 
 import {
   OrderStatus,
@@ -81,7 +82,7 @@ export const OrderToPrint = forwardRef((props, ref) => {
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
     if (name !== 'No') {
       const pos = position ? `(${position})` : ''
-      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price, { currencyPosition: 'left' })}` : `${name} ${pos}`
+      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price, { currency: getCurrenySymbol(order?.currency) })}` : `${name} ${pos}`
     } else {
       return 'No'
     }
@@ -97,14 +98,14 @@ export const OrderToPrint = forwardRef((props, ref) => {
               <span>
                 {event?.wallet_event
                   ? walletName[event?.wallet_event?.wallet?.type]?.name
-                  : event?.paymethod?.name}
+                  : t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name)}
               </span>
               <EnDotSingle />
             </React.Fragment>
           ))
         ) : (
           <>
-            <span>{order?.paymethod?.name}</span>
+            <span>{t(order?.paymethod?.gateway?.toUpperCase(), order?.paymethod?.name)}</span>
             <EnDotSingle />
           </>
         )}

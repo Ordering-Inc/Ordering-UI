@@ -31,9 +31,8 @@ const OrdersManagerUI = (props) => {
     citiesList,
     ordersStatusGroup,
     filterValues,
-    deletedOrderId,
+    deletedOrderIds,
     startMulitOrderStatusChange,
-    startMulitOrderDelete,
     handleChangeSearch,
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
@@ -46,7 +45,9 @@ const OrdersManagerUI = (props) => {
     handleSelectedSubOrderStatus,
     handleCustomOrderDetail,
     setSelectedOrderIds,
-    numberOfOrdersByStatus
+    numberOfOrdersByStatus,
+    allowColumns,
+    setAllowColumns
   } = props
 
   const [, t] = useLanguage()
@@ -125,10 +126,10 @@ const OrdersManagerUI = (props) => {
   }
 
   useEffect(() => {
-    if (startMulitOrderStatusChange || startMulitOrderDelete) {
+    if (startMulitOrderStatusChange) {
       setTotalSelectedOrder(selectedOrderIds.length)
     }
-  }, [startMulitOrderStatusChange, startMulitOrderDelete])
+  }, [startMulitOrderStatusChange])
 
   useEffect(() => {
     if (selectedOrderIds.length === 0) {
@@ -147,7 +148,6 @@ const OrdersManagerUI = (props) => {
         handleBackRedirect()
       } else {
         setOrderDetailId(id)
-        onOrderRedirect && onOrderRedirect(id)
         setIsOpenOrderDetail(true)
       }
     }
@@ -190,7 +190,7 @@ const OrdersManagerUI = (props) => {
           changeOrderStatus={handleOrdersStatusGroupFilter}
           numberOfOrdersByStatus={numberOfOrdersByStatus}
         />
-        <OrderSubFilterControls isColumn={selectedOrderIds?.length}>
+        <OrderSubFilterControls>
           <OrderStatusSubFilterWrapper isColumn={selectedOrderIds?.length}>
             <OrderStatusSubFilter
               ordersStatusGroup={ordersStatusGroup}
@@ -204,6 +204,10 @@ const OrdersManagerUI = (props) => {
               filterValues={filterValues}
               handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
               handleDeleteMultiOrders={handleDeleteMultiOrders}
+              handleOpenCustomOrderDetail={(id) => {
+                setOrderDetailId(id)
+                setIsOpenOrderDetail(true)
+              }}
             />
           )}
         </OrderSubFilterControls>
@@ -218,7 +222,7 @@ const OrdersManagerUI = (props) => {
                 searchValue={searchValue}
                 filterValues={filterValues}
                 selectedOrderIds={selectedOrderIds}
-                deletedOrderId={deletedOrderId}
+                deletedOrderIds={deletedOrderIds}
                 driversList={driversList}
                 ordersStatusGroup={ordersStatusGroup}
                 selectedSubOrderStatus={selectedSubOrderStatus}
@@ -233,6 +237,8 @@ const OrdersManagerUI = (props) => {
                 setFilterModalOpen={setFilterModalOpen}
                 timeStatus={timeStatus}
                 slaSettingTime={slaSettingTime}
+                allowColumns={allowColumns}
+                setAllowColumns={setAllowColumns}
               />
             </WrapItemView>
           </OrdersInnerContent>
@@ -256,7 +262,7 @@ const OrdersManagerUI = (props) => {
         />
       )}
 
-      <OrderNotification />
+      <OrderNotification customerId={props.customerId} />
 
       {totalSelectedOrder > 0 && (
         <WrapperIndicator>
