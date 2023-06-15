@@ -18,6 +18,7 @@ const ModalUI = (props) => {
     onAccept,
     onCancel,
     onClose,
+    onRemove,
     acceptText,
     cancelText,
     isTransparent,
@@ -30,6 +31,11 @@ const ModalUI = (props) => {
     if (e.code === 'Escape') {
       onClose && onClose()
     }
+  }
+
+  const handleClose = () => {
+    if (onRemove) onRemove()
+    else onClose()
   }
 
   useEffect(() => {
@@ -53,7 +59,7 @@ const ModalUI = (props) => {
           <ModalIcon className='modal-close-icon'>
             <IconButton
               color='black'
-              onClick={() => onClose()}
+              onClick={handleClose}
             >
               <XLg />
             </IconButton>
@@ -73,7 +79,6 @@ const ModalUI = (props) => {
             {onCancel && <Button color='primary' onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
           </ModalActions>)}
       </ModalDialogInnerContainer>
-      
     </ModalDialog>
   )
 }

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const SubFilterContainer = styled.div`
-  padding: 20px 0;
+  padding: 15px 0;
 
   button {
     ${props => props.theme?.rtl ? css`
