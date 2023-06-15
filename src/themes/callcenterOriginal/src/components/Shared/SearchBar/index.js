@@ -1,16 +1,16 @@
 import React, { useRef, useEffect } from 'react'
 import { SearchContainer } from './styles'
-import IosSearch from '@meronex/icons/ios/IosSearch'
+import { Search, XCircle } from 'react-bootstrap-icons'
 
 export const SearchBar = (props) => {
   const {
     onSearch,
     search,
     placeholder,
-    isCustomLayout,
     lazyLoad,
     customClass
   } = props
+
   let timeout = null
   let previousSearch
   const el = useRef()
@@ -19,20 +19,25 @@ export const SearchBar = (props) => {
     clearTimeout(timeout)
 
     timeout = setTimeout(function () {
-      onSearch && onSearch(e.target.value)
+      onSearch(e.target.value)
     }, 750)
 
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
-        onSearch && onSearch(e.target.value)
+        onSearch(e.target.value)
       } else {
         clearTimeout(timeout)
         timeout = setTimeout(function () {
-          onSearch && onSearch(e.target.value)
+          onSearch(e.target.value)
         }, 750)
       }
     }
     previousSearch = e.target.value
+  }
+
+  const handleClear = () => {
+    onSearch('')
+    el.current.value = ''
   }
 
   useEffect(() => {
@@ -46,9 +51,11 @@ export const SearchBar = (props) => {
   }, [search])
 
   return (
-    <SearchContainer isCustomLayout={isCustomLayout} className={customClass || ''}>
-      <IosSearch />
+    <SearchContainer className={customClass || ''}>
       <input type='text' ref={el} name='search' placeholder={placeholder} autoComplete='off' />
+      {el.current?.value
+        ? <XCircle className='close' onClick={handleClear} />
+        : <Search />}
     </SearchContainer>
   )
 }

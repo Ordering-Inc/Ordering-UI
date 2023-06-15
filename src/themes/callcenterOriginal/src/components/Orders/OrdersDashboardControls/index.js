@@ -3,6 +3,7 @@ import { useSession } from 'ordering-components'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { OrdersExportCSV } from '../OrdersExportCSV'
 import { OrderDelete } from '../OrderDelete'
+import { CreateCustomOrder } from '../CreateCustomOrder'
 import {
   OrderDashboardControlsContainer,
   InnerContnet,
@@ -14,7 +15,8 @@ export const OrdersDashboardControls = (props) => {
     selectedOrderNumber,
     filterValues,
     handleDeleteMultiOrders,
-    handleChangeMultiOrdersStatus
+    handleChangeMultiOrdersStatus,
+    handleOpenCustomOrderDetail
   } = props
 
   const [{ user }] = useSession()
@@ -23,6 +25,7 @@ export const OrdersDashboardControls = (props) => {
     <>
       <OrderDashboardControlsContainer>
         <InnerContnet>
+          <CreateCustomOrder handleOpenCustomOrderDetail={handleOpenCustomOrderDetail} />
           <OrdersExportCSV filterValues={filterValues} />
           {selectedOrderNumber > 0 && (
             <>

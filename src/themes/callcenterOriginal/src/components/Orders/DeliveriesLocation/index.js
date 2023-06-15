@@ -46,11 +46,6 @@ export const DeliveriesLocation = (props) => {
   const mapRef = useRef(null)
 
   const mapFit = () => {
-    const _onlineDrivers = driversList.drivers.filter(
-      (driver) => driver.enabled && driver.available && !driver.busy
-    )
-    setActiveDrivers(_onlineDrivers)
-
     const bounds = new window.google.maps.LatLngBounds()
 
     if (interActionMapOrder === null) {
@@ -129,6 +124,10 @@ export const DeliveriesLocation = (props) => {
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
     if (driversList.loading || driversList.drivers.length === 0 || mapLoaded) return
+    const _onlineDrivers = driversList.drivers.filter(
+      (driver) => driver.enabled && driver.available && !driver.busy
+    )
+    setActiveDrivers(_onlineDrivers)
     if (interActionMapOrder !== null) {
       for (const driver of driversList.drivers) {
         if (driver.id === interActionMapOrder?.driver?.id) {
@@ -146,6 +145,7 @@ export const DeliveriesLocation = (props) => {
   }, [interActionMapOrder])
 
   const handleMapChange = (data) => {
+    if (!data?.zoom) return
     setMapZoom(data?.zoom)
   }
 
