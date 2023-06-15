@@ -83,13 +83,13 @@ var convertHoursToMinutes = function convertHoursToMinutes(time) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  if (!time) return '0min';
+  if (!time) return "0 ".concat(t('TIME_MIN', 'min'));
   var _time$split = time.split(':'),
     _time$split2 = _slicedToArray(_time$split, 2),
     hour = _time$split2[0],
     minute = _time$split2[1];
   var result = parseInt(hour, 10) * 60 + parseInt(minute, 10);
-  return "".concat(result).concat(t('MIN', 'min'));
+  return "".concat(result).concat(t('TIME_MIN', 'min'));
 };
 
 /**

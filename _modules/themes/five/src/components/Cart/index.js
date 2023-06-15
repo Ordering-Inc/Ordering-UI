@@ -351,7 +351,8 @@ var CartUI = function CartUI(props) {
     checkoutButtonDisabled: openUpselling && !canOpenUpselling || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) || !(cart !== null && cart !== void 0 && cart.valid_address),
     setPreorderBusiness: setPreorderBusiness,
     handleChangeStore: !useKioskApp && handleChangeStore,
-    isMultiCheckout: isMultiCheckout
+    isMultiCheckout: isMultiCheckout,
+    isGiftCart: !(cart !== null && cart !== void 0 && cart.business_id)
   }, (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,

@@ -226,9 +226,12 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     var products = (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.length) > 0 ? _products === null || _products === void 0 ? void 0 : _products.filter(function (product) {
       return !(subcategoriesSelected !== null && subcategoriesSelected !== void 0 && subcategoriesSelected.find(function (subcategory) {
         return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id) === (category === null || category === void 0 ? void 0 : category.id);
-      })) || (subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.some(function (subcategory) {
-        return subcategory.id === (product === null || product === void 0 ? void 0 : product.category_id);
-      }));
+      })) || subcategoriesSelected.some(function (subcategory) {
+        var _subcategory$children, _subcategory$children2;
+        return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id) === (product === null || product === void 0 ? void 0 : product.category_id) || (subcategory === null || subcategory === void 0 ? void 0 : (_subcategory$children = subcategory.children) === null || _subcategory$children === void 0 ? void 0 : (_subcategory$children2 = _subcategory$children.reduce(function (prev, cur) {
+          return [].concat(_toConsumableArray(prev), [cur === null || cur === void 0 ? void 0 : cur.category_id]);
+        }, [])) === null || _subcategory$children2 === void 0 ? void 0 : _subcategory$children2.includes(product === null || product === void 0 ? void 0 : product.category_id));
+      });
     }) : _products;
     var shortCategoryDescription = (category === null || category === void 0 ? void 0 : (_category$description = category.description) === null || _category$description === void 0 ? void 0 : _category$description.length) > 200 ? "".concat(category === null || category === void 0 ? void 0 : (_category$description2 = category.description) === null || _category$description2 === void 0 ? void 0 : _category$description2.substring(0, 200), "...") : category === null || category === void 0 ? void 0 : category.description;
     var isSubcategorySearch = isSearchMode && (category === null || category === void 0 ? void 0 : (_category$subcategori6 = category.subcategories) === null || _category$subcategori6 === void 0 ? void 0 : _category$subcategori6.length) > 0 && (category === null || category === void 0 ? void 0 : (_category$subcategori7 = category.subcategories) === null || _category$subcategori7 === void 0 ? void 0 : _category$subcategori7.some(function (subcategory) {
