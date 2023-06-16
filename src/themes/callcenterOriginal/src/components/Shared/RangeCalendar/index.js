@@ -7,8 +7,6 @@ import 'react-date-range/dist/theme/default.css'
 import { Calendar4 } from 'react-bootstrap-icons'
 import { Button } from '../../../styles'
 import { Container, CalendarWrapper } from './styles'
-import * as locales from 'react-date-range/dist/locale'
-import { getLocale } from '../../../../../../utils'
 
 export const RangeCalendar = (props) => {
   const {
@@ -20,7 +18,7 @@ export const RangeCalendar = (props) => {
     minDate
   } = props
 
-  const [state, t] = useLanguage()
+  const [, t] = useLanguage()
   const [dateRange, setDateRange] = useState([
     {
       startDate: null,
@@ -113,7 +111,6 @@ export const RangeCalendar = (props) => {
           <CalendarWrapper ref={calendarRef} isLeft={isLeft}>
             {isSingleDate ? (
               <Calendar
-                locale={getLocale(state?.language?.code, locales)}
                 date={date}
                 onChange={(date) => handleChangeSingleDate(date)}
                 minDate={minDate || new Date('1922-01-01')}
@@ -121,13 +118,10 @@ export const RangeCalendar = (props) => {
             ) : (
               <DateRange
                 editableDateInputs
-                locale={getLocale(state?.language?.code, locales)}
                 onChange={item => handleChangeDates(item)}
                 moveRangeOnFirstSelection={false}
                 ranges={dateRange}
                 minDate={minDate || new Date('1922-01-01')}
-                startDatePlaceholder={t('EARLY', 'Early')}
-                endDatePlaceholder={t('CONTINUOUS', 'Continuous')}
               />
             )}
           </CalendarWrapper>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Cropper from 'cropperjs'
-import { useApi, useLanguage, useSession, useUtils } from 'ordering-components'
-import { Button, Checkbox, IconButton } from '../../../styles'
+import { useLanguage } from 'ordering-components'
+import { Button, IconButton } from '../../../styles'
 import { ArrowClockwise } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import 'cropperjs/dist/cropper.css'
@@ -11,30 +11,21 @@ import {
   ImageCropActionWrapper,
   RangeWrapper,
   ActionContentWrapper,
-  ButtonWrapper,
-  ActionAspectRatioBox
+  ButtonWrapper
 } from './styles'
-import Skeleton from 'react-loading-skeleton'
 
 export const ImageCrop = (props) => {
   const {
     photo,
     handleChangePhoto,
-    onClose,
-    aspectRatio,
-    showAspectRatioBox,
-    useCloudinaryUrl,
-    themeId
+    onClose
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [ordering] = useApi()
-  const [{ token }] = useSession()
-  const [{ optimizeImage }] = useUtils()
+
   const [cropper, setCropper] = useState()
   const [zoomValue, setZoomValue] = useState(50)
-  const [loading, setLoading] = useState(false)
   const cropperRef = useRef(null)
 
   const handleChangeZoom = (evt) => {
@@ -43,31 +34,9 @@ export const ImageCrop = (props) => {
     setZoomValue(value)
   }
 
-  const getCropData = async () => {
+  const getCropData = () => {
     if (typeof cropper !== 'undefined') {
-      let photo
-      if (useCloudinaryUrl && themeId) {
-        console.log('entra')
-        setLoading(true)
-        const response = await fetch(`${ordering.root}/themes/${themeId}/gallery`, {
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-          method: 'POST',
-          body: JSON.stringify({
-            type: 'image',
-            file: cropper.getCroppedCanvas({ imageSmoothingQuality: 'high' }).toDataURL()
-          })
-        })
-        const { result, error } = await response.json()
-        setLoading(false)
-        if (!error) {
-          photo = optimizeImage(result.image, 'f_auto,q_auto,w_2000,c_limit')
-        } else {
-          return
-        }
-      } else {
-        photo = cropper.getCroppedCanvas({ imageSmoothingQuality: 'high' }).toDataURL()
-      }
-      handleChangePhoto(photo)
+      handleChangePhoto(cropper.getCroppedCanvas({ imageSmoothingQuality: 'high' }).toDataURL())
       onClose && onClose()
     }
   }
@@ -79,39 +48,21 @@ export const ImageCrop = (props) => {
 
   useEffect(() => {
     if (!cropperRef.current || !photo) return
-    let _cropper
-    if (aspectRatio) {
-      _cropper = new Cropper(cropperRef.current, {
-        aspectRatio: aspectRatio,
-        dragMode: 'move',
-        zoomable: false,
-        toggleDragModeOnDblclick: false,
-        autoCropArea: 1
-      })
-    } else {
-      _cropper = new Cropper(cropperRef.current, {
-        dragMode: 'move',
-        zoomable: false,
-        toggleDragModeOnDblclick: false,
-        autoCropArea: 1
-      })
-    }
-    setCropper(_cropper)
-  }, [photo, aspectRatio])
 
-  const handleChangeAspectRatio = (checked) => {
-    checked ? cropper.setAspectRatio(18 / 9) : cropper.setAspectRatio(aspectRatio)
-  }
+    const _cropper = new Cropper(cropperRef.current, {
+      // aspectRatio: 16 / 9,
+      dragMode: 'move',
+      zoomable: false,
+      toggleDragModeOnDblclick: false
+    })
+    setCropper(_cropper)
+  }, [photo])
 
   return (
     <Container>
-      {loading
-        ? <Skeleton style={{ height: 400 }} />
-        : (
-          <ImageCropWrapper>
-            <img ref={cropperRef} src={photo} />
-          </ImageCropWrapper>
-        )}
+      <ImageCropWrapper>
+        <img ref={cropperRef} src={photo} />
+      </ImageCropWrapper>
       <ImageCropActionWrapper>
         <RangeWrapper>
           <span className='title'>{t('RESIZE_IMAGE', 'Resize image')}</span>
@@ -131,22 +82,12 @@ export const ImageCrop = (props) => {
             <ArrowClockwise />
           </IconButton>
         </ActionContentWrapper>
-        {showAspectRatioBox && (
-          <ActionAspectRatioBox>
-            <Checkbox
-              id='aspect'
-              onChange={(e) => handleChangeAspectRatio(e.target.checked)}
-            />
-            <label htmlFor='aspect'>{t('USE_WEB_ASPECT_RATIO', 'Use web aspect ratio')}</label>
-          </ActionAspectRatioBox>
-        )}
       </ImageCropActionWrapper>
       <ButtonWrapper>
         <Button
           borderRadius='7.6px'
           color='primary'
           onClick={getCropData}
-          disabled={loading}
         >
           {t('CROP', 'Crop')}
         </Button>

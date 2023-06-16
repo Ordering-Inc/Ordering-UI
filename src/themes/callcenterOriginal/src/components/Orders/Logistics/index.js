@@ -9,13 +9,11 @@ import {
   Reason,
   SkeletonHitory
 } from './styles'
-import { Button } from '../../../styles'
 
 const LogisticsUI = (props) => {
   const {
     logisticList,
-    parseLog,
-    getLogistics
+    parseLog
   } = props
 
   const [, t] = useLanguage()
@@ -37,13 +35,6 @@ const LogisticsUI = (props) => {
         </>
       ) : (
         <WraaperLogs>
-          <Button
-            rectangle
-            color='primary'
-            onClick={() => getLogistics()}
-          >
-            {t('RELOAD', 'Reload')}
-          </Button>
           {logisticList.logs.map((log) => (
             <BubbleConsole key={log.id}>
               <div dangerouslySetInnerHTML={{

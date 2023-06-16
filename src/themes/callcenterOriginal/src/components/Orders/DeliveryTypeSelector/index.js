@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components'
 import { MultiSelect } from '../../../styles/MultiSelect'
 
@@ -15,31 +15,13 @@ export const DeliveryTypeSelector = (props) => {
 
   const [, t] = useLanguage()
 
-  const [searchValue, setSearchValue] = useState('')
-  const [deliveryTypes, setDeliveryTypes] = useState([])
-
-  const deliveryTypeList = [
-    { value: 1, name: t('DELIVERY', 'Delivery') },
-    { value: 2, name: t('PICKUP', 'Pickup') },
-    { value: 3, name: t('EAT_IN', 'Eat in') },
-    { value: 4, name: t('CURBSIDE', 'Curbside') },
-    { value: 5, name: t('DRIVE_THRU', 'Drive thru') }
+  const deliveryTypes = [
+    { value: 1, content: <Option>{t('DELIVERY', 'Delivery')}</Option> },
+    { value: 2, content: <Option>{t('PICKUP', 'Pickup')}</Option> },
+    { value: 3, content: <Option>{t('EAT_IN', 'Eat in')}</Option> },
+    { value: 4, content: <Option>{t('CURBSIDE', 'Curbside')}</Option> },
+    { value: 5, content: <Option>{t('DRIVE_THRU', 'Drive thru')}</Option> }
   ]
-
-  useEffect(() => {
-    const _deliveryTypes = deliveryTypeList
-      .filter(option => option?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
-      .map((type) => {
-        return {
-          value: type.value,
-          content: (
-            <Option>{type.name}</Option>
-          )
-        }
-      })
-    setDeliveryTypes(_deliveryTypes)
-  }, [searchValue])
-
   const placeholder = <PlaceholderTitle>{t('SELECT_DELIVERY_TYPE', 'Select delivery type')}</PlaceholderTitle>
 
   return (
@@ -48,11 +30,6 @@ export const DeliveryTypeSelector = (props) => {
       defaultValue={filterValues.deliveryTypes}
       options={deliveryTypes}
       onChange={(deliveryType) => handleChangeDeliveryType(deliveryType)}
-      isShowSearchBar
-      searchBarIsCustomLayout
-      searchBarIsNotLazyLoad
-      searchValue={searchValue}
-      handleChangeSearch={(val) => setSearchValue(val)}
     />
   )
 }

@@ -4,22 +4,20 @@ export const OrderDashboardControlsContainer = styled.div`
   display: flex;
   margin-top: 10px;
 
-  > div {
-    > button {
-      height: 42px;
+  button {
+    height: 42px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 14px;
+    ` : css`
+      margin-right: 14px;
+    `}
+
+    svg {
       ${props => props.theme?.rtl ? css`
-        margin-left: 14px;
+        margin-right: 5px;
       ` : css`
-        margin-right: 14px;
+        margin-left: 5px;
       `}
-  
-      svg {
-        ${props => props.theme?.rtl ? css`
-          margin-right: 5px;
-        ` : css`
-          margin-left: 5px;
-        `}
-      }
     }
   }
 

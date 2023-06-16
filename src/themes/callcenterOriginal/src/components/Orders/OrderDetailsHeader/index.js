@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React from 'react'
 import { useLanguage, useSession } from 'ordering-components'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import ReactToPrint from 'react-to-print'
@@ -9,25 +9,21 @@ import {
   ThreeDots,
   XLg as CloseIcon,
   Chat as ChatIcon,
-  Dot,
-  ArrowsAngleExpand,
-  ArrowsAngleContract
+  Dot
 } from 'react-bootstrap-icons'
 import { IconButton as ButtonLink } from '../../../styles'
 import {
   OrderDetailsHeaderContainer,
   UreadMessageAlert,
   ButtonGroup,
-  StripeLink,
-  PrinterSelectContainer,
-  PrinterSelect
+  StripeLink
 } from './styles'
-import { useWindowSize } from '../../../../../../hooks/useWindowSize'
 
 export const OrderDetailsHeader = (props) => {
   const {
     order,
     handleShowOption,
+    handleOpenMessages,
     actionSidebar,
     setIsTourOpen,
     isTourOpen,
@@ -35,18 +31,11 @@ export const OrderDetailsHeader = (props) => {
     showOption,
     openMessage,
     printRef,
-    isServiceOrder,
-    extraOpen,
-    printTicketRef,
-    isExpand,
-    setIsExpand
+    isServiceOrder
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const { width } = useWindowSize()
-  const [showPrinterOptions, setShowPrinterOptions] = useState(false)
-  const dropdownReference = useRef()
 
   const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
 
@@ -64,32 +53,6 @@ export const OrderDetailsHeader = (props) => {
     if (isTourOpen && currentTourStep === 1) setIsTourOpen(false)
   }
 
-  const expandSideBar = () => {
-    const element = document.getElementById('orderDetails')
-    if (!element) return
-
-    if (isExpand) element.style.width = '500px'
-    else element.style.width = '100vw'
-    setIsExpand(prev => !prev)
-  }
-
-  const closeSelect = (e) => {
-    if (showPrinterOptions) {
-      const outsideDropdown = !dropdownReference.current?.contains(e.target)
-      if (outsideDropdown) {
-        setShowPrinterOptions(false)
-      }
-    }
-  }
-
-  useEffect(() => {
-    if (!showPrinterOptions) {
-      return
-    }
-    document.addEventListener('click', closeSelect)
-    return () => document.removeEventListener('click', closeSelect)
-  }, [showPrinterOptions])
-
   return (
     <OrderDetailsHeaderContainer>
       <div>
@@ -99,7 +62,7 @@ export const OrderDetailsHeader = (props) => {
             <ButtonLink
               color='black'
               active={openMessage?.chat}
-              onClick={() => handleShowOption('chat')}
+              onClick={() => handleOpenMessages('chat')}
               isDisabled={isTourOpen && currentTourStep === 1}
             >
               <ChatIcon />
@@ -110,49 +73,22 @@ export const OrderDetailsHeader = (props) => {
               )}
             </ButtonLink>
           )}
-          <PrinterSelectContainer>
-            <ButtonLink
-              color='black'
-              isDisabled={isTourOpen && currentTourStep === 1}
-              onClick={() => setShowPrinterOptions(!showPrinterOptions)}
-            >
-              <Printer />
-            </ButtonLink>
-            {showPrinterOptions && (
-              <PrinterSelect ref={dropdownReference}>
-                <ReactToPrint
-                  trigger={() => (
-                    <ButtonLink
-                      color='black'
-                      isDisabled={isTourOpen && currentTourStep === 1}
-                      onClick={() => setShowPrinterOptions(false)}
-                    >
-                      {t('NORMAL', 'Normal')}
-                    </ButtonLink>
-                  )}
-                  content={() => printRef.current}
-                  removeAfterPrint
-                />
-                <ReactToPrint
-                  trigger={() => (
-                    <ButtonLink
-                      color='black'
-                      isDisabled={isTourOpen && currentTourStep === 1}
-                      onClick={() => setShowPrinterOptions(false)}
-                    >
-                      {t('TICKET', 'Ticket')}
-                    </ButtonLink>
-                  )}
-                  content={() => printTicketRef.current}
-                  removeAfterPrint
-                />
-              </PrinterSelect>
+          <ReactToPrint
+            trigger={() => (
+              <ButtonLink
+                color='black'
+                isDisabled={isTourOpen && currentTourStep === 1}
+              >
+                <Printer />
+              </ButtonLink>
             )}
-          </PrinterSelectContainer>
+            content={() => printRef.current}
+            removeAfterPrint
+          />
           <ButtonLink
             color='black'
             active={openMessage?.history}
-            onClick={() => handleShowOption('history')}
+            onClick={() => handleOpenMessages('history')}
             isDisabled={isTourOpen && currentTourStep === 1}
           >
             <Diagram3 />
@@ -165,14 +101,6 @@ export const OrderDetailsHeader = (props) => {
           >
             <ThreeDots />
           </ButtonLink>
-          {width > 576 && !extraOpen && (
-            <ButtonLink
-              color='black'
-              onClick={() => expandSideBar()}
-            >
-              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
-            </ButtonLink>
-          )}
           <ButtonLink
             color='black'
             onClick={() => closeSideBar()}
@@ -181,26 +109,19 @@ export const OrderDetailsHeader = (props) => {
           </ButtonLink>
         </ButtonGroup>
       </div>
-      {order?.external_id && (
-        <div>
-          <h2>
-            {t('EXTERNAL_ID', 'External ID :')} {order?.external_id}
-          </h2>
-        </div>
-      )}
       <p>
         {order?.payment_events?.length > 0 ? (
-          order?.payment_events?.filter(item => item.event === 'payment').map((event, i) => (
+          order?.payment_events?.map((event, i) => (
             <React.Fragment key={i}>
               <span>
                 {event?.wallet_event
                   ? walletName[event?.wallet_event?.wallet?.type]?.name
-                  : t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name)}
+                  : event?.paymethod?.name}
               </span>
-              {stripePaymethods.includes(event?.data?.gateway || event?.paymethod?.gateway) && (
+              {stripePaymethods.includes(event?.data?.gateway) && (
                 <>
                   <span> (</span>
-                  <StripeLink href={`https://dashboard.stripe.com/payments/${event?.data?.result?.pay_data || event?.data?.extra?.pay_data}`} target='_blank'>{event?.data?.result?.pay_data || event?.data?.extra?.pay_data}</StripeLink>
+                  <StripeLink href={`https://dashboard.stripe.com/payments/${event?.data?.result?.pay_data}`} target='_blank'>{event?.data?.result?.pay_data}</StripeLink>
                   <span>) </span>
                   <span> ({order?.refund_data ? t('REFUNDED', 'Refunded') : t('MOBILE_SUCCESS', 'Success')}) </span>
                 </>

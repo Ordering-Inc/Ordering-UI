@@ -2,11 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const DriversListContainer = styled.div`
-  padding: 15px 0px;
+  padding: 15px 10px;
 `
 
 export const DriverCard = styled.div`
-  min-height: 66px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -116,6 +115,16 @@ export const DriverInfo = styled.div`
   }
 `
 
+export const AssignedOrdersCount = styled.span`
+  font-size: 14px;
+  cursor: pointer;
+  color: ${props => props.theme.colors.primary};
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+    opacity: 0.5;
+  `}
+`
 export const Timestatus = styled.div`
   width: 4px;
   height: 42px;

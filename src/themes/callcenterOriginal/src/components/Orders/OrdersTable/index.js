@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import moment from 'moment'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -8,6 +9,8 @@ import {
   useUtils,
   useConfig
 } from 'ordering-components'
+import { useTheme } from 'styled-components'
+import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
 
 import {
   OrdersContainer,
@@ -31,16 +34,8 @@ import {
   DragTh
 } from './styles'
 
-import { useTheme } from 'styled-components'
-import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
-import { getCurrenySymbol } from '../../../../../../utils'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-dayjs.extend(utc)
-
 export const OrdersTable = (props) => {
   const {
-    hidePhoto,
     isSelectedOrders,
     orderList,
     pagination,
@@ -58,12 +53,11 @@ export const OrdersTable = (props) => {
     groupStatus,
     allowColumns,
     setAllowColumns,
-    handleDrop,
-    saveUserSettings
+    handleDrop
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ optimizeImage, getTimeAgo, parsePrice }] = useUtils()
+  const [{ parseDate, optimizeImage, getTimeAgo, parsePrice }] = useUtils()
   const [isAllChecked, setIsAllChecked] = useState(false)
   const [, setCurrentTime] = useState()
   const [dragOverd, setDragOverd] = useState('')
@@ -75,21 +69,6 @@ export const OrdersTable = (props) => {
     getPageOrders(pageSize, expectedPage)
   }
   const [configState] = useConfig()
-  const isEnabledRowInColor = configState?.configs?.row_in_color_enabled?.value === '1'
-
-  const parseDateCustom = (date, options = {}) => { // method added for NaN errors
-    const formatTime = options?.formatTime || configState.configs.format_time?.value || '24'
-    const formatDate = {
-      inputFormat: options?.inputFormat || ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD hh:mm:ss A', 'YYYY-MM-DD hh:mm:ss'],
-      outputFormat: options?.outputFormat || (formatTime === '24' ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD hh:mm:ss A'),
-      utc: typeof options?.utc === 'boolean' ? options?.utc : true
-    }
-    if (!dayjs(date, formatDate.inputFormat).isValid()) {
-      return t('INVALID_FORMAT', 'invalid format')
-    }
-    const _date = formatDate.utc ? dayjs.utc(date, formatDate.inputFormat).local() : dayjs(date, formatDate.inputFormat)
-    return _date.format(formatDate.outputFormat)
-  }
 
   const optionsDefault = [
     {
@@ -99,14 +78,6 @@ export const OrdersTable = (props) => {
     {
       value: 'orderNumber',
       content: t('INVOICE_ORDER_NO', 'Order No.')
-    },
-    {
-      value: 'cartGroupId',
-      content: t('GROUP_ORDER', 'Group Order')
-    },
-    {
-      value: 'driverGroupId',
-      content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
     },
     {
       value: 'dateTime',
@@ -133,28 +104,20 @@ export const OrdersTable = (props) => {
       content: t('SLA_TIMER', 'SLA’s timer')
     },
     {
-      value: 'eta',
-      content: t('ETA', 'ETA')
-    },
-    {
       value: 'total',
       content: t('EXPORT_TOTAL', 'Total')
-    },
-    {
-      value: 'externalId',
-      content: t('EXTERNAL_ID', 'External id')
     }
   ]
 
   const getDelayMinutes = (order) => {
     // targetMin = delivery_datetime  + eta_time - now()
     const offset = 300
-    const cdtToutc = dayjs(order?.delivery_datetime).add(offset, 'minutes').format('YYYY-MM-DD HH:mm:ss')
+    const cdtToutc = moment(order?.delivery_datetime).add(offset, 'minutes').format('YYYY-MM-DD HH:mm:ss')
     const _delivery = order?.delivery_datetime_utc
-      ? parseDateCustom(order?.delivery_datetime_utc)
-      : parseDateCustom(cdtToutc)
+      ? parseDate(order?.delivery_datetime_utc)
+      : parseDate(cdtToutc)
     const _eta = order?.eta_time
-    const diffTimeAsSeconds = dayjs(_delivery).add(_eta, 'minutes').diff(dayjs().utc(), 'seconds')
+    const diffTimeAsSeconds = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'seconds')
     return Math.ceil(diffTimeAsSeconds / 60)
   }
 
@@ -176,11 +139,11 @@ export const OrdersTable = (props) => {
     return finalTaget
   }
 
-  // const getStatusClassName = (minutes) => {
-  //   if (isNaN(Number(minutes))) return 'in_time'
-  //   const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
-  //   return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
-  // }
+  const getStatusClassName = (minutes) => {
+    if (isNaN(Number(minutes))) return 'in_time'
+    const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
+    return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -258,14 +221,10 @@ export const OrdersTable = (props) => {
 
   const handleChangeAllowColumns = (type) => {
     const _column = allowColumns[type]
-    const updatedAllowColumns = {
+    setAllowColumns({
       ...allowColumns,
       [type]: { ..._column, visable: !_column?.visable }
-    }
-    setAllowColumns(updatedAllowColumns)
-    if (type === 'externalId') {
-      saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)))
-    }
+    })
   }
 
   const handleClickOrder = (order, e) => {
@@ -311,7 +270,9 @@ export const OrdersTable = (props) => {
   const handleDragEnd = () => {
     const elements = document.getElementsByClassName('ghostDragging')
     while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0])
+      if (elements?.[0]?.parentNode?.contains(elements?.[0])) {
+        elements[0].parentNode.removeChild(elements[0])
+      }
     }
     setDragOverd('')
   }
@@ -350,9 +311,9 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
-                {allowColumns && (Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0).length === 0
-                  ? (
-                    <th className='orderPrice'>
+                {allowColumns && (Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)?.length === 0 ?
+                  (
+                    <th className='orderPrice' key={`noDragTh-${i}`}>
                       <ColumnAllowSettingPopover
                         allowColumns={allowColumns}
                         optionsDefault={optionsDefault}
@@ -399,27 +360,6 @@ export const OrdersTable = (props) => {
                                 </th>
                               )}
                             </React.Fragment>
-                          )
-                        }
-                        if (column === 'externalId') {
-                          return (
-                            <DragTh
-                              key={`dragTh-${i}`}
-                              onDragOver={e => handleDragOver?.(e, column)}
-                              onDrop={e => handleDrop(e, column)}
-                              onDragEnd={e => handleDragEnd(e)}
-                              colSpan={allowColumns[column]?.colSpan ?? 1}
-                              className={allowColumns[column]?.className}
-                              selectedDragOver={column === dragOverd}
-                            >
-                              <div draggable onDragStart={e => handleDragStart?.(e, column)}>
-                                <img
-                                  src={theme.images.icons?.sixDots}
-                                  alt='six dots'
-                                />
-                                <span>{allowColumns[column]?.title}</span>
-                              </div>
-                            </DragTh>
                           )
                         }
                         if (column === 'total' || (column !== 'total' && column === [...array].pop())) {
@@ -504,33 +444,6 @@ export const OrdersTable = (props) => {
                       </div>
                     </OrderNumberContainer>
                   </td>
-                  {allowColumns?.externalId?.visable && (
-                    <td className='externalId'>
-                      <StatusInfo>
-                        <div className='info'>
-                          <p className='bold'><Skeleton width={100} /></p>
-                        </div>
-                      </StatusInfo>
-                    </td>
-                  )}
-                  {allowColumns?.cartGroupId?.visable && (
-                    <td className='statusInfo'>
-                      <StatusInfo>
-                        <div className='info'>
-                          <p className='bold'><Skeleton width={100} /></p>
-                        </div>
-                      </StatusInfo>
-                    </td>
-                  )}
-                  {allowColumns?.driverGroupId?.visable && (
-                    <td className='statusInfo'>
-                      <StatusInfo>
-                        <div className='info'>
-                          <p className='bold'><Skeleton width={100} /></p>
-                        </div>
-                      </StatusInfo>
-                    </td>
-                  )}
                   {allowColumns?.status?.visable && !isSelectedOrders && (
                     <td className='statusInfo'>
                       <StatusInfo>
@@ -543,9 +456,7 @@ export const OrdersTable = (props) => {
                   {allowColumns?.business?.visable && (
                     <td className='businessInfo'>
                       <BusinessInfo>
-                        {!hidePhoto && (
-                          <Skeleton width={45} height={45} />
-                        )}
+                        <Skeleton width={45} height={45} />
                         <div className='info'>
                           <p className='bold'><Skeleton width={80} /></p>
                           <p><Skeleton width={100} /></p>
@@ -556,9 +467,7 @@ export const OrdersTable = (props) => {
                   {allowColumns?.customer?.visable && (
                     <td className='customerInfo'>
                       <CustomerInfo>
-                        {!hidePhoto && (
-                          <Skeleton width={45} height={45} />
-                        )}
+                        <Skeleton width={45} height={45} />
                         <div className='info'>
                           <p className='bold'><Skeleton width={100} /></p>
                           <p><Skeleton width={100} /></p>
@@ -569,9 +478,7 @@ export const OrdersTable = (props) => {
                   {allowColumns?.driver?.visable && !isSelectedOrders && (
                     <td className='driverInfo'>
                       <DriversInfo className='d-flex align-items-center'>
-                        {!hidePhoto && (
-                          <Skeleton width={45} height={45} />
-                        )}
+                        <Skeleton width={45} height={45} />
                         <Skeleton width={100} style={{ margin: '10px' }} />
                       </DriversInfo>
                     </td>
@@ -636,7 +543,6 @@ export const OrdersTable = (props) => {
                 className={parseInt(orderDetailId) === order.id ? 'active' : ''}
                 onClick={(e) => handleClickOrder(order, e)}
                 data-tour={i === 0 ? 'tour_start' : ''}
-                data-status={isEnabledRowInColor && order?.time_status}
               >
                 <tr>
                   {Object.keys(allowColumns).filter(col => allowColumns[col]?.visable)
@@ -646,17 +552,8 @@ export const OrdersTable = (props) => {
                         return (
                           <td key={`slaBar${i}-${index}`}>
                             <Timestatus
-                              timeState={order?.time_status}
+                              timeState={getStatusClassName(getDelayMinutes(order))}
                             />
-                          </td>
-                        )
-                      }
-                      if (column === 'externalId' && !isSelectedOrders) {
-                        return (
-                          <td className='externalId' key={`externalId${i}-${index}`}>
-                            <StatusInfo>
-                              <p className='bold'>{order?.external_id}</p>
-                            </StatusInfo>
                           </td>
                         )
                       }
@@ -686,11 +583,7 @@ export const OrdersTable = (props) => {
                                 )}
                                 {allowColumns?.dateTime?.visable && (
                                   <p className='date'>
-                                    {
-                                      order?.delivery_datetime_utc
-                                        ? parseDateCustom(order?.delivery_datetime_utc)
-                                        : parseDateCustom(order?.delivery_datetime, { utc: false })
-                                    }
+                                    {parseDate(order?.delivery_datetime, { utc: false })}
                                   </p>
                                 )}
                               </div>
@@ -707,37 +600,13 @@ export const OrdersTable = (props) => {
                           </td>
                         )
                       }
-                      if (column === 'cartGroupId') {
-                        return (
-                          <td className='orderGroupId' key={`cart_group_id${i}-${index}`}>
-                            <StatusInfo>
-                              {order?.cart_group_id && (
-                                <p className='bold'>{t('No', 'No')}. {order?.cart_group_id}</p>
-                              )}
-                            </StatusInfo>
-                          </td>
-                        )
-                      }
-                      if (column === 'driverGroupId') {
-                        return (
-                          <td className='orderGroupId' key={`cart_group_id${i}-${index}`}>
-                            <StatusInfo>
-                              {order?.driver_group_id && (
-                                <p className='bold'>{t('No', 'No')}. {order?.driver_group_id}</p>
-                              )}
-                            </StatusInfo>
-                          </td>
-                        )
-                      }
                       if (column === 'business') {
                         return (
                           <td className='businessInfo' key={`businessInfo${i}-${index}`}>
                             <BusinessInfo>
-                              {!hidePhoto && (
-                                <WrapperImage>
-                                  <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
-                                </WrapperImage>
-                              )}
+                              <WrapperImage>
+                                <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
+                              </WrapperImage>
                               <div className='info'>
                                 <p className='bold'>{order?.business?.name}</p>
                                 <p>{order?.business?.city?.name}</p>
@@ -750,22 +619,18 @@ export const OrdersTable = (props) => {
                         return (
                           <td className='customerInfo' key={`customerInfo${i}-${index}`}>
                             <CustomerInfo>
-                              {!hidePhoto && (
-                                <WrapperImage>
-                                  {order?.customer?.photo ? (
-                                    <img src={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
-                                  ) : (
-                                    <FaUserAlt />
-                                  )}
-                                  <OrdersCountWrapper isNew={order?.customer?.orders_count === 0}>
-                                    {order?.customer?.orders_count || t('NEW', 'New')}
-                                  </OrdersCountWrapper>
-                                </WrapperImage>
-                              )}
+                              <WrapperImage>
+                                {order?.customer?.photo ? (
+                                  <img src={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
+                                ) : (
+                                  <FaUserAlt />
+                                )}
+                                <OrdersCountWrapper isNew={order?.customer?.orders_count === 0}>
+                                  {order?.customer?.orders_count || t('NEW', 'New')}
+                                </OrdersCountWrapper>
+                              </WrapperImage>
                               <div className='info'>
-                                <p className='bold'>
-                                  {(!order?.customer?.email && !order?.customer?.cellphone && !order?.customer?.name) ? t('GUEST_USER', 'Guest user') : order?.customer?.name}
-                                </p>
+                                <p className='bold'>{order?.customer?.name}</p>
                                 <p>{order?.customer?.cellphone}</p>
                               </div>
                             </CustomerInfo>
@@ -777,15 +642,13 @@ export const OrdersTable = (props) => {
                           <td key={`driver${i}-${index}`}>
                             {order?.delivery_type === 1 && (
                               <CustomerInfo>
-                                {!hidePhoto && (
-                                  <WrapperImage>
-                                    {order?.driver?.photo ? (
-                                      <img src={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
-                                    ) : (
-                                      <FaUserAlt />
-                                    )}
-                                  </WrapperImage>
-                                )}
+                                <WrapperImage>
+                                  {order?.driver?.photo ? (
+                                    <img src={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
+                                  ) : (
+                                    <FaUserAlt />
+                                  )}
+                                </WrapperImage>
                                 <div className='info'>
                                   {order?.driver ? (
                                     <>
@@ -838,7 +701,7 @@ export const OrdersTable = (props) => {
                           <td className='timer' key={`timer${i}-${index}`}>
                             <Timer>
                               <p className='bold'>{t('TIMER', 'Timer')}</p>
-                              <p className={order?.time_status}>{displayDelayedTime(order)}</p>
+                              <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
                             </Timer>
                           </td>
                         )
@@ -848,7 +711,7 @@ export const OrdersTable = (props) => {
                           <td className='orderPrice' key={`total${i}-${index}`}>
                             <div className='info'>
                               {allowColumns?.total?.visable && (
-                                <p className='bold'>{parsePrice(order?.summary?.total, { currency: getCurrenySymbol(order?.currency) })}</p>
+                                <p className='bold'>{parsePrice(order?.summary?.total, { currency: order?.currency })}</p>
                               )}
                               {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
                                 <p>
@@ -864,7 +727,6 @@ export const OrdersTable = (props) => {
                         )
                       }
                     })}
-                  <td />
                 </tr>
               </OrderTbody>
             ))

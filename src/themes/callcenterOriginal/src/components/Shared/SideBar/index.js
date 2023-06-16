@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useWindowSize } from '../../../../../../hooks/useWindowSize'
-import { XLg, ArrowsAngleExpand, ArrowsAngleContract } from 'react-bootstrap-icons'
+import { XLg } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles'
 import {
-  BarContainer,
-  IconButtonWrapper
+  BarContainer
 } from './styles'
 
 export const SideBar = (props) => {
@@ -15,15 +14,12 @@ export const SideBar = (props) => {
     isBorderShow,
     noAnimation,
     handleCloseWizard,
-    IconTop,
-    showExpandIcon,
-    sidebarId
+    IconTop
   } = props
 
   const sideBarRef = useRef(null)
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isExpand, setIsExpand] = useState(false)
   const sideBarWidth = defaultSideBarWidth || 500
 
   const actionSidebar = (value) => {
@@ -55,12 +51,6 @@ export const SideBar = (props) => {
     }
   }
 
-  const expandSideBar = () => {
-    if (isExpand) sideBarRef.current.style.width = `${sideBarWidth}px`
-    else sideBarRef.current.style.width = '100vw'
-    setIsExpand(prev => !prev)
-  }
-
   useEffect(() => {
     if (!open) return
     document.addEventListener('keydown', onCloseSidebar)
@@ -74,24 +64,14 @@ export const SideBar = (props) => {
         isBorderShow={isBorderShow}
         moveDistance={moveDistance}
         noAnimation={noAnimation}
-        id={sidebarId ?? 'sideSlider'}
+        IconTop={IconTop}
       >
-        <IconButtonWrapper IconTop={IconTop}>
-          {width > 576 && showExpandIcon && (
-            <IconButton
-              color='black'
-              onClick={() => expandSideBar()}
-            >
-              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
-            </IconButton>
-          )}
-          <IconButton
-            color='black'
-            onClick={() => props.onClose()}
-          >
-            <XLg />
-          </IconButton>
-        </IconButtonWrapper>
+        <IconButton
+          color='black'
+          onClick={() => props.onClose()}
+        >
+          <XLg />
+        </IconButton>
         {props.children}
       </BarContainer>
     </>

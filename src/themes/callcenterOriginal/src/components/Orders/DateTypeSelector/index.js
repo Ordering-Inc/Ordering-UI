@@ -61,7 +61,7 @@ export const DateTypeSelector = (props) => {
   const _handleChangeFromDate = (date) => {
     setStartDate(date)
     if (date !== null) {
-      handleChangeFromDate(dayjs(date).format('YYYY-MM-DD 00:00:00'))
+      handleChangeFromDate(dayjs(date).format('YYYY-MM-DD'))
     } else {
       handleChangeFromDate(null)
     }
@@ -70,7 +70,7 @@ export const DateTypeSelector = (props) => {
   const _handleChangeEndDate = (date) => {
     setEndDate(date)
     if (date !== null) {
-      handleChangeEndDate(dayjs(date).format('YYYY-MM-DD 23:59:59'))
+      handleChangeEndDate(dayjs(date).format('YYYY-MM-DD'))
     } else {
       handleChangeEndDate(null)
     }

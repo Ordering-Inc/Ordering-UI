@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import { useUtils, useLanguage, useSession, MessagesDashboard as MessagesController } from 'ordering-components'
+import { useUtils, useLanguage, useSession, MessagesDasboard as MessagesController } from 'ordering-components'
 import { useForm, Controller } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import AiOutlineInfoCircle from '@meronex/icons/ai/AiOutlineInfoCircle'
-import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import MdClose from '@meronex/icons/md/MdClose'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import {
@@ -46,8 +44,7 @@ import {
   InfoBlock,
   SendToContainer,
   MessageSender,
-  QuickMessageWrapper,
-  NotSendMessage
+  QuickMessageWrapper
 } from './styles'
 import { Alert, Image as ImageWithFallback } from '../../Shared'
 import { Button, Input } from '../../../styles'
@@ -58,6 +55,8 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { Logistics } from '../Logistics'
 import { OrderLogisticInformation } from '../OrderLogisticInformation'
+
+const filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime']
 
 export const MessagesUI = (props) => {
   const {
@@ -78,12 +77,9 @@ export const MessagesUI = (props) => {
     handleReadMessages,
     isTourOpen,
     setCurrentTourStep,
-    orderDetailClose,
-    getHistoryComment
+    orderDetailClose
   } = props
 
-  const routerHistory = useHistory()
-  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const { handleSubmit, setValue, errors, control } = useForm()
@@ -93,14 +89,12 @@ export const MessagesUI = (props) => {
   const messageInputRef = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [tabActive, setTabActive] = useState('order_history')
+  const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false, logistic_information: false })
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
   const [load, setLoad] = useState(0)
   const [messageList, setMessageList] = useState([])
   const [isChatDisabled, setIsChatDisabled] = useState(false)
-  const previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17]
-  const chatDisabled = previousStatus.includes(order?.status)
 
   const adminMessageList = [
     { key: 'message_1', text: t('ADMIN_MESSAGE_1', 'admin_message_1') },
@@ -120,14 +114,16 @@ export const MessagesUI = (props) => {
     const quickMsg = message ? `${message} ${msg}` : msg
     setValue('message', quickMsg)
     setMessage(quickMsg)
+  }
+
+  useEffect(() => {
     const msgElement = messageInputRef?.current
     if (msgElement) {
-      msgElement.value = quickMsg
       msgElement.focus()
       msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length
       msgElement.scrollLeft = msgElement.scrollWidth
     }
-  }
+  }, [message])
 
   useEffect(() => {
     if (user.level === 0) setMessageList(adminMessageList)
@@ -209,6 +205,78 @@ export const MessagesUI = (props) => {
     }
   }
 
+  const getStatus = (status) => {
+    switch (status) {
+      case 0:
+        return t('PENDING', 'Pending')
+      case 1:
+        return t('COMPLETED_BY_ADMIN', 'Completed by admin')
+      case 2:
+        return t('REJECTED_BY_ADMIN', 'Rejected by admin')
+      case 3:
+        return t('ORDER_STATUS_IN_BUSINESS', 'Driver arrived to business')
+      case 4:
+        return t('PREPARATION_COMPLETED', 'Preparation Completed')
+      case 5:
+        return t('REJECTED_BY_BUSINESS', 'Rejected by business')
+      case 6:
+        return t('REJECTED_BY_DRIVER', 'Rejected by driver')
+      case 7:
+        return t('ACCEPTED_BY_BUSINESS', 'Accepted by Business')
+      case 8:
+        return t('ACCEPTED_BY_DRIVER', 'Accepted by Driver')
+      case 9:
+        return t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver')
+      case 10:
+        return t('PICK_UP_FAILED_BY_DRIVER', 'Pick up failed by driver')
+      case 11:
+        return t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver')
+      case 12:
+        return t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
+      case 13:
+        return t('PREORDER', 'Preorder')
+      case 14:
+        return t('ORDER_NOT_READY', 'Order not ready')
+      case 15:
+        return t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')
+      case 16:
+        return t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Cancelled by customer')
+      case 17:
+        return t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Not picked by customer')
+      case 18:
+        return t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business')
+      case 19:
+        return t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer')
+      case 20:
+        return t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business')
+      case 21:
+        return t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business')
+      case 22:
+        return t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver')
+      case 23:
+        return t('ORDER_DRIVER_ON_WAY', 'Driver on way')
+      default:
+        return status
+    }
+  }
+
+  const getLogisticTagStatus = (status) => {
+    switch (status) {
+      case 0:
+        return t('PENDING', 'Pending')
+      case 1:
+        return t('IN_PROGRESS', 'In Progress')
+      case 2:
+        return t('IN_QUEUE', 'In Queue')
+      case 3:
+        return t('EXPIRED', 'Logistic expired')
+      case 4:
+        return t('RESOLVED', 'Resolved')
+      default:
+        return status
+    }
+  }
+
   const getLevel = (level) => {
     switch (level) {
       case 0:
@@ -224,6 +292,10 @@ export const MessagesUI = (props) => {
       case 5:
         return t('DRIVER_MANAGER', 'Driver Manager')
     }
+  }
+
+  const getVehicleSmmary = (vehicle) => {
+    return vehicle?.type + ' ' + vehicle?.model + ' ' + vehicle?.car_registration + ' ' + vehicle?.color
   }
 
   const clearInputs = () => {
@@ -274,11 +346,6 @@ export const MessagesUI = (props) => {
   }, [isChat, order])
 
   useEffect(() => {
-    if (!isChat || !order?.id || messages.loading) return
-    unreadMessageControl()
-  }, [isChat, order?.id, messages])
-
-  useEffect(() => {
     if (messages.loading) return
     const _filteredMessages = messages.messages.filter(message => {
       if (message.type === 2) {
@@ -298,25 +365,6 @@ export const MessagesUI = (props) => {
       else setIsChatDisabled(false)
     }
   }, [canRead])
-
-  const handleTabClick = (tab, isInitialRender) => {
-    setTabActive(tab)
-    if (!isInitialRender) {
-      const orderId = query.get('id')
-      const section = query.get('section')
-      routerHistory.replace(`${location.pathname}?id=${orderId}&section=${section}&tab=${tab}`)
-    }
-  }
-
-  useEffect(() => {
-    if (!history) return
-    const tab = query.get('tab')
-    if (tab) {
-      handleTabClick(tab, true)
-    } else {
-      handleTabClick('order_history')
-    }
-  }, [history])
 
   return (
     <MessagesContainer>
@@ -354,13 +402,13 @@ export const MessagesUI = (props) => {
               )}
               {history && (
                 <WrapperHitoryHeader>
-                  <TabItem active={tabActive === 'order_history'} onClick={() => handleTabClick('order_history')}>
+                  <TabItem active={tabActive.orderHistory} onClick={() => setTabActive({ orderHistory: true, logistics: false, logistic_information: false })}>
                     {t('MOBILE_ORDER_HISTORY', 'Order History')}
                   </TabItem>
-                  <TabItem active={tabActive === 'logistics'} onClick={() => handleTabClick('logistics')}>
+                  <TabItem active={tabActive.logistics} onClick={() => setTabActive({ orderHistory: false, logistics: true, logistic_information: false })}>
                     {t('LOGISTICS', 'Logistics')}
                   </TabItem>
-                  <TabItem active={tabActive === 'logistic_information'} onClick={() => handleTabClick('logistic_information')}>
+                  <TabItem active={tabActive.logistic_information} onClick={() => setTabActive({ orderHistory: false, logistics: false, logistic_information: true })}>
                     {t('LOGISTIC_INFORMATION', 'Logistics information')}
                   </TabItem>
                 </WrapperHitoryHeader>
@@ -431,12 +479,12 @@ export const MessagesUI = (props) => {
           {
             !messages.loading && (
               <>
-                {!tabActive === 'logistic_information' && (
+                {!tabActive.logistic_information && (
                   <MessageConsole>
                     <BubbleConsole>
                       {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
                       <strong>{parseDate(order.created_at)}</strong> {' '}
-                      {t('VIA', 'via')} <strong>{order.app_id ? t(order.app_id.toUpperCase(), `${order.app_id}`) : ''}</strong>{' '}
+                      {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
                       <OverlayTrigger
                         placement='top'
                         overlay={
@@ -452,12 +500,12 @@ export const MessagesUI = (props) => {
                 )}
                 {history && (
                   <>
-                    {tabActive === 'logistics' && (
+                    {tabActive.logistics && (
                       <WrapperLogistics>
                         <Logistics orderId={order.id} />
                       </WrapperLogistics>
                     )}
-                    {tabActive === 'logistic_information' && (
+                    {tabActive.logistic_information && (
                       <WrapperLogisticInformation>
                         <OrderLogisticInformation orderId={order.id} />
                       </WrapperLogisticInformation>
@@ -466,38 +514,61 @@ export const MessagesUI = (props) => {
                 )}
                 {filteredMessages.length > 0 && filteredMessages.map((message) => (
                   <React.Fragment key={message.id}>
-                    {history && tabActive === 'order_history' && (
+                    {history && tabActive.orderHistory && (
                       <>
-                        {message.type === 0 && (
-                          <MessageConsole key={message.id}>
-                            <BubbleConsole>
-                              <p
-                                dangerouslySetInnerHTML={{
-                                  __html: t('ORDER_PLACED_FOR_VIA', 'Order placed for _for_ via _via_.')
-                                    .replace('_for_', '<b>' + parseDate(order.delivery_datetime) + '</b>')
-                                    .replace('_via_', '<b>' + t(order.app_id ? order.app_id.toUpperCase() : 'OTHER') + '</b>')
-                                }}
-                              />
-                              <div><strong>{t('APP_ID', 'App ID')}: </strong>{message?.app_id}</div>
-                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author?.name} {message?.author?.lastname}</div>
-                              <div><strong>{t('USER_AGENT', 'User agent')}: </strong>{message?.user_agent}</div>
-                              <div><strong>{t('IP', 'IP')}: </strong>{message?.ip}</div>
-                              <TimeofSent>{getTimeAgo(message?.created_at)}</TimeofSent>
-                            </BubbleConsole>
-                          </MessageConsole>
-                        )}
                         {message.type === 1 && (
-                          <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
-                            {getHistoryComment(message) && (
+                          <MessageConsole key={message.id} style={{ display: `${tabActive.orderHistory ? 'inline-flex' : 'none'}` }}>
+                            {message.change?.attribute !== 'driver_id' ? (
                               <BubbleConsole>
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: getHistoryComment(message)
-                                  }}
-                                />
+                                {t('ORDER', 'Order')} {' '}
+                                <strong>{t(message.change.attribute)}</strong> {' '}
+                                {t('CHANGED_FROM', 'Changed from')} {' '}
+                                {message.change.old !== null && (
+                                  <>
+                                    <strong>{message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : getStatus(parseInt(message.change.old, 10))}</strong> {' '}
+                                  </>
+                                )}
+                                <>
+                                  {t('TO', 'to')} {' '}
+                                  <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : getStatus(parseInt(message.change.new, 10))}</strong>
+                                  {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
+                                  {(message?.author?.name || message?.author?.lastname) && (
+                                    <p><strong>Author: </strong>{(message?.author?.name ?? '') + ' ' + (message?.author?.lastname ?? '')}</p>
+                                  )}
+                                </>
                                 <OverlayTrigger
                                   placement='top'
-                                  overlay={<Tooltip>{parseDate(message.created_at)}</Tooltip>}
+                                  overlay={
+                                    <Tooltip>
+                                      {parseDate(message.created_at)}
+                                    </Tooltip>
+                                  }
+                                >
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </OverlayTrigger>
+                              </BubbleConsole>
+                            ) : (
+                              <BubbleConsole>
+                                <>
+                                  {message.change.new !== null ? (
+                                    <>
+                                      <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                      {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                      {message.comment && (<><br /> {message.comment.length}</>)}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {t('DRIVER_UNASSIGNED', 'The driver was unnasigned')}
+                                    </>
+                                  )}
+                                </>
+                                <OverlayTrigger
+                                  placement='top'
+                                  overlay={
+                                    <Tooltip>
+                                      {parseDate(message.created_at)}
+                                    </Tooltip>
+                                  }
                                 >
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </OverlayTrigger>
@@ -509,37 +580,95 @@ export const MessagesUI = (props) => {
                     )}
                     {isChat && (
                       <>
-                        {message.type === 0 && (
+                        {message.type === 1 && message.change?.attribute !== 'comment' && (
                           <MessageConsole key={message.id}>
-                            <BubbleConsole>
-                              <p>
-                                {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-                                <strong>{parseDate(order.created_at)}</strong> {' '}
-                                {t('VIA', 'Via')}{' '}
-                                <strong>
-                                  {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
-                                </strong>{' '}
-                              </p>
-                              <div><strong>{t('APP_ID', 'App ID')}: </strong>{message?.app_id}</div>
-                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author?.name} {message?.author?.lastname}</div>
-                              <div><strong>{t('USER_AGENT', 'User agent')}: </strong>{message?.user_agent}</div>
-                              <div><strong>{t('IP', 'IP')}: </strong>{message?.ip}</div>
-                              <TimeofSent>{getTimeAgo(message?.created_at)}</TimeofSent>
-                            </BubbleConsole>
-                          </MessageConsole>
-                        )}
-                        {message.type === 1 && (
-                          <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
-                            {getHistoryComment(message) && (
+                            {message.change?.attribute !== 'driver_id' ? (
                               <BubbleConsole>
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: getHistoryComment(message)
-                                  }}
-                                />
+                                {t('ORDER', 'Order')} {' '}
+                                <strong>{t(message.change.attribute)}</strong> {' '}
+                                {t('CHANGED_FROM', 'Changed from')} {' '}
+                                {filterSpecialStatus.includes(message.change.attribute) ? (
+                                  <>
+                                    {message.change.old === null ? <strong>0</strong> : (
+                                      <>
+                                        <strong>{message.change.old}</strong> {' '}
+                                      </>
+                                    )}
+                                    <div style={{ whiteSpace: 'pre' }}>
+                                      {t('TO', 'to')} {' '}
+                                      <strong>{message.change.new}</strong> {' '}
+                                      {t('MINUTES', 'Minutes')}
+                                    </div>
+                                  </>
+                                ) : (
+                                  <>
+                                    {message.change.old !== null && (
+                                      <>
+                                        <strong>
+                                          {
+                                            message.change?.attribute === 'logistic_status'
+                                              ? getLogisticTagStatus(parseInt(message.change.old, 10))
+                                              : message.change?.attribute === 'vehicle'
+                                                ? getVehicleSmmary(message.change.old)
+                                                : getStatus(parseInt(message.change.old, 10))
+                                          }
+                                        </strong>{' '}
+                                      </>
+                                    )}
+                                    <div style={{ whiteSpace: 'pre' }}>
+                                      {t('TO', 'to')} {' '}
+                                      <strong>
+                                        {
+                                          message.change.old === null && message.change.attribute === 'delivery_in'
+                                            ? 'null'
+                                            : message.change?.attribute === 'logistic_status'
+                                              ? getLogisticTagStatus(parseInt(message.change.new, 10))
+                                              : message.change?.attribute === 'vehicle'
+                                                ? getVehicleSmmary(message.change.new)
+                                                : getStatus(parseInt(message.change.new, 10))
+                                        }
+                                      </strong>
+                                      <strong>{message?.change?.comment ? (`\n${t('COMMENT', 'Comment:')}`) : ''}</strong>
+                                      {message?.change?.comment ? ` ${message?.change?.comment}` : ''}
+                                      {(message?.author?.name || message?.author?.lastname) && (
+                                        <p><strong>Author: </strong>{(message?.author?.name ?? '') + ' ' + (message?.author?.lastname ?? '')}</p>
+                                      )}
+                                    </div>
+                                  </>
+                                )}
                                 <OverlayTrigger
                                   placement='top'
-                                  overlay={<Tooltip>{parseDate(message.created_at)}</Tooltip>}
+                                  overlay={
+                                    <Tooltip>
+                                      {parseDate(message.created_at)}
+                                    </Tooltip>
+                                  }
+                                >
+                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
+                                </OverlayTrigger>
+                              </BubbleConsole>
+                            ) : (
+                              <BubbleConsole>
+                                <>
+                                  {message.change.new !== null ? (
+                                    <>
+                                      <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
+                                      {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
+                                      {message.comment && (<><br /> {message.comment.length}</>)}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {t('DRIVER_UNASSIGNED', 'The driver was unnasigned')}
+                                    </>
+                                  )}
+                                </>
+                                <OverlayTrigger
+                                  placement='top'
+                                  overlay={
+                                    <Tooltip>
+                                      {parseDate(message.created_at)}
+                                    </Tooltip>
+                                  }
                                 >
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </OverlayTrigger>
@@ -793,104 +922,95 @@ export const MessagesUI = (props) => {
                 </ChatContactInfoContainer>
               )}
             </ImageContainer>
-            {chatDisabled ? (
-              <NotSendMessage>
-                <MdcCloseOctagonOutline />
-                <p>{t('NOT_SEND_MESSAGES', 'You can\'t send messages because the order has ended')}</p>
-              </NotSendMessage>
-            ) : (
-              <>
-                {messageList.length > 0 && (
-                  <QuickMessageWrapper>
-                    {messageList.map((quickMessage, i) => (
-                      <Button
-                        key={i}
-                        color='secundaryDark'
-                        onClick={() => handleClickQuickMessage(quickMessage.text)}
-                      >
-                        {quickMessage.text}
-                      </Button>
-                    ))}
-                  </QuickMessageWrapper>
-                )}
-
-                <Send onSubmit={handleSubmit(onSubmit)} noValidate>
-                  <WrapperSendInput>
-                    <Controller
-                      name='message'
-                      control={control}
-                      render={({ onChange, value }) => (
-                        <Input
-                          placeholder={t('WRITE_A_MESSAGE', 'Write a message...')}
-                          value={value}
-                          onChange={e => {
-                            onChange(e.target.value)
-                            onChangeMessage(e)
-                          }}
-                          onFocus={unreadMessageControl}
-                          name='message'
-                          ref={messageInputRef}
-                          autoComplete='off'
-                          readOnly={isChatDisabled}
-                        />
-                      )}
-                      rules={{
-                        required: !image
-                      }}
-                      defaultValue=''
-                    />
-                    {!image && (
-                      <SendImage htmlFor='chat_image'>
-                        <input
-                          type='file'
-                          name='image'
-                          id='chat_image'
-                          accept='image/png,image/jpg,image/jpeg'
-                          onChange={onChangeImage}
-                          disabled={isChatDisabled}
-                        />
-                        <BsCardImage />
-                      </SendImage>
-                    )}
-                    {image && (
-                      <WrapperDeleteImage>
-                        <Button
-                          circle
-                          onClick={removeImage}
-                          type='reset'
-                        >
-                          <MdClose />
-                        </Button>
-                        <img
-                          src={image}
-                          loading='lazy'
-                        />
-                      </WrapperDeleteImage>
-                    )}
-                  </WrapperSendInput>
-                  <WrapperSendMessageButton>
-                    <Button
-                      borderRadius='8px'
-                      color='primary'
-                      type='submit'
-                      disabled={sendMessage.loading || (message === '' && !image) || messages.loading}
-                      ref={buttonRef}
-                    >
-                      <IosSend />
-                      {sendMessage.loading ? (
-                        <span>
-                          {t('SENDING_MESSAGE', 'Sending...')}
-                        </span>
-                      )
-                        : (
-                          <span>
-                            {t('SEND', 'send')}
-                          </span>)}
-                    </Button>
-                  </WrapperSendMessageButton>
-                </Send>
-              </>
+            {messageList.length > 0 && (
+              <QuickMessageWrapper>
+                {messageList.map((quickMessage, i) => (
+                  <Button
+                    key={i}
+                    color='secundaryDark'
+                    onClick={() => handleClickQuickMessage(quickMessage.text)}
+                  >
+                    {quickMessage.text}
+                  </Button>
+                ))}
+              </QuickMessageWrapper>
             )}
+
+            <Send onSubmit={handleSubmit(onSubmit)} noValidate>
+              <WrapperSendInput>
+                <Controller
+                  name='message'
+                  control={control}
+                  render={({ onChange, value }) => (
+                    <Input
+                      placeholder={t('WRITE_A_MESSAGE', 'Write a message...')}
+                      value={value}
+                      onChange={e => {
+                        onChange(e.target.value)
+                        onChangeMessage(e)
+                      }}
+                      onFocus={unreadMessageControl}
+                      name='message'
+                      ref={messageInputRef}
+                      autoComplete='off'
+                      readOnly={isChatDisabled}
+                    />
+                  )}
+                  rules={{
+                    required: !image
+                  }}
+                  defaultValue=''
+                />
+                {!image && (
+                  <SendImage htmlFor='chat_image'>
+                    <input
+                      type='file'
+                      name='image'
+                      id='chat_image'
+                      accept='image/png,image/jpg,image/jpeg'
+                      onChange={onChangeImage}
+                      disabled={isChatDisabled}
+                    />
+                    <BsCardImage />
+                  </SendImage>
+                )}
+                {image && (
+                  <WrapperDeleteImage>
+                    <Button
+                      circle
+                      onClick={removeImage}
+                      type='reset'
+                    >
+                      <MdClose />
+                    </Button>
+                    <img
+                      src={image}
+                      loading='lazy'
+                    />
+                  </WrapperDeleteImage>
+                )}
+              </WrapperSendInput>
+              <WrapperSendMessageButton>
+                <Button
+                  borderRadius='8px'
+                  color='primary'
+                  type='submit'
+                  disabled={sendMessage.loading || (message === '' && !image) || messages.loading}
+                  ref={buttonRef}
+                >
+                  <IosSend />
+                  {sendMessage.loading ? (
+                    <span>
+                      {t('SENDING_MESSAGE', 'Sending...')}
+                    </span>
+                  )
+                    : (
+                      <span>
+                        {t('SEND', 'send')}
+                      </span>)}
+                </Button>
+              </WrapperSendMessageButton>
+            </Send>
           </SendForm>
         )}
         <Alert

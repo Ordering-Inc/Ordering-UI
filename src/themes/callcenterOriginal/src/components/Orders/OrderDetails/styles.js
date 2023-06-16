@@ -248,7 +248,3 @@ export const RejectReasonWrapper = styled.div`
   background-color: ${props => lighten(0.4, props.theme.colors.danger)};
   color: ${props => props.theme.colors.danger};
 `
-
-export const DetailBottom = styled.div`
-  height: 20px;
-`

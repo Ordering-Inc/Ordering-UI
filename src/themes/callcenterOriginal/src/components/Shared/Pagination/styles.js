@@ -54,10 +54,10 @@ export const PageButton = styled.button`
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
     &:hover {
-      background: ${props => props.theme.colors.primary};
+      background: ${props => darken(0.04, props.theme.colors.primary)};
     }
     &:active {
-      background: ${props => props.theme.colors.primary};
+      background: ${props => darken(0.1, props.theme.colors.primary)};
     }
   `}
 
