@@ -43,17 +43,13 @@ var ScheduleUI = function ScheduleUI(props) {
     selectedCopyDays = props.selectedCopyDays,
     cleanSelectedCopyDays = props.cleanSelectedCopyDays,
     handleSelectCopyTimes = props.handleSelectCopyTimes,
-    handleApplyScheduleCopyTimes = props.handleApplyScheduleCopyTimes,
-    isShowDate = props.isShowDate;
+    handleApplyScheduleCopyTimes = props.handleApplyScheduleCopyTimes;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var _useUtils = (0, _orderingComponents.useUtils)(),
-    _useUtils2 = _slicedToArray(_useUtils, 1),
-    parseDate = _useUtils2[0].parseDate;
   var is12Hours = ((_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12';
   var _useState = (0, _react.useState)({
       open: false,
@@ -98,11 +94,6 @@ var ScheduleUI = function ScheduleUI(props) {
         handleDeleteSchedule(daysOfWeekIndex, index);
       }
     });
-  };
-  var getNextDate = function getNextDate(x) {
-    var now = new Date();
-    now.setDate(now.getDate() + (x + (7 - now.getDay())) % 7);
-    return now;
   };
   (0, _react.useEffect)(function () {
     if (!isTimeChangeError) return;
@@ -160,11 +151,7 @@ var ScheduleUI = function ScheduleUI(props) {
       onChange: function onChange(e) {
         return handleEnabledSchedule(daysOfWeekIndex, e.target.checked);
       }
-    }), /*#__PURE__*/_react.default.createElement(_styles2.DateWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, daysOfWeek[daysOfWeekIndex]), isShowDate && /*#__PURE__*/_react.default.createElement("h4", {
-      className: "date"
-    }, parseDate(getNextDate(daysOfWeekIndex), {
-      outputFormat: 'YYYY-MM-DD'
-    })))), schedule !== null && schedule !== void 0 && schedule.enabled ? /*#__PURE__*/_react.default.createElement("div", null, schedule === null || schedule === void 0 ? void 0 : schedule.lapses.map(function (lapse, index) {
+    }), /*#__PURE__*/_react.default.createElement("h4", null, daysOfWeek[daysOfWeekIndex])), schedule !== null && schedule !== void 0 && schedule.enabled ? /*#__PURE__*/_react.default.createElement("div", null, schedule === null || schedule === void 0 ? void 0 : schedule.lapses.map(function (lapse, index) {
       var _lapse$open, _lapse$open2, _lapse$open3, _lapse$open4, _lapse$open5, _lapse$open6, _lapse$close, _lapse$close2, _lapse$close3, _lapse$close4, _lapse$close5, _lapse$close6;
       return /*#__PURE__*/_react.default.createElement("div", {
         key: index

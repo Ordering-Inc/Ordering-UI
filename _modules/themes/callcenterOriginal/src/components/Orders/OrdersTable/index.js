@@ -6,17 +6,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OrdersTable = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _moment = _interopRequireDefault(require("moment"));
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
 var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponents = require("ordering-components");
-var _styles = require("./styles");
 var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
-var _utils = require("../../../../../../utils");
-var _dayjs = _interopRequireDefault(require("dayjs"));
-var _utc = _interopRequireDefault(require("dayjs/plugin/utc"));
+var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -35,11 +33,9 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-_dayjs.default.extend(_utc.default);
 var OrdersTable = function OrdersTable(props) {
-  var _configState$configs, _configState$configs$, _orderList$orders3;
-  var hidePhoto = props.hidePhoto,
-    isSelectedOrders = props.isSelectedOrders,
+  var _orderList$orders3, _Object$keys$filter;
+  var isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
     pagination = props.pagination,
     selectedOrderIds = props.selectedOrderIds,
@@ -56,8 +52,7 @@ var OrdersTable = function OrdersTable(props) {
     groupStatus = props.groupStatus,
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns,
-    handleDrop = props.handleDrop,
-    saveUserSettings = props.saveUserSettings;
+    handleDrop = props.handleDrop;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -65,6 +60,7 @@ var OrdersTable = function OrdersTable(props) {
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
+    parseDate = _useUtils2$.parseDate,
     optimizeImage = _useUtils2$.optimizeImage,
     getTimeAgo = _useUtils2$.getTimeAgo,
     parsePrice = _useUtils2$.parsePrice;
@@ -89,35 +85,12 @@ var OrdersTable = function OrdersTable(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
-  var isEnabledRowInColor = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.row_in_color_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1';
-  var parseDateCustom = function parseDateCustom(date) {
-    var _configState$configs$2;
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    // method added for NaN errors
-    var formatTime = (options === null || options === void 0 ? void 0 : options.formatTime) || ((_configState$configs$2 = configState.configs.format_time) === null || _configState$configs$2 === void 0 ? void 0 : _configState$configs$2.value) || '24';
-    var formatDate = {
-      inputFormat: (options === null || options === void 0 ? void 0 : options.inputFormat) || ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD hh:mm:ss A', 'YYYY-MM-DD hh:mm:ss'],
-      outputFormat: (options === null || options === void 0 ? void 0 : options.outputFormat) || (formatTime === '24' ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD hh:mm:ss A'),
-      utc: typeof (options === null || options === void 0 ? void 0 : options.utc) === 'boolean' ? options === null || options === void 0 ? void 0 : options.utc : true
-    };
-    if (!(0, _dayjs.default)(date, formatDate.inputFormat).isValid()) {
-      return t('INVALID_FORMAT', 'invalid format');
-    }
-    var _date = formatDate.utc ? _dayjs.default.utc(date, formatDate.inputFormat).local() : (0, _dayjs.default)(date, formatDate.inputFormat);
-    return _date.format(formatDate.outputFormat);
-  };
   var optionsDefault = [{
     value: 'status',
     content: t('STATUS', 'Status')
   }, {
     value: 'orderNumber',
     content: t('INVOICE_ORDER_NO', 'Order No.')
-  }, {
-    value: 'cartGroupId',
-    content: t('GROUP_ORDER', 'Group Order')
-  }, {
-    value: 'driverGroupId',
-    content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
   }, {
     value: 'dateTime',
     content: t('DATE_TIME', 'Date and time')
@@ -137,22 +110,16 @@ var OrdersTable = function OrdersTable(props) {
     value: 'timer',
     content: t('SLA_TIMER', 'SLA’s timer')
   }, {
-    value: 'eta',
-    content: t('ETA', 'ETA')
-  }, {
     value: 'total',
     content: t('EXPORT_TOTAL', 'Total')
-  }, {
-    value: 'externalId',
-    content: t('EXTERNAL_ID', 'External id')
   }];
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
     var offset = 300;
-    var cdtToutc = (0, _dayjs.default)(order === null || order === void 0 ? void 0 : order.delivery_datetime).add(offset, 'minutes').format('YYYY-MM-DD HH:mm:ss');
-    var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDateCustom(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDateCustom(cdtToutc);
+    var cdtToutc = (0, _moment.default)(order === null || order === void 0 ? void 0 : order.delivery_datetime).add(offset, 'minutes').format('YYYY-MM-DD HH:mm:ss');
+    var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(cdtToutc);
     var _eta = order === null || order === void 0 ? void 0 : order.eta_time;
-    var diffTimeAsSeconds = (0, _dayjs.default)(_delivery).add(_eta, 'minutes').diff((0, _dayjs.default)().utc(), 'seconds');
+    var diffTimeAsSeconds = (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'seconds');
     return Math.ceil(diffTimeAsSeconds / 60);
   };
   var displayDelayedTime = function displayDelayedTime(order) {
@@ -171,13 +138,12 @@ var OrdersTable = function OrdersTable(props) {
     var finalTaget = sign + day + restHours + ':' + restMins;
     return finalTaget;
   };
-
-  // const getStatusClassName = (minutes) => {
-  //   if (isNaN(Number(minutes))) return 'in_time'
-  //   const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
-  //   return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
-  // }
-
+  var getStatusClassName = function getStatusClassName(minutes) {
+    var _configState$configs, _configState$configs$;
+    if (isNaN(Number(minutes))) return 'in_time';
+    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_delayed_time) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
+    return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed';
+  };
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
       setCurrentTime(Date.now());
@@ -299,13 +265,9 @@ var OrdersTable = function OrdersTable(props) {
   };
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
     var _column = allowColumns[type];
-    var updatedAllowColumns = _objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
+    setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
       visable: !(_column !== null && _column !== void 0 && _column.visable)
-    })));
-    setAllowColumns(updatedAllowColumns);
-    if (type === 'externalId') {
-      saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)));
-    }
+    }))));
   };
   var handleClickOrder = function handleClickOrder(order, e) {
     var inValid = !isSelectedOrders && (e.target.closest('.orderCheckBox') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'));
@@ -353,7 +315,10 @@ var OrdersTable = function OrdersTable(props) {
   var handleDragEnd = function handleDragEnd() {
     var elements = document.getElementsByClassName('ghostDragging');
     while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0]);
+      var _elements$, _elements$$parentNode;
+      if (elements !== null && elements !== void 0 && (_elements$ = elements[0]) !== null && _elements$ !== void 0 && (_elements$$parentNode = _elements$.parentNode) !== null && _elements$$parentNode !== void 0 && _elements$$parentNode.contains(elements === null || elements === void 0 ? void 0 : elements[0])) {
+        elements[0].parentNode.removeChild(elements[0]);
+      }
     }
     setDragOverd('');
   };
@@ -388,11 +353,12 @@ var OrdersTable = function OrdersTable(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "orders_table",
     noFixedHeader: !orderList.loading && ((_orderList$orders3 = orderList.orders) === null || _orderList$orders3 === void 0 ? void 0 : _orderList$orders3.length) <= 5
-  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, allowColumns && (Object.keys(allowColumns).filter(function (col) {
+  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, allowColumns && (((_Object$keys$filter = Object.keys(allowColumns).filter(function (col) {
     var _allowColumns$col, _allowColumns$col2;
     return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.visable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) !== 0;
-  }).length === 0 ? /*#__PURE__*/_react.default.createElement("th", {
-    className: "orderPrice"
+  })) === null || _Object$keys$filter === void 0 ? void 0 : _Object$keys$filter.length) === 0 ? /*#__PURE__*/_react.default.createElement("th", {
+    className: "orderPrice",
+    key: "noDragTh-".concat(i)
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
@@ -405,7 +371,7 @@ var OrdersTable = function OrdersTable(props) {
     var _allowColumns$col5, _allowColumns$col6;
     return ((_allowColumns$col5 = allowColumns[col1]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.order) - ((_allowColumns$col6 = allowColumns[col2]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.order);
   }).map(function (column, i, array) {
-    var _allowColumns$column$3, _allowColumns$column7, _allowColumns$column8, _theme$images$icons3, _allowColumns$column9;
+    var _allowColumns$column$2, _allowColumns$column4, _allowColumns$column5, _theme$images$icons2, _allowColumns$column6;
     if (column === 'slaBar') {
       return;
     }
@@ -433,9 +399,11 @@ var OrdersTable = function OrdersTable(props) {
         isOrder: true
       })));
     }
-    if (column === 'externalId') {
+    if (column === 'total' || column !== 'total' && column === _toConsumableArray(array).pop()) {
       var _allowColumns$column$, _allowColumns$column, _allowColumns$column2, _theme$images$icons, _allowColumns$column3;
-      return /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: i
+      }, column !== 'total' && column === _toConsumableArray(array).pop() && /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
         key: "dragTh-".concat(i),
         onDragOver: function onDragOver(e) {
           return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e, column);
@@ -457,35 +425,7 @@ var OrdersTable = function OrdersTable(props) {
       }, /*#__PURE__*/_react.default.createElement("img", {
         src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
         alt: "six dots"
-      }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title)));
-    }
-    if (column === 'total' || column !== 'total' && column === _toConsumableArray(array).pop()) {
-      var _allowColumns$column$2, _allowColumns$column4, _allowColumns$column5, _theme$images$icons2, _allowColumns$column6;
-      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-        key: i
-      }, column !== 'total' && column === _toConsumableArray(array).pop() && /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
-        key: "dragTh-".concat(i),
-        onDragOver: function onDragOver(e) {
-          return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e, column);
-        },
-        onDrop: function onDrop(e) {
-          return handleDrop(e, column);
-        },
-        onDragEnd: function onDragEnd(e) {
-          return handleDragEnd(e);
-        },
-        colSpan: (_allowColumns$column$2 = (_allowColumns$column4 = allowColumns[column]) === null || _allowColumns$column4 === void 0 ? void 0 : _allowColumns$column4.colSpan) !== null && _allowColumns$column$2 !== void 0 ? _allowColumns$column$2 : 1,
-        className: (_allowColumns$column5 = allowColumns[column]) === null || _allowColumns$column5 === void 0 ? void 0 : _allowColumns$column5.className,
-        selectedDragOver: column === dragOverd
-      }, /*#__PURE__*/_react.default.createElement("div", {
-        draggable: true,
-        onDragStart: function onDragStart(e) {
-          return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, column);
-        }
-      }, /*#__PURE__*/_react.default.createElement("img", {
-        src: (_theme$images$icons2 = theme.images.icons) === null || _theme$images$icons2 === void 0 ? void 0 : _theme$images$icons2.sixDots,
-        alt: "six dots"
-      }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column6 = allowColumns[column]) === null || _allowColumns$column6 === void 0 ? void 0 : _allowColumns$column6.title))), /*#__PURE__*/_react.default.createElement("th", {
+      }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title))), /*#__PURE__*/_react.default.createElement("th", {
         className: "orderPrice",
         key: "noDragTh-".concat(i)
       }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
@@ -506,8 +446,8 @@ var OrdersTable = function OrdersTable(props) {
       onDragEnd: function onDragEnd(e) {
         return handleDragEnd(e);
       },
-      colSpan: (_allowColumns$column$3 = (_allowColumns$column7 = allowColumns[column]) === null || _allowColumns$column7 === void 0 ? void 0 : _allowColumns$column7.colSpan) !== null && _allowColumns$column$3 !== void 0 ? _allowColumns$column$3 : 1,
-      className: (_allowColumns$column8 = allowColumns[column]) === null || _allowColumns$column8 === void 0 ? void 0 : _allowColumns$column8.className,
+      colSpan: (_allowColumns$column$2 = (_allowColumns$column4 = allowColumns[column]) === null || _allowColumns$column4 === void 0 ? void 0 : _allowColumns$column4.colSpan) !== null && _allowColumns$column$2 !== void 0 ? _allowColumns$column$2 : 1,
+      className: (_allowColumns$column5 = allowColumns[column]) === null || _allowColumns$column5 === void 0 ? void 0 : _allowColumns$column5.className,
       selectedDragOver: column === dragOverd
     }, /*#__PURE__*/_react.default.createElement("div", {
       draggable: true,
@@ -515,11 +455,11 @@ var OrdersTable = function OrdersTable(props) {
         return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, column);
       }
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: (_theme$images$icons3 = theme.images.icons) === null || _theme$images$icons3 === void 0 ? void 0 : _theme$images$icons3.sixDots,
+      src: (_theme$images$icons2 = theme.images.icons) === null || _theme$images$icons2 === void 0 ? void 0 : _theme$images$icons2.sixDots,
       alt: "six dots"
-    }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column9 = allowColumns[column]) === null || _allowColumns$column9 === void 0 ? void 0 : _allowColumns$column9.title)));
+    }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column6 = allowColumns[column]) === null || _allowColumns$column6 === void 0 ? void 0 : _allowColumns$column6.title)));
   })))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$externa, _allowColumns$cartGro, _allowColumns$driverG, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
+    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
@@ -536,31 +476,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     })), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$dateTim3 = allowColumns.dateTime) === null || _allowColumns$dateTim3 === void 0 ? void 0 : _allowColumns$dateTim3.visable) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$externa = allowColumns.externalId) === null || _allowColumns$externa === void 0 ? void 0 : _allowColumns$externa.visable) && /*#__PURE__*/_react.default.createElement("td", {
-      className: "externalId"
-    }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$cartGro = allowColumns.cartGroupId) === null || _allowColumns$cartGro === void 0 ? void 0 : _allowColumns$cartGro.visable) && /*#__PURE__*/_react.default.createElement("td", {
-      className: "statusInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$driverG = allowColumns.driverGroupId) === null || _allowColumns$driverG === void 0 ? void 0 : _allowColumns$driverG.visable) && /*#__PURE__*/_react.default.createElement("td", {
-      className: "statusInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$status = allowColumns.status) === null || _allowColumns$status === void 0 ? void 0 : _allowColumns$status.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$status = allowColumns.status) === null || _allowColumns$status === void 0 ? void 0 : _allowColumns$status.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "statusInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -570,7 +486,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$busines = allowColumns.business) === null || _allowColumns$busines === void 0 ? void 0 : _allowColumns$busines.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "businessInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
       height: 45
     }), /*#__PURE__*/_react.default.createElement("div", {
@@ -583,7 +499,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$custome = allowColumns.customer) === null || _allowColumns$custome === void 0 ? void 0 : _allowColumns$custome.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "customerInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
       height: 45
     }), /*#__PURE__*/_react.default.createElement("div", {
@@ -598,7 +514,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "driverInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, {
       className: "d-flex align-items-center"
-    }, !hidePhoto && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
       height: 45
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -664,8 +580,7 @@ var OrdersTable = function OrdersTable(props) {
       onClick: function onClick(e) {
         return handleClickOrder(order, e);
       },
-      "data-tour": i === 0 ? 'tour_start' : '',
-      "data-status": isEnabledRowInColor && (order === null || order === void 0 ? void 0 : order.time_status)
+      "data-tour": i === 0 ? 'tour_start' : ''
     }, /*#__PURE__*/_react.default.createElement("tr", null, Object.keys(allowColumns).filter(function (col) {
       var _allowColumns$col7;
       return (_allowColumns$col7 = allowColumns[col]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.visable;
@@ -677,16 +592,8 @@ var OrdersTable = function OrdersTable(props) {
         return /*#__PURE__*/_react.default.createElement("td", {
           key: "slaBar".concat(i, "-").concat(index)
         }, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
-          timeState: order === null || order === void 0 ? void 0 : order.time_status
+          timeState: getStatusClassName(getDelayMinutes(order))
         }));
-      }
-      if (column === 'externalId' && !isSelectedOrders) {
-        return /*#__PURE__*/_react.default.createElement("td", {
-          className: "externalId",
-          key: "externalId".concat(i, "-").concat(index)
-        }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("p", {
-          className: "bold"
-        }, order === null || order === void 0 ? void 0 : order.external_id)));
       }
       if (column === 'orderNumber') {
         var _allowColumns$orderNu4, _allowColumns$dateTim4, _allowColumns$orderNu5, _allowColumns$dateTim5;
@@ -705,7 +612,7 @@ var OrdersTable = function OrdersTable(props) {
           className: "bold"
         }, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$dateTim5 = allowColumns.dateTime) === null || _allowColumns$dateTim5 === void 0 ? void 0 : _allowColumns$dateTim5.visable) && /*#__PURE__*/_react.default.createElement("p", {
           className: "date"
-        }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDateCustom(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDateCustom(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+        }, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
           utc: false
         })))));
       }
@@ -718,28 +625,12 @@ var OrdersTable = function OrdersTable(props) {
           className: "bold"
         }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)));
       }
-      if (column === 'cartGroupId') {
-        return /*#__PURE__*/_react.default.createElement("td", {
-          className: "orderGroupId",
-          key: "cart_group_id".concat(i, "-").concat(index)
-        }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, (order === null || order === void 0 ? void 0 : order.cart_group_id) && /*#__PURE__*/_react.default.createElement("p", {
-          className: "bold"
-        }, t('No', 'No'), ". ", order === null || order === void 0 ? void 0 : order.cart_group_id)));
-      }
-      if (column === 'driverGroupId') {
-        return /*#__PURE__*/_react.default.createElement("td", {
-          className: "orderGroupId",
-          key: "cart_group_id".concat(i, "-").concat(index)
-        }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, (order === null || order === void 0 ? void 0 : order.driver_group_id) && /*#__PURE__*/_react.default.createElement("p", {
-          className: "bold"
-        }, t('No', 'No'), ". ", order === null || order === void 0 ? void 0 : order.driver_group_id)));
-      }
       if (column === 'business') {
         var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city;
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "businessInfo",
           key: "businessInfo".concat(i, "-").concat(index)
-        }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
+        }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
           src: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
           loading: "lazy",
           alt: ""
@@ -750,11 +641,11 @@ var OrdersTable = function OrdersTable(props) {
         }, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : (_order$business3$city = _order$business3.city) === null || _order$business3$city === void 0 ? void 0 : _order$business3$city.name))));
       }
       if (column === 'customer') {
-        var _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9;
+        var _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6;
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "customerInfo",
           key: "customerInfo".concat(i, "-").concat(index)
-        }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$customer = order.customer) !== null && _order$customer !== void 0 && _order$customer.photo ? /*#__PURE__*/_react.default.createElement("img", {
+        }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$customer = order.customer) !== null && _order$customer !== void 0 && _order$customer.photo ? /*#__PURE__*/_react.default.createElement("img", {
           src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo, 'h_50,c_limit'),
           loading: "lazy",
           alt: ""
@@ -764,13 +655,13 @@ var OrdersTable = function OrdersTable(props) {
           className: "info"
         }, /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
-        }, !(order !== null && order !== void 0 && (_order$customer5 = order.customer) !== null && _order$customer5 !== void 0 && _order$customer5.email) && !(order !== null && order !== void 0 && (_order$customer6 = order.customer) !== null && _order$customer6 !== void 0 && _order$customer6.cellphone) && !(order !== null && order !== void 0 && (_order$customer7 = order.customer) !== null && _order$customer7 !== void 0 && _order$customer7.name) ? t('GUEST_USER', 'Guest user') : order === null || order === void 0 ? void 0 : (_order$customer8 = order.customer) === null || _order$customer8 === void 0 ? void 0 : _order$customer8.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer9 = order.customer) === null || _order$customer9 === void 0 ? void 0 : _order$customer9.cellphone))));
+        }, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.cellphone))));
       }
       if (column === 'driver' && !isSelectedOrders) {
         var _order$driver, _order$driver2, _order$driver3, _order$driver4;
         return /*#__PURE__*/_react.default.createElement("td", {
           key: "driver".concat(i, "-").concat(index)
-        }, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
+        }, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
           src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit'),
           loading: "lazy",
           alt: ""
@@ -816,7 +707,7 @@ var OrdersTable = function OrdersTable(props) {
         }, /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
         }, t('TIMER', 'Timer')), /*#__PURE__*/_react.default.createElement("p", {
-          className: order === null || order === void 0 ? void 0 : order.time_status
+          className: getStatusClassName(getDelayMinutes(order))
         }, displayDelayedTime(order))));
       }
       if (column === 'total') {
@@ -829,12 +720,12 @@ var OrdersTable = function OrdersTable(props) {
         }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$total2 = allowColumns.total) === null || _allowColumns$total2 === void 0 ? void 0 : _allowColumns$total2.visable) && /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
         }, parsePrice(order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total, {
-          currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
+          currency: order === null || order === void 0 ? void 0 : order.currency
         })), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
           utc: false
         }))));
       }
-    }), /*#__PURE__*/_react.default.createElement("td", null)));
+    })));
   }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
     totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),

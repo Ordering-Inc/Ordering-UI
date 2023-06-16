@@ -25,20 +25,14 @@ var CurrencyFilter = function CurrencyFilter(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)(''),
-    _useState2 = _slicedToArray(_useState, 2),
-    searchValue = _useState2[0],
-    setSearchValue = _useState2[1];
   var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_A_CURRENCY', 'Select a currency'));
-  var _useState3 = (0, _react.useState)([]),
-    _useState4 = _slicedToArray(_useState3, 2),
-    countryTypes = _useState4[0],
-    setCountryTypes = _useState4[1];
+  var _useState = (0, _react.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    countryTypes = _useState2[0],
+    setCountryTypes = _useState2[1];
   (0, _react.useEffect)(function () {
     var _countryList = [];
-    var _groupsOption = _constants.currencyList.filter(function (option) {
-      return option === null || option === void 0 ? void 0 : option.text.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
-    }).map(function (country) {
+    var _groupsOption = _constants.currencyList.map(function (country) {
       return {
         value: country.value,
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, country.text)
@@ -57,7 +51,7 @@ var CurrencyFilter = function CurrencyFilter(props) {
       _iterator.f();
     }
     setCountryTypes(_countryList);
-  }, [_constants.currencyList, searchValue]);
+  }, [_constants.currencyList]);
   return /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
     placeholder: placeholder,
     defaultValue: filterValues.currency,
@@ -65,14 +59,7 @@ var CurrencyFilter = function CurrencyFilter(props) {
     onChange: function onChange(code) {
       return handleChangeCurrency(code);
     },
-    optionInnerMaxHeight: "200px",
-    isShowSearchBar: true,
-    searchBarIsCustomLayout: true,
-    searchBarIsNotLazyLoad: true,
-    searchValue: searchValue,
-    handleChangeSearch: function handleChangeSearch(val) {
-      return setSearchValue(val);
-    }
+    optionInnerMaxHeight: "200px"
   });
 };
 exports.CurrencyFilter = CurrencyFilter;

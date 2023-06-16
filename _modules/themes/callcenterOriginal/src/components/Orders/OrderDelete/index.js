@@ -11,6 +11,7 @@ var _FaTrash = _interopRequireDefault(require("@meronex/icons/fa/FaTrash"));
 var _useWindowSize2 = require("../../../../../../hooks/useWindowSize");
 var _Buttons = require("../../../styles/Buttons");
 var _Shared = require("../../Shared");
+var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -25,45 +26,76 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var OrderDelete = function OrderDelete(props) {
-  var handleDeleteMultiOrders = props.handleDeleteMultiOrders;
+var OrderDeleteUI = function OrderDeleteUI(props) {
+  var checkPasswordStatus = props.checkPasswordStatus,
+    handleChangePassword = props.handleChangePassword,
+    getCheckPassword = props.getCheckPassword,
+    handleDeleteMultiOrders = props.handleDeleteMultiOrders;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)({
-      open: false,
-      handleOnConfirm: null
-    }),
+  var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    confirmAdmin = _useState2[0],
-    setConfirmAdmin = _useState2[1];
-  var handleModalOpen = function handleModalOpen() {
-    setConfirmAdmin({
-      open: true,
-      handleOnConfirm: function handleOnConfirm() {
-        setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {
-          open: false
-        }));
-        handleDeleteMultiOrders();
-      }
-    });
+    checkPasswordModalOpen = _useState2[0],
+    setCheckPasswordModalOpen = _useState2[1];
+  var _useState3 = (0, _react.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    password = _useState4[0],
+    setPassword = _useState4[1];
+  var handlePassword = function handlePassword(e) {
+    setPassword(e.target.value);
   };
+  var handleModalOpen = function handleModalOpen() {
+    setPassword('');
+    setCheckPasswordModalOpen(true);
+  };
+  (0, _react.useEffect)(function () {
+    handleChangePassword(password);
+  }, [password]);
+  (0, _react.useEffect)(function () {
+    if (checkPasswordStatus.loading || checkPasswordStatus.error !== null) return;
+    if (checkPasswordStatus.result === 'OK') {
+      setCheckPasswordModalOpen(false);
+      setPassword('');
+      handleDeleteMultiOrders();
+    }
+  }, [checkPasswordStatus]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     borderRadius: "8px",
     color: "secundary",
     onClick: function onClick() {
       return handleModalOpen();
     }
-  }, width > 600 && t('DELETE', 'Delete'), /*#__PURE__*/_react.default.createElement(_FaTrash.default, null)), /*#__PURE__*/_react.default.createElement(_Shared.ConfirmAdmin, {
-    open: confirmAdmin.open,
+  }, width > 600 && t('DELETE', 'Delete'), /*#__PURE__*/_react.default.createElement(_FaTrash.default, null)), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    open: checkPasswordModalOpen,
+    width: "600px",
     onClose: function onClose() {
-      return setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {
-        open: false
-      }));
-    },
-    onConfirm: confirmAdmin.handleOnConfirm
-  }));
+      return setCheckPasswordModalOpen(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperCheckPassword, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CONFIRM_PASSWORD', 'Confirm password')), /*#__PURE__*/_react.default.createElement("p", null, t('TYPE_YOUR_PASSWORD_TO_CONFIRM_DELETE', 'Type your password to confirm delete.')), /*#__PURE__*/_react.default.createElement("input", {
+    autoComplete: "new-password",
+    type: "password",
+    value: password,
+    placeholder: t('PASSWORD', 'password'),
+    onChange: function onChange(e) {
+      return handlePassword(e);
+    }
+  }), (checkPasswordStatus === null || checkPasswordStatus === void 0 ? void 0 : checkPasswordStatus.error) && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, {
+    className: "text-danger"
+  }, checkPasswordStatus.error), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    borderRadius: "7.6px",
+    onClick: function onClick() {
+      return getCheckPassword();
+    }
+  }, t('CONFIRM', 'Confirm')))));
+};
+var OrderDelete = function OrderDelete(props) {
+  var checkPasswordControlProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: OrderDeleteUI
+  });
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.CheckPassword, checkPasswordControlProps);
 };
 exports.OrderDelete = OrderDelete;

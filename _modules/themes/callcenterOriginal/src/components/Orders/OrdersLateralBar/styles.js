@@ -21,11 +21,11 @@ var LateralBarContainer = _styledComponents.default.div(_templateObject || (_tem
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    left: 0;\n  "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    right: 0;\n  "])));
 });
 exports.LateralBarContainer = LateralBarContainer;
-var OrdersContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  /* max-width: 560px; */\n\n  #orderTable {\n    border-top: 1px solid ", ";\n\n    table {\n      min-width: initial;\n      width: 100%;\n    }\n  }\n"])), function (props) {
+var OrdersContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  max-width: 560px;\n\n  #orderTable {\n    border-top: 1px solid ", ";\n\n    table {\n      min-width: initial;\n      width: 100%;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 exports.OrdersContainer = OrdersContainer;
-var CloseButtonWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  position: absolute;\n  top: 25px;\n  cursor: pointer;\n\n  ", "\n"])), function (props) {
+var CloseButtonWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 25px;\n  cursor: pointer;\n\n  ", "\n"])), function (props) {
   var _props$theme2;
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    right: 10px;\n  "])));
 });

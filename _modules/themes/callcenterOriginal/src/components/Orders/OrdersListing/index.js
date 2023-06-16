@@ -22,8 +22,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersListing = function OrdersListing(props) {
   var _theme$images, _theme$images$dummies;
-  var hidePhoto = props.hidePhoto,
-    isSelectedOrders = props.isSelectedOrders,
+  var isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
     selectedOrderIds = props.selectedOrderIds,
     orderListView = props.orderListView,
@@ -54,9 +53,7 @@ var OrdersListing = function OrdersListing(props) {
     slaSettingTime = props.slaSettingTime,
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns,
-    handleDrop = props.handleDrop,
-    isDelivery = props.isDelivery,
-    saveUserSettings = props.saveUserSettings;
+    handleDrop = props.handleDrop;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -101,7 +98,6 @@ var OrdersListing = function OrdersListing(props) {
   }, t('FILTERS', 'Filters'))) : /*#__PURE__*/_react.default.createElement("p", null, t('MOBILE_NO_ORDERS', 'No Orders yet.')))) : /*#__PURE__*/_react.default.createElement(_styles2.WrapperOrderListContent, {
     maxHeight: orderListView !== 'table'
   }, orderListView === 'table' ? /*#__PURE__*/_react.default.createElement(_OrdersTable.OrdersTable, {
-    hidePhoto: hidePhoto,
     setSelectedOrderIds: setSelectedOrderIds,
     isSelectedOrders: isSelectedOrders,
     orderList: orderList,
@@ -121,8 +117,7 @@ var OrdersListing = function OrdersListing(props) {
     groupStatus: groupStatus,
     allowColumns: allowColumns,
     setAllowColumns: setAllowColumns,
-    handleDrop: handleDrop,
-    saveUserSettings: saveUserSettings
+    handleDrop: handleDrop
   }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
     isMessagesView: isMessagesView,
     orderList: orderList,
@@ -136,8 +131,7 @@ var OrdersListing = function OrdersListing(props) {
     selectedOrderCard: selectedOrderCard,
     handleOrderCardClick: handleOrderCardClick,
     handleUpdateDriverLocation: handleUpdateDriverLocation,
-    slaSettingTime: slaSettingTime,
-    isDelivery: isDelivery
+    slaSettingTime: slaSettingTime
   }))));
 };
 exports.OrdersListing = OrdersListing;

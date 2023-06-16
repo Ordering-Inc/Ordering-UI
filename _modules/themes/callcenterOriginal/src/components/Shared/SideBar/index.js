@@ -25,9 +25,7 @@ var SideBar = function SideBar(props) {
     isBorderShow = props.isBorderShow,
     noAnimation = props.noAnimation,
     handleCloseWizard = props.handleCloseWizard,
-    IconTop = props.IconTop,
-    showExpandIcon = props.showExpandIcon,
-    sidebarId = props.sidebarId;
+    IconTop = props.IconTop;
   var sideBarRef = (0, _react.useRef)(null);
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
@@ -35,10 +33,6 @@ var SideBar = function SideBar(props) {
     _useState2 = _slicedToArray(_useState, 2),
     isMenuOpen = _useState2[0],
     setIsMenuOpen = _useState2[1];
-  var _useState3 = (0, _react.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    isExpand = _useState4[0],
-    setIsExpand = _useState4[1];
   var sideBarWidth = defaultSideBarWidth || 500;
   var actionSidebar = function actionSidebar(value) {
     if (!value) {
@@ -65,12 +59,6 @@ var SideBar = function SideBar(props) {
       handleCloseWizard && handleCloseWizard();
     }
   };
-  var expandSideBar = function expandSideBar() {
-    if (isExpand) sideBarRef.current.style.width = "".concat(sideBarWidth, "px");else sideBarRef.current.style.width = '100vw';
-    setIsExpand(function (prev) {
-      return !prev;
-    });
-  };
   (0, _react.useEffect)(function () {
     if (!open) return;
     document.addEventListener('keydown', onCloseSidebar);
@@ -83,19 +71,12 @@ var SideBar = function SideBar(props) {
     isBorderShow: isBorderShow,
     moveDistance: moveDistance,
     noAnimation: noAnimation,
-    id: sidebarId !== null && sidebarId !== void 0 ? sidebarId : 'sideSlider'
-  }, /*#__PURE__*/_react.default.createElement(_styles2.IconButtonWrapper, {
     IconTop: IconTop
-  }, width > 576 && showExpandIcon && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    color: "black",
-    onClick: function onClick() {
-      return expandSideBar();
-    }
-  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return props.onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), props.children));
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), props.children));
 };
 exports.SideBar = SideBar;

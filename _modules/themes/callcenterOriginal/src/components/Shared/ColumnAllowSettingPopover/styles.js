@@ -12,7 +12,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n"])));
 exports.HeaderItem = HeaderItem;
-var PopoverBody = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: fixed !important;\n  z-index: 1001;\n  background: ", ";\n  border: 1px solid ", ";\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n  border-radius: 7.6px;\n  padding: 15px;\n  max-width: 250px;\n"])), function (props) {
+var PopoverBody = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  z-index: 1001;\n  background: ", ";\n  border: 1px solid ", ";\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n  border-radius: 7.6px;\n  padding: 15px;\n  max-width: 250px;\n"])), function (props) {
   var _props$theme$colors;
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 }, function (props) {

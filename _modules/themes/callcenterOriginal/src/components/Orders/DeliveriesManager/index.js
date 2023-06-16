@@ -91,12 +91,11 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     var id = query.get('id');
     if (id === null) setIsOpenOrderDetail(false);else {
       setOrderDetailId(id);
+      onOrderRedirect(id);
       setIsOpenOrderDetail(true);
     }
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveriesContainer, {
-    id: "deliveryDashboard"
-  }, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveriesContainer, null, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
     isDisableControl: true,
     title: t('DELIVERY_DASHBOARD', 'Delivery dashboard'),
     isShowMapsKeySettingButton: !googleMapsApiKey,
@@ -133,7 +132,7 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     open: isOpenOrderDetail,
     order: detailsOrder,
     orderId: orderDetailId,
-    drivers: driversList.drivers,
+    driversList: driversList,
     onClose: function onClose() {
       return handleBackRedirect();
     }
@@ -143,7 +142,6 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
 };
 var DeliveriesManager = function DeliveriesManager(props) {
   var OrdersListControlProps = _objectSpread(_objectSpread({}, props), {}, {
-    isOnlyDelivery: true,
     UIComponent: DeliveriesManagerUI,
     driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
   });

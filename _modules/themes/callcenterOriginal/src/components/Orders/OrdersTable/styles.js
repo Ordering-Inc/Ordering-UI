@@ -21,7 +21,7 @@ var OrdersContainer = _styledComponents.default.div(_templateObject || (_templat
   return isSelectedOrders && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      max-height: calc(var(--vh, 1vh) * 100 - 345px);\n    "])));
 });
 exports.OrdersContainer = OrdersContainer;
-var Table = _styledComponents.default.table(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n\n  th,\n  td {\n    padding: 15px;\n    box-sizing: border-box;\n    font-size: 14px;\n\n    &:first-child {\n      padding-left: 0px;\n      padding-right: 0px;\n    }\n  }\n\n  th {\n    padding-top: 0px;\n  }\n\n  thead {\n    tr {\n      width: 100%;\n      border-bottom: solid 1px ", ";\n      th {\n        color: ", ";\n        white-space: nowrap;\n        ", "\n        background: ", ";\n      }\n    }\n  }\n\n  p {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  .orderPrice {\n    div.info {\n      p {\n        ", "\n      }\n    }\n  }\n\n  div.info {\n    p {\n      margin: 0px;\n      color: ", ";\n      font-size: 12px;\n    }\n    p.date {\n      color: ", ";\n    }\n    p.bold {\n      font-size: 14px;\n      font-weight: 600;\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var Table = _styledComponents.default.table(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  min-width: 900px;\n  min-height: 35vh;\n\n  th,\n  td {\n    padding: 15px;\n    box-sizing: border-box;\n    font-size: 14px;\n\n    &:first-child {\n      padding-left: 0px;\n      padding-right: 0px;\n    }\n  }\n\n  th {\n    padding-top: 0px;\n  }\n\n  thead {\n    tr {\n      width: 100%;\n      border-bottom: solid 1px ", ";\n      th {\n        color: ", ";\n        white-space: nowrap;\n        ", "\n        background: ", ";\n      }\n    }\n  }\n\n  p {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  .orderPrice {\n    div.info {\n      p {\n        ", "\n      }\n    }\n  }\n\n  div.info {\n    p {\n      margin: 0px;\n      color: ", ";\n      font-size: 12px;\n    }\n    p.date {\n      color: ", ";\n    }\n    p.bold {\n      font-size: 14px;\n      font-weight: 600;\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.disabled;
 }, function (props) {
   var _props$theme$colors;
@@ -45,20 +45,8 @@ var Table = _styledComponents.default.table(_templateObject5 || (_templateObject
   return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.headingColor;
 });
 exports.Table = Table;
-var OrderTbody = _styledComponents.default.tbody(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n\n  &[data-status=\"delayed\"] {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n  &[data-status=\"at_risk\"] {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n  &:hover {\n    background-color: ", ";\n  }\n  &.active {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n"])), function (props) {
+var OrderTbody = _styledComponents.default.tbody(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n\n  &:hover {\n    background-color: ", ";\n  }\n  &.active {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
-}, function (props) {
-  return props.theme.colors.danger100;
-}, function (props) {
-  return props.theme.colors.danger;
-}, function (props) {
-  return props.theme.colors.danger;
-}, function (props) {
-  return props.theme.colors.warning100;
-}, function (props) {
-  return props.theme.colors.warning;
-}, function (props) {
-  return props.theme.colors.warning;
 }, function (props) {
   return props.theme.colors.lightPrimary;
 }, function (props) {

@@ -32,21 +32,15 @@ var CountryFilterUI = function CountryFilterUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)(''),
-    _useState2 = _slicedToArray(_useState, 2),
-    searchValue = _useState2[0],
-    setSearchValue = _useState2[1];
-  var _useState3 = (0, _react.useState)([]),
-    _useState4 = _slicedToArray(_useState3, 2),
-    countryTypes = _useState4[0],
-    setCountryTypes = _useState4[1];
   var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_A_COUNTRY', 'Select a country'));
+  var _useState = (0, _react.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    countryTypes = _useState2[0],
+    setCountryTypes = _useState2[1];
   (0, _react.useEffect)(function () {
     var _countryList = [];
     if (!countriesState.loading) {
-      var _groupsOption = countriesState.countries.filter(function (option) {
-        return option === null || option === void 0 ? void 0 : option.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
-      }).map(function (country) {
+      var _groupsOption = countriesState.countries.map(function (country) {
         return {
           value: country.code,
           content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, country.name)
@@ -66,7 +60,7 @@ var CountryFilterUI = function CountryFilterUI(props) {
       }
     }
     setCountryTypes(_countryList);
-  }, [countriesState, searchValue]);
+  }, [countriesState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !countriesState.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
     placeholder: placeholder,
     defaultValue: filterValues.countryCode,
@@ -74,14 +68,7 @@ var CountryFilterUI = function CountryFilterUI(props) {
     onChange: function onChange(code) {
       return handleChangeCountryCode(code);
     },
-    optionInnerMaxHeight: "200px",
-    isShowSearchBar: true,
-    searchBarIsCustomLayout: true,
-    searchBarIsNotLazyLoad: true,
-    searchValue: searchValue,
-    handleChangeSearch: function handleChangeSearch(val) {
-      return setSearchValue(val);
-    }
+    optionInnerMaxHeight: "200px"
   }) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     style: {
       height: '57px'

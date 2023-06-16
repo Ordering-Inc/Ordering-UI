@@ -41,7 +41,7 @@ var OrderHeader = _styledComponents.default.div(_templateObject7 || (_templateOb
 exports.OrderHeader = OrderHeader;
 var Timer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  align-items: right;\n  p {\n    font-size: 10px;\n    line-height: 15px;\n  }\n\n  .bold {\n    font-weight: 500;\n    font-size: 12px;\n    line-height: 18px;\n  }\n\n  .in_time{\n    color: #00D27A;\n  }\n\n  .at_risk {\n    color: #FFC700;\n  }\n  \n  .delayed {\n    color: #E63757;\n  }\n"])));
 exports.Timer = Timer;
-var ViewDetails = _styledComponents.default.a(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  font-size: 12px;\n  margin: 0 10px;\n  &:hover {\n    text-decoration: underline;\n  }\n"])), function (props) {
+var ViewDetails = _styledComponents.default.a(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  font-size: 12px;\n  text-decoration: underline;\n  margin: 0 10px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.ViewDetails = ViewDetails;

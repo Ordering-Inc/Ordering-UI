@@ -25,15 +25,11 @@ var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)(''),
-    _useState2 = _slicedToArray(_useState, 2),
-    searchValue = _useState2[0],
-    setSearchValue = _useState2[1];
   var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('DRIVER_GROUP', 'Driver group'));
-  var _useState3 = (0, _react.useState)([]),
-    _useState4 = _slicedToArray(_useState3, 2),
-    groupTypes = _useState4[0],
-    setGroupTypes = _useState4[1];
+  var _useState = (0, _react.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    groupTypes = _useState2[0],
+    setGroupTypes = _useState2[1];
   var groupTypesLoading = [{
     value: 'default',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('GROUP_LOADING', 'Group loading'), "...")
@@ -41,9 +37,7 @@ var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
   (0, _react.useEffect)(function () {
     var _groupList = [];
     if (!driverGroupList.loading) {
-      var _groupsOption = driverGroupList.groups.filter(function (option) {
-        return option === null || option === void 0 ? void 0 : option.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
-      }).map(function (group) {
+      var _groupsOption = driverGroupList.groups.map(function (group) {
         return {
           value: group.id,
           content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, group.id, ". ", group.name)
@@ -63,32 +57,18 @@ var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
       }
     }
     setGroupTypes(_groupList);
-  }, [driverGroupList, searchValue]);
+  }, [driverGroupList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driverGroupList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
     placeholder: placeholder,
     defaultValue: filterValues.groupTypes,
     options: groupTypes,
     onChange: function onChange(groupType) {
       return handleChangeGroup(groupType);
-    },
-    isShowSearchBar: true,
-    searchBarIsCustomLayout: true,
-    searchBarIsNotLazyLoad: true,
-    searchValue: searchValue,
-    handleChangeSearch: function handleChangeSearch(val) {
-      return setSearchValue(val);
     }
   }) : /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
     defaultValue: "default",
     options: groupTypesLoading,
-    optionBottomBorder: true,
-    isShowSearchBar: true,
-    searchBarIsCustomLayout: true,
-    searchBarIsNotLazyLoad: true,
-    searchValue: searchValue,
-    handleChangeSearch: function handleChangeSearch(val) {
-      return setSearchValue(val);
-    }
+    optionBottomBorder: true
   }));
 };
 exports.DriversGroupTypeSelector = DriversGroupTypeSelector;

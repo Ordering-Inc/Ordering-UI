@@ -29,7 +29,6 @@ var ModalUI = function ModalUI(props) {
     onAccept = props.onAccept,
     onCancel = props.onCancel,
     onClose = props.onClose,
-    onRemove = props.onRemove,
     acceptText = props.acceptText,
     cancelText = props.cancelText,
     isTransparent = props.isTransparent,
@@ -42,9 +41,6 @@ var ModalUI = function ModalUI(props) {
     if (e.code === 'Escape') {
       onClose && onClose();
     }
-  };
-  var handleClose = function handleClose() {
-    if (onRemove) onRemove();else onClose();
   };
   (0, _react.useEffect)(function () {
     if (!props.open) return;
@@ -66,7 +62,9 @@ var ModalUI = function ModalUI(props) {
     className: "modal-close-icon"
   }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
-    onClick: handleClose
+    onClick: function onClick() {
+      return onClose();
+    }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles2.ModalHeader, null, title && /*#__PURE__*/_react.default.createElement(_styles2.ModalTitle, null, title)), children, (onCancel || onAccept) && /*#__PURE__*/_react.default.createElement(_styles2.ModalActions, null, onAccept && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "darkBlue",
     onClick: function onClick() {

@@ -62,8 +62,7 @@ var DeliveryDashboard = function DeliveryDashboard(props) {
     orderListView: "card",
     selectedOrderCard: interActionMapOrder,
     handleOrderCardClick: handleLocation,
-    handleUpdateDriverLocation: handleUpdateDriverLocation,
-    isDelivery: true
+    handleUpdateDriverLocation: handleUpdateDriverLocation
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperDeliveriesLocation, null, /*#__PURE__*/_react.default.createElement(_DeliveriesLocation.DeliveriesLocation, {
     driversList: driversList,
     interActionMapOrder: interActionMapOrder

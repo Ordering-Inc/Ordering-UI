@@ -34,25 +34,19 @@ var CitySelectorUI = function CitySelectorUI(props) {
     handleChangeCity = props.handleChangeCity,
     position = props.position,
     optionInnerMaxHeight = props.optionInnerMaxHeight;
-  var _useLanguage = (0, _orderingComponents.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     cityOptions = _useState2[0],
     setCityOptions = _useState2[1];
-  var _useState3 = (0, _react.useState)(''),
-    _useState4 = _slicedToArray(_useState3, 2),
-    searchValue = _useState4[0],
-    setSearchValue = _useState4[1];
+  var _useLanguage = (0, _orderingComponents.useLanguage)(),
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var placeholder = /*#__PURE__*/_react.default.createElement(_styles2.PlaceholderTitle, {
     isDefault: isDefault
   }, t('SELECT_CITY', 'Select City'));
   (0, _react.useEffect)(function () {
     if (citiesList !== null && citiesList !== void 0 && citiesList.loading) return;
-    var _cityOptions = citiesList === null || citiesList === void 0 ? void 0 : citiesList.cities.filter(function (option) {
-      return option === null || option === void 0 ? void 0 : option.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
-    }).map(function (city) {
+    var _cityOptions = citiesList === null || citiesList === void 0 ? void 0 : citiesList.cities.map(function (city) {
       return {
         value: city.id,
         content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
@@ -65,7 +59,7 @@ var CitySelectorUI = function CitySelectorUI(props) {
       };
     });
     setCityOptions(_cityOptions);
-  }, [citiesList, isDefault, searchValue]);
+  }, [citiesList, isDefault]);
   (0, _react.useEffect)(function () {
     if (!isAddMode) return;
     if (cityOptions.length === 1) {
@@ -93,13 +87,6 @@ var CitySelectorUI = function CitySelectorUI(props) {
     options: cityOptions,
     onChange: function onChange(city) {
       return handleChangeCity(city);
-    },
-    isShowSearchBar: true,
-    searchBarIsCustomLayout: true,
-    searchBarIsNotLazyLoad: true,
-    searchValue: searchValue,
-    handleChangeSearch: function handleChangeSearch(val) {
-      return setSearchValue(val);
     }
   })));
 };

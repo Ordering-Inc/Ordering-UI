@@ -9,7 +9,6 @@ var _orderingComponents = require("ordering-components");
 var _OrderStatusTypeSelector = require("../OrderStatusTypeSelector");
 var _OrdersExportCSV = require("../OrdersExportCSV");
 var _OrderDelete = require("../OrderDelete");
-var _CreateCustomOrder = require("../CreateCustomOrder");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -22,14 +21,11 @@ var OrdersDashboardControls = function OrdersDashboardControls(props) {
   var selectedOrderNumber = props.selectedOrderNumber,
     filterValues = props.filterValues,
     handleDeleteMultiOrders = props.handleDeleteMultiOrders,
-    handleChangeMultiOrdersStatus = props.handleChangeMultiOrdersStatus,
-    handleOpenCustomOrderDetail = props.handleOpenCustomOrderDetail;
+    handleChangeMultiOrdersStatus = props.handleChangeMultiOrdersStatus;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderDashboardControlsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContnet, null, /*#__PURE__*/_react.default.createElement(_CreateCustomOrder.CreateCustomOrder, {
-    handleOpenCustomOrderDetail: handleOpenCustomOrderDetail
-  }), /*#__PURE__*/_react.default.createElement(_OrdersExportCSV.OrdersExportCSV, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderDashboardControlsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContnet, null, /*#__PURE__*/_react.default.createElement(_OrdersExportCSV.OrdersExportCSV, {
     filterValues: filterValues
   }), selectedOrderNumber > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_OrderDelete.OrderDelete, {
     handleDeleteMultiOrders: handleDeleteMultiOrders
