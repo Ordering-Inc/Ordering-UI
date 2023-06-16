@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const IconButton = styled.button`
   background-color: transparent;
@@ -68,30 +69,24 @@ export const Button = styled.button`
   background: #CCC;
   color: #FFF;
   border: 1px solid #CCC;
-  border-radius: ${({ borderRadius }) => !borderRadius ? '30px' : borderRadius};
+  border-radius: 7.6px;
   line-height: 30px;
   padding-left: 15px;
   padding-right: 15px;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   outline: none;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: all .2s ease-in;
-
   &:active {
-    background: '#CCC';
+    background: ${() => darken(0.07, '#CCC')};
   }
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
-  ${({ rectangle }) => rectangle && css`
-    border-radius: unset;
-  `}
-
   ${({ bgtransparent }) => bgtransparent && css`
-    background: transparent !important;
+      background: transparent !important;
   `}
   ${({ initialIcon }) => initialIcon && css`
     text-align: left;
@@ -105,20 +100,20 @@ export const Button = styled.button`
       padding-left: 15%
       ${props => props.theme?.rtl && css`
         padding-right: 15%;
-        padding-left: 0;
+        padding-left: 0
     `}
     }
   `}
   ${({ outline }) => outline && css`
-    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+    background: #FFF;
     color: #CCC;
     border-color: #CCC;
     &:active {
       color: #FFF;
-      background: '#CCC';
+      background: ${darken(0.07, '#CCC')};
     }
     &:hover {
-      background: '#CCC';
+      background: ${darken(0.07, '#CCC')};
       color: #FFF;
     }
   `}
@@ -134,11 +129,11 @@ export const Button = styled.button`
     border-radius: 50%;
     &:active {
       color: #FFF;
-      background: '#CCC';
+      background: ${darken(0.07, '#CCC')};
     }
   `}
   ${({ circle, outline }) => circle && outline && css`
-    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+    background: #FFF;
     color: #CCC;
     border-color: #CCC;
     padding: 0;
@@ -149,21 +144,18 @@ export const Button = styled.button`
     border-radius: 50%;
     &:active {
       color: #FFF;
-      background: '#CCC';
+      background: ${darken(0.07, '#CCC')};
     }
   `}
   ${({ color }) => color === 'primary' && css`
     background: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primaryContrast};
     border-color: ${props => props.theme.colors.primary};
-    &:hover {
-      background: ${props => props.theme.colors.primary};
-    }
     &:active {
-      background: ${props => props.theme.colors.primary};
+      background: ${props => darken(0.07, props.theme.colors.primary)};
     }
     ${({ outline }) => outline && css`
-      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+      background: #FFF;
       color: ${props => props.theme.colors.primary};
       border-color: ${props => props.theme.colors.primary};
       &:active {
@@ -171,7 +163,7 @@ export const Button = styled.button`
         background: ${props => props.theme.colors.primary};
       }
       &:hover {
-        background: ${props => props.theme.colors.primary};
+        background: ${props => darken(0.07, props.theme.colors.primary)};
         color: #FFF;
       }
     `}
@@ -186,12 +178,12 @@ export const Button = styled.button`
       text-align: center;
       border-radius: 50%;
       &:active {
-        border-color: ${props => props.theme.colors.primary};
-        background: ${props => props.theme.colors.primary};
+        border-color: ${props => darken(0.07, props.theme.colors.primary)};
+        background: ${props => darken(0.07, props.theme.colors.primary)};
       }
     `}
     ${({ circle, outline }) => circle && outline && css`
-      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+      background: #FFF;
       color: ${props => props.theme.colors.primary};
       border-color: ${props => props.theme.colors.primary};
       padding: 0;
@@ -206,49 +198,44 @@ export const Button = styled.button`
       }
     `}
   `}
-
-  ${({ color }) => color === 'lightPrimary' && css`
-    background: ${props => props.theme.colors.lightPrimary};
+  ${({ color }) => color === 'primaryContrast' && css`
+    background: ${props => props.theme.colors.primaryContrast};
     color: ${props => props.theme.colors.primary};
-    border-color: ${props => props.theme.colors.lightPrimary};
+    border-color: ${props => props.theme.colors.primaryContrast};
     &:hover {
-      background: ${props => props.theme.colors.lightPrimary};
+      background: ${props => darken(0.04, props.theme.colors.primaryContrast)};
     }
     &:active {
-      background: ${props => props.theme.colors.lightPrimary};
+      background: ${props => darken(0.1, props.theme.colors.primaryContrast)};
     }
-  `}
-  ${({ color }) => color === 'secundaryDark' && css`
-    background: ${props => props.theme.colors.secundaryDarkContrast};
-    color: ${props => props.theme.colors.secundaryDark};
-    border-color: ${props => props.theme.colors.secundaryDarkContrast};
-    &:hover {
-      background: ${props => props.theme.colors.secundaryDarkContrast};
-    }
-    &:active {
-      background: ${props => props.theme.colors.secundaryDarkContrast};
-    }
+    ${({ naked }) => naked && css`
+      background: transparent;
+      border-color: transparent;
+      &:active {
+        background: transparent;
+      }
+      &:hover {
+        background: transparent;
+      }
+    `}
   `}
   ${({ color }) => color === 'secundary' && css`
     background: ${props => props.theme.colors.secundary};
     color: ${props => props.theme.colors.secundaryContrast};
     border-color: ${props => props.theme.colors.secundary};
-    &:hover {
-      background: ${props => props.theme.colors.secundary};
-    }
     &:active {
-      background: ${props => props.theme.colors.secundary};
+      background: ${props => darken(0.07, props.theme.colors.secundary)};
     }
     ${({ outline }) => outline && css`
-      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+      background: #FFF;
       color: ${props => props.theme.colors.secundary};
       border-color: ${props => props.theme.colors.secundary};
       &:active {
         color: ${props => props.theme.colors.secundaryContrast};
-        background: ${props => props.theme.colors.secundary};
+        background: ${props => darken(0.05, props.theme.colors.secundary)};
       }
       &:hover {
-        background: ${props => props.theme.colors.secundary};
+        background: ${props => darken(0.07, props.theme.colors.secundary)};
         color: #FFF;
       }
     `}
@@ -264,12 +251,12 @@ export const Button = styled.button`
       border-radius: 50%;
       &:active {
         color: ${props => props.theme.colors.secundaryContrast};
-        border-color: ${props => props.theme.colors.secundary};
-        background: ${props => props.theme.colors.secundary};
+        border-color: ${props => darken(0.07, props.theme.colors.secundary)};
+        background: ${props => darken(0.07, props.theme.colors.secundary)};
       }
     `}
     ${({ circle, outline }) => circle && outline && css`
-      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+      background: #FFF;
       color: ${props => props.theme.colors.secundary};
       border-color: ${props => props.theme.colors.secundary};
       padding: 0;
@@ -285,29 +272,15 @@ export const Button = styled.button`
       }
     `}
   `}
-  ${({ color }) => color === 'black' && css`
-    background: ${props => props.theme.colors.black};
-    color: ${props => props.theme.colors.white};
-    border-color: ${props => props.theme.colors.black};
-    &:hover {
-      background: ${props => props.theme.colors.black};
-    }
+  ${({ color }) => color === 'gray' && css`
+    background: ${props => props.theme.colors.grayDividerColor};
+    color: ${props => props.theme.colors.darkGray};
+    border-color: ${props => props.theme.colors.grayDividerColor};
     &:active {
-      background: ${props => props.theme.colors.black};
+      background: ${props => darken(0.05, props.theme.colors.grayDividerColor)};
     }
-  `}
-`
-
-export const LinkButton = styled.a`
-  font-size: 14px;
-  cursor: pointer;
-  color: ${props => props.theme.colors.primary};
-  &:hover {
-    text-decoration: underline;
-  }
-
-  ${({ disabled }) => disabled && css`
-    pointer-events: none;
-    opacity: 0.5;
+    &:hover {
+      background: ${props => darken(0.07, props.theme.colors.grayDividerColor)};
+    }
   `}
 `

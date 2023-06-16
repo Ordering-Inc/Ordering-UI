@@ -8,7 +8,6 @@ import { Telephone, ChevronDown } from 'react-bootstrap-icons'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { ReviewCustomer } from '../ReviewCustomer'
 import { Modal } from '../../Shared'
-import { CompanySelector } from '../CompanySelector'
 
 import {
   BusinessInfo,
@@ -131,11 +130,7 @@ export const OrderContactInformation = (props) => {
             </PhotoWrapper>
             <InfoContent>
               <div>
-                {(order?.customer?.name || order?.customer?.middle_name || order?.customer?.lastname || order?.customer?.second_lastname) ? (
-                  <p className='name'>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
-                ) : (
-                  (!order?.customer?.email || !order?.customer?.phone) && <p className='name'>{t('GUEST_USER', 'Guest user')}</p>
-                )}
+                <p className='name'>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
                 {order?.customer?.cellphone && (
                   <IconButton
                     onClick={() => window.open(`tel:${order?.customer?.country_phone_code ? '+' + order?.customer?.country_phone_code : ''}${order?.customer?.cellphone}`)}
@@ -144,13 +139,13 @@ export const OrderContactInformation = (props) => {
                   </IconButton>
                 )}
               </div>
-              {!order?.user_review && pastOrderStatuses.includes(order?.status) && (
+              {/* {!order?.user_review && pastOrderStatuses.includes(order?.status) && (
                 <ReviewButton
                   onClick={() => handleReviewCustomer(order?.customer)}
                 >
                   {t('REVIEW', 'Review')}
                 </ReviewButton>
-              )}
+              )} */}
             </InfoContent>
             <ChevronDown className='down-arrow' />
           </CustomerInfo>
@@ -216,38 +211,20 @@ export const OrderContactInformation = (props) => {
       </Accordion>
       {order?.delivery_type === 1 && !isServiceOrder && (
         <>
-          {!order?.driver_id && (
-            <DriverSelectorContainer>
-              <p>{t('DRIVER_COMPANY', 'Driver company')}</p>
-              <CompanySelector
-                small
-                isPhoneView
-                defaultValue={order?.driver_company_id ?? 'default'}
-                order={order}
-                isTourOpen={isTourOpen}
-                setCurrentTourStep={setCurrentTourStep}
-                handleOpenMessages={handleOpenMessages}
-                isOrderDrivers
-                orderId={order?.id}
-              />
-            </DriverSelectorContainer>
-          )}
-          {!order?.driver_company_id && (
-            <DriverSelectorContainer>
-              <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
-              <DriverSelector
-                small
-                isPhoneView
-                defaultValue={order?.driver_id ?? 'default'}
-                order={order}
-                isTourOpen={isTourOpen}
-                setCurrentTourStep={setCurrentTourStep}
-                handleOpenMessages={handleOpenMessages}
-                isOrderDrivers
-                orderId={order?.id}
-              />
-            </DriverSelectorContainer>
-          )}
+          <DriverSelectorContainer>
+            <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
+            <DriverSelector
+              small
+              isPhoneView
+              defaultValue={order?.driver_id ? order.driver_id : 'default'}
+              order={order}
+              isTourOpen={isTourOpen}
+              setCurrentTourStep={setCurrentTourStep}
+              handleOpenMessages={handleOpenMessages}
+              isOrderDrivers
+              orderId={order?.id}
+            />
+          </DriverSelectorContainer>
           <DriverInfoContainer>
             <DriverInfo>
               <PhotoWrapper>

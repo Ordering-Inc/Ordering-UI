@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
 import { useWindowSize } from '../../../../../../hooks/useWindowSize'
-import { XLg, ArrowsAngleExpand, ArrowsAngleContract } from 'react-bootstrap-icons'
+import { XLg } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { OrdersManager } from '../OrdersManager'
 import { IconButton } from '../../../styles/Buttons'
@@ -29,9 +29,8 @@ export const OrdersLateralBar = (props) => {
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
-  const { width } = useWindowSize()
 
-  const [isExpand, setIsExpand] = useState(false)
+  const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isOpenDriverOrderDetails, setIsOpenDriverOrderDetails] = useState(false)
 
@@ -84,15 +83,6 @@ export const OrdersLateralBar = (props) => {
     }
   }
 
-  const expandSideBar = () => {
-    const element = document.getElementById('driver_lateral_bar')
-    if (!element) return
-
-    if (isExpand) element.style.width = '500px'
-    else element.style.width = '100vw'
-    setIsExpand(prev => !prev)
-  }
-
   useEffect(() => {
     if (!open) return
     document.addEventListener('keydown', onCloseSidebar)
@@ -103,14 +93,6 @@ export const OrdersLateralBar = (props) => {
     <LateralBarContainer id='driver_lateral_bar'>
       <OrdersContainer>
         <CloseButtonWrapper>
-          {width > 576 && (
-            <IconButton
-              color='black'
-              onClick={() => expandSideBar()}
-            >
-              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
-            </IconButton>
-          )}
           <IconButton
             color='black'
             onClick={() => props.onClose()}

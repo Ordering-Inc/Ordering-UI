@@ -42,8 +42,21 @@ export const WrapItemView = styled.div`
 export const OrderSubFilterControls = styled.div`
   display: flex;
   width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
+
+  ${({ isColumn }) => isColumn ? css`
+    flex-direction: column;
+    > div:last-child {
+      margin-top: 0;
+      margin-bottom: 10px;
+      > div {
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+  ` : css`
+    flex-direction: row;
+    justify-content: space-between;
+  `}
 `
 export const OrderStatusSubFilterWrapper = styled.div`
   flex: 1;

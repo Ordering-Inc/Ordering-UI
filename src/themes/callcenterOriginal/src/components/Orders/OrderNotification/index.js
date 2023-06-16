@@ -5,7 +5,7 @@ import {
   useEvent,
   OrderNotification as OrderNotificationController
 } from 'ordering-components'
-import { Alert, Modal } from '../../Shared'
+import { Modal } from '../../Shared'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
 import { useTheme } from 'styled-components'
@@ -18,10 +18,7 @@ import {
 toast.configure()
 
 const OrderNotificationUI = (props) => {
-  const {
-    isOnlyDelivery,
-    customerId
-  } = props
+  const { isOnlyDelivery } = props
 
   const [configState] = useConfig()
   const [, t] = useLanguage()
@@ -30,11 +27,8 @@ const OrderNotificationUI = (props) => {
 
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleNotification = (order) => {
-    if (order?.products?.[0]?.type === 'gift_card') return
-    if (customerId && order?.customer_id !== customerId) return
     if (isOnlyDelivery && order?.delivery_type !== 1) return
     const _registerOrderIds = [...registerOrderIds]
     if (!_registerOrderIds.includes(order.id)) {
@@ -76,9 +70,11 @@ const OrderNotificationUI = (props) => {
     }
     toast(content, toastConfigure)
     const sound = document.getElementById('notification-sound')
-    sound.muted = false
-    sound.play()
-    setRegisterOrderIds([])
+    if (sound?.muted && sound?.play) {
+      sound.muted = false
+      sound.play()
+      setRegisterOrderIds([])
+    }
   }
 
   useEffect(() => {
@@ -89,7 +85,7 @@ const OrderNotificationUI = (props) => {
   useEffect(() => {
     const sound = document.getElementById('notification-sound')
     const interval = setInterval(() => {
-      if (notificationModalOpen) {
+      if (notificationModalOpen && sound?.muted && sound?.play) {
         sound.muted = false
         sound.play()
       }
@@ -107,14 +103,7 @@ const OrderNotificationUI = (props) => {
     return () => {
       events.off('order_added', handleNotification)
     }
-  }, [configState, registerOrderIds, customerId])
-
-  useEffect(() => {
-    setAlertState({
-      open: true,
-      content: t('SOUND_WILL_BE_PLAYED', 'The sound will be played on this page whenever a new order is received.')
-    })
-  }, [])
+  }, [configState, registerOrderIds])
 
   return (
     <>
@@ -133,20 +122,10 @@ const OrderNotificationUI = (props) => {
           )}
         </ModalContainer>
       </Modal>
-      <audio id='notification-sound' muted>
+      {/* <audio id='notification-sound' muted>
         <source src={theme.sounds.notificationOgg} type='audio/ogg' />
         <source src={theme.sounds.notificationMp3} type='audio/mpeg' />
-      </audio>
-      <Alert
-        width='700px'
-        title={t('WEB_APPNAME', 'Ordering')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => setAlertState({ open: false, content: [] })}
-        onAccept={() => setAlertState({ open: false, content: [] })}
-        closeOnBackdrop={false}
-      />
+      </audio> */}
     </>
   )
 }

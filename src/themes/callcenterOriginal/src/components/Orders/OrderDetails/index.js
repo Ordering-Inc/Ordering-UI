@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useSession, OrderDetailsDashboard as OrderDetailsController } from 'ordering-components'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -14,9 +13,6 @@ import { XLg } from 'react-bootstrap-icons'
 import { NotFoundSource, Modal } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { OrderToPrint } from '../OrderToPrint'
-import { OrderToPrintTicket } from '../OrderToPrintTicket'
-import { getOrderStatuPickUp, getOrderStatus, getCurrenySymbol } from '../../../../../../utils'
-
 import {
   Container,
   SkeletonWrapper,
@@ -33,8 +29,7 @@ import {
   PlaceSpotContainer,
   RejectReasonsContainer,
   RejectReasonWrapper,
-  RejectReasonsList,
-  DetailBottom
+  RejectReasonsList
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -52,13 +47,10 @@ const OrderDetailsUI = (props) => {
     setIsTourFlag,
     setIsTourOpen,
     actionStatus,
-    handleRefundPaymentsStripe,
-    handleOrderRefund,
+    handleRefundOrder,
     isServiceOrder
   } = props
 
-  const history = useHistory()
-  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [openMessages, setOpenMessages] = useState({ chat: false, history: false })
@@ -66,12 +58,10 @@ const OrderDetailsUI = (props) => {
   const [{ parseDate }] = useUtils()
   const [{ user }] = useSession()
   const printRef = useRef()
-  const printTicketRef = useRef()
 
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
-  const [isExpand, setIsExpand] = useState(false)
   const placeSpotEnabled = [3, 4]
   const {
     order,
@@ -79,6 +69,37 @@ const OrderDetailsUI = (props) => {
   } = props.order
 
   const rejectResonStatuses = [6, 9, 10, 11, 12, 14]
+  const getOrderStatus = (status) => {
+    const orderStatus = [
+      { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 25 },
+      { key: 1, value: 'Completed by admin', slug: 'COMPLETED_BY_ADMIN', percentage: 100 },
+      { key: 2, value: 'Reject by admin', slug: 'REJECT_BY_ADMIN', percentage: 0 },
+      { key: 3, value: 'Driver arrived by business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
+      { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 70 },
+      { key: 5, value: 'Reject by business', slug: 'REJECT_BY_BUSINESS', percentage: 0 },
+      { key: 6, value: 'Reject by driver', slug: 'REJECT_BY_DRIVER', percentage: 0 },
+      { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
+      { key: 8, value: 'Accepted by driver', slug: 'ACCEPTED_BY_DRIVER', percentage: 45 },
+      { key: 9, value: 'Pick up completed by driver', slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },
+      { key: 10, value: 'Pick up Failed by driver', slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
+      { key: 11, value: 'Delivery completed by driver', slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
+      { key: 12, value: 'Delivery Failed by driver', slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 },
+      { key: 13, value: 'Preorder', slug: 'PREORDER', percentage: 25 },
+      { key: 14, value: 'Order not ready', slug: 'ORDER_NOT_READY', percentage: 65 },
+      { key: 15, value: 'Pickup completed by customer', slug: 'PICKUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
+      { key: 16, value: 'Canceled by customer', slug: 'CANCELED_BY_CUSTOMER', percentage: 0 },
+      { key: 17, value: 'Not picked by customer', slug: 'NOT_PICKED_BY_CUSTOMER', percentage: 0 },
+      { key: 18, value: 'Driver almost arrived to business', slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 50 },
+      { key: 19, value: 'Driver almost arrived to customer', slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', percentage: 90 },
+      { key: 20, value: 'Customer almost arrived to business', slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 50 },
+      { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 60 },
+      { key: 22, value: 'Looking for driver', slug: 'ORDER_LOOKING_FOR_DRIVER', percentage: 35 },
+      { key: 23, value: 'Driver on way', slug: 'ORDER_DRIVER_ON_WAY', percentage: 45 }
+    ]
+
+    const objectStatus = orderStatus.find((o) => o.key === status)
+    return objectStatus && objectStatus
+  }
 
   const getLogisticTag = (status) => {
     switch (parseInt(status)) {
@@ -120,28 +141,26 @@ const OrderDetailsUI = (props) => {
     setUnreadAlert({ business, driver, customer })
   }
 
+  const handleOpenMessages = (openMessage) => {
+    if (openMessage === 'chat') {
+      setOpenMessages({ chat: true, history: false })
+      setUnreadAlert({ ...unreadAlert, customer: false })
+    }
+    if (openMessage === 'history') {
+      setOpenMessages({ chat: false, history: true })
+    }
+    setShowOption(null)
+    setExtraOpen(true)
+  }
+
   const handleCloseMessages = () => {
     setOpenMessages({ chat: false, history: false })
   }
 
-  const handleShowOption = (option, isInitialRender) => {
-    if (option === 'chat') {
-      setOpenMessages({ chat: true, history: false })
-      setUnreadAlert({ ...unreadAlert, customer: false })
-      setShowOption(null)
-    } else if (option === 'history') {
-      setOpenMessages({ chat: false, history: true })
-      setShowOption(null)
-    } else {
-      setOpenMessages({ chat: false, history: false })
-      setShowOption(option)
-    }
+  const handleShowOption = (option) => {
+    handleCloseMessages()
     setExtraOpen(true)
-
-    if (!isInitialRender) {
-      const orderId = query.get('id')
-      history.replace(`${location.pathname}?id=${orderId}&section=${option}`)
-    }
+    setShowOption(option)
   }
 
   useEffect(() => {
@@ -161,14 +180,10 @@ const OrderDetailsUI = (props) => {
       if (width <= 500) {
         document.getElementById('orderDetails').style.width = '100vw'
       } else {
-        if (isExpand) {
-          document.getElementById('orderDetails').style.width = '100vw'
+        if (extraOpen && width >= 1000) {
+          document.getElementById('orderDetails').style.width = '1000px'
         } else {
-          if (extraOpen && width >= 1000) {
-            document.getElementById('orderDetails').style.width = '1000px'
-          } else {
-            document.getElementById('orderDetails').style.width = '500px'
-          }
+          document.getElementById('orderDetails').style.width = '500px'
         }
       }
     }
@@ -176,12 +191,21 @@ const OrderDetailsUI = (props) => {
 
   useEffect(() => {
     toggleMainContent()
-  }, [extraOpen, isExpand, width])
+  }, [width])
 
   useEffect(() => {
     if (!open) return
     actionSidebar(true)
   }, [open])
+
+  useEffect(() => {
+    if (width < 1000) return
+    if (extraOpen) {
+      document.getElementById('orderDetails').style.width = '1000px'
+    } else {
+      toggleMainContent()
+    }
+  }, [extraOpen])
 
   const handleChangeTour = (evt) => {
     if (!isTourOpen) return
@@ -192,7 +216,7 @@ const OrderDetailsUI = (props) => {
     }
     if (evt.target.closest('.driver-select')) return
     if (isTourOpen && setCurrentTourStep) {
-      handleShowOption('chat')
+      handleOpenMessages('chat')
       setTimeout(() => {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
       }, 1)
@@ -203,7 +227,7 @@ const OrderDetailsUI = (props) => {
     if (evt.keyCode === 37 && currentTourStep === 2) setCurrentTourStep(1)
     if (evt.keyCode === 39 && currentTourStep === 1 && order?.delivery_type === 1) setCurrentTourStep(2)
     if (evt.keyCode === 39 && currentTourStep === 1 && order?.delivery_type !== 1) {
-      handleShowOption('chat')
+      handleOpenMessages('chat')
       setTimeout(() => {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
       }, 1)
@@ -215,7 +239,7 @@ const OrderDetailsUI = (props) => {
       setIsTourFlag(false)
     }
     if ((evt.keyCode === 39 && currentTourStep === 2)) {
-      handleShowOption('chat')
+      handleOpenMessages('chat')
       setCurrentTourStep(3)
     }
     if (evt.keyCode === 39 && currentTourStep === 3) {
@@ -233,7 +257,7 @@ const OrderDetailsUI = (props) => {
 
   useEffect(() => {
     if (!isTourFlag) return
-    handleShowOption('chat')
+    handleOpenMessages('chat')
     setTimeout(() => {
       setCurrentTourStep(3)
     }, 1)
@@ -250,8 +274,6 @@ const OrderDetailsUI = (props) => {
     setExtraOpen(false)
     setOpenMessages({ chat: false, history: false })
     setShowOption(null)
-    const orderId = query.get('id')
-    history.replace(`${location.pathname}?id=${orderId}`)
   }
 
   useEffect(() => {
@@ -259,16 +281,6 @@ const OrderDetailsUI = (props) => {
     document.addEventListener('keydown', onCloseSidebar)
     return () => document.removeEventListener('keydown', onCloseSidebar)
   }, [open])
-
-  useEffect(() => {
-    if (loading) return
-    const section = query.get('section')
-    if (section) {
-      handleShowOption(section, true)
-    }
-  }, [loading])
-
-  const progressBarObjt = order?.delivery_type && order?.delivery_type === 2 ? getOrderStatuPickUp : getOrderStatus
 
   return (
     <Container
@@ -301,25 +313,18 @@ const OrderDetailsUI = (props) => {
             showOption={showOption}
             openMessage={openMessages}
             handleShowOption={handleShowOption}
+            handleOpenMessages={handleOpenMessages}
             isTourOpen={isTourOpen}
             currentTourStep={currentTourStep}
             setIsTourOpen={setIsTourOpen}
             printRef={printRef}
-            printTicketRef={printTicketRef}
-            isExpand={isExpand}
-            setIsExpand={setIsExpand}
           />
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
               <p>
-                {
-                  order?.delivery_datetime_utc
-                    ? parseDate(order?.delivery_datetime_utc)
-                    : parseDate(order?.delivery_datetime, { utc: false })
-                }
+                {parseDate(order?.delivery_datetime, { utc: false })}
               </p>
-              <p>{order?.eta_time} {t('MIN', 'min')}</p>
             </div>
             <OrderStatusSelectorWrapper>
               <OrderStatusTypeSelector
@@ -340,7 +345,7 @@ const OrderDetailsUI = (props) => {
             </PlaceSpotContainer>
           )}
           <StatusBarContainer>
-            <StatusBar percentage={progressBarObjt(order?.status)?.percentage} />
+            <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
           </StatusBarContainer>
           <AdvancedLogistic>
             <div>
@@ -374,7 +379,7 @@ const OrderDetailsUI = (props) => {
               unreadAlert={unreadAlert}
               isTourOpen={isTourOpen}
               setCurrentTourStep={setCurrentTourStep}
-              handleShowOption={handleShowOption}
+              handleOpenMessages={handleOpenMessages}
             />
             <OrderProducts>
               <h2>{t('EXPORT_SUMMARY', 'Summary')}</h2>
@@ -382,18 +387,16 @@ const OrderDetailsUI = (props) => {
                 <ProductItemAccordion
                   key={product.id}
                   product={product}
-                  currency={getCurrenySymbol(order?.currency)}
+                  currency={order?.currency}
                 />
               ))}
             </OrderProducts>
             <OrderBill
               order={order}
               actionStatus={actionStatus}
-              handleRefundPaymentsStripe={handleRefundPaymentsStripe}
-              handleOrderRefund={handleOrderRefund}
+              handleRefundOrder={handleRefundOrder}
             />
           </div>
-          <DetailBottom />
         </OrderDetailsContent>
       )}
 
@@ -512,21 +515,15 @@ const OrderDetailsUI = (props) => {
           ref={printRef}
           order={order}
           placeSpotEnabled={placeSpotEnabled}
-          getOrderStatus={progressBarObjt}
+          getOrderStatus={getOrderStatus}
           getLogisticTag={getLogisticTag}
           getPriorityTag={getPriorityTag}
-        />
-      )}
-      {order && Object.keys(order).length > 0 && !loading && (
-        <OrderToPrintTicket
-          ref={printTicketRef}
-          order={order}
-          getOrderStatus={progressBarObjt}
         />
       )}
     </Container>
   )
 }
+
 export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,

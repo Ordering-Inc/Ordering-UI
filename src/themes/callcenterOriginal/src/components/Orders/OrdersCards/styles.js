@@ -100,10 +100,8 @@ export const ViewDetails = styled.a`
   cursor: pointer;
   color: ${props => props.theme.colors.primary};
   font-size: 12px;
+  text-decoration: underline;
   margin: 0 10px;
-  &:hover {
-    text-decoration: underline;
-  }
 `
 
 export const InfoItemContainer = styled.div`
