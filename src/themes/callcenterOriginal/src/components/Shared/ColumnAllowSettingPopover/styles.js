@@ -6,7 +6,6 @@ export const HeaderItem = styled.div`
 `
 
 export const PopoverBody = styled.div`
-  position: fixed !important;
   z-index: 1001;
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border: 1px solid ${props => props.theme.colors?.borderColor};

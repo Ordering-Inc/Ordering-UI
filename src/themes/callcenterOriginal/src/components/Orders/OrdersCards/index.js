@@ -20,7 +20,6 @@ import {
   CardHeading,
   Timer
 } from './styles'
-import { useWindowSize } from '../../../../../../hooks/useWindowSize'
 
 export const OrdersCards = (props) => {
   const {
@@ -33,12 +32,10 @@ export const OrdersCards = (props) => {
     selectedOrderCard,
     handleOrderCardClick,
     handleUpdateDriverLocation,
-    slaSettingTime,
-    isDelivery
+    slaSettingTime
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const { width } = useWindowSize()
   const [{ parseDate, optimizeImage }] = useUtils()
   const [, setCurrentTime] = useState()
   const [configState] = useConfig()
@@ -60,8 +57,6 @@ export const OrdersCards = (props) => {
     const isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector')
     if (isInvalid) return
     handleOrderCardClick(order)
-    const element = document.getElementById('deliveryDashboard')
-    if ((isDelivery || isMessagesView) && width < 993 && element) element.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }
 
   const getOrderStatus = (s) => {
@@ -128,11 +123,11 @@ export const OrdersCards = (props) => {
     return finalTaget
   }
 
-  // const getStatusClassName = (minutes) => {
-  //   if (isNaN(Number(minutes))) return 'in_time'
-  //   const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
-  //   return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
-  // }
+  const getStatusClassName = (minutes) => {
+    if (isNaN(Number(minutes))) return 'in_time'
+    const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
+    return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -212,11 +207,7 @@ export const OrdersCards = (props) => {
                     <p>{getOrderStatus(order.status)?.value}</p>
                     <div>
                       <p>
-                        {
-                          order?.delivery_datetime_utc
-                            ? parseDate(order?.delivery_datetime_utc)
-                            : parseDate(order?.delivery_datetime, { utc: false })
-                        }
+                        {parseDate(order?.delivery_datetime, { utc: false })}
                       </p>
                       <ViewDetails
                         className='view-details'
@@ -229,7 +220,7 @@ export const OrdersCards = (props) => {
                   {allowColumns?.timer && (
                     <Timer>
                       <p className='bold'>Timer</p>
-                      <p className={order?.time_status}>{displayDelayedTime(order)}</p>
+                      <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
                     </Timer>
                   )}
                 </CardHeading>
@@ -269,7 +260,7 @@ export const OrdersCards = (props) => {
                   </InfoItemContainer>
                 </CardContent>
                 {allowColumns?.slaBar && (
-                  <Timestatus timeState={order?.time_status} />
+                  <Timestatus timeState={getStatusClassName(getDelayMinutes(order))} />
                 )}
               </OrderCard>
             ))}

@@ -7,11 +7,10 @@ export const Container = styled.div`
 `
 
 export const Tab = styled.div`
-  padding: 10px 0px;
+  padding: 10px 15px;
   cursor: pointer;
   color: ${props => props.theme.colors?.headingColor};
   white-space: nowrap;
-  font-size: 14px;
 
   ${({ active }) => active && css`
     border-bottom: 3px solid;
@@ -20,11 +19,5 @@ export const Tab = styled.div`
 
   ${({ active }) => !active && css`
     color: #909BA9;
-  `}
-
-  ${props => props.theme?.rtl ? css`
-    margin-left: 30px;
-  ` : css`
-    margin-right: 30px;
   `}
 `

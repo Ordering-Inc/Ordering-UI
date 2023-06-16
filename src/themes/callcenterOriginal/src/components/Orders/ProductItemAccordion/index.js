@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import TiPencil from '@meronex/icons/ti/TiPencil'
 import IosArrowUp from '@meronex/icons/ios/IosArrowUp'
 import VscTrash from '@meronex/icons/vsc/VscTrash'
-import { useUtils, useLanguage, useOrder, useConfig } from 'ordering-components'
+import { useUtils, useLanguage, useOrder } from 'ordering-components'
 import { useWindowSize } from '../../../../../../hooks/useWindowSize'
 
 import {
@@ -23,9 +23,7 @@ import {
   ProductNotAvailable,
   ProductSelect,
   ProductOptionsList,
-  ProductQuantity,
-  ScheduleInfoWrapper,
-  ScheduleInfo
+  ProductQuantity
 } from './styles'
 
 export const ProductItemAccordion = (props) => {
@@ -41,8 +39,7 @@ export const ProductItemAccordion = (props) => {
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const [{ parsePrice, optimizeImage, parseDate }] = useUtils()
-  const [{ configs }] = useConfig()
+  const [{ parsePrice, optimizeImage }] = useUtils()
   const windowSize = useWindowSize()
 
   const [setActive, setActiveState] = useState('active')
@@ -95,7 +92,7 @@ export const ProductItemAccordion = (props) => {
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
     if (name !== 'No') {
       const pos = position ? `(${position})` : ''
-      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price, { currency: currency })}` : `${name} ${pos}`
+      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price, { currencyPosition: 'left' })}` : `${name} ${pos}`
     } else {
       return 'No'
     }
@@ -130,71 +127,56 @@ export const ProductItemAccordion = (props) => {
               <ProductImage bgimage={optimizeImage(product?.images, 'h_100,c_limit')} />
             </WrapperProductImage>
           )}
-          {product?.calendar_event ? (
-            <ScheduleInfoWrapper>
-              <h3>{product.name}</h3>
-              <ScheduleInfo>
-                <span>
-                  {parseDate(product?.calendar_event?.start, { outputFormat: (configs?.format_time?.value === '12') ? 'hh:mm a' : 'HH:mm' })}
-                  {' '}-{' '}
-                  {parseDate(product?.calendar_event?.end, { outputFormat: (configs?.format_time?.value === '12') ? 'hh:mm a' : 'HH:mm' })}
-                </span>
-              </ScheduleInfo>
-            </ScheduleInfoWrapper>
-          ) : (
-            <>
-              {isCartProduct ? (
-                <ProductSelect
-                  ref={productSelect}
-                  value={product.quantity}
-                  onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+          {isCartProduct ? (
+            <ProductSelect
+              ref={productSelect}
+              value={product.quantity}
+              onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+            >
+              {[...Array(getProductMax(product) + 1)].map((v, i) => (
+                <option
+                  key={i}
+                  value={i}
+                  disabled={offsetDisabled(product) < i && i !== 0}
                 >
-                  {[...Array(getProductMax(product) + 1)].map((v, i) => (
-                    <option
-                      key={i}
-                      value={i}
-                      disabled={offsetDisabled(product) < i && i !== 0}
-                    >
-                      {i === 0 ? t('REMOVE', 'Remove') : i}
-                    </option>
-                  ))}
-                </ProductSelect>
-              ) : (
-                <ProductQuantity>
-                  {product?.quantity}
-                </ProductQuantity>
-              )}
-              <ContentInfo>
-                <h3>{product.name}</h3>
-                {windowSize.width <= 410 && (
-                  <span>
-                    <p>{parsePrice(getProductPrice(product), { currency: currency })}</p>
-                    {isCartProduct && (
-                      <div>
-                        {onEditProduct && (
-                          <span ref={productActionsEdit}>
-                            <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
-                          </span>
-                        )}
-                        {onDeleteProduct && (
-                          <span ref={productActionsDelete}>
-                            <VscTrash color='#D81212' onClick={() => onDeleteProduct(product)} />
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </span>
-                )}
-              </ContentInfo>
-            </>
+                  {i === 0 ? t('REMOVE', 'Remove') : i}
+                </option>
+              ))}
+            </ProductSelect>
+          ) : (
+            <ProductQuantity>
+              {product?.quantity}
+            </ProductQuantity>
           )}
+          <ContentInfo>
+            <h3>{product.name}</h3>
+            {windowSize.width <= 410 && (
+              <span>
+                <p>{parsePrice(getProductPrice(product), { currencyPosition: 'left', ...(currency && { currency }) })}</p>
+                {isCartProduct && (
+                  <div>
+                    {onEditProduct && (
+                      <span ref={productActionsEdit}>
+                        <TiPencil color='#F2BB40' onClick={() => onEditProduct(product)} />
+                      </span>
+                    )}
+                    {onDeleteProduct && (
+                      <span ref={productActionsDelete}>
+                        <VscTrash color='#D81212' onClick={() => onDeleteProduct(product)} />
+                      </span>
+                    )}
+                  </div>
+                )}
+              </span>
+            )}
+          </ContentInfo>
         </ProductInfo>
 
         {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
           <ProductPriceSection>
             <ProductPrice>
               <span>
-                {parsePrice(getProductPrice(product), { currency: currency })}
+                {parsePrice(getProductPrice(product), { currencyPosition: 'left', ...(currency && { currency }) })}
               </span>
               {(productInfo().ingredients?.length > 0 || productInfo().options?.length > 0 || product.comment) && (
                 <p>

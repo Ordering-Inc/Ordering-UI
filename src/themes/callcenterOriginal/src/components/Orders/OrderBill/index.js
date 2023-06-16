@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, useConfig } from 'ordering-components'
-import { verifyDecimals, getCurrenySymbol } from '../../../../../../utils'
-import { RefundToWallet } from './RefundToWallet'
+import { verifyDecimals } from '../../../../../../utils'
 import { Alert, Confirm } from '../../Shared'
 import { Button } from '../../../styles'
 
@@ -14,11 +13,9 @@ export const OrderBill = (props) => {
   const {
     order,
     actionStatus,
-    handleRefundPaymentsStripe,
-    handleOrderRefund
+    handleRefundOrder
   } = props
 
-  const isGiftCardOrder = order?.products?.[0]?.type === 'gift_card'
   const [, t] = useLanguage()
   const [{ parsePrice, parseNumber }] = useUtils()
   const [{ configs }] = useConfig()
@@ -26,7 +23,7 @@ export const OrderBill = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const SPOT_DICTIONARY = {
     3: t('SPOT_NUMBER_EAT_IN', 'Table number'),
-    4: t('SPOT_NUMBER_CURBSIDE', 'Spot number'),
+    4: t('SPOT_NUMBER_CURBSIDE', 'Spor number'),
     5: t('SPOT_NUMBER_DRIVE_THRU', 'Drive thru lane')
   }
 
@@ -52,7 +49,7 @@ export const OrderBill = (props) => {
       content: t('QUESTION_REFUND_ORDER', 'Do you want to reimburse this order? This action is irreversible.'),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
-        handleRefundPaymentsStripe()
+        handleRefundOrder()
       }
     })
   }
@@ -89,7 +86,7 @@ export const OrderBill = (props) => {
           <tr>
             <td>{t('SUBTOTAL', 'Subtotal')}</td>
             <td>
-              {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()), { currency: getCurrenySymbol(order?.currency) })}
+              {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()), { currency: order?.currency })}
             </td>
           </tr>
           {(order?.summary?.discount > 0 ?? order?.discount > 0) && order?.offers?.length === 0 && (
@@ -102,20 +99,20 @@ export const OrderBill = (props) => {
               ) : (
                 <td>{t('DISCOUNT', 'Discount')}</td>
               )}
-              <td>- {parsePrice(order?.summary?.discount ?? order?.discount, { currency: getCurrenySymbol(order?.currency) })}</td>
+              <td>- {parsePrice(order?.summary?.discount ?? order?.discount, { currency: order?.currency })}</td>
             </tr>
           )}
           {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {t(offer?.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
+                  {offer.name}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
                 </td>
                 <td>
-                  - {parsePrice(offer?.summary?.discount, { currency: getCurrenySymbol(order?.currency) })}
+                  - {parsePrice(offer?.summary?.discount, { currency: order?.currency })}
                 </td>
               </tr>
             ))
@@ -124,9 +121,9 @@ export const OrderBill = (props) => {
             <tr>
               <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
               {order?.tax_type === 1 ? (
-                <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0), { currency: getCurrenySymbol(order?.currency) })}</td>
+                <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0), { currency: order?.currency })}</td>
               ) : (
-                <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
+                <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0, { currency: order?.currency })}</td>
               )}
             </tr>
           )}
@@ -137,7 +134,7 @@ export const OrderBill = (props) => {
                   {t('TAX', 'Tax')}
                   <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
                 </td>
-                <td>{parsePrice(order?.summary?.tax ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
+                <td>{parsePrice(order?.summary?.tax ?? 0, { currency: order?.currency })}</td>
               </tr>
             )
           }
@@ -148,7 +145,7 @@ export const OrderBill = (props) => {
                   {t('SERVICE_FEE', 'Service fee')}
                   <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
                 </td>
-                <td>{parsePrice(order?.summary?.service_fee ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
+                <td>{parsePrice(order?.summary?.service_fee ?? 0, { currency: order?.currency })}</td>
               </tr>
             )
           }
@@ -156,10 +153,10 @@ export const OrderBill = (props) => {
             order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
               <tr key={tax?.id}>
                 <td>
-                  {t(tax?.name?.toUpperCase()?.replaceAll(' ', '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                 </td>
-                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
+                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0, { currency: order?.currency })}</td>
               </tr>
             ))
           }
@@ -167,10 +164,10 @@ export const OrderBill = (props) => {
             order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
               <tr key={fee.id}>
                 <td>
-                  {t(fee?.name?.toUpperCase()?.replaceAll(' ', '_'), fee?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
                 </td>
-                <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
+                <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0, { currency: order?.currency })}</td>
               </tr>
             ))
           }
@@ -178,34 +175,34 @@ export const OrderBill = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {t(offer?.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
+                  {offer.name}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
                 </td>
                 <td>
-                  - {parsePrice(offer?.summary?.discount, { currency: getCurrenySymbol(order?.currency) })}
+                  - {parsePrice(offer?.summary?.discount, { currency: order?.currency })}
                 </td>
               </tr>
             ))
           }
-          {typeof order?.summary?.delivery_price === 'number' && (
+          {order?.summary?.delivery_price > 0 && (
             <tr>
               <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-              <td>{parsePrice(order?.summary?.delivery_price, { currency: getCurrenySymbol(order?.currency) })}</td>
+              <td>{parsePrice(order?.summary?.delivery_price, { currency: order?.currency })}</td>
             </tr>
           )}
           {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {t(offer?.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
+                  {offer.name}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
                 </td>
                 <td>
-                  - {parsePrice(offer?.summary?.discount, { currency: getCurrenySymbol(order?.currency) })}
+                  - {parsePrice(offer?.summary?.discount, { currency: order?.currency })}
                 </td>
               </tr>
             ))
@@ -221,7 +218,7 @@ export const OrderBill = (props) => {
                     <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
                   )}
               </td>
-              <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip, { currency: getCurrenySymbol(order?.currency) })}</td>
+              <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip, { currency: order?.currency })}</td>
             </tr>
           )}
         </tbody>
@@ -230,7 +227,7 @@ export const OrderBill = (props) => {
         <tbody>
           <tr>
             <td>{t('TOTAL', 'Total')}</td>
-            <td>{parsePrice(order?.summary?.total || order?.total, { currency: getCurrenySymbol(order?.currency) })}</td>
+            <td>{parsePrice(order?.summary?.total || order?.total, { currencyPosition: 'left', currency: order?.currency })}</td>
           </tr>
         </tbody>
       </table>
@@ -242,71 +239,33 @@ export const OrderBill = (props) => {
             </tr>
           </thead>
           <tbody>
-            {order?.payment_events?.filter(item => item.event === 'payment').map((event, i) => (
+            {order?.payment_events?.map((event, i) => (
               <tr key={i}>
                 <td>
                   {event?.wallet_event
                     ? walletName[event?.wallet_event?.wallet?.type]?.name
-                    : event?.paymethod
-                      ? t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name)
-                      : event?.data?.gateway
-                        ? t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))
-                        : walletName[event?.data?.wallet_currency]?.name}
+                    : event?.paymethod?.name}
                 </td>
-                <td>
-                  {event?.paymethod?.gateway === 'cash' && order?.cash
-                    ? parsePrice(order?.cash, { currency: getCurrenySymbol(order?.currency) })
-                    : `-${parsePrice(event?.amount, { currency: getCurrenySymbol(order?.currency) })}`}
-                </td>
+                <td>-{parsePrice(event?.amount, { currency: order?.currency })}</td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-      {!isGiftCardOrder && (
-        <RefundToWallet
-          order={order}
-          actionStatus={actionStatus}
-          handleOrderRefund={handleOrderRefund}
-        />
-      )}
-      {order?.payment_events?.filter(item => item.event === 'refund').length > 0 && (
-        <table className='payments'>
+      {order?.delivery_option && (
+        <table className='delivery_option'>
           <thead>
             <tr>
-              <th colSpan='2'>{t('REFUND', 'Refund')}</th>
+              <th colSpan='2'>{t('DELIVERY_PREFERENCE', 'Delivery Preference')}</th>
             </tr>
           </thead>
           <tbody>
-            {order?.payment_events?.filter(item => item.event === 'refund').map((event, i) => (
-              <tr key={i}>
-                <td>
-                  {event?.wallet_event
-                    ? walletName[event?.wallet_event?.wallet?.type]?.name
-                    : event?.paymethod
-                      ? t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name)
-                      : event?.data?.gateway
-                        ? t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))
-                        : walletName[event?.data?.wallet_currency]?.name}
-                </td>
-                <td>{parsePrice(event?.amount, { currency: getCurrenySymbol(order?.currency) })}</td>
-              </tr>
-            ))}
+            <tr>
+              <td>{order?.delivery_option?.name}</td>
+            </tr>
           </tbody>
         </table>
       )}
-      <table className='delivery_option'>
-        <thead>
-          <tr>
-            <th colSpan='2'>{t('DELIVERY_PREFERENCE', 'Delivery Preference')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{order?.delivery_option ? t(order?.delivery_option?.name?.toUpperCase()?.replaceAll(' ', '_'), order?.delivery_option?.name) : t('EITHER_WAY', 'Either way')}</td>
-          </tr>
-        </tbody>
-      </table>
       {order?.comment && (
         <table className='comments'>
           <tbody>
@@ -337,7 +296,7 @@ export const OrderBill = (props) => {
           <tbody>
             <tr>
               <td>{t('ORDER_VEHICLE_TYPE', 'Type')}</td>
-              <td>{t(order?.vehicle?.type?.toUpperCase(), order?.vehicle?.type)}</td>
+              <td>{order?.vehicle?.type}</td>
             </tr>
             <tr>
               <td>{t('ORDER_VEHICLE_MODEL', 'Model')}</td>
@@ -355,7 +314,7 @@ export const OrderBill = (props) => {
         </table>
       )}
 
-      {!isGiftCardOrder && !order?.refund_data && stripePaymethods.includes(order?.paymethod?.gateway) && (
+      {!order?.refund_data && stripePaymethods.includes(order?.paymethod?.gateway) && (
         <RefundButtonWrapper>
           <Button
             color='primary'

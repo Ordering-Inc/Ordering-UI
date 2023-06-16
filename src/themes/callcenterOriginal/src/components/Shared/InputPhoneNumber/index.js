@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import parsePhoneNumber from 'libphonenumber-js'
 import PhoneInput from 'react-phone-number-input'
 import { useLanguage, useConfig, useSession } from 'ordering-components'
-import { findExitingCode } from '../../../../../../utils'
 
 import { Container, ErrorMsg } from './styles'
 
@@ -12,8 +11,7 @@ export const InputPhoneNumber = (props) => {
     value,
     setValue,
     handleIsValid,
-    disabled,
-    isUser
+    disabled
   } = props
 
   const [, t] = useLanguage()
@@ -44,10 +42,9 @@ export const InputPhoneNumber = (props) => {
         <PhoneInput
           disabled={disabled}
           placeholder={t('PHONE_NUMBER', 'Phone number')}
-          defaultCountry={findExitingCode(configs?.default_country_code?.value?.toUpperCase())}
+          defaultCountry={configs?.default_country_code?.value}
           value={value}
-          displayInitialValueAsLocalNumber={!isUser}
-          international={isUser}
+          displayInitialValueAsLocalNumber
           onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val))}
         />
         {value && !isValidPhoneNumber(value) && !disabled && (

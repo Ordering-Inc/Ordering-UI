@@ -9,7 +9,6 @@ import { List as MenuIcon } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles/Buttons'
 import { useInfoShare } from '../../../../../../contexts/InfoShareContext'
 import { GoogleMapsApiKeySettingButton } from '../GoogleMapsApiKeySettingButton'
-import { WebsocketStatus } from '../WebsocketStatus'
 
 import {
   DriversHeader,
@@ -23,11 +22,12 @@ const DriversManagerUI = (props) => {
     onDriverRedirect,
     handleChangeSearch,
     searchValue,
-    driversIsOnline
+    driversIsOnline,
+    driversList
   } = props
 
-  const { drivers, loading } = props.driversList
-
+  const drivers = driversList?.drivers
+  const loading = driversList?.loading
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [configState] = useConfig()
@@ -74,7 +74,7 @@ const DriversManagerUI = (props) => {
 
   return (
     <>
-      <DriversContainer id='driverDashboard'>
+      <DriversContainer>
         <DriversHeader>
           <HeaderTitleContainer>
             {isCollapse && (
@@ -87,7 +87,6 @@ const DriversManagerUI = (props) => {
             )}
             <h1>{t('DRIVERS_DASHBOARD', 'Drivers dashboard')}</h1>
           </HeaderTitleContainer>
-          <WebsocketStatus />
           {!googleMapsApiKey && (
             <GoogleMapsApiKeySettingButton />
           )}

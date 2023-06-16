@@ -62,13 +62,14 @@ const DeliveriesManagerUI = (props) => {
     if (id === null) setIsOpenOrderDetail(false)
     else {
       setOrderDetailId(id)
+      onOrderRedirect(id)
       setIsOpenOrderDetail(true)
     }
   }, [])
 
   return (
     <>
-      <DeliveriesContainer id='deliveryDashboard'>
+      <DeliveriesContainer>
         <OrdersContentHeader
           isDisableControl
           title={t('DELIVERY_DASHBOARD', 'Delivery dashboard')}
@@ -115,7 +116,7 @@ const DeliveriesManagerUI = (props) => {
           open={isOpenOrderDetail}
           order={detailsOrder}
           orderId={orderDetailId}
-          drivers={driversList.drivers}
+          driversList={driversList}
           onClose={() => handleBackRedirect()}
         />
       )}
@@ -129,7 +130,6 @@ const DeliveriesManagerUI = (props) => {
 export const DeliveriesManager = (props) => {
   const OrdersListControlProps = {
     ...props,
-    isOnlyDelivery: true,
     UIComponent: DeliveriesManagerUI,
     driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
   }

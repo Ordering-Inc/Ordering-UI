@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const WrapperCheckPassword = styled.form`
+export const WrapperCheckPassword = styled.div`
   padding: 10px;
   color: ${props => props.theme.colors?.headingColor};
 
