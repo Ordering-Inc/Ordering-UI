@@ -118,7 +118,7 @@ const PageBannerUI = (props) => {
         pageBannerState.banner?.items?.length > 0 && (
           <BannerContainer>
             <Swiper
-              navigation
+              navigation={pageBannerState.banner?.items?.length > 1}
               spaceBetween={0}
               shortSwipes={false}
               loop={pageBannerState.banner?.items.length > 1}
