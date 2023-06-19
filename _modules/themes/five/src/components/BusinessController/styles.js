@@ -120,7 +120,7 @@ var Medadata = _styledComponents.default.div(_templateObject26 || (_templateObje
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0;\n      "])));
 });
 exports.Medadata = Medadata;
-var CallCenterInformation = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  position: absolute;\n  right: 0;\n  bottom: 43px;\n  margin-right: 10px;\n  margin-bottom: 10px;\n  div{\n    justify-content: space-evenly;\n  }\n"])));
+var CallCenterInformation = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  position: absolute;\n  right: 0;\n  bottom: 0;\n  margin-right: 10px;\n  margin-bottom: 10px;\n  div{\n    justify-content: space-evenly;\n  }\n"])));
 exports.CallCenterInformation = CallCenterInformation;
 var CallCenterInformationBullet = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  padding: 2px;\n  margin-bottom: 2px;\n  border-radius: 16px;\n  background: ", ";\n  width: 50px;\n  color: #fff;\n  svg{\n    font-size: 18px;\n  }\n"])), function (_ref16) {
   var bgcolor = _ref16.bgcolor;
