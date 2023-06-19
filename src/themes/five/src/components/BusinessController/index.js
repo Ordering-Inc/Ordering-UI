@@ -274,19 +274,19 @@ const BusinessControllerUI = (props) => {
                   {isCustomerMode && hasInformationLength && (
                     <CallCenterInformation>
                       {business?.idle_drivers_count > 0 && (
-                        <CallCenterInformationBullet bgcolor='green'>
+                        <CallCenterInformationBullet bgcolor='#4CAF50'>
                           <BiCar />
                           {business?.idle_drivers_count}
                         </CallCenterInformationBullet>
                       )}
                       {business?.busy_drivers_count > 0 && (
-                        <CallCenterInformationBullet bgcolor='red'>
+                        <CallCenterInformationBullet bgcolor='#E91E63'>
                           <BiCar />
                           {business?.busy_drivers_count}
                         </CallCenterInformationBullet>
                       )}
                       {business?.activated_orders > 0 && (
-                        <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
+                        <CallCenterInformationBullet bgcolor='#FF9800'>
                           <BiBasket />
                           {business?.activated_orders}
                         </CallCenterInformationBullet>
