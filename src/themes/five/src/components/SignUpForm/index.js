@@ -422,13 +422,13 @@ const SignUpFormUI = (props) => {
                                         placeholder={t(field.code.toUpperCase(), field.name)}
                                         onChange={handleChangeInputEmail}
                                         ref={formMethods.register({
-                                          required: isRequiredField(field.code)
+                                          required: !isCustomerMode && isRequiredField(field.code)
                                             ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
                                             : null,
                                           pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                                         })}
                                         onKeyDown={preventWhiteSpaceOnKeyDown}
-                                        required={!!field.required}
+                                        required={!!field.required && !isCustomerMode}
                                         autoComplete='on'
                                         isError={formMethods.errors?.email && !notValidationFields.includes(field.code)}
                                       />
@@ -553,7 +553,7 @@ const SignUpFormUI = (props) => {
               )}
 
               <CheckboxArea>
-                {(signUpTab === 'default') && (
+                {(signUpTab === 'default') && !isCustomerMode && (
                   <PromotionsWrapper>
                     <Checkbox
                       name='promotions'
@@ -568,7 +568,7 @@ const SignUpFormUI = (props) => {
                   </PromotionsWrapper>
                 )}
 
-                {configs?.terms_and_conditions?.value === 'true' && (
+                {configs?.terms_and_conditions?.value === 'true' && !isCustomerMode && (
                   <>
                     {formMethods.errors?.acceptTerms && (
                       <ValidationText>
@@ -674,14 +674,14 @@ const SignUpFormUI = (props) => {
                 )}
               </BussinessAndDriverSignUp>
             )}
-          {hasSocialLogin && hasSocialEnabled && (
+          {hasSocialLogin && hasSocialEnabled && !isCustomerMode && (
             <LoginDivider>
               <DividerLine />
               <p>{t('OR', 'or')}</p>
               <DividerLine />
             </LoginDivider>
           )}
-          {!externalPhoneNumber && (
+          {!externalPhoneNumber && !isCustomerMode && (
             <>
               {Object.keys(configs).length > 0 ? (
                 <SocialButtons isPopup={isPopup}>
