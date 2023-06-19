@@ -132,15 +132,19 @@ const OrderProgressUI = (props) => {
 }
 
 export const OrderProgress = (props) => {
+  const propsToFetchBusiness = ['name', 'logo', 'slug', 'id']
+  const propsToFetch = ['cart', 'business', 'status', 'id', 'uuid', 'cart_group_id', 'business_id', 'delivery_datetime', 'delivery_datetime_utc', 'total', 'summary']
   const orderProgressProps = {
     ...props,
     UIComponent: OrderProgressUI,
     orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23],
     useDefualtSessionManager: true,
     noGiftCardOrders: true,
+    propsToFetchBusiness,
+    propsToFetch,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 10,
+      pageSize: props.isCustomerMode ? 1 : 10,
       controlType: 'infinity'
     }
   }
