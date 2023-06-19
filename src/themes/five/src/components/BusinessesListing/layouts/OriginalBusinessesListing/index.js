@@ -226,7 +226,10 @@ const BusinessesListingUI = (props) => {
 
   return (
     <BusinessContainer>
-      <PageBanner position='web_business_listing' />
+      <PageBanner
+        position='web_business_listing'
+        isCustomerMode={isCustomerMode}
+      />
 
       {(windowSize.width < 576 || (configs?.business_listing_hide_image?.value !== '1' && !isChew)) && (
         <BusinessBanner>

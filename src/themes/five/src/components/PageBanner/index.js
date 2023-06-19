@@ -22,7 +22,8 @@ SwiperCore.use([Navigation])
 
 const PageBannerUI = (props) => {
   const {
-    pageBannerState
+    pageBannerState,
+    isCustomerMode
   } = props
 
   const [{ site }] = useSite()
@@ -33,61 +34,74 @@ const PageBannerUI = (props) => {
 
   const onProductRedirect = ({ slug, category, product }) => {
     if (!category && !product) {
-      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
-        return events.emit('go_to_page', { page: 'business', params: { business_slug: slug }, replace: false })
+      if (isCustomerMode) {
+        return events.emit('go_to_page', { page: 'business', params: { store: slug } })
       } else {
-        return events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}`, replace: false })
+        if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+          return events.emit('go_to_page', { page: 'business', params: { business_slug: slug }, replace: false })
+        } else {
+          return events.emit('go_to_page', { page: 'business', search: `?${businessUrlTemplate.split('?')[1].replace(':business_slug', '')}${slug}`, replace: false })
+        }
       }
     }
     events.emit('product_banner_clicked')
-    if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
+    if (isCustomerMode) {
       return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          business_slug: slug,
-          category_slug: category,
-          product_slug: product
-        },
-        replace: false
+        page: 'business',
+        params: { store: slug },
+        search: `?category=${category}&product=${product}`,
+        replace: true
       })
-    }
-    if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
-      const businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '')
-      return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          category_slug: category,
-          product_slug: product
-        },
-        search: `?${businessParameter}=${slug}`,
-        replace: false
-      })
-    }
-    if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
-      const ids = productUrlTemplate.split('?')[1].split('&')
-      const categoryParameter = ids[0].replace('=:category_id', '')
-      const productParameter = ids[1].replace('=:product_id', '')
-      return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          business_slug: slug
-        },
-        search: `?${categoryParameter}=${category}&${productParameter}=${product}`,
-        replace: false
-      })
-    }
-    if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
-      const ids = productUrlTemplate.split('?')[1].split('&')
-      const categoryParameter = ids[0].replace('=:category_id', '')
-      const productParameter = ids[1].replace('=:product_id', '')
-      return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          business_slug: slug
-        },
-        search: `?${categoryParameter}=${category}&${productParameter}=${product}`,
-        replace: false
-      })
+    } else {
+      if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug,
+            category_slug: category,
+            product_slug: product
+          },
+          replace: false
+        })
+      }
+      if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
+        const businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '')
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            category_slug: category,
+            product_slug: product
+          },
+          search: `?${businessParameter}=${slug}`,
+          replace: false
+        })
+      }
+      if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
+        const ids = productUrlTemplate.split('?')[1].split('&')
+        const categoryParameter = ids[0].replace('=:category_id', '')
+        const productParameter = ids[1].replace('=:product_id', '')
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug
+          },
+          search: `?${categoryParameter}=${category}&${productParameter}=${product}`,
+          replace: false
+        })
+      }
+      if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
+        const ids = productUrlTemplate.split('?')[1].split('&')
+        const categoryParameter = ids[0].replace('=:category_id', '')
+        const productParameter = ids[1].replace('=:product_id', '')
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug
+          },
+          search: `?${categoryParameter}=${category}&${productParameter}=${product}`,
+          replace: false
+        })
+      }
     }
   }
 
