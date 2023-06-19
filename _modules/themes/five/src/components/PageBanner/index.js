@@ -30,8 +30,9 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var PageBannerUI = function PageBannerUI(props) {
-  var _pageBannerState$bann, _pageBannerState$bann2, _pageBannerState$bann3, _pageBannerState$bann4;
-  var pageBannerState = props.pageBannerState;
+  var _pageBannerState$bann, _pageBannerState$bann2, _pageBannerState$bann3, _pageBannerState$bann4, _pageBannerState$bann5, _pageBannerState$bann6;
+  var pageBannerState = props.pageBannerState,
+    isCustomerMode = props.isCustomerMode;
   var _useSite = (0, _orderingComponents.useSite)(),
     _useSite2 = _slicedToArray(_useSite, 1),
     site = _useSite2[0].site;
@@ -45,71 +46,91 @@ var PageBannerUI = function PageBannerUI(props) {
       category = _ref.category,
       product = _ref.product;
     if (!category && !product) {
-      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      if (isCustomerMode) {
         return events.emit('go_to_page', {
           page: 'business',
           params: {
-            business_slug: slug
-          },
-          replace: false
+            store: slug
+          }
         });
       } else {
-        return events.emit('go_to_page', {
-          page: 'business',
-          search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(slug),
-          replace: false
-        });
+        if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+          return events.emit('go_to_page', {
+            page: 'business',
+            params: {
+              business_slug: slug
+            },
+            replace: false
+          });
+        } else {
+          return events.emit('go_to_page', {
+            page: 'business',
+            search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(slug),
+            replace: false
+          });
+        }
       }
     }
     events.emit('product_banner_clicked');
-    if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
+    if (isCustomerMode) {
       return events.emit('go_to_page', {
-        page: 'product',
+        page: 'business',
         params: {
-          business_slug: slug,
-          category_slug: category,
-          product_slug: product
+          store: slug
         },
-        replace: false
+        search: "?category=".concat(category, "&product=").concat(product),
+        replace: true
       });
-    }
-    if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
-      var businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '');
-      return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          category_slug: category,
-          product_slug: product
-        },
-        search: "?".concat(businessParameter, "=").concat(slug),
-        replace: false
-      });
-    }
-    if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
-      var ids = productUrlTemplate.split('?')[1].split('&');
-      var categoryParameter = ids[0].replace('=:category_id', '');
-      var productParameter = ids[1].replace('=:product_id', '');
-      return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          business_slug: slug
-        },
-        search: "?".concat(categoryParameter, "=").concat(category, "&").concat(productParameter, "=").concat(product),
-        replace: false
-      });
-    }
-    if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
-      var _ids = productUrlTemplate.split('?')[1].split('&');
-      var _categoryParameter = _ids[0].replace('=:category_id', '');
-      var _productParameter = _ids[1].replace('=:product_id', '');
-      return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          business_slug: slug
-        },
-        search: "?".concat(_categoryParameter, "=").concat(category, "&").concat(_productParameter, "=").concat(product),
-        replace: false
-      });
+    } else {
+      if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug,
+            category_slug: category,
+            product_slug: product
+          },
+          replace: false
+        });
+      }
+      if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
+        var businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '');
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            category_slug: category,
+            product_slug: product
+          },
+          search: "?".concat(businessParameter, "=").concat(slug),
+          replace: false
+        });
+      }
+      if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
+        var ids = productUrlTemplate.split('?')[1].split('&');
+        var categoryParameter = ids[0].replace('=:category_id', '');
+        var productParameter = ids[1].replace('=:product_id', '');
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug
+          },
+          search: "?".concat(categoryParameter, "=").concat(category, "&").concat(productParameter, "=").concat(product),
+          replace: false
+        });
+      }
+      if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
+        var _ids = productUrlTemplate.split('?')[1].split('&');
+        var _categoryParameter = _ids[0].replace('=:category_id', '');
+        var _productParameter = _ids[1].replace('=:product_id', '');
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug
+          },
+          search: "?".concat(_categoryParameter, "=").concat(category, "&").concat(_productParameter, "=").concat(product),
+          replace: false
+        });
+      }
     }
   };
   var handleGoToPage = function handleGoToPage(action) {
@@ -138,11 +159,11 @@ var PageBannerUI = function PageBannerUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, pageBannerState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 250
   })) : ((_pageBannerState$bann = pageBannerState.banner) === null || _pageBannerState$bann === void 0 ? void 0 : (_pageBannerState$bann2 = _pageBannerState$bann.items) === null || _pageBannerState$bann2 === void 0 ? void 0 : _pageBannerState$bann2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
-    navigation: true,
+    navigation: ((_pageBannerState$bann3 = pageBannerState.banner) === null || _pageBannerState$bann3 === void 0 ? void 0 : (_pageBannerState$bann4 = _pageBannerState$bann3.items) === null || _pageBannerState$bann4 === void 0 ? void 0 : _pageBannerState$bann4.length) > 1,
     spaceBetween: 0,
     shortSwipes: false,
-    loop: ((_pageBannerState$bann3 = pageBannerState.banner) === null || _pageBannerState$bann3 === void 0 ? void 0 : _pageBannerState$bann3.items.length) > 1
-  }, (_pageBannerState$bann4 = pageBannerState.banner) === null || _pageBannerState$bann4 === void 0 ? void 0 : _pageBannerState$bann4.items.map(function (img, i) {
+    loop: ((_pageBannerState$bann5 = pageBannerState.banner) === null || _pageBannerState$bann5 === void 0 ? void 0 : _pageBannerState$bann5.items.length) > 1
+  }, (_pageBannerState$bann6 = pageBannerState.banner) === null || _pageBannerState$bann6 === void 0 ? void 0 : _pageBannerState$bann6.items.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: i,
       onClick: function onClick() {
