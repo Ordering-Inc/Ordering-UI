@@ -17,7 +17,8 @@ var DatePickerUI = function DatePickerUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, /*#__PURE__*/_react.default.createElement(_reactDateRange.Calendar, {
     date: value,
     name: name,
-    onChange: onChange
+    onChange: onChange,
+    maxDate: new Date()
   }));
 };
 exports.DatePickerUI = DatePickerUI;
