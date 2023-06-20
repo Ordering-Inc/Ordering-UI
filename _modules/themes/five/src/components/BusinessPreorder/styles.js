@@ -4,10 +4,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TypeContent = exports.Title = exports.TimeListWrapper = exports.TimeItem = exports.SelectWrapper = exports.PreorderTypeWrapper = exports.OrderTimeWrapper = exports.MonthYearLayer = exports.LogoWrapper = exports.Layer = exports.DaysSwiper = exports.DayNumber = exports.DayName = exports.Day = exports.DateWrapper = exports.ClosedBusinessMsg = exports.ButtonWrapper = exports.BusinessPreorderContainer = exports.BusinessLogo = void 0;
+exports.TypeContent = exports.Title = exports.TimeListWrapper = exports.TimeItem = exports.SelectWrapper = exports.PreorderTypeWrapper = exports.OrderTimeWrapper = exports.MonthYearLayer = exports.LogoWrapper = exports.Layer = exports.DaysSwiper = exports.DayNumber = exports.DayName = exports.Day = exports.DateWrapper = exports.ClosedBusinessMsg = exports.CheckedIcon = exports.CheckIcon = exports.ButtonWrapper = exports.BusinessPreorderContainer = exports.BusinessLogo = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _react = _interopRequireDefault(require("react"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -52,29 +52,21 @@ var ButtonWrapper = _styledComponents.default.div(_templateObject9 || (_template
 exports.ButtonWrapper = ButtonWrapper;
 var TimeListWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  margin-left: -12px;\n  width: calc(100% + 24px);\n  margin-top: 30px;\n  max-height: 250px;\n  overflow: auto;\n"])));
 exports.TimeListWrapper = TimeListWrapper;
-var TimeItem = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  ", "\n  border-radius: 7.6px;\n  padding: 5px 15px;\n  margin: 12px;\n  width: calc(50% - 24px);\n  min-width: calc(50% - 24px);\n  box-sizing: border-box;\n  user-select: none;\n\n  ", "\n\n  ", "\n  \n  ", "\n\n  span {\n    font-size: 14px;\n  }\n\n  @media (min-width: 400px) {\n    width: calc(33.33% - 24px);\n    min-width: calc(33.33% - 24px);\n  }\n\n  @media (min-width: 576px) {\n    width: calc(25% - 24px);\n    min-width: calc(25% - 24px);\n  }\n\n  @media (min-width: 769px) {\n    width: calc(16.66% - 24px);\n    min-width: calc(16.66% - 24px);\n  }\n"])), function (_ref) {
-  var isProfessional = _ref.isProfessional;
-  return isProfessional ? (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n  "])), function (props) {
-    return props.theme.colors.primaryContrast;
-  }, function (props) {
+var TimeItem = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  span {\n    font-size: 14px;\n    white-space: nowrap;\n  }\n  ", "\n", "\n"])), function (_ref) {
+  var active = _ref.active;
+  return active && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background: #F5F9FF;\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.primary;
-  }) : (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    background: ", ";\n  "])), function (props) {
-    return props.theme.colors.gray200;
   });
 }, function (_ref2) {
-  var active = _ref2.active;
-  return active && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    background: #F5F9FF;\n    color: ", ";\n  "])), function (props) {
-    return props.theme.colors.primary;
-  });
-}, function (_ref3) {
-  var isDisabled = _ref3.isDisabled;
-  return isDisabled && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
-}, function (_ref4) {
-  var busyTime = _ref4.busyTime;
-  return busyTime && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n  "])), function (props) {
-    return props.theme.colors.gray200;
-  }, function (props) {
-    return props.theme.colors.lightGray;
+  var cateringPreorder = _ref2.cateringPreorder;
+  return cateringPreorder ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    background: #fff;\n    width: 100%;\n    min-width: 100%;\n    height: 50px;\n    \n    span {\n      font-size: 18px;\n      display: flex;\n      align-items: center;\n      margin: 10px 0;\n      margin-left: 15px;\n      p{\n        position: relative;\n        bottom: 2px;\n      }\n    }\n    ", "\n  "])), function (_ref3) {
+    var active = _ref3.active;
+    return active && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      background: #F5F9FF;\n      color: ", ";\n      span {\n        p{\n          bottom: 0;\n          margin-left: 2px;\n        }\n      }\n    "])), function (props) {
+      return props.theme.colors.primary;
+    });
+  }) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    justify-content: center;\n    align-items: center;\n    background: #E9ECEF;\n    border-radius: 7.6px;\n    padding: 5px 15px;\n    margin: 12px;\n    width: calc(50% - 24px);\n    min-width: calc(50% - 24px);\n    box-sizing: border-box;\n    user-select: none;\n      \n      @media (min-width: 400px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n      }\n      \n      @media (min-width: 576px) {\n      width: calc(25% - 24px);\n      min-width: calc(25% - 24px);\n      }\n      \n      @media (min-width: 769px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n        ", "\n      }\n    "])), function (_ref4) {
+    var isAppoint = _ref4.isAppoint;
+    return isAppoint && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n          width: calc(33.33% - 24px);\n          min-width: calc(33.33% - 24px);\n          span {\n            font-size: 12px;\n          }\n        "])));
   });
 });
 exports.TimeItem = TimeItem;
@@ -108,3 +100,15 @@ var DayNumber = _styledComponents.default.div(_templateObject29 || (_templateObj
 exports.DayNumber = DayNumber;
 var ClosedBusinessMsg = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-size: 16px;\n  width: 100%;\n"])));
 exports.ClosedBusinessMsg = ClosedBusinessMsg;
+var CheckIcon = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  margin-right: 20px;\n  svg {\n    width: 24px;\n    height: 24px;\n  }\n"])));
+exports.CheckIcon = CheckIcon;
+var CheckedIcon = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  border-radius: 50%;\n  width: 20px;\n  min-width: 20px;\n  height: 20px;\n  box-sizing: border-box;\n  border: 6px solid ", ";\n  margin: 2px 12px 2px 2px;\n  ", "\n  ", "\n"])), function (props) {
+  var _props$theme$colors;
+  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    margin: 2px 2px 2px 12px;\n  "])));
+}, function (_ref8) {
+  var cateringPreorder = _ref8.cateringPreorder;
+  return cateringPreorder && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    width: 21px;\n    min-width: 21px;\n    height: 21px;\n    margin: 0;\n    margin-left: 1px;\n  "])));
+});
+exports.CheckedIcon = CheckedIcon;

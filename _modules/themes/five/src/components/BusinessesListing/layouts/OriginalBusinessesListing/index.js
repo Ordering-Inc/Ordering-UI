@@ -259,11 +259,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       });
     })))));
   }
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, !isCustomerMode &&
-  /*#__PURE__*/
-  // Keep this banner at the top
-  _react.default.createElement(_PageBanner.PageBanner, {
-    position: "web_business_listing"
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
+    position: "web_business_listing",
+    isCustomerMode: isCustomerMode
   }), (windowSize.width < 576 || (configs === null || configs === void 0 ? void 0 : (_configs$business_lis = configs.business_listing_hide_image) === null || _configs$business_lis === void 0 ? void 0 : _configs$business_lis.value) !== '1' && !isChew) && /*#__PURE__*/_react.default.createElement(_styles.BusinessBanner, null, windowSize.width < 576 && /*#__PURE__*/_react.default.createElement(_OrderContextUI.OrderContextUI, {
     isBusinessList: true,
     hideHero: (configs === null || configs === void 0 ? void 0 : (_configs$business_lis2 = configs.business_listing_hide_image) === null || _configs$business_lis2 === void 0 ? void 0 : _configs$business_lis2.value) !== '1' && !isChew && !hideHero

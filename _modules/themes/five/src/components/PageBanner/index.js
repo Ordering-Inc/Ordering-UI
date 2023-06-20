@@ -31,7 +31,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var PageBannerUI = function PageBannerUI(props) {
   var _pageBannerState$bann, _pageBannerState$bann2, _pageBannerState$bann3, _pageBannerState$bann4;
-  var pageBannerState = props.pageBannerState;
+  var pageBannerState = props.pageBannerState,
+    isCustomerMode = props.isCustomerMode;
   var _useSite = (0, _orderingComponents.useSite)(),
     _useSite2 = _slicedToArray(_useSite, 1),
     site = _useSite2[0].site;
@@ -45,71 +46,91 @@ var PageBannerUI = function PageBannerUI(props) {
       category = _ref.category,
       product = _ref.product;
     if (!category && !product) {
-      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+      if (isCustomerMode) {
         return events.emit('go_to_page', {
           page: 'business',
           params: {
-            business_slug: slug
-          },
-          replace: false
+            store: slug
+          }
         });
       } else {
-        return events.emit('go_to_page', {
-          page: 'business',
-          search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(slug),
-          replace: false
-        });
+        if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
+          return events.emit('go_to_page', {
+            page: 'business',
+            params: {
+              business_slug: slug
+            },
+            replace: false
+          });
+        } else {
+          return events.emit('go_to_page', {
+            page: 'business',
+            search: "?".concat(businessUrlTemplate.split('?')[1].replace(':business_slug', '')).concat(slug),
+            replace: false
+          });
+        }
       }
     }
     events.emit('product_banner_clicked');
-    if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
+    if (isCustomerMode) {
       return events.emit('go_to_page', {
-        page: 'product',
+        page: 'business',
         params: {
-          business_slug: slug,
-          category_slug: category,
-          product_slug: product
+          store: slug
         },
-        replace: false
+        search: "?category=".concat(category, "&product=").concat(product),
+        replace: true
       });
-    }
-    if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
-      var businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '');
-      return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          category_slug: category,
-          product_slug: product
-        },
-        search: "?".concat(businessParameter, "=").concat(slug),
-        replace: false
-      });
-    }
-    if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
-      var ids = productUrlTemplate.split('?')[1].split('&');
-      var categoryParameter = ids[0].replace('=:category_id', '');
-      var productParameter = ids[1].replace('=:product_id', '');
-      return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          business_slug: slug
-        },
-        search: "?".concat(categoryParameter, "=").concat(category, "&").concat(productParameter, "=").concat(product),
-        replace: false
-      });
-    }
-    if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
-      var _ids = productUrlTemplate.split('?')[1].split('&');
-      var _categoryParameter = _ids[0].replace('=:category_id', '');
-      var _productParameter = _ids[1].replace('=:product_id', '');
-      return events.emit('go_to_page', {
-        page: 'product',
-        params: {
-          business_slug: slug
-        },
-        search: "?".concat(_categoryParameter, "=").concat(category, "&").concat(_productParameter, "=").concat(product),
-        replace: false
-      });
+    } else {
+      if (productUrlTemplate === '/store/:business_slug/:category_slug/:product_slug' || productUrlTemplate === '/:business_slug/:category_slug/:product_slug') {
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug,
+            category_slug: category,
+            product_slug: product
+          },
+          replace: false
+        });
+      }
+      if (productUrlTemplate.includes('/store/:category_slug/:product_slug')) {
+        var businessParameter = businessUrlTemplate.replace('/store?', '').replace('=:business_slug', '');
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            category_slug: category,
+            product_slug: product
+          },
+          search: "?".concat(businessParameter, "=").concat(slug),
+          replace: false
+        });
+      }
+      if (productUrlTemplate.includes('/store/:business_slug') && productUrlTemplate.includes('category_id')) {
+        var ids = productUrlTemplate.split('?')[1].split('&');
+        var categoryParameter = ids[0].replace('=:category_id', '');
+        var productParameter = ids[1].replace('=:product_id', '');
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug
+          },
+          search: "?".concat(categoryParameter, "=").concat(category, "&").concat(productParameter, "=").concat(product),
+          replace: false
+        });
+      }
+      if (productUrlTemplate.includes('/:business_slug') && !productUrlTemplate.includes('store')) {
+        var _ids = productUrlTemplate.split('?')[1].split('&');
+        var _categoryParameter = _ids[0].replace('=:category_id', '');
+        var _productParameter = _ids[1].replace('=:product_id', '');
+        return events.emit('go_to_page', {
+          page: 'product',
+          params: {
+            business_slug: slug
+          },
+          search: "?".concat(_categoryParameter, "=").concat(category, "&").concat(_productParameter, "=").concat(product),
+          replace: false
+        });
+      }
     }
   };
   var handleGoToPage = function handleGoToPage(action) {

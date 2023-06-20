@@ -19,11 +19,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MomentContent = function MomentContent(props) {
-  var _configs$max_days_pre, _document, _document$getElementB, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _props$afterComponent, _props$afterElements;
+  var _props$preorderMaximu, _configs$max_days_pre, _document, _document$getElementB, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _props$afterComponent, _props$afterElements;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
-    configs = _useConfig2[0].configs;
-  var limitDays = parseInt(configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value, 10);
+    _useConfig2$ = _useConfig2[0],
+    configs = _useConfig2$.configs,
+    loading = _useConfig2$.loading;
+  var limitDays = parseInt((_props$preorderMaximu = props.preorderMaximumDays) !== null && _props$preorderMaximu !== void 0 ? _props$preorderMaximu : configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value, 10);
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
@@ -48,9 +50,17 @@ var MomentContent = function MomentContent(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, _extends({}, momentProps, {
-    onClose: props.onClose
-  })), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, {
+  }, (!props.cateringPreorder || !loading) && /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, _extends({}, momentProps, {
+    onClose: props.onClose,
+    cateringPreorder: props.cateringPreorder,
+    isCart: props.isCart,
+    preorderSlotInterval: props.preorderSlotInterval,
+    preorderLeadTime: props.preorderLeadTime,
+    preorderTimeRange: props.preorderTimeRange,
+    preorderMaximumDays: props.preorderMaximumDays,
+    preorderMinimumDays: props.preorderMinimumDays,
+    business: props.business
+  })), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && !props.isHeader && /*#__PURE__*/_react.default.createElement(_styles.Layer, {
     height: (momentControl === null || momentControl === void 0 ? void 0 : momentControl.height) && "".concat(momentControl === null || momentControl === void 0 ? void 0 : momentControl.height, "px")
   }, (window.location.pathname !== '/search' || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {

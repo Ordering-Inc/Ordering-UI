@@ -29,7 +29,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -38,7 +37,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var MomentControlUI = function MomentControlUI(props) {
-  var _configs$general_hour, _configs$general_hour2, _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _props$afterComponent, _props$afterElements;
+  var _configs$general_hour, _configs$general_hour2, _datesList$slice, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _configs$max_days_pre4, _configs$max_days_pre5, _configs$max_days_pre6;
   var isAsap = props.isAsap,
     datesList = props.datesList,
     hoursList = props.hoursList,
@@ -48,7 +47,14 @@ var MomentControlUI = function MomentControlUI(props) {
     handleChangeDate = props.handleChangeDate,
     handleChangeTime = props.handleChangeTime,
     onClose = props.onClose,
-    isAppoint = props.isAppoint;
+    isAppoint = props.isAppoint,
+    cateringPreorder = props.cateringPreorder,
+    isCart = props.isCart,
+    preorderLeadTime = props.preorderLeadTime,
+    business = props.business,
+    getActualSchedule = props.getActualSchedule,
+    preorderMaximumDays = props.preorderMaximumDays,
+    preorderMinimumDays = props.preorderMinimumDays;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
@@ -112,13 +118,29 @@ var MomentControlUI = function MomentControlUI(props) {
   };
   (0, _react.useEffect)(function () {
     var _timeLists = [];
-    if (!scheduleList) {
-      _timeLists = hoursList.map(function (hour) {
+    if (!scheduleList || cateringPreorder) {
+      var _Object$keys, _Object$keys2;
+      var schedule = business && ((_Object$keys = Object.keys(business || {})) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0 && getActualSchedule();
+      if (!schedule && cateringPreorder && ((_Object$keys2 = Object.keys(business)) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) > 0) {
+        setIsEnabled(false);
+        return;
+      }
+      _timeLists = hoursList.filter(function (hour) {
+        var _Object$keys3, _schedule$lapses;
+        return (((_Object$keys3 = Object.keys(business || {})) === null || _Object$keys3 === void 0 ? void 0 : _Object$keys3.length) === 0 || (schedule === null || schedule === void 0 ? void 0 : (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.some(function (lapse) {
+          return (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) >= (0, _moment.default)(dateSelected + " ".concat(lapse.open.hour, ":").concat(lapse.open.minute)).add(preorderLeadTime, 'minutes') && (0, _moment.default)(dateSelected + " ".concat(hour.endTime)) <= (0, _moment.default)(dateSelected + " ".concat(lapse.close.hour, ":").concat(lapse.close.minute));
+        }))) && (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) < (0, _moment.default)(dateSelected + " ".concat(hour.endTime)) && ((0, _moment.default)().add(preorderLeadTime, 'minutes') < (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) || !cateringPreorder);
+      }).map(function (hour) {
         return {
           value: hour.startTime,
           text: is12hours ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
             outputFormat: 'hh:mma'
           }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+            outputFormat: 'HH:mm'
+          }),
+          endText: is12hours ? hour.endTime.includes('12') ? "".concat(hour.endTime, "PM") : parseTime((0, _moment.default)(hour.endTime, 'HH:mm'), {
+            outputFormat: 'hh:mma'
+          }) : parseTime((0, _moment.default)(hour.endTime, 'HH:mm'), {
             outputFormat: 'HH:mm'
           })
         };
@@ -128,12 +150,12 @@ var MomentControlUI = function MomentControlUI(props) {
       _timeLists = getTimes(dateSelected, scheduleList);
     }
     setTimeList(_timeLists);
-  }, [dateSelected, hoursList, scheduleList]);
+  }, [dateSelected, hoursList, scheduleList, cateringPreorder, JSON.stringify(business)]);
   (0, _react.useEffect)(function () {
-    handleCheckBoxChange(isAsap);
+    handleCheckBoxChange(isAsap && (preorderMinimumDays === 0 && preorderLeadTime === 0 || !cateringPreorder));
   }, [isAsap]);
   (0, _react.useEffect)(function () {
-    if (!pathname.includes('store')) {
+    if (!pathname.includes('store') || isCart) {
       setScheduleList(null);
       return;
     }
@@ -145,15 +167,7 @@ var MomentControlUI = function MomentControlUI(props) {
   }, []);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
-  }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), !isAppoint && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
+  }, !isAppoint && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCart && /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')), (preorderMinimumDays === 0 && preorderLeadTime === 0 || !cateringPreorder) && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
     highlight: isAsap && isASP,
     onClick: function onClick() {
       return handleCheckBoxChange(true);
@@ -164,7 +178,7 @@ var MomentControlUI = function MomentControlUI(props) {
     onClick: function onClick() {
       return handleCheckBoxChange(null);
     }
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later')))), (!isASP || isAppoint) && (!props.isCustomLayout ? /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, !isAppoint && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later')))), (!isASP || isAppoint) && (!props.isCustomLayout ? /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, !isAppoint && !isCart && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, ((_datesList$slice = datesList.slice(cateringPreorder && preorderMinimumDays || 0, Number(cateringPreorder ? preorderMaximumDays : (_configs$max_days_pre = configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) !== null && _configs$max_days_pre !== void 0 ? _configs$max_days_pre : 6, 10))) === null || _datesList$slice === void 0 ? void 0 : _datesList$slice.length) === 0 ? (0, _moment.default)(dateSelected).format('Do MMMM, yyyy') : (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
     left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 0,
@@ -183,7 +197,7 @@ var MomentControlUI = function MomentControlUI(props) {
         spaceBetween: 0
       },
       769: {
-        slidesPerView: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) < 7 ? configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value : 7,
+        slidesPerView: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) < 7 ? configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre4 = configs.max_days_preorder) === null || _configs$max_days_pre4 === void 0 ? void 0 : _configs$max_days_pre4.value : 7,
         spaceBetween: 0
       }
     },
@@ -191,7 +205,7 @@ var MomentControlUI = function MomentControlUI(props) {
     watchSlidesProgress: true,
     className: "swiper-datelist",
     preventClicksPropagation: false
-  }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
+  }, datesList.slice(cateringPreorder && preorderMinimumDays || 0, Number(cateringPreorder ? preorderMaximumDays : (_configs$max_days_pre5 = configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre6 = configs.max_days_preorder) === null || _configs$max_days_pre6 === void 0 ? void 0 : _configs$max_days_pre6.value) !== null && _configs$max_days_pre5 !== void 0 ? _configs$max_days_pre5 : 6, 10)).map(function (date) {
     var dateParts = date.split('-');
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2);
@@ -215,9 +229,12 @@ var MomentControlUI = function MomentControlUI(props) {
       onClick: function onClick() {
         return handleChangeTime(time.value);
       },
-      isAppoint: isAppoint
-    }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))) : /*#__PURE__*/_react.default.createElement(_CustomLayout.CustomLayout, {
+      isAppoint: isAppoint,
+      cateringPreorder: cateringPreorder
+    }, /*#__PURE__*/_react.default.createElement("span", null, cateringPreorder && /*#__PURE__*/_react.default.createElement(_styles.CheckIcon, null, timeSelected === time.value ? /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, {
+      cateringPreorder: cateringPreorder
+    }) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null)), /*#__PURE__*/_react.default.createElement("p", null, time.text, " ", cateringPreorder && "- ".concat(time.endText))));
+  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, !business ? t('ERROR_SHEDULE_UNAVAILABLE', 'There are no schedules for this date') : t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))) : /*#__PURE__*/_react.default.createElement(_CustomLayout.CustomLayout, {
     handleChangeDate: handleChangeDate,
     datesList: datesList,
     hoursList: hoursList,
@@ -225,20 +242,13 @@ var MomentControlUI = function MomentControlUI(props) {
     timeList: timeList,
     timeSelected: timeSelected,
     handleChangeTime: handleChangeTime
-  })), !isAppoint && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), !isAppoint && !isCart && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return onClose();
-    }
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRight, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+    },
+    disabled: !timeSelected
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRight, null))));
 };
 var MomentControl = function MomentControl(props) {
   var momentProps = _objectSpread(_objectSpread({}, props), {}, {
