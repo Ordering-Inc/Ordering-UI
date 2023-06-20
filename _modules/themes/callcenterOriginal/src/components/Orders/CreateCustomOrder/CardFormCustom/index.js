@@ -8,7 +8,7 @@ exports.CardFormCustom = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _reactCreditCards = _interopRequireDefault(require("react-credit-cards-2"));
-require("react-credit-cards-2/dist/es/styles-compiled.css");
+require("react-credit-cards-2/es/styles-compiled.css");
 var _cardUtils = require("./cardUtils");
 var _reactHookForm = require("react-hook-form");
 var _styles = require("../../../../styles");
