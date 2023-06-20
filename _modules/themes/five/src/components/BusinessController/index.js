@@ -222,11 +222,11 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_GoPrimitiveDot.default, null), parseDistance(businessDistance !== null && businessDistance !== void 0 ? businessDistance : business === null || business === void 0 ? void 0 : business.distance)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 65
   })), isCustomerMode && hasInformationLength && /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformation, null, (business === null || business === void 0 ? void 0 : business.idle_drivers_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
-    bgcolor: "green"
+    bgcolor: "#4CAF50"
   }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 ? void 0 : business.idle_drivers_count), (business === null || business === void 0 ? void 0 : business.busy_drivers_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
-    bgcolor: "red"
+    bgcolor: "#E91E63"
   }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 ? void 0 : business.busy_drivers_count), (business === null || business === void 0 ? void 0 : business.activated_orders) > 0 && /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
-    bgcolor: "rgb(252,225,5)"
+    bgcolor: "#FF9800"
   }, /*#__PURE__*/_react.default.createElement(_BiBasket.default, null), business === null || business === void 0 ? void 0 : business.activated_orders)))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_CLOSED', 'Business Closed'),
     content: alertState.content,

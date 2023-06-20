@@ -29,7 +29,19 @@ var OrdersSection = function OrdersSection(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var propsToFetchBusiness = ['name', 'logo', 'slug', 'id'];
+  var propsToFetch = ['cart', 'business', 'status', 'id', 'uuid', 'cart_group_id', 'business_id', 'delivery_datetime', 'delivery_datetime_utc', 'total', 'summary'];
+  var handleRedirectToCheckout = function handleRedirectToCheckout(uuid) {
+    onRedirectPage && onRedirectPage({
+      page: 'checkout',
+      params: {
+        cartUuid: uuid
+      }
+    });
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, onRedirectPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    propsToFetch: propsToFetch,
+    propsToFetchBusiness: propsToFetchBusiness,
     horizontal: true,
     isBusinessesPage: true,
     onRedirectPage: onRedirectPage,
@@ -41,8 +53,11 @@ var OrdersSection = function OrdersSection(props) {
     isCustomLayout: true,
     isBusinessesLoading: businessesList.loading,
     isCustomerMode: isCustomerMode,
-    franchiseId: props.franchiseId
+    franchiseId: props.franchiseId,
+    handleRedirectToCheckout: handleRedirectToCheckout
   }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    propsToFetch: propsToFetch,
+    propsToFetchBusiness: propsToFetchBusiness,
     activeOrders: true,
     horizontal: true,
     asDashboard: true,
@@ -54,8 +69,11 @@ var OrdersSection = function OrdersSection(props) {
     isCustomLayout: true,
     isBusinessesLoading: businessesList.loading,
     isCustomerMode: isCustomerMode,
-    franchiseId: props.franchiseId
+    franchiseId: props.franchiseId,
+    handleRedirectToCheckout: handleRedirectToCheckout
   }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
+    propsToFetch: propsToFetch,
+    propsToFetchBusiness: propsToFetchBusiness,
     pastOrders: true,
     horizontal: true,
     asDashboard: true,
@@ -67,7 +85,8 @@ var OrdersSection = function OrdersSection(props) {
     titleContent: titleContent,
     isBusinessesLoading: businessesList.loading,
     isCustomerMode: isCustomerMode,
-    franchiseId: props.franchiseId
+    franchiseId: props.franchiseId,
+    handleRedirectToCheckout: handleRedirectToCheckout
   })));
 };
 exports.OrdersSection = OrdersSection;
