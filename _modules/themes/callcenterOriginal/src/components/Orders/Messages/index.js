@@ -6,11 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.MessagesUI = exports.Messages = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponents = require("ordering-components");
 var _reactHookForm = require("react-hook-form");
 var _styledComponents = require("styled-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _AiOutlineInfoCircle = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineInfoCircle"));
+var _MdcCloseOctagonOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcCloseOctagonOutline"));
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 var _reactBootstrap = require("react-bootstrap");
 var _styles = require("./styles");
@@ -41,7 +43,6 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime'];
 var MessagesUI = function MessagesUI(props) {
   var _order$business, _order$customer, _order$driver, _theme$images, _theme$images$icons, _order$business6, _order$business7, _order$customer6, _order$customer7, _order$customer8, _order$driver6, _order$driver7, _order$driver8;
   var isChat = props.isChat,
@@ -61,7 +62,10 @@ var MessagesUI = function MessagesUI(props) {
     handleReadMessages = props.handleReadMessages,
     isTourOpen = props.isTourOpen,
     setCurrentTourStep = props.setCurrentTourStep,
-    orderDetailClose = props.orderDetailClose;
+    orderDetailClose = props.orderDetailClose,
+    getHistoryComment = props.getHistoryComment;
+  var routerHistory = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -89,11 +93,7 @@ var MessagesUI = function MessagesUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
-  var _useState3 = (0, _react.useState)({
-      orderHistory: true,
-      logistics: false,
-      logistic_information: false
-    }),
+  var _useState3 = (0, _react.useState)('order_history'),
     _useState4 = _slicedToArray(_useState3, 2),
     tabActive = _useState4[0],
     setTabActive = _useState4[1];
@@ -117,6 +117,8 @@ var MessagesUI = function MessagesUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     isChatDisabled = _useState14[0],
     setIsChatDisabled = _useState14[1];
+  var previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17];
+  var chatDisabled = previousStatus.includes(order === null || order === void 0 ? void 0 : order.status);
   var adminMessageList = [{
     key: 'message_1',
     text: t('ADMIN_MESSAGE_1', 'admin_message_1')
@@ -147,15 +149,14 @@ var MessagesUI = function MessagesUI(props) {
     var quickMsg = message ? "".concat(message, " ").concat(msg) : msg;
     setValue('message', quickMsg);
     setMessage(quickMsg);
-  };
-  (0, _react.useEffect)(function () {
     var msgElement = messageInputRef === null || messageInputRef === void 0 ? void 0 : messageInputRef.current;
     if (msgElement) {
+      msgElement.value = quickMsg;
       msgElement.focus();
       msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length;
       msgElement.scrollLeft = msgElement.scrollWidth;
     }
-  }, [message]);
+  };
   (0, _react.useEffect)(function () {
     if (user.level === 0) setMessageList(adminMessageList);else if (user.level === 2) setMessageList(storeMessageList);else setMessageList([]);
   }, [user]);
@@ -226,76 +227,6 @@ var MessagesUI = function MessagesUI(props) {
       console.log(error);
     };
   };
-  var getStatus = function getStatus(status) {
-    switch (status) {
-      case 0:
-        return t('PENDING', 'Pending');
-      case 1:
-        return t('COMPLETED_BY_ADMIN', 'Completed by admin');
-      case 2:
-        return t('REJECTED_BY_ADMIN', 'Rejected by admin');
-      case 3:
-        return t('ORDER_STATUS_IN_BUSINESS', 'Driver arrived to business');
-      case 4:
-        return t('PREPARATION_COMPLETED', 'Preparation Completed');
-      case 5:
-        return t('REJECTED_BY_BUSINESS', 'Rejected by business');
-      case 6:
-        return t('REJECTED_BY_DRIVER', 'Rejected by driver');
-      case 7:
-        return t('ACCEPTED_BY_BUSINESS', 'Accepted by Business');
-      case 8:
-        return t('ACCEPTED_BY_DRIVER', 'Accepted by Driver');
-      case 9:
-        return t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver');
-      case 10:
-        return t('PICK_UP_FAILED_BY_DRIVER', 'Pick up failed by driver');
-      case 11:
-        return t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver');
-      case 12:
-        return t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver');
-      case 13:
-        return t('PREORDER', 'Preorder');
-      case 14:
-        return t('ORDER_NOT_READY', 'Order not ready');
-      case 15:
-        return t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer');
-      case 16:
-        return t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Cancelled by customer');
-      case 17:
-        return t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Not picked by customer');
-      case 18:
-        return t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business');
-      case 19:
-        return t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer');
-      case 20:
-        return t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business');
-      case 21:
-        return t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business');
-      case 22:
-        return t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver');
-      case 23:
-        return t('ORDER_DRIVER_ON_WAY', 'Driver on way');
-      default:
-        return status;
-    }
-  };
-  var getLogisticTagStatus = function getLogisticTagStatus(status) {
-    switch (status) {
-      case 0:
-        return t('PENDING', 'Pending');
-      case 1:
-        return t('IN_PROGRESS', 'In Progress');
-      case 2:
-        return t('IN_QUEUE', 'In Queue');
-      case 3:
-        return t('EXPIRED', 'Logistic expired');
-      case 4:
-        return t('RESOLVED', 'Resolved');
-      default:
-        return status;
-    }
-  };
   var getLevel = function getLevel(level) {
     switch (level) {
       case 0:
@@ -311,9 +242,6 @@ var MessagesUI = function MessagesUI(props) {
       case 5:
         return t('DRIVER_MANAGER', 'Driver Manager');
     }
-  };
-  var getVehicleSmmary = function getVehicleSmmary(vehicle) {
-    return (vehicle === null || vehicle === void 0 ? void 0 : vehicle.type) + ' ' + (vehicle === null || vehicle === void 0 ? void 0 : vehicle.model) + ' ' + (vehicle === null || vehicle === void 0 ? void 0 : vehicle.car_registration) + ' ' + (vehicle === null || vehicle === void 0 ? void 0 : vehicle.color);
   };
   var clearInputs = function clearInputs() {
     var input = messageInputRef === null || messageInputRef === void 0 ? void 0 : messageInputRef.current;
@@ -367,6 +295,10 @@ var MessagesUI = function MessagesUI(props) {
     }
   }, [isChat, order]);
   (0, _react.useEffect)(function () {
+    if (!isChat || !(order !== null && order !== void 0 && order.id) || messages.loading) return;
+    unreadMessageControl();
+  }, [isChat, order === null || order === void 0 ? void 0 : order.id, messages]);
+  (0, _react.useEffect)(function () {
     if (messages.loading) return;
     var _filteredMessages = messages.messages.filter(function (message) {
       if (message.type === 2) {
@@ -383,6 +315,23 @@ var MessagesUI = function MessagesUI(props) {
       if (!(canRead !== null && canRead !== void 0 && canRead.customer) && !(canRead !== null && canRead !== void 0 && canRead.driver)) setIsChatDisabled(true);else setIsChatDisabled(false);
     }
   }, [canRead]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setTabActive(tab);
+    if (!isInitialRender) {
+      var orderId = query.get('id');
+      var section = query.get('section');
+      routerHistory.replace("".concat(location.pathname, "?id=").concat(orderId, "&section=").concat(section, "&tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    if (!history) return;
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick('order_history');
+    }
+  }, [history]);
   return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
     onClick: handleChangeTour
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperHeader, {
@@ -398,31 +347,19 @@ var MessagesUI = function MessagesUI(props) {
     src: optimizeImage((_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo, 'w_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
   }))), history && /*#__PURE__*/_react.default.createElement(_styles.WrapperHitoryHeader, null, /*#__PURE__*/_react.default.createElement(_styles.TabItem, {
-    active: tabActive.orderHistory,
+    active: tabActive === 'order_history',
     onClick: function onClick() {
-      return setTabActive({
-        orderHistory: true,
-        logistics: false,
-        logistic_information: false
-      });
+      return handleTabClick('order_history');
     }
   }, t('MOBILE_ORDER_HISTORY', 'Order History')), /*#__PURE__*/_react.default.createElement(_styles.TabItem, {
-    active: tabActive.logistics,
+    active: tabActive === 'logistics',
     onClick: function onClick() {
-      return setTabActive({
-        orderHistory: false,
-        logistics: true,
-        logistic_information: false
-      });
+      return handleTabClick('logistics');
     }
   }, t('LOGISTICS', 'Logistics')), /*#__PURE__*/_react.default.createElement(_styles.TabItem, {
-    active: tabActive.logistic_information,
+    active: tabActive === 'logistic_information',
     onClick: function onClick() {
-      return setTabActive({
-        orderHistory: false,
-        logistics: false,
-        logistic_information: true
-      });
+      return handleTabClick('logistic_information');
     }
   }, t('LOGISTIC_INFORMATION', 'Logistics information')))), messageDashboardView && /*#__PURE__*/_react.default.createElement(_styles.SearchAndDetailControlContainer, null, /*#__PURE__*/_react.default.createElement(_styles.MessagesSearch, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.search,
@@ -472,42 +409,47 @@ var MessagesUI = function MessagesUI(props) {
       width: 450,
       height: 50
     }));
-  }))), !messages.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !tabActive.logistic_information && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'via'), " ", /*#__PURE__*/_react.default.createElement("strong", null, order.app_id), ' ', /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+  }))), !messages.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !tabActive === 'logistic_information' && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'via'), " ", /*#__PURE__*/_react.default.createElement("strong", null, order.app_id ? t(order.app_id.toUpperCase(), "".concat(order.app_id)) : ''), ' ', /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
     placement: "top",
     overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, parseDate(order.created_at))
-  }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(order.created_at))))), history && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, tabActive.logistics && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogistics, null, /*#__PURE__*/_react.default.createElement(_Logistics.Logistics, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(order.created_at))))), history && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, tabActive === 'logistics' && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogistics, null, /*#__PURE__*/_react.default.createElement(_Logistics.Logistics, {
     orderId: order.id
-  })), tabActive.logistic_information && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogisticInformation, null, /*#__PURE__*/_react.default.createElement(_OrderLogisticInformation.OrderLogisticInformation, {
+  })), tabActive === 'logistic_information' && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogisticInformation, null, /*#__PURE__*/_react.default.createElement(_OrderLogisticInformation.OrderLogisticInformation, {
     orderId: order.id
   }))), filteredMessages.length > 0 && filteredMessages.map(function (message) {
-    var _message$change, _message$change2, _message$change3, _message$change4, _message$change5, _message$author, _message$author2, _message$author$name, _message$author3, _message$author$lastn, _message$author4, _message$driver, _message$driver2, _message$change6, _message$change7, _message$change8, _message$change9, _message$change10, _message$change11, _message$change12, _message$change13, _message$change14, _message$author5, _message$author6, _message$author$name2, _message$author7, _message$author$lastn2, _message$author8, _message$driver3, _message$driver4, _order$business2, _order$customer2, _order$driver2, _order$business3, _order$customer3, _order$driver3, _order$business4, _order$customer4, _order$driver4, _order$business5, _order$customer5, _order$driver5;
+    var _message$author, _message$author2, _message$author3, _message$author4, _order$business2, _order$customer2, _order$driver2, _order$business3, _order$customer3, _order$driver3, _order$business4, _order$customer4, _order$driver4, _order$business5, _order$customer5, _order$driver5;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: message.id
-    }, history && tabActive.orderHistory && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+    }, history && tabActive === 'order_history' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 0 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+      key: message.id
+    }, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement("p", {
+      dangerouslySetInnerHTML: {
+        __html: t('ORDER_PLACED_FOR_VIA', 'Order placed for _for_ via _via_.').replace('_for_', '<b>' + parseDate(order.delivery_datetime) + '</b>').replace('_via_', '<b>' + t(order.app_id ? order.app_id.toUpperCase() : 'OTHER') + '</b>')
+      }
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('APP_ID', 'App ID'), ": "), message === null || message === void 0 ? void 0 : message.app_id), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('AUTHOR', 'Author'), ": "), message === null || message === void 0 ? void 0 : (_message$author = message.author) === null || _message$author === void 0 ? void 0 : _message$author.name, " ", message === null || message === void 0 ? void 0 : (_message$author2 = message.author) === null || _message$author2 === void 0 ? void 0 : _message$author2.lastname), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('USER_AGENT', 'User agent'), ": "), message === null || message === void 0 ? void 0 : message.user_agent), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('IP', 'IP'), ": "), message === null || message === void 0 ? void 0 : message.ip), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message === null || message === void 0 ? void 0 : message.created_at)))), message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
       key: message.id,
       style: {
-        display: "".concat(tabActive.orderHistory ? 'inline-flex' : 'none')
+        display: "".concat(tabActive === 'order_history' ? 'inline-flex' : 'none')
       }
-    }, ((_message$change = message.change) === null || _message$change === void 0 ? void 0 : _message$change.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, t(message.change.attribute)), " ", ' ', t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, ((_message$change2 = message.change) === null || _message$change2 === void 0 ? void 0 : _message$change2.attribute) === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : getStatus(parseInt(message.change.old, 10))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : ((_message$change3 = message.change) === null || _message$change3 === void 0 ? void 0 : _message$change3.attribute) === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : getStatus(parseInt(message.change.new, 10))), message !== null && message !== void 0 && (_message$change4 = message.change) !== null && _message$change4 !== void 0 && _message$change4.comment ? "\n'".concat(message === null || message === void 0 ? void 0 : (_message$change5 = message.change) === null || _message$change5 === void 0 ? void 0 : _message$change5.comment, "'") : '', ((message === null || message === void 0 ? void 0 : (_message$author = message.author) === null || _message$author === void 0 ? void 0 : _message$author.name) || (message === null || message === void 0 ? void 0 : (_message$author2 = message.author) === null || _message$author2 === void 0 ? void 0 : _message$author2.lastname)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, "Author: "), ((_message$author$name = message === null || message === void 0 ? void 0 : (_message$author3 = message.author) === null || _message$author3 === void 0 ? void 0 : _message$author3.name) !== null && _message$author$name !== void 0 ? _message$author$name : '') + ' ' + ((_message$author$lastn = message === null || message === void 0 ? void 0 : (_message$author4 = message.author) === null || _message$author4 === void 0 ? void 0 : _message$author4.lastname) !== null && _message$author$lastn !== void 0 ? _message$author$lastn : ''))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+    }, getHistoryComment(message) && /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement("div", {
+      dangerouslySetInnerHTML: {
+        __html: getHistoryComment(message)
+      }
+    }), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
       placement: "top",
       overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, parseDate(message.created_at))
-    }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.new !== null ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver = message.driver) === null || _message$driver === void 0 ? void 0 : _message$driver.name, " ", ' ', " ", ((_message$driver2 = message.driver) === null || _message$driver2 === void 0 ? void 0 : _message$driver2.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVER_UNASSIGNED', 'The driver was unnasigned'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
-      placement: "top",
-      overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, parseDate(message.created_at))
-    }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))))), isChat && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 1 && ((_message$change6 = message.change) === null || _message$change6 === void 0 ? void 0 : _message$change6.attribute) !== 'comment' && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))))), isChat && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 0 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
       key: message.id
-    }, ((_message$change7 = message.change) === null || _message$change7 === void 0 ? void 0 : _message$change7.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, t(message.change.attribute)), " ", ' ', t('CHANGED_FROM', 'Changed from'), " ", ' ', filterSpecialStatus.includes(message.change.attribute) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.old === null ? /*#__PURE__*/_react.default.createElement("strong", null, "0") : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, message.change.old), " ", ' '), /*#__PURE__*/_react.default.createElement("div", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'Via'), ' ', /*#__PURE__*/_react.default.createElement("strong", null, order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')), ' '), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('APP_ID', 'App ID'), ": "), message === null || message === void 0 ? void 0 : message.app_id), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('AUTHOR', 'Author'), ": "), message === null || message === void 0 ? void 0 : (_message$author3 = message.author) === null || _message$author3 === void 0 ? void 0 : _message$author3.name, " ", message === null || message === void 0 ? void 0 : (_message$author4 = message.author) === null || _message$author4 === void 0 ? void 0 : _message$author4.lastname), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('USER_AGENT', 'User agent'), ": "), message === null || message === void 0 ? void 0 : message.user_agent), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('IP', 'IP'), ": "), message === null || message === void 0 ? void 0 : message.ip), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message === null || message === void 0 ? void 0 : message.created_at)))), message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+      key: message.id,
       style: {
-        whiteSpace: 'pre'
+        display: "".concat(tabActive === 'order_history' ? 'inline-flex' : 'none')
       }
-    }, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.new), " ", ' ', t('MINUTES', 'Minutes'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, ((_message$change8 = message.change) === null || _message$change8 === void 0 ? void 0 : _message$change8.attribute) === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : ((_message$change9 = message.change) === null || _message$change9 === void 0 ? void 0 : _message$change9.attribute) === 'vehicle' ? getVehicleSmmary(message.change.old) : getStatus(parseInt(message.change.old, 10))), ' '), /*#__PURE__*/_react.default.createElement("div", {
-      style: {
-        whiteSpace: 'pre'
+    }, getHistoryComment(message) && /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement("div", {
+      dangerouslySetInnerHTML: {
+        __html: getHistoryComment(message)
       }
-    }, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : ((_message$change10 = message.change) === null || _message$change10 === void 0 ? void 0 : _message$change10.attribute) === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : ((_message$change11 = message.change) === null || _message$change11 === void 0 ? void 0 : _message$change11.attribute) === 'vehicle' ? getVehicleSmmary(message.change.new) : getStatus(parseInt(message.change.new, 10))), /*#__PURE__*/_react.default.createElement("strong", null, message !== null && message !== void 0 && (_message$change12 = message.change) !== null && _message$change12 !== void 0 && _message$change12.comment ? "\n".concat(t('COMMENT', 'Comment:')) : ''), message !== null && message !== void 0 && (_message$change13 = message.change) !== null && _message$change13 !== void 0 && _message$change13.comment ? " ".concat(message === null || message === void 0 ? void 0 : (_message$change14 = message.change) === null || _message$change14 === void 0 ? void 0 : _message$change14.comment) : '', ((message === null || message === void 0 ? void 0 : (_message$author5 = message.author) === null || _message$author5 === void 0 ? void 0 : _message$author5.name) || (message === null || message === void 0 ? void 0 : (_message$author6 = message.author) === null || _message$author6 === void 0 ? void 0 : _message$author6.lastname)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, "Author: "), ((_message$author$name2 = message === null || message === void 0 ? void 0 : (_message$author7 = message.author) === null || _message$author7 === void 0 ? void 0 : _message$author7.name) !== null && _message$author$name2 !== void 0 ? _message$author$name2 : '') + ' ' + ((_message$author$lastn2 = message === null || message === void 0 ? void 0 : (_message$author8 = message.author) === null || _message$author8 === void 0 ? void 0 : _message$author8.lastname) !== null && _message$author$lastn2 !== void 0 ? _message$author$lastn2 : '')))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
-      placement: "top",
-      overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, parseDate(message.created_at))
-    }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.change.new !== null ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, (_message$driver3 = message.driver) === null || _message$driver3 === void 0 ? void 0 : _message$driver3.name, " ", ' ', " ", ((_message$driver4 = message.driver) === null || _message$driver4 === void 0 ? void 0 : _message$driver4.lastname) && message.driver.lastname), t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver'), message.comment && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("br", null), " ", message.comment.length)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DRIVER_UNASSIGNED', 'The driver was unnasigned'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+    }), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
       placement: "top",
       overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, parseDate(message.created_at))
     }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at))))), message.type === 2 && user.id === message.author_id && /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.MessageSender, null, message.author.name, " (", order.customer_id === message.author.id ? getLevel(3) : getLevel(message.author.level), ")"), message.comment, /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
@@ -621,7 +563,7 @@ var MessagesUI = function MessagesUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_Shared.Image, {
     src: optimizeImage((_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.photo, 'w_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
-  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.name, " ", (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))))), messageList.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuickMessageWrapper, null, messageList.map(function (quickMessage, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.name, " ", (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))))), chatDisabled ? /*#__PURE__*/_react.default.createElement(_styles.NotSendMessage, null, /*#__PURE__*/_react.default.createElement(_MdcCloseOctagonOutline.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('NOT_SEND_MESSAGES', 'You can\'t send messages because the order has ended'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, messageList.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuickMessageWrapper, null, messageList.map(function (quickMessage, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Button, {
       key: i,
       color: "secundaryDark",
@@ -678,7 +620,7 @@ var MessagesUI = function MessagesUI(props) {
     type: "submit",
     disabled: sendMessage.loading || message === '' && !image || messages.loading,
     ref: buttonRef
-  }, /*#__PURE__*/_react.default.createElement(_IosSend.default, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement("span", null, t('SEND', 'send')))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_IosSend.default, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement("span", null, t('SEND', 'send'))))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('ERROR', 'error'),
     content: alertState.content,
     acceptText: t('ACCEPT'),
@@ -698,6 +640,6 @@ var Messages = function Messages(props) {
     asDashboard: true,
     UIComponent: MessagesUI
   });
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.MessagesDasboard, MessagesProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.MessagesDashboard, MessagesProps);
 };
 exports.Messages = Messages;

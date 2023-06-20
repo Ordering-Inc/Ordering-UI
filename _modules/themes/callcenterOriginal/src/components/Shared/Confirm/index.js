@@ -48,9 +48,13 @@ var ConfirmUI = function ConfirmUI(props) {
       return onClose();
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), title && /*#__PURE__*/_react.default.createElement(_styles2.PopupTitle, null, title), /*#__PURE__*/_react.default.createElement(_styles2.PopupContent, null, content && typeof content === 'string' && content, content && _typeof(content) === 'object' && Array.isArray(content) && /*#__PURE__*/_react.default.createElement("ul", null, content.map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement("li", {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
-    }, t(item.toUpperCase(), errors[item]));
+    }, Array.isArray(item) ? item.map(function (err, index) {
+      return typeof err === 'string' && /*#__PURE__*/_react.default.createElement("li", {
+        key: index
+      }, t(err.toUpperCase(), errors[err] || err));
+    }) : typeof item === 'string' && /*#__PURE__*/_react.default.createElement("li", null, t(item.toUpperCase(), errors[item] || item)));
   })), children), (onCancel || onAccept || onClose) && /*#__PURE__*/_react.default.createElement(_styles2.PopupActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     outline: true,
     onClick: function onClick() {

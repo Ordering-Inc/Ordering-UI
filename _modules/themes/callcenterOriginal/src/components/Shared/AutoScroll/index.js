@@ -111,6 +111,7 @@ var AutoScroll = function AutoScroll(_ref) {
     var _document3, _document3$getElement;
     if (!scrollId) return;
     var element = (_document3 = document) === null || _document3 === void 0 ? void 0 : (_document3$getElement = _document3.getElementById("".concat(autoScrollId))) === null || _document3$getElement === void 0 ? void 0 : _document3$getElement.parentNode;
+    if (!element) return;
     setParentWidth(element.width);
     setParentElement(element);
   }, [scrollId]);

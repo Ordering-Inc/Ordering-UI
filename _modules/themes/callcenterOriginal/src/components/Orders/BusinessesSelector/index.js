@@ -29,6 +29,10 @@ var BusinessesSelector = function BusinessesSelector(props) {
     _useState2 = _slicedToArray(_useState, 2),
     businessTypes = _useState2[0],
     setBusinessTypes = _useState2[1];
+  var _useState3 = (0, _react.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    searchValue = _useState4[0],
+    setSearchValue = _useState4[1];
   var Placeholder = /*#__PURE__*/_react.default.createElement(_styles2.PlaceholderTitle, null, t('SELECT_BUSINESS', 'Select business'));
   var businessesLoading = [{
     value: 'default',
@@ -37,7 +41,9 @@ var BusinessesSelector = function BusinessesSelector(props) {
   (0, _react.useEffect)(function () {
     var _businessesOptionList = [];
     if (!businessesList.loading) {
-      var _businessesOption = businessesList.businesses.map(function (business) {
+      var _businessesOption = businessesList.businesses.filter(function (option) {
+        return option === null || option === void 0 ? void 0 : option.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+      }).map(function (business) {
         return {
           value: business.id,
           content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessImage, null, business.logo && /*#__PURE__*/_react.default.createElement(_styles2.BusinessImage, {
@@ -59,7 +65,7 @@ var BusinessesSelector = function BusinessesSelector(props) {
       }
     }
     setBusinessTypes(_businessesOptionList);
-  }, [businessesList]);
+  }, [businessesList, searchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !businessesList.loading ? /*#__PURE__*/_react.default.createElement(_styles.MultiSelect, {
     defaultValue: filterValues.businessIds,
     placeholder: Placeholder,
@@ -69,13 +75,27 @@ var BusinessesSelector = function BusinessesSelector(props) {
     optionBottomBorder: true,
     onChange: function onChange(business) {
       return handleChangeBusinesses(business);
+    },
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: searchValue,
+    handleChangeSearch: function handleChangeSearch(val) {
+      return setSearchValue(val);
     }
   }) : /*#__PURE__*/_react.default.createElement(_styles.MultiSelect, {
     defaultValue: "default",
     options: businessesLoading,
     optionInnerMargin: "10px",
     optionInnerMaxHeight: "150px",
-    optionBottomBorder: true
+    optionBottomBorder: true,
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: searchValue,
+    handleChangeSearch: function handleChangeSearch(val) {
+      return setSearchValue(val);
+    }
   }));
 };
 exports.BusinessesSelector = BusinessesSelector;
