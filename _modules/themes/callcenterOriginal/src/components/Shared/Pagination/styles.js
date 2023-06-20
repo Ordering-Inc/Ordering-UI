@@ -30,9 +30,9 @@ var PageButton = _styledComponents.default.button(_templateObject5 || (_template
   }, function (props) {
     return props.theme.colors.primaryContrast;
   }, function (props) {
-    return (0, _polished.darken)(0.04, props.theme.colors.primary);
+    return props.theme.colors.primary;
   }, function (props) {
-    return (0, _polished.darken)(0.1, props.theme.colors.primary);
+    return props.theme.colors.primary;
   });
 }, function (_ref2) {
   var noEffect = _ref2.noEffect;

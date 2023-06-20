@@ -13,6 +13,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _Shared = require("../../Shared");
 var _styles = require("./styles");
+var _useWindowSize2 = require("../../../../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -41,11 +42,14 @@ var OrdersCards = function OrdersCards(props) {
     selectedOrderCard = props.selectedOrderCard,
     handleOrderCardClick = props.handleOrderCardClick,
     handleUpdateDriverLocation = props.handleUpdateDriverLocation,
-    slaSettingTime = props.slaSettingTime;
+    slaSettingTime = props.slaSettingTime,
+    isDelivery = props.isDelivery;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
@@ -75,6 +79,12 @@ var OrdersCards = function OrdersCards(props) {
     var isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector');
     if (isInvalid) return;
     handleOrderCardClick(order);
+    var element = document.getElementById('deliveryDashboard');
+    if ((isDelivery || isMessagesView) && width < 993 && element) element.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22;
@@ -182,12 +192,13 @@ var OrdersCards = function OrdersCards(props) {
     var finalTaget = sign + day + restHours + ':' + restMins;
     return finalTaget;
   };
-  var getStatusClassName = function getStatusClassName(minutes) {
-    var _configState$configs, _configState$configs$;
-    if (isNaN(Number(minutes))) return 'in_time';
-    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_delayed_time) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
-    return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed';
-  };
+
+  // const getStatusClassName = (minutes) => {
+  //   if (isNaN(Number(minutes))) return 'in_time'
+  //   const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
+  //   return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
+  // }
+
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
       setCurrentTime(Date.now());
@@ -206,8 +217,8 @@ var OrdersCards = function OrdersCards(props) {
     }
   }, [orderList === null || orderList === void 0 ? void 0 : orderList.orders]);
   (0, _react.useEffect)(function () {
-    var _configState$configs2, _configState$configs3;
-    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
+    var _configState$configs, _configState$configs$;
+    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1';
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
       timer: slaSettings,
       slaBar: slaSettings
@@ -254,7 +265,7 @@ var OrdersCards = function OrdersCards(props) {
       onClick: function onClick(e) {
         return handleOrderClick(e, order);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles.CardHeading, null, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id)), /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.CardHeading, null, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id)), /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     })), /*#__PURE__*/_react.default.createElement(_styles.ViewDetails, {
       className: "view-details",
@@ -264,7 +275,7 @@ var OrdersCards = function OrdersCards(props) {
     }, t('VIEW_DETAILS', 'View details')))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, "Timer"), /*#__PURE__*/_react.default.createElement("p", {
-      className: getStatusClassName(getDelayMinutes(order))
+      className: order === null || order === void 0 ? void 0 : order.time_status
     }, displayDelayedTime(order)))), isMessagesView && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageCounter, null, order === null || order === void 0 ? void 0 : order.unread_count), /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.InfoItemContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
       src: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
       loading: "lazy",
@@ -284,7 +295,7 @@ var OrdersCards = function OrdersCards(props) {
     }, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.cellphone)) : /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, t('NO_DRIVER', 'No Driver'))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.slaBar) && /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
-      timeState: getStatusClassName(getDelayMinutes(order))
+      timeState: order === null || order === void 0 ? void 0 : order.time_status
     }));
   }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,

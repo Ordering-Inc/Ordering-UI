@@ -12,7 +12,6 @@ var _DriversBusyStatusFilter = require("../DriversBusyStatusFilter");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var DriversDashboard = function DriversDashboard(props) {
-  var _onlineDrivers$filter, _offlineDrivers$filte, _onlineDrivers$filter2, _offlineDrivers$filte2;
   var driversList = props.driversList,
     onlineDrivers = props.onlineDrivers,
     offlineDrivers = props.offlineDrivers,
@@ -23,18 +22,18 @@ var DriversDashboard = function DriversDashboard(props) {
     handleChangeDriverIsOnline = props.handleChangeDriverIsOnline,
     handleChangeDriversSubFilter = props.handleChangeDriversSubFilter,
     handleOpenDriverOrders = props.handleOpenDriverOrders;
-  var numberOfonlineDrivers = onlineDrivers === null || onlineDrivers === void 0 ? void 0 : onlineDrivers.length;
-  var numberOfofflineDrivers = offlineDrivers === null || offlineDrivers === void 0 ? void 0 : offlineDrivers.length;
-  var numberOfbusyDrivers = driversIsOnline ? (_onlineDrivers$filter = onlineDrivers.filter(function (ele) {
+  var numberOfonlineDrivers = onlineDrivers.length;
+  var numberOfofflineDrivers = offlineDrivers.length;
+  var numberOfbusyDrivers = driversIsOnline ? onlineDrivers.filter(function (ele) {
     return ele.busy;
-  })) === null || _onlineDrivers$filter === void 0 ? void 0 : _onlineDrivers$filter.length : (_offlineDrivers$filte = offlineDrivers.filter(function (ele) {
+  }).length : offlineDrivers.filter(function (ele) {
     return ele.busy;
-  })) === null || _offlineDrivers$filte === void 0 ? void 0 : _offlineDrivers$filte.length;
-  var numberOfnotBusyDrivers = driversIsOnline ? (_onlineDrivers$filter2 = onlineDrivers.filter(function (ele) {
+  }).length;
+  var numberOfnotBusyDrivers = driversIsOnline ? onlineDrivers.filter(function (ele) {
     return !ele.busy;
-  })) === null || _onlineDrivers$filter2 === void 0 ? void 0 : _onlineDrivers$filter2.length : (_offlineDrivers$filte2 = offlineDrivers.filter(function (ele) {
+  }).length : offlineDrivers.filter(function (ele) {
     return !ele.busy;
-  })) === null || _offlineDrivers$filte2 === void 0 ? void 0 : _offlineDrivers$filte2.length;
+  }).length;
   return /*#__PURE__*/_react.default.createElement(_styles.DriversDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_DriversOnlineOfflineFilter.DriversOnlineOfflineFilter, {
     driversIsOnline: driversIsOnline,
     handleChangeDriverIsOnline: handleChangeDriverIsOnline,

@@ -27,7 +27,12 @@ var ProtectedRoute = function ProtectedRoute(props) {
     exact: true,
     path: path
   }, auth ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, allowedLevels.includes(user === null || user === void 0 ? void 0 : user.level) ? props.children : /*#__PURE__*/_react.default.createElement(_PageNotFound.PageNotFound, null)) : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Redirect, {
-    to: "/login"
+    to: {
+      pathname: '/login',
+      state: {
+        from: path
+      }
+    }
   }));
 };
 exports.ProtectedRoute = ProtectedRoute;

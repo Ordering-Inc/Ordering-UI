@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OrderDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponents = require("ordering-components");
 var _ProductItemAccordion = require("../ProductItemAccordion");
@@ -20,6 +21,8 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _OrderToPrint = require("../OrderToPrint");
+var _OrderToPrintTicket = require("../OrderToPrintTicket");
+var _utils = require("../../../../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -36,7 +39,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _order$place, _getOrderStatus, _order$products;
+  var _order$place, _progressBarObjt, _order$products;
   var isSelectedOrders = props.isSelectedOrders,
     open = props.open,
     handleBackRedirect = props.handleBackRedirect,
@@ -50,8 +53,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setIsTourFlag = props.setIsTourFlag,
     setIsTourOpen = props.setIsTourOpen,
     actionStatus = props.actionStatus,
-    handleRefundOrder = props.handleRefundOrder,
+    handleRefundPaymentsStripe = props.handleRefundPaymentsStripe,
+    handleOrderRefund = props.handleOrderRefund,
     isServiceOrder = props.isServiceOrder;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -75,6 +81,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
   var printRef = (0, _react.useRef)();
+  var printTicketRef = (0, _react.useRef)();
   var _useState5 = (0, _react.useState)({
       business: false,
       driver: false,
@@ -91,138 +98,15 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     extraOpen = _useState10[0],
     setExtraOpen = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isExpand = _useState12[0],
+    setIsExpand = _useState12[1];
   var placeSpotEnabled = [3, 4];
   var _props$order = props.order,
     order = _props$order.order,
     loading = _props$order.loading;
   var rejectResonStatuses = [6, 9, 10, 11, 12, 14];
-  var getOrderStatus = function getOrderStatus(status) {
-    var orderStatus = [{
-      key: 0,
-      value: 'Pending Order',
-      slug: 'PENDING_ORDER',
-      percentage: 25
-    }, {
-      key: 1,
-      value: 'Completed by admin',
-      slug: 'COMPLETED_BY_ADMIN',
-      percentage: 100
-    }, {
-      key: 2,
-      value: 'Reject by admin',
-      slug: 'REJECT_BY_ADMIN',
-      percentage: 0
-    }, {
-      key: 3,
-      value: 'Driver arrived by business',
-      slug: 'DRIVER_IN_BUSINESS',
-      percentage: 60
-    }, {
-      key: 4,
-      value: 'Preparation Completed',
-      slug: 'PREPARATION_COMPLETED',
-      percentage: 70
-    }, {
-      key: 5,
-      value: 'Reject by business',
-      slug: 'REJECT_BY_BUSINESS',
-      percentage: 0
-    }, {
-      key: 6,
-      value: 'Reject by driver',
-      slug: 'REJECT_BY_DRIVER',
-      percentage: 0
-    }, {
-      key: 7,
-      value: 'Accepted by business',
-      slug: 'ACCEPTED_BY_BUSINESS',
-      percentage: 35
-    }, {
-      key: 8,
-      value: 'Accepted by driver',
-      slug: 'ACCEPTED_BY_DRIVER',
-      percentage: 45
-    }, {
-      key: 9,
-      value: 'Pick up completed by driver',
-      slug: 'PICK_UP_COMPLETED_BY_DRIVER',
-      percentage: 80
-    }, {
-      key: 10,
-      value: 'Pick up Failed by driver',
-      slug: 'PICK_UP_FAILED_BY_DRIVER',
-      percentage: 0
-    }, {
-      key: 11,
-      value: 'Delivery completed by driver',
-      slug: 'DELIVERY_COMPLETED_BY_DRIVER',
-      percentage: 100
-    }, {
-      key: 12,
-      value: 'Delivery Failed by driver',
-      slug: 'DELIVERY_FAILED_BY_DRIVER',
-      percentage: 0
-    }, {
-      key: 13,
-      value: 'Preorder',
-      slug: 'PREORDER',
-      percentage: 25
-    }, {
-      key: 14,
-      value: 'Order not ready',
-      slug: 'ORDER_NOT_READY',
-      percentage: 65
-    }, {
-      key: 15,
-      value: 'Pickup completed by customer',
-      slug: 'PICKUP_COMPLETED_BY_CUSTOMER',
-      percentage: 100
-    }, {
-      key: 16,
-      value: 'Canceled by customer',
-      slug: 'CANCELED_BY_CUSTOMER',
-      percentage: 0
-    }, {
-      key: 17,
-      value: 'Not picked by customer',
-      slug: 'NOT_PICKED_BY_CUSTOMER',
-      percentage: 0
-    }, {
-      key: 18,
-      value: 'Driver almost arrived to business',
-      slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS',
-      percentage: 50
-    }, {
-      key: 19,
-      value: 'Driver almost arrived to customer',
-      slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER',
-      percentage: 90
-    }, {
-      key: 20,
-      value: 'Customer almost arrived to business',
-      slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS',
-      percentage: 50
-    }, {
-      key: 21,
-      value: 'Customer arrived to business',
-      slug: 'CUSTOMER_ARRIVED_TO_BUSINESS',
-      percentage: 60
-    }, {
-      key: 22,
-      value: 'Looking for driver',
-      slug: 'ORDER_LOOKING_FOR_DRIVER',
-      percentage: 35
-    }, {
-      key: 23,
-      value: 'Driver on way',
-      slug: 'ORDER_DRIVER_ON_WAY',
-      percentage: 45
-    }];
-    var objectStatus = orderStatus.find(function (o) {
-      return o.key === status;
-    });
-    return objectStatus && objectStatus;
-  };
   var getLogisticTag = function getLogisticTag(status) {
     switch (parseInt(status)) {
       case 0:
@@ -276,8 +160,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       customer: customer
     });
   };
-  var handleOpenMessages = function handleOpenMessages(openMessage) {
-    if (openMessage === 'chat') {
+  var handleCloseMessages = function handleCloseMessages() {
+    setOpenMessages({
+      chat: false,
+      history: false
+    });
+  };
+  var handleShowOption = function handleShowOption(option, isInitialRender) {
+    if (option === 'chat') {
       setOpenMessages({
         chat: true,
         history: false
@@ -285,26 +175,25 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
         customer: false
       }));
-    }
-    if (openMessage === 'history') {
+      setShowOption(null);
+    } else if (option === 'history') {
       setOpenMessages({
         chat: false,
         history: true
       });
+      setShowOption(null);
+    } else {
+      setOpenMessages({
+        chat: false,
+        history: false
+      });
+      setShowOption(option);
     }
-    setShowOption(null);
     setExtraOpen(true);
-  };
-  var handleCloseMessages = function handleCloseMessages() {
-    setOpenMessages({
-      chat: false,
-      history: false
-    });
-  };
-  var handleShowOption = function handleShowOption(option) {
-    handleCloseMessages();
-    setExtraOpen(true);
-    setShowOption(option);
+    if (!isInitialRender) {
+      var orderId = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(orderId, "&section=").concat(option));
+    }
   };
   (0, _react.useEffect)(function () {
     unreadMessages();
@@ -320,29 +209,25 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       if (width <= 500) {
         document.getElementById('orderDetails').style.width = '100vw';
       } else {
-        if (extraOpen && width >= 1000) {
-          document.getElementById('orderDetails').style.width = '1000px';
+        if (isExpand) {
+          document.getElementById('orderDetails').style.width = '100vw';
         } else {
-          document.getElementById('orderDetails').style.width = '500px';
+          if (extraOpen && width >= 1000) {
+            document.getElementById('orderDetails').style.width = '1000px';
+          } else {
+            document.getElementById('orderDetails').style.width = '500px';
+          }
         }
       }
     }
   };
   (0, _react.useEffect)(function () {
     toggleMainContent();
-  }, [width]);
+  }, [extraOpen, isExpand, width]);
   (0, _react.useEffect)(function () {
     if (!open) return;
     actionSidebar(true);
   }, [open]);
-  (0, _react.useEffect)(function () {
-    if (width < 1000) return;
-    if (extraOpen) {
-      document.getElementById('orderDetails').style.width = '1000px';
-    } else {
-      toggleMainContent();
-    }
-  }, [extraOpen]);
   var handleChangeTour = function handleChangeTour(evt) {
     if (!isTourOpen) return;
     if (isTourOpen && (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && currentTourStep !== 2) {
@@ -351,7 +236,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
     if (evt.target.closest('.driver-select')) return;
     if (isTourOpen && setCurrentTourStep) {
-      handleOpenMessages('chat');
+      handleShowOption('chat');
       setTimeout(function () {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3);
       }, 1);
@@ -361,7 +246,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     if (evt.keyCode === 37 && currentTourStep === 2) setCurrentTourStep(1);
     if (evt.keyCode === 39 && currentTourStep === 1 && (order === null || order === void 0 ? void 0 : order.delivery_type) === 1) setCurrentTourStep(2);
     if (evt.keyCode === 39 && currentTourStep === 1 && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) {
-      handleOpenMessages('chat');
+      handleShowOption('chat');
       setTimeout(function () {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3);
       }, 1);
@@ -373,7 +258,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       setIsTourFlag(false);
     }
     if (evt.keyCode === 39 && currentTourStep === 2) {
-      handleOpenMessages('chat');
+      handleShowOption('chat');
       setCurrentTourStep(3);
     }
     if (evt.keyCode === 39 && currentTourStep === 3) {
@@ -391,7 +276,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, [isTourOpen, currentTourStep]);
   (0, _react.useEffect)(function () {
     if (!isTourFlag) return;
-    handleOpenMessages('chat');
+    handleShowOption('chat');
     setTimeout(function () {
       setCurrentTourStep(3);
     }, 1);
@@ -409,6 +294,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       history: false
     });
     setShowOption(null);
+    var orderId = query.get('id');
+    history.replace("".concat(location.pathname, "?id=").concat(orderId));
   };
   (0, _react.useEffect)(function () {
     if (!open) return;
@@ -417,6 +304,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       return document.removeEventListener('keydown', onCloseSidebar);
     };
   }, [open]);
+  (0, _react.useEffect)(function () {
+    if (loading) return;
+    var section = query.get('section');
+    if (section) {
+      handleShowOption(section, true);
+    }
+  }, [loading]);
+  var progressBarObjt = order !== null && order !== void 0 && order.delivery_type && (order === null || order === void 0 ? void 0 : order.delivery_type) === 2 ? _utils.getOrderStatuPickUp : _utils.getOrderStatus;
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     isSelectedOrders: isSelectedOrders,
     id: "orderDetails",
@@ -467,16 +362,18 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     showOption: showOption,
     openMessage: openMessages,
     handleShowOption: handleShowOption,
-    handleOpenMessages: handleOpenMessages,
     isTourOpen: isTourOpen,
     currentTourStep: currentTourStep,
     setIsTourOpen: setIsTourOpen,
-    printRef: printRef
+    printRef: printRef,
+    printTicketRef: printTicketRef,
+    isExpand: isExpand,
+    setIsExpand: setIsExpand
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
     isDisabled: isTourOpen && currentTourStep === 1
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
+  })), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.eta_time, " ", t('MIN', 'min'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     isFirstSelect: true,
     noPadding: true,
     orderId: order.id,
@@ -484,7 +381,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     defaultValue: parseInt(order.status),
     handleUpdateOrderStatus: handleUpdateOrderStatus
   }))), (order === null || order === void 0 ? void 0 : order.place) && placeSpotEnabled.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement(_styles2.PlaceSpotContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('SPOT', 'Spot'), ": ", order === null || order === void 0 ? void 0 : (_order$place = order.place) === null || _order$place === void 0 ? void 0 : _order$place.name)), /*#__PURE__*/_react.default.createElement(_styles2.StatusBarContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.StatusBar, {
-    percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
+    percentage: (_progressBarObjt = progressBarObjt(order === null || order === void 0 ? void 0 : order.status)) === null || _progressBarObjt === void 0 ? void 0 : _progressBarObjt.percentage
   })), /*#__PURE__*/_react.default.createElement(_styles2.AdvancedLogistic, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('ATTEMPTS', 'Attempts')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.logistic_attemps)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority)))), rejectResonStatuses.includes(order === null || order === void 0 ? void 0 : order.status) && (order === null || order === void 0 ? void 0 : order.reject_reason) && /*#__PURE__*/_react.default.createElement(_styles2.RejectReasonsContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('REJECT_REASONS', 'Reject reasons')), /*#__PURE__*/_react.default.createElement(_styles2.RejectReasonsList, null, /*#__PURE__*/_react.default.createElement(_styles2.RejectReasonWrapper, null, t("REJECT_REASON_".concat(order === null || order === void 0 ? void 0 : order.reject_reason.toUpperCase()), order === null || order === void 0 ? void 0 : order.reject_reason.replace(/_/g, ' '))))), /*#__PURE__*/_react.default.createElement("div", {
     "data-tour": "tour_driver"
   }, /*#__PURE__*/_react.default.createElement(_OrderContactInformation.OrderContactInformation, {
@@ -494,18 +391,19 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     unreadAlert: unreadAlert,
     isTourOpen: isTourOpen,
     setCurrentTourStep: setCurrentTourStep,
-    handleOpenMessages: handleOpenMessages
+    handleShowOption: handleShowOption
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPORT_SUMMARY', 'Summary')), (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
       product: product,
-      currency: order === null || order === void 0 ? void 0 : order.currency
+      currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
     });
   }))), /*#__PURE__*/_react.default.createElement(_OrderBill.OrderBill, {
     order: order,
     actionStatus: actionStatus,
-    handleRefundOrder: handleRefundOrder
-  }))), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    handleRefundPaymentsStripe: handleRefundPaymentsStripe,
+    handleOrderRefund: handleOrderRefund
+  })), /*#__PURE__*/_react.default.createElement(_styles2.DetailBottom, null)), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleCloseMoreDetails();
@@ -589,9 +487,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     ref: printRef,
     order: order,
     placeSpotEnabled: placeSpotEnabled,
-    getOrderStatus: getOrderStatus,
+    getOrderStatus: progressBarObjt,
     getLogisticTag: getLogisticTag,
     getPriorityTag: getPriorityTag
+  }), order && Object.keys(order).length > 0 && !loading && /*#__PURE__*/_react.default.createElement(_OrderToPrintTicket.OrderToPrintTicket, {
+    ref: printTicketRef,
+    order: order,
+    getOrderStatus: progressBarObjt
   }));
 };
 var OrderDetails = function OrderDetails(props) {
