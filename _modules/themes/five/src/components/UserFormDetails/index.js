@@ -402,7 +402,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   }), showInputBirthday && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('BIRTHDATE', 'Birthdate')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     borderBottom: true,
     className: "form",
-    value: (0, _moment.default)(birthdate).format('YYYY/MM/DD'),
+    value: birthdate ? (0, _moment.default)(birthdate).format('YYYY/MM/DD') : '',
     autoComplete: "off",
     onFocus: function onFocus() {
       return setOpenCalendar(true);
