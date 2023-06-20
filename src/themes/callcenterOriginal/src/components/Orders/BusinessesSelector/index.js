@@ -22,6 +22,7 @@ export const BusinessesSelector = (props) => {
 
   const [, t] = useLanguage()
   const [businessTypes, setBusinessTypes] = useState([])
+  const [searchValue, setSearchValue] = useState('')
 
   const Placeholder = <PlaceholderTitle>{t('SELECT_BUSINESS', 'Select business')}</PlaceholderTitle>
   const businessesLoading = [{ value: 'default', content: <Option>{t('BUSINESSES_LOADING', 'Businesses loading')}...</Option> }]
@@ -29,29 +30,31 @@ export const BusinessesSelector = (props) => {
   useEffect(() => {
     const _businessesOptionList = []
     if (!businessesList.loading) {
-      const _businessesOption = businessesList.businesses.map((business) => {
-        return {
-          value: business.id,
-          content: (
-            <Option>
-              <WrapperBusinessImage>
-                {business.logo && <BusinessImage bgimage={business.logo} />}
-              </WrapperBusinessImage>
-              <OptionContent>
-                <OptionName>
-                  {business.name}
-                </OptionName>
-                <OptionCategory>
-                  {business?.alcohol && t('ALCOHOL', 'Alcohol')}
-                  {business?.food && t('FOOD', 'Food')}
-                  {business?.groceries && t('GROCERIES', 'Groceries')}
-                  {business?.laundry && t('LAUNDRY', 'Laundry')}
-                </OptionCategory>
-              </OptionContent>
-            </Option>
-          )
-        }
-      })
+      const _businessesOption = businessesList.businesses
+        .filter(option => option?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+        .map((business) => {
+          return {
+            value: business.id,
+            content: (
+              <Option>
+                <WrapperBusinessImage>
+                  {business.logo && <BusinessImage bgimage={business.logo} />}
+                </WrapperBusinessImage>
+                <OptionContent>
+                  <OptionName>
+                    {business.name}
+                  </OptionName>
+                  <OptionCategory>
+                    {business?.alcohol && t('ALCOHOL', 'Alcohol')}
+                    {business?.food && t('FOOD', 'Food')}
+                    {business?.groceries && t('GROCERIES', 'Groceries')}
+                    {business?.laundry && t('LAUNDRY', 'Laundry')}
+                  </OptionCategory>
+                </OptionContent>
+              </Option>
+            )
+          }
+        })
 
       for (const option of _businessesOption) {
         _businessesOptionList.push(option)
@@ -59,7 +62,7 @@ export const BusinessesSelector = (props) => {
     }
 
     setBusinessTypes(_businessesOptionList)
-  }, [businessesList])
+  }, [businessesList, searchValue])
 
   return (
     <>
@@ -72,6 +75,11 @@ export const BusinessesSelector = (props) => {
           optionInnerMaxHeight='150px'
           optionBottomBorder
           onChange={(business) => handleChangeBusinesses(business)}
+          isShowSearchBar
+          searchBarIsCustomLayout
+          searchBarIsNotLazyLoad
+          searchValue={searchValue}
+          handleChangeSearch={(val) => setSearchValue(val)}
         />
       ) : (
         <MultiSelect
@@ -80,6 +88,11 @@ export const BusinessesSelector = (props) => {
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'
           optionBottomBorder
+          isShowSearchBar
+          searchBarIsCustomLayout
+          searchBarIsNotLazyLoad
+          searchValue={searchValue}
+          handleChangeSearch={(val) => setSearchValue(val)}
         />
       )}
     </>

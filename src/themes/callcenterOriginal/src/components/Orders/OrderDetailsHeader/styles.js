@@ -11,6 +11,12 @@ export const OrderDetailsHeaderContainer = styled.div`
       margin: 0px;
       font-weight: 700;
     }
+    h2 {
+      width: 100%;
+      font-size: 18px;
+      margin: 0px;
+      font-weight: 700;
+    }
     > div {
       display: flex;
       width: 100%;
@@ -74,5 +80,26 @@ export const StripeLink = styled.a`
   color: ${props => props.theme.colors.primary};
   &:hover {
     color: ${props => props.theme.colors.primary};
+  }
+`
+export const PrinterSelectContainer = styled.div`
+  position: relative;
+  margin-right: 8px;
+`
+
+export const PrinterSelect = styled.div`
+  position: absolute;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  border: 1px solid ${props => props.theme.colors.textGray};
+
+  button {
+    padding: 10px 20px;
+    color: ${props => props.theme.colors.textGray};
+    &:hover {
+      background-color: #f5f5f5;
+    }
   }
 `

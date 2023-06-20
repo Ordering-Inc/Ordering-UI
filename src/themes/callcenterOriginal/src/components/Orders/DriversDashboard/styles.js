@@ -11,7 +11,7 @@ export const DriversDashboardContainer = styled.div`
 
   @media (min-width: 1024px) {
     flex-direction: row;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 122px);
   }
 `
 

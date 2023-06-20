@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const ScheduleContainer = styled.div`
-  min-width: 400px;
+  min-width: 320px;
 `
 
 export const TimeScheduleItemContainer = styled.div`
@@ -18,20 +18,20 @@ export const TimeScheduleItemContainer = styled.div`
       font-size: 13px;
       font-weight: 600;
       margin: 0px;
-      padding: 0 16px;
+      padding: 0 10px;
     }
 
     &:first-child {
-      width: 95px;
+      min-width: 95px;
     }
 
     &:nth-child(2) {
       flex-direction: column;
       flex: 1;
       ${props => props.theme?.rtl ? css`
-        padding-right: 10px;
+        padding-right: 8px;
       ` : css`
-        padding-left: 10px;
+        padding-left: 8px;
       `}
       > div {
         display: flex;
@@ -42,7 +42,7 @@ export const TimeScheduleItemContainer = styled.div`
         }
   
         svg {
-          font-size: 20px;
+          font-size: 18px;
           cursor: pointer;
         }
       }
@@ -56,7 +56,7 @@ export const TimeScheduleItemContainer = styled.div`
       > span {
         svg {
           cursor: pointer;
-          font-size: 20px;
+          font-size: 18px;
           color: ${props => props.theme.colors.primary};
           ${props => props.theme?.rtl ? css`
             margin-left: 10px;
@@ -68,14 +68,25 @@ export const TimeScheduleItemContainer = styled.div`
     }
   }
 
-  @media (min-width: 380px) {
+  @media (min-width: 450px) {
     > div {
       h4 {
         font-size: 14px;
+        padding: 0 12px;
       }
       &:nth-child(2) {
         p {
           font-size: 14px;
+        }
+        svg {
+          font-size: 20px;
+        }
+      }
+      &:nth-child(3) {
+        > span {
+          svg {
+            font-size: 20px;
+          }
         }
       }
     }
@@ -96,6 +107,7 @@ export const SelectWrapper = styled.div`
     > div {
       padding-left: 13px;
       padding-right: 13px;
+      font-size: 13px;
       > div:last-child {
         margin: 0px;
       }
@@ -111,13 +123,19 @@ export const SelectWrapper = styled.div`
     }
   }
 
-  @media (min-width: 380px) {
-    width: 100px;
+  @media (min-width: 450px) {
+    width: 95px;
+    .select {
+      > div {
+        font-size: 16px;
+      }
+    }
   }
 `
 
 export const Option = styled.div`
   white-space: nowrap;
+  font-size: 15px;
 `
 
 export const SplitLine = styled.div`
@@ -137,19 +155,22 @@ export const IconWrapper = styled.span`
 export const TrashIconWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 56px;
+  width: 50px;
   ${({ isHide }) => isHide ? css`
     opacity: 0;
     pointer-events: none;
   ` : css`
     opacity: 1;
   `}
+  @media (min-width: 450px) {
+    width: 56px;
+  }
 `
 
 export const AddScheduleIconWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 56px;
+  width: 50px;
   > svg {
     color: ${props => props.theme.colors.primary};
     ${props => props.theme?.rtl ? css`
@@ -159,6 +180,20 @@ export const AddScheduleIconWrapper = styled.div`
     `}
     &:last-child {
       color: ${props => props.theme.colors.lightGray};
+    }
+  }
+
+  @media (min-width: 450px) {
+    width: 56px;
+  }
+`
+export const DateWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h4 {
+    &.date {
+      font-weight: normal;
     }
   }
 `

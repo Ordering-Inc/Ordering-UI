@@ -13,20 +13,23 @@ export const PaymethodTypeSelector = (props) => {
 
   const [, t] = useLanguage()
   const [paymethodsTypes, setPaymethodsTypes] = useState([])
+  const [searchValue, setSearchValue] = useState('')
   const placeholder = <PlaceholderTitle>{t('SELECT_PAYMETHOD', 'Select paymethod')}</PlaceholderTitle>
   const paymthodsLoading = [{ value: 'default', content: <Option>{t('PAYMETHODS_LOADING', 'Paymethods loading')}...</Option> }]
 
   useEffect(() => {
     const _paymthodsOptionList = []
     if (!paymethodsList.loading) {
-      const _paymthodsOption = paymethodsList.paymethods.map((paymethod) => {
-        return {
-          value: paymethod.id,
-          content: (
-            <Option>{paymethod.name}</Option>
-          )
-        }
-      })
+      const _paymthodsOption = paymethodsList.paymethods
+        .filter(option => option?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+        .map((paymethod) => {
+          return {
+            value: paymethod.id,
+            content: (
+              <Option>{t(paymethod?.gateway?.toUpperCase(), paymethod.name)}</Option>
+            )
+          }
+        })
 
       for (const option of _paymthodsOption) {
         _paymthodsOptionList.push(option)
@@ -34,7 +37,7 @@ export const PaymethodTypeSelector = (props) => {
     }
 
     setPaymethodsTypes(_paymthodsOptionList)
-  }, [paymethodsList])
+  }, [paymethodsList, searchValue])
 
   return (
     <>
@@ -45,12 +48,22 @@ export const PaymethodTypeSelector = (props) => {
           options={paymethodsTypes}
           optionBottomBorder
           onChange={(paymethod) => handleChangePaymethodType(paymethod)}
+          isShowSearchBar
+          searchBarIsCustomLayout
+          searchBarIsNotLazyLoad
+          searchValue={searchValue}
+          handleChangeSearch={(val) => setSearchValue(val)}
         />
       ) : (
         <MultiSelect
           defaultValue='default'
           options={paymthodsLoading}
           optionBottomBorder
+          isShowSearchBar
+          searchBarIsCustomLayout
+          searchBarIsNotLazyLoad
+          searchValue={searchValue}
+          handleChangeSearch={(val) => setSearchValue(val)}
         />
       )}
     </>
