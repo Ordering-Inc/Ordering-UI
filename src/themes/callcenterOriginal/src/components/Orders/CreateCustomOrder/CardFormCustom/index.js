@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components'
 import Card from 'react-credit-cards-2'
-import 'react-credit-cards-2/dist/es/styles-compiled.css'
+import 'react-credit-cards-2/es/styles-compiled.css'
 import {
   formatCreditCardNumber,
   formatCVC,
