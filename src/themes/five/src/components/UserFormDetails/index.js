@@ -388,7 +388,7 @@ export const UserFormDetailsUI = (props) => {
                 <Input
                   borderBottom
                   className='form'
-                  value={moment(birthdate).format('YYYY/MM/DD')}
+                  value={birthdate ? moment(birthdate).format('YYYY/MM/DD') : ''}
                   autoComplete='off'
                   onFocus={() => setOpenCalendar(true)}
                 />
