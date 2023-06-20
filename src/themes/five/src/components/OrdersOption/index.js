@@ -109,7 +109,6 @@ const OrdersOptionUI = (props) => {
     ? orders && orders.length > 0 && !orders.map(order => businessesIds && businessesIds.includes(order.business_id)).every(i => !i)
     : orders.length > 0
 
-  const [loadingOrders, setLoadingOrders] = useState(true)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const closeOrderModal = (e) => {
     const outsideModal = !window.document.getElementById('app-modals') ||
@@ -141,18 +140,6 @@ const OrdersOptionUI = (props) => {
       })
     }
   }
-
-  useEffect(() => {
-    let timeout
-    if (isCustomLayout) {
-      timeout = setTimeout(() => {
-        setLoadingOrders(false)
-      }, 2000)
-    }
-    return () => {
-      typeof timeout === 'number' && clearTimeout(timeout)
-    }
-  }, [])
 
   useEffect(() => {
     if (loading) return
@@ -203,7 +190,7 @@ const OrdersOptionUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : ((isShowTitles || !isBusinessesPage) && !hideOrders)) && (
+      {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loading && !isBusinessesLoading) : ((isShowTitles || !isBusinessesPage) && !hideOrders)) && (
         <>
           {orders.length > 0 && (
             <OptionTitle isBusinessesPage={isBusinessesPage}>
@@ -241,7 +228,7 @@ const OrdersOptionUI = (props) => {
         />
       )}
 
-      {(isCustomLayout ? (loadingOrders || loading || businesses?.loading) : showSkeletons) && (
+      {(isCustomLayout ? (loading || businesses?.loading) : showSkeletons) && (
         <>
           {(businesses?.loading && isBusiness) ? (
             <BusinessControllerSkeleton>
@@ -316,8 +303,7 @@ const OrdersOptionUI = (props) => {
           )}
         </>
       )}
-
-      {(isCustomLayout ? !loadingOrders && !loading && !error && orders.length > 0 && !isBusinessesLoading && !hideOrders : !loading && !error && orders.length > 0 && !hideOrders) && (
+      {(isCustomLayout ? !loading && !error && orders.length > 0 && !isBusinessesLoading && !hideOrders : !loading && !error && orders.length > 0 && !hideOrders) && (
         horizontal ? (
           <HorizontalOrdersLayout
             businessesIds={businessesIds}

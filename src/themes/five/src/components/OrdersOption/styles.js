@@ -2,9 +2,8 @@ import styled, { css } from 'styled-components'
 
 export const OptionTitle = styled.div`
   width: 100%;
-  margin: ${({ isBusinessesPage }) => isBusinessesPage ? '10px 20px 0' : '0 auto'};
-  padding: ${({ isBusinessesPage }) => !isBusinessesPage && '0 15px'};
-
+  margin: ${({ isBusinessesPage }) => isBusinessesPage ? '0' : '0 auto'};
+  padding: ${({ isBusinessesPage }) => isBusinessesPage ? '10px 20px 0' : '0 15px'};
   h1{
     text-transform: capitalize;
     font-size: 18px;
@@ -12,7 +11,7 @@ export const OptionTitle = styled.div`
   }
 
   @media (min-width: 768px){
-    padding: 0;
+    padding: ${({ isBusinessesPage }) => isBusinessesPage ? '10px 20px 0' : '0'};
     width: 100%;
   }
 `

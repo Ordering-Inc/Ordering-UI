@@ -193,9 +193,13 @@ export const RenderProductsLayout = (props) => {
               />
             )}
 
-            {!isCustomerMode && businessState?.business?.id && (
+            {businessState?.business?.id && (
               <PageBannerWrapper>
-                <PageBanner position='web_business_page' businessId={businessState?.business?.id} />
+                <PageBanner
+                  position='web_business_page'
+                  businessId={businessState?.business?.id}
+                  isCustomerMode={isCustomerMode}
+                />
               </PageBannerWrapper>
             )}
 

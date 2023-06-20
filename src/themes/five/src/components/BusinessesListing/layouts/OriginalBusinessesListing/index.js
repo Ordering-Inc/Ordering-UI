@@ -23,7 +23,8 @@ import {
   BusinessLogo,
   BusinessLogosContainer,
   BusinessBanner,
-  BusinessLogosWrapper
+  BusinessLogosWrapper,
+  AddressFormWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { Button } from '../../../../styles/Buttons'
@@ -48,6 +49,8 @@ import { CitiesControl } from '../../../CitiesControl'
 import { OrderContextUI } from '../../../OrderContextUI'
 import { OrdersSection } from './OrdersSection'
 import { getCateringValues } from '../../../../../../../utils'
+import { AddressList } from '../../../AddressList'
+import { AddressForm } from '../../../AddressForm'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -223,9 +226,10 @@ const BusinessesListingUI = (props) => {
 
   return (
     <BusinessContainer>
-      {!isCustomerMode && ( // Keep this banner at the top
-        <PageBanner position='web_business_listing' />
-      )}
+      <PageBanner
+        position='web_business_listing'
+        isCustomerMode={isCustomerMode}
+      />
 
       {(windowSize.width < 576 || (configs?.business_listing_hide_image?.value !== '1' && !isChew)) && (
         <BusinessBanner>
@@ -447,6 +451,34 @@ const BusinessesListingUI = (props) => {
           onClose={() => setModals({ ...modals, citiesOpen: false })}
         />
       </Modal>
+
+      <Modal
+        {...(!auth && { title: t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?') })}
+        open={modals.formOpen || modals.listOpen}
+        width='70%'
+        onClose={() => setModals({ ...modals, formOpen: false, listOpen: false })}
+        >
+          {modals.listOpen ? (
+              <AddressList
+                isModal
+                changeOrderAddressWithDefault
+                userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+                onCancel={() => setModals({ ...modals, listOpen: false })}
+                isCustomerMode={isCustomerMode}
+              />
+            ) : (
+              <AddressFormWrapper>
+                <AddressForm
+                  useValidationFileds
+                  address={orderState?.options?.address || {}}
+                  onCancel={() => setModals({ ...modals, formOpen: false })}
+                  onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+                  isCustomerMode={isCustomerMode}
+                />
+              </AddressFormWrapper>
+            )
+          }
+        </Modal>
 
       <Alert
         title={!mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map')}

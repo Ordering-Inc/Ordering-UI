@@ -182,6 +182,7 @@ const PhoneAutocompleteUI = (props) => {
           fieldsNotValid={props.fieldsNotValid}
           useChekoutFileds
           isCustomerMode
+          isPopup
         />
       </Modal>
       <Modal

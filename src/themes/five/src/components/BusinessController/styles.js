@@ -344,7 +344,7 @@ export const CallCenterInformation = styled.div`
   flex-direction: column;
   position: absolute;
   right: 0;
-  bottom: 43px;
+  bottom: 0;
   margin-right: 10px;
   margin-bottom: 10px;
   div{
