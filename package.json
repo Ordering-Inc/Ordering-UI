@@ -88,7 +88,7 @@
     "lodash": "^4.17.19",
     "moment": "^2.29.4",
     "nanoid": "^4.0.0",
-    "ordering-components": "github:Ordering-Inc/ordering-components#dashboard-update",
+    "ordering-components": "github:Ordering-Inc/ordering-components#development",
     "payment": "^2.4.6",
     "polished": "^3.6.6",
     "react-bootstrap-icons": "^1.7.2",
