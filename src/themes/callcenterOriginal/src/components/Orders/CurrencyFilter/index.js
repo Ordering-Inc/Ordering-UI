@@ -11,6 +11,7 @@ export const CurrencyFilter = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [searchValue, setSearchValue] = useState('')
 
   const placeholder = (
     <PlaceholderTitle>
@@ -22,20 +23,22 @@ export const CurrencyFilter = (props) => {
 
   useEffect(() => {
     const _countryList = []
-    const _groupsOption = currencyList.map((country) => {
-      return {
-        value: country.value,
-        content: (
-          <Option>{country.text}</Option>
-        )
-      }
-    })
+    const _groupsOption = currencyList
+      .filter(option => option?.text.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+      .map((country) => {
+        return {
+          value: country.value,
+          content: (
+            <Option>{country.text}</Option>
+          )
+        }
+      })
 
     for (const option of _groupsOption) {
       _countryList.push(option)
     }
     setCountryTypes(_countryList)
-  }, [currencyList])
+  }, [currencyList, searchValue])
 
   return (
     <MultiSelect
@@ -44,6 +47,11 @@ export const CurrencyFilter = (props) => {
       options={countryTypes}
       onChange={(code) => handleChangeCurrency(code)}
       optionInnerMaxHeight='200px'
+      isShowSearchBar
+      searchBarIsCustomLayout
+      searchBarIsNotLazyLoad
+      searchValue={searchValue}
+      handleChangeSearch={(val) => setSearchValue(val)}
     />
   )
 }

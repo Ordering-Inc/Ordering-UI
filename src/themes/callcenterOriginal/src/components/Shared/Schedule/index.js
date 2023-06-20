@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
   useConfig,
-  Schedule as ScheduleController
+  Schedule as ScheduleController,
+  useUtils
 } from 'ordering-components'
 import {
   Trash,
@@ -22,7 +23,8 @@ import {
   IconWrapper,
   SelectWrapper,
   AddScheduleIconWrapper,
-  TrashIconWrapper
+  TrashIconWrapper,
+  DateWrapper
 } from './styles'
 
 const ScheduleUI = (props) => {
@@ -43,11 +45,13 @@ const ScheduleUI = (props) => {
     selectedCopyDays,
     cleanSelectedCopyDays,
     handleSelectCopyTimes,
-    handleApplyScheduleCopyTimes
+    handleApplyScheduleCopyTimes,
+    isShowDate
   } = props
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
+  const [{ parseDate }] = useUtils()
 
   const is12Hours = configs.format_time?.value === '12'
 
@@ -85,6 +89,12 @@ const ScheduleUI = (props) => {
         handleDeleteSchedule(daysOfWeekIndex, index)
       }
     })
+  }
+
+  const getNextDate = (x) => {
+    const now = new Date()
+    now.setDate(now.getDate() + (x + (7 - now.getDay())) % 7)
+    return now
   }
 
   useEffect(() => {
@@ -164,7 +174,12 @@ const ScheduleUI = (props) => {
                 checked={schedule?.enabled}
                 onChange={e => handleEnabledSchedule(daysOfWeekIndex, e.target.checked)}
               />
-              <h4>{daysOfWeek[daysOfWeekIndex]}</h4>
+              <DateWrapper>
+                <h4>{daysOfWeek[daysOfWeekIndex]}</h4>
+                {isShowDate && (
+                  <h4 className='date'>{parseDate(getNextDate(daysOfWeekIndex), { outputFormat: 'YYYY-MM-DD' })}</h4>
+                )}
+              </DateWrapper>
             </div>
             {schedule?.enabled ? (
               <div>

@@ -123,3 +123,29 @@ export const ButtonGroup = styled.div`
     }
   }
 `
+
+export const AddInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: transparent !important;
+  input {
+    flex: 1;
+    height: 57px;
+  }
+  button {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    ${props => props.theme.rtl && css`
+      margin-right: 10px;
+      margin-left: 0;
+    `}
+  }
+`
+
+export const AddMetaFiled = styled.span`
+  font-size: 14px;
+  color: ${props => props.theme.colors.primary};
+  cursor: pointer;
+  width: 100%;
+`

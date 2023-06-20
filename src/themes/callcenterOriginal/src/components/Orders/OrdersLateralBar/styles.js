@@ -21,7 +21,7 @@ export const LateralBarContainer = styled.div`
 `
 
 export const OrdersContainer = styled.div`
-  max-width: 560px;
+  /* max-width: 560px; */
 
   #orderTable {
     border-top: 1px solid ${props => props.theme.colors.borderColor};
@@ -34,6 +34,8 @@ export const OrdersContainer = styled.div`
 `
 
 export const CloseButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 25px;
   cursor: pointer;

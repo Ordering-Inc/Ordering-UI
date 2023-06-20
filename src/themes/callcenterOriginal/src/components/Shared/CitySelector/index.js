@@ -20,21 +20,25 @@ const CitySelectorUI = (props) => {
     optionInnerMaxHeight
   } = props
 
-  const [cityOptions, setCityOptions] = useState([])
   const [, t] = useLanguage()
+
+  const [cityOptions, setCityOptions] = useState([])
+  const [searchValue, setSearchValue] = useState('')
   const placeholder = <PlaceholderTitle isDefault={isDefault}>{t('SELECT_CITY', 'Select City')}</PlaceholderTitle>
 
   useEffect(() => {
     if (citiesList?.loading) return
-    const _cityOptions = citiesList?.cities.map(city => {
-      return {
-        value: city.id,
-        content: <Option noPadding isDefault={isDefault}>{city?.name}</Option>,
-        showOnSelected: <Option isDefault={isDefault}>{city?.name}</Option>
-      }
-    })
+    const _cityOptions = citiesList?.cities
+      .filter(option => option?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+      .map(city => {
+        return {
+          value: city.id,
+          content: <Option noPadding isDefault={isDefault}>{city?.name}</Option>,
+          showOnSelected: <Option isDefault={isDefault}>{city?.name}</Option>
+        }
+      })
     setCityOptions(_cityOptions)
-  }, [citiesList, isDefault])
+  }, [citiesList, isDefault, searchValue])
 
   useEffect(() => {
     if (!isAddMode) return
@@ -66,6 +70,11 @@ const CitySelectorUI = (props) => {
               defaultValue={filterValues?.cityIds}
               options={cityOptions}
               onChange={(city) => handleChangeCity(city)}
+              isShowSearchBar
+              searchBarIsCustomLayout
+              searchBarIsNotLazyLoad
+              searchValue={searchValue}
+              handleChangeSearch={(val) => setSearchValue(val)}
             />
           )}
         </>
