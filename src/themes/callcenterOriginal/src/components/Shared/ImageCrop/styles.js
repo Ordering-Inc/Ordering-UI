@@ -123,3 +123,21 @@ export const ButtonWrapper = styled.div`
     height: 44px;
   }
 `
+
+export const ActionAspectRatioBox = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  label {
+    font-size: 14px;
+    color: ${props => props.theme?.colors.headingColor};
+    margin-bottom: 0;
+    margin-left: 15px;
+    ${props => props.theme?.rtl && css`
+      margin-right: 15px;
+      margin-left: 0;
+    `}
+  }
+`

@@ -83,6 +83,7 @@ export const AutoScroll = ({ children, modal, special, innerScroll, scrollId }) 
   useEffect(() => {
     if (!scrollId) return
     const element = document?.getElementById(`${autoScrollId}`)?.parentNode
+    if (!element) return
     setParentWidth(element.width)
     setParentElement(element)
   }, [scrollId])

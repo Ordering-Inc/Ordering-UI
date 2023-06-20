@@ -4,15 +4,17 @@ import Skeleton from 'react-loading-skeleton'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { useTheme } from 'styled-components'
 import { getStarWidth } from '../../../../../../utils'
+import { LinkButton } from '../../../styles'
+
 import {
   DriversListContainer,
   DriverCard,
   WrapperImage,
   Image,
   DriverInfo,
-  WrapperStar,
-  AssignedOrdersCount
+  WrapperStar
 } from './styles'
+import { useWindowSize } from '../../../../../../hooks/useWindowSize'
 
 export const DriversList = (props) => {
   const {
@@ -22,17 +24,21 @@ export const DriversList = (props) => {
     offlineDrivers,
     selectedDriver,
     handleChangeDriver,
-    handleOpenDriverOrders
+    handleOpenDriverOrders,
+    hidePhoto
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
+  const { width } = useWindowSize()
 
   const handleClickDriver = (e, driver) => {
     const isInvalid = e.target.closest('.driver-orders')
     if (isInvalid) return
     handleChangeDriver(driver)
+    const element = document.getElementById('driverDashboard')
+    if (width < 993 && element) element.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }
 
   const onOpenDriverOrdersDetail = (driver) => {
@@ -70,20 +76,22 @@ export const DriversList = (props) => {
               onClick={(e) => handleClickDriver(e, driver)}
               active={selectedDriver?.id === driver.id}
             >
-              <WrapperImage>
-                <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
-              </WrapperImage>
+              {!hidePhoto && (
+                <WrapperImage>
+                  <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
+                </WrapperImage>
+              )}
               <DriverInfo>
                 <div>
                   <p>{driver.name} {driver.lastname}</p>
                   <BsDot />
-                  <AssignedOrdersCount
+                  <LinkButton
                     className='driver-orders'
                     disabled={!driver?.assigned_orders_count || driver?.assigned_orders_count === 0}
                     onClick={() => onOpenDriverOrdersDetail(driver)}
                   >
                     {driver?.assigned_orders_count} {t('ORDERS', 'Orders')}
-                  </AssignedOrdersCount>
+                  </LinkButton>
                 </div>
                 {driver?.qualification && (
                   <WrapperStar width={getStarWidth(driver?.qualification)} />

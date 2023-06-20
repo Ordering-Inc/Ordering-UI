@@ -74,6 +74,7 @@ export const OrderDashboardSLASettingUI = (props) => {
   const onSubmit = (data) => {
     if (data && Object.keys(data).length > 0) {
       handleClickUpdate()
+      setSettingOpen(false)
     }
   }
 
@@ -193,7 +194,6 @@ export const StatusBlock = (props) => {
             name='minute'
             type='text'
             placeholder='MM'
-            disabled
             defaultValue={configs?.order_deadlines_delayed_time?.value}
             ref={formMethods.register({
               required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute'))
