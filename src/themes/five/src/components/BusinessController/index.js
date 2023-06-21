@@ -78,7 +78,6 @@ const BusinessControllerUI = (props) => {
   const [modalPageToShow, setModalPageToShow] = useState(null)
 
   const favoriteRef = useRef(null)
-  console.log(theme?.business_listing_view?.components?.layout?.rows)
   const businessRows = theme?.business_listing_view?.components?.layout?.rows
   const hideBusinessLogo = theme?.business_listing_view?.components?.business?.components?.logo?.hidden
   const hideBusinessFee = theme?.business_listing_view?.components?.business?.components?.fee?.hidden
