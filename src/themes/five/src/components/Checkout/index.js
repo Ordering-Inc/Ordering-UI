@@ -93,6 +93,7 @@ const CheckoutUI = (props) => {
     onPlaceOrderClick,
     setPlaceSpotNumber,
     placeSpotNumber,
+    uberDirect,
     applyCoupon,
     hasCateringProducts,
     cateringHours,
@@ -118,6 +119,7 @@ const CheckoutUI = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [requiredFields, setRequiredFields] = useState([])
   const [isSuccess, setIsSuccess] = useState(false)
+  const [isHideCash, setHideCash] = useState(false)
 
   const [cateringDayError, setCateringDayError] = useState(false)
   const [openAlertCatering, setOpenAlertCatering] = useState(false)
@@ -261,6 +263,16 @@ const CheckoutUI = (props) => {
       // changePaymethod(cart?.business_id, null, null)
     }
   }, [isResetPaymethod])
+
+  useEffect(() => {
+    if (uberDirect?.amountToHide && !(cart?.total <= uberDirect.amountToHide) && options?.type === 1) {
+      setHideCash(true)
+      if (paymethodSelected === null || paymethodSelected?.gateway !== 'cash') return
+      handlePaymethodChange(null)
+    } else {
+      setHideCash(false)
+    }
+  }, [uberDirect, cart, options, paymethodSelected])
 
   useEffect(() => {
     if ((!configs?.advanced_offers_module?.value && (paymethodSelected?.gateway !== 'openpay' || hasCateringProducts?.result) && !cartState.loading && cart?.coupon && cart?.coupon === 'DLVMASTER30')) {
@@ -450,6 +462,7 @@ const CheckoutUI = (props) => {
                 handlePlaceOrder={handlePlaceOrder}
                 onPlaceOrderClick={onPlaceOrderClick}
                 hasCateringProducts={hasCateringProducts}
+                isHideCash={isHideCash}
               />
             </PaymentMethodContainer>
           )}

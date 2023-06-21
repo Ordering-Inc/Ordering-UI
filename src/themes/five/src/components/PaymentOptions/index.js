@@ -98,7 +98,8 @@ const PaymentOptionsUI = (props) => {
     onPlaceOrderClick,
     handlePlaceOrder,
     paymethods,
-    hasCateringProducts
+    hasCateringProducts,
+    isHideCash
   } = props
   const [, t] = useLanguage()
   const [orderState, { applyCoupon, removeOffer }] = useOrder()
@@ -119,9 +120,9 @@ const PaymentOptionsUI = (props) => {
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
 
-  const excludePaymethods = [''] // hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['']
+  const excludePaymethods = isHideCash ? ['cash'] : [''] // hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['']
 
-  const supportedMethods = list?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : hasCateringProducts?.result ? !excludePaymethods.includes(p.gateway) : p)
+  const supportedMethods = list?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : (isHideCash || hasCateringProducts?.result) ? !excludePaymethods.includes(p.gateway) : p)
 
   const handlePaymentMethodClick = (paymethod) => {
     if (cart?.balance > 0) {
