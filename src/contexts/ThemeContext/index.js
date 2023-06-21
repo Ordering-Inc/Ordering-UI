@@ -70,7 +70,7 @@ export const ThemeProvider = ({ children, ...props }) => {
     input, textarea, button {
       font-family: inherit;
     }
-    h1,p,span {
+    h1,h2,p,span {
       ${props.isDarkTextColor && css`
         color: ${theme.colors.darkTextColor}
       `}
