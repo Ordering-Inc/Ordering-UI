@@ -29,6 +29,7 @@ export const CardsContainer = styled.div`
 export const CardsContainerWrapper = styled.div`
   margin-bottom: 10px;
   display: flex;
+  overflow: auto hidden;
   ${({ isBusinessesPage }) => isBusinessesPage && css`
     overflow: scroll hidden;
     width: 100%;
