@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PWAPrompt from 'react-ios-pwa-prompt'
-import { useTheme, ThemeProvider } from 'styled-components'
+import { useTheme } from 'styled-components'
+import { ThemeProvider } from '../src/contexts/ThemeContext'
 import loadable from '@loadable/component'
 import {
   Switch,
@@ -133,7 +134,8 @@ export const App = () => {
     colors: {
       ...theme.colors,
       ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color && { primary: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color }),
-      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color && { links: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color })
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color && { links: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color }),
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.background_page && { backgroundPage: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.background_page })
     },
     images: {
       ...theme.images,
@@ -527,7 +529,7 @@ export const App = () => {
       {
         loaded && (
           <ThemeProvider
-            theme={orderingThemeUpdated(theme, orderingTheme)}
+            theme={themeUpdated}
           >
             <ListenPageChanges />
             {!(isKioskApp && isHome) && (
