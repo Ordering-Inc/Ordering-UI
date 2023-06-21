@@ -81,6 +81,7 @@ var CheckoutUI = function CheckoutUI(props) {
     onPlaceOrderClick = props.onPlaceOrderClick,
     setPlaceSpotNumber = props.setPlaceSpotNumber,
     placeSpotNumber = props.placeSpotNumber,
+    uberDirect = props.uberDirect,
     applyCoupon = props.applyCoupon,
     hasCateringProducts = props.hasCateringProducts,
     cateringHours = props.cateringHours;
@@ -150,12 +151,16 @@ var CheckoutUI = function CheckoutUI(props) {
     setIsSuccess = _useState16[1];
   var _useState17 = (0, _react.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    cateringDayError = _useState18[0],
-    setCateringDayError = _useState18[1];
+    isHideCash = _useState18[0],
+    setHideCash = _useState18[1];
   var _useState19 = (0, _react.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    openAlertCatering = _useState20[0],
-    setOpenAlertCatering = _useState20[1];
+    cateringDayError = _useState20[0],
+    setCateringDayError = _useState20[1];
+  var _useState21 = (0, _react.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    openAlertCatering = _useState22[0],
+    setOpenAlertCatering = _useState22[1];
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
   var isTableNumberEnabled = configs === null || configs === void 0 ? void 0 : (_configs$table_numer_ = configs.table_numer_enabled) === null || _configs$table_numer_ === void 0 ? void 0 : _configs$table_numer_.value;
   var isWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
@@ -272,6 +277,15 @@ var CheckoutUI = function CheckoutUI(props) {
       // changePaymethod(cart?.business_id, null, null)
     }
   }, [isResetPaymethod]);
+  (0, _react.useEffect)(function () {
+    if (uberDirect !== null && uberDirect !== void 0 && uberDirect.amountToHide && !((cart === null || cart === void 0 ? void 0 : cart.total) <= uberDirect.amountToHide) && (options === null || options === void 0 ? void 0 : options.type) === 1) {
+      setHideCash(true);
+      if (paymethodSelected === null || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'cash') return;
+      handlePaymethodChange(null);
+    } else {
+      setHideCash(false);
+    }
+  }, [uberDirect, cart, options, paymethodSelected]);
   (0, _react.useEffect)(function () {
     var _configs$advanced_off;
     if (!(configs !== null && configs !== void 0 && (_configs$advanced_off = configs.advanced_offers_module) !== null && _configs$advanced_off !== void 0 && _configs$advanced_off.value) && ((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay' || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result) && !cartState.loading && cart !== null && cart !== void 0 && cart.coupon && (cart === null || cart === void 0 ? void 0 : cart.coupon) === 'DLVMASTER30') {
@@ -431,7 +445,8 @@ var CheckoutUI = function CheckoutUI(props) {
     paySelected: paymethodSelected,
     handlePlaceOrder: handlePlaceOrder,
     onPlaceOrderClick: onPlaceOrderClick,
-    hasCateringProducts: hasCateringProducts
+    hasCateringProducts: hasCateringProducts,
+    isHideCash: isHideCash
   })), isWalletEnabled && !(businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart,
     businessConfigs: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi11 = businessDetails.business) === null || _businessDetails$busi11 === void 0 ? void 0 : _businessDetails$busi11.configs
@@ -560,37 +575,37 @@ var Checkout = function Checkout(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
-  var _useState21 = (0, _react.useState)({
+  var _useState23 = (0, _react.useState)({
       loading: true,
       error: null,
       cart: null
     }),
-    _useState22 = _slicedToArray(_useState21, 2),
-    cartState = _useState22[0],
-    setCartState = _useState22[1];
-  var _useState23 = (0, _react.useState)(false),
     _useState24 = _slicedToArray(_useState23, 2),
-    openUpselling = _useState24[0],
-    setOpenUpselling = _useState24[1];
+    cartState = _useState24[0],
+    setCartState = _useState24[1];
   var _useState25 = (0, _react.useState)(false),
     _useState26 = _slicedToArray(_useState25, 2),
-    canOpenUpselling = _useState26[0],
-    setCanOpenUpselling = _useState26[1];
-  var _useState27 = (0, _react.useState)(null),
+    openUpselling = _useState26[0],
+    setOpenUpselling = _useState26[1];
+  var _useState27 = (0, _react.useState)(false),
     _useState28 = _slicedToArray(_useState27, 2),
-    currentCart = _useState28[0],
-    setCurrentCart = _useState28[1];
-  var _useState29 = (0, _react.useState)({
+    canOpenUpselling = _useState28[0],
+    setCanOpenUpselling = _useState28[1];
+  var _useState29 = (0, _react.useState)(null),
+    _useState30 = _slicedToArray(_useState29, 2),
+    currentCart = _useState30[0],
+    setCurrentCart = _useState30[1];
+  var _useState31 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState30 = _slicedToArray(_useState29, 2),
-    alertState = _useState30[0],
-    setAlertState = _useState30[1];
-  var _useState31 = (0, _react.useState)(false),
     _useState32 = _slicedToArray(_useState31, 2),
-    isResetPaymethod = _useState32[0],
-    setIsResetPaymethod = _useState32[1];
+    alertState = _useState32[0],
+    setAlertState = _useState32[1];
+  var _useState33 = (0, _react.useState)(false),
+    _useState34 = _slicedToArray(_useState33, 2),
+    isResetPaymethod = _useState34[0],
+    setIsResetPaymethod = _useState34[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);

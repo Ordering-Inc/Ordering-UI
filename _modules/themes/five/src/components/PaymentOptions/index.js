@@ -117,7 +117,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     onPlaceOrderClick = props.onPlaceOrderClick,
     handlePlaceOrder = props.handlePlaceOrder,
     paymethods = props.paymethods,
-    hasCateringProducts = props.hasCateringProducts;
+    hasCateringProducts = props.hasCateringProducts,
+    isHideCash = props.isHideCash;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -148,10 +149,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     return pay.paymethod;
   });
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
-  var excludePaymethods = ['']; // hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['']
+  var excludePaymethods = isHideCash ? ['cash'] : ['']; // hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['']
 
   var supportedMethods = list === null || list === void 0 ? void 0 : list.filter(function (p) {
-    return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? !excludePaymethods.includes(p.gateway) : p;
+    return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : isHideCash || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? !excludePaymethods.includes(p.gateway) : p;
   });
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
     if ((cart === null || cart === void 0 ? void 0 : cart.balance) > 0) {
