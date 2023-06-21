@@ -45,7 +45,17 @@ const ConfirmUI = (props) => {
         {content && typeof content === 'object' && Array.isArray(content) && (
           <ul>
             {content.map((item, i) => (
-              <li key={i}>{t(item.toUpperCase(), errors[item])}</li>
+              <React.Fragment key={i}>
+                {Array.isArray(item) ? (
+                  item.map((err, index) => (
+                    typeof err === 'string' && (
+                      <li key={index}>{t(err.toUpperCase(), errors[err] || err)}</li>
+                    )
+                  ))
+                ) : (
+                  typeof item === 'string' && <li>{t(item.toUpperCase(), errors[item] || item)}</li>
+                )}
+              </React.Fragment>
             ))}
           </ul>
         )}

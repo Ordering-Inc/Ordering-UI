@@ -1,5 +1,9 @@
+import { AllInOne } from './AllInOne'
+import { Appointments } from './Appointments'
 import { DeliveriesManager } from './DeliveriesManager'
 import { DriversManager } from './DriversManager'
+import { GiftCardsListing } from './GiftCardsListing'
+
 import { Messages } from './Messages'
 import { OrdersContentHeader } from './OrdersContentHeader'
 import { OrdersDashboardList } from './OrdersDashboardList'
@@ -46,8 +50,11 @@ import { CountryFilter } from './CountryFilter'
 import { OrderToPrint } from './OrderToPrint'
 
 export {
+  AllInOne,
+  Appointments,
   DeliveriesManager,
   DriversManager,
+  GiftCardsListing,
   Messages,
   OrdersContentHeader,
   OrdersManager,

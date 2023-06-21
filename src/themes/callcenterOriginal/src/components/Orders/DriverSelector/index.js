@@ -159,6 +159,11 @@ const DriverSelectorUI = (props) => {
             optionInnerMargin='10px'
             optionInnerMaxHeight='150px'
             onChange={(driver) => handleChangeDriver(driver)}
+            isShowSearchBar
+            searchBarIsCustomLayout
+            searchBarIsNotLazyLoad
+            searchValue={searchValue}
+            handleChangeSearch={(val) => setSearchValue(val)}
           />
         ) : (
           <MultiSelect
@@ -167,6 +172,11 @@ const DriverSelectorUI = (props) => {
             optionInnerMargin='10px'
             optionInnerMaxHeight='150px'
             className='driver-select'
+            isShowSearchBar
+            searchBarIsCustomLayout
+            searchBarIsNotLazyLoad
+            searchValue={searchValue}
+            handleChangeSearch={(val) => setSearchValue(val)}
           />
         )}
       </>

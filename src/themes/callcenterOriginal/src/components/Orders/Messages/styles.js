@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { darken } from 'polished'
 
 export const MessagesContainer = styled.div`
   width: 100%;
@@ -13,6 +12,26 @@ export const WrapperContainer = styled.div`
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
+`
+
+export const NotSendMessage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  color: #909BA9;
+  background: #F8F9FA;
+
+  svg {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #909BA9;
+    margin: 6px 0;
+  }
 `
 
 export const HeaderProfile = styled.div`
@@ -402,10 +421,11 @@ export const WrapperDeleteImage = styled.div`
 
 export const WrapperSendMessageButton = styled.div`
   white-space: nowrap;
-  width: fit-content;
+  width: 80px;
 
   button {
     height: 43px;
+    width: 100%;
     svg {
        width: 1.5em;
        height: 1.5em; 
@@ -429,6 +449,7 @@ export const WrapperSendMessageButton = styled.div`
   }
 
   @media (min-width: 480px) {
+    width: fit-content;
     button {
       svg {
         margin-right: 10px;
@@ -529,8 +550,7 @@ export const OrderDetailIconButton = styled.button`
   border: none;
   background: #b9bcc7;
   &:active {
-    background: ${() => darken(0.07, '#b9bcc7')};
-  }
+    background: '#b9bcc7';
   border-radius: 5px;
   display: flex;
   align-items: center;

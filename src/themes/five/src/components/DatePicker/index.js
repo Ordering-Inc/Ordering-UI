@@ -14,6 +14,7 @@ export const DatePickerUI = props => {
         date={value}
         name={name}
         onChange={onChange}
+        maxDate={new Date()}
       />
     </DateContainer>
   )
