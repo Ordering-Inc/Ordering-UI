@@ -279,7 +279,7 @@ export const ProductActions = styled.div`
   bottom: 0;
   right: 0;
   width: 100%;
-  background-color: #FFF;
+  background-color: ${(props) => props.theme?.colors?.backgroundPage};
 
   div.price {
     padding-top: 10px;

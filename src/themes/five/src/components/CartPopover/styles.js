@@ -26,7 +26,7 @@ export const HeaderItem = styled.div`
 `
 
 export const PopoverBody = styled.div`
-  background-color: #FFF;
+  background-color: ${(props) => props.theme?.colors?.backgroundPage};
   color: #333;
   padding: 15px;
   border-radius: 10px;
