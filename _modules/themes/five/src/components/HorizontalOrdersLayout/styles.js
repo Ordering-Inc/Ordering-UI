@@ -25,7 +25,7 @@ var CardsContainer = _styledComponents.default.div(_templateObject5 || (_templat
   return isBusinessesPage && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    box-sizing: border-box;\n  "])));
 });
 exports.CardsContainer = CardsContainer;
-var CardsContainerWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  display: flex;\n  ", "\n  ::-webkit-scrollbar {\n    width: 6px;\n    height: 6px;\n  }\n  ", "\n"])), function (_ref3) {
+var CardsContainerWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  display: flex;\n  overflow: auto hidden;\n  ", "\n  ::-webkit-scrollbar {\n    width: 6px;\n    height: 6px;\n  }\n  ", "\n"])), function (_ref3) {
   var isBusinessesPage = _ref3.isBusinessesPage;
   return isBusinessesPage && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    overflow: scroll hidden;\n    width: 100%;\n  "])));
 }, function (_ref4) {
