@@ -130,6 +130,13 @@ const BusinessProductsListingUI = (props) => {
     { value: 'a-z', content: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z'), showOnSelected: t('A_to_Z', theme?.defaultLanguages?.A_to_Z || 'A-Z') }
   ]
 
+  const subtotalWithTaxes = currentCart?.taxes?.reduce((acc, item) => {
+    if (item?.type === 1) {
+      return acc = acc + item?.summary?.tax
+    }
+    return acc = acc
+  }, currentCart?.subtotal)
+
   const handler = () => {
     setOpenBusinessInformation(true)
   }
@@ -443,14 +450,14 @@ const BusinessProductsListingUI = (props) => {
           btnText={
             !currentCart?.valid_maximum ? (
               `${t('MAXIMUM_SUBTOTAL_ORDER', theme?.defaultLanguages?.MAXIMUM_SUBTOTAL_ORDER || 'Maximum subtotal order')}: ${parsePrice(currentCart?.maximum)}`
-            ) : (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100)) ? (
+            ) : (subtotalWithTaxes < currentCart?.minimum) ? (
               `${t('MINIMUN_SUBTOTAL_ORDER', theme?.defaultLanguages?.MINIMUN_SUBTOTAL_ORDER || 'Minimum subtotal order:')} ${parsePrice(currentCart?.minimum)}`
             ) : !openUpselling !== canOpenUpselling ? t('VIEW_ORDER', theme?.defaultLanguages?.VIEW_ORDER || 'View Order') : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')
           }
-          isSecondaryBtn={!currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
+          isSecondaryBtn={!currentCart?.valid_maximum || subtotalWithTaxes < currentCart?.minimum}
           btnValue={currentCart?.products?.length}
           handleClick={() => setOpenUpselling(true)}
-          disabled={openUpselling || !currentCart?.valid_maximum || (!currentCart?.valid_minimum && !(currentCart?.discount_type === 1 && currentCart?.discount_rate === 100))}
+          disabled={openUpselling || !currentCart?.valid_maximum || subtotalWithTaxes < currentCart?.minimum}
         />
       )}
       {(windowSize.width < 1000 || windowSize.height < 600) && currentCart?.products?.length > 0 && (
