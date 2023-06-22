@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer, useConfig, useOrderingTheme, useOrder } from 'ordering-components'
+import { useLanguage, useSession, LogoutAction as LogoutActionController, useEvent, useCustomer, useConfig, useOrder } from 'ordering-components'
 import { usePopper } from 'react-popper'
 import {
   HeaderItem,
@@ -31,7 +31,6 @@ export const UserPopover = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
   const [{ configs }] = useConfig()
-  const [orderingTheme] = useOrderingTheme()
   const [orderStatus] = useOrder()
   const theme = useTheme()
   const referenceElement = useRef()
@@ -40,8 +39,8 @@ export const UserPopover = (props) => {
 
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
-  const isAddressListNewPage = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isAddressListNewPage = theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const hideBrowse = theme?.bar_menu?.components?.browse?.hidden
   const hideOrders = theme?.bar_menu?.components?.orders?.hidden

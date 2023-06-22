@@ -1,9 +1,10 @@
 import React from 'react'
-import { useOrder, useOrderingTheme } from 'ordering-components'
+import { useOrder } from 'ordering-components'
 import { BusinessController } from '../../BusinessController'
 import { AutoScroll } from '../../AutoScroll'
 import { BusinessList, BusinessListWrapper } from './styles'
 import { useWindowSize } from '../../../../../../hooks/useWindowSize'
+import { useTheme } from 'styled-components'
 
 export const PreviousBusinessOrdered = (props) => {
   const {
@@ -15,9 +16,9 @@ export const PreviousBusinessOrdered = (props) => {
   } = props
 
   const [orderState] = useOrder()
-  const [orderingTheme] = useOrderingTheme()
+  const theme = useTheme()
   const { width } = useWindowSize()
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const onBusinessClick = (business) => {
     onRedirectPage({ page: 'business', params: { store: business.slug } })

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useOrder, useOrderingTheme } from 'ordering-components'
+import { useLanguage, useOrder } from 'ordering-components'
 import { FavoriteList } from '../FavoriteList'
 import { Tabs } from '../../styles/Tabs'
 import {
@@ -9,12 +9,13 @@ import {
   Tab,
   ContentWrapper
 } from './styles'
+import { useTheme } from 'styled-components'
 
 export const Favorite = (props) => {
   const [, t] = useLanguage()
-  const [orderingTheme] = useOrderingTheme()
   const [orderState] = useOrder()
-  const layout = orderingTheme?.theme?.favorite?.components?.layout?.type || 'original'
+  const theme = useTheme()
+  const layout = theme?.favorite?.components?.layout?.type || 'original'
 
   const [tabSelected, setTabSelected] = useState('businesses')
 

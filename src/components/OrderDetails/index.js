@@ -5,8 +5,7 @@ import {
   useEvent,
   useUtils,
   useConfig,
-  GoogleMapsMap,
-  useOrderingTheme
+  GoogleMapsMap
 } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
@@ -90,7 +89,6 @@ const OrderDetailsUI = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
-  const [orderingTheme] = useOrderingTheme()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isReviewOpen, setIsReviewOpen] = useState(false)
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
@@ -106,19 +104,19 @@ const OrderDetailsUI = (props) => {
 
   const isFromCheckPage = JSON.parse(window.localStorage.getItem('business-address'))
 
-  const showDeliveryDate = !orderingTheme?.theme?.confirmation?.components?.order?.components?.date?.hidden
-  const showDeliveryProgress = !orderingTheme?.theme?.confirmation?.components?.order?.components?.progress?.hidden
-  const showBusinessMessages = !orderingTheme?.theme?.confirmation?.components?.business?.components?.messages?.hidden
-  const showBusinessAddress = !orderingTheme?.theme?.confirmation?.components?.business?.components?.address?.hidden
-  const showBusinessMap = !orderingTheme?.theme?.confirmation?.components?.business?.components?.map?.hidden
-  const showBusinessLogo = !orderingTheme?.theme?.confirmation?.components?.business?.components?.logo?.hidden
-  const showDriverName = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.name?.hidden
-  const showDriverPhone = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.phone?.hidden
-  const showDriverMessages = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.messages?.hidden
-  const showDriverEmail = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.email?.hidden
-  const showDriverPhoto = !orderingTheme?.theme?.confirmation?.components?.driver?.components?.photo?.hidden
-  const showCustomerAddress = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.address?.hidden
-  const showCustomerPhoto = !orderingTheme?.theme?.confirmation?.components?.customer?.components?.photo?.hidden
+  const showDeliveryDate = !theme?.confirmation?.components?.order?.components?.date?.hidden
+  const showDeliveryProgress = !theme?.confirmation?.components?.order?.components?.progress?.hidden
+  const showBusinessMessages = !theme?.confirmation?.components?.business?.components?.messages?.hidden
+  const showBusinessAddress = !theme?.confirmation?.components?.business?.components?.address?.hidden
+  const showBusinessMap = !theme?.confirmation?.components?.business?.components?.map?.hidden
+  const showBusinessLogo = !theme?.confirmation?.components?.business?.components?.logo?.hidden
+  const showDriverName = !theme?.confirmation?.components?.driver?.components?.name?.hidden
+  const showDriverPhone = !theme?.confirmation?.components?.driver?.components?.phone?.hidden
+  const showDriverMessages = !theme?.confirmation?.components?.driver?.components?.messages?.hidden
+  const showDriverEmail = !theme?.confirmation?.components?.driver?.components?.email?.hidden
+  const showDriverPhoto = !theme?.confirmation?.components?.driver?.components?.photo?.hidden
+  const showCustomerAddress = !theme?.confirmation?.components?.customer?.components?.address?.hidden
+  const showCustomerPhoto = !theme?.confirmation?.components?.customer?.components?.photo?.hidden
 
   const getOrderStatus = (s) => {
     const status = parseInt(s)

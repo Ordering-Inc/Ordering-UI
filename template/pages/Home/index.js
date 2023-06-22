@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useApi, useEvent, useSite, useOrderingTheme } from 'ordering-components'
+import { useApi, useEvent, useSite } from 'ordering-components'
 import { HomeHero } from '../../../src/themes/five/src/components/HomeHero'
 import { KioskHomeHero } from '../../../src/themes/five/src/components/HomeHero/layouts/KioskHomeHero'
 import { useHistory } from 'react-router-dom'
@@ -18,6 +18,7 @@ import {
   SkeletonSide
 } from './styles'
 import { checkSiteUrl } from '../../Utils'
+import { useTheme } from 'styled-components'
 
 export const HomePage = (props) => {
   const history = useHistory()
@@ -25,7 +26,8 @@ export const HomePage = (props) => {
   const [ordering] = useApi()
   const [events] = useEvent()
   const [{ site }] = useSite()
-  const [{ theme }] = useOrderingTheme()
+  const theme = useTheme()
+
   const websiteThemeType = theme?.my_products?.components?.website_theme?.components?.type
   const websiteThemeBusinessSlug = theme?.my_products?.components?.website_theme?.components?.business_slug
   const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug

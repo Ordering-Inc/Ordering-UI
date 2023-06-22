@@ -4,7 +4,7 @@ import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
 import FaStar from '@meronex/icons/fa/FaStar'
-import { useUtils, useOrder, useLanguage, useOrderingTheme } from 'ordering-components'
+import { useUtils, useOrder, useLanguage } from 'ordering-components'
 import { convertHoursToMinutes } from '../../../../../utils'
 
 import {
@@ -13,6 +13,7 @@ import {
   BusinessInfo,
   BusinessInfoItem
 } from './styles'
+import { useTheme } from 'styled-components'
 const types = ['food', 'laundry', 'alcohol', 'groceries']
 export const BusinessBasicInformation = (props) => {
   const {
@@ -23,7 +24,7 @@ export const BusinessBasicInformation = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance }] = useUtils()
-  const [orderingTheme] = useOrderingTheme()
+  const theme = useTheme()
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
     const _types = []
@@ -33,11 +34,11 @@ export const BusinessBasicInformation = (props) => {
     return _types.join(', ')
   }
 
-  const showDeliveryFee = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
-  const showTime = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
-  const showBusinessInfo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
-  const showReviews = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
-  const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
+  const showDeliveryFee = !theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
+  const showTime = !theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
+  const showBusinessInfo = !theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
+  const showReviews = !theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
+  const showDistance = !theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
 
   return (
     <>

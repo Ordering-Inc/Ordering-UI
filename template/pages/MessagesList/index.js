@@ -2,14 +2,15 @@ import React from 'react'
 import { MessagesListing } from '../../../src/themes/five/src/components/MessagesListing'
 
 import { HelmetTags } from '../../components/HelmetTags'
-import { useEvent, useOrderingTheme } from 'ordering-components'
+import { useEvent } from 'ordering-components'
 import settings from '../../config'
+import { useTheme } from 'styled-components'
 
 export const MessagesList = (props) => {
   const [events] = useEvent()
-  const [orderingTheme] = useOrderingTheme()
-  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeFranchiseSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.franchise_slug
+  const theme = useTheme()
+  const websiteThemeType = theme?.my_products?.components?.website_theme?.components?.type
+  const websiteThemeFranchiseSlug = theme?.my_products?.components?.website_theme?.components?.franchise_slug
   const updatedFranchiseSlug = (websiteThemeType === 'franchise' && websiteThemeFranchiseSlug) || settings?.franchiseSlug
 
   const messageprops = {

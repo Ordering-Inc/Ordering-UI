@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useConfig, useOrder, useUtils, useSession, useOrderingTheme, SingleProductCard as SingleProductCardController } from 'ordering-components'
+import { useLanguage, useConfig, useOrder, useUtils, useSession, SingleProductCard as SingleProductCardController } from 'ordering-components'
 import { shape } from '../../../../../../../utils'
 import { useIntersectionObserver } from '../../../../../../../hooks/useIntersectionObserver'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
@@ -52,7 +52,6 @@ const SingleProductCardUI = (props) => {
   const [{ parsePrice, optimizeImage, parseDate }] = useUtils()
   const [orderState] = useOrder()
   const [{ auth }, { login }] = useSession()
-  const [orderingTheme] = useOrderingTheme()
   const theme = useTheme()
   const favoriteRef = useRef(null)
 

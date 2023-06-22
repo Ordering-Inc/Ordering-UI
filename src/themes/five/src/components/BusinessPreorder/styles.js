@@ -162,7 +162,7 @@ export const TimeItem = styled.div`
     color: ${props => props.theme.colors.primary};
   `}
 ${({ cateringPreorder }) => cateringPreorder ? css`
-    background: #fff;
+    background: ${(props) => props.theme?.colors?.backgroundPage};
     width: 100%;
     min-width: 100%;
     height: 50px;
