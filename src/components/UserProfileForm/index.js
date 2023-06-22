@@ -5,8 +5,7 @@ import {
   useLanguage,
   useSession,
   DragAndDrop,
-  ExamineClick,
-  useOrderingTheme
+  ExamineClick
 } from 'ordering-components'
 
 import { useWindowSize } from '../../hooks/useWindowSize'
@@ -37,6 +36,7 @@ import {
   WrapperForm
 } from './styles'
 import { LogoutButton } from '../LogoutButton'
+import { useTheme } from 'styled-components'
 
 const UserProfileFormUI = (props) => {
   const {
@@ -52,18 +52,18 @@ const UserProfileFormUI = (props) => {
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [edit, setEdit] = useState(false)
+  const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
-  const [orderingTheme] = useOrderingTheme()
   const windowSize = useWindowSize()
 
-  const showCustomerPicture = !orderingTheme?.theme?.profile?.components?.picture?.hidden
-  const showCustomerName = !orderingTheme?.theme?.profile?.components?.name?.hidden
-  const showCustomerLastName = !orderingTheme?.theme?.profile?.components?.last_name?.hidden
-  const showCustomerEmail = !orderingTheme?.theme?.profile?.components?.email?.hidden
-  const showCustomerCellphone = !orderingTheme?.theme?.profile?.components?.cellphone?.hidden
-  const showAddressList = !orderingTheme?.theme?.profile?.components?.address_list?.hidden
-  const userFormLayoutColumn = orderingTheme?.theme?.profile?.components?.layout?.position === 'column'
+  const showCustomerPicture = !theme?.profile?.components?.picture?.hidden
+  const showCustomerName = !theme?.profile?.components?.name?.hidden
+  const showCustomerLastName = !theme?.profile?.components?.last_name?.hidden
+  const showCustomerEmail = !theme?.profile?.components?.email?.hidden
+  const showCustomerCellphone = !theme?.profile?.components?.cellphone?.hidden
+  const showAddressList = !theme?.profile?.components?.address_list?.hidden
+  const userFormLayoutColumn = theme?.profile?.components?.layout?.position === 'column'
   const showEditButton = showCustomerName || showCustomerLastName || showCustomerEmail || showCustomerCellphone
 
   const handleFiles = (files) => {

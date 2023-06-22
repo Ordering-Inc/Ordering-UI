@@ -1,21 +1,21 @@
 import React from 'react'
 import { BusinessesListing } from '../../../src/themes/five/src/components/BusinessesListing'
-import { useEvent, useSite, useOrderingTheme } from 'ordering-components'
+import { useEvent, useSite } from 'ordering-components'
 import { HelmetTags } from '../../components/HelmetTags'
 import settings from '../../config'
 import { checkSiteUrl } from '../../Utils'
+import { useTheme } from 'styled-components'
 
 export const BusinessesList = (props) => {
   const [events] = useEvent()
   const [{ site }] = useSite()
-  const [orderingTheme] = useOrderingTheme()
-
+  const theme = useTheme()
   const businessUrlTemplate = checkSiteUrl(site?.business_url_template, '/store/:business_slug')
 
-  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeBusinessSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.business_slug
+  const websiteThemeType = theme?.my_products?.components?.website_theme?.components?.type
+  const websiteThemeBusinessSlug = theme?.my_products?.components?.website_theme?.components?.business_slug
   const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
-  const websiteThemeFranchiseSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.franchise_slug
+  const websiteThemeFranchiseSlug = theme?.my_products?.components?.website_theme?.components?.franchise_slug
   const updatedFranchiseSlug = (websiteThemeType === 'franchise' && websiteThemeFranchiseSlug) || settings?.franchiseSlug
 
   const businessListingProps = {

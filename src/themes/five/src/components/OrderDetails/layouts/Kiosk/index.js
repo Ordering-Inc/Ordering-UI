@@ -9,8 +9,7 @@ import {
   useUtils,
   useEvent,
   useToast, ToastType,
-  useApi,
-  useOrderingTheme
+  useApi
 } from 'ordering-components'
 import AiFillCheckCircle from '@meronex/icons/ai/AiFillCheckCircle'
 
@@ -59,7 +58,6 @@ const OrderDetailsUI = (props) => {
   const [events] = useEvent()
   const [{ parseDate }] = useUtils()
   const [, { showToast }] = useToast()
-  const [orderingTheme] = useOrderingTheme()
   const optToSendReceipt = [
     {
       key: _EMAIL,
@@ -81,9 +79,9 @@ const OrderDetailsUI = (props) => {
 
   const { order, loading, error } = props.order
 
-  const showDeliveryType = !orderingTheme?.theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
-  const showDeliveryDate = !orderingTheme?.theme?.confirmation?.components?.order?.components?.date?.hidden
-  const showDeliveryProgress = !orderingTheme?.theme?.confirmation?.components?.order?.components?.progress?.hidden
+  const showDeliveryType = !theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
+  const showDeliveryDate = !theme?.confirmation?.components?.order?.components?.date?.hidden
+  const showDeliveryProgress = !theme?.confirmation?.components?.order?.components?.progress?.hidden
 
   const locations = [
     { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },

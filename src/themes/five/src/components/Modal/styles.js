@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const ModalDialog = styled.div`
   position: relative;
-  background-color: ${({ isTransparent }) => isTransparent ? 'transparent' : '#FFF'};
+  background-color: ${({ isTransparent, theme }) => isTransparent ? 'transparent' : theme?.colors?.backgroundPage};
   padding: ${({ padding }) => padding || '30px 20px'};
   width: 100vw;
   border-radius: 0px;

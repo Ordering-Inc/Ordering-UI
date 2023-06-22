@@ -1,19 +1,20 @@
 import React from 'react'
-import { useSite, useEvent, useOrderingTheme } from 'ordering-components'
+import { useSite, useEvent } from 'ordering-components'
 import { MyOrders as MyOrdersController } from '../../../src/themes/five/src/components/MyOrders'
 import { HelmetTags } from '../../components/HelmetTags'
 import settings from '../../config'
 import { checkSiteUrl } from '../../Utils'
 import { useWindowSize } from '../../../src/hooks/useWindowSize'
+import { useTheme } from 'styled-components'
 
 export const MyOrders = (props) => {
   const [events] = useEvent()
   const [{ site }] = useSite()
-  const [orderingTheme] = useOrderingTheme()
-  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeBusinessSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.business_slug
+  const theme = useTheme()
+  const websiteThemeType = theme?.my_products?.components?.website_theme?.components?.type
+  const websiteThemeBusinessSlug = theme?.my_products?.components?.website_theme?.components?.business_slug
   const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
-  const websiteThemeFranchiseSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.franchise_slug
+  const websiteThemeFranchiseSlug = theme?.my_products?.components?.website_theme?.components?.franchise_slug
   const updatedFranchiseSlug = (websiteThemeType === 'franchise' && websiteThemeFranchiseSlug) || settings?.franchiseSlug
 
   const windowSize = useWindowSize()
