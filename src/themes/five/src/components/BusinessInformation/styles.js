@@ -11,7 +11,7 @@ export const BussinessTitle = styled.div`
   z-index: 1000;
   display: inline-flex;
   width: 50%;
-  background: #ffffff;
+  background: ${(props) => props.theme?.colors?.backgroundPage};
   align-items: center;
   margin-left: 10px;
   margin-bottom: 10px;
@@ -76,7 +76,7 @@ export const Information = styled.div`
 
 export const BusinessContent = styled.div`
   padding: 0 10px;
-  background: #FFF;
+  background: ${props => props.theme.colors.backgroundPage};
   @media(min-width: 768px){
     padding: 0 20px;
     padding-top: 30px;

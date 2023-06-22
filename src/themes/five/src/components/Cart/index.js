@@ -136,6 +136,13 @@ const CartUI = (props) => {
     }
   }
 
+  const subtotalWithTaxes = cart?.taxes?.reduce((acc, item) => {
+    if (item?.type === 1) {
+      return acc = acc + item?.summary?.tax
+    }
+    return acc = acc
+  }, cart?.subtotal)
+  console.log('cart', cart)
   const clearAmount = (value) => parseFloat((Math.trunc(value * 100) / 100).toFixed(configs.format_number_decimal_length?.value ?? 2))
   const loyaltyRewardValue = clearAmount((cart?.subtotal + getIncludedTaxes()) * loyaltyRewardRate)
 
@@ -614,15 +621,15 @@ const CartUI = (props) => {
               <CheckoutAction>
                 <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 <Button
-                  color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) ? 'secundary' : 'primary'}
+                  color={(!cart?.valid_maximum || subtotalWithTaxes < cart?.minimum || !cart?.valid_address) ? 'secundary' : 'primary'}
                   onClick={() => checkOutBtnClick(cart?.uuid)}
-                  disabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
+                  disabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || subtotalWithTaxes < cart?.minimum || !cart?.valid_address}
                 >
                   {!cart?.valid_address ? (
                     t('OUT_OF_COVERAGE', 'Out of Coverage')
                   ) : !cart?.valid_maximum ? (
                     `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
-                  ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
+                  ) : subtotalWithTaxes < cart?.minimum ? (
                     `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
                   ) : !openUpselling ^ canOpenUpselling ? t('CHECKOUT', 'Checkout') : t('LOADING', 'Loading')}
                 </Button>

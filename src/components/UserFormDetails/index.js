@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useSession, useLanguage, useCustomer, useOrderingTheme } from 'ordering-components'
+import { useSession, useLanguage, useCustomer } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 
@@ -11,6 +11,7 @@ import { Button } from '../../styles/Buttons'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import { Alert } from '../Confirm'
 import { sortInputFields } from '../../utils'
+import { useTheme } from 'styled-components'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -33,11 +34,11 @@ export const UserFormDetailsUI = (props) => {
   const formMethods = useForm()
   const [, t] = useLanguage()
   const [{ user: userSession }] = useSession()
+  const theme = useTheme()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [, { setUserCustomer }] = useCustomer()
-  const [orderingTheme] = useOrderingTheme()
   const emailInput = useRef(null)
 
   const user = userData || userSession
@@ -51,8 +52,8 @@ export const UserFormDetailsUI = (props) => {
   }
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
-  const showCustomerCellphone = !orderingTheme?.theme?.profile?.components?.cellphone?.hidden
-  const showCustomerPassword = !orderingTheme?.theme?.profile?.components?.password?.hidden
+  const showCustomerCellphone = !theme?.profile?.components?.cellphone?.hidden
+  const showCustomerPassword = !theme?.profile?.components?.password?.hidden
 
   const setUserCellPhone = (isEdit = false) => {
     if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
@@ -159,7 +160,7 @@ export const UserFormDetailsUI = (props) => {
   }
 
   const showFieldWithTheme = (name) => {
-    return !orderingTheme?.theme?.profile?.components?.[name]?.hidden
+    return !theme?.profile?.components?.[name]?.hidden
   }
 
   useEffect(() => {

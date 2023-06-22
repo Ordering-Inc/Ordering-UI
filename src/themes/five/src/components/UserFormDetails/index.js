@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useSession, useLanguage, useCustomer, useConfig, useOrderingTheme } from 'ordering-components'
+import { useSession, useLanguage, useCustomer, useConfig } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useTheme } from 'styled-components'
@@ -59,7 +59,6 @@ export const UserFormDetailsUI = (props) => {
   const [{ configs }] = useConfig()
   const theme = useTheme()
   const [{ user: userSession }, { login }] = useSession()
-  const [orderingTheme] = useOrderingTheme()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -215,7 +214,7 @@ export const UserFormDetailsUI = (props) => {
   }
 
   const showFieldWithTheme = (name) => {
-    return !orderingTheme?.theme?.profile?.components?.[name]?.hidden
+    return !theme?.profile?.components?.[name]?.hidden
   }
 
   const _handleChangeDate = (date) => {

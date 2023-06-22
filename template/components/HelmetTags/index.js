@@ -2,13 +2,14 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import helmetData from '../../helmetdata.json'
 import settings from '../../config'
-import { useConfig, useOrderingTheme } from 'ordering-components'
+import { useConfig } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 export const HelmetTags = (props) => {
   const {
     page
   } = props
-  const [{ theme }] = useOrderingTheme()
+  const theme = useTheme()
   const [configs] = useConfig()
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
   const metaTag = page ? helmetData[page] : helmetData.app

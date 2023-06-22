@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { BusinessProductsCategories as ProductsCategories, useOrderingTheme } from 'ordering-components'
+import { BusinessProductsCategories as ProductsCategories } from 'ordering-components'
 import { AutoScroll } from '../../../../../components/AutoScroll'
 import { useTheme } from 'styled-components'
 
@@ -23,11 +23,10 @@ const BusinessProductsCategoriesUI = (props) => {
 
   const theme = useTheme()
   const windowSize = useWindowSize()
-  const [orderingTheme] = useOrderingTheme()
   const [selectedCategory, setSelectedCateogry] = useState({ id: null })
   const scrollTopSpan = 60
 
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   const handleChangeCategory = (category) => {
     const isBlockScroll = window.location.search.includes('category') &&

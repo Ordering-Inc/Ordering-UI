@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
-import { useApi, useEvent, useSite, useOrderingTheme } from 'ordering-components'
+import { useApi, useEvent, useSite } from 'ordering-components'
 import { BusinessProductsListing } from '../../../src/themes/five/src/components/BusinessProductsListing'
 import { HelmetTags } from '../../components/HelmetTags'
 import { capitalize } from '../../../src/utils'
 import settings from '../../config'
 import { checkSiteUrl } from '../../Utils'
+import { useTheme } from 'styled-components'
 
 export const BusinessProductsList = (props) => {
   const [{ site }] = useSite()
   const { search } = useLocation()
-  const [orderingTheme] = useOrderingTheme()
+  const theme = useTheme()
 
-  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeBusinessSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.business_slug
+  const websiteThemeType = theme?.my_products?.components?.website_theme?.components?.type
+  const websiteThemeBusinessSlug = theme?.my_products?.components?.website_theme?.components?.business_slug
   const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
 
   const [helmetMetaTags, setHelmetMetaTags] = useState({

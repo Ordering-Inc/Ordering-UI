@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useApi, useConfig, useLanguage, useOrderingTheme } from 'ordering-components'
+import { useApi, useConfig, useLanguage } from 'ordering-components'
 
 import { Container, PoweredByOrdering } from './styles'
+import { useTheme } from 'styled-components'
 
 export const Footer = ({ isFooterPage }) => {
   const [footerState, setfooterState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
-  const [{ theme }] = useOrderingTheme()
+  const theme = useTheme()
   const requestsState = {}
   const [{ configs }] = useConfig()
   const [, t] = useLanguage()

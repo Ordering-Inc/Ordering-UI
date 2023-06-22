@@ -8,8 +8,7 @@ import {
   useConfig,
   useOrder,
   useCustomer,
-  GoogleMapsMap,
-  useOrderingTheme
+  GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -107,7 +106,6 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseDate }] = useUtils()
   const [, { deleteUserCustomer }] = useCustomer()
   const [{ carts }, { refreshOrderOptions }] = useOrder()
-  const [orderingTheme] = useOrderingTheme()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
   const [isProductReviewed, setIsProductReviewed] = useState(false)
@@ -134,7 +132,7 @@ const OrderDetailsUI = (props) => {
   const hideOrderActions = order?.delivery_type === 1
   const isGiftCardOrder = !order?.business_id
 
-  const isOriginalLayout = orderingTheme?.theme?.confirmation?.components?.layout?.type === 'original'
+  const isOriginalLayout = theme?.confirmation?.components?.layout?.type === 'original'
   const hideDeliveryType = theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
   const hideDeliveryDate = theme?.confirmation?.components?.order?.components?.date?.hidden
   const hideDeliveryProgress = theme?.confirmation?.components?.order?.components?.progress?.hidden

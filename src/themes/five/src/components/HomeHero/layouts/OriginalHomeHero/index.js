@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
-import { useSession, useOrder, useLanguage, useOrderingTheme, useConfig } from 'ordering-components'
+import { useSession, useOrder, useLanguage, useConfig } from 'ordering-components'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
 import {
   HeroContainer,
@@ -35,17 +35,16 @@ export const OriginalHomeHero = (props) => {
   const theme = useTheme()
   const userCustomer = parseInt(window.localStorage.getItem('user-customer'))
   const windowSize = useWindowSize()
-  const [orderingTheme] = useOrderingTheme()
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
   const [newAddressModalOpened, setNewAddressModalOpened] = useState(false)
 
-  const isShowLoginAccount = !orderingTheme?.theme?.mobile_view_web?.components?.home?.components?.login_account?.hidden
-  const bgImg = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_background?.components?.image
-  const logo = orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image
-  const mobileBgImg = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_mobile_background?.components?.image
-  const isFullScreen = orderingTheme?.theme?.my_products?.components?.images?.components?.homepage_image_fullscreen
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isShowLoginAccount = !theme?.mobile_view_web?.components?.home?.components?.login_account?.hidden
+  const bgImg = theme?.my_products?.components?.images?.components?.homepage_background?.components?.image
+  const logo = theme?.my_products?.components?.images?.components?.logo?.components?.image
+  const mobileBgImg = theme?.my_products?.components?.images?.components?.homepage_mobile_background?.components?.image
+  const isFullScreen = theme?.my_products?.components?.images?.components?.homepage_image_fullscreen
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
   const handleFindBusinesses = () => {
     if (!orderState?.options?.address?.location) {
