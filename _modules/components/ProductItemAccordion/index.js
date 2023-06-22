@@ -12,6 +12,7 @@ var _VscTrash = _interopRequireDefault(require("@meronex/icons/vsc/VscTrash"));
 var _orderingComponents = require("ordering-components");
 var _useWindowSize = require("../../hooks/useWindowSize");
 var _styles = require("./styles");
+var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -32,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme$6, _orderingTheme$theme$7, _props$beforeElements, _props$beforeComponen, _product$valid, _product$total, _props$afterComponent, _props$afterElements;
+  var _theme$confirmation, _theme$confirmation$c, _theme$confirmation$c2, _theme$confirmation$c3, _theme$confirmation$c4, _theme$confirmation$c5, _theme$confirmation$c6, _props$beforeElements, _props$beforeComponen, _product$valid, _product$total, _props$afterComponent, _props$afterElements;
   var isCartPending = props.isCartPending,
     isCartProduct = props.isCartProduct,
     product = props.product,
@@ -50,10 +51,8 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parsePrice = _useUtils2[0].parsePrice;
+  var theme = (0, _styledComponents.useTheme)();
   var windowSize = (0, _useWindowSize.useWindowSize)();
-  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
   var _useState = (0, _react.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
     setActive = _useState2[0],
@@ -70,7 +69,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var productSelect = (0, _react.useRef)(null);
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
-  var showProductImage = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.confirmation) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.cart) !== null && _orderingTheme$theme$3 !== void 0 && (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) !== null && _orderingTheme$theme$4 !== void 0 && (_orderingTheme$theme$5 = _orderingTheme$theme$4.products) !== null && _orderingTheme$theme$5 !== void 0 && (_orderingTheme$theme$6 = _orderingTheme$theme$5.components) !== null && _orderingTheme$theme$6 !== void 0 && (_orderingTheme$theme$7 = _orderingTheme$theme$6.image) !== null && _orderingTheme$theme$7 !== void 0 && _orderingTheme$theme$7.hidden);
+  var showProductImage = !(theme !== null && theme !== void 0 && (_theme$confirmation = theme.confirmation) !== null && _theme$confirmation !== void 0 && (_theme$confirmation$c = _theme$confirmation.components) !== null && _theme$confirmation$c !== void 0 && (_theme$confirmation$c2 = _theme$confirmation$c.cart) !== null && _theme$confirmation$c2 !== void 0 && (_theme$confirmation$c3 = _theme$confirmation$c2.components) !== null && _theme$confirmation$c3 !== void 0 && (_theme$confirmation$c4 = _theme$confirmation$c3.products) !== null && _theme$confirmation$c4 !== void 0 && (_theme$confirmation$c5 = _theme$confirmation$c4.components) !== null && _theme$confirmation$c5 !== void 0 && (_theme$confirmation$c6 = _theme$confirmation$c5.image) !== null && _theme$confirmation$c6 !== void 0 && _theme$confirmation$c6.hidden);
   var productInfo = function productInfo() {
     if (isCartProduct) {
       var _product$ingredients, _product$options;

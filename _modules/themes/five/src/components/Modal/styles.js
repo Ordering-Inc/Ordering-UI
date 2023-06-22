@@ -17,8 +17,10 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 });
 exports.Container = Container;
 var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 0px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: ", ";\n  max-height: 100vh;\n  overflow: auto;\n  overflow-x: ", ";\n  z-index: 10001;\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: 10px;\n    height: auto;\n    ", "\n  }\n"])), function (_ref2) {
-  var isTransparent = _ref2.isTransparent;
-  return isTransparent ? 'transparent' : '#FFF';
+  var _theme$colors;
+  var isTransparent = _ref2.isTransparent,
+    theme = _ref2.theme;
+  return isTransparent ? 'transparent' : theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.backgroundPage;
 }, function (_ref3) {
   var padding = _ref3.padding;
   return padding || '30px 20px';

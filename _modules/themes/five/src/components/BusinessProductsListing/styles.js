@@ -12,10 +12,9 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 95%;\n  margin: 20px auto 0px;\n  > svg {\n    color: ", ";\n    font-size: 24px;\n    cursor: pointer;\n    margin-bottom: 5px;\n  }\n  > div {\n    background-color: ", ";\n  }\n\n"])), function (props) {
   return props.theme.colors.headingColor;
-}, function (_ref) {
-  var _theme$business_view, _theme$business_view$, _theme$business_view$2;
-  var theme = _ref.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 ? void 0 : (_theme$business_view$ = _theme$business_view.components) === null || _theme$business_view$ === void 0 ? void 0 : (_theme$business_view$2 = _theme$business_view$.style) === null || _theme$business_view$2 === void 0 ? void 0 : _theme$business_view$2.backgroundColor;
+}, function (props) {
+  var _props$theme, _props$theme$colors;
+  return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors = _props$theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage;
 });
 exports.ProductsContainer = ProductsContainer;
 var ProductLoading = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n"])));
@@ -24,11 +23,11 @@ var SkeletonItem = _styledComponents.default.div(_templateObject3 || (_templateO
 exports.SkeletonItem = SkeletonItem;
 var MobileCartViewWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: fixed;\n  width: 100vw;\n  left: 0;\n  bottom: 0;\n  background-color: white;\n  padding: 15px 25px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  box-sizing: border-box;\n  z-index: 1006;\n  box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);\n\n  span {\n    font-weight: 600;\n    font-size: 16px;\n\n    @media (min-width: 1200px) {\n      font-size: 18px;\n      padding-left: 20px;\n    }\n  }\n\n  button {\n    height: 44px;\n    border-radius: 7.6px;\n  }\n"])));
 exports.MobileCartViewWrapper = MobileCartViewWrapper;
-var BusinessCartContent = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 30px;\n  position: relative;\n  margin-bottom: 30px;\n  max-height: ", ";\n  overflow: auto;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  /* .accordion.active {\n    padding-bottom: 10px;\n  } */\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref2) {
-  var maxHeight = _ref2.maxHeight;
+var BusinessCartContent = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 30px;\n  position: relative;\n  margin-bottom: 30px;\n  max-height: ", ";\n  overflow: auto;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  /* .accordion.active {\n    padding-bottom: 10px;\n  } */\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref) {
+  var maxHeight = _ref.maxHeight;
   return "".concat(maxHeight, "px");
-}, function (_ref3) {
-  var isModal = _ref3.isModal;
+}, function (_ref2) {
+  var isModal = _ref2.isModal;
   return !isModal && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    border: 1px solid #E9ECEF;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 7.6px;\n  "])));
 });
 exports.BusinessCartContent = BusinessCartContent;
@@ -45,10 +44,10 @@ exports.EmptyBtnWrapper = EmptyBtnWrapper;
 var HeaderContent = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n  .back-arrow {\n    font-size: 24px;\n    cursor: pointer;\n  }\n  .fixed-arrow {\n    position: fixed;\n    top: 0;\n    left: 0;\n    z-index: 10001;\n    width: 100vw;\n    background-color: ", ";\n    height: 56px;\n    display: flex;\n    align-items: center;\n    ", "\n    @media (min-width: 993px){\n      width: 100px;\n      ", "\n    }\n  }\n  .fixed-arrow-width{\n    width: 100vw;      \n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (props) {
-  var _props$theme;
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      padding-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      padding-left: 10px;\n    "])));
-}, function (_ref4) {
-  var useFullWidth = _ref4.useFullWidth;
+  var _props$theme2;
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      padding-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      padding-left: 10px;\n    "])));
+}, function (_ref3) {
+  var useFullWidth = _ref3.useFullWidth;
   return useFullWidth && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n        width: 100vw;\n      "])));
 });
 exports.HeaderContent = HeaderContent;
