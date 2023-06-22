@@ -33,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var isSkeleton = props.isSkeleton,
     categories = props.categories,
     featured = props.featured,
@@ -45,9 +45,6 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     isProfessional = props.isProfessional;
   var theme = (0, _styledComponents.useTheme)();
   var windowSize = (0, _useWindowSize.useWindowSize)();
-  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
   var _useState = (0, _react.useState)({
       id: null
     }),
@@ -55,7 +52,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     selectedCategory = _useState2[0],
     setSelectedCateogry = _useState2[1];
   var scrollTopSpan = 60;
-  var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.type) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.toLowerCase()) === 'chew';
+  var isChew = (theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.layout) === null || _theme$header$compone2 === void 0 ? void 0 : (_theme$header$compone3 = _theme$header$compone2.type) === null || _theme$header$compone3 === void 0 ? void 0 : _theme$header$compone3.toLowerCase()) === 'chew';
   var handleChangeCategory = function handleChangeCategory(category) {
     var _document$getElementB, _document$getElementB2;
     var isBlockScroll = window.location.search.includes('category') && window.location.search.includes('product');

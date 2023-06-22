@@ -76,9 +76,6 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     _useSession2 = _slicedToArray(_useSession, 2),
     userSession = _useSession2[0].user,
     login = _useSession2[1].login;
-  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     isValidPhoneNumber = _useState2[0],
@@ -256,8 +253,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   };
   var showFieldWithTheme = function showFieldWithTheme(name) {
-    var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3;
-    return !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.profile) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2[name]) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
+    var _theme$profile6, _theme$profile6$compo, _theme$profile6$compo2;
+    return !(theme !== null && theme !== void 0 && (_theme$profile6 = theme.profile) !== null && _theme$profile6 !== void 0 && (_theme$profile6$compo = _theme$profile6.components) !== null && _theme$profile6$compo !== void 0 && (_theme$profile6$compo2 = _theme$profile6$compo[name]) !== null && _theme$profile6$compo2 !== void 0 && _theme$profile6$compo2.hidden);
   };
   var _handleChangeDate = function _handleChangeDate(date) {
     setBirthdate(date);

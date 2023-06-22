@@ -31,7 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CartPopover = function CartPopover(props) {
-  var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _theme$header$compone4, _props$beforeElements, _props$beforeComponen, _props$carts, _props$carts2, _theme$header2, _theme$header2$compon, _theme$header2$compon2, _theme$header2$compon3, _theme$header2$compon4, _props$afterComponent, _props$afterElements;
+  var _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _theme$header2, _theme$header2$compon, _theme$header2$compon2, _theme$header2$compon3, _theme$header2$compon4, _props$beforeElements, _props$beforeComponen, _props$carts, _props$carts2, _theme$header3, _theme$header3$compon, _theme$header3$compon2, _theme$header3$compon3, _theme$header3$compon4, _props$afterComponent, _props$afterElements;
   var open = props.open,
     auth = props.auth,
     location = props.location,
@@ -47,13 +47,10 @@ var CartPopover = function CartPopover(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
-    _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
-    orderingTheme = _useOrderingTheme2[0];
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
   var arrowElement = (0, _react.useRef)();
-  var isChew = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.header) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.layout) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.type) === null || _orderingTheme$theme$4 === void 0 ? void 0 : _orderingTheme$theme$4.toLowerCase()) === 'chew';
+  var isChew = (theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.layout) === null || _theme$header$compone2 === void 0 ? void 0 : (_theme$header$compone3 = _theme$header$compone2.type) === null || _theme$header$compone3 === void 0 ? void 0 : _theme$header$compone3.toLowerCase()) === 'chew';
   var popper = (0, _reactPopper.usePopper)(referenceElement.current, popperElement.current, {
     placement: theme !== null && theme !== void 0 && theme.rtl ? 'bottom' : 'bottom-end',
     modifiers: [{
@@ -70,7 +67,7 @@ var CartPopover = function CartPopover(props) {
   });
   var styles = popper.styles,
     attributes = popper.attributes;
-  var isSlideBar = (theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.cart) === null || _theme$header$compone2 === void 0 ? void 0 : (_theme$header$compone3 = _theme$header$compone2.components) === null || _theme$header$compone3 === void 0 ? void 0 : (_theme$header$compone4 = _theme$header$compone3.open_strategy) === null || _theme$header$compone4 === void 0 ? void 0 : _theme$header$compone4.type) === 'slide';
+  var isSlideBar = (theme === null || theme === void 0 ? void 0 : (_theme$header2 = theme.header) === null || _theme$header2 === void 0 ? void 0 : (_theme$header2$compon = _theme$header2.components) === null || _theme$header2$compon === void 0 ? void 0 : (_theme$header2$compon2 = _theme$header2$compon.cart) === null || _theme$header2$compon2 === void 0 ? void 0 : (_theme$header2$compon3 = _theme$header2$compon2.components) === null || _theme$header2$compon3 === void 0 ? void 0 : (_theme$header2$compon4 = _theme$header2$compon3.open_strategy) === null || _theme$header2$compon4 === void 0 ? void 0 : _theme$header2$compon4.type) === 'slide';
   (0, _react.useEffect)(function () {
     // forceUpdate && forceUpdate()
   }, [open, orderState]);
@@ -144,7 +141,7 @@ var CartPopover = function CartPopover(props) {
     onClose: props.onClose,
     hideCloseDefault: true,
     isSlideBar: true,
-    slideBarPosition: theme === null || theme === void 0 ? void 0 : (_theme$header2 = theme.header) === null || _theme$header2 === void 0 ? void 0 : (_theme$header2$compon = _theme$header2.components) === null || _theme$header2$compon === void 0 ? void 0 : (_theme$header2$compon2 = _theme$header2$compon.cart) === null || _theme$header2$compon2 === void 0 ? void 0 : (_theme$header2$compon3 = _theme$header2$compon2.components) === null || _theme$header2$compon3 === void 0 ? void 0 : (_theme$header2$compon4 = _theme$header2$compon3.open_strategy) === null || _theme$header2$compon4 === void 0 ? void 0 : _theme$header2$compon4.position
+    slideBarPosition: theme === null || theme === void 0 ? void 0 : (_theme$header3 = theme.header) === null || _theme$header3 === void 0 ? void 0 : (_theme$header3$compon = _theme$header3.components) === null || _theme$header3$compon === void 0 ? void 0 : (_theme$header3$compon2 = _theme$header3$compon.cart) === null || _theme$header3$compon2 === void 0 ? void 0 : (_theme$header3$compon3 = _theme$header3$compon2.components) === null || _theme$header3$compon3 === void 0 ? void 0 : (_theme$header3$compon4 = _theme$header3$compon3.open_strategy) === null || _theme$header3$compon4 === void 0 ? void 0 : _theme$header3$compon4.position
   }, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('MY_CART', 'My cart')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
