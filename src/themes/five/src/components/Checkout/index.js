@@ -312,12 +312,12 @@ const CheckoutUI = (props) => {
 
   useEffect(() => {
     if (cart?.products?.length) return
-    if (cart?.business?.slug) {
+    if (cart?.business_id !== null) {
       handleStoreRedirect(cart?.business?.slug)
     } else {
       events.emit('go_to_page', { page: 'wallets' })
     }
-  }, [cart?.products])
+  }, [JSON.stringify(cart?.products)])
 
   useEffect(() => {
     window.scrollTo(0, 0)
