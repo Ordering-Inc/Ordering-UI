@@ -9,8 +9,7 @@ import {
   useOrder,
   useCustomer,
   useSession,
-  GoogleMapsMap,
-  useOrderingTheme
+  GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -109,7 +108,6 @@ const OrderDetailsUI = (props) => {
   const [{ parsePrice, parseDate }] = useUtils()
   const [, { deleteUserCustomer }] = useCustomer()
   const [{ carts }, { refreshOrderOptions }] = useOrder()
-  const [orderingTheme] = useOrderingTheme()
   const [openMessages, setOpenMessages] = useState({ business: false, driver: false })
   const [isOrderReviewed, setIsOrderReviewed] = useState(false)
   const [isProductReviewed, setIsProductReviewed] = useState(false)
@@ -126,7 +124,7 @@ const OrderDetailsUI = (props) => {
   const [isShowBusinessLogo, setIsShowBusinessLogo] = useState(true)
   const { order, loading, businessData, error } = props.order
   const yourSpotString = order?.delivery_type === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')
-  const acceptedStatus = [1, 2, 5, 6, 10, 11, 12, 16]
+  const acceptedStatus = [1, 2, 5, 6, 10, 11, 12]
   const completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const placeSpotTypes = [3, 4, 5]
   const activeStatus = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23]
@@ -136,7 +134,7 @@ const OrderDetailsUI = (props) => {
   const hideOrderActions = order?.delivery_type === 1
   const isGiftCardOrder = !order?.business_id
 
-  const isOriginalLayout = orderingTheme?.theme?.confirmation?.components?.layout?.type === 'original'
+  const isOriginalLayout = theme?.confirmation?.components?.layout?.type === 'original'
   const hideDeliveryType = theme?.confirmation?.components?.order?.components?.delivery_type?.hidden
   const hideDeliveryDate = theme?.confirmation?.components?.order?.components?.date?.hidden
   const hideDeliveryProgress = theme?.confirmation?.components?.order?.components?.progress?.hidden
@@ -480,7 +478,7 @@ const OrderDetailsUI = (props) => {
                         <ReviewOrderLink
                           className='Review-order'
                           active={
-                            acceptedStatus.includes(parseInt(order?.status, 10)) &&
+                            [...acceptedStatus, 16].includes(parseInt(order?.status, 10)) &&
                             (!order?.review || (order.driver && !order?.user_review)) &&
                             (!isOrderReviewed || !isProductReviewed || (isService && !isProReviewed) || !isDriverReviewed)
                           }
@@ -770,13 +768,36 @@ const OrderDetailsUI = (props) => {
           >
             <ReviewWrapper>
               {
-                reviewStatus?.order
-                  ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
-                  : (reviewStatus?.product
-                    ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
-                    : (reviewStatus?.professional
-                      ? <ReviewProfessional order={order} closeReviewProfessional={handleCloseReivew} setIsProfessionalReviewed={setIsProReviewed} isProfessional />
-                      : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />))
+                reviewStatus?.order ? (
+                  <ReviewOrder
+                    order={order}
+                    hashKey={props.hashKey}
+                    closeReviewOrder={closeReviewOrder}
+                    setIsReviewed={setIsOrderReviewed}
+                  />)
+                  : (reviewStatus?.product ? (
+                    <ReviewProduct
+                      order={order}
+                      hashKey={props.hashKey}
+                      closeReviewProduct={closeReviewProduct}
+                      setIsProductReviewed={setIsProductReviewed}
+                    />)
+                    : (reviewStatus?.professional ? (
+                      <ReviewProfessional
+                        order={order}
+                        hashKey={props.hashKey}
+                        closeReviewProfessional={handleCloseReivew}
+                        setIsProfessionalReviewed={setIsProReviewed}
+                        isProfessional
+                      />)
+                      : (
+                        <ReviewDriver
+                          order={order}
+                          hashKey={props.hashKey}
+                          closeReviewDriver={handleCloseReivew}
+                          setIsDriverReviewed={setIsDriverReviewed}
+                        />
+                      )))
               }
             </ReviewWrapper>
 
