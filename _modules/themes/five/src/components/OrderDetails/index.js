@@ -80,6 +80,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
   var theme = (0, _styledComponents.useTheme)();
+  var _useSession = (0, _orderingComponents.useSession)(),
+    _useSession2 = _slicedToArray(_useSession, 1),
+    token = _useSession2[0].token;
   var _useEvent = (0, _orderingComponents.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
@@ -499,6 +502,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
     setIsService(_isService);
     businessLogoUrlValidation();
+    props.openBChatByParam && setOpenMessages(_objectSpread(_objectSpread({}, openMessages), {}, {
+      business: !!props.openBChatByParam
+    }));
   }, [order]);
   (0, _react.useEffect)(function () {
     window.scrollTo(0, 0);
@@ -554,9 +560,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     onClick: function onClick() {
       return setIsOrderHistory(true);
     }
-  }, t('VIEW_DETAILS', 'View details'))), /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
+  }, t('VIEW_DETAILS', 'View details'))), (!props.isCustomerMode || props.isCustomerMode && !!props.hashKey && !token) && /*#__PURE__*/_react.default.createElement(_styles.ReviewOrderLink, {
     className: "Review-order",
-    active: acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || isService && !isProReviewed || !isDriverReviewed)
+    active: [].concat(acceptedStatus, [16]).includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) && (!(order !== null && order !== void 0 && order.review) || order.driver && !(order !== null && order !== void 0 && order.user_review)) && (!isOrderReviewed || !isProductReviewed || isService && !isProReviewed || !isDriverReviewed)
   }, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleOpenReview
   }, t('REVIEW_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.REVIEW_ORDER) || 'Review your Order'))))))), !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderBusiness, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessExternalWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessWrapper, {
@@ -724,19 +730,23 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     title: order ? reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? t('REVIEW_ORDER', 'Review order') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? t('REVIEW_PRODUCT', 'Review Product') : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.professional ? t('PROFESSIONAL_REVIEW', 'Professional review') : t('REVIEW_DRIVER', 'Review Driver') : t('LOADING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.LOADING) || 'Loading...')
   }, /*#__PURE__*/_react.default.createElement(_styles.ReviewWrapper, null, reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.order ? /*#__PURE__*/_react.default.createElement(_ReviewOrder.ReviewOrder, {
     order: order,
+    hashKey: props.hashKey,
     closeReviewOrder: closeReviewOrder,
     setIsReviewed: setIsOrderReviewed
   }) : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.product ? /*#__PURE__*/_react.default.createElement(_ReviewProduct.ReviewProduct, {
     order: order,
+    hashKey: props.hashKey,
     closeReviewProduct: closeReviewProduct,
     setIsProductReviewed: setIsProductReviewed
   }) : reviewStatus !== null && reviewStatus !== void 0 && reviewStatus.professional ? /*#__PURE__*/_react.default.createElement(_ReviewProfessional.ReviewProfessional, {
     order: order,
+    hashKey: props.hashKey,
     closeReviewProfessional: handleCloseReivew,
     setIsProfessionalReviewed: setIsProReviewed,
     isProfessional: true
   }) : /*#__PURE__*/_react.default.createElement(_ReviewDriver.ReviewDriver, {
     order: order,
+    hashKey: props.hashKey,
     closeReviewDriver: handleCloseReivew,
     setIsDriverReviewed: setIsDriverReviewed
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {

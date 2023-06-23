@@ -101,7 +101,9 @@ var CheckoutUI = function CheckoutUI(props) {
     parsePrice = _useUtils2[0].parsePrice;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 2),
-    user = _useSession2[0].user,
+    _useSession2$ = _useSession2[0],
+    user = _useSession2$.user,
+    userLoading = _useSession2$.loading,
     login = _useSession2[1].login;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -213,6 +215,7 @@ var CheckoutUI = function CheckoutUI(props) {
     return b.business_id === (cart === null || cart === void 0 ? void 0 : cart.business_id) && b.accumulates;
   });
   var handlePlaceOrder = function handlePlaceOrder() {
+    if (placing) return;
     if (stripePaymethods.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && user !== null && user !== void 0 && user.guest_id) {
       setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         signup: true,
@@ -311,7 +314,7 @@ var CheckoutUI = function CheckoutUI(props) {
   };
   (0, _react.useEffect)(function () {
     var _validationFields$fie29;
-    if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie29 = validationFields.fields) !== null && _validationFields$fie29 !== void 0 && _validationFields$fie29.checkout) {
+    if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie29 = validationFields.fields) !== null && _validationFields$fie29 !== void 0 && _validationFields$fie29.checkout && !customerState.loading && !userLoading) {
       checkValidationFields();
     }
   }, [validationFields, user, customerState]);
