@@ -107,7 +107,7 @@ const CheckoutUI = (props) => {
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const [{ user }, { login }] = useSession()
+  const [{ user, loading: userLoading }, { login }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
   const [events] = useEvent()
@@ -184,6 +184,7 @@ const CheckoutUI = (props) => {
   const creditPointPlanOnBusiness = creditPointPlan?.businesses?.find(b => b.business_id === cart?.business_id && b.accumulates)
 
   const handlePlaceOrder = () => {
+    if (placing) return
     if (stripePaymethods.includes(paymethodSelected?.gateway) && user?.guest_id) {
       setOpenModal({ ...openModal, signup: true, isGuest: true })
       return
@@ -288,7 +289,7 @@ const CheckoutUI = (props) => {
   }
 
   useEffect(() => {
-    if (validationFields && validationFields?.fields?.checkout) {
+    if (validationFields && validationFields?.fields?.checkout && !customerState.loading && !userLoading) {
       checkValidationFields()
     }
   }, [validationFields, user, customerState])
