@@ -8,6 +8,7 @@ import {
   useConfig,
   useOrder,
   useCustomer,
+  useSession,
   GoogleMapsMap
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
@@ -102,6 +103,7 @@ const OrderDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const theme = useTheme()
+  const [{ token }] = useSession()
   const [events] = useEvent()
   const [{ parsePrice, parseDate }] = useUtils()
   const [, { deleteUserCustomer }] = useCustomer()
@@ -367,6 +369,10 @@ const OrderDetailsUI = (props) => {
     const _isService = order.products.some(product => product.type === 'service')
     setIsService(_isService)
     businessLogoUrlValidation()
+    props.openBChatByParam && setOpenMessages({
+      ...openMessages,
+      business: !!props.openBChatByParam
+    })
   }, [order])
 
   useEffect(() => {
@@ -468,16 +474,18 @@ const OrderDetailsUI = (props) => {
                       >
                         <span onClick={() => setIsOrderHistory(true)}>{t('VIEW_DETAILS', 'View details')}</span>
                       </ReviewOrderLink>
-                      <ReviewOrderLink
-                        className='Review-order'
-                        active={
-                          acceptedStatus.includes(parseInt(order?.status, 10)) &&
-                          (!order?.review || (order.driver && !order?.user_review)) &&
-                          (!isOrderReviewed || !isProductReviewed || (isService && !isProReviewed) || !isDriverReviewed)
-                        }
-                      >
-                        <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                      </ReviewOrderLink>
+                      {(!props.isCustomerMode || (props.isCustomerMode && !!props.hashKey && !token)) && (
+                        <ReviewOrderLink
+                          className='Review-order'
+                          active={
+                            [...acceptedStatus, 16].includes(parseInt(order?.status, 10)) &&
+                            (!order?.review || (order.driver && !order?.user_review)) &&
+                            (!isOrderReviewed || !isProductReviewed || (isService && !isProReviewed) || !isDriverReviewed)
+                          }
+                        >
+                          <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                        </ReviewOrderLink>
+                      )}
                     </LinkWrapper>
                   </OrderStatusAndLinkContainer>
                 </>
@@ -760,13 +768,36 @@ const OrderDetailsUI = (props) => {
           >
             <ReviewWrapper>
               {
-                reviewStatus?.order
-                  ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
-                  : (reviewStatus?.product
-                    ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
-                    : (reviewStatus?.professional
-                      ? <ReviewProfessional order={order} closeReviewProfessional={handleCloseReivew} setIsProfessionalReviewed={setIsProReviewed} isProfessional />
-                      : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />))
+                reviewStatus?.order ? (
+                  <ReviewOrder
+                    order={order}
+                    hashKey={props.hashKey}
+                    closeReviewOrder={closeReviewOrder}
+                    setIsReviewed={setIsOrderReviewed}
+                  />)
+                  : (reviewStatus?.product ? (
+                    <ReviewProduct
+                      order={order}
+                      hashKey={props.hashKey}
+                      closeReviewProduct={closeReviewProduct}
+                      setIsProductReviewed={setIsProductReviewed}
+                    />)
+                    : (reviewStatus?.professional ? (
+                      <ReviewProfessional
+                        order={order}
+                        hashKey={props.hashKey}
+                        closeReviewProfessional={handleCloseReivew}
+                        setIsProfessionalReviewed={setIsProReviewed}
+                        isProfessional
+                      />)
+                      : (
+                        <ReviewDriver
+                          order={order}
+                          hashKey={props.hashKey}
+                          closeReviewDriver={handleCloseReivew}
+                          setIsDriverReviewed={setIsDriverReviewed}
+                        />
+                      )))
               }
             </ReviewWrapper>
 
