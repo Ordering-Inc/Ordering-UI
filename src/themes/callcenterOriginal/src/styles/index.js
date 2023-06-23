@@ -1,4 +1,4 @@
-import { Button, IconButton } from './Buttons'
+import { Button, IconButton, LinkButton } from './Buttons'
 import { Checkbox } from './Checkbox'
 import { Input, TextArea } from './Inputs'
 import { MultiSelect } from './MultiSelect'
@@ -10,6 +10,7 @@ import { Tabs, Tab } from './Tabs'
 export {
   Button,
   IconButton,
+  LinkButton,
   Checkbox,
   Input,
   MultiSelect,

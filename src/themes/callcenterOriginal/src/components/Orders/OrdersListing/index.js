@@ -13,6 +13,7 @@ import {
 
 export const OrdersListing = (props) => {
   const {
+    hidePhoto,
     isSelectedOrders,
     orderList,
     selectedOrderIds,
@@ -46,7 +47,9 @@ export const OrdersListing = (props) => {
 
     allowColumns,
     setAllowColumns,
-    handleDrop
+    handleDrop,
+    isDelivery,
+    saveUserSettings
   } = props
 
   const theme = useTheme()
@@ -109,6 +112,7 @@ export const OrdersListing = (props) => {
             >
               {orderListView === 'table' ? (
                 <OrdersTable
+                  hidePhoto={hidePhoto}
                   setSelectedOrderIds={setSelectedOrderIds}
                   isSelectedOrders={isSelectedOrders}
                   orderList={orderList}
@@ -129,6 +133,7 @@ export const OrdersListing = (props) => {
                   allowColumns={allowColumns}
                   setAllowColumns={setAllowColumns}
                   handleDrop={handleDrop}
+                  saveUserSettings={saveUserSettings}
                 />
               ) : (
                 <OrdersCards
@@ -146,6 +151,7 @@ export const OrdersListing = (props) => {
                   handleOrderCardClick={handleOrderCardClick}
                   handleUpdateDriverLocation={handleUpdateDriverLocation}
                   slaSettingTime={slaSettingTime}
+                  isDelivery={isDelivery}
                 />
               )}
             </WrapperOrderListContent>

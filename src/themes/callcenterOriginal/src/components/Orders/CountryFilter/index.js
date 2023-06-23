@@ -13,32 +13,35 @@ const CountryFilterUI = (props) => {
 
   const [, t] = useLanguage()
 
+  const [searchValue, setSearchValue] = useState('')
+  const [countryTypes, setCountryTypes] = useState([])
+
   const placeholder = (
     <PlaceholderTitle>
       {t('SELECT_A_COUNTRY', 'Select a country')}
     </PlaceholderTitle>
   )
 
-  const [countryTypes, setCountryTypes] = useState([])
-
   useEffect(() => {
     const _countryList = []
     if (!countriesState.loading) {
-      const _groupsOption = countriesState.countries.map((country) => {
-        return {
-          value: country.code,
-          content: (
-            <Option>{country.name}</Option>
-          )
-        }
-      })
+      const _groupsOption = countriesState.countries
+        .filter(option => option?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+        .map((country) => {
+          return {
+            value: country.code,
+            content: (
+              <Option>{country.name}</Option>
+            )
+          }
+        })
 
       for (const option of _groupsOption) {
         _countryList.push(option)
       }
     }
     setCountryTypes(_countryList)
-  }, [countriesState])
+  }, [countriesState, searchValue])
 
   return (
     <>
@@ -49,6 +52,11 @@ const CountryFilterUI = (props) => {
           options={countryTypes}
           onChange={(code) => handleChangeCountryCode(code)}
           optionInnerMaxHeight='200px'
+          isShowSearchBar
+          searchBarIsCustomLayout
+          searchBarIsNotLazyLoad
+          searchValue={searchValue}
+          handleChangeSearch={(val) => setSearchValue(val)}
         />
       ) : (
         <SkeletonWrapper>

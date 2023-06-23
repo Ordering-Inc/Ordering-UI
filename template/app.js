@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PWAPrompt from 'react-ios-pwa-prompt'
-import { useTheme, ThemeProvider } from 'styled-components'
+import { useTheme } from 'styled-components'
+import { ThemeProvider } from '../src/contexts/ThemeContext'
 import loadable from '@loadable/component'
 import {
   Switch,
@@ -28,7 +29,6 @@ import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { useWindowSize } from '../src/hooks/useWindowSize'
 
 import settings from './config'
-import { orderingThemeUpdated } from './components/OrderingThemeUpdated'
 
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { Input } from '../src/themes/five/src/styles/Inputs'
@@ -134,7 +134,8 @@ export const App = () => {
     colors: {
       ...theme.colors,
       ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color && { primary: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_btn_color }),
-      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color && { links: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color })
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color && { links: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.primary_link_color }),
+      ...(orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.background_page && { backgroundPage: orderingTheme?.theme?.my_products?.components?.theme_settings?.components?.style?.background_page })
     },
     images: {
       ...theme.images,
@@ -170,8 +171,8 @@ export const App = () => {
     }
   }
 
-  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeBusinessSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.business_slug
+  const websiteThemeType = themeUpdated?.theme?.my_products?.components?.website_theme?.components?.type
+  const websiteThemeBusinessSlug = themeUpdated?.theme?.my_products?.components?.website_theme?.components?.business_slug
   const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
 
   const businessesSlug = {
@@ -185,21 +186,21 @@ export const App = () => {
     businessSlug: businessesSlug[isKioskApp ? 'kiosk' : settings?.use_marketplace ? 'marketplace' : 'business']
   }
 
-  const signUpBusinesslayout = orderingTheme?.theme?.business_signup?.components?.layout?.type === 'old'
+  const signUpBusinesslayout = themeUpdated?.theme?.business_signup?.components?.layout?.type === 'old'
     ? 'old'
     : 'new'
 
-  const signUpDriverlayout = orderingTheme?.theme?.driver_signup?.components?.layout?.type === 'old'
+  const signUpDriverlayout = themeUpdated?.theme?.driver_signup?.components?.layout?.type === 'old'
     ? 'old'
     : 'new'
 
   const HeaderComponent =
     isKioskApp ? HeaderKiosk
-      : orderingTheme?.theme?.header?.components?.layout?.type === 'old'
+      : themeUpdated?.theme?.header?.components?.layout?.type === 'old'
         ? HeaderOld
-        : orderingTheme?.theme?.header?.components?.layout?.type === 'red'
+        : themeUpdated?.theme?.header?.components?.layout?.type === 'red'
           ? HeaderRed
-          : orderingTheme?.theme?.header?.components?.layout?.type === 'starbucks'
+          : themeUpdated?.theme?.header?.components?.layout?.type === 'starbucks'
             ? HeaderStarbucks
             : Header
 
@@ -210,7 +211,7 @@ export const App = () => {
   const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
   const isPhoneVerifyRequired = auth && configs?.verification_phone_required?.value === '1' && !user?.phone_verified
   const isUserVerifyRequired = (isEmailVerifyRequired || isPhoneVerifyRequired) && !isKioskApp
-  const isHideFooter = orderingTheme?.theme?.footer?.hidden
+  const isHideFooter = themeUpdated?.theme?.footer?.hidden
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const isFooterPage = location.pathname === '/pages/footer' || isKioskApp || isHideFooter
@@ -529,7 +530,7 @@ export const App = () => {
       {
         loaded && (
           <ThemeProvider
-            theme={orderingThemeUpdated(theme, orderingTheme)}
+            theme={themeUpdated}
           >
             <ListenPageChanges />
             {!(isKioskApp && isHome) && (

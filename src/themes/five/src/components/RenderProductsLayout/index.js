@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
-import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
+import { useLanguage, useConfig, useUtils } from 'ordering-components'
 import CgSearch from '@meronex/icons/cg/CgSearch'
 import { Cart3, ArrowLeft } from 'react-bootstrap-icons'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
@@ -88,14 +88,13 @@ export const RenderProductsLayout = (props) => {
     handleChangePriceFilterValues,
     priceFilterValues,
     handleUpdateProfessionals,
-    isCustomerMode,
+    isCustomerMode
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
-  const [orderingTheme] = useOrderingTheme()
   const windowSize = useWindowSize()
   const [isCartModal, setisCartModal] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
@@ -121,7 +120,7 @@ export const RenderProductsLayout = (props) => {
   const businessLayout = {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
   }
-  const showCartOnProductList = !orderingTheme?.theme?.business_view?.components?.cart?.components?.hidden
+  const showCartOnProductList = !theme?.business_view?.components?.cart?.components?.hidden
   const hideBusinessNearCity = theme?.business_view?.components?.near_business?.hidden ?? true
   const hidePreviousOrdered = theme?.business_view?.components?.products_ordered?.hidden
 
@@ -193,9 +192,13 @@ export const RenderProductsLayout = (props) => {
               />
             )}
 
-            {!isCustomerMode && businessState?.business?.id && (
+            {businessState?.business?.id && (
               <PageBannerWrapper>
-                <PageBanner position='web_business_page' businessId={businessState?.business?.id} />
+                <PageBanner
+                  position='web_business_page'
+                  businessId={businessState?.business?.id}
+                  isCustomerMode={isCustomerMode}
+                />
               </PageBannerWrapper>
             )}
 

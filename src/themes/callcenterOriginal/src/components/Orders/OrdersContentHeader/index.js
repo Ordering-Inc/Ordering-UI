@@ -11,6 +11,7 @@ import { useInfoShare } from '../../../../../../contexts/InfoShareContext'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { useWindowSize } from '../../../../../../hooks/useWindowSize'
 import { GoogleMapsApiKeySettingButton } from '../GoogleMapsApiKeySettingButton'
+import { WebsocketStatus } from '../WebsocketStatus'
 
 import {
   OrderContentHeaderContainer,
@@ -58,7 +59,8 @@ export const OrdersContentHeader = (props) => {
     } else {
       _filterApplied = filterValues?.groupTypes?.length || filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
         filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
-        filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0
+        filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0 || filterValues?.metafield?.length > 0 ||
+        filterValues?.externalId
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
@@ -103,6 +105,7 @@ export const OrdersContentHeader = (props) => {
           </HeaderSection>
         )}
         <TopRightSection>
+          <WebsocketStatus />
           {isShowMapsKeySettingButton && (
             <GoogleMapsApiKeySettingButton />
           )}

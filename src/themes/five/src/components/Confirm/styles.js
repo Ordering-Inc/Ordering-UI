@@ -24,7 +24,7 @@ export const PopupWrap = styled.div`
 `
 
 export const PopupDialog = styled.div`
-  background-color: #FFF;
+  background-color: ${(props) => props.theme?.colors?.backgroundPage};
   padding: 20px;
   width: 70%;
   border-radius: 10px;

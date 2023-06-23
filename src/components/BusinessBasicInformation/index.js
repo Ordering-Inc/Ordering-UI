@@ -9,7 +9,7 @@ import { useTheme } from 'styled-components'
 import { Modal } from '../Modal'
 import { BusinessInformation } from '../BusinessInformation'
 
-import { useUtils, useOrder, useLanguage, useOrderingTheme } from 'ordering-components'
+import { useUtils, useOrder, useLanguage } from 'ordering-components'
 
 import { convertHoursToMinutes } from '../../utils'
 
@@ -37,7 +37,6 @@ export const BusinessBasicInformation = (props) => {
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
-  const [orderingTheme] = useOrderingTheme()
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
@@ -48,12 +47,12 @@ export const BusinessBasicInformation = (props) => {
     return _types.join(', ')
   }
 
-  const showLogo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
-  const showDeliveryFee = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
-  const showTime = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
-  const showBusinessInfo = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
-  const showReviews = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
-  const showDistance = !orderingTheme?.theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
+  const showLogo = !theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
+  const showDeliveryFee = !theme?.business_view?.components?.header?.components?.business?.components?.fee?.hidden
+  const showTime = !theme?.business_view?.components?.header?.components?.business?.components?.time?.hidden
+  const showBusinessInfo = !theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
+  const showReviews = !theme?.business_view?.components?.header?.components?.business?.components?.reviews?.hidden
+  const showDistance = !theme?.business_view?.components?.header?.components?.business?.components?.distance?.hidden
 
   return (
     <>

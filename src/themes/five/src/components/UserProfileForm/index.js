@@ -9,8 +9,7 @@ import {
   useLanguage,
   useSession,
   DragAndDrop,
-  ExamineClick,
-  useOrderingTheme
+  ExamineClick
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
@@ -97,7 +96,6 @@ const UserProfileFormUI = (props) => {
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
   const theme = useTheme()
-  const [orderingTheme] = useOrderingTheme()
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
     600, willVerifyOtpState)
@@ -110,7 +108,7 @@ const UserProfileFormUI = (props) => {
   const userFormLayoutRow = theme?.profile?.components?.layout?.position === 'row'
 
   const isPromotionsEnabled = configs?.advanced_offers_module?.value === '1' || configs?.advanced_offers_module?.value === true
-  const isAddressListNewPage = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
+  const isAddressListNewPage = theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
   const isWalletEnabled = configs?.cash_wallet?.value &&
     configs?.wallet_enabled?.value === '1' &&
     (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')

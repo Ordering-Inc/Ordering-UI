@@ -9,7 +9,7 @@ import {
   Title
 } from './styles'
 
-import { useOrder, useEvent, useLanguage, useOrderingTheme } from 'ordering-components'
+import { useOrder, useEvent, useLanguage } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import { CartContent } from '../CartContent'
 import { Modal } from '../Modal'
@@ -22,11 +22,10 @@ export const CartPopover = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [, t] = useLanguage()
-  const [orderingTheme] = useOrderingTheme()
   const referenceElement = useRef()
   const popperElement = useRef()
   const arrowElement = useRef()
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const popper = usePopper(referenceElement.current, popperElement.current, {
     placement: theme?.rtl ? 'bottom' : 'bottom-end',
     modifiers: [

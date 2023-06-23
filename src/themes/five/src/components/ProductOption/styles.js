@@ -12,7 +12,7 @@ export const WrapHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #FFF;
+  background-color: ${(props) => props.theme?.colors?.backgroundPage};
 `
 
 export const TitleContainer = styled.div`

@@ -4,9 +4,10 @@ import { useParams, useLocation } from 'react-router-dom'
 import { HelmetTags } from '../../components/HelmetTags'
 
 import { Checkout } from '../../../src/themes/five/src/components/Checkout'
-import { useEvent, useOrder, useLanguage, useSite, useOrderingTheme } from 'ordering-components'
+import { useEvent, useOrder, useLanguage, useSite } from 'ordering-components'
 import settings from '../../config'
 import { checkSiteUrl } from '../../Utils'
+import { useTheme } from 'styled-components'
 
 export const CheckoutPage = (props) => {
   const { cartUuid } = useParams()
@@ -15,9 +16,10 @@ export const CheckoutPage = (props) => {
   const [orderState, { confirmCart, changeMoment }] = useOrder()
   const [, t] = useLanguage()
   const [{ site }] = useSite()
-  const [orderingTheme] = useOrderingTheme()
-  const websiteThemeType = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeBusinessSlug = orderingTheme?.theme?.my_products?.components?.website_theme?.components?.business_slug
+  const theme = useTheme()
+
+  const websiteThemeType = theme?.my_products?.components?.website_theme?.components?.type
+  const websiteThemeBusinessSlug = theme?.my_products?.components?.website_theme?.components?.business_slug
   const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
 
   const stripePayments = ['stripe', 'stripe_connect', 'stripe_direct', 'google_pay', 'apple_pay']

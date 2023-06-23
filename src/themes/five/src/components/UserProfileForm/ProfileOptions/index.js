@@ -4,15 +4,16 @@ import { Tabs, Tab } from '../../../styles/Tabs'
 import BsPerson from '@meronex/icons/bs/BsPerson'
 import AiOutlineUnorderedList from '@meronex/icons/ai/AiOutlineUnorderedList'
 import FaAddressBook from '@meronex/icons/fa/FaAddressBook'
-import { useEvent, useLanguage, useOrderingTheme } from 'ordering-components'
+import { useEvent, useLanguage } from 'ordering-components'
+import { useTheme } from 'styled-components'
 
 export const ProfileOptions = ({ value }) => {
   const [tabValue] = useState(value)
   const [, t] = useLanguage()
   const [events] = useEvent()
-  const [orderingTheme] = useOrderingTheme()
+  const theme = useTheme()
 
-  const showAddressListTab = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
+  const showAddressListTab = theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
 
   const handleGoToPage = (data) => {
     events.emit('go_to_page', data)

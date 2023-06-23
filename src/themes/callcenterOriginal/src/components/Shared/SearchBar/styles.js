@@ -2,30 +2,20 @@ import styled, { css } from 'styled-components'
 
 export const SearchContainer = styled.div`
   position: relative;
-
-  svg {
-    position: absolute;
-    top: 10px;
-    ${props => props.theme?.rtl ? css`
-      right: 15px;
-    ` : css`
-      left: 15px;
-    `}
-    font-size: 20px;
-    color: ${props => props.theme.colors.lightGray};
-  }
+  display: flex;
+  align-items: center;
 
   > input {
-    width: 250px;
+    width: 100%;
     border: 1px solid ${props => props.theme.colors.borderColor} !important;
     background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-    border-radius: 22px;
     outline: none;
-    padding: 10px 8px;
+    padding: 10px 15px;
+    border-radius: 8px;
     ${props => props.theme?.rtl ? css`
-      padding-right: 40px;
-    ` : css`
       padding-left: 40px;
+    ` : css`
+      padding-right: 40px;
     `}
     font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
@@ -35,23 +25,20 @@ export const SearchContainer = styled.div`
     }
   }
 
-  ${({ isCustomLayout }) => isCustomLayout && css`
-    input {
-      border-radius: 8px;
-      width: 100%;
-      padding: 10px 15px;
-    }
+  svg {
+    position: absolute;
+    ${props => props.theme?.rtl ? css`
+      left: 15px;
+    ` : css`
+      right: 15px;
+    `}
+    font-size: 16px;
+    color: ${props => props.theme.colors.lightGray};
 
-    svg {
-      ${props => props.theme?.rtl ? css`
-        right: initial;
-        left: 10px;
-      ` : css`
-        left: initial;
-        right: 10px;
-      `}
+    &.close {
+      cursor: pointer;
     }
-  `}
+  }
 
   @media (max-width: 1200px) {
     flex: 1;

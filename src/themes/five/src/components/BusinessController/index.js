@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, useUtils, useOrder, useConfig, useSession, useOrderingTheme, BusinessController as BusinessSingleCard } from 'ordering-components'
+import { useLanguage, useUtils, useOrder, useConfig, useSession, BusinessController as BusinessSingleCard } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
@@ -73,14 +73,12 @@ const BusinessControllerUI = (props) => {
   const [{ auth }, { login }] = useSession()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [orderState] = useOrder()
-  const [orderingTheme] = useOrderingTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
 
   const favoriteRef = useRef(null)
-
-  const businessRows = orderingTheme?.theme?.business_listing_view?.components?.layout?.rows
+  const businessRows = theme?.business_listing_view?.components?.layout?.rows
   const hideBusinessLogo = theme?.business_listing_view?.components?.business?.components?.logo?.hidden
   const hideBusinessFee = theme?.business_listing_view?.components?.business?.components?.fee?.hidden
   const hideBusinessTime = theme?.business_listing_view?.components?.business?.components?.time?.hidden
@@ -276,19 +274,19 @@ const BusinessControllerUI = (props) => {
                   {isCustomerMode && hasInformationLength && (
                     <CallCenterInformation>
                       {business?.idle_drivers_count > 0 && (
-                        <CallCenterInformationBullet bgcolor='green'>
+                        <CallCenterInformationBullet bgcolor='#4CAF50'>
                           <BiCar />
                           {business?.idle_drivers_count}
                         </CallCenterInformationBullet>
                       )}
                       {business?.busy_drivers_count > 0 && (
-                        <CallCenterInformationBullet bgcolor='red'>
+                        <CallCenterInformationBullet bgcolor='#E91E63'>
                           <BiCar />
                           {business?.busy_drivers_count}
                         </CallCenterInformationBullet>
                       )}
                       {business?.activated_orders > 0 && (
-                        <CallCenterInformationBullet bgcolor='rgb(252,225,5)'>
+                        <CallCenterInformationBullet bgcolor='#FF9800'>
                           <BiBasket />
                           {business?.activated_orders}
                         </CallCenterInformationBullet>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useUtils, useLanguage, useConfig, useOrder, useOrderingTheme } from 'ordering-components'
+import { useUtils, useLanguage, useConfig, useOrder } from 'ordering-components'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 import FaMapMarkerAlt from '@meronex/icons/fa/FaMapMarkerAlt'
 
@@ -7,6 +7,7 @@ import {
   Container,
   DeliveryType
 } from './styles'
+import { useTheme } from 'styled-components'
 
 export const HeaderOption = (props) => {
   const {
@@ -19,10 +20,10 @@ export const HeaderOption = (props) => {
 
   const [{ configs }] = useConfig()
   const [{ parseDate }] = useUtils()
-  const [orderingTheme] = useOrderingTheme()
   const [, t] = useLanguage()
   const [orderStatus] = useOrder()
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const theme = useTheme()
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
   return (
     <>

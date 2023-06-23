@@ -19,8 +19,7 @@ import {
   useLanguage,
   useOrder,
   useCustomer,
-  useEvent,
-  useOrderingTheme
+  useEvent
 } from 'ordering-components'
 
 import {
@@ -76,7 +75,6 @@ const AddressListUI = (props) => {
   const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
-  const [orderingTheme] = useOrderingTheme()
   const [{ user }] = useCustomer()
   const { width } = useWindowSize()
   const isCompletedLayout = width < 769 || isProfile

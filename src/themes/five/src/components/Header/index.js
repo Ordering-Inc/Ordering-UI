@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useOrderingTheme, useBusiness } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useBusiness } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
@@ -76,7 +76,6 @@ export const Header = (props) => {
   const theme = useTheme()
   const [configState] = useConfig()
   const [customerState, { deleteUserCustomer }] = useCustomer()
-  const [orderingTheme] = useOrderingTheme()
   const [{ business }] = useBusiness()
 
   const clearCustomer = useRef(null)
@@ -106,7 +105,7 @@ export const Header = (props) => {
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru'), '', t('CATERING_DELIVERY', 'Catering Delivery'), t('CATERING_PICKUP', 'Catering pickup')]
   const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isPreOrderSetting = configState?.configs?.preorder_status_enabled?.value === '1'
-  const isChew = orderingTheme?.theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const isHideLanguages = theme?.header?.components?.language_selector?.hidden
   const cateringTypeString = orderState?.options?.type === 7
     ? 'catering_delivery'
@@ -242,8 +241,8 @@ export const Header = (props) => {
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
               isChew={isChew}
             >
-              <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (windowSize.width <= 768 ? theme?.images?.logos?.isotypeInvert : orderingTheme?.theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
+              <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
+              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (windowSize.width <= 768 ? theme?.images?.logos?.isotypeInvert : theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && windowSize.width >= 576 && (

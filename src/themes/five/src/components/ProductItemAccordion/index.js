@@ -4,7 +4,7 @@ import {
   Pencil,
   Trash
 } from 'react-bootstrap-icons'
-import { useUtils, useLanguage, useOrder, useConfig, useOrderingTheme } from 'ordering-components'
+import { useUtils, useLanguage, useOrder, useConfig } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import {
   AccordionSection,
@@ -52,7 +52,6 @@ export const ProductItemAccordion = (props) => {
   const [{ parsePrice, parseDate }] = useUtils()
   const windowSize = useWindowSize()
   const [{ configs }] = useConfig()
-  const [orderingTheme] = useOrderingTheme()
   const [setActive, setActiveState] = useState('')
   const [setHeight, setHeightState] = useState('0px')
   const [setRotate, setRotateState] = useState('accordion__icon')

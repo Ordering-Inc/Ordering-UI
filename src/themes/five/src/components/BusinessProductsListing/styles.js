@@ -10,7 +10,7 @@ export const ProductsContainer = styled.div`
     margin-bottom: 5px;
   }
   > div {
-    background-color: ${({ theme }) => theme?.business_view?.components?.style?.backgroundColor};
+    background-color: ${(props) => props.theme?.colors?.backgroundPage};
   }
 
 `
