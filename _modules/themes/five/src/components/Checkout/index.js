@@ -62,7 +62,7 @@ var mapConfigs = {
   }
 };
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _cart$comment, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _validationFields$fie12, _paymethodSelected$da, _paymethodSelected$da2, _paymethodSelected$da3, _cardList$cards, _cartState$cart, _validationFields$fie13, _validationFields$fie14, _validationFields$fie15, _validationFields$fie16, _validationFields$fie17, _validationFields$fie18, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _theme$checkout, _theme$checkout$compo, _theme$checkout$compo2, _theme$checkout$compo3, _theme$checkout$compo4, _theme$checkout2, _theme$checkout2$comp, _theme$checkout2$comp2, _theme$checkout3, _theme$checkout3$comp, _theme$checkout3$comp2, _theme$checkout4, _theme$checkout4$comp, _theme$checkout4$comp2, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _loyaltyPlansState$re, _creditPointPlan$busi, _options$address, _businessDetails$busi3, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _ref, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _validationFields$fie30, _validationFields$fie31, _validationFields$fie32, _validationFields$fie33, _validationFields$fie34, _validationFields$fie35, _customerState$user3;
+  var _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _cart$comment, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _validationFields$fie10, _validationFields$fie11, _validationFields$fie12, _paymethodSelected$da, _paymethodSelected$da2, _paymethodSelected$da3, _cardList$cards, _cartState$cart, _validationFields$fie13, _validationFields$fie14, _validationFields$fie15, _validationFields$fie16, _validationFields$fie17, _validationFields$fie18, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _theme$checkout, _theme$checkout$compo, _theme$checkout$compo2, _theme$checkout$compo3, _theme$checkout$compo4, _theme$checkout2, _theme$checkout2$comp, _theme$checkout2$comp2, _theme$checkout3, _theme$checkout3$comp, _theme$checkout3$comp2, _theme$checkout4, _theme$checkout4$comp, _theme$checkout4$comp2, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _loyaltyPlansState$re, _creditPointPlan$busi, _options$address, _businessDetails$busi3, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business2, _cart$products2, _ref, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _validationFields$fie30, _validationFields$fie31, _validationFields$fie32, _validationFields$fie33, _validationFields$fie34, _validationFields$fie35, _customerState$user3;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
@@ -331,17 +331,17 @@ var CheckoutUI = function CheckoutUI(props) {
     }
   }, [isResetPaymethod]);
   (0, _react.useEffect)(function () {
-    var _cart$products, _cart$business;
+    var _cart$products;
     if (cart !== null && cart !== void 0 && (_cart$products = cart.products) !== null && _cart$products !== void 0 && _cart$products.length) return;
-    if (cart !== null && cart !== void 0 && (_cart$business = cart.business) !== null && _cart$business !== void 0 && _cart$business.slug) {
-      var _cart$business2;
-      handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.slug);
+    if ((cart === null || cart === void 0 ? void 0 : cart.business_id) !== null) {
+      var _cart$business;
+      handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug);
     } else {
       events.emit('go_to_page', {
         page: 'wallets'
       });
     }
-  }, [cart === null || cart === void 0 ? void 0 : cart.products]);
+  }, [JSON.stringify(cart === null || cart === void 0 ? void 0 : cart.products)]);
   (0, _react.useEffect)(function () {
     window.scrollTo(0, 0);
   }, []);
@@ -528,10 +528,10 @@ var CheckoutUI = function CheckoutUI(props) {
     spotNumberDefault: (_cartState$cart$spot_ = cartState === null || cartState === void 0 ? void 0 : (_cartState$cart2 = cartState.cart) === null || _cartState$cart2 === void 0 ? void 0 : _cartState$cart2.spot_number) !== null && _cartState$cart$spot_ !== void 0 ? _cartState$cart$spot_ : cart === null || cart === void 0 ? void 0 : cart.spot_number,
     vehicleDefault: cart === null || cart === void 0 ? void 0 : cart.vehicle,
     setPlaceSpotNumber: setPlaceSpotNumber
-  })), !cartState.loading && cart && /*#__PURE__*/_react.default.createElement(_styles.CartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CartHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MOBILE_FRONT_YOUR_ORDER', 'Your order')), (cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.slug) && /*#__PURE__*/_react.default.createElement("span", {
+  })), !cartState.loading && cart && /*#__PURE__*/_react.default.createElement(_styles.CartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CartHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MOBILE_FRONT_YOUR_ORDER', 'Your order')), (cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.slug) && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
-      var _cart$business4, _cart$business5;
-      return (cart === null || cart === void 0 ? void 0 : (_cart$business4 = cart.business) === null || _cart$business4 === void 0 ? void 0 : _cart$business4.slug) && handleStoreRedirect && handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business5 = cart.business) === null || _cart$business5 === void 0 ? void 0 : _cart$business5.slug);
+      var _cart$business3, _cart$business4;
+      return (cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.slug) && handleStoreRedirect && handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business4 = cart.business) === null || _cart$business4 === void 0 ? void 0 : _cart$business4.slug);
     }
   }, t('ADD_PRODUCTS', 'Add products'))), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
@@ -699,8 +699,8 @@ var Checkout = function Checkout(props) {
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);
   })) || null);
   var carts = businessSlug ? cartsWithProducts.filter(function (cart) {
-    var _cart$business6;
-    return (cart === null || cart === void 0 ? void 0 : (_cart$business6 = cart.business) === null || _cart$business6 === void 0 ? void 0 : _cart$business6.slug) === businessSlug || businessSlug === (cart === null || cart === void 0 ? void 0 : cart.business_id);
+    var _cart$business5;
+    return (cart === null || cart === void 0 ? void 0 : (_cart$business5 = cart.business) === null || _cart$business5 === void 0 ? void 0 : _cart$business5.slug) === businessSlug || businessSlug === (cart === null || cart === void 0 ? void 0 : cart.business_id);
   }) : cartsWithProducts;
   var closeAlert = function closeAlert() {
     setAlertState({
