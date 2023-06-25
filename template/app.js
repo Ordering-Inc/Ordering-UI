@@ -513,7 +513,7 @@ export const App = () => {
     } else if (hashKey) {
       setHashKey(hashKey)
     }
-  }, [hashKey])
+  }, [hashKey, auth])
 
   return settings.isCancellation ? (
     <CancellationComponent
