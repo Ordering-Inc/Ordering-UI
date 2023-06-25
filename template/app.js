@@ -508,7 +508,9 @@ export const App = () => {
   }, [configLoading])
 
   useEffect(() => {
-    if (hashKey) {
+    if (auth) {
+      setHashKey(null)
+    } else if (hashKey) {
       setHashKey(hashKey)
     }
   }, [hashKey])
