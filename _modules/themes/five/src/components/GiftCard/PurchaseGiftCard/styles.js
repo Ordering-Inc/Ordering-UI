@@ -1,14 +1,14 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.IconControl = exports.GiftCardsWrapper = exports.GiftCardsListContainer = exports.GiftCardItem = exports.Container = exports.ActionButtonContainer = void 0;
-var _styledComponents = _interopRequireWildcard(require("styled-components"));
+exports.IconControl = exports.GiftCardsWrapper = exports.GiftCardsListContainer = exports.GiftCardItem = exports.Container = exports.CardImageStyled = exports.CardImage = exports.ActionButtonContainer = void 0;
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _react = _interopRequireDefault(require("react"));
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding-top: 30px;\n\n  h2 {\n    font-size: 24px;\n    font-weight: 600;\n    text-align: center;\n    margin-top: 0;\n    margin-bottom: 24px;\n  }\n  > p {\n    font-size: 16px;\n    line-height: 24px;\n    margin-top: 0;\n  }\n"])));
 exports.Container = Container;
@@ -20,16 +20,28 @@ var GiftCardItem = _styledComponents.default.div(_templateObject4 || (_templateO
   return props.theme.colors.gray200;
 });
 exports.GiftCardItem = GiftCardItem;
-var IconControl = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  color: ", ";\n  margin-right: 40px;\n  ", "\n  svg {\n    font-size: 24px;\n  }\n\n  svg[disabled] {\n    color: ", ";\n  }\n"])), function (props) {
+var IconControl = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  color: ", ";\n  svg {\n    font-size: 24px;\n  }\n\n  svg[disabled] {\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
-}, function (props) {
-  var _props$theme;
-  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    margin-left: 40px;\n    margin-right: 0px;\n  "])));
 }, function (props) {
   return props.theme.colors.lightGray;
 });
 exports.IconControl = IconControl;
-var ActionButtonContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  position: sticky;\n  bottom: 0px;\n  background-color: ", ";\n  padding: 15px 20px;\n  > button {\n    height: 44px;\n    width: 100%;\n  }\n"])), function (props) {
+var ActionButtonContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  position: sticky;\n  bottom: 0px;\n  background-color: ", ";\n  padding: 15px 20px;\n  > button {\n    height: 44px;\n    width: 100%;\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 });
 exports.ActionButtonContainer = ActionButtonContainer;
+var CardImageStyled = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  height: 38px;\n  width: 38px;\n  min-width: 38px;\n  min-height: 38px;\n  border-radius: 8px;\n  box-shadow: 0px 1px 4px rgba(0,0,0,0.1);\n  margin: 0 12px;\n"])));
+exports.CardImageStyled = CardImageStyled;
+var CardImage = function CardImage(props) {
+  var style = {};
+  if (props.bgimage) {
+    style.backgroundImage = "url(".concat(props.bgimage, ")");
+  }
+  if (props.soldOut) {
+    style.filter = 'brightness(70%)';
+  }
+  return /*#__PURE__*/_react.default.createElement(CardImageStyled, _extends({}, props, {
+    style: style
+  }), props.children);
+};
+exports.CardImage = CardImage;
