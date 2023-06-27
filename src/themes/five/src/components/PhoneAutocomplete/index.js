@@ -39,14 +39,15 @@ const PhoneAutocompleteUI = (props) => {
     onChangeNumber,
     setCustomerState,
     countryCallingCode,
-    onRedirectPage
+    onRedirectPage,
+    urlPhone
   } = props
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
   const [, { deleteUserCustomer }] = useCustomer()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState(urlPhone ?? '')
   const [optSelected, setOptSelected] = useState(null)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
@@ -103,7 +104,10 @@ const PhoneAutocompleteUI = (props) => {
     const user = customersPhones.users?.find(user => user.cellphone === option?.value || user.phone === option?.value)
     if (user) {
       setCustomerState({ ...customerState, result: user })
-      setOpenModal({ ...openModal, customer: true })
+      setOpenModal({ signup: false, customer: true })
+    } else {
+      setCustomerState({ ...customerState, result: { error: false } })
+      setOpenModal({ customer: false, signup: true })
     }
   }
 
@@ -119,7 +123,7 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const handleCloseAddressList = () => {
-    setOpenModal({ openModal, customer: false })
+    setOpenModal({ ...openModal, customer: false })
     setCustomerState({ ...customerState, result: { error: false } })
     deleteUserCustomer(true)
   }
@@ -130,6 +134,12 @@ const PhoneAutocompleteUI = (props) => {
     obj.label = `${user?.country_phone_code ? `(${user?.country_phone_code})` : ''} ${user?.phone && !user?.cellphone ? `${user?.phone}` : ''} ${user?.cellphone ? `${user.cellphone}` : ''} - {${user.name}}`
     return obj
   }) || []
+
+  useEffect(() => {
+    if (!urlPhone) return
+    onInputChange(urlPhone, { action: 'url' })
+    onChange({ value: urlPhone, label: urlPhone })
+  }, [urlPhone, customersPhones?.users?.length])
 
   return (
     <>
@@ -174,7 +184,7 @@ const PhoneAutocompleteUI = (props) => {
       <Modal
         open={openModal.signup}
         width='80%'
-        onClose={() => setOpenModal({ openModal, signup: false })}
+        onClose={() => setOpenModal({ ...openModal, signup: false })}
       >
         <SignUpForm
           externalPhoneNumber={`${countryCallingCode} ${optSelected?.value || phone}`}
@@ -210,7 +220,8 @@ const PhoneAutocompleteUI = (props) => {
                 changeOrderAddressWithDefault
                 userCustomerSetup={{
                   ...customerState?.result,
-                  phone
+                  phone,
+                  urlPhone
                 }}
                 isEnableContinueButton
                 isCustomerMode
