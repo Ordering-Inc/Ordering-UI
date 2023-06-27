@@ -32,9 +32,9 @@ import { LanguageSelector } from '../LanguageSelector'
 import { CartContent } from '../CartContent'
 import { SidebarMenu } from '../SidebarMenu'
 import { HeaderOption } from '../HeaderOption'
-import { LoginForm } from '../../themes/five/src/components/LoginForm'
-import { SignUpForm } from '../../themes/five/src/components/SignUpForm'
-import { ForgotPasswordForm } from '../../themes/five/src/components/ForgotPasswordForm'
+import { LoginForm } from '../../../../../themes/five/src/components/LoginForm'
+import { SignUpForm } from '../../../../../themes/five/src/components/SignUpForm'
+import { ForgotPasswordForm } from '../../../../../themes/five/src/components/ForgotPasswordForm'
 
 export const Header = (props) => {
   const {
