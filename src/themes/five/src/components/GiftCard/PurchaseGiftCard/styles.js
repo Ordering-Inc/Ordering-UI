@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+import React from 'react'
 
 export const Container = styled.div`
   display: flex;
@@ -38,11 +39,6 @@ export const GiftCardItem = styled.div`
 export const IconControl = styled.div`
   display: flex;
   color: ${props => props.theme.colors.primary};
-  margin-right: 40px;
-  ${props => props.theme?.rtl && css`
-    margin-left: 40px;
-    margin-right: 0px;
-  `}
   svg {
     font-size: 24px;
   }
@@ -61,3 +57,33 @@ export const ActionButtonContainer = styled.div`
     width: 100%;
   }
 `
+
+export const CardImageStyled = styled.div`
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  height: 38px;
+  width: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  border-radius: 8px;
+  box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
+  margin: 0 12px;
+`
+export const CardImage = (props) => {
+  const style = {}
+  if (props.bgimage) {
+    style.backgroundImage = `url(${props.bgimage})`
+  }
+  if (props.soldOut) {
+    style.filter = 'brightness(70%)'
+  }
+  return (
+    <CardImageStyled {...props} style={style}>
+      {props.children}
+    </CardImageStyled>
+  )
+}

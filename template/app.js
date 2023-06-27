@@ -22,8 +22,7 @@ import {
   AnalyticsSegment,
   useEvent,
   useOrderingTheme,
-  useSite,
-  useWebsocket
+  useSite
 } from 'ordering-components'
 
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
@@ -97,7 +96,6 @@ export const App = () => {
   const [{ loading: siteLoading }] = useSite()
   const [languageState, t] = useLanguage()
   const [orderingTheme] = useOrderingTheme()
-  const [, { setHashKey }] = useWebsocket()
   const [loaded, setLoaded] = useState(false)
   const onlineStatus = useOnlineStatus()
   const location = useLocation()
@@ -506,14 +504,6 @@ export const App = () => {
     if (configLoading) return
     oneSignalSetup()
   }, [configLoading])
-
-  useEffect(() => {
-    if (auth) {
-      setHashKey(null)
-    } else if (hashKey) {
-      setHashKey(hashKey)
-    }
-  }, [hashKey, auth])
 
   return settings.isCancellation ? (
     <CancellationComponent

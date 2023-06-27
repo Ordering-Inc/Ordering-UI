@@ -1,6 +1,7 @@
 import React from 'react'
-import { useLanguage, PurchaseGiftCard as PurchaseGiftCardController } from 'ordering-components'
+import { useLanguage, useUtils, PurchaseGiftCard as PurchaseGiftCardController } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
+import { useTheme } from 'styled-components'
 import { Button } from '../../../styles/Buttons'
 import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
 import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
@@ -12,7 +13,9 @@ import {
   GiftCardsWrapper,
   GiftCardItem,
   IconControl,
-  ActionButtonContainer
+  ActionButtonContainer,
+  CardImage,
+  CardImageStyled
 } from './styles'
 
 const PurchaseGiftCardUI = (props) => {
@@ -22,7 +25,10 @@ const PurchaseGiftCardUI = (props) => {
     setSelectedProduct,
     handleAccept
   } = props
+
+  const theme = useTheme()
   const [, t] = useLanguage()
+  const [{ optimizeImage }] = useUtils()
 
   return (
     <Container>
@@ -33,7 +39,13 @@ const PurchaseGiftCardUI = (props) => {
           {productsListState.loading && (
             [...Array(5).keys()].map(i => (
               <GiftCardItem key={i}>
-                <Skeleton width={150} />
+                <IconControl>
+                  <Skeleton width={16} height={16} />
+                </IconControl>
+                <CardImageStyled>
+                  <Skeleton width={38} height={38} />
+                </CardImageStyled>
+                <Skeleton width={100} />
               </GiftCardItem>
             ))
           )}
@@ -49,6 +61,9 @@ const PurchaseGiftCardUI = (props) => {
                   <MdRadioButtonUnchecked disabled />
                 )}
               </IconControl>
+              <CardImage
+                bgimage={optimizeImage(product?.image || theme?.images?.dummies?.product, 'h_86,c_limit')}
+              />
               <span>{product.name}</span>
             </GiftCardItem>
           ))}
