@@ -32,18 +32,24 @@ import { LanguageSelector } from '../LanguageSelector'
 import { CartContent } from '../CartContent'
 import { SidebarMenu } from '../SidebarMenu'
 import { HeaderOption } from '../HeaderOption'
+import { LoginForm } from '../../themes/five/src/components/LoginForm'
+import { SignUpForm } from '../../themes/five/src/components/SignUpForm'
+import { ForgotPasswordForm } from '../../themes/five/src/components/ForgotPasswordForm'
+
 export const Header = (props) => {
   const {
     isHome,
     location,
     isShowOrderOptions,
     isHideSignup,
-    isCustomerMode
+    isCustomerMode,
+    notificationState,
+    useModalMode
   } = props
   const { pathname } = useLocation()
   const [events] = useEvent()
   const [, t] = useLanguage()
-  const [{ auth }] = useSession()
+  const [{ auth }, { login }] = useSession()
   const [orderState, { refreshOrderOptions }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
@@ -54,6 +60,9 @@ export const Header = (props) => {
   const [customerModalOpen, setCustomerModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [authModalOpen, setAuthModalOpen] = useState(false)
+  const [modalPageToShow, setModalPageToShow] = useState(null)
+
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
   const windowSize = useWindowSize()
   const onlineStatus = useOnlineStatus()
@@ -99,6 +108,39 @@ export const Header = (props) => {
       refreshOrderOptions()
     }
   }
+
+  const handleCustomModalClick = (e, { page }) => {
+    e.preventDefault()
+    setModalPageToShow(page)
+  }
+
+  const closeAuthModal = () => {
+    setAuthModalOpen(false)
+    setModalPageToShow(null)
+  }
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+  }
+
+  const handleSuccessLogin = (user) => {
+    if (user) {
+      closeAuthModal()
+    }
+  }
+
+  const handleOpenLoginSignUp = (index) => {
+    if (isCustomerMode) {
+      events.emit('go_to_page', { page: 'home' })
+    } else {
+      setModalPageToShow(index)
+      setAuthModalOpen(true)
+    }
+  }
+
   useEffect(() => {
     if (isCustomerMode) {
       setCustomerModalOpen(false)
@@ -171,9 +213,9 @@ export const Header = (props) => {
                 {
                   !auth && windowSize.width > 768 && (
                     <>
-                      <MenuLink onClick={() => handleGoToPage({ page: 'signin' })} name='signin'>{t(theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</MenuLink>
+                      <MenuLink onClick={() => useModalMode ? handleOpenLoginSignUp('login') : handleGoToPage({ page: 'signin' })} name='signin'>{t(theme?.defaultLanguages?.SIGN_IN || 'Sign in')}</MenuLink>
                       {!isHideSignup && (
-                        <MenuLink onClick={() => handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t(theme?.defaultLanguages?.SIGN_UP || 'Join now')}</MenuLink>
+                        <MenuLink onClick={() => useModalMode ? handleOpenLoginSignUp('signup') : handleGoToPage({ page: 'signup' })} highlight={1} name='signup'>{t(theme?.defaultLanguages?.SIGN_UP || 'Join now')}</MenuLink>
                       )}
                     </>
                   )
@@ -286,6 +328,72 @@ export const Header = (props) => {
                 </>
               )}
             </UserEdit>
+          </Modal>
+        )}
+        {authModalOpen && !auth && (
+          <Modal
+            open={authModalOpen}
+            onRemove={() => closeAuthModal()}
+            onClose={() => closeAuthModal()}
+            width='50%'
+            authModal
+            closeOnBackdrop
+          >
+            {modalPageToShow === 'login' && (
+              <LoginForm
+                notificationState={notificationState}
+                handleSuccessLogin={handleSuccessLogin}
+                elementLinkToSignup={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'signup' })
+                    } href='#'
+                  >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
+                  </a>
+                }
+                elementLinkToForgotPassword={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+                    } href='#'
+                  >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+                  </a>
+                }
+                useLoginByCellphone
+                isPopup
+              />
+            )}
+            {modalPageToShow === 'signup' && (
+              <SignUpForm
+                notificationState={notificationState}
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                  </a>
+                }
+                useLoginByCellphone
+                useChekoutFileds
+                handleSuccessSignup={handleSuccessSignup}
+                isPopup
+                closeModal={() => closeAuthModal()}
+              />
+            )}
+            {modalPageToShow === 'forgotpassword' && (
+              <ForgotPasswordForm
+                elementLinkToLogin={
+                  <a
+                    onClick={
+                      (e) => handleCustomModalClick(e, { page: 'login' })
+                    } href='#'
+                  >{t('LOGIN', theme?.defaultLanguages?.LOGIN || 'Login')}
+                  </a>
+                }
+                isPopup
+              />
+            )}
           </Modal>
         )}
         <Confirm
