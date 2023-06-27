@@ -228,7 +228,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     saveCustomerUser: saveCustomerUser,
     fieldsNotValid: props.fieldsNotValid,
     useChekoutFileds: true,
-    isCustomerMode: true
+    isCustomerMode: true,
+    isPopup: true
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.customer,
     width: "80%",

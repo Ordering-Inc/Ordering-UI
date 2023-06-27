@@ -113,14 +113,18 @@ var OrderProgressUI = function OrderProgressUI(props) {
   }))))))));
 };
 var OrderProgress = function OrderProgress(props) {
+  var propsToFetchBusiness = ['name', 'logo', 'slug', 'id'];
+  var propsToFetch = ['cart', 'business', 'status', 'id', 'uuid', 'cart_group_id', 'business_id', 'delivery_datetime', 'delivery_datetime_utc', 'total', 'summary'];
   var orderProgressProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrderProgressUI,
     orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23],
     useDefualtSessionManager: true,
     noGiftCardOrders: true,
+    propsToFetchBusiness: propsToFetchBusiness,
+    propsToFetch: propsToFetch,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 10,
+      pageSize: props.isCustomerMode ? 1 : 10,
       controlType: 'infinity'
     }
   });

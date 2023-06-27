@@ -42,5 +42,5 @@ var TitleContainer = _styledComponents.default.div(_templateObject9 || (_templat
 exports.TitleContainer = TitleContainer;
 var CountryFlag = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin-right: 5px;\n  .PhoneInputCountryIcon {\n    width: 25px;\n  }\n  .PhoneInputInput {\n    display: none;\n  }\n  .PhoneInputCountrySelect {\n    display: none;\n  }\n"])));
 exports.CountryFlag = CountryFlag;
-var PhoneContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  height: 30px;\n"])));
+var PhoneContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  height: 30px;\n  p {\n    margin-bottom: 0;\n  }\n"])));
 exports.PhoneContainer = PhoneContainer;
