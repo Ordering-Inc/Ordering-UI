@@ -707,10 +707,17 @@ export const calendarLanguages = {
 }
 
 export const getCateringValues = (cateringTypeString, configs) => {
-  const splitCateringValue = (configName) => Object.values(configs || {})
-    ?.find(config => config?.key === configName)
-    ?.value?.split('|')
-    ?.find(val => val.includes(cateringTypeString))?.split(',')[1]
+  let splitCateringValue
+  if (configs?.preorder_slot_interval) {
+    splitCateringValue = (configName) => configs[configName]
+      ?.value?.split('|')
+      ?.find(val => val.includes(cateringTypeString))?.split(',')[1]
+  } else {
+    splitCateringValue = (configName) => Object.values(configs || {})
+      ?.find(config => config?.key === configName)
+      ?.value?.split('|')
+      ?.find(val => val.includes(cateringTypeString))?.split(',')[1]
+  }
   const preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'))
   const preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'))
   const preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'))
