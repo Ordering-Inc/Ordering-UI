@@ -72,6 +72,7 @@ import { ProductIngredient } from './src/components/ProductIngredient'
 import { PhoneAutocomplete } from './src/components/PhoneAutocomplete'
 import { ProductOption } from './src/components/ProductOption'
 import { ProductOptionSubOption } from './src/components/ProductOptionSubOption'
+import { ProfessionalBusinessFilter } from './src/components/ProfessionalBusinessFilter'
 import { ProfileOptions } from './src/components/UserProfileForm/ProfileOptions'
 import { Promotions } from './src/components/Promotions'
 import { ProfessionalInfo } from './src/components/ProfessionalInfo'
@@ -204,6 +205,7 @@ export {
   ProductOption,
   ProfileOptions,
   ProductOptionSubOption,
+  ProfessionalBusinessFilter,
   Promotions,
   ProfessionalInfo,
   PhoneAutocomplete,
