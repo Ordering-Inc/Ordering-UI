@@ -1133,14 +1133,24 @@ var calendarLanguages = {
 };
 exports.calendarLanguages = calendarLanguages;
 var getCateringValues = function getCateringValues(cateringTypeString, configs) {
-  var splitCateringValue = function splitCateringValue(configName) {
-    var _Object$values, _Object$values$find, _Object$values$find$v, _Object$values$find$v2, _Object$values$find$v3;
-    return (_Object$values = Object.values(configs || {})) === null || _Object$values === void 0 ? void 0 : (_Object$values$find = _Object$values.find(function (config) {
-      return (config === null || config === void 0 ? void 0 : config.key) === configName;
-    })) === null || _Object$values$find === void 0 ? void 0 : (_Object$values$find$v = _Object$values$find.value) === null || _Object$values$find$v === void 0 ? void 0 : (_Object$values$find$v2 = _Object$values$find$v.split('|')) === null || _Object$values$find$v2 === void 0 ? void 0 : (_Object$values$find$v3 = _Object$values$find$v2.find(function (val) {
-      return val.includes(cateringTypeString);
-    })) === null || _Object$values$find$v3 === void 0 ? void 0 : _Object$values$find$v3.split(',')[1];
-  };
+  var splitCateringValue;
+  if (configs !== null && configs !== void 0 && configs.preorder_slot_interval) {
+    splitCateringValue = function splitCateringValue(configName) {
+      var _configs$configName, _configs$configName$v, _configs$configName$v2, _configs$configName$v3;
+      return (_configs$configName = configs[configName]) === null || _configs$configName === void 0 ? void 0 : (_configs$configName$v = _configs$configName.value) === null || _configs$configName$v === void 0 ? void 0 : (_configs$configName$v2 = _configs$configName$v.split('|')) === null || _configs$configName$v2 === void 0 ? void 0 : (_configs$configName$v3 = _configs$configName$v2.find(function (val) {
+        return val.includes(cateringTypeString);
+      })) === null || _configs$configName$v3 === void 0 ? void 0 : _configs$configName$v3.split(',')[1];
+    };
+  } else {
+    splitCateringValue = function splitCateringValue(configName) {
+      var _Object$values, _Object$values$find, _Object$values$find$v, _Object$values$find$v2, _Object$values$find$v3;
+      return (_Object$values = Object.values(configs || {})) === null || _Object$values === void 0 ? void 0 : (_Object$values$find = _Object$values.find(function (config) {
+        return (config === null || config === void 0 ? void 0 : config.key) === configName;
+      })) === null || _Object$values$find === void 0 ? void 0 : (_Object$values$find$v = _Object$values$find.value) === null || _Object$values$find$v === void 0 ? void 0 : (_Object$values$find$v2 = _Object$values$find$v.split('|')) === null || _Object$values$find$v2 === void 0 ? void 0 : (_Object$values$find$v3 = _Object$values$find$v2.find(function (val) {
+        return val.includes(cateringTypeString);
+      })) === null || _Object$values$find$v3 === void 0 ? void 0 : _Object$values$find$v3.split(',')[1];
+    };
+  }
   var preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'));
   var preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'));
   var preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'));
