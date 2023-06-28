@@ -171,8 +171,8 @@ export const App = () => {
     }
   }
 
-  const websiteThemeType = themeUpdated?.theme?.my_products?.components?.website_theme?.components?.type
-  const websiteThemeBusinessSlug = themeUpdated?.theme?.my_products?.components?.website_theme?.components?.business_slug
+  const websiteThemeType = themeUpdated?.my_products?.components?.website_theme?.components?.type
+  const websiteThemeBusinessSlug = themeUpdated?.my_products?.components?.website_theme?.components?.business_slug
   const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
 
   const businessesSlug = {
@@ -185,21 +185,21 @@ export const App = () => {
     businessSlug: businessesSlug[isKioskApp ? 'kiosk' : 'marketplace']
   }
 
-  const signUpBusinesslayout = themeUpdated?.theme?.business_signup?.components?.layout?.type === 'old'
+  const signUpBusinesslayout = themeUpdated?.business_signup?.components?.layout?.type === 'old'
     ? 'old'
     : 'new'
 
-  const signUpDriverlayout = themeUpdated?.theme?.driver_signup?.components?.layout?.type === 'old'
+  const signUpDriverlayout = themeUpdated?.driver_signup?.components?.layout?.type === 'old'
     ? 'old'
     : 'new'
 
   const HeaderComponent =
     isKioskApp ? HeaderKiosk
-      : themeUpdated?.theme?.header?.components?.layout?.type === 'old'
+      : themeUpdated?.header?.components?.layout?.type === 'old'
         ? HeaderOld
-        : themeUpdated?.theme?.header?.components?.layout?.type === 'red'
+        : themeUpdated?.header?.components?.layout?.type === 'red'
           ? HeaderRed
-          : themeUpdated?.theme?.header?.components?.layout?.type === 'starbucks'
+          : themeUpdated?.header?.components?.layout?.type === 'starbucks'
             ? HeaderStarbucks
             : Header
 
@@ -210,7 +210,7 @@ export const App = () => {
   const isEmailVerifyRequired = auth && configs?.verification_email_required?.value === '1' && !user?.email_verified
   const isPhoneVerifyRequired = auth && configs?.verification_phone_required?.value === '1' && !user?.phone_verified
   const isUserVerifyRequired = (isEmailVerifyRequired || isPhoneVerifyRequired) && !isKioskApp
-  const isHideFooter = themeUpdated?.theme?.footer?.hidden
+  const isHideFooter = themeUpdated?.footer?.hidden
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const isFooterPage = location.pathname === '/pages/footer' || isKioskApp || isHideFooter
