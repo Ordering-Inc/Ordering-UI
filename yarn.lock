@@ -4536,9 +4536,9 @@ camelize@^1.0.0:
   integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
 
 caniuse-lite@^1.0.30001503:
-  version "1.0.30001508"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001508.tgz#4461bbc895c692a96da399639cc1e146e7302a33"
-  integrity sha512-sdQZOJdmt3GJs1UMNpCCCyeuS2IEGLXnHyAo9yIO5JJDjbjoVRij4M1qep6P6gFpptD1PqIYgzM+gwJbOi92mw==
+  version "1.0.30001509"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001509.tgz#2b7ad5265392d6d2de25cd8776d1ab3899570d14"
+  integrity sha512-2uDDk+TRiTX5hMcUYT/7CSyzMZxjfGu0vAUjS2g0LSD8UoXOv0LtpH4LxGMemsiPq6LCVIUjNwVM0erkOkGCDA==
 
 canvg@^3.0.6:
   version "3.0.10"
@@ -8261,10 +8261,10 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-libphonenumber-js@^1.10.30, libphonenumber-js@^1.9.17, libphonenumber-js@^1.9.4:
-  version "1.10.36"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.36.tgz#ec74008ffbc488d7ad9ebd722b2773292d568033"
-  integrity sha512-NCPWES1poiS4NSzIS49mxHM5hCkSWov8wFICRKfL9narzimqAXlnAgNloHCt0BukZHbWt8TIStCdzLy7LXBYpQ==
+libphonenumber-js@^1.10.37, libphonenumber-js@^1.9.17, libphonenumber-js@^1.9.4:
+  version "1.10.37"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.37.tgz#185264130c9375f17d0c487a288223294579929c"
+  integrity sha512-Z10PCaOCiAxbUxLyR31DNeeNugSVP6iv/m7UrSKS5JHziEMApJtgku4e9Q69pzzSC9LnQiM09sqsGf2ticZnMw==
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
@@ -10196,14 +10196,14 @@ react-otp-input@^2.3.0:
   integrity sha512-AIgl7u4sS9BTNCxX1xlaS5fPWay/Zml8Ho5LszXZKXrH1C/TiFsTQGmtl13UecQYO3mSF3HUzG2rrDf0sjEFmg==
 
 react-phone-number-input@^3.1.6:
-  version "3.2.23"
-  resolved "https://registry.yarnpkg.com/react-phone-number-input/-/react-phone-number-input-3.2.23.tgz#e8c02587bb80804c4044255875c2ec326ee82370"
-  integrity sha512-xhYD+8XFlU9ICEM2VeQAbAulGHAsk2Rrnt7a3/c7kls+g3HLcwo1ox7DCw/lWZOCq5DJwM79oTSMMj04iuqb3A==
+  version "3.2.24"
+  resolved "https://registry.yarnpkg.com/react-phone-number-input/-/react-phone-number-input-3.2.24.tgz#bb66cf7a975cc8cc3345b22684a405115c6bb10a"
+  integrity sha512-YbKOhghRUopz9khjp3KvvFOXnGpVoW5vUsHKWVJ1ZOsXrg2s86C9Jdujj6r/vTwOpkrEyACb//0BcOn219FcdQ==
   dependencies:
     classnames "^2.3.1"
     country-flag-icons "^1.5.4"
     input-format "^0.3.8"
-    libphonenumber-js "^1.10.30"
+    libphonenumber-js "^1.10.37"
     prop-types "^15.8.1"
 
 react-popper@^2.2.3, react-popper@^2.3.0:
