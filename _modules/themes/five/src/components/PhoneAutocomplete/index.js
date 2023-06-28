@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _theme$images, _theme$images$general, _orderState$options2, _orderState$options2$, _orderState$options4, _orderState$options4$, _orderState$options5, _orderState$options5$, _customerState$result, _customerState$result2;
+  var _customersPhones$user2, _theme$images, _theme$images$general, _orderState$options2, _orderState$options2$, _orderState$options4, _orderState$options4$, _orderState$options5, _orderState$options5$, _customerState$result, _customerState$result2;
   var phone = props.phone,
     customerState = props.customerState,
     customersPhones = props.customersPhones,
@@ -47,7 +47,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onChangeNumber = props.onChangeNumber,
     setCustomerState = props.setCustomerState,
     countryCallingCode = props.countryCallingCode,
-    onRedirectPage = props.onRedirectPage;
+    onRedirectPage = props.onRedirectPage,
+    urlPhone = props.urlPhone;
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
@@ -65,7 +66,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
-  var _useState3 = (0, _react.useState)(''),
+  var _useState3 = (0, _react.useState)(urlPhone !== null && urlPhone !== void 0 ? urlPhone : ''),
     _useState4 = _slicedToArray(_useState3, 2),
     inputValue = _useState4[0],
     setInputValue = _useState4[1];
@@ -152,9 +153,20 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       setCustomerState(_objectSpread(_objectSpread({}, customerState), {}, {
         result: user
       }));
-      setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+      setOpenModal({
+        signup: false,
         customer: true
+      });
+    } else {
+      setCustomerState(_objectSpread(_objectSpread({}, customerState), {}, {
+        result: {
+          error: false
+        }
       }));
+      setOpenModal({
+        customer: false,
+        signup: true
+      });
     }
   };
   var createNewUser = function createNewUser() {
@@ -171,10 +183,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     }
   };
   var handleCloseAddressList = function handleCloseAddressList() {
-    setOpenModal({
-      openModal: openModal,
+    setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
       customer: false
-    });
+    }));
     setCustomerState(_objectSpread(_objectSpread({}, customerState), {}, {
       result: {
         error: false
@@ -188,6 +199,16 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     obj.label = "".concat(user !== null && user !== void 0 && user.country_phone_code ? "(".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, ")") : '', " ").concat(user !== null && user !== void 0 && user.phone && !(user !== null && user !== void 0 && user.cellphone) ? "".concat(user === null || user === void 0 ? void 0 : user.phone) : '', " ").concat(user !== null && user !== void 0 && user.cellphone ? "".concat(user.cellphone) : '', " - {").concat(user.name, "}");
     return obj;
   }) || [];
+  (0, _react.useEffect)(function () {
+    if (!urlPhone) return;
+    onInputChange(urlPhone, {
+      action: 'url'
+    });
+    onChange({
+      value: urlPhone,
+      label: urlPhone
+    });
+  }, [urlPhone, customersPhones === null || customersPhones === void 0 ? void 0 : (_customersPhones$user2 = customersPhones.users) === null || _customersPhones$user2 === void 0 ? void 0 : _customersPhones$user2.length]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME_CALLCENTER', 'Start First by adding the customers\' phone number')), !userCustomer && /*#__PURE__*/_react.default.createElement(_styles.SelectContainer, null, /*#__PURE__*/_react.default.createElement(_MdcCellphoneAndroid.default, {
@@ -218,10 +239,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     open: openModal.signup,
     width: "80%",
     onClose: function onClose() {
-      return setOpenModal({
-        openModal: openModal,
+      return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         signup: false
-      });
+      }));
     }
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
     externalPhoneNumber: "".concat(countryCallingCode, " ").concat((optSelected === null || optSelected === void 0 ? void 0 : optSelected.value) || phone),
@@ -253,7 +273,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
     changeOrderAddressWithDefault: true,
     userCustomerSetup: _objectSpread(_objectSpread({}, customerState === null || customerState === void 0 ? void 0 : customerState.result), {}, {
-      phone: phone
+      phone: phone,
+      urlPhone: urlPhone
     }),
     isEnableContinueButton: true,
     isCustomerMode: true,
