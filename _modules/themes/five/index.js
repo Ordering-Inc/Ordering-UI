@@ -531,6 +531,12 @@ Object.defineProperty(exports, "ProductShare", {
     return _ProductShare.ProductShare;
   }
 });
+Object.defineProperty(exports, "ProfessionalBusinessFilter", {
+  enumerable: true,
+  get: function get() {
+    return _ProfessionalBusinessFilter.ProfessionalBusinessFilter;
+  }
+});
 Object.defineProperty(exports, "ProfessionalFilter", {
   enumerable: true,
   get: function get() {
@@ -845,6 +851,7 @@ var _ProductIngredient = require("./src/components/ProductIngredient");
 var _PhoneAutocomplete = require("./src/components/PhoneAutocomplete");
 var _ProductOption = require("./src/components/ProductOption");
 var _ProductOptionSubOption = require("./src/components/ProductOptionSubOption");
+var _ProfessionalBusinessFilter = require("./src/components/ProfessionalBusinessFilter");
 var _ProfileOptions = require("./src/components/UserProfileForm/ProfileOptions");
 var _Promotions = require("./src/components/Promotions");
 var _ProfessionalInfo = require("./src/components/ProfessionalInfo");
