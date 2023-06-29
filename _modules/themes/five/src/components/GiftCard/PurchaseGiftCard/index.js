@@ -8,6 +8,7 @@ exports.PurchaseGiftCard = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _orderingComponents = require("ordering-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+var _styledComponents = require("styled-components");
 var _Buttons = require("../../../styles/Buttons");
 var _RiRadioButtonFill = _interopRequireDefault(require("@meronex/icons/ri/RiRadioButtonFill"));
 var _MdRadioButtonUnchecked = _interopRequireDefault(require("@meronex/icons/md/MdRadioButtonUnchecked"));
@@ -34,16 +35,27 @@ var PurchaseGiftCardUI = function PurchaseGiftCardUI(props) {
     selectedProduct = props.selectedProduct,
     setSelectedProduct = props.setSelectedProduct,
     handleAccept = props.handleAccept;
+  var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    optimizeImage = _useUtils2[0].optimizeImage;
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PURCHASE_GIFT_CARD', 'Purchase gift card')), /*#__PURE__*/_react.default.createElement(_styles.GiftCardsListContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('SELECT_ONE_OPTION', 'Select one option')), /*#__PURE__*/_react.default.createElement(_styles.GiftCardsWrapper, null, productsListState.loading && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.GiftCardItem, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 150
+    }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 16,
+      height: 16
+    })), /*#__PURE__*/_react.default.createElement(_styles.CardImageStyled, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 38,
+      height: 38
+    })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100
     }));
   }), productsListState.products.map(function (product) {
+    var _theme$images, _theme$images$dummies;
     return /*#__PURE__*/_react.default.createElement(_styles.GiftCardItem, {
       key: product.id,
       onClick: function onClick() {
@@ -51,7 +63,9 @@ var PurchaseGiftCardUI = function PurchaseGiftCardUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (selectedProduct === null || selectedProduct === void 0 ? void 0 : selectedProduct.id) === product.id ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
       disabled: true
-    })), /*#__PURE__*/_react.default.createElement("span", null, product.name));
+    })), /*#__PURE__*/_react.default.createElement(_styles.CardImage, {
+      bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.image) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_86,c_limit')
+    }), /*#__PURE__*/_react.default.createElement("span", null, product.name));
   }), !productsListState.loading && productsListState.products.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, null))), /*#__PURE__*/_react.default.createElement(_styles.ActionButtonContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "button",
     color: "primary",
