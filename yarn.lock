@@ -5709,9 +5709,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.431:
-  version "1.4.443"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.443.tgz#fa7e866b2ba3684259c8d373ab22ddd0e31d1a83"
-  integrity sha512-QG+DKVaD7OkcCJ/0x/IHdVEcwU7cak9Vr9dXCNp7G9ojBZQWtwtRV77CBOrU49jsKygedFcNc/IHUrGljKV2Gw==
+  version "1.4.444"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.444.tgz#a05bf992e361e8d4c55d43fab354af6bc5758fdb"
+  integrity sha512-/AjkL4syRvOpowXWy3N4OHmVbFdWQpfSKHh0sCVYipDeEAtMce3rLjMJi/27Ia9jNIbw6P1JuPN32pSWybXXEQ==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
