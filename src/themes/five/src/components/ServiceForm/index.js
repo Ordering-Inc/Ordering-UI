@@ -319,73 +319,74 @@ const ServiceFormUI = (props) => {
               <p>{product?.description}</p>
             </HeaderInfoWrapper>
             <Divider />
-            <ProfessionalInfoWrapper>
-              <SectionHeader>
-                <h2>{t('PROFESSIONALS', 'Professionals')}</h2>
-                <span>{t('REQUIRED', 'Required')}</span>
-              </SectionHeader>
-              <ProfessionalSelectWrapper ref={dropDownRef}>
-                <SelectedItem onClick={() => setIsDropDown(prev => !prev)}>
-                  {currentProfessional ? (
-                    <InfoWrapper>
-                      {currentProfessional?.photo ? (
-                        <ProfessionalPhoto
-                          bgimage={currentProfessional?.photo}
-                        />
-                      ) : <FaUserAlt />}
-                      <NameWrapper>
-                        <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
-                        <StatusInfo available={!isBusyTime(currentProfessional, dateSelected)}>
-                          {isBusyTime(currentProfessional, dateSelected) ? (
-                            <>
-                              <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
-                            </>
-                          ) : (
-                            <span className='status'>{t('AVAILABLE', 'Available')}</span>
-                          )}
-                        </StatusInfo>
-                      </NameWrapper>
-                    </InfoWrapper>
-                  ) : (
-                    <p>{t('SELECT_PROFESSIONAL', 'Select professional')}</p>
+            {!professionalSelected && (
+              <ProfessionalInfoWrapper>
+                <SectionHeader>
+                  <h2>{t('PROFESSIONALS', 'Professionals')}</h2>
+                  <span>{t('REQUIRED', 'Required')}</span>
+                </SectionHeader>
+                <ProfessionalSelectWrapper ref={dropDownRef}>
+                  <SelectedItem onClick={() => setIsDropDown(prev => !prev)}>
+                    {currentProfessional ? (
+                      <InfoWrapper>
+                        {currentProfessional?.photo ? (
+                          <ProfessionalPhoto
+                            bgimage={currentProfessional?.photo}
+                          />
+                        ) : <FaUserAlt />}
+                        <NameWrapper>
+                          <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
+                          <StatusInfo available={!isBusyTime(currentProfessional, dateSelected)}>
+                            {isBusyTime(currentProfessional, dateSelected) ? (
+                              <>
+                                <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                              </>
+                            ) : (
+                              <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                            )}
+                          </StatusInfo>
+                        </NameWrapper>
+                      </InfoWrapper>
+                    ) : (
+                      <p>{t('SELECT_PROFESSIONAL', 'Select professional')}</p>
+                    )}
+                    <ChevronDown />
+                  </SelectedItem>
+                  {isDropDown && (
+                    <DropDownWrapper>
+                      {professionalListState?.professionals?.map((professional) => (
+                        <SelectedItem
+                          key={professional?.id}
+                          isDropDown
+                          active={professional?.id === currentProfessional?.id}
+                          onClick={() => handleChangeProfessional(professional)}
+                        >
+                          <InfoWrapper>
+                            {professional?.photo ? (
+                              <ProfessionalPhoto
+                                bgimage={professional?.photo}
+                              />
+                            ) : <FaUserAlt />}
+                            <NameWrapper>
+                              <p>{professional?.name} {professional?.lastname}</p>
+                              <StatusInfo available={!isBusyTime(professional, dateSelected)}>
+                                {isBusyTime(professional, dateSelected) ? (
+                                  <>
+                                    <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                                  </>
+                                ) : (
+                                  <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                                )}
+                              </StatusInfo>
+                            </NameWrapper>
+                          </InfoWrapper>
+                        </SelectedItem>
+                      ))}
+                    </DropDownWrapper>
                   )}
-                  <ChevronDown />
-                </SelectedItem>
-                {isDropDown && (
-                  <DropDownWrapper>
-                    {professionalListState?.professionals?.map((professional) => (
-                      <SelectedItem
-                        key={professional?.id}
-                        isDropDown
-                        active={professional?.id === currentProfessional?.id}
-                        onClick={() => handleChangeProfessional(professional)}
-                      >
-                        <InfoWrapper>
-                          {professional?.photo ? (
-                            <ProfessionalPhoto
-                              bgimage={professional?.photo}
-                            />
-                          ) : <FaUserAlt />}
-                          <NameWrapper>
-                            <p>{professional?.name} {professional?.lastname}</p>
-                            <StatusInfo available={!isBusyTime(professional, dateSelected)}>
-                              {isBusyTime(professional, dateSelected) ? (
-                                <>
-                                  <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
-                                </>
-                              ) : (
-                                <span className='status'>{t('AVAILABLE', 'Available')}</span>
-                              )}
-                            </StatusInfo>
-                          </NameWrapper>
-                        </InfoWrapper>
-                      </SelectedItem>
-                    ))}
-                  </DropDownWrapper>
-                )}
-
-              </ProfessionalSelectWrapper>
-            </ProfessionalInfoWrapper>
+                </ProfessionalSelectWrapper>
+              </ProfessionalInfoWrapper>
+            )}
             <ScheduleWrapper>
               <SectionHeader>
                 <h2>{t('SCHEDULE', 'Schedule')}</h2>
