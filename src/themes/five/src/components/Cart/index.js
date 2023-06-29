@@ -168,7 +168,7 @@ const CartUI = (props) => {
 
   const handleClickCheckout = (uuid) => {
     const cartsAvailable = Object.values(orderState?.carts)?.filter(cart => cart?.valid && cart?.status !== 2)
-    if (cartsAvailable.length === 1 || !isMultiCheckout) {
+    if (cartsAvailable.length === 1 || !isMultiCheckout || !cart?.business_id) {
       events.emit('go_to_page', { page: 'checkout', params: { cartUuid: uuid } })
     } else {
       const groupKeys = {}
@@ -617,7 +617,7 @@ const CartUI = (props) => {
                 />
               </div>
             )}
-            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid && (!isMultiCheckout || isStore) && (
+            {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid && (!isMultiCheckout || isStore || !cart?.business_id) && (
               <CheckoutAction>
                 <p>{cart?.total >= 1 && parsePrice(cart?.total)}</p>
                 <Button
