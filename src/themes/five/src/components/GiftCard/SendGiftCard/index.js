@@ -46,11 +46,11 @@ const SendGiftCardUI = (props) => {
         />
       </FormController>
       <FormController>
-        <label>{t('FROM', 'From')}</label>
+        <label>{t('NAME', 'Name')}</label>
         <Input
           name='user_name'
           ref={register()}
-          placeholder={t('WRITE_YOUR_NAME', 'Write your name')}
+          placeholder={t('WRITE_A_NAME', 'Write a name')}
           autoComplete='off'
         />
       </FormController>
