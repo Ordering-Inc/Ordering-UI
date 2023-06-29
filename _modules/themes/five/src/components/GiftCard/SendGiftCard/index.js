@@ -64,10 +64,10 @@ var SendGiftCardUI = function SendGiftCardUI(props) {
       required: t('VALIDATION_ERROR_REQUIRED', 'To email is required').replace('_attribute_', t('EMAIL', 'EMail'))
     }),
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_styles.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('FROM', 'From')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "user_name",
     ref: register(),
-    placeholder: t('WRITE_YOUR_NAME', 'Write your name'),
+    placeholder: t('WRITE_A_NAME', 'Write a name'),
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "title",

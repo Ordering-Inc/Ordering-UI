@@ -207,7 +207,7 @@ var CartUI = function CartUI(props) {
     var cartsAvailable = (_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
       return (cart === null || cart === void 0 ? void 0 : cart.valid) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2;
     });
-    if (cartsAvailable.length === 1 || !isMultiCheckout) {
+    if (cartsAvailable.length === 1 || !isMultiCheckout || !(cart !== null && cart !== void 0 && cart.business_id)) {
       events.emit('go_to_page', {
         page: 'checkout',
         params: {
@@ -564,7 +564,7 @@ var CartUI = function CartUI(props) {
     cateringPreorder: true,
     isCart: true,
     business: cart === null || cart === void 0 ? void 0 : cart.business
-  }, cateringValues))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid) && (!isMultiCheckout || isStore) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, cateringValues))), (onClickCheckout || isForceOpenCart) && !isCheckout && (cart === null || cart === void 0 ? void 0 : cart.valid) && (!isMultiCheckout || isStore || !(cart !== null && cart !== void 0 && cart.business_id)) && /*#__PURE__*/_react.default.createElement(_styles.CheckoutAction, null, /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || subtotalWithTaxes < (cart === null || cart === void 0 ? void 0 : cart.minimum) || !(cart !== null && cart !== void 0 && cart.valid_address) ? 'secundary' : 'primary',
     onClick: function onClick() {
       return checkOutBtnClick(cart === null || cart === void 0 ? void 0 : cart.uuid);
