@@ -223,6 +223,9 @@ ${({ cateringPreorder }) => cateringPreorder ? css`
       }
     `
   }
+  ${({ isDisabled }) => isDisabled && css`
+    pointer-events: none;
+  `}
 `
 
 export const DateWrapper = styled.div``
