@@ -142,7 +142,6 @@ const CartUI = (props) => {
     }
     return acc = acc
   }, cart?.subtotal)
-  console.log('cart', cart)
   const clearAmount = (value) => parseFloat((Math.trunc(value * 100) / 100).toFixed(configs.format_number_decimal_length?.value ?? 2))
   const loyaltyRewardValue = clearAmount((cart?.subtotal + getIncludedTaxes()) * loyaltyRewardRate)
 

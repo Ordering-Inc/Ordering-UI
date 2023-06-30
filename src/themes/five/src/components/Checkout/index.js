@@ -99,7 +99,8 @@ const CheckoutUI = (props) => {
     handleStoreRedirect,
     onPlaceOrderClick,
     setPlaceSpotNumber,
-    placeSpotNumber
+    placeSpotNumber,
+    checkoutFieldsState
   } = props
 
   const theme = useTheme()
@@ -136,6 +137,7 @@ const CheckoutUI = (props) => {
   const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' &&
     (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp && !isCustomerMode
   const isMultiDriverTips = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
+  const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes', 'comments']
 
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
@@ -190,8 +192,7 @@ const CheckoutUI = (props) => {
       return
     }
 
-    if (!userErrors.length && (!requiredFields?.length ||
-      (allowedGuest && (paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery')))) {
+    if (!userErrors.length && !requiredFields?.length) {
       const body = {}
       if (behalfName) {
         body.on_behalf_of = behalfName
@@ -227,10 +228,19 @@ const CheckoutUI = (props) => {
     setIsUserDetailsEdit(false)
   }
 
+  const checkGuestValidationFields = () => {
+    const userSelected = isCustomerMode ? customerState.user : user
+    const _requiredFields = checkoutFieldsState?.fields
+      .filter(field => (field?.order_type_id === options?.type) && field?.enabled && field?.required &&
+        !notFields.includes(field?.validation_field?.code) &&
+        userSelected && !userSelected[field?.validation_field?.code])
+      .map(item => item?.validation_field?.code)
+    setRequiredFields(_requiredFields)
+  }
+
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
-    const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes', 'comments']
     const userSelected = isCustomerMode ? customerState.user : user
     const _requiredFields = []
 
@@ -293,6 +303,11 @@ const CheckoutUI = (props) => {
       checkValidationFields()
     }
   }, [validationFields, user, customerState])
+
+  useEffect(() => {
+    if (checkoutFieldsState?.loading || !user?.guest_id || customerState.loading || userLoading) return
+    checkGuestValidationFields()
+  }, [user, checkoutFieldsState, customerState])
 
   useEffect(() => {
     if (errors) {
@@ -542,24 +557,24 @@ const CheckoutUI = (props) => {
 
         {
           !!(!isMultiDriverTips && driverTipsField) &&
-          <>
-            <DriverTipContainer>
-              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-              <DriverTips
-                businessId={cart?.business_id}
-                driverTipsOptions={driverTipsOptions}
-                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                  ? cart?.driver_tip
-                  : cart?.driver_tip_rate}
-                cart={cart}
-                useOrderContext
-              />
-            </DriverTipContainer>
-            <DriverTipDivider />
-          </>
+            <>
+              <DriverTipContainer>
+                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                <DriverTips
+                  businessId={cart?.business_id}
+                  driverTipsOptions={driverTipsOptions}
+                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate}
+                  cart={cart}
+                  useOrderContext
+                />
+              </DriverTipContainer>
+              <DriverTipDivider />
+            </>
         }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
