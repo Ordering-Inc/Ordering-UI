@@ -396,7 +396,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     })));
-  }), showInputBirthday && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('BIRTHDATE', 'Birthdate')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), (!(user !== null && user !== void 0 && user.guest_id) && showInputBirthday || (user === null || user === void 0 ? void 0 : user.guest_id) && requiredFields.includes('birthdate')) && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('BIRTHDATE', 'Birthdate')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     borderBottom: true,
     className: "form",
     value: birthdate ? (0, _moment.default)(birthdate).format('YYYY/MM/DD') : '',
@@ -464,24 +464,12 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     color: "primary",
     type: "submit",
     disabled: formState.loading
-  }, formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')), requiredFields && !(userSession !== null && userSession !== void 0 && userSession.guest_id) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')), requiredFields && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "form-btn",
     color: "primary",
     type: "submit",
     disabled: formState.loading
-  }, formState.loading ? t('UPDATING', 'Updating...') : t('CONTINUE', 'Continue'))), requiredFields && isCheckout && (userSession === null || userSession === void 0 ? void 0 : userSession.guest_id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    id: "form-btn",
-    color: "primary",
-    type: "button",
-    onClick: function onClick() {
-      return setModalIsOpen(true);
-    },
-    disabled: formState.loading
-  }, formState.loading ? t('UPDATING', 'Updating...') : t('SIGN_UP_AND_PLACE_ORDER', 'Sign up and place order')), isAllowGuest && /*#__PURE__*/_react.default.createElement(_styles.TextLinkWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
-    onClick: function onClick() {
-      return handlePlaceOrderAsGuest();
-    }
-  }, t('PLACE_ORDER_AS_GUEST', 'Place order as guest'))))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
+  }, formState.loading ? t('UPDATING', 'Updating...') : t('CONTINUE', 'Continue')))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i
     });

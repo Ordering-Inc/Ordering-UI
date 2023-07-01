@@ -177,7 +177,6 @@ var CartUI = function CartUI(props) {
     }
     return acc = acc;
   }, cart === null || cart === void 0 ? void 0 : cart.subtotal);
-  console.log('cart', cart);
   var clearAmount = function clearAmount(value) {
     var _configs$format_numbe, _configs$format_numbe2;
     return parseFloat((Math.trunc(value * 100) / 100).toFixed((_configs$format_numbe = (_configs$format_numbe2 = configs.format_number_decimal_length) === null || _configs$format_numbe2 === void 0 ? void 0 : _configs$format_numbe2.value) !== null && _configs$format_numbe !== void 0 ? _configs$format_numbe : 2));
