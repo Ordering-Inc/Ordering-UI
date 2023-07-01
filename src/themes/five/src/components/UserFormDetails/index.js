@@ -14,8 +14,7 @@ import {
   InputPhoneNumberWrapper,
   LanguageSelectorWrapper,
   SwitchWrapper,
-  NotificationsGroupSwitchWrapper,
-  TextLinkWrapper
+  NotificationsGroupSwitchWrapper
 } from './styles'
 
 import { Switch } from '../../../../../styles/Switch'
@@ -381,7 +380,7 @@ export const UserFormDetailsUI = (props) => {
                 </React.Fragment>
               )
             )}
-            {showInputBirthday && (
+            {((!user?.guest_id && showInputBirthday) || (user?.guest_id && requiredFields.includes('birthdate'))) && (
               <InputPhoneNumberWrapper>
                 <p>{t('BIRTHDATE', 'Birthdate')}</p>
                 <Input
@@ -498,7 +497,7 @@ export const UserFormDetailsUI = (props) => {
                   {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
                 </Button>
               )}
-              {requiredFields && !userSession?.guest_id && (
+              {requiredFields && (
                 <Button
                   id='form-btn'
                   color='primary'
@@ -509,26 +508,6 @@ export const UserFormDetailsUI = (props) => {
                 </Button>
               )}
             </ActionsForm>
-            {requiredFields && isCheckout && userSession?.guest_id && (
-              <>
-                <Button
-                  id='form-btn'
-                  color='primary'
-                  type='button'
-                  onClick={() => setModalIsOpen(true)}
-                  disabled={formState.loading}
-                >
-                  {formState.loading ? t('UPDATING', 'Updating...') : t('SIGN_UP_AND_PLACE_ORDER', 'Sign up and place order')}
-                </Button>
-                {isAllowGuest && (
-                  <TextLinkWrapper>
-                    <span onClick={() => handlePlaceOrderAsGuest()}>
-                      {t('PLACE_ORDER_AS_GUEST', 'Place order as guest')}
-                    </span>
-                  </TextLinkWrapper>
-                )}
-              </>
-            )}
           </>
         ) : (
           <SkeletonForm>
