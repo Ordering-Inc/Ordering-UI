@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { nanoid } from 'nanoid'
-import { useUtils, useLanguage, useSession, useConfig, ProductForm as ProductFormController, useOrder } from 'ordering-components'
+import { useUtils, useLanguage, useSession, useConfig, useOrder, ProductForm as ProductFormController } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
@@ -183,7 +183,7 @@ const ServiceFormUI = (props) => {
   }
 
   const handleClickOutside = (e) => {
-    if (dropDownRef?.current.contains(e.target)) return
+    if (dropDownRef?.current?.contains(e.target)) return
     setIsDropDown(false)
   }
 
@@ -483,9 +483,9 @@ const ServiceFormUI = (props) => {
                 <Button
                   onClick={() => handleAddProduct()}
                   color='primary'
-                  disabled={isBusyTime(currentProfessional, dateSelected)}
+                  disabled={isBusyTime(currentProfessional, dateSelected) || orderState?.loading}
                 >
-                  {t('BOOK', 'Book')}
+                  {orderState?.loading ? t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading') : t('BOOK', 'Book')}
                 </Button>
               )}
               {(!auth || isSoldOut || maxProductQuantity <= 0) && (
