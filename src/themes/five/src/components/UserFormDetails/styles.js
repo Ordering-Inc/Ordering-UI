@@ -208,19 +208,3 @@ export const SwitchWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
 `
-
-export const TextLinkWrapper = styled.span`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-  span {
-    font-size: 14px;
-    text-align: center;
-    cursor: pointer;
-    color: ${props => props.theme.colors.primary};
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`
