@@ -160,6 +160,7 @@ const ServiceFormUI = (props) => {
   }
 
   const isBusyTime = (professional, selectedMoment) => {
+    if (!professional?.schedule) return true
     if (!selectedMoment) return false
     const startDay = moment(selectedMoment).utc().format('d')
     const isStartScheduleEnabled = professional?.schedule?.[startDay]?.enabled
@@ -251,7 +252,7 @@ const ServiceFormUI = (props) => {
 
   useEffect(() => {
     if (selectDate === null || currentProfessional === null) return
-    const _times = getTimeList(selectDate, currentProfessional)
+    const _times = currentProfessional?.schedule ? getTimeList(selectDate, currentProfessional) : []
     setTimeList(_times)
   }, [selectDate, currentProfessional])
 
@@ -337,12 +338,18 @@ const ServiceFormUI = (props) => {
                         <NameWrapper>
                           <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
                           <StatusInfo available={!isBusyTime(currentProfessional, dateSelected)}>
-                            {isBusyTime(currentProfessional, dateSelected) ? (
+                            {currentProfessional?.schedule ? (
                               <>
-                                <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                                {isBusyTime(currentProfessional, dateSelected) ? (
+                                  <>
+                                    <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                                  </>
+                                ) : (
+                                  <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                                )}
                               </>
                             ) : (
-                              <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                              <span className='status'>{t('NOT_AVAILABLE', 'Not available')}</span>
                             )}
                           </StatusInfo>
                         </NameWrapper>
@@ -370,12 +377,18 @@ const ServiceFormUI = (props) => {
                             <NameWrapper>
                               <p>{professional?.name} {professional?.lastname}</p>
                               <StatusInfo available={!isBusyTime(professional, dateSelected)}>
-                                {isBusyTime(professional, dateSelected) ? (
+                                {professional?.schedule ? (
                                   <>
-                                    <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                                    {isBusyTime(professional, dateSelected) ? (
+                                      <>
+                                        <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                                      </>
+                                    ) : (
+                                      <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                                    )}
                                   </>
                                 ) : (
-                                  <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                                  <span className='status'>{t('NOT_AVAILABLE', 'Not available')}</span>
                                 )}
                               </StatusInfo>
                             </NameWrapper>
@@ -392,7 +405,7 @@ const ServiceFormUI = (props) => {
                 <h2>{t('SCHEDULE', 'Schedule')}</h2>
                 <span>{t('REQUIRED', 'Required')}</span>
               </SectionHeader>
-              {currentProfessional ? (
+              {currentProfessional?.schedule ? (
                 <OrderTimeWrapper>
                   <DateWrapper>
                     <MonthYearLayer>
