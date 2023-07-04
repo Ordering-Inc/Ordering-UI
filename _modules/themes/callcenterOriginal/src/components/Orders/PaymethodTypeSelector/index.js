@@ -47,7 +47,7 @@ var PaymethodTypeSelector = function PaymethodTypeSelector(props) {
         var _paymethod$gateway;
         return {
           value: paymethod.id,
-          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t(paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod.name))
+          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t(paymethod === null || paymethod === void 0 || (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod.name))
         };
       });
       var _iterator = _createForOfIteratorHelper(_paymthodsOption),

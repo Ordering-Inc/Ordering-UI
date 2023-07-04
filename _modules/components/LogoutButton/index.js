@@ -29,13 +29,13 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
     t = _useLanguage2[1];
   var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
   var handleLogOutClick = function handleLogOutClick() {
-    var _window, _window$gapi, _window$gapi$auth;
+    var _window;
     window.FB.getLoginStatus(function (response) {
       if (response.status === 'connected') {
         window.FB.logout();
       }
     });
-    var GoogleAuth = (_window = window) === null || _window === void 0 ? void 0 : (_window$gapi = _window.gapi) === null || _window$gapi === void 0 ? void 0 : (_window$gapi$auth = _window$gapi.auth2) === null || _window$gapi$auth === void 0 ? void 0 : _window$gapi$auth.getAuthInstance();
+    var GoogleAuth = (_window = window) === null || _window === void 0 || (_window = _window.gapi) === null || _window === void 0 || (_window = _window.auth2) === null || _window === void 0 ? void 0 : _window.getAuthInstance();
     if (GoogleAuth) {
       var signedIn = GoogleAuth.isSignedIn.get();
       if (signedIn) {

@@ -41,7 +41,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
   var isValidPhoneNumber = function isValidPhoneNumber(number) {
     var _configs$validation_p, _configs$validation_p2;
     if (!number) return;
-    if (!parseInt((_configs$validation_p = configs === null || configs === void 0 ? void 0 : (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10)) {
+    if (!parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10)) {
       return true;
     }
     var numberParser = (0, _libphonenumberJs.default)(number);
@@ -66,8 +66,8 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     disabled: disabled,
-    placeholder: t('PHONE_NUMBER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.PHONE_NUMBER) || 'Phone number'),
-    defaultCountry: configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.value,
+    placeholder: t('PHONE_NUMBER', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.PHONE_NUMBER) || 'Phone number'),
+    defaultCountry: configs === null || configs === void 0 || (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.value,
     value: value,
     displayInitialValueAsLocalNumber: true,
     onChange: function onChange(val) {

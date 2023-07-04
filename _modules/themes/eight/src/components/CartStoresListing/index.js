@@ -56,8 +56,8 @@ var CartStoresListingUI = function CartStoresListingUI(props) {
       className: "card",
       business: store,
       isSkeleton: changeStoreState.loading && businessIdSelect === store.id,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type,
-      disabledStoreBtn: ((_changeStoreState$res = changeStoreState === null || changeStoreState === void 0 ? void 0 : (_changeStoreState$res2 = changeStoreState.result) === null || _changeStoreState$res2 === void 0 ? void 0 : _changeStoreState$res2.business_id) !== null && _changeStoreState$res !== void 0 ? _changeStoreState$res : businessId) === store.id,
+      orderType: orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type,
+      disabledStoreBtn: ((_changeStoreState$res = changeStoreState === null || changeStoreState === void 0 || (_changeStoreState$res2 = changeStoreState.result) === null || _changeStoreState$res2 === void 0 ? void 0 : _changeStoreState$res2.business_id) !== null && _changeStoreState$res !== void 0 ? _changeStoreState$res : businessId) === store.id,
       handleCartStoreClick: handleCartStoreChange
     });
   }))), ((storesState === null || storesState === void 0 ? void 0 : storesState.loading) || !(storesState !== null && storesState !== void 0 && storesState.error) && !(storesState !== null && storesState !== void 0 && storesState.result)) && /*#__PURE__*/_react.default.createElement(_styles.ItemListing, null, _toConsumableArray(Array(4).keys()).map(function (i) {
@@ -67,9 +67,9 @@ var CartStoresListingUI = function CartStoresListingUI(props) {
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
+      orderType: orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
     });
-  })), !(storesState !== null && storesState !== void 0 && storesState.loading) && ((storesState === null || storesState === void 0 ? void 0 : storesState.error) || (storesState === null || storesState === void 0 ? void 0 : (_storesState$result2 = storesState.result) === null || _storesState$result2 === void 0 ? void 0 : _storesState$result2.length) === 0) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), !(storesState !== null && storesState !== void 0 && storesState.loading) && ((storesState === null || storesState === void 0 ? void 0 : storesState.error) || (storesState === null || storesState === void 0 || (_storesState$result2 = storesState.result) === null || _storesState$result2 === void 0 ? void 0 : _storesState$result2.length) === 0) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: storesState !== null && storesState !== void 0 && storesState.error ? t('ERROR_NOT_FOUND_CART_STORES', 'Sorry, an error has occurred') : t('NOT_FOUND_CART_STORES', 'No businesses to show at this time.')
   }));
 };

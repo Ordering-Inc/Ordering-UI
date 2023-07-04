@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RedHomeHero = function RedHomeHero(props) {
-  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$images9, _theme$images9$alsea, _theme$defaultLanguag, _orderState$options4, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _props$beforeElements, _props$beforeComponen, _theme$images9, _theme$defaultLanguag, _orderState$options4, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
   var onFindBusiness = props.onFindBusiness;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -52,14 +52,14 @@ var RedHomeHero = function RedHomeHero(props) {
     setModals = _useState2[1];
   var theme = (0, _styledComponents.useTheme)();
   var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
-  var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
+  var configTypes = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.order_types_allowed) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').map(function (value) {
     return Number(value);
   })) || [];
   var history = (0, _reactRouterDom.useHistory)();
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var handleFindBusinesses = function handleFindBusinesses() {
-    var _orderState$options, _orderState$options$a;
-    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
+    var _orderState$options;
+    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options = _orderState$options.address) !== null && _orderState$options !== void 0 && _orderState$options.location)) {
       setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: true
       }));
@@ -72,8 +72,8 @@ var RedHomeHero = function RedHomeHero(props) {
     onFindBusiness && onFindBusiness();
   };
   var handleAddressInput = function handleAddressInput() {
-    var _orderState$options2, _orderState$options2$;
-    if (auth && orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2$ = _orderState$options2.address) !== null && _orderState$options2$ !== void 0 && _orderState$options2$.location) {
+    var _orderState$options2;
+    if (auth && orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2 = _orderState$options2.address) !== null && _orderState$options2 !== void 0 && _orderState$options2.location) {
       setModals(_objectSpread(_objectSpread({}, modals), {}, {
         listOpen: true
       }));
@@ -102,8 +102,8 @@ var RedHomeHero = function RedHomeHero(props) {
     }));
   };
   (0, _react.useEffect)(function () {
-    var _orderState$options3, _orderState$options3$;
-    if (orderState !== null && orderState !== void 0 && (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && (_orderState$options3$ = _orderState$options3.address) !== null && _orderState$options3$ !== void 0 && _orderState$options3$.address && submited) {
+    var _orderState$options3;
+    if (orderState !== null && orderState !== void 0 && (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && (_orderState$options3 = _orderState$options3.address) !== null && _orderState$options3 !== void 0 && _orderState$options3.address && submited) {
       history.push('/search');
     }
   }, [orderState, submited]);
@@ -115,11 +115,11 @@ var RedHomeHero = function RedHomeHero(props) {
     setBgImage = _useState6[1];
   (0, _react.useEffect)(function () {
     if (curHr < 12) {
-      var _theme$images, _theme$images$alsea, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$alsea, _theme$images4, _theme$images4$genera;
-      windowSize.width > 480 ? setBgImage(((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$alsea = _theme$images.alsea) === null || _theme$images$alsea === void 0 ? void 0 : _theme$images$alsea.moringHomeBackDesktop) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.homeHero)) : setBgImage(((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$alsea = _theme$images3.alsea) === null || _theme$images3$alsea === void 0 ? void 0 : _theme$images3$alsea.moringHomeBackMobile) || ((_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$genera = _theme$images4.general) === null || _theme$images4$genera === void 0 ? void 0 : _theme$images4$genera.homeHero));
+      var _theme$images, _theme$images2, _theme$images3, _theme$images4;
+      windowSize.width > 480 ? setBgImage(((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.alsea) === null || _theme$images === void 0 ? void 0 : _theme$images.moringHomeBackDesktop) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.general) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.homeHero)) : setBgImage(((_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.alsea) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.moringHomeBackMobile) || ((_theme$images4 = theme.images) === null || _theme$images4 === void 0 || (_theme$images4 = _theme$images4.general) === null || _theme$images4 === void 0 ? void 0 : _theme$images4.homeHero));
     } else {
-      var _theme$images5, _theme$images5$alsea, _theme$images6, _theme$images6$genera, _theme$images7, _theme$images7$alsea, _theme$images8, _theme$images8$genera;
-      windowSize.width > 480 ? setBgImage(((_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$alsea = _theme$images5.alsea) === null || _theme$images5$alsea === void 0 ? void 0 : _theme$images5$alsea.afternoonHomeBackDesktop) || ((_theme$images6 = theme.images) === null || _theme$images6 === void 0 ? void 0 : (_theme$images6$genera = _theme$images6.general) === null || _theme$images6$genera === void 0 ? void 0 : _theme$images6$genera.homeHero)) : setBgImage(((_theme$images7 = theme.images) === null || _theme$images7 === void 0 ? void 0 : (_theme$images7$alsea = _theme$images7.alsea) === null || _theme$images7$alsea === void 0 ? void 0 : _theme$images7$alsea.afternoonHomeBackMobile) || ((_theme$images8 = theme.images) === null || _theme$images8 === void 0 ? void 0 : (_theme$images8$genera = _theme$images8.general) === null || _theme$images8$genera === void 0 ? void 0 : _theme$images8$genera.homeHero));
+      var _theme$images5, _theme$images6, _theme$images7, _theme$images8;
+      windowSize.width > 480 ? setBgImage(((_theme$images5 = theme.images) === null || _theme$images5 === void 0 || (_theme$images5 = _theme$images5.alsea) === null || _theme$images5 === void 0 ? void 0 : _theme$images5.afternoonHomeBackDesktop) || ((_theme$images6 = theme.images) === null || _theme$images6 === void 0 || (_theme$images6 = _theme$images6.general) === null || _theme$images6 === void 0 ? void 0 : _theme$images6.homeHero)) : setBgImage(((_theme$images7 = theme.images) === null || _theme$images7 === void 0 || (_theme$images7 = _theme$images7.alsea) === null || _theme$images7 === void 0 ? void 0 : _theme$images7.afternoonHomeBackMobile) || ((_theme$images8 = theme.images) === null || _theme$images8 === void 0 || (_theme$images8 = _theme$images8.general) === null || _theme$images8 === void 0 ? void 0 : _theme$images8.homeHero));
     }
   }, [curHr, windowSize]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -134,14 +134,14 @@ var RedHomeHero = function RedHomeHero(props) {
     src: bgImage,
     alt: ""
   })), /*#__PURE__*/_react.default.createElement(_styles.HomeContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DiscountBars, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images9 = theme.images) === null || _theme$images9 === void 0 ? void 0 : (_theme$images9$alsea = _theme$images9.alsea) === null || _theme$images9$alsea === void 0 ? void 0 : _theme$images9$alsea.discountBanner,
+    src: (_theme$images9 = theme.images) === null || _theme$images9 === void 0 || (_theme$images9 = _theme$images9.alsea) === null || _theme$images9 === void 0 ? void 0 : _theme$images9.discountBanner,
     alt: ""
   })), /*#__PURE__*/_react.default.createElement(_styles.SloganContent, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME', '¡Empieza tu pedido!')), /*#__PURE__*/_react.default.createElement(ArchiesOrderTypes, {
     configTypes: !(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0 ? configTypes : null,
     defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && configTypes.length > 0) && 1,
     handleAddressInput: handleAddressInput
   })))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ADDRESS) || 'Address'),
+    title: t('ADDRESS', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ADDRESS) || 'Address'),
     open: modals.formOpen,
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -150,7 +150,7 @@ var RedHomeHero = function RedHomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
+    address: (orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
@@ -167,7 +167,7 @@ var RedHomeHero = function RedHomeHero(props) {
       }));
     }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ADDRESSES', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.ADDRESSES) || 'Addresses'),
+    title: t('ADDRESSES', (theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.ADDRESSES) || 'Addresses'),
     open: modals.listOpen,
     width: "70%",
     onClose: function onClose() {

@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductsListUI = function BusinessProductsListUI(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _props$beforeElements, _props$beforeComponen, _category$subcategori2, _category$subcategori3, _category$subcategori4, _category$subcategori5, _categoryState$produc2, _categoryState$produc3, _categoryState$produc4, _categoryState$produc9, _props$afterComponent, _props$afterElements;
+  var _configs$use_parent_c, _configs$use_parent_c2, _categoryState$produc, _props$beforeElements, _props$beforeComponen, _category$subcategori2, _category$subcategori3, _category$subcategori4, _categoryState$produc2, _categoryState$produc3, _categoryState$produc4, _categoryState$produc9, _props$afterComponent, _props$afterElements;
   var errors = props.errors,
     businessId = props.businessId,
     isLazy = props.isLazy,
@@ -63,7 +63,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var isUseParentCategory = (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1';
+  var isUseParentCategory = (configs === null || configs === void 0 || (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 || (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1';
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     openDescription = _useState2[0],
@@ -105,7 +105,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return onClickSubcategory(null, category);
       },
       color: allsubcategorySelected ? 'primary' : 'lightGray'
-    }, t('ALL', 'All'))), category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.map(function (subcategory) {
+    }, t('ALL', 'All'))), category === null || category === void 0 || (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.map(function (subcategory) {
       var isSubcategorySelected = subcategoriesSelected === null || subcategoriesSelected === void 0 ? void 0 : subcategoriesSelected.find(function (_subcategory) {
         return (_subcategory === null || _subcategory === void 0 ? void 0 : _subcategory.id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
       });
@@ -135,7 +135,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, (category === null || category === void 0 ? void 0 : category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderWrapper, null, (category === null || category === void 0 ? void 0 : (_category$subcategori2 = category.subcategories) === null || _category$subcategori2 === void 0 ? void 0 : _category$subcategori2.length) > 0 && !isSearchMode && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, (category === null || category === void 0 ? void 0 : category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderWrapper, null, (category === null || category === void 0 || (_category$subcategori2 = category.subcategories) === null || _category$subcategori2 === void 0 ? void 0 : _category$subcategori2.length) > 0 && !isSearchMode && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
     category: category
   })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, productsCategorySelected.map(function (product, i) {
     var _currentCart$products;
@@ -148,21 +148,21 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList,
       handleUpdateProducts: handleUpdateProducts,
-      productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.reduce(function (productsLength, Cproduct) {
+      productAddedToCartLength: currentCart === null || currentCart === void 0 || (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.reduce(function (productsLength, Cproduct) {
         return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
       }, 0)
     });
-  })), isSearchMode && (category === null || category === void 0 ? void 0 : (_category$subcategori3 = category.subcategories) === null || _category$subcategori3 === void 0 ? void 0 : _category$subcategori3.length) > 0 && (category === null || category === void 0 ? void 0 : (_category$subcategori4 = category.subcategories) === null || _category$subcategori4 === void 0 ? void 0 : (_category$subcategori5 = _category$subcategori4.filter(function (subcategory) {
+  })), isSearchMode && (category === null || category === void 0 || (_category$subcategori3 = category.subcategories) === null || _category$subcategori3 === void 0 ? void 0 : _category$subcategori3.length) > 0 && (category === null || category === void 0 || (_category$subcategori4 = category.subcategories) === null || _category$subcategori4 === void 0 || (_category$subcategori4 = _category$subcategori4.filter(function (subcategory) {
     return productsCategorySelected === null || productsCategorySelected === void 0 ? void 0 : productsCategorySelected.some(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
     });
-  })) === null || _category$subcategori5 === void 0 ? void 0 : _category$subcategori5.map(function (subcategory) {
+  })) === null || _category$subcategori4 === void 0 ? void 0 : _category$subcategori4.map(function (subcategory) {
     var _productsCategorySele;
     return /*#__PURE__*/_react.default.createElement(_styles.SubcategorySearchContainer, {
       key: subcategory === null || subcategory === void 0 ? void 0 : subcategory.id
     }, /*#__PURE__*/_react.default.createElement("h4", null, subcategory === null || subcategory === void 0 ? void 0 : subcategory.name), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, {
       isSubcategorySearch: true
-    }, productsCategorySelected === null || productsCategorySelected === void 0 ? void 0 : (_productsCategorySele = productsCategorySelected.filter(function (product) {
+    }, productsCategorySelected === null || productsCategorySelected === void 0 || (_productsCategorySele = productsCategorySelected.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
     })) === null || _productsCategorySele === void 0 ? void 0 : _productsCategorySele.map(function (product, i) {
       var _currentCart$products2;
@@ -175,12 +175,12 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         isCartOnProductsList: isCartOnProductsList,
         handleUpdateProducts: handleUpdateProducts,
         useKioskApp: useKioskApp,
-        productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.reduce(function (productsLength, Cproduct) {
+        productAddedToCartLength: currentCart === null || currentCart === void 0 || (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.reduce(function (productsLength, Cproduct) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
         }, 0)
       });
     })));
-  }))), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
+  }))), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 || (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
     return product.featured;
   })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
     id: "categoryfeatured"
@@ -195,11 +195,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList,
       handleUpdateProducts: handleUpdateProducts,
-      productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.reduce(function (productsLength, Cproduct) {
+      productAddedToCartLength: currentCart === null || currentCart === void 0 || (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.reduce(function (productsLength, Cproduct) {
         return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
       }, 0)
     });
-  }), !(business !== null && business !== void 0 && business.food) && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+  }), !(business !== null && business !== void 0 && business.food) && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (categoryState === null || categoryState === void 0 || (_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
     useCustomFunctionality: true,
     onCustomClick: function onCustomClick() {
       return onClickCategory(category);
@@ -214,12 +214,12 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
   }).map(function (category, i, _categories) {
-    var _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _categoryState$produc8, _category$description, _category$description2, _category$subcategori6, _category$subcategori7, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _headerRef$current, _category$description3, _category$subcategori8, _category$subcategori9, _products$filter, _category$subcategori10, _category$subcategori11, _category$subcategori12;
-    var _products = !isUseParentCategory ? (_categoryState$produc5 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc6 = categoryState.products) === null || _categoryState$produc6 === void 0 ? void 0 : _categoryState$produc6.filter(function (product) {
+    var _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _categoryState$produc8, _category$description, _category$description2, _category$subcategori5, _category$subcategori6, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _headerRef$current, _category$description3, _category$subcategori7, _category$subcategori8, _products$filter, _category$subcategori9, _category$subcategori10;
+    var _products = !isUseParentCategory ? (_categoryState$produc5 = categoryState === null || categoryState === void 0 || (_categoryState$produc6 = categoryState.products) === null || _categoryState$produc6 === void 0 ? void 0 : _categoryState$produc6.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
-    })) !== null && _categoryState$produc5 !== void 0 ? _categoryState$produc5 : [] : (_categoryState$produc7 = categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc8 = categoryState.products) === null || _categoryState$produc8 === void 0 ? void 0 : _categoryState$produc8.filter(function (product) {
+    })) !== null && _categoryState$produc5 !== void 0 ? _categoryState$produc5 : [] : (_categoryState$produc7 = categoryState === null || categoryState === void 0 || (_categoryState$produc8 = categoryState.products) === null || _categoryState$produc8 === void 0 ? void 0 : _categoryState$produc8.filter(function (product) {
       var _category$children;
-      return category === null || category === void 0 ? void 0 : (_category$children = category.children) === null || _category$children === void 0 ? void 0 : _category$children.some(function (cat) {
+      return category === null || category === void 0 || (_category$children = category.children) === null || _category$children === void 0 ? void 0 : _category$children.some(function (cat) {
         return cat.category_id === (product === null || product === void 0 ? void 0 : product.category_id);
       });
     })) !== null && _categoryState$produc7 !== void 0 ? _categoryState$produc7 : [];
@@ -227,14 +227,14 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       return !(subcategoriesSelected !== null && subcategoriesSelected !== void 0 && subcategoriesSelected.find(function (subcategory) {
         return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.parent_category_id) === (category === null || category === void 0 ? void 0 : category.id);
       })) || subcategoriesSelected.some(function (subcategory) {
-        var _subcategory$children, _subcategory$children2;
-        return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id) === (product === null || product === void 0 ? void 0 : product.category_id) || (subcategory === null || subcategory === void 0 ? void 0 : (_subcategory$children = subcategory.children) === null || _subcategory$children === void 0 ? void 0 : (_subcategory$children2 = _subcategory$children.reduce(function (prev, cur) {
+        var _subcategory$children;
+        return (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id) === (product === null || product === void 0 ? void 0 : product.category_id) || (subcategory === null || subcategory === void 0 || (_subcategory$children = subcategory.children) === null || _subcategory$children === void 0 || (_subcategory$children = _subcategory$children.reduce(function (prev, cur) {
           return [].concat(_toConsumableArray(prev), [cur === null || cur === void 0 ? void 0 : cur.category_id]);
-        }, [])) === null || _subcategory$children2 === void 0 ? void 0 : _subcategory$children2.includes(product === null || product === void 0 ? void 0 : product.category_id));
+        }, [])) === null || _subcategory$children === void 0 ? void 0 : _subcategory$children.includes(product === null || product === void 0 ? void 0 : product.category_id));
       });
     }) : _products;
-    var shortCategoryDescription = (category === null || category === void 0 ? void 0 : (_category$description = category.description) === null || _category$description === void 0 ? void 0 : _category$description.length) > 200 ? "".concat(category === null || category === void 0 ? void 0 : (_category$description2 = category.description) === null || _category$description2 === void 0 ? void 0 : _category$description2.substring(0, 200), "...") : category === null || category === void 0 ? void 0 : category.description;
-    var isSubcategorySearch = isSearchMode && (category === null || category === void 0 ? void 0 : (_category$subcategori6 = category.subcategories) === null || _category$subcategori6 === void 0 ? void 0 : _category$subcategori6.length) > 0 && (category === null || category === void 0 ? void 0 : (_category$subcategori7 = category.subcategories) === null || _category$subcategori7 === void 0 ? void 0 : _category$subcategori7.some(function (subcategory) {
+    var shortCategoryDescription = (category === null || category === void 0 || (_category$description = category.description) === null || _category$description === void 0 ? void 0 : _category$description.length) > 200 ? "".concat(category === null || category === void 0 || (_category$description2 = category.description) === null || _category$description2 === void 0 ? void 0 : _category$description2.substring(0, 200), "...") : category === null || category === void 0 ? void 0 : category.description;
+    var isSubcategorySearch = isSearchMode && (category === null || category === void 0 || (_category$subcategori5 = category.subcategories) === null || _category$subcategori5 === void 0 ? void 0 : _category$subcategori5.length) > 0 && (category === null || category === void 0 || (_category$subcategori6 = category.subcategories) === null || _category$subcategori6 === void 0 ? void 0 : _category$subcategori6.some(function (subcategory) {
       return products === null || products === void 0 ? void 0 : products.some(function (product) {
         return (product === null || product === void 0 ? void 0 : product.category_id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
       });
@@ -249,21 +249,21 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       className: "category-title"
     }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
       src: category.image
-    }), /*#__PURE__*/_react.default.createElement("h3", null, category.name), (category === null || category === void 0 ? void 0 : (_category$ribbon = category.ribbon) === null || _category$ribbon === void 0 ? void 0 : _category$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
-      bgColor: category === null || category === void 0 ? void 0 : (_category$ribbon2 = category.ribbon) === null || _category$ribbon2 === void 0 ? void 0 : _category$ribbon2.color,
-      isRoundRect: (category === null || category === void 0 ? void 0 : (_category$ribbon3 = category.ribbon) === null || _category$ribbon3 === void 0 ? void 0 : _category$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
-      isCapsule: (category === null || category === void 0 ? void 0 : (_category$ribbon4 = category.ribbon) === null || _category$ribbon4 === void 0 ? void 0 : _category$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
-    }, category === null || category === void 0 ? void 0 : (_category$ribbon5 = category.ribbon) === null || _category$ribbon5 === void 0 ? void 0 : _category$ribbon5.text)), (category === null || category === void 0 ? void 0 : category.description) && /*#__PURE__*/_react.default.createElement(_styles.CategoryDescription, {
-      maxWidth: headerRef === null || headerRef === void 0 ? void 0 : (_headerRef$current = headerRef.current) === null || _headerRef$current === void 0 ? void 0 : _headerRef$current.clientWidth
-    }, /*#__PURE__*/_react.default.createElement("p", null, shortCategoryDescription), (category === null || category === void 0 ? void 0 : (_category$description3 = category.description) === null || _category$description3 === void 0 ? void 0 : _category$description3.length) > 200 && /*#__PURE__*/_react.default.createElement("span", {
+    }), /*#__PURE__*/_react.default.createElement("h3", null, category.name), (category === null || category === void 0 || (_category$ribbon = category.ribbon) === null || _category$ribbon === void 0 ? void 0 : _category$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
+      bgColor: category === null || category === void 0 || (_category$ribbon2 = category.ribbon) === null || _category$ribbon2 === void 0 ? void 0 : _category$ribbon2.color,
+      isRoundRect: (category === null || category === void 0 || (_category$ribbon3 = category.ribbon) === null || _category$ribbon3 === void 0 ? void 0 : _category$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
+      isCapsule: (category === null || category === void 0 || (_category$ribbon4 = category.ribbon) === null || _category$ribbon4 === void 0 ? void 0 : _category$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
+    }, category === null || category === void 0 || (_category$ribbon5 = category.ribbon) === null || _category$ribbon5 === void 0 ? void 0 : _category$ribbon5.text)), (category === null || category === void 0 ? void 0 : category.description) && /*#__PURE__*/_react.default.createElement(_styles.CategoryDescription, {
+      maxWidth: headerRef === null || headerRef === void 0 || (_headerRef$current = headerRef.current) === null || _headerRef$current === void 0 ? void 0 : _headerRef$current.clientWidth
+    }, /*#__PURE__*/_react.default.createElement("p", null, shortCategoryDescription), (category === null || category === void 0 || (_category$description3 = category.description) === null || _category$description3 === void 0 ? void 0 : _category$description3.length) > 200 && /*#__PURE__*/_react.default.createElement("span", {
       onClick: function onClick() {
         return setOpenDescription(category);
       }
-    }, t('VIEW_MORE', 'View more'))), (category === null || category === void 0 ? void 0 : (_category$subcategori8 = category.subcategories) === null || _category$subcategori8 === void 0 ? void 0 : _category$subcategori8.length) > 0 && !isSearchMode && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
+    }, t('VIEW_MORE', 'View more'))), (category === null || category === void 0 || (_category$subcategori7 = category.subcategories) === null || _category$subcategori7 === void 0 ? void 0 : _category$subcategori7.length) > 0 && !isSearchMode && /*#__PURE__*/_react.default.createElement(SubcategoriesComponent, {
       category: category
     })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, {
       isSubcategorySearch: isSubcategorySearch
-    }, isSearchMode && (category === null || category === void 0 ? void 0 : (_category$subcategori9 = category.subcategories) === null || _category$subcategori9 === void 0 ? void 0 : _category$subcategori9.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, products === null || products === void 0 ? void 0 : (_products$filter = products.filter(function (product, i) {
+    }, isSearchMode && (category === null || category === void 0 || (_category$subcategori8 = category.subcategories) === null || _category$subcategori8 === void 0 ? void 0 : _category$subcategori8.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, products === null || products === void 0 || (_products$filter = products.filter(function (product, i) {
       return i < 9 && (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id) || (business === null || business === void 0 ? void 0 : business.food);
     })) === null || _products$filter === void 0 ? void 0 : _products$filter.map(function (product, i) {
       var _currentCart$products4;
@@ -276,7 +276,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         useKioskApp: useKioskApp,
         isCartOnProductsList: isCartOnProductsList,
         handleUpdateProducts: handleUpdateProducts,
-        productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.reduce(function (productsLength, Cproduct) {
+        productAddedToCartLength: currentCart === null || currentCart === void 0 || (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.reduce(function (productsLength, Cproduct) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
         }, 0)
       });
@@ -305,7 +305,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         useKioskApp: useKioskApp,
         isCartOnProductsList: isCartOnProductsList,
         handleUpdateProducts: handleUpdateProducts,
-        productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products5 = currentCart.products) === null || _currentCart$products5 === void 0 ? void 0 : _currentCart$products5.reduce(function (productsLength, Cproduct) {
+        productAddedToCartLength: currentCart === null || currentCart === void 0 || (_currentCart$products5 = currentCart.products) === null || _currentCart$products5 === void 0 ? void 0 : _currentCart$products5.reduce(function (productsLength, Cproduct) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
         }, 0)
       });
@@ -326,17 +326,17 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         key: "skeleton:".concat(i),
         isSkeleton: true
       });
-    })), isSearchMode && (category === null || category === void 0 ? void 0 : (_category$subcategori10 = category.subcategories) === null || _category$subcategori10 === void 0 ? void 0 : _category$subcategori10.length) > 0 && (category === null || category === void 0 ? void 0 : (_category$subcategori11 = category.subcategories) === null || _category$subcategori11 === void 0 ? void 0 : (_category$subcategori12 = _category$subcategori11.filter(function (subcategory) {
+    })), isSearchMode && (category === null || category === void 0 || (_category$subcategori9 = category.subcategories) === null || _category$subcategori9 === void 0 ? void 0 : _category$subcategori9.length) > 0 && (category === null || category === void 0 || (_category$subcategori10 = category.subcategories) === null || _category$subcategori10 === void 0 || (_category$subcategori10 = _category$subcategori10.filter(function (subcategory) {
       return products === null || products === void 0 ? void 0 : products.some(function (product) {
         return (product === null || product === void 0 ? void 0 : product.category_id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
       });
-    })) === null || _category$subcategori12 === void 0 ? void 0 : _category$subcategori12.map(function (subcategory) {
+    })) === null || _category$subcategori10 === void 0 ? void 0 : _category$subcategori10.map(function (subcategory) {
       var _products$filter2;
       return /*#__PURE__*/_react.default.createElement(_styles.SubcategorySearchContainer, {
         key: subcategory === null || subcategory === void 0 ? void 0 : subcategory.id
       }, /*#__PURE__*/_react.default.createElement("h4", null, subcategory === null || subcategory === void 0 ? void 0 : subcategory.name), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, {
         isSubcategorySearch: isSubcategorySearch
-      }, products === null || products === void 0 ? void 0 : (_products$filter2 = products.filter(function (product) {
+      }, products === null || products === void 0 || (_products$filter2 = products.filter(function (product) {
         return (product === null || product === void 0 ? void 0 : product.category_id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
       })) === null || _products$filter2 === void 0 ? void 0 : _products$filter2.map(function (product, i) {
         var _currentCart$products6;
@@ -349,7 +349,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
           isCartOnProductsList: isCartOnProductsList,
           handleUpdateProducts: handleUpdateProducts,
           useKioskApp: useKioskApp,
-          productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.reduce(function (productsLength, Cproduct) {
+          productAddedToCartLength: currentCart === null || currentCart === void 0 || (_currentCart$products6 = currentCart.products) === null || _currentCart$products6 === void 0 ? void 0 : _currentCart$products6.reduce(function (productsLength, Cproduct) {
             return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
           }, 0)
         });
@@ -360,7 +360,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       key: "skeleton:".concat(i),
       isSkeleton: true
     });
-  })), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && !isBusinessLoading && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc9 = categoryState.products) === null || _categoryState$produc9 === void 0 ? void 0 : _categoryState$produc9.length) === 0 && !(!searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && !isBusinessLoading && (categoryState === null || categoryState === void 0 || (_categoryState$produc9 = categoryState.products) === null || _categoryState$produc9 === void 0 ? void 0 : _categoryState$produc9.length) === 0 && !(!searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
     btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),
     onClickButton: function onClickButton() {

@@ -117,7 +117,7 @@ var RangeCalendar = function RangeCalendar(props) {
     ref: calendarRef,
     isLeft: isLeft
   }, isSingleDate ? /*#__PURE__*/_react.default.createElement(_reactDateRange.Calendar, {
-    locale: (0, _utils.getLocale)(state === null || state === void 0 ? void 0 : (_state$language = state.language) === null || _state$language === void 0 ? void 0 : _state$language.code, locales),
+    locale: (0, _utils.getLocale)(state === null || state === void 0 || (_state$language = state.language) === null || _state$language === void 0 ? void 0 : _state$language.code, locales),
     date: date,
     onChange: function onChange(date) {
       return handleChangeSingleDate(date);
@@ -125,7 +125,7 @@ var RangeCalendar = function RangeCalendar(props) {
     minDate: minDate || new Date('1922-01-01')
   }) : /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
     editableDateInputs: true,
-    locale: (0, _utils.getLocale)(state === null || state === void 0 ? void 0 : (_state$language2 = state.language) === null || _state$language2 === void 0 ? void 0 : _state$language2.code, locales),
+    locale: (0, _utils.getLocale)(state === null || state === void 0 || (_state$language2 = state.language) === null || _state$language2 === void 0 ? void 0 : _state$language2.code, locales),
     onChange: function onChange(item) {
       return handleChangeDates(item);
     },

@@ -46,7 +46,7 @@ var PaymentOptionCardUI = function PaymentOptionCardUI(props) {
     setAddCardOpen = _useState2[1];
   (0, _react.useEffect)(function () {
     var _cardsList$cards;
-    if ((cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$cards = cardsList.cards) === null || _cardsList$cards === void 0 ? void 0 : _cardsList$cards.length) > 0) {
+    if ((cardsList === null || cardsList === void 0 || (_cardsList$cards = cardsList.cards) === null || _cardsList$cards === void 0 ? void 0 : _cardsList$cards.length) > 0) {
       setAddCardOpen(true);
     }
   }, [cardsList === null || cardsList === void 0 ? void 0 : cardsList.cards]);

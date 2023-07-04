@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SidebarMenu = function SidebarMenu(props) {
-  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _options$address4, _options$address4$add, _options$address4$add2, _configState$configs, _configState$configs$, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _options$address4, _configState$configs, _props$afterComponent, _props$afterElements;
   var auth = props.auth,
     isHideSignup = props.isHideSignup,
     userCustomer = props.userCustomer,
@@ -125,7 +125,7 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/address' || window.location.pathname === '/address-list'
   }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/address' || window.location.pathname === '/address-list'
-  }, (options === null || options === void 0 ? void 0 : (_options$address4 = options.address) === null || _options$address4 === void 0 ? void 0 : (_options$address4$add = _options$address4.address) === null || _options$address4$add === void 0 ? void 0 : (_options$address4$add2 = _options$address4$add.split(',')) === null || _options$address4$add2 === void 0 ? void 0 : _options$address4$add2[0]) || t('FIND_RESTAURANT', 'Find a restaurant'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }, (options === null || options === void 0 || (_options$address4 = options.address) === null || _options$address4 === void 0 || (_options$address4 = _options$address4.address) === null || _options$address4 === void 0 || (_options$address4 = _options$address4.split(',')) === null || _options$address4 === void 0 ? void 0 : _options$address4[0]) || t('FIND_RESTAURANT', 'Find a restaurant'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'moment'
@@ -136,7 +136,7 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
     active: window.location.pathname === '/moment'
   }, options !== null && options !== void 0 && options.moment ? parseDate(options === null || options === void 0 ? void 0 : options.moment, {
-    outputFormat: configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.dates_moment_format) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value
+    outputFormat: configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.dates_moment_format) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value
   }) : t('ASAP_ABBREVIATION', 'ASAP'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({

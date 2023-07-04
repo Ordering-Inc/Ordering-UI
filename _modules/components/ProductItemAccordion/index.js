@@ -33,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _theme$confirmation, _theme$confirmation$c, _theme$confirmation$c2, _theme$confirmation$c3, _theme$confirmation$c4, _theme$confirmation$c5, _theme$confirmation$c6, _props$beforeElements, _props$beforeComponen, _product$valid, _product$total, _props$afterComponent, _props$afterElements;
+  var _theme$confirmation, _props$beforeElements, _props$beforeComponen, _product$valid, _product$total, _props$afterComponent, _props$afterElements;
   var isCartPending = props.isCartPending,
     isCartProduct = props.isCartProduct,
     product = props.product,
@@ -69,7 +69,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var productSelect = (0, _react.useRef)(null);
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
-  var showProductImage = !(theme !== null && theme !== void 0 && (_theme$confirmation = theme.confirmation) !== null && _theme$confirmation !== void 0 && (_theme$confirmation$c = _theme$confirmation.components) !== null && _theme$confirmation$c !== void 0 && (_theme$confirmation$c2 = _theme$confirmation$c.cart) !== null && _theme$confirmation$c2 !== void 0 && (_theme$confirmation$c3 = _theme$confirmation$c2.components) !== null && _theme$confirmation$c3 !== void 0 && (_theme$confirmation$c4 = _theme$confirmation$c3.products) !== null && _theme$confirmation$c4 !== void 0 && (_theme$confirmation$c5 = _theme$confirmation$c4.components) !== null && _theme$confirmation$c5 !== void 0 && (_theme$confirmation$c6 = _theme$confirmation$c5.image) !== null && _theme$confirmation$c6 !== void 0 && _theme$confirmation$c6.hidden);
+  var showProductImage = !(theme !== null && theme !== void 0 && (_theme$confirmation = theme.confirmation) !== null && _theme$confirmation !== void 0 && (_theme$confirmation = _theme$confirmation.components) !== null && _theme$confirmation !== void 0 && (_theme$confirmation = _theme$confirmation.cart) !== null && _theme$confirmation !== void 0 && (_theme$confirmation = _theme$confirmation.components) !== null && _theme$confirmation !== void 0 && (_theme$confirmation = _theme$confirmation.products) !== null && _theme$confirmation !== void 0 && (_theme$confirmation = _theme$confirmation.components) !== null && _theme$confirmation !== void 0 && (_theme$confirmation = _theme$confirmation.image) !== null && _theme$confirmation !== void 0 && _theme$confirmation.hidden);
   var productInfo = function productInfo() {
     if (isCartProduct) {
       var _product$ingredients, _product$options;

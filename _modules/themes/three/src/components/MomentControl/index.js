@@ -82,7 +82,7 @@ var MomentControlUI = function MomentControlUI(props) {
       content: []
     });
   };
-  var dateListOptions = datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10)).map(function (date) {
+  var dateListOptions = datesList.slice(0, Number((configs === null || configs === void 0 || (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10)).map(function (date) {
     var dateParts = date.split('-');
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7));
@@ -96,7 +96,7 @@ var MomentControlUI = function MomentControlUI(props) {
     var _configs$format_time;
     return {
       value: hour.startTime,
-      content: (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+      content: (configs === null || configs === void 0 || (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
         outputFormat: 'hh:mma'
       }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
         outputFormat: 'HH:mm'

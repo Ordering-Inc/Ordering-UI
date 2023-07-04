@@ -59,7 +59,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
       onClick: function onClick() {
         return handleClickOrderType(item.value);
       },
-      active: (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === (item === null || item === void 0 ? void 0 : item.value)
+      active: (orderStatus === null || orderStatus === void 0 || (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === (item === null || item === void 0 ? void 0 : item.value)
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeTitle, null, item.text), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeDescription, null, item.description), /*#__PURE__*/_react.default.createElement(_styles.OrderStartWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('START_MY_ORDER', 'start my order')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)));
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
@@ -73,7 +73,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
 };
 exports.OrderTypeSelectorContentUI = OrderTypeSelectorContentUI;
 var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
-  var _theme$images, _theme$images$deliver, _theme$images2, _theme$images2$delive, _theme$images3, _theme$images3$delive, _theme$images4, _theme$images4$delive, _theme$images5, _theme$images5$delive;
+  var _theme$images, _theme$images2, _theme$images3, _theme$images4, _theme$images5;
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -84,27 +84,27 @@ var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
       value: 1,
       text: t('DELIVERY', 'Delivery'),
       description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$deliver = _theme$images.deliveryTypes) === null || _theme$images$deliver === void 0 ? void 0 : _theme$images$deliver.delivery
+      image: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.deliveryTypes) === null || _theme$images === void 0 ? void 0 : _theme$images.delivery
     }, {
       value: 2,
       text: t('PICKUP', 'Pickup'),
       description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$delive = _theme$images2.deliveryTypes) === null || _theme$images2$delive === void 0 ? void 0 : _theme$images2$delive.pickUp
+      image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.deliveryTypes) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.pickUp
     }, {
       value: 3,
       text: t('EAT_IN', 'Eat in'),
       description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$delive = _theme$images3.deliveryTypes) === null || _theme$images3$delive === void 0 ? void 0 : _theme$images3$delive.eatIn
+      image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.deliveryTypes) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.eatIn
     }, {
       value: 4,
       text: t('CURBSIDE', 'Curbside'),
       description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$delive = _theme$images4.deliveryTypes) === null || _theme$images4$delive === void 0 ? void 0 : _theme$images4$delive.curbside
+      image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 || (_theme$images4 = _theme$images4.deliveryTypes) === null || _theme$images4 === void 0 ? void 0 : _theme$images4.curbside
     }, {
       value: 5,
       text: t('DRIVE_THRU', 'Drive thru'),
       description: 'Lorem ipsum dolor sit amet, consectetur.',
-      image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$delive = _theme$images5.deliveryTypes) === null || _theme$images5$delive === void 0 ? void 0 : _theme$images5$delive.driveThru
+      image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 || (_theme$images5 = _theme$images5.deliveryTypes) === null || _theme$images5 === void 0 ? void 0 : _theme$images5.driveThru
     }]
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderTypeControl, orderTypeProps);

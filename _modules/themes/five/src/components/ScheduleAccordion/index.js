@@ -40,7 +40,7 @@ var ScheduleAccordion = function ScheduleAccordion(props) {
       display: isActive ? 'flex' : 'none',
       paddingLeft: 60
     }
-  }, schedule === null || schedule === void 0 ? void 0 : (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.map(function (lapse, i) {
+  }, schedule === null || schedule === void 0 || (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.map(function (lapse, i) {
     return schedule !== null && schedule !== void 0 && schedule.enabled ? /*#__PURE__*/_react.default.createElement("p", {
       key: "".concat(i, "-").concat(timeFormated(lapse.open))
     }, timeFormated(lapse.open) + ' - ' + timeFormated(lapse.close)) : /*#__PURE__*/_react.default.createElement(_styles.ClosedSchedule, null, t('CLOSED', 'Closed'));

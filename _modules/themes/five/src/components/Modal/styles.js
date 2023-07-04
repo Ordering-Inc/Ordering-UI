@@ -20,7 +20,7 @@ var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateOb
   var _theme$colors;
   var isTransparent = _ref2.isTransparent,
     theme = _ref2.theme;
-  return isTransparent ? 'transparent' : theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.backgroundPage;
+  return isTransparent ? 'transparent' : theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.backgroundPage;
 }, function (_ref3) {
   var padding = _ref3.padding;
   return padding || '30px 20px';

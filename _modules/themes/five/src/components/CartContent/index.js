@@ -20,7 +20,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CartContent = function CartContent(props) {
-  var _configs$checkout_mul, _carts$filter, _configs$multi_busine4, _configs$multi_busine5, _theme$images, _theme$images$general;
+  var _configs$checkout_mul, _carts$filter, _configs$multi_busine4, _configs$multi_busine5, _theme$images;
   var carts = props.carts,
     isOrderStateCarts = props.isOrderStateCarts,
     isCartPopover = props.isCartPopover,
@@ -49,11 +49,11 @@ var CartContent = function CartContent(props) {
     _useState2 = _slicedToArray(_useState, 2),
     currentCartUuid = _useState2[0],
     setCurrentCartUuid = _useState2[1];
-  var checkoutMultiBusinessEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
+  var checkoutMultiBusinessEnabled = (configs === null || configs === void 0 || (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var totalCartsPrice = (carts === null || carts === void 0 ? void 0 : carts.length) && carts.reduce(function (total, cart) {
     return total + (cart === null || cart === void 0 ? void 0 : cart.total);
   }, 0);
-  var totalCartsFee = (carts === null || carts === void 0 ? void 0 : carts.length) && (carts === null || carts === void 0 ? void 0 : (_carts$filter = carts.filter(function (cart) {
+  var totalCartsFee = (carts === null || carts === void 0 ? void 0 : carts.length) && (carts === null || carts === void 0 || (_carts$filter = carts.filter(function (cart) {
     return (cart === null || cart === void 0 ? void 0 : cart.status) !== 1 && (cart === null || cart === void 0 ? void 0 : cart.valid);
   })) === null || _carts$filter === void 0 ? void 0 : _carts$filter.reduce(function (total, cart) {
     return total + (cart === null || cart === void 0 ? void 0 : cart.delivery_price_with_discount);
@@ -82,18 +82,18 @@ var CartContent = function CartContent(props) {
       var groupKeys = {};
       cartsAvailable.forEach(function (_cart) {
         var _cart$group, _cart$group2, _cart$group$uuid, _cart$group3;
-        groupKeys[_cart === null || _cart === void 0 ? void 0 : (_cart$group = _cart.group) === null || _cart$group === void 0 ? void 0 : _cart$group.uuid] ? groupKeys[_cart === null || _cart === void 0 ? void 0 : (_cart$group2 = _cart.group) === null || _cart$group2 === void 0 ? void 0 : _cart$group2.uuid] += 1 : groupKeys[(_cart$group$uuid = _cart === null || _cart === void 0 ? void 0 : (_cart$group3 = _cart.group) === null || _cart$group3 === void 0 ? void 0 : _cart$group3.uuid) !== null && _cart$group$uuid !== void 0 ? _cart$group$uuid : 'null'] = 1;
+        groupKeys[_cart === null || _cart === void 0 || (_cart$group = _cart.group) === null || _cart$group === void 0 ? void 0 : _cart$group.uuid] ? groupKeys[_cart === null || _cart === void 0 || (_cart$group2 = _cart.group) === null || _cart$group2 === void 0 ? void 0 : _cart$group2.uuid] += 1 : groupKeys[(_cart$group$uuid = _cart === null || _cart === void 0 || (_cart$group3 = _cart.group) === null || _cart$group3 === void 0 ? void 0 : _cart$group3.uuid) !== null && _cart$group$uuid !== void 0 ? _cart$group$uuid : 'null'] = 1;
       });
       if (Object.keys(groupKeys).length === 1 && Object.keys(groupKeys)[0] === 'null' || Object.keys(groupKeys).length > 1) {
         events.emit('go_to_page', {
           page: 'multi_cart'
         });
       } else {
-        var _cartsAvailable$2, _cartsAvailable$2$gro;
+        var _cartsAvailable$2;
         events.emit('go_to_page', {
           page: 'multi_checkout',
           params: {
-            cartUuid: (_cartsAvailable$2 = cartsAvailable[0]) === null || _cartsAvailable$2 === void 0 ? void 0 : (_cartsAvailable$2$gro = _cartsAvailable$2.group) === null || _cartsAvailable$2$gro === void 0 ? void 0 : _cartsAvailable$2$gro.uuid
+            cartUuid: (_cartsAvailable$2 = cartsAvailable[0]) === null || _cartsAvailable$2 === void 0 || (_cartsAvailable$2 = _cartsAvailable$2.group) === null || _cartsAvailable$2 === void 0 ? void 0 : _cartsAvailable$2.uuid
           }
         });
       }
@@ -127,18 +127,18 @@ var CartContent = function CartContent(props) {
       isProducts: cart.products.length,
       onClickCheckout: props.onClose,
       setPreorderBusiness: setPreorderBusiness,
-      businessConfigs: cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.configs,
-      hideCouponInput: (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine = configs.multi_business_checkout_coupon_input_style) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === 'group',
-      hideDeliveryFee: (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine2 = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine2 === void 0 ? void 0 : _configs$multi_busine2.value) === '1',
-      hideDriverTip: (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine3 = configs.multi_business_checkout_show_combined_driver_tip) === null || _configs$multi_busine3 === void 0 ? void 0 : _configs$multi_busine3.value) === '1',
+      businessConfigs: cart === null || cart === void 0 || (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.configs,
+      hideCouponInput: (configs === null || configs === void 0 || (_configs$multi_busine = configs.multi_business_checkout_coupon_input_style) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === 'group',
+      hideDeliveryFee: (configs === null || configs === void 0 || (_configs$multi_busine2 = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine2 === void 0 ? void 0 : _configs$multi_busine2.value) === '1',
+      hideDriverTip: (configs === null || configs === void 0 || (_configs$multi_busine3 = configs.multi_business_checkout_show_combined_driver_tip) === null || _configs$multi_busine3 === void 0 ? void 0 : _configs$multi_busine3.value) === '1',
       isCustomerMode: isCustomerMode
     }));
-  }), checkoutMultiBusinessEnabled && !!carts.length && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, null, !!totalCartsFee && (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine4 = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine4 === void 0 ? void 0 : _configs$multi_busine4.value) === '1' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, t('TOTAL_DELIVERY_FEE', 'Total delivery fee')), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(totalCartsFee))), carts.reduce(function (sum, cart) {
+  }), checkoutMultiBusinessEnabled && !!carts.length && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, null, !!totalCartsFee && (configs === null || configs === void 0 || (_configs$multi_busine4 = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine4 === void 0 ? void 0 : _configs$multi_busine4.value) === '1' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, t('TOTAL_DELIVERY_FEE', 'Total delivery fee')), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(totalCartsFee))), carts.reduce(function (sum, cart) {
     return sum + (cart === null || cart === void 0 ? void 0 : cart.driver_tip);
-  }, 0) > 0 && (configs === null || configs === void 0 ? void 0 : (_configs$multi_busine5 = configs.multi_business_checkout_show_combined_driver_tip) === null || _configs$multi_busine5 === void 0 ? void 0 : _configs$multi_busine5.value) === '1' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER_TIP', 'Driver tip')), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(carts.reduce(function (sum, cart) {
+  }, 0) > 0 && (configs === null || configs === void 0 || (_configs$multi_busine5 = configs.multi_business_checkout_show_combined_driver_tip) === null || _configs$multi_busine5 === void 0 ? void 0 : _configs$multi_busine5.value) === '1' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER_TIP', 'Driver tip')), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(carts.reduce(function (sum, cart) {
     return sum + (cart === null || cart === void 0 ? void 0 : cart.driver_tip);
   }, 0)))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, t('TOTAL_FOR_ALL_CARTS', 'Total for all Carts')), /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(totalCartsPrice))), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, t('CART_GROUP_MESSAGE_ALERT', 'Discounts may be applied at the time of payment for this group.'))))), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0) && /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
+    src: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.notFound,
     alt: "Not Found",
     width: "200px",
     height: "122px",

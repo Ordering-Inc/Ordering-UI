@@ -27,7 +27,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
     var _order$business;
     return (businessesIds === null || businessesIds === void 0 ? void 0 : businessesIds.includes(order === null || order === void 0 ? void 0 : order.business_id)) || JSON.stringify(businessesIds.sort(function (a, b) {
       return a - b;
-    })) === JSON.stringify(order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.map(function (business) {
+    })) === JSON.stringify(order === null || order === void 0 || (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.map(function (business) {
       return business === null || business === void 0 ? void 0 : business.id;
     }).sort(function (a, b) {
       return a - b;

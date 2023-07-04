@@ -38,8 +38,8 @@ var AutoScroll = function AutoScroll(_ref) {
     _useTheme2 = _slicedToArray(_useTheme, 1),
     theme = _useTheme2[0];
   (0, _react.useLayoutEffect)(function () {
-    var _document, _document$getElementB;
-    var element = (_document = document) === null || _document === void 0 ? void 0 : (_document$getElementB = _document.getElementById('autoscroll')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.parentNode;
+    var _document;
+    var element = (_document = document) === null || _document === void 0 || (_document = _document.getElementById('autoscroll')) === null || _document === void 0 ? void 0 : _document.parentNode;
     element && element.parentNode.addEventListener('scroll', handleScroll);
     var containerElement = element === null || element === void 0 ? void 0 : element.parentNode;
     setParentElement(element);

@@ -54,7 +54,7 @@ var HeaderOption = function HeaderOption(props) {
   }), /*#__PURE__*/_react.default.createElement("span", null, addressState || t('SELECT_AN_ADDRESS', 'Select an address'))), variant === 'moment' && /*#__PURE__*/_react.default.createElement(_styles.DeliverytimeInput, null, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, {
     id: "icon"
   }), /*#__PURE__*/_react.default.createElement("span", null, momentState ? parseDate(momentState, {
-    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
+    outputFormat: configs === null || configs === void 0 || (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

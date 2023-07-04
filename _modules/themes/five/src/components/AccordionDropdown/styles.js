@@ -23,10 +23,10 @@ exports.CategoryTab = CategoryTab;
 var SelectCategory = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 40px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 30px;\n  border: 1px solid ", ";\n  margin-right: 10px;\n  height: 20px;\n  svg {\n    color: ", "\n  }\n  &:hover{\n    opacity: 0.8;\n  }\n"])), function (_ref2) {
   var _theme$colors;
   var theme = _ref2.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
+  return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
 }, function (_ref3) {
   var _theme$colors2;
   var theme = _ref3.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
+  return theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
 });
 exports.SelectCategory = SelectCategory;

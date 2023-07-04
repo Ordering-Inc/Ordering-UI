@@ -87,7 +87,7 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
             var _hotTableRef$current;
             if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current = hotTableRef.current) !== null && _hotTableRef$current !== void 0 && _hotTableRef$current.hotInstance) {
               var _hotTableRef$current2;
-              var hotRef = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current2 = hotTableRef.current) === null || _hotTableRef$current2 === void 0 ? void 0 : _hotTableRef$current2.hotInstance;
+              var hotRef = hotTableRef === null || hotTableRef === void 0 || (_hotTableRef$current2 = hotTableRef.current) === null || _hotTableRef$current2 === void 0 ? void 0 : _hotTableRef$current2.hotInstance;
               var plugin = hotRef === null || hotRef === void 0 ? void 0 : hotRef.getPlugin('copyPaste');
               // eslint-disable-next-line no-unused-expressions
               hotRef === null || hotRef === void 0 ? void 0 : hotRef.listen();
@@ -103,8 +103,8 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
         readOnly: false
       };
       if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current3 = hotTableRef.current) !== null && _hotTableRef$current3 !== void 0 && _hotTableRef$current3.hotInstance && isBusinessProducts) {
-        var _hotTableRef$current4, _hotTableRef$current5;
-        var visualColIndex = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current4 = hotTableRef.current) === null || _hotTableRef$current4 === void 0 ? void 0 : (_hotTableRef$current5 = _hotTableRef$current4.hotInstance) === null || _hotTableRef$current5 === void 0 ? void 0 : _hotTableRef$current5.toVisualColumn(column);
+        var _hotTableRef$current4;
+        var visualColIndex = hotTableRef === null || hotTableRef === void 0 || (_hotTableRef$current4 = hotTableRef.current) === null || _hotTableRef$current4 === void 0 || (_hotTableRef$current4 = _hotTableRef$current4.hotInstance) === null || _hotTableRef$current4 === void 0 ? void 0 : _hotTableRef$current4.toVisualColumn(column);
         if (visualColIndex === 0) {
           cellProperties.readOnly = true;
         }
@@ -146,41 +146,41 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
     }
   };
   var handleAfterChange = function handleAfterChange(changes, accionHanson) {
-    var _hotTableRef$current6;
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current6 = hotTableRef.current) !== null && _hotTableRef$current6 !== void 0 && _hotTableRef$current6.hotInstance) {
-      var _hotTableRef$current7;
-      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current7 = hotTableRef.current) === null || _hotTableRef$current7 === void 0 ? void 0 : _hotTableRef$current7.hotInstance;
+    var _hotTableRef$current5;
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current5 = hotTableRef.current) !== null && _hotTableRef$current5 !== void 0 && _hotTableRef$current5.hotInstance) {
+      var _hotTableRef$current6;
+      var hotTableObj = hotTableRef === null || hotTableRef === void 0 || (_hotTableRef$current6 = hotTableRef.current) === null || _hotTableRef$current6 === void 0 ? void 0 : _hotTableRef$current6.hotInstance;
       handleItemChange && handleItemChange(changes, accionHanson, hotTableObj);
     }
   };
   var handleBeforeRemoveRow = function handleBeforeRemoveRow(index, amount, physicalRows) {
-    var _hotTableRef$current8;
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current8 = hotTableRef.current) !== null && _hotTableRef$current8 !== void 0 && _hotTableRef$current8.hotInstance) {
-      var _hotTableRef$current9;
-      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current9 = hotTableRef.current) === null || _hotTableRef$current9 === void 0 ? void 0 : _hotTableRef$current9.hotInstance;
+    var _hotTableRef$current7;
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current7 = hotTableRef.current) !== null && _hotTableRef$current7 !== void 0 && _hotTableRef$current7.hotInstance) {
+      var _hotTableRef$current8;
+      var hotTableObj = hotTableRef === null || hotTableRef === void 0 || (_hotTableRef$current8 = hotTableRef.current) === null || _hotTableRef$current8 === void 0 ? void 0 : _hotTableRef$current8.hotInstance;
       handleRowRemove && handleRowRemove(index, amount, physicalRows, hotTableObj);
     }
   };
   var _afterSelectionEnd = function afterSelectionEnd(row, col, row1, col1) {
-    var _hotTableRef$current10;
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current10 = hotTableRef.current) !== null && _hotTableRef$current10 !== void 0 && _hotTableRef$current10.hotInstance) {
-      var _hotTableRef$current11;
-      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current11 = hotTableRef.current) === null || _hotTableRef$current11 === void 0 ? void 0 : _hotTableRef$current11.hotInstance;
+    var _hotTableRef$current9;
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current9 = hotTableRef.current) !== null && _hotTableRef$current9 !== void 0 && _hotTableRef$current9.hotInstance) {
+      var _hotTableRef$current10;
+      var hotTableObj = hotTableRef === null || hotTableRef === void 0 || (_hotTableRef$current10 = hotTableRef.current) === null || _hotTableRef$current10 === void 0 ? void 0 : _hotTableRef$current10.hotInstance;
       handleAfterSectionEnd && handleAfterSectionEnd(row, col, row1, col1, hotTableObj);
     }
   };
   var _outsideClickDeselects = function outsideClickDeselects(event) {
-    var _hotTableRef$current12;
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current12 = hotTableRef.current) !== null && _hotTableRef$current12 !== void 0 && _hotTableRef$current12.hotInstance) {
+    var _hotTableRef$current11;
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current11 = hotTableRef.current) !== null && _hotTableRef$current11 !== void 0 && _hotTableRef$current11.hotInstance) {
       handleoutsideClickDeselects && handleoutsideClickDeselects(event);
     }
   };
   (0, _react.useEffect)(function () {
-    var _hotTableRef$current13;
+    var _hotTableRef$current12;
     if (typeof hiddenColumns === 'undefined') return;
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current13 = hotTableRef.current) !== null && _hotTableRef$current13 !== void 0 && _hotTableRef$current13.hotInstance) {
-      var _hotTableRef$current14;
-      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current14 = hotTableRef.current) === null || _hotTableRef$current14 === void 0 ? void 0 : _hotTableRef$current14.hotInstance;
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current12 = hotTableRef.current) !== null && _hotTableRef$current12 !== void 0 && _hotTableRef$current12.hotInstance) {
+      var _hotTableRef$current13;
+      var hotTableObj = hotTableRef === null || hotTableRef === void 0 || (_hotTableRef$current13 = hotTableRef.current) === null || _hotTableRef$current13 === void 0 ? void 0 : _hotTableRef$current13.hotInstance;
       hotTableObj.updateSettings({
         hiddenColumns: {
           columns: hiddenColumns

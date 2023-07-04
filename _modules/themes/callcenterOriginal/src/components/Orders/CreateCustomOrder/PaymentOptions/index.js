@@ -96,7 +96,7 @@ var paypalBtnStyle = {
   size: 'responsive'
 };
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _list$filter, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodSelected$da3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _paymethodSelected$da4, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _cart$balance2, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _isOpenMethod$paymeth30, _isOpenMethod$paymeth31, _isOpenMethod$paymeth32, _isOpenMethod$paymeth33, _isOpenMethod$paymeth34, _isOpenMethod$paymeth35, _isOpenMethod$paymeth36, _isOpenMethod$paymeth37;
+  var _list$filter, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _paymethodSelected$da3, _isOpenMethod$paymeth5, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _paymethodSelected$da4, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _cart$balance2, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27;
   var cart = props.cart,
     errorCash = props.errorCash,
     isLoading = props.isLoading,
@@ -150,15 +150,15 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     return pay.paymethod;
   });
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
-  var supportedMethods = list === null || list === void 0 ? void 0 : (_list$filter = list.filter(function (p) {
+  var supportedMethods = list === null || list === void 0 || (_list$filter = list.filter(function (p) {
     return !multiCheckoutMethods.includes(p.gateway);
   })) === null || _list$filter === void 0 ? void 0 : _list$filter.filter(function (p) {
     return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
   });
   var paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay'];
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
-    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6;
-    if (paymethodsFieldRequired.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) && options.type === 1 && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.driver_tip) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie5 = _validationFields$fie4.checkout) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.driver_tip) !== null && _validationFields$fie6 !== void 0 && _validationFields$fie6.required && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0) {
+    var _validationFields$fie, _validationFields$fie2;
+    if (paymethodsFieldRequired.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) && options.type === 1 && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.checkout) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.driver_tip) !== null && _validationFields$fie !== void 0 && _validationFields$fie.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie2 = validationFields.fields) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.driver_tip) !== null && _validationFields$fie2 !== void 0 && _validationFields$fie2.required && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0) {
       setAlertState({
         open: true,
         content: [t('DRIVER_TIPS_REQUIRED', 'Driver tips is required, please select a driver tip before select this paymethod')]
@@ -232,7 +232,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       key: paymethod.id
     }, (!isCustomerMode && paymethod.gateway || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isDisabled: isDisabled,
-      className: "".concat(((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) || (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth === void 0 ? void 0 : _isOpenMethod$paymeth.id)) === paymethod.id ? 'active' : ''),
+      className: "".concat(((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) || (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth === void 0 ? void 0 : _isOpenMethod$paymeth.id)) === paymethod.id ? 'active' : ''),
       onClick: function onClick() {
         return handlePaymentMethodClick(paymethod);
       }
@@ -250,58 +250,58 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       }
     }));
   }), paymethodsList.error && paymethodsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
-    content: (paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$error = paymethodsList.error[0]) === null || _paymethodsList$error === void 0 ? void 0 : _paymethodsList$error.message) || (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0])
+    content: (paymethodsList === null || paymethodsList === void 0 || (_paymethodsList$error = paymethodsList.error[0]) === null || _paymethodsList$error === void 0 ? void 0 : _paymethodsList$error.message) || (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0])
   }), !(paymethodsList.loading || isLoading) && !paymethodsList.error && (!(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.paymethods) || supportedMethods.length === 0) && /*#__PURE__*/_react.default.createElement("p", null, t('NO_PAYMENT_METHODS', 'No payment methods!'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
     data: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.data,
     orderTotal: (_cart$balance = cart === null || cart === void 0 ? void 0 : cart.balance) !== null && _cart$balance !== void 0 ? _cart$balance : cart === null || cart === void 0 ? void 0 : cart.total,
-    defaultValue: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da2 = paymethodSelected.data) === null || _paymethodSelected$da2 === void 0 ? void 0 : _paymethodSelected$da2.cash,
+    defaultValue: paymethodSelected === null || paymethodSelected === void 0 || (_paymethodSelected$da2 = paymethodSelected.data) === null || _paymethodSelected$da2 === void 0 ? void 0 : _paymethodSelected$da2.cash,
     onChangeData: handlePaymethodDataChange,
     setErrorCash: props.setErrorCash
-  }), ((isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth2 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth2 === void 0 ? void 0 : _isOpenMethod$paymeth2.gateway) === 'stripe' || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe') && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
+  }), ((isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth2 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth2 === void 0 ? void 0 : _isOpenMethod$paymeth2.gateway) === 'stripe' || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe') && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
     setCardList: setCardList,
     paymethod: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : isOpenMethod.paymethod,
     businessId: props.businessId,
-    publicKey: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth3 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth3 === void 0 ? void 0 : (_isOpenMethod$paymeth4 = _isOpenMethod$paymeth3.credentials) === null || _isOpenMethod$paymeth4 === void 0 ? void 0 : _isOpenMethod$paymeth4.publishable,
+    publicKey: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth3 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth3 === void 0 || (_isOpenMethod$paymeth3 = _isOpenMethod$paymeth3.credentials) === null || _isOpenMethod$paymeth3 === void 0 ? void 0 : _isOpenMethod$paymeth3.publishable,
     onPaymentChange: onPaymentChange,
-    payType: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth5 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth5 === void 0 ? void 0 : _isOpenMethod$paymeth5.name,
+    payType: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth4 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth4 === void 0 ? void 0 : _isOpenMethod$paymeth4.name,
     onSelectCard: handlePaymethodDataChange,
     onCancel: function onCancel() {
       return handlePaymethodClick(null);
     },
-    paymethodSelected: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da3 = paymethodSelected.data) === null || _paymethodSelected$da3 === void 0 ? void 0 : _paymethodSelected$da3.id,
+    paymethodSelected: paymethodSelected === null || paymethodSelected === void 0 || (_paymethodSelected$da3 = paymethodSelected.data) === null || _paymethodSelected$da3 === void 0 ? void 0 : _paymethodSelected$da3.id,
     handlePaymentMethodClick: handlePaymentMethodClick
-  }), (cardsPaymethods.includes(isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth6 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth6 === void 0 ? void 0 : _isOpenMethod$paymeth6.gateway) || cardsPaymethods.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway)) && /*#__PURE__*/_react.default.createElement(_PaymentOptionCard.PaymentOptionCard, {
+  }), (cardsPaymethods.includes(isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth5 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth5 === void 0 ? void 0 : _isOpenMethod$paymeth5.gateway) || cardsPaymethods.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway)) && /*#__PURE__*/_react.default.createElement(_PaymentOptionCard.PaymentOptionCard, {
     setCardList: setCardList,
     paymethod: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : isOpenMethod.paymethod,
     businessId: props.businessId,
-    publicKey: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth7 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth7 === void 0 ? void 0 : (_isOpenMethod$paymeth8 = _isOpenMethod$paymeth7.credentials) === null || _isOpenMethod$paymeth8 === void 0 ? void 0 : _isOpenMethod$paymeth8.publishable,
-    gateway: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth9 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth9 === void 0 ? void 0 : _isOpenMethod$paymeth9.gateway) || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway),
+    publicKey: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth6 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth6 === void 0 || (_isOpenMethod$paymeth6 = _isOpenMethod$paymeth6.credentials) === null || _isOpenMethod$paymeth6 === void 0 ? void 0 : _isOpenMethod$paymeth6.publishable,
+    gateway: (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth7 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth7 === void 0 ? void 0 : _isOpenMethod$paymeth7.gateway) || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway),
     onPaymentChange: onPaymentChange,
-    payType: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth10 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth10 === void 0 ? void 0 : _isOpenMethod$paymeth10.name,
+    payType: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth8 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth8 === void 0 ? void 0 : _isOpenMethod$paymeth8.name,
     onSelectCard: handlePaymethodDataChange,
     onCancel: function onCancel() {
       return handlePaymethodClick(null);
     },
-    paymethodSelected: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da4 = paymethodSelected.data) === null || _paymethodSelected$da4 === void 0 ? void 0 : _paymethodSelected$da4.id,
+    paymethodSelected: paymethodSelected === null || paymethodSelected === void 0 || (_paymethodSelected$da4 = paymethodSelected.data) === null || _paymethodSelected$da4 === void 0 ? void 0 : _paymethodSelected$da4.id,
     handlePaymentMethodClick: handlePaymentMethodClick
   }), stripeOptions.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && (paymethodData === null || paymethodData === void 0 ? void 0 : paymethodData.card) && !isCustomerMode && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'stripe' && /*#__PURE__*/_react.default.createElement(_styles.PayCardSelected, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "checks"
   }, /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null)), /*#__PURE__*/_react.default.createElement("span", {
     className: "brand"
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: (0, _utils.getIconCard)(paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand),
-    alt: paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.brand
-  })), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card3 = paymethodData.card) === null || _paymethodData$card3 === void 0 ? void 0 : _paymethodData$card3.last4))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    src: (0, _utils.getIconCard)(paymethodData === null || paymethodData === void 0 || (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand),
+    alt: paymethodData === null || paymethodData === void 0 || (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.brand
+  })), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 || (_paymethodData$card3 = paymethodData.card) === null || _paymethodData$card3 === void 0 ? void 0 : _paymethodData$card3.last4))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     className: "modal-info",
-    open: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth11 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth11 === void 0 ? void 0 : _isOpenMethod$paymeth11.gateway) === 'paypal' && !paymethodData.id,
+    open: (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth9 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth9 === void 0 ? void 0 : _isOpenMethod$paymeth9.gateway) === 'paypal' && !paymethodData.id,
     onClose: function onClose() {
       return handlePaymethodClick(null);
     },
     title: t('PAY_WITH_PAYPAL', 'Pay with PayPal')
-  }, (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth12 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth12 === void 0 ? void 0 : _isOpenMethod$paymeth12.gateway) === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
-    clientId: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth13 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth13 === void 0 ? void 0 : (_isOpenMethod$paymeth14 = _isOpenMethod$paymeth13.credentials) === null || _isOpenMethod$paymeth14 === void 0 ? void 0 : _isOpenMethod$paymeth14.client_id,
+  }, (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth10 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth10 === void 0 ? void 0 : _isOpenMethod$paymeth10.gateway) === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
+    clientId: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth11 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth11 === void 0 || (_isOpenMethod$paymeth11 = _isOpenMethod$paymeth11.credentials) === null || _isOpenMethod$paymeth11 === void 0 ? void 0 : _isOpenMethod$paymeth11.client_id,
     body: {
-      paymethod_id: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth15 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth15 === void 0 ? void 0 : _isOpenMethod$paymeth15.id,
+      paymethod_id: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth12 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth12 === void 0 ? void 0 : _isOpenMethod$paymeth12.id,
       amount: (_cart$balance2 = cart === null || cart === void 0 ? void 0 : cart.balance) !== null && _cart$balance2 !== void 0 ? _cart$balance2 : cart.total,
       delivery_zone_id: cart.delivery_zone_id,
       cartUuid: cart.uuid
@@ -313,16 +313,16 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     title: t('SELECT_A_CARD', 'Select a card'),
-    open: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth16 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth16 === void 0 ? void 0 : _isOpenMethod$paymeth16.gateway) === 'stripe_connect' && !paymethodData.id,
+    open: (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth13 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth13 === void 0 ? void 0 : _isOpenMethod$paymeth13.gateway) === 'stripe_connect' && !paymethodData.id,
     className: "modal-info",
     onClose: function onClose() {
       return handlePaymethodClick(null);
     }
-  }, (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth17 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth17 === void 0 ? void 0 : _isOpenMethod$paymeth17.gateway) === 'stripe_connect' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
+  }, (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth14 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth14 === void 0 ? void 0 : _isOpenMethod$paymeth14.gateway) === 'stripe_connect' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripe, {
     paymethod: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : isOpenMethod.paymethod,
     businessId: props.businessId,
-    publicKey: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth18 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth18 === void 0 ? void 0 : (_isOpenMethod$paymeth19 = _isOpenMethod$paymeth18.credentials) === null || _isOpenMethod$paymeth19 === void 0 ? void 0 : (_isOpenMethod$paymeth20 = _isOpenMethod$paymeth19.stripe) === null || _isOpenMethod$paymeth20 === void 0 ? void 0 : _isOpenMethod$paymeth20.publishable,
-    clientSecret: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth21 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth21 === void 0 ? void 0 : (_isOpenMethod$paymeth22 = _isOpenMethod$paymeth21.credentials) === null || _isOpenMethod$paymeth22 === void 0 ? void 0 : _isOpenMethod$paymeth22.publishable,
+    publicKey: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth15 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth15 === void 0 || (_isOpenMethod$paymeth15 = _isOpenMethod$paymeth15.credentials) === null || _isOpenMethod$paymeth15 === void 0 || (_isOpenMethod$paymeth15 = _isOpenMethod$paymeth15.stripe) === null || _isOpenMethod$paymeth15 === void 0 ? void 0 : _isOpenMethod$paymeth15.publishable,
+    clientSecret: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth16 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth16 === void 0 || (_isOpenMethod$paymeth16 = _isOpenMethod$paymeth16.credentials) === null || _isOpenMethod$paymeth16 === void 0 ? void 0 : _isOpenMethod$paymeth16.publishable,
     payType: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.name,
     onSelectCard: handlePaymethodDataChange,
     onCancel: function onCancel() {
@@ -331,17 +331,17 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     paymethodSelected: paymethodSelected
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     title: t('ADD_CARD', 'Add card'),
-    open: (stripeDirectMethods === null || stripeDirectMethods === void 0 ? void 0 : stripeDirectMethods.includes(isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth23 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth23 === void 0 ? void 0 : _isOpenMethod$paymeth23.gateway)) && !paymethodData.id,
+    open: (stripeDirectMethods === null || stripeDirectMethods === void 0 ? void 0 : stripeDirectMethods.includes(isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth17 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth17 === void 0 ? void 0 : _isOpenMethod$paymeth17.gateway)) && !paymethodData.id,
     className: "modal-info",
     onClose: function onClose() {
       return handlePaymethodClick(null);
     }
-  }, !(isOpenMethod !== null && isOpenMethod !== void 0 && (_isOpenMethod$paymeth24 = isOpenMethod.paymethod) !== null && _isOpenMethod$paymeth24 !== void 0 && (_isOpenMethod$paymeth25 = _isOpenMethod$paymeth24.credentials) !== null && _isOpenMethod$paymeth25 !== void 0 && _isOpenMethod$paymeth25.publishable) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PUBLISHABLE_KEY', 'Please add a publishable key'))), (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth26 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth26 === void 0 ? void 0 : (_isOpenMethod$paymeth27 = _isOpenMethod$paymeth26.credentials) === null || _isOpenMethod$paymeth27 === void 0 ? void 0 : _isOpenMethod$paymeth27.publishable) && (stripeDirectMethods === null || stripeDirectMethods === void 0 ? void 0 : stripeDirectMethods.includes(isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth28 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth28 === void 0 ? void 0 : _isOpenMethod$paymeth28.gateway)) && /*#__PURE__*/_react.default.createElement(_StripeElementsForm.StripeElementsForm, {
+  }, !(isOpenMethod !== null && isOpenMethod !== void 0 && (_isOpenMethod$paymeth18 = isOpenMethod.paymethod) !== null && _isOpenMethod$paymeth18 !== void 0 && (_isOpenMethod$paymeth18 = _isOpenMethod$paymeth18.credentials) !== null && _isOpenMethod$paymeth18 !== void 0 && _isOpenMethod$paymeth18.publishable) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PUBLISHABLE_KEY', 'Please add a publishable key'))), (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth19 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth19 === void 0 || (_isOpenMethod$paymeth19 = _isOpenMethod$paymeth19.credentials) === null || _isOpenMethod$paymeth19 === void 0 ? void 0 : _isOpenMethod$paymeth19.publishable) && (stripeDirectMethods === null || stripeDirectMethods === void 0 ? void 0 : stripeDirectMethods.includes(isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth20 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth20 === void 0 ? void 0 : _isOpenMethod$paymeth20.gateway)) && /*#__PURE__*/_react.default.createElement(_StripeElementsForm.StripeElementsForm, {
     methodsPay: methodsPay,
-    paymethod: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth29 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth29 === void 0 ? void 0 : _isOpenMethod$paymeth29.gateway,
+    paymethod: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth21 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth21 === void 0 ? void 0 : _isOpenMethod$paymeth21.gateway,
     businessId: props.businessId,
     cart: cart,
-    publicKey: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth30 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth30 === void 0 ? void 0 : (_isOpenMethod$paymeth31 = _isOpenMethod$paymeth30.credentials) === null || _isOpenMethod$paymeth31 === void 0 ? void 0 : _isOpenMethod$paymeth31.publishable) || (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth32 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth32 === void 0 ? void 0 : (_isOpenMethod$paymeth33 = _isOpenMethod$paymeth32.credentials) === null || _isOpenMethod$paymeth33 === void 0 ? void 0 : _isOpenMethod$paymeth33.publishable_key),
+    publicKey: (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth22 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth22 === void 0 || (_isOpenMethod$paymeth22 = _isOpenMethod$paymeth22.credentials) === null || _isOpenMethod$paymeth22 === void 0 ? void 0 : _isOpenMethod$paymeth22.publishable) || (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth23 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth23 === void 0 || (_isOpenMethod$paymeth23 = _isOpenMethod$paymeth23.credentials) === null || _isOpenMethod$paymeth23 === void 0 ? void 0 : _isOpenMethod$paymeth23.publishable_key),
     handleSource: handlePaymethodDataChange,
     onCancel: function onCancel() {
       return handlePaymethodClick(null);
@@ -349,7 +349,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     handlePlaceOrder: handlePlaceOrder
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     title: t('STRIPE_REDIRECT', 'Stripe Redirect'),
-    open: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth34 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth34 === void 0 ? void 0 : _isOpenMethod$paymeth34.gateway) === 'stripe_redirect' && !paymethodData.type,
+    open: (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth24 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth24 === void 0 ? void 0 : _isOpenMethod$paymeth24.gateway) === 'stripe_redirect' && !paymethodData.type,
     className: "modal-info",
     onClose: function onClose() {
       return handlePaymethodClick(null);
@@ -361,16 +361,16 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     handleStripeRedirect: handlePaymethodDataChange
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     title: t('SQUARE', 'Square'),
-    open: (isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth35 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth35 === void 0 ? void 0 : _isOpenMethod$paymeth35.gateway) === 'square' && !paymethodData.token,
+    open: (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth25 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth25 === void 0 ? void 0 : _isOpenMethod$paymeth25.gateway) === 'square' && !paymethodData.token,
     onClose: function onClose() {
       return handlePaymethodClick(null);
     }
   }, /*#__PURE__*/_react.default.createElement(_PaymentOptionSquare.PaymentOptionSquare, {
     businessId: props.businessId,
     cartTotal: cart === null || cart === void 0 ? void 0 : cart.total,
-    data: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth36 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth36 === void 0 ? void 0 : _isOpenMethod$paymeth36.credentials,
+    data: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth26 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth26 === void 0 ? void 0 : _isOpenMethod$paymeth26.credentials,
     body: {
-      paymethod_id: isOpenMethod === null || isOpenMethod === void 0 ? void 0 : (_isOpenMethod$paymeth37 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth37 === void 0 ? void 0 : _isOpenMethod$paymeth37.id,
+      paymethod_id: isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth27 = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth27 === void 0 ? void 0 : _isOpenMethod$paymeth27.id,
       amount: cart.total,
       delivery_zone_id: cart.delivery_zone_id,
       cartUuid: cart.uuid

@@ -33,6 +33,6 @@ var OrderActionsSection = function OrderActionsSection(props) {
         page: 'orders'
       });
     }
-  }, isService ? t('YOUR_APPOINTMENTS', 'Your appointments') : t('YOUR_ORDERS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.YOUR_ORDERS) || 'Your Orders'))));
+  }, isService ? t('YOUR_APPOINTMENTS', 'Your appointments') : t('YOUR_ORDERS', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.YOUR_ORDERS) || 'Your Orders'))));
 };
 exports.OrderActionsSection = OrderActionsSection;

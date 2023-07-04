@@ -105,8 +105,8 @@ var ExclamationWrapper = _styledComponents.default.div(_templateObject33 || (_te
   var driver = _ref3.driver;
   return driver ? 'translate(50%,-25%)' : 'translate(300%, -25%)';
 }, function (props) {
-  var _props$theme7, _props$theme7$colors;
-  return (_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : (_props$theme7$colors = _props$theme7.colors) === null || _props$theme7$colors === void 0 ? void 0 : _props$theme7$colors.primary;
+  var _props$theme7;
+  return (_props$theme7 = props.theme) === null || _props$theme7 === void 0 || (_props$theme7 = _props$theme7.colors) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.primary;
 });
 exports.ExclamationWrapper = ExclamationWrapper;
 var WrapperLeftContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n\n"])));

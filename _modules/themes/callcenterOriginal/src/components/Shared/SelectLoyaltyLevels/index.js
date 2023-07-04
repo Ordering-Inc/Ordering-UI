@@ -55,7 +55,7 @@ var SelectLoyaltyLevelsUI = function SelectLoyaltyLevelsUI(props) {
     if (searchValue) {
       _filteredLevels = levelList.levels.filter(function (level) {
         var _level$name;
-        return level === null || level === void 0 ? void 0 : (_level$name = level.name) === null || _level$name === void 0 ? void 0 : _level$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
+        return level === null || level === void 0 || (_level$name = level.name) === null || _level$name === void 0 ? void 0 : _level$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       _filteredLevels = _toConsumableArray(levelList.levels);

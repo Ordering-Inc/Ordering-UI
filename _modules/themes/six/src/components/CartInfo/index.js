@@ -25,7 +25,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CartInfo = function CartInfo(props) {
-  var _theme$images, _theme$images$logos, _cart$products, _configs$dates_moment;
+  var _theme$images, _cart$products, _configs$dates_moment;
   var handleGoBackPage = props.handleGoBackPage,
     cart = props.cart,
     businessName = props.businessName,
@@ -55,7 +55,7 @@ var CartInfo = function CartInfo(props) {
     var handleChangeOrderType = props.handleChangeOrderType,
       typeSelected = props.typeSelected,
       orderTypes = props.orderTypes;
-    var configTypes = (configs === null || configs === void 0 ? void 0 : (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 ? void 0 : _configs$order_types_.value.split('|').map(function (value) {
+    var configTypes = (configs === null || configs === void 0 || (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 ? void 0 : _configs$order_types_.value.split('|').map(function (value) {
       return Number(value);
     })) || [];
     var filteredOrderTypes = configTypes ? orderTypes.filter(function (type) {
@@ -104,12 +104,12 @@ var CartInfo = function CartInfo(props) {
     alt: "Isotype",
     width: "35px",
     height: "45px",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.isotype,
+    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.logos) === null || _theme$images === void 0 ? void 0 : _theme$images.isotype,
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles.HeaderText, {
     onClick: handleGoBackPage
-  }, /*#__PURE__*/_react.default.createElement(_AiOutlineLeft.default, null), windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('BACK_STORE', 'Back to Store')))), /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.OrderReview, null, t('REVIEW_ORDER', 'Review Order'), " \xA0 (", ' ', cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length, ' ', ")"), /*#__PURE__*/_react.default.createElement(_styles.PreTime, null, t('PREP_TIME', 'Prep time'), ' ', ':', ' ', options !== null && options !== void 0 && options.moment ? parseDate(options === null || options === void 0 ? void 0 : options.moment, {
-    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineLeft.default, null), windowSize.width > 768 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('BACK_STORE', 'Back to Store')))), /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.OrderReview, null, t('REVIEW_ORDER', 'Review Order'), " \xA0 (", ' ', cart === null || cart === void 0 || (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length, ' ', ")"), /*#__PURE__*/_react.default.createElement(_styles.PreTime, null, t('PREP_TIME', 'Prep time'), ' ', ':', ' ', options !== null && options !== void 0 && options.moment ? parseDate(options === null || options === void 0 ? void 0 : options.moment, {
+    outputFormat: configs === null || configs === void 0 || (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')), /*#__PURE__*/_react.default.createElement(_styles.SubTitle, null, t('STORE', 'Store'), ':'), /*#__PURE__*/_react.default.createElement(_styles.PickStore, {
     onClick: function onClick() {
       return handleGoToPage({

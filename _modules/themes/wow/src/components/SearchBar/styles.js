@@ -14,8 +14,8 @@ var BusinessSearch = _styledComponents.default.div(_templateObject || (_template
   var _props$theme;
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      padding-right: 35px;\n    "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      padding-left: 35px;\n    "])));
 }, function (props) {
-  var _props$theme2, _props$theme2$colors;
-  return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : (_props$theme2$colors = _props$theme2.colors) === null || _props$theme2$colors === void 0 ? void 0 : _props$theme2$colors.backgroundPage;
+  var _props$theme2;
+  return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 || (_props$theme2 = _props$theme2.colors) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.backgroundPage;
 });
 exports.BusinessSearch = BusinessSearch;
 var DeleteContent = _styledComponents.default.span(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: absolute;\n  font-weight: 300;\n  padding: 10px 0;\n  color: #333;\n  font-size: 14px;\n  left: 15px;\n  border-radius: 25%;\n  max-height: 100%;\n  ", "\n  span{\n    cursor: pointer;\n  }\n  img{\n    width: 20px;\n    transform: translate(-25%, 0%);\n    ", "\n  }\n"])), function (props) {
@@ -27,10 +27,10 @@ var DeleteContent = _styledComponents.default.span(_templateObject4 || (_templat
 });
 exports.DeleteContent = DeleteContent;
 var SearchIcon = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  background-image: url(", ");\n  background-position: right 10px center;\n  background-repeat: no-repeat;\n  background-size: 15px;\n  background-color: ", ";\n"])), function (props) {
-  var _props$theme5, _props$theme5$images, _props$theme5$images$;
-  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : (_props$theme5$images = _props$theme5.images) === null || _props$theme5$images === void 0 ? void 0 : (_props$theme5$images$ = _props$theme5$images.general) === null || _props$theme5$images$ === void 0 ? void 0 : _props$theme5$images$.searchIcon;
+  var _props$theme5;
+  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 || (_props$theme5 = _props$theme5.images) === null || _props$theme5 === void 0 || (_props$theme5 = _props$theme5.general) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.searchIcon;
 }, function (props) {
-  var _props$theme6, _props$theme6$colors;
-  return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : (_props$theme6$colors = _props$theme6.colors) === null || _props$theme6$colors === void 0 ? void 0 : _props$theme6$colors.backgroundPage;
+  var _props$theme6;
+  return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 || (_props$theme6 = _props$theme6.colors) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.backgroundPage;
 });
 exports.SearchIcon = SearchIcon;

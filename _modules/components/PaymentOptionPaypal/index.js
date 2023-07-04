@@ -56,7 +56,7 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
     configs = _useConfig2[0].configs;
   var paymentPaypalProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PaymentOptionPaypalUI,
-    currency: configs === null || configs === void 0 ? void 0 : (_configs$stripe_curre = configs.stripe_currency) === null || _configs$stripe_curre === void 0 ? void 0 : _configs$stripe_curre.value
+    currency: configs === null || configs === void 0 || (_configs$stripe_curre = configs.stripe_currency) === null || _configs$stripe_curre === void 0 ? void 0 : _configs$stripe_curre.value
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PaymentOptionPaypal, paymentPaypalProps);
 };

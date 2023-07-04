@@ -69,7 +69,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     }, t('LOADING', 'loading'), "...")
   }];
   (0, _react.useEffect)(function () {
-    var _theme$images, _theme$images$icons;
+    var _theme$images;
     var _driversOptionList = [{
       value: 'default',
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
@@ -78,7 +78,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
         small: small,
         className: "driver-photo"
       }, /*#__PURE__*/_react.default.createElement(_styles.DriverImage, {
-        bgimage: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver,
+        bgimage: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.noDriver,
         small: small
       })), /*#__PURE__*/_react.default.createElement(_styles.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriverNameContainer, {
         className: "driver-info"
@@ -108,7 +108,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
         _driverList = driversList.drivers;
       }
       var _driversOptionListTemp = _driverList.map(function (driver, i) {
-        var _theme$images$icons2;
+        var _theme$images$icons;
         return {
           value: driver.id,
           showDisable: isFilterView ? true : !(isFilterView || driver !== null && driver !== void 0 && driver.available && !(driver !== null && driver !== void 0 && driver.busy)),
@@ -121,7 +121,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
             small: small,
             className: "driver-photo"
           }, /*#__PURE__*/_react.default.createElement(_styles.DriverImage, {
-            bgimage: driver.photo || ((_theme$images$icons2 = theme.images.icons) === null || _theme$images$icons2 === void 0 ? void 0 : _theme$images$icons2.noDriver),
+            bgimage: driver.photo || ((_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver),
             small: small
           })), /*#__PURE__*/_react.default.createElement(_styles.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriverNameContainer, {
             className: "driver-info"

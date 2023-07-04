@@ -38,7 +38,7 @@ var ProfessionalBusinessFilter = function ProfessionalBusinessFilter(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
-    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SEARCH_PRODUCTS) || 'Search Products'),
+    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SEARCH_PRODUCTS) || 'Search Products'),
     lazyLoad: business === null || business === void 0 ? void 0 : business.lazy_load_products_recommended
   })), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.FilterWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.FilterItem, null, /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER_STEP_2_TIME_OPTION_MIN', 'Min'), "."), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     value: (priceFilterValues === null || priceFilterValues === void 0 ? void 0 : priceFilterValues.min) || '',

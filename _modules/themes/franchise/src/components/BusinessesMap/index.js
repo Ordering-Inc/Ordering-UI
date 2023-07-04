@@ -22,7 +22,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessesMapUI = function BusinessesMapUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _configState$configs, _configState$configs2, _props$afterComponent, _props$afterElements;
   var userLocation = props.userLocation,
     businessLocations = props.businessLocations,
     onBusinessClick = props.onBusinessClick,
@@ -57,11 +57,11 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
-    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value,
+    apiKey: configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.google_maps_api_key) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value,
     location: userLocation,
     locations: businessLocations,
     mapControls: googleMapsControls,
-    maxLimitLocation: parseInt(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.meters_to_change_address) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value),
+    maxLimitLocation: parseInt(configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.meters_to_change_address) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value),
     businessMap: true,
     noDistanceValidation: true,
     onBusinessClick: onBusinessClick,

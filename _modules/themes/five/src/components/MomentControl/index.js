@@ -37,7 +37,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var MomentControlUI = function MomentControlUI(props) {
-  var _configs$general_hour, _configs$general_hour2, _datesList$slice, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _configs$max_days_pre4, _configs$max_days_pre5, _configs$max_days_pre6;
+  var _configs$general_hour, _datesList$slice, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _configs$max_days_pre4, _configs$max_days_pre5, _configs$max_days_pre6;
   var isAsap = props.isAsap,
     datesList = props.datesList,
     hoursList = props.hoursList,
@@ -58,7 +58,7 @@ var MomentControlUI = function MomentControlUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var is12hours = configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : (_configs$general_hour2 = _configs$general_hour.value) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.includes('hh:mm');
+  var is12hours = configs === null || configs === void 0 || (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 || (_configs$general_hour = _configs$general_hour.value) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.includes('hh:mm');
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseTime = _useUtils2[0].parseTime;
@@ -99,7 +99,7 @@ var MomentControlUI = function MomentControlUI(props) {
   var getTimes = function getTimes(curdate, schedule) {
     var _curdate$split;
     validateSelectedDate(curdate, schedule);
-    var dateParts = curdate === null || curdate === void 0 ? void 0 : (_curdate$split = curdate.split) === null || _curdate$split === void 0 ? void 0 : _curdate$split.call(curdate, '-');
+    var dateParts = curdate === null || curdate === void 0 || (_curdate$split = curdate.split) === null || _curdate$split === void 0 ? void 0 : _curdate$split.call(curdate, '-');
     var dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     var times = (0, _utils.getTimes)(dateSeleted, schedule, is12hours);
     return times;
@@ -127,7 +127,7 @@ var MomentControlUI = function MomentControlUI(props) {
       }
       _timeLists = hoursList.filter(function (hour) {
         var _Object$keys3, _schedule$lapses;
-        return (((_Object$keys3 = Object.keys(business || {})) === null || _Object$keys3 === void 0 ? void 0 : _Object$keys3.length) === 0 || (schedule === null || schedule === void 0 ? void 0 : (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.some(function (lapse) {
+        return (((_Object$keys3 = Object.keys(business || {})) === null || _Object$keys3 === void 0 ? void 0 : _Object$keys3.length) === 0 || (schedule === null || schedule === void 0 || (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.some(function (lapse) {
           return (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) >= (0, _moment.default)(dateSelected + " ".concat(lapse.open.hour, ":").concat(lapse.open.minute)).add(preorderLeadTime, 'minutes') && (0, _moment.default)(dateSelected + " ".concat(hour.endTime)) <= (0, _moment.default)(dateSelected + " ".concat(lapse.close.hour, ":").concat(lapse.close.minute));
         }))) && (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) < (0, _moment.default)(dateSelected + " ".concat(hour.endTime)) && ((0, _moment.default)().add(preorderLeadTime, 'minutes') < (0, _moment.default)(dateSelected + " ".concat(hour.startTime)) || !cateringPreorder);
       }).map(function (hour) {
@@ -178,7 +178,7 @@ var MomentControlUI = function MomentControlUI(props) {
     onClick: function onClick() {
       return handleCheckBoxChange(null);
     }
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later')))), (!isASP || isAppoint) && (!props.isCustomLayout ? /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, !isAppoint && !isCart && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, ((_datesList$slice = datesList.slice(cateringPreorder && preorderMinimumDays || 0, Number(cateringPreorder ? preorderMaximumDays : (_configs$max_days_pre = configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) !== null && _configs$max_days_pre !== void 0 ? _configs$max_days_pre : 6, 10))) === null || _datesList$slice === void 0 ? void 0 : _datesList$slice.length) === 0 ? (0, _moment.default)(dateSelected).format('Do MMMM, yyyy') : (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null) : /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null), /*#__PURE__*/_react.default.createElement("span", null, t('SCHEDULE_FOR_LATER', 'Schedule for later')))), (!isASP || isAppoint) && (!props.isCustomLayout ? /*#__PURE__*/_react.default.createElement(_styles.OrderTimeWrapper, null, !isAppoint && !isCart && /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MonthYearLayer, null, /*#__PURE__*/_react.default.createElement("span", null, ((_datesList$slice = datesList.slice(cateringPreorder && preorderMinimumDays || 0, Number(cateringPreorder ? preorderMaximumDays : (_configs$max_days_pre = configs === null || configs === void 0 || (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) !== null && _configs$max_days_pre !== void 0 ? _configs$max_days_pre : 6, 10))) === null || _datesList$slice === void 0 ? void 0 : _datesList$slice.length) === 0 ? (0, _moment.default)(dateSelected).format('Do MMMM, yyyy') : (0, _moment.default)(dateSelected).format('MMMM, yyyy'))), /*#__PURE__*/_react.default.createElement(_styles.DaysSwiper, {
     left: /*#__PURE__*/_react.default.createElement(_BsCaretLeftFill.default, null)
   }, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     spaceBetween: 0,
@@ -197,7 +197,7 @@ var MomentControlUI = function MomentControlUI(props) {
         spaceBetween: 0
       },
       769: {
-        slidesPerView: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) < 7 ? configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre4 = configs.max_days_preorder) === null || _configs$max_days_pre4 === void 0 ? void 0 : _configs$max_days_pre4.value : 7,
+        slidesPerView: (configs === null || configs === void 0 || (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) < 7 ? configs === null || configs === void 0 || (_configs$max_days_pre4 = configs.max_days_preorder) === null || _configs$max_days_pre4 === void 0 ? void 0 : _configs$max_days_pre4.value : 7,
         spaceBetween: 0
       }
     },
@@ -205,7 +205,7 @@ var MomentControlUI = function MomentControlUI(props) {
     watchSlidesProgress: true,
     className: "swiper-datelist",
     preventClicksPropagation: false
-  }, datesList.slice(cateringPreorder && preorderMinimumDays || 0, Number(cateringPreorder ? preorderMaximumDays : (_configs$max_days_pre5 = configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre6 = configs.max_days_preorder) === null || _configs$max_days_pre6 === void 0 ? void 0 : _configs$max_days_pre6.value) !== null && _configs$max_days_pre5 !== void 0 ? _configs$max_days_pre5 : 6, 10)).map(function (date) {
+  }, datesList.slice(cateringPreorder && preorderMinimumDays || 0, Number(cateringPreorder ? preorderMaximumDays : (_configs$max_days_pre5 = configs === null || configs === void 0 || (_configs$max_days_pre6 = configs.max_days_preorder) === null || _configs$max_days_pre6 === void 0 ? void 0 : _configs$max_days_pre6.value) !== null && _configs$max_days_pre5 !== void 0 ? _configs$max_days_pre5 : 6, 10)).map(function (date) {
     var dateParts = date.split('-');
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2);

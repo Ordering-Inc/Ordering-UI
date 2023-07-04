@@ -22,7 +22,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SearchBar = function SearchBar(props) {
-  var _props$beforeElements, _props$beforeComponen, _el$current, _theme$images, _theme$images$general, _el$current2, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _el$current, _theme$images, _el$current2, _props$afterComponent, _props$afterElements;
   var onSearch = props.onSearch,
     search = props.search,
     placeholder = props.placeholder,
@@ -103,7 +103,7 @@ var SearchBar = function SearchBar(props) {
     autoComplete: "off",
     maxLength: "500",
     style: {
-      backgroundImage: "url(".concat(theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.searchIcon, ")")
+      backgroundImage: "url(".concat(theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.searchIcon, ")")
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.DeleteContent, null, ((_el$current2 = el.current) === null || _el$current2 === void 0 ? void 0 : _el$current2.value) && !isFilter && /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleClear

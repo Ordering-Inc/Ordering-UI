@@ -88,8 +88,8 @@ exports.ShareOrder = ShareOrder;
 var MessagesIcon = _styledComponents.default.span(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n"])));
 exports.MessagesIcon = MessagesIcon;
 var ExclamationWrapper = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(75%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
-  var _props$theme4, _props$theme4$colors;
-  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : (_props$theme4$colors = _props$theme4.colors) === null || _props$theme4$colors === void 0 ? void 0 : _props$theme4$colors.primary;
+  var _props$theme4;
+  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 || (_props$theme4 = _props$theme4.colors) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.primary;
 });
 exports.ExclamationWrapper = ExclamationWrapper;
 var OrderPayInfoWrapper = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  margin: 10px 0;\n  ", "\n  h3 {\n    font-size: 18px;\n    margin: 0px;\n  }\n"])), function (props) {

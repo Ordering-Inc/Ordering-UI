@@ -56,14 +56,14 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   }), /*#__PURE__*/_react.default.createElement(_styles.CategoriesContainer, {
     featured: featured
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categories && categories.length > 0 && categories.map(function (category) {
-    var _theme$images, _theme$images$dummies;
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.CategoryCard, {
       key: category.id,
       onClick: function onClick() {
         return handlerClickCategory(category);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapImage, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryImage, {
-      bgimage: optimizeImage(category.image || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
+      bgimage: optimizeImage(category.image || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles.CategoryName, null, category.name), /*#__PURE__*/_react.default.createElement(_BsChevronRight.default, null));
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.CategoryCard, {

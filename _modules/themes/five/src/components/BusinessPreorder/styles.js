@@ -60,8 +60,8 @@ var TimeItem = _styledComponents.default.div(_templateObject12 || (_templateObje
 }, function (_ref2) {
   var cateringPreorder = _ref2.cateringPreorder;
   return cateringPreorder ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    background: ", ";\n    width: 100%;\n    min-width: 100%;\n    height: 50px;\n    \n    span {\n      font-size: 18px;\n      display: flex;\n      align-items: center;\n      margin: 10px 0;\n      margin-left: 15px;\n      p{\n        position: relative;\n        bottom: 2px;\n      }\n    }\n    ", "\n  "])), function (props) {
-    var _props$theme, _props$theme$colors;
-    return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors = _props$theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage;
+    var _props$theme;
+    return (_props$theme = props.theme) === null || _props$theme === void 0 || (_props$theme = _props$theme.colors) === null || _props$theme === void 0 ? void 0 : _props$theme.backgroundPage;
   }, function (_ref3) {
     var active = _ref3.active;
     return active && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      background: #F5F9FF;\n      color: ", ";\n      span {\n        p{\n          bottom: 0;\n          margin-left: 2px;\n        }\n      }\n    "])), function (props) {
@@ -109,8 +109,8 @@ exports.ClosedBusinessMsg = ClosedBusinessMsg;
 var CheckIcon = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  margin-right: 20px;\n  svg {\n    width: 24px;\n    height: 24px;\n  }\n"])));
 exports.CheckIcon = CheckIcon;
 var CheckedIcon = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  border-radius: 50%;\n  width: 20px;\n  min-width: 20px;\n  height: 20px;\n  box-sizing: border-box;\n  border: 6px solid ", ";\n  margin: 2px 12px 2px 2px;\n  ", "\n  ", "\n"])), function (props) {
-  var _props$theme$colors2;
-  return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.primary;
+  var _props$theme$colors;
+  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    margin: 2px 2px 2px 12px;\n  "])));
 }, function (_ref9) {

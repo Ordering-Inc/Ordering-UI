@@ -57,7 +57,7 @@ var BusinessMenuListUI = function BusinessMenuListUI(props) {
   }, [businessMenuList === null || businessMenuList === void 0 ? void 0 : businessMenuList.menus]);
   var handleChangeBusinessMenu = function handleChangeBusinessMenu(menuId) {
     var _businessMenuList$men;
-    var menu = businessMenuList === null || businessMenuList === void 0 ? void 0 : (_businessMenuList$men = businessMenuList.menus) === null || _businessMenuList$men === void 0 ? void 0 : _businessMenuList$men.find(function (menu) {
+    var menu = businessMenuList === null || businessMenuList === void 0 || (_businessMenuList$men = businessMenuList.menus) === null || _businessMenuList$men === void 0 ? void 0 : _businessMenuList$men.find(function (menu) {
       return menu.id === menuId;
     });
     setMenu(_objectSpread({}, menu));

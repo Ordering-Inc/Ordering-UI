@@ -37,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SidebarMenu = function SidebarMenu(props) {
-  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _options$address4, _options$address4$add, _options$address4$add2, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _options$address4, _configState$configs2, _configState$configs3, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
   var auth = props.auth,
     isHideSignup = props.isHideSignup,
     userCustomer = props.userCustomer,
@@ -73,7 +73,7 @@ var SidebarMenu = function SidebarMenu(props) {
     modalSelected = _useState8[0],
     setModalSelected = _useState8[1];
   var theme = (0, _styledComponents.useTheme)();
-  var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
+  var configTypes = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.order_types_allowed) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').map(function (value) {
     return Number(value);
   })) || [];
   var handleGoToPage = function handleGoToPage(data) {
@@ -174,14 +174,14 @@ var SidebarMenu = function SidebarMenu(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
-    addressState: options === null || options === void 0 ? void 0 : (_options$address4 = options.address) === null || _options$address4 === void 0 ? void 0 : (_options$address4$add = _options$address4.address) === null || _options$address4$add === void 0 ? void 0 : (_options$address4$add2 = _options$address4$add.split(',')) === null || _options$address4$add2 === void 0 ? void 0 : _options$address4$add2[0],
+    addressState: options === null || options === void 0 || (_options$address4 = options.address) === null || _options$address4 === void 0 || (_options$address4 = _options$address4.address) === null || _options$address4 === void 0 || (_options$address4 = _options$address4.split(',')) === null || _options$address4 === void 0 ? void 0 : _options$address4[0],
     onClick: function onClick(variant) {
       return openModal(variant);
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, null, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
     momentState: options === null || options === void 0 ? void 0 : options.moment,
-    onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function (variant) {
+    onClick: (configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.max_days_preorder) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) === -1 || (configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.max_days_preorder) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
   }))), auth && /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
@@ -202,7 +202,7 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     },
     name: "signin"
-  }, t((theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SIGN_IN) || 'Sign in')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t((theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SIGN_IN) || 'Sign in')), !isHideSignup && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "secundary",
     onClick: function onClick() {
       return handleGoToPage({
@@ -211,7 +211,7 @@ var SidebarMenu = function SidebarMenu(props) {
     },
     highlight: 1,
     name: "signup"
-  }, t((theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SIGN_UP) || 'Join now')))), sideBackOver && /*#__PURE__*/_react.default.createElement(_styles.SideBarOver, {
+  }, t((theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SIGN_UP) || 'Join now')))), sideBackOver && /*#__PURE__*/_react.default.createElement(_styles.SideBarOver, {
     onClick: function onClick() {
       return actionSidebar(false);
     }

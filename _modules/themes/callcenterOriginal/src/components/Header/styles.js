@@ -13,9 +13,9 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  border-bottom: 1px solid #E9ECEF;\n"])));
 exports.Header = Header;
 var InnerHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  color: #FFF;\n  justify-content: space-between;\n  width: 98%;\n  margin: 15px auto;\n  align-items: center;\n\n  #center-side {\n    width: ", ";\n  }\n\n  @media (min-width: 1024px) {\n    #center-side {\n      width: calc(60% - 100px);\n    }\n  }\n\n  @media (min-width: 1200px) {\n    #center-side {\n      width: calc(60% - 160px);\n    }\n  }\n\n  @media (min-width: 1500px) {\n    #center-side {\n      width: calc(60% - 200px);\n    }\n  }\n"])), function (_ref) {
-  var _theme$header, _theme$header$compone, _theme$header$compone2;
+  var _theme$header;
   var theme = _ref.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.layout) === null || _theme$header$compone2 === void 0 ? void 0 : _theme$header$compone2.type) === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)';
+  return (theme === null || theme === void 0 || (_theme$header = theme.header) === null || _theme$header === void 0 || (_theme$header = _theme$header.components) === null || _theme$header === void 0 || (_theme$header = _theme$header.layout) === null || _theme$header === void 0 ? void 0 : _theme$header.type) === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)';
 });
 exports.InnerHeader = InnerHeader;
 var LogoHeader = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  img {\n    width: 35px;\n    height: 45px;\n    margin: 0;\n    vertical-align: middle;\n    margin-left: 10px;\n\n    ", "\n\n    @media (min-width: 768px) {\n      width: 150px;\n    }\n  }\n\n  img:nth-child(1) {\n    display: none;\n  }\n\n  @media (min-width: 768px) {\n    img:nth-child(1) {\n      display: block;\n    }\n    img:nth-child(2) {\n      display: none;\n    }\n  }\n"])), function (props) {
@@ -87,10 +87,10 @@ exports.Divider = Divider;
 var AdminSection = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  background: #fff;\n  height: 30px;\n  width: 120px;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 5px;\n  cursor: pointer;\n  p {\n    margin: 0;\n    font-size: 14px;\n  }\n  svg{\n    width: 14px;\n    height: 14px;\n  }\n"])), function (_ref3) {
   var _theme$colors;
   var theme = _ref3.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
+  return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
 }, function (_ref4) {
   var _theme$colors2;
   var theme = _ref4.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
+  return theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
 });
 exports.AdminSection = AdminSection;

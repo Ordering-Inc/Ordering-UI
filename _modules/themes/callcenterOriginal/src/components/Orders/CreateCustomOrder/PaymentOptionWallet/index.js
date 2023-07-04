@@ -60,8 +60,8 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     checkedState = _useState4[0],
     setCheckedState = _useState4[1];
-  var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
-  var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
+  var isWalletCashEnabled = (configs === null || configs === void 0 || (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
+  var isWalletPointsEnabled = (configs === null || configs === void 0 || (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
   var isBusinessWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
     return config.key === 'wallet_cash_enabled';
   })) === null || _businessConfigs$find === void 0 ? void 0 : _businessConfigs$find.value) === '1';
@@ -99,7 +99,7 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
   (0, _react.useEffect)(function () {
     if (!walletsState.loading) {
       var _walletsState$result2;
-      setCheckedState(walletsState === null || walletsState === void 0 ? void 0 : (_walletsState$result2 = walletsState.result) === null || _walletsState$result2 === void 0 ? void 0 : _walletsState$result2.map(function (wallet) {
+      setCheckedState(walletsState === null || walletsState === void 0 || (_walletsState$result2 = walletsState.result) === null || _walletsState$result2 === void 0 ? void 0 : _walletsState$result2.map(function (wallet) {
         var _cart$wallets;
         return !!(cart !== null && cart !== void 0 && (_cart$wallets = cart.wallets) !== null && _cart$wallets !== void 0 && _cart$wallets.find(function (w) {
           return w.id === wallet.id;

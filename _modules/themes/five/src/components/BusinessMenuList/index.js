@@ -39,7 +39,7 @@ var BusinessMenuListUI = function BusinessMenuListUI(props) {
     var _businessMenuList$men;
     if (businessMenuList.loading) return;
     var _menuList = [];
-    if ((businessMenuList === null || businessMenuList === void 0 ? void 0 : (_businessMenuList$men = businessMenuList.menus) === null || _businessMenuList$men === void 0 ? void 0 : _businessMenuList$men.length) > 0) {
+    if ((businessMenuList === null || businessMenuList === void 0 || (_businessMenuList$men = businessMenuList.menus) === null || _businessMenuList$men === void 0 ? void 0 : _businessMenuList$men.length) > 0) {
       setMenu(businessMenuList === null || businessMenuList === void 0 ? void 0 : businessMenuList.menus[0]);
       var _iterator = _createForOfIteratorHelper(businessMenuList === null || businessMenuList === void 0 ? void 0 : businessMenuList.menus),
         _step;
@@ -61,7 +61,7 @@ var BusinessMenuListUI = function BusinessMenuListUI(props) {
   }, [businessMenuList === null || businessMenuList === void 0 ? void 0 : businessMenuList.menus]);
   var handleChangeBusinessMenu = function handleChangeBusinessMenu(menuId) {
     var _businessMenuList$men2;
-    var menu = businessMenuList === null || businessMenuList === void 0 ? void 0 : (_businessMenuList$men2 = businessMenuList.menus) === null || _businessMenuList$men2 === void 0 ? void 0 : _businessMenuList$men2.find(function (menu) {
+    var menu = businessMenuList === null || businessMenuList === void 0 || (_businessMenuList$men2 = businessMenuList.menus) === null || _businessMenuList$men2 === void 0 ? void 0 : _businessMenuList$men2.find(function (menu) {
       return menu.id === menuId;
     });
     setMenu(_objectSpread({}, menu));

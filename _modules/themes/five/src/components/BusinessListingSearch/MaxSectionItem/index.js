@@ -32,7 +32,7 @@ var MaxSectionItem = function MaxSectionItem(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var distanceUnit = configs === null || configs === void 0 ? void 0 : (_configs$distance_uni = configs.distance_unit) === null || _configs$distance_uni === void 0 ? void 0 : _configs$distance_uni.value;
+  var distanceUnit = configs === null || configs === void 0 || (_configs$distance_uni = configs.distance_unit) === null || _configs$distance_uni === void 0 ? void 0 : _configs$distance_uni.value;
   var units = {
     mi: 1609,
     km: 1000

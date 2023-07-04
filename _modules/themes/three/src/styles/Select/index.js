@@ -52,7 +52,7 @@ var Select = function Select(props) {
   var closeSelect = function closeSelect(e) {
     if (open) {
       var _dropdownReference$cu, _outsideContainer$cur;
-      var outsideDropdown = !((_dropdownReference$cu = dropdownReference.current) !== null && _dropdownReference$cu !== void 0 && _dropdownReference$cu.contains(e.target)) && (outsideContainer ? outsideContainer === null || outsideContainer === void 0 ? void 0 : (_outsideContainer$cur = outsideContainer.current) === null || _outsideContainer$cur === void 0 ? void 0 : _outsideContainer$cur.contains(e.target) : true);
+      var outsideDropdown = !((_dropdownReference$cu = dropdownReference.current) !== null && _dropdownReference$cu !== void 0 && _dropdownReference$cu.contains(e.target)) && (outsideContainer ? outsideContainer === null || outsideContainer === void 0 || (_outsideContainer$cur = outsideContainer.current) === null || _outsideContainer$cur === void 0 ? void 0 : _outsideContainer$cur.contains(e.target) : true);
       if (outsideDropdown) {
         setOpen(false);
       }

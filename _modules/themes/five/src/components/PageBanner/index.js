@@ -30,7 +30,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var PageBannerUI = function PageBannerUI(props) {
-  var _pageBannerState$bann, _pageBannerState$bann2, _pageBannerState$bann3, _pageBannerState$bann4, _pageBannerState$bann5, _pageBannerState$bann6;
+  var _pageBannerState$bann, _pageBannerState$bann2, _pageBannerState$bann3, _pageBannerState$bann4;
   var pageBannerState = props.pageBannerState,
     isCustomerMode = props.isCustomerMode;
   var _useSite = (0, _orderingComponents.useSite)(),
@@ -158,12 +158,12 @@ var PageBannerUI = function PageBannerUI(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, pageBannerState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 250
-  })) : ((_pageBannerState$bann = pageBannerState.banner) === null || _pageBannerState$bann === void 0 ? void 0 : (_pageBannerState$bann2 = _pageBannerState$bann.items) === null || _pageBannerState$bann2 === void 0 ? void 0 : _pageBannerState$bann2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
-    navigation: ((_pageBannerState$bann3 = pageBannerState.banner) === null || _pageBannerState$bann3 === void 0 ? void 0 : (_pageBannerState$bann4 = _pageBannerState$bann3.items) === null || _pageBannerState$bann4 === void 0 ? void 0 : _pageBannerState$bann4.length) > 1,
+  })) : ((_pageBannerState$bann = pageBannerState.banner) === null || _pageBannerState$bann === void 0 || (_pageBannerState$bann = _pageBannerState$bann.items) === null || _pageBannerState$bann === void 0 ? void 0 : _pageBannerState$bann.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
+    navigation: ((_pageBannerState$bann2 = pageBannerState.banner) === null || _pageBannerState$bann2 === void 0 || (_pageBannerState$bann2 = _pageBannerState$bann2.items) === null || _pageBannerState$bann2 === void 0 ? void 0 : _pageBannerState$bann2.length) > 1,
     spaceBetween: 0,
     shortSwipes: false,
-    loop: ((_pageBannerState$bann5 = pageBannerState.banner) === null || _pageBannerState$bann5 === void 0 ? void 0 : _pageBannerState$bann5.items.length) > 1
-  }, (_pageBannerState$bann6 = pageBannerState.banner) === null || _pageBannerState$bann6 === void 0 ? void 0 : _pageBannerState$bann6.items.map(function (img, i) {
+    loop: ((_pageBannerState$bann3 = pageBannerState.banner) === null || _pageBannerState$bann3 === void 0 ? void 0 : _pageBannerState$bann3.items.length) > 1
+  }, (_pageBannerState$bann4 = pageBannerState.banner) === null || _pageBannerState$bann4 === void 0 ? void 0 : _pageBannerState$bann4.items.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: i,
       onClick: function onClick() {

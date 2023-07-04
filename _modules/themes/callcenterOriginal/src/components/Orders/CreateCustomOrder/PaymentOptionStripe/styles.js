@@ -36,7 +36,7 @@ var CardItemContent = _styledComponents.default.div(_templateObject7 || (_templa
 }, function (_ref3) {
   var _theme$colors;
   var theme = _ref3.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.danger500;
+  return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.danger500;
 });
 exports.CardItemContent = CardItemContent;
 var CardItemActions = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > span {\n    font-weight: 600;\n    font-size: 12px;\n    color: ", ";\n    margin-right: 20px;\n    ", "\n  }\n"])), function (props) {

@@ -87,7 +87,7 @@ var LogisticsUI = function LogisticsUI(props) {
       dangerouslySetInnerHTML: {
         __html: parseLog(log)
       }
-    }), log.event === 'logistic_expired' && /*#__PURE__*/_react.default.createElement(_styles.Reason, null, t('REASON', 'Reason'), ": ", log === null || log === void 0 ? void 0 : (_log$data = log.data) === null || _log$data === void 0 ? void 0 : _log$data.reason), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+    }), log.event === 'logistic_expired' && /*#__PURE__*/_react.default.createElement(_styles.Reason, null, t('REASON', 'Reason'), ": ", log === null || log === void 0 || (_log$data = log.data) === null || _log$data === void 0 ? void 0 : _log$data.reason), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
       placement: "top",
       overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, parseDate(log.updated_at))
     }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(log.updated_at))));

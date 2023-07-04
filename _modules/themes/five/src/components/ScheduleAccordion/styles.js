@@ -17,7 +17,7 @@ exports.DropdownWrapper = DropdownWrapper;
 var HoursWrappers = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  flex-direction: column;\n\n  p {\n    margin: 0px 0px 10px 0px;\n  }\n"])));
 exports.HoursWrappers = HoursWrappers;
 var ClosedSchedule = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  color: ", "\n"])), function (props) {
-  var _props$theme, _props$theme$colors;
-  return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors = _props$theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.danger500;
+  var _props$theme;
+  return (_props$theme = props.theme) === null || _props$theme === void 0 || (_props$theme = _props$theme.colors) === null || _props$theme === void 0 ? void 0 : _props$theme.danger500;
 });
 exports.ClosedSchedule = ClosedSchedule;

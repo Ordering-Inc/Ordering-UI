@@ -28,7 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var KioskHomeHero = function KioskHomeHero(props) {
-  var _configState$configs, _configState$configs$, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _theme$defaultLanguag;
+  var _configState$configs, _theme$images, _theme$images2, _theme$defaultLanguag;
   var handleGoToBusiness = props.handleGoToBusiness;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -48,7 +48,7 @@ var KioskHomeHero = function KioskHomeHero(props) {
     modalIsOpen = _useState2[0],
     setModalIsOpen = _useState2[1];
   var excludeTypes = [1];
-  var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
+  var configTypes = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.order_types_allowed) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').map(function (value) {
     return !excludeTypes.includes(Number(value)) && Number(value);
   })) || [];
   var handleActionModal = function handleActionModal(_ref) {
@@ -76,7 +76,7 @@ var KioskHomeHero = function KioskHomeHero(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
-    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
+    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.homeHero
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroContent, null, /*#__PURE__*/_react.default.createElement("div", {
     id: "logo"
   }, /*#__PURE__*/_react.default.createElement(_styles2.LogoHeader, {
@@ -87,7 +87,7 @@ var KioskHomeHero = function KioskHomeHero(props) {
     alt: "Logotype",
     width: "250px",
     height: "70px",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype,
+    src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.logos) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.logotype,
     loading: "lazy",
     onClick: function onClick() {
       return handleActionModal({
@@ -114,7 +114,7 @@ var KioskHomeHero = function KioskHomeHero(props) {
       width: 'auto',
       padding: '5px 20px'
     }
-  }, t('TOUCH_ANYWHERE_TO_ORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TOUCH_ANYWHERE_TO_ORDER) || 'Touch anywhere to order'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, t('TOUCH_ANYWHERE_TO_ORDER', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TOUCH_ANYWHERE_TO_ORDER) || 'Touch anywhere to order'))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen.open,
     onClose: function onClose() {
       return handleActionModal({

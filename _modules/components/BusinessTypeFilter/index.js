@@ -48,8 +48,8 @@ var BusinessTypeFilterUI = function BusinessTypeFilterUI(props) {
     load = _useState2[0],
     setLoad = _useState2[1];
   var defaultImage = function defaultImage(name) {
-    var _theme$images, _theme$images$categor;
-    return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$categor = _theme$images.categories) === null || _theme$images$categor === void 0 ? void 0 : _theme$images$categor[name.toLowerCase()];
+    var _theme$images;
+    return (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.categories) === null || _theme$images === void 0 ? void 0 : _theme$images[name.toLowerCase()];
   };
   var handleChangeCategory = function handleChangeCategory(category) {
     handleChangeBusinessType && handleChangeBusinessType(category);

@@ -38,11 +38,11 @@ var AppleLoginUI = function AppleLoginUI(props) {
   (0, _react.useEffect)(function () {
     var result = location.hash;
     if (result) {
-      var _divisions$, _divisions$$split, _divisions$2, _divisions$2$split, _divisions$3, _divisions$3$split;
+      var _divisions$, _divisions$2, _divisions$3;
       var divisions = result === null || result === void 0 ? void 0 : result.split('&', 4);
-      var state = divisions === null || divisions === void 0 ? void 0 : (_divisions$ = divisions[0]) === null || _divisions$ === void 0 ? void 0 : (_divisions$$split = _divisions$.split('state=', 2)) === null || _divisions$$split === void 0 ? void 0 : _divisions$$split[1];
-      var code = divisions === null || divisions === void 0 ? void 0 : (_divisions$2 = divisions[1]) === null || _divisions$2 === void 0 ? void 0 : (_divisions$2$split = _divisions$2.split('code=', 2)) === null || _divisions$2$split === void 0 ? void 0 : _divisions$2$split[1];
-      var idToken = divisions === null || divisions === void 0 ? void 0 : (_divisions$3 = divisions[2]) === null || _divisions$3 === void 0 ? void 0 : (_divisions$3$split = _divisions$3.split('id_token=', 2)) === null || _divisions$3$split === void 0 ? void 0 : _divisions$3$split[1];
+      var state = divisions === null || divisions === void 0 || (_divisions$ = divisions[0]) === null || _divisions$ === void 0 || (_divisions$ = _divisions$.split('state=', 2)) === null || _divisions$ === void 0 ? void 0 : _divisions$[1];
+      var code = divisions === null || divisions === void 0 || (_divisions$2 = divisions[1]) === null || _divisions$2 === void 0 || (_divisions$2 = _divisions$2.split('code=', 2)) === null || _divisions$2 === void 0 ? void 0 : _divisions$2[1];
+      var idToken = divisions === null || divisions === void 0 || (_divisions$3 = divisions[2]) === null || _divisions$3 === void 0 || (_divisions$3 = _divisions$3.split('id_token=', 2)) === null || _divisions$3 === void 0 ? void 0 : _divisions$3[1];
       if (code) {
         handleAppleLoginClick({
           state: state,

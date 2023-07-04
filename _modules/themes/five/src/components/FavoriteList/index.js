@@ -110,9 +110,9 @@ var FavoriteListUI = function FavoriteListUI(props) {
     events.emit('go_to_page', data);
   };
   var _onProductClick = function onProductClick(product) {
-    var _product$category, _product$category$bus, _product$category2;
-    var slug = product === null || product === void 0 ? void 0 : (_product$category = product.category) === null || _product$category === void 0 ? void 0 : (_product$category$bus = _product$category.business) === null || _product$category$bus === void 0 ? void 0 : _product$category$bus.slug;
-    var categoryId = product === null || product === void 0 ? void 0 : (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.id;
+    var _product$category, _product$category2;
+    var slug = product === null || product === void 0 || (_product$category = product.category) === null || _product$category === void 0 || (_product$category = _product$category.business) === null || _product$category === void 0 ? void 0 : _product$category.slug;
+    var categoryId = product === null || product === void 0 || (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.id;
     var productId = product === null || product === void 0 ? void 0 : product.id;
     if (!categoryId && !productId) {
       if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
@@ -179,13 +179,13 @@ var FavoriteListUI = function FavoriteListUI(props) {
   var closeOrderModal = function closeOrderModal(e) {
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
     if (outsideModal) {
-      var _reorderState$result, _reorderState$result2, _reorderState$result3;
-      var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result = reorderState.result) === null || _reorderState$result === void 0 ? void 0 : _reorderState$result.business_id);
+      var _reorderState$result, _reorderState$result2;
+      var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 || (_reorderState$result = reorderState.result) === null || _reorderState$result === void 0 ? void 0 : _reorderState$result.business_id);
       sessionStorage.setItem('adjust-cart-products', _businessId);
       onRedirectPage && onRedirectPage({
         page: 'business',
         params: {
-          store: reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result2 = reorderState.result) === null || _reorderState$result2 === void 0 ? void 0 : (_reorderState$result3 = _reorderState$result2.business) === null || _reorderState$result3 === void 0 ? void 0 : _reorderState$result3.slug
+          store: reorderState === null || reorderState === void 0 || (_reorderState$result2 = reorderState.result) === null || _reorderState$result2 === void 0 || (_reorderState$result2 = _reorderState$result2.business) === null || _reorderState$result2 === void 0 ? void 0 : _reorderState$result2.slug
         }
       });
     }
@@ -194,7 +194,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
     if (preorderBusiness) setIsPreorder(true);
   }, [preorderBusiness]);
   (0, _react.useEffect)(function () {
-    var _reorderState$result4;
+    var _reorderState$result3;
     if (!isOrder) return;
     if (reorderState !== null && reorderState !== void 0 && reorderState.error) {
       window.addEventListener('click', closeOrderModal);
@@ -202,18 +202,18 @@ var FavoriteListUI = function FavoriteListUI(props) {
         window.removeEventListener('click', closeOrderModal);
       };
     }
-    if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && (reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading) === false && reorderState !== null && reorderState !== void 0 && (_reorderState$result4 = reorderState.result) !== null && _reorderState$result4 !== void 0 && _reorderState$result4.business_id) {
-      var _reorderState$result5, _orderState$carts, _orderState$carts$_bu, _favoriteList$favorit, _reorderState$result7;
-      var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result5 = reorderState.result) === null || _reorderState$result5 === void 0 ? void 0 : _reorderState$result5.business_id);
-      var cartProducts = orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : (_orderState$carts$_bu = _orderState$carts[_businessId]) === null || _orderState$carts$_bu === void 0 ? void 0 : _orderState$carts$_bu.products;
+    if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && (reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading) === false && reorderState !== null && reorderState !== void 0 && (_reorderState$result3 = reorderState.result) !== null && _reorderState$result3 !== void 0 && _reorderState$result3.business_id) {
+      var _reorderState$result4, _orderState$carts, _favoriteList$favorit, _reorderState$result6;
+      var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 || (_reorderState$result4 = reorderState.result) === null || _reorderState$result4 === void 0 ? void 0 : _reorderState$result4.business_id);
+      var cartProducts = orderState === null || orderState === void 0 || (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 || (_orderState$carts = _orderState$carts[_businessId]) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts.products;
       var available = cartProducts.every(function (product) {
         return product.valid === true;
       });
-      var orderProducts = favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit = favoriteList.favorites.find(function (order) {
-        var _reorderState$result6;
-        return (order === null || order === void 0 ? void 0 : order.id) === (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result6 = reorderState.result) === null || _reorderState$result6 === void 0 ? void 0 : _reorderState$result6.orderId);
+      var orderProducts = favoriteList === null || favoriteList === void 0 || (_favoriteList$favorit = favoriteList.favorites.find(function (order) {
+        var _reorderState$result5;
+        return (order === null || order === void 0 ? void 0 : order.id) === (reorderState === null || reorderState === void 0 || (_reorderState$result5 = reorderState.result) === null || _reorderState$result5 === void 0 ? void 0 : _reorderState$result5.orderId);
       })) === null || _favoriteList$favorit === void 0 ? void 0 : _favoriteList$favorit.products;
-      if (available && reorderState !== null && reorderState !== void 0 && (_reorderState$result7 = reorderState.result) !== null && _reorderState$result7 !== void 0 && _reorderState$result7.uuid && (cartProducts === null || cartProducts === void 0 ? void 0 : cartProducts.length) === (orderProducts === null || orderProducts === void 0 ? void 0 : orderProducts.length)) {
+      if (available && reorderState !== null && reorderState !== void 0 && (_reorderState$result6 = reorderState.result) !== null && _reorderState$result6 !== void 0 && _reorderState$result6.uuid && (cartProducts === null || cartProducts === void 0 ? void 0 : cartProducts.length) === (orderProducts === null || orderProducts === void 0 ? void 0 : orderProducts.length)) {
         onRedirectPage && onRedirectPage({
           page: 'checkout',
           params: {
@@ -221,13 +221,13 @@ var FavoriteListUI = function FavoriteListUI(props) {
           }
         });
       } else {
-        var _reorderState$result8, _reorderState$result9;
+        var _reorderState$result7;
         sessionStorage.setItem('adjust-cart-products', _businessId);
         (cartProducts === null || cartProducts === void 0 ? void 0 : cartProducts.length) !== (orderProducts === null || orderProducts === void 0 ? void 0 : orderProducts.length) && sessionStorage.setItem('already-removed', 'removed');
         onRedirectPage && onRedirectPage({
           page: 'business',
           params: {
-            store: reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result8 = reorderState.result) === null || _reorderState$result8 === void 0 ? void 0 : (_reorderState$result9 = _reorderState$result8.business) === null || _reorderState$result9 === void 0 ? void 0 : _reorderState$result9.slug
+            store: reorderState === null || reorderState === void 0 || (_reorderState$result7 = reorderState.result) === null || _reorderState$result7 === void 0 || (_reorderState$result7 = _reorderState$result7.business) === null || _reorderState$result7 === void 0 ? void 0 : _reorderState$result7.slug
           }
         });
       }
@@ -251,12 +251,12 @@ var FavoriteListUI = function FavoriteListUI(props) {
       height: '44px'
     }
   }, t('ADD_FAVORITE', 'Add favorite'))), /*#__PURE__*/_react.default.createElement(_styles.FavoriteListWrapper, {
-    isLoading: (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.loading) || (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit2 = favoriteList.favorites) === null || _favoriteList$favorit2 === void 0 ? void 0 : _favoriteList$favorit2.length) === 0
+    isLoading: (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.loading) || (favoriteList === null || favoriteList === void 0 || (_favoriteList$favorit2 = favoriteList.favorites) === null || _favoriteList$favorit2 === void 0 ? void 0 : _favoriteList$favorit2.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.FavoriteListing, {
     isOrder: isOrder
   }, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: "favorite"
-  }, isBusiness && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit3 = favoriteList.favorites) === null || _favoriteList$favorit3 === void 0 ? void 0 : _favoriteList$favorit3.map(function (business, i) {
+  }, isBusiness && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 || (_favoriteList$favorit3 = favoriteList.favorites) === null || _favoriteList$favorit3 === void 0 ? void 0 : _favoriteList$favorit3.map(function (business, i) {
     var _orderState$options, _business$reviews;
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
@@ -264,13 +264,13 @@ var FavoriteListUI = function FavoriteListUI(props) {
       business: business,
       isBusinessOpen: business.open,
       handleCustomClick: handleClickBusiness,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type,
+      orderType: orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type,
       onPreorderBusiness: setPreorderBusiness,
       businessHeader: business === null || business === void 0 ? void 0 : business.header,
       businessFeatured: business === null || business === void 0 ? void 0 : business.featured,
       businessOffers: business === null || business === void 0 ? void 0 : business.offers,
       businessLogo: business === null || business === void 0 ? void 0 : business.logo,
-      businessReviews: business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total,
+      businessReviews: business === null || business === void 0 || (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total,
       businessDeliveryPrice: business === null || business === void 0 ? void 0 : business.delivery_price,
       businessDeliveryTime: business === null || business === void 0 ? void 0 : business.delivery_time,
       businessPickupTime: business === null || business === void 0 ? void 0 : business.pickup_time,
@@ -285,9 +285,9 @@ var FavoriteListUI = function FavoriteListUI(props) {
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
+      orderType: orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
     });
-  })), isProduct && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit4 = favoriteList.favorites) === null || _favoriteList$favorit4 === void 0 ? void 0 : _favoriteList$favorit4.map(function (product, i) {
+  })), isProduct && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 || (_favoriteList$favorit4 = favoriteList.favorites) === null || _favoriteList$favorit4 === void 0 ? void 0 : _favoriteList$favorit4.map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: "".concat(product.id, "_").concat(i),
       isSoldOut: product.inventoried && !product.quantity,
@@ -303,7 +303,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
       key: "skeleton:".concat(i),
       isSkeleton: true
     });
-  })), isOrder && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit5 = favoriteList.favorites) === null || _favoriteList$favorit5 === void 0 ? void 0 : _favoriteList$favorit5.map(function (order, i) {
+  })), isOrder && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 || (_favoriteList$favorit5 = favoriteList.favorites) === null || _favoriteList$favorit5 === void 0 ? void 0 : _favoriteList$favorit5.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement(_SingleOrderCard.SingleOrderCard, {
       key: "".concat(order === null || order === void 0 ? void 0 : order.id, "_").concat(i),
       order: order,
@@ -323,7 +323,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
       getOrderStatus: _utils.getOrderStatus,
       handleReorder: handleReorder
     });
-  })), isProfessional && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 ? void 0 : (_favoriteList$favorit6 = favoriteList.favorites) === null || _favoriteList$favorit6 === void 0 ? void 0 : _favoriteList$favorit6.map(function (professional, i) {
+  })), isProfessional && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(favoriteList !== null && favoriteList !== void 0 && favoriteList.loading) && (favoriteList === null || favoriteList === void 0 || (_favoriteList$favorit6 = favoriteList.favorites) === null || _favoriteList$favorit6 === void 0 ? void 0 : _favoriteList$favorit6.map(function (professional, i) {
     return /*#__PURE__*/_react.default.createElement(_SingleProfessionalCard.SingleProfessionalCard, {
       key: i,
       professional: professional,

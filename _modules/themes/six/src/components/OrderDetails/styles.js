@@ -135,8 +135,8 @@ exports.ShareOrder = ShareOrder;
 var MessagesIcon = _styledComponents.default.span(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n"])));
 exports.MessagesIcon = MessagesIcon;
 var ExclamationWrapper = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(75%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
-  var _props$theme5, _props$theme5$colors;
-  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : (_props$theme5$colors = _props$theme5.colors) === null || _props$theme5$colors === void 0 ? void 0 : _props$theme5$colors.primary;
+  var _props$theme5;
+  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 || (_props$theme5 = _props$theme5.colors) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.primary;
 });
 exports.ExclamationWrapper = ExclamationWrapper;
 var DashLine = _styledComponents.default.span(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  padding: 0 15px;\n  box-sizing: border-box;\n  display: flex;\n  width: 100%;\n  height: 70%;\n  border-bottom: 1px dashed ", ";;\n"])), function (props) {
