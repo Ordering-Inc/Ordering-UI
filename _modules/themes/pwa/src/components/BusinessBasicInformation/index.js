@@ -34,7 +34,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var types = ['food', 'laundry', 'alcohol', 'groceries'];
 var BusinessBasicInformation = function BusinessBasicInformation(props) {
-  var _props$beforeElements, _props$beforeComponen, _categoryState$produc, _theme$defaultLanguag, _businessState$busine, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc2, _theme$defaultLanguag2, _businessState$busine2, _theme$images, _theme$images$dummies, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _categoryState$produc, _theme$defaultLanguag, _businessState$busine, _orderState$options, _business$reviews, _business$reviews2, _categoryState$produc2, _theme$defaultLanguag2, _businessState$busine2, _theme$images, _business$reviews3, _business$reviews4, _props$afterComponent, _props$afterElements;
   var isSkeleton = props.isSkeleton,
     businessState = props.businessState,
     setOpenBusinessInformation = props.setOpenBusinessInformation,
@@ -80,7 +80,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     var _types = [];
     types.forEach(function (type) {
       var _type$replace;
-      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
+      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 || (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
     });
     return _types.join(', ');
   };
@@ -100,7 +100,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), windowSize.width < 768 && ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
+  }), windowSize.width < 768 && ((categoryState === null || categoryState === void 0 || (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     style: {
       marginBottom: '15px'
     }
@@ -111,8 +111,8 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   }), /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
-    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SEARCH_PRODUCTS) || 'Search Products'),
-    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended
+    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.SEARCH_PRODUCTS) || 'Search Products'),
+    lazyLoad: businessState === null || businessState === void 0 || (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, /*#__PURE__*/_react.default.createElement("h2", {
@@ -125,7 +125,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     width: 100
   }), /*#__PURE__*/_react.default.createElement(_styles.BusinessDetail, null, (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_FEE', 'Delivery fee')), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  })), !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("p", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("p", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), !loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("p", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("p", null, (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
   }), !loading ? /*#__PURE__*/_react.default.createElement("p", null, parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
@@ -133,7 +133,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     className: "review"
   }, /*#__PURE__*/_react.default.createElement(_FaStar.default, {
     className: "start"
-  }), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 || (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   }))), !loading ? /*#__PURE__*/_react.default.createElement("div", {
     className: "preorder-Reviews"
@@ -147,11 +147,11 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     }
   }, t('REVIEWS', 'Reviews'))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  })))), windowSize.width > 767 && ((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.length) !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
+  })))), windowSize.width > 767 && ((categoryState === null || categoryState === void 0 || (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.length) !== 0 || searchValue) && !errorQuantityProducts && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     onSearch: handleChangeSearch,
     search: searchValue,
-    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SEARCH_PRODUCTS) || 'Search Products'),
-    lazyLoad: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.lazy_load_products_recommended
+    placeholder: t('SEARCH_PRODUCTS', (theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SEARCH_PRODUCTS) || 'Search Products'),
+    lazyLoad: businessState === null || businessState === void 0 || (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.lazy_load_products_recommended
   }), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     notAsync: true,
     notReload: true,
@@ -166,7 +166,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     id: "container",
     isClosed: !(business !== null && business !== void 0 && business.open)
   }, !loading && !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed')), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, !loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
+    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 70,
     width: 70

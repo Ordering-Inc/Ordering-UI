@@ -58,7 +58,7 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   var handleChangeSelectCategory = function handleChangeSelectCategory(include) {
     var _category$subcategori;
     var categoryIds = [];
-    if ((category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0) {
+    if ((category === null || category === void 0 || (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0) {
       category.subcategories.forEach(function iterate(category) {
         categoryIds = [].concat(_toConsumableArray(categoryIds), [category.id]);
         Array.isArray(category === null || category === void 0 ? void 0 : category.subcategories) && category.subcategories.forEach(iterate);
@@ -102,7 +102,7 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     style: {
       maxHeight: !setActive && '0px'
     }
-  }, (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 ? void 0 : (_category$subcategori2 = category.subcategories) === null || _category$subcategori2 === void 0 ? void 0 : _category$subcategori2.length) > 0 && category.subcategories.map(function (subCategory) {
+  }, (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 || (_category$subcategori2 = category.subcategories) === null || _category$subcategori2 === void 0 ? void 0 : _category$subcategori2.length) > 0 && category.subcategories.map(function (subCategory) {
     return /*#__PURE__*/_react.default.createElement(CategoryTreeNode, _extends({}, props, {
       key: subCategory.id,
       category: subCategory,

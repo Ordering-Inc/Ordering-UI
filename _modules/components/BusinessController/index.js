@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessControllerUI = function BusinessControllerUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _orderState$options, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _business$reviews2, _business$reviews3, _orderState$options2, _business$available_d, _business$busy_driver, _business$active_orde, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _orderState$options, _theme$images2, _theme$images3, _business$reviews, _business$reviews2, _business$reviews3, _orderState$options2, _business$available_d, _business$busy_driver, _business$active_orde, _props$afterComponent, _props$afterElements;
   var isSkeleton = props.isSkeleton,
     business = props.business,
     getBusinessOffer = props.getBusinessOffer,
@@ -72,7 +72,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     var _types = [];
     types.forEach(function (type) {
       var _type$replace;
-      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
+      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 || (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
     });
     return _types.join(', ');
   };
@@ -100,14 +100,14 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessHero, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100
   }) : /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
-    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.header) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_400,c_limit'),
+    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.header) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_400,c_limit'),
     isClosed: !isBusinessOpen || isBusinessClose
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessTags, null, (business === null || business === void 0 ? void 0 : business.featured) && /*#__PURE__*/_react.default.createElement("span", {
     className: "crown"
-  }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), !isCustomLayout && /*#__PURE__*/_react.default.createElement("div", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), (!isBusinessOpen || isBusinessClose) && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'PreOrder')))), !!businessWillCloseSoonMinutes && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.moment) === null && isBusinessOpen && !isBusinessClose && /*#__PURE__*/_react.default.createElement("h1", null, businessWillCloseSoonMinutes, " ", t('MINUTES_TO_CLOSE', 'minutes to close')), (!isBusinessOpen || isBusinessClose) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed')))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, {
+  }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), !isCustomLayout && /*#__PURE__*/_react.default.createElement("div", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, getBusinessOffer(business === null || business === void 0 ? void 0 : business.offers) || parsePrice(0)), (!isBusinessOpen || isBusinessClose) && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'PreOrder')))), !!businessWillCloseSoonMinutes && (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.moment) === null && isBusinessOpen && !isBusinessClose && /*#__PURE__*/_react.default.createElement("h1", null, businessWillCloseSoonMinutes, " ", t('MINUTES_TO_CLOSE', 'minutes to close')), (!isBusinessOpen || isBusinessClose) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed')))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, {
     isSkeleton: isSkeleton
-  }, !isSkeleton && (business !== null && business !== void 0 && business.logo || (_theme$images2 = theme.images) !== null && _theme$images2 !== void 0 && (_theme$images2$dummie = _theme$images2.dummies) !== null && _theme$images2$dummie !== void 0 && _theme$images2$dummie.businessLogo) ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo), 'h_200,c_limit')
+  }, !isSkeleton && (business !== null && business !== void 0 && business.logo || (_theme$images2 = theme.images) !== null && _theme$images2 !== void 0 && (_theme$images2 = _theme$images2.dummies) !== null && _theme$images2 !== void 0 && _theme$images2.businessLogo) ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.dummies) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.businessLogo), 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 70,
     width: 70
@@ -115,9 +115,9 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
-  }), (business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) > 0 ? /*#__PURE__*/_react.default.createElement("div", {
+  }), (business === null || business === void 0 || (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) > 0 ? /*#__PURE__*/_react.default.createElement("div", {
     className: "reviews"
-  }, /*#__PURE__*/_react.default.createElement(_GrStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)) : (business === null || business === void 0 ? void 0 : (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.total) !== 0 && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_GrStar.default, null), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 || (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total)) : (business === null || business === void 0 || (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.total) !== 0 && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50
   })), !isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles.Categories, null, Object.keys(business).length > 0 ? businessType() : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
@@ -125,7 +125,7 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     isCustomerMode: isShowCallcenterInformation
   }, Object.keys(business).length > 0 ? /*#__PURE__*/_react.default.createElement("p", {
     className: "bullet"
-  }, /*#__PURE__*/_react.default.createElement(_GrClock.default, null), (0, _utils.convertHoursToMinutes)((orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 ? business === null || business === void 0 ? void 0 : business.delivery_time : business === null || business === void 0 ? void 0 : business.pickup_time) || /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_GrClock.default, null), (0, _utils.convertHoursToMinutes)((orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 ? business === null || business === void 0 ? void 0 : business.delivery_time : business === null || business === void 0 ? void 0 : business.pickup_time) || /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
@@ -137,11 +137,11 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     width: 70
   })), isShowCallcenterInformation && /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformation, null, /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
     bgcolor: "green"
-  }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 ? void 0 : (_business$available_d = business.available_drivers) === null || _business$available_d === void 0 ? void 0 : _business$available_d.length), /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
+  }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 || (_business$available_d = business.available_drivers) === null || _business$available_d === void 0 ? void 0 : _business$available_d.length), /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
     bgcolor: "red"
-  }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 ? void 0 : (_business$busy_driver = business.busy_drivers) === null || _business$busy_driver === void 0 ? void 0 : _business$busy_driver.length), /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
+  }, /*#__PURE__*/_react.default.createElement(_BiCar.default, null), business === null || business === void 0 || (_business$busy_driver = business.busy_drivers) === null || _business$busy_driver === void 0 ? void 0 : _business$busy_driver.length), /*#__PURE__*/_react.default.createElement(_styles.CallCenterInformationBullet, {
     bgcolor: "rgb(252,225,5)"
-  }, /*#__PURE__*/_react.default.createElement(_BiBasket.default, null), business === null || business === void 0 ? void 0 : (_business$active_orde = business.active_orders) === null || _business$active_orde === void 0 ? void 0 : _business$active_orde.length)))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_BiBasket.default, null), business === null || business === void 0 || (_business$active_orde = business.active_orders) === null || _business$active_orde === void 0 ? void 0 : _business$active_orde.length)))))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('BUSINESS_CLOSED', 'Business Closed'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

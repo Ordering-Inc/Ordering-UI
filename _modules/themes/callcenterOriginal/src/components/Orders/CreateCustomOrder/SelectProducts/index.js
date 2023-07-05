@@ -140,7 +140,7 @@ var SelectProducts = function SelectProducts(props) {
     }
   }), productList.loading && /*#__PURE__*/_react.default.createElement("span", {
     className: "loading"
-  }, /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null)), searchInputFocus && /*#__PURE__*/_react.default.createElement(_styles2.OptionsToSelectContainer, null, (productList === null || productList === void 0 ? void 0 : (_productList$products2 = productList.products) === null || _productList$products2 === void 0 ? void 0 : _productList$products2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, productList === null || productList === void 0 ? void 0 : (_productList$products3 = productList.products) === null || _productList$products3 === void 0 ? void 0 : _productList$products3.map(function (product) {
+  }, /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null)), searchInputFocus && /*#__PURE__*/_react.default.createElement(_styles2.OptionsToSelectContainer, null, (productList === null || productList === void 0 || (_productList$products2 = productList.products) === null || _productList$products2 === void 0 ? void 0 : _productList$products2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, productList === null || productList === void 0 || (_productList$products3 = productList.products) === null || _productList$products3 === void 0 ? void 0 : _productList$products3.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SelectOption, {
       key: product.id,
       onClick: function onClick() {
@@ -152,7 +152,7 @@ var SelectProducts = function SelectProducts(props) {
     }) : /*#__PURE__*/_react.default.createElement(_BiImage.default, null)), /*#__PURE__*/_react.default.createElement("span", {
       className: "name"
     }, product === null || product === void 0 ? void 0 : product.name));
-  })) : /*#__PURE__*/_react.default.createElement("p", null, productList.loading ? t('LOADING', 'Loading') : t('SEARCH_PRODUCTOS', 'Search products')))), /*#__PURE__*/_react.default.createElement(_styles2.CartProductsConatiner, null, cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.map(function (product, index) {
+  })) : /*#__PURE__*/_react.default.createElement("p", null, productList.loading ? t('LOADING', 'Loading') : t('SEARCH_PRODUCTOS', 'Search products')))), /*#__PURE__*/_react.default.createElement(_styles2.CartProductsConatiner, null, cart === null || cart === void 0 || (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.map(function (product, index) {
     return /*#__PURE__*/_react.default.createElement(_styles2.CartProductsWrapper, {
       key: "".concat(product.id, "_").concat(index)
     }, /*#__PURE__*/_react.default.createElement(_styles2.SelectOption, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, product !== null && product !== void 0 && product.images ? /*#__PURE__*/_react.default.createElement("img", {
@@ -209,7 +209,7 @@ var SelectProducts = function SelectProducts(props) {
     onSave: function onSave() {
       return setOpenProduct(false);
     },
-    productAddedToCartLength: (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.reduce(function (productsLength, Cproduct) {
+    productAddedToCartLength: (cart === null || cart === void 0 || (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.reduce(function (productsLength, Cproduct) {
       return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (curProduct === null || curProduct === void 0 ? void 0 : curProduct.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
     }, 0)) || 0
   })), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {

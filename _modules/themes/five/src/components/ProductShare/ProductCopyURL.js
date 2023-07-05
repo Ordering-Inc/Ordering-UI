@@ -21,7 +21,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductCopyURL = function ProductCopyURL(props) {
-  var _theme$images, _theme$images$dummies;
+  var _theme$images;
   var urlToShare = props.urlToShare,
     product = props.product;
   var theme = (0, _styledComponents.useTheme)();
@@ -43,7 +43,7 @@ var ProductCopyURL = function ProductCopyURL(props) {
     }, 1000);
   };
   return /*#__PURE__*/_react.default.createElement(_styles.ProductCopyURLContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_200,c_limit'),
+    src: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.product), 'h_200,c_limit'),
     loading: "lazy",
     alt: "product image"
   })), /*#__PURE__*/_react.default.createElement("p", {

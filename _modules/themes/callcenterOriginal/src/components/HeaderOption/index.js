@@ -55,7 +55,7 @@ var HeaderOption = function HeaderOption(props) {
   }), totalCarts > 0 && /*#__PURE__*/_react.default.createElement("p", null, totalCarts)), variant === 'address' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, {
     id: "icon"
   }), addressState || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), variant === 'moment' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, momentState ? parseDate(momentState, {
-    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
+    outputFormat: configs === null || configs === void 0 || (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')), variant === 'delivery' && /*#__PURE__*/_react.default.createElement(_styles.DeliveryType, null, orderTypeList && orderTypeList[(orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.options.type) - 1] || t('DELIVERY', 'Delivery'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i

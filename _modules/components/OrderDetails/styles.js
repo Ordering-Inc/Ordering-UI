@@ -150,8 +150,8 @@ exports.ShareOrder = ShareOrder;
 var MessagesIcon = _styledComponents.default.span(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n"])));
 exports.MessagesIcon = MessagesIcon;
 var ExclamationWrapper = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(75%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
-  var _props$theme10, _props$theme10$colors;
-  return (_props$theme10 = props.theme) === null || _props$theme10 === void 0 ? void 0 : (_props$theme10$colors = _props$theme10.colors) === null || _props$theme10$colors === void 0 ? void 0 : _props$theme10$colors.primary;
+  var _props$theme10;
+  return (_props$theme10 = props.theme) === null || _props$theme10 === void 0 || (_props$theme10 = _props$theme10.colors) === null || _props$theme10 === void 0 ? void 0 : _props$theme10.primary;
 });
 exports.ExclamationWrapper = ExclamationWrapper;
 var Exclamation = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  position: relative;\n  display: inline-flex;\n  cursor: pointer;\n  margin-left: 5px;\n  top: 3px;\n"])));

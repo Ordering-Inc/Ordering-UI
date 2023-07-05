@@ -55,7 +55,7 @@ var PurchaseGiftCardUI = function PurchaseGiftCardUI(props) {
       width: 100
     }));
   }), productsListState.products.map(function (product) {
-    var _theme$images, _theme$images$dummies;
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.GiftCardItem, {
       key: product.id,
       onClick: function onClick() {
@@ -64,7 +64,7 @@ var PurchaseGiftCardUI = function PurchaseGiftCardUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (selectedProduct === null || selectedProduct === void 0 ? void 0 : selectedProduct.id) === product.id ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
       disabled: true
     })), /*#__PURE__*/_react.default.createElement(_styles.CardImage, {
-      bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.image) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product), 'h_86,c_limit')
+      bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.image) || (theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.product), 'h_86,c_limit')
     }), /*#__PURE__*/_react.default.createElement("span", null, product.name));
   }), !productsListState.loading && productsListState.products.length === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, null))), /*#__PURE__*/_react.default.createElement(_styles.ActionButtonContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "button",

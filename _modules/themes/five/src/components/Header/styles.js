@@ -12,28 +12,28 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  background-color: ", ";\n  border-bottom: ", ";\n"])), function (props) {
-  var _props$theme, _props$theme$header, _props$theme$header$c, _props$theme$header$c2;
-  return props.isChew && props.theme.colors.primary || ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$header = _props$theme.header) === null || _props$theme$header === void 0 ? void 0 : (_props$theme$header$c = _props$theme$header.components) === null || _props$theme$header$c === void 0 ? void 0 : (_props$theme$header$c2 = _props$theme$header$c.style) === null || _props$theme$header$c2 === void 0 ? void 0 : _props$theme$header$c2.backgroundColor);
+  var _props$theme;
+  return props.isChew && props.theme.colors.primary || ((_props$theme = props.theme) === null || _props$theme === void 0 || (_props$theme = _props$theme.header) === null || _props$theme === void 0 || (_props$theme = _props$theme.components) === null || _props$theme === void 0 || (_props$theme = _props$theme.style) === null || _props$theme === void 0 ? void 0 : _props$theme.backgroundColor);
 }, function (props) {
   return !props.isChew && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["1px solid #E9ECEF"])));
 });
 exports.Header = Header;
 var InnerHeader = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  color: #FFF;\n  justify-content: space-between;\n  margin: 15px 0;\n  align-items: center;\n  #left-side {\n    width: ", ";\n    justify-content: flex-start;\n  }\n  #right-side {\n    width: ", ";\n    justify-content: flex-end;\n  }\n  #center-side {\n    width: ", ";\n  }\n  @media (min-width: 768px) {\n    #left-side {\n      width: ", ";\n    }\n    #center-side {\n      width: calc(100% - 60px);\n    }\n  }\n  @media (min-width: 1024px) {\n    #center-side {\n      width: calc(100% - 140px);\n    }\n  }\n  @media (min-width: 1200px) {\n    #center-side {\n      width: calc(70% - 200px);\n    }\n  }\n  @media (min-width: 1500px) {\n    #center-side {\n      width: calc(60% - 260px);\n    }\n  }\n"])), function (_ref) {
-  var _theme$header, _theme$header$compone, _theme$header$compone2;
+  var _theme$header;
   var theme = _ref.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$header = theme.header) === null || _theme$header === void 0 ? void 0 : (_theme$header$compone = _theme$header.components) === null || _theme$header$compone === void 0 ? void 0 : (_theme$header$compone2 = _theme$header$compone.layout) === null || _theme$header$compone2 === void 0 ? void 0 : _theme$header$compone2.type) === 'starbucks' ? '30%' : '25%';
+  return (theme === null || theme === void 0 || (_theme$header = theme.header) === null || _theme$header === void 0 || (_theme$header = _theme$header.components) === null || _theme$header === void 0 || (_theme$header = _theme$header.layout) === null || _theme$header === void 0 ? void 0 : _theme$header.type) === 'starbucks' ? '30%' : '25%';
 }, function (_ref2) {
-  var _theme$header2, _theme$header2$compon, _theme$header2$compon2;
+  var _theme$header2;
   var theme = _ref2.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$header2 = theme.header) === null || _theme$header2 === void 0 ? void 0 : (_theme$header2$compon = _theme$header2.components) === null || _theme$header2$compon === void 0 ? void 0 : (_theme$header2$compon2 = _theme$header2$compon.layout) === null || _theme$header2$compon2 === void 0 ? void 0 : _theme$header2$compon2.type) === 'starbucks' ? '30%' : '40%';
+  return (theme === null || theme === void 0 || (_theme$header2 = theme.header) === null || _theme$header2 === void 0 || (_theme$header2 = _theme$header2.components) === null || _theme$header2 === void 0 || (_theme$header2 = _theme$header2.layout) === null || _theme$header2 === void 0 ? void 0 : _theme$header2.type) === 'starbucks' ? '30%' : '40%';
 }, function (_ref3) {
-  var _theme$header3, _theme$header3$compon, _theme$header3$compon2;
+  var _theme$header3;
   var theme = _ref3.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$header3 = theme.header) === null || _theme$header3 === void 0 ? void 0 : (_theme$header3$compon = _theme$header3.components) === null || _theme$header3$compon === void 0 ? void 0 : (_theme$header3$compon2 = _theme$header3$compon.layout) === null || _theme$header3$compon2 === void 0 ? void 0 : _theme$header3$compon2.type) === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)';
+  return (theme === null || theme === void 0 || (_theme$header3 = theme.header) === null || _theme$header3 === void 0 || (_theme$header3 = _theme$header3.components) === null || _theme$header3 === void 0 || (_theme$header3 = _theme$header3.layout) === null || _theme$header3 === void 0 ? void 0 : _theme$header3.type) === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)';
 }, function (_ref4) {
-  var _theme$header4, _theme$header4$compon, _theme$header4$compon2;
+  var _theme$header4;
   var theme = _ref4.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$header4 = theme.header) === null || _theme$header4 === void 0 ? void 0 : (_theme$header4$compon = _theme$header4.components) === null || _theme$header4$compon === void 0 ? void 0 : (_theme$header4$compon2 = _theme$header4$compon.layout) === null || _theme$header4$compon2 === void 0 ? void 0 : _theme$header4$compon2.type) === 'starbucks' ? '30%' : 'initial';
+  return (theme === null || theme === void 0 || (_theme$header4 = theme.header) === null || _theme$header4 === void 0 || (_theme$header4 = _theme$header4.components) === null || _theme$header4 === void 0 || (_theme$header4 = _theme$header4.layout) === null || _theme$header4 === void 0 ? void 0 : _theme$header4.type) === 'starbucks' ? '30%' : 'initial';
 });
 exports.InnerHeader = InnerHeader;
 var LogoHeader = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  img {\n    width: ", ";\n    height: ", ";\n    margin: 0;\n    vertical-align: middle;\n    margin-left: 10px;\n    ", "\n    @media (min-width: 769px) {\n      ", ";\n      width: ", ";\n      height: ", ";\n    }\n  }\n  ", "\n  @media (min-width: 769px) {\n    img:nth-child(1) {\n      display: block;\n    }\n    img:nth-child(2) {\n      display: none;\n    }\n  }\n"])), function (props) {
@@ -46,9 +46,9 @@ var LogoHeader = _styledComponents.default.div(_templateObject4 || (_templateObj
   var _props$theme2;
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      margin-left: 0;\n    "])));
 }, function (_ref5) {
-  var _ref6, _theme$header5, _theme$header5$compon, _theme$header5$compon2, _theme$header5$compon3, _theme$header5$compon4;
+  var _ref6, _theme$header5;
   var theme = _ref5.theme;
-  return ((_ref6 = ['center', 'right']) === null || _ref6 === void 0 ? void 0 : _ref6.includes(theme === null || theme === void 0 ? void 0 : (_theme$header5 = theme.header) === null || _theme$header5 === void 0 ? void 0 : (_theme$header5$compon = _theme$header5.components) === null || _theme$header5$compon === void 0 ? void 0 : (_theme$header5$compon2 = _theme$header5$compon.logo) === null || _theme$header5$compon2 === void 0 ? void 0 : (_theme$header5$compon3 = _theme$header5$compon2.components) === null || _theme$header5$compon3 === void 0 ? void 0 : (_theme$header5$compon4 = _theme$header5$compon3.layout) === null || _theme$header5$compon4 === void 0 ? void 0 : _theme$header5$compon4.position)) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-right: 30px;\n      "])));
+  return ((_ref6 = ['center', 'right']) === null || _ref6 === void 0 ? void 0 : _ref6.includes(theme === null || theme === void 0 || (_theme$header5 = theme.header) === null || _theme$header5 === void 0 || (_theme$header5 = _theme$header5.components) === null || _theme$header5 === void 0 || (_theme$header5 = _theme$header5.logo) === null || _theme$header5 === void 0 || (_theme$header5 = _theme$header5.components) === null || _theme$header5 === void 0 || (_theme$header5 = _theme$header5.layout) === null || _theme$header5 === void 0 ? void 0 : _theme$header5.position)) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-right: 30px;\n      "])));
 }, function (props) {
   var _props$imgW2;
   return (_props$imgW2 = props.imgW) !== null && _props$imgW2 !== void 0 ? _props$imgW2 : '150px';
@@ -144,8 +144,8 @@ exports.LanguageSelectorWrapper = LanguageSelectorWrapper;
 var HeaderSearchMode = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  width: 300px;\n  input {\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n  @media (min-width: 1400px){\n    width: 350px;\n  }\n  @media (min-width: 1200px){\n    width: 300px;\n    div {\n      > span {\n        padding: 7px 0;\n      }\n    }\n  }\n"])));
 exports.HeaderSearchMode = HeaderSearchMode;
 var LeftSide = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  @media (min-width: 769px){\n    flex-direction: ", ";\n    width: 62%;\n  }\n"])), function (_ref12) {
-  var _ref13, _theme$header6, _theme$header6$compon, _theme$header6$compon2, _theme$header6$compon3, _theme$header6$compon4;
+  var _ref13, _theme$header6;
   var theme = _ref12.theme;
-  return (_ref13 = ['center', 'right']) !== null && _ref13 !== void 0 && _ref13.includes(theme === null || theme === void 0 ? void 0 : (_theme$header6 = theme.header) === null || _theme$header6 === void 0 ? void 0 : (_theme$header6$compon = _theme$header6.components) === null || _theme$header6$compon === void 0 ? void 0 : (_theme$header6$compon2 = _theme$header6$compon.logo) === null || _theme$header6$compon2 === void 0 ? void 0 : (_theme$header6$compon3 = _theme$header6$compon2.components) === null || _theme$header6$compon3 === void 0 ? void 0 : (_theme$header6$compon4 = _theme$header6$compon3.layout) === null || _theme$header6$compon4 === void 0 ? void 0 : _theme$header6$compon4.position) ? 'row-reverse' : 'row';
+  return (_ref13 = ['center', 'right']) !== null && _ref13 !== void 0 && _ref13.includes(theme === null || theme === void 0 || (_theme$header6 = theme.header) === null || _theme$header6 === void 0 || (_theme$header6 = _theme$header6.components) === null || _theme$header6 === void 0 || (_theme$header6 = _theme$header6.logo) === null || _theme$header6 === void 0 || (_theme$header6 = _theme$header6.components) === null || _theme$header6 === void 0 || (_theme$header6 = _theme$header6.layout) === null || _theme$header6 === void 0 ? void 0 : _theme$header6.position) ? 'row-reverse' : 'row';
 });
 exports.LeftSide = LeftSide;

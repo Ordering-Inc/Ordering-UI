@@ -40,16 +40,16 @@ var PreviousProductsOrdered = function PreviousProductsOrdered(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_styles.ProductsListContainer, {
     isLoading: (products === null || products === void 0 ? void 0 : products.length) < 1
-  }, /*#__PURE__*/_react.default.createElement(_styles.ProductsList, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, products === null || products === void 0 ? void 0 : (_products$filter = products.filter(function (product) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.ProductsList, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, products === null || products === void 0 || (_products$filter = products.filter(function (product) {
     var _product$business;
-    return product === null || product === void 0 ? void 0 : (_product$business = product.business) === null || _product$business === void 0 ? void 0 : _product$business.available;
+    return product === null || product === void 0 || (_product$business = product.business) === null || _product$business === void 0 ? void 0 : _product$business.available;
   })) === null || _products$filter === void 0 ? void 0 : _products$filter.map(function (product) {
     var _product$business2;
     return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
       isSoldOut: product.inventoried && !product.quantity,
       product: product,
-      businessId: product === null || product === void 0 ? void 0 : (_product$business2 = product.business) === null || _product$business2 === void 0 ? void 0 : _product$business2.id,
+      businessId: product === null || product === void 0 || (_product$business2 = product.business) === null || _product$business2 === void 0 ? void 0 : _product$business2.id,
       handleUpdateProducts: handleUpdateProducts,
       onProductClick: function onProductClick(product) {
         return _onProductClick(product);
@@ -67,7 +67,7 @@ var PreviousProductsOrdered = function PreviousProductsOrdered(props) {
     isProductForm: true,
     disableOverflowX: true
   }, !!curProduct && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
-    businessSlug: curProduct === null || curProduct === void 0 ? void 0 : (_curProduct$business = curProduct.business) === null || _curProduct$business === void 0 ? void 0 : _curProduct$business.slug,
+    businessSlug: curProduct === null || curProduct === void 0 || (_curProduct$business = curProduct.business) === null || _curProduct$business === void 0 ? void 0 : _curProduct$business.slug,
     useKioskApp: props === null || props === void 0 ? void 0 : props.useKioskApp,
     businessId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.businessId,
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,

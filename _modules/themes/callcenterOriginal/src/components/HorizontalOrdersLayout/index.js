@@ -73,7 +73,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         key: i
       }, props));
     }), orders.length > 0 && ordersToShow.map(function (order) {
-      var _order$business, _theme$images, _theme$images$dummies, _order$business2, _theme$images2, _theme$images2$dummie, _order$business3, _order$summary, _getOrderStatus;
+      var _order$business, _theme$images, _order$business2, _theme$images2, _order$business3, _order$summary, _getOrderStatus;
       return /*#__PURE__*/_react.default.createElement(_styles.Card, {
         key: order.id || order.uuid,
         id: "order-card",
@@ -81,8 +81,8 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         onClick: function onClick() {
           return handleClickCard(order === null || order === void 0 ? void 0 : order.uuid);
         }
-      }, /*#__PURE__*/_react.default.createElement(_styles.Content, null, (((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
-        src: ((_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo),
+      }, /*#__PURE__*/_react.default.createElement(_styles.Content, null, (((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.Logo, null, /*#__PURE__*/_react.default.createElement("img", {
+        src: ((_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.dummies) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.businessLogo),
         alt: "business-logo",
         width: "75px",
         height: "75px"
@@ -90,7 +90,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         activeOrders: true
       }, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), /*#__PURE__*/_react.default.createElement(_styles.Price, {
         isBusinessesPage: isBusinessesPage
-      }, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))))), /*#__PURE__*/_react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 || (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))))), /*#__PURE__*/_react.default.createElement("div", {
         className: "orders-detail"
       }, (order === null || order === void 0 ? void 0 : order.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
         name: "order_number"

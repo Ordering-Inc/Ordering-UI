@@ -115,7 +115,7 @@ var SelectCustomer = function SelectCustomer(props) {
     }
   }), customersPhones.loading && /*#__PURE__*/_react.default.createElement("span", {
     className: "loading"
-  }, /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null)), searchInputFocus && /*#__PURE__*/_react.default.createElement(_styles2.OptionsToSelectContainer, null, (customersPhones === null || customersPhones === void 0 ? void 0 : (_customersPhones$user = customersPhones.users) === null || _customersPhones$user === void 0 ? void 0 : _customersPhones$user.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, customersPhones === null || customersPhones === void 0 ? void 0 : (_customersPhones$user2 = customersPhones.users) === null || _customersPhones$user2 === void 0 ? void 0 : _customersPhones$user2.map(function (user) {
+  }, /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null)), searchInputFocus && /*#__PURE__*/_react.default.createElement(_styles2.OptionsToSelectContainer, null, (customersPhones === null || customersPhones === void 0 || (_customersPhones$user = customersPhones.users) === null || _customersPhones$user === void 0 ? void 0 : _customersPhones$user.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, customersPhones === null || customersPhones === void 0 || (_customersPhones$user2 = customersPhones.users) === null || _customersPhones$user2 === void 0 ? void 0 : _customersPhones$user2.map(function (user) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SelectOption, {
       key: user.id,
       onClick: function onClick() {

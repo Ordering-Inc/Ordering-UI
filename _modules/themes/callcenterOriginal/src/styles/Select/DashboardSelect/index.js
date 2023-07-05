@@ -135,7 +135,7 @@ var Select = function Select(props) {
   };
   var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
     display: open ? 'block' : 'none',
-    minWidth: (referenceElement === null || referenceElement === void 0 ? void 0 : (_referenceElement$cur2 = referenceElement.current) === null || _referenceElement$cur2 === void 0 ? void 0 : _referenceElement$cur2.offsetWidth) || '100px'
+    minWidth: (referenceElement === null || referenceElement === void 0 || (_referenceElement$cur2 = referenceElement.current) === null || _referenceElement$cur2 === void 0 ? void 0 : _referenceElement$cur2.offsetWidth) || '100px'
   });
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)';

@@ -104,7 +104,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       var _category$data$;
       return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
         key: category === null || category === void 0 ? void 0 : category.categoryName,
-        className: "category ".concat(getActive(category), " ").concat((category === null || category === void 0 ? void 0 : (_category$data$ = category.data[0]) === null || _category$data$ === void 0 ? void 0 : _category$data$.id) === 'featured' ? 'special' : ''),
+        className: "category ".concat(getActive(category), " ").concat((category === null || category === void 0 || (_category$data$ = category.data[0]) === null || _category$data$ === void 0 ? void 0 : _category$data$.id) === 'featured' ? 'special' : ''),
         isVerticalList: isVerticalList
       }, /*#__PURE__*/_react.default.createElement(CategoryAccordion, {
         category: category

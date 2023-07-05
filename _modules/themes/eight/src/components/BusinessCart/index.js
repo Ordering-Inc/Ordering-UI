@@ -36,7 +36,7 @@ var BusinessCart = function BusinessCart(props) {
     setIsGoBack = _useState2[1];
   var currentCart = (_Object$values$find = Object.values(carts).find(function (cart) {
     var _cart$business;
-    return (cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === slug;
+    return (cart === null || cart === void 0 || (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === slug;
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
   (0, _react.useEffect)(function () {
     if (loading || !isGoBack) return;
@@ -44,7 +44,7 @@ var BusinessCart = function BusinessCart(props) {
   }, [loading, isGoBack]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_NavBar.NavBar, {
     title: t('LOGIN_LINK_MY_ORDERS', 'My Orders')
-  }), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapCart, {
+  }), (currentCart === null || currentCart === void 0 || (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapCart, {
     isExistBottom: document.getElementById('page-footer')
   }, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isForceOpenCart: true,

@@ -56,7 +56,7 @@ var SelectBusinesses = function SelectBusinesses(props) {
     if (searchValue) {
       _filteredBusinesses = allBusinesses.filter(function (business) {
         var _business$name;
-        return business === null || business === void 0 ? void 0 : (_business$name = business.name) === null || _business$name === void 0 ? void 0 : _business$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
+        return business === null || business === void 0 || (_business$name = business.name) === null || _business$name === void 0 ? void 0 : _business$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       _filteredBusinesses = _toConsumableArray(allBusinesses);
@@ -95,7 +95,7 @@ var SelectBusinesses = function SelectBusinesses(props) {
       width: 100
     })));
   }) : filteredBusinesses.map(function (business) {
-    var _theme$images, _theme$images$dummies;
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessWrapper, {
       key: business.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
@@ -104,7 +104,7 @@ var SelectBusinesses = function SelectBusinesses(props) {
         return handleSelectBusiness(business.id, e.target.checked);
       }
     }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit')
+      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit')
     })), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.name));
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",

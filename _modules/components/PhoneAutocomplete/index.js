@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _customerState$result, _customerState$result2, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _customerState$result, _customerState$result2, _props$afterComponent, _props$afterElements;
   var phone = props.phone,
     customerState = props.customerState,
     customersPhones = props.customersPhones,
@@ -96,8 +96,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     });
   };
   var handleFindClick = function handleFindClick() {
-    var _orderState$options, _orderState$options$a;
-    if (userCustomer !== null && userCustomer !== void 0 && userCustomer.id && orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.address) {
+    var _orderState$options;
+    if (userCustomer !== null && userCustomer !== void 0 && userCustomer.id && orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options = _orderState$options.address) !== null && _orderState$options !== void 0 && _orderState$options.address) {
       onRedirectPage && onRedirectPage('search');
     } else {
       setAlertState({
@@ -146,7 +146,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   };
   var createNewUser = function createNewUser() {
     var _optSelected$value;
-    if (optSelected && (optSelected === null || optSelected === void 0 ? void 0 : (_optSelected$value = optSelected.value) === null || _optSelected$value === void 0 ? void 0 : _optSelected$value.length) === 10 || !optSelected && phone.length === 10) {
+    if (optSelected && (optSelected === null || optSelected === void 0 || (_optSelected$value = optSelected.value) === null || _optSelected$value === void 0 ? void 0 : _optSelected$value.length) === 10 || !optSelected && phone.length === 10) {
       setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         signup: true
       }));
@@ -184,7 +184,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, {
-    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero
+    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.homeHero
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME_CALLCENTER', 'Start First by adding the customers\' phone number')), !userCustomer && /*#__PURE__*/_react.default.createElement("div", {
     style: {
       position: 'relative',
@@ -244,11 +244,11 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       return handleCloseAddressList();
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
-    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id,
+    userId: customerState === null || customerState === void 0 || (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id,
     isCustomerMode: true
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
-    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
+    userId: customerState === null || customerState === void 0 || (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
     changeOrderAddressWithDefault: true,
     userCustomerSetup: _objectSpread(_objectSpread({}, customerState === null || customerState === void 0 ? void 0 : customerState.result), {}, {
       phone: phone

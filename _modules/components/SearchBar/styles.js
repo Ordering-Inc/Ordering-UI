@@ -14,8 +14,8 @@ var BusinessSearch = _styledComponents.default.div(_templateObject || (_template
   var _props$theme;
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      padding-left: 60px;\n    "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      padding-right: 60px;\n    "])));
 }, function (props) {
-  var _props$theme2, _props$theme2$colors;
-  return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : (_props$theme2$colors = _props$theme2.colors) === null || _props$theme2$colors === void 0 ? void 0 : _props$theme2$colors.backgroundPage;
+  var _props$theme2;
+  return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 || (_props$theme2 = _props$theme2.colors) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.backgroundPage;
 }, function (_ref) {
   var isCustomLayout = _ref.isCustomLayout;
   return !isCustomLayout && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      justify-content: center;\n      -webkit-transition: width 0.4s ease-in-out;\n      transition: width 0.4s ease-in-out; \n    "])));
@@ -33,10 +33,10 @@ var DeleteContent = _styledComponents.default.span(_templateObject6 || (_templat
 });
 exports.DeleteContent = DeleteContent;
 var SearchIcon = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background-image: url(", ");\n  background-position: right 10px center;\n  background-repeat: no-repeat;\n  background-size: 15px;\n  background-color: ", ";\n\n"])), function (props) {
-  var _props$theme5, _props$theme5$images, _props$theme5$images$;
-  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : (_props$theme5$images = _props$theme5.images) === null || _props$theme5$images === void 0 ? void 0 : (_props$theme5$images$ = _props$theme5$images.general) === null || _props$theme5$images$ === void 0 ? void 0 : _props$theme5$images$.searchIcon;
+  var _props$theme5;
+  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 || (_props$theme5 = _props$theme5.images) === null || _props$theme5 === void 0 || (_props$theme5 = _props$theme5.general) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.searchIcon;
 }, function (props) {
-  var _props$theme6, _props$theme6$colors;
-  return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : (_props$theme6$colors = _props$theme6.colors) === null || _props$theme6$colors === void 0 ? void 0 : _props$theme6$colors.backgroundPage;
+  var _props$theme6;
+  return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 || (_props$theme6 = _props$theme6.colors) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.backgroundPage;
 });
 exports.SearchIcon = SearchIcon;

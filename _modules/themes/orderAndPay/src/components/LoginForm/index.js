@@ -108,13 +108,13 @@ var LoginFormUI = function LoginFormUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     otpState = _useState12[0],
     setOtpState = _useState12[1];
-  var isAvailableSocialLogin = ((configs === null || configs === void 0 ? void 0 : (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log2 = configs.facebook_login) === null || _configs$facebook_log2 === void 0 ? void 0 : _configs$facebook_log2.value) === '1') && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) || (configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value) || (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_ = configs.apple_login_client_id) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value);
+  var isAvailableSocialLogin = ((configs === null || configs === void 0 || (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) === 'true' || (configs === null || configs === void 0 || (_configs$facebook_log2 = configs.facebook_login) === null || _configs$facebook_log2 === void 0 ? void 0 : _configs$facebook_log2.value) === '1') && (configs === null || configs === void 0 || (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) || (configs === null || configs === void 0 || (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value) || (configs === null || configs === void 0 || (_configs$apple_login_ = configs.apple_login_client_id) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value);
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
     _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
     otpLeftTime = _useCountdownTimer2[0],
     resetOtpLeftTime = _useCountdownTimer2[2];
   var initParams = {
-    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value,
+    client_id: configs === null || configs === void 0 || (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value,
     cookiepolicy: 'single_host_origin',
     scope: 'profile'
   };
@@ -156,21 +156,21 @@ var LoginFormUI = function LoginFormUI(props) {
     var _user$session;
     login({
       user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+      token: user === null || user === void 0 || (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
     });
   };
   var handleSuccessApple = function handleSuccessApple(user) {
     var _user$session2;
     login({
       user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
+      token: user === null || user === void 0 || (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
     });
   };
   var handleSuccessGoogle = function handleSuccessGoogle(user) {
     var _user$session3;
     login({
       user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session3 = user.session) === null || _user$session3 === void 0 ? void 0 : _user$session3.access_token
+      token: user === null || user === void 0 || (_user$session3 = user.session) === null || _user$session3 === void 0 ? void 0 : _user$session3.access_token
     });
   };
   var togglePasswordView = function togglePasswordView() {
@@ -279,7 +279,7 @@ var LoginFormUI = function LoginFormUI(props) {
       var _checkPhoneCodeState$2;
       setAlertState({
         open: true,
-        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
+        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 || (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
       });
     } else resetOtpLeftTime();
   }, [checkPhoneCodeState]);
@@ -289,7 +289,7 @@ var LoginFormUI = function LoginFormUI(props) {
       var _verifyPhoneState$res2;
       setAlertState({
         open: true,
-        content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
+        content: (verifyPhoneState === null || verifyPhoneState === void 0 || (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
       });
     } else resetOtpLeftTime();
   }, [verifyPhoneState]);
@@ -417,25 +417,25 @@ var LoginFormUI = function LoginFormUI(props) {
   }, t('CANCEL', 'Cancel'))), elementLinkToSignup && !loginWithOtpState && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.NEW_ON_PLATFORM) || 'New on Ordering?')), elementLinkToSignup), !props.isDisableButtons && !loginWithOtpState && (Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isAvailableSocialLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.NEW_ON_PLATFORM) || 'New on Ordering?')), elementLinkToSignup), !props.isDisableButtons && !loginWithOtpState && (Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isAvailableSocialLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
-  }, ((configs === null || configs === void 0 ? void 0 : (_configs$facebook_log3 = configs.facebook_login) === null || _configs$facebook_log3 === void 0 ? void 0 : _configs$facebook_log3.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log4 = configs.facebook_login) === null || _configs$facebook_log4 === void 0 ? void 0 : _configs$facebook_log4.value) === '1') && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
-    appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id3 = configs.facebook_id) === null || _configs$facebook_id3 === void 0 ? void 0 : _configs$facebook_id3.value,
+  }, ((configs === null || configs === void 0 || (_configs$facebook_log3 = configs.facebook_login) === null || _configs$facebook_log3 === void 0 ? void 0 : _configs$facebook_log3.value) === 'true' || (configs === null || configs === void 0 || (_configs$facebook_log4 = configs.facebook_login) === null || _configs$facebook_log4 === void 0 ? void 0 : _configs$facebook_log4.value) === '1') && (configs === null || configs === void 0 || (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
+    appId: configs === null || configs === void 0 || (_configs$facebook_id3 = configs.facebook_id) === null || _configs$facebook_id3 === void 0 ? void 0 : _configs$facebook_id3.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login3 = configs.google_login_client_id) === null || _configs$google_login3 === void 0 ? void 0 : _configs$google_login3.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
+  }), (configs === null || configs === void 0 || (_configs$google_login3 = configs.google_login_client_id) === null || _configs$google_login3 === void 0 ? void 0 : _configs$google_login3.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
     initParams: initParams,
     handleSuccessGoogleLogin: handleSuccessGoogle,
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_2 = configs.apple_login_client_id) === null || _configs$apple_login_2 === void 0 ? void 0 : _configs$apple_login_2.value) && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
+  }), (configs === null || configs === void 0 || (_configs$apple_login_2 = configs.apple_login_client_id) === null || _configs$apple_login_2 === void 0 ? void 0 : _configs$apple_login_2.value) && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
     onSuccess: handleSuccessApple,
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }
-  }), useLoginByCellphone && loginTab === 'cellphone' && configs && Object.keys(configs).length > 0 && ((configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi = configs.twilio_service_enabled) === null || _configs$twilio_servi === void 0 ? void 0 : _configs$twilio_servi.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi2 = configs.twilio_service_enabled) === null || _configs$twilio_servi2 === void 0 ? void 0 : _configs$twilio_servi2.value) === '1') && /*#__PURE__*/_react.default.createElement(_SmsLogin.SmsLoginButton, {
+  }), useLoginByCellphone && loginTab === 'cellphone' && configs && Object.keys(configs).length > 0 && ((configs === null || configs === void 0 || (_configs$twilio_servi = configs.twilio_service_enabled) === null || _configs$twilio_servi === void 0 ? void 0 : _configs$twilio_servi.value) === 'true' || (configs === null || configs === void 0 || (_configs$twilio_servi2 = configs.twilio_service_enabled) === null || _configs$twilio_servi2 === void 0 ? void 0 : _configs$twilio_servi2.value) === '1') && /*#__PURE__*/_react.default.createElement(_SmsLogin.SmsLoginButton, {
     handleSmsLogin: function handleSmsLogin() {
       setLoginWithOtpState(true);
     }

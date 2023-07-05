@@ -28,7 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MomentControlUI = function MomentControlUI(props) {
-  var _configs$dates_moment, _configs$dates_moment2, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options2, _configs$dates_moment3, _props$afterComponent, _props$afterElements;
+  var _configs$dates_moment, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options2, _configs$dates_moment2, _props$afterComponent, _props$afterElements;
   var isAsap = props.isAsap,
     datesList = props.datesList,
     hoursList = props.hoursList,
@@ -41,7 +41,7 @@ var MomentControlUI = function MomentControlUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var is12hours = configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : (_configs$dates_moment2 = _configs$dates_moment.value) === null || _configs$dates_moment2 === void 0 ? void 0 : _configs$dates_moment2.includes('hh:mm');
+  var is12hours = configs === null || configs === void 0 || (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 || (_configs$dates_moment = _configs$dates_moment.value) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.includes('hh:mm');
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
@@ -62,7 +62,7 @@ var MomentControlUI = function MomentControlUI(props) {
     var _configs$max_days_pre;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')), /*#__PURE__*/_react.default.createElement(_styles.Days, {
       name: "days"
-    }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10)).map(function (date) {
+    }, datesList.slice(0, Number((configs === null || configs === void 0 || (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10)).map(function (date) {
       var dateParts = date.split('-');
       var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
       var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 3).toUpperCase();
@@ -115,8 +115,8 @@ var MomentControlUI = function MomentControlUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, {
     id: "icon"
-  }), orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && _orderState$options.moment ? parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.moment, {
-    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment3 = configs.dates_moment_format) === null || _configs$dates_moment3 === void 0 ? void 0 : _configs$dates_moment3.value
+  }), orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && _orderState$options.moment ? parseDate(orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.moment, {
+    outputFormat: configs === null || configs === void 0 || (_configs$dates_moment2 = configs.dates_moment_format) === null || _configs$dates_moment2 === void 0 ? void 0 : _configs$dates_moment2.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')), isModalBehavior ? /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
@@ -138,7 +138,7 @@ var MomentControl = function MomentControl(props) {
   var _useConfig3 = (0, _orderingComponents.useConfig)(),
     _useConfig4 = _slicedToArray(_useConfig3, 1),
     configs = _useConfig4[0].configs;
-  var limitDays = parseInt(configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value, 10);
+  var limitDays = parseInt(configs === null || configs === void 0 || (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value, 10);
   var currentDate = new Date();
   var time = limitDays > 1 ? currentDate.getTime() + (limitDays - 1) * 24 * 60 * 60 * 1000 : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + 6 * 24 * 60 * 60 * 1000;
   currentDate.setTime(time);

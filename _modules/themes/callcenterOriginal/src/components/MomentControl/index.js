@@ -109,19 +109,19 @@ var MomentControlUI = function MomentControlUI(props) {
   };
   var handleChangeTimeFormat = function handleChangeTimeFormat() {
     var _configs$format_time;
-    if ((configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) !== '12') return;
+    if ((configs === null || configs === void 0 || (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) !== '12') return;
     setTimeFormat(function (prev) {
       return prev === 'AM' ? 'PM' : 'AM';
     });
   };
   (0, _react.useEffect)(function () {
     var _configs$format_time2;
-    if ((configs === null || configs === void 0 ? void 0 : (_configs$format_time2 = configs.format_time) === null || _configs$format_time2 === void 0 ? void 0 : _configs$format_time2.value) === '12') setTimeFormat('AM');else setTimeFormat('');
-  }, [configs === null || configs === void 0 ? void 0 : (_configs$format_time3 = configs.format_time) === null || _configs$format_time3 === void 0 ? void 0 : _configs$format_time3.value]);
+    if ((configs === null || configs === void 0 || (_configs$format_time2 = configs.format_time) === null || _configs$format_time2 === void 0 ? void 0 : _configs$format_time2.value) === '12') setTimeFormat('AM');else setTimeFormat('');
+  }, [configs === null || configs === void 0 || (_configs$format_time3 = configs.format_time) === null || _configs$format_time3 === void 0 ? void 0 : _configs$format_time3.value]);
   (0, _react.useEffect)(function () {
     if ((datesList === null || datesList === void 0 ? void 0 : datesList.length) > 0) {
       var _configs$max_days_pre;
-      var _datesList = datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10));
+      var _datesList = datesList.slice(0, Number((configs === null || configs === void 0 || (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10));
       var minDateParts = _datesList[0].split('-');
       var maxDateParts = _datesList[_datesList.length - 1].split('-');
       var _minDate = new Date(minDateParts[0], minDateParts[1] - 1, minDateParts[2]);
@@ -143,7 +143,7 @@ var MomentControlUI = function MomentControlUI(props) {
         var _configs$format_time4;
         return {
           value: hour.startTime,
-          content: (configs === null || configs === void 0 ? void 0 : (_configs$format_time4 = configs.format_time) === null || _configs$format_time4 === void 0 ? void 0 : _configs$format_time4.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+          content: (configs === null || configs === void 0 || (_configs$format_time4 = configs.format_time) === null || _configs$format_time4 === void 0 ? void 0 : _configs$format_time4.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
             outputFormat: 'hh:mma'
           }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
             outputFormat: 'HH:mm'

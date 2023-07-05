@@ -41,10 +41,10 @@ var ActionsSection = function ActionsSection(props) {
     }
     window.scrollTo(0, 0);
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, (order === null || order === void 0 ? void 0 : order[actionType]) && (order === null || order === void 0 ? void 0 : (_order$actionType = order[actionType]) === null || _order$actionType === void 0 ? void 0 : _order$actionType.phone) && showPhone && /*#__PURE__*/_react.default.createElement("span", {
+  return /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, (order === null || order === void 0 ? void 0 : order[actionType]) && (order === null || order === void 0 || (_order$actionType = order[actionType]) === null || _order$actionType === void 0 ? void 0 : _order$actionType.phone) && showPhone && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       var _order$actionType2;
-      return window.open("tel:".concat(order === null || order === void 0 ? void 0 : (_order$actionType2 = order[actionType]) === null || _order$actionType2 === void 0 ? void 0 : _order$actionType2.phone));
+      return window.open("tel:".concat(order === null || order === void 0 || (_order$actionType2 = order[actionType]) === null || _order$actionType2 === void 0 ? void 0 : _order$actionType2.phone));
     }
   }, /*#__PURE__*/_react.default.createElement(_BsPhone.default, null)), actionType === 'business' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_BiStoreAlt.default, {
     onClick: function onClick() {

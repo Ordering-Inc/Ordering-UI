@@ -89,7 +89,7 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
     }
   }) : /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address) || {},
+    address: (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },

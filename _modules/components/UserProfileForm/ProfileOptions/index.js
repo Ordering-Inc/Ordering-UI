@@ -23,7 +23,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProfileOptions = function ProfileOptions(_ref) {
-  var _theme$profile, _theme$profile$compon, _theme$profile$compon2, _theme$profile$compon3, _theme$profile$compon4;
+  var _theme$profile;
   var value = _ref.value;
   var _useState = (0, _react.useState)(value),
     _useState2 = _slicedToArray(_useState, 1),
@@ -35,7 +35,7 @@ var ProfileOptions = function ProfileOptions(_ref) {
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
   var theme = (0, _styledComponents.useTheme)();
-  var showAddressListTab = (theme === null || theme === void 0 ? void 0 : (_theme$profile = theme.profile) === null || _theme$profile === void 0 ? void 0 : (_theme$profile$compon = _theme$profile.components) === null || _theme$profile$compon === void 0 ? void 0 : (_theme$profile$compon2 = _theme$profile$compon.address_list) === null || _theme$profile$compon2 === void 0 ? void 0 : (_theme$profile$compon3 = _theme$profile$compon2.components) === null || _theme$profile$compon3 === void 0 ? void 0 : (_theme$profile$compon4 = _theme$profile$compon3.layout) === null || _theme$profile$compon4 === void 0 ? void 0 : _theme$profile$compon4.position) === 'new_page';
+  var showAddressListTab = (theme === null || theme === void 0 || (_theme$profile = theme.profile) === null || _theme$profile === void 0 || (_theme$profile = _theme$profile.components) === null || _theme$profile === void 0 || (_theme$profile = _theme$profile.address_list) === null || _theme$profile === void 0 || (_theme$profile = _theme$profile.components) === null || _theme$profile === void 0 || (_theme$profile = _theme$profile.layout) === null || _theme$profile === void 0 ? void 0 : _theme$profile.position) === 'new_page';
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
   };

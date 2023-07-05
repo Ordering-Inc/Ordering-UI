@@ -102,8 +102,8 @@ exports.SkeletonBlockWrapp = SkeletonBlockWrapp;
 var MessagesIcon = _styledComponents.default.span(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n"])));
 exports.MessagesIcon = MessagesIcon;
 var ExclamationWrapper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(75%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
-  var _props$theme5, _props$theme5$colors;
-  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : (_props$theme5$colors = _props$theme5.colors) === null || _props$theme5$colors === void 0 ? void 0 : _props$theme5$colors.primary;
+  var _props$theme5;
+  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 || (_props$theme5 = _props$theme5.colors) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.primary;
 });
 exports.ExclamationWrapper = ExclamationWrapper;
 var Hr = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: ", ";\n  background: ", ";\n"])), function (_ref3) {

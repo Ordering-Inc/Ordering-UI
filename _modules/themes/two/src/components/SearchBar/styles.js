@@ -27,10 +27,10 @@ var DeleteContent = _styledComponents.default.span(_templateObject6 || (_templat
 });
 exports.DeleteContent = DeleteContent;
 var SearchIcon = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background-image: url(", ");\n  background-position: right 10px center;\n  background-repeat: no-repeat;\n  background-size: 15px;\n  background-color: ", ";\n"])), function (props) {
-  var _props$theme3, _props$theme3$images, _props$theme3$images$;
-  return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : (_props$theme3$images = _props$theme3.images) === null || _props$theme3$images === void 0 ? void 0 : (_props$theme3$images$ = _props$theme3$images.general) === null || _props$theme3$images$ === void 0 ? void 0 : _props$theme3$images$.searchIcon;
+  var _props$theme3;
+  return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 || (_props$theme3 = _props$theme3.images) === null || _props$theme3 === void 0 || (_props$theme3 = _props$theme3.general) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.searchIcon;
 }, function (props) {
-  var _props$theme4, _props$theme4$colors;
-  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : (_props$theme4$colors = _props$theme4.colors) === null || _props$theme4$colors === void 0 ? void 0 : _props$theme4$colors.backgroundPage;
+  var _props$theme4;
+  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 || (_props$theme4 = _props$theme4.colors) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.backgroundPage;
 });
 exports.SearchIcon = SearchIcon;

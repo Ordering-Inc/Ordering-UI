@@ -69,8 +69,8 @@ var CardFormCustom = function CardFormCustom(props) {
       type: 'card',
       brand: cardBrand,
       last4: lastFourDigits,
-      ccnumber: values === null || values === void 0 ? void 0 : (_values$number = values.number) === null || _values$number === void 0 ? void 0 : _values$number.replace(/\s/g, ''),
-      ccexp: values === null || values === void 0 ? void 0 : (_values$expiry = values.expiry) === null || _values$expiry === void 0 ? void 0 : _values$expiry.replace('/', ''),
+      ccnumber: values === null || values === void 0 || (_values$number = values.number) === null || _values$number === void 0 ? void 0 : _values$number.replace(/\s/g, ''),
+      ccexp: values === null || values === void 0 || (_values$expiry = values.expiry) === null || _values$expiry === void 0 ? void 0 : _values$expiry.replace('/', ''),
       cvv: values === null || values === void 0 ? void 0 : values.cvc
     };
     handleNewCard(card);

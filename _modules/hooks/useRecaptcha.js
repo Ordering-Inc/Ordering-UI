@@ -36,11 +36,11 @@ var useRecaptcha = function useRecaptcha(enableRecaptcha) {
   (0, _react.useEffect)(function () {
     if (configs && Object.keys(configs).length > 0 && enableRecaptcha && (reCaptchaConfig === null || reCaptchaConfig === void 0 ? void 0 : reCaptchaConfig.siteKey) === '') {
       var _configs$security_rec, _configs$security_rec2, _configs$security_rec3, _configs$security_rec5;
-      if ((configs === null || configs === void 0 ? void 0 : (_configs$security_rec = configs.security_recaptcha_type) === null || _configs$security_rec === void 0 ? void 0 : _configs$security_rec.value) === 'v3' && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_score_v3) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value) > 0 && configs !== null && configs !== void 0 && (_configs$security_rec3 = configs.security_recaptcha_site_key_v3) !== null && _configs$security_rec3 !== void 0 && _configs$security_rec3.value) {
+      if ((configs === null || configs === void 0 || (_configs$security_rec = configs.security_recaptcha_type) === null || _configs$security_rec === void 0 ? void 0 : _configs$security_rec.value) === 'v3' && (configs === null || configs === void 0 || (_configs$security_rec2 = configs.security_recaptcha_score_v3) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value) > 0 && configs !== null && configs !== void 0 && (_configs$security_rec3 = configs.security_recaptcha_site_key_v3) !== null && _configs$security_rec3 !== void 0 && _configs$security_rec3.value) {
         var _configs$security_rec4;
         setRecaptchaConfig({
           version: 'v3',
-          siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec4 = configs.security_recaptcha_site_key_v3) === null || _configs$security_rec4 === void 0 ? void 0 : _configs$security_rec4.value,
+          siteKey: configs === null || configs === void 0 || (_configs$security_rec4 = configs.security_recaptcha_site_key_v3) === null || _configs$security_rec4 === void 0 ? void 0 : _configs$security_rec4.value,
           error: false
         });
         return;
@@ -49,7 +49,7 @@ var useRecaptcha = function useRecaptcha(enableRecaptcha) {
         var _configs$security_rec6;
         setRecaptchaConfig({
           version: 'v2',
-          siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec6 = configs.security_recaptcha_site_key) === null || _configs$security_rec6 === void 0 ? void 0 : _configs$security_rec6.value,
+          siteKey: configs === null || configs === void 0 || (_configs$security_rec6 = configs.security_recaptcha_site_key) === null || _configs$security_rec6 === void 0 ? void 0 : _configs$security_rec6.value,
           error: false
         });
         return;

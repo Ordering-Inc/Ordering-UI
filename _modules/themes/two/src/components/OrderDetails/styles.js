@@ -120,8 +120,8 @@ exports.MessagesIcon = MessagesIcon;
 var ExclamationWrapper = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: -5px;\n\n  ", "\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
   return props.theme.rtl ? (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n    left: -5px;\n  "]))) : (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    right: -5px;\n  "])));
 }, function (props) {
-  var _props$theme10, _props$theme10$colors;
-  return (_props$theme10 = props.theme) === null || _props$theme10 === void 0 ? void 0 : (_props$theme10$colors = _props$theme10.colors) === null || _props$theme10$colors === void 0 ? void 0 : _props$theme10$colors.primary;
+  var _props$theme10;
+  return (_props$theme10 = props.theme) === null || _props$theme10 === void 0 || (_props$theme10 = _props$theme10.colors) === null || _props$theme10 === void 0 ? void 0 : _props$theme10.primary;
 });
 exports.ExclamationWrapper = ExclamationWrapper;
 var DriverInfo = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  border-top: 1px solid #E7E7E7;\n  padding: 20px 0;\n"])));

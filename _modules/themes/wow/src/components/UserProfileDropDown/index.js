@@ -24,7 +24,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserProfileDropDown = function UserProfileDropDown(props) {
-  var _theme$images, _theme$images$general;
+  var _theme$images;
   var auth = props.auth,
     selectedItem = props.selectedItem,
     handleChangeItem = props.handleChangeItem;
@@ -52,7 +52,7 @@ var UserProfileDropDown = function UserProfileDropDown(props) {
       return handleChangeItem('myProfile');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement(_BisUser.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('MY_PROFILE', 'My profile'))), /*#__PURE__*/_react.default.createElement(_styles.Item, null, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement(_RiBankCardFill.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('PAYMENT_METHODS', 'Payment Methods'))), /*#__PURE__*/_react.default.createElement(_styles.Item, null, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.wowCard,
+    src: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.wowCard,
     alt: "wow-card"
   })), /*#__PURE__*/_react.default.createElement("span", null, t('ADD_WOW_CARD', 'Add Wow card'))), /*#__PURE__*/_react.default.createElement(_styles.Item, {
     active: selectedItem === 'savedAddress',

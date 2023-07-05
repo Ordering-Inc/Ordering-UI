@@ -36,9 +36,9 @@ var BusinessHeader = function BusinessHeader(props) {
 };
 exports.BusinessHeader = BusinessHeader;
 var BusinessTags = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  position: absolute;\n  justify-content: space-between;\n  align-items: center;\n  top: 0;\n  margin: 15px;\n  width: calc(100% - 35px);\n      \n  ", "\n  span.crown {\n    background-color: rgba(0, 0, 0, 0.5);\n    font-size: 20px;\n    display: flex;\n    align-items: center;\n    color: #FFC917;\n  }\n\n  div {\n    display: flex;\n    align-items: center;\n    justify-content: flex-end;\n  }\n\n  span {\n    background-color: #6C6C6C;\n    font-size: 12px;\n    color: #FFF;\n    padding: 8px;\n    border-radius: 10px;\n    margin-right: 10px;\n    ", "\n    &:last-child {\n      ", "\n    }\n  }\n"])), function (_ref2) {
-  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3;
+  var _theme$business_listi;
   var theme = _ref2.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$business_listi = theme.business_listing_view) === null || _theme$business_listi === void 0 ? void 0 : (_theme$business_listi2 = _theme$business_listi.components) === null || _theme$business_listi2 === void 0 ? void 0 : (_theme$business_listi3 = _theme$business_listi2.layout) === null || _theme$business_listi3 === void 0 ? void 0 : _theme$business_listi3.type) === 'mapview' && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: 100%;\n  "])));
+  return (theme === null || theme === void 0 || (_theme$business_listi = theme.business_listing_view) === null || _theme$business_listi === void 0 || (_theme$business_listi = _theme$business_listi.components) === null || _theme$business_listi === void 0 || (_theme$business_listi = _theme$business_listi.layout) === null || _theme$business_listi === void 0 ? void 0 : _theme$business_listi.type) === 'mapview' && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: 100%;\n  "])));
 }, function (props) {
   var _props$theme;
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n      margin-right: 0;\n    "])));
@@ -66,9 +66,9 @@ var BusinessLogo = function BusinessLogo(props) {
 };
 exports.BusinessLogo = BusinessLogo;
 var BusinessInfo = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  width: calc(100% - 65px);\n\n  @media (min-width: 481px){\n    width: calc(100% - 75px);\n    ", "\n  }\n"])), function (_ref4) {
-  var _theme$business_listi4, _theme$business_listi5, _theme$business_listi6;
+  var _theme$business_listi2;
   var theme = _ref4.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$business_listi4 = theme.business_listing_view) === null || _theme$business_listi4 === void 0 ? void 0 : (_theme$business_listi5 = _theme$business_listi4.components) === null || _theme$business_listi5 === void 0 ? void 0 : (_theme$business_listi6 = _theme$business_listi5.layout) === null || _theme$business_listi6 === void 0 ? void 0 : _theme$business_listi6.type) === 'mapview' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    "])));
+  return (theme === null || theme === void 0 || (_theme$business_listi2 = theme.business_listing_view) === null || _theme$business_listi2 === void 0 || (_theme$business_listi2 = _theme$business_listi2.components) === null || _theme$business_listi2 === void 0 || (_theme$business_listi2 = _theme$business_listi2.layout) === null || _theme$business_listi2 === void 0 ? void 0 : _theme$business_listi2.type) === 'mapview' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    "])));
 });
 exports.BusinessInfo = BusinessInfo;
 var BusinessInfoItem = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 92%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  padding: 0px 5px 0px 10px;\n  font-size: 12px;\n  ", "\n  .reviews {\n    display: flex;\n    align-items: center;\n    svg {\n      margin-right: 3px;\n      font-size: 22px;\n      color: #FDC918;\n      ", "\n    }\n  }\n\n  div {\n    display: flex;\n    justify-content: space-between;\n    ", "\n    p {\n      text-transform: capitalize;\n      display: flex;\n      align-items: center;\n      margin: 0px;\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      img {\n        margin-right: 4px;\n        ", "\n      }\n    }\n    p.bold {\n      font-weight: bold;\n    }\n  }\n\n  @media (min-width: 1201px) {\n    width: 95%;\n  }\n\n  @media (min-width: 481px){\n    ", "\n    padding: 0px 5px 0px 16px;\n    font-size: 16px;\n\n    ", "\n  }\n"])), function (props) {
@@ -78,16 +78,16 @@ var BusinessInfoItem = _styledComponents.default.div(_templateObject16 || (_temp
   var _props$theme4;
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n        margin-left: 3px;\n        margin-right: 0;\n    "])));
 }, function (_ref5) {
-  var _theme$business_listi7, _theme$business_listi8, _theme$business_listi9;
+  var _theme$business_listi3;
   var theme = _ref5.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$business_listi7 = theme.business_listing_view) === null || _theme$business_listi7 === void 0 ? void 0 : (_theme$business_listi8 = _theme$business_listi7.components) === null || _theme$business_listi8 === void 0 ? void 0 : (_theme$business_listi9 = _theme$business_listi8.layout) === null || _theme$business_listi9 === void 0 ? void 0 : _theme$business_listi9.type) === 'mapview' && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n      align-items: center;\n    "])));
+  return (theme === null || theme === void 0 || (_theme$business_listi3 = theme.business_listing_view) === null || _theme$business_listi3 === void 0 || (_theme$business_listi3 = _theme$business_listi3.components) === null || _theme$business_listi3 === void 0 || (_theme$business_listi3 = _theme$business_listi3.layout) === null || _theme$business_listi3 === void 0 ? void 0 : _theme$business_listi3.type) === 'mapview' && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n      align-items: center;\n    "])));
 }, function (props) {
   var _props$theme5;
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n          margin-left: 4px;\n          margin-right: 0px;\n       "])));
 }, function (_ref6) {
-  var _theme$business_listi10, _theme$business_listi11, _theme$business_listi12;
+  var _theme$business_listi4;
   var theme = _ref6.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$business_listi10 = theme.business_listing_view) === null || _theme$business_listi10 === void 0 ? void 0 : (_theme$business_listi11 = _theme$business_listi10.components) === null || _theme$business_listi11 === void 0 ? void 0 : (_theme$business_listi12 = _theme$business_listi11.layout) === null || _theme$business_listi12 === void 0 ? void 0 : _theme$business_listi12.type) === 'mapview' && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      min-width: 100%;\n      width: 100%;\n    "])));
+  return (theme === null || theme === void 0 || (_theme$business_listi4 = theme.business_listing_view) === null || _theme$business_listi4 === void 0 || (_theme$business_listi4 = _theme$business_listi4.components) === null || _theme$business_listi4 === void 0 || (_theme$business_listi4 = _theme$business_listi4.layout) === null || _theme$business_listi4 === void 0 ? void 0 : _theme$business_listi4.type) === 'mapview' && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      min-width: 100%;\n      width: 100%;\n    "])));
 }, function (props) {
   var _props$theme6;
   return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n        padding: 0px 16px 0px 5px;\n    "])));
@@ -124,10 +124,10 @@ exports.Address = Address;
 var SelectStoreContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  button{ \n    background: transparent;\n    color: ", ";\n    border-color: ", ";\n    height: 27px;\n    line-height: 0;\n    font-size: 14px;\n    white-space: nowrap;\n  }\n"])), function (_ref9) {
   var _theme$colors;
   var theme = _ref9.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
+  return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
 }, function (_ref10) {
   var _theme$colors2;
   var theme = _ref10.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
+  return theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
 });
 exports.SelectStoreContainer = SelectStoreContainer;

@@ -45,7 +45,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CheckoutUI = function CheckoutUI(props) {
-  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _cart$products, _props$beforeElements3, _props$beforeComponen3, _props$beforeElements4, _props$beforeComponen4, _businessDetails$busi2, _businessDetails$busi3, _props$beforeElements5, _props$beforeComponen5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _props$beforeElements6, _props$beforeComponen6, _cart$products2, _cart$products3, _props$afterComponent, _props$afterElements;
+  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _cart$products, _props$beforeElements3, _props$beforeComponen3, _props$beforeElements4, _props$beforeComponen4, _businessDetails$busi2, _businessDetails$busi3, _props$beforeElements5, _props$beforeComponen5, _validationFields$fie4, _props$beforeElements6, _props$beforeComponen6, _cart$products2, _cart$products3, _props$afterComponent, _props$afterElements;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
@@ -92,7 +92,7 @@ var CheckoutUI = function CheckoutUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     alertState = _useState6[0],
     setAlertState = _useState6[1];
-  var driverTipsOptions = typeof (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 ? void 0 : (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
+  var driverTipsOptions = typeof (configs === null || configs === void 0 || (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 || (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 || (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var handlePlaceOrder = function handlePlaceOrder() {
     if (!userErrors.length) {
       handlerClickPlaceOrder && handlerClickPlaceOrder();
@@ -112,19 +112,19 @@ var CheckoutUI = function CheckoutUI(props) {
     });
   };
   var checkValidationFields = function checkValidationFields() {
-    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4;
+    var _validationFields$fie, _validationFields$fie2;
     setUserErrors([]);
     var errors = [];
     var notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes'];
     var userSelected = isCustomerMode ? customerState.user : user;
-    Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.checkout).map(function (field) {
+    Object.values(validationFields === null || validationFields === void 0 || (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.checkout).map(function (field) {
       if (field !== null && field !== void 0 && field.required && !notFields.includes(field.code)) {
         if (!userSelected[field === null || field === void 0 ? void 0 : field.code]) {
           errors.push(t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "The field ".concat(field === null || field === void 0 ? void 0 : field.name, " is required")));
         }
       }
     });
-    if (!(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && validationFields !== null && validationFields !== void 0 && (_validationFields$fie2 = validationFields.fields) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.checkout) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie4 = _validationFields$fie3.cellphone) !== null && _validationFields$fie4 !== void 0 && _validationFields$fie4.required) {
+    if (!(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && validationFields !== null && validationFields !== void 0 && (_validationFields$fie2 = validationFields.fields) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.cellphone) !== null && _validationFields$fie2 !== void 0 && _validationFields$fie2.required) {
       errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone number is required'));
     }
     if (userSelected !== null && userSelected !== void 0 && userSelected.cellphone) {
@@ -142,8 +142,8 @@ var CheckoutUI = function CheckoutUI(props) {
     setUserErrors(errors);
   };
   (0, _react.useEffect)(function () {
-    var _validationFields$fie5;
-    if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie5 = validationFields.fields) !== null && _validationFields$fie5 !== void 0 && _validationFields$fie5.checkout) {
+    var _validationFields$fie3;
+    if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie3 = validationFields.fields) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.checkout) {
       checkValidationFields();
     }
   }, [validationFields, user]);
@@ -157,7 +157,7 @@ var CheckoutUI = function CheckoutUI(props) {
   }, [errors]);
   (0, _react.useEffect)(function () {
     var _businessDetails$busi;
-    var paymethods = (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi = businessDetails.business) === null || _businessDetails$busi === void 0 ? void 0 : _businessDetails$busi.paymethods) || [];
+    var paymethods = (businessDetails === null || businessDetails === void 0 || (_businessDetails$busi = businessDetails.business) === null || _businessDetails$busi === void 0 ? void 0 : _businessDetails$busi.paymethods) || [];
     if (paymethods && paymethods.length > 1) {
       handlePaymethodChange(null);
     }
@@ -182,7 +182,7 @@ var CheckoutUI = function CheckoutUI(props) {
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
     cart: cart,
     isCheckout: true,
-    isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) || 0
+    isProducts: (cart === null || cart === void 0 || (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) || 0
   })), (_props$beforeElements3 = props.beforeElementsSectioTwo) === null || _props$beforeElements3 === void 0 ? void 0 : _props$beforeElements3.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -202,9 +202,9 @@ var CheckoutUI = function CheckoutUI(props) {
   }), !props.isHideSectionFive && !cartState.loading && cart && /*#__PURE__*/_react.default.createElement(_styles.SectionContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMENT_METHODS', 'Payment Methods')), /*#__PURE__*/_react.default.createElement(_PaymentOptions.PaymentOptions, {
     cart: cart,
     isDisabled: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
-    businessId: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.id,
+    businessId: businessDetails === null || businessDetails === void 0 || (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.id,
     isLoading: businessDetails.loading,
-    paymethods: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi3 = businessDetails.business) === null || _businessDetails$busi3 === void 0 ? void 0 : _businessDetails$busi3.paymethods,
+    paymethods: businessDetails === null || businessDetails === void 0 || (_businessDetails$busi3 = businessDetails.business) === null || _businessDetails$busi3 === void 0 ? void 0 : _businessDetails$busi3.paymethods,
     onPaymentChange: handlePaymethodChange,
     errorCash: errorCash,
     setErrorCash: setErrorCash,
@@ -219,7 +219,7 @@ var CheckoutUI = function CheckoutUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), !props.isHideSectionFour && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.checkout) === null || _validationFields$fie7 === void 0 ? void 0 : (_validationFields$fie8 = _validationFields$fie7.driver_tip) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.enabled) && /*#__PURE__*/_react.default.createElement(_styles.SectionContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+  }), !props.isHideSectionFour && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && options.type === 1 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (validationFields === null || validationFields === void 0 || (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 || (_validationFields$fie4 = _validationFields$fie4.checkout) === null || _validationFields$fie4 === void 0 || (_validationFields$fie4 = _validationFields$fie4.driver_tip) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) && /*#__PURE__*/_react.default.createElement(_styles.SectionContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
     useOrderContext: true
@@ -236,7 +236,7 @@ var CheckoutUI = function CheckoutUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     price: cart === null || cart === void 0 ? void 0 : cart.total
-  })), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && /*#__PURE__*/_react.default.createElement(_styles.TotalPrice, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, t('TOTAL', 'Total')), (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) > 0 && /*#__PURE__*/_react.default.createElement("span", null, cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length, " ", t('PRODUCTS', 'Products'))), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.total))), !props.isHideSectionSeven && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ActionContainer, null, (cart === null || cart === void 0 ? void 0 : cart.total) >= 1 && /*#__PURE__*/_react.default.createElement(_styles.TotalPrice, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, t('TOTAL', 'Total')), (cart === null || cart === void 0 || (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) > 0 && /*#__PURE__*/_react.default.createElement("span", null, cart === null || cart === void 0 || (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length, " ", t('PRODUCTS', 'Products'))), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.total))), !props.isHideSectionSeven && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) ? 'secundary' : 'primary',
     disabled: !(cart !== null && cart !== void 0 && cart.valid) || !paymethodSelected || placing || errorCash || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum),
     onClick: function onClick() {
@@ -316,7 +316,7 @@ var Checkout = function Checkout(props) {
     setAlertState = _useState16[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && ((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
     var _cart$products4;
-    return cart === null || cart === void 0 ? void 0 : (_cart$products4 = cart.products) === null || _cart$products4 === void 0 ? void 0 : _cart$products4.length;
+    return cart === null || cart === void 0 || (_cart$products4 = cart.products) === null || _cart$products4 === void 0 ? void 0 : _cart$products4.length;
   })) || null;
   var closeAlert = function closeAlert() {
     setAlertState({

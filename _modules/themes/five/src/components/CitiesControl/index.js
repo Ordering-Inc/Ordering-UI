@@ -33,13 +33,13 @@ var CitiesControl = function CitiesControl(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
-  var _useState = (0, _react.useState)(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.city_id),
+  var _useState = (0, _react.useState)(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.city_id),
     _useState2 = _slicedToArray(_useState, 2),
     cityState = _useState2[0],
     setCityState = _useState2[1];
   var handleClick = function handleClick() {
     var _orderState$options2;
-    cityState !== (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.city_id) && handleChangeCity(cityState);
+    cityState !== (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.city_id) && handleChangeCity(cityState);
     onClose && onClose();
   };
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, orderState !== null && orderState !== void 0 && orderState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

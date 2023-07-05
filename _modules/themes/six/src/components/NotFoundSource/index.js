@@ -11,14 +11,14 @@ var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 var NotFoundSource = function NotFoundSource(props) {
-  var _theme$images, _theme$images$general, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$images, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var image = props.image,
     content = props.content,
     btnTitle = props.btnTitle,
     conditioned = props.conditioned,
     onClickButton = props.onClickButton;
   var theme = (0, _styledComponents.useTheme)();
-  var errorImage = image || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound);
+  var errorImage = image || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.notFound);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

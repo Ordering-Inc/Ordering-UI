@@ -102,8 +102,8 @@ exports.ShareOrder = ShareOrder;
 var MessagesIcon = _styledComponents.default.span(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n"])));
 exports.MessagesIcon = MessagesIcon;
 var ExclamationWrapper = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(75%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
-  var _props$theme7, _props$theme7$colors;
-  return (_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : (_props$theme7$colors = _props$theme7.colors) === null || _props$theme7$colors === void 0 ? void 0 : _props$theme7$colors.primary;
+  var _props$theme7;
+  return (_props$theme7 = props.theme) === null || _props$theme7 === void 0 || (_props$theme7 = _props$theme7.colors) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.primary;
 });
 exports.ExclamationWrapper = ExclamationWrapper;
 var WrapperLeftContainer = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px;\n  padding-bottom: 0px;\n  box-sizing: border-box;\n\n  @media (min-width: 1024px) {\n    width: 50%;\n    padding: 40px;\n    padding-bottom: 40px;\n  }\n"])));

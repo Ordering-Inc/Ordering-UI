@@ -24,7 +24,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
-  var _theme$order_types, _theme$order_types$co, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$order_types, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var handleChangeOrderType = props.handleChangeOrderType,
     orderTypes = props.orderTypes,
     onClose = props.onClose,
@@ -40,22 +40,22 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
     onClose && onClose();
     handleChangeOrderType && handleChangeOrderType(orderType);
   };
-  var titleOrdertype = theme === null || theme === void 0 ? void 0 : (_theme$order_types = theme.order_types) === null || _theme$order_types === void 0 ? void 0 : (_theme$order_types$co = _theme$order_types.components) === null || _theme$order_types$co === void 0 ? void 0 : _theme$order_types$co.title_menu;
+  var titleOrdertype = theme === null || theme === void 0 || (_theme$order_types = theme.order_types) === null || _theme$order_types === void 0 || (_theme$order_types = _theme$order_types.components) === null || _theme$order_types === void 0 ? void 0 : _theme$order_types.title_menu;
   var orderTypeImage = function orderTypeImage(type) {
-    var _theme$order_types2, _theme$order_types2$c, _theme$order_types2$c2, _theme$order_types2$c3;
-    return theme === null || theme === void 0 ? void 0 : (_theme$order_types2 = theme.order_types) === null || _theme$order_types2 === void 0 ? void 0 : (_theme$order_types2$c = _theme$order_types2.components) === null || _theme$order_types2$c === void 0 ? void 0 : (_theme$order_types2$c2 = _theme$order_types2$c[type]) === null || _theme$order_types2$c2 === void 0 ? void 0 : (_theme$order_types2$c3 = _theme$order_types2$c2.components) === null || _theme$order_types2$c3 === void 0 ? void 0 : _theme$order_types2$c3.image;
+    var _theme$order_types2;
+    return theme === null || theme === void 0 || (_theme$order_types2 = theme.order_types) === null || _theme$order_types2 === void 0 || (_theme$order_types2 = _theme$order_types2.components) === null || _theme$order_types2 === void 0 || (_theme$order_types2 = _theme$order_types2[type]) === null || _theme$order_types2 === void 0 || (_theme$order_types2 = _theme$order_types2.components) === null || _theme$order_types2 === void 0 ? void 0 : _theme$order_types2.image;
   };
   var orderTypeTitle = function orderTypeTitle(type) {
-    var _theme$order_types3, _theme$order_types3$c, _theme$order_types3$c2, _theme$order_types3$c3;
-    return theme === null || theme === void 0 ? void 0 : (_theme$order_types3 = theme.order_types) === null || _theme$order_types3 === void 0 ? void 0 : (_theme$order_types3$c = _theme$order_types3.components) === null || _theme$order_types3$c === void 0 ? void 0 : (_theme$order_types3$c2 = _theme$order_types3$c[type]) === null || _theme$order_types3$c2 === void 0 ? void 0 : (_theme$order_types3$c3 = _theme$order_types3$c2.components) === null || _theme$order_types3$c3 === void 0 ? void 0 : _theme$order_types3$c3.title;
+    var _theme$order_types3;
+    return theme === null || theme === void 0 || (_theme$order_types3 = theme.order_types) === null || _theme$order_types3 === void 0 || (_theme$order_types3 = _theme$order_types3.components) === null || _theme$order_types3 === void 0 || (_theme$order_types3 = _theme$order_types3[type]) === null || _theme$order_types3 === void 0 || (_theme$order_types3 = _theme$order_types3.components) === null || _theme$order_types3 === void 0 ? void 0 : _theme$order_types3.title;
   };
   var orderTypeDescription = function orderTypeDescription(type) {
-    var _theme$order_types4, _theme$order_types4$c, _theme$order_types4$c2, _theme$order_types4$c3;
-    return theme === null || theme === void 0 ? void 0 : (_theme$order_types4 = theme.order_types) === null || _theme$order_types4 === void 0 ? void 0 : (_theme$order_types4$c = _theme$order_types4.components) === null || _theme$order_types4$c === void 0 ? void 0 : (_theme$order_types4$c2 = _theme$order_types4$c[type]) === null || _theme$order_types4$c2 === void 0 ? void 0 : (_theme$order_types4$c3 = _theme$order_types4$c2.components) === null || _theme$order_types4$c3 === void 0 ? void 0 : _theme$order_types4$c3.description;
+    var _theme$order_types4;
+    return theme === null || theme === void 0 || (_theme$order_types4 = theme.order_types) === null || _theme$order_types4 === void 0 || (_theme$order_types4 = _theme$order_types4.components) === null || _theme$order_types4 === void 0 || (_theme$order_types4 = _theme$order_types4[type]) === null || _theme$order_types4 === void 0 || (_theme$order_types4 = _theme$order_types4.components) === null || _theme$order_types4 === void 0 ? void 0 : _theme$order_types4.description;
   };
   var orderTypeCallAction = function orderTypeCallAction(type) {
-    var _theme$order_types5, _theme$order_types5$c, _theme$order_types5$c2, _theme$order_types5$c3;
-    return theme === null || theme === void 0 ? void 0 : (_theme$order_types5 = theme.order_types) === null || _theme$order_types5 === void 0 ? void 0 : (_theme$order_types5$c = _theme$order_types5.components) === null || _theme$order_types5$c === void 0 ? void 0 : (_theme$order_types5$c2 = _theme$order_types5$c[type]) === null || _theme$order_types5$c2 === void 0 ? void 0 : (_theme$order_types5$c3 = _theme$order_types5$c2.components) === null || _theme$order_types5$c3 === void 0 ? void 0 : _theme$order_types5$c3.call_to_action;
+    var _theme$order_types5;
+    return theme === null || theme === void 0 || (_theme$order_types5 = theme.order_types) === null || _theme$order_types5 === void 0 || (_theme$order_types5 = _theme$order_types5.components) === null || _theme$order_types5 === void 0 || (_theme$order_types5 = _theme$order_types5[type]) === null || _theme$order_types5 === void 0 || (_theme$order_types5 = _theme$order_types5.components) === null || _theme$order_types5 === void 0 ? void 0 : _theme$order_types5.call_to_action;
   };
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "order-type",
@@ -73,15 +73,15 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListTitle, null, titleOrdertype || t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), orderTypes && (configTypes ? orderTypes.filter(function (type) {
     return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
   }) : orderTypes).map(function (item, i) {
-    var _item$text, _item$text$replace, _orderStatus$options, _item$text2, _item$text2$replace, _item$text3, _item$text3$replace, _item$text4, _item$text4$replace;
+    var _item$text, _orderStatus$options, _item$text2, _item$text3, _item$text4;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeListItemContainer, {
       key: i,
-      bgimage: orderTypeImage(item === null || item === void 0 ? void 0 : (_item$text = item.text) === null || _item$text === void 0 ? void 0 : (_item$text$replace = _item$text.replace(' ', '_')) === null || _item$text$replace === void 0 ? void 0 : _item$text$replace.toLowerCase()) || (item === null || item === void 0 ? void 0 : item.image),
+      bgimage: orderTypeImage(item === null || item === void 0 || (_item$text = item.text) === null || _item$text === void 0 || (_item$text = _item$text.replace(' ', '_')) === null || _item$text === void 0 ? void 0 : _item$text.toLowerCase()) || (item === null || item === void 0 ? void 0 : item.image),
       onClick: function onClick() {
         return handleClickOrderType(item.value);
       },
-      active: (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === (item === null || item === void 0 ? void 0 : item.value)
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeTitle, null, orderTypeTitle(item === null || item === void 0 ? void 0 : (_item$text2 = item.text) === null || _item$text2 === void 0 ? void 0 : (_item$text2$replace = _item$text2.replace(' ', '_')) === null || _item$text2$replace === void 0 ? void 0 : _item$text2$replace.toLowerCase()) || item.text), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeDescription, null, orderTypeDescription(item === null || item === void 0 ? void 0 : (_item$text3 = item.text) === null || _item$text3 === void 0 ? void 0 : (_item$text3$replace = _item$text3.replace(' ', '_')) === null || _item$text3$replace === void 0 ? void 0 : _item$text3$replace.toLowerCase()) || item.description), /*#__PURE__*/_react.default.createElement(_styles.OrderStartWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, orderTypeCallAction(item === null || item === void 0 ? void 0 : (_item$text4 = item.text) === null || _item$text4 === void 0 ? void 0 : (_item$text4$replace = _item$text4.replace(' ', '_')) === null || _item$text4$replace === void 0 ? void 0 : _item$text4$replace.toLowerCase()) || t('START_MY_ORDER', 'start my order')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeOverlay, null));
+      active: (orderStatus === null || orderStatus === void 0 || (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === (item === null || item === void 0 ? void 0 : item.value)
+    }, /*#__PURE__*/_react.default.createElement(_styles.OrderTypeTitle, null, orderTypeTitle(item === null || item === void 0 || (_item$text2 = item.text) === null || _item$text2 === void 0 || (_item$text2 = _item$text2.replace(' ', '_')) === null || _item$text2 === void 0 ? void 0 : _item$text2.toLowerCase()) || item.text), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeDescription, null, orderTypeDescription(item === null || item === void 0 || (_item$text3 = item.text) === null || _item$text3 === void 0 || (_item$text3 = _item$text3.replace(' ', '_')) === null || _item$text3 === void 0 ? void 0 : _item$text3.toLowerCase()) || item.description), /*#__PURE__*/_react.default.createElement(_styles.OrderStartWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, orderTypeCallAction(item === null || item === void 0 || (_item$text4 = item.text) === null || _item$text4 === void 0 || (_item$text4 = _item$text4.replace(' ', '_')) === null || _item$text4 === void 0 ? void 0 : _item$text4.toLowerCase()) || t('START_MY_ORDER', 'start my order')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeOverlay, null));
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
@@ -94,7 +94,7 @@ var OrderTypeSelectorContentUI = function OrderTypeSelectorContentUI(props) {
 };
 exports.OrderTypeSelectorContentUI = OrderTypeSelectorContentUI;
 var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
-  var _theme$images, _theme$images$deliver, _theme$images2, _theme$images2$delive, _theme$images3, _theme$images3$delive, _theme$images4, _theme$images4$delive, _theme$images5, _theme$images5$delive, _theme$images6, _theme$images6$delive, _theme$images7, _theme$images7$delive;
+  var _theme$images, _theme$images2, _theme$images3, _theme$images4, _theme$images5, _theme$images6, _theme$images7;
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -105,37 +105,37 @@ var OrderTypeSelectorContent = function OrderTypeSelectorContent(props) {
       value: 1,
       text: t('DELIVERY', 'Delivery'),
       description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description'),
-      image: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$deliver = _theme$images.deliveryTypes) === null || _theme$images$deliver === void 0 ? void 0 : _theme$images$deliver.delivery
+      image: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.deliveryTypes) === null || _theme$images === void 0 ? void 0 : _theme$images.delivery
     }, {
       value: 2,
       text: t('PICKUP', 'Pickup'),
       description: t('ORDERTYPE_DESCRIPTION_PICKUP', 'Pickup description'),
-      image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$delive = _theme$images2.deliveryTypes) === null || _theme$images2$delive === void 0 ? void 0 : _theme$images2$delive.pickUp
+      image: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.deliveryTypes) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.pickUp
     }, {
       value: 3,
       text: t('EAT_IN', 'Eat in'),
       description: t('ORDERTYPE_DESCRIPTION_EATIN', 'Eat in description'),
-      image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$delive = _theme$images3.deliveryTypes) === null || _theme$images3$delive === void 0 ? void 0 : _theme$images3$delive.eatIn
+      image: (_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.deliveryTypes) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.eatIn
     }, {
       value: 4,
       text: t('CURBSIDE', 'Curbside'),
       description: t('ORDERTYPE_DESCRIPTION_CURBSIDE', 'Curbside description'),
-      image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$delive = _theme$images4.deliveryTypes) === null || _theme$images4$delive === void 0 ? void 0 : _theme$images4$delive.curbside
+      image: (_theme$images4 = theme.images) === null || _theme$images4 === void 0 || (_theme$images4 = _theme$images4.deliveryTypes) === null || _theme$images4 === void 0 ? void 0 : _theme$images4.curbside
     }, {
       value: 5,
       text: t('DRIVE_THRU', 'Drive thru'),
       description: t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description'),
-      image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$delive = _theme$images5.deliveryTypes) === null || _theme$images5$delive === void 0 ? void 0 : _theme$images5$delive.driveThru
+      image: (_theme$images5 = theme.images) === null || _theme$images5 === void 0 || (_theme$images5 = _theme$images5.deliveryTypes) === null || _theme$images5 === void 0 ? void 0 : _theme$images5.driveThru
     }, {
       value: 7,
       text: t('CATERING_DELIVERY', 'Catering Delivery'),
       description: t('ORDERTYPE_DESCRIPTION_CATERING_DELIVERY', 'Catering Delivery description'),
-      image: (_theme$images6 = theme.images) === null || _theme$images6 === void 0 ? void 0 : (_theme$images6$delive = _theme$images6.deliveryTypes) === null || _theme$images6$delive === void 0 ? void 0 : _theme$images6$delive.cateringDelivery
+      image: (_theme$images6 = theme.images) === null || _theme$images6 === void 0 || (_theme$images6 = _theme$images6.deliveryTypes) === null || _theme$images6 === void 0 ? void 0 : _theme$images6.cateringDelivery
     }, {
       value: 8,
       text: t('CATERING_PICKUP', 'Catering Pickup'),
       description: t('ORDERTYPE_DESCRIPTION_CATERING_PICKUP', 'Catering Pickup description'),
-      image: (_theme$images7 = theme.images) === null || _theme$images7 === void 0 ? void 0 : (_theme$images7$delive = _theme$images7.deliveryTypes) === null || _theme$images7$delive === void 0 ? void 0 : _theme$images7$delive.cateringPickup
+      image: (_theme$images7 = theme.images) === null || _theme$images7 === void 0 || (_theme$images7 = _theme$images7.deliveryTypes) === null || _theme$images7 === void 0 ? void 0 : _theme$images7.cateringPickup
     }]
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderTypeControl, orderTypeProps);

@@ -61,7 +61,7 @@ var MomentControlUI = function MomentControlUI(props) {
     var _configs$max_days_pre;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')), /*#__PURE__*/_react.default.createElement(_styles.Days, {
       name: "days"
-    }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10)).map(function (date) {
+    }, datesList.slice(0, Number((configs === null || configs === void 0 || (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10)).map(function (date) {
       var dateParts = date.split('-');
       var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
       var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 3).toUpperCase();
@@ -92,7 +92,7 @@ var MomentControlUI = function MomentControlUI(props) {
           return !orderState.loading && handleChangeTime(hour.startTime);
         },
         isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-      }, (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+      }, (configs === null || configs === void 0 || (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
         outputFormat: 'hh:mma'
       }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
         outputFormat: 'HH:mm'
@@ -115,8 +115,8 @@ var MomentControlUI = function MomentControlUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_FaRegClock.default, {
     id: "icon"
-  }), orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && _orderState$options.moment ? parseDate(orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.moment, {
-    outputFormat: configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
+  }), orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && _orderState$options.moment ? parseDate(orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.moment, {
+    outputFormat: configs === null || configs === void 0 || (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : _configs$dates_moment.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')), isModalBehavior ? /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
     onClose: function onClose() {
@@ -138,7 +138,7 @@ var MomentControl = function MomentControl(props) {
   var _useConfig3 = (0, _orderingComponents.useConfig)(),
     _useConfig4 = _slicedToArray(_useConfig3, 1),
     configs = _useConfig4[0].configs;
-  var limitDays = parseInt(configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value, 10);
+  var limitDays = parseInt(configs === null || configs === void 0 || (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value, 10);
   var currentDate = new Date();
   var time = limitDays > 1 ? currentDate.getTime() + (limitDays - 1) * 24 * 60 * 60 * 1000 : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + 6 * 24 * 60 * 60 * 1000;
   currentDate.setTime(time);

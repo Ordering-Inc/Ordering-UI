@@ -117,8 +117,8 @@ exports.ShareOrder = ShareOrder;
 var MessagesIcon = _styledComponents.default.span(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n"])));
 exports.MessagesIcon = MessagesIcon;
 var ExclamationWrapper = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(75%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
-  var _props$theme6, _props$theme6$colors;
-  return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : (_props$theme6$colors = _props$theme6.colors) === null || _props$theme6$colors === void 0 ? void 0 : _props$theme6$colors.primary;
+  var _props$theme6;
+  return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 || (_props$theme6 = _props$theme6.colors) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.primary;
 });
 exports.ExclamationWrapper = ExclamationWrapper;
 var WrapperLeftContainer = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n"])));

@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SingleOrderCardUI = function SingleOrderCardUI(props) {
-  var _configs$multi_busine, _orderTypes$find, _order$reporting_data, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business4, _order$business5, _getOrderStatus, _getOrderStatus2, _order$summary$total, _order$summary;
+  var _configs$multi_busine, _orderTypes$find, _order$reporting_data, _order$business, _theme$images, _order$business2, _order$business3, _order$business4, _order$business5, _getOrderStatus, _getOrderStatus2, _order$summary$total, _order$summary;
   var orderTypes = props.orderTypes,
     readMessages = props.readMessages,
     messages = props.messages,
@@ -95,11 +95,11 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     var unreadedMessages = messages.messages.slice(length - unreadLength, length);
     var business = unreadedMessages.some(function (message) {
       var _message$can_see;
-      return message === null || message === void 0 ? void 0 : (_message$can_see = message.can_see) === null || _message$can_see === void 0 ? void 0 : _message$can_see.includes(2);
+      return message === null || message === void 0 || (_message$can_see = message.can_see) === null || _message$can_see === void 0 ? void 0 : _message$can_see.includes(2);
     });
     var driver = unreadedMessages.some(function (message) {
       var _message$can_see2;
-      return message === null || message === void 0 ? void 0 : (_message$can_see2 = message.can_see) === null || _message$can_see2 === void 0 ? void 0 : _message$can_see2.includes(4);
+      return message === null || message === void 0 || (_message$can_see2 = message.can_see) === null || _message$can_see2 === void 0 ? void 0 : _message$can_see2.includes(4);
     });
     setUnreadAlert({
       business: business,
@@ -109,24 +109,24 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   (0, _react.useEffect)(function () {
     unreadMessages();
   }, [messages === null || messages === void 0 ? void 0 : messages.messages]);
-  return /*#__PURE__*/_react.default.createElement(_styles.SingleOrderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SingleOrderHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER', 'Order'), " #", order.id), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, orderTypes === null || orderTypes === void 0 ? void 0 : (_orderTypes$find = orderTypes.find(function (type) {
+  return /*#__PURE__*/_react.default.createElement(_styles.SingleOrderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SingleOrderHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER', 'Order'), " #", order.id), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, orderTypes === null || orderTypes === void 0 || (_orderTypes$find = orderTypes.find(function (type) {
     return (order === null || order === void 0 ? void 0 : order.delivery_type) === (type === null || type === void 0 ? void 0 : type.value);
   })) === null || _orderTypes$find === void 0 ? void 0 : _orderTypes$find.text, ":"), /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
   }, activeStatus.includes(order === null || order === void 0 ? void 0 : order.status) ? /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
     order: order
-  }) : parseDate(order === null || order === void 0 ? void 0 : (_order$reporting_data = order.reporting_data) === null || _order$reporting_data === void 0 ? void 0 : _order$reporting_data.at["status:".concat(order.status)])))), !hideIndividualButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }) : parseDate(order === null || order === void 0 || (_order$reporting_data = order.reporting_data) === null || _order$reporting_data === void 0 ? void 0 : _order$reporting_data.at["status:".concat(order.status)])))), !hideIndividualButton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     onClick: function onClick() {
       return handleGoToOrderDetails(order === null || order === void 0 ? void 0 : order.uuid);
     }
   }, t('ORDER_DETAILS', 'Order Details'))), /*#__PURE__*/_react.default.createElement(_styles.OrderBusinessDetails, null, /*#__PURE__*/_react.default.createElement(_styles.OrderBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.PhotoWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
+    src: (order === null || order === void 0 || (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo),
     alt: ""
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessData, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "bold"
-  }, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.email), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.cellphone))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, (order === null || order === void 0 ? void 0 : (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.cellphone) && /*#__PURE__*/_react.default.createElement("span", {
+  }, order === null || order === void 0 || (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.email), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.cellphone))), /*#__PURE__*/_react.default.createElement(_styles.ActionsBlock, null, (order === null || order === void 0 || (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.cellphone) && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return window.open("tel:".concat(order === null || order === void 0 ? void 0 : order.business.phone));
     }
@@ -143,7 +143,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     className: "order-status"
   }, (_getOrderStatus2 = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value)), /*#__PURE__*/_react.default.createElement("p", {
     className: "order-total"
-  }, t('EXPORT_ORDER_TOTAL', 'Order total'), ": ", parsePrice((_order$summary$total = order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) !== null && _order$summary$total !== void 0 ? _order$summary$total : order === null || order === void 0 ? void 0 : order.total)), openMessages.business && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, t('EXPORT_ORDER_TOTAL', 'Order total'), ": ", parsePrice((_order$summary$total = order === null || order === void 0 || (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) !== null && _order$summary$total !== void 0 ? _order$summary$total : order === null || order === void 0 ? void 0 : order.total)), openMessages.business && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openMessages.business,
     onClose: function onClose() {
       return setOpenMessages({

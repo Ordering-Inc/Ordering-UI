@@ -36,11 +36,11 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
   var timeout = null;
   var onChangeCash = function onChangeCash(e) {
     var _e$target;
-    if (!/^(?=.)([+-]?([0-9]*)(\.([0-9]+))?)$/.test(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value)) return;
+    if (!/^(?=.)([+-]?([0-9]*)(\.([0-9]+))?)$/.test(e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value)) return;
     clearTimeout(timeout);
     timeout = setTimeout(function () {
       var _e$target2;
-      var cash = parseFloat(e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value);
+      var cash = parseFloat(e === null || e === void 0 || (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value);
       cash = isNaN(cash) ? null : cash;
       setvalue(cash);
       if (cash >= orderTotal || !cash) {

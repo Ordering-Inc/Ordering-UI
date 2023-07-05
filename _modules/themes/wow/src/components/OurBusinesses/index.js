@@ -62,14 +62,14 @@ var OurBusinessesUI = function OurBusinessesUI(props) {
       height: 75
     }));
   }), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
-    var _theme$images, _theme$images$dummies;
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, {
       key: business.id,
       onClick: function onClick() {
         return onBusinessClick(business);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
+      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_200,c_limit')
     }));
   }), (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) < (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.LoadMore, {
     onClick: function onClick() {

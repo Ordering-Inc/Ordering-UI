@@ -77,7 +77,7 @@ var GoogleMapsApiKeySettingUI = function GoogleMapsApiKeySettingUI(props) {
       required: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('API_KEY', 'Api Key'))
     }),
     autoComplete: "off"
-  }), (errors === null || errors === void 0 ? void 0 : (_errors$api_key = errors.api_key) === null || _errors$api_key === void 0 ? void 0 : _errors$api_key.message) && /*#__PURE__*/_react.default.createElement("p", {
+  }), (errors === null || errors === void 0 || (_errors$api_key = errors.api_key) === null || _errors$api_key === void 0 ? void 0 : _errors$api_key.message) && /*#__PURE__*/_react.default.createElement("p", {
     className: "error"
   }, errors.api_key.message), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",

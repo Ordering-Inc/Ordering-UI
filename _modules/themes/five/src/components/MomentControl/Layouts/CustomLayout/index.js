@@ -72,7 +72,7 @@ var CustomLayout = function CustomLayout(props) {
   (0, _react.useEffect)(function () {
     if ((datesList === null || datesList === void 0 ? void 0 : datesList.length) > 0) {
       var _configs$max_days_pre;
-      var _datesList = datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10));
+      var _datesList = datesList.slice(0, Number((configs === null || configs === void 0 || (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10));
       var minDateParts = _datesList[0].split('-');
       var maxDateParts = _datesList[_datesList.length - 1].split('-');
       var _minDate = new Date(minDateParts[0], minDateParts[1] - 1, minDateParts[2]);

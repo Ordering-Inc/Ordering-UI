@@ -69,7 +69,7 @@ var CompanySelectorUI = function CompanySelectorUI(props) {
     }, t('LOADING', 'loading'), "...")
   }];
   (0, _react.useEffect)(function () {
-    var _theme$images, _theme$images$icons;
+    var _theme$images;
     var _companysOptionList = [{
       value: 'default',
       content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
@@ -78,7 +78,7 @@ var CompanySelectorUI = function CompanySelectorUI(props) {
         small: small,
         className: "driver-photo"
       }, /*#__PURE__*/_react.default.createElement(_styles2.CompanyImage, {
-        bgimage: company.logo || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver),
+        bgimage: company.logo || (theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.noDriver),
         small: small
       })), /*#__PURE__*/_react.default.createElement(_styles2.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CompanyNameContainer, {
         className: "driver-info"
@@ -108,7 +108,7 @@ var CompanySelectorUI = function CompanySelectorUI(props) {
         _companysList = companysList.companys;
       }
       var _companysOptionListTemp = _companysList.map(function (company, i) {
-        var _theme$images$icons2;
+        var _theme$images$icons;
         return {
           value: company.id,
           showDisable: isFilterView ? true : !(isFilterView || !(company !== null && company !== void 0 && company.busy)),
@@ -121,7 +121,7 @@ var CompanySelectorUI = function CompanySelectorUI(props) {
             small: small,
             className: "driver-photo"
           }, /*#__PURE__*/_react.default.createElement(_styles2.CompanyImage, {
-            bgimage: company.logo || ((_theme$images$icons2 = theme.images.icons) === null || _theme$images$icons2 === void 0 ? void 0 : _theme$images$icons2.noDriver),
+            bgimage: company.logo || ((_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver),
             small: small
           })), /*#__PURE__*/_react.default.createElement(_styles2.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CompanyNameContainer, {
             className: "driver-info"

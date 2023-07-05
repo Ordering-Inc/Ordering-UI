@@ -28,7 +28,7 @@ var Personalization = function Personalization(props) {
     target: "_blank",
     rel: "noopener noreferrer"
   }, t('SEND_US_SPECIAL_WISH', 'send us your special wish.'))), /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images$general = theme.images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.personalization,
+    src: theme === null || theme === void 0 || (_theme$images$general = theme.images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.personalization,
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperButton, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",

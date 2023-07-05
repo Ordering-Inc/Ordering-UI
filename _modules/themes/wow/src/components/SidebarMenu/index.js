@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SidebarMenu = function SidebarMenu(props) {
-  var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _options$address2, _options$address3, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$genera, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _options$address2, _options$address3, _theme$images, _theme$images2, _props$afterComponent, _props$afterElements;
   var auth = props.auth,
     isHideSignup = props.isHideSignup,
     userCustomer = props.userCustomer;
@@ -102,9 +102,9 @@ var SidebarMenu = function SidebarMenu(props) {
     id: "sidebar_menu",
     isHome: isHome
   }, /*#__PURE__*/_react.default.createElement(_styles.TopContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
-    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
+    src: sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  }), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name))), /*#__PURE__*/_react.default.createElement(_styles.MenuClose, {
+  }), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 || (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name))), /*#__PURE__*/_react.default.createElement(_styles.MenuClose, {
     isHome: isHome,
     "aria-label": "close",
     onClick: function onClick() {
@@ -218,7 +218,7 @@ var SidebarMenu = function SidebarMenu(props) {
     active: window.location.pathname === '/signup'
   }, t('SIGNUP', 'Sign up'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))))), /*#__PURE__*/_react.default.createElement(_styles.DownloadAppContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype Invert",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
+    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.logos) === null || _theme$images === void 0 ? void 0 : _theme$images.logotype,
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles.DownloadAppLinkContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('HOME_DONWLOAD_APP_TITLE', 'Enjoy a better experience by downloading the App')), /*#__PURE__*/_react.default.createElement(_styles.DownloadAppLink, {
     target: "_blank",
@@ -227,7 +227,7 @@ var SidebarMenu = function SidebarMenu(props) {
     "aria-label": "GooglePlay"
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Google play",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.googlePlay,
+    src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.general) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.googlePlay,
     loading: "lazy"
   })))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({

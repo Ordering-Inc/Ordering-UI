@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options3, _orderState$options4, _orderState$options4$, _orderState$options5, _theme$defaultLanguag, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options3, _orderState$options4, _orderState$options5, _theme$defaultLanguag, _props$afterComponent, _props$afterElements;
   var addressToShow = props.addressToShow,
     isCartPending = props.isCartPending,
     googleMapsUrl = props.googleMapsUrl,
@@ -61,8 +61,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     setRotate = _useState6[0],
     setRotateState = _useState6[1];
   var handleFindBusinesses = function handleFindBusinesses() {
-    var _orderState$options, _orderState$options$a;
-    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
+    var _orderState$options;
+    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options = _orderState$options.address) !== null && _orderState$options !== void 0 && _orderState$options.location)) {
       setAlertState({
         open: true,
         content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')]
@@ -73,7 +73,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
   };
   var toggleAccordion = function toggleAccordion() {
     var _orderState$options2;
-    if (!((orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 && !isCartPending)) return;
+    if (!((orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 && !isCartPending)) return;
     setActiveState(setActive === '' ? 'active' : '');
     setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
   };
@@ -90,10 +90,10 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     onClick: function onClick() {
       return toggleAccordion();
     },
-    active: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending
+    active: (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending
   }, /*#__PURE__*/_react.default.createElement(_styles.Text, {
     active: setActive === 'active'
-  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.address))), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+  }, /*#__PURE__*/_react.default.createElement(_FaMapMarkerAlt.default, null), /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 || (_orderState$options4 = _orderState$options4.address) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address))), (orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
   }))), /*#__PURE__*/_react.default.createElement(_styles.AccordionContent, {
     style: {
@@ -120,7 +120,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SEARCH', 'Search'),
     content: alertState.content,
-    acceptText: t('ACCEPT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ACCEPT) || 'Accept'),
+    acceptText: t('ACCEPT', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ACCEPT) || 'Accept'),
     open: alertState.open,
     onClose: function onClose() {
       return setAlertState({

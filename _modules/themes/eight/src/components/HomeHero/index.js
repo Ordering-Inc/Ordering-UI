@@ -22,7 +22,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var HomeHero = function HomeHero(props) {
-  var _configState$configs, _configState$configs$, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
+  var _configState$configs, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     auth = _useSession2[0].auth;
@@ -39,7 +39,7 @@ var HomeHero = function HomeHero(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
-  var configTypes = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_types_allowed) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value.split('|').map(function (value) {
+  var configTypes = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.order_types_allowed) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').map(function (value) {
     return Number(value);
   })) || [];
   var handleGoToPage = function handleGoToPage(data) {
@@ -65,7 +65,7 @@ var HomeHero = function HomeHero(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_8', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'What type of order can we get started for you?')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME_8', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Order ahead for pickup or let us deliver to your location')), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectContainer, null, (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(1)) && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_8', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'What type of order can we get started for you?')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME_8', (theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Order ahead for pickup or let us deliver to your location')), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectContainer, null, (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(1)) && /*#__PURE__*/_react.default.createElement(_styles.OrderTypeItem, {
     onClick: function onClick() {
       return handleAddressInput(1);
     }

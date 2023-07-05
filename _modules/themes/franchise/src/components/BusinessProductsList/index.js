@@ -63,7 +63,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList
     });
-  })), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
+  })), !(category !== null && category !== void 0 && category.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, featured && (categoryState === null || categoryState === void 0 || (_categoryState$produc2 = categoryState.products) === null || _categoryState$produc2 === void 0 ? void 0 : _categoryState$produc2.find(function (product) {
     return product.featured;
   })) && /*#__PURE__*/_react.default.createElement(_styles.WrapAllCategories, {
     id: "categoryfeatured"
@@ -91,11 +91,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       className: "category-title"
     }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
       src: category.image
-    }), /*#__PURE__*/_react.default.createElement("h3", null, category.name), (category === null || category === void 0 ? void 0 : (_category$ribbon = category.ribbon) === null || _category$ribbon === void 0 ? void 0 : _category$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
-      bgColor: category === null || category === void 0 ? void 0 : (_category$ribbon2 = category.ribbon) === null || _category$ribbon2 === void 0 ? void 0 : _category$ribbon2.color,
-      isRoundRect: (category === null || category === void 0 ? void 0 : (_category$ribbon3 = category.ribbon) === null || _category$ribbon3 === void 0 ? void 0 : _category$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
-      isCapsule: (category === null || category === void 0 ? void 0 : (_category$ribbon4 = category.ribbon) === null || _category$ribbon4 === void 0 ? void 0 : _category$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
-    }, category === null || category === void 0 ? void 0 : (_category$ribbon5 = category.ribbon) === null || _category$ribbon5 === void 0 ? void 0 : _category$ribbon5.text)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
+    }), /*#__PURE__*/_react.default.createElement("h3", null, category.name), (category === null || category === void 0 || (_category$ribbon = category.ribbon) === null || _category$ribbon === void 0 ? void 0 : _category$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
+      bgColor: category === null || category === void 0 || (_category$ribbon2 = category.ribbon) === null || _category$ribbon2 === void 0 ? void 0 : _category$ribbon2.color,
+      isRoundRect: (category === null || category === void 0 || (_category$ribbon3 = category.ribbon) === null || _category$ribbon3 === void 0 ? void 0 : _category$ribbon3.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
+      isCapsule: (category === null || category === void 0 || (_category$ribbon4 = category.ribbon) === null || _category$ribbon4 === void 0 ? void 0 : _category$ribbon4.shape) === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape)
+    }, category === null || category === void 0 || (_category$ribbon5 = category.ribbon) === null || _category$ribbon5 === void 0 ? void 0 : _category$ribbon5.text)), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, null, products.map(function (product) {
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: product === null || product === void 0 ? void 0 : product.id,
         isSoldOut: product.inventoried && !product.quantity,

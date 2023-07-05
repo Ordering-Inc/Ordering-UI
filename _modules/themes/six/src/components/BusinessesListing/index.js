@@ -43,7 +43,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import { BusinessTypeFilter } from '../../../../../components/BusinessTypeFilter'
 var PIXELS_TO_SCROLL = 500;
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _configs$google_maps_, _businessesList$busin3, _orderState$options4, _orderState$options4$, _getCustomArray, _businessesList$busin4, _orderState$options5, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _props$beforeElements, _props$beforeComponen, _businessesList$busin2, _configs$google_maps_, _businessesList$busin3, _orderState$options4, _getCustomArray, _businessesList$busin4, _orderState$options5, _props$afterComponent, _props$afterElements;
   var businessesList = props.businessesList,
     paginationProps = props.paginationProps,
     searchValue = props.searchValue,
@@ -132,8 +132,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   };
   var handleFindBusinesses = function handleFindBusinesses() {
-    var _orderState$options, _orderState$options$a;
-    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
+    var _orderState$options;
+    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options = _orderState$options.address) !== null && _orderState$options !== void 0 && _orderState$options.location)) {
       setAlertState({
         open: true,
         content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')]
@@ -181,7 +181,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     var _types = [];
     types.forEach(function (type) {
       var _type$replace;
-      return businessInfoById[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
+      return businessInfoById[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 || (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
     });
     return _types.join(', ');
   };
@@ -224,7 +224,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       handleShowBusinessInfo: function handleShowBusinessInfo(business) {
         return _handleShowBusinessInfo(business);
       },
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type,
+      orderType: orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type,
       isCustomLayout: isCustomLayout,
       isShowCallcenterInformation: isCustomLayout
     });
@@ -235,7 +235,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
+      orderType: orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
     });
   }), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
@@ -253,9 +253,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onSearch: handleChangeSearch
   }), isCustomLayout && /*#__PURE__*/_react.default.createElement(_FiMap.default, {
     onClick: toggleMap
-  })), configs !== null && configs !== void 0 && (_configs$google_maps_ = configs.google_maps_api_key) !== null && _configs$google_maps_ !== void 0 && _configs$google_maps_.value && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
+  })), configs !== null && configs !== void 0 && (_configs$google_maps_ = configs.google_maps_api_key) !== null && _configs$google_maps_ !== void 0 && _configs$google_maps_.value && (businessesList === null || businessesList === void 0 || (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
-    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location,
+    userLocation: orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 || (_orderState$options4 = _orderState$options4.address) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.location,
     setErrors: setMapErrors
   }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
@@ -285,7 +285,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
     isCustomLayout: true,
     isBusinessesLoading: businessesList.loading
-  })), isCustomLayout && (businessesList === null || businessesList === void 0 ? void 0 : (_businessesList$busin4 = businessesList.businesses) === null || _businessesList$busin4 === void 0 ? void 0 : _businessesList$busin4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), isCustomLayout && (businessesList === null || businessesList === void 0 || (_businessesList$busin4 = businessesList.businesses) === null || _businessesList$busin4 === void 0 ? void 0 : _businessesList$busin4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessesTitle, null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('ADDRESS_FORM', 'Address Form'),
     open: modals.formOpen,
     onClose: function onClose() {
@@ -295,7 +295,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.address) || {},
+    address: (orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false

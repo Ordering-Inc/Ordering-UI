@@ -27,7 +27,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var layoutOne = 'groceries';
 var SearchProducts = function SearchProducts(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _theme$images, _theme$images$logos, _theme$defaultLanguag, _theme$defaultLanguag2;
+  var _configs$use_parent_c, _configs$use_parent_c2, _theme$images, _theme$defaultLanguag, _theme$defaultLanguag2;
   var onClose = props.onClose,
     searchValue = props.searchValue,
     handleChangeSearch = props.handleChangeSearch,
@@ -45,7 +45,7 @@ var SearchProducts = function SearchProducts(props) {
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
   var searchRef = (0, _react.useRef)();
-  var isUseParentCategory = (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1';
+  var isUseParentCategory = (configs === null || configs === void 0 || (_configs$use_parent_c = configs.use_parent_category) === null || _configs$use_parent_c === void 0 ? void 0 : _configs$use_parent_c.value) === 'true' || (configs === null || configs === void 0 || (_configs$use_parent_c2 = configs.use_parent_category) === null || _configs$use_parent_c2 === void 0 ? void 0 : _configs$use_parent_c2.value) === '1';
   var frontLayout = business === null || business === void 0 ? void 0 : business.front_layout;
   var businessLayout = {
     layoutOne: frontLayout === layoutOne && isUseParentCategory
@@ -57,7 +57,7 @@ var SearchProducts = function SearchProducts(props) {
   var BusinessLayoutProductsList = businessLayout.layoutOne ? _groceries.BusinessProductsList : _BusinessProductsList.BusinessProductsList;
   (0, _react.useEffect)(function () {
     var _searchRef$current;
-    (searchRef === null || searchRef === void 0 ? void 0 : (_searchRef$current = searchRef.current) === null || _searchRef$current === void 0 ? void 0 : _searchRef$current.focus) && searchRef.current.focus();
+    (searchRef === null || searchRef === void 0 || (_searchRef$current = searchRef.current) === null || _searchRef$current === void 0 ? void 0 : _searchRef$current.focus) && searchRef.current.focus();
   }, [searchRef === null || searchRef === void 0 ? void 0 : searchRef.current]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.SearchContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SearchHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
@@ -69,7 +69,7 @@ var SearchProducts = function SearchProducts(props) {
     alt: "Logotype",
     width: "170px",
     height: "45px",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
+    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.logos) === null || _theme$images === void 0 ? void 0 : _theme$images.logotype,
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     forceFocus: true,
@@ -83,10 +83,10 @@ var SearchProducts = function SearchProducts(props) {
   }, t('CANCEL', 'Cancel')))), searchValue && /*#__PURE__*/_react.default.createElement(_styles.BusinessProductsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductsListWrapper, null, /*#__PURE__*/_react.default.createElement(BusinessLayoutProductsList, _extends({}, props, {
     categories: [{
       id: null,
-      name: t('ALL', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ALL) || 'All')
+      name: t('ALL', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.ALL) || 'All')
     }, {
       id: 'featured',
-      name: t('FEATURED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.FEATURED) || 'Featured')
+      name: t('FEATURED', (theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.FEATURED) || 'Featured')
     }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories.sort(function (a, b) {
       return a.rank - b.rank;
     }))),

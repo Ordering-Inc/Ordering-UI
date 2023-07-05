@@ -19,7 +19,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Footer = function Footer(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$genera, _theme$images4, _theme$images4$genera, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images2, _theme$images3, _theme$images4, _props$afterComponent, _props$afterElements;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -36,7 +36,7 @@ var Footer = function Footer(props) {
     id: "footer"
   }, /*#__PURE__*/_react.default.createElement(_styles.InnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LogoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype Invert",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotypeInvert,
+    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.logos) === null || _theme$images === void 0 ? void 0 : _theme$images.logotypeInvert,
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles.Content, {
     mobileSocialView: true
@@ -73,7 +73,7 @@ var Footer = function Footer(props) {
     name: "title-3"
   }, t('FOOTER_QL3_TITLE')), /*#__PURE__*/_react.default.createElement(_styles.DownloadAppContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWapper, null, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype Invert",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype,
+    src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.logos) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.logotype,
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles.AppLinkWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DownloadAppLink, {
     target: "_blank",
@@ -82,7 +82,7 @@ var Footer = function Footer(props) {
     "aria-label": "GooglePlay"
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Google play",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.googlePlay,
+    src: theme === null || theme === void 0 || (_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.general) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.googlePlay,
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles.DownloadAppLink, {
     target: "_blank",
@@ -91,7 +91,7 @@ var Footer = function Footer(props) {
     "aria-label": "AppStore"
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "App store",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$genera = _theme$images4.general) === null || _theme$images4$genera === void 0 ? void 0 : _theme$images4$genera.appStore,
+    src: theme === null || theme === void 0 || (_theme$images4 = theme.images) === null || _theme$images4 === void 0 || (_theme$images4 = _theme$images4.general) === null || _theme$images4 === void 0 ? void 0 : _theme$images4.appStore,
     loading: "lazy"
   }))))), /*#__PURE__*/_react.default.createElement(_styles.Content, {
     desktopSocilalView: true

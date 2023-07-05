@@ -38,7 +38,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var BusinessPreorderUI = function BusinessPreorderUI(props) {
-  var _theme$images, _theme$images$dummies, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _orderState$options, _orderState$options$a;
+  var _theme$images, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _orderState$options;
   var business = props.business,
     handleClick = props.handleClick,
     datesList = props.datesList,
@@ -115,7 +115,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
           var _configs$format_time;
           var hour = '';
           var meridian = '';
-          if ((configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '24') hour = i < 10 ? '0' + i : i;else {
+          if ((configs === null || configs === void 0 || (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '24') hour = i < 10 ? '0' + i : i;else {
             if (i === 0) {
               hour = '12';
               meridian = ' ' + t('AM', 'AM');
@@ -156,7 +156,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     handleAsap && handleAsap();
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.BusinessPreorderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
-    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
+    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_200,c_limit')
   }), /*#__PURE__*/_react.default.createElement("p", null, business.name)), /*#__PURE__*/_react.default.createElement(_styles.PreorderTypeWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PREORDER_TYPE', 'Preorder type')), /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     defaultValue: type,
     options: preOrderType,
@@ -186,14 +186,14 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
         spaceBetween: 0
       },
       769: {
-        slidesPerView: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) < 7 ? configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value : 7,
+        slidesPerView: (configs === null || configs === void 0 || (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) < 7 ? configs === null || configs === void 0 || (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value : 7,
         spaceBetween: 0
       }
     },
     freeMode: true,
     watchSlidesProgress: true,
     className: "swiper-datelist"
-  }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
+  }, datesList.slice(0, Number((configs === null || configs === void 0 || (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
     var dateParts = date.split('-');
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 2);
@@ -218,7 +218,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     color: "primary",
     onClick: goToBusinessPage,
     disabled: isAsap || !(dateSelected && timeSelected)
-  }, t('GO_TO_MENU', 'Go to menu'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, null, (window.location.pathname !== '/search' || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+  }, t('GO_TO_MENU', 'Go to menu'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))), (orderState === null || orderState === void 0 ? void 0 : orderState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Layer, null, (window.location.pathname !== '/search' || (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 || (_orderState$options = _orderState$options.address) === null || _orderState$options === void 0 ? void 0 : _orderState$options.location)) && /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
     style: {
       top: windowSize.width <= 768 ? '50%' : '40%',
       position: windowSize.width <= 768 ? 'absolute' : 'sticky',
@@ -231,7 +231,7 @@ var BusinessPreorder = function BusinessPreorder(props) {
   var _useConfig3 = (0, _orderingComponents.useConfig)(),
     _useConfig4 = _slicedToArray(_useConfig3, 1),
     configs = _useConfig4[0].configs;
-  var limitDays = parseInt(configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre4 = configs.max_days_preorder) === null || _configs$max_days_pre4 === void 0 ? void 0 : _configs$max_days_pre4.value, 10);
+  var limitDays = parseInt(configs === null || configs === void 0 || (_configs$max_days_pre4 = configs.max_days_preorder) === null || _configs$max_days_pre4 === void 0 ? void 0 : _configs$max_days_pre4.value, 10);
   var currentDate = new Date();
   var time = limitDays > 1 ? currentDate.getTime() + (limitDays - 1) * 24 * 60 * 60 * 1000 : limitDays === 1 ? currentDate.getTime() : currentDate.getTime() + 6 * 24 * 60 * 60 * 1000;
   currentDate.setTime(time);

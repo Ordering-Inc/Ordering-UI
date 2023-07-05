@@ -132,14 +132,14 @@ var UserPopover = function UserPopover(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
-    isPhoto: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
+    isPhoto: sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     isHome: isHome,
     ref: referenceElement,
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineMenu.default, {
     className: "menu-list"
   }), /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
-    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo,
+    src: sessionState === null || sessionState === void 0 || (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   })), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
@@ -181,8 +181,8 @@ var LogoutActionUI = function LogoutActionUI(props) {
     _useCustomer2 = _slicedToArray(_useCustomer, 2),
     deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
   var handleClick = function handleClick() {
-    var _window, _window$gapi, _window$gapi$auth;
-    var GoogleAuth = (_window = window) === null || _window === void 0 ? void 0 : (_window$gapi = _window.gapi) === null || _window$gapi === void 0 ? void 0 : (_window$gapi$auth = _window$gapi.auth2) === null || _window$gapi$auth === void 0 ? void 0 : _window$gapi$auth.getAuthInstance();
+    var _window;
+    var GoogleAuth = (_window = window) === null || _window === void 0 || (_window = _window.gapi) === null || _window === void 0 || (_window = _window.auth2) === null || _window === void 0 ? void 0 : _window.getAuthInstance();
     if (GoogleAuth) {
       var signedIn = GoogleAuth.isSignedIn.get();
       if (signedIn) {

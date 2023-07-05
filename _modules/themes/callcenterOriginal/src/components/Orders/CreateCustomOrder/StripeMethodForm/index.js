@@ -51,20 +51,20 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
   var googlePayMethods = ['google_pay', 'global_google_pay'];
   (0, _react.useEffect)(function () {
     if (stripe) {
-      var _configs$stripe_curre, _configs$stripe_curre2, _configs$stripe_curre3, _cart$business2;
+      var _configs$stripe_curre, _configs$stripe_curre2, _cart$business2;
       var cartNames = '';
       if (cartGroup) {
         // eslint-disable-next-line no-unused-expressions
         cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.carts.map(function (cart, i) {
-          var _cart$business, _cartNames, _cartNames$carts;
-          return cartNames = "".concat(cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.name, " ").concat(i !== ((_cartNames = cartNames) === null || _cartNames === void 0 ? void 0 : (_cartNames$carts = _cartNames.carts) === null || _cartNames$carts === void 0 ? void 0 : _cartNames$carts.length) && ', ');
+          var _cart$business, _cartNames;
+          return cartNames = "".concat(cart === null || cart === void 0 || (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.name, " ").concat(i !== ((_cartNames = cartNames) === null || _cartNames === void 0 || (_cartNames = _cartNames.carts) === null || _cartNames === void 0 ? void 0 : _cartNames.length) && ', ');
         });
       }
       var pr = stripe.paymentRequest({
         country: 'US',
-        currency: (configs === null || configs === void 0 ? void 0 : (_configs$stripe_curre = configs.stripe_currency) === null || _configs$stripe_curre === void 0 ? void 0 : (_configs$stripe_curre2 = _configs$stripe_curre.value) === null || _configs$stripe_curre2 === void 0 ? void 0 : (_configs$stripe_curre3 = _configs$stripe_curre2.toLowerCase) === null || _configs$stripe_curre3 === void 0 ? void 0 : _configs$stripe_curre3.call(_configs$stripe_curre2)) || 'usd',
+        currency: (configs === null || configs === void 0 || (_configs$stripe_curre = configs.stripe_currency) === null || _configs$stripe_curre === void 0 || (_configs$stripe_curre = _configs$stripe_curre.value) === null || _configs$stripe_curre === void 0 || (_configs$stripe_curre2 = _configs$stripe_curre.toLowerCase) === null || _configs$stripe_curre2 === void 0 ? void 0 : _configs$stripe_curre2.call(_configs$stripe_curre)) || 'usd',
         total: {
-          label: cartNames || (cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.name),
+          label: cartNames || (cart === null || cart === void 0 || (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.name),
           amount: Math.floor(((cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.balance) || (cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.total) || (cart === null || cart === void 0 ? void 0 : cart.balance) || (cart === null || cart === void 0 ? void 0 : cart.total)) * 100)
         },
         requestPayerName: true,
@@ -84,10 +84,10 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
           return _regeneratorRuntime().wrap(function _callee$(_context) {
             while (1) switch (_context.prev = _context.next) {
               case 0:
-                data = _objectSpread(_objectSpread({}, e === null || e === void 0 ? void 0 : (_e$paymentMethod = e.paymentMethod) === null || _e$paymentMethod === void 0 ? void 0 : _e$paymentMethod.card), {}, {
+                data = _objectSpread(_objectSpread({}, e === null || e === void 0 || (_e$paymentMethod = e.paymentMethod) === null || _e$paymentMethod === void 0 ? void 0 : _e$paymentMethod.card), {}, {
                   id: e.paymentMethod.id,
                   type: e.paymentMethod.type,
-                  source_id: e === null || e === void 0 ? void 0 : (_e$paymentMethod2 = e.paymentMethod) === null || _e$paymentMethod2 === void 0 ? void 0 : _e$paymentMethod2.id,
+                  source_id: e === null || e === void 0 || (_e$paymentMethod2 = e.paymentMethod) === null || _e$paymentMethod2 === void 0 ? void 0 : _e$paymentMethod2.id,
                   card: {
                     brand: e.paymentMethod.card.brand,
                     last4: e.paymentMethod.card.last4

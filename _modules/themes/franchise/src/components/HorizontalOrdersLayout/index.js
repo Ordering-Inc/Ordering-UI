@@ -74,7 +74,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         key: i
       }, props));
     }), orders.length > 0 && ordersToShow.map(function (order) {
-      var _order$business, _theme$images, _theme$images$dummies, _order$business2, _getOrderStatus, _order$summary;
+      var _order$business, _theme$images, _order$business2, _getOrderStatus, _order$summary;
       return /*#__PURE__*/_react.default.createElement(_styles.Card, {
         key: order.id || order.uuid,
         id: "order-card",
@@ -83,7 +83,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
           return handleClickCard(order === null || order === void 0 ? void 0 : order.uuid);
         }
       }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, {
-        bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_400,c_limit')
+        bgimage: optimizeImage((order === null || order === void 0 || (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_400,c_limit')
       }), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInformation, {
         activeOrders: true
       }, /*#__PURE__*/_react.default.createElement("h2", null, (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("div", {
@@ -98,7 +98,7 @@ var HorizontalOrdersLayout = function HorizontalOrdersLayout(props) {
         className: "order-status"
       }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)), /*#__PURE__*/_react.default.createElement(_styles.Price, {
         isBusinessesPage: isBusinessesPage
-      }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))))), pastOrders && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+      }, !pastOrders && /*#__PURE__*/_react.default.createElement("h2", null, parsePrice((order === null || order === void 0 || (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total))))), pastOrders && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
         outline: true,
         color: "primary",
         onClick: function onClick() {

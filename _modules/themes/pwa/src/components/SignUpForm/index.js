@@ -45,7 +45,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$google_login, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login2, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _configs$google_login, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie6, _validationFields$fie7, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _configs$apple_login_, _configs$google_login2, _props$afterComponent, _props$afterElements;
   var handleChangeInput = props.handleChangeInput,
     handleButtonSignupClick = props.handleButtonSignupClick,
     handleReCaptcha = props.handleReCaptcha,
@@ -92,9 +92,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     passwordSee = _useState8[0],
     setPasswordSee = _useState8[1];
-  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 || (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.checkout) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.cellphone) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
   var initParams = {
-    client_id: configs === null || configs === void 0 ? void 0 : (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
+    client_id: configs === null || configs === void 0 || (_configs$google_login = configs.google_login_client_id) === null || _configs$google_login === void 0 ? void 0 : _configs$google_login.value,
     cookiepolicy: 'single_host_origin',
     scope: 'profile'
   };
@@ -102,21 +102,21 @@ var SignUpFormUI = function SignUpFormUI(props) {
     var _user$session;
     login({
       user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+      token: user === null || user === void 0 || (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
     });
   };
   var handleSuccessApple = function handleSuccessApple(user) {
     var _user$session2;
     login({
       user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
+      token: user === null || user === void 0 || (_user$session2 = user.session) === null || _user$session2 === void 0 ? void 0 : _user$session2.access_token
     });
   };
   var handleSuccessGoogle = function handleSuccessGoogle(user) {
     var _user$session3;
     login({
       user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session3 = user.session) === null || _user$session3 === void 0 ? void 0 : _user$session3.access_token
+      token: user === null || user === void 0 || (_user$session3 = user.session) === null || _user$session3 === void 0 ? void 0 : _user$session3.access_token
     });
   };
   var togglePasswordView = function togglePasswordView() {
@@ -129,9 +129,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     });
   };
   var onSubmit = function onSubmit() {
-    var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _validationFields$fie10;
+    var _validationFields$fie3, _validationFields$fie4;
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
-    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie5 = validationFields.fields) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.checkout) !== null && _validationFields$fie6 !== void 0 && (_validationFields$fie7 = _validationFields$fie6.cellphone) !== null && _validationFields$fie7 !== void 0 && _validationFields$fie7.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie8 = validationFields.fields) !== null && _validationFields$fie8 !== void 0 && (_validationFields$fie9 = _validationFields$fie8.checkout) !== null && _validationFields$fie9 !== void 0 && (_validationFields$fie10 = _validationFields$fie9.cellphone) !== null && _validationFields$fie10 !== void 0 && _validationFields$fie10.required) {
+    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie3 = validationFields.fields) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie3 = _validationFields$fie3.checkout) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie3 = _validationFields$fie3.cellphone) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie4 = _validationFields$fie4.checkout) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie4 = _validationFields$fie4.cellphone) !== null && _validationFields$fie4 !== void 0 && _validationFields$fie4.required) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -217,8 +217,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading) {
-      var _validationFields$fie11;
-      Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout).map(function (field) {
+      var _validationFields$fie5;
+      Object.values(validationFields === null || validationFields === void 0 || (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout).map(function (field) {
         return !notValidationFields.includes(field.code) && (field.code === 'email' ? formMethods.register('email', {
           required: isRequiredField(field.code) ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
           pattern: {
@@ -275,8 +275,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie12 = validationFields.fields) === null || _validationFields$fie12 === void 0 ? void 0 : _validationFields$fie12.checkout) && (0, _utils.sortInputFields)({
-    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie13 = validationFields.fields) === null || _validationFields$fie13 === void 0 ? void 0 : _validationFields$fie13.checkout
+  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 || (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.checkout) && (0, _utils.sortInputFields)({
+    values: validationFields === null || validationFields === void 0 || (_validationFields$fie7 = validationFields.fields) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.checkout
   }).map(function (field) {
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
@@ -348,15 +348,15 @@ var SignUpFormUI = function SignUpFormUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin), /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, null, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
-  }, (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
-    appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
+  }, (configs === null || configs === void 0 || (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) && (configs === null || configs === void 0 || (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
+    appId: configs === null || configs === void 0 || (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_ = configs.apple_login_client_id) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value) && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
+  }), (configs === null || configs === void 0 || (_configs$apple_login_ = configs.apple_login_client_id) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value) && /*#__PURE__*/_react.default.createElement(_AppleLogin.AppleLogin, {
     onSuccess: handleSuccessApple,
     onFailure: function onFailure(data) {
       return console.log('onFailure', data);
     }
-  }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
+  }), (configs === null || configs === void 0 || (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
     initParams: initParams,
     handleSuccessGoogleLogin: handleSuccessGoogle,
     onFailure: function onFailure(data) {

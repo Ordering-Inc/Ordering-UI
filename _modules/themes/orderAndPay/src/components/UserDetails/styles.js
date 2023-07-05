@@ -30,7 +30,7 @@ var UserData = _styledComponents.default.div(_templateObject5 || (_templateObjec
   var _props$theme3;
   return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.darkTextColor;
 }, function (props) {
-  var _props$theme4, _props$theme4$colors;
-  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : (_props$theme4$colors = _props$theme4.colors) === null || _props$theme4$colors === void 0 ? void 0 : _props$theme4$colors.primary;
+  var _props$theme4;
+  return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 || (_props$theme4 = _props$theme4.colors) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.primary;
 });
 exports.UserData = UserData;

@@ -155,7 +155,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       width: 250,
       height: 100
     }));
-  })))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 ? void 0 : (_upsellingProducts$pr4 = upsellingProducts.products) === null || _upsellingProducts$pr4 === void 0 ? void 0 : _upsellingProducts$pr4.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !canOpenUpselling || (upsellingProducts === null || upsellingProducts === void 0 || (_upsellingProducts$pr4 = upsellingProducts.products) === null || _upsellingProducts$pr4 === void 0 ? void 0 : _upsellingProducts$pr4.length) === 0 ? '' : /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     title: t('UPSELLING_QUESTION', 'Do you want something else?'),
     open: openUpselling,
     onClose: function onClose() {

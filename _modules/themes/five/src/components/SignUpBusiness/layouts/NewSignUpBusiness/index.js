@@ -42,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 var SignUpBusinessUI = function SignUpBusinessUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _theme$images, _theme$images$general, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie12, _validationFields$fie13, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2;
+  var _validationFields$fie, _validationFields$fie2, _configs$verification, _theme$images, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie6, _validationFields$fie7, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _configs$terms_and_co2;
   var handleChangeInput = props.handleChangeInput,
     handleButtonSignupClick = props.handleButtonSignupClick,
     handleReCaptcha = props.handleReCaptcha,
@@ -96,7 +96,7 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     passwordSee = _useState10[0],
     setPasswordSee = _useState10[1];
-  var showInputPhoneNumber = ((_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false) || (configs === null || configs === void 0 ? void 0 : (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1';
+  var showInputPhoneNumber = ((_validationFields$fie = validationFields === null || validationFields === void 0 || (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.checkout) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.cellphone) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false) || (configs === null || configs === void 0 || (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1';
   var togglePasswordView = function togglePasswordView() {
     setPasswordSee(!passwordSee);
   };
@@ -107,9 +107,9 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
     });
   };
   var onSubmit = function onSubmit() {
-    var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _validationFields$fie10, _configs$verification2;
+    var _validationFields$fie3, _validationFields$fie4, _configs$verification2;
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
-    if (!userPhoneNumber && (validationFields !== null && validationFields !== void 0 && (_validationFields$fie5 = validationFields.fields) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.checkout) !== null && _validationFields$fie6 !== void 0 && (_validationFields$fie7 = _validationFields$fie6.cellphone) !== null && _validationFields$fie7 !== void 0 && _validationFields$fie7.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie8 = validationFields.fields) !== null && _validationFields$fie8 !== void 0 && (_validationFields$fie9 = _validationFields$fie8.checkout) !== null && _validationFields$fie9 !== void 0 && (_validationFields$fie10 = _validationFields$fie9.cellphone) !== null && _validationFields$fie10 !== void 0 && _validationFields$fie10.required || (configs === null || configs === void 0 ? void 0 : (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1')) {
+    if (!userPhoneNumber && (validationFields !== null && validationFields !== void 0 && (_validationFields$fie3 = validationFields.fields) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie3 = _validationFields$fie3.checkout) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie3 = _validationFields$fie3.cellphone) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie4 = _validationFields$fie4.checkout) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie4 = _validationFields$fie4.cellphone) !== null && _validationFields$fie4 !== void 0 && _validationFields$fie4.required || (configs === null || configs === void 0 || (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1')) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -173,14 +173,14 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result4, _formState$result5;
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
-      var _formState$result2, _formState$result2$re, _formState$result3;
-      if (((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re[0]) === 'ERROR_AUTH_VERIFICATION_CODE') {
+      var _formState$result2, _formState$result3;
+      if (((_formState$result2 = formState.result) === null || _formState$result2 === void 0 || (_formState$result2 = _formState$result2.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2[0]) === 'ERROR_AUTH_VERIFICATION_CODE') {
         var _configs$security_rec;
         if (configs !== null && configs !== void 0 && (_configs$security_rec = configs.security_recaptcha_site_key) !== null && _configs$security_rec !== void 0 && _configs$security_rec.value) {
           var _configs$security_rec2;
           setRecaptchaVersion({
             version: 'v2',
-            siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_site_key) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value
+            siteKey: configs === null || configs === void 0 || (_configs$security_rec2 = configs.security_recaptcha_site_key) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value
           });
           setAlertState({
             open: true,
@@ -215,8 +215,8 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading) {
-      var _validationFields$fie11;
-      Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout).map(function (field) {
+      var _validationFields$fie5;
+      Object.values(validationFields === null || validationFields === void 0 || (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout).map(function (field) {
         return !notValidationFields.includes(field.code) && (field.code === 'email' ? formMethods.register('email', {
           required: isRequiredField(field.code) ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
           pattern: {
@@ -257,7 +257,7 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
     });
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.SignupBusinessContainer, {
-    bgImage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.businessSignUpBG
+    bgImage: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.businessSignUpBG
   }, /*#__PURE__*/_react.default.createElement(_styles.SignupDescriptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SignupDescriptionTitle, null, t('START_SELLING_WITH_US', 'Start Selling with us.')), /*#__PURE__*/_react.default.createElement(_styles.SignupDescriptionContent, null, t('REGISTER_AS_NEW_BUSINESS_TERMS', 'Register as a new business owner and create your store to sell your products or services in _Domain_or_brand_ Website and Native Apps for iOS & Android.').replace('_Domain_or_brand_', 'test'))), /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement(_styles.SignUpTitle, null, t('SIGN_UP_NOW', 'Sign up now')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
@@ -271,8 +271,8 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie12 = validationFields.fields) === null || _validationFields$fie12 === void 0 ? void 0 : _validationFields$fie12.checkout) && (0, _utils.sortInputFields)({
-    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie13 = validationFields.fields) === null || _validationFields$fie13 === void 0 ? void 0 : _validationFields$fie13.checkout
+  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 || (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.checkout) && (0, _utils.sortInputFields)({
+    values: validationFields === null || validationFields === void 0 || (_validationFields$fie7 = validationFields.fields) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.checkout
   }).map(function (field) {
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
@@ -340,7 +340,7 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
   })), props.isRecaptchaEnable && enableReCaptcha && /*#__PURE__*/_react.default.createElement(_styles.ReCaptchaWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.ReCaptcha, {
     handleReCaptcha: handleReCaptcha,
     reCaptchaVersion: reCaptchaVersion
-  })), (configs === null || configs === void 0 ? void 0 : (_configs$terms_and_co = configs.terms_and_conditions) === null || _configs$terms_and_co === void 0 ? void 0 : _configs$terms_and_co.value) === 'true' && /*#__PURE__*/_react.default.createElement(_styles.TermsConditionWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
+  })), (configs === null || configs === void 0 || (_configs$terms_and_co = configs.terms_and_conditions) === null || _configs$terms_and_co === void 0 ? void 0 : _configs$terms_and_co.value) === 'true' && /*#__PURE__*/_react.default.createElement(_styles.TermsConditionWrapper, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
     name: "acceptTerms",
     ref: formMethods.register({
       required: t('ERROR_ACCEPT_TERMS', 'You must accept the Terms & Conditions.')
@@ -349,7 +349,7 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "acceptTerms"
   }, /*#__PURE__*/_react.default.createElement("span", null, t('TERMS_AND_CONDITIONS_TEXT', 'I’m agree with')), /*#__PURE__*/_react.default.createElement("a", {
-    href: configs === null || configs === void 0 ? void 0 : (_configs$terms_and_co2 = configs.terms_and_conditions_url) === null || _configs$terms_and_co2 === void 0 ? void 0 : _configs$terms_and_co2.value,
+    href: configs === null || configs === void 0 || (_configs$terms_and_co2 = configs.terms_and_conditions_url) === null || _configs$terms_and_co2 === void 0 ? void 0 : _configs$terms_and_co2.value,
     target: "_blank",
     rel: "noopener noreferrer"
   }, t('TERMS_AND_CONDITIONS', 'Terms & Conditions')))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {

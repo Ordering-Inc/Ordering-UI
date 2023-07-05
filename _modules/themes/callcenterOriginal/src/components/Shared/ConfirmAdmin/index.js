@@ -179,7 +179,7 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
       var _checkCodeState$resul2;
       setAlertState({
         open: true,
-        content: (checkCodeState === null || checkCodeState === void 0 ? void 0 : (_checkCodeState$resul2 = checkCodeState.result) === null || _checkCodeState$resul2 === void 0 ? void 0 : _checkCodeState$resul2.error) || [t('ERROR', 'Error')]
+        content: (checkCodeState === null || checkCodeState === void 0 || (_checkCodeState$resul2 = checkCodeState.result) === null || _checkCodeState$resul2 === void 0 ? void 0 : _checkCodeState$resul2.error) || [t('ERROR', 'Error')]
       });
     } else if (checkCodeState !== null && checkCodeState !== void 0 && (_checkCodeState$resul3 = checkCodeState.result) !== null && _checkCodeState$resul3 !== void 0 && _checkCodeState$resul3.result) {
       setAlertState({

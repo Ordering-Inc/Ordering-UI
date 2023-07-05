@@ -22,8 +22,8 @@ exports.BusinessSearch = BusinessSearch;
 var BusinessList = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n"])));
 exports.BusinessList = BusinessList;
 var WrapperSearch = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 10px 20px 0px;\n  display: flex;\n  justify-content: flex-end;\n  svg{\n    align-self: center;\n    cursor: pointer;\n    font-size: 26px;\n    color: ", ";\n    margin-left: 10px;\n  }\n  button {\n    width: 250px;\n    margin-left: 10px;\n  }\n  ", "\n"])), function (props) {
-  var _props$theme, _props$theme$colors;
-  return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors = _props$theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;
+  var _props$theme;
+  return (_props$theme = props.theme) === null || _props$theme === void 0 || (_props$theme = _props$theme.colors) === null || _props$theme === void 0 ? void 0 : _props$theme.primary;
 }, function (_ref) {
   var isCustomLayout = _ref.isCustomLayout,
     isCustomerMode = _ref.isCustomerMode;
@@ -46,10 +46,10 @@ var BusinessHeroImgStyled = _styledComponents.default.div(_templateObject14 || (
   var bgimage = _ref3.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 }, function (_ref4) {
-  var _theme$business_listi, _theme$business_listi2, _theme$business_listi3, _theme$business_listi4, _theme$business_listi5;
+  var _theme$business_listi;
   var height = _ref4.height,
     theme = _ref4.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$business_listi = theme.business_listing_view) === null || _theme$business_listi === void 0 ? void 0 : (_theme$business_listi2 = _theme$business_listi.components) === null || _theme$business_listi2 === void 0 ? void 0 : (_theme$business_listi3 = _theme$business_listi2.business_hero) === null || _theme$business_listi3 === void 0 ? void 0 : (_theme$business_listi4 = _theme$business_listi3.components) === null || _theme$business_listi4 === void 0 ? void 0 : (_theme$business_listi5 = _theme$business_listi4.styles) === null || _theme$business_listi5 === void 0 ? void 0 : _theme$business_listi5.height) || height || '650px';
+  return (theme === null || theme === void 0 || (_theme$business_listi = theme.business_listing_view) === null || _theme$business_listi === void 0 || (_theme$business_listi = _theme$business_listi.components) === null || _theme$business_listi === void 0 || (_theme$business_listi = _theme$business_listi.business_hero) === null || _theme$business_listi === void 0 || (_theme$business_listi = _theme$business_listi.components) === null || _theme$business_listi === void 0 || (_theme$business_listi = _theme$business_listi.styles) === null || _theme$business_listi === void 0 ? void 0 : _theme$business_listi.height) || height || '650px';
 });
 exports.BusinessHeroImgStyled = BusinessHeroImgStyled;
 var BusinessHeroImg = function BusinessHeroImg(props) {

@@ -49,10 +49,10 @@ exports.RoundMark = RoundMark;
 var AdminSection = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  background: #fff;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  padding: 5px;\n  height: 35px;\n  cursor: pointer;\n  p {\n    margin: auto;\n    font-size: 14px;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    height: 20px;\n  }\n  @media (min-width: 1200px) {\n    p {\n      min-width: 100px;\n    }\n  }\n  svg{\n    width: 14px;\n    height: 14px;\n  }\n"])), function (_ref3) {
   var _theme$colors;
   var theme = _ref3.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
+  return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
 }, function (_ref4) {
   var _theme$colors2;
   var theme = _ref4.theme;
-  return theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
+  return theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
 });
 exports.AdminSection = AdminSection;

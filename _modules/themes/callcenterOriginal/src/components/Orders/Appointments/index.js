@@ -65,7 +65,7 @@ var AppointmentsUI = function AppointmentsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     selectedAppointment = _useState6[0],
     setSelectedAppointment = _useState6[1];
-  var isEnabledAppointmentsFeature = configs === null || configs === void 0 ? void 0 : (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
+  var isEnabledAppointmentsFeature = configs === null || configs === void 0 || (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var changeBusinessState = function changeBusinessState(business) {
     setShowSelectHeader(false);
     setSelectedBusiness(business);
@@ -94,7 +94,7 @@ var AppointmentsUI = function AppointmentsUI(props) {
   }, t('CALENDAR', 'Calendar')))))), isEnabledAppointmentsFeature ? /*#__PURE__*/_react.default.createElement(_styles3.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBigCalendar.Calendar, {
     localizer: localizer,
     formats: {
-      timeGutterFormat: (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '24' ? 'HH:mm' : 'HH:mm A'
+      timeGutterFormat: (configs === null || configs === void 0 || (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '24' ? 'HH:mm' : 'HH:mm A'
     },
     defaultView: _reactBigCalendar.Views.MONTH,
     events: businessCalendarEvents.result,

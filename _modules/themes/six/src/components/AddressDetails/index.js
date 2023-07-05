@@ -27,7 +27,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options2$, _orderState$options3, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options3, _props$afterComponent, _props$afterElements;
   var addressToShow = props.addressToShow,
     isCartPending = props.isCartPending,
     googleMapsUrl = props.googleMapsUrl,
@@ -56,8 +56,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     _useCustomer2 = _slicedToArray(_useCustomer, 1),
     user = _useCustomer2[0].user;
   var handleFindBusinesses = function handleFindBusinesses() {
-    var _orderState$options, _orderState$options$a;
-    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location)) {
+    var _orderState$options;
+    if (!(orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options = _orderState$options.address) !== null && _orderState$options !== void 0 && _orderState$options.location)) {
       setAlertState({
         open: true,
         content: [t('SELECT_AN_ADDRESS_TO_SEARCH', 'Select or add an address to search')]
@@ -86,7 +86,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     width: "288px",
     height: "162px",
     loading: "lazy"
-  }))), /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : _orderState$options2$.address)), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h4", null, addressToShow || (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2.address) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address)), (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return setOpenModal(true);
     },

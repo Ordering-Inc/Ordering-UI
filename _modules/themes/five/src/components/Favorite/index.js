@@ -21,7 +21,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Favorite = function Favorite(props) {
-  var _theme$favorite, _theme$favorite$compo, _theme$favorite$compo2, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options2, _orderState$options2$, _orderState$options2$2, _props$afterComponent, _props$afterElements;
+  var _theme$favorite, _props$beforeElements, _props$beforeComponen, _orderState$options, _orderState$options2, _props$afterComponent, _props$afterElements;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -29,7 +29,7 @@ var Favorite = function Favorite(props) {
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
   var theme = (0, _styledComponents.useTheme)();
-  var layout = (theme === null || theme === void 0 ? void 0 : (_theme$favorite = theme.favorite) === null || _theme$favorite === void 0 ? void 0 : (_theme$favorite$compo = _theme$favorite.components) === null || _theme$favorite$compo === void 0 ? void 0 : (_theme$favorite$compo2 = _theme$favorite$compo.layout) === null || _theme$favorite$compo2 === void 0 ? void 0 : _theme$favorite$compo2.type) || 'original';
+  var layout = (theme === null || theme === void 0 || (_theme$favorite = theme.favorite) === null || _theme$favorite === void 0 || (_theme$favorite = _theme$favorite.components) === null || _theme$favorite === void 0 || (_theme$favorite = _theme$favorite.layout) === null || _theme$favorite === void 0 ? void 0 : _theme$favorite.type) || 'original';
   var _useState = (0, _react.useState)('businesses'),
     _useState2 = _slicedToArray(_useState, 2),
     tabSelected = _useState2[0],
@@ -73,7 +73,7 @@ var Favorite = function Favorite(props) {
     isBusiness: true,
     favoriteURL: "favorite_businesses",
     originalURL: "business",
-    location: "".concat((_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.location) === null || _orderState$options$a2 === void 0 ? void 0 : _orderState$options$a2.lat, ",").concat((_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : (_orderState$options2$2 = _orderState$options2$.location) === null || _orderState$options2$2 === void 0 ? void 0 : _orderState$options2$2.lng),
+    location: "".concat((_orderState$options = orderState.options) === null || _orderState$options === void 0 || (_orderState$options = _orderState$options.address) === null || _orderState$options === void 0 || (_orderState$options = _orderState$options.location) === null || _orderState$options === void 0 ? void 0 : _orderState$options.lat, ",").concat((_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2.address) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2.location) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.lng),
     propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'ribbon', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug']
   }), tabSelected === 'products' && /*#__PURE__*/_react.default.createElement(_FavoriteList.FavoriteList, {
     favoriteURL: "favorite_products",

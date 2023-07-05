@@ -22,7 +22,7 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     notReload = props.notReload,
     defaultLanguages = props.defaultLanguages,
     defaultCurrentLanguage = props.defaultCurrentLanguage;
-  var _languages = languagesState === null || languagesState === void 0 ? void 0 : (_languagesState$langu = languagesState.languages) === null || _languagesState$langu === void 0 ? void 0 : _languagesState$langu.map(function (language) {
+  var _languages = languagesState === null || languagesState === void 0 || (_languagesState$langu = languagesState.languages) === null || _languagesState$langu === void 0 ? void 0 : _languagesState$langu.map(function (language) {
     var _language$code;
     return {
       value: language === null || language === void 0 ? void 0 : language.code,

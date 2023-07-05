@@ -40,7 +40,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime'];
 var MessagesUI = function MessagesUI(props) {
-  var _messages$messages, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _theme$images2$dummie, _order$driver3, _order$business4, _order$driver4, _order$business6, _theme$images3, _theme$images3$dummie, _order$driver5, _messagesToShow$messa;
+  var _messages$messages, _order$business, _theme$images, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _order$driver3, _order$business4, _order$driver4, _order$business6, _theme$images3, _order$driver5, _messagesToShow$messa;
   var order = props.order,
     messages = props.messages,
     handleSend = props.handleSend,
@@ -153,7 +153,7 @@ var MessagesUI = function MessagesUI(props) {
     var chat = document.getElementById('chat');
     chat.scrollTop = chat.scrollHeight;
     readMessages && readMessages();
-  }, [messages === null || messages === void 0 ? void 0 : (_messages$messages = messages.messages) === null || _messages$messages === void 0 ? void 0 : _messages$messages.length]);
+  }, [messages === null || messages === void 0 || (_messages$messages = messages.messages) === null || _messages$messages === void 0 ? void 0 : _messages$messages.length]);
   (0, _react.useEffect)(function () {
     setImage(null);
   }, [alertState.open]);
@@ -322,7 +322,7 @@ var MessagesUI = function MessagesUI(props) {
     },
     isCursor: true
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, null, /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: ((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
+    src: ((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo),
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   })), /*#__PURE__*/_react.default.createElement(_styles.HeaderOnline, null, /*#__PURE__*/_react.default.createElement("h1", null, (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("span", null, t('BUSINESS', 'Business')))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, {
     active: driver,
@@ -339,7 +339,7 @@ var MessagesUI = function MessagesUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.HeaderOnline, null, /*#__PURE__*/_react.default.createElement("h1", null, (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.name), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVER', 'Driver'))))))), /*#__PURE__*/_react.default.createElement(_styles.MessagesRightLayout, {
     profileMessages: profileMessages
   }, !profileMessages ? /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.Image, null, business && /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: ((_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo),
+    src: ((_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.dummies) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.businessLogo),
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   }), driver && /*#__PURE__*/_react.default.createElement(_Image.Image, {
     src: (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.photo,
@@ -358,10 +358,10 @@ var MessagesUI = function MessagesUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
     onClick: function onClick() {
       var _order$business5;
-      return goToBusiness(order === null || order === void 0 ? void 0 : (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.slug);
+      return goToBusiness(order === null || order === void 0 || (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.slug);
     }
   }, /*#__PURE__*/_react.default.createElement(_Image.Image, {
-    src: ((_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo),
+    src: ((_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.dummies) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.businessLogo),
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
   }))), (order === null || order === void 0 ? void 0 : order.driver) && /*#__PURE__*/_react.default.createElement(_styles.MessageType, {
     active: driver,

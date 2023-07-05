@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProfileBusinessesUI = function ProfileBusinessesUI(props) {
-  var _document$getElementB, _orderState$options, _orderState$options$a, _businessesList$busin;
+  var _document$getElementB, _orderState$options, _businessesList$busin;
   var isCustomLayout = props.isCustomLayout,
     businessesList = props.businessesList,
     searchValue = props.searchValue,
@@ -95,7 +95,7 @@ var ProfileBusinessesUI = function ProfileBusinessesUI(props) {
     onSearch: handleChangeSearch
   })), !businessesList.loading && !configState.loading ? /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
     businessList: businessesList.businesses,
-    userLocation: orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : _orderState$options$a.location,
+    userLocation: orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 || (_orderState$options = _orderState$options.address) === null || _orderState$options === void 0 ? void 0 : _orderState$options.location,
     onBusinessCustomClick: onBusinessCustomClick
   }) : /*#__PURE__*/_react.default.createElement(_styles.MapSkeleton, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)), /*#__PURE__*/_react.default.createElement(_theme_wow.Button, {
     color: "primary",
@@ -121,7 +121,7 @@ var ProfileBusinessesUI = function ProfileBusinessesUI(props) {
     return /*#__PURE__*/_react.default.createElement(_ProfileBusinesBasicInformation.ProfileBusinesBasicInformation, {
       key: business.id,
       business: business,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type,
+      orderType: orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type,
       onBusinesClick: onBusinesClick
     });
   }), businessesList.loading && _toConsumableArray(Array(paginationProps.nextPageItems ? paginationProps.nextPageItems : 8).keys()).map(function (i) {
@@ -131,7 +131,7 @@ var ProfileBusinessesUI = function ProfileBusinessesUI(props) {
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
+      orderType: orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type
     });
   })), /*#__PURE__*/_react.default.createElement(_styles.ShowMapButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_theme_wow.Button, {
     color: "primary",

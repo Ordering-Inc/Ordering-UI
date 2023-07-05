@@ -51,8 +51,8 @@ var MessagesIcon = _styledComponents.default.span(_templateObject13 || (_templat
 });
 exports.MessagesIcon = MessagesIcon;
 var ExclamationWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  position: absolute;\n  transform: translate(0%, -25%);\n  svg{\n    font-size: 16px;\n    color: ", "\n  }\n"])), function (props) {
-  var _props$theme3, _props$theme3$colors;
-  return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : (_props$theme3$colors = _props$theme3.colors) === null || _props$theme3$colors === void 0 ? void 0 : _props$theme3$colors.primaryContrast;
+  var _props$theme3;
+  return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 || (_props$theme3 = _props$theme3.colors) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.primaryContrast;
 });
 exports.ExclamationWrapper = ExclamationWrapper;
 var OrderStatus = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n"])));

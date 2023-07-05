@@ -13,8 +13,8 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var ProductsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 95%;\n  margin: 20px auto 0px;\n  > svg {\n    color: ", ";\n    font-size: 24px;\n    cursor: pointer;\n    margin-bottom: 5px;\n  }\n  > div {\n    background-color: ", ";\n  }\n\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
-  var _props$theme, _props$theme$colors;
-  return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors = _props$theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage;
+  var _props$theme;
+  return (_props$theme = props.theme) === null || _props$theme === void 0 || (_props$theme = _props$theme.colors) === null || _props$theme === void 0 ? void 0 : _props$theme.backgroundPage;
 });
 exports.ProductsContainer = ProductsContainer;
 var ProductLoading = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n"])));

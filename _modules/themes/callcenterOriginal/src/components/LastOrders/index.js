@@ -25,7 +25,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var LastOrdersUI = function LastOrdersUI(props) {
-  var _theme$images, _theme$images$general, _props$beforeElements, _props$beforeComponen, _orderList$orders, _orderList$orders2, _props$afterComponent, _props$afterElements;
+  var _theme$images, _props$beforeElements, _props$beforeComponen, _orderList$orders, _orderList$orders2, _props$afterComponent, _props$afterElements;
   var orderList = props.orderList;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -39,7 +39,7 @@ var LastOrdersUI = function LastOrdersUI(props) {
     _useUtils2$ = _useUtils2[0],
     optimizeImage = _useUtils2$.optimizeImage,
     parseDate = _useUtils2$.parseDate;
-  var imageFails = (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.emptyPastOrders;
+  var imageFails = (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.emptyPastOrders;
   var handleClickOrder = function handleClickOrder(uuid) {
     events.emit('go_to_page', {
       page: 'order_detail',
@@ -58,21 +58,21 @@ var LastOrdersUI = function LastOrdersUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.LastOrdersContainer, null, (orderList === null || orderList === void 0 ? void 0 : orderList.loading) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) > 0 && (orderList === null || orderList === void 0 ? void 0 : orderList.orders.map(function (order, i) {
-    var _order$business, _theme$images2, _theme$images2$dummie, _order$business2, _order$business3;
+  }), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 || (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) > 0 && (orderList === null || orderList === void 0 ? void 0 : orderList.orders.map(function (order, i) {
+    var _order$business, _theme$images2, _order$business2, _order$business3;
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, {
       key: i,
-      bgimage: optimizeImage((order === null || order === void 0 ? void 0 : (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.header) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_400,c_limit')
+      bgimage: optimizeImage((order === null || order === void 0 || (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.header) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.dummies) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.businessLogo), 'h_400,c_limit')
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderInfoBlock, {
       onClick: function onClick() {
         return handleClickOrder(order === null || order === void 0 ? void 0 : order.uuid);
       }
-    }, (order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name) && /*#__PURE__*/_react.default.createElement("h4", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), ((order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) || (order === null || order === void 0 ? void 0 : order.delivery_datetime)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('TUTORIAL_ORDER_COMPLETED', 'Order Completed'), " ", ('ON', 'on'), " "), order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
+    }, (order === null || order === void 0 || (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name) && /*#__PURE__*/_react.default.createElement("h4", null, order === null || order === void 0 || (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), ((order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) || (order === null || order === void 0 ? void 0 : order.delivery_datetime)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('TUTORIAL_ORDER_COMPLETED', 'Order Completed'), " ", ('ON', 'on'), " "), order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
       outputFormat: 'MMM DD, YY - hh:mm A'
     }) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     }))));
-  })), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 ? void 0 : (_orderList$orders2 = orderList.orders) === null || _orderList$orders2 === void 0 ? void 0 : _orderList$orders2.length) === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), !(orderList !== null && orderList !== void 0 && orderList.loading) && (orderList === null || orderList === void 0 || (_orderList$orders2 = orderList.orders) === null || _orderList$orders2 === void 0 ? void 0 : _orderList$orders2.length) === 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     image: imageFails,
     content: t('NO_RESULTS_FOUND', 'Sorry, no results found'),
     conditioned: true

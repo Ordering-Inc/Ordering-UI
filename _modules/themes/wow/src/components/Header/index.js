@@ -45,7 +45,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Header = function Header(props) {
-  var _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _orderState$options2, _orderState$options3, _orderState$options3$, _orderState$options3$2, _orderState$options3$3, _orderState$options4, _customerState$user2, _customerState$user3, _props$afterComponent, _props$afterElements;
+  var _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _orderState$options2, _orderState$options3, _orderState$options4, _customerState$user2, _customerState$user3, _props$afterComponent, _props$afterElements;
   var isHome = props.isHome,
     location = props.location,
     closeCartPopover = props.closeCartPopover,
@@ -152,7 +152,7 @@ var Header = function Header(props) {
     if (isCustomerMode) {
       setCustomerModalOpen(false);
     }
-  }, [customerState === null || customerState === void 0 ? void 0 : (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.address]);
+  }, [customerState === null || customerState === void 0 || (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.address]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -167,14 +167,14 @@ var Header = function Header(props) {
     home: isHome
   }, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
-      var _orderState$options, _orderState$options$a;
+      var _orderState$options;
       return handleGoToPage({
-        page: orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options$a = _orderState$options.address) !== null && _orderState$options$a !== void 0 && _orderState$options$a.location && !isCustomerMode ? 'search' : 'home'
+        page: orderState !== null && orderState !== void 0 && (_orderState$options = orderState.options) !== null && _orderState$options !== void 0 && (_orderState$options = _orderState$options.address) !== null && _orderState$options !== void 0 && _orderState$options.location && !isCustomerMode ? 'search' : 'home'
       });
     }
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
+    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.logos) === null || _theme$images === void 0 ? void 0 : _theme$images.logotype,
     loading: "lazy"
   })), isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     className: "left-header"
@@ -190,7 +190,7 @@ var Header = function Header(props) {
     style: styles.clearCustomer
   }))), onlineStatus && windowSize.width > 820 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_AddressesPopover.AddressesPopover, {
     auth: auth,
-    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address,
+    addressState: orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address,
     open: openPopover.addresses,
     onClick: function onClick() {
       return handleTogglePopover('addresses');
@@ -201,7 +201,7 @@ var Header = function Header(props) {
     isHome: isHome
   })) : /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
-    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : (_orderState$options3$2 = _orderState$options3$.address) === null || _orderState$options3$2 === void 0 ? void 0 : (_orderState$options3$3 = _orderState$options3$2.split(',')) === null || _orderState$options3$3 === void 0 ? void 0 : _orderState$options3$3[0],
+    addressState: orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.address) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.address) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.split(',')) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3[0],
     onClick: function onClick(variant) {
       return openModal(variant);
     },
@@ -277,7 +277,7 @@ var Header = function Header(props) {
     }
   }) : /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
+    address: (orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },
@@ -292,11 +292,11 @@ var Header = function Header(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     userData: customerState === null || customerState === void 0 ? void 0 : customerState.user,
-    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id,
+    userId: customerState === null || customerState === void 0 || (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id,
     isCustomerMode: true
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
-    userId: customerState === null || customerState === void 0 ? void 0 : (_customerState$user3 = customerState.user) === null || _customerState$user3 === void 0 ? void 0 : _customerState$user3.id,
+    userId: customerState === null || customerState === void 0 || (_customerState$user3 = customerState.user) === null || _customerState$user3 === void 0 ? void 0 : _customerState$user3.id,
     changeOrderAddressWithDefault: true,
     userCustomerSetup: customerState.user
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {

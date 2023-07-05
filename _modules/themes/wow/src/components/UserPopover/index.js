@@ -69,7 +69,7 @@ var optionsDefault = [{
   pathname: '/help'
 }];
 var UserPopover = function UserPopover(props) {
-  var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _sessionState$user3, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$genera, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _sessionState$user3, _theme$images, _theme$images2, _theme$images3, _props$afterComponent, _props$afterElements;
   var open = props.open,
     isHome = props.isHome,
     optionsList = props.optionsList,
@@ -159,14 +159,14 @@ var UserPopover = function UserPopover(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
-    isPhoto: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
+    isPhoto: sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     isHome: isHome,
     ref: referenceElement,
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_style.DropDownCircleImage, {
-    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo,
+    src: sessionState === null || sessionState === void 0 || (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  }), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.name)), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 || (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.name)), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
   }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, options && options.length > 0 && options.map(function (option) {
@@ -183,7 +183,7 @@ var UserPopover = function UserPopover(props) {
     onClose: props.onClose
   }), /*#__PURE__*/_react.default.createElement(_styles.DownloadAppContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DownloadAppInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype Invert",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
+    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.logos) === null || _theme$images === void 0 ? void 0 : _theme$images.logotype,
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles.AppLinkWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DownloadAppLink, {
     target: "_blank",
@@ -192,7 +192,7 @@ var UserPopover = function UserPopover(props) {
     "aria-label": "GooglePlay"
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Google play",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.googlePlay,
+    src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.general) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.googlePlay,
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles.DownloadAppLink, {
     target: "_blank",
@@ -201,7 +201,7 @@ var UserPopover = function UserPopover(props) {
     "aria-label": "AppStore"
   }, /*#__PURE__*/_react.default.createElement("img", {
     alt: "App store",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.appStore,
+    src: theme === null || theme === void 0 || (_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.general) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.appStore,
     loading: "lazy"
   })))))), /*#__PURE__*/_react.default.createElement(_styles.PopoverArrow, {
     key: "arrow",

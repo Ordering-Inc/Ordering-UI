@@ -28,7 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PlaceSpotUI = function PlaceSpotUI(props) {
-  var _orderState$options, _placesState$placeGro3, _orderState$options2, _placesState$places4, _placesState$places4$, _getPlacesGroups, _getPlacesGroups2, _placesState$places5, _placesState$places6;
+  var _orderState$options, _placesState$placeGro3, _orderState$options2, _placesState$places4, _getPlacesGroups, _getPlacesGroups2, _placesState$places5, _placesState$places6;
   var cart = props.cart,
     orderTypes = props.orderTypes,
     placesState = props.placesState,
@@ -64,7 +64,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     setAlertState = _useState4[1];
   var selectYourSpotString = (placeGroupSelected === null || placeGroupSelected === void 0 ? void 0 : placeGroupSelected.name) === 'Tables' ? t('SELECT_YOUR_TABLE', 'Select your table') : t('SELECT_YOUR_SPOT', 'Select your spot');
   var vehicleInputAllowed = [4, 5];
-  var currentOrderType = isCheckout ? orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type : cart === null || cart === void 0 ? void 0 : cart.delivery_type;
+  var currentOrderType = isCheckout ? orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type : cart === null || cart === void 0 ? void 0 : cart.delivery_type;
   var isEatin = currentOrderType === 3;
   var isDriveThru = currentOrderType === 5;
   var placeholderText = isEatin ? t('EATIN_SPOT_NUMBER', 'Table number') : isDriveThru ? t('DRIVE_THRU_SPOT_NUMBER', 'Drive thru lane') : t('CURBSIDE_SPOT_NUMBER', 'Spot number');
@@ -118,9 +118,9 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
   };
   var onChangeSpotNumber = function onChangeSpotNumber(e) {
     var _e$target;
-    if (/^[\d]*$/.test(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value)) {
+    if (/^[\d]*$/.test(e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value)) {
       var _e$target2;
-      var _spotNumber = parseFloat(e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value);
+      var _spotNumber = parseFloat(e === null || e === void 0 || (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value);
       _spotNumber = isNaN(_spotNumber) ? null : _spotNumber;
       setSpotNumber(_spotNumber);
       setPlaceSpotNumber(_spotNumber);
@@ -145,7 +145,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     var _placesState$placeGro;
     var groups = (_placesState$placeGro = placesState.placeGroups) === null || _placesState$placeGro === void 0 ? void 0 : _placesState$placeGro.filter(function (group) {
       var _placesState$places;
-      return (group === null || group === void 0 ? void 0 : group.enabled) && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places = placesState.places) === null || _placesState$places === void 0 ? void 0 : _placesState$places.find(function (place) {
+      return (group === null || group === void 0 ? void 0 : group.enabled) && (placesState === null || placesState === void 0 || (_placesState$places = placesState.places) === null || _placesState$places === void 0 ? void 0 : _placesState$places.find(function (place) {
         return (place === null || place === void 0 ? void 0 : place.enabled) && (place === null || place === void 0 ? void 0 : place.place_group_id) === (group === null || group === void 0 ? void 0 : group.id);
       }));
     });
@@ -159,7 +159,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
   };
   var getPlaces = function getPlaces() {
     var _placesState$places2;
-    var places = placeGroupSelected && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places2 = placesState.places) === null || _placesState$places2 === void 0 ? void 0 : _placesState$places2.filter(function (place) {
+    var places = placeGroupSelected && (placesState === null || placesState === void 0 || (_placesState$places2 = placesState.places) === null || _placesState$places2 === void 0 ? void 0 : _placesState$places2.filter(function (place) {
       return (place === null || place === void 0 ? void 0 : place.enabled) && (place === null || place === void 0 ? void 0 : place.place_group_id) === (placeGroupSelected === null || placeGroupSelected === void 0 ? void 0 : placeGroupSelected.id);
     }));
     return places.map(function (place) {
@@ -175,12 +175,12 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
       var _placesState$placeGro2;
       var placeGroupOnCart = placesState === null || placesState === void 0 ? void 0 : placesState.placeGroups.find(function (group) {
         var _cart$place;
-        return (group === null || group === void 0 ? void 0 : group.id) === (cart === null || cart === void 0 ? void 0 : (_cart$place = cart.place) === null || _cart$place === void 0 ? void 0 : _cart$place.place_group_id);
+        return (group === null || group === void 0 ? void 0 : group.id) === (cart === null || cart === void 0 || (_cart$place = cart.place) === null || _cart$place === void 0 ? void 0 : _cart$place.place_group_id);
       });
       setPlaceGroupSelected(placeGroupOnCart);
       var groups = (_placesState$placeGro2 = placesState.placeGroups) === null || _placesState$placeGro2 === void 0 ? void 0 : _placesState$placeGro2.filter(function (group) {
         var _placesState$places3;
-        return (group === null || group === void 0 ? void 0 : group.enabled) && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places3 = placesState.places) === null || _placesState$places3 === void 0 ? void 0 : _placesState$places3.find(function (place) {
+        return (group === null || group === void 0 ? void 0 : group.enabled) && (placesState === null || placesState === void 0 || (_placesState$places3 = placesState.places) === null || _placesState$places3 === void 0 ? void 0 : _placesState$places3.find(function (place) {
           return (place === null || place === void 0 ? void 0 : place.enabled) && (place === null || place === void 0 ? void 0 : place.place_group_id) === (group === null || group === void 0 ? void 0 : group.id);
         }));
       });
@@ -200,7 +200,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
   }, [spotState]);
   (0, _react.useEffect)(function () {
     var _spotState$error;
-    if ((spotState === null || spotState === void 0 ? void 0 : (_spotState$error = spotState.error) === null || _spotState$error === void 0 ? void 0 : _spotState$error.length) > 0) {
+    if ((spotState === null || spotState === void 0 || (_spotState$error = spotState.error) === null || _spotState$error === void 0 ? void 0 : _spotState$error.length) > 0) {
       setAlertState({
         open: true,
         content: spotState === null || spotState === void 0 ? void 0 : spotState.error
@@ -232,7 +232,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
       defaultValue: vehicle[input.key],
       onChange: function onChange(val) {
         var _val$target;
-        return setVehicle(_objectSpread(_objectSpread({}, vehicle), {}, _defineProperty({}, input.key, val === null || val === void 0 ? void 0 : (_val$target = val.target) === null || _val$target === void 0 ? void 0 : _val$target.value)));
+        return setVehicle(_objectSpread(_objectSpread({}, vehicle), {}, _defineProperty({}, input.key, val === null || val === void 0 || (_val$target = val.target) === null || _val$target === void 0 ? void 0 : _val$target.value)));
       }
     }));
   })), /*#__PURE__*/_react.default.createElement("p", null, placeholderText), /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
@@ -266,9 +266,9 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     className: "title"
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 30
-  }))), !(placesState.error || (placesState === null || placesState === void 0 ? void 0 : (_placesState$placeGro3 = placesState.placeGroups) === null || _placesState$placeGro3 === void 0 ? void 0 : _placesState$placeGro3.length) === 0) && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, props.isSelectDisabled ? t('PLACE_GROUP', 'Place group') : orderTypes[orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type]), props.isSelectDisabled ? /*#__PURE__*/_react.default.createElement("div", null, placeGroupSelected === null || placeGroupSelected === void 0 ? void 0 : placeGroupSelected.name, " - ", placesState === null || placesState === void 0 ? void 0 : (_placesState$places4 = placesState.places) === null || _placesState$places4 === void 0 ? void 0 : (_placesState$places4$ = _placesState$places4.find(function (place) {
+  }))), !(placesState.error || (placesState === null || placesState === void 0 || (_placesState$placeGro3 = placesState.placeGroups) === null || _placesState$placeGro3 === void 0 ? void 0 : _placesState$placeGro3.length) === 0) && !(placesState !== null && placesState !== void 0 && placesState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PlaceGroupContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, props.isSelectDisabled ? t('PLACE_GROUP', 'Place group') : orderTypes[orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type]), props.isSelectDisabled ? /*#__PURE__*/_react.default.createElement("div", null, placeGroupSelected === null || placeGroupSelected === void 0 ? void 0 : placeGroupSelected.name, " - ", placesState === null || placesState === void 0 || (_placesState$places4 = placesState.places) === null || _placesState$places4 === void 0 || (_placesState$places4 = _placesState$places4.find(function (place) {
     return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
-  })) === null || _placesState$places4$ === void 0 ? void 0 : _placesState$places4$.name) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  })) === null || _placesState$places4 === void 0 ? void 0 : _placesState$places4.name) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
     isHomeStyle: !props.isCancelHomeStyle,
     isDisabled: props.isSelectDisabled,
     options: getPlacesGroups(),
@@ -285,13 +285,13 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     isHomeStyle: !props.isCancelHomeStyle,
     isDisabled: props.isSelectDisabled,
     placeholder: selectYourSpotString,
-    defaultValue: placesState === null || placesState === void 0 ? void 0 : (_placesState$places5 = placesState.places) === null || _placesState$places5 === void 0 ? void 0 : _placesState$places5.find(function (place) {
+    defaultValue: placesState === null || placesState === void 0 || (_placesState$places5 = placesState.places) === null || _placesState$places5 === void 0 ? void 0 : _placesState$places5.find(function (place) {
       return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
     }),
     onChange: function onChange(place) {
       return handleChangeSpot(place, props.isFetchOrder);
     }
-  }))), placeGroupSelected && (placesState === null || placesState === void 0 ? void 0 : (_placesState$places6 = placesState.places) === null || _placesState$places6 === void 0 ? void 0 : _placesState$places6.find(function (place) {
+  }))), placeGroupSelected && (placesState === null || placesState === void 0 || (_placesState$places6 = placesState.places) === null || _placesState$places6 === void 0 ? void 0 : _placesState$places6.find(function (place) {
     return (place === null || place === void 0 ? void 0 : place.id) === (cart === null || cart === void 0 ? void 0 : cart.place_id);
   })) && !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: placesState !== null && placesState !== void 0 && placesState.loading ? 'secondary' : 'primary',

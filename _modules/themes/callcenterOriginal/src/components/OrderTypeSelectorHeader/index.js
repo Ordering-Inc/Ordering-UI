@@ -42,7 +42,7 @@ var OrderTypeSelectorHeader = function OrderTypeSelectorHeader(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     ref: referenceElement,
-    onClick: (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) === -1 || (configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) === 0 ? null : props.onClick,
+    onClick: (configs === null || configs === void 0 || (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) === -1 || (configs === null || configs === void 0 || (_configs$max_days_pre2 = configs.max_days_preorder) === null || _configs$max_days_pre2 === void 0 ? void 0 : _configs$max_days_pre2.value) === 0 ? null : props.onClick,
     isHome: props.isHome
   }, orderTypeList && orderTypeList[(orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.options.type) - 1] || t('DELIVERY', 'Delivery')), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({

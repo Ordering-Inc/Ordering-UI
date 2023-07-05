@@ -24,8 +24,8 @@ exports.ErrorMessage = ErrorMessage;
 var PreviousOrders = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  margin: 10px 20px 0px;\n\n"])));
 exports.PreviousOrders = PreviousOrders;
 var BusinessesTitle = _styledComponents.default.h2(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 34px;\n  color: ", ";\n  margin: 0 auto;\n  width: 100%;\n  margin: 0 20px;\n"])), function (props) {
-  var _props$theme, _props$theme$colors;
-  return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors = _props$theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;
+  var _props$theme;
+  return (_props$theme = props.theme) === null || _props$theme === void 0 || (_props$theme = _props$theme.colors) === null || _props$theme === void 0 ? void 0 : _props$theme.primary;
 });
 exports.BusinessesTitle = BusinessesTitle;
 var PreviousButtonWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 89%;\n  margin: 0 auto;\n  margin-top: 10px;\n  button{\n    width: 100%;\n\n  }\n"])));

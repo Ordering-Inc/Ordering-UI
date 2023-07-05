@@ -71,7 +71,7 @@ var DriversList = function DriversList(props) {
       width: 100
     })));
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (driversIsOnline ? onlineDrivers : offlineDrivers).map(function (driver) {
-    var _theme$images, _theme$images$icons;
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles2.DriverCard, {
       key: driver.id,
       onClick: function onClick(e) {
@@ -79,7 +79,7 @@ var DriversList = function DriversList(props) {
       },
       active: (selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id) === driver.id
     }, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-      bgimage: optimizeImage((driver === null || driver === void 0 ? void 0 : driver.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver), 'h_50,c_limit')
+      bgimage: optimizeImage((driver === null || driver === void 0 ? void 0 : driver.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.noDriver), 'h_50,c_limit')
     })), /*#__PURE__*/_react.default.createElement(_styles2.DriverInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
       className: "driver-orders",
       disabled: !(driver !== null && driver !== void 0 && driver.assigned_orders_count) || (driver === null || driver === void 0 ? void 0 : driver.assigned_orders_count) === 0,

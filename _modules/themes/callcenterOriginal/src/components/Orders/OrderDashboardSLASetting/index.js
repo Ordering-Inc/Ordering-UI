@@ -123,7 +123,7 @@ var OrderDashboardSLASettingUI = function OrderDashboardSLASettingUI(props) {
       var _settingsState$result2;
       setAlertState({
         open: true,
-        content: settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$result2 = settingsState.result) === null || _settingsState$result2 === void 0 ? void 0 : _settingsState$result2.result
+        content: settingsState === null || settingsState === void 0 || (_settingsState$result2 = settingsState.result) === null || _settingsState$result2 === void 0 ? void 0 : _settingsState$result2.result
       });
     }
   }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.result]);
@@ -193,7 +193,7 @@ var StatusBlock = function StatusBlock(props) {
   var handleMiuteChange = function handleMiuteChange(e) {
     var _configs$order_deadli;
     setInputWidth((e.target.value.length + 1) * 8.5);
-    handleInputChange(e.target.value, configs === null || configs === void 0 ? void 0 : (_configs$order_deadli = configs.order_deadlines_delayed_time) === null || _configs$order_deadli === void 0 ? void 0 : _configs$order_deadli.id);
+    handleInputChange(e.target.value, configs === null || configs === void 0 || (_configs$order_deadli = configs.order_deadlines_delayed_time) === null || _configs$order_deadli === void 0 ? void 0 : _configs$order_deadli.id);
   };
   return /*#__PURE__*/_react.default.createElement(_styles2.StatusItems, null, /*#__PURE__*/_react.default.createElement(_styles2.ItemHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     src: item === null || item === void 0 ? void 0 : item.icon,
@@ -204,7 +204,7 @@ var StatusBlock = function StatusBlock(props) {
     name: "minute",
     type: "text",
     placeholder: "MM",
-    defaultValue: configs === null || configs === void 0 ? void 0 : (_configs$order_deadli2 = configs.order_deadlines_delayed_time) === null || _configs$order_deadli2 === void 0 ? void 0 : _configs$order_deadli2.value,
+    defaultValue: configs === null || configs === void 0 || (_configs$order_deadli2 = configs.order_deadlines_delayed_time) === null || _configs$order_deadli2 === void 0 ? void 0 : _configs$order_deadli2.value,
     ref: formMethods.register({
       required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute'))
     }),

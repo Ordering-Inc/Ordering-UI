@@ -70,7 +70,7 @@ var CitySelectorUI = function CitySelectorUI(props) {
     if (!isAddMode) return;
     if (cityOptions.length === 1) {
       var _citiesList$cities$;
-      handleChangeCity(citiesList === null || citiesList === void 0 ? void 0 : (_citiesList$cities$ = citiesList.cities[0]) === null || _citiesList$cities$ === void 0 ? void 0 : _citiesList$cities$.id);
+      handleChangeCity(citiesList === null || citiesList === void 0 || (_citiesList$cities$ = citiesList.cities[0]) === null || _citiesList$cities$ === void 0 ? void 0 : _citiesList$cities$.id);
     }
   }, [cityOptions, isAddMode]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, citiesList !== null && citiesList !== void 0 && citiesList.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

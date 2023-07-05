@@ -29,10 +29,10 @@ var Map = function Map(props) {
   var mapRef = (0, _react.useRef)(null);
   var googleMapsApiKey = (0, _react.useMemo)(function () {
     var _configs$google_maps_;
-    return configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
+    return configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   }, [configs]);
-  var defaultLatitude = Number(configs === null || configs === void 0 ? void 0 : (_configs$location_def = configs.location_default_latitude) === null || _configs$location_def === void 0 ? void 0 : _configs$location_def.value);
-  var defaultLongitude = Number(configs === null || configs === void 0 ? void 0 : (_configs$location_def2 = configs.location_default_longitude) === null || _configs$location_def2 === void 0 ? void 0 : _configs$location_def2.value);
+  var defaultLatitude = Number(configs === null || configs === void 0 || (_configs$location_def = configs.location_default_latitude) === null || _configs$location_def === void 0 ? void 0 : _configs$location_def.value);
+  var defaultLongitude = Number(configs === null || configs === void 0 || (_configs$location_def2 = configs.location_default_longitude) === null || _configs$location_def2 === void 0 ? void 0 : _configs$location_def2.value);
   var isInvalidDefaultLocation = isNaN(defaultLatitude) || isNaN(defaultLongitude);
   var defaultCenter = {
     lat: !isInvalidDefaultLocation ? defaultLatitude : 40.7744146,
@@ -72,12 +72,12 @@ var Map = function Map(props) {
     bounds.extend(newPoint);
     var newBounds = {
       ne: {
-        lat: (_bounds$getNorthEast = bounds.getNorthEast()) === null || _bounds$getNorthEast === void 0 ? void 0 : (_bounds$getNorthEast$ = _bounds$getNorthEast.lat) === null || _bounds$getNorthEast$ === void 0 ? void 0 : _bounds$getNorthEast$.call(_bounds$getNorthEast),
-        lng: (_bounds$getNorthEast2 = bounds.getNorthEast()) === null || _bounds$getNorthEast2 === void 0 ? void 0 : (_bounds$getNorthEast3 = _bounds$getNorthEast2.lng) === null || _bounds$getNorthEast3 === void 0 ? void 0 : _bounds$getNorthEast3.call(_bounds$getNorthEast2)
+        lat: (_bounds$getNorthEast = bounds.getNorthEast()) === null || _bounds$getNorthEast === void 0 || (_bounds$getNorthEast$ = _bounds$getNorthEast.lat) === null || _bounds$getNorthEast$ === void 0 ? void 0 : _bounds$getNorthEast$.call(_bounds$getNorthEast),
+        lng: (_bounds$getNorthEast2 = bounds.getNorthEast()) === null || _bounds$getNorthEast2 === void 0 || (_bounds$getNorthEast3 = _bounds$getNorthEast2.lng) === null || _bounds$getNorthEast3 === void 0 ? void 0 : _bounds$getNorthEast3.call(_bounds$getNorthEast2)
       },
       sw: {
-        lat: (_bounds$getSouthWest = bounds.getSouthWest()) === null || _bounds$getSouthWest === void 0 ? void 0 : (_bounds$getSouthWest$ = _bounds$getSouthWest.lat) === null || _bounds$getSouthWest$ === void 0 ? void 0 : _bounds$getSouthWest$.call(_bounds$getSouthWest),
-        lng: (_bounds$getSouthWest2 = bounds.getSouthWest()) === null || _bounds$getSouthWest2 === void 0 ? void 0 : (_bounds$getSouthWest3 = _bounds$getSouthWest2.lng) === null || _bounds$getSouthWest3 === void 0 ? void 0 : _bounds$getSouthWest3.call(_bounds$getSouthWest2)
+        lat: (_bounds$getSouthWest = bounds.getSouthWest()) === null || _bounds$getSouthWest === void 0 || (_bounds$getSouthWest$ = _bounds$getSouthWest.lat) === null || _bounds$getSouthWest$ === void 0 ? void 0 : _bounds$getSouthWest$.call(_bounds$getSouthWest),
+        lng: (_bounds$getSouthWest2 = bounds.getSouthWest()) === null || _bounds$getSouthWest2 === void 0 || (_bounds$getSouthWest3 = _bounds$getSouthWest2.lng) === null || _bounds$getSouthWest3 === void 0 ? void 0 : _bounds$getSouthWest3.call(_bounds$getSouthWest2)
       }
     };
     var mapSize = {
@@ -118,8 +118,8 @@ var Map = function Map(props) {
     yesIWantToUseGoogleMapApiInternals: true
   }, (business === null || business === void 0 ? void 0 : business.location) && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     business: business,
-    lat: business === null || business === void 0 ? void 0 : (_business$location = business.location) === null || _business$location === void 0 ? void 0 : _business$location.lat,
-    lng: business === null || business === void 0 ? void 0 : (_business$location2 = business.location) === null || _business$location2 === void 0 ? void 0 : _business$location2.lng,
+    lat: business === null || business === void 0 || (_business$location = business.location) === null || _business$location === void 0 ? void 0 : _business$location.lat,
+    lng: business === null || business === void 0 || (_business$location2 = business.location) === null || _business$location2 === void 0 ? void 0 : _business$location2.lng,
     image: business === null || business === void 0 ? void 0 : business.logo
   }), /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     customer: customer,

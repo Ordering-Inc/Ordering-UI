@@ -38,7 +38,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _props$beforeElements, _props$beforeComponen, _cardsList$error$, _cardsList$cards2, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _props$beforeElements, _props$beforeComponen, _cardsList$error$, _cardsList$cards2, _props$afterComponent, _props$afterElements;
   var deleteCard = props.deleteCard,
     cardsList = props.cardsList,
     _handleCardClick = props.handleCardClick,
@@ -67,7 +67,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     addCartOpen = _useState4[0],
     setAddCardOpen = _useState4[1];
-  var validateZipcodeCard = (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.card) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.zipcode) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.card) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.zipcode) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required);
+  var validateZipcodeCard = (validationFields === null || validationFields === void 0 || (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 || (_validationFields$fie = _validationFields$fie.card) === null || _validationFields$fie === void 0 || (_validationFields$fie = _validationFields$fie.zipcode) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.enabled) && (validationFields === null || validationFields === void 0 || (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.card) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.zipcode) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.required);
   var paymethodsWithoutSaveCards = ['credomatic'];
   var _handleNewCard = function _handleNewCard(card) {
     setAddCardOpen(false);
@@ -87,7 +87,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   };
   (0, _react.useEffect)(function () {
     var _cardsList$cards;
-    if (!(cardsList !== null && cardsList !== void 0 && cardsList.loading) && (cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$cards = cardsList.cards) === null || _cardsList$cards === void 0 ? void 0 : _cardsList$cards.length) === 0 && !paymethodsWithoutSaveCards.includes(gateway)) {
+    if (!(cardsList !== null && cardsList !== void 0 && cardsList.loading) && (cardsList === null || cardsList === void 0 || (_cardsList$cards = cardsList.cards) === null || _cardsList$cards === void 0 ? void 0 : _cardsList$cards.length) === 0 && !paymethodsWithoutSaveCards.includes(gateway)) {
       setAddCardOpen(true);
     }
   }, [cardsList === null || cardsList === void 0 ? void 0 : cardsList.loading]);
@@ -100,8 +100,8 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.OptionStripeContainer, null, !token && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')), token && !cardsList.loading && cardsList.cards && cardsList.cards.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.CardItem, null, /*#__PURE__*/_react.default.createElement("span", null, t('NO_CARDS', 'No cards'))), token && cardsList.error && cardsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: (cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$error$ = cardsList.error[0]) === null || _cardsList$error$ === void 0 ? void 0 : _cardsList$error$.message) || (cardsList === null || cardsList === void 0 ? void 0 : cardsList.error[0])
-  }), token && cardsList.cards && cardsList.cards.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$cards2 = cardsList.cards) === null || _cardsList$cards2 === void 0 ? void 0 : _cardsList$cards2.map(function (card, i) {
+    content: (cardsList === null || cardsList === void 0 || (_cardsList$error$ = cardsList.error[0]) === null || _cardsList$error$ === void 0 ? void 0 : _cardsList$error$.message) || (cardsList === null || cardsList === void 0 ? void 0 : cardsList.error[0])
+  }), token && cardsList.cards && cardsList.cards.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cardsList === null || cardsList === void 0 || (_cardsList$cards2 = cardsList.cards) === null || _cardsList$cards2 === void 0 ? void 0 : _cardsList$cards2.map(function (card, i) {
     return /*#__PURE__*/_react.default.createElement(PaymentCard, _extends({}, props, {
       key: i,
       handleCardClick: function handleCardClick() {
@@ -219,9 +219,9 @@ var PaymentCard = function PaymentCard(props) {
       id: cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.id,
       type: 'card',
       card: {
-        brand: cardSelected === null || cardSelected === void 0 ? void 0 : (_cardSelected$card = cardSelected.card) === null || _cardSelected$card === void 0 ? void 0 : _cardSelected$card.brand,
-        last4: cardSelected === null || cardSelected === void 0 ? void 0 : (_cardSelected$card2 = cardSelected.card) === null || _cardSelected$card2 === void 0 ? void 0 : _cardSelected$card2.last4,
-        zipcode: cardSelected === null || cardSelected === void 0 ? void 0 : (_cardSelected$card3 = cardSelected.card) === null || _cardSelected$card3 === void 0 ? void 0 : _cardSelected$card3.zipcode
+        brand: cardSelected === null || cardSelected === void 0 || (_cardSelected$card = cardSelected.card) === null || _cardSelected$card === void 0 ? void 0 : _cardSelected$card.brand,
+        last4: cardSelected === null || cardSelected === void 0 || (_cardSelected$card2 = cardSelected.card) === null || _cardSelected$card2 === void 0 ? void 0 : _cardSelected$card2.last4,
+        zipcode: cardSelected === null || cardSelected === void 0 || (_cardSelected$card3 = cardSelected.card) === null || _cardSelected$card3 === void 0 ? void 0 : _cardSelected$card3.zipcode
       }
     }));
   }, [cardSelected]);

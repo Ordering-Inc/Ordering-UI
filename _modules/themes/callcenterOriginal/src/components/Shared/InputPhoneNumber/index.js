@@ -22,7 +22,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var InputPhoneNumber = function InputPhoneNumber(props) {
-  var _props$beforeElements, _props$beforeComponen, _configs$default_coun, _configs$default_coun2, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _configs$default_coun, _props$afterComponent, _props$afterElements;
   var user = props.user,
     value = props.value,
     setValue = props.setValue,
@@ -63,7 +63,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     disabled: disabled,
     placeholder: t('PHONE_NUMBER', 'Phone number'),
-    defaultCountry: (0, _utils.findExitingCode)(configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : (_configs$default_coun2 = _configs$default_coun.value) === null || _configs$default_coun2 === void 0 ? void 0 : _configs$default_coun2.toUpperCase()),
+    defaultCountry: (0, _utils.findExitingCode)(configs === null || configs === void 0 || (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 || (_configs$default_coun = _configs$default_coun.value) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.toUpperCase()),
     value: value,
     displayInitialValueAsLocalNumber: !isUser,
     international: isUser,

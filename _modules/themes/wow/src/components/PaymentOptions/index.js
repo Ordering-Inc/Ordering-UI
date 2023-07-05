@@ -150,7 +150,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       }
     }));
   }), paymethodsList.error && paymethodsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: (paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$error = paymethodsList.error[0]) === null || _paymethodsList$error === void 0 ? void 0 : _paymethodsList$error.message) || (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0])
+    content: (paymethodsList === null || paymethodsList === void 0 || (_paymethodsList$error = paymethodsList.error[0]) === null || _paymethodsList$error === void 0 ? void 0 : _paymethodsList$error.message) || (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0])
   }), !(paymethodsList.loading || isLoading) && !paymethodsList.error && (!(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.paymethods) || paymethodsList.paymethods.length === 0) && /*#__PURE__*/_react.default.createElement("p", null, t('NO_PAYMENT_METHODS', 'No payment methods!'))), (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
     orderTotal: cart.total,
     onChangeData: handlePaymethodDataChange,
@@ -159,7 +159,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     className: "checks"
   }, /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null)), /*#__PURE__*/_react.default.createElement("span", {
     className: "brand"
-  }, (0, _utils.getIconCard)(paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand)), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 ? void 0 : (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.last4))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  }, (0, _utils.getIconCard)(paymethodData === null || paymethodData === void 0 || (_paymethodData$card = paymethodData.card) === null || _paymethodData$card === void 0 ? void 0 : _paymethodData$card.brand)), /*#__PURE__*/_react.default.createElement("span", null, "XXXX-XXXX-XXXX-", paymethodData === null || paymethodData === void 0 || (_paymethodData$card2 = paymethodData.card) === null || _paymethodData$card2 === void 0 ? void 0 : _paymethodData$card2.last4))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     className: "modal-info",
     open: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'paypal' && !paymethodData.id,
     onClose: function onClose() {
@@ -167,7 +167,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     },
     title: t('PAY_WITH_PAYPAL', 'Pay with PayPal')
   }, (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
-    clientId: paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$cr = paymethodSelected.credentials) === null || _paymethodSelected$cr === void 0 ? void 0 : _paymethodSelected$cr.client_id,
+    clientId: paymethodSelected === null || paymethodSelected === void 0 || (_paymethodSelected$cr = paymethodSelected.credentials) === null || _paymethodSelected$cr === void 0 ? void 0 : _paymethodSelected$cr.client_id,
     body: {
       paymethod_id: paymethodSelected.id,
       amount: cart.total,

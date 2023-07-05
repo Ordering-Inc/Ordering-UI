@@ -58,7 +58,7 @@ var MomentControlUI = function MomentControlUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SELECT_A_DELIVERY_DATE', 'Select a Delivery Date')), /*#__PURE__*/_react.default.createElement(_styles.Days, {
     name: "days"
-  }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10)).map(function (date) {
+  }, datesList.slice(0, Number((configs === null || configs === void 0 || (_configs$max_days_pre = configs.max_days_preorder) === null || _configs$max_days_pre === void 0 ? void 0 : _configs$max_days_pre.value) || 6, 10)).map(function (date) {
     var dateParts = date.split('-');
     var _date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
     var dayName = t('DAY' + (_date.getDay() >= 1 ? _date.getDay() : 7)).substring(0, 3).toUpperCase();
@@ -89,7 +89,7 @@ var MomentControlUI = function MomentControlUI(props) {
         return !orderState.loading && handleChangeTime(hour.startTime);
       },
       isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-    }, (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+    }, (configs === null || configs === void 0 || (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
       outputFormat: 'hh:mma'
     }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
       outputFormat: 'HH:mm'

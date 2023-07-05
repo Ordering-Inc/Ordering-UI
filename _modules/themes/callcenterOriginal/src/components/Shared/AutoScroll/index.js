@@ -45,8 +45,8 @@ var AutoScroll = function AutoScroll(_ref) {
     parentWidth = _useState6[0],
     setParentWidth = _useState6[1];
   (0, _react.useLayoutEffect)(function () {
-    var _document, _document$getElementB;
-    var element = (_document = document) === null || _document === void 0 ? void 0 : (_document$getElementB = _document.getElementById("".concat(autoScrollId))) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.parentNode;
+    var _document;
+    var element = (_document = document) === null || _document === void 0 || (_document = _document.getElementById("".concat(autoScrollId))) === null || _document === void 0 ? void 0 : _document.parentNode;
     element && element.parentNode.addEventListener('scroll', handleScroll);
     var containerElement = element === null || element === void 0 ? void 0 : element.parentNode;
     setParentWidth(element === null || element === void 0 ? void 0 : element.offsetWidth);
@@ -108,9 +108,9 @@ var AutoScroll = function AutoScroll(_ref) {
     }
   };
   (0, _react.useEffect)(function () {
-    var _document3, _document3$getElement;
+    var _document3;
     if (!scrollId) return;
-    var element = (_document3 = document) === null || _document3 === void 0 ? void 0 : (_document3$getElement = _document3.getElementById("".concat(autoScrollId))) === null || _document3$getElement === void 0 ? void 0 : _document3$getElement.parentNode;
+    var element = (_document3 = document) === null || _document3 === void 0 || (_document3 = _document3.getElementById("".concat(autoScrollId))) === null || _document3 === void 0 ? void 0 : _document3.parentNode;
     if (!element) return;
     setParentWidth(element.width);
     setParentElement(element);

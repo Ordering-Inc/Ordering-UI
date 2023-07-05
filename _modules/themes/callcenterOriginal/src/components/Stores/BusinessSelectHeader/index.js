@@ -111,7 +111,7 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_50,c_limit'),
       alt: ""
-    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("b", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name)));
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("b", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 || (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name)));
   }))), pagination && (pagination === null || pagination === void 0 ? void 0 : pagination.total) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, {
     className: "pagination-container"
   }, (pagination === null || pagination === void 0 ? void 0 : pagination.total) && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {

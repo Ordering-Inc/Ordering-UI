@@ -40,7 +40,7 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
     clearTimeout(timeout);
     timeout = setTimeout(function () {
       var _e$target;
-      var cash = parseFloat(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value);
+      var cash = parseFloat(e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value);
       cash = isNaN(cash) ? null : cash;
       setvalue(cash);
       if (cash >= orderTotal || !cash) {

@@ -28,8 +28,8 @@ var SmartAppBanneUI = function SmartAppBanneUI(props) {
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactSmartbanner.default, {
-    title: t('MOBILE_APPNAME', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.MOBILE_APPNAME) || 'Ordering app'),
-    author: t('MOBILE_APPNAME_AUTHOR', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.MOBILE_APPNAME_AUTHOR) || 'Ordering, Inc.'),
+    title: t('MOBILE_APPNAME', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.MOBILE_APPNAME) || 'Ordering app'),
+    author: t('MOBILE_APPNAME_AUTHOR', (theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.MOBILE_APPNAME_AUTHOR) || 'Ordering, Inc.'),
     daysHidden: 7,
     daysReminder: 15,
     button: t('VIEW', 'View'),

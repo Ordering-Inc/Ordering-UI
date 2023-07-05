@@ -45,7 +45,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie9, _validationFields$fie10, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images2, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie5, _validationFields$fie6, _props$afterMidElemen, _props$afterMidCompon, _configs$facebook_log, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
   var handleChangeInput = props.handleChangeInput,
     handleButtonSignupClick = props.handleButtonSignupClick,
     elementLinkToLogin = props.elementLinkToLogin,
@@ -104,7 +104,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     var _user$session;
     login({
       user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+      token: user === null || user === void 0 || (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
     });
   };
   var togglePasswordView = function togglePasswordView() {
@@ -117,9 +117,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     });
   };
   var onSubmit = function onSubmit() {
-    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3;
+    var _validationFields$fie;
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
-    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.cellphone) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.required && !externalPhoneNumber) {
+    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.checkout) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.cellphone) !== null && _validationFields$fie !== void 0 && _validationFields$fie.required && !externalPhoneNumber) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Mobile phone is required.')]
@@ -203,8 +203,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading) {
-      var _validationFields$fie4;
-      Object.values(validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.checkout).map(function (field) {
+      var _validationFields$fie2;
+      Object.values(validationFields === null || validationFields === void 0 || (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.checkout).map(function (field) {
         return !notValidationFields.includes(field.code) && formMethods.register(field.code, {
           required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null
         });
@@ -226,7 +226,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   (0, _react.useEffect)(function () {
     setWelcomeModalOpen(true);
   }, []);
-  var showInputPhoneNumber = (_validationFields$fie5 = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : (_validationFields$fie7 = _validationFields$fie6.checkout) === null || _validationFields$fie7 === void 0 ? void 0 : (_validationFields$fie8 = _validationFields$fie7.cellphone) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.enabled) !== null && _validationFields$fie5 !== void 0 ? _validationFields$fie5 : false;
+  var showInputPhoneNumber = (_validationFields$fie3 = validationFields === null || validationFields === void 0 || (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 || (_validationFields$fie4 = _validationFields$fie4.checkout) === null || _validationFields$fie4 === void 0 || (_validationFields$fie4 = _validationFields$fie4.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie3 !== void 0 ? _validationFields$fie3 : false;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -238,7 +238,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.SignUpContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, {
-    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.authHero
+    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.authHero
   }), /*#__PURE__*/_react.default.createElement(_styles.FormSideContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BackButton, {
     onClick: function onClick() {
       return history.goBack();
@@ -247,7 +247,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("img", {
     id: "logo",
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotype,
+    src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.logos) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.logotype,
     alt: "Logo sign up",
     width: "200",
     height: "66",
@@ -265,8 +265,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
       key: i
     }, props));
-  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie9 = validationFields.fields) === null || _validationFields$fie9 === void 0 ? void 0 : _validationFields$fie9.checkout) && (0, _utils.sortInputFields)({
-    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie10 = validationFields.fields) === null || _validationFields$fie10 === void 0 ? void 0 : _validationFields$fie10.checkout
+  }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 || (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout) && (0, _utils.sortInputFields)({
+    values: validationFields === null || validationFields === void 0 || (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.checkout
   }).map(function (field) {
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
@@ -347,8 +347,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     }
   }, t('WIDTH_PHONE_NUMBER', 'With phone number')), !externalPhoneNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
-  }, (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
-    appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
+  }, (configs === null || configs === void 0 || (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) && (configs === null || configs === void 0 || (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
+    appId: configs === null || configs === void 0 || (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
   })) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonSocialWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 43

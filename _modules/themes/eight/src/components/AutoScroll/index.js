@@ -59,8 +59,8 @@ var AutoScroll = function AutoScroll(_ref) {
   (0, _react.useEffect)(function () {
     var _scrollWrapperRef$cur, _scrollContainerRef$c;
     setWrapperScrollLeft(scrollWrapperRef.current.scrollLeft);
-    setWrapperWidth(scrollWrapperRef === null || scrollWrapperRef === void 0 ? void 0 : (_scrollWrapperRef$cur = scrollWrapperRef.current) === null || _scrollWrapperRef$cur === void 0 ? void 0 : _scrollWrapperRef$cur.offsetWidth);
-    setContainerWidth(scrollContainerRef === null || scrollContainerRef === void 0 ? void 0 : (_scrollContainerRef$c = scrollContainerRef.current) === null || _scrollContainerRef$c === void 0 ? void 0 : _scrollContainerRef$c.offsetWidth);
+    setWrapperWidth(scrollWrapperRef === null || scrollWrapperRef === void 0 || (_scrollWrapperRef$cur = scrollWrapperRef.current) === null || _scrollWrapperRef$cur === void 0 ? void 0 : _scrollWrapperRef$cur.offsetWidth);
+    setContainerWidth(scrollContainerRef === null || scrollContainerRef === void 0 || (_scrollContainerRef$c = scrollContainerRef.current) === null || _scrollContainerRef$c === void 0 ? void 0 : _scrollContainerRef$c.offsetWidth);
   }, [scrollWrapperRef, scrollContainerRef, width, children]);
   return /*#__PURE__*/_react.default.createElement(_styles.ScrollBox, {
     className: "scroll-box"

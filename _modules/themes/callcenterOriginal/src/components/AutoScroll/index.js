@@ -37,8 +37,8 @@ var AutoScroll = function AutoScroll(_ref) {
     theme = _useTheme2[0];
   var autoScrollId = scrollId || 'autoscroll';
   (0, _react.useLayoutEffect)(function () {
-    var _document, _document$getElementB;
-    var element = (_document = document) === null || _document === void 0 ? void 0 : (_document$getElementB = _document.getElementById("".concat(autoScrollId))) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.parentNode;
+    var _document;
+    var element = (_document = document) === null || _document === void 0 || (_document = _document.getElementById("".concat(autoScrollId))) === null || _document === void 0 ? void 0 : _document.parentNode;
     element && element.parentNode.addEventListener('scroll', handleScroll);
     var containerElement = element === null || element === void 0 ? void 0 : element.parentNode;
     setParentElement(element);
@@ -55,8 +55,8 @@ var AutoScroll = function AutoScroll(_ref) {
   var handleScroll = function handleScroll() {
     var _document2, _autoScrollContainer$, _autoScrollContainer$2;
     var autoScrollContainer = (_document2 = document) === null || _document2 === void 0 ? void 0 : _document2.getElementById("".concat(autoScrollId));
-    var botonRight = autoScrollContainer === null || autoScrollContainer === void 0 ? void 0 : (_autoScrollContainer$ = autoScrollContainer.querySelector) === null || _autoScrollContainer$ === void 0 ? void 0 : _autoScrollContainer$.call(autoScrollContainer, '.right-autoscroll');
-    var botonLeft = autoScrollContainer === null || autoScrollContainer === void 0 ? void 0 : (_autoScrollContainer$2 = autoScrollContainer.querySelector) === null || _autoScrollContainer$2 === void 0 ? void 0 : _autoScrollContainer$2.call(autoScrollContainer, '.left-autoscroll');
+    var botonRight = autoScrollContainer === null || autoScrollContainer === void 0 || (_autoScrollContainer$ = autoScrollContainer.querySelector) === null || _autoScrollContainer$ === void 0 ? void 0 : _autoScrollContainer$.call(autoScrollContainer, '.right-autoscroll');
+    var botonLeft = autoScrollContainer === null || autoScrollContainer === void 0 || (_autoScrollContainer$2 = autoScrollContainer.querySelector) === null || _autoScrollContainer$2 === void 0 ? void 0 : _autoScrollContainer$2.call(autoScrollContainer, '.left-autoscroll');
     if (botonLeft || botonRight) {
       if (theme !== null && theme !== void 0 && theme.rtl) {
         if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) * -1 < 40) {

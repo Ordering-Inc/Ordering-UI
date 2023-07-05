@@ -42,7 +42,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var LoginFormUI = function LoginFormUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$general, _theme$defaultLanguag, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag2, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$defaultLanguag, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag2, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$facebook_id2, _props$afterComponent, _props$afterElements;
   var useLoginByEmail = props.useLoginByEmail,
     useLoginByCellphone = props.useLoginByCellphone,
     handleChangeInput = props.handleChangeInput,
@@ -97,7 +97,7 @@ var LoginFormUI = function LoginFormUI(props) {
     var _user$session;
     login({
       user: user,
-      token: user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+      token: user === null || user === void 0 || (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
     });
   };
   var togglePasswordView = function togglePasswordView() {
@@ -159,7 +159,7 @@ var LoginFormUI = function LoginFormUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroSide, {
-    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.authHero
+    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.authHero
   }), /*#__PURE__*/_react.default.createElement(_styles.FormSideContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BackButton, {
     onClick: function onClick() {
       return history.goBack();
@@ -180,7 +180,7 @@ var LoginFormUI = function LoginFormUI(props) {
       return handleChangeTab('cellphone');
     },
     active: loginTab === 'cellphone'
-  }, t('LOGIN_WITH_CELLPHONE', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.LOGIN_WITH_CELLPHONE) || 'Login with Cellphone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, t('LOGIN_WITH_CELLPHONE', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.LOGIN_WITH_CELLPHONE) || 'Login with Cellphone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: formMethods.handleSubmit(onSubmit)
@@ -246,10 +246,10 @@ var LoginFormUI = function LoginFormUI(props) {
   }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('LOGIN', 'Login'))), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.NEW_ON_PLATFORM) || 'New on Ordering?')), elementLinkToSignup), !props.isDisableButtons && (Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', (theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.NEW_ON_PLATFORM) || 'New on Ordering?')), elementLinkToSignup), !props.isDisableButtons && (Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
-  }, ((configs === null || configs === void 0 ? void 0 : (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log2 = configs.facebook_login) === null || _configs$facebook_log2 === void 0 ? void 0 : _configs$facebook_log2.value) === '1') && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
-    appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
+  }, ((configs === null || configs === void 0 || (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) === 'true' || (configs === null || configs === void 0 || (_configs$facebook_log2 = configs.facebook_login) === null || _configs$facebook_log2 === void 0 ? void 0 : _configs$facebook_log2.value) === '1') && (configs === null || configs === void 0 || (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
+    appId: configs === null || configs === void 0 || (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value,
     handleSuccessFacebookLogin: handleSuccessFacebook
   })) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonSocialWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 43

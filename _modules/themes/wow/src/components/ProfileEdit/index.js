@@ -84,7 +84,7 @@ var ProfileEdit = function ProfileEdit(props) {
     onClick: function onClick() {
       return handleClickImage();
     },
-    isImage: (user === null || user === void 0 ? void 0 : user.photo) || (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo) && !formState.result.error
+    isImage: (user === null || user === void 0 ? void 0 : user.photo) || (formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo) && !formState.result.error
   }, /*#__PURE__*/_react.default.createElement(_orderingComponents.ExamineClick, {
     onFiles: handleFiles,
     childRef: function childRef(e) {
@@ -104,8 +104,8 @@ var ProfileEdit = function ProfileEdit(props) {
     width: "200px",
     height: "200px",
     loading: "lazy"
-  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))) : (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.photo) && formState.result.error && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.photo,
+  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))) : (formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.photo) && formState.result.error && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.photo,
     alt: "user image",
     loading: "lazy"
   })))), /*#__PURE__*/_react.default.createElement(_styles.ProfileContent, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {

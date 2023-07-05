@@ -130,7 +130,7 @@ var InsertImage = function InsertImage(props) {
     onClick: function onClick() {
       return handleClickImage();
     },
-    isImage: insertImageState === null || insertImageState === void 0 ? void 0 : (_insertImageState$cha = insertImageState.change) === null || _insertImageState$cha === void 0 ? void 0 : _insertImageState$cha.soucre
+    isImage: insertImageState === null || insertImageState === void 0 || (_insertImageState$cha = insertImageState.change) === null || _insertImageState$cha === void 0 ? void 0 : _insertImageState$cha.soucre
   }, /*#__PURE__*/_react.default.createElement(_orderingComponents.ExamineClick, {
     onFiles: handleFiles,
     childRef: function childRef(e) {
@@ -144,8 +144,8 @@ var InsertImage = function InsertImage(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: insertImageState.loading
-  }, insertImageState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : (insertImageState === null || insertImageState === void 0 ? void 0 : (_insertImageState$cha2 = insertImageState.change) === null || _insertImageState$cha2 === void 0 ? void 0 : _insertImageState$cha2.soucre) && /*#__PURE__*/_react.default.createElement("img", {
-    src: insertImageState === null || insertImageState === void 0 ? void 0 : (_insertImageState$cha3 = insertImageState.change) === null || _insertImageState$cha3 === void 0 ? void 0 : _insertImageState$cha3.soucre,
+  }, insertImageState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : (insertImageState === null || insertImageState === void 0 || (_insertImageState$cha2 = insertImageState.change) === null || _insertImageState$cha2 === void 0 ? void 0 : _insertImageState$cha2.soucre) && /*#__PURE__*/_react.default.createElement("img", {
+    src: insertImageState === null || insertImageState === void 0 || (_insertImageState$cha3 = insertImageState.change) === null || _insertImageState$cha3 === void 0 ? void 0 : _insertImageState$cha3.soucre,
     alt: "image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here')))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImageListContainer, null, imageListState.images.map(function (image) {
