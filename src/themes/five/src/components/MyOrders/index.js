@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components'
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { OrdersOption } from '../OrdersOption'
+import { GiftCardOrdersList } from '../GiftCard/GiftCardOrdersList'
 import { Button } from '../../styles/Buttons'
 import MdClose from '@meronex/icons/ios/MdClose'
 import { useHistory } from 'react-router-dom'
@@ -41,7 +42,8 @@ export const MyOrders = (props) => {
   const MyOrdersMenu = [
     { key: 'orders', value: t('ORDERS', 'Orders'), disabled: false },
     { key: 'business', value: t('BUSINESS', 'Business'), disabled: hideBusinessTab },
-    { key: 'products', value: t('PRODUCTS', 'Products'), disabled: hideProductsTab }
+    { key: 'products', value: t('PRODUCTS', 'Products'), disabled: hideProductsTab },
+    { key: 'giftCards', value: t('GIFT_CARD', 'Gift card'), disabled: false }
   ]
 
   const notOrderOptions = ['business', 'products', 'professionals']
@@ -143,6 +145,9 @@ export const MyOrders = (props) => {
             setBusinessOrderIds={setBusinessOrderIds}
             onProductRedirect={onProductRedirect}
           />
+        )}
+        {selectedOption === 'giftCards' && (
+          <GiftCardOrdersList />
         )}
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
