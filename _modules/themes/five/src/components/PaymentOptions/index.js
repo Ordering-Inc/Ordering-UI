@@ -149,8 +149,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var excludePaymethods = hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash'];
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
   var supportedMethods = paymethodsList.paymethods.filter(function (p) {
-    return isHideCash || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? !excludePaymethods.includes(p.gateway) : p;
-  });
+    return isHideCash || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? !excludePaymethods.includes(p.gateway) : !['openpay_mastercard'].includes(p.gateway);
+  }); // remove !['openpay_mastercard'].includes(p.gateway) and leave p Once implemented new payment
   var isDisabledWowPoints = function isDisabledWowPoints(paymethod) {
     return paymethod.gateway === 'wow_rewards' && (wowPoints.loading || wowPoints.error || (wowPoints === null || wowPoints === void 0 ? void 0 : wowPoints.points) < (cart === null || cart === void 0 ? void 0 : cart.total));
   };
@@ -215,12 +215,13 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
           business_id: props === null || props === void 0 ? void 0 : props.businessId,
           coupon: null
         });
-      } else {
-        removeOffer({
-          business_id: props === null || props === void 0 ? void 0 : props.businessId,
-          offer_id: cart === null || cart === void 0 ? void 0 : cart.offers[0].id
-        });
       }
+      // else {
+      //   removeOffer({
+      //     business_id: props?.businessId,
+      //     offer_id: cart?.offers[0].id
+      //   })
+      // }
     }
   }, [paymethodData, paymethodSelected]);
   (0, _react.useEffect)(function () {
