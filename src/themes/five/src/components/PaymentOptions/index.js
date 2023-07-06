@@ -126,7 +126,7 @@ const PaymentOptionsUI = (props) => {
   const excludePaymethods = hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash']
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
-  const supportedMethods = paymethodsList.paymethods.filter(p => (isHideCash || hasCateringProducts?.result) ? !excludePaymethods.includes(p.gateway) : p)
+  const supportedMethods = paymethodsList.paymethods.filter(p => (isHideCash || hasCateringProducts?.result) ? !excludePaymethods.includes(p.gateway) : !['openpay_mastercard'].includes(p.gateway)) // remove !['openpay_mastercard'].includes(p.gateway) and leave p Once implemented new payment
   const isDisabledWowPoints = (paymethod) => paymethod.gateway === 'wow_rewards' && (wowPoints.loading || wowPoints.error || wowPoints?.points < cart?.total)
   const handlePaymentMethodClick = (paymethod) => {
     if (cart?.balance > 0) {
@@ -189,12 +189,13 @@ const PaymentOptionsUI = (props) => {
           business_id: props?.businessId,
           coupon: null
         })
-      } else {
-        removeOffer({
-          business_id: props?.businessId,
-          offer_id: cart?.offers[0].id
-        })
       }
+      // else {
+      //   removeOffer({
+      //     business_id: props?.businessId,
+      //     offer_id: cart?.offers[0].id
+      //   })
+      // }
     }
   }, [paymethodData, paymethodSelected])
 
