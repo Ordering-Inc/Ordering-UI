@@ -96,7 +96,7 @@ const BusinessesListingUI = (props) => {
   const hidePreviousOrders = theme?.business_listing_view?.components?.previous_orders_block?.hidden
   const hideHighestBusiness = theme?.business_listing_view?.components?.highest_rated_business_block?.hidden
   const hideSearchSection = hideCities && hideSearch && hideFilter
-  const isAllCategoriesHidden = theme?.business_listing_view?.components?.categories?.hidden
+  const isAllCategoriesHidden = theme?.business_listing_view?.components?.categories?.hidden || props?.franchiseId
   const businessesIds = businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
   const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
