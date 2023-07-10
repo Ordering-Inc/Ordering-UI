@@ -52,6 +52,7 @@ import { getDistance, getCateringValues } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { SearchBar } from '../SearchBar'
 import { Button } from '../../styles/Buttons'
+import { WebsocketStatus } from '../WebsocketStatus'
 
 export const Header = (props) => {
   const {
@@ -227,7 +228,7 @@ export const Header = (props) => {
 
   return (
     <HeaderContainer isChew={isChew}>
-      <InnerHeader>
+      <InnerHeader auth={auth}>
         <LeftSide>
           <LeftHeader id='left-side'>
             <SidebarMenu
@@ -325,8 +326,11 @@ export const Header = (props) => {
               )}
             </Menu>
           )}
+          {windowSize.width < 1200 && windowSize.width >= 480 && auth && (
+            <WebsocketStatus />
+          )}
         </LeftSide>
-        {windowSize.width > 1200 && window.location.pathname === '/search' && (
+        {windowSize.width >= 1200 && window.location.pathname === '/search' && (
           <HeaderSearchMode>
             <SearchBar
               lazyLoad
@@ -340,9 +344,12 @@ export const Header = (props) => {
             />
           </HeaderSearchMode>
         )}
+        {windowSize.width >= 1200 && auth && (
+          <WebsocketStatus />
+        )}
         {onlineStatus && (
           <RightHeader id='right-side'>
-            <Menu isCustomerMode={isCustomerMode}>
+            <Menu isCustomerMode={isCustomerMode} auth={auth}>
               {
                 !auth && windowSize.width > 920 && (
                   <>

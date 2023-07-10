@@ -22,7 +22,7 @@ export const InnerHeader = styled.div`
     justify-content: flex-start;
   }
   #right-side {
-    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : '40%'};
+    width: ${({ theme, auth }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : auth ? '220px' : '40%'};
     justify-content: flex-end;
   }
   #center-side {
@@ -34,19 +34,19 @@ export const InnerHeader = styled.div`
       width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '30%' : 'initial'};
     }
     #center-side {
-      width: calc(100% - 60px);
+      width: ${({ theme, auth }) => theme?.header?.components?.layout?.type === 'starbucks' ? 'calc(60% - 60px)' : auth ? 'calc(60% - 100px)' : 'calc(50% - 60px)'} ;
     }
   }
 
   @media (min-width: 1024px) {
     #center-side {
-      width: calc(100% - 140px);
+      width: ${({ auth }) => auth ? 'calc(70% - 140px)' : 'calc(100% - 140px)'};
     }
   }
 
   @media (min-width: 1200px) {
     #center-side {
-      width: calc(70% - 200px);
+      width: ${({ auth }) => auth ? 'calc(70% - 200px)' : 'calc(100% - 200px)'};
     }
   }
 
@@ -74,7 +74,7 @@ export const LogoHeader = styled.div`
 
     @media (min-width: 769px) {
       ${({ theme }) =>
-      ['center', 'right']?.includes(theme?.header?.components?.logo?.components?.layout?.position) && css`
+    ['center', 'right']?.includes(theme?.header?.components?.logo?.components?.layout?.position) && css`
         margin-right: 30px;
       `};
       width: ${props => props.imgW ?? '150px'};
@@ -175,7 +175,7 @@ export const Menu = styled.div`
 
     @media (min-width: 1200px) {
       padding: 0 30px;
-      margin-left: 50px;
+      margin-left: 30px;
     }
 
     @media (min-width: 1500px) {
@@ -488,20 +488,22 @@ export const HeaderSearchMode = styled.div`
   display: flex;
   justify-content: center;
   width: 300px;
+  margin-right: 15px;
   input {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  @media (min-width: 1400px){
-    width: 350px;
-  }
+
   @media (min-width: 1200px){
-    width: 300px;
+    width: 200px;
     div {
       > span {
         padding: 7px 0;
       }
     }
+  }
+  @media (min-width: 1400px){
+    width: 230px;
   }
 `
 
@@ -511,6 +513,9 @@ export const LeftSide = styled.div`
   @media (min-width: 769px){
     flex-direction: ${({ theme }) =>
     ['center', 'right']?.includes(theme?.header?.components?.logo?.components?.layout?.position) ? 'row-reverse' : 'row'};
-    width: 62%;
+    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? '62%' : '75%'};
+  }
+  @media (min-width: 1200px){
+    width: 50%;
   }
 `
