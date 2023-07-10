@@ -365,7 +365,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     values: validationFields === null || validationFields === void 0 || (_validationFields$fie7 = validationFields.fields) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.checkout
   }).map(function (field) {
     var _ref3, _formState$changes$fi, _ref4, _formState$changes$fi2;
-    return showField && showField(field.code) && showFieldWithTheme(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+    return (showField && showField(field.code) && showFieldWithTheme(field.code) || (user === null || user === void 0 ? void 0 : user.guest_id)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
     }, field.code === 'email' ? (requiredFields && requiredFields.includes(field.code) || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
@@ -408,7 +408,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     value: birthdate,
     onChange: _handleChangeDate,
     name: 'birthdate'
-  })), !!showInputPhoneNumber && showCustomerCellphone && (requiredFields && requiredFields.includes('cellphone') || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  })), (!(user !== null && user !== void 0 && user.guest_id) && !!showInputPhoneNumber || (user === null || user === void 0 ? void 0 : user.guest_id) && requiredFields.includes('cellphone')) && showCustomerCellphone && (requiredFields && requiredFields.includes('cellphone') || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
