@@ -4,19 +4,12 @@ export const Contatiner = styled.div`
   display: flex;
   align-items: center;
   font-size: 14px;
-  max-width: 200px;
-  width: 200px;
   > button {
     height: 41px;
   }
-  
-  @media (min-width: 576px) {
-    ${props => props.theme?.rtl ? css`
-      margin-left: 20px;
-    ` : css`
-      margin-right: 20px;
-    `}
-  }
+  justify-content: flex-end;
+  margin-right: 10px;
+  margin-bottom: 10px;
 `
 
 export const StatusContainer = styled.div`
@@ -76,7 +69,7 @@ export const InfoWrapper = styled.div`
 
 export const InfoContent = styled.div`
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   z-index: 999;
   background: ${props => props.theme.colors.backgroundInfo};
   border: 1px solid ${props => props.theme.colors.primary};
@@ -91,12 +84,12 @@ export const InfoContent = styled.div`
   visibility: hidden;
   opacity: 0;
   /* display: none; */
-  right: 0px;
   color: ${props => props.theme?.colors?.darkTextColor};
-  ${props => props.theme.rtl && css`
-    left: 0px;
-    right: initial;
-  `}
+  left: -100px;
+    ${props => props.theme.rtl && css`
+      right: -100px;
+      left: initial;
+    `}
 
   a {
     color: ${props => props.theme.colors.primary};
@@ -124,15 +117,13 @@ export const InfoContent = styled.div`
 
   @media (min-width: 993px) {
     min-width: 535px;
-  }
-  
-  @media (min-width: 1200px){
-    left: -100px;
+    left: -330px;
     ${props => props.theme.rtl && css`
-      right: -100px;
+      right: -330px;
       left: initial;
     `}
   }
+
 `
 export const DetailContainer = styled.div`
   margin-top: 10px;
@@ -185,11 +176,9 @@ export const ButtonsContainer = styled.div`
 export const ButtonWrapper = styled.div`
   button{
     height: 41px;
-    width: 120px;
-  }
-  @media (min-width: 1200px){
-    button {
       width: 175px;
-    }
+      width: 175px;
+    width: 175px;
   }
+
 `
