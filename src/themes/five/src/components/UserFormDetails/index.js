@@ -330,7 +330,7 @@ export const UserFormDetailsUI = (props) => {
                 <BeforeMidComponents key={i} {...props} />))
             }
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
-              showField && showField(field.code) && showFieldWithTheme(field.code) && (
+              ((showField && showField(field.code) && showFieldWithTheme(field.code)) || user?.guest_id) && (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
                     ((requiredFields && requiredFields.includes(field.code)) || !requiredFields) && (
@@ -391,11 +391,11 @@ export const UserFormDetailsUI = (props) => {
                   onFocus={() => setOpenCalendar(true)}
                 />
                 {openCalendar && (
-                <DatePickerUI value={birthdate} onChange={_handleChangeDate} name={'birthdate'}/>
+                  <DatePickerUI value={birthdate} onChange={_handleChangeDate} name={'birthdate'}/>
                 )}
               </InputPhoneNumberWrapper>
             )}
-            {!!showInputPhoneNumber && showCustomerCellphone && ((requiredFields && requiredFields.includes('cellphone')) || !requiredFields) && (
+            {((!user?.guest_id && !!showInputPhoneNumber) || (user?.guest_id && requiredFields.includes('cellphone'))) && showCustomerCellphone && ((requiredFields && requiredFields.includes('cellphone')) || !requiredFields) && (
               <InputPhoneNumberWrapper>
                 <p>{t('PHONE', 'Phone')}</p>
                 <InputPhoneNumber
