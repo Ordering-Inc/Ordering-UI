@@ -8,6 +8,7 @@ import {
   useValidationFields,
   useConfig,
   useSite,
+  useSession,
   useCustomer
 } from 'ordering-components'
 import { Button } from '../../styles/Buttons'
@@ -73,13 +74,16 @@ const CartUI = (props) => {
     hideCouponInput,
     businessConfigs,
     loyaltyRewardRate,
-    isCustomerMode
+    isCustomerMode,
+    guestCheckoutComment,
+    guestCheckoutCupon
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
+  const [{ user: loginUser }] = useSession()
   const [{ parsePrice, parseNumber, parseDate }] = useUtils()
   const [validationFields] = useValidationFields()
   const [{ configs }] = useConfig()
@@ -107,8 +111,8 @@ const CartUI = (props) => {
   const isMultiCheckout = configs?.checkout_multi_business_enabled?.value === '1'
   const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
-  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden || !validationFields?.fields?.checkout?.comments?.enabled
-  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount_coupon?.hidden
+  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden || ((loginUser?.guest_id && guestCheckoutComment) ? !guestCheckoutComment?.enabled : !validationFields?.fields?.checkout?.comments?.enabled)
+  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount_coupon?.hidden || ((loginUser?.guest_id && guestCheckoutCupon) ? !guestCheckoutCupon?.enabled : !validationFields?.fields?.checkout?.comments?.enabled)
   const cateringTypeString = orderState?.options?.type === 7
     ? 'catering_delivery'
     : orderState?.options?.type === 8
