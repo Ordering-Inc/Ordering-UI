@@ -42,7 +42,8 @@
     "success500": "#00D27A",
     "secondaryDark": "#414954",
     "black": "#000000",
-    "white": "#FFFFFF"
+    "white": "#FFFFFF",
+    "backgroundInfo": "#F5F9FF"
   },
   "defaultLanguages": {
     "QUESTION_CLEAR_CUSTOMER": "Are you sure that you want to clear the customer?",
