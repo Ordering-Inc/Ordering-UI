@@ -120,7 +120,7 @@ import { Confirm } from './src/components/Confirm'
 import { TaxInformation } from './src/components/TaxInformation'
 import { SendGiftCard } from './src/components/GiftCard/SendGiftCard'
 import { DatePickerUI } from './src/components/DatePicker'
-
+import { WebsocketStatus } from './src/components/WebsocketStatus'
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
@@ -251,6 +251,7 @@ export {
   Confirm,
   TaxInformation,
   SendGiftCard,
+  WebsocketStatus,
   // styles
   Button,
   Input,
