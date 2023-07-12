@@ -236,6 +236,17 @@ const CheckoutUI = (props) => {
         !notFields.includes(field?.validation_field?.code) &&
         userSelected && !userSelected[field?.validation_field?.code])
       .map(item => item?.validation_field?.code)
+    const guestCheckoutCellPhone = checkoutFieldsState?.fields?.find(field => field.order_type_id === options?.type && field?.validation_field?.code === 'mobile_phone')
+
+    if (
+      userSelected &&
+        !userSelected?.cellphone &&
+        ((guestCheckoutCellPhone?.enabled &&
+          guestCheckoutCellPhone?.required) ||
+          configs?.verification_phone_required?.value === '1')
+    ) {
+      _requiredFields.push('cellphone')
+    }
     setRequiredFields(_requiredFields)
   }
 

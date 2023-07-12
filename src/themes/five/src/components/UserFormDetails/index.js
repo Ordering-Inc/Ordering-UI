@@ -131,10 +131,9 @@ export const UserFormDetailsUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
+    const requiredPhone = (user?.guest_id && requiredFields.includes('cellphone')) || (validationFields?.fields?.checkout?.cellphone?.enabled && validationFields?.fields?.checkout?.cellphone?.required)
     if (!userPhoneNumber &&
-      ((validationFields?.fields?.checkout?.cellphone?.enabled &&
-        validationFields?.fields?.checkout?.cellphone?.required) ||
-        configs?.verification_phone_required?.value === '1')
+      (requiredPhone || configs?.verification_phone_required?.value === '1')
     ) {
       setAlertState({
         open: true,
