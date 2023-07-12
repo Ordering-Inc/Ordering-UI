@@ -280,6 +280,7 @@ var CheckoutUI = function CheckoutUI(props) {
     setIsUserDetailsEdit(false);
   };
   var checkGuestValidationFields = function checkGuestValidationFields() {
+    var _checkoutFieldsState$4, _configs$verification;
     var userSelected = isCustomerMode ? customerState.user : user;
     var _requiredFields = checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields.filter(function (field) {
       var _field$validation_fie4, _field$validation_fie5;
@@ -288,10 +289,17 @@ var CheckoutUI = function CheckoutUI(props) {
       var _item$validation_fiel;
       return item === null || item === void 0 || (_item$validation_fiel = item.validation_field) === null || _item$validation_fiel === void 0 ? void 0 : _item$validation_fiel.code;
     });
+    var guestCheckoutCellPhone = checkoutFieldsState === null || checkoutFieldsState === void 0 || (_checkoutFieldsState$4 = checkoutFieldsState.fields) === null || _checkoutFieldsState$4 === void 0 ? void 0 : _checkoutFieldsState$4.find(function (field) {
+      var _field$validation_fie6;
+      return field.order_type_id === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 || (_field$validation_fie6 = field.validation_field) === null || _field$validation_fie6 === void 0 ? void 0 : _field$validation_fie6.code) === 'mobile_phone';
+    });
+    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.enabled && guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.required || (configs === null || configs === void 0 || (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
+      _requiredFields.push('cellphone');
+    }
     setRequiredFields(_requiredFields);
   };
   var checkValidationFields = function checkValidationFields() {
-    var _validationFields$fie8, _validationFields$fie9, _validationFields$fie10, _configs$verification;
+    var _validationFields$fie8, _validationFields$fie9, _validationFields$fie10, _configs$verification2;
     setUserErrors([]);
     var errors = [];
     var userSelected = isCustomerMode ? customerState.user : user;
@@ -303,7 +311,7 @@ var CheckoutUI = function CheckoutUI(props) {
         }
       }
     });
-    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (validationFields !== null && validationFields !== void 0 && (_validationFields$fie9 = validationFields.fields) !== null && _validationFields$fie9 !== void 0 && (_validationFields$fie9 = _validationFields$fie9.checkout) !== null && _validationFields$fie9 !== void 0 && (_validationFields$fie9 = _validationFields$fie9.cellphone) !== null && _validationFields$fie9 !== void 0 && _validationFields$fie9.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie10 = validationFields.fields) !== null && _validationFields$fie10 !== void 0 && (_validationFields$fie10 = _validationFields$fie10.checkout) !== null && _validationFields$fie10 !== void 0 && (_validationFields$fie10 = _validationFields$fie10.cellphone) !== null && _validationFields$fie10 !== void 0 && _validationFields$fie10.required || (configs === null || configs === void 0 || (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
+    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (validationFields !== null && validationFields !== void 0 && (_validationFields$fie9 = validationFields.fields) !== null && _validationFields$fie9 !== void 0 && (_validationFields$fie9 = _validationFields$fie9.checkout) !== null && _validationFields$fie9 !== void 0 && (_validationFields$fie9 = _validationFields$fie9.cellphone) !== null && _validationFields$fie9 !== void 0 && _validationFields$fie9.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie10 = validationFields.fields) !== null && _validationFields$fie10 !== void 0 && (_validationFields$fie10 = _validationFields$fie10.checkout) !== null && _validationFields$fie10 !== void 0 && (_validationFields$fie10 = _validationFields$fie10.cellphone) !== null && _validationFields$fie10 !== void 0 && _validationFields$fie10.required || (configs === null || configs === void 0 || (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1')) {
       _requiredFields.push('cellphone');
     }
     setRequiredFields(_requiredFields);
