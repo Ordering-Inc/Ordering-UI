@@ -14,6 +14,7 @@ export const OrdersDashboardControls = (props) => {
   const {
     selectedOrderNumber,
     filterValues,
+    franchiseId,
     handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus,
     handleOpenCustomOrderDetail
@@ -26,7 +27,10 @@ export const OrdersDashboardControls = (props) => {
       <OrderDashboardControlsContainer>
         <InnerContnet>
           <CreateCustomOrder handleOpenCustomOrderDetail={handleOpenCustomOrderDetail} />
-          <OrdersExportCSV filterValues={filterValues} />
+          <OrdersExportCSV
+            filterValues={filterValues}
+            franchiseId={franchiseId}
+          />
           {selectedOrderNumber > 0 && (
             <>
               {user?.level !== 5 && (
