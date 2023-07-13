@@ -337,6 +337,7 @@ export const RenderProductsLayout = (props) => {
                       handleUpdateProducts={handleUpdateProducts}
                       professionalSelected={professionalSelected}
                       handleChangeProfessionalSelected={handleChangeProfessionalSelected}
+                      previouslyProducts={businessState?.business?.previously_products}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
