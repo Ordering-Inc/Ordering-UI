@@ -106,7 +106,7 @@ var PriceWrapper = _styledComponents.default.div(_templateObject27 || (_template
   return isOffPrice && (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n        min-width: 64px;\n      "])));
 });
 exports.PriceWrapper = PriceWrapper;
-var QuantityContainer = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-20px, 50%);\n\n  @media (min-width: 768px) {\n    transform: translate(-50%, 50%);\n  }\n"])), function (_ref14) {
+var QuantityContainer = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 98%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-20px, 50%);\n\n  @media (min-width: 768px) {\n    transform: translate(-50%, 50%);\n  }\n"])), function (_ref14) {
   var theme = _ref14.theme;
   return theme.colors.primary;
 }, function (_ref15) {

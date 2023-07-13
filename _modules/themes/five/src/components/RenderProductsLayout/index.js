@@ -49,7 +49,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var layoutOne = 'groceries';
 var RenderProductsLayout = function RenderProductsLayout(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view5, _theme$business_view6, _theme$business_view$, _theme$business_view7, _theme$business_view8, _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _business$previously_, _business$professiona, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _business$professiona2, _business$categories2, _theme$defaultLanguag4, _theme$defaultLanguag5, _business$professiona3, _currentCart$products, _business$professiona4, _business$categories3, _theme$defaultLanguag6, _theme$defaultLanguag7, _business$previously_2, _theme$defaultLanguag8, _theme$defaultLanguag9, _currentCart$products2, _currentCart$products3;
+  var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view5, _theme$business_view6, _theme$business_view$, _theme$business_view7, _theme$business_view8, _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _business$previously_, _business$professiona, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _business$professiona2, _business$categories2, _theme$defaultLanguag4, _theme$defaultLanguag5, _businessState$busine5, _business$professiona3, _currentCart$products, _business$professiona4, _business$categories3, _theme$defaultLanguag6, _theme$defaultLanguag7, _business$previously_2, _theme$defaultLanguag8, _theme$defaultLanguag9, _currentCart$products2, _currentCart$products3;
   var errors = props.errors,
     isError = props.isError,
     isLoading = props.isLoading,
@@ -294,7 +294,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     onClickCategory: onClickCategory,
     handleUpdateProducts: handleUpdateProducts,
     professionalSelected: professionalSelected,
-    handleChangeProfessionalSelected: handleChangeProfessionalSelected
+    handleChangeProfessionalSelected: handleChangeProfessionalSelected,
+    previouslyProducts: businessState === null || businessState === void 0 || (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.previously_products
   }))), windowSize.width >= 1000 && windowSize.height >= 600 && showCartOnProductList && /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, {
     isProfessional: (business === null || business === void 0 || (_business$professiona3 = business.professionals) === null || _business$professiona3 === void 0 ? void 0 : _business$professiona3.length) > 0 && !useKioskApp
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, {
