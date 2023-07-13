@@ -777,6 +777,12 @@ Object.defineProperty(exports, "Wallets", {
     return _Wallets.Wallets;
   }
 });
+Object.defineProperty(exports, "WebsocketStatus", {
+  enumerable: true,
+  get: function get() {
+    return _WebsocketStatus.WebsocketStatus;
+  }
+});
 var _AccordionDropdown = require("./src/components/AccordionDropdown");
 var _AddressDetails = require("./src/components/AddressDetails");
 var _AddressForm = require("./src/components/AddressForm");
@@ -899,6 +905,7 @@ var _Confirm = require("./src/components/Confirm");
 var _TaxInformation = require("./src/components/TaxInformation");
 var _SendGiftCard = require("./src/components/GiftCard/SendGiftCard");
 var _DatePicker = require("./src/components/DatePicker");
+var _WebsocketStatus = require("./src/components/WebsocketStatus");
 var _Buttons = require("./src/styles/Buttons");
 var _Inputs = require("./src/styles/Inputs");
 var _Select = require("./src/styles/Select");
