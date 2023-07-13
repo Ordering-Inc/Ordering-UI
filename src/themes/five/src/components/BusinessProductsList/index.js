@@ -22,7 +22,9 @@ import {
   CategoryDescription,
   DescriptionContainer,
   SubcategorySearchContainer,
-  SubCategoriesInnerContainer
+  SubCategoriesInnerContainer,
+  PreviouslyOrderedContainer,
+  PreviouslyOrderedWrapper
 } from './styles'
 import { Button } from '../../styles/Buttons'
 
@@ -49,7 +51,8 @@ const BusinessProductsListUI = (props) => {
     onClickCategory,
     handleUpdateProducts,
     isSearchMode,
-    business
+    business,
+    previouslyProducts
   } = props
 
   const [, t] = useLanguage()
@@ -171,7 +174,37 @@ const BusinessProductsListUI = (props) => {
             ))}
           </>
         )}
-
+        {
+          !category?.id && previouslyProducts?.length > 0 && (
+            <WrapAllCategories id='previously_block'>
+              <h3>{t('ORDER_IT_AGAIN', 'Order it again')}</h3>
+              <CategoryDescription maxWidth={headerRef?.current?.clientWidth}>
+                <p>
+                  {t('ORDER_IT_AGAIN_DESC', 'Quickly add items from your past orders.')}
+                </p>
+              </CategoryDescription>
+              <PreviouslyOrderedContainer>
+                <PreviouslyOrderedWrapper>
+                  <AutoScroll scrollId='previously_ordered'>
+                    {previouslyProducts?.map((product, i) => (
+                      <SingleProductCard
+                        key={i}
+                        isSoldOut={(product.inventoried && !product.quantity)}
+                        product={product}
+                        useKioskApp={useKioskApp}
+                        businessId={businessId}
+                        onProductClick={onProductClick}
+                        isCartOnProductsList={isCartOnProductsList}
+                        handleUpdateProducts={handleUpdateProducts}
+                        productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                      />
+                    ))}
+                  </AutoScroll>
+                </PreviouslyOrderedWrapper>
+              </PreviouslyOrderedContainer>
+            </WrapAllCategories>
+          )
+        }
         {
           !category?.id && (
             <>

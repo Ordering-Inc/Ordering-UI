@@ -205,3 +205,23 @@ export const SubcategorySearchContainer = styled.div`
   flex-direction: column;
   margin-left: 30px;
 `
+
+export const PreviouslyOrderedContainer = styled.div`
+    display: flex;
+    overflow: scroll hidden;
+    ::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
+`
+
+export const PreviouslyOrderedWrapper = styled.div`
+  display: flex;
+  box-sizing: border-box;
+
+  .product-card {
+    width: 270px;
+    max-width: 270px;
+  }
+
+`
