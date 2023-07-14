@@ -30,7 +30,8 @@ const DeliveriesManagerUI = (props) => {
     handleSelectedSubOrderStatus,
     onOrderRedirect,
     numberOfOrdersByStatus,
-    numberOfOrdersBySubstatus
+    numberOfOrdersBySubstatus,
+    franchiseId
   } = props
 
   const [, t] = useLanguage()
@@ -105,6 +106,7 @@ const DeliveriesManagerUI = (props) => {
               timeStatus={timeStatus}
               numberOfOrdersByStatus={numberOfOrdersByStatus}
               numberOfOrdersBySubstatus={numberOfOrdersBySubstatus}
+              franchiseId={franchiseId}
             />
           </WrapItemView>
         </OrdersContent>
