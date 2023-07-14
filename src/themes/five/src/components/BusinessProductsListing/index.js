@@ -306,6 +306,8 @@ const BusinessProductsListingUI = (props) => {
       onChangeMetaTag && onChangeMetaTag(curProduct?.seo_title, curProduct?.seo_description, curProduct?.seo_keywords)
     } else {
       onChangeMetaTag && onChangeMetaTag(business?.slug, business?.description, business?.name)
+      updateProductModal(null)
+      setCurProduct(null)
     }
   }, [openProduct, loading, business, curProduct])
 

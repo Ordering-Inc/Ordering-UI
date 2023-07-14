@@ -163,7 +163,7 @@ const CheckoutUI = (props) => {
     !cart?.valid_maximum ||
     (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
     // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
-    validateDriverTipField ||
+    (validateDriverTipField && !isGiftCardCart) ||
     (validateCommentsCartField) ||
     validateZipcodeCard
 
@@ -687,7 +687,7 @@ const CheckoutUI = (props) => {
           </WarningText>
         )}
 
-        {validateDriverTipField &&
+        {validateDriverTipField && !isGiftCardCart &&
           (
             <WarningText>
               {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
