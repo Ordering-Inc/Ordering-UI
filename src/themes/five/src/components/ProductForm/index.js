@@ -416,6 +416,7 @@ const ProductOptionsUI = (props) => {
               observer
               observeParents
               parallax
+              slidesPerView={1}
               thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
               onSlideChange={() => handleSlideChange()}
             >
