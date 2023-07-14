@@ -232,6 +232,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   })), !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_OrdersDashboardControls.OrdersDashboardControls, {
     selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
     filterValues: filterValues,
+    franchiseId: props.franchiseId,
     handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,
     handleDeleteMultiOrders: handleDeleteMultiOrders,
     handleOpenCustomOrderDetail: function handleOpenCustomOrderDetail(id) {
@@ -245,6 +246,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     driverId: props.driverId,
     customerId: props.customerId,
     businessId: props.businessId,
+    franchiseId: props.franchiseId,
     searchValue: searchValue,
     filterValues: filterValues,
     selectedOrderIds: selectedOrderIds,
