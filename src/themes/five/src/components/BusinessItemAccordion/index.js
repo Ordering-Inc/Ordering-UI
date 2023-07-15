@@ -153,7 +153,7 @@ export const BusinessItemAccordion = (props) => {
                     />
                   </WrapperBusinessLogo>
                 )}
-                <ContentInfo className='info' isStore={isStore}>
+                <ContentInfo className='info' isStore={isStore} isLogo={!hideBusinessLogo}>
                   <h2>{business?.name}</h2>
                   {!hideBusinessTime && (
                     <TimeContainer>

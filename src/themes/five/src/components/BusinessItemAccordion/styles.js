@@ -47,6 +47,9 @@ export const ContentInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  ${({ isLogo }) => isLogo && css`
+    width: calc(100% - 80px);
+  `}
 
   > div {
     display: flex;
@@ -141,18 +144,13 @@ export const AccordionText = styled.div`
 export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
+  width: calc(100% - 30px);
 
   h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  @media (min-width: 576px) {
-    width: 75%;
-  }
-
 `
 
 export const BusinessTotal = styled.div`
@@ -186,7 +184,7 @@ export const BusinessTotal = styled.div`
 `
 
 export const BusinessActions = styled.div`
-  max-width: 30%;
+  max-width: 30px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
