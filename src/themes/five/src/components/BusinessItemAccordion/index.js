@@ -145,7 +145,7 @@ export const BusinessItemAccordion = (props) => {
               className={`accordion ${setActive}`}
               onClick={(e) => toggleAccordion(e)}
             >
-              <BusinessInfo>
+              <BusinessInfo isOtherInfo={(isClosed && !isStore) || (!isClosed && !isProducts && !isStore)}>
                 {!hideBusinessLogo && (
                   <WrapperBusinessLogo>
                     <BusinessLogo

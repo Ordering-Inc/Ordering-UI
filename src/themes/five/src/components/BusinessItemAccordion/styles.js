@@ -145,6 +145,9 @@ export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
   width: calc(100% - 30px);
+  ${({ isOtherInfo }) => isOtherInfo && css`
+    width: calc(100% - 100px);
+  `}
 
   h2 {
     overflow: hidden;
