@@ -23,7 +23,13 @@ import {
   BusinessLogosContainer,
   BusinessBanner,
   BusinessLogosWrapper,
-  AddressFormWrapper
+  AddressFormWrapper,
+  Title,
+  TypesContainer,
+  TypeButton,
+  IconTypeButton,
+  TypesWrapper,
+  AdditionalTypesContainer
 } from './styles'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { Button } from '../../../../styles/Buttons'
@@ -70,11 +76,12 @@ const BusinessesListingUI = (props) => {
     getCities,
     citiesState,
     logosLayout,
-    actualSlug
+    actualSlug,
+    orderTypes
   } = props
 
   const [, t] = useLanguage()
-  const [orderState, { changeCityFilter }] = useOrder()
+  const [orderState, { changeCityFilter, changeType }] = useOrder()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const windowSize = useWindowSize()
@@ -86,6 +93,7 @@ const BusinessesListingUI = (props) => {
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
+  const [isPickupSelected, setIsPickupSelected] = useState(orderState?.options?.type !== 1)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [favoriteIds, setFavoriteIds] = useState([])
   const allCitiesDisabled = citiesState?.cities?.every(city => !city.enabled)
@@ -105,6 +113,7 @@ const BusinessesListingUI = (props) => {
     : orderState?.options?.type === 8
       ? 'catering_pickup'
       : null
+  const configTypes = configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const cateringValues = preorderBusiness?.configs && getCateringValues(cateringTypeString, preorderBusiness?.configs)
 
@@ -173,6 +182,20 @@ const BusinessesListingUI = (props) => {
     changeCityFilter(cityId === orderState?.options?.city_id ? null : cityId)
   }
 
+  const handleChangeType = (value) => {
+    if (!orderState?.loading) {
+      changeType(value)
+      if (value === 1) {
+        setIsPickupSelected(false)
+      }
+    }
+  }
+
+  const handleChangeToPickup = () => {
+    handleChangeType(2)
+    setIsPickupSelected(true)
+  }
+
   useEffect(() => {
     if (preorderBusiness) setIsPreorder(true)
   }, [preorderBusiness])
@@ -194,6 +217,24 @@ const BusinessesListingUI = (props) => {
     const selectedCity = citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)
     if (!selectedCity || !selectedCity?.enabled) changeCityFilter(null)
   }, [citiesState, orderState?.options?.city_id])
+
+  const OrderTypesComponent = () => {
+    return (
+      <>
+        {orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value)) : orderTypes).map((item, i) => (
+          <Button
+            key={item.value}
+            onClick={() => handleChangeType(item.value)}
+            color={orderState?.options?.type === item?.value ? 'primary' : 'secondary'}
+            disabled={orderState?.loading}
+            className={orderState?.options?.type !== item?.value ? 'activated' : ''}
+          >
+            {item.text}
+          </Button>
+        ))}
+      </>
+    )
+  }
 
   if (logosLayout) {
     return (
@@ -241,6 +282,45 @@ const BusinessesListingUI = (props) => {
             />
           )}
         </BusinessBanner>
+      )}
+      {(userCustomer && orderState?.options?.address?.address && isCustomerMode) && (
+        <>
+          <Title>{t('DELIVERY_TYPE', 'Delivery Type')}</Title>
+          <TypesContainer>
+            <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={!isPickupSelected}>
+              <IconTypeButton activated={!isPickupSelected}>
+                <img
+                  src={theme?.images?.general?.deliveryIco}
+                  width={20}
+                  height={20}
+                />
+              </IconTypeButton>
+              <p>{t('DELIVERY', 'Delivery')}</p>
+            </TypeButton>
+            <TypeButton
+              disabled={orderState?.loading}
+              activated={isPickupSelected}
+              onClick={() => handleChangeToPickup()}
+            >
+              <IconTypeButton activated={isPickupSelected}>
+                <img
+                  src={theme?.images?.general?.pickupIco}
+                  width={22}
+                  height={22}
+                />
+              </IconTypeButton>
+              <p>{t('PICKUP', 'Pickup')}</p>
+            </TypeButton>
+          </TypesContainer>
+          {isPickupSelected && (
+            <TypesWrapper>
+              <p>{t('WHAT_PICKUP_YOU_NEED', 'What kind of pickup do you need?')}</p>
+              <AdditionalTypesContainer>
+                <OrderTypesComponent />
+              </AdditionalTypesContainer>
+            </TypesWrapper>
+          )}
+        </>
       )}
       <OrderProgress
         isChew={isChew}
@@ -455,28 +535,27 @@ const BusinessesListingUI = (props) => {
         open={modals.formOpen || modals.listOpen}
         width='70%'
         onClose={() => setModals({ ...modals, formOpen: false, listOpen: false })}
-        >
-          {modals.listOpen ? (
-              <AddressList
-                isModal
-                changeOrderAddressWithDefault
-                userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
-                onCancel={() => setModals({ ...modals, listOpen: false })}
-                isCustomerMode={isCustomerMode}
-              />
-            ) : (
-              <AddressFormWrapper>
-                <AddressForm
-                  useValidationFileds
-                  address={orderState?.options?.address || {}}
-                  onCancel={() => setModals({ ...modals, formOpen: false })}
-                  onSaveAddress={() => setModals({ ...modals, formOpen: false })}
-                  isCustomerMode={isCustomerMode}
-                />
-              </AddressFormWrapper>
-            )
-          }
-        </Modal>
+      >
+        {modals.listOpen ? (
+          <AddressList
+            isModal
+            changeOrderAddressWithDefault
+            userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+            onCancel={() => setModals({ ...modals, listOpen: false })}
+            isCustomerMode={isCustomerMode}
+          />
+        ) : (
+          <AddressFormWrapper>
+            <AddressForm
+              useValidationFileds
+              address={orderState?.options?.address || {}}
+              onCancel={() => setModals({ ...modals, formOpen: false })}
+              onSaveAddress={() => setModals({ ...modals, formOpen: false })}
+              isCustomerMode={isCustomerMode}
+            />
+          </AddressFormWrapper>
+        )}
+      </Modal>
 
       <Alert
         title={!mapErrors ? t('SEARCH', 'Search') : t('BUSINESSES_MAP', 'Businesses Map')}
@@ -492,10 +571,33 @@ const BusinessesListingUI = (props) => {
 }
 
 export const OriginalBusinessesListing = (props) => {
+  const [, t] = useLanguage()
   const businessListingProps = {
     ...props,
     UIComponent: BusinessesListingUI,
-    paginationSettings: { initialPage: 1, pageSize: 25, controlType: 'infinity' }
+    paginationSettings: { initialPage: 1, pageSize: 25, controlType: 'infinity' },
+    orderTypes: props.orderTypes || [
+      {
+        value: 2,
+        text: t('PICKUP', 'Pickup'),
+        description: t('ORDERTYPE_DESCRIPTION_PICKUP', 'Pickup description')
+      },
+      {
+        value: 3,
+        text: t('EAT_IN', 'Eat in'),
+        description: t('ORDERTYPE_DESCRIPTION_EATIN', 'Eat in description')
+      },
+      {
+        value: 4,
+        text: t('CURBSIDE', 'Curbside'),
+        description: t('ORDERTYPE_DESCRIPTION_CURBSIDE', 'Curbside description')
+      },
+      {
+        value: 5,
+        text: t('DRIVE_THRU', 'Drive thru'),
+        description: t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description')
+      }
+    ]
   }
   return <BusinessListController {...businessListingProps} />
 }
