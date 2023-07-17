@@ -1,9 +1,10 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const PhoneContainer = styled.div`
   width: 100%;
   height: calc(100vh - 97px);
-
+  display: flex;
   ${({ bgimage }) => bgimage && css`
     background-repeat: no-repeat, repeat;
     background-size: cover;
@@ -78,10 +79,7 @@ export const ContentWrapper = styled.div`
   justify-content: center;
   height: 100%;
   padding: 0px 20px 0px;
-
-  .basic-single {
-    margin-bottom: 15px;
-  }
+  width: 70%;
 
   .select__control {
     border-radius: 30px;
@@ -126,11 +124,14 @@ export const ContentWrapper = styled.div`
         padding: 0px 40px 0px;
       `}
     }
+    @media (min-width: 1400px){
+      width: 60%;
+    }
 `
 
 export const WrappBtn = styled.div`
   width: 50%;
-
+  margin-top: 20px;
   button {
     min-width: 130px;
     max-width: 400px;
@@ -145,7 +146,6 @@ export const Title = styled.h1`
   text-align: left;
   font: normal normal normal 80px ${props => props.theme.fonts.special?.name || 'Georgia'};
   letter-spacing: 0px;
-  color: #ffffff;
   text-shadow: 0px 3px 6px #00000029;
   opacity: 1;
   font-size: 35px;
@@ -160,7 +160,6 @@ export const Slogan = styled.p`
   text-align: left;
   font-size: 18px;
   letter-spacing: 0px;
-  color: #fff;
   opacity: 1;
   margin-bottom: 15px;
 
@@ -256,7 +255,7 @@ export const SelectContainer = styled.div`
   svg{
     position: absolute;
     top: 0;
-    left: 0;
+    left: 20px;
     transform: translate(50%, 70%);
     z-index: 10;
   }
@@ -264,7 +263,8 @@ export const SelectContainer = styled.div`
     width: 100%;
     .select__placeholder, .select__single-value, input {
       margin-left: 40px;
-      z-index: 100
+      z-index: 100;
+      bottom: -10px;
     }
     .select__menu {
       position: relative;
@@ -279,6 +279,18 @@ export const SelectContainer = styled.div`
         height: 30px;
       }
     }
+    .select__control {
+      height: 45px;
+      padding-left: 10px;
+    }
+    .select__indicator {
+      bottom: 8px;
+      position: relative;
+    }
+    input {
+      position: relative;
+      top: -5px;
+    }
   }
 `
 
@@ -286,4 +298,88 @@ export const SearchContainer = styled.div`
   position: absolute;
   top: 0;
   width: 90%;
+`
+
+const ImageWrapperStyled = styled.div`
+  width: 30%;
+  ${({ bgimage }) => bgimage && css`
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center;
+  `}
+  @media (min-width: 1400px){
+    width: 40%;
+  }
+`
+
+export const ImageWrapper = (props) => {
+  const style = {}
+  style.backgroundImage = `url(${props.bgimage})`
+
+  return (
+    <ImageWrapperStyled {...props} style={style}>
+      {props.children}
+    </ImageWrapperStyled>
+  )
+}
+
+export const TypeButton = styled.div`
+  display: flex;
+  align-items: center;
+  width: 215px;
+  height: 75px;
+  border-radius: 7.6px;
+  padding: 16px;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.10);
+  margin-right: 32px;
+  margin-bottom: 32px;
+  cursor: pointer;
+  background: ${({ activated, theme }) => activated ? theme?.colors?.primary : theme?.colors?.white};
+  p{
+    margin: 0;
+    margin-left: 33px;
+    ${({ activated, theme }) => activated && css`
+      color: ${theme?.colors?.white};
+    `}
+  }
+`
+
+export const IconTypeButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: ${({ activated, theme }) => activated ? theme?.colors?.white : '#F3F9FF'};
+  border-radius: 44px;
+`
+
+export const TypesContainer = styled.div`
+  display: flex;
+`
+
+export const AdditionalTypesContainer = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  button {
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 10px;
+    line-height: 0;
+    height: 25px;
+  }
+  .activated {
+    color: ${({ theme }) => theme?.colors?.darkTextColor}
+  }
+`
+
+export const PhoneAutocompleteContainer = styled.div`
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
 `
