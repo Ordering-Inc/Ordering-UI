@@ -4,7 +4,8 @@ import {
   PhoneAutocomplete as PhoneAutocompleteController,
   useLanguage,
   useOrder,
-  useCustomer
+  useCustomer,
+  useConfig
 } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
@@ -22,7 +23,13 @@ import {
   Slogan,
   UserEdit,
   WrappBtn,
-  SelectContainer
+  SelectContainer,
+  TypesContainer,
+  TypeButton,
+  IconTypeButton,
+  AdditionalTypesContainer,
+  PhoneAutocompleteContainer,
+  ImageWrapper
 } from './styles'
 
 import MdcCellphoneAndroid from '@meronex/icons/mdc/MdcCellphoneAndroid'
@@ -40,18 +47,22 @@ const PhoneAutocompleteUI = (props) => {
     setCustomerState,
     countryCallingCode,
     onRedirectPage,
-    urlPhone
+    urlPhone,
+    orderTypes
   } = props
-  const [orderState] = useOrder()
+  const [orderState, { changeType }] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
   const [, { deleteUserCustomer }] = useCustomer()
+  const [configState] = useConfig()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [inputValue, setInputValue] = useState(urlPhone ?? '')
   const [optSelected, setOptSelected] = useState(null)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
+  const [isPickupSelected, setIsPickupSelected] = useState(false)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
 
   const userName = userCustomer?.lastname
     ? `${userCustomer?.name} ${userCustomer?.lastname}`
@@ -73,6 +84,15 @@ const PhoneAutocompleteUI = (props) => {
       onRedirectPage && onRedirectPage('search')
     } else {
       setAlertState({ open: true, content: t('SELECT_ADDRESS_CUSTOMER', 'Please select an address for the selected customer') })
+    }
+  }
+
+  const handleChangeType = (value) => {
+    if (!orderState?.loading) {
+      changeType(value)
+      if (value === 1) {
+        setIsPickupSelected(false)
+      }
     }
   }
 
@@ -128,6 +148,11 @@ const PhoneAutocompleteUI = (props) => {
     deleteUserCustomer(true)
   }
 
+  const handleChangeToPickup = () => {
+    handleChangeType(2)
+    setIsPickupSelected(true)
+  }
+
   const optionsToSelect = customersPhones.users.map(user => {
     const obj = {}
     obj.value = user.cellphone || user.phone
@@ -141,30 +166,89 @@ const PhoneAutocompleteUI = (props) => {
     onChange({ value: urlPhone, label: urlPhone })
   }, [urlPhone, customersPhones?.users?.length])
 
+  const OrderTypesComponent = () => {
+    return (
+      <>
+        {orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value)) : orderTypes).map((item, i) => (
+          <Button
+            key={item.value}
+            onClick={() => handleChangeType(item.value)}
+            color={orderState?.options?.type === item?.value ? 'primary' : 'secondary'}
+            disabled={orderState?.loading}
+            className={orderState?.options?.type !== item?.value ? 'activated' : ''}
+          >
+            {item.text}
+          </Button>
+        ))}
+      </>
+    )
+  }
+
   return (
     <>
-      <PhoneContainer bgimage={theme.images?.general?.homeHero}>
+      <PhoneContainer>
         <ContentWrapper>
           <Title>{t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')}</Title>
-          <Slogan>{t('SUBTITLE_HOME_CALLCENTER', 'Start First by adding the customers\' phone number')}</Slogan>
+          <Slogan>{t('SUBTITLE_HOME_CALLCENTER', 'Start first by selecting a delivery type')}</Slogan>
+          {!(userCustomer && orderState?.options?.address?.address) && (
+            <TypesContainer>
+              <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={!isPickupSelected}>
+                <IconTypeButton activated={!isPickupSelected}>
+                  <img
+                    src={theme?.images?.general?.deliveryIco}
+                    width={20}
+                    height={20}
+                  />
+                </IconTypeButton>
+                <p>{t('DELIVERY', 'Delivery')}</p>
+              </TypeButton>
+              <TypeButton
+                disabled={orderState?.loading}
+                activated={isPickupSelected}
+                onClick={() => handleChangeToPickup()}
+              >
+                <IconTypeButton activated={isPickupSelected}>
+                  <img
+                    src={theme?.images?.general?.pickupIco}
+                    width={22}
+                    height={22}
+                  />
+                </IconTypeButton>
+                <p>{t('PICKUP', 'Pickup')}</p>
+              </TypeButton>
+            </TypesContainer>
+          )}
+          {isPickupSelected && (
+            <>
+              <p>{t('WHAT_PICKUP_YOU_NEED', 'What kind of pickup do you need?')}</p>
+              <AdditionalTypesContainer>
+                <OrderTypesComponent />
+              </AdditionalTypesContainer>
+            </>
+          )}
           {!userCustomer && (
-            <SelectContainer>
-              <MdcCellphoneAndroid size={26} />
-              <Select
-                isSearchable
-                isClearable
-                className='basic-single'
-                classNamePrefix='select'
-                placeholder={t('PHONE_NUMBER', 'Phone number')}
-                value={optSelected}
-                noOptionsMessage={() => inputValue?.length > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')}
-                inputValue={!optSelected ? inputValue : ''}
-                onChange={onChange}
-                onInputChange={onInputChange}
-                isLoading={customersPhones?.loading}
-                options={optionsToSelect}
-              />
-            </SelectContainer>
+            <PhoneAutocompleteContainer>
+              <h2>
+                {t('ADDING_CUSTOMERS_PHONE_NUMBER', 'Adding the customers’ phone number')}
+              </h2>
+              <SelectContainer>
+                <MdcCellphoneAndroid size={18} color={theme?.colors?.primary} />
+                <Select
+                  isSearchable
+                  isClearable
+                  className='basic-single'
+                  classNamePrefix='select'
+                  placeholder={t('PHONE_NUMBER', 'Phone number')}
+                  value={optSelected}
+                  noOptionsMessage={() => inputValue?.length > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')}
+                  inputValue={!optSelected ? inputValue : ''}
+                  onChange={onChange}
+                  onInputChange={onInputChange}
+                  isLoading={customersPhones?.loading}
+                  options={optionsToSelect}
+                />
+              </SelectContainer>
+            </PhoneAutocompleteContainer>
           )}
           <WrappBtn>
             <Button
@@ -180,6 +264,7 @@ const PhoneAutocompleteUI = (props) => {
             </Button>
           </WrappBtn>
         </ContentWrapper>
+        <ImageWrapper bgimage={theme?.images?.general?.phoneHero} />
       </PhoneContainer>
       <Modal
         open={openModal.signup}
@@ -245,9 +330,32 @@ const PhoneAutocompleteUI = (props) => {
 }
 
 export const PhoneAutocomplete = (props) => {
+  const [, t] = useLanguage()
   const phoneProps = {
     UIComponent: PhoneAutocompleteUI,
-    ...props
+    ...props,
+    orderTypes: props.orderTypes || [
+      {
+        value: 2,
+        text: t('PICKUP', 'Pickup'),
+        description: t('ORDERTYPE_DESCRIPTION_PICKUP', 'Pickup description')
+      },
+      {
+        value: 3,
+        text: t('EAT_IN', 'Eat in'),
+        description: t('ORDERTYPE_DESCRIPTION_EATIN', 'Eat in description')
+      },
+      {
+        value: 4,
+        text: t('CURBSIDE', 'Curbside'),
+        description: t('ORDERTYPE_DESCRIPTION_CURBSIDE', 'Curbside description')
+      },
+      {
+        value: 5,
+        text: t('DRIVE_THRU', 'Drive thru'),
+        description: t('ORDERTYPE_DESCRIPTION_DRIVETHRU', 'Drive Thru description')
+      }
+    ]
   }
 
   return <PhoneAutocompleteController {...phoneProps} />

@@ -38,6 +38,10 @@ import credit from './template/assets/images/credit.png'
 import businessSignUpHero from './template/assets/images/business_signup.png'
 import driverSignUpHero from './template/assets/images/driver-signup-hero.png'
 import loyaltyLevel from './template/assets/images/loyalty_level.png'
+import phoneHero from './assets/images/phone-hero-callcenter.png'
+import deliveryIco from './assets/images/delivery.svg'
+import pickupIco from './assets/images/pickup.svg'
+import phone from './assets/images/phone.svg'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -113,7 +117,11 @@ theme.images = {
     businessSignUpHero,
     driverSignUpHero,
     leftArrow,
-    rightArrow
+    rightArrow,
+    phoneHero,
+    deliveryIco,
+    pickupIco,
+    phone
   },
 
   order: {
