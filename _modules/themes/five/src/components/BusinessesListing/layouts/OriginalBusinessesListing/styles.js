@@ -98,7 +98,7 @@ var IconTypeButton = _styledComponents.default.div(_templateObject25 || (_templa
 exports.IconTypeButton = IconTypeButton;
 var TypesContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 42px 20px 0px 20px;\n"])));
 exports.TypesContainer = TypesContainer;
-var AdditionalTypesContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 20px;\n  margin-left: 20px;\n  button {\n    padding: 4px 10px;\n    border-radius: 50px;\n    font-size: 10px;\n    line-height: 0;\n    height: 25px;\n  }\n  .activated {\n    color: ", "\n  }\n"])), function (_ref6) {
+var AdditionalTypesContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n  margin-bottom: 20px;\n  margin-left: 20px;\n  button {\n    padding: 4px 10px;\n    border-radius: 50px;\n    font-size: 10px;\n    line-height: 0;\n    height: 25px;\n    margin-right: 20px;\n  }\n  .activated {\n    color: ", "\n  }\n"])), function (_ref6) {
   var _theme$colors2;
   var theme = _ref6.theme;
   return theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.darkTextColor;
