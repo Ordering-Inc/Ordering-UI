@@ -360,9 +360,8 @@ export const TypesContainer = styled.div`
 `
 
 export const AdditionalTypesContainer = styled.div`
-  width: 50%;
+  width: 60%;
   display: flex;
-  justify-content: space-between;
   margin-bottom: 20px;
   button {
     padding: 4px 10px;
@@ -370,6 +369,7 @@ export const AdditionalTypesContainer = styled.div`
     font-size: 10px;
     line-height: 0;
     height: 25px;
+    margin-right: 20px;
   }
   .activated {
     color: ${({ theme }) => theme?.colors?.darkTextColor}
