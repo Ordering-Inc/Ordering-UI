@@ -50,6 +50,8 @@ const PhoneAutocompleteUI = (props) => {
     urlPhone,
     orderTypes
   } = props
+  const allOrderTypes = [1, 2, 3, 4, 5]
+  const pickupTypes = [2, 3, 4, 5]
   const [orderState, { changeType }] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -60,10 +62,9 @@ const PhoneAutocompleteUI = (props) => {
   const [optSelected, setOptSelected] = useState(null)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
-  const [isPickupSelected, setIsPickupSelected] = useState(false)
+  const [isPickupSelected, setIsPickupSelected] = useState(pickupTypes.includes(orderState?.options?.type))
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
-  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').map(value => Number(value)) || []
-
+  const configTypes = configState?.configs?.order_types_allowed?.value.split('|').filter(value => (allOrderTypes.includes(Number(value)))).map(value => Number(value)) || []
   const userName = userCustomer?.lastname
     ? `${userCustomer?.name} ${userCustomer?.lastname}`
     : userCustomer?.name
@@ -149,7 +150,8 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const handleChangeToPickup = () => {
-    handleChangeType(2)
+    const firstEnabledPickupType = orderTypes.find(type => configTypes?.includes(type.value) && type.value !== 1)?.value
+    handleChangeType(firstEnabledPickupType)
     setIsPickupSelected(true)
   }
 
@@ -169,7 +171,7 @@ const PhoneAutocompleteUI = (props) => {
   const OrderTypesComponent = () => {
     return (
       <>
-        {orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value)) : orderTypes).map((item, i) => (
+        {orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value) && type.value !== 1) : orderTypes).map((item, i) => (
           <Button
             key={item.value}
             onClick={() => handleChangeType(item.value)}
@@ -192,30 +194,34 @@ const PhoneAutocompleteUI = (props) => {
           <Slogan>{t('SUBTITLE_HOME_CALLCENTER', 'Start first by selecting a delivery type')}</Slogan>
           {!(userCustomer && orderState?.options?.address?.address) && (
             <TypesContainer>
-              <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={!isPickupSelected}>
-                <IconTypeButton activated={!isPickupSelected}>
-                  <img
-                    src={theme?.images?.general?.deliveryIco}
-                    width={20}
-                    height={20}
-                  />
-                </IconTypeButton>
-                <p>{t('DELIVERY', 'Delivery')}</p>
-              </TypeButton>
-              <TypeButton
-                disabled={orderState?.loading}
-                activated={isPickupSelected}
-                onClick={() => handleChangeToPickup()}
-              >
-                <IconTypeButton activated={isPickupSelected}>
-                  <img
-                    src={theme?.images?.general?.pickupIco}
-                    width={22}
-                    height={22}
-                  />
-                </IconTypeButton>
-                <p>{t('PICKUP', 'Pickup')}</p>
-              </TypeButton>
+              {configTypes.includes(1) && (
+                <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={orderState?.options?.type === 1}>
+                  <IconTypeButton activated={orderState?.options?.type === 1}>
+                    <img
+                      src={theme?.images?.general?.deliveryIco}
+                      width={20}
+                      height={20}
+                    />
+                  </IconTypeButton>
+                  <p>{t('DELIVERY', 'Delivery')}</p>
+                </TypeButton>
+              )}
+              {configTypes.some(type => pickupTypes.includes(type)) && (
+                <TypeButton
+                  disabled={orderState?.loading}
+                  activated={isPickupSelected}
+                  onClick={() => handleChangeToPickup()}
+                >
+                  <IconTypeButton activated={isPickupSelected}>
+                    <img
+                      src={theme?.images?.general?.pickupIco}
+                      width={22}
+                      height={22}
+                    />
+                  </IconTypeButton>
+                  <p>{t('PICKUP', 'Pickup')}</p>
+                </TypeButton>
+              )}
             </TypesContainer>
           )}
           {isPickupSelected && (
@@ -226,43 +232,47 @@ const PhoneAutocompleteUI = (props) => {
               </AdditionalTypesContainer>
             </>
           )}
-          {!userCustomer && (
-            <PhoneAutocompleteContainer>
-              <h2>
-                {t('ADDING_CUSTOMERS_PHONE_NUMBER', 'Adding the customers’ phone number')}
-              </h2>
-              <SelectContainer>
-                <MdcCellphoneAndroid size={18} color={theme?.colors?.primary} />
-                <Select
-                  isSearchable
-                  isClearable
-                  className='basic-single'
-                  classNamePrefix='select'
-                  placeholder={t('PHONE_NUMBER', 'Phone number')}
-                  value={optSelected}
-                  noOptionsMessage={() => inputValue?.length > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')}
-                  inputValue={!optSelected ? inputValue : ''}
-                  onChange={onChange}
-                  onInputChange={onInputChange}
-                  isLoading={customersPhones?.loading}
-                  options={optionsToSelect}
-                />
-              </SelectContainer>
-            </PhoneAutocompleteContainer>
+          {configTypes.includes(orderState?.options?.type) && (
+            <>
+              {!userCustomer && (
+                <PhoneAutocompleteContainer>
+                  <h2>
+                    {t('ADDING_CUSTOMERS_PHONE_NUMBER', 'Adding the customers’ phone number')}
+                  </h2>
+                  <SelectContainer>
+                    <MdcCellphoneAndroid size={18} color={theme?.colors?.primary} />
+                    <Select
+                      isSearchable
+                      isClearable
+                      className='basic-single'
+                      classNamePrefix='select'
+                      placeholder={t('PHONE_NUMBER', 'Phone number')}
+                      value={optSelected}
+                      noOptionsMessage={() => inputValue?.length > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')}
+                      inputValue={!optSelected ? inputValue : ''}
+                      onChange={onChange}
+                      onInputChange={onInputChange}
+                      isLoading={customersPhones?.loading}
+                      options={optionsToSelect}
+                    />
+                  </SelectContainer>
+                </PhoneAutocompleteContainer>
+              )}
+              <WrappBtn>
+                <Button
+                  color={(inputValue || (userCustomer && orderState?.options?.address?.address)) ? 'primary' : 'secundary'}
+                  onMouseDown={() => !(userCustomer && orderState?.options?.address?.address) ? createNewUser() : handleFindClick()}
+                  disabled={(!inputValue && !(userCustomer && orderState?.options?.address?.address))}
+                >
+                  {
+                    !(userCustomer && orderState?.options?.address?.address)
+                      ? t('CREATE_CUSTOMER', 'Create new customer')
+                      : `${t('CONTINUE_WITH', 'Continue with')} ${userName}`
+                  }
+                </Button>
+              </WrappBtn>
+            </>
           )}
-          <WrappBtn>
-            <Button
-              color={inputValue || (userCustomer && orderState?.options?.address?.address) ? 'primary' : 'secundary'}
-              onMouseDown={() => !(userCustomer && orderState?.options?.address?.address) ? createNewUser() : handleFindClick()}
-              disabled={!inputValue && !(userCustomer && orderState?.options?.address?.address)}
-            >
-              {
-                !(userCustomer && orderState?.options?.address?.address)
-                  ? t('CREATE_CUSTOMER', 'Create new customer')
-                  : `${t('CONTINUE_WITH', 'Continue with')} ${userName}`
-              }
-            </Button>
-          </WrappBtn>
         </ContentWrapper>
         <ImageWrapper bgimage={theme?.images?.general?.phoneHero} />
       </PhoneContainer>
@@ -335,6 +345,11 @@ export const PhoneAutocomplete = (props) => {
     UIComponent: PhoneAutocompleteUI,
     ...props,
     orderTypes: props.orderTypes || [
+      {
+        value: 1,
+        text: t('DELIVERY', 'Delivery'),
+        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description')
+      },
       {
         value: 2,
         text: t('PICKUP', 'Pickup'),
