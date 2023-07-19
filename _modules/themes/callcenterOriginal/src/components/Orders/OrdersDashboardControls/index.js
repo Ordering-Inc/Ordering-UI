@@ -21,6 +21,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersDashboardControls = function OrdersDashboardControls(props) {
   var selectedOrderNumber = props.selectedOrderNumber,
     filterValues = props.filterValues,
+    franchiseId = props.franchiseId,
     handleDeleteMultiOrders = props.handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus = props.handleChangeMultiOrdersStatus,
     handleOpenCustomOrderDetail = props.handleOpenCustomOrderDetail;
@@ -30,7 +31,8 @@ var OrdersDashboardControls = function OrdersDashboardControls(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderDashboardControlsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContnet, null, /*#__PURE__*/_react.default.createElement(_CreateCustomOrder.CreateCustomOrder, {
     handleOpenCustomOrderDetail: handleOpenCustomOrderDetail
   }), /*#__PURE__*/_react.default.createElement(_OrdersExportCSV.OrdersExportCSV, {
-    filterValues: filterValues
+    filterValues: filterValues,
+    franchiseId: franchiseId
   }), selectedOrderNumber > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_OrderDelete.OrderDelete, {
     handleDeleteMultiOrders: handleDeleteMultiOrders
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusTypeSelector, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
