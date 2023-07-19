@@ -2,6 +2,7 @@ import React from 'react'
 import { useLanguage, useUtils, useEvent } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
+import BsDot from '@meronex/icons/bs/BsDot'
 
 import {
   CardContainer,
@@ -63,7 +64,9 @@ export const SingleGiftCard = (props) => {
         {isSkeleton ? (
           <p className='date'><Skeleton width={150} height={14} /></p>
         ) : (
-          <p className='date'>{parseDate(card?.created_at)}</p>
+          <p className='date'>
+            {t('ORDER_NUM', 'Order No.')} {card?.order_product?.order_id}<BsDot />{parseDate(card?.created_at)}
+          </p>
         )}
         {isSkeleton ? (
           <p className='status'><Skeleton width={80} height={14} /></p>

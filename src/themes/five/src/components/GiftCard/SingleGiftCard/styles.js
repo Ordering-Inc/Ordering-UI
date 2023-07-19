@@ -67,6 +67,8 @@ export const CardInfo = styled.div`
     color: ${props => props.theme.colors.darkGray};
     margin: 7px 0;
     line-height: 24px;
+    display: flex;
+    align-items: center;
   }
   p.status {
     font-size: 14px;
