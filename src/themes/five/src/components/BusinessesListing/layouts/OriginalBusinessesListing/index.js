@@ -115,7 +115,7 @@ const BusinessesListingUI = (props) => {
       ? 'catering_pickup'
       : null
   const configTypes = configs?.order_types_allowed?.value.split('|').filter(value => (allOrderTypes.includes(Number(value)))).map(value => Number(value)) || []
-
+  const cateringValues = preorderBusiness?.configs && getCateringValues(cateringTypeString, preorderBusiness?.configs)
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
@@ -218,6 +218,12 @@ const BusinessesListingUI = (props) => {
     if (!selectedCity || !selectedCity?.enabled) changeCityFilter(null)
   }, [citiesState, orderState?.options?.city_id])
 
+  useEffect(() => {
+    if (pickupTypes.includes(orderState?.options?.type) && isCustomerMode) {
+      setIsPickupSelected(true)
+    }
+  }, [orderState?.options?.type])
+
   const OrderTypesComponent = () => {
     return (
       <>
@@ -288,8 +294,8 @@ const BusinessesListingUI = (props) => {
           <Title>{t('DELIVERY_TYPE', 'Delivery Type')}</Title>
           <TypesContainer>
             {configTypes.includes(1) && (
-              <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={orderState?.options?.type === 1}>
-                <IconTypeButton activated={orderState?.options?.type === 1}>
+              <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={!isPickupSelected}>
+                <IconTypeButton activated={!isPickupSelected}>
                   <img
                     src={theme?.images?.general?.deliveryIco}
                     width={20}
@@ -581,6 +587,11 @@ export const OriginalBusinessesListing = (props) => {
     UIComponent: BusinessesListingUI,
     paginationSettings: { initialPage: 1, pageSize: 25, controlType: 'infinity' },
     orderTypes: props.orderTypes || [
+      {
+        value: 1,
+        text: t('DELIVERY', 'Delivery'),
+        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description'),
+      },
       {
         value: 2,
         text: t('PICKUP', 'Pickup'),
