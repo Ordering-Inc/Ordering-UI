@@ -16,7 +16,8 @@ const HorizontalGiftCardOrdersLayoutUI = (props) => {
     paginationProps,
     goToPage,
     title,
-    setIsEmpty
+    setIsEmpty,
+    scrollId
   } = props
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const HorizontalGiftCardOrdersLayoutUI = (props) => {
         : giftCards.list?.length > 0 && <h2>{title}</h2>}
       <ProductsListContainer>
         <ProductsList>
-          <AutoScroll>
+          <AutoScroll scrollId={scrollId}>
             {giftCards.loading ? (
               [...Array(10).keys()].map(i => (
                 <SingleGiftCard

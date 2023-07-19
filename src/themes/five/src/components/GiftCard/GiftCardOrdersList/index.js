@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components'
 import { HorizontalGiftCardOrdersLayout } from '../HorizontalGiftCardOrdersLayout'
-import { VerticalGiftCardOrdersLayout } from '../VerticalGiftCardOrdersLayout'
 import {
   Container,
   Divider,
@@ -20,22 +19,25 @@ export const GiftCardOrdersList = (props) => {
         title={t('PENDING', 'Pending')}
         defaultStatus='pending'
         setIsEmpty={setIsEmptyPending}
+        scrollId='pendingGifts'
       />
 
       {isEmptyPending && isEmptySent && isEmptyRedeemed && (
         <Divider />
       )}
 
-      <VerticalGiftCardOrdersLayout
+      <HorizontalGiftCardOrdersLayout
         title={t('SENT', 'Sent')}
         defaultStatus='sent'
         setIsEmpty={setIsEmptySent}
+        scrollId='sentGifts'
       />
 
-      <VerticalGiftCardOrdersLayout
+      <HorizontalGiftCardOrdersLayout
         title={t('REDEEMED', 'Redeemed')}
         defaultStatus='activated'
         setIsEmpty={setIsEmptyRedeemed}
+        scrollId='redeemedgGifts'
       />
 
       {isEmptyPending && isEmptySent && isEmptyRedeemed && (
