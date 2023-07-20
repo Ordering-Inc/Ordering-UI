@@ -37,7 +37,7 @@ import {
 import { PaymentOptionOpenPay } from '../PaymentOptionOpenPay'
 import { useTheme } from 'styled-components'
 
-const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect', 'openpay']
+const stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect', 'openpay', 'openpay_mastercard']
 const stripeRedirectOptions = [
   { name: 'Bancontact', value: 'bancontact' },
   { name: 'Alipay', value: 'alipay' },
@@ -123,10 +123,10 @@ const PaymentOptionsUI = (props) => {
 
   const stripeDirectMethods = ['stripe_direct', ...methodsPay]
 
-  const excludePaymethods = hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash']
+  const excludePaymethods = hasCateringProducts?.result ? ['cash', 'card_delivery', 'wow_rewards', '100_coupon', 'openpay_mastercard'] : ['cash', '100_coupon', 'openpay_mastercard']
 
   const popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay']
-  const supportedMethods = paymethodsList.paymethods.filter(p => (isHideCash || hasCateringProducts?.result) ? !excludePaymethods.includes(p.gateway) : !['openpay_mastercard'].includes(p.gateway)) // remove !['openpay_mastercard'].includes(p.gateway) and leave p Once implemented new payment
+  const supportedMethods = paymethodsList.paymethods.filter(p => (isHideCash || hasCateringProducts?.result) ? !excludePaymethods.includes(p.gateway) : !['openpay_mastercard', '100_coupon'].includes(p.gateway))
   const isDisabledWowPoints = (paymethod) => paymethod.gateway === 'wow_rewards' && (wowPoints.loading || wowPoints.error || wowPoints?.points < cart?.total)
   const handlePaymentMethodClick = (paymethod) => {
     if (cart?.balance > 0) {
@@ -200,8 +200,7 @@ const PaymentOptionsUI = (props) => {
   }, [paymethodData, paymethodSelected])
 
   useEffect(() => {
-    if (!hasCateringProducts?.loading && hasCateringProducts?.result && paymethodSelected?.gateway !== 'openpay' ) handlePaymentMethodClick(null)
-
+    if (!hasCateringProducts?.loading && hasCateringProducts?.result && paymethodSelected?.gateway !== 'openpay' && paymethodSelected?.gateway !== 'openpay_mastercard') handlePaymentMethodClick(null)
   }, [paymethodSelected, hasCateringProducts])
 
   return (
@@ -221,7 +220,7 @@ const PaymentOptionsUI = (props) => {
                   (!isCustomerMode || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
                     <PayCard
                       isDisabled={isDisabled || isDisabledWowPoints(paymethod)}
-                      className={`card ${paymethodSelected?.id === paymethod.id ? 'active' : ''}`}
+                      className={`card ${(paymethodSelected?.id === paymethod.id || (paymethodSelected?.gateway === 'openpay_mastercard' && paymethod.gateway === 'openpay')) ? 'active' : ''}`}
                       onClick={() => handlePaymentMethodClick(paymethod)}
                     >
                       <div>

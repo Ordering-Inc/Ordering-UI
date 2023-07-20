@@ -325,8 +325,8 @@ const CheckoutUI = (props) => {
     }
     saveAddress({ address_notes: values.addressNotes })
     refreshOrderOptions()
-    setOpenAddressNotes(false)
-    paymethodSelected?.gateway === 'openpay' && isCSVPopup ? setOpenCardCSV(true) : handlePlaceOrder()
+    setOpenAddressNotes(false);
+    ((paymethodSelected?.gateway === 'openpay' || paymethodSelected?.gateway === 'openpay_mastercard') && isCSVPopup) ? setOpenCardCSV(true) : handlePlaceOrder()
   }
   const saveAddress = async (values) => {
     try {
@@ -784,7 +784,7 @@ const CheckoutUI = (props) => {
             <Button
               color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
               disabled={isDisablePlaceOrderButton}
-              onClick={() => (paymethodSelected?.gateway === 'openpay' && isCSVPopup) ? checkAddressNote(true) : checkAddressNote()}
+              onClick={() => ((paymethodSelected?.gateway === 'openpay' || paymethodSelected?.gateway === 'openpay_mastercard') && isCSVPopup) ? checkAddressNote(true) : checkAddressNote()}
             >
               {!cart?.valid_maximum ? (
                 `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
