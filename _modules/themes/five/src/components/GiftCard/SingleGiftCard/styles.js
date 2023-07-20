@@ -32,7 +32,7 @@ var CardLogo = function CardLogo(props) {
   }), props.children);
 };
 exports.CardLogo = CardLogo;
-var CardInfo = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  ", "\n\n  flex: 1;\n  > div {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    font-size: 16px;\n    font-weight: 600;\n    span.name {\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n    }\n  }\n  \n  p.date {\n    font-size: 14px;\n    color: ", ";\n    margin: 7px 0;\n    line-height: 24px;\n  }\n  p.status {\n    font-size: 14px;\n    line-height: 24px;\n    color: ", ";\n    margin: 0;\n  }\n"])), function (props) {
+var CardInfo = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  ", "\n\n  flex: 1;\n  > div {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    font-size: 16px;\n    font-weight: 600;\n    span.name {\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n    }\n  }\n  \n  p.date {\n    font-size: 14px;\n    color: ", ";\n    margin: 7px 0;\n    line-height: 24px;\n    display: flex;\n    align-items: center;\n  }\n  p.status {\n    font-size: 14px;\n    line-height: 24px;\n    color: ", ";\n    margin: 0;\n  }\n"])), function (props) {
   var _props$theme;
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n  "])));
 }, function (props) {

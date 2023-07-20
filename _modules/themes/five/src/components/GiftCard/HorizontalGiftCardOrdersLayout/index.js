@@ -32,7 +32,8 @@ var HorizontalGiftCardOrdersLayoutUI = function HorizontalGiftCardOrdersLayoutUI
     paginationProps = props.paginationProps,
     goToPage = props.goToPage,
     title = props.title,
-    setIsEmpty = props.setIsEmpty;
+    setIsEmpty = props.setIsEmpty,
+    scrollId = props.scrollId;
   (0, _react.useEffect)(function () {
     var _giftCards$list;
     if (giftCards.loading) return;
@@ -41,7 +42,9 @@ var HorizontalGiftCardOrdersLayoutUI = function HorizontalGiftCardOrdersLayoutUI
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, giftCards.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
     height: 24
-  }) : ((_giftCards$list2 = giftCards.list) === null || _giftCards$list2 === void 0 ? void 0 : _giftCards$list2.length) > 0 && /*#__PURE__*/_react.default.createElement("h2", null, title), /*#__PURE__*/_react.default.createElement(_styles.ProductsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsList, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, null, giftCards.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  }) : ((_giftCards$list2 = giftCards.list) === null || _giftCards$list2 === void 0 ? void 0 : _giftCards$list2.length) > 0 && /*#__PURE__*/_react.default.createElement("h2", null, title), /*#__PURE__*/_react.default.createElement(_styles.ProductsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsList, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+    scrollId: scrollId
+  }, giftCards.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleGiftCard.SingleGiftCard, {
       isSkeleton: true,
       key: i

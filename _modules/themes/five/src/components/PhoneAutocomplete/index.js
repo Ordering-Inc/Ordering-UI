@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _orderState$options, _configState$configs, _customersPhones$user2, _orderState$options5, _orderState$options6, _orderState$options7, _theme$images, _theme$images2, _orderState$options8, _theme$colors, _orderState$options9, _orderState$options11, _orderState$options12, _theme$images3, _customerState$result, _customerState$result2;
+  var _orderState$options, _configState$configs, _customersPhones$user2, _orderState$options4, _orderState$options7, _theme$images, _theme$images2, _orderState$options8, _theme$colors, _orderState$options9, _orderState$options11, _orderState$options12, _theme$images3, _customerState$result, _customerState$result2;
   var phone = props.phone,
     customerState = props.customerState,
     customersPhones = props.customersPhones,
@@ -241,30 +241,36 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       label: urlPhone
     });
   }, [urlPhone, customersPhones === null || customersPhones === void 0 || (_customersPhones$user2 = customersPhones.users) === null || _customersPhones$user2 === void 0 ? void 0 : _customersPhones$user2.length]);
+  (0, _react.useEffect)(function () {
+    var _orderState$options3;
+    if (pickupTypes.includes(orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type)) {
+      setIsPickupSelected(true);
+    }
+  }, [orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type]);
   var OrderTypesComponent = function OrderTypesComponent() {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orderTypes && (configTypes ? orderTypes.filter(function (type) {
       return (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value)) && type.value !== 1;
     }) : orderTypes).map(function (item, i) {
-      var _orderState$options3, _orderState$options4;
+      var _orderState$options5, _orderState$options6;
       return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
         key: item.value,
         onClick: function onClick() {
           return handleChangeType(item.value);
         },
-        color: (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === (item === null || item === void 0 ? void 0 : item.value) ? 'primary' : 'secondary',
+        color: (orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type) === (item === null || item === void 0 ? void 0 : item.value) ? 'primary' : 'secondary',
         disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading,
-        className: (orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) !== (item === null || item === void 0 ? void 0 : item.value) ? 'activated' : ''
+        className: (orderState === null || orderState === void 0 || (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.type) !== (item === null || item === void 0 ? void 0 : item.value) ? 'activated' : ''
       }, item.text);
     }));
   };
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME_CALLCENTER', 'Start first by selecting a delivery type')), !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options5 = orderState.options) !== null && _orderState$options5 !== void 0 && (_orderState$options5 = _orderState$options5.address) !== null && _orderState$options5 !== void 0 && _orderState$options5.address) && /*#__PURE__*/_react.default.createElement(_styles.TypesContainer, null, configTypes.includes(1) && /*#__PURE__*/_react.default.createElement(_styles.TypeButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t('SUBTITLE_HOME_CALLCENTER', 'Start first by selecting a delivery type')), !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options7 = orderState.options) !== null && _orderState$options7 !== void 0 && (_orderState$options7 = _orderState$options7.address) !== null && _orderState$options7 !== void 0 && _orderState$options7.address) && /*#__PURE__*/_react.default.createElement(_styles.TypesContainer, null, configTypes.includes(1) && /*#__PURE__*/_react.default.createElement(_styles.TypeButton, {
     onClick: function onClick() {
       return handleChangeType(1);
     },
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading,
-    activated: (orderState === null || orderState === void 0 || (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.type) === 1
+    activated: !isPickupSelected
   }, /*#__PURE__*/_react.default.createElement(_styles.IconTypeButton, {
-    activated: (orderState === null || orderState === void 0 || (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.type) === 1
+    activated: !isPickupSelected
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.deliveryIco,
     width: 20,

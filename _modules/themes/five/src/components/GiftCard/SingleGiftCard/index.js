@@ -8,6 +8,7 @@ var _react = _interopRequireDefault(require("react"));
 var _orderingComponents = require("ordering-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _styledComponents = require("styled-components");
+var _BsDot = _interopRequireDefault(require("@meronex/icons/bs/BsDot"));
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -17,7 +18,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SingleGiftCard = function SingleGiftCard(props) {
-  var _card$order_product2, _theme$images, _card$order_product3, _card$order_product4;
+  var _card$order_product2, _theme$images, _card$order_product3, _card$order_product4, _card$order_product5;
   var card = props.card,
     isSkeleton = props.isSkeleton;
   var theme = (0, _styledComponents.useTheme)();
@@ -77,7 +78,7 @@ var SingleGiftCard = function SingleGiftCard(props) {
     height: 14
   })) : /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
-  }, parseDate(card === null || card === void 0 ? void 0 : card.created_at)), isSkeleton ? /*#__PURE__*/_react.default.createElement("p", {
+  }, t('ORDER_NUM', 'Order No.'), " ", card === null || card === void 0 || (_card$order_product5 = card.order_product) === null || _card$order_product5 === void 0 ? void 0 : _card$order_product5.order_id, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), parseDate(card === null || card === void 0 ? void 0 : card.created_at)), isSkeleton ? /*#__PURE__*/_react.default.createElement("p", {
     className: "status"
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80,
