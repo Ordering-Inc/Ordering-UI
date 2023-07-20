@@ -162,11 +162,14 @@ var BusinessItemAccordion = function BusinessItemAccordion(props) {
     onClick: function onClick(e) {
       return toggleAccordion(e);
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, !hideBusinessLogo && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
+    isOtherInfo: isClosed && !isStore || !isClosed && !isProducts && !isStore
+  }, !hideBusinessLogo && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
     bgimage: !isGiftCart ? (business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo) : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.logos) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.isotype
   })), /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, {
     className: "info",
-    isStore: isStore
+    isStore: isStore,
+    isLogo: !hideBusinessLogo
   }, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), !hideBusinessTime && /*#__PURE__*/_react.default.createElement(_styles.TimeContainer, null, (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))), /*#__PURE__*/_react.default.createElement("div", null, handleStoreRedirect && !isCartOnProductsList && !isStore && !isGiftCart && /*#__PURE__*/_react.default.createElement("span", {
     ref: businessStore,
     onClick: function onClick() {

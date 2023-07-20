@@ -108,8 +108,6 @@ const BusinessesListingUI = (props) => {
 
   const cateringValues = preorderBusiness?.configs && getCateringValues(cateringTypeString, preorderBusiness?.configs)
 
-  const cateringValues = preorderBusiness?.configs && getCateringValues(cateringTypeString, preorderBusiness?.configs)
-
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
