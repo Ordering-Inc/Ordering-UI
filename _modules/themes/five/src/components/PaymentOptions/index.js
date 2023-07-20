@@ -42,7 +42,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect', 'openpay'];
+var stripeOptions = ['stripe_direct', 'stripe', 'stripe_connect', 'openpay', 'openpay_mastercard'];
 var stripeRedirectOptions = [{
   name: 'Bancontact',
   value: 'bancontact'
@@ -146,11 +146,11 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
-  var excludePaymethods = hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? ['cash', 'card_delivery', 'wow_rewards'] : ['cash'];
+  var excludePaymethods = hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? ['cash', 'card_delivery', 'wow_rewards', '100_coupon', 'openpay_mastercard'] : ['cash', '100_coupon', 'openpay_mastercard'];
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
   var supportedMethods = paymethodsList.paymethods.filter(function (p) {
-    return isHideCash || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? !excludePaymethods.includes(p.gateway) : !['openpay_mastercard'].includes(p.gateway);
-  }); // remove !['openpay_mastercard'].includes(p.gateway) and leave p Once implemented new payment
+    return isHideCash || hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result ? !excludePaymethods.includes(p.gateway) : !['openpay_mastercard', '100_coupon'].includes(p.gateway);
+  });
   var isDisabledWowPoints = function isDisabledWowPoints(paymethod) {
     return paymethod.gateway === 'wow_rewards' && (wowPoints.loading || wowPoints.error || (wowPoints === null || wowPoints === void 0 ? void 0 : wowPoints.points) < (cart === null || cart === void 0 ? void 0 : cart.total));
   };
@@ -225,7 +225,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     }
   }, [paymethodData, paymethodSelected]);
   (0, _react.useEffect)(function () {
-    if (!(hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.loading) && hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay') handlePaymentMethodClick(null);
+    if (!(hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.loading) && hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay' && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay_mastercard') handlePaymentMethodClick(null);
   }, [paymethodSelected, hasCateringProducts]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -244,7 +244,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       key: paymethod.id
     }, (!isCustomerMode || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isDisabled: isDisabled || isDisabledWowPoints(paymethod),
-      className: "card ".concat((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id ? 'active' : ''),
+      className: "card ".concat((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'openpay_mastercard' && paymethod.gateway === 'openpay' ? 'active' : ''),
       onClick: function onClick() {
         return handlePaymentMethodClick(paymethod);
       }
