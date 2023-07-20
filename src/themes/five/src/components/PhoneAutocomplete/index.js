@@ -168,6 +168,12 @@ const PhoneAutocompleteUI = (props) => {
     onChange({ value: urlPhone, label: urlPhone })
   }, [urlPhone, customersPhones?.users?.length])
 
+  useEffect(() => {
+    if (pickupTypes.includes(orderState?.options?.type)) {
+      setIsPickupSelected(true)
+    }
+  }, [orderState?.options?.type])
+
   const OrderTypesComponent = () => {
     return (
       <>
@@ -195,8 +201,8 @@ const PhoneAutocompleteUI = (props) => {
           {!(userCustomer && orderState?.options?.address?.address) && (
             <TypesContainer>
               {configTypes.includes(1) && (
-                <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={orderState?.options?.type === 1}>
-                  <IconTypeButton activated={orderState?.options?.type === 1}>
+                <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={!isPickupSelected}>
+                  <IconTypeButton activated={!isPickupSelected}>
                     <img
                       src={theme?.images?.general?.deliveryIco}
                       width={20}
@@ -348,7 +354,7 @@ export const PhoneAutocomplete = (props) => {
       {
         value: 1,
         text: t('DELIVERY', 'Delivery'),
-        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description')
+        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description'),
       },
       {
         value: 2,
