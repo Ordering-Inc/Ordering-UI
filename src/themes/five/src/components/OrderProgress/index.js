@@ -133,7 +133,7 @@ const OrderProgressUI = (props) => {
 
 export const OrderProgress = (props) => {
   const propsToFetchBusiness = ['name', 'logo', 'slug', 'id']
-  const propsToFetch = ['cart', 'business', 'status', 'id', 'uuid', 'cart_group_id', 'business_id', 'delivery_datetime', 'delivery_datetime_utc', 'total', 'summary']
+  const propsToFetch = ['cart', 'business', 'status', 'id', 'uuid', 'cart_group_id', 'business_id', 'delivery_datetime', 'delivery_datetime_utc', 'total', 'summary', 'eta_current_status_time', 'eta_previous_status_times', 'eta_time', 'delivered_in', 'prepared_in', 'eta_drive_time']
   const orderProgressProps = {
     ...props,
     UIComponent: OrderProgressUI,
