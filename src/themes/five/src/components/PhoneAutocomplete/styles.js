@@ -80,7 +80,7 @@ export const ContentWrapper = styled.div`
   height: 100%;
   padding: 0px 20px 0px;
   width: 70%;
-
+  position: relative;
   .select__control {
     border-radius: 30px;
   }
@@ -131,13 +131,16 @@ export const ContentWrapper = styled.div`
 
 export const WrappBtn = styled.div`
   width: 50%;
-  margin-top: 20px;
+  position: relative;
   button {
+    position: absolute;
+    top: 55px;
     min-width: 130px;
     max-width: 400px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    z-index: 100;
   }
 `
 
@@ -287,6 +290,9 @@ export const SelectContainer = styled.div`
       bottom: 8px;
       position: relative;
     }
+    .select__menu{
+      top: 45px;
+    }
     input {
       position: relative;
       top: -5px;
@@ -377,9 +383,19 @@ export const AdditionalTypesContainer = styled.div`
 `
 
 export const PhoneAutocompleteContainer = styled.div`
-
+  position: relative;
   h2 {
     font-size: 20px;
     margin-bottom: 20px;
+  }
+`
+
+export const ContinueButton = styled.span`
+  position: absolute;
+  right: 35px;
+  bottom: 5px;
+  width: 
+  button {
+    cursor: pointer;
   }
 `

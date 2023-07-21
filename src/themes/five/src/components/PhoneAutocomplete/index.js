@@ -29,7 +29,8 @@ import {
   IconTypeButton,
   AdditionalTypesContainer,
   PhoneAutocompleteContainer,
-  ImageWrapper
+  ImageWrapper,
+  ContinueButton
 } from './styles'
 
 import MdcCellphoneAndroid from '@meronex/icons/mdc/MdcCellphoneAndroid'
@@ -48,7 +49,8 @@ const PhoneAutocompleteUI = (props) => {
     countryCallingCode,
     onRedirectPage,
     urlPhone,
-    orderTypes
+    orderTypes,
+    localPhoneCode
   } = props
   const allOrderTypes = [1, 2, 3, 4, 5]
   const pickupTypes = [2, 3, 4, 5]
@@ -119,9 +121,9 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const onChange = (option) => {
-    if (!option) { onChangeNumber('') }
     setOptSelected(option)
     setInputValue(option ? option?.value : '')
+    if (!option) { onChangeNumber(''); return }
     const user = customersPhones.users?.find(user => user.cellphone === option?.value || user.phone === option?.value)
     if (user) {
       setCustomerState({ ...customerState, result: user })
@@ -245,6 +247,19 @@ const PhoneAutocompleteUI = (props) => {
                   <h2>
                     {t('ADDING_CUSTOMERS_PHONE_NUMBER', 'Adding the customers’ phone number')}
                   </h2>
+                  <WrappBtn>
+                    <Button
+                      color={(inputValue || (userCustomer && orderState?.options?.address?.address)) ? 'primary' : 'secundary'}
+                      onMouseDown={() => !(userCustomer && orderState?.options?.address?.address) ? createNewUser() : handleFindClick()}
+                      disabled={(!inputValue && !(userCustomer && orderState?.options?.address?.address))}
+                    >
+                      {
+                        !(userCustomer && orderState?.options?.address?.address)
+                          ? t('CREATE_CUSTOMER', 'Create new customer')
+                          : `${t('CONTINUE_WITH', 'Continue with')} ${userName}`
+                      }
+                    </Button>
+                  </WrappBtn>
                   <SelectContainer>
                     <MdcCellphoneAndroid size={18} color={theme?.colors?.primary} />
                     <Select
@@ -261,22 +276,16 @@ const PhoneAutocompleteUI = (props) => {
                       isLoading={customersPhones?.loading}
                       options={optionsToSelect}
                     />
+                    {optSelected && (
+                      <ContinueButton>
+                        <Button onClick={() => onChange(optSelected)} color='primary'>
+                          {t('CONTINUE', 'Continue')}
+                        </Button>
+                      </ContinueButton>
+                    )}
                   </SelectContainer>
                 </PhoneAutocompleteContainer>
               )}
-              <WrappBtn>
-                <Button
-                  color={(inputValue || (userCustomer && orderState?.options?.address?.address)) ? 'primary' : 'secundary'}
-                  onMouseDown={() => !(userCustomer && orderState?.options?.address?.address) ? createNewUser() : handleFindClick()}
-                  disabled={(!inputValue && !(userCustomer && orderState?.options?.address?.address))}
-                >
-                  {
-                    !(userCustomer && orderState?.options?.address?.address)
-                      ? t('CREATE_CUSTOMER', 'Create new customer')
-                      : `${t('CONTINUE_WITH', 'Continue with')} ${userName}`
-                  }
-                </Button>
-              </WrappBtn>
             </>
           )}
         </ContentWrapper>
@@ -288,7 +297,7 @@ const PhoneAutocompleteUI = (props) => {
         onClose={() => setOpenModal({ ...openModal, signup: false })}
       >
         <SignUpForm
-          externalPhoneNumber={`${countryCallingCode} ${optSelected?.value || phone}`}
+          externalPhoneNumber={`${localPhoneCode || countryCallingCode} ${optSelected?.value || phone}`}
           saveCustomerUser={saveCustomerUser}
           fieldsNotValid={props.fieldsNotValid}
           useChekoutFileds
@@ -354,7 +363,7 @@ export const PhoneAutocomplete = (props) => {
       {
         value: 1,
         text: t('DELIVERY', 'Delivery'),
-        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description'),
+        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description')
       },
       {
         value: 2,
