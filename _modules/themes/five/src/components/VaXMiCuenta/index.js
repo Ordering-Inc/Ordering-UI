@@ -35,7 +35,7 @@ var VaXMiCuenta = function VaXMiCuenta(props) {
       onClick: function onClick() {
         return handleChangeVaXMiCuenta(value, index);
       }
-    }, value === 0 ? 'No Donar' : value));
+    }, value === 0 ? 'No Donar' : "$".concat(value)));
   }))));
 };
 exports.VaXMiCuenta = VaXMiCuenta;
