@@ -434,7 +434,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       name: field.code,
       "aria-label": field.code,
       className: "form",
-      placeholder: t(field.code.toUpperCase(), field.name),
+      placeholder: isCustomerMode ? t(field.code.toUpperCase() + '_OPTIONAL', field.name + ' (Optional)') : t(field.code.toUpperCase(), field.name),
       onChange: handleChangeInputEmail,
       ref: formMethods.register({
         required: !isCustomerMode && isRequiredField(field.code) ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
