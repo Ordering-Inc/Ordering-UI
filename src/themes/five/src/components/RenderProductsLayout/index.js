@@ -161,7 +161,7 @@ export const RenderProductsLayout = (props) => {
     <>
       {!isLoading && business?.id && (
         <WrappLayout isCartOnProductsList={isCartOnProductsList}>
-          {((!hideBusinessNearCity && !useKioskApp) || props.forceShowNearBusiness) && !isCustomLayout && (
+          {((!hideBusinessNearCity && !useKioskApp) || props.forceShowNearBusiness) && !isCustomerMode && !isCustomLayout && (
             <NearBusiness>
               <BusinessesListing
                 logosLayout
