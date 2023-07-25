@@ -66,8 +66,9 @@ export const BusinessBasicInformation = (props) => {
   const [isPreOrder, setIsPreOrder] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
 
-  const hideLogo = theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
-  const hideInfoIcon = theme?.business_view?.components?.header?.components?.business?.components?.business_info?.hidden
+  const hideLogo = theme?.business_view?.components?.header?.components?.logo?.hidden
+  const hideInfoIcon = theme?.business_view?.components?.header?.components?.business_info?.hidden
+  const hideHeader = theme?.business_view?.components?.header?.hidden
 
   const isInfoShrunken = theme?.business_view?.components?.header?.components?.business?.components?.layout?.position === 'shrunken'
   const searchLayout = theme?.business_view?.components?.product_search?.components?.layout?.type
@@ -193,7 +194,7 @@ export const BusinessBasicInformation = (props) => {
 
           />
         )}
-        {(business?.header || business?.logo || loading || isInfoShrunken) && (
+        {((business?.header || business?.logo || loading || isInfoShrunken) && !hideHeader) && (
           <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open} isChew={isChew}>
             {(!loading && !business?.open) && <h1>{t('CLOSED', 'Closed')}</h1>}
             {(!hideLogo && business?.logo && !isChew) && (
@@ -235,9 +236,11 @@ export const BusinessBasicInformation = (props) => {
                     />
                   </WrapperFloatingSearch>
                 )}
+                {!hideInfoIcon  && (
                 <BusinessMoreDetail>
                   <BsInfoCircle onClick={() => setOpenBusinessInformation(true)} />
                 </BusinessMoreDetail>
+                )}
               </>
             )}
           </BusinessContainer>
