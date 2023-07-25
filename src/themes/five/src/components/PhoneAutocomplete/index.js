@@ -363,7 +363,7 @@ export const PhoneAutocomplete = (props) => {
       {
         value: 1,
         text: t('DELIVERY', 'Delivery'),
-        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description'),
+        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description')
       },
       {
         value: 2,

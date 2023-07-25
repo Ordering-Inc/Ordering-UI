@@ -127,13 +127,19 @@ export const AddressItemActions = styled.div`
 `
 
 export const WrappNotAddresses = styled.div`
-  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 80%;
   margin: 20px auto 10px;
+
+  ${({ isCustomerMode }) => isCustomerMode ? css`
+    min-height: 200px;
+    height: 200px
+  ` : css`
+    height: 350px;
+  `}
 
   img {
     width: 200px;
@@ -218,7 +224,7 @@ export const AddressFormContainer = styled.div`
   position: sticky;
   right: 0;
   top: 0;
-  margin-top: ${({ isCustomerMode }) => isCustomerMode ? '-190px' : '0'};
+  margin-top: ${({ isCustomerMode, isOpenUserData }) => isCustomerMode && !isOpenUserData ? '-190px' : '0'};
   height: 100%;
   padding-left: 10px;
 `
