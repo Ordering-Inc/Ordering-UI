@@ -406,7 +406,7 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputPhoneNumberWrapper>
             )}
-            {!isCheckout && showCustomerPassword && !requiredFields && (
+            {!isCheckout && showCustomerPassword && !requiredFields && !isCustomerMode && (
               <InputGroup>
                 <p>{t('PASSWORD', 'Password')}</p>
                 <Input
@@ -429,7 +429,7 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputGroup>
             )}
-            {showNotifications && showCustomerPromotions && !requiredFields && (
+            {showNotifications && showCustomerPromotions && !requiredFields && !isCustomerMode && (
               <>
                 <NotificationsGroupSwitchWrapper>
                   <p>{t('MARKETING_NOTIFICATIONS', 'Marketing Notifications')}</p>
@@ -457,7 +457,7 @@ export const UserFormDetailsUI = (props) => {
                 </NotificationsGroupSwitchWrapper>
               </>
             )}
-            {showLangauges && !requiredFields && (
+            {showLangauges && !requiredFields && !isCustomerMode && (
               <>
                 <LanguageSelectorWrapper>
                   <p>{t('LANGUAGE', 'Language')}</p>
