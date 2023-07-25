@@ -408,6 +408,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       onChangeMetaTag && onChangeMetaTag(curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_title, curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_description, curProduct === null || curProduct === void 0 ? void 0 : curProduct.seo_keywords);
     } else {
       onChangeMetaTag && onChangeMetaTag(business === null || business === void 0 ? void 0 : business.slug, business === null || business === void 0 ? void 0 : business.description, business === null || business === void 0 ? void 0 : business.name);
+      updateProductModal(null);
+      setCurProduct(null);
     }
   }, [openProduct, loading, business, curProduct]);
   (0, _react.useEffect)(function () {

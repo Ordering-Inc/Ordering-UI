@@ -9,6 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _ProfileOptions = require("../../../../../components/UserProfileForm/ProfileOptions");
 var _OrdersOption = require("../OrdersOption");
+var _GiftCardOrdersList = require("../GiftCard/GiftCardOrdersList");
 var _Buttons = require("../../styles/Buttons");
 var _MdClose = _interopRequireDefault(require("@meronex/icons/ios/MdClose"));
 var _reactRouterDom = require("react-router-dom");
@@ -75,6 +76,10 @@ var MyOrders = function MyOrders(props) {
     key: 'products',
     value: t('PRODUCTS', 'Products'),
     disabled: hideProductsTab
+  }, {
+    key: 'giftCards',
+    value: t('GIFT_CARD', 'Gift card'),
+    disabled: false
   }];
   var notOrderOptions = ['business', 'products', 'professionals'];
   var allEmpty = isEmptyActive && isEmptyPast && isEmptyPreorder || (isEmptyBusinesses || (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) === 0) && hideOrders;
@@ -141,7 +146,7 @@ var MyOrders = function MyOrders(props) {
     businessOrderIds: businessOrderIds,
     setBusinessOrderIds: setBusinessOrderIds,
     onProductRedirect: onProductRedirect
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })), selectedOption === 'giftCards' && /*#__PURE__*/_react.default.createElement(_GiftCardOrdersList.GiftCardOrdersList, null)), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

@@ -439,6 +439,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     observer: true,
     observeParents: true,
     parallax: true,
+    slidesPerView: 1,
     thumbs: {
       swiper: thumbsSwiper
     },
