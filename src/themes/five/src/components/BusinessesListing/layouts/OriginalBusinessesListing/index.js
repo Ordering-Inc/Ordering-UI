@@ -282,7 +282,7 @@ const BusinessesListingUI = (props) => {
           {windowSize.width < 576 && (
             <OrderContextUI isBusinessList hideHero={(configs?.business_listing_hide_image?.value !== '1' && !isChew) && !hideHero} />
           )}
-          {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && !hideHero && (
+          {(configs?.business_listing_hide_image?.value !== '1' && !isChew) && !hideHero && !isCustomerMode && (
             <BusinessHeroImg
               bgimage={theme.images?.general?.businessHero}
               height={theme?.business_listing_view?.components?.business_hero?.style?.height}
@@ -333,13 +333,15 @@ const BusinessesListingUI = (props) => {
           )}
         </>
       )}
-      <OrderProgress
-        isChew={isChew}
-        franchiseId={props.franchiseId}
-        userCustomerId={userCustomer?.id}
-        asDashboard={isCustomerMode}
-        isCustomerMode={isCustomerMode}
-      />
+      {!isCustomerMode && (
+        <OrderProgress
+          isChew={isChew}
+          franchiseId={props.franchiseId}
+          userCustomerId={userCustomer?.id}
+          asDashboard={isCustomerMode}
+          isCustomerMode={isCustomerMode}
+        />
+      )}
       {(configs?.business_listing_hide_image?.value !== '1' && isChew) && (
         <BusinessHeroImg
           bgimage={theme.images?.general?.businessHero}
