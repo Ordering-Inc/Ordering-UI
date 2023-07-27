@@ -61,7 +61,9 @@ var Header = function Header(props) {
     searchValue = props.searchValue,
     setSearchValue = props.setSearchValue,
     businessSlug = props.businessSlug,
-    notificationState = props.notificationState;
+    notificationState = props.notificationState,
+    singleBusinessConfig = props.singleBusinessConfig;
+  var isSingleBusiness = !!(singleBusinessConfig !== null && singleBusinessConfig !== void 0 && singleBusinessConfig.isActive);
   var _useLocation = (0, _reactRouterDom.useLocation)(),
     pathname = _useLocation.pathname;
   var _useEvent = (0, _orderingComponents.useEvent)(),
@@ -464,7 +466,7 @@ var Header = function Header(props) {
     },
     cateringPreorder: !!cateringTypeString,
     isHeader: true,
-    business: pathname.includes('store') && business
+    business: pathname.includes('store') && business || isSingleBusiness
   }, cateringValues)), modalSelected === 'delivery' && /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorContent.OrderTypeSelectorContent, {
     onClose: function onClose() {
       return setModalIsOpen(false);

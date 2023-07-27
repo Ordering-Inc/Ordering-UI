@@ -175,7 +175,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     onClick: function onClick() {
       return onDeleteProduct(product);
     }
-  }))))))), product.valid ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
+  }))))))), product.valid && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
     className: "prod-price"
   }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
@@ -195,15 +195,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
     color: "#B1BCCC"
-  }))))) : /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, onDeleteProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsDelete, {
-    ref: productActionsDelete,
-    onClick: function onClick() {
-      return onDeleteProduct(product);
-    },
-    disabled: orderState.loading
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
-    color: "#B1BCCC"
-  }))), isCartProduct && !isCartPending && (product === null || product === void 0 ? void 0 : product.valid_menu) && !(product !== null && product !== void 0 && product.valid_quantity) && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, !isDisabledEdit && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
+  }))))), isCartProduct && !isCartPending && (product === null || product === void 0 ? void 0 : product.valid_menu) && !(product !== null && product !== void 0 && product.valid_quantity) && /*#__PURE__*/_react.default.createElement(_styles.ProductError, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, !isDisabledEdit && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
     onClick: function onClick() {
       return onEditProduct(product);
