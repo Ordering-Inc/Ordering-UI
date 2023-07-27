@@ -206,7 +206,7 @@ export const ProductItemAccordion = (props) => {
             )}
           </ProductInfo>
 
-          {product.valid ? (
+          {product.valid && (
             <>
               {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
                 <ProductPriceSection>
@@ -245,18 +245,6 @@ export const ProductItemAccordion = (props) => {
                 </ProductPriceSection>
               )}
             </>
-          ) : (
-            <ProductActions>
-              {onDeleteProduct && (
-                <ProductActionsDelete
-                  ref={productActionsDelete}
-                  onClick={() => onDeleteProduct(product)}
-                  disabled={orderState.loading}
-                >
-                  <Trash color='#B1BCCC' />
-                </ProductActionsDelete>
-              )}
-            </ProductActions>
           )}
 
           {isCartProduct && !isCartPending && product?.valid_menu && !product?.valid_quantity && (
