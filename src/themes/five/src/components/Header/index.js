@@ -62,9 +62,11 @@ export const Header = (props) => {
     searchValue,
     setSearchValue,
     businessSlug,
-    notificationState
+    notificationState,
+    singleBusinessConfig
   } = props
 
+  const isSingleBusiness = !!singleBusinessConfig?.isActive
   const { pathname } = useLocation()
   const [events] = useEvent()
   const [{ parseDate }] = useUtils()
@@ -508,7 +510,7 @@ export const Header = (props) => {
               onClose={() => setModalIsOpen(false)}
               cateringPreorder={!!cateringTypeString}
               isHeader
-              business={pathname.includes('store') && business}
+              business={(pathname.includes('store') && business) || isSingleBusiness}
               {...cateringValues}
             />
           )}
