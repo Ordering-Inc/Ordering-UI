@@ -65,7 +65,8 @@ const AddressListUI = (props) => {
     setIsAddressFormOpen,
     isProfile,
     isMobile,
-    onCancel
+    onCancel,
+    isOpenUserData
   } = props
 
   const [, t] = useLanguage()
@@ -190,6 +191,12 @@ const AddressListUI = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (addressList?.addresses?.length === 0 && !addressList.loading && isCustomerMode) {
+      openAddress({})
+    }
+  }, [addressList.loading, addressList?.addresses?.length])
+
   const AddressListCallcenterLayout = ({ children }) => {
     return (
       <AddressHalfContainer>
@@ -197,7 +204,7 @@ const AddressListUI = (props) => {
           {children}
         </List>
         {addressOpen && (
-          <AddressFormContainer isCustomerMode={isCustomerMode}>
+          <AddressFormContainer isCustomerMode={isCustomerMode} isOpenUserData={isOpenUserData}>
             <TitleFormContainer>
               <CloseIcon>
                 <MdClose onClick={() => handleCloseAddressForm()} />
