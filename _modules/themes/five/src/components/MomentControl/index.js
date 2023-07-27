@@ -155,7 +155,7 @@ var MomentControlUI = function MomentControlUI(props) {
     handleCheckBoxChange(isAsap && (preorderMinimumDays === 0 && preorderLeadTime === 0 || !cateringPreorder));
   }, [isAsap]);
   (0, _react.useEffect)(function () {
-    if (!pathname.includes('store') || isCart) {
+    if ((!pathname.includes('store') || isCart) && !props.business) {
       setScheduleList(null);
       return;
     }

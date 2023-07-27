@@ -414,7 +414,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
     disabled: !isEdit
-  })), !isCheckout && showCustomerPassword && !requiredFields && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  })), !isCheckout && showCustomerPassword && !requiredFields && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "password",
     className: "form",
@@ -429,7 +429,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  })), showNotifications && showCustomerPromotions && !requiredFields && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.NotificationsGroupSwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('MARKETING_NOTIFICATIONS', 'Marketing Notifications')), /*#__PURE__*/_react.default.createElement(_styles.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('EMAILS', 'Emails')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+  })), showNotifications && showCustomerPromotions && !requiredFields && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.NotificationsGroupSwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('MARKETING_NOTIFICATIONS', 'Marketing Notifications')), /*#__PURE__*/_react.default.createElement(_styles.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('EMAILS', 'Emails')), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     onChange: function onChange(value) {
       return handleEditNotifications('email', value);
     },
@@ -444,7 +444,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return handleEditNotifications('notification', value);
     },
     defaultChecked: notificationList === null || notificationList === void 0 ? void 0 : notificationList.notification
-  })))), showLangauges && !requiredFields && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  })))), showLangauges && !requiredFields && !isCustomerMode && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('LANGUAGE', 'Language')), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);
