@@ -218,8 +218,8 @@ export const Header = (props) => {
             <LogoHeader
               onClick={() => handleGoToPage({ page: orderState?.options?.address?.location && !isCustomerMode ? 'search' : 'home' })}
             >
-              <img alt='Logotype' width='170px' height='45px' src={theme?.my_products?.components?.images?.components?.logo?.components?.image || isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width='35px' height='45px' src={theme?.my_products?.components?.images?.components?.logo?.components?.image || isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype} loading='lazy' />
+              <img alt='Logotype' width='170px' height='45px' src={theme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.logotypeInvert : theme?.images?.logos?.logotype)} loading='lazy' />
+              <img alt='Isotype' width='35px' height='45px' src={theme?.my_products?.components?.images?.components?.logo?.components?.image || (isHome ? theme?.images?.logos?.isotypeInvert : theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
             {isShowOrderOptions && (
               <Menu className='left-header'>
