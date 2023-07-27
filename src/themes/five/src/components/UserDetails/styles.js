@@ -114,7 +114,4 @@ export const PhoneContainer = styled.div`
   display: flex;
   align-items: center;
   height: 30px;
-  p {
-    margin-bottom: 0;
-  }
 `
