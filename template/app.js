@@ -569,7 +569,7 @@ export const App = () => {
                       isKioskApp
                         ? <HomePage notificationState={oneSignalState} />
                         : queryIntegrationToken && queryIntegrationCode === 'spoonity'
-                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
+                          ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
                           : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                             ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
                             : singleBusinessConfig.isActive
@@ -672,7 +672,7 @@ export const App = () => {
                       isKioskApp
                         ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                         : queryIntegrationToken && queryIntegrationCode === 'spoonity'
-                          ? <QueryLoginSpoonity token={queryIntegrationToken} />
+                          ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
                           : (
                             orderStatus.loading && !orderStatus.options?.address?.location ? (
                               <SpinnerLoader />
@@ -831,53 +831,67 @@ export const App = () => {
                       )}
                   </Route>
                   <Route exact path='/store'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
+                    {queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                      ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
+                      : isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
+                      )}
                   </Route>
                   <Route exact path='/store/:business_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
+                    {queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                      ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
+                      : isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
+                      )}
                   </Route>
                   <Route exact path='/store/:business_slug/:category_slug/:product_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
+                    {queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                      ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
+                      : isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
+                      )}
                   </Route>
                   <Route exact path='/store/:category_slug/:product_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
+                    {queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                      ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
+                      : isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
+                      )}
                   </Route>
                   <Route exact path='/:business_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
+                    {queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                      ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
+                      : isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
+                      )}
                   </Route>
                   <Route exact path='/:business_slug/:category_slug/:product_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
+                    {queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                      ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
+                      : isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
+                      )}
                   </Route>
                   <Route exact path='/:business_slug/:category_slug'>
-                    {isUserVerifyRequired ? (
-                      <Redirect to='/verify' />
-                    ) : (
-                      <BusinessProductsList />
-                    )}
+                    {queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                      ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
+                      : isUserVerifyRequired ? (
+                        <Redirect to='/verify' />
+                      ) : (
+                        <BusinessProductsList />
+                      )}
                   </Route>
                   <Route path='*'>
                     <PageNotFound />
