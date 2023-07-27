@@ -2176,9 +2176,9 @@
     tslib "^2.4.1"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.53.1"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.53.1.tgz#0ffe13b5af72e6a235dcc489a8bccf687e4d8da4"
-  integrity sha512-Tf5suyN00Qq2irdUP6q2KJje1reFTN5vCrh4mi/E/gTma2by9j5jYYsbHavMaOGM51aYVbWkf6a3HOyTqWOm1A==
+  version "1.53.2"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.53.2.tgz#807034c1a18475a2d08e6b2f4df0583f3bd15f12"
+  integrity sha512-Slq9353wH0roLLpt+bKELGPuzaBRwV1SsIN2nMkYep35yudiAok4tLcKw895IogI3UllVmeve6i0l3YKmnwmHg==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics-core" "1.3.0"
@@ -3435,9 +3435,9 @@
     "@xtuc/long" "4.2.2"
 
 "@wojtekmaj/date-utils@^1.0.2":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@wojtekmaj/date-utils/-/date-utils-1.4.1.tgz#d6be1a002173d3a43590b941008ea27b432672ae"
-  integrity sha512-Fjs0KJz0//0AmlJVFx9AQmWpmxOTw4foDo4DKoswWVVjHsna4rdu+fXwid5YHNgzv/wHi9AkZCRPmHWsf890lg==
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@wojtekmaj/date-utils/-/date-utils-1.5.0.tgz#6e8e5be857f3b66d0a99876e4c2295f1009a7560"
+  integrity sha512-0mq88lCND6QiffnSDWp+TbOxzJSwy2V/3XN+HwWZ7S2n19QAgR5dy5hRVhlECXvQIq2r+VcblBu+S9V+yMcxXw==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -5712,9 +5712,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.431:
-  version "1.4.470"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.470.tgz#0e932816be8d5f2b491ad2aa449ea47db4785398"
-  integrity sha512-zZM48Lmy2FKWgqyvsX9XK+J6FfP7aCDUFLmgooLJzA7v1agCs/sxSoBpTIwDLhmbhpx9yJIxj2INig/ncjJRqg==
+  version "1.4.473"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.473.tgz#4853de13a335c70fe1f9df8d4029be54068767d1"
+  integrity sha512-aVfC8+440vGfl06l8HKKn8/PD5jRfSnLkTTD65EFvU46igbpQRri1gxSzW9/+TeUlwYzrXk1sw867T96zlyECA==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -8266,9 +8266,9 @@ levn@^0.3.0, levn@~0.3.0:
     type-check "~0.3.2"
 
 libphonenumber-js@^1.10.37, libphonenumber-js@^1.9.17, libphonenumber-js@^1.9.4:
-  version "1.10.37"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.37.tgz#185264130c9375f17d0c487a288223294579929c"
-  integrity sha512-Z10PCaOCiAxbUxLyR31DNeeNugSVP6iv/m7UrSKS5JHziEMApJtgku4e9Q69pzzSC9LnQiM09sqsGf2ticZnMw==
+  version "1.10.38"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.38.tgz#edb9c1f13796ab17a8484180ef937184784628e9"
+  integrity sha512-4NjVXVUmpZ9Zsqq6FXa2+MKI+KAI3tOqA0pxXgXGluhpj4ge5didmbWJpMBqGB3AVGv1SnEtKdGTbxjSEG1kCQ==
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
