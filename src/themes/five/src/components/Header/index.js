@@ -188,6 +188,12 @@ export const Header = (props) => {
   }
 
   const handleSuccessLogin = (user) => {
+    if (!user?.name || !user?.lastname || !user?.cellphone || !user?.email) {
+      setModalPageToShow('user_update')
+      setAuthModalOpen(true)
+      setOtpDataUser(null)
+      return
+    }
     if (user) {
       closeAuthModal()
     }
@@ -675,6 +681,26 @@ export const Header = (props) => {
                   </a>
                 }
                 isPopup
+              />
+            )}
+          </Modal>
+        )}
+        {auth && authModalOpen && (
+          <Modal
+            open={authModalOpen}
+            width='50%'
+            hideCloseDefault
+          >
+            {modalPageToShow === 'user_update' && (
+              <UserDetails
+                useSessionUser
+                // userData={customerState?.user}
+                // userId={customerState?.user?.id}
+                isUserDetailsEdit
+                isOpenUserData={isOpenUserData}
+                setIsOpenUserData={setIsOpenUserData}
+                isMissedData
+                onClose={() => closeAuthModal()}
               />
             )}
           </Modal>

@@ -42,7 +42,8 @@ export const UserFormDetailsUI = (props) => {
     setWillVerifyOtpState,
     handleChangePromotions,
     isOldLayout,
-    requiredFields
+    requiredFields,
+    isMissedData
   } = props
 
   const formMethods = useForm()
@@ -298,7 +299,7 @@ export const UserFormDetailsUI = (props) => {
                       </InputGroup>
                     )
                   ) : (
-                    ((requiredFields && requiredFields.includes(field.code)) || !requiredFields) && (
+                    ((isMissedData && ['name', 'lastname'].includes(field.code)) || (!isMissedData && ((requiredFields && requiredFields.includes(field.code)) || !requiredFields))) && (
                       <InputGroup>
                         <p>{t(field.code.toUpperCase(), field?.name)}</p>
                         <Input
@@ -336,7 +337,7 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputPhoneNumberWrapper>
             )}
-            {!isCheckout && showCustomerPassword && !requiredFields && (
+            {!isCheckout && showCustomerPassword && !requiredFields && !isMissedData && (
               <InputGroup>
                 <p>{t('PASSWORD', 'Password')}</p>
                 <Input
@@ -359,7 +360,7 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputGroup>
             )}
-            {!isCheckout && showCustomerPromotions && (
+            {!isCheckout && showCustomerPromotions && !isMissedData && (
               <PromotionsWrapper>
                 <Checkbox
                   name='promotions'
@@ -378,7 +379,7 @@ export const UserFormDetailsUI = (props) => {
                 </label>
               </PromotionsWrapper>
             )}
-            {showLangauges && !requiredFields && (
+            {showLangauges && !requiredFields && !isMissedData && (
               <>
                 <Divider />
                 <LanguageSelectorWrapper>

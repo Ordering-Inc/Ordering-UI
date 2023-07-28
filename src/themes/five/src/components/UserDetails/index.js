@@ -45,7 +45,8 @@ const UserDetailsUI = (props) => {
     verifyPhoneState,
     requiredFields,
     setFormState,
-    setIsSuccess
+    setIsSuccess,
+    isMissedData
   } = props
 
   const [, t] = useLanguage()
@@ -66,6 +67,12 @@ const UserDetailsUI = (props) => {
   useEffect(() => {
     setIsOpenUserData && setIsOpenUserData(isEdit)
   }, [isEdit])
+
+  useEffect(() => {
+    const userComplete = (userData?.name && userData?.lastname && userData?.cellphone && userData?.email)
+
+    !isEdit && !isModal && isMissedData && userComplete && onClose()
+  }, [isEdit, isMissedData, userData])
 
   useEffect(() => {
     if (verifyPhoneState?.result?.error) {
@@ -150,7 +157,7 @@ const UserDetailsUI = (props) => {
 
       {!(validationFields.loading || formState.loading || userState.loading) && (
         <Container>
-          {isModal && (
+          {isModal && !isMissedData && (
             <TitleContainer isAddressFormOpen={isAddressFormOpen && !isEdit}>
               {!requiredFields && (
                 <ModalIcon>
@@ -165,7 +172,7 @@ const UserDetailsUI = (props) => {
               {!isModal && (
                 <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
               )}
-              {cartStatus !== 2 && (
+              {cartStatus !== 2 && !isMissedData && (
                 !isEdit ? (
                   <span onClick={() => toggleIsEdit()}>{t('CHANGE', 'Change')}</span>
                 ) : (
