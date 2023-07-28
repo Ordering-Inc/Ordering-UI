@@ -234,6 +234,12 @@ var Header = function Header(props) {
     }
   };
   var handleSuccessLogin = function handleSuccessLogin(user) {
+    if (!(user !== null && user !== void 0 && user.name) || !(user !== null && user !== void 0 && user.lastname) || !(user !== null && user !== void 0 && user.cellphone) || !(user !== null && user !== void 0 && user.email)) {
+      setModalPageToShow('user_update');
+      setAuthModalOpen(true);
+      setOtpDataUser(null);
+      return;
+    }
     if (user) {
       closeAuthModal();
     }
@@ -632,6 +638,22 @@ var Header = function Header(props) {
       href: "#"
     }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.LOGIN) || 'Login')),
     isPopup: true
+  })), auth && authModalOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: authModalOpen,
+    width: "50%",
+    hideCloseDefault: true
+  }, modalPageToShow === 'user_update' && /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+    useSessionUser: true
+    // userData={customerState?.user}
+    // userId={customerState?.user?.id}
+    ,
+    isUserDetailsEdit: true,
+    isOpenUserData: isOpenUserData,
+    setIsOpenUserData: setIsOpenUserData,
+    isMissedData: true,
+    onClose: function onClose() {
+      return closeAuthModal();
+    }
   })), /*#__PURE__*/_react.default.createElement(ConfirmComponent, {
     title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.CUSTOMER) || 'Customer'),
     content: confirm.content,

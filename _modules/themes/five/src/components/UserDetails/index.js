@@ -50,7 +50,8 @@ var UserDetailsUI = function UserDetailsUI(props) {
     verifyPhoneState = props.verifyPhoneState,
     requiredFields = props.requiredFields,
     setFormState = props.setFormState,
-    setIsSuccess = props.setIsSuccess;
+    setIsSuccess = props.setIsSuccess,
+    isMissedData = props.isMissedData;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -81,6 +82,10 @@ var UserDetailsUI = function UserDetailsUI(props) {
   (0, _react.useEffect)(function () {
     setIsOpenUserData && setIsOpenUserData(isEdit);
   }, [isEdit]);
+  (0, _react.useEffect)(function () {
+    var userComplete = (userData === null || userData === void 0 ? void 0 : userData.name) && (userData === null || userData === void 0 ? void 0 : userData.lastname) && (userData === null || userData === void 0 ? void 0 : userData.cellphone) && (userData === null || userData === void 0 ? void 0 : userData.email);
+    !isEdit && !isModal && isMissedData && userComplete && onClose();
+  }, [isEdit, isMissedData, userData]);
   (0, _react.useEffect)(function () {
     var _verifyPhoneState$res;
     if (verifyPhoneState !== null && verifyPhoneState !== void 0 && (_verifyPhoneState$res = verifyPhoneState.result) !== null && _verifyPhoneState$res !== void 0 && _verifyPhoneState$res.error) {
@@ -160,7 +165,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 210,
     height: 25
-  })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
+  })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && !isMissedData && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
     isAddressFormOpen: isAddressFormOpen && !isEdit
   }, !requiredFields && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
@@ -168,7 +173,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details'))), !requiredFields && /*#__PURE__*/_react.default.createElement(_styles.Header, {
     className: "user-form"
-  }, !isModal && /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && (!isEdit ? /*#__PURE__*/_react.default.createElement("span", {
+  }, !isModal && /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_DETAILS', 'Customer Details')), cartStatus !== 2 && !isMissedData && (!isEdit ? /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return toggleIsEdit();
     }
