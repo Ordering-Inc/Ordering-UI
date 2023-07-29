@@ -206,6 +206,10 @@ export const ProductItemAccordion = (props) => {
             )}
           </ProductInfo>
 
+          {isConfirmationPage && (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
+            <IosArrowDown className={`${setRotate}`} />
+          )}
+
           {product.valid && (
             <>
               {(product?.valid || !isCartProduct) && windowSize.width > 410 && (
