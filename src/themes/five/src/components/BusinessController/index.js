@@ -174,7 +174,7 @@ const BusinessControllerUI = (props) => {
                     </span>}
                   {!hideBusinessOffer && !isCustomLayout && (configState?.configs?.preorder_status_enabled?.value === '1') && (
                     <div>
-                      {getBusinessOffer((businessOffers ?? business?.offers)) && <span>{getBusinessOffer((businessOffers ?? business?.offers)) || parsePrice(0)}</span>}
+                      {getBusinessOffer((businessOffers ?? business?.offers)) && <span>{t('DISCOUNT', 'Discount')}{' '}{getBusinessOffer((businessOffers ?? business?.offers)) || parsePrice(0)}</span>}
                       {!isBusinessOpen && <span>{t('PREORDER', 'PreOrder')}</span>}
                     </div>
                   )}
