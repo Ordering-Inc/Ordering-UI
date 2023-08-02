@@ -20,7 +20,6 @@ import {
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
-
 import {
   FormControl,
   FormActions,
@@ -33,13 +32,6 @@ import {
 
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
-
-const inputNames = [
-  { name: 'address', code: 'Address' },
-  { name: 'internal_number', code: 'Internal number' },
-  { name: 'zipcode', code: 'Zipcode' },
-  { name: 'address_notes', code: 'Address notes' }
-]
 
 const AddressFormUI = (props) => {
   const {
@@ -54,7 +46,10 @@ const AddressFormUI = (props) => {
     handleChangeInput,
     saveAddress,
     setIsEdit,
-    userCustomerSetup
+    userCustomerSetup,
+    businessesList,
+    getBusinessDeliveryZones,
+    isEnableContinueButton
   } = props
 
   const [configState] = useConfig()
@@ -79,12 +74,19 @@ const AddressFormUI = (props) => {
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
-                              configState.configs?.google_autocomplete_selection_required?.value === 'true'
+    configState.configs?.google_autocomplete_selection_required?.value === 'true'
 
   const mapErrors = {
     ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
     ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
   }
+
+  const inputNames = [
+    { name: 'address', code: 'Address' },
+    { name: 'internal_number', code: 'Internal number' },
+    { name: 'zipcode', code: 'Zipcode' },
+    { name: 'address_notes', code: 'Address notes' }
+  ]
 
   const closeAlert = () => {
     setAlertState({
@@ -231,6 +233,9 @@ const AddressFormUI = (props) => {
   }
 
   const handleChangeAddress = (address) => {
+    if (address?.address) {
+      getBusinessDeliveryZones(address?.location)
+    }
     setState({
       ...state,
       selectedFromAutocomplete: true
@@ -255,8 +260,8 @@ const AddressFormUI = (props) => {
         formMethods.setValue(
           field.name,
           formState?.changes[field.name] ||
-            (orderState?.options?.address && orderState?.options?.address[field.name]) ||
-            ''
+          (orderState?.options?.address && orderState?.options?.address[field.name]) ||
+          ''
         )
       )
       return
@@ -407,15 +412,19 @@ const AddressFormUI = (props) => {
                 </AddressWrap>
 
                 {locationChange && (addressState?.address?.location || formState?.changes?.location) && (
-                  <WrapperMap>
+                  <WrapperMap isEnableContinueButton={isEnableContinueButton}>
                     <GoogleMapsMap
+                      useLocationPin
+                      deactiveAlerts
                       apiKey={googleMapsApiKey}
                       location={locationChange}
+                      locations={businessesList?.businesses}
                       fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
                       mapControls={googleMapsControls}
                       handleChangeAddressMap={handleChangeAddress}
                       setErrors={setMapErrors}
                       maxLimitLocation={maxLimitLocation}
+                      businessZones={businessesList?.businesses?.map(business => business?.zones)}
                     />
                   </WrapperMap>
                 )}
