@@ -196,20 +196,27 @@ export const AddressHalfContainer = styled.div`
 export const List = styled.div`
   width: ${({ halfWidth }) => halfWidth ? '50%' : '100%'};
   padding-right: 10px;
-  position: sticky;
-  right: 0;
-  top: 0;
-  margin-top: 222px;
+  ${({ isEnableContinueButton, isOpenUserData }) => isEnableContinueButton || isOpenUserData ? css`
+    margin-top: 0px;
+  ` : css`
+    margin-top: 222px;
+  `} 
   button {
     width: 100%;
   }
 `
 
 export const AddressFormContainer = styled.div`
-  width: 50%;
   z-index: 10;
   height: 100%;
   padding-left: 10px;
+  ${({ width }) => css`
+    width: ${width};
+  `}
+  ${({ isEnableContinueButton }) => isEnableContinueButton && css`
+    position: relative;
+    bottom: 190px;
+  `}
 `
 
 export const CloseIcon = styled.div`
@@ -223,6 +230,7 @@ export const CloseIcon = styled.div`
 export const TitleFormContainer = styled.div`
   display: flex; 
   align-items: center;
+  margin-top: 7px;
   h1 {
     margin: auto;
     font-size: 24px;
