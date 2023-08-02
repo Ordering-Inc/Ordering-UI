@@ -101,19 +101,24 @@ export const FormControl = styled.form`
 `
 
 export const AddressWrap = styled.div`
-  width: 100%;
+  width: 50%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-
+  position: absolute;
+  bottom: 75%;
+  right: 0px;
+  padding-right: 20px;
   button {
     height: 41px;
-    right: 1px;
+    right: 25px;
     border: none;
+    width: 25px;
+    position: absolute;
+    z-index: 1000;
 
     ${props => props.theme?.rtl && css`
-      left: 1px;
+      left: 25px;
       right: initial;
     `}
 
@@ -191,8 +196,16 @@ export const AddressTagSection = styled.div`
 `
 
 export const WrapperMap = styled.div`
-  width: 100%;
-  height: 250px;
+  width: 50%;
+  position: absolute;
+  bottom: 2%;
+  right: 0;
+  padding-right: 20px;
+  ${({ isEnableContinueButton }) => isEnableContinueButton ? css`
+    height: 460px;
+  ` : css`
+    height: 480px;
+  `}
   > div {
     position: relative !important;
     width: 100% !important;

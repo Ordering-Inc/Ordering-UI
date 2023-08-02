@@ -183,6 +183,12 @@ const AddressListUI = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (isOpenUserData) {
+      handleCloseAddressForm()
+    }
+  }, [isOpenUserData])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -193,9 +199,9 @@ const AddressListUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
         <AddressHalfContainer>
-        <List halfWidth={addressOpen} isOpenUserData={isOpenUserData} isHeader={isHeader}>
+          <List halfWidth={addressOpen} isOpenUserData={isOpenUserData} isHeader={isHeader} isEnableContinueButton={isEnableContinueButton}>
             {
-              (!isPopover || !addressOpen) && (
+              (!isPopover || !addressOpen) && !isOpenUserData && (
                 <Button
                   className='add'
                   outline
@@ -228,6 +234,7 @@ const AddressListUI = (props) => {
               !addressList.error &&
               addressList?.addresses?.length > 0 &&
               typeof orderState.options?.address === 'object' &&
+              !addressOpen &&
               ((!addressOpen && isPopover) || isModal) && (
                 <AddressListUl id='list'>
                   <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
@@ -249,7 +256,7 @@ const AddressListUI = (props) => {
                         </div>
                       </div>
                       <AddressItemActions className='form'>
-                        <a className={actionStatus.loading ? 'disabled' : ''} onClick={() => openAddress(address)}>
+                        <a className={actionStatus.loading || isOpenUserData ? 'disabled' : ''} onClick={() => openAddress(address)}>
                           <Pencil />
                         </a>
                         <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
@@ -292,24 +299,29 @@ const AddressListUI = (props) => {
                 content={t('NETWORK_ERROR', 'Network error, please reload the page')}
               />
             )}
+            {!isPopover && addressOpen && (
+              <AddressFormContainer>
+                <AddressForm
+                  userId={userId}
+                  addressesList={addressList?.addresses}
+                  useValidationFileds
+                  address={curAddress}
+                  onCancel={() => handleCloseAddressForm()}
+                  onSaveAddress={handleSaveAddress}
+                  userCustomerSetup={userCustomerSetup}
+                  isEnableContinueButton={isEnableContinueButton}
+                />
+              </AddressFormContainer>
+            )}
           </List>
-          {!isPopover && addressOpen && (
-            <AddressFormContainer>
+          {addressOpen && (
+            <AddressFormContainer width='50%' isEnableContinueButton={isEnableContinueButton}>
               <TitleFormContainer>
                 <CloseIcon>
                   <MdClose onClick={() => handleCloseAddressForm()} />
                 </CloseIcon>
                 <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
               </TitleFormContainer>
-              <AddressForm
-                userId={userId}
-                addressesList={addressList?.addresses}
-                useValidationFileds
-                address={curAddress}
-                onCancel={() => handleCloseAddressForm()}
-                onSaveAddress={handleSaveAddress}
-                userCustomerSetup={userCustomerSetup}
-              />
             </AddressFormContainer>
           )}
         </AddressHalfContainer>
