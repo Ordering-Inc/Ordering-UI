@@ -416,7 +416,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       }).map(function (product) {
         return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
           key: product.id,
-          product: product
+          product: product,
+          showArrowIcon: true
         });
       }));
     }), order === null || order === void 0 ? void 0 : order.products.filter(function (product) {
@@ -424,7 +425,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }).map(function (product) {
       return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
         key: product.id,
-        product: product
+        product: product,
+        showArrowIcon: true
       });
     }));
   };

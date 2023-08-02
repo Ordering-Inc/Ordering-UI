@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _theme$viewString, _props$beforeElements, _props$beforeComponen, _product$valid, _theme$images, _theme$images2, _product$calendar_eve, _configs$format_time, _product$calendar_eve2, _configs$format_time2, _props$afterComponent, _props$afterElements;
+  var _theme$viewString, _productInfo, _productInfo2, _props$beforeElements, _props$beforeComponen, _product$valid, _theme$images, _theme$images2, _product$calendar_eve, _configs$format_time, _product$calendar_eve2, _configs$format_time2, _props$afterComponent, _props$afterElements;
   var isDisabledEdit = props.isDisabledEdit,
     isCartPending = props.isCartPending,
     isCartProduct = props.isCartProduct,
@@ -96,6 +96,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     }
     return product;
   };
+  var showArrowIcon = props.showArrowIcon && (((_productInfo = productInfo()) === null || _productInfo === void 0 || (_productInfo = _productInfo.ingredients) === null || _productInfo === void 0 ? void 0 : _productInfo.length) > 0 || ((_productInfo2 = productInfo()) === null || _productInfo2 === void 0 || (_productInfo2 = _productInfo2.options) === null || _productInfo2 === void 0 ? void 0 : _productInfo2.length) > 0 || (product === null || product === void 0 ? void 0 : product.comment));
   var toggleAccordion = function toggleAccordion(e) {
     var _productSelect$curren, _productActionsEdit$c, _productActionsDelete;
     var isActionsClick = ((_productSelect$curren = productSelect.current) === null || _productSelect$curren === void 0 ? void 0 : _productSelect$curren.contains(e.target)) || ((_productActionsEdit$c = productActionsEdit.current) === null || _productActionsEdit$c === void 0 ? void 0 : _productActionsEdit$c.contains(e.target)) || ((_productActionsDelete = productActionsDelete.current) === null || _productActionsDelete === void 0 ? void 0 : _productActionsDelete.contains(e.target));
@@ -175,7 +176,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     onClick: function onClick() {
       return onDeleteProduct(product);
     }
-  }))))))), product.valid && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
+  }))))))), showArrowIcon && /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+    className: "".concat(setRotate)
+  }), product.valid && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
     className: "prod-price"
   }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)

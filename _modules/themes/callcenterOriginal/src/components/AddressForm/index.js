@@ -35,19 +35,6 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var inputNames = [{
-  name: 'address',
-  code: 'Address'
-}, {
-  name: 'internal_number',
-  code: 'Internal number'
-}, {
-  name: 'zipcode',
-  code: 'Zipcode'
-}, {
-  name: 'address_notes',
-  code: 'Address notes'
-}];
 var AddressFormUI = function AddressFormUI(props) {
   var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _props$afterComponent, _props$afterElements;
   var addressesList = props.addressesList,
@@ -61,7 +48,10 @@ var AddressFormUI = function AddressFormUI(props) {
     handleChangeInput = props.handleChangeInput,
     saveAddress = props.saveAddress,
     setIsEdit = props.setIsEdit,
-    userCustomerSetup = props.userCustomerSetup;
+    userCustomerSetup = props.userCustomerSetup,
+    businessesList = props.businessesList,
+    getBusinessDeliveryZones = props.getBusinessDeliveryZones,
+    isEnableContinueButton = props.isEnableContinueButton;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -114,6 +104,19 @@ var AddressFormUI = function AddressFormUI(props) {
     ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
     ERROR_MAX_LIMIT_LOCATION: "Sorry, You can only set the position to ".concat(maxLimitLocation, "m")
   };
+  var inputNames = [{
+    name: 'address',
+    code: 'Address'
+  }, {
+    name: 'internal_number',
+    code: 'Internal number'
+  }, {
+    name: 'zipcode',
+    code: 'Zipcode'
+  }, {
+    name: 'address_notes',
+    code: 'Address notes'
+  }];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -303,6 +306,9 @@ var AddressFormUI = function AddressFormUI(props) {
     });
   };
   var handleChangeAddress = function handleChangeAddress(address) {
+    if (address !== null && address !== void 0 && address.address) {
+      getBusinessDeliveryZones(address === null || address === void 0 ? void 0 : address.location);
+    }
     setState(_objectSpread(_objectSpread({}, state), {}, {
       selectedFromAutocomplete: true
     }));
@@ -441,7 +447,7 @@ var AddressFormUI = function AddressFormUI(props) {
       key: i
     }, props));
   }), inputNames.map(function (field) {
-    var _configState$configs5, _addressState$address12, _formState$changes26, _ref9, _formState$changes$fi2, _formState$changes27, _addressState$address13, _ref10, _formState$changes$ad5, _formState$changes28;
+    var _configState$configs5, _addressState$address12, _formState$changes26, _businessesList$busin, _ref9, _formState$changes$fi2, _formState$changes27, _addressState$address13, _ref10, _formState$changes$ad5, _formState$changes28;
     return showField && showField(field.name) && (field.name === 'address' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
@@ -476,14 +482,22 @@ var AddressFormUI = function AddressFormUI(props) {
       onError: setMapErrors,
       IconButton: _reactBootstrapIcons.GeoAlt,
       IconLoadingButton: _CgSearchLoading.default
-    })), locationChange && ((addressState === null || addressState === void 0 || (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 || (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+    })), locationChange && ((addressState === null || addressState === void 0 || (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 || (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
+      isEnableContinueButton: isEnableContinueButton
+    }, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+      useLocationPin: true,
+      deactiveAlerts: true,
       apiKey: googleMapsApiKey,
       location: locationChange,
+      locations: businessesList === null || businessesList === void 0 ? void 0 : businessesList.businesses,
       fixedLocation: !isEditing ? firstLocationNoEdit.value : null,
       mapControls: googleMapsControls,
       handleChangeAddressMap: handleChangeAddress,
       setErrors: setMapErrors,
-      maxLimitLocation: maxLimitLocation
+      maxLimitLocation: maxLimitLocation,
+      businessZones: businessesList === null || businessesList === void 0 || (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
+        return business === null || business === void 0 ? void 0 : business.zones;
+      })
     }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, field.name !== 'address_notes' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {

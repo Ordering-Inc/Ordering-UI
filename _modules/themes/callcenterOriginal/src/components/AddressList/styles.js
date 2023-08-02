@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.WrappNotAddresses = exports.TitleFormContainer = exports.List = exports.FormActions = exports.ContinueButton = exports.CloseIcon = exports.AddressTitle = exports.AddressListUl = exports.AddressListContainer = exports.AddressItemActions = exports.AddressItem = exports.AddressHalfContainer = exports.AddressFormContainer = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -54,14 +54,24 @@ var AddressTitle = _styledComponents.default.span(_templateObject13 || (_templat
 exports.AddressTitle = AddressTitle;
 var AddressHalfContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n"])));
 exports.AddressHalfContainer = AddressHalfContainer;
-var List = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: ", ";\n  padding-right: 10px;\n  position: sticky;\n  right: 0;\n  top: 0;\n  margin-top: 222px;\n  button {\n    width: 100%;\n  }\n"])), function (_ref2) {
+var List = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: ", ";\n  padding-right: 10px;\n  ", " \n  button {\n    width: 100%;\n  }\n"])), function (_ref2) {
   var halfWidth = _ref2.halfWidth;
   return halfWidth ? '50%' : '100%';
+}, function (_ref3) {
+  var isEnableContinueButton = _ref3.isEnableContinueButton,
+    isOpenUserData = _ref3.isOpenUserData;
+  return isEnableContinueButton || isOpenUserData ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-top: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-top: 222px;\n  "])));
 });
 exports.List = List;
-var AddressFormContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: 50%;\n  z-index: 10;\n  height: 100%;\n  padding-left: 10px;\n"])));
+var AddressFormContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  z-index: 10;\n  height: 100%;\n  padding-left: 10px;\n  ", "\n  ", "\n"])), function (_ref4) {
+  var width = _ref4.width;
+  return (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    width: ", ";\n  "])), width);
+}, function (_ref5) {
+  var isEnableContinueButton = _ref5.isEnableContinueButton;
+  return isEnableContinueButton && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    position: relative;\n    bottom: 190px;\n  "])));
+});
 exports.AddressFormContainer = AddressFormContainer;
-var CloseIcon = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  svg{\n    width: 30px;\n    height: 30px;\n  }\n"])));
+var CloseIcon = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  svg{\n    width: 30px;\n    height: 30px;\n  }\n"])));
 exports.CloseIcon = CloseIcon;
-var TitleFormContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: center;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n"])));
+var TitleFormContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: center;\n  margin-top: 7px;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n"])));
 exports.TitleFormContainer = TitleFormContainer;
