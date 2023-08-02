@@ -414,6 +414,8 @@ const AddressFormUI = (props) => {
                 {locationChange && (addressState?.address?.location || formState?.changes?.location) && (
                   <WrapperMap isEnableContinueButton={isEnableContinueButton}>
                     <GoogleMapsMap
+                      useLocationPin
+                      deactiveAlerts
                       apiKey={googleMapsApiKey}
                       location={locationChange}
                       locations={businessesList?.businesses}
@@ -423,7 +425,6 @@ const AddressFormUI = (props) => {
                       setErrors={setMapErrors}
                       maxLimitLocation={maxLimitLocation}
                       businessZones={businessesList?.businesses?.map(business => business?.zones)}
-                      isCallcenterAddressMap
                     />
                   </WrapperMap>
                 )}
