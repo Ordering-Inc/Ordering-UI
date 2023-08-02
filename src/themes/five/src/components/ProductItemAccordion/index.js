@@ -44,8 +44,7 @@ export const ProductItemAccordion = (props) => {
     onEditProduct,
     isCheckout,
     isStore,
-    isConfirmationPage,
-    showArrowIcon
+    isConfirmationPage
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -82,6 +81,8 @@ export const ProductItemAccordion = (props) => {
     }
     return product
   }
+
+  const showArrowIcon = props.showArrowIcon && (productInfo()?.ingredients?.length > 0 || productInfo()?.options?.length > 0 || product?.comment)
 
   const toggleAccordion = (e) => {
     const isActionsClick = productSelect.current?.contains(e.target) || productActionsEdit.current?.contains(e.target) || productActionsDelete.current?.contains(e.target)
