@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils, WebsocketStatus as WebsocketStatusController } from 'ordering-components'
+import { useLanguage, useUtils, WebsocketStatus as WebsocketStatusController, useConfig } from 'ordering-components'
 import { InfoCircle } from 'react-bootstrap-icons'
 import { Alert } from '../../../src/components/Confirm'
 import { Modal } from '../Modal'
@@ -15,7 +15,6 @@ import {
   ButtonsContainer,
   ButtonWrapper
 } from './styles'
-import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
 const SocketStatusUI = (props) => {
   const {
@@ -28,7 +27,8 @@ const SocketStatusUI = (props) => {
   const [{ parseDate }] = useUtils()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [openModal, setOpenModal] = useState(false)
-  const windowSize = useWindowSize()
+  const [{ configs }] = useConfig()
+  const isEnabledBtn = configs?.white_label_module?.value
 
   const closeAlert = () => {
     setAlertState({
@@ -57,7 +57,7 @@ const SocketStatusUI = (props) => {
         </IconButton>
         <InfoContent>
           {t('WEBSOCKET_STATUS_APP_INFO', 'Verify the server connection by date and time using the Connection status button. Press update to refresh your app and update the status as well. Need help? Contact our Customer support team here:')}
-          <a href='https://www.ordering.co/contact-ordering' target='_blank' rel='noopener noreferrer'>{t('CUSTOMER_SUPPORT', 'Customer support')}</a>
+          {!isEnabledBtn && <a href='https://www.ordering.co/contact-ordering' target='_blank' rel='noopener noreferrer'>{t('CUSTOMER_SUPPORT', 'Customer support')}</a>}
         </InfoContent>
       </InfoWrapper>
       <ButtonWrapper>
