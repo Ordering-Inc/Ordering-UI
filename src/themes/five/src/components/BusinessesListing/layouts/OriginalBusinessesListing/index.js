@@ -56,6 +56,7 @@ import { OrdersSection } from './OrdersSection'
 import { getCateringValues } from '../../../../../../../utils'
 import { AddressList } from '../../../AddressList'
 import { AddressForm } from '../../../AddressForm'
+import { WebsocketStatus } from '../../../WebsocketStatus'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -516,6 +517,7 @@ const BusinessesListingUI = (props) => {
             ))
           )}
         </BusinessList>
+        <WebsocketStatus />
       </>
       <Modal
         open={isPreorder}
@@ -593,7 +595,7 @@ export const OriginalBusinessesListing = (props) => {
       {
         value: 1,
         text: t('DELIVERY', 'Delivery'),
-        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description'),
+        description: t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description')
       },
       {
         value: 2,
