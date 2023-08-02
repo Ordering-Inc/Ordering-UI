@@ -82,6 +82,8 @@ export const ProductItemAccordion = (props) => {
     return product
   }
 
+  const showArrowIcon = isConfirmationPage && (productInfo()?.ingredients?.length > 0 || productInfo()?.options?.length > 0 || product?.comment)
+
   const toggleAccordion = (e) => {
     const isActionsClick = productSelect.current?.contains(e.target) || productActionsEdit.current?.contains(e.target) || productActionsDelete.current?.contains(e.target)
     if ((!product?.valid_menu && isCartProduct) || isActionsClick) return
@@ -206,9 +208,7 @@ export const ProductItemAccordion = (props) => {
             )}
           </ProductInfo>
 
-          {isConfirmationPage && (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
-            <IosArrowDown className={`${setRotate}`} />
-          )}
+          {showArrowIcon && <IosArrowDown className={`${setRotate}`} />}
 
           {product.valid && (
             <>
