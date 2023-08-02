@@ -290,7 +290,7 @@ const OrderDetailsUI = (props) => {
               <ProductItemAccordion
                 key={product.id}
                 product={product}
-                isConfirmationPage
+                showArrowIcon
               />
             ))}
           </ProfessionalBlock>
@@ -299,7 +299,7 @@ const OrderDetailsUI = (props) => {
           <ProductItemAccordion
             key={product.id}
             product={product}
-            isConfirmationPage
+            showArrowIcon
           />
         ))}
       </>

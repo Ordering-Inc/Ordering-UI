@@ -44,7 +44,8 @@ export const ProductItemAccordion = (props) => {
     onEditProduct,
     isCheckout,
     isStore,
-    isConfirmationPage
+    isConfirmationPage,
+    showArrowIcon
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -81,8 +82,6 @@ export const ProductItemAccordion = (props) => {
     }
     return product
   }
-
-  const showArrowIcon = isConfirmationPage && (productInfo()?.ingredients?.length > 0 || productInfo()?.options?.length > 0 || product?.comment)
 
   const toggleAccordion = (e) => {
     const isActionsClick = productSelect.current?.contains(e.target) || productActionsEdit.current?.contains(e.target) || productActionsDelete.current?.contains(e.target)
@@ -208,7 +207,7 @@ export const ProductItemAccordion = (props) => {
             )}
           </ProductInfo>
 
-          {showArrowIcon && <IosArrowDown className={`${setRotate}`} />}
+          {showArrowIcon && (productInfo()?.ingredients?.length > 0 || productInfo()?.options?.length > 0 || product?.comment) && <IosArrowDown className={`${setRotate}`} />}
 
           {product.valid && (
             <>
