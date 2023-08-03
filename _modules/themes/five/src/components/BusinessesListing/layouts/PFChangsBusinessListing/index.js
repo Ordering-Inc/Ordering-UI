@@ -39,7 +39,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _orderState$options3, _orderState$options3$, _citiesState$cities, _citiesState$cities$f, _orderState$options4, _orderState$options4$, _businessesSearchList11, _businessesSearchList12, _businessesSearchList13, _businessesSearchList14, _businessesSearchList15, _businessesSearchList16, _orderState$options5;
+  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _orderState$options3, _orderState$options3$, _citiesState$cities, _citiesState$cities$f, _orderState$options4, _orderState$options4$, _businessesSearchList11, _businessesSearchList12, _businessesSearchList13, _orderState$options5, _orderState$options5$, _businessesSearchList14, _businessesSearchList15, _businessesSearchList16, _orderState$options6;
   var businessesSearchList = props.businessesSearchList,
     paginationProps = props.paginationProps,
     isCustomerMode = props.isCustomerMode,
@@ -390,9 +390,18 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       width: 100,
       height: 30
     })));
-  }), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList13 = businessesSearchList.businesses) === null || _businessesSearchList13 === void 0 ? void 0 : _businessesSearchList13.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
-  })), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList14 = businessesSearchList.error) === null || _businessesSearchList14 === void 0 ? void 0 : _businessesSearchList14.length) > 0 && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList15 = businessesSearchList.businesses) === null || _businessesSearchList15 === void 0 ? void 0 : _businessesSearchList15.length) === 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, typeof (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) === 'string' ? /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('ERROR', 'ERROR'), ": ", businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList16 = businessesSearchList.error) === null || _businessesSearchList16 === void 0 ? void 0 : _businessesSearchList16.map(function (e, i) {
+  }), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList13 = businessesSearchList.businesses) === null || _businessesSearchList13 === void 0 ? void 0 : _businessesSearchList13.length) === 0 && ((orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.location) || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) !== 'Failed to fetch') && /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+    content: (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) === 'Failed to fetch' ? t('NOT_FOUND_BUSINESSES_FETCH', 'Error trying to get businesses') : t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
+  }, (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) === 'Failed to fetch' ? /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    outline: true,
+    color: "primary",
+    style: {
+      height: '44px'
+    },
+    onClick: function onClick() {
+      return getBusinesses(true);
+    }
+  }, t('TRY_AGAIN_MARKETPLACE', 'Try again')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, null))), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList14 = businessesSearchList.error) === null || _businessesSearchList14 === void 0 ? void 0 : _businessesSearchList14.length) > 0 && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList15 = businessesSearchList.businesses) === null || _businessesSearchList15 === void 0 ? void 0 : _businessesSearchList15.length) === 0 && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) !== 'Failed to fetch' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, typeof (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) === 'string' ? /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('ERROR', 'ERROR'), ": ", businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList16 = businessesSearchList.error) === null || _businessesSearchList16 === void 0 ? void 0 : _businessesSearchList16.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
@@ -416,7 +425,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
