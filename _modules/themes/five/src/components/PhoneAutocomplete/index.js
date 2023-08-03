@@ -13,7 +13,8 @@ var _Modal = require("../Modal");
 var _SignUpForm = require("../SignUpForm");
 var _Buttons = require("../../styles/Buttons");
 var _Confirm = require("../Confirm");
-var _callcenterOriginal = require("../../../../callcenterOriginal");
+var _AddressList = require("../AddressList");
+var _UserDetails = require("../UserDetails");
 var _styles = require("./styles");
 var _MdcCellphoneAndroid = _interopRequireDefault(require("@meronex/icons/mdc/MdcCellphoneAndroid"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -345,7 +346,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     },
     hideCloseDefault: true,
     padding: "20px"
-  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_callcenterOriginal.UserDetails, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     isAddressFormOpen: isAddressFormOpen,
     isOpenUserData: isOpenUserData,
     userId: customerState === null || customerState === void 0 || (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id,
@@ -355,7 +356,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onClose: function onClose() {
       return handleCloseAddressList();
     }
-  }), /*#__PURE__*/_react.default.createElement(_callcenterOriginal.AddressList, {
+  }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     userId: customerState === null || customerState === void 0 || (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
     changeOrderAddressWithDefault: true,
