@@ -13,8 +13,8 @@ import { Modal } from '../Modal'
 import { SignUpForm } from '../SignUpForm'
 import { Button } from '../../styles/Buttons'
 import { Alert } from '../Confirm'
-import { AddressList, UserDetails } from '../../../../callcenterOriginal'
-
+import { AddressList } from '../AddressList'
+import { UserDetails } from '../UserDetails'
 import {
   PhoneContainer,
   ContentWrapper,
