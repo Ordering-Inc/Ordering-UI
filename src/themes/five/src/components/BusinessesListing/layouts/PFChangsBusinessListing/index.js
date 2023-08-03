@@ -342,27 +342,50 @@ const BusinessesListingUI = (props) => {
             ))
           )}
           {
-            !businessesSearchList.loading && businessesSearchList?.businesses?.length === 0 && (
+            !businessesSearchList.loading && businessesSearchList?.businesses?.length === 0 && (orderState?.options?.address?.location || businessesSearchList?.error !== 'Failed to fetch') && (
               <NotFoundSourceWrapper>
                 <NotFoundSource
-                  content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
-                />
+                  content={
+                    businessesSearchList?.error === 'Failed to fetch'
+                      ? t('NOT_FOUND_BUSINESSES_FETCH', 'Error trying to get businesses')
+                      : t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
+                >
+                  {businessesSearchList?.error === 'Failed to fetch' ? (
+                    <Button
+                      outline
+                      color='primary'
+                      style={{ height: '44px' }}
+                      onClick={() => getBusinesses(true)}
+                    >
+                      {t('TRY_AGAIN_MARKETPLACE', 'Try again')}
+                    </Button>
+                  ) : (
+                    <>
+                      {null}
+                    </>
+                  )}
+                </NotFoundSource>
               </NotFoundSourceWrapper>
             )
           }
-          {!businessesSearchList.loading && businessesSearchList?.error && businessesSearchList?.error?.length > 0 && businessesSearchList?.businesses?.length === 0 && (
-            <>
-              {typeof businessesSearchList?.error === 'string' ? (
-                <ErrorMessage>{t('ERROR', 'ERROR')}: {businessesSearchList?.error}</ErrorMessage>
-              ) : (
-                <>
-                  {businessesSearchList?.error?.map((e, i) => (
-                    <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
-                  ))}
-                </>
-              )}
-            </>
-          )}
+          {!businessesSearchList.loading &&
+            businessesSearchList?.error &&
+            businessesSearchList?.error?.length > 0 &&
+            businessesSearchList?.businesses?.length === 0 &&
+            businessesSearchList?.error !== 'Failed to fetch' &&
+            (
+              <>
+                {typeof businessesSearchList?.error === 'string' ? (
+                  <ErrorMessage>{t('ERROR', 'ERROR')}: {businessesSearchList?.error}</ErrorMessage>
+                ) : (
+                  <>
+                    {businessesSearchList?.error?.map((e, i) => (
+                      <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+                    ))}
+                  </>
+                )}
+              </>
+            )}
         </>
         <Modal
           open={isPreorder}
