@@ -144,6 +144,8 @@ const PageBannerUI = (props) => {
               spaceBetween={0}
               shortSwipes={false}
               loop={pageBannerState.banner?.items.length > 1}
+              touchStartPreventDefault={false}
+              slidesPerView={1}
             >
               {pageBannerState.banner?.items.map((img, i) => (
                 <SwiperSlide
