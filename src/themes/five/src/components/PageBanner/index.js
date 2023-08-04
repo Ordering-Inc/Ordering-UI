@@ -23,7 +23,9 @@ SwiperCore.use([Navigation])
 const PageBannerUI = (props) => {
   const {
     pageBannerState,
-    isCustomerMode
+    isCustomerMode,
+    handleCustomProductBannerClick,
+    business
   } = props
 
   const [{ site }] = useSite()
@@ -116,9 +118,15 @@ const PageBannerUI = (props) => {
       slug = action.url.split('store/')[1]?.split('?')[0]
       const paramString = action.url.split('?')[1]
       const urlParams = new URLSearchParams(paramString)
-      const product = urlParams.get('product')
-      const category = urlParams.get('category')
-      onProductRedirect({ slug, category, product })
+      const productId = urlParams.get('product')
+      const categoryId = urlParams.get('category')
+      const foundCategory = business?.categories?.find(category => category.id === Number(categoryId))
+      const foundProduct = foundCategory?.products?.find(product => product.id === Number(productId))
+      if (business?.slug === slug && foundProduct) {
+        handleCustomProductBannerClick(foundProduct)
+      } else {
+        onProductRedirect({ slug, category: categoryId, product: productId })
+      }
     }
   }
 
