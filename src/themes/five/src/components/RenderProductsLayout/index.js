@@ -88,7 +88,8 @@ export const RenderProductsLayout = (props) => {
     handleChangePriceFilterValues,
     priceFilterValues,
     handleUpdateProfessionals,
-    isCustomerMode
+    isCustomerMode,
+    handleCustomProductBannerClick
   } = props
 
   const theme = useTheme()
@@ -198,6 +199,8 @@ export const RenderProductsLayout = (props) => {
                   position='web_business_page'
                   businessId={businessState?.business?.id}
                   isCustomerMode={isCustomerMode}
+                  handleCustomProductBannerClick={handleCustomProductBannerClick}
+                  business={businessState?.business}
                 />
               </PageBannerWrapper>
             )}

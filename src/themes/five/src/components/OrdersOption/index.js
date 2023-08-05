@@ -114,9 +114,11 @@ const OrdersOptionUI = (props) => {
     const outsideModal = !window.document.getElementById('app-modals') ||
       !window.document.getElementById('app-modals').contains(e.target)
     if (outsideModal) {
-      const _businessId = 'businessId:' + reorderState?.result?.business_id
-      sessionStorage.setItem('adjust-cart-products', _businessId)
-      onRedirectPage && onRedirectPage({ page: 'business', params: { store: reorderState?.result?.business?.slug } })
+      if (reorderState?.result?.business?.slug) {
+        const _businessId = 'businessId:' + reorderState?.result?.business_id
+        sessionStorage.setItem('adjust-cart-products', _businessId)
+        onRedirectPage && onRedirectPage({ page: 'business', params: { store: reorderState?.result?.business?.slug } })
+      }
     }
   }
 
