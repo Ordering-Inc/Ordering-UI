@@ -185,6 +185,26 @@ const BusinessProductsListingUI = (props) => {
     }
   }
 
+  const handleCustomProductBannerClick = (product) => {
+    if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
+      if (site?.product_url_template) {
+        onProductRedirect({
+          slug: business?.slug,
+          product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
+          category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
+        })
+      } else {
+        onProductRedirect({
+          slug: business?.slug,
+          product: product.id,
+          category: product.category_id
+        })
+      }
+    }
+    setCurProduct(product)
+    setModalIsOpen(true)
+  }
+
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
@@ -411,6 +431,7 @@ const BusinessProductsListingUI = (props) => {
           productToIdLoading={productToIdLoading}
           handleUpdateProfessionals={handleUpdateProfessionals}
           isCustomerMode={isCustomerMode}
+          handleCustomProductBannerClick={handleCustomProductBannerClick}
         />
 
         {
