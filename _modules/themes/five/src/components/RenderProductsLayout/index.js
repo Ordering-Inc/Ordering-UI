@@ -87,7 +87,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleChangePriceFilterValues = props.handleChangePriceFilterValues,
     priceFilterValues = props.priceFilterValues,
     handleUpdateProfessionals = props.handleUpdateProfessionals,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    handleCustomProductBannerClick = props.handleCustomProductBannerClick;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -172,7 +173,9 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   })), (businessState === null || businessState === void 0 || (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.id) && /*#__PURE__*/_react.default.createElement(_styles.PageBannerWrapper, null, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanner, {
     position: "web_business_page",
     businessId: businessState === null || businessState === void 0 || (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.id,
-    isCustomerMode: isCustomerMode
+    isCustomerMode: isCustomerMode,
+    handleCustomProductBannerClick: handleCustomProductBannerClick,
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business
   })), !errorQuantityProducts && SearchProductsComponent && !useKioskApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(SearchProductsComponent, {
     handleChangeSearch: handleChangeSearch,
     searchValue: searchValue,

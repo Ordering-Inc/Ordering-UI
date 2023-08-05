@@ -31,7 +31,8 @@ var MyOrders = function MyOrders(props) {
   var hideOrders = props.hideOrders,
     isFromBusinessListingSearch = props.isFromBusinessListingSearch,
     businessesSearchList = props.businessesSearchList,
-    onProductRedirect = props.onProductRedirect;
+    onProductRedirect = props.onProductRedirect,
+    onRedirectPage = props.onRedirectPage;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -130,7 +131,15 @@ var MyOrders = function MyOrders(props) {
     setIsEmptyActive: setIsEmptyActive
   })), !isEmptyActive && /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     pastOrders: true,
-    setIsEmptyPast: setIsEmptyPast
+    setIsEmptyPast: setIsEmptyPast,
+    handleRedirectToCheckout: function handleRedirectToCheckout(uuid) {
+      onRedirectPage && onRedirectPage({
+        page: 'checkout',
+        params: {
+          cartUuid: uuid
+        }
+      });
+    }
   })), !isEmptyPast && /*#__PURE__*/_react.default.createElement(_styles.Divider, null))), notOrderOptions.includes(selectedOption) && /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     titleContent: t('PREVIOUSLY_ORDERED', 'Previously ordered'),
     hideOrders: true,

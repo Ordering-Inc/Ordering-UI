@@ -45,7 +45,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _configs$add_product_, _configs$checkout_mul, _Object$values$find, _businessState$busine, _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$header, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$taxes, _currentCart$products2, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products3, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _currentCart$products4, _currentCart$products5, _currentCart$products6, _productModal$error$, _theme$defaultLanguag16, _productModal$product2, _business$professiona2, _currentCart$products7, _currentCart$products8;
+  var _configs$add_product_, _configs$checkout_mul, _Object$values$find, _businessState$busine, _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$header, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$taxes, _currentCart$products2, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products3, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _currentCart$products4, _currentCart$products5, _currentCart$products6, _productModal$error$, _theme$defaultLanguag16, _productModal$product2, _business$professiona3, _currentCart$products7, _currentCart$products8;
   var errors = props.errors,
     openCategories = props.openCategories,
     isInitialRender = props.isInitialRender,
@@ -265,6 +265,27 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return _ref.apply(this, arguments);
     };
   }();
+  var handleCustomProductBannerClick = function handleCustomProductBannerClick(product) {
+    var _business$professiona2;
+    if (!((product === null || product === void 0 ? void 0 : product.type) === 'service' && (business === null || business === void 0 || (_business$professiona2 = business.professionals) === null || _business$professiona2 === void 0 ? void 0 : _business$professiona2.length) > 0)) {
+      if (site !== null && site !== void 0 && site.product_url_template) {
+        var _product$category2;
+        onProductRedirect({
+          slug: business === null || business === void 0 ? void 0 : business.slug,
+          product: site.product_url_template.includes('product_slug') ? product === null || product === void 0 ? void 0 : product.slug : product.id,
+          category: site.product_url_template.includes('category_slug') ? product === null || product === void 0 || (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.slug : product.category_id
+        });
+      } else {
+        onProductRedirect({
+          slug: business === null || business === void 0 ? void 0 : business.slug,
+          product: product.id,
+          category: product.category_id
+        });
+      }
+    }
+    setCurProduct(product);
+    setModalIsOpen(true);
+  };
   var handlerProductAction = function handlerProductAction(product) {
     if (Object.keys(product).length) {
       setModalIsOpen(false);
@@ -505,7 +526,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleChangePriceFilterValues: handleChangePriceFilterValues,
     productToIdLoading: productToIdLoading,
     handleUpdateProfessionals: handleUpdateProfessionals,
-    isCustomerMode: isCustomerMode
+    isCustomerMode: isCustomerMode,
+    handleCustomProductBannerClick: handleCustomProductBannerClick
   }), isMounted && !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', (theme === null || theme === void 0 || (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 || (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.SEARCH_REDIRECT) || 'Go to Businesses'),
@@ -578,7 +600,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     content: ((_productModal$error$ = productModal.error[0]) === null || _productModal$error$ === void 0 ? void 0 : _productModal$error$.message) || productModal.error[0]
   }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && notFound && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('ERROR_GET_PRODUCT', (theme === null || theme === void 0 || (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ERROR_GET_PRODUCT) || 'Sorry, we couldn\'t find the requested product.')
-  }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((productModal === null || productModal === void 0 || (_productModal$product2 = productModal.product) === null || _productModal$product2 === void 0 ? void 0 : _productModal$product2.type) === 'service' || (curProduct === null || curProduct === void 0 ? void 0 : curProduct.type) === 'service') && (business === null || business === void 0 || (_business$professiona2 = business.professionals) === null || _business$professiona2 === void 0 ? void 0 : _business$professiona2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_ServiceForm.ServiceForm, {
+  }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((productModal === null || productModal === void 0 || (_productModal$product2 = productModal.product) === null || _productModal$product2 === void 0 ? void 0 : _productModal$product2.type) === 'service' || (curProduct === null || curProduct === void 0 ? void 0 : curProduct.type) === 'service') && (business === null || business === void 0 || (_business$professiona3 = business.professionals) === null || _business$professiona3 === void 0 ? void 0 : _business$professiona3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_ServiceForm.ServiceForm, {
     businessSlug: business === null || business === void 0 ? void 0 : business.slug,
     useKioskApp: props.useKioskApp,
     product: productModal.product || curProduct,

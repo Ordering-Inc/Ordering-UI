@@ -32,7 +32,9 @@ _swiper.default.use([_swiper.Navigation]);
 var PageBannerUI = function PageBannerUI(props) {
   var _pageBannerState$bann, _pageBannerState$bann2, _pageBannerState$bann3, _pageBannerState$bann4;
   var pageBannerState = props.pageBannerState,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    handleCustomProductBannerClick = props.handleCustomProductBannerClick,
+    business = props.business;
   var _useSite = (0, _orderingComponents.useSite)(),
     _useSite2 = _slicedToArray(_useSite, 1),
     site = _useSite2[0].site;
@@ -143,17 +145,27 @@ var PageBannerUI = function PageBannerUI(props) {
       });
     }
     if (action.type === 'product') {
-      var _action$url$split$;
+      var _action$url$split$, _business$categories, _foundCategory$produc;
       slug = (_action$url$split$ = action.url.split('store/')[1]) === null || _action$url$split$ === void 0 ? void 0 : _action$url$split$.split('?')[0];
       var paramString = action.url.split('?')[1];
       var urlParams = new URLSearchParams(paramString);
-      var product = urlParams.get('product');
-      var category = urlParams.get('category');
-      onProductRedirect({
-        slug: slug,
-        category: category,
-        product: product
+      var productId = urlParams.get('product');
+      var categoryId = urlParams.get('category');
+      var foundCategory = business === null || business === void 0 || (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.find(function (category) {
+        return category.id === Number(categoryId);
       });
+      var foundProduct = foundCategory === null || foundCategory === void 0 || (_foundCategory$produc = foundCategory.products) === null || _foundCategory$produc === void 0 ? void 0 : _foundCategory$produc.find(function (product) {
+        return product.id === Number(productId);
+      });
+      if ((business === null || business === void 0 ? void 0 : business.slug) === slug && foundProduct) {
+        handleCustomProductBannerClick(foundProduct);
+      } else {
+        onProductRedirect({
+          slug: slug,
+          category: categoryId,
+          product: productId
+        });
+      }
     }
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, pageBannerState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -162,7 +174,9 @@ var PageBannerUI = function PageBannerUI(props) {
     navigation: ((_pageBannerState$bann2 = pageBannerState.banner) === null || _pageBannerState$bann2 === void 0 || (_pageBannerState$bann2 = _pageBannerState$bann2.items) === null || _pageBannerState$bann2 === void 0 ? void 0 : _pageBannerState$bann2.length) > 1,
     spaceBetween: 0,
     shortSwipes: false,
-    loop: ((_pageBannerState$bann3 = pageBannerState.banner) === null || _pageBannerState$bann3 === void 0 ? void 0 : _pageBannerState$bann3.items.length) > 1
+    loop: ((_pageBannerState$bann3 = pageBannerState.banner) === null || _pageBannerState$bann3 === void 0 ? void 0 : _pageBannerState$bann3.items.length) > 1,
+    touchStartPreventDefault: false,
+    slidesPerView: 1
   }, (_pageBannerState$bann4 = pageBannerState.banner) === null || _pageBannerState$bann4 === void 0 ? void 0 : _pageBannerState$bann4.items.map(function (img, i) {
     return /*#__PURE__*/_react.default.createElement(_react2.SwiperSlide, {
       key: i,
