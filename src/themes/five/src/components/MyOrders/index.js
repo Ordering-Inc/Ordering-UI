@@ -21,7 +21,8 @@ export const MyOrders = (props) => {
     hideOrders,
     isFromBusinessListingSearch,
     businessesSearchList,
-    onProductRedirect
+    onProductRedirect,
+    onRedirectPage
   } = props
 
   const [, t] = useLanguage()
@@ -121,6 +122,9 @@ export const MyOrders = (props) => {
                   {...props}
                   pastOrders
                   setIsEmptyPast={setIsEmptyPast}
+                  handleRedirectToCheckout={uuid => {
+                    onRedirectPage && onRedirectPage({ page: 'checkout', params: { cartUuid: uuid } })
+                  }}
                 />
                 {!isEmptyPast && <Divider />}
               </>
