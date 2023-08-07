@@ -184,6 +184,11 @@ var AddressListUI = function AddressListUI(props) {
       handleCloseAddressForm();
     };
   }, []);
+  (0, _react.useEffect)(function () {
+    if (isOpenUserData) {
+      handleCloseAddressForm();
+    }
+  }, [isOpenUserData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -198,8 +203,9 @@ var AddressListUI = function AddressListUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.AddressHalfContainer, null, /*#__PURE__*/_react.default.createElement(_styles.List, {
     halfWidth: addressOpen,
     isOpenUserData: isOpenUserData,
-    isHeader: isHeader
-  }, (!isPopover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    isHeader: isHeader,
+    isEnableContinueButton: isEnableContinueButton
+  }, (!isPopover || !addressOpen) && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
     color: isEnableContinueButton && (addressList === null || addressList === void 0 || (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 ? 'secondary' : 'primary',
@@ -217,7 +223,7 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup
-  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && !addressOpen && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
   }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), uniqueAddressesList.map(function (address) {
     return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
@@ -238,7 +244,7 @@ var AddressListUI = function AddressListUI(props) {
     }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
       className: "form"
     }, /*#__PURE__*/_react.default.createElement("a", {
-      className: actionStatus.loading ? 'disabled' : '',
+      className: actionStatus.loading || isOpenUserData ? 'disabled' : '',
       onClick: function onClick() {
         return openAddress(address);
       }
@@ -267,11 +273,7 @@ var AddressListUI = function AddressListUI(props) {
     content: ((_addressList$error$ = addressList.error[0]) === null || _addressList$error$ === void 0 ? void 0 : _addressList$error$.message) || addressList.error[0]
   }), !(addressList.loading || actionStatus.loading || orderState.loading) && _typeof((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.address) !== 'object' && !addressList.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NETWORK_ERROR', 'Network error, please reload the page')
-  })), !isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
-    onClick: function onClick() {
-      return handleCloseAddressForm();
-    }
-  })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))), /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+  }), !isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
@@ -280,8 +282,16 @@ var AddressListUI = function AddressListUI(props) {
       return handleCloseAddressForm();
     },
     onSaveAddress: handleSaveAddress,
-    userCustomerSetup: userCustomerSetup
-  }))), (addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    userCustomerSetup: userCustomerSetup,
+    isEnableContinueButton: isEnableContinueButton
+  }))), addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
+    width: "50%",
+    isEnableContinueButton: isEnableContinueButton
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return handleCloseAddressForm();
+    }
+  })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))))), (addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50,
     count: 3,
     style: {
