@@ -638,11 +638,11 @@ var Header = function Header(props) {
       href: "#"
     }, t('LOGIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.LOGIN) || 'Login')),
     isPopup: true
-  })), auth && authModalOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })), auth && authModalOpen && modalPageToShow === 'user_update' && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: authModalOpen,
     width: "50%",
     hideCloseDefault: true
-  }, modalPageToShow === 'user_update' && /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+  }, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     useSessionUser: true
     // userData={customerState?.user}
     // userId={customerState?.user?.id}
@@ -653,7 +653,14 @@ var Header = function Header(props) {
     isMissedData: true,
     onClose: function onClose() {
       return closeAuthModal();
-    }
+    },
+    handleSuccessLogin: handleSuccessLogin,
+    setOtpDataUser: setOtpDataUser,
+    handleOpenSignup: function handleOpenSignup() {
+      return setModalPageToShow('signup');
+    },
+    handleCustomModalClick: handleCustomModalClick,
+    LoginFormComponent: LoginFormComponent
   })), /*#__PURE__*/_react.default.createElement(ConfirmComponent, {
     title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.CUSTOMER) || 'Customer'),
     content: confirm.content,

@@ -15,6 +15,7 @@ var _reactPhoneNumberInput = _interopRequireDefault(require("react-phone-number-
 var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
 var _libphonenumberJs = require("libphonenumber-js");
 var _orderingComponents = require("ordering-components");
+var _styledComponents = require("styled-components");
 var _Confirm = require("../Confirm");
 var _Modal = require("../Modal");
 var _UserFormDetails = require("../UserFormDetails");
@@ -32,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _userState$result, _formState$result, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _parsePhoneNumber, _userData$country_pho, _props$afterComponent, _props$afterElements;
+  var _userState$result, _formState$result, _verifyPhoneState$res3, _props$beforeElements, _props$beforeComponen, _parsePhoneNumber, _userData$country_pho, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
   var isEdit = props.isEdit,
     formState = props.formState,
     cleanFormState = props.cleanFormState,
@@ -51,13 +52,19 @@ var UserDetailsUI = function UserDetailsUI(props) {
     requiredFields = props.requiredFields,
     setFormState = props.setFormState,
     setIsSuccess = props.setIsSuccess,
-    isMissedData = props.isMissedData;
+    isMissedData = props.isMissedData,
+    LoginFormComponent = props.LoginFormComponent,
+    handleCustomModalClick = props.handleCustomModalClick,
+    handleOpenSignup = props.handleOpenSignup,
+    setOtpDataUser = props.setOtpDataUser,
+    handleSuccessLogin = props.handleSuccessLogin;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
+  var theme = (0, _styledComponents.useTheme)();
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -139,9 +146,11 @@ var UserDetailsUI = function UserDetailsUI(props) {
       });
     }
   }, [otpLeftTime]);
-  (0, _react.useEffect)(function () {
-    handleSendOtp();
-  }, [willVerifyOtpState]);
+
+  // useEffect(() => {
+  //   handleSendOtp()
+  // }, [willVerifyOtpState])
+
   (0, _react.useEffect)(function () {
     if (!isEdit && requiredFields) {
       setIsSuccess && setIsSuccess(true);
@@ -165,7 +174,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 210,
     height: 25
-  })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && !isMissedData && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
+  })), !(validationFields.loading || formState.loading || userState.loading) && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && !isMissedData && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
     isAddressFormOpen: isAddressFormOpen && !isEdit
   }, !requiredFields && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
@@ -189,7 +198,31 @@ var UserDetailsUI = function UserDetailsUI(props) {
     userData: userData,
     isCustomerMode: isCustomerMode,
     setWillVerifyOtpState: setWillVerifyOtpState
-  })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  })))), willVerifyOtpState && /*#__PURE__*/_react.default.createElement(LoginFormComponent, {
+    handleSuccessLogin: handleSuccessLogin,
+    elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'signup'
+        });
+      },
+      href: "#"
+    }, t('CREATE_ACCOUNT', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.CREATE_ACCOUNT) || 'Create account')),
+    elementLinkToForgotPassword: /*#__PURE__*/_react.default.createElement("a", {
+      onClick: function onClick(e) {
+        return handleCustomModalClick(e, {
+          page: 'forgotpassword'
+        });
+      },
+      href: "#"
+    }, t('RESET_PASSWORD', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.RESET_PASSWORD) || 'Reset password')),
+    useLoginByCellphone: true,
+    isPopup: true,
+    defaultLoginTab: "otp",
+    setOtpDataUser: setOtpDataUser,
+    handleOpenSignup: handleOpenSignup,
+    isDirectLogin: true
+  }), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('PROFILE', 'Profile'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -201,22 +234,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ENTER_VERIFICATION_CODE', 'Enter verification code'),
-    open: willVerifyOtpState,
-    width: "700px",
-    height: "420px",
-    onClose: function onClose() {
-      return setWillVerifyOtpState(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_VerifyCodeForm.VerifyCodeForm, {
-    otpLeftTime: otpLeftTime,
-    credentials: formState === null || formState === void 0 ? void 0 : formState.changes,
-    handleSendOtp: handleSendOtp,
-    handleCheckPhoneCode: handleSendPhoneCode,
-    email: (userData === null || userData === void 0 ? void 0 : userData.email) || (user === null || user === void 0 ? void 0 : user.email),
-    isPhone: true
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

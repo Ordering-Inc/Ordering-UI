@@ -69,7 +69,8 @@ var LoginFormUI = function LoginFormUI(props) {
     alseaOtpCreateUser = props.alseaOtpCreateUser,
     createOtpUser = props.createOtpUser,
     handleLoginFacebookAlsea = props.handleLoginFacebookAlsea,
-    handleLoginGoogleAlsea = props.handleLoginGoogleAlsea;
+    handleLoginGoogleAlsea = props.handleLoginGoogleAlsea,
+    isDirectLogin = props.isDirectLogin;
   var numOtpInputs = 4;
   var otpPlaceholder = _toConsumableArray(Array(numOtpInputs)).fill(0).join('');
   var _useApi = (0, _orderingComponents.useApi)(),
@@ -92,6 +93,7 @@ var LoginFormUI = function LoginFormUI(props) {
     setAlertState = _useState2[1];
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 2),
+    user = _useSession2[0].user,
     login = _useSession2[1].login;
   var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
@@ -235,6 +237,11 @@ var LoginFormUI = function LoginFormUI(props) {
     setOtpType(type);
   };
   (0, _react.useEffect)(function () {
+    if (isDirectLogin && user !== null && user !== void 0 && user.cellphone) {
+      handleChangePhoneNumber(user === null || user === void 0 ? void 0 : user.cellphone);
+    }
+  }, [isDirectLogin, user]);
+  (0, _react.useEffect)(function () {
     var _formState$result;
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
@@ -342,7 +349,7 @@ var LoginFormUI = function LoginFormUI(props) {
     height: "105px",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logoCallcenter,
     loading: "lazy"
-  })) : /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LOGIN', 'Login')), !loginWithOtpState && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+  })) : isDirectLogin ? /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('VERIFICATIOn', 'Verificacion')) : /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LOGIN', 'Login')), !loginWithOtpState && !willVerifyOtpState && !isDirectLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
@@ -378,6 +385,7 @@ var LoginFormUI = function LoginFormUI(props) {
     autoComplete: "off",
     isError: (_formMethods$errors4 = formMethods.errors) === null || _formMethods$errors4 === void 0 ? void 0 : _formMethods$errors4.email
   }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null)))), (useLoginByCellphone && loginTab === 'cellphone' || loginTab === 'otp' && otpType === 'cellphone') && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_formMethods$errors5 = formMethods.errors) === null || _formMethods$errors5 === void 0 ? void 0 : _formMethods$errors5.cellphone) && !(credentials !== null && credentials !== void 0 && credentials.cellphone) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors6 = formMethods.errors) === null || _formMethods$errors6 === void 0 ? void 0 : (_formMethods$errors6$ = _formMethods$errors6.cellphone) === null || _formMethods$errors6$ === void 0 ? void 0 : _formMethods$errors6$.message, " ", (formMethods === null || formMethods === void 0 ? void 0 : (_formMethods$errors7 = formMethods.errors) === null || _formMethods$errors7 === void 0 ? void 0 : (_formMethods$errors7$ = _formMethods$errors7.cellphone) === null || _formMethods$errors7$ === void 0 ? void 0 : _formMethods$errors7$.type) === 'required' && '*'), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+    user: user,
     value: credentials === null || credentials === void 0 ? void 0 : credentials.cellphone,
     setValue: handleChangePhoneNumber,
     handleIsValid: function handleIsValid() {},
@@ -431,9 +439,9 @@ var LoginFormUI = function LoginFormUI(props) {
     onClick: function onClick() {
       setLoginWithOtpState(false);
     }
-  }, t('CANCEL', 'Cancel'))), !props.isDisableButtons && hasSocialLogin && hasSocialEnabled && /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, {
+  }, t('CANCEL', 'Cancel'))), !props.isDisableButtons && hasSocialLogin && hasSocialEnabled && !isDirectLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginDivider, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !props.isDisableButtons && !loginWithOtpState && (Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null), /*#__PURE__*/_react.default.createElement("p", null, t('OR', 'or')), /*#__PURE__*/_react.default.createElement(_styles.DividerLine, null)), !props.isDisableButtons && !loginWithOtpState && !isDirectLogin && (Object.keys(configs).length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.SocialButtons, {
     isPopup: isPopup
   }, ((configs === null || configs === void 0 ? void 0 : (_configs$facebook_log5 = configs.facebook_login) === null || _configs$facebook_log5 === void 0 ? void 0 : _configs$facebook_log5.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log6 = configs.facebook_login) === null || _configs$facebook_log6 === void 0 ? void 0 : _configs$facebook_log6.value) === '1') && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id2 = configs.facebook_id) === null || _configs$facebook_id2 === void 0 ? void 0 : _configs$facebook_id2.value) && facebookLoginEnabled && /*#__PURE__*/_react.default.createElement(_FacebookLogin.FacebookLoginButton, {
     appId: configs === null || configs === void 0 ? void 0 : (_configs$facebook_id3 = configs.facebook_id) === null || _configs$facebook_id3 === void 0 ? void 0 : _configs$facebook_id3.value,
