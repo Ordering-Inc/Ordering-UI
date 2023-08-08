@@ -22,6 +22,8 @@ import {
   useLanguage,
   useSession
 } from 'ordering-components'
+import { useTheme } from 'styled-components'
+
 import { Alert } from '../Confirm'
 import { Modal } from '../Modal'
 import { UserFormDetailsUI } from '../UserFormDetails'
@@ -46,11 +48,18 @@ const UserDetailsUI = (props) => {
     requiredFields,
     setFormState,
     setIsSuccess,
-    isMissedData
+    isMissedData,
+    LoginFormComponent,
+    handleCustomModalClick,
+    handleOpenSignup,
+    setOtpDataUser,
+    handleSuccessLogin
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const theme = useTheme()
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const userData = userState.result?.result || props.userData || formState.result?.result || user
 
@@ -128,9 +137,9 @@ const UserDetailsUI = (props) => {
     }
   }, [otpLeftTime])
 
-  useEffect(() => {
-    handleSendOtp()
-  }, [willVerifyOtpState])
+  // useEffect(() => {
+  //   handleSendOtp()
+  // }, [willVerifyOtpState])
 
   useEffect(() => {
     if (!isEdit && requiredFields) {
@@ -155,7 +164,7 @@ const UserDetailsUI = (props) => {
         </UserData>
       )}
 
-      {!(validationFields.loading || formState.loading || userState.loading) && (
+      {!(validationFields.loading || formState.loading || userState.loading) && !willVerifyOtpState && (
         <Container>
           {isModal && !isMissedData && (
             <TitleContainer isAddressFormOpen={isAddressFormOpen && !isEdit}>
@@ -219,6 +228,33 @@ const UserDetailsUI = (props) => {
           )}
         </Container>
       )}
+      {(willVerifyOtpState) && (
+        <LoginFormComponent
+          handleSuccessLogin={handleSuccessLogin}
+          elementLinkToSignup={
+            <a
+              onClick={
+                (e) => handleCustomModalClick(e, { page: 'signup' })
+              } href='#'
+            >{t('CREATE_ACCOUNT', theme?.defaultLanguages?.CREATE_ACCOUNT || 'Create account')}
+            </a>
+          }
+          elementLinkToForgotPassword={
+            <a
+              onClick={
+                (e) => handleCustomModalClick(e, { page: 'forgotpassword' })
+              } href='#'
+            >{t('RESET_PASSWORD', theme?.defaultLanguages?.RESET_PASSWORD || 'Reset password')}
+            </a>
+          }
+          useLoginByCellphone
+          isPopup
+          defaultLoginTab='otp'
+          setOtpDataUser={setOtpDataUser}
+          handleOpenSignup={handleOpenSignup}
+          isDirectLogin
+        />
+      )}
       <Alert
         title={t('PROFILE', 'Profile')}
         content={alertState.content}
@@ -228,7 +264,7 @@ const UserDetailsUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-      <Modal
+      {/* <Modal
         title={t('ENTER_VERIFICATION_CODE', 'Enter verification code')}
         open={willVerifyOtpState}
         width='700px'
@@ -237,13 +273,14 @@ const UserDetailsUI = (props) => {
       >
         <VerifyCodeForm
           otpLeftTime={otpLeftTime}
+          resetOtpLeftTime={resetOtpLeftTime}
           credentials={formState?.changes}
           handleSendOtp={handleSendOtp}
           handleCheckPhoneCode={handleSendPhoneCode}
           email={(userData?.email || user?.email)}
           isPhone
         />
-      </Modal>
+      </Modal> */}
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

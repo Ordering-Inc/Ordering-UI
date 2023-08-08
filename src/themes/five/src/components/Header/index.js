@@ -234,7 +234,6 @@ export const Header = (props) => {
       })
     }
   }
-
   useEffect(() => {
     if (isCustomerMode) {
       setCustomerModalOpen(false)
@@ -685,24 +684,27 @@ export const Header = (props) => {
             )}
           </Modal>
         )}
-        {auth && authModalOpen && (
+        {auth && authModalOpen && modalPageToShow === 'user_update' && (
           <Modal
             open={authModalOpen}
             width='50%'
             hideCloseDefault
           >
-            {modalPageToShow === 'user_update' && (
-              <UserDetails
-                useSessionUser
-                // userData={customerState?.user}
-                // userId={customerState?.user?.id}
-                isUserDetailsEdit
-                isOpenUserData={isOpenUserData}
-                setIsOpenUserData={setIsOpenUserData}
-                isMissedData
-                onClose={() => closeAuthModal()}
-              />
-            )}
+            <UserDetails
+              useSessionUser
+              // userData={customerState?.user}
+              // userId={customerState?.user?.id}
+              isUserDetailsEdit
+              isOpenUserData={isOpenUserData}
+              setIsOpenUserData={setIsOpenUserData}
+              isMissedData
+              onClose={() => closeAuthModal()}
+              handleSuccessLogin={handleSuccessLogin}
+              setOtpDataUser={setOtpDataUser}
+              handleOpenSignup={() => setModalPageToShow('signup')}
+              handleCustomModalClick={handleCustomModalClick}
+              LoginFormComponent={LoginFormComponent}
+            />
           </Modal>
         )}
         <ConfirmComponent

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useSession, useLanguage, useCustomer, useConfig, useOrderingTheme } from 'ordering-components'
+import { useSession, useLanguage, useCustomer, useConfig, useOrderingTheme, useApi } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useTheme } from 'styled-components'
@@ -46,11 +46,12 @@ export const UserFormDetailsUI = (props) => {
     isMissedData
   } = props
 
+  const [ordering] = useApi()
   const formMethods = useForm()
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const theme = useTheme()
-  const [{ user: userSession }] = useSession()
+  const [{ user: userSession, token }, { changeUser }] = useSession()
   const [orderingTheme] = useOrderingTheme()
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
@@ -98,8 +99,86 @@ export const UserFormDetailsUI = (props) => {
     }
     setUserPhoneNumber(user?.cellphone || '')
   }
+  const isAlsea = ordering.project === 'alsea'
 
-  const onSubmit = () => {
+  const parseNumber = (unparsedNumber) => {
+    if (!unparsedNumber) return {}
+
+    const parsedNumber = parsePhoneNumber(unparsedNumber)
+    const cellphone = parsedNumber?.nationalNumber
+    const countryPhoneCode = +(parsedNumber?.countryCallingCode)
+
+    return {
+      cellphone,
+      countryPhoneCode
+    }
+  }
+
+  const checkNewPhone = async (changes) => {
+    let available = false
+    available = await alseaOtpInitialize(parseNumber(userPhoneNumber))
+    if (available) {
+      const consult = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging'}.ordering.co/alseaplatform/api_update_user.php?user=${props?.userData?.id || user?.id}`, {
+        method: 'POST',
+        body: JSON.stringify(formState.changes),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'X-APP-X': ordering.appId,
+          'Content-Type': 'application/json;charset=UTF-8',
+          accept: 'application/json, text/plain'
+        }
+      })
+      const { result, error } = await consult.json()
+      if (!error) {
+        changeUser({
+          ...userSession,
+          ...result
+        })
+        setWillVerifyOtpState(true)
+      }
+    } else {
+      setAlertState({
+        open: true,
+        content: [t('NUMBER_ALREADY_EXISTS', 'El numero ya existe en otra cuenta.')]
+      })
+    }
+  }
+  const alseaOtpConsult = async (params) => {
+    try {
+      const response = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-development'}.ordering.co/alseaplatform/wow_search_recover.php?${params}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      const text = await response.text()
+      if (text.toString() === 'Lo sentimos, estamos en mantenimiento.') {
+        return text
+      }
+      return text
+    } catch (err) {
+    }
+  }
+  const alseaOtpInitialize = async (values, type, social) => {
+    try {
+      const body = {}
+      body.user = values?.cellphone || formState?.changes?.cellphone
+      body.cellphone = values?.cellphone || formState?.changes?.cellphone
+      body.country_code = values?.countryPhoneCode
+
+      const params = `pass=q7i1rcljnv3roqv72sleodqt9mi0udrrotqau4rhi81274q2ejt${body.cellphone ? `&cellphone=${body.cellphone}` : ''}${body.country_code ? `&country_phone_code=${body.country_code}` : ''}${body.email ? `&mail=${body.email}` : ''}`
+      const result = await alseaOtpConsult(params, social)
+
+      if (result === 'new_user') {
+        return true
+      } else if (result === 'existing_user') {
+        return false
+      } else {
+        return false
+      }
+    } catch (err) {
+      return false
+    }
+  }
+  const onSubmit = async () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
     if (!userPhoneNumber &&
       ((validationFields?.fields?.checkout?.cellphone?.enabled &&
@@ -136,6 +215,10 @@ export const UserFormDetailsUI = (props) => {
       }
       if (isCustomerMode) {
         setUserCustomer(formState.result.result, true)
+      }
+      if (isChanged) {
+        await checkNewPhone(changes)
+        return
       }
       handleButtonUpdateClick(changes)
     }

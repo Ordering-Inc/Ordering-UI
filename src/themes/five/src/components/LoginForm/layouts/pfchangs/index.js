@@ -75,7 +75,8 @@ const LoginFormUI = (props) => {
     alseaOtpCreateUser,
     createOtpUser,
     handleLoginFacebookAlsea,
-    handleLoginGoogleAlsea
+    handleLoginGoogleAlsea,
+    isDirectLogin
   } = props
   const numOtpInputs = 4
   const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
@@ -86,7 +87,7 @@ const LoginFormUI = (props) => {
   const formMethods = useForm()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [, { login }] = useSession()
+  const [{ user }, { login }] = useSession()
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
   const [validPhoneFieldState, setValidPhoneField] = useState(false)
@@ -183,6 +184,12 @@ const LoginFormUI = (props) => {
     handleChangeTab('otp')
     setOtpType(type)
   }
+
+  useEffect(() => {
+    if (isDirectLogin && user?.cellphone) {
+      handleChangePhoneNumber(user?.cellphone)
+    }
+  }, [isDirectLogin, user])
 
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
@@ -291,10 +298,10 @@ const LoginFormUI = (props) => {
               <img alt='Logotype-callcenter' width='250px' height='105px' src={theme?.images?.logos?.logoCallcenter} loading='lazy' />
             </LogotypeContainer>
           ) : (
-            <Title>{t('LOGIN', 'Login')}</Title>
+            isDirectLogin ? <Title>{t('VERIFICATIOn', 'Verificacion')}</Title> : <Title>{t('LOGIN', 'Login')}</Title>
           )}
 
-          {!loginWithOtpState && !willVerifyOtpState && (
+          {!loginWithOtpState && !willVerifyOtpState && !isDirectLogin && (
             <LoginWith isPopup={isPopup}>
               <Tabs variant='primary'>
                 <Tab
@@ -363,6 +370,7 @@ const LoginFormUI = (props) => {
                   </ValidationText>
                 )}
                 <InputPhoneNumber
+                  user={user}
                   value={credentials?.cellphone}
                   setValue={handleChangePhoneNumber}
                   handleIsValid={() => { }}
@@ -467,14 +475,14 @@ const LoginFormUI = (props) => {
             )}
           </FormInput>
 
-          {!props.isDisableButtons && hasSocialLogin && hasSocialEnabled && (
+          {!props.isDisableButtons && hasSocialLogin && hasSocialEnabled && !isDirectLogin && (
             <LoginDivider isPopup={isPopup}>
               <DividerLine />
               <p>{t('OR', 'or')}</p>
               <DividerLine />
             </LoginDivider>
           )}
-          {(!props.isDisableButtons && !loginWithOtpState) && (
+          {(!props.isDisableButtons && !loginWithOtpState && !isDirectLogin) && (
             Object.keys(configs).length > 0 ? (
               <SocialButtons isPopup={isPopup}>
                 {(configs?.facebook_login?.value === 'true' ||
