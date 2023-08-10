@@ -242,7 +242,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
+        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ATENTION', 'Atención')]
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.loading]);

@@ -245,7 +245,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
-    }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
+    }, t('ATENTION', 'Atención'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
   })))), /*#__PURE__*/_react.default.createElement(_styles.MapWrapper, {
     className: "map-wrapper"
   }, windowSize.width < 850 && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {

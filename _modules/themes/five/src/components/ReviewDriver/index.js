@@ -152,7 +152,7 @@ var ReviewDriverUI = function ReviewDriverUI(props) {
       setAlertState({
         open: true,
         success: false,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
+        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ATENTION', 'Atención')]
       });
     }
     if (!formState.loading && !((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && alertState.success) {

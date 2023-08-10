@@ -127,7 +127,7 @@ var MessagesUI = function MessagesUI(props) {
     if (!sendMessage.loading && sendMessage !== null && sendMessage !== void 0 && sendMessage.error) {
       setAlertState({
         open: true,
-        content: sendMessage.error || [t('ERROR', 'Error')]
+        content: sendMessage.error || [t('ATENTION', 'Atención')]
       });
     }
     if (sendMessage.loading) {
@@ -486,7 +486,7 @@ var MessagesUI = function MessagesUI(props) {
     disabled: (sendMessage === null || sendMessage === void 0 ? void 0 : sendMessage.loading) || message === '' && !image || (messages === null || messages === void 0 ? void 0 : messages.loading),
     ref: buttonRef
   }, /*#__PURE__*/_react.default.createElement(_IosSend.default, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement("span", null, t('SEND', 'Send')))))))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
-    title: t('ERROR', 'Error'),
+    title: t('ATENTION', 'Atención'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

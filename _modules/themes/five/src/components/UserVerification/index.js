@@ -148,14 +148,14 @@ var UserVerificationUI = function UserVerificationUI(props) {
       var _ref, _verifyEmailState$err, _verifyEmailState$err2, _verifyEmailState$err3;
       setAlertState({
         open: true,
-        content: (_ref = (_verifyEmailState$err = verifyEmailState === null || verifyEmailState === void 0 ? void 0 : (_verifyEmailState$err2 = verifyEmailState.errorSendCode) === null || _verifyEmailState$err2 === void 0 ? void 0 : _verifyEmailState$err2[0]) !== null && _verifyEmailState$err !== void 0 ? _verifyEmailState$err : verifyEmailState === null || verifyEmailState === void 0 ? void 0 : (_verifyEmailState$err3 = verifyEmailState.errorCheckCode) === null || _verifyEmailState$err3 === void 0 ? void 0 : _verifyEmailState$err3[0]) !== null && _ref !== void 0 ? _ref : t('ERROR', 'Error')
+        content: (_ref = (_verifyEmailState$err = verifyEmailState === null || verifyEmailState === void 0 ? void 0 : (_verifyEmailState$err2 = verifyEmailState.errorSendCode) === null || _verifyEmailState$err2 === void 0 ? void 0 : _verifyEmailState$err2[0]) !== null && _verifyEmailState$err !== void 0 ? _verifyEmailState$err : verifyEmailState === null || verifyEmailState === void 0 ? void 0 : (_verifyEmailState$err3 = verifyEmailState.errorCheckCode) === null || _verifyEmailState$err3 === void 0 ? void 0 : _verifyEmailState$err3[0]) !== null && _ref !== void 0 ? _ref : t('ATENTION', 'Atención')
       });
     }
     if (verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.errorSendCode || verifyPhoneState !== null && verifyPhoneState !== void 0 && verifyPhoneState.errorCheckCode) {
       var _ref2, _verifyPhoneState$err, _verifyPhoneState$err2, _verifyPhoneState$err3;
       setAlertState({
         open: true,
-        content: (_ref2 = (_verifyPhoneState$err = verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$err2 = verifyPhoneState.errorSendCode) === null || _verifyPhoneState$err2 === void 0 ? void 0 : _verifyPhoneState$err2[0]) !== null && _verifyPhoneState$err !== void 0 ? _verifyPhoneState$err : verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$err3 = verifyPhoneState.errorCheckCode) === null || _verifyPhoneState$err3 === void 0 ? void 0 : _verifyPhoneState$err3[0]) !== null && _ref2 !== void 0 ? _ref2 : t('ERROR', 'Error')
+        content: (_ref2 = (_verifyPhoneState$err = verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$err2 = verifyPhoneState.errorSendCode) === null || _verifyPhoneState$err2 === void 0 ? void 0 : _verifyPhoneState$err2[0]) !== null && _verifyPhoneState$err !== void 0 ? _verifyPhoneState$err : verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$err3 = verifyPhoneState.errorCheckCode) === null || _verifyPhoneState$err3 === void 0 ? void 0 : _verifyPhoneState$err3[0]) !== null && _ref2 !== void 0 ? _ref2 : t('ATENTION', 'Atención')
       });
     }
   }, [verifyEmailState, verifyPhoneState]);

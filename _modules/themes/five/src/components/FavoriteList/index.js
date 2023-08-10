@@ -409,7 +409,7 @@ var FavoriteListUI = function FavoriteListUI(props) {
   }, t('LOAD_MORE_ITEMS', 'Load more items')))))), (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.error) && (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.error.length) > 0 && (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.favorites.length) === 0 && (favoriteList === null || favoriteList === void 0 ? void 0 : favoriteList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
-    }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
+    }, t('ATENTION', 'Atención'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
   }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: isPreorder,
     width: "760px",

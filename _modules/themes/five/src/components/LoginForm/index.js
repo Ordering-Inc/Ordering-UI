@@ -291,7 +291,7 @@ var LoginFormUI = function LoginFormUI(props) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
+        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ATENTION', 'Atención')]
       });
       setSubmitted(false);
     }
@@ -333,7 +333,7 @@ var LoginFormUI = function LoginFormUI(props) {
       var _checkPhoneCodeState$3;
       setAlertState({
         open: true,
-        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$3 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$3 === void 0 ? void 0 : _checkPhoneCodeState$3.result) || [t('ERROR', 'Error')]
+        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$3 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$3 === void 0 ? void 0 : _checkPhoneCodeState$3.result) || [t('ATENTION', 'Atención')]
       });
     } else if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$4 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$4 !== void 0 && _checkPhoneCodeState$4.result) {
       setAlertState({
@@ -357,7 +357,7 @@ var LoginFormUI = function LoginFormUI(props) {
       var _verifyPhoneState$res3;
       setAlertState({
         open: true,
-        content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res3 = verifyPhoneState.result) === null || _verifyPhoneState$res3 === void 0 ? void 0 : _verifyPhoneState$res3.result) || [t('ERROR', 'Error')]
+        content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res3 = verifyPhoneState.result) === null || _verifyPhoneState$res3 === void 0 ? void 0 : _verifyPhoneState$res3.result) || [t('ATENTION', 'Atención')]
       });
     } else resetOtpLeftTime();
   }, [verifyPhoneState]);

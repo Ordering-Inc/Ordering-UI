@@ -144,7 +144,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       var _verifyPhoneState$res2;
       setAlertState({
         open: true,
-        content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ERROR', 'Error')]
+        content: (verifyPhoneState === null || verifyPhoneState === void 0 ? void 0 : (_verifyPhoneState$res2 = verifyPhoneState.result) === null || _verifyPhoneState$res2 === void 0 ? void 0 : _verifyPhoneState$res2.result) || [t('ATENTION', 'Atención')]
       });
     } else {
       resetOtpLeftTime();

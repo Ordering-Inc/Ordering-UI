@@ -253,7 +253,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     setIsOpenUserData: setIsOpenUserData,
     setIsAddressFormOpen: setIsAddressFormOpen
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('ERROR', 'Error'),
+    title: t('ATENTION', 'Atención'),
     open: alertState.open,
     content: alertState.content,
     onClose: handleCloseAlert,

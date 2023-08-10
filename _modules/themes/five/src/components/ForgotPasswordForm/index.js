@@ -78,7 +78,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
         success: false,
         open: true,
         title: t('ERROR_UNKNOWN', 'An error has ocurred'),
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
+        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ATENTION', 'Atención')]
       }));
     }
     if (!formState.loading && !((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && alertState.success) {
@@ -95,7 +95,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       var _formState$result5;
       setAlertState({
         open: true,
-        content: ((_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result) || [t('ERROR', 'Error')]
+        content: ((_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result) || [t('ATENTION', 'Atención')]
       });
     }
   }, [formState]);

@@ -508,7 +508,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleCustomSave: handleCustomSave,
     brand_id: business === null || business === void 0 ? void 0 : business.brand_id
   }))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
-    title: t('ERROR', 'Error'),
+    title: t('ATENTION', 'Atención'),
     open: alertState === null || alertState === void 0 ? void 0 : alertState.open,
     content: t('NOT_AVAILABLE_PRODUCTS', 'These products are not available.'),
     onClose: function onClose() {
