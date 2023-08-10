@@ -68,7 +68,7 @@ var SocketStatusUI = function SocketStatusUI(props) {
   }, [reconnectAttemptCount]);
   return /*#__PURE__*/_react.default.createElement(_styles.Contatiner, null, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "primary"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoContent, null, t('WEBSOCKET_STATUS_APP_INFO', 'Verify the server connection by date and time using the Connection status button. Press update to refresh your app and update the status as well. Need help? Contact our Customer support team here:'), !isEnabledBtn && /*#__PURE__*/_react.default.createElement("a", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles.InfoContent, null, isEnabledBtn ? t('WEBSOCKET_STATUS_INFO_WITHOUT_LINK', 'Verify the server connection by date and time using the Connection status button. Press update to refresh you dashboard and update the status as well. Need help? Contact our Customer support team.') : t('WEBSOCKET_STATUS_APP_INFO', 'Verify the server connection by date and time using the Connection status button. Press update to refresh your app and update the status as well. Need help? Contact our Customer support team here:'), !isEnabledBtn && /*#__PURE__*/_react.default.createElement("a", {
     href: "https://www.ordering.co/contact-ordering",
     target: "_blank",
     rel: "noopener noreferrer"
