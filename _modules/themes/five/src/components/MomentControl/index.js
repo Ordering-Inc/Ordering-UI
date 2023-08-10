@@ -247,7 +247,7 @@ var MomentControlUI = function MomentControlUI(props) {
     onClick: function onClick() {
       return onClose();
     },
-    disabled: !timeSelected
+    disabled: !isASP ? !timeSelected : false
   }, /*#__PURE__*/_react.default.createElement("span", null, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRight, null))));
 };
 var MomentControl = function MomentControl(props) {
