@@ -99,7 +99,7 @@ const ReviewDriverUI = (props) => {
       setAlertState({
         open: true,
         success: false,
-        content: formState.result?.result || [t('ERROR', 'Error')]
+        content: formState.result?.result || [t('ATENTION', 'Atención')]
       })
     }
     if (!formState.loading && !formState.result?.error && alertState.success) {

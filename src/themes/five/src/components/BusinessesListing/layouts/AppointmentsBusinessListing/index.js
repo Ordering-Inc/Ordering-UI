@@ -275,7 +275,7 @@ const BusinessListingUI = (props) => {
               )}
               {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
                 businessesList.error.map((e, i) => (
-                  <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+                  <ErrorMessage key={i}>{t('ATENTION', 'Atención')}: [{e?.message || e}]</ErrorMessage>
                 ))
               )}
             </BusinessList>

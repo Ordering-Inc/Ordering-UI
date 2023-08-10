@@ -129,7 +129,7 @@ const MessagesUI = (props) => {
     if (!sendMessage.loading && sendMessage?.error) {
       setAlertState({
         open: true,
-        content: sendMessage.error || [t('ERROR', 'Error')]
+        content: sendMessage.error || [t('ATENTION', 'Atención')]
       })
     }
     if (sendMessage.loading) {
@@ -752,7 +752,7 @@ const MessagesUI = (props) => {
         </MessagesRightLayout>
       </MessagesLayoutWrapper>
       <AlertComponent
-        title={t('ERROR', 'Error')}
+        title={t('ATENTION', 'Atención')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

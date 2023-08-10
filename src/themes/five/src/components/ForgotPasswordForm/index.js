@@ -62,7 +62,7 @@ const ForgotPasswordUI = (props) => {
         success: false,
         open: true,
         title: t('ERROR_UNKNOWN', 'An error has ocurred'),
-        content: formState.result?.result || [t('ERROR', 'Error')]
+        content: formState.result?.result || [t('ATENTION', 'Atención')]
       })
     }
     if (!formState.loading && !formState.result?.error && alertState.success) {
@@ -79,7 +79,7 @@ const ForgotPasswordUI = (props) => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
-        content: formState.result?.result || [t('ERROR', 'Error')]
+        content: formState.result?.result || [t('ATENTION', 'Atención')]
       })
     }
   }, [formState])

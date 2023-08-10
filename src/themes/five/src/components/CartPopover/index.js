@@ -49,6 +49,7 @@ export const CartPopover = (props) => {
   const isCartButtonPF = theme?.layouts?.header?.components?.cart?.components?.layout?.type === 'pfchangs'
   const showCartText = !theme?.layouts?.header?.components?.cart?.components?.text?.hidden
   const cartButtonIcon = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.image
+  const numProductsFirstCart = props?.carts && props?.carts?.length > 0 && props?.carts[0].products?.length
 
   useEffect(() => {
     // forceUpdate && forceUpdate()
@@ -127,9 +128,9 @@ export const CartPopover = (props) => {
                 {showCartText && (
                   <p>{t('CART', 'Cart')}</p>
                 )}
-                {props.carts?.length > 0 && auth ? (
+                {numProductsFirstCart > 0 && auth ? (
                   <CartLength>
-                    <p>{props.carts?.length > 9 ? '9+' : props.carts?.length}</p>
+                    <p>{numProductsFirstCart > 9 ? '9+' : numProductsFirstCart}</p>
                   </CartLength>
                 ) : (
                   <>

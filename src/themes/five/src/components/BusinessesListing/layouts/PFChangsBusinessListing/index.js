@@ -376,11 +376,11 @@ const BusinessesListingUI = (props) => {
             (
               <>
                 {typeof businessesSearchList?.error === 'string' ? (
-                  <ErrorMessage>{t('ERROR', 'ERROR')}: {businessesSearchList?.error}</ErrorMessage>
+                  <ErrorMessage>{t('ATENTION', 'Atención')}: {businessesSearchList?.error}</ErrorMessage>
                 ) : (
                   <>
                     {businessesSearchList?.error?.map((e, i) => (
-                      <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+                      <ErrorMessage key={i}>{t('ATENTION', 'Atención')}: [{e?.message || e}]</ErrorMessage>
                     ))}
                   </>
                 )}

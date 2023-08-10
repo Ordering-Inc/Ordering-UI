@@ -248,7 +248,7 @@ const SignUpFormUI = (props) => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
-        content: formState.result?.result || [t('ERROR', 'Error')]
+        content: formState.result?.result || [t('ATENTION', 'Atención')]
       })
     } else if (!formState.loading && !formState.result?.error && formState.result?.result) {
       saveCustomerUser && saveCustomerUser(formState.result?.result)
@@ -293,7 +293,7 @@ const SignUpFormUI = (props) => {
     if (checkPhoneCodeState?.result?.error) {
       setAlertState({
         open: true,
-        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
+        content: checkPhoneCodeState?.result?.result || [t('ATENTION', 'Atención')]
       })
     } else if (checkPhoneCodeState?.result?.result && checkPhoneCodeState?.result?.result?.[0] === 'VERIFICATION_CODE_WAS_SENT_TO') {
       setAlertState({

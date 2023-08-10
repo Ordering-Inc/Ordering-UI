@@ -219,7 +219,7 @@ const PhoneAutocompleteUI = (props) => {
         </UserEdit>
       </Modal>
       <Alert
-        title={t('ERROR', 'Error')}
+        title={t('ATENTION', 'Atención')}
         open={alertState.open}
         content={alertState.content}
         onClose={handleCloseAlert}

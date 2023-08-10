@@ -403,7 +403,7 @@ const ProductOptionsUI = (props) => {
               </div>
               {isShowCommentsByBrand && (
                 <ProductComment>
-                  <SectionTitle>{t('NAME', 'Name')} ({t('NO_SPECIAL_INSTRUCTIONS', 'no special instructions')}):</SectionTitle>
+                  <SectionTitle>({t('MOBILE_FRONT_SPECIAL_INSTRUCTIONS', 'Special instructions')}):</SectionTitle>
                   <TextArea
                     rows={1}
                     placeholder={`${t('ENTER_RECIPIENT', 'Enter recipient')} (60 ${t('CHARACTER_LIMIT', 'Character limit')})`}

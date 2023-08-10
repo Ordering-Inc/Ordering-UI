@@ -339,7 +339,7 @@ const FavoriteListUI = (props) => {
         </FavoriteListWrapper>
         {favoriteList?.error && favoriteList?.error.length > 0 && favoriteList?.favorites.length === 0 && (
           favoriteList?.error.map((e, i) => (
-            <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
+            <ErrorMessage key={i}>{t('ATENTION', 'Atención')}: [{e?.message || e}]</ErrorMessage>
           ))
         )}
       </Container>

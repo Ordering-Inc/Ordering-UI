@@ -243,7 +243,7 @@ const LoginFormUI = (props) => {
     if (!formState.loading && formState.result?.error) {
       setAlertState({
         open: true,
-        content: formState.result?.result || [t('ERROR', 'Error')]
+        content: formState.result?.result || [t('ATENTION', 'Atención')]
       })
       setSubmitted(false)
     }
@@ -287,7 +287,7 @@ const LoginFormUI = (props) => {
     if (checkPhoneCodeState?.result?.error) {
       setAlertState({
         open: true,
-        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
+        content: checkPhoneCodeState?.result?.result || [t('ATENTION', 'Atención')]
       })
     } else if (checkPhoneCodeState?.result?.result) {
       setAlertState({
@@ -311,7 +311,7 @@ const LoginFormUI = (props) => {
     if (verifyPhoneState?.result?.error) {
       setAlertState({
         open: true,
-        content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
+        content: verifyPhoneState?.result?.result || [t('ATENTION', 'Atención')]
       })
     } else resetOtpLeftTime()
   }, [verifyPhoneState])

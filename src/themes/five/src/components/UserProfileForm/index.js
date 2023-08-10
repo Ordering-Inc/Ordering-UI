@@ -139,7 +139,7 @@ const UserProfileFormUI = (props) => {
     if (verifyPhoneState?.result?.error) {
       setAlertState({
         open: true,
-        content: verifyPhoneState?.result?.result || [t('ERROR', 'Error')]
+        content: verifyPhoneState?.result?.result || [t('ATENTION', 'Atención')]
       })
     } else { resetOtpLeftTime() }
   }, [verifyPhoneState?.result?.result])

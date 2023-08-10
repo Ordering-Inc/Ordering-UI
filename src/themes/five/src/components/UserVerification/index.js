@@ -130,7 +130,7 @@ const UserVerificationUI = (props) => {
         open: true,
         content: verifyEmailState?.errorSendCode?.[0]
           ?? verifyEmailState?.errorCheckCode?.[0]
-          ?? t('ERROR', 'Error')
+          ?? t('ATENTION', 'Atención')
       })
     }
 
@@ -139,7 +139,7 @@ const UserVerificationUI = (props) => {
         open: true,
         content: verifyPhoneState?.errorSendCode?.[0]
           ?? verifyPhoneState?.errorCheckCode?.[0]
-          ?? t('ERROR', 'Error')
+          ?? t('ATENTION', 'Atención')
       })
     }
   }, [verifyEmailState, verifyPhoneState])
