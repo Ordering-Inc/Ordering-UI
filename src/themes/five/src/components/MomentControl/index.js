@@ -59,7 +59,7 @@ const MomentControlUI = (props) => {
     business,
     getActualSchedule,
     preorderMaximumDays,
-    preorderMinimumDays 
+    preorderMinimumDays
   } = props
 
   const [{ configs }] = useConfig()
@@ -155,7 +155,7 @@ const MomentControlUI = (props) => {
       }
     })
   }
-  
+
   useEffect(() => {
     let _timeLists = []
     if (!scheduleList || cateringPreorder) {
@@ -165,11 +165,11 @@ const MomentControlUI = (props) => {
         return
       }
       _timeLists = hoursList
-      .filter(hour => (Object.keys(business || {})?.length === 0 || schedule?.lapses?.some(lapse =>
-        moment(dateSelected + ` ${hour.startTime}`) >= moment(dateSelected + ` ${lapse.open.hour}:${lapse.open.minute}`).add(preorderLeadTime, 'minutes') && moment(dateSelected + ` ${hour.endTime}`) <= moment(dateSelected + ` ${lapse.close.hour}:${lapse.close.minute}`))) &&
+        .filter(hour => (Object.keys(business || {})?.length === 0 || schedule?.lapses?.some(lapse =>
+          moment(dateSelected + ` ${hour.startTime}`) >= moment(dateSelected + ` ${lapse.open.hour}:${lapse.open.minute}`).add(preorderLeadTime, 'minutes') && moment(dateSelected + ` ${hour.endTime}`) <= moment(dateSelected + ` ${lapse.close.hour}:${lapse.close.minute}`))) &&
         moment(dateSelected + ` ${hour.startTime}`) < moment(dateSelected + ` ${hour.endTime}`) &&
         (moment().add(preorderLeadTime, 'minutes') < moment(dateSelected + ` ${hour.startTime}`) || !cateringPreorder))
-      .map(hour => {
+        .map(hour => {
           return {
             value: hour.startTime,
             text: is12hours ? (
@@ -351,7 +351,7 @@ const MomentControlUI = (props) => {
           <Button
             color='primary'
             onClick={() => onClose()}
-            disabled={!timeSelected}
+            disabled={!isASP ? !timeSelected : false}
           >
             <span>{t('CONTINUE', 'Continue')}</span>
             <ArrowRight />
