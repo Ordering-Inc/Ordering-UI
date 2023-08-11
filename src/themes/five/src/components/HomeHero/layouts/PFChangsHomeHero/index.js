@@ -161,7 +161,7 @@ export const PFChangsHomeHero = (props) => {
                 {t('PICKUP', 'Pickup')}
               </Button>
               <Button
-                color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? '#000' : '#FFF'  : theme?.colors?.tertiary || '#FFF'}
+                color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
                 onClick={() => handleChangeOrderType(1)}
                 disabled={orderState?.loading}
               >
