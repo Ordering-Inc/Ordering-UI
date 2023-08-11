@@ -86,7 +86,7 @@ export const FormInput = styled.form`
     margin-top: 10px;
     padding: 5px;
     background: ${({ theme }) => theme?.colors.gold};
-    color: #000;
+    color: ${({ theme }) => theme?.colors?.buttonPrimaryContrast ?? theme?.colors?.primaryContrast};
     border-color: ${({ theme }) => theme?.colors.gold};
   }
 
