@@ -44,7 +44,8 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
   return color === 'primary' && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:active {\n      background: ", ";\n    }\n    ", "\n    ", "\n    ", "\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
-    return props.theme.colors.primaryContrast;
+    var _props$theme$colors$b;
+    return (_props$theme$colors$b = props.theme.colors.buttonPrimaryContrast) !== null && _props$theme$colors$b !== void 0 ? _props$theme$colors$b : props.theme.colors.primaryContrast;
   }, function (props) {
     return props.theme.colors.primary;
   }, function (props) {
