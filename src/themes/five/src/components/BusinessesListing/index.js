@@ -15,12 +15,12 @@ export const BusinessesListing = (props) => {
 
   const layout = theme?.business_listing_view?.components?.layout?.type || 'original'
   const isStarbucksLayout = ['starbucks', 'mapview'].includes(layout)
-
+  const oloLayout = ['franchise_1', 'franchise_2']
   return (
     <>
       {websiteTheme === 'franchise' ? (
         <>
-          {franchiseLayout === 'franchise_1' && <OloBusinessesListing {...props} />}
+          {oloLayout.includes(franchiseLayout) && <OloBusinessesListing {...props} />}
           {!franchiseLayout && <OriginalBusinessesListing {...props} />}
         </>
       ) : (
