@@ -41,6 +41,10 @@ import loyaltyLevel from './template/assets/images/loyalty_level.png'
 import phoneHero from './template/assets/images/phone-hero-callcenter.png'
 import deliveryIco from './template/assets/images/delivery.svg'
 import pickupIco from './template/assets/images/pickup.svg'
+import eatinIco from './template/assets/images/eatin.svg'
+import curbsideIco from './template/assets/images/curbside.svg'
+import drivethruIco from './template/assets/images/drivethru.svg'
+import cateringIco from './template/assets/images/catering.svg'
 import phone from './template/assets/images/phone.svg'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
@@ -121,6 +125,10 @@ theme.images = {
     phoneHero,
     deliveryIco,
     pickupIco,
+    eatinIco,
+    curbsideIco,
+    drivethruIco,
+    cateringIco,
     phone
   },
 
