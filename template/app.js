@@ -113,8 +113,7 @@ export const App = () => {
   const [oneSignalState, setOneSignalState] = useState({
     notification_app: settings.notification_app
   })
-  const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
-  const isAllowUnaddressOrderType = unaddressedTypes.includes(orderStatus?.options?.type)
+
   const isShowReviewsPopupEnabled = configs?.show_reviews_popups_enabled?.value === '1'
   const hashKey = new URLSearchParams(useLocation()?.search)?.get('hash') || null
   const isKioskApp = settings?.use_kiosk
@@ -174,7 +173,10 @@ export const App = () => {
   const websiteThemeType = themeUpdated?.my_products?.components?.website_theme?.components?.type
   const websiteThemeBusinessSlug = themeUpdated?.my_products?.components?.website_theme?.components?.business_slug
   const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
-
+  const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const franchiseLayout = themeUpdated?.my_products?.components?.website_theme?.components?.franchise_slug
+  const isAllowUnaddressOrderType = unaddressedTypes.includes(orderStatus?.options?.type)
+  const isFranchiseOne = franchiseLayout === 'franchise_1'
   const businessesSlug = {
     marketplace: 'marketplace',
     kiosk: updatedBusinessSlug,
@@ -555,7 +557,7 @@ export const App = () => {
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      isKioskApp
+                      isKioskApp || isFranchiseOne
                         ? <HomePage notificationState={oneSignalState} />
                         : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
@@ -568,7 +570,7 @@ export const App = () => {
                     {isUserVerifyRequired ? (
                       <Redirect to='/verify' />
                     ) : (
-                      isKioskApp
+                      isKioskApp || isFranchiseOne
                         ? <HomePage notificationState={oneSignalState} />
                         : queryIntegrationToken && queryIntegrationCode === 'spoonity'
                           ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
@@ -682,7 +684,7 @@ export const App = () => {
                               isUserVerifyRequired ? (
                                 <Redirect to='/verify' />
                               ) : (
-                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !singleBusinessConfig.isActive
+                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType || isFranchiseOne) && !singleBusinessConfig.isActive
                                   ? <BusinessesList searchValueCustom={searchValue} />
                                   : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                               )
