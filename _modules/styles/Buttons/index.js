@@ -18,12 +18,12 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
   return bgtransparent && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      background: transparent !important;\n  "])));
 }, function (_ref2) {
   var initialIcon = _ref2.initialIcon;
-  return initialIcon && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    text-align: left;\n    ", "\n    img{\n      vertical-align: middle;\n    }\n    span {\n      padding-left: 15%\n      ", "\n    }\n  "])), function (props) {
+  return initialIcon && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    text-align: left;\n    ", "\n    img{\n      vertical-align: middle;\n    }\n    span {\n      padding-left: 15%;\n      ", "\n    }\n  "])), function (props) {
     var _props$theme;
     return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      text-align: right;\n    "])));
   }, function (props) {
     var _props$theme2;
-    return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        padding-right: 15%;\n        padding-left: 0\n    "])));
+    return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        padding-right: 15%;\n        padding-left: 0;\n    "])));
   });
 }, function (_ref3) {
   var outline = _ref3.outline;
@@ -40,7 +40,8 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
   return color === 'primary' && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:active {\n      background: ", ";\n    }\n    ", "\n    ", "\n    ", "\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
-    return props.theme.colors.primaryContrast;
+    var _props$theme$colors$b;
+    return ((_props$theme$colors$b = props.theme.colors.buttonPrimaryContrast) !== null && _props$theme$colors$b !== void 0 ? _props$theme$colors$b : props.theme.colors.primaryContrast) + '!important';
   }, function (props) {
     return props.theme.colors.primary;
   }, function (props) {

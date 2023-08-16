@@ -21,7 +21,7 @@ var VaXMiCuenta = function VaXMiCuenta(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  return /*#__PURE__*/_react.default.createElement(_styles.VaXMiCuentaContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "\xBFDeseas donar a ", /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement(_styles.VaXMiCuentaContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "\xBFDeseas donar a ", /*#__PURE__*/_react.default.createElement("div", null, " ", /*#__PURE__*/_react.default.createElement("img", {
     src: "https://d2gjwc6pypyhyf.cloudfront.net/va-por-mi-cuenta.svg"
   })), " ?"), /*#__PURE__*/_react.default.createElement("p", null, t('VA_POR_MI_CUENTA', 'VA_POR_MI_CUENTA'), " ", /*#__PURE__*/_react.default.createElement("a", {
     href: t('VA_POR_MI_CUENTA_URL', 'VA_POR_MI_CUENTA'),

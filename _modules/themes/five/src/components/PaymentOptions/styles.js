@@ -14,11 +14,23 @@ var PaymentMethodsContainer = _styledComponents.default.div(_templateObject || (
 exports.PaymentMethodsContainer = PaymentMethodsContainer;
 var PaymentMethodsList = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  width: calc(100% + 15px);\n  margin-left: -15px;\n"])));
 exports.PaymentMethodsList = PaymentMethodsList;
-var PayCard = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: calc(50% - 30px);\n  cursor: pointer;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  margin: 15px;\n  text-align: center;\n\n  ", "\n\n  > div {\n    max-width: 88px;\n    width: 100%;\n    border: 1px solid #DEE2E6;\n    border-radius: 7.6px;\n    padding: 15px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: 12px;\n    box-sizing: border-box;\n\n    > svg {\n      font-size: 25px;\n      path {\n        fill: #DEE2E6;\n      }\n    }\n  }\n\n  p {\n    margin: 0px;\n    font-size: 13px;\n    text-align: center;\n    color: #DEE2E6;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 351px) {\n    width: calc(33% - 30px);\n  }\n\n  @media (min-width: 513px) {\n    width: calc(25% - 30px);\n  }\n\n  @media (min-width: 768px) {\n    width: calc(25% - 30px);\n  }\n\n  @media (min-width: 1200px) {\n    width: calc(20% - 30px);\n  }\n\n  ", "\n  \n  &.active {\n    > div {\n      border: 1px solid ", ";\n      svg path {\n        fill: ", ";\n      }\n    }\n    p {\n      color: ", ";\n    }\n  }\n\n  /* &:not(.active) {\n    border: ", ";\n  } */\n"])), function (props) {
+var PayCard = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: calc(50% - 30px);\n  cursor: pointer;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  margin: 15px;\n  text-align: center;\n\n  ", "\n\n  > div {\n    max-width: 88px;\n    width: 100%;\n    border: '1px solid'+", ";\n    border-radius: 7.6px;\n    padding: 15px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-bottom: 12px;\n    box-sizing: border-box;\n\n    > svg {\n      font-size: 25px;\n      path {\n        fill: ", ";\n      }\n    }\n  }\n\n  p {\n    margin: 0px;\n    font-size: 13px;\n    text-align: center;\n    color: ", ";\n    white-space: nowrap;\n  }\n\n  @media (min-width: 351px) {\n    width: calc(33% - 30px);\n  }\n\n  @media (min-width: 513px) {\n    width: calc(25% - 30px);\n  }\n\n  @media (min-width: 768px) {\n    width: calc(25% - 30px);\n  }\n\n  @media (min-width: 1200px) {\n    width: calc(20% - 30px);\n  }\n\n  ", "\n  \n  &.active {\n    > div {\n      border: 1px solid ", ";\n      svg path {\n        fill: ", ";\n      }\n    }\n    p {\n      color: ", ";\n    }\n  }\n\n  /* &:not(.active) {\n    border: ", ";\n  } */\n"])), function (props) {
   return props.isDisabled && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    opacity: 0.7;\n  "])));
 }, function (_ref) {
-  var _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3;
+  var _theme$colors;
   var theme = _ref.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#fff';
+}, function (_ref2) {
+  var _theme$colors2;
+  var theme = _ref2.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#fff';
+}, function (_ref3) {
+  var _theme$colors3;
+  var theme = _ref3.theme;
+  return (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#fff';
+}, function (_ref4) {
+  var _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3;
+  var theme = _ref4.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$checko = _theme$layouts.checkout) === null || _theme$layouts$checko === void 0 ? void 0 : (_theme$layouts$checko2 = _theme$layouts$checko.components) === null || _theme$layouts$checko2 === void 0 ? void 0 : (_theme$layouts$checko3 = _theme$layouts$checko2.layout) === null || _theme$layouts$checko3 === void 0 ? void 0 : _theme$layouts$checko3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    align-self: flex-start;\n    p {\n      white-space: pre-wrap;\n    }\n    @media (min-width: 768px) {\n      width: calc(25% - 10px);\n    }\n    @media (min-width: 1024px) {\n      width: calc(20% - 20px);\n    }\n    @media (min-width: 1200px) {\n      width: calc(20% - 30px);\n    }\n  "])));
 }, function (props) {
   return props.theme.colors.primary;
@@ -26,8 +38,8 @@ var PayCard = _styledComponents.default.div(_templateObject3 || (_templateObject
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.headingColor;
-}, function (_ref2) {
-  var isSkeleton = _ref2.isSkeleton;
+}, function (_ref5) {
+  var isSkeleton = _ref5.isSkeleton;
   return isSkeleton ? '0' : '1px solid #EAEAEA';
 });
 exports.PayCard = PayCard;

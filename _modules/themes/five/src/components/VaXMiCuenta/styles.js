@@ -14,8 +14,9 @@ var VaXMiCuentaContainer = _styledComponents.default.div(_templateObject || (_te
   return props.theme.colors.secundaryContrast;
 });
 exports.VaXMiCuentaContainer = VaXMiCuentaContainer;
-var Button = _styledComponents.default.button(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  /* background: transparent; */\n  border-radius: 8px;\n  /* width: 60px; */\n  height: 45px;\n  border-color: #8a83833b;\n  color: ", ";;\n  font-weight: 800;\n  font-size: 16px;\n  line-height: 18px;\n  min-width: ", ";\n  background-color: ", "\n"])), function (props) {
-  return props.theme.colors.secondaryDark;
+var Button = _styledComponents.default.button(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  /* background: transparent; */\n  border-radius: 8px;\n  /* width: 60px; */\n  height: 45px;\n  border-color: #8a83833b;\n  color: ", ";\n  font-weight: 800;\n  font-size: 16px;\n  line-height: 18px;\n  min-width: ", ";\n  background-color: ", "\n"])), function (props) {
+  var _props$theme, _props$theme$colors;
+  return props.isSelected ? ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : (_props$theme$colors = _props$theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.buttonPrimaryContrast) || '#000' : props.theme.colors.secondaryDark;
 }, function (_ref) {
   var value = _ref.value;
   return value === 0 ? '100px' : '60px';

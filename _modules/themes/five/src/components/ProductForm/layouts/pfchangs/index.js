@@ -404,7 +404,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     });
   })), isShowCommentsByBrand && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, "(", t('MOBILE_FRONT_SPECIAL_INSTRUCTIONS', 'Special instructions'), "):"), /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
     rows: 1,
-    placeholder: "".concat(t('ENTER_RECIPIENT', 'Enter recipient'), " (60 ").concat(t('CHARACTER_LIMIT', 'Character limit'), ")"),
+    placeholder: "(60 ".concat(t('CHARACTER_LIMIT', 'Character limit'), ")"),
     defaultValue: productCart.comment,
     onChange: handleChangeCommentState,
     disabled: !(productCart && !isSoldOut && maxProductQuantity),
