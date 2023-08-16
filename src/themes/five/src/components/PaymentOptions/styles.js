@@ -32,7 +32,7 @@ export const PayCard = styled.div`
   > div {
     max-width: 88px;
     width: 100%;
-    border: 1px solid #DEE2E6;
+    border: '1px solid'+${({ theme }) => theme?.colors?.tertiary || '#fff'};
     border-radius: 7.6px;
     padding: 15px;
     display: flex;
@@ -44,7 +44,7 @@ export const PayCard = styled.div`
     > svg {
       font-size: 25px;
       path {
-        fill: #DEE2E6;
+        fill: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
       }
     }
   }
@@ -53,7 +53,7 @@ export const PayCard = styled.div`
     margin: 0px;
     font-size: 13px;
     text-align: center;
-    color: #DEE2E6;
+    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     white-space: nowrap;
   }
 

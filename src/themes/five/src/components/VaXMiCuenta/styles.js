@@ -49,11 +49,11 @@ export const Button = styled.button`
   /* width: 60px; */
   height: 45px;
   border-color: #8a83833b;
-  color: ${props => props.theme.colors.secondaryDark};;
+  color: ${props => props.isSelected ? (props.theme?.colors?.buttonPrimaryContrast || '#000') : props.theme.colors.secondaryDark};
   font-weight: 800;
   font-size: 16px;
   line-height: 18px;
-  min-width: ${({ value }) => value === 0 ? '100px' : '60px' };
+  min-width: ${({ value }) => value === 0 ? '100px' : '60px'};
   background-color: ${({ isSelected }) => isSelected && css`
       ${props => props.theme.colors.primary};
   `}

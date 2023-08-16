@@ -406,7 +406,7 @@ const ProductOptionsUI = (props) => {
                   <SectionTitle>({t('MOBILE_FRONT_SPECIAL_INSTRUCTIONS', 'Special instructions')}):</SectionTitle>
                   <TextArea
                     rows={1}
-                    placeholder={`${t('ENTER_RECIPIENT', 'Enter recipient')} (60 ${t('CHARACTER_LIMIT', 'Character limit')})`}
+                    placeholder={`(60 ${t('CHARACTER_LIMIT', 'Character limit')})`}
                     defaultValue={productCart.comment}
                     onChange={handleChangeCommentState}
                     disabled={!(productCart && !isSoldOut && maxProductQuantity)}

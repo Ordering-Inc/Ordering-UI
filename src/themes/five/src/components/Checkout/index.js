@@ -765,18 +765,18 @@ const CheckoutUI = (props) => {
         )}
         {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && configSlug !== 'starbucks' && (
           <RewardContainer>
-              <RewardBox>
-                <RewardBoxContainer>
-                  <div className='image-reward'>
-                    <div style={{paddingRight: 10}}><img src={theme.images?.general?.rewardsIcon} /></div>
-                    <div style={{margin: 'auto'}} className="name">{t('WOW_CART_NEW_POINTS', 'Saldo que acumulas')}</div>
-                  </div>
-                  <div className="value">{parsePrice(wowAcumulationPoints?.result?.pesos)}</div>
-                </RewardBoxContainer>
-              </RewardBox>
-              <RewardDisclaimerContainer>
-                {t('REWARDS_DISCLAIMER','*Cálculo aproximado, el saldo real se verá reflejado máx en 24 hrs.')}
-              </RewardDisclaimerContainer>
+            <RewardBox>
+              <RewardBoxContainer>
+                <div className='image-reward'>
+                  <div style={{ paddingRight: 10 }}><img src={theme.images?.general?.rewardsIcon} /></div>
+                  <div style={{ margin: 'auto' }} className='name'>{t('WOW_CART_NEW_POINTS', 'Saldo que acumulas')}</div>
+                </div>
+                <div className='value'>{parsePrice(wowAcumulationPoints?.result?.pesos)}</div>
+              </RewardBoxContainer>
+            </RewardBox>
+            <RewardDisclaimerContainer>
+              {t('REWARDS_DISCLAIMER', '*Cálculo aproximado, el saldo real se verá reflejado máx en 24 hrs.')}
+            </RewardDisclaimerContainer>
           </RewardContainer>
         )}
         {!cartState.loading && cart && cart?.status !== 2 && (
@@ -829,10 +829,10 @@ const CheckoutUI = (props) => {
           validationFields?.fields?.checkout?.driver_tip?.enabled &&
           validationFields?.fields?.checkout?.driver_tip?.required &&
           (Number(cart?.driver_tip) <= 0) && (
-            <WarningText>
-              {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
-            </WarningText>
-          )}
+          <WarningText>
+            {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
+          </WarningText>
+        )}
       </WrapperRightContainer>
       <AlertComponent
         title={t('CUSTOMER_DETAILS', 'Customer Details')}
