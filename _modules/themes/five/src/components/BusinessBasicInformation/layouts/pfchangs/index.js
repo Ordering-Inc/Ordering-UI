@@ -29,7 +29,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _dayjs.default.extend(_timezone.default);
 _dayjs.default.extend(_isBetween.default);
 var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs(props) {
-  var _orderState$options, _theme$colors, _theme$colors2;
+  var _orderState$options, _props$business, _props$business$slug, _theme$colors, _theme$colors2, _props$business2, _props$business2$slug, _theme$colors3, _theme$colors4;
   var businessState = props.businessState,
     isSkeleton = props.isSkeleton,
     setOpenBusinessInformation = props.setOpenBusinessInformation,
@@ -81,13 +81,13 @@ var BusinessBasicInformationPFChangs = function BusinessBasicInformationPFChangs
   }))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
     orderTypeSelected: orderTypeSelected
   }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 2 ? '#000' : (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || '#FFF',
+    color: orderTypeSelected === 2 ? props !== null && props !== void 0 && (_props$business = props.business) !== null && _props$business !== void 0 && (_props$business$slug = _props$business.slug) !== null && _props$business$slug !== void 0 && _props$business$slug.includes('pf_changs') ? '#000' : (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.buttonPrimaryContrast) || 'FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#FFF',
     onClick: function onClick() {
       return handleChangeOrderType(2);
     },
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 1 ? '#000' : (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#FFF',
+    color: orderTypeSelected === 1 ? props !== null && props !== void 0 && (_props$business2 = props.business) !== null && _props$business2 !== void 0 && (_props$business2$slug = _props$business2.slug) !== null && _props$business2$slug !== void 0 && _props$business2$slug.includes('pf_changs') ? '#000' : (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.buttonPrimaryContrast) || 'FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.tertiary) || '#FFF',
     onClick: function onClick() {
       return handleChangeOrderType(1);
     },

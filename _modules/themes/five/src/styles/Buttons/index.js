@@ -45,7 +45,7 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
     return props.theme.colors.primary;
   }, function (props) {
     var _props$theme$colors$b;
-    return (_props$theme$colors$b = props.theme.colors.buttonPrimaryContrast) !== null && _props$theme$colors$b !== void 0 ? _props$theme$colors$b : props.theme.colors.primaryContrast;
+    return ((_props$theme$colors$b = props.theme.colors.buttonPrimaryContrast) !== null && _props$theme$colors$b !== void 0 ? _props$theme$colors$b : props.theme.colors.primaryContrast) + '!important';
   }, function (props) {
     return props.theme.colors.primary;
   }, function (props) {
