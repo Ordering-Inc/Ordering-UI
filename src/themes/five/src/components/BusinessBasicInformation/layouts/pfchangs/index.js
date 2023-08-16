@@ -63,14 +63,14 @@ export const BusinessBasicInformationPFChangs = (props) => {
       </TitleContainer>
       <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
         <Button
-          color={orderTypeSelected === 2 ? '#000' : theme?.colors?.tertiary || '#FFF'}
+          color={orderTypeSelected === 2 ? props?.business?.slug?.includes('pf_changs') ? '#000' : (theme?.colors?.buttonPrimaryContrast || 'FFF') : theme?.colors?.tertiary || '#FFF'}
           onClick={() => handleChangeOrderType(2)}
           disabled={orderState?.loading}
         >
           {t('PICKUP', 'Pickup')}
         </Button>
         <Button
-          color={orderTypeSelected === 1 ? '#000' : theme?.colors?.tertiary || '#FFF'}
+          color={orderTypeSelected === 1 ? props?.business?.slug?.includes('pf_changs') ? '#000' : (theme?.colors?.buttonPrimaryContrast || 'FFF') : theme?.colors?.tertiary || '#FFF'}
           onClick={() => handleChangeOrderType(1)}
           disabled={orderState?.loading}
         >

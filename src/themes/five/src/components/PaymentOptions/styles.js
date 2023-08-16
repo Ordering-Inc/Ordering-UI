@@ -32,7 +32,7 @@ export const PayCard = styled.div`
   > div {
     max-width: 88px;
     width: 100%;
-    border: '1px solid'+${({ theme }) => theme?.colors?.tertiary || '#fff'};
+    border: ${({ theme }) => ('1px solid' + theme?.colors?.tertiary) || '#fff'};
     border-radius: 7.6px;
     padding: 15px;
     display: flex;
