@@ -97,7 +97,7 @@ export const PayCard = styled.div`
       }
     }
     p {
-      color: ${props => props.theme.colors.headingColor};
+      color: ${props => props.theme.colors.primary};
     }
   }
 

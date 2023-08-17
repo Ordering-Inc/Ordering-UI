@@ -241,7 +241,7 @@ export const Header = (props) => {
   }, [customerState?.user?.address])
 
   useEffect(() => {
-    if (!(pathname.includes('/search') || pathname.includes('/checkout'))) {
+    if (!(pathname.includes('/search'))) {
       setIsFarAway(false)
       return
     }
@@ -305,7 +305,7 @@ export const Header = (props) => {
               )}
             </LogoHeader>
           </LeftHeader>
-          {showOrderOptionsByTheme && isShowOrderOptions && !props.isCustomLayout && (
+          {/* {showOrderOptionsByTheme && isShowOrderOptions && !props.isCustomLayout && (
             <Menu className='left-header' isCustomerMode={isCustomerMode}>
               {windowSize.width > 820 && isFarAway && (
                 <FarAwayMessage>
@@ -382,7 +382,7 @@ export const Header = (props) => {
                 </>
               )}
             </Menu>
-          )}
+          )} */}
           {onlineStatus && (
             <RightHeader>
               <Menu isCustomerMode={isCustomerMode}>

@@ -12,7 +12,8 @@ import {
   useLanguage,
   useSession,
   useOrder,
-  useConfig
+  useConfig,
+  useApi
 } from 'ordering-components'
 
 import { Modal } from '../Modal'
@@ -111,7 +112,11 @@ const PaymentOptionsUI = (props) => {
   const [{ token, user }] = useSession()
   const [ , { applyCoupon, removeOffer }] = useOrder()
   const [{ configs }] = useConfig()
+  const [ordering] = useApi()
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const isAlsea = ordering.project === 'alsea'
 
   const AlertComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
     ? AlertPFChangs
@@ -158,6 +163,43 @@ const PaymentOptionsUI = (props) => {
       props.setErrorCash(false)
     }
   }, [paymethodSelected])
+
+  useEffect(() => {
+    if (!isLoading && paymethodSelected?.gateway === 'openpay') {
+      const publicKey = configs?.openpay_client_id?.value ?? 'pk_e871b3211d924956ad7de33c87af6ef9'
+      const merchantId = configs?.openpay_client_id?.key ?? 'mz86y3z3qbpmxukfefll'
+
+      if (!merchantId || !publicKey) return
+      if (window?.OpenPay?.deviceData?.setup) {
+        // setIsSdkReady(true)
+        return
+      }
+      const scripts = [
+        'https://js.openpay.mx/openpay.v1.min.js',
+        'https://resources.openpay.mx/lib/openpay-data-js/1.2.38/openpay-data.v1.min.js'
+      ]
+      scripts.forEach(s => {
+        const script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.src = s
+        script.defer = true
+        script.async = true
+        script.onload = () => {
+          console.log('onload', isAlsea)
+          window.OpenPay.setId(isAlsea ? merchantId : 'mdcd0jbyt3l0nptkyftl')
+          window.OpenPay.setApiKey(isAlsea ? publicKey : 'pk_d076c726815841c3be83a3c7917c039b')
+          window.OpenPay.Group.setId(isAlsea ? 'gquhxdrqw0eqdwtbcw0o' : 'gbuk3cxhqpapnqznndcg')
+          window.OpenPay.Group.setApiKey(isAlsea ? 'pk_6fe12174eefa4930b4c17c5cfeec398e' : 'pk_fd69e364498d442f9e7340687c8eed90')
+          window.OpenPay.setSandboxMode(!isAlsea)
+          // setIsSdkReady(true)
+        }
+        script.onerror = () => {
+          throw new Error('Open pay SDK could not be loaded.')
+        }
+        document.body.appendChild(script)
+      })
+    }
+  }, [paymethodSelected, isLoading])
 
   useEffect(() => {
     if (props.paySelected && props.paySelected?.data) {

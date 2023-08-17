@@ -99,14 +99,15 @@ export const ModalHeader = styled.div`
 
 export const ModalTitle = styled.h2`
   font-weight: 600;
-  font-size: 24px;
+  font-size: 22px;
   text-align: center;
   letter-spacing: 0px;
   color: #010300;
   opacity: 1;
   margin: 0px 0px;
   margin-bottom: 20px;
-  padding-left: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
   /* text-transform: capitalize; */
   flex: 1;
   ${props => props.theme?.rtl && css`

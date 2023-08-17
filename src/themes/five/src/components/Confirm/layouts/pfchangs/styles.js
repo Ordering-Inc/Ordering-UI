@@ -26,8 +26,9 @@ export const PopupWrap = styled.div`
 export const PopupDialog = styled.div`
   background-color: #FFF;
   padding: 20px;
-  width: 70%;
+  width: 40%;
   border-radius: 10px;
+  font-family: TrajanPro-Bold;
   @media (min-width: 768px){
     width: 40%;
   }

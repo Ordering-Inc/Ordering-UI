@@ -403,10 +403,10 @@ const ProductOptionsUI = (props) => {
               </div>
               {isShowCommentsByBrand && (
                 <ProductComment>
-                  <SectionTitle>({t('MOBILE_FRONT_SPECIAL_INSTRUCTIONS', 'Special instructions')}):</SectionTitle>
+                  <SectionTitle>{t('MOBILE_FRONT_SPECIAL_INSTRUCTIONS', 'Special instructions')}:</SectionTitle>
                   <TextArea
                     rows={1}
-                    placeholder={`(60 ${t('CHARACTER_LIMIT', 'Character limit')})`}
+                    placeholder={`60 ${t('CHARACTER_LIMIT', 'Character limit')}`}
                     defaultValue={productCart.comment}
                     onChange={handleChangeCommentState}
                     disabled={!(productCart && !isSoldOut && maxProductQuantity)}

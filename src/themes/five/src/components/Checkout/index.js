@@ -85,6 +85,8 @@ import { VaXMiCuenta } from '../VaXMiCuenta'
 import { MomentContent as MomentContentPF } from '../MomentContent/layouts/pfchangs'
 import { getIconCard } from '../../../../../utils'
 
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+
 const mapConfigs = {
   mapZoom: 16,
   mapSize: {
@@ -129,6 +131,7 @@ const CheckoutUI = (props) => {
   // const [{ options, loading }, { changePaymethod }] = useOrder()
   const [{ options, loading }, { refreshOrderOptions }] = useOrder()
   const [ordering] = useApi()
+  const windowSize = useWindowSize()
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -392,6 +395,9 @@ const CheckoutUI = (props) => {
         business_id: cart?.business_id,
         coupon: null
       })
+    }
+    if (!cartState.loading && paymethodSelected?.gateway === 'openpay' && ((paymethodSelected?.data && Object.keys(paymethodSelected?.data).length === 0) || !paymethodSelected?.data)) {
+      handlePaymethodChange(null)
     }
   }, [paymethodSelected, cartState.loading])
 
@@ -877,14 +883,14 @@ const CheckoutUI = (props) => {
         />
       </Modal>
       <Modal
-        title={openCardCSV ? t('CSV_DESCRIPTION', 'CSV_DESCRIPTION') : t('ADD_NOTES_TO_ADDRESS', 'ADD_NOTES_TO_ADDRESS') }
+        title={openCardCSV ? t('CSV_DESCRIPTION', 'CSV_DESCRIPTION') : t('ADD_NOTES_TO_ADDRESS', 'ADD_NOTES_TO_ADDRESS')}
         className='modal-info'
         open={openAddressNotes || openCardCSV}
         onClose={() => {
           setOpenAddressNotes(false)
           setOpenCardCSV(false)
         }}
-        width='70%'
+        width={windowSize.width > 1500 ? '25%' : '35%'}
       >
         {openCardCSV && (
           <CardForm>
