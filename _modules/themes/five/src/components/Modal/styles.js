@@ -49,7 +49,7 @@ var ModalActions = _styledComponents.default.div(_templateObject7 || (_templateO
 exports.ModalActions = ModalActions;
 var ModalHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 30px;\n\n  @media(min-width: 450px){\n    margin-top: 0;\n  }\n\n"])));
 exports.ModalHeader = ModalHeader;
-var ModalTitle = _styledComponents.default.h2(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  text-align: center;\n  letter-spacing: 0px;\n  color: #010300;\n  opacity: 1;\n  margin: 0px 0px;\n  margin-bottom: 20px;\n  padding-left: 10px;\n  /* text-transform: capitalize; */\n  flex: 1;\n  ", "\n  ", "\n  &::first-letter {\n    text-transform: capitalize;\n  }\n"])), function (props) {
+var ModalTitle = _styledComponents.default.h2(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 22px;\n  text-align: center;\n  letter-spacing: 0px;\n  color: #010300;\n  opacity: 1;\n  margin: 0px 0px;\n  margin-bottom: 20px;\n  padding-left: 15px;\n  padding-right: 15px;\n  /* text-transform: capitalize; */\n  flex: 1;\n  ", "\n  ", "\n  &::first-letter {\n    text-transform: capitalize;\n  }\n"])), function (props) {
   var _props$theme2;
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    text-align: left;\n    padding-right: 10px;\n    padding-left: 0px;\n  "])));
 }, function (_ref9) {

@@ -95,7 +95,7 @@ var paypalBtnStyle = {
   size: 'responsive'
 };
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance2, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _configs$openpay_clie, _configs$openpay_clie2, _configs$openpay_clie3, _configs$openpay_clie4, _configs$openpay_clie5, _configs$openpay_clie6, _props$afterComponent, _props$afterElements;
+  var _theme$layouts, _theme$layouts$genera, _theme$layouts$genera2, _theme$layouts$genera3, _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _cart$balance2, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _configs$openpay_clie5, _configs$openpay_clie6, _configs$openpay_clie7, _configs$openpay_clie8, _configs$openpay_clie9, _configs$openpay_clie10, _props$afterComponent, _props$afterElements;
   var cart = props.cart,
     errorCash = props.errorCash,
     isLoading = props.isLoading,
@@ -135,6 +135,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
+  var _useApi = (0, _orderingComponents.useApi)(),
+    _useApi2 = _slicedToArray(_useApi, 1),
+    ordering = _useApi2[0];
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -142,6 +145,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
+  var isAlsea = ordering.project === 'alsea';
   var AlertComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$genera = _theme$layouts.general) === null || _theme$layouts$genera === void 0 ? void 0 : (_theme$layouts$genera2 = _theme$layouts$genera.components) === null || _theme$layouts$genera2 === void 0 ? void 0 : (_theme$layouts$genera3 = _theme$layouts$genera2.layout) === null || _theme$layouts$genera3 === void 0 ? void 0 : _theme$layouts$genera3.type) === 'pfchangs' ? _pfchangs.Alert : _Confirm.Alert;
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
@@ -182,6 +186,40 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       props.setErrorCash(false);
     }
   }, [paymethodSelected]);
+  (0, _react.useEffect)(function () {
+    if (!isLoading && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'openpay') {
+      var _configs$openpay_clie, _configs$openpay_clie2, _configs$openpay_clie3, _configs$openpay_clie4, _window, _window$OpenPay, _window$OpenPay$devic;
+      var publicKey = (_configs$openpay_clie = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie2 = configs.openpay_client_id) === null || _configs$openpay_clie2 === void 0 ? void 0 : _configs$openpay_clie2.value) !== null && _configs$openpay_clie !== void 0 ? _configs$openpay_clie : 'pk_e871b3211d924956ad7de33c87af6ef9';
+      var merchantId = (_configs$openpay_clie3 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie4 = configs.openpay_client_id) === null || _configs$openpay_clie4 === void 0 ? void 0 : _configs$openpay_clie4.key) !== null && _configs$openpay_clie3 !== void 0 ? _configs$openpay_clie3 : 'mz86y3z3qbpmxukfefll';
+      if (!merchantId || !publicKey) return;
+      if ((_window = window) !== null && _window !== void 0 && (_window$OpenPay = _window.OpenPay) !== null && _window$OpenPay !== void 0 && (_window$OpenPay$devic = _window$OpenPay.deviceData) !== null && _window$OpenPay$devic !== void 0 && _window$OpenPay$devic.setup) {
+        // setIsSdkReady(true)
+        return;
+      }
+      var scripts = ['https://js.openpay.mx/openpay.v1.min.js', 'https://resources.openpay.mx/lib/openpay-data-js/1.2.38/openpay-data.v1.min.js'];
+      scripts.forEach(function (s) {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = s;
+        script.defer = true;
+        script.async = true;
+        script.onload = function () {
+          console.log('onload', isAlsea);
+          window.OpenPay.setId(isAlsea ? merchantId : 'mdcd0jbyt3l0nptkyftl');
+          window.OpenPay.setApiKey(isAlsea ? publicKey : 'pk_d076c726815841c3be83a3c7917c039b');
+          window.OpenPay.Group.setId(isAlsea ? 'gquhxdrqw0eqdwtbcw0o' : 'gbuk3cxhqpapnqznndcg');
+          window.OpenPay.Group.setApiKey(isAlsea ? 'pk_6fe12174eefa4930b4c17c5cfeec398e' : 'pk_fd69e364498d442f9e7340687c8eed90');
+          window.OpenPay.setSandboxMode(!isAlsea);
+          // setIsSdkReady(true)
+        };
+
+        script.onerror = function () {
+          throw new Error('Open pay SDK could not be loaded.');
+        };
+        document.body.appendChild(script);
+      });
+    }
+  }, [paymethodSelected, isLoading]);
   (0, _react.useEffect)(function () {
     var _props$paySelected;
     if (props.paySelected && (_props$paySelected = props.paySelected) !== null && _props$paySelected !== void 0 && _props$paySelected.data) {
@@ -376,9 +414,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       return handlePaymethodClick(null);
     },
     handlePlaceOrder: handlePlaceOrder,
-    merchantId: (_configs$openpay_clie = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie2 = configs.openpay_client_id) === null || _configs$openpay_clie2 === void 0 ? void 0 : _configs$openpay_clie2.key) !== null && _configs$openpay_clie !== void 0 ? _configs$openpay_clie : 'mz86y3z3qbpmxukfefll',
-    publicKey: (_configs$openpay_clie3 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie4 = configs.openpay_client_id) === null || _configs$openpay_clie4 === void 0 ? void 0 : _configs$openpay_clie4.value) !== null && _configs$openpay_clie3 !== void 0 ? _configs$openpay_clie3 : 'pk_e871b3211d924956ad7de33c87af6ef9',
-    isSandbox: (_configs$openpay_clie5 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie6 = configs.openpay_client_id) === null || _configs$openpay_clie6 === void 0 ? void 0 : _configs$openpay_clie6.sandbox) !== null && _configs$openpay_clie5 !== void 0 ? _configs$openpay_clie5 : true,
+    merchantId: (_configs$openpay_clie5 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie6 = configs.openpay_client_id) === null || _configs$openpay_clie6 === void 0 ? void 0 : _configs$openpay_clie6.key) !== null && _configs$openpay_clie5 !== void 0 ? _configs$openpay_clie5 : 'mz86y3z3qbpmxukfefll',
+    publicKey: (_configs$openpay_clie7 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie8 = configs.openpay_client_id) === null || _configs$openpay_clie8 === void 0 ? void 0 : _configs$openpay_clie8.value) !== null && _configs$openpay_clie7 !== void 0 ? _configs$openpay_clie7 : 'pk_e871b3211d924956ad7de33c87af6ef9',
+    isSandbox: (_configs$openpay_clie9 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie10 = configs.openpay_client_id) === null || _configs$openpay_clie10 === void 0 ? void 0 : _configs$openpay_clie10.sandbox) !== null && _configs$openpay_clie9 !== void 0 ? _configs$openpay_clie9 : true,
     isApplyMasterCoupon: isApplyMasterCoupon
   })), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('PAYMENT_METHODS', 'Payment methods'),

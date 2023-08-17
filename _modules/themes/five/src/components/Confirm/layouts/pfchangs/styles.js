@@ -22,7 +22,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var PopupWrap = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  z-index: 1001;\n  outline: none;\n"])));
 exports.PopupWrap = PopupWrap;
-var PopupDialog = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  background-color: #FFF;\n  padding: 20px;\n  width: 70%;\n  border-radius: 10px;\n  @media (min-width: 768px){\n    width: 40%;\n  }\n"])));
+var PopupDialog = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  background-color: #FFF;\n  padding: 20px;\n  width: 40%;\n  border-radius: 10px;\n  font-family: TrajanPro-Bold;\n  @media (min-width: 768px){\n    width: 40%;\n  }\n"])));
 exports.PopupDialog = PopupDialog;
 var PopupActions = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  margin: 30px 0px 0px;\n  button {\n    width: 150px;\n    border-radius: 0px;\n    opacity: 1;\n    height: 45px;\n    border-width: 0;\n    &:nth-child(1) {\n      margin-right: 15px;\n      ", "  \n      color: ", ";\n    }\n    &:last-child {\n      color: #fff;\n      ", "  \n    }\n  }\n"])), function (props) {
   var _props$theme;

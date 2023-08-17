@@ -37,7 +37,7 @@ var PayCard = _styledComponents.default.div(_templateObject3 || (_templateObject
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
-  return props.theme.colors.headingColor;
+  return props.theme.colors.primary;
 }, function (_ref5) {
   var isSkeleton = _ref5.isSkeleton;
   return isSkeleton ? '0' : '1px solid #EAEAEA';

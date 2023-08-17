@@ -49,7 +49,7 @@ var inputNames = [{
   code: 'Address notes'
 }];
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _theme$header$compone4, _theme$general, _theme$general$compon, _theme$general$compon2, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _theme$header, _theme$header$compone, _theme$header$compone2, _theme$header$compone3, _theme$header$compone4, _theme$general, _theme$general$compon, _theme$general$compon2, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _configState$configs6, _configState$configs7, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _formState$changes29, _orderState$options6, _orderState$options6$, _props$afterComponent, _props$afterElements;
   var addressesList = props.addressesList,
     googleMapsControls = props.googleMapsControls,
     formState = props.formState,
@@ -587,7 +587,7 @@ var AddressFormUI = function AddressFormUI(props) {
   }, t('CANCEL', 'Cancel')), Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_pfchangs2.Button, {
     id: "submit-btn",
     type: "submit",
-    disabled: formState.loading,
+    disabled: formState.loading || !(formState !== null && formState !== void 0 && (_formState$changes29 = formState.changes) !== null && _formState$changes29 !== void 0 && _formState$changes29.address_notes),
     color: "primary"
   }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6$ = _orderState$options6.address) !== null && _orderState$options6$ !== void 0 && _orderState$options6$.address ? t('UPDATE', 'Update') : t('ADD_ADDRESS', 'Add address')) : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('ADDRESS', 'Address'),
