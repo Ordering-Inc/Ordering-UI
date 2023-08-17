@@ -18,6 +18,7 @@ export const AddressListContainer = styled.div`
     ${({ isProfile }) => !isProfile && css`
       min-width: 100px;
     `}
+    color: ${({ theme }) => theme?.colors?.primary + '!important'};
   }
 `
 
