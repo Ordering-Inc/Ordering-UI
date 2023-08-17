@@ -191,7 +191,7 @@ const CheckoutUI = (props) => {
       validationFields?.fields?.checkout?.driver_tip?.required &&
       (Number(cart?.driver_tip) <= 0)) ||
     cateringDayError ||
-    hasCateringProducts.loading
+    hasCateringProducts?.loading
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -407,7 +407,7 @@ const CheckoutUI = (props) => {
   }, [cart?.products])
 
   useEffect(() => {
-    if (hasCateringProducts.result) {
+    if (hasCateringProducts?.result) {
       setOpenAlertCatering(true)
     }
   }, [hasCateringProducts])
@@ -566,13 +566,13 @@ const CheckoutUI = (props) => {
 
           {!useKioskApp && (
             <>
-              {layout === 'pfchangs' && !hasCateringProducts.loading && (
+              {layout === 'pfchangs' && !hasCateringProducts?.loading && (
                 <>
                   {/* <SubtitleContainer>
                     <h2>{t('PREORDER_CONFIGUTARION', 'Preorder configuration')}</h2>
                   </SubtitleContainer> */}
                   <MomentContentPF
-                    hasCateringProducts={hasCateringProducts.result}
+                    hasCateringProducts={hasCateringProducts?.result}
                     cateringHours={cateringHours}
                     cateringDayError={cateringDayError}
                     setCateringDayError={setCateringDayError}
@@ -647,7 +647,7 @@ const CheckoutUI = (props) => {
                     </h1>
                   </WarningMessage>
                 )}
-                {isApplyMasterCoupon && !hasCateringProducts.loading && (
+                {isApplyMasterCoupon && !hasCateringProducts?.loading && (
                   <MasterCardCoupon>
                     <img src={"https://d347gjkxx0g7x1.cloudfront.net/wow-plus/banners/dev/Banner_APP_Wow_MasterCard.jpg"} />
                   </MasterCardCoupon>
