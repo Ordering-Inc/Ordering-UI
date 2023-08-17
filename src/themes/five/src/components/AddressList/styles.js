@@ -19,6 +19,10 @@ export const AddressListContainer = styled.div`
       min-width: 100px;
     `}
     color: ${({ theme }) => theme?.colors?.primary + '!important'};
+    &:hover {
+        background: ${props => darken(0.07, props.theme.colors.primary)};
+        color: #FFF !important;
+    }
   }
 `
 
