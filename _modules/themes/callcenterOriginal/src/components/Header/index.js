@@ -52,7 +52,8 @@ var Header = function Header(props) {
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
     isHideSignup = props.isHideSignup,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    isShowRedirectButton = props.isShowRedirectButton;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
     pathname = _useLocation.pathname;
   var _useEvent = (0, _orderingComponents.useEvent)(),
@@ -249,7 +250,16 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('admin');
     }
-  })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, !auth && windowSize.width > 920 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, isShowRedirectButton && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+    onClick: function onClick() {
+      return window.open("".concat(t('CALL_CENTER_REDIRECT_URL', '#')));
+    },
+    highlight: 1,
+    style: {
+      whiteSpace: 'nowrap'
+    },
+    name: "redirect"
+  }, t('CALL_CENTER_REDIRECT_BUTTON', 'Call Center')), !auth && windowSize.width > 920 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
     },
