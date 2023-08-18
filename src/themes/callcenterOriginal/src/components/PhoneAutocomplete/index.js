@@ -8,8 +8,10 @@ import {
   useConfig
 } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import { Alert } from '../../../../five/src/components/Confirm'
-import { Button, SignUpForm, Modal } from '../../../../five'
+import { Modal } from '../Modal'
+import { SignUpForm } from '../SignUpForm'
+import { Button } from '../../styles/Buttons'
+import { Alert } from '../Confirm'
 import { AddressList } from '../AddressList'
 import { UserDetails } from '../UserDetails'
 
@@ -27,7 +29,8 @@ import {
   AdditionalTypesContainer,
   PhoneAutocompleteContainer,
   ImageWrapper,
-  ContinueButton
+  ContinueButton,
+  NotFoundUser
 } from './styles'
 
 import MdcCellphoneAndroid from '@meronex/icons/mdc/MdcCellphoneAndroid'
@@ -47,7 +50,10 @@ const PhoneAutocompleteUI = (props) => {
     onRedirectPage,
     urlPhone,
     orderTypes,
-    localPhoneCode
+    localPhoneCode,
+    isFromUrlPhone,
+    onRedirectPhoneUrlPage
+
   } = props
   const allOrderTypes = [1, 2, 3, 4, 5]
   const pickupTypes = [2, 3, 4, 5]
@@ -76,7 +82,7 @@ const PhoneAutocompleteUI = (props) => {
   const saveCustomerUser = (user) => {
     setCustomersPhones({ ...customersPhones, users: [...customersPhones.users, user] })
     setCustomerState({ ...customerState, result: user })
-    setOpenModal({ customer: true, signup: false })
+    setOpenModal({ ...openModal, customer: true, signup: false })
   }
 
   const handleFindClick = () => {
@@ -120,14 +126,19 @@ const PhoneAutocompleteUI = (props) => {
   const onChange = (option) => {
     setOptSelected(option)
     setInputValue(option ? option?.value : '')
-    if (!option) { onChangeNumber(''); return }
+    if (!option) {
+      onChangeNumber('')
+      if (isFromUrlPhone) {
+        onRedirectPhoneUrlPage && onRedirectPhoneUrlPage('home')
+      }
+      return
+    }
     const user = customersPhones.users?.find(user => user.cellphone === option?.value || user.phone === option?.value)
     if (user) {
       setCustomerState({ ...customerState, result: user })
-      setOpenModal({ signup: false, customer: true })
+      setOpenModal({ ...openModal, signup: false, customer: true })
     } else {
-      setCustomerState({ ...customerState, result: { error: false } })
-      setOpenModal({ customer: false, signup: true })
+      setOpenModal({ ...openModal, error: true })
     }
   }
 
@@ -146,6 +157,9 @@ const PhoneAutocompleteUI = (props) => {
     setOpenModal({ ...openModal, customer: false })
     setCustomerState({ ...customerState, result: { error: false } })
     deleteUserCustomer(true)
+    if (isFromUrlPhone) {
+      onRedirectPhoneUrlPage && onRedirectPhoneUrlPage('home')
+    }
   }
 
   const handleChangeToPickup = () => {
@@ -162,10 +176,14 @@ const PhoneAutocompleteUI = (props) => {
   }) || []
 
   useEffect(() => {
+    if (customersPhones?.loading) return
+    if (!urlPhone && isFromUrlPhone) {
+      onRedirectPhoneUrlPage && onRedirectPhoneUrlPage('home')
+    }
     if (!urlPhone) return
     onInputChange(urlPhone, { action: 'url' })
     onChange({ value: urlPhone, label: urlPhone })
-  }, [urlPhone, customersPhones?.users?.length])
+  }, [urlPhone, customersPhones?.loading])
 
   useEffect(() => {
     if (pickupTypes.includes(orderState?.options?.type)) {
@@ -310,7 +328,7 @@ const PhoneAutocompleteUI = (props) => {
         padding='20px'
       >
         <UserEdit>
-          {!customerState?.loading && (
+          {!customerState?.loading && !customersPhones?.loading && (
             <>
               <UserDetails
                 isAddressFormOpen={isAddressFormOpen}
@@ -339,6 +357,16 @@ const PhoneAutocompleteUI = (props) => {
             </>
           )}
         </UserEdit>
+      </Modal>
+      <Modal
+        open={openModal.error}
+        width='50%'
+        onClose={() => handleCloseAddressList()}
+        padding='20px'
+      >
+        <NotFoundUser>
+          <h2>{t('NO_USER_FOUND', 'No user found')}</h2>
+        </NotFoundUser>
       </Modal>
       <Alert
         title={t('ERROR', 'Error')}
