@@ -399,3 +399,8 @@ export const ContinueButton = styled.span`
     cursor: pointer;
   }
 `
+
+export const NotFoundUser = styled.div`
+  margin: 70px 0px;
+  text-align: center;
+`
