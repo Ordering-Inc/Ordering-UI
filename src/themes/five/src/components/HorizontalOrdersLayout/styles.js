@@ -84,6 +84,9 @@ export const Card = styled.div`
 
   button.load-orders {
     padding: 10px 30px;
+    background: ${props => props.theme.colors.primary};
+    color: ${props => (props.theme.colors.buttonPrimaryContrast ?? props.theme.colors.primaryContrast) + '!important'};
+    border-color: ${props => props.theme.colors.primary};
   }
 
   ${props => props.theme?.rtl && css`

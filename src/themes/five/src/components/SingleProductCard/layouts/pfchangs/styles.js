@@ -205,7 +205,7 @@ export const PriceWrapper = styled.div`
 
 export const QuantityContainer = styled.div`
   background: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.primaryContrast};
+  color: ${({ theme }) => theme.colors.white};
   position: absolute;
   left: 100%;
   bottom: 100%;

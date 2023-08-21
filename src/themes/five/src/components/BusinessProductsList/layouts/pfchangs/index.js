@@ -72,7 +72,7 @@ const BusinessProductsListUI = (props) => {
                           onProductClick={onProductClick}
                           isCartOnProductsList={isCartOnProductsList}
                           handleUpdateProducts={handleUpdateProducts}
-                          productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                          productAddedToCartLength={currentCart?.valid && currentCart?.valid && currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                         />
                       ))}
                     </ProductsListing>
@@ -130,7 +130,7 @@ const BusinessProductsListUI = (props) => {
                                 useKioskApp={useKioskApp}
                                 isCartOnProductsList={isCartOnProductsList}
                                 handleUpdateProducts={handleUpdateProducts}
-                                productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                                productAddedToCartLength={currentCart?.valid && currentCart?.valid && currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                               />
                             ))}
                           </>
@@ -147,7 +147,7 @@ const BusinessProductsListUI = (props) => {
                                   useKioskApp={useKioskApp}
                                   isCartOnProductsList={isCartOnProductsList}
                                   handleUpdateProducts={handleUpdateProducts}
-                                  productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                                  productAddedToCartLength={currentCart?.valid && currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                                 />
                               ))
                             }
@@ -176,7 +176,7 @@ const BusinessProductsListUI = (props) => {
                                 isCartOnProductsList={isCartOnProductsList}
                                 handleUpdateProducts={handleUpdateProducts}
                                 useKioskApp={useKioskApp}
-                                productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
+                                productAddedToCartLength={currentCart?.valid && currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                               />
                             ))}
                           </ProductsListing>

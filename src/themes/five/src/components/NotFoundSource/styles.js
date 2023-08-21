@@ -30,5 +30,8 @@ export const NotFoundImage = styled.div`
 export const ButtonWrapper = styled.div`
   button {
     height: 44px;
+    background: ${props => props.theme.colors.primary};
+    color: ${props => (props.theme.colors.buttonPrimaryContrast ?? props.theme.colors.primaryContrast) + '!important'};
+    border-color: ${props => props.theme.colors.primary};
   }
 `

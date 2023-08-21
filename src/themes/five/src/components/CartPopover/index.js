@@ -22,7 +22,7 @@ import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 
 export const CartPopover = (props) => {
   const { open, auth, location, isCustomerMode, setPreorderBusiness } = props
-  const [orderState] = useOrder()
+  const [orderState, { clearCart }] = useOrder()
   const theme = useTheme()
   const [events] = useEvent()
   const [, t] = useLanguage()
@@ -49,7 +49,13 @@ export const CartPopover = (props) => {
   const isCartButtonPF = theme?.layouts?.header?.components?.cart?.components?.layout?.type === 'pfchangs'
   const showCartText = !theme?.layouts?.header?.components?.cart?.components?.text?.hidden
   const cartButtonIcon = theme?.layouts?.header?.components?.cart?.components?.icon?.components?.image
-  const numProductsFirstCart = props?.carts && props?.carts?.length > 0 && props?.carts[0].products?.length
+  const numProductsFirstCart = props?.carts && props?.carts?.length > 0 && props?.carts[0].valid && props?.carts[0].products?.length
+
+  useEffect(() => {
+    if (!orderState?.loading && props?.carts && props?.carts?.length > 0 && !props?.carts[0]?.valid && props?.carts[0].products?.length) {
+      clearCart(props?.carts[0]?.uuid)
+    }
+  }, [props?.carts, orderState])
 
   useEffect(() => {
     // forceUpdate && forceUpdate()
