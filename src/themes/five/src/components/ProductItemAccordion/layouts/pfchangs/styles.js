@@ -177,10 +177,14 @@ export const ProductTitle = styled.div`
   }
   h3 {
     margin-left: 10px;
+    margin-right: 5px;
     cursor: pointer;
   }
   h3:hover {
     text-decoration: underline;
+  }
+  svg {
+    cursor: pointer;
   }
   p {
     font-size: 14px;

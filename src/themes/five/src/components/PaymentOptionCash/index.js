@@ -39,13 +39,13 @@ export const PaymentOptionCash = (props) => {
     }
   }
 
-  useEffect(() => {
-    el.current.onkeyup = onChangeCash
-  }, [])
+  // useEffect(() => {
+  //   el.current.onkeyup = onChangeCash
+  // }, [])
 
-  useEffect(() => {
-    el.current.value = value || ''
-  }, [value])
+  // useEffect(() => {
+  //   el.current.value = value || ''
+  // }, [value])
 
   useEffect(() => {
     if (value && parseFloat(value) < orderTotal) {
@@ -64,7 +64,7 @@ export const PaymentOptionCash = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <PaymentCashContainer>
-        <FormCash>
+        {/* <FormCash>
           <WrapperInput>
             <label>{t('NOT_EXACT_CASH_AMOUNT', 'Don\'t have exact amount? Let us know with how much will you pay')}</label>
             <Input
@@ -82,7 +82,7 @@ export const PaymentOptionCash = (props) => {
           {value && parseFloat(value) < orderTotal && (
             <ErrorText>{t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total')}: {parsePrice(orderTotal)}</ErrorText>
           )}
-        </FormCash>
+        </FormCash> */}
       </PaymentCashContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

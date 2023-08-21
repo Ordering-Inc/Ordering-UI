@@ -1,7 +1,9 @@
 import React from 'react'
 import { useUtils, useLanguage, useOrder } from 'ordering-components'
 import MdClose from '@meronex/icons/md/MdClose'
-import BsFillPersonFill from '@meronex/icons/bs/BsFillPersonFill';
+import BsFillPersonFill from '@meronex/icons/bs/BsFillPersonFill'
+import TiPencil from '@meronex/icons/ti/TiPencil'
+
 import {
   AccordionSection,
   ContentInfo,
@@ -59,12 +61,11 @@ export const ProductItemAccordion = (props) => {
       <ProductInfo className='info'>
         <ContentInfo>
           <ProductTitle readOnlyMode={readOnlyMode}>
-            <div>
-              <h3
-                onClick={() => onEditProduct(product)}
-              >
+            <div onClick={() => onEditProduct(product)}>
+              <h3>
                 {product.name}
               </h3>
+              <TiPencil />
             </div>
             <PriceContainer>
               <ProductPrice>{parsePrice(product.total || product.price)}</ProductPrice>

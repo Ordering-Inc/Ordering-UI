@@ -91,13 +91,13 @@ export const PayCard = styled.div`
   
   &.active {
     > div {
-      border: 1px solid ${props => props.theme.colors.primary};
+      border: 1px solid ${({ theme, brandInformation }) => brandInformation?.brand_id === '5' ? theme.colors.gold : theme.colors.primary};
       svg path {
-        fill: ${props => props.theme.colors.primary};
+        fill: ${({ theme, brandInformation }) => brandInformation?.brand_id === '5' ? theme.colors.gold : theme.colors.primary};
       }
     }
     p {
-      color: ${props => props.theme.colors.primary};
+      color: ${({ theme, brandInformation }) => brandInformation?.brand_id === '5' ? theme.colors.gold : theme.colors.primary};
     }
   }
 

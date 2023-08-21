@@ -264,6 +264,7 @@ const PaymentOptionsUI = (props) => {
                       isDisabled={isDisabled || isDisabledWowPoints(paymethod)}
                       className={`card ${(paymethodSelected?.id === paymethod.id || (paymethodSelected?.gateway === 'openpay_mastercard' && paymethod.gateway === 'openpay')) ? 'active' : ''}`}
                       onClick={() => handlePaymentMethodClick(paymethod)}
+                      brandInformation={brandInformation}
                     >
                       <div>
                         {getPayIcon(paymethod.id)}
