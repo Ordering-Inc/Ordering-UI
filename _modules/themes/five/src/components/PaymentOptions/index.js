@@ -285,7 +285,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       className: "card ".concat((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) === paymethod.id || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'openpay_mastercard' && paymethod.gateway === 'openpay' ? 'active' : ''),
       onClick: function onClick() {
         return handlePaymentMethodClick(paymethod);
-      }
+      },
+      brandInformation: brandInformation
     }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod.gateway.toUpperCase(), paymethod.name), paymethod.gateway === 'wow_rewards' && (wowPoints === null || wowPoints === void 0 ? void 0 : wowPoints.points) >= 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ' ', "(", wowPoints.points || 0, " ", t('PTS', 'pts'), ")"))));
   }), paymethodsList.error && paymethodsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$error = paymethodsList.error[0]) === null || _paymethodsList$error === void 0 ? void 0 : _paymethodsList$error.message) || (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.error[0])

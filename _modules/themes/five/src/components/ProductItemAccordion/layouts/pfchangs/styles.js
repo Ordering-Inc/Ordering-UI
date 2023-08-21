@@ -54,7 +54,7 @@ var ProductOptionsList = _styledComponents.default.div(_templateObject12 || (_te
 exports.ProductOptionsList = ProductOptionsList;
 var ProductOptionsContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n"])));
 exports.ProductOptionsContainer = ProductOptionsContainer;
-var ProductTitle = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  div {\n    display: flex;\n    align-items: center;\n  }\n  h3 {\n    margin-left: 10px;\n    cursor: pointer;\n  }\n  h3:hover {\n    text-decoration: underline;\n  }\n  p {\n    font-size: 14px;\n  }\n  @media (min-width: 768px){\n    h3{\n        max-width: 250px;\n    }\n  }\n  ", "\n"])), function (_ref4) {
+var ProductTitle = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n  div {\n    display: flex;\n    align-items: center;\n  }\n  h3 {\n    margin-left: 10px;\n    margin-right: 5px;\n    cursor: pointer;\n  }\n  h3:hover {\n    text-decoration: underline;\n  }\n  svg {\n    cursor: pointer;\n  }\n  p {\n    font-size: 14px;\n  }\n  @media (min-width: 768px){\n    h3{\n        max-width: 250px;\n    }\n  }\n  ", "\n"])), function (_ref4) {
   var readOnlyMode = _ref4.readOnlyMode;
   return readOnlyMode && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    h3, p, div {\n      color: ", ";\n    }\n  "])), function (_ref5) {
     var _theme$colors2;

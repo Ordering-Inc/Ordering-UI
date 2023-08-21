@@ -55,12 +55,15 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
       }, 1000);
     }
   };
-  (0, _react.useEffect)(function () {
-    el.current.onkeyup = onChangeCash;
-  }, []);
-  (0, _react.useEffect)(function () {
-    el.current.value = value || '';
-  }, [value]);
+
+  // useEffect(() => {
+  //   el.current.onkeyup = onChangeCash
+  // }, [])
+
+  // useEffect(() => {
+  //   el.current.value = value || ''
+  // }, [value])
+
   (0, _react.useEffect)(function () {
     if (value && parseFloat(value) < orderTotal) {
       setErrorCash && setErrorCash(true);
@@ -76,17 +79,7 @@ var PaymentOptionCash = function PaymentOptionCash(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.PaymentCashContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormCash, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('NOT_EXACT_CASH_AMOUNT', 'Don\'t have exact amount? Let us know with how much will you pay')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    ref: el,
-    name: "cash",
-    type: "text",
-    placeholder: "$0.00",
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9 .]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    }
-  })), value && parseFloat(value) < orderTotal && /*#__PURE__*/_react.default.createElement(_styles.ErrorText, null, t('VALUE_GREATER_THAN_TOTAL', 'This value must be greater than order total'), ": ", parsePrice(orderTotal)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.PaymentCashContainer, null), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

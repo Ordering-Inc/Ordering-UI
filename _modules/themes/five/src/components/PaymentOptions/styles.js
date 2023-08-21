@@ -32,14 +32,20 @@ var PayCard = _styledComponents.default.div(_templateObject3 || (_templateObject
   var _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3;
   var theme = _ref4.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$checko = _theme$layouts.checkout) === null || _theme$layouts$checko === void 0 ? void 0 : (_theme$layouts$checko2 = _theme$layouts$checko.components) === null || _theme$layouts$checko2 === void 0 ? void 0 : (_theme$layouts$checko3 = _theme$layouts$checko2.layout) === null || _theme$layouts$checko3 === void 0 ? void 0 : _theme$layouts$checko3.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    align-self: flex-start;\n    p {\n      white-space: pre-wrap;\n    }\n    @media (min-width: 768px) {\n      width: calc(25% - 10px);\n    }\n    @media (min-width: 1024px) {\n      width: calc(20% - 20px);\n    }\n    @media (min-width: 1200px) {\n      width: calc(20% - 30px);\n    }\n  "])));
-}, function (props) {
-  return props.theme.colors.primary;
-}, function (props) {
-  return props.theme.colors.primary;
-}, function (props) {
-  return props.theme.colors.primary;
 }, function (_ref5) {
-  var isSkeleton = _ref5.isSkeleton;
+  var theme = _ref5.theme,
+    brandInformation = _ref5.brandInformation;
+  return (brandInformation === null || brandInformation === void 0 ? void 0 : brandInformation.brand_id) === '5' ? theme.colors.gold : theme.colors.primary;
+}, function (_ref6) {
+  var theme = _ref6.theme,
+    brandInformation = _ref6.brandInformation;
+  return (brandInformation === null || brandInformation === void 0 ? void 0 : brandInformation.brand_id) === '5' ? theme.colors.gold : theme.colors.primary;
+}, function (_ref7) {
+  var theme = _ref7.theme,
+    brandInformation = _ref7.brandInformation;
+  return (brandInformation === null || brandInformation === void 0 ? void 0 : brandInformation.brand_id) === '5' ? theme.colors.gold : theme.colors.primary;
+}, function (_ref8) {
+  var isSkeleton = _ref8.isSkeleton;
   return isSkeleton ? '0' : '1px solid #EAEAEA';
 });
 exports.PayCard = PayCard;
