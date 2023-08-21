@@ -87,7 +87,7 @@ var QuantityContainer = _styledComponents.default.div(_templateObject16 || (_tem
   return theme.colors.primary;
 }, function (_ref9) {
   var theme = _ref9.theme;
-  return theme.colors.primaryContrast;
+  return theme.colors.white;
 });
 exports.QuantityContainer = QuantityContainer;
 var RibbonBox = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: absolute;\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 500;\n  font-size: 16px;\n  line-height: 13px;\n  top: -4px;\n  right: -3px;\n  background-color: ", ";\n  max-width: 100px;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  overflow: hidden;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n  ", "\n"])), function (props) {

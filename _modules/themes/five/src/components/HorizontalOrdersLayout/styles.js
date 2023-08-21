@@ -34,7 +34,7 @@ var Price = _styledComponents.default.div(_templateObject4 || (_templateObject4 
   return !isCustomerMode && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      flex-direction: row;\n      align-items: center;\n    "])));
 });
 exports.Price = Price;
-var Card = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  margin: 10px;\n  position: relative;\n  background: white;\n  border-radius: 16px;\n  display: inline-block;\n  text-align: left;\n  transition: all 0.3s ease;\n\n  ", "\n\n  &:hover {\n    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;\n  }\n\n  button.load-orders {\n    padding: 10px 30px;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px) {\n    min-width: 430px;\n    max-height: ", ";\n    width: 430px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n"])), function (_ref6) {
+var Card = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  margin: 10px;\n  position: relative;\n  background: white;\n  border-radius: 16px;\n  display: inline-block;\n  text-align: left;\n  transition: all 0.3s ease;\n\n  ", "\n\n  &:hover {\n    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px;\n  }\n\n  button.load-orders {\n    padding: 10px 30px;\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n\n  @media (min-width: 480px) {\n    min-width: 430px;\n    max-height: ", ";\n    width: 430px;\n  }\n\n  @media(min-width: 993px){\n    ", "\n  }\n"])), function (_ref6) {
   var isCustomerMode = _ref6.isCustomerMode;
   return isCustomerMode ? (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    min-width: 300px;\n    width: 300px;\n    display: inline-block;\n  "]))) : (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    min-width: 380px;\n    width: 380px;\n    height: ", ";\n    max-height: ", ";\n  "])), function (_ref7) {
     var isBusinessesPage = _ref7.isBusinessesPage;
@@ -43,6 +43,13 @@ var Card = _styledComponents.default.div(_templateObject8 || (_templateObject8 =
     var isBusinessesPage = _ref8.isBusinessesPage;
     return isBusinessesPage ? '300px' : '220px';
   });
+}, function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  var _props$theme$colors$b;
+  return ((_props$theme$colors$b = props.theme.colors.buttonPrimaryContrast) !== null && _props$theme$colors$b !== void 0 ? _props$theme$colors$b : props.theme.colors.primaryContrast) + '!important';
+}, function (props) {
+  return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    text-align: right;\n  "])));

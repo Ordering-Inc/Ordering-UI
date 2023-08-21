@@ -15,5 +15,12 @@ var NotFound = _styledComponents.default.div(_templateObject || (_templateObject
 exports.NotFound = NotFound;
 var NotFoundImage = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  max-width: 300px;\n"])));
 exports.NotFoundImage = NotFoundImage;
-var ButtonWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  button {\n    height: 44px;\n  }\n"])));
+var ButtonWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  button {\n    height: 44px;\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  var _props$theme$colors$b;
+  return ((_props$theme$colors$b = props.theme.colors.buttonPrimaryContrast) !== null && _props$theme$colors$b !== void 0 ? _props$theme$colors$b : props.theme.colors.primaryContrast) + '!important';
+}, function (props) {
+  return props.theme.colors.primary;
+});
 exports.ButtonWrapper = ButtonWrapper;

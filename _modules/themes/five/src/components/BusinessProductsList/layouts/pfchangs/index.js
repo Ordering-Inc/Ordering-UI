@@ -81,9 +81,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       onProductClick: onProductClick,
       isCartOnProductsList: isCartOnProductsList,
       handleUpdateProducts: handleUpdateProducts,
-      productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.reduce(function (productsLength, Cproduct) {
+      productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid) && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid) && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.reduce(function (productsLength, Cproduct) {
         return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-      }, 0)
+      }, 0))
     });
   })))), categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
@@ -139,9 +139,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         useKioskApp: useKioskApp,
         isCartOnProductsList: isCartOnProductsList,
         handleUpdateProducts: handleUpdateProducts,
-        productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.reduce(function (productsLength, Cproduct) {
+        productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid) && (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid) && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products2 = currentCart.products) === null || _currentCart$products2 === void 0 ? void 0 : _currentCart$products2.reduce(function (productsLength, Cproduct) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-        }, 0)
+        }, 0))
       });
     })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, products.map(function (product, i) {
       var _currentCart$products3;
@@ -154,9 +154,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         useKioskApp: useKioskApp,
         isCartOnProductsList: isCartOnProductsList,
         handleUpdateProducts: handleUpdateProducts,
-        productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.reduce(function (productsLength, Cproduct) {
+        productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid) && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.reduce(function (productsLength, Cproduct) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-        }, 0)
+        }, 0))
       });
     })), categoryState.loading && i + 1 === _categories.length && _toConsumableArray(Array(categoryState.pagination.nextPageItems).keys()).map(function (i) {
       return /*#__PURE__*/_react.default.createElement(_pfchangs.SingleProductCard, {
@@ -186,9 +186,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
           isCartOnProductsList: isCartOnProductsList,
           handleUpdateProducts: handleUpdateProducts,
           useKioskApp: useKioskApp,
-          productAddedToCartLength: currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.reduce(function (productsLength, Cproduct) {
+          productAddedToCartLength: (currentCart === null || currentCart === void 0 ? void 0 : currentCart.valid) && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.reduce(function (productsLength, Cproduct) {
             return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-          }, 0)
+          }, 0))
         });
       })));
     }))));
