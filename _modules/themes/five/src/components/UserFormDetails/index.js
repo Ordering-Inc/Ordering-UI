@@ -58,7 +58,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     handleChangePromotions = props.handleChangePromotions,
     isOldLayout = props.isOldLayout,
     requiredFields = props.requiredFields,
-    isMissedData = props.isMissedData;
+    isMissedData = props.isMissedData,
+    handleSetAlert = props.handleSetAlert;
   var _useApi = (0, _orderingComponents.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
@@ -168,7 +169,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
             case 3:
               available = _context.sent;
               if (!available) {
-                _context.next = 16;
+                _context.next = 17;
                 break;
               }
               _context.next = 7;
@@ -194,14 +195,22 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
                 changeUser(_objectSpread(_objectSpread({}, userSession), result));
                 setWillVerifyOtpState(true);
               }
-              _context.next = 17;
+              if (error) {
+                // changeUser({
+                //   ...userSession,
+                //   ...formState.changes
+                // })
+                // setWillVerifyOtpState(true)
+                handleSetAlert(result, t('ATENTION', 'Atencion'));
+              }
+              _context.next = 18;
               break;
-            case 16:
+            case 17:
               setAlertState({
                 open: true,
                 content: [t('NUMBER_ALREADY_EXISTS', 'El numero ya existe en otra cuenta.')]
               });
-            case 17:
+            case 18:
             case "end":
               return _context.stop();
           }

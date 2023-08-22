@@ -118,34 +118,41 @@ var Header = function Header(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     modalPageToShow = _useState12[0],
     setModalPageToShow = _useState12[1];
-  var _useState13 = (0, _react.useState)(null),
+  var _useState13 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
     _useState14 = _slicedToArray(_useState13, 2),
-    preorderBusiness = _useState14[0],
-    setPreorderBusiness = _useState14[1];
-  var _useState15 = (0, _react.useState)(false),
+    alertState = _useState14[0],
+    setAlertState = _useState14[1];
+  var _useState15 = (0, _react.useState)(null),
     _useState16 = _slicedToArray(_useState15, 2),
-    isAddressFormOpen = _useState16[0],
-    setIsAddressFormOpen = _useState16[1];
+    preorderBusiness = _useState16[0],
+    setPreorderBusiness = _useState16[1];
   var _useState17 = (0, _react.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    isOpenUserData = _useState18[0],
-    setIsOpenUserData = _useState18[1];
-  var _useState19 = (0, _react.useState)(null),
+    isAddressFormOpen = _useState18[0],
+    setIsAddressFormOpen = _useState18[1];
+  var _useState19 = (0, _react.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    otpDataUser = _useState20[0],
-    setOtpDataUser = _useState20[1];
-  var _useState21 = (0, _react.useState)({
+    isOpenUserData = _useState20[0],
+    setIsOpenUserData = _useState20[1];
+  var _useState21 = (0, _react.useState)(null),
+    _useState22 = _slicedToArray(_useState21, 2),
+    otpDataUser = _useState22[0],
+    setOtpDataUser = _useState22[1];
+  var _useState23 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
-    _useState22 = _slicedToArray(_useState21, 2),
-    confirm = _useState22[0],
-    setConfirm = _useState22[1];
-  var _useState23 = (0, _react.useState)(false),
     _useState24 = _slicedToArray(_useState23, 2),
-    isFarAway = _useState24[0],
-    setIsFarAway = _useState24[1];
+    confirm = _useState24[0],
+    setConfirm = _useState24[1];
+  var _useState25 = (0, _react.useState)(false),
+    _useState26 = _slicedToArray(_useState25, 2),
+    isFarAway = _useState26[0],
+    setIsFarAway = _useState26[1];
   var isAlsea = ordering.project === 'alsea';
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products, _cart$business;
@@ -178,6 +185,19 @@ var Header = function Header(props) {
     login({
       user: user,
       token: (user === null || user === void 0 ? void 0 : (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token) || (otpDataUser === null || otpDataUser === void 0 ? void 0 : otpDataUser.token)
+    });
+  };
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+  var handleSetAlert = function handleSetAlert(content, title) {
+    setAlertState({
+      open: true,
+      content: content,
+      title: title
     });
   };
   var handleClickUserCustomer = function handleClickUserCustomer(e) {
@@ -625,7 +645,8 @@ var Header = function Header(props) {
       return setModalPageToShow('signup');
     },
     handleCustomModalClick: handleCustomModalClick,
-    LoginFormComponent: LoginFormComponent
+    LoginFormComponent: LoginFormComponent,
+    handleSetAlert: handleSetAlert
   })), /*#__PURE__*/_react.default.createElement(ConfirmComponent, {
     title: t('CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.CUSTOMER) || 'Customer'),
     content: confirm.content,
@@ -642,6 +663,18 @@ var Header = function Header(props) {
       }));
     },
     onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
+    title: (alertState === null || alertState === void 0 ? void 0 : alertState.title) || t('PROFILE', 'Profile'),
+    content: alertState === null || alertState === void 0 ? void 0 : alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: !!preorderBusiness,
