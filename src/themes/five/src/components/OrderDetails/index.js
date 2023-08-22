@@ -190,7 +190,7 @@ const OrderDetailsUI = (props) => {
   }
 
   const locations = [
-    { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.dummies?.driverPhoto },
+    { ...order?.driver?.location, icon: order?.driver?.photo || theme.images?.general?.driverPng },
     { ...order?.business?.location, icon: order?.business?.logo || theme.images?.dummies?.businessLogo },
     { ...order?.customer?.location, icon: order?.customer?.photo || theme.images?.dummies?.customerPhoto }
   ]

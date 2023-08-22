@@ -42,6 +42,7 @@ import phoneHero from './template/assets/images/phone-hero-callcenter.png'
 import deliveryIco from './template/assets/images/delivery.svg'
 import pickupIco from './template/assets/images/pickup.svg'
 import phone from './template/assets/images/phone.svg'
+import driverPng from './template/assets/images/driver.png'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -121,7 +122,8 @@ theme.images = {
     phoneHero,
     deliveryIco,
     pickupIco,
-    phone
+    phone,
+    driverPng
   },
 
   order: {
