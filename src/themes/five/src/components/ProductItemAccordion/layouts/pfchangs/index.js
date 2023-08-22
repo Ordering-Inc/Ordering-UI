@@ -3,6 +3,7 @@ import { useUtils, useLanguage, useOrder } from 'ordering-components'
 import MdClose from '@meronex/icons/md/MdClose'
 import BsFillPersonFill from '@meronex/icons/bs/BsFillPersonFill'
 import TiPencil from '@meronex/icons/ti/TiPencil'
+import TiTrash from '@meronex/icons/ti/TiTrash'
 
 import {
   AccordionSection,
@@ -67,7 +68,7 @@ export const ProductItemAccordion = (props) => {
               </h3>
               <TiPencil onClick={() => onEditProduct(product)} />
               {isCheckout && (
-                <MdClose
+                <TiTrash
                   onClick={() => onDeleteProduct(product)}
                   disabled={orderState.loading}
                 />
