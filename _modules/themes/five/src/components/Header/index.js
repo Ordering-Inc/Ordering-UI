@@ -330,7 +330,7 @@ var Header = function Header(props) {
     }
   }, [customerState === null || customerState === void 0 ? void 0 : (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.address]);
   (0, _react.useEffect)(function () {
-    if (!pathname.includes('/search')) {
+    if (!pathname.includes('/search') && pathname !== '/') {
       setIsFarAway(false);
       return;
     }
