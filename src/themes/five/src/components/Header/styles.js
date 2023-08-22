@@ -74,7 +74,7 @@ export const LogoHeader = styled.div`
 
     @media (min-width: 769px) {
       ${({ theme }) =>
-      ['center', 'right']?.includes(theme?.header?.components?.logo?.components?.layout?.position) && css`
+    ['center', 'right']?.includes(theme?.header?.components?.logo?.components?.layout?.position) && css`
         margin-right: 30px;
       `};
       width: ${props => props.imgW ?? '150px'};
@@ -362,7 +362,9 @@ export const AddressMenu = styled.div`
 
 export const MomentMenu = styled.div`
   border-left: 1px solid #DEE2E6;
-  border-right: 1px solid #DEE2E6;
+  ${({ isFranchiseSlugOne }) => !isFranchiseSlugOne && css`
+      border-right: 1px solid #DEE2E6;
+  `}
   height: 100%;
   justify-content: center;
   width: 175px;

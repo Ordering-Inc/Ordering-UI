@@ -50,7 +50,8 @@ export const Header = (props) => {
     location,
     isShowOrderOptions,
     isHideSignup,
-    isCustomerMode
+    isCustomerMode,
+    isShowRedirectButton
   } = props
 
   const { pathname } = useLocation()
@@ -225,6 +226,16 @@ export const Header = (props) => {
         {onlineStatus && (
           <RightHeader>
             <Menu>
+              {isShowRedirectButton && (
+                <MenuLink
+                  onClick={() => window.open(`${t('CALL_CENTER_REDIRECT_URL','#')}`)}
+                  highlight={1}
+                  style={{ whiteSpace: 'nowrap' }}
+                  name='redirect'
+                >
+                  {t('CALL_CENTER_REDIRECT_BUTTON', 'Call Center')}
+                </MenuLink>
+              )}
               {
                 !auth && windowSize.width > 920 && (
                   <>
