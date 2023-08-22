@@ -123,11 +123,7 @@ theme.images = {
     deliveryIco,
     pickupIco,
     phone,
-    driverPng,
-    eatinIco,
-    curbsideIco,
-    drivethruIco,
-    cateringIco
+    driverPng
   },
 
   order: {
