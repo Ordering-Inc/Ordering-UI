@@ -61,11 +61,17 @@ export const ProductItemAccordion = (props) => {
       <ProductInfo className='info'>
         <ContentInfo>
           <ProductTitle readOnlyMode={readOnlyMode}>
-            <div onClick={() => onEditProduct(product)}>
-              <h3>
+            <div>
+              <h3 onClick={() => onEditProduct(product)}>
                 {product.name}
               </h3>
-              <TiPencil />
+              <TiPencil onClick={() => onEditProduct(product)} />
+              {isCheckout && (
+                <MdClose
+                  onClick={() => onDeleteProduct(product)}
+                  disabled={orderState.loading}
+                />
+              )}
             </div>
             <PriceContainer>
               <ProductPrice>{parsePrice(product.total || product.price)}</ProductPrice>
