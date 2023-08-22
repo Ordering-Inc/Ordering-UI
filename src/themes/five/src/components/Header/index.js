@@ -257,7 +257,7 @@ export const Header = (props) => {
   }, [customerState?.user?.address])
 
   useEffect(() => {
-    if (!(pathname.includes('/search'))) {
+    if (!pathname.includes('/search') && pathname !== '/') {
       setIsFarAway(false)
       return
     }
