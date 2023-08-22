@@ -43,7 +43,8 @@ export const UserFormDetailsUI = (props) => {
     handleChangePromotions,
     isOldLayout,
     requiredFields,
-    isMissedData
+    isMissedData,
+    handleSetAlert
   } = props
 
   const [ordering] = useApi()
@@ -135,6 +136,14 @@ export const UserFormDetailsUI = (props) => {
           ...result
         })
         setWillVerifyOtpState(true)
+      }
+      if (error) {
+        // changeUser({
+        //   ...userSession,
+        //   ...formState.changes
+        // })
+        // setWillVerifyOtpState(true)
+        handleSetAlert(result, t('ATENTION', 'Atencion'))
       }
     } else {
       setAlertState({

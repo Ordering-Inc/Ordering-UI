@@ -40,7 +40,7 @@ import { AddressForm } from '../AddressForm'
 import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../UserDetails'
-import { Confirm } from '../Confirm'
+import { Confirm, Confirm as Alert } from '../Confirm'
 import { Confirm as ConfirmPFChangs } from '../Confirm/layouts/pfchangs'
 import { LoginForm } from '../LoginForm'
 import { LoginForm as LoginFormPF } from '../LoginForm/layouts/pfchangs'
@@ -79,6 +79,8 @@ export const Header = (props) => {
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [modalSelected, setModalSelected] = useState(null)
   const [modalPageToShow, setModalPageToShow] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [isOpenUserData, setIsOpenUserData] = useState(false)
@@ -128,6 +130,20 @@ export const Header = (props) => {
     })
   }
 
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  const handleSetAlert = (content, title) => {
+    setAlertState({
+      open: true,
+      content: content,
+      title
+    })
+  }
   const handleClickUserCustomer = (e) => {
     const isActionsClick = clearCustomer.current?.contains(e?.target)
     if (isActionsClick) {
@@ -704,6 +720,7 @@ export const Header = (props) => {
               handleOpenSignup={() => setModalPageToShow('signup')}
               handleCustomModalClick={handleCustomModalClick}
               LoginFormComponent={LoginFormComponent}
+              handleSetAlert={handleSetAlert}
             />
           </Modal>
         )}
@@ -715,6 +732,15 @@ export const Header = (props) => {
           onClose={() => setConfirm({ ...confirm, open: false })}
           onCancel={() => setConfirm({ ...confirm, open: false })}
           onAccept={confirm.handleOnAccept}
+          closeOnBackdrop={false}
+        />
+        <Alert
+          title={alertState?.title || t('PROFILE', 'Profile')}
+          content={alertState?.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
           closeOnBackdrop={false}
         />
         <Modal
