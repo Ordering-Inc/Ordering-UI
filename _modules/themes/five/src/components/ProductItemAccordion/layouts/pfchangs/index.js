@@ -9,6 +9,7 @@ var _orderingComponents = require("ordering-components");
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 var _BsFillPersonFill = _interopRequireDefault(require("@meronex/icons/bs/BsFillPersonFill"));
 var _TiPencil = _interopRequireDefault(require("@meronex/icons/ti/TiPencil"));
+var _TiTrash = _interopRequireDefault(require("@meronex/icons/ti/TiTrash"));
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -71,11 +72,20 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTitle, {
     readOnlyMode: readOnlyMode
-  }, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", {
     onClick: function onClick() {
       return onEditProduct(product);
     }
-  }, /*#__PURE__*/_react.default.createElement("h3", null, product.name), /*#__PURE__*/_react.default.createElement(_TiPencil.default, null)), /*#__PURE__*/_react.default.createElement(_styles.PriceContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, parsePrice(product.total || product.price)), !readOnlyMode && /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+  }, product.name), /*#__PURE__*/_react.default.createElement(_TiPencil.default, {
+    onClick: function onClick() {
+      return onEditProduct(product);
+    }
+  }), isCheckout && /*#__PURE__*/_react.default.createElement(_TiTrash.default, {
+    onClick: function onClick() {
+      return onDeleteProduct(product);
+    },
+    disabled: orderState.loading
+  })), /*#__PURE__*/_react.default.createElement(_styles.PriceContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, parsePrice(product.total || product.price)), !readOnlyMode && /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onDeleteProduct(product);
     },
