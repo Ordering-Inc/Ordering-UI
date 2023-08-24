@@ -49,7 +49,9 @@ const AddressFormUI = (props) => {
     userCustomerSetup,
     businessesList,
     getBusinessDeliveryZones,
-    isEnableContinueButton
+    isEnableContinueButton,
+    address,
+    notUseCustomerInfo
   } = props
 
   const [configState] = useConfig()
@@ -345,6 +347,12 @@ const AddressFormUI = (props) => {
     })
   }, [formMethods])
 
+  useEffect(() => {
+    if (address?.location) {
+      getBusinessDeliveryZones(address?.location)
+    }
+  }, [address])
+
   return (
     <div className='address-form'>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -412,9 +420,9 @@ const AddressFormUI = (props) => {
                 </AddressWrap>
 
                 {locationChange && (addressState?.address?.location || formState?.changes?.location) && (
-                  <WrapperMap isEnableContinueButton={isEnableContinueButton}>
+                  <WrapperMap isEnableContinueButton={isEnableContinueButton} notUseCustomerInfo={notUseCustomerInfo}>
                     <GoogleMapsMap
-                      useLocationPin
+                      useMapWithBusinessZones
                       deactiveAlerts
                       apiKey={googleMapsApiKey}
                       location={locationChange}
