@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -59,8 +59,9 @@ var List = _styledComponents.default.div(_templateObject16 || (_templateObject16
   return halfWidth ? '50%' : '100%';
 }, function (_ref3) {
   var isEnableContinueButton = _ref3.isEnableContinueButton,
-    isOpenUserData = _ref3.isOpenUserData;
-  return isEnableContinueButton || isOpenUserData ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-top: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-top: 222px;\n  "])));
+    isOpenUserData = _ref3.isOpenUserData,
+    notUseCustomerInfo = _ref3.notUseCustomerInfo;
+  return isEnableContinueButton || isOpenUserData || notUseCustomerInfo ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-top: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-top: 222px;\n  "])));
 });
 exports.List = List;
 var AddressFormContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  z-index: 10;\n  height: 100%;\n  padding-left: 10px;\n  ", "\n  ", "\n"])), function (_ref4) {
