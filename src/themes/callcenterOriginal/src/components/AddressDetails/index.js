@@ -20,14 +20,14 @@ const AddressDetailsUI = (props) => {
     googleMapsUrl,
     isCustomerMode,
     apiKey,
-    isFromCheckout
+    isFromCheckout,
+    notUseCustomerInfo
   } = props
 
   const [orderState] = useOrder()
   const [, t] = useLanguage()
   const [openModal, setOpenModal] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [{ user }] = useCustomer()
 
   const handleFindBusinesses = () => {
@@ -41,6 +41,12 @@ const AddressDetailsUI = (props) => {
   useEffect(() => {
     return () => setOpenModal(false)
   }, [])
+
+  useEffect(() => {
+    if (isCustomerMode) {
+      setOpenModal(false)
+    }
+  }, [JSON.stringify(orderState?.options?.address?.address)])
 
   return (
     <>
@@ -75,7 +81,8 @@ const AddressDetailsUI = (props) => {
           <AddressList
             isModal
             changeOrderAddressWithDefault
-            userId={isNaN(userCustomer?.id) ? null : userCustomer?.id}
+            notUseCustomerInfo={notUseCustomerInfo}
+            userId={user?.id}
             onCancel={() => setOpenModal(false)}
             onAccept={() => handleFindBusinesses()}
             userCustomerSetup={isCustomerMode && user}

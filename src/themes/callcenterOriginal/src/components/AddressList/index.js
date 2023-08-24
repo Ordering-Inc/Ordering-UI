@@ -65,7 +65,8 @@ const AddressListUI = (props) => {
     isFromCheckout,
     isOpenUserData,
     setIsAddressFormOpen,
-    isHeader
+    isHeader,
+    notUseCustomerInfo
   } = props
 
   const [, t] = useLanguage()
@@ -199,7 +200,13 @@ const AddressListUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
         <AddressHalfContainer>
-          <List halfWidth={addressOpen} isOpenUserData={isOpenUserData} isHeader={isHeader} isEnableContinueButton={isEnableContinueButton}>
+          <List
+            halfWidth={addressOpen}
+            isOpenUserData={isOpenUserData}
+            isHeader={isHeader}
+            isEnableContinueButton={isEnableContinueButton}
+            notUseCustomerInfo={notUseCustomerInfo}
+          >
             {
               (!isPopover || !addressOpen) && !isOpenUserData && (
                 <Button
@@ -310,11 +317,12 @@ const AddressListUI = (props) => {
                   onSaveAddress={handleSaveAddress}
                   userCustomerSetup={userCustomerSetup}
                   isEnableContinueButton={isEnableContinueButton}
+                  notUseCustomerInfo={notUseCustomerInfo}
                 />
               </AddressFormContainer>
             )}
           </List>
-          {addressOpen && (
+          {addressOpen && !notUseCustomerInfo && (
             <AddressFormContainer width='50%' isEnableContinueButton={isEnableContinueButton}>
               <TitleFormContainer>
                 <CloseIcon>
@@ -332,7 +340,7 @@ const AddressListUI = (props) => {
           </AddressListUl>
         )}
 
-        {onCancel && onAccept && typeof orderState.options?.address === 'object' && (
+        {onCancel && onAccept && typeof orderState.options?.address === 'object' && !notUseCustomerInfo && (
           <FormActions>
             <Button
               outline

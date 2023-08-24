@@ -201,8 +201,10 @@ export const WrapperMap = styled.div`
   bottom: 2%;
   right: 0;
   padding-right: 20px;
-  ${({ isEnableContinueButton }) => isEnableContinueButton ? css`
+  ${({ isEnableContinueButton, notUseCustomerInfo }) => isEnableContinueButton ? css`
     height: 460px;
+  ` : notUseCustomerInfo ? css`
+    height: 370px;
   ` : css`
     height: 480px;
   `}

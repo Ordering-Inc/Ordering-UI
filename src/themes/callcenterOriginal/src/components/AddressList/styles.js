@@ -196,7 +196,7 @@ export const AddressHalfContainer = styled.div`
 export const List = styled.div`
   width: ${({ halfWidth }) => halfWidth ? '50%' : '100%'};
   padding-right: 10px;
-  ${({ isEnableContinueButton, isOpenUserData }) => isEnableContinueButton || isOpenUserData ? css`
+  ${({ isEnableContinueButton, isOpenUserData, notUseCustomerInfo }) => isEnableContinueButton || isOpenUserData || notUseCustomerInfo ? css`
     margin-top: 0px;
   ` : css`
     margin-top: 222px;
