@@ -240,6 +240,7 @@ const CheckoutUI = (props) => {
                   apiKey={configs?.google_maps_api_key?.value}
                   mapConfigs={mapConfigs}
                   isCustomerMode={isCustomerMode}
+                  notUseCustomerInfo
                 />
               )
             )}
