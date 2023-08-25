@@ -16,11 +16,9 @@ const CmsUI = (props) => {
       {props.beforeElements?.map((BeforeElement, i) => (
         <React.Fragment key={i}>
           {BeforeElement}
-        </React.Fragment>))
-      }
+        </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))
-      }
+        <BeforeComponent key={i} {...props} />))}
       <CmsContainer id='cms'>
         {
           cmsState.loading && !cmsState.error && (
@@ -44,9 +42,10 @@ const CmsUI = (props) => {
         }
         {
           cmsState.body && (
-            <div dangerouslySetInnerHTML={{
-              __html: cmsState.body
-            }}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: cmsState.body
+              }}
             />
           )
         }

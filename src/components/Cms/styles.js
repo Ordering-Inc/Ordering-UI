@@ -12,12 +12,18 @@ export const CmsError = styled.div`
 `
 
 export const CmsContainer = styled.div`
-  padding: 0 30px;
+  padding: 0 25px;
+  background: ${({ theme }) => theme?.colors?.tertiaryContrast ?? '#000'} !important;
+  > div * {
+    font-family: ${({ theme }) => theme?.fonts?.special?.name} !important;
+    background: transparent !important;
+    color: ${({ theme }) => theme?.colors?.tertiary ?? '#FFF'} !important;
+  }
 `
 
 export const SkeletonContainer = styled.div`
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 `
 
 export const SkeletonHeader = styled.div`
@@ -43,7 +49,7 @@ export const SkeletonInformation = styled.div`
   ${props => props.theme?.rtl && css`
     margin-left: 10px;
     margin-right: 0;
-  `}  
+  `}
 `
 
 export const SkeletonSide = styled.div`
@@ -52,6 +58,6 @@ export const SkeletonSide = styled.div`
   margin-left: 10px;
   ${props => props.theme?.rtl && css`
     margin-right: 10px;
-    margin-left: 0;    
-  `}  
+    margin-left: 0;
+  `}
 `
