@@ -217,7 +217,8 @@ export const App = () => {
   const isHideFooter = themeUpdated?.footer?.hidden
   const guestCheckoutEnabled =
     configs?.guest_checkout_enabled?.value === '1' &&
-    (!orderTypeList[orderStatus?.options?.type - 1] || configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderStatus?.options?.type - 1]))
+    (!orderTypeList[orderStatus?.options?.type - 1] || configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderStatus?.options?.type - 1])) &&
+    user?.guest_id
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const isFooterPage = location.pathname === '/pages/footer' || isKioskApp || isHideFooter
