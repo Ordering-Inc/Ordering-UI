@@ -131,7 +131,7 @@ export const UserFormDetailsUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
-    const requiredPhone = (user?.guest_id && requiredFields.includes('cellphone')) || (validationFields?.fields?.checkout?.cellphone?.enabled && validationFields?.fields?.checkout?.cellphone?.required)
+    const requiredPhone = (user?.guest_id && requiredFields?.includes?.('cellphone')) || (validationFields?.fields?.checkout?.cellphone?.enabled && validationFields?.fields?.checkout?.cellphone?.required)
     if (!userPhoneNumber &&
       (requiredPhone || configs?.verification_phone_required?.value === '1')
     ) {
@@ -293,7 +293,7 @@ export const UserFormDetailsUI = (props) => {
   }, [isValidPhoneNumber, userPhoneNumber, configs?.verification_phone_required?.value, isChanged])
 
   useEffect(() => {
-    if (requiredFields && !requiredFields.includes('cellphone')) setIsValidPhoneNumber(true)
+    if (requiredFields && !requiredFields?.includes?.('cellphone')) setIsValidPhoneNumber(true)
   }, [requiredFields])
 
   const handleEditNotifications = (key, value) => {
@@ -332,7 +332,7 @@ export const UserFormDetailsUI = (props) => {
               ((showField && showField(field.code) && showFieldWithTheme(field.code)) || user?.guest_id) && (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
-                    ((requiredFields && requiredFields.includes(field.code)) || !requiredFields) && (
+                    ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields) && (
                       <InputGroup>
                         <p>{t(field.code.toUpperCase(), field?.name)}</p>
                         <Input
@@ -353,7 +353,7 @@ export const UserFormDetailsUI = (props) => {
                       </InputGroup>
                     )
                   ) : (
-                    ((requiredFields && requiredFields.includes(field.code)) || !requiredFields) && (
+                    ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields) && (
                       <InputGroup>
                         <p>{t(field.code.toUpperCase(), field?.name)}</p>
                         <Input
@@ -379,7 +379,7 @@ export const UserFormDetailsUI = (props) => {
                 </React.Fragment>
               )
             )}
-            {((!user?.guest_id && showInputBirthday) || (user?.guest_id && requiredFields.includes('birthdate'))) && (
+            {((!user?.guest_id && showInputBirthday) || (user?.guest_id && requiredFields?.includes?.('birthdate'))) && (
               <InputPhoneNumberWrapper>
                 <p>{t('BIRTHDATE', 'Birthdate')}</p>
                 <Input
@@ -390,11 +390,11 @@ export const UserFormDetailsUI = (props) => {
                   onFocus={() => setOpenCalendar(true)}
                 />
                 {openCalendar && (
-                  <DatePickerUI value={birthdate} onChange={_handleChangeDate} name={'birthdate'}/>
+                  <DatePickerUI value={birthdate} onChange={_handleChangeDate} name={'birthdate'} />
                 )}
               </InputPhoneNumberWrapper>
             )}
-            {((!user?.guest_id && !!showInputPhoneNumber) || (user?.guest_id && requiredFields.includes('cellphone'))) && showCustomerCellphone && ((requiredFields && requiredFields.includes('cellphone')) || !requiredFields) && (
+            {((!user?.guest_id && !!showInputPhoneNumber) || (user?.guest_id && requiredFields?.includes?.('cellphone'))) && showCustomerCellphone && ((requiredFields && requiredFields?.includes?.('cellphone')) || !requiredFields) && (
               <InputPhoneNumberWrapper>
                 <p>{t('PHONE', 'Phone')}</p>
                 <InputPhoneNumber
