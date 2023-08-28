@@ -33,6 +33,7 @@ import settings from './config'
 import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { Input } from '../src/themes/five/src/styles/Inputs'
 import { QueryLoginSpoonity } from '../src/themes/five/src/components/QueryLoginSpoonity'
+import { orderTypeList } from '../src/utils'
 
 const Header = loadable(() => import('../src/themes/five/src/components/Header'))
 const HeaderKiosk = loadable(() => import('../src/themes/five/src/components/Header/layouts/Kiosk'))
@@ -211,6 +212,10 @@ export const App = () => {
   const isPhoneVerifyRequired = auth && configs?.verification_phone_required?.value === '1' && !user?.phone_verified
   const isUserVerifyRequired = (isEmailVerifyRequired || isPhoneVerifyRequired) && !isKioskApp
   const isHideFooter = themeUpdated?.footer?.hidden
+  const guestCheckoutEnabled =
+    configs?.guest_checkout_enabled?.value === '1' &&
+    (!orderTypeList[orderStatus?.options?.type - 1] || configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderStatus?.options?.type - 1])) &&
+    user?.guest_id
 
   const isHome = location.pathname === '/' || location.pathname === '/home'
   const isFooterPage = location.pathname === '/pages/footer' || isKioskApp || isHideFooter
@@ -550,7 +555,7 @@ export const App = () => {
                 <HelmetTags />
                 <Switch>
                   <Route exact path='/home'>
-                    {isUserVerifyRequired ? (
+                    {isUserVerifyRequired && !guestCheckoutEnabled ? (
                       <Redirect to='/verify' />
                     ) : (
                       isKioskApp
@@ -563,7 +568,7 @@ export const App = () => {
                     )}
                   </Route>
                   <Route exact path='/'>
-                    {isUserVerifyRequired ? (
+                    {isUserVerifyRequired && !guestCheckoutEnabled ? (
                       <Redirect to='/verify' />
                     ) : (
                       isKioskApp
@@ -579,7 +584,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/wallets'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : isWalletEnabled
                           ? <Wallets />
@@ -625,7 +630,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/profile'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : (<Profile userId={user?.id} accessToken={user?.session?.access_token} useValidationFields />)
                       : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
@@ -637,21 +642,21 @@ export const App = () => {
                   </Route>
                   <Route exact path='/profile/orders'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : (<MyOrders />)
                       : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
                   </Route>
                   <Route exact path='/profile/addresses'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : (<AddressList />)
                       : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
                   </Route>
                   <Route exact path='/messages'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : <MessagesList />
                       : (
@@ -662,7 +667,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/help'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : (<Help />)
                       : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
@@ -677,7 +682,7 @@ export const App = () => {
                             orderStatus.loading && !orderStatus.options?.address?.location ? (
                               <SpinnerLoader />
                             ) : (
-                              isUserVerifyRequired ? (
+                              isUserVerifyRequired && !guestCheckoutEnabled ? (
                                 <Redirect to='/verify' />
                               ) : (
                                 (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !singleBusinessConfig.isActive
@@ -689,7 +694,7 @@ export const App = () => {
                     }
                   </Route>
                   <Route exact path='/business_search'>
-                    {isUserVerifyRequired ? (
+                    {isUserVerifyRequired && !guestCheckoutEnabled ? (
                       <Redirect to='/verify' />
                     ) : (
                       (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !isKioskApp ? (
@@ -703,7 +708,7 @@ export const App = () => {
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
                       <SpinnerLoader />
                     ) : (
-                      isUserVerifyRequired ? (
+                      isUserVerifyRequired && !guestCheckoutEnabled ? (
                         <Redirect to='/verify' />
                       ) : (
                         orderStatus.options?.address?.location && !isKioskApp
@@ -714,7 +719,7 @@ export const App = () => {
                   </Route>
                   <Route path='/checkout/:cartUuid?'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : <CheckoutPage />
                       : (
@@ -729,7 +734,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/multi-checkout/:cartUuid?'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : <MultiCheckout />
                       : (
@@ -744,7 +749,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/multi-cart'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : <MultiCart />
                       : (
@@ -759,7 +764,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/multi-orders/:orderId'>
                     {auth
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : <MultiOrdersDetails />
                       : (
@@ -774,7 +779,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/orders/:orderId'>
                     {(auth || hashKey)
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : <OrderDetailsPage />
                       : (
@@ -789,7 +794,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/promotions'>
                     {(auth || hashKey)
-                      ? isUserVerifyRequired
+                      ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : <Promotions />
                       : (
@@ -803,14 +808,14 @@ export const App = () => {
                       )}
                   </Route>
                   <Route exact path='/pages/:pageSlug'>
-                    {isUserVerifyRequired ? (
+                    {isUserVerifyRequired && !guestCheckoutEnabled ? (
                       <Redirect to='/verify' />
                     ) : (
                       <Cms />
                     )}
                   </Route>
                   <Route exact path='/pages'>
-                    {isUserVerifyRequired ? (
+                    {isUserVerifyRequired && !guestCheckoutEnabled ? (
                       <Redirect to='/verify' />
                     ) : (
                       <PagesList />
@@ -833,7 +838,7 @@ export const App = () => {
                   <Route exact path='/store'>
                     {queryIntegrationToken && queryIntegrationCode === 'spoonity'
                       ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
-                      : isUserVerifyRequired ? (
+                      : isUserVerifyRequired && !guestCheckoutEnabled ? (
                         <Redirect to='/verify' />
                       ) : (
                         <BusinessProductsList />
@@ -842,7 +847,7 @@ export const App = () => {
                   <Route exact path='/store/:business_slug'>
                     {queryIntegrationToken && queryIntegrationCode === 'spoonity'
                       ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
-                      : isUserVerifyRequired ? (
+                      : isUserVerifyRequired && !guestCheckoutEnabled ? (
                         <Redirect to='/verify' />
                       ) : (
                         <BusinessProductsList />
@@ -851,7 +856,7 @@ export const App = () => {
                   <Route exact path='/store/:business_slug/:category_slug/:product_slug'>
                     {queryIntegrationToken && queryIntegrationCode === 'spoonity'
                       ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
-                      : isUserVerifyRequired ? (
+                      : isUserVerifyRequired && !guestCheckoutEnabled ? (
                         <Redirect to='/verify' />
                       ) : (
                         <BusinessProductsList />
@@ -860,7 +865,7 @@ export const App = () => {
                   <Route exact path='/store/:category_slug/:product_slug'>
                     {queryIntegrationToken && queryIntegrationCode === 'spoonity'
                       ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
-                      : isUserVerifyRequired ? (
+                      : isUserVerifyRequired && !guestCheckoutEnabled ? (
                         <Redirect to='/verify' />
                       ) : (
                         <BusinessProductsList />
@@ -869,7 +874,7 @@ export const App = () => {
                   <Route exact path='/:business_slug'>
                     {queryIntegrationToken && queryIntegrationCode === 'spoonity'
                       ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
-                      : isUserVerifyRequired ? (
+                      : isUserVerifyRequired && !guestCheckoutEnabled ? (
                         <Redirect to='/verify' />
                       ) : (
                         <BusinessProductsList />
@@ -878,7 +883,7 @@ export const App = () => {
                   <Route exact path='/:business_slug/:category_slug/:product_slug'>
                     {queryIntegrationToken && queryIntegrationCode === 'spoonity'
                       ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
-                      : isUserVerifyRequired ? (
+                      : isUserVerifyRequired && !guestCheckoutEnabled ? (
                         <Redirect to='/verify' />
                       ) : (
                         <BusinessProductsList />
@@ -887,7 +892,7 @@ export const App = () => {
                   <Route exact path='/:business_slug/:category_slug'>
                     {queryIntegrationToken && queryIntegrationCode === 'spoonity'
                       ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
-                      : isUserVerifyRequired ? (
+                      : isUserVerifyRequired && !guestCheckoutEnabled ? (
                         <Redirect to='/verify' />
                       ) : (
                         <BusinessProductsList />
