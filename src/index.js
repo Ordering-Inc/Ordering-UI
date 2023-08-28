@@ -130,7 +130,8 @@ import {
   getTraduction,
   priceList,
   reviewCommentList,
-  shape
+  shape,
+  orderTypeList
 } from './utils'
 
 export {
@@ -280,5 +281,6 @@ export {
   getTraduction,
   priceList,
   reviewCommentList,
-  shape
+  shape,
+  orderTypeList
 }
