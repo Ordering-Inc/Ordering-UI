@@ -208,8 +208,10 @@ export const Header = (props) => {
       setModalPageToShow('user_update')
       setAuthModalOpen(true)
       setOtpDataUser(null)
+      localStorage.setItem('user-info-required', JSON.stringify(true))
       return
     }
+    localStorage.removeItem('user-info-required')
     if (user) {
       closeAuthModal()
     }
@@ -284,6 +286,12 @@ export const Header = (props) => {
 
   useEffect(() => {
     if (auth && isloginSignupLayoutPF) {
+      setOtpDataUser(null)
+    }
+    const localUserInfoRequired = JSON.parse(window.localStorage.getItem('user-info-required'))
+    if (auth && localUserInfoRequired) {
+      setModalPageToShow('user_update')
+      setAuthModalOpen(true)
       setOtpDataUser(null)
     }
   }, [auth])

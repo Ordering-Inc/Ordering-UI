@@ -136,6 +136,7 @@ export const UserFormDetailsUI = (props) => {
           ...result
         })
         setWillVerifyOtpState(true)
+        localStorage.removeItem('user-info-required')
       }
       if (error) {
         // changeUser({
