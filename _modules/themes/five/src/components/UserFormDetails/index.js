@@ -194,6 +194,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
               if (!error) {
                 changeUser(_objectSpread(_objectSpread({}, userSession), result));
                 setWillVerifyOtpState(true);
+                localStorage.removeItem('user-info-required');
               }
               if (error) {
                 // changeUser({

@@ -258,8 +258,10 @@ var Header = function Header(props) {
       setModalPageToShow('user_update');
       setAuthModalOpen(true);
       setOtpDataUser(null);
+      localStorage.setItem('user-info-required', JSON.stringify(true));
       return;
     }
+    localStorage.removeItem('user-info-required');
     if (user) {
       closeAuthModal();
     }
@@ -355,6 +357,12 @@ var Header = function Header(props) {
   }, [otpDataUser, modalPageToShow, authModalOpen]);
   (0, _react.useEffect)(function () {
     if (auth && isloginSignupLayoutPF) {
+      setOtpDataUser(null);
+    }
+    var localUserInfoRequired = JSON.parse(window.localStorage.getItem('user-info-required'));
+    if (auth && localUserInfoRequired) {
+      setModalPageToShow('user_update');
+      setAuthModalOpen(true);
       setOtpDataUser(null);
     }
   }, [auth]);
