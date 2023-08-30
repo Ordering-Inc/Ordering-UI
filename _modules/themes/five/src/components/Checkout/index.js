@@ -353,7 +353,7 @@ var CheckoutUI = function CheckoutUI(props) {
   };
   (0, _react.useEffect)(function () {
     var _validationFields$fie11;
-    if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie11 = validationFields.fields) !== null && _validationFields$fie11 !== void 0 && _validationFields$fie11.checkout && !customerState.loading && !userLoading) {
+    if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie11 = validationFields.fields) !== null && _validationFields$fie11 !== void 0 && _validationFields$fie11.checkout && !customerState.loading && !userLoading && !(user !== null && user !== void 0 && user.guest_id)) {
       checkValidationFields();
     }
   }, [validationFields, user, customerState]);

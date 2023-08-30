@@ -45,13 +45,17 @@ var SidebarMenu = function SidebarMenu(props) {
   var auth = props.auth,
     isHideSignup = props.isHideSignup,
     userCustomer = props.userCustomer,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    notificationState = props.notificationState;
   var _useEvent = (0, _orderingComponents.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useSession = (0, _orderingComponents.useSession)(),
+    _useSession2 = _slicedToArray(_useSession, 2),
+    login = _useSession2[1].login;
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     options = _useOrder2[0].options;
@@ -106,6 +110,14 @@ var SidebarMenu = function SidebarMenu(props) {
     setModalIsOpen(false);
     setModalSelected(null);
     actionSidebar(false);
+  };
+  var handleSuccessSignup = function handleSuccessSignup(user) {
+    var _user$session;
+    login({
+      user: user,
+      token: user === null || user === void 0 || (_user$session = user.session) === null || _user$session === void 0 ? void 0 : _user$session.access_token
+    });
+    _closeModal();
   };
   var handleCustomModalClick = function handleCustomModalClick(e, _ref) {
     var page = _ref.page;
@@ -289,6 +301,7 @@ var SidebarMenu = function SidebarMenu(props) {
     useLoginByCellphone: true,
     isPopup: true
   }), modalSelected === 'signup' && /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
+    notificationState: notificationState,
     elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {
         return handleCustomModalClick(e, {
@@ -299,6 +312,7 @@ var SidebarMenu = function SidebarMenu(props) {
     }, t('LOGIN', (theme === null || theme === void 0 || (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.LOGIN) || 'Login')),
     useLoginByCellphone: true,
     useChekoutFileds: true,
+    handleSuccessSignup: handleSuccessSignup,
     isPopup: true,
     closeModal: function closeModal() {
       return _closeModal();
