@@ -8,7 +8,7 @@ import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BiStore from '@meronex/icons/bi/BiStore'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
-import { useEvent, useLanguage, useOrder, useConfig } from 'ordering-components'
+import { useEvent, useLanguage, useOrder, useConfig, useSession } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { capitalize } from '../../../../../utils'
 import { MomentContent } from '../../../../../components/MomentContent'
@@ -38,9 +38,10 @@ import {
   MenuLinkSeparator
 } from './styles'
 export const SidebarMenu = (props) => {
-  const { auth, isHideSignup, userCustomer, isCustomerMode } = props
+  const { auth, isHideSignup, userCustomer, isCustomerMode, notificationState } = props
   const [events] = useEvent()
   const [, t] = useLanguage()
+  const [, { login }] = useSession()
   const [{ options }] = useOrder()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -80,6 +81,14 @@ export const SidebarMenu = (props) => {
     setModalIsOpen(false)
     setModalSelected(null)
     actionSidebar(false)
+  }
+
+  const handleSuccessSignup = (user) => {
+    login({
+      user,
+      token: user?.session?.access_token
+    })
+    closeModal()
   }
 
   const handleCustomModalClick = (e, { page }) => {
@@ -353,6 +362,7 @@ export const SidebarMenu = (props) => {
             )}
             {modalSelected === 'signup' && (
               <SignUpForm
+                notificationState={notificationState}
                 elementLinkToLogin={
                   <a
                     onClick={
@@ -363,6 +373,7 @@ export const SidebarMenu = (props) => {
                 }
                 useLoginByCellphone
                 useChekoutFileds
+                handleSuccessSignup={handleSuccessSignup}
                 isPopup
                 closeModal={() => closeModal()}
               />
