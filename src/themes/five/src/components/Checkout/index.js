@@ -311,7 +311,7 @@ const CheckoutUI = (props) => {
   }
 
   useEffect(() => {
-    if (validationFields && validationFields?.fields?.checkout && !customerState.loading && !userLoading) {
+    if (validationFields && validationFields?.fields?.checkout && !customerState.loading && !userLoading && !user?.guest_id) {
       checkValidationFields()
     }
   }, [validationFields, user, customerState])
