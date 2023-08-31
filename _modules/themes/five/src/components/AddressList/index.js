@@ -53,7 +53,8 @@ var AddressListUI = function AddressListUI(props) {
     isFromCheckout = props.isFromCheckout,
     setIsAddressFormOpen = props.setIsAddressFormOpen,
     isProfile = props.isProfile,
-    onAccept = props.onAccept;
+    onAccept = props.onAccept,
+    geoLocation = props.geoLocation;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -220,7 +221,8 @@ var AddressListUI = function AddressListUI(props) {
         return handleCloseAddressForm();
       },
       onSaveAddress: handleSaveAddress,
-      userCustomerSetup: userCustomerSetup
+      userCustomerSetup: userCustomerSetup,
+      geoLocation: geoLocation
     })));
   };
   var AddressListContent = function AddressListContent() {
@@ -246,7 +248,8 @@ var AddressListUI = function AddressListUI(props) {
         return handleCloseAddressForm();
       },
       onSaveAddress: handleSaveAddress,
-      userCustomerSetup: userCustomerSetup
+      userCustomerSetup: userCustomerSetup,
+      geoLocation: geoLocation
     }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
       id: "list",
       isProfile: isProfile
@@ -334,7 +337,8 @@ var AddressListUI = function AddressListUI(props) {
     userCustomerSetup: userCustomerSetup,
     onCancel: function onCancel() {
       return handleCloseAddressForm();
-    }
+    },
+    geoLocation: geoLocation
   })), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: confirm.title || t('SEARCH', 'Search'),
     content: confirm.content,

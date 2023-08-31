@@ -62,6 +62,7 @@ var AddressFormUI = function AddressFormUI(props) {
     saveAddress = props.saveAddress,
     setIsEdit = props.setIsEdit,
     userCustomerSetup = props.userCustomerSetup,
+    geoLocation = props.geoLocation,
     pfchangs = props.pfchangs;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -495,7 +496,8 @@ var AddressFormUI = function AddressFormUI(props) {
       },
       onError: setMapErrors,
       IconButton: _reactBootstrapIcons.GeoAlt,
-      IconLoadingButton: _CgSearchLoading.default
+      IconLoadingButton: _CgSearchLoading.default,
+      geoLocation: geoLocation
     })), !isHideMap && locationChange && ((addressState === null || addressState === void 0 ? void 0 : (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 ? void 0 : (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
       apiKey: googleMapsApiKey,
       location: locationChange,
