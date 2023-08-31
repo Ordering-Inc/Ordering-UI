@@ -66,7 +66,8 @@ const AddressListUI = (props) => {
     isFromCheckout,
     setIsAddressFormOpen,
     isProfile,
-    onAccept
+    onAccept,
+    geoLocation
   } = props
 
   const [, t] = useLanguage()
@@ -222,6 +223,7 @@ const AddressListUI = (props) => {
               onCancel={() => handleCloseAddressForm()}
               onSaveAddress={handleSaveAddress}
               userCustomerSetup={userCustomerSetup}
+              geoLocation={geoLocation}
             />
           </AddressFormContainer>
         )}
@@ -263,6 +265,7 @@ const AddressListUI = (props) => {
               onCancel={() => handleCloseAddressForm()}
               onSaveAddress={handleSaveAddress}
               userCustomerSetup={userCustomerSetup}
+              geoLocation={geoLocation}
             />
           )
         }
@@ -388,6 +391,7 @@ const AddressListUI = (props) => {
                 onSaveAddress={handleSaveAddress}
                 userCustomerSetup={userCustomerSetup}
                 onCancel={() => handleCloseAddressForm()}
+                geoLocation={geoLocation}
               />
             </Modal>
           )

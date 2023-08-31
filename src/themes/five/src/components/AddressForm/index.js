@@ -59,6 +59,7 @@ const AddressFormUI = (props) => {
     saveAddress,
     setIsEdit,
     userCustomerSetup,
+    geoLocation,
     pfchangs
   } = props
 
@@ -423,6 +424,7 @@ const AddressFormUI = (props) => {
                     onError={setMapErrors}
                     IconButton={GeoAlt}
                     IconLoadingButton={CgSearchLoading}
+                    geoLocation={geoLocation}
                   />
                 </AddressWrap>
 

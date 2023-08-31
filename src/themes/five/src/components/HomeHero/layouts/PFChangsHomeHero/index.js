@@ -45,6 +45,7 @@ export const PFChangsHomeHero = (props) => {
   const [businessesLocations, setBusinessesLocations] = useState([])
   const [currentLocation, setCurrentLocation] = useState(null)
   const [businessClikedId, setBusinessClikedId] = useState(null)
+  const [geoLocation, setGeoLocation] = useState(false)
   const [isMapReady, setIsMapReady] = useState(false)
   const [mapActivated, setMapActivated] = useState(false)
   const [imageMapDimensions, setImageMapDimension] = useState({})
@@ -116,8 +117,19 @@ export const PFChangsHomeHero = (props) => {
   const defaultLocation = { lat: 19.432241, lng: -99.177254 }
 
   useEffect(() => {
+    navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+      if (result.state === 'granted') {
+        setGeoLocation(true)
+      }
+    })
     return () => setModals({ listOpen: false, formOpen: false })
   }, [])
+
+  useEffect(() => {
+    if (geoLocation && !auth && !orderState?.options?.address?.location) {
+      setModals({ ...modals, formOpen: true })
+    }
+  }, [geoLocation, auth, orderState?.options?.address?.location])
 
   useEffect(() => {
     const imageMapDimensions = document.getElementById('wrapper-map-id')
@@ -310,6 +322,7 @@ export const PFChangsHomeHero = (props) => {
             onClose={() => setModals({ ...modals, formOpen: false })}
             onSaveAddress={() => handleSaveAddress()}
             onCancel={() => setModals({ ...modals, formOpen: false })}
+            geoLocation={geoLocation}
             pfchangs
           />
         </Modal>
@@ -324,6 +337,7 @@ export const PFChangsHomeHero = (props) => {
             userId={isNaN(userCustomer) ? null : userCustomer}
             onCancel={() => setModals({ ...modals, listOpen: false })}
             onAccept={() => handleFindBusinesses()}
+            geoLocation={geoLocation}
           />
         </Modal>
       </HeroContainer>
