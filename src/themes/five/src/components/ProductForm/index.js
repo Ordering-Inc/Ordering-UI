@@ -138,6 +138,7 @@ const ProductOptionsUI = (props) => {
   const guestCheckoutEnabled = configs?.guest_checkout_enabled?.value === '1'
   const orderTypeEnabled = !orderTypeList[orderState?.options?.type - 1] || configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderState?.options?.type - 1])
   const hideProductDescription = theme?.business_view?.components?.products?.components?.product?.components?.description?.hidden
+  const hideProductDummyLogo = theme?.business_view?.components?.products?.components?.product?.components?.dummy?.hidden
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -409,32 +410,34 @@ const ProductOptionsUI = (props) => {
       {product && (
         <WrapperImage>
           <SwiperWrapper isSoldOut={isSoldOut}>
-            <Swiper
-              spaceBetween={10}
-              navigation
-              watchOverflow
-              observer
-              observeParents
-              parallax
-              slidesPerView={1}
-              thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
-              onSlideChange={() => handleSlideChange()}
-            >
-              {gallery?.map((img, i) => (
-                <SwiperSlide key={i}>
-                  <img src={img} alt='' className='active-img' />
-                </SwiperSlide>
-              ))}
-              {videoGallery && videoGallery?.length > 0 && (
-                <>
-                  {videoGallery?.map((video, j) => (
-                    <SwiperSlide key={j}>
-                      <iframe style={{ border: 'none', width: '100%', height: '100%' }} src={video} />
-                    </SwiperSlide>
-                  ))}
-                </>
-              )}
-            </Swiper>
+            {(product?.images || !hideProductDummyLogo) && (
+              <Swiper
+                spaceBetween={10}
+                navigation
+                watchOverflow
+                observer
+                observeParents
+                parallax
+                slidesPerView={1}
+                thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+                onSlideChange={() => handleSlideChange()}
+              >
+                {gallery?.map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <img src={img} alt='' className='active-img' />
+                  </SwiperSlide>
+                ))}
+                {videoGallery && videoGallery?.length > 0 && (
+                  <>
+                    {videoGallery?.map((video, j) => (
+                      <SwiperSlide key={j}>
+                        <iframe style={{ border: 'none', width: '100%', height: '100%' }} src={video} />
+                      </SwiperSlide>
+                    ))}
+                  </>
+                )}
+              </Swiper>
+            )}
             {galleryLength > 2 && (
               <Swiper
                 onSwiper={setThumbsSwiper}

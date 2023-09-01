@@ -63,6 +63,7 @@ export const ProductItemAccordion = (props) => {
 
   const viewString = isConfirmationPage ? 'confirmation' : isStore ? 'business_view' : 'header'
   const showProductImage = !theme?.[viewString]?.components?.cart?.components?.products?.components?.image?.hidden
+  const hideProductDummyLogo = theme?.business_view?.components?.products?.components?.product?.components?.dummy?.hidden
 
   const productInfo = () => {
     if (isCartProduct) {
@@ -131,7 +132,7 @@ export const ProductItemAccordion = (props) => {
           onClick={(e) => toggleAccordion(e)}
         >
           <ProductInfo className='info' isValid={product?.valid ?? true}>
-            {(product?.images || theme?.images?.dummies?.product) && showProductImage && (
+            {(product?.images || (!hideProductDummyLogo && theme?.images?.dummies?.product)) && showProductImage && (
               <WrapperProductImage>
                 <ProductImage bgimage={product?.images || theme?.images?.dummies?.product} />
               </WrapperProductImage>
