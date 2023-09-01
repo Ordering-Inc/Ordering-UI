@@ -75,6 +75,7 @@ const SingleProductCardUI = (props) => {
 
   const hideAddButton = theme?.business_view?.components?.products?.components?.add_to_cart_button?.hidden ?? true
   const hideProductDescription = theme?.business_view?.components?.products?.components?.product?.components?.description?.hidden
+  const hideProductDummyLogo = theme?.business_view?.components?.products?.components?.product?.components?.dummy?.hidden
   const hideProductLogo = viewString
     ? theme?.[viewString]?.components?.cart?.components?.products?.image?.hidden
     : theme?.business_view?.components?.products?.components?.product?.components?.image?.hidden
@@ -216,7 +217,7 @@ const SingleProductCardUI = (props) => {
                     <CardLogo
                       className='image'
                       soldOut={isSoldOut || maxProductQuantity <= 0}
-                      bgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')}
+                      bgimage={optimizeImage(product?.images || !hideProductDummyLogo && theme?.images?.dummies?.product, 'h_86,c_limit')}
                     />
                   </WrapLogo>
                 ) : (
