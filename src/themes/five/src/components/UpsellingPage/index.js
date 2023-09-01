@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { UpsellingPage as UpsellingPageController, useLanguage, useUtils } from 'ordering-components'
+import { useTheme } from 'styled-components'
 import {
   Container,
   UpsellingContainer,
@@ -33,11 +34,16 @@ const UpsellingPageUI = (props) => {
     business,
     isCustomMode
   } = props
+
   const [, t] = useLanguage()
+  const [{ parsePrice }] = useUtils()
+  const theme = useTheme()
+
   const [actualProduct, setActualProduct] = useState(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [{ parsePrice }] = useUtils()
   const [showUpselling, setShowUpSelling] = useState(true)
+
+  const hideProductDummyLogo = theme?.business_view?.components?.products?.components?.product?.components?.dummy?.hidden
 
   useEffect(() => {
     if (!isCustomMode) {
@@ -144,9 +150,11 @@ const UpsellingPageUI = (props) => {
                               </div>
                               <Button color='primary' onClick={() => handleFormProduct(product)}>{t('ADD', 'Add')}</Button>
                             </HorizontalDetails>
-                            <HorizontalImage>
-                              <img src={product.images} alt={`product-${i}`} loading='lazy' />
-                            </HorizontalImage>
+                            {(product?.images || (!hideProductDummyLogo && theme?.images?.dummies?.product)) && (
+                              <HorizontalImage>
+                                <img src={product.images} alt={`product-${i}`} loading='lazy' />
+                              </HorizontalImage>
+                            )}
                           </HorizontalItem>
                         )) : (
                           <div>
