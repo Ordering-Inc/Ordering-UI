@@ -431,7 +431,7 @@ const AddressFormUI = (props) => {
                       mapControls={googleMapsControls}
                       handleChangeAddressMap={handleChangeAddress}
                       setErrors={setMapErrors}
-                      maxLimitLocation={maxLimitLocation}
+                      maxLimitLocation={parseInt(maxLimitLocation, 10)}
                       businessZones={businessesList?.businesses?.map(business => business?.zones)}
                     />
                   </WrapperMap>

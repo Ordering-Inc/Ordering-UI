@@ -51,7 +51,8 @@ export const Header = (props) => {
     isShowOrderOptions,
     isHideSignup,
     isCustomerMode,
-    isShowRedirectButton
+    isShowRedirectButton,
+    franchiseId
   } = props
 
   const { pathname } = useLocation()
@@ -228,7 +229,7 @@ export const Header = (props) => {
             <Menu>
               {isShowRedirectButton && (
                 <MenuLink
-                  onClick={() => window.open(`${t('CALL_CENTER_REDIRECT_URL','#')}`)}
+                  onClick={() => window.open(`${t('CALL_CENTER_REDIRECT_URL', '#')}`)}
                   highlight={1}
                   style={{ whiteSpace: 'nowrap' }}
                   name='redirect'
@@ -395,6 +396,7 @@ export const Header = (props) => {
                 isModal
                 setIsOpenUserData={setIsOpenUserData}
                 onClose={() => setCustomerModalOpen(false)}
+                franchiseId={franchiseId}
               />
               <AddressList
                 isModal
@@ -405,6 +407,7 @@ export const Header = (props) => {
                 setCustomerModalOpen={setCustomerModalOpen}
                 setIsOpenUserData={setIsOpenUserData}
                 setIsAddressFormOpen={setIsAddressFormOpen}
+                franchiseId={franchiseId}
                 isHeader
               />
             </>
