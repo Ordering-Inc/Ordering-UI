@@ -44,7 +44,8 @@ export const UserFormDetailsUI = (props) => {
     isOldLayout,
     requiredFields,
     isMissedData,
-    handleSetAlert
+    handleSetAlert,
+    onClose
   } = props
 
   const [ordering] = useApi()
@@ -139,11 +140,13 @@ export const UserFormDetailsUI = (props) => {
         localStorage.removeItem('user-info-required')
       }
       if (error) {
+        localStorage.removeItem('user-info-required')
         // changeUser({
         //   ...userSession,
         //   ...formState.changes
         // })
         // setWillVerifyOtpState(true)
+        onClose()
         handleSetAlert(result, t('ATENTION', 'Atencion'))
       }
     } else {
