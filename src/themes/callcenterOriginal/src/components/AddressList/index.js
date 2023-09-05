@@ -66,7 +66,8 @@ const AddressListUI = (props) => {
     isOpenUserData,
     setIsAddressFormOpen,
     isHeader,
-    notUseCustomerInfo
+    notUseCustomerInfo,
+    franchiseId
   } = props
 
   const [, t] = useLanguage()
@@ -318,6 +319,7 @@ const AddressListUI = (props) => {
                   userCustomerSetup={userCustomerSetup}
                   isEnableContinueButton={isEnableContinueButton}
                   notUseCustomerInfo={notUseCustomerInfo}
+                  franchiseId={franchiseId}
                 />
               </AddressFormContainer>
             )}
