@@ -59,7 +59,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     isOldLayout = props.isOldLayout,
     requiredFields = props.requiredFields,
     isMissedData = props.isMissedData,
-    handleSetAlert = props.handleSetAlert;
+    handleSetAlert = props.handleSetAlert,
+    onClose = props.onClose;
   var _useApi = (0, _orderingComponents.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
@@ -197,11 +198,13 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
                 localStorage.removeItem('user-info-required');
               }
               if (error) {
+                localStorage.removeItem('user-info-required');
                 // changeUser({
                 //   ...userSession,
                 //   ...formState.changes
                 // })
                 // setWillVerifyOtpState(true)
+                onClose();
                 handleSetAlert(result, t('ATENTION', 'Atencion'));
               }
               _context.next = 18;
