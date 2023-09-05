@@ -56,7 +56,8 @@ var AddressListUI = function AddressListUI(props) {
     isOpenUserData = props.isOpenUserData,
     setIsAddressFormOpen = props.setIsAddressFormOpen,
     isHeader = props.isHeader,
-    notUseCustomerInfo = props.notUseCustomerInfo;
+    notUseCustomerInfo = props.notUseCustomerInfo,
+    franchiseId = props.franchiseId;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -286,7 +287,8 @@ var AddressListUI = function AddressListUI(props) {
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup,
     isEnableContinueButton: isEnableContinueButton,
-    notUseCustomerInfo: notUseCustomerInfo
+    notUseCustomerInfo: notUseCustomerInfo,
+    franchiseId: franchiseId
   }))), addressOpen && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
     width: "50%",
     isEnableContinueButton: isEnableContinueButton

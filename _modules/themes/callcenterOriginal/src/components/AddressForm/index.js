@@ -502,7 +502,7 @@ var AddressFormUI = function AddressFormUI(props) {
       mapControls: googleMapsControls,
       handleChangeAddressMap: handleChangeAddress,
       setErrors: setMapErrors,
-      maxLimitLocation: maxLimitLocation,
+      maxLimitLocation: parseInt(maxLimitLocation, 10),
       businessZones: businessesList === null || businessesList === void 0 || (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
         return business === null || business === void 0 ? void 0 : business.zones;
       })

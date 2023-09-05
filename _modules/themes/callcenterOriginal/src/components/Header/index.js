@@ -53,7 +53,8 @@ var Header = function Header(props) {
     isShowOrderOptions = props.isShowOrderOptions,
     isHideSignup = props.isHideSignup,
     isCustomerMode = props.isCustomerMode,
-    isShowRedirectButton = props.isShowRedirectButton;
+    isShowRedirectButton = props.isShowRedirectButton,
+    franchiseId = props.franchiseId;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
     pathname = _useLocation.pathname;
   var _useEvent = (0, _orderingComponents.useEvent)(),
@@ -389,7 +390,8 @@ var Header = function Header(props) {
     setIsOpenUserData: setIsOpenUserData,
     onClose: function onClose() {
       return setCustomerModalOpen(false);
-    }
+    },
+    franchiseId: franchiseId
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     userId: customerState === null || customerState === void 0 || (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id,
@@ -399,6 +401,7 @@ var Header = function Header(props) {
     setCustomerModalOpen: setCustomerModalOpen,
     setIsOpenUserData: setIsOpenUserData,
     setIsAddressFormOpen: setIsAddressFormOpen,
+    franchiseId: franchiseId,
     isHeader: true
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.CUSTOMER) || 'Customer'),

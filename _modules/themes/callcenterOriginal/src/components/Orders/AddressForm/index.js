@@ -447,7 +447,7 @@ var AddressFormUI = function AddressFormUI(props) {
     mapControls: googleMapsControls,
     handleChangeAddressMap: handleChangeAddress,
     setErrors: setMapErrors,
-    maxLimitLocation: maxLimitLocation
+    maxLimitLocation: parseInt(maxLimitLocation, 10)
   })), inputNames.map(function (field) {
     var _configState$configs5, _ref8, _formState$changes$fi, _formState$changes25, _addressState$address11, _ref9, _formState$changes$ad5, _formState$changes26;
     return showField && showField(field.name) && (field.name === 'address' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
