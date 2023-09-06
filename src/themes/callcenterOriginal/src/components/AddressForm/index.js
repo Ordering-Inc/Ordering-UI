@@ -8,6 +8,7 @@ import {
   House,
   GeoAlt
 } from 'react-bootstrap-icons'
+import { useTheme } from 'styled-components'
 import { useForm } from 'react-hook-form'
 import {
   AddressForm as AddressFormController,
@@ -59,6 +60,7 @@ const AddressFormUI = (props) => {
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
+  const theme = useTheme()
 
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
@@ -433,6 +435,7 @@ const AddressFormUI = (props) => {
                       setErrors={setMapErrors}
                       maxLimitLocation={parseInt(maxLimitLocation, 10)}
                       businessZones={businessesList?.businesses?.map(business => business?.zones)}
+                      fallbackIcon={theme.images?.dummies?.businessLogo}
                     />
                   </WrapperMap>
                 )}
