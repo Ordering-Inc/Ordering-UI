@@ -6,10 +6,13 @@ export const CategoriesWrap = styled.div`
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 7.6px;
-  @media (min-width: 993){
-    width: calc(100% - 40px);
+
+  @media (min-width: 993px) {
+    /* width: calc(100% - 40px);
     border: 0;
-    padding: 0;
+    padding: 0; */
+    overflow: auto;
+    max-height: calc(90vh - 10px);
   }
 `
 
@@ -30,7 +33,7 @@ export const CategoriesContainer = styled.div`
     overflow: hidden;
   }
 
-  div.special{
+  div.special {
     ${props => !props.featured && css`
       display: none;
     `}
