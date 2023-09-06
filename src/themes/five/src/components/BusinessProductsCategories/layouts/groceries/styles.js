@@ -8,9 +8,6 @@ export const CategoriesWrap = styled.div`
   border-radius: 7.6px;
 
   @media (min-width: 993px) {
-    /* width: calc(100% - 40px);
-    border: 0;
-    padding: 0; */
     overflow: auto;
     max-height: calc(90vh - 10px);
   }
