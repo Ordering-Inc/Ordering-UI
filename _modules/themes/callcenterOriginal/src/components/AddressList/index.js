@@ -55,7 +55,9 @@ var AddressListUI = function AddressListUI(props) {
     isFromCheckout = props.isFromCheckout,
     isOpenUserData = props.isOpenUserData,
     setIsAddressFormOpen = props.setIsAddressFormOpen,
-    isHeader = props.isHeader;
+    isHeader = props.isHeader,
+    notUseCustomerInfo = props.notUseCustomerInfo,
+    franchiseId = props.franchiseId;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -204,7 +206,8 @@ var AddressListUI = function AddressListUI(props) {
     halfWidth: addressOpen,
     isOpenUserData: isOpenUserData,
     isHeader: isHeader,
-    isEnableContinueButton: isEnableContinueButton
+    isEnableContinueButton: isEnableContinueButton,
+    notUseCustomerInfo: notUseCustomerInfo
   }, (!isPopover || !addressOpen) && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
@@ -283,8 +286,10 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup,
-    isEnableContinueButton: isEnableContinueButton
-  }))), addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
+    isEnableContinueButton: isEnableContinueButton,
+    notUseCustomerInfo: notUseCustomerInfo,
+    franchiseId: franchiseId
+  }))), addressOpen && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
     width: "50%",
     isEnableContinueButton: isEnableContinueButton
   }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
@@ -297,7 +302,7 @@ var AddressListUI = function AddressListUI(props) {
     style: {
       marginBottom: '10px'
     }
-  })), onCancel && onAccept && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) === 'object' && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), onCancel && onAccept && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) === 'object' && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     type: "button",
     disabled: addressList.loading || actionStatus.loading || orderState.loading,

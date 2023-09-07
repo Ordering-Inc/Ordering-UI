@@ -26,13 +26,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressDetailsUI = function AddressDetailsUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _orderState$options2, _orderState$options3, _props$afterComponent, _props$afterElements;
+  var _orderState$options2, _props$beforeElements, _props$beforeComponen, _orderState$options3, _orderState$options4, _props$afterComponent, _props$afterElements;
   var addressToShow = props.addressToShow,
     isCartPending = props.isCartPending,
     googleMapsUrl = props.googleMapsUrl,
     isCustomerMode = props.isCustomerMode,
     apiKey = props.apiKey,
-    isFromCheckout = props.isFromCheckout;
+    isFromCheckout = props.isFromCheckout,
+    notUseCustomerInfo = props.notUseCustomerInfo;
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
@@ -50,7 +51,6 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     alertState = _useState4[0],
     setAlertState = _useState4[1];
-  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
     _useCustomer2 = _slicedToArray(_useCustomer, 1),
     user = _useCustomer2[0].user;
@@ -70,6 +70,11 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
       return setOpenModal(false);
     };
   }, []);
+  (0, _react.useEffect)(function () {
+    if (isCustomerMode) {
+      setOpenModal(false);
+    }
+  }, [JSON.stringify(orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2.address) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address)]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -78,7 +83,7 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h1", null, addressToShow || (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2.address) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address)), (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react.default.createElement(_styles.AddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("h1", null, addressToShow || (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.address) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address)), (orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) === 1 && !isCartPending && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setOpenModal(true);
     }
@@ -99,7 +104,8 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     changeOrderAddressWithDefault: true,
-    userId: isNaN(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) ? null : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
+    notUseCustomerInfo: notUseCustomerInfo,
+    userId: user === null || user === void 0 ? void 0 : user.id,
     onCancel: function onCancel() {
       return setOpenModal(false);
     },

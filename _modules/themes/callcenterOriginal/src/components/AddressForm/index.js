@@ -9,6 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _CgSearchLoading = _interopRequireDefault(require("@meronex/icons/cg/CgSearchLoading"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _styledComponents = require("styled-components");
 var _reactHookForm = require("react-hook-form");
 var _orderingComponents = require("ordering-components");
 var _Confirm = require("../Confirm");
@@ -51,7 +52,9 @@ var AddressFormUI = function AddressFormUI(props) {
     userCustomerSetup = props.userCustomerSetup,
     businessesList = props.businessesList,
     getBusinessDeliveryZones = props.getBusinessDeliveryZones,
-    isEnableContinueButton = props.isEnableContinueButton;
+    isEnableContinueButton = props.isEnableContinueButton,
+    address = props.address,
+    notUseCustomerInfo = props.notUseCustomerInfo;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -65,6 +68,7 @@ var AddressFormUI = function AddressFormUI(props) {
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     auth = _useSession2[0].auth;
+  var theme = (0, _styledComponents.useTheme)();
   var _useState = (0, _react.useState)({
       selectedFromAutocomplete: true
     }),
@@ -416,6 +420,11 @@ var AddressFormUI = function AddressFormUI(props) {
       formMethods.setValue(field.name, (_ref8 = (_formState$changes$fi = (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25[field.name]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11[field.name]) !== null && _ref8 !== void 0 ? _ref8 : '');
     });
   }, [formMethods]);
+  (0, _react.useEffect)(function () {
+    if (address !== null && address !== void 0 && address.location) {
+      getBusinessDeliveryZones(address === null || address === void 0 ? void 0 : address.location);
+    }
+  }, [address]);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "address-form"
   }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -447,7 +456,7 @@ var AddressFormUI = function AddressFormUI(props) {
       key: i
     }, props));
   }), inputNames.map(function (field) {
-    var _configState$configs5, _addressState$address12, _formState$changes26, _businessesList$busin, _ref9, _formState$changes$fi2, _formState$changes27, _addressState$address13, _ref10, _formState$changes$ad5, _formState$changes28;
+    var _configState$configs5, _addressState$address12, _formState$changes26, _businessesList$busin, _theme$images, _ref9, _formState$changes$fi2, _formState$changes27, _addressState$address13, _ref10, _formState$changes$ad5, _formState$changes28;
     return showField && showField(field.name) && (field.name === 'address' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
@@ -483,9 +492,10 @@ var AddressFormUI = function AddressFormUI(props) {
       IconButton: _reactBootstrapIcons.GeoAlt,
       IconLoadingButton: _CgSearchLoading.default
     })), locationChange && ((addressState === null || addressState === void 0 || (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 || (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
-      isEnableContinueButton: isEnableContinueButton
+      isEnableContinueButton: isEnableContinueButton,
+      notUseCustomerInfo: notUseCustomerInfo
     }, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
-      useLocationPin: true,
+      useMapWithBusinessZones: true,
       deactiveAlerts: true,
       apiKey: googleMapsApiKey,
       location: locationChange,
@@ -494,10 +504,11 @@ var AddressFormUI = function AddressFormUI(props) {
       mapControls: googleMapsControls,
       handleChangeAddressMap: handleChangeAddress,
       setErrors: setMapErrors,
-      maxLimitLocation: maxLimitLocation,
+      maxLimitLocation: parseInt(maxLimitLocation, 10),
       businessZones: businessesList === null || businessesList === void 0 || (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
         return business === null || business === void 0 ? void 0 : business.zones;
-      })
+      }),
+      fallbackIcon: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo
     }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, field.name !== 'address_notes' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
