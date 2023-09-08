@@ -264,8 +264,9 @@ var LoginFormUI = function LoginFormUI(props) {
   }, [formMethods]);
   (0, _react.useEffect)(function () {
     if ((otpState === null || otpState === void 0 ? void 0 : otpState.length) === numOtpInputs) {
+      var localUserInfoRequired = JSON.parse(window.localStorage.getItem('user-info-required'));
       if (loginTab === 'otp') {
-        if (createOtpUser) {
+        if (createOtpUser && !localUserInfoRequired) {
           alseaOtpCreateUser({
             country_code: parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone).countryPhoneCode,
             cellphone: parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone).cellphone,

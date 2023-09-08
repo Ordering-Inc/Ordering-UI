@@ -170,7 +170,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
             case 3:
               available = _context.sent;
               if (!available) {
-                _context.next = 17;
+                _context.next = 24;
                 break;
               }
               _context.next = 7;
@@ -197,24 +197,30 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
                 setWillVerifyOtpState(true);
                 localStorage.removeItem('user-info-required');
               }
-              if (error) {
-                localStorage.removeItem('user-info-required');
-                // changeUser({
-                //   ...userSession,
-                //   ...formState.changes
-                // })
-                // setWillVerifyOtpState(true)
-                onClose();
-                handleSetAlert(result, t('ATENTION', 'Atencion'));
+              if (!error) {
+                _context.next = 22;
+                break;
               }
-              _context.next = 18;
+              if (!(Array.isArray(result) && result[0] === 'CHANGE_PHONE_REQUIRE_VERIFICATION')) {
+                _context.next = 19;
+                break;
+              }
+              changeUser(_objectSpread(_objectSpread({}, userSession), formState.changes));
+              setWillVerifyOtpState(true);
+              return _context.abrupt("return");
+            case 19:
+              localStorage.removeItem('user-info-required');
+              onClose();
+              handleSetAlert(result, t('ATENTION', 'Atencion'));
+            case 22:
+              _context.next = 25;
               break;
-            case 17:
+            case 24:
               setAlertState({
                 open: true,
                 content: [t('NUMBER_ALREADY_EXISTS', 'El numero ya existe en otra cuenta.')]
               });
-            case 18:
+            case 25:
             case "end":
               return _context.stop();
           }

@@ -17,6 +17,7 @@ var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
 var _AddressList = require("../AddressList");
 var _Confirm = require("../Confirm");
 var _pfchangs2 = require("../Confirm/layouts/pfchangs");
+var _pfchangs3 = require("../LoginForm/layouts/pfchangs");
 var _ProfileOptions = require("../../../../../components/UserProfileForm/ProfileOptions");
 var _utils = require("../../../../../utils");
 var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
@@ -47,7 +48,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     isHiddenAddress = props.isHiddenAddress,
     handleSendVerifyCode = props.handleSendVerifyCode,
     verifyPhoneState = props.verifyPhoneState,
-    setFormState = props.setFormState;
+    setFormState = props.setFormState,
+    willVerifyOtpState = props.willVerifyOtpState,
+    setWillVerifyOtpState = props.setWillVerifyOtpState;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -58,10 +61,10 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
-    willVerifyOtpState = _useState2[0],
-    setWillVerifyOtpState = _useState2[1];
+    otpDataUser = _useState2[0],
+    setOtpDataUser = _useState2[1];
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, willVerifyOtpState),
     _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
     otpLeftTime = _useCountdownTimer2[0],
@@ -112,6 +115,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   var handleClickImage = function handleClickImage() {
     inputRef.current.click();
   };
+  var closeWillVerifyModal = function closeWillVerifyModal() {
+    setWillVerifyOtpState(false);
+  };
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -153,9 +159,11 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   (0, _react.useEffect)(function () {
     toggleIsEdit();
   }, []);
-  (0, _react.useEffect)(function () {
-    handleSendOtp();
-  }, [willVerifyOtpState]);
+
+  // useEffect(() => {
+  //   handleSendOtp()
+  // }, [willVerifyOtpState])
+
   (0, _react.useEffect)(function () {
     if (otpLeftTime === 0) {
       setAlertState({
@@ -244,20 +252,16 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     },
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('ENTER_VERIFICATION_CODE', 'Enter verification code'),
     open: willVerifyOtpState,
-    width: "700px",
-    height: "420px",
-    onClose: function onClose() {
-      return setWillVerifyOtpState(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_VerifyCodeForm.VerifyCodeForm, {
-    otpLeftTime: otpLeftTime,
-    credentials: formState === null || formState === void 0 ? void 0 : formState.changes,
-    handleSendOtp: handleSendOtp,
-    handleCheckPhoneCode: handleSendPhoneCode,
-    email: (userData === null || userData === void 0 ? void 0 : userData.email) || (user === null || user === void 0 ? void 0 : user.email),
-    isPhone: true
+    width: "50%",
+    hideCloseDefault: true
+  }, /*#__PURE__*/_react.default.createElement(_pfchangs3.LoginForm, {
+    useLoginByCellphone: true,
+    isPopup: true,
+    defaultLoginTab: "otp",
+    setOtpDataUser: setOtpDataUser,
+    isDirectLogin: true,
+    handleSuccessLogin: closeWillVerifyModal
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
