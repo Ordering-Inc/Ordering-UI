@@ -250,11 +250,11 @@ export const UserFormDetailsUI = (props) => {
     })
   }, [formMethods])
 
-  useEffect(() => {
-    if (isChanged && userPhoneNumber && isValidPhoneNumber && formState?.changes?.country_phone_code && formState?.changes?.cellphone && configs?.verification_phone_required?.value === '1') {
-      setWillVerifyOtpState(true)
-    }
-  }, [isValidPhoneNumber, userPhoneNumber, configs?.verification_phone_required?.value, isChanged])
+  // useEffect(() => {
+  //   if (isChanged && userPhoneNumber && isValidPhoneNumber && formState?.changes?.country_phone_code && formState?.changes?.cellphone && configs?.verification_phone_required?.value === '1') {
+  //     setWillVerifyOtpState(true)
+  //   }
+  // }, [isValidPhoneNumber, userPhoneNumber, configs?.verification_phone_required?.value, isChanged])
 
   useEffect(() => {
     if (requiredFields && !requiredFields.includes('cellphone')) setIsValidPhoneNumber(true)

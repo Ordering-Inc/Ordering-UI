@@ -140,12 +140,15 @@ export const UserFormDetailsUI = (props) => {
         localStorage.removeItem('user-info-required')
       }
       if (error) {
+        if (Array.isArray(result) && result[0] === 'CHANGE_PHONE_REQUIRE_VERIFICATION') {
+          changeUser({
+            ...userSession,
+            ...formState.changes
+          })
+          setWillVerifyOtpState(true)
+          return
+        }
         localStorage.removeItem('user-info-required')
-        // changeUser({
-        //   ...userSession,
-        //   ...formState.changes
-        // })
-        // setWillVerifyOtpState(true)
         onClose()
         handleSetAlert(result, t('ATENTION', 'Atencion'))
       }

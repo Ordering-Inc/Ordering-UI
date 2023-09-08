@@ -216,8 +216,9 @@ const LoginFormUI = (props) => {
 
   useEffect(() => {
     if (otpState?.length === numOtpInputs) {
+      const localUserInfoRequired = JSON.parse(window.localStorage.getItem('user-info-required'))
       if (loginTab === 'otp') {
-        if (createOtpUser) {
+        if (createOtpUser && !localUserInfoRequired) {
           alseaOtpCreateUser({
             country_code: parseNumber(credentials?.cellphone).countryPhoneCode,
             cellphone: parseNumber(credentials?.cellphone).cellphone,

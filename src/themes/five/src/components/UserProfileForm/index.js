@@ -18,6 +18,7 @@ import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
+import { LoginForm as LoginFormComponent } from '../LoginForm/layouts/pfchangs'
 
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { bytesConverter } from '../../../../../utils'
@@ -49,16 +50,20 @@ const UserProfileFormUI = (props) => {
     isHiddenAddress,
     handleSendVerifyCode,
     verifyPhoneState,
-    setFormState
+    setFormState,
+    willVerifyOtpState,
+    setWillVerifyOtpState
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ user }] = useSession()
   const [orderingTheme] = useOrderingTheme()
-  const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
+  const [otpDataUser, setOtpDataUser] = useState(null)
+
   const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
     600, willVerifyOtpState)
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
 
@@ -108,6 +113,10 @@ const UserProfileFormUI = (props) => {
     inputRef.current.click()
   }
 
+  const closeWillVerifyModal = () => {
+    setWillVerifyOtpState(false)
+  }
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -148,9 +157,9 @@ const UserProfileFormUI = (props) => {
     toggleIsEdit()
   }, [])
 
-  useEffect(() => {
-    handleSendOtp()
-  }, [willVerifyOtpState])
+  // useEffect(() => {
+  //   handleSendOtp()
+  // }, [willVerifyOtpState])
 
   useEffect(() => {
     if (otpLeftTime === 0) {
@@ -253,7 +262,7 @@ const UserProfileFormUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-      <Modal
+      {/* <Modal
         title={t('ENTER_VERIFICATION_CODE', 'Enter verification code')}
         open={willVerifyOtpState}
         width='700px'
@@ -267,6 +276,20 @@ const UserProfileFormUI = (props) => {
           handleCheckPhoneCode={handleSendPhoneCode}
           email={(userData?.email || user?.email)}
           isPhone
+        />
+      </Modal> */}
+      <Modal
+        open={willVerifyOtpState}
+        width='50%'
+        hideCloseDefault
+      >
+        <LoginFormComponent
+          useLoginByCellphone
+          isPopup
+          defaultLoginTab='otp'
+          setOtpDataUser={setOtpDataUser}
+          isDirectLogin
+          handleSuccessLogin={closeWillVerifyModal}
         />
       </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
