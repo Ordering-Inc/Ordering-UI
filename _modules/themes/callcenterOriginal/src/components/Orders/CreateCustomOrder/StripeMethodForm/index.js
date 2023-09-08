@@ -51,7 +51,7 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
   var googlePayMethods = ['google_pay', 'global_google_pay'];
   (0, _react.useEffect)(function () {
     if (stripe) {
-      var _configs$stripe_curre, _configs$stripe_curre2, _cart$business2;
+      var _configs$stripe_curre, _configs$stripe_curre2, _cart$business2, _ref;
       var cartNames = '';
       if (cartGroup) {
         // eslint-disable-next-line no-unused-expressions
@@ -77,8 +77,8 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
           setMethodUnavailable(true);
         }
       });
-      pr.on('paymentmethod', /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      pr.on('paymentmethod', function (_x) {
+        return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
           var _e$paymentMethod, _e$paymentMethod2;
           var data;
           return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -101,11 +101,8 @@ var StripeMethodFormUI = function StripeMethodFormUI(props) {
                 return _context.stop();
             }
           }, _callee);
-        }));
-        return function (_x) {
-          return _ref.apply(this, arguments);
-        };
-      }());
+        }))).apply(this, arguments);
+      });
     }
   }, [stripe]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, methodUnavailable ? /*#__PURE__*/_react.default.createElement("h2", null, googlePayMethods.includes(paymethod) ? t('GOOGLE_PAY_UNAVAILABLE', 'Google pay unavailable') : t('APPLE_PAY_UNAVAILABLE', 'Apple pay unavailable')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, paymentRequest ? /*#__PURE__*/_react.default.createElement(_reactStripeJs.PaymentRequestButtonElement, {

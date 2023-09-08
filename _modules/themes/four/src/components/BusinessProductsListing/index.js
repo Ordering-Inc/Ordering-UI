@@ -38,7 +38,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _configs$add_product_, _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products2, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _error$, _theme$defaultLanguag4, _currentCart$products3, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$products4, _productModal$error$, _theme$defaultLanguag7, _props$afterComponent, _props$afterElements;
+  var _configs$add_product_, _Object$values$find, _ref, _props$beforeElements, _props$beforeComponen, _currentCart$products2, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _error$, _theme$defaultLanguag4, _currentCart$products3, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$products4, _productModal$error$, _theme$defaultLanguag7, _props$afterComponent, _props$afterElements;
   var errors = props.errors,
     isInitialRender = props.isInitialRender,
     businessState = props.businessState,
@@ -124,8 +124,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var handler = function handler() {
     setOpenBusinessInformation(true);
   };
-  var onProductClick = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(product) {
+  var onProductClick = function onProductClick(_x) {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(product) {
       var _currentCart$products, isProductAddedToCart, productQuantity, addCurrentProduct, updateCurrentProduct, cartData;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -180,11 +180,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }));
-    return function onProductClick(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   var handlerProductAction = function handlerProductAction(product) {
     if (Object.keys(product).length) {
       setModalIsOpen(false);
