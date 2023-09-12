@@ -244,6 +244,9 @@ var CheckoutUI = function CheckoutUI(props) {
           email: user === null || user === void 0 ? void 0 : user.email
         }, brandInformation);
       }
+      if (paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.id) {
+        body.paymethod_id = paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id;
+      }
       if (csvID) {
         paymentOptions = _objectSpread(_objectSpread({}, paymentOptions), {}, {
           data: {
