@@ -227,6 +227,9 @@ const CheckoutUI = (props) => {
           ...brandInformation
         }
       }
+      if (paymethodSelected?.id) {
+        body.paymethod_id = paymethodSelected?.id
+      }
       if (csvID) {
         paymentOptions = {
           ...paymentOptions,
