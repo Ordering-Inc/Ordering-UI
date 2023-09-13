@@ -43,7 +43,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _formState$result, _formState$result2, _formState$changes$se, _formState$changes, _user$settings, _formState$result3, _formState$result4, _formState$changes$se2, _formState$changes2, _user$settings2, _formState$result5, _formState$result6, _formState$changes$se3, _formState$changes3, _user$settings3, _theme$profile, _theme$profile2, _theme$profile3, _theme$profile4, _theme$profile5, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie7, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _formState$result, _formState$result2, _formState$changes$se, _formState$changes, _user$settings, _formState$result3, _formState$result4, _formState$changes$se2, _formState$changes2, _user$settings2, _formState$result5, _formState$result6, _formState$changes$se3, _formState$changes3, _user$settings3, _theme$profile, _theme$profile2, _theme$profile3, _theme$profile4, _theme$profile5, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie7, _requiredFields$inclu4, _requiredFields$inclu5, _requiredFields$inclu6, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
   var isEdit = props.isEdit,
     formState = props.formState,
     onCancel = props.onCancel,
@@ -334,7 +334,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   }, [isValidPhoneNumber, userPhoneNumber, configs === null || configs === void 0 || (_configs$verification3 = configs.verification_phone_required) === null || _configs$verification3 === void 0 ? void 0 : _configs$verification3.value, isChanged]);
   (0, _react.useEffect)(function () {
-    if (requiredFields && !requiredFields.includes('cellphone')) setIsValidPhoneNumber(true);
+    var _requiredFields$inclu;
+    if (requiredFields && !(requiredFields !== null && requiredFields !== void 0 && (_requiredFields$inclu = requiredFields.includes) !== null && _requiredFields$inclu !== void 0 && _requiredFields$inclu.call(requiredFields, 'cellphone'))) setIsValidPhoneNumber(true);
   }, [requiredFields]);
   var handleEditNotifications = function handleEditNotifications(key, value) {
     setNotificationList(_objectSpread(_objectSpread({}, notificationList), {}, _defineProperty({}, key, value)));
@@ -364,10 +365,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   }), (0, _utils.sortInputFields)({
     values: validationFields === null || validationFields === void 0 || (_validationFields$fie7 = validationFields.fields) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.checkout
   }).map(function (field) {
-    var _ref3, _formState$changes$fi, _ref4, _formState$changes$fi2;
+    var _requiredFields$inclu2, _ref3, _formState$changes$fi, _requiredFields$inclu3, _ref4, _formState$changes$fi2;
     return (showField && showField(field.code) && showFieldWithTheme(field.code) || (user === null || user === void 0 ? void 0 : user.guest_id)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
-    }, field.code === 'email' ? (requiredFields && requiredFields.includes(field.code) || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    }, field.code === 'email' ? (requiredFields && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu2 = requiredFields.includes) === null || _requiredFields$inclu2 === void 0 ? void 0 : _requiredFields$inclu2.call(requiredFields, field.code)) || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.type,
       name: field.code,
@@ -381,7 +382,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         emailInput.current = e;
       },
       autoComplete: "off"
-    })) : (requiredFields && requiredFields.includes(field.code) || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    })) : (requiredFields && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu3 = requiredFields.includes) === null || _requiredFields$inclu3 === void 0 ? void 0 : _requiredFields$inclu3.call(requiredFields, field.code)) || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.type,
       borderBottom: true,
@@ -396,7 +397,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     })));
-  }), (!(user !== null && user !== void 0 && user.guest_id) && showInputBirthday || (user === null || user === void 0 ? void 0 : user.guest_id) && requiredFields.includes('birthdate')) && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('BIRTHDATE', 'Birthdate')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  }), (!(user !== null && user !== void 0 && user.guest_id) && showInputBirthday || (user === null || user === void 0 ? void 0 : user.guest_id) && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu4 = requiredFields.includes) === null || _requiredFields$inclu4 === void 0 ? void 0 : _requiredFields$inclu4.call(requiredFields, 'birthdate'))) && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('BIRTHDATE', 'Birthdate')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     borderBottom: true,
     className: "form",
     value: birthdate ? (0, _moment.default)(birthdate).format('YYYY/MM/DD') : '',
@@ -408,7 +409,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     value: birthdate,
     onChange: _handleChangeDate,
     name: 'birthdate'
-  })), (!(user !== null && user !== void 0 && user.guest_id) && !!showInputPhoneNumber || (user === null || user === void 0 ? void 0 : user.guest_id) && requiredFields.includes('cellphone')) && showCustomerCellphone && (requiredFields && requiredFields.includes('cellphone') || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+  })), (!(user !== null && user !== void 0 && user.guest_id) && !!showInputPhoneNumber || (user === null || user === void 0 ? void 0 : user.guest_id) && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu5 = requiredFields.includes) === null || _requiredFields$inclu5 === void 0 ? void 0 : _requiredFields$inclu5.call(requiredFields, 'cellphone'))) && showCustomerCellphone && (requiredFields && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu6 = requiredFields.includes) === null || _requiredFields$inclu6 === void 0 ? void 0 : _requiredFields$inclu6.call(requiredFields, 'cellphone')) || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,

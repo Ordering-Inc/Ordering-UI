@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.UpsellingPage = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
+var _styledComponents = require("styled-components");
 var _styles = require("./styles");
 var _Buttons = require("../../styles/Buttons");
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
@@ -34,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UpsellingPageUI = function UpsellingPageUI(props) {
-  var _upsellingProducts$pr4;
+  var _theme$business_view, _upsellingProducts$pr4;
   var upsellingProducts = props.upsellingProducts,
     handleUpsellingPage = props.handleUpsellingPage,
     openUpselling = props.openUpselling,
@@ -45,6 +46,10 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useUtils = (0, _orderingComponents.useUtils)(),
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    parsePrice = _useUtils2[0].parsePrice;
+  var theme = (0, _styledComponents.useTheme)();
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     actualProduct = _useState2[0],
@@ -53,13 +58,11 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     modalIsOpen = _useState4[0],
     setModalIsOpen = _useState4[1];
-  var _useUtils = (0, _orderingComponents.useUtils)(),
-    _useUtils2 = _slicedToArray(_useUtils, 1),
-    parsePrice = _useUtils2[0].parsePrice;
   var _useState5 = (0, _react.useState)(true),
     _useState6 = _slicedToArray(_useState5, 2),
     showUpselling = _useState6[0],
     setShowUpSelling = _useState6[1];
+  var hideProductDummyLogo = theme === null || theme === void 0 || (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.components) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.products) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.components) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.product) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.components) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.dummy) === null || _theme$business_view === void 0 ? void 0 : _theme$business_view.hidden;
   (0, _react.useEffect)(function () {
     if (!isCustomMode) {
       var _upsellingProducts$pr, _upsellingProducts$pr2;
@@ -134,6 +137,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     scrollId: "upSelling",
     isColumnMode: upsellingProducts.products.length === 1
   }, !upsellingProducts.error && upsellingProducts.products.length > 0 ? upsellingProducts.products.map(function (product, i) {
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.HorizontalItem, {
       key: product.id,
       name: product.name
@@ -144,7 +148,7 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
       onClick: function onClick() {
         return handleFormProduct(product);
       }
-    }, t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_styles.HorizontalImage, null, /*#__PURE__*/_react.default.createElement("img", {
+    }, t('ADD', 'Add'))), ((product === null || product === void 0 ? void 0 : product.images) || !hideProductDummyLogo && (theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.product)) && /*#__PURE__*/_react.default.createElement(_styles.HorizontalImage, null, /*#__PURE__*/_react.default.createElement("img", {
       src: product.images,
       alt: "product-".concat(i),
       loading: "lazy"

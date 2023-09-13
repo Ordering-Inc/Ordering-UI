@@ -297,6 +297,7 @@ var Header = function Header(props) {
       return openModal(variant);
     }
   }))), /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), /*#__PURE__*/_react.default.createElement(_SidebarMenu.SidebarMenu, {
+    notificationState: notificationState,
     auth: auth,
     isHideSignup: isHideSignup,
     userCustomer: userCustomer,

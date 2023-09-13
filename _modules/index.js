@@ -783,6 +783,12 @@ Object.defineProperty(exports, "getTraduction", {
     return _utils.getTraduction;
   }
 });
+Object.defineProperty(exports, "orderTypeList", {
+  enumerable: true,
+  get: function get() {
+    return _utils.orderTypeList;
+  }
+});
 Object.defineProperty(exports, "priceList", {
   enumerable: true,
   get: function get() {
