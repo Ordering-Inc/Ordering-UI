@@ -37,7 +37,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var _EMAIL = 'email';
 var _SMS = 'sms';
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _theme$confirmation, _theme$confirmation2, _theme$confirmation3, _order$driver, _order$driver2, _theme$images, _order$business, _order$business2, _theme$images2, _order$customer, _order$customer2, _theme$images3, _theme$defaultLanguag26, _orderTypes$find, _getOrderStatus, _getOrderStatus2, _order$products, _formMethods$errors, _formMethods$errors2, _theme$defaultLanguag27, _theme$defaultLanguag28, _theme$defaultLanguag29, _theme$defaultLanguag30;
+  var _theme$confirmation, _theme$confirmation2, _theme$confirmation3, _order$driver, _order$driver2, _theme$images, _order$business, _order$business2, _theme$images2, _order$customer, _order$customer2, _theme$images3, _ref, _theme$defaultLanguag26, _orderTypes$find, _getOrderStatus, _getOrderStatus2, _order$products, _formMethods$errors, _formMethods$errors2, _theme$defaultLanguag27, _theme$defaultLanguag28, _theme$defaultLanguag29, _theme$defaultLanguag30;
   var handleOrderRedirect = props.handleOrderRedirect,
     driverLocation = props.driverLocation,
     orderTypes = props.orderTypes;
@@ -237,8 +237,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setEmailReceipt(e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
   };
-  var onSubmit = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(values) {
+  var onSubmit = function onSubmit(_x) {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(values) {
       var body, response, _yield$response$json, _error, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -298,11 +298,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
             return _context.stop();
         }
       }, _callee, null, [[7, 20]]);
-    }));
-    return function onSubmit(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   var OrderHeaderInfoSection = function OrderHeaderInfoSection() {
     var _theme$defaultLanguag25;
     return /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, (order === null || order === void 0 ? void 0 : order.on_behalf_of) && /*#__PURE__*/_react.default.createElement("p", {

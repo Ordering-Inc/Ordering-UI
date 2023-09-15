@@ -689,7 +689,7 @@ var CheckoutUI = function CheckoutUI(props) {
   })));
 };
 var Checkout = function Checkout(props) {
-  var _Object$values2, _cartState$error, _cartState$cart3;
+  var _Object$values2, _ref2, _cartState$error, _cartState$cart3;
   var errors = props.errors,
     clearErrors = props.clearErrors,
     cartUuid = props.cartUuid,
@@ -784,8 +784,8 @@ var Checkout = function Checkout(props) {
       });
     }
   }, [errors]);
-  var getOrder = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(cartId) {
+  var getOrder = function getOrder(_x) {
+    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(cartId) {
       var _result$order, result, cart, userCustomer, url, response, content, _result, credomaticData, urlParams, paramsObj, _confirmCartRes$resul, confirmCartRes, _cart, spotNumberFromStorage, _JSON$parse, _JSON$parse2, _cart2, spotNumber, slug;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -911,11 +911,8 @@ var Checkout = function Checkout(props) {
             return _context.stop();
         }
       }, _callee, null, [[0, 45], [25, 34]]);
-    }));
-    return function getOrder(_x) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   (0, _react.useEffect)(function () {
     if (token && cartUuid) {
       getOrder(cartUuid);

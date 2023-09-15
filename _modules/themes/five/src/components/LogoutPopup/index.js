@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var LogoutUI = function LogoutUI(props) {
-  var _formMethods$errors, _formMethods$errors2, _formMethods$errors3, _formMethods$errors4;
+  var _ref, _ref2, _formMethods$errors, _formMethods$errors2, _formMethods$errors3, _formMethods$errors4;
   var handleLogoutClick = props.handleLogoutClick,
     onClose = props.onClose;
   var _useApi = (0, _orderingComponents.useApi)(),
@@ -75,8 +75,8 @@ var LogoutUI = function LogoutUI(props) {
       content: []
     });
   };
-  var fetchPassword = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(body) {
+  var fetchPassword = function fetchPassword(_x) {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(body) {
       var response, _yield$response$json, error, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -125,13 +125,10 @@ var LogoutUI = function LogoutUI(props) {
             return _context.stop();
         }
       }, _callee, null, [[0, 14]]);
-    }));
-    return function fetchPassword(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-  var onSubmit = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(values) {
+    }))).apply(this, arguments);
+  };
+  var onSubmit = function onSubmit(_x2) {
+    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(values) {
       var result;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
@@ -156,11 +153,8 @@ var LogoutUI = function LogoutUI(props) {
             return _context2.stop();
         }
       }, _callee2, null, [[0, 7]]);
-    }));
-    return function onSubmit(_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   return /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormSide, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LOGOUT', 'Logout')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, null, /*#__PURE__*/_react.default.createElement(_styles.SubTitle, null, t('ONLY_MANAGER_LOGOUT', 'Only the manager has the password to sign out this App.')), ((_formMethods$errors = formMethods.errors) === null || _formMethods$errors === void 0 ? void 0 : _formMethods$errors.password) && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, (_formMethods$errors2 = formMethods.errors) === null || _formMethods$errors2 === void 0 || (_formMethods$errors2 = _formMethods$errors2.password) === null || _formMethods$errors2 === void 0 ? void 0 : _formMethods$errors2.message, " ", (formMethods === null || formMethods === void 0 || (_formMethods$errors3 = formMethods.errors) === null || _formMethods$errors3 === void 0 || (_formMethods$errors3 = _formMethods$errors3.password) === null || _formMethods$errors3 === void 0 ? void 0 : _formMethods$errors3.type) === 'required' && '*'), logoutState.error && logoutState.result && /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, logoutState.result[0]), /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: !passwordSee ? 'password' : 'text',
     name: "password",

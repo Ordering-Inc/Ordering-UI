@@ -53,7 +53,7 @@ var inputNames = [{
   code: 'Address notes'
 }];
 var AddressFormUI = function AddressFormUI(props) {
-  var _ref, _formState$changes$ad, _formState$changes, _addressState$address, _addressState$address2, _addressState$address3, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _props$afterComponent, _props$afterElements;
+  var _ref, _formState$changes$ad, _formState$changes, _addressState$address, _addressState$address2, _addressState$address3, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _ref2, _props$beforeElements, _props$beforeComponen, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _props$afterComponent, _props$afterElements;
   var isPopup = props.isPopup,
     addressesList = props.addressesList,
     googleMapsControls = props.googleMapsControls,
@@ -247,8 +247,8 @@ var AddressFormUI = function AddressFormUI(props) {
   var handleGoToPage = function handleGoToPage(data) {
     events.emit('go_to_page', data);
   };
-  var onSubmit = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var onSubmit = function onSubmit() {
+    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _formState$changes3, _addressState$address5, _formState$changes4, _formState$changes5, _arrayList$map$some2;
       var _formState$changes6, arrayList, addressToCompare, isAddressAlreadyExist;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -315,11 +315,8 @@ var AddressFormUI = function AddressFormUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }));
-    return function onSubmit() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
 
   // const handleAddressTag = (tag) => {
   //   setAddressTag(tag)

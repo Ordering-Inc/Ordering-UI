@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersOptionUI = function OrdersOptionUI(props) {
-  var _theme$images, _theme$images2, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$images, _theme$images2, _ref, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var horizontal = props.horizontal,
     activeOrders = props.activeOrders,
     orderList = props.orderList,
@@ -72,8 +72,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     reorderLoading = _useState4[0],
     setReorderLoading = _useState4[1];
-  var handleReorder = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(orderId) {
+  var handleReorder = function handleReorder(_x) {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(orderId) {
       var _yield$reorder, _error, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -110,11 +110,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
             return _context.stop();
         }
       }, _callee, null, [[1, 13]]);
-    }));
-    return function handleReorder(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
     var status = parseInt(s);

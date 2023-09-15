@@ -51,7 +51,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _configs$facebook_log, _configs$facebook_log2, _configs$google_login, _configs$google_login2, _configs$facebook_log3, _configs$facebook_log4, _configs$apple_login_, _configs$apple_login_2, _validationFields$fie, _validationFields$fie2, _configs$verification, _configs$google_login3, _configs$facebook_log5, _configs$facebook_log6, _configs$facebook_id, _configs$google_login4, _configs$google_login5, _configs$google_login6, _configs$apple_login_3, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie7, _validationFields$fie8, _formMethods$errors8, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _formMethods$errors16, _formMethods$errors17, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$driver_signu2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_4, _configs$google_login7, _configs$google_login8, _configs$google_login9, _props$afterComponent, _props$afterElements;
+  var _configs$facebook_log, _configs$facebook_log2, _configs$google_login, _configs$google_login2, _configs$facebook_log3, _configs$facebook_log4, _configs$apple_login_, _configs$apple_login_2, _validationFields$fie, _validationFields$fie2, _configs$verification, _configs$google_login3, _configs$facebook_log5, _configs$facebook_log6, _configs$facebook_id, _configs$google_login4, _configs$google_login5, _configs$google_login6, _configs$apple_login_3, _ref, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie7, _validationFields$fie8, _formMethods$errors8, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _props$afterMidElemen, _props$afterMidCompon, _configs$terms_and_co, _formMethods$errors16, _formMethods$errors17, _configs$terms_and_co2, _configs$business_sig, _configs$driver_signu, _configs$business_sig2, _configs$driver_signu2, _configs$facebook_id2, _configs$facebook_id3, _configs$apple_login_4, _configs$google_login7, _configs$google_login8, _configs$google_login9, _props$afterComponent, _props$afterElements;
   var handleChangeInput = props.handleChangeInput,
     handleButtonSignupClick = props.handleButtonSignupClick,
     handleReCaptcha = props.handleReCaptcha,
@@ -197,8 +197,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     setSignUpTab(tab);
     formMethods.clearErrors();
   };
-  var onSubmit = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var onSubmit = function onSubmit() {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _validationFields$fie3, _validationFields$fie4, _configs$verification2;
       var isPhoneNumberValid;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -241,11 +241,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }));
-    return function onSubmit() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
     setUserPhoneNumber(number);
     var phoneNumberParser = null;

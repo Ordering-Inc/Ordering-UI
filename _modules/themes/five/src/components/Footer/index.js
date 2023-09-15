@@ -26,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Footer = function Footer(_ref) {
-  var _theme$my_products, _configs$powered_by_o;
+  var _theme$my_products, _configs$powered_by_o, _ref2;
   var isFooterPage = _ref.isFooterPage;
   var _useState = (0, _react.useState)({
       body: null,
@@ -49,8 +49,8 @@ var Footer = function Footer(_ref) {
     t = _useLanguage2[1];
   var footerContent = theme === null || theme === void 0 || (_theme$my_products = theme.my_products) === null || _theme$my_products === void 0 || (_theme$my_products = _theme$my_products.components) === null || _theme$my_products === void 0 || (_theme$my_products = _theme$my_products.theme_settings) === null || _theme$my_products === void 0 || (_theme$my_products = _theme$my_products.components) === null || _theme$my_products === void 0 || (_theme$my_products = _theme$my_products.values) === null || _theme$my_products === void 0 ? void 0 : _theme$my_products.footer_content;
   var enabledPoweredByOrdering = configs === null || configs === void 0 || (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
-  var getPage = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var getPage = function getPage() {
+    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var source, _yield$ordering$pages, _yield$ordering$pages2, error, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -98,11 +98,8 @@ var Footer = function Footer(_ref) {
             return _context.stop();
         }
       }, _callee, null, [[1, 14]]);
-    }));
-    return function getPage() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   (0, _react.useEffect)(function () {
     getPage();
     return function () {
