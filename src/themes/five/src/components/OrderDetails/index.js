@@ -13,6 +13,7 @@ import {
 } from 'ordering-components'
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
+import ExclamationTriangleIcon from '@meronex/icons/bs/BsExclamationTriangle'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -71,7 +72,8 @@ import {
   ProfessionalWrapper,
   ProfessionalBlock,
   PlaceSpotWrapper,
-  PoweredByOrdering
+  PoweredByOrdering,
+  ValidationText
 } from './styles'
 import { useTheme } from 'styled-components'
 import { TaxInformation } from '../TaxInformation'
@@ -464,6 +466,14 @@ const OrderDetailsUI = (props) => {
                     </ReOrder>
                   )}
               </TitleContainer>
+              {props.isCustomerMode && !!order?.debug_payment_response?.message && (
+                <div id='error-subs'>
+                  <ValidationText>
+                    <ExclamationTriangleIcon />
+                    <span>{order?.debug_payment_response?.message}</span>
+                  </ValidationText>
+                </div>
+              )}
               {!hideDeliveryProgress && !isGiftCardOrder && (
                 <>
                   <StatusBar percentage={progressBarObjt(order?.status)?.percentage} />
