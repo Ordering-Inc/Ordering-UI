@@ -193,7 +193,59 @@ export const OrderInfo = styled.div`
     font-weight: 600;
     font-size: 16px;
   }
+
+  #error-subs {
+    margin: 20px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    #error-subs {
+      margin: 20px 0;
+    }
+  }
 `
+
+export const ValidationText = styled.div`
+  color: ${props => props.theme.colors.danger500};
+  ${props => props.onlyText ? css`
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+  ` : css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid ${props => props.theme.colors.danger500};
+    background-color: ${props => props.theme.colors.danger100};
+
+    ${props => props.mb && css`
+      margin-bottom: ${props.mb};
+    `}
+
+    ${props => props.color && css`
+      svg {
+        font-size: 21px;
+      }
+    `}
+
+    svg {
+      width: 5%;
+    }
+
+    span {
+      margin: 0 0 0 5px;
+      padding: 0;
+      font-size: 14px;
+      color: ${props => props.theme.colors.headingColor};
+    }
+  `}
+`
+
 export const OrderIdSec = styled.h1`
   font-size: 25px !important;
   @media (min-width: 350px) {
@@ -390,7 +442,7 @@ export const ShareOrder = styled.div`
       border-radius: 7.6px;
     }
   }
-  
+
   h1 {
     font-size: 15px;
     margin: 0px;
