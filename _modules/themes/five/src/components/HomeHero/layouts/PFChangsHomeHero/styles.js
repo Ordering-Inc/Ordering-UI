@@ -86,7 +86,7 @@ exports.Diviver = Diviver;
 var WrapperMap = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  height: calc(80vh - 97px);\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n  .btn-choose-store {\n    line-height: 30px;\n    padding: 0 10px;\n    font-size: 14px;\n    cursor: pointer;\n    outline: none;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    min-width: 80px;\n    height: 38px;\n    font-size: 14px;\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:active {\n      background: ", ";\n    }\n  }\n  .btn-address-map {\n    cursor: pointer;\n    &:hover{\n      text-decoration: underline;\n    }\n  }\n  .className {\n    object-fit: none;\n  }\n  @media (min-width: 768px){\n    flex: 1;\n    height: calc(100vh - 97px);\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
-  return props.theme.colors.primaryContrast;
+  return props.theme.colors.buttonPrimaryContrast || props.theme.colors.primaryContrast;
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {

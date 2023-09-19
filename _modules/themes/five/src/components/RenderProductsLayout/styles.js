@@ -77,7 +77,9 @@ var WrapperSearchAbsolute = _styledComponents.default.div(_templateObject21 || (
 exports.WrapperSearchAbsolute = WrapperSearchAbsolute;
 var NearBusiness = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 exports.NearBusiness = NearBusiness;
-var BackToTop = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  padding: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: fixed;\n  right: 20px;\n  bottom: 20px;\n  height: 80px;\n  width: 80px;\n  text-align: center;\n  background: ", ";\n  border-radius: 6px;\n  cursor: pointer;\n  font-weight: 900;\n  opacity: 0.9;\n  svg {\n    font-size: 25px;\n  }\n"])), function (_ref7) {
+var BackToTop = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  padding: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: fixed;\n  right: 20px;\n  bottom: 20px;\n  height: 80px;\n  width: 80px;\n  text-align: center;\n  color: ", ";\n  background: ", ";\n  border-radius: 6px;\n  cursor: pointer;\n  font-weight: 900;\n  opacity: 0.9;\n  svg {\n    font-size: 25px;\n  }\n"])), function (props) {
+  return props.theme.colors.buttonPrimaryContrast || '#000';
+}, function (_ref7) {
   var theme = _ref7.theme;
   return theme.colors.gold;
 });

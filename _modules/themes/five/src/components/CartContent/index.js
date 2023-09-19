@@ -78,6 +78,7 @@ var CartContent = function CartContent(props) {
       isOpenCart: isOpenCart
     }));
   }), (!carts || (carts === null || carts === void 0 ? void 0 : carts.length) === 0 || !auth && cartLayout === 'pfchangs') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cartLayout === 'pfchangs' ? /*#__PURE__*/_react.default.createElement(_styles.NotCartsPFChangs, null, /*#__PURE__*/_react.default.createElement("h1", null, t('YOUR_CART_IS_EMPTY', 'Your cart is empty')), /*#__PURE__*/_react.default.createElement("h2", null, t('GET_STARTED_ADD_TASTY_FOOD', 'Get started and add some tasty food')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
     onClick: onClose
   }, t('BACK', 'Back'))) : /*#__PURE__*/_react.default.createElement(_styles.NotCarts, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.notFound,
