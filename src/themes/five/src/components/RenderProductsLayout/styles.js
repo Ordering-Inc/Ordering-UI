@@ -253,6 +253,7 @@ export const BackToTop = styled.div`
   height: 80px;
   width: 80px;
   text-align: center;
+  color: ${props => props.theme.colors.buttonPrimaryContrast || '#000'};
   background: ${({ theme }) => theme.colors.gold};
   border-radius: 6px;
   cursor: pointer;

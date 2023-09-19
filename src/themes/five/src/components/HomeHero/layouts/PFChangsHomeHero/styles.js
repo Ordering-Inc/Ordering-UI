@@ -230,7 +230,7 @@ export const WrapperMap = styled.div`
     height: 38px;
     font-size: 14px;
     background: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.primaryContrast};
+    color: ${props => props.theme.colors.buttonPrimaryContrast || props.theme.colors.primaryContrast};
     border-color: ${props => props.theme.colors.primary};
     &:active {
       background: ${props => darken(0.07, props.theme.colors.primary)};

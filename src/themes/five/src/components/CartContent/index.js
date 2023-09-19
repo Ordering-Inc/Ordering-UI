@@ -79,7 +79,7 @@ export const CartContent = (props) => {
               <NotCartsPFChangs>
                 <h1>{t('YOUR_CART_IS_EMPTY', 'Your cart is empty')}</h1>
                 <h2>{t('GET_STARTED_ADD_TASTY_FOOD', 'Get started and add some tasty food')}</h2>
-                <Button onClick={onClose}>
+                <Button color='primary' onClick={onClose}>
                   {t('BACK', 'Back')}
                 </Button>
               </NotCartsPFChangs>
