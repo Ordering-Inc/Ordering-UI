@@ -3,10 +3,14 @@ import { SignUpDriver as SignUpDriverController } from '../../../src/themes/five
 import { HelmetTags } from '../../components/HelmetTags'
 
 export const SignUpDriver = (props) => {
+  const SignUpDriverProps = {
+    ...props,
+    isDriverSignup: true
+  }
   return (
     <>
       <HelmetTags page='signup_driver' />
-      <SignUpDriverController {...props} />
+      <SignUpDriverController {...SignUpDriverProps} />
     </>
   )
 }
