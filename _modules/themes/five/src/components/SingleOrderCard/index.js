@@ -182,12 +182,11 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   var handleClickReorder = function handleClickReorder(order) {
     var _carts;
     if (carts["businessId:".concat(order === null || order === void 0 ? void 0 : order.business_id)] && ((_carts = carts["businessId:".concat(order === null || order === void 0 ? void 0 : order.business_id)]) === null || _carts === void 0 || (_carts = _carts.products) === null || _carts === void 0 ? void 0 : _carts.length) > 0) {
-      var _handleOnAccept;
       setConfirm({
         open: true,
         content: t('QUESTION_DELETE_PRODUCTS_FROM_CART', 'Are you sure that you want to delete all products from cart?'),
-        handleOnAccept: function handleOnAccept() {
-          return (_handleOnAccept = _handleOnAccept || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        handleOnAccept: function () {
+          var _handleOnAccept = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
             return _regeneratorRuntime().wrap(function _callee$(_context) {
               while (1) switch (_context.prev = _context.next) {
                 case 0:
@@ -200,8 +199,12 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
                   return _context.stop();
               }
             }, _callee);
-          }))).apply(this, arguments);
-        }
+          }));
+          function handleOnAccept() {
+            return _handleOnAccept.apply(this, arguments);
+          }
+          return handleOnAccept;
+        }()
       });
     } else {
       handleReorder(order.id);

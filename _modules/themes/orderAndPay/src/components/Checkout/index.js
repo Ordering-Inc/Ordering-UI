@@ -55,7 +55,7 @@ var mapConfigs = {
   }
 };
 var CheckoutUI = function CheckoutUI(props) {
-  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _ref, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _businessDetails$busi, _businessDetails$busi2, _theme$images, _configs$google_maps_, _props$beforeElements3, _props$beforeComponen3, _customerState$user, _customerState$user2, _props$beforeElements4, _props$beforeComponen4, _Object$values, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _props$beforeElements5, _props$beforeComponen5, _businessDetails$busi7, _businessDetails$busi8, _props$beforeElements6, _props$beforeComponen6, _validationFields$fie5, _configs$driver_tip_u, _configs$driver_tip_t, _configs$driver_tip_u2, _props$beforeElements7, _props$beforeComponen7, _cart$products2, _props$beforeElements8, _props$beforeComponen8, _props$afterComponent, _props$afterElements;
+  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _props$beforeElements, _props$beforeComponen, _props$beforeElements2, _props$beforeComponen2, _businessDetails$busi, _businessDetails$busi2, _theme$images, _configs$google_maps_, _props$beforeElements3, _props$beforeComponen3, _customerState$user, _customerState$user2, _props$beforeElements4, _props$beforeComponen4, _Object$values, _businessDetails$busi3, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$erro, _businessDetails$erro2, _props$beforeElements5, _props$beforeComponen5, _businessDetails$busi7, _businessDetails$busi8, _props$beforeElements6, _props$beforeComponen6, _validationFields$fie5, _configs$driver_tip_u, _configs$driver_tip_t, _configs$driver_tip_u2, _props$beforeElements7, _props$beforeComponen7, _cart$products2, _props$beforeElements8, _props$beforeComponen8, _props$afterComponent, _props$afterElements;
   var businessId = props.businessId,
     cart = props.cart,
     errors = props.errors,
@@ -139,8 +139,8 @@ var CheckoutUI = function CheckoutUI(props) {
   var isIOS = window.navigator.userAgent.includes('iPhone');
   var placeSpotTypes = [3, 4];
   var driverTipsOptions = typeof (configs === null || configs === void 0 || (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 || (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 || (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
-  var handlePlaceOrder = function handlePlaceOrder() {
-    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var handlePlaceOrder = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -176,8 +176,11 @@ var CheckoutUI = function CheckoutUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function handlePlaceOrder() {
+      return _ref.apply(this, arguments);
+    };
+  }();
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -251,9 +254,8 @@ var CheckoutUI = function CheckoutUI(props) {
     }
   }, [paymethodSelected]);
   (0, _react.useEffect)(function () {
-    var _ref2;
-    var getPlaceId = function getPlaceId() {
-      return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var getPlaceId = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var id;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
@@ -268,14 +270,17 @@ var CheckoutUI = function CheckoutUI(props) {
               return _context2.stop();
           }
         }, _callee2);
-      }))).apply(this, arguments);
-    };
+      }));
+      return function getPlaceId() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
     getPlaceId();
   }, []);
   (0, _react.useEffect)(function () {
-    var _ref3, _cart$products;
-    var handleChangePlace = function handleChangePlace() {
-      return (_ref3 = _ref3 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var _cart$products;
+    var handleChangePlace = /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var response, _yield$response$json, result, error;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
@@ -323,8 +328,11 @@ var CheckoutUI = function CheckoutUI(props) {
               return _context3.stop();
           }
         }, _callee3, null, [[1, 14]]);
-      }))).apply(this, arguments);
-    };
+      }));
+      return function handleChangePlace() {
+        return _ref3.apply(this, arguments);
+      };
+    }();
     if ((cart === null || cart === void 0 || (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && placeId && placeSpotTypes.includes(options === null || options === void 0 ? void 0 : options.type) && !isDisabledTables) {
       handleChangePlace();
     }
@@ -572,7 +580,7 @@ var CheckoutUI = function CheckoutUI(props) {
   }));
 };
 var Checkout = function Checkout(props) {
-  var _Object$values2, _ref4, _cartState$cart, _cartState$error, _cartState$cart2;
+  var _Object$values2, _cartState$cart, _cartState$error, _cartState$cart2;
   var errors = props.errors,
     clearErrors = props.clearErrors,
     cartUuid = props.cartUuid,
@@ -662,8 +670,8 @@ var Checkout = function Checkout(props) {
       });
     }
   }, [errors]);
-  var getOrder = function getOrder(_x) {
-    return (_ref4 = _ref4 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(cartId) {
+  var getOrder = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(cartId) {
       var _result$order, userCustomer, url, response, _yield$response$json2, result, _confirmCartRes$resul, confirmCartRes, cart;
       return _regeneratorRuntime().wrap(function _callee4$(_context4) {
         while (1) switch (_context4.prev = _context4.next) {
@@ -757,8 +765,11 @@ var Checkout = function Checkout(props) {
             return _context4.stop();
         }
       }, _callee4, null, [[0, 35], [17, 26]]);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function getOrder(_x) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
   (0, _react.useEffect)(function () {
     if (token && cartUuid) {
       getOrder(cartUuid);

@@ -54,7 +54,7 @@ var inputNames = [{
   code: 'Address notes'
 }];
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _ref2, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _props$afterComponent, _props$afterElements;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _props$afterComponent, _props$afterElements;
   var addressesList = props.addressesList,
     googleMapsControls = props.googleMapsControls,
     formState = props.formState,
@@ -236,8 +236,8 @@ var AddressFormUI = function AddressFormUI(props) {
       e.preventDefault();
     }
   };
-  var onSubmit = function onSubmit() {
-    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var onSubmit = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _formState$changes3, _addressState$address6, _formState$changes4, _formState$changes5, _arrayList$map$some2;
       var _formState$changes6, arrayList, addressToCompare, isAddressAlreadyExist;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -298,8 +298,11 @@ var AddressFormUI = function AddressFormUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function onSubmit() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
   var handleAddressTag = function handleAddressTag(tag) {
     setAddressTag(tag);
     handleChangeInput({

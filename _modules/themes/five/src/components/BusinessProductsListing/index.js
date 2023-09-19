@@ -45,7 +45,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _configs$add_product_, _configs$checkout_mul, _Object$values$find, _businessState$busine, _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$header, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$taxes, _ref, _ref2, _currentCart$products2, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products3, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _currentCart$products4, _currentCart$products5, _currentCart$products6, _productModal$error$, _theme$defaultLanguag16, _productModal$product2, _business$professiona3, _currentCart$products7, _currentCart$products8;
+  var _configs$add_product_, _configs$checkout_mul, _Object$values$find, _businessState$busine, _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$header, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _currentCart$taxes, _currentCart$products2, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _error$, _theme$defaultLanguag11, _currentCart$products3, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _currentCart$products4, _currentCart$products5, _currentCart$products6, _productModal$error$, _theme$defaultLanguag16, _productModal$product2, _business$professiona3, _currentCart$products7, _currentCart$products8;
   var errors = props.errors,
     openCategories = props.openCategories,
     isInitialRender = props.isInitialRender,
@@ -193,8 +193,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var handler = function handler() {
     setOpenBusinessInformation(true);
   };
-  var onProductClick = function onProductClick(_x) {
-    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(product) {
+  var onProductClick = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(product) {
       var _currentCart$products, isProductAddedToCart, productQuantity, minimumPerOrder, addCurrentProduct, updateCurrentProduct, cartData, _business$professiona, _product$category;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -260,8 +260,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function onProductClick(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
   var handleCustomProductBannerClick = function handleCustomProductBannerClick(product) {
     var _business$professiona2;
     if (!((product === null || product === void 0 ? void 0 : product.type) === 'service' && (business === null || business === void 0 || (_business$professiona2 = business.professionals) === null || _business$professiona2 === void 0 ? void 0 : _business$professiona2.length) > 0)) {
@@ -346,8 +349,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       page: 'search'
     });
   };
-  var adjustBusiness = function adjustBusiness(_x2) {
-    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(adjustBusinessId) {
+  var adjustBusiness = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(adjustBusinessId) {
       var _carts$adjustBusiness;
       var _carts, products, unavailableProducts, alreadyRemoved;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -385,8 +388,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
             return _context2.stop();
         }
       }, _callee2);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function adjustBusiness(_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
   (0, _react.useEffect)(function () {
     if (categoryId && productId && isInitialRender) {
       var _productModal$product;

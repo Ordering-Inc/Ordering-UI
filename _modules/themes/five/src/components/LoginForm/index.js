@@ -46,7 +46,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var LoginFormUI = function LoginFormUI(props) {
-  var _configs$google_login, _optimizationLoad$res, _optimizationLoad$res2, _optimizationLoad$res3, _configs$spoonity_tit, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$google_login2, _configs$google_login3, _configs$google_login4, _configs$apple_login_, _configs$twilio_servi, _configs$twilio_servi2, _ref, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images2, _props$beforeMidEleme, _props$beforeMidCompo, _formMethods$errors, _formMethods$errors2, _formMethods$errors3, _formMethods$errors4, _formMethods$errors5, _formMethods$errors6, _formMethods$errors7, _formMethods$errors8, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag, _configs$facebook_log3, _configs$facebook_log4, _configs$facebook_id2, _configs$facebook_id3, _configs$google_login5, _configs$google_login6, _configs$google_login7, _configs$apple_login_2, _configs$twilio_servi3, _configs$twilio_servi4, _props$afterComponent, _props$afterElements;
+  var _configs$google_login, _optimizationLoad$res, _optimizationLoad$res2, _optimizationLoad$res3, _configs$spoonity_tit, _configs$facebook_log, _configs$facebook_log2, _configs$facebook_id, _configs$google_login2, _configs$google_login3, _configs$google_login4, _configs$apple_login_, _configs$twilio_servi, _configs$twilio_servi2, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images2, _props$beforeMidEleme, _props$beforeMidCompo, _formMethods$errors, _formMethods$errors2, _formMethods$errors3, _formMethods$errors4, _formMethods$errors5, _formMethods$errors6, _formMethods$errors7, _formMethods$errors8, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _props$afterMidElemen, _props$afterMidCompon, _theme$defaultLanguag, _configs$facebook_log3, _configs$facebook_log4, _configs$facebook_id2, _configs$facebook_id3, _configs$google_login5, _configs$google_login6, _configs$google_login7, _configs$apple_login_2, _configs$twilio_servi3, _configs$twilio_servi4, _props$afterComponent, _props$afterElements;
   var useLoginByEmail = props.useLoginByEmail,
     useLoginByCellphone = props.useLoginByCellphone,
     handleChangeInput = props.handleChangeInput,
@@ -155,8 +155,8 @@ var LoginFormUI = function LoginFormUI(props) {
   var spoonityTitle = configs === null || configs === void 0 || (_configs$spoonity_tit = configs.spoonity_title) === null || _configs$spoonity_tit === void 0 ? void 0 : _configs$spoonity_tit.value;
   var hasSocialLogin = ((configs === null || configs === void 0 || (_configs$facebook_log = configs.facebook_login) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) === 'true' || (configs === null || configs === void 0 || (_configs$facebook_log2 = configs.facebook_login) === null || _configs$facebook_log2 === void 0 ? void 0 : _configs$facebook_log2.value) === '1') && (configs === null || configs === void 0 || (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) || (configs === null || configs === void 0 || (_configs$google_login2 = configs.google_login_client_id) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) && (configs === null || configs === void 0 || (_configs$google_login3 = configs.google_login_auth_domain) === null || _configs$google_login3 === void 0 ? void 0 : _configs$google_login3.value) && (configs === null || configs === void 0 || (_configs$google_login4 = configs.google_login_api_key) === null || _configs$google_login4 === void 0 ? void 0 : _configs$google_login4.value) && googleLoginEnabled || (configs === null || configs === void 0 || (_configs$apple_login_ = configs.apple_login_client_id) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value) && appleLoginEnabled || loginTab === 'cellphone' && ((configs === null || configs === void 0 || (_configs$twilio_servi = configs.twilio_service_enabled) === null || _configs$twilio_servi === void 0 ? void 0 : _configs$twilio_servi.value) === 'true' || (configs === null || configs === void 0 || (_configs$twilio_servi2 = configs.twilio_service_enabled) === null || _configs$twilio_servi2 === void 0 ? void 0 : _configs$twilio_servi2.value) === '1');
   var hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled;
-  var onSubmit = function onSubmit() {
-    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var onSubmit = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _parseNumber, cellphone, countryPhoneCode;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -214,8 +214,11 @@ var LoginFormUI = function LoginFormUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function onSubmit() {
+      return _ref.apply(this, arguments);
+    };
+  }();
   var handleSuccessFacebook = function handleSuccessFacebook(user) {
     var _user$session;
     login({
