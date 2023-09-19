@@ -54,7 +54,8 @@ const SignUpDriverUI = (props) => {
     saveCustomerUser,
     fieldsNotValid,
     signupData,
-    enableReCaptcha
+    enableReCaptcha,
+    isDriverSignup
   } = props
 
   const theme = useTheme()
@@ -385,7 +386,7 @@ const SignUpDriverUI = (props) => {
         </FormInput>
       </FormSide>
       <Alert
-        title={t('SIGN_UP_FOR_BUSINESS', 'Sign up for business')}
+        title={isDriverSignup ? t('SIGN_UP_FOR_DRIVER', 'Sign up for driver') : t('SIGN_UP_FOR_BUSINESS', 'Sign up for business')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
