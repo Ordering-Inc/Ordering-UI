@@ -33,7 +33,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import 
 // import { useConfig } from '../../contexts/ConfigContext'
 // import { useApi } from '../../contexts/ApiContext'
 var ProductForm = function ProductForm(props) {
-  var _props$productCart, _orderState$carts, _cart$products, _cart$products2, _product$product, _product$product2, _product$product3, _product$product4, _ref, _ref3;
+  var _props$productCart, _orderState$carts, _cart$products, _cart$products2, _product$product, _product$product2, _product$product3, _product$product4;
   var UIComponent = props.UIComponent,
     useOrderContext = props.useOrderContext,
     onSave = props.onSave,
@@ -229,8 +229,8 @@ var ProductForm = function ProductForm(props) {
   /**
    * Load product from API
    */
-  var loadProductWithOptions = function loadProductWithOptions() {
-    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var loadProductWithOptions = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var source, _yield$ordering$busin, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -266,8 +266,11 @@ var ProductForm = function ProductForm(props) {
             return _context.stop();
         }
       }, _callee, null, [[0, 11]]);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function loadProductWithOptions() {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   /**
    * Remove related option by respect_to
@@ -456,8 +459,8 @@ var ProductForm = function ProductForm(props) {
   /**
    * Handle when click on save product
    */
-  var handleSave = function handleSave() {
-    return (_ref3 = _ref3 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  var handleSave = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       var errors, successful, _props$productCart6, _props$productCart7;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
@@ -504,8 +507,11 @@ var ProductForm = function ProductForm(props) {
             return _context2.stop();
         }
       }, _callee2);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function handleSave() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
   var increment = function increment() {
     if (maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity) {
       return;

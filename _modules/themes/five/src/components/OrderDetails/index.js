@@ -10,6 +10,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _orderingComponents = require("ordering-components");
 var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
+var _BsExclamationTriangle = _interopRequireDefault(require("@meronex/icons/bs/BsExclamationTriangle"));
 var _Buttons = require("../../styles/Buttons");
 var _NotFoundSource = require("../NotFoundSource");
 var _ProductItemAccordion = require("../ProductItemAccordion");
@@ -57,7 +58,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _configs$google_maps_, _configs$powered_by_o, _theme$confirmation, _theme$confirmation2, _theme$confirmation3, _theme$confirmation4, _theme$confirmation5, _theme$confirmation6, _theme$confirmation7, _theme$confirmation8, _theme$confirmation9, _theme$confirmation10, _theme$confirmation11, _theme$confirmation12, _theme$confirmation13, _theme$confirmation14, _theme$confirmation15, _theme$confirmation16, _theme$confirmation17, _theme$confirmation18, _ref, _order$driver, _order$driver2, _theme$images, _order$business2, _order$business3, _theme$images2, _order$customer, _order$customer2, _theme$images3, _order$driver3, _order$driver4, _theme$defaultLanguag, _configs$guest_uuid_a, _order$business4, _order$business5, _orderTypes$find, _configs$general_hour, _order$reporting_data, _configs$general_hour2, _progressBarObjt, _progressBarObjt2, _theme$defaultLanguag2, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$place, _order$place2, _progressBarObjt3, _progressBarObjt4, _order$business12, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _theme$defaultLanguag3, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11, _order$driver12, _order$driver13, _order$driver14, _configs$google_maps_2, _order$products$, _order$products$2, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6;
+  var _configs$google_maps_, _configs$powered_by_o, _theme$confirmation, _theme$confirmation2, _theme$confirmation3, _theme$confirmation4, _theme$confirmation5, _theme$confirmation6, _theme$confirmation7, _theme$confirmation8, _theme$confirmation9, _theme$confirmation10, _theme$confirmation11, _theme$confirmation12, _theme$confirmation13, _theme$confirmation14, _theme$confirmation15, _theme$confirmation16, _theme$confirmation17, _theme$confirmation18, _order$driver, _order$driver2, _theme$images, _order$business2, _order$business3, _theme$images2, _order$customer, _order$customer2, _theme$images3, _order$driver3, _order$driver4, _theme$defaultLanguag, _configs$guest_uuid_a, _order$business4, _order$business5, _orderTypes$find, _configs$general_hour, _order$reporting_data, _configs$general_hour2, _order$debug_payment_, _order$debug_payment_2, _progressBarObjt, _progressBarObjt2, _theme$defaultLanguag2, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$place, _order$place2, _progressBarObjt3, _progressBarObjt4, _order$business12, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _theme$defaultLanguag3, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11, _order$driver12, _order$driver13, _order$driver14, _configs$google_maps_2, _order$products$, _order$products$2, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6;
   var userCustomerId = props.userCustomerId,
     handleChangeOrderStatus = props.handleChangeOrderStatus,
     handleBusinessRedirect = props.handleBusinessRedirect,
@@ -242,8 +243,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       }
     });
   };
-  var businessLogoUrlValidation = function businessLogoUrlValidation() {
-    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var businessLogoUrlValidation = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _order$business;
       var isValidImage;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -259,8 +260,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function businessLogoUrlValidation() {
+      return _ref.apply(this, arguments);
+    };
+  }();
   var locations = [_objectSpread(_objectSpread({}, order === null || order === void 0 || (_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.location), {}, {
     icon: (order === null || order === void 0 || (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.driverPng)
   }), _objectSpread(_objectSpread({}, order === null || order === void 0 || (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.location), {}, {
@@ -355,12 +359,11 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var handleClickReorder = function handleClickReorder(order) {
     var _carts;
     if (carts["businessId:".concat(order === null || order === void 0 ? void 0 : order.business_id)] && ((_carts = carts["businessId:".concat(order === null || order === void 0 ? void 0 : order.business_id)]) === null || _carts === void 0 || (_carts = _carts.products) === null || _carts === void 0 ? void 0 : _carts.length) > 0) {
-      var _handleOnAccept;
       setConfirm({
         open: true,
         content: t('QUESTION_DELETE_PRODUCTS_FROM_CART', 'Are you sure that you want to delete all products from cart?'),
-        handleOnAccept: function handleOnAccept() {
-          return (_handleOnAccept = _handleOnAccept || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        handleOnAccept: function () {
+          var _handleOnAccept = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
             return _regeneratorRuntime().wrap(function _callee2$(_context2) {
               while (1) switch (_context2.prev = _context2.next) {
                 case 0:
@@ -373,8 +376,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
                   return _context2.stop();
               }
             }, _callee2);
-          }))).apply(this, arguments);
-        }
+          }));
+          function handleOnAccept() {
+            return _handleOnAccept.apply(this, arguments);
+          }
+          return handleOnAccept;
+        }()
       });
     } else {
       handleReorder(order.id);
@@ -545,7 +552,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       return handleClickReorder(order);
     },
     disabled: reorderState === null || reorderState === void 0 ? void 0 : reorderState.loading
-  }, reorderState !== null && reorderState !== void 0 && reorderState.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')))), !hideDeliveryProgress && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
+  }, reorderState !== null && reorderState !== void 0 && reorderState.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')))), props.isCustomerMode && !!(order !== null && order !== void 0 && (_order$debug_payment_ = order.debug_payment_response) !== null && _order$debug_payment_ !== void 0 && _order$debug_payment_.message) && /*#__PURE__*/_react.default.createElement("div", {
+    id: "error-subs"
+  }, /*#__PURE__*/_react.default.createElement(_styles.ValidationText, null, /*#__PURE__*/_react.default.createElement(_BsExclamationTriangle.default, null), /*#__PURE__*/_react.default.createElement("span", null, order === null || order === void 0 || (_order$debug_payment_2 = order.debug_payment_response) === null || _order$debug_payment_2 === void 0 ? void 0 : _order$debug_payment_2.message))), !hideDeliveryProgress && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.StatusBar, {
     percentage: (_progressBarObjt = progressBarObjt(order === null || order === void 0 ? void 0 : order.status)) === null || _progressBarObjt === void 0 ? void 0 : _progressBarObjt.percentage
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderStatusAndLinkContainer, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "order-status"

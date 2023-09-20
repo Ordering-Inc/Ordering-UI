@@ -28,9 +28,8 @@ function useIntersectionObserver() {
     setIsObserved = _useState2[1];
   var $element = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
-    var _ref;
-    var loadPollyFill = function loadPollyFill() {
-      return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var loadPollyFill = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -51,8 +50,11 @@ function useIntersectionObserver() {
               return _context.stop();
           }
         }, _callee, null, [[0, 5]]);
-      }))).apply(this, arguments);
-    };
+      }));
+      return function loadPollyFill() {
+        return _ref.apply(this, arguments);
+      };
+    }();
     if (!window.IntersectionObserver) loadPollyFill();
     var observer = new window.IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
