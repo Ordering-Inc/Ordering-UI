@@ -198,15 +198,15 @@ export const fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname
 export const sortInputFields = ({ fields, values }) => {
   let fieldsBase = fields
   const fieldsSorted = []
-  const fieldsArray = Array.isArray(values) ? values : Object.values(values)
+  const fieldsArray = Array.isArray(values) ? values : values && Object.values(values)
 
   if (!fieldsBase) {
     fieldsBase = fieldsToSort
   }
 
   fieldsBase.forEach(f => {
-    fieldsArray.forEach(field => {
-      if (f === field.code) {
+    fieldsArray && fieldsArray.forEach(field => {
+      if (f === field.code || f === field?.validation_field?.code) {
         fieldsSorted.push(field)
       }
     })
