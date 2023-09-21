@@ -50,7 +50,9 @@ export const UserFormDetailsUI = (props) => {
     requiredFields,
     handleChangeNotifications,
     handlePlaceOrderAsGuest,
-    isAllowGuest
+    isAllowGuest,
+    isGuest,
+    orderTypeValidationFields
   } = props
 
   const formMethods = useForm()
@@ -328,11 +330,12 @@ export const UserFormDetailsUI = (props) => {
               props.beforeMidComponents?.map((BeforeMidComponents, i) => (
                 <BeforeMidComponents key={i} {...props} />))
             }
-            {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
-              ((showField && showField(field.code) && showFieldWithTheme(field.code)) || user?.guest_id) && (
+            {sortInputFields({ values: isGuest ? orderTypeValidationFields : validationFields?.fields?.checkout }).map(item => {
+              const field = item?.validation_field || item
+              return (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
-                    ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields) && (
+                    (isGuest ? item?.enabled : showField && showField(field.code)) && ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields) && (
                       <InputGroup>
                         <p>{t(field.code.toUpperCase(), field?.name)}</p>
                         <Input
@@ -353,7 +356,7 @@ export const UserFormDetailsUI = (props) => {
                       </InputGroup>
                     )
                   ) : (
-                    ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields) && (
+                    (isGuest ? item?.enabled : (showField && showField(field.code)) && ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields)) && (
                       <InputGroup>
                         <p>{t(field.code.toUpperCase(), field?.name)}</p>
                         <Input
@@ -378,7 +381,7 @@ export const UserFormDetailsUI = (props) => {
                   )}
                 </React.Fragment>
               )
-            )}
+            })}
             {((!user?.guest_id && showInputBirthday) || (user?.guest_id && requiredFields?.includes?.('birthdate'))) && (
               <InputPhoneNumberWrapper>
                 <p>{t('BIRTHDATE', 'Birthdate')}</p>
