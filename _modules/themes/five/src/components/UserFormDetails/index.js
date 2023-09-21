@@ -63,7 +63,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     requiredFields = props.requiredFields,
     handleChangeNotifications = props.handleChangeNotifications,
     handlePlaceOrderAsGuest = props.handlePlaceOrderAsGuest,
-    isAllowGuest = props.isAllowGuest;
+    isAllowGuest = props.isAllowGuest,
+    isGuest = props.isGuest,
+    orderTypeValidationFields = props.orderTypeValidationFields;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -364,12 +366,13 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       key: i
     }, props));
   }), (0, _utils.sortInputFields)({
-    values: validationFields === null || validationFields === void 0 || (_validationFields$fie7 = validationFields.fields) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.checkout
-  }).map(function (field) {
+    values: isGuest ? orderTypeValidationFields : validationFields === null || validationFields === void 0 || (_validationFields$fie7 = validationFields.fields) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.checkout
+  }).map(function (item) {
     var _requiredFields$inclu3, _ref3, _formState$changes$fi, _requiredFields$inclu4, _ref4, _formState$changes$fi2;
-    return (showField && showField(field.code) && showFieldWithTheme(field.code) || (user === null || user === void 0 ? void 0 : user.guest_id)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+    var field = (item === null || item === void 0 ? void 0 : item.validation_field) || item;
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
-    }, field.code === 'email' ? (requiredFields && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu3 = requiredFields.includes) === null || _requiredFields$inclu3 === void 0 ? void 0 : _requiredFields$inclu3.call(requiredFields, field.code)) || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    }, field.code === 'email' ? (isGuest ? item === null || item === void 0 ? void 0 : item.enabled : showField && showField(field.code)) && (requiredFields && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu3 = requiredFields.includes) === null || _requiredFields$inclu3 === void 0 ? void 0 : _requiredFields$inclu3.call(requiredFields, field.code)) || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.type,
       name: field.code,
@@ -383,7 +386,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         emailInput.current = e;
       },
       autoComplete: "off"
-    })) : (requiredFields && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu4 = requiredFields.includes) === null || _requiredFields$inclu4 === void 0 ? void 0 : _requiredFields$inclu4.call(requiredFields, field.code)) || !requiredFields) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    })) : (isGuest ? item === null || item === void 0 ? void 0 : item.enabled : showField && showField(field.code) && (requiredFields && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu4 = requiredFields.includes) === null || _requiredFields$inclu4 === void 0 ? void 0 : _requiredFields$inclu4.call(requiredFields, field.code)) || !requiredFields)) && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name)), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       key: field.id,
       type: field.type,
       borderBottom: true,

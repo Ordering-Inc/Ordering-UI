@@ -233,13 +233,14 @@ var sortInputFields = function sortInputFields(_ref2) {
     values = _ref2.values;
   var fieldsBase = fields;
   var fieldsSorted = [];
-  var fieldsArray = Array.isArray(values) ? values : Object.values(values);
+  var fieldsArray = Array.isArray(values) ? values : values && Object.values(values);
   if (!fieldsBase) {
     fieldsBase = fieldsToSort;
   }
   fieldsBase.forEach(function (f) {
-    fieldsArray.forEach(function (field) {
-      if (f === field.code) {
+    fieldsArray && fieldsArray.forEach(function (field) {
+      var _field$validation_fie;
+      if (f === field.code || f === (field === null || field === void 0 || (_field$validation_fie = field.validation_field) === null || _field$validation_fie === void 0 ? void 0 : _field$validation_fie.code)) {
         fieldsSorted.push(field);
       }
     });

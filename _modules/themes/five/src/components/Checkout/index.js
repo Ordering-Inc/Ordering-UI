@@ -172,6 +172,10 @@ var CheckoutUI = function CheckoutUI(props) {
     _useState24 = _slicedToArray(_useState23, 2),
     paymethodClicked = _useState24[0],
     setPaymethodClicked = _useState24[1];
+  var _useState25 = (0, _react.useState)([]),
+    _useState26 = _slicedToArray(_useState25, 2),
+    orderTypeValidationFields = _useState26[0],
+    setOrderTypeValidationFields = _useState26[1];
   var cardsMethods = ['stripe', 'credomatic'];
   var stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect'];
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 || (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
@@ -208,8 +212,8 @@ var CheckoutUI = function CheckoutUI(props) {
   }, [checkoutFieldsState, options]);
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
-  var validateCommentsCartField = (!(user !== null && user !== void 0 && user.guest_id) ? (validationFields === null || validationFields === void 0 || (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 || (_validationFields$fie = _validationFields$fie.checkout) === null || _validationFields$fie === void 0 || (_validationFields$fie = _validationFields$fie.comments) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.enabled) && (validationFields === null || validationFields === void 0 || (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.checkout) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.comments) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.required) : (guestCheckoutComment === null || guestCheckoutComment === void 0 ? void 0 : guestCheckoutComment.enabled) && (guestCheckoutComment === null || guestCheckoutComment === void 0 ? void 0 : guestCheckoutComment.required)) && ((cart === null || cart === void 0 ? void 0 : cart.comment) === null || (cart === null || cart === void 0 || (_cart$comment = cart.comment) === null || _cart$comment === void 0 ? void 0 : _cart$comment.trim().length) === 0);
-  var validateDriverTipField = options.type === 1 && (!(user !== null && user !== void 0 && user.guest_id) ? (validationFields === null || validationFields === void 0 || (_validationFields$fie3 = validationFields.fields) === null || _validationFields$fie3 === void 0 || (_validationFields$fie3 = _validationFields$fie3.checkout) === null || _validationFields$fie3 === void 0 || (_validationFields$fie3 = _validationFields$fie3.driver_tip) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 || (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 || (_validationFields$fie4 = _validationFields$fie4.checkout) === null || _validationFields$fie4 === void 0 || (_validationFields$fie4 = _validationFields$fie4.driver_tip) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.required) : (guestCheckoutDriveTip === null || guestCheckoutDriveTip === void 0 ? void 0 : guestCheckoutDriveTip.enabled) && (guestCheckoutDriveTip === null || guestCheckoutDriveTip === void 0 ? void 0 : guestCheckoutDriveTip.required)) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0;
+  var validateCommentsCartField = (!(user !== null && user !== void 0 && user.guest_id) ? (validationFields === null || validationFields === void 0 || (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 || (_validationFields$fie = _validationFields$fie.checkout) === null || _validationFields$fie === void 0 || (_validationFields$fie = _validationFields$fie.comments) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.enabled) && (validationFields === null || validationFields === void 0 || (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.checkout) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.comments) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.required) : (guestCheckoutComment === null || guestCheckoutComment === void 0 ? void 0 : guestCheckoutComment.enabled) && (guestCheckoutComment === null || guestCheckoutComment === void 0 ? void 0 : guestCheckoutComment.required_with_guest)) && ((cart === null || cart === void 0 ? void 0 : cart.comment) === null || (cart === null || cart === void 0 || (_cart$comment = cart.comment) === null || _cart$comment === void 0 ? void 0 : _cart$comment.trim().length) === 0);
+  var validateDriverTipField = options.type === 1 && (!(user !== null && user !== void 0 && user.guest_id) ? (validationFields === null || validationFields === void 0 || (_validationFields$fie3 = validationFields.fields) === null || _validationFields$fie3 === void 0 || (_validationFields$fie3 = _validationFields$fie3.checkout) === null || _validationFields$fie3 === void 0 || (_validationFields$fie3 = _validationFields$fie3.driver_tip) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 || (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 || (_validationFields$fie4 = _validationFields$fie4.checkout) === null || _validationFields$fie4 === void 0 || (_validationFields$fie4 = _validationFields$fie4.driver_tip) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.required) : (guestCheckoutDriveTip === null || guestCheckoutDriveTip === void 0 ? void 0 : guestCheckoutDriveTip.enabled) && (guestCheckoutDriveTip === null || guestCheckoutDriveTip === void 0 ? void 0 : guestCheckoutDriveTip.required_with_guest)) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0;
   var validateZipcodeCard = (validationFields === null || validationFields === void 0 || (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 || (_validationFields$fie5 = _validationFields$fie5.card) === null || _validationFields$fie5 === void 0 || (_validationFields$fie5 = _validationFields$fie5.zipcode) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.enabled) && (validationFields === null || validationFields === void 0 || (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 || (_validationFields$fie6 = _validationFields$fie6.card) === null || _validationFields$fie6 === void 0 || (_validationFields$fie6 = _validationFields$fie6.zipcode) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required) && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && (paymethodSelected === null || paymethodSelected === void 0 || (_paymethodSelected$da = paymethodSelected.data) === null || _paymethodSelected$da === void 0 ? void 0 : _paymethodSelected$da.card) && !(paymethodSelected !== null && paymethodSelected !== void 0 && (_paymethodSelected$da2 = paymethodSelected.data) !== null && _paymethodSelected$da2 !== void 0 && (_paymethodSelected$da2 = _paymethodSelected$da2.card) !== null && _paymethodSelected$da2 !== void 0 && _paymethodSelected$da2.zipcode);
   var isDisablePlaceOrderButton = !(cart !== null && cart !== void 0 && cart.valid) || !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 || cardsMethods.includes(paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) && (cardList === null || cardList === void 0 || (_cardList$cards = cardList.cards) === null || _cardList$cards === void 0 ? void 0 : _cardList$cards.length) === 0 || placing || errorCash || loading || isTableNumberEnabled === '1' && (options === null || options === void 0 ? void 0 : options.type) === 3 && !(cartState !== null && cartState !== void 0 && (_cartState$cart = cartState.cart) !== null && _cartState$cart !== void 0 && _cartState$cart.spot_number || cart !== null && cart !== void 0 && cart.spot_number || placeSpotNumber) || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ||
   // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
@@ -284,8 +288,9 @@ var CheckoutUI = function CheckoutUI(props) {
     var userSelected = isCustomerMode ? customerState.user : user;
     var _requiredFields = checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields.filter(function (field) {
       var _field$validation_fie4, _field$validation_fie5;
-      return (field === null || field === void 0 ? void 0 : field.order_type_id) === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 ? void 0 : field.enabled) && (field === null || field === void 0 ? void 0 : field.required) && !notFields.includes(field === null || field === void 0 || (_field$validation_fie4 = field.validation_field) === null || _field$validation_fie4 === void 0 ? void 0 : _field$validation_fie4.code) && userSelected && !userSelected[field === null || field === void 0 || (_field$validation_fie5 = field.validation_field) === null || _field$validation_fie5 === void 0 ? void 0 : _field$validation_fie5.code];
-    }).map(function (item) {
+      return (field === null || field === void 0 ? void 0 : field.order_type_id) === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 ? void 0 : field.enabled) && (field === null || field === void 0 ? void 0 : field.required_with_guest) && !notFields.includes(field === null || field === void 0 || (_field$validation_fie4 = field.validation_field) === null || _field$validation_fie4 === void 0 ? void 0 : _field$validation_fie4.code) && userSelected && !userSelected[field === null || field === void 0 || (_field$validation_fie5 = field.validation_field) === null || _field$validation_fie5 === void 0 ? void 0 : _field$validation_fie5.code];
+    });
+    var requiredFieldsCode = _requiredFields.map(function (item) {
       var _item$validation_fiel;
       return item === null || item === void 0 || (_item$validation_fiel = item.validation_field) === null || _item$validation_fiel === void 0 ? void 0 : _item$validation_fiel.code;
     });
@@ -293,10 +298,11 @@ var CheckoutUI = function CheckoutUI(props) {
       var _field$validation_fie6;
       return field.order_type_id === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 || (_field$validation_fie6 = field.validation_field) === null || _field$validation_fie6 === void 0 ? void 0 : _field$validation_fie6.code) === 'mobile_phone';
     });
-    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.enabled && guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.required || (configs === null || configs === void 0 || (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
-      _requiredFields.push('cellphone');
+    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.enabled && guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.required_with_guest || (configs === null || configs === void 0 || (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
+      requiredFieldsCode.push('cellphone');
     }
-    setRequiredFields(_requiredFields);
+    setRequiredFields(requiredFieldsCode);
+    setOrderTypeValidationFields(_requiredFields);
   };
   var checkValidationFields = function checkValidationFields() {
     var _validationFields$fie8, _validationFields$fie9, _validationFields$fie10, _configs$verification2;
@@ -645,7 +651,9 @@ var CheckoutUI = function CheckoutUI(props) {
     isCheckoutPlace: true,
     isEdit: true,
     isModal: true,
+    orderTypeValidationFields: orderTypeValidationFields,
     handlePlaceOrderAsGuest: handlePlaceOrderAsGuest,
+    isGuest: !!(user !== null && user !== void 0 && user.guest_id),
     isAllowGuest: (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'card_delivery',
     onClose: function onClose() {
       setIsOpen(false);
@@ -711,37 +719,37 @@ var Checkout = function Checkout(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
-  var _useState25 = (0, _react.useState)({
+  var _useState27 = (0, _react.useState)({
       loading: true,
       error: null,
       cart: null
     }),
-    _useState26 = _slicedToArray(_useState25, 2),
-    cartState = _useState26[0],
-    setCartState = _useState26[1];
-  var _useState27 = (0, _react.useState)(false),
     _useState28 = _slicedToArray(_useState27, 2),
-    openUpselling = _useState28[0],
-    setOpenUpselling = _useState28[1];
+    cartState = _useState28[0],
+    setCartState = _useState28[1];
   var _useState29 = (0, _react.useState)(false),
     _useState30 = _slicedToArray(_useState29, 2),
-    canOpenUpselling = _useState30[0],
-    setCanOpenUpselling = _useState30[1];
-  var _useState31 = (0, _react.useState)(null),
+    openUpselling = _useState30[0],
+    setOpenUpselling = _useState30[1];
+  var _useState31 = (0, _react.useState)(false),
     _useState32 = _slicedToArray(_useState31, 2),
-    currentCart = _useState32[0],
-    setCurrentCart = _useState32[1];
-  var _useState33 = (0, _react.useState)({
+    canOpenUpselling = _useState32[0],
+    setCanOpenUpselling = _useState32[1];
+  var _useState33 = (0, _react.useState)(null),
+    _useState34 = _slicedToArray(_useState33, 2),
+    currentCart = _useState34[0],
+    setCurrentCart = _useState34[1];
+  var _useState35 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState34 = _slicedToArray(_useState33, 2),
-    alertState = _useState34[0],
-    setAlertState = _useState34[1];
-  var _useState35 = (0, _react.useState)(false),
     _useState36 = _slicedToArray(_useState35, 2),
-    isResetPaymethod = _useState36[0],
-    setIsResetPaymethod = _useState36[1];
+    alertState = _useState36[0],
+    setAlertState = _useState36[1];
+  var _useState37 = (0, _react.useState)(false),
+    _useState38 = _slicedToArray(_useState37, 2),
+    isResetPaymethod = _useState38[0],
+    setIsResetPaymethod = _useState38[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 || (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);
