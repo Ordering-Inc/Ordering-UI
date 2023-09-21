@@ -667,6 +667,7 @@ const OrderDetailsUI = (props) => {
                         locations={parsedLocations}
                         mapControls={googleMapsControls}
                         apiKey={configs?.google_maps_api_key?.value}
+                        manualZoom
                       />
                     </Map>
                   )
