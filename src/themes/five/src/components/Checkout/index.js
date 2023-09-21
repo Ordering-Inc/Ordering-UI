@@ -128,6 +128,8 @@ const CheckoutUI = (props) => {
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
   const [paymethodClicked, setPaymethodClicked] = useState(null)
+  const [orderTypeValidationFields, setOrderTypeValidationFields] = useState([])
+
   const cardsMethods = ['stripe', 'credomatic']
   const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
   const businessConfigs = businessDetails?.business?.configs ?? []
@@ -147,8 +149,8 @@ const CheckoutUI = (props) => {
   const guestCheckoutCupon = useMemo(() => checkoutFieldsState?.fields?.find(field => field.order_type_id === options?.type && field?.validation_field?.code === 'coupon'), [checkoutFieldsState, options])
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
-  const validateCommentsCartField = (!user?.guest_id ? (validationFields?.fields?.checkout?.comments?.enabled && validationFields?.fields?.checkout?.comments?.required) : (guestCheckoutComment?.enabled && guestCheckoutComment?.required)) && (cart?.comment === null || cart?.comment?.trim().length === 0)
-  const validateDriverTipField = options.type === 1 && (!user?.guest_id ? (validationFields?.fields?.checkout?.driver_tip?.enabled && validationFields?.fields?.checkout?.driver_tip?.required) : (guestCheckoutDriveTip?.enabled && guestCheckoutDriveTip?.required)) && (Number(cart?.driver_tip) <= 0)
+  const validateCommentsCartField = (!user?.guest_id ? (validationFields?.fields?.checkout?.comments?.enabled && validationFields?.fields?.checkout?.comments?.required) : (guestCheckoutComment?.enabled && guestCheckoutComment?.required_with_guest)) && (cart?.comment === null || cart?.comment?.trim().length === 0)
+  const validateDriverTipField = options.type === 1 && (!user?.guest_id ? (validationFields?.fields?.checkout?.driver_tip?.enabled && validationFields?.fields?.checkout?.driver_tip?.required) : (guestCheckoutDriveTip?.enabled && guestCheckoutDriveTip?.required_with_guest)) && (Number(cart?.driver_tip) <= 0)
 
   const validateZipcodeCard =
     validationFields?.fields?.card?.zipcode?.enabled && validationFields?.fields?.card?.zipcode?.required && paymethodSelected?.gateway === 'stripe' && paymethodSelected?.data?.card && !paymethodSelected?.data?.card?.zipcode
@@ -232,24 +234,23 @@ const CheckoutUI = (props) => {
   const checkGuestValidationFields = () => {
     const userSelected = isCustomerMode ? customerState.user : user
     const _requiredFields = checkoutFieldsState?.fields
-      .filter(field => (field?.order_type_id === options?.type) && field?.enabled && field?.required &&
+      .filter((field) => (field?.order_type_id === options?.type) && field?.enabled && field?.required_with_guest &&
         !notFields.includes(field?.validation_field?.code) &&
         userSelected && !userSelected[field?.validation_field?.code])
-      .map(item => item?.validation_field?.code)
-    const guestCheckoutCellPhone = checkoutFieldsState?.fields?.find(field => field.order_type_id === options?.type && field?.validation_field?.code === 'mobile_phone')
-
+    const requiredFieldsCode = _requiredFields.map((item) => item?.validation_field?.code)
+    const guestCheckoutCellPhone = checkoutFieldsState?.fields?.find((field) => field.order_type_id === options?.type && field?.validation_field?.code === 'mobile_phone')
     if (
       userSelected &&
-        !userSelected?.cellphone &&
-        ((guestCheckoutCellPhone?.enabled &&
-          guestCheckoutCellPhone?.required) ||
-          configs?.verification_phone_required?.value === '1')
+      !userSelected?.cellphone &&
+      ((guestCheckoutCellPhone?.enabled &&
+        guestCheckoutCellPhone?.required_with_guest) ||
+        configs?.verification_phone_required?.value === '1')
     ) {
-      _requiredFields.push('cellphone')
+      requiredFieldsCode.push('cellphone')
     }
-    setRequiredFields(_requiredFields)
+    setRequiredFields(requiredFieldsCode)
+    setOrderTypeValidationFields(_requiredFields)
   }
-
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
@@ -569,24 +570,24 @@ const CheckoutUI = (props) => {
 
         {
           !!(!isMultiDriverTips && driverTipsField) &&
-            <>
-              <DriverTipContainer>
-                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-                <DriverTips
-                  businessId={cart?.business_id}
-                  driverTipsOptions={driverTipsOptions}
-                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                    ? cart?.driver_tip
-                    : cart?.driver_tip_rate}
-                  cart={cart}
-                  useOrderContext
-                />
-              </DriverTipContainer>
-              <DriverTipDivider />
-            </>
+          <>
+            <DriverTipContainer>
+              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+              <DriverTips
+                businessId={cart?.business_id}
+                driverTipsOptions={driverTipsOptions}
+                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                  ? cart?.driver_tip
+                  : cart?.driver_tip_rate}
+                cart={cart}
+                useOrderContext
+              />
+            </DriverTipContainer>
+            <DriverTipDivider />
+          </>
         }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
@@ -758,7 +759,9 @@ const CheckoutUI = (props) => {
           isCheckoutPlace
           isEdit
           isModal
+          orderTypeValidationFields={orderTypeValidationFields}
           handlePlaceOrderAsGuest={handlePlaceOrderAsGuest}
+          isGuest={!!user?.guest_id}
           isAllowGuest={paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery'}
           onClose={() => {
             setIsOpen(false)
