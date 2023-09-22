@@ -57,7 +57,8 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
     saveCustomerUser = props.saveCustomerUser,
     fieldsNotValid = props.fieldsNotValid,
     signupData = props.signupData,
-    enableReCaptcha = props.enableReCaptcha;
+    enableReCaptcha = props.enableReCaptcha,
+    isDriverSignup = props.isDriverSignup;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -358,7 +359,7 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
     className: "formButton",
     disabled: formState.loading || (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
   }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('SUBMIT', 'Submit')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('SIGN_UP_FOR_BUSINESS', 'Sign up for business'),
+    title: isDriverSignup ? t('SIGN_UP_FOR_DRIVER', 'Sign up for driver') : t('SIGN_UP_FOR_BUSINESS', 'Sign up for business'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

@@ -640,7 +640,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     } : driverLocation !== null && driverLocation !== void 0 ? driverLocation : order === null || order === void 0 || (_order$driver14 = order.driver) === null || _order$driver14 === void 0 ? void 0 : _order$driver14.location,
     locations: parsedLocations,
     mapControls: googleMapsControls,
-    apiKey: configs === null || configs === void 0 || (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value
+    apiKey: configs === null || configs === void 0 || (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
+    manualZoom: true
   }))), ((order === null || order === void 0 ? void 0 : order.delivery_type) === 1 || (order === null || order === void 0 ? void 0 : order.comment)) && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderPreferences, null, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
     order: order,
     placeSpotTypes: placeSpotTypes
