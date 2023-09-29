@@ -37,7 +37,9 @@ const ProductOptionSubOptionUI = (props) => {
     changePosition,
     isSoldOut,
     setIsScrollAvailable,
-    onChange
+    onChange,
+    pizzaType,
+    productCart
   } = props
 
   const disableIncrement = option?.limit_suboptions_by_max ? (balance === option?.max || state.quantity === suboption.max) : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
@@ -90,6 +92,23 @@ const ProductOptionSubOptionUI = (props) => {
     const newState = { ...state, selected: suboption?.preselected, quantity: state.selected ? 0 : 1 }
     onChange(newState, suboption, option)
   }, [suboption, dirtyRef, option])
+
+  useEffect(() => {
+    if (pizzaType.type === 'Mitad y mitad' && option?.with_half_option) {
+      const option = Object.values(productCart?.options || {})?.find(option => option?.name === 'Elige tus ingredientes' && Object.values(option?.suboptions)?.length > 0)
+      const alreadyRight = Object.values(option?.suboptions || {})?.some(suboption => suboption?.position === 'right')
+      if (pizzaType.right && !alreadyRight) {
+        if (state?.selected) {
+          handlePosition({}, 'right')
+        }
+      } else if (pizzaType.left || alreadyRight) {
+        if (state?.selected) {
+          handlePosition({}, 'left')
+        }
+      }
+    }
+  }, [pizzaType.type, state?.selected, suboption?.id])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -144,15 +163,24 @@ const ProductOptionSubOptionUI = (props) => {
               option?.with_half_option && state?.selected && (
                 <>
                   <BsCircleHalf
-                    className={['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}
+                    className={[
+                      pizzaType.center ? 'disabled' : '',
+                      pizzaType.type === 'Mitad y mitad' && 'disable-clicks',
+                      'reverse',
+                      state.selected && state.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}
                     onClick={(e) => handlePosition(e, 'left')}
                   />
                   <BsCircleFill
-                    className={[state.selected && state.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
+                    className={[
+                      !pizzaType.center && pizzaType.type === 'Mitad y mitad' ? 'disabled' : '',
+                      state.selected && state.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
                     onClick={(e) => handlePosition(e, 'whole')}
                   />
                   <BsCircleHalf
-                    className={[state.selected && state.position === 'right' ? 'selected' : null].filter(classname => classname).join(' ')}
+                    className={[
+                      pizzaType.center ? 'disabled' : '',
+                      pizzaType.type === 'Mitad y mitad' && 'disable-clicks',
+                      state.selected && state.position === 'right' ? 'selected' : null].filter(classname => classname).join(' ')}
                     onClick={(e) => handlePosition(e, 'right')}
                   />
                 </>
