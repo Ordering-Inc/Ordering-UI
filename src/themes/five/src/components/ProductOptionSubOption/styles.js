@@ -153,6 +153,14 @@ export const PositionControl = styled.div`
       color: ${props => props.theme.colors.primary};
     }
 
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.2
+    }
+    &.disable-clicks {
+      pointer-events: none;
+    }
+
     &:last-child {
       margin-right: 0;
       ${props => props.theme?.rtl && css`
