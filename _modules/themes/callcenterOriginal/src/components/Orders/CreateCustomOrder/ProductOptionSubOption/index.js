@@ -138,11 +138,10 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     noMargin: true
   }, /*#__PURE__*/_react.default.createElement("span", null, "".concat(t('OPTIONS_MAX_LIMIT', 'Maximum options to choose'), ": ").concat(option === null || option === void 0 ? void 0 : option.max))));
 };
-var ProductOptionSubOption = function ProductOptionSubOption(props) {
+var ProductOptionSubOption = exports.ProductOptionSubOption = function ProductOptionSubOption(props) {
   var productOptionSubOptionProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProductOptionSubOptionUI,
     isOrigin: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductOptionSuboption, productOptionSubOptionProps);
 };
-exports.ProductOptionSubOption = ProductOptionSubOption;

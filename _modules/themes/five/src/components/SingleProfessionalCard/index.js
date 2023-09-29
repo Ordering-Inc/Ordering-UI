@@ -104,10 +104,9 @@ var SingleProfessionalCardUI = function SingleProfessionalCardUI(props) {
     userId: professional === null || professional === void 0 ? void 0 : professional.id
   })));
 };
-var SingleProfessionalCard = function SingleProfessionalCard(props) {
+var SingleProfessionalCard = exports.SingleProfessionalCard = function SingleProfessionalCard(props) {
   var singleProfessionalCardProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SingleProfessionalCardUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.SingleProfessionalCard, singleProfessionalCardProps);
 };
-exports.SingleProfessionalCard = SingleProfessionalCard;

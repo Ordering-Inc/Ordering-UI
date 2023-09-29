@@ -39,10 +39,9 @@ var SmsLoginButtonUI = function SmsLoginButtonUI(props) {
     style: props.textStyle
   }, t('LOGIN_WITH_SMS', 'Login with SMS')));
 };
-var SmsLoginButton = function SmsLoginButton(props) {
+var SmsLoginButton = exports.SmsLoginButton = function SmsLoginButton(props) {
   var smsLoginProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SmsLoginButtonUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.LoginForm, smsLoginProps);
 };
-exports.SmsLoginButton = SmsLoginButton;

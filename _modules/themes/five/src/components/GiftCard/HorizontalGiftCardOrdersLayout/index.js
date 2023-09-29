@@ -60,10 +60,9 @@ var HorizontalGiftCardOrdersLayoutUI = function HorizontalGiftCardOrdersLayoutUI
     handleChangePage: goToPage
   })));
 };
-var HorizontalGiftCardOrdersLayout = function HorizontalGiftCardOrdersLayout(props) {
+var HorizontalGiftCardOrdersLayout = exports.HorizontalGiftCardOrdersLayout = function HorizontalGiftCardOrdersLayout(props) {
   var giftCardsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: HorizontalGiftCardOrdersLayoutUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.GiftCardOrdersList, giftCardsProps);
 };
-exports.HorizontalGiftCardOrdersLayout = HorizontalGiftCardOrdersLayout;

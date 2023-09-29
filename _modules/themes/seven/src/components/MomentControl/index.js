@@ -104,10 +104,9 @@ var MomentControlUI = function MomentControlUI(props) {
     }, AfterElement);
   }));
 };
-var MomentControl = function MomentControl(props) {
+var MomentControl = exports.MomentControl = function MomentControl(props) {
   var momentProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: MomentControlUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.MomentOption, momentProps);
 };
-exports.MomentControl = MomentControl;

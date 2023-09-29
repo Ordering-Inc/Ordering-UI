@@ -45,10 +45,9 @@ var FloatingButtonUI = function FloatingButtonUI(props) {
     }, AfterElement);
   }));
 };
-var FloatingButton = function FloatingButton(props) {
+var FloatingButton = exports.FloatingButton = function FloatingButton(props) {
   var floatingButtonProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: FloatingButtonUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.FloatingButton, floatingButtonProps);
 };
-exports.FloatingButton = FloatingButton;

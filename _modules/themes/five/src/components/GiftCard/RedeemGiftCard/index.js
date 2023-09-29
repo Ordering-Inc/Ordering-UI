@@ -136,10 +136,9 @@ var RedeemGiftCardUI = function RedeemGiftCardUI(props) {
     }
   }, t('OK', 'Ok')))));
 };
-var RedeemGiftCard = function RedeemGiftCard(props) {
+var RedeemGiftCard = exports.RedeemGiftCard = function RedeemGiftCard(props) {
   var redeemGiftCardProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: RedeemGiftCardUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.RedeemGiftCard, redeemGiftCardProps);
 };
-exports.RedeemGiftCard = RedeemGiftCard;

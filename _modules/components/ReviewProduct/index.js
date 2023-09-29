@@ -255,11 +255,10 @@ var ReviewProductUI = function ReviewProductUI(props) {
     }, AfterElement);
   }));
 };
-var ReviewProduct = function ReviewProduct(props) {
+var ReviewProduct = exports.ReviewProduct = function ReviewProduct(props) {
   var reviewProductProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ReviewProductUI,
     isToast: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ReviewProduct, reviewProductProps);
 };
-exports.ReviewProduct = ReviewProduct;

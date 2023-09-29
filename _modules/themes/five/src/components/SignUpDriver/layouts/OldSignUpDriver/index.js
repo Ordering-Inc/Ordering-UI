@@ -367,10 +367,9 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
     closeOnBackdrop: false
   }));
 };
-var SignUpDriver = function SignUpDriver(props) {
+var SignUpDriver = exports.SignUpDriver = function SignUpDriver(props) {
   var signUpDriverProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SignUpDriverUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.SignupForm, signUpDriverProps);
 };
-exports.SignUpDriver = SignUpDriver;

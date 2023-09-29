@@ -184,11 +184,10 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     }, AfterElement);
   }));
 };
-var ForgotPasswordForm = function ForgotPasswordForm(props) {
+var ForgotPasswordForm = exports.ForgotPasswordForm = function ForgotPasswordForm(props) {
   var ForgotPasswordProps = _objectSpread(_objectSpread({}, props), {}, {
     isRecaptchaEnable: true,
     UIComponent: ForgotPasswordUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ForgotPasswordForm, ForgotPasswordProps);
 };
-exports.ForgotPasswordForm = ForgotPasswordForm;

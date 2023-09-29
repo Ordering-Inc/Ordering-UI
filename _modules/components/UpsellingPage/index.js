@@ -147,10 +147,9 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
     }
   })));
 };
-var UpsellingPage = function UpsellingPage(props) {
+var UpsellingPage = exports.UpsellingPage = function UpsellingPage(props) {
   var UpsellingPageProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UpsellingPageUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UpsellingPage, UpsellingPageProps);
 };
-exports.UpsellingPage = UpsellingPage;

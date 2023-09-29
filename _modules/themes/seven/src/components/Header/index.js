@@ -39,7 +39,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var Header = function Header(props) {
+var Header = exports.Header = function Header(props) {
   var _configState$configs, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images2, _orderState$options2, _theme$defaultLanguag, _theme$defaultLanguag2, _orderState$options3, _orderState$options4, _customerState$user2, _customerState$user3, _theme$defaultLanguag3, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
   var isHome = props.isHome,
     location = props.location,
@@ -360,11 +360,10 @@ var Header = function Header(props) {
     }, AfterElement);
   }));
 };
-exports.Header = Header;
 Header.defaultProps = {
   isShowOrderOptions: true
 };
-var SignInIcon = function SignInIcon() {
+var SignInIcon = exports.SignInIcon = function SignInIcon() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     height: "512pt",
     viewBox: "0 0 512 512",
@@ -374,8 +373,7 @@ var SignInIcon = function SignInIcon() {
     d: "m512 80v352c0 44.113281-35.886719 80-80 80h-201c-44.113281 0-80-35.886719-80-80v-40c0-11.046875 8.953125-20 20-20s20 8.953125 20 20v40c0 22.054688 17.945312 40 40 40h201c22.054688 0 40-17.945312 40-40v-352c0-22.054688-17.945312-40-40-40h-201c-22.054688 0-40 17.945312-40 40v40c0 11.046875-8.953125 20-20 20s-20-8.953125-20-20v-40c0-44.113281 35.886719-80 80-80h201c44.113281 0 80 35.886719 80 80zm-286.085938 227.800781c-7.839843 7.78125-7.890624 20.445313-.113281 28.285157 3.910157 3.941406 9.054688 5.914062 14.199219 5.914062 5.09375 0 10.1875-1.933594 14.085938-5.800781l45.144531-44.789063c9.523437-9.449218 14.769531-22.023437 14.769531-35.410156s-5.246094-25.960938-14.769531-35.410156l-45.144531-44.789063c-7.839844-7.777343-20.503907-7.730469-28.285157.113281-7.777343 7.839844-7.726562 20.503907.113281 28.28125l32.054688 31.804688h-237.96875c-11.046875 0-20 8.953125-20 20s8.953125 20 20 20h237.96875zm0 0"
   }));
 };
-exports.SignInIcon = SignInIcon;
-var SignUpIcon = function SignUpIcon() {
+var SignUpIcon = exports.SignUpIcon = function SignUpIcon() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     version: "1.1",
     id: "Capa_1",
@@ -391,6 +389,4 @@ var SignUpIcon = function SignUpIcon() {
     d: "M492,397h-55v-55c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v55h-55c-11.046,0-20,8.954-20,20 c0,11.046,8.954,20,20,20h55v55c0,11.046,8.954,20,20,20c11.046,0,20-8.954,20-20v-55h55c11.046,0,20-8.954,20-20 C512,405.954,503.046,397,492,397z"
   }))));
 };
-exports.SignUpIcon = SignUpIcon;
-var _default = Header;
-exports.default = _default;
+var _default = exports.default = Header;

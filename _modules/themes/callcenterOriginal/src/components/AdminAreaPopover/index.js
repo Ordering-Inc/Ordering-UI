@@ -42,7 +42,7 @@ var optionsDefault = [{
   displayName: 'drivers dashboard',
   key: 'DRIVERS_DASHBOARD'
 }];
-var AdminAreaPopover = function AdminAreaPopover(props) {
+var AdminAreaPopover = exports.AdminAreaPopover = function AdminAreaPopover(props) {
   var open = props.open,
     isHome = props.isHome;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -128,4 +128,3 @@ var AdminAreaPopover = function AdminAreaPopover(props) {
     }, t((option.key || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)));
   }))));
 };
-exports.AdminAreaPopover = AdminAreaPopover;

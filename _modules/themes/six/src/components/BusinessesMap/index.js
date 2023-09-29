@@ -75,10 +75,9 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
     }, AfterElement);
   }));
 };
-var BusinessesMap = function BusinessesMap(props) {
+var BusinessesMap = exports.BusinessesMap = function BusinessesMap(props) {
   var businessMapController = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessesMapUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessesMap, businessMapController);
 };
-exports.BusinessesMap = BusinessesMap;

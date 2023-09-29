@@ -203,10 +203,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     src: openDescription.image
   }), /*#__PURE__*/_react.default.createElement("p", null, openDescription === null || openDescription === void 0 ? void 0 : openDescription.description))));
 };
-var BusinessProductsList = function BusinessProductsList(props) {
+var BusinessProductsList = exports.BusinessProductsList = function BusinessProductsList(props) {
   var businessProductsListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductsList, businessProductsListProps);
 };
-exports.BusinessProductsList = BusinessProductsList;

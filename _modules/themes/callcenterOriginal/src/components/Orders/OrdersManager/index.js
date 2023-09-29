@@ -311,11 +311,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     closeOnBackdrop: false
   }));
 };
-var OrdersManager = function OrdersManager(props) {
+var OrdersManager = exports.OrdersManager = function OrdersManager(props) {
   var OrdersListControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersManagerUI,
     driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrdersManage, OrdersListControlProps);
 };
-exports.OrdersManager = OrdersManager;

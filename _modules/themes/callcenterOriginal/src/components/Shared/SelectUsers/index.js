@@ -122,7 +122,7 @@ var SelectUsersUI = function SelectUsersUI(props) {
     }
   }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')));
 };
-var SelectUsers = function SelectUsers(props) {
+var SelectUsers = exports.SelectUsers = function SelectUsers(props) {
   var usersProps = _objectSpread(_objectSpread({}, props), {}, {
     defaultUserTypesSelected: [3],
     UIComponent: SelectUsersUI,
@@ -132,4 +132,3 @@ var SelectUsers = function SelectUsers(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UsersList, usersProps);
 };
-exports.SelectUsers = SelectUsers;

@@ -47,7 +47,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
-var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
+var BusinessListingSearchUI = exports.BusinessListingSearchUI = function BusinessListingSearchUI(props) {
   var _configs$format_numbe, _configs$distance_uni, _businessesSearchList, _Object$values$find, _businessesSearchList3, _businessesSearchList4, _businessesSearchList6, _curProduct$business2, _curProduct$business3, _curProduct$product, _curProduct$product2, _currentCart$products;
   var businessesSearchList = props.businessesSearchList,
     onBusinessClick = props.onBusinessClick,
@@ -398,11 +398,9 @@ var BusinessListingSearchUI = function BusinessListingSearchUI(props) {
     title: t('FILTERS', 'Filters')
   }, filtersComponent()));
 };
-exports.BusinessListingSearchUI = BusinessListingSearchUI;
-var BusinessListingSearch = function BusinessListingSearch(props) {
+var BusinessListingSearch = exports.BusinessListingSearch = function BusinessListingSearch(props) {
   var BusinessListSearch = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessListingSearchUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessSearchList, BusinessListSearch);
 };
-exports.BusinessListingSearch = BusinessListingSearch;

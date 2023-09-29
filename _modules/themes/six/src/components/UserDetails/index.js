@@ -94,10 +94,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
     }, AfterElement);
   }));
 };
-var UserDetails = function UserDetails(props) {
+var UserDetails = exports.UserDetails = function UserDetails(props) {
   var userDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UserDetailsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UserFormDetails, userDetailsProps);
 };
-exports.UserDetails = UserDetails;

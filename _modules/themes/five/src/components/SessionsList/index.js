@@ -165,10 +165,9 @@ var SessionsListUI = function SessionsListUI(props) {
     closeOnBackdrop: false
   }));
 };
-var SessionsList = function SessionsList(props) {
+var SessionsList = exports.SessionsList = function SessionsList(props) {
   var sessionsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SessionsListUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.Sessions, sessionsProps);
 };
-exports.SessionsList = SessionsList;

@@ -160,7 +160,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     }, AfterElement);
   }));
 };
-var PaymentCard = function PaymentCard(props) {
+var PaymentCard = exports.PaymentCard = function PaymentCard(props) {
   var handleDeleteCard = props.handleDeleteCard,
     card = props.card,
     cardSelected = props.cardSelected,
@@ -229,11 +229,9 @@ var PaymentCard = function PaymentCard(props) {
     onClick: handleDeleteCard
   }, t('DELETE', 'Delete'))))));
 };
-exports.PaymentCard = PaymentCard;
-var PaymentOptionStripe = function PaymentOptionStripe(props) {
+var PaymentOptionStripe = exports.PaymentOptionStripe = function PaymentOptionStripe(props) {
   var paymentOptionStripeProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PaymentOptionStripeUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PaymentOptionStripe, paymentOptionStripeProps);
 };
-exports.PaymentOptionStripe = PaymentOptionStripe;

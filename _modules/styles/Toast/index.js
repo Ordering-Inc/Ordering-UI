@@ -23,7 +23,7 @@ var ToastBar = _styledComponents.default.div(_templateObject || (_templateObject
   return backgroundColor;
 });
 var ToastContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n"])));
-var Toast = function Toast() {
+var Toast = exports.Toast = function Toast() {
   var _theme$colors$primary;
   var _useToast = (0, _orderingComponents.useToast)(),
     _useToast2 = _slicedToArray(_useToast, 2),
@@ -67,4 +67,3 @@ var Toast = function Toast() {
     ref: toastRef
   }, message));
 };
-exports.Toast = Toast;

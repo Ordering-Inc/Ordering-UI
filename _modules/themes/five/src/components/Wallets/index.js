@@ -149,7 +149,7 @@ var WalletsUI = function WalletsUI(props) {
     }));
   }))), !(transactionsList !== null && transactionsList !== void 0 && transactionsList.loading) && ((transactionsList === null || transactionsList === void 0 ? void 0 : transactionsList.error) || !((_transactionsList$lis3 = transactionsList.list) !== null && _transactionsList$lis3 !== void 0 && (_transactionsList$lis3 = _transactionsList$lis3["wallet:".concat(currentWalletSelected === null || currentWalletSelected === void 0 ? void 0 : currentWalletSelected.id)]) !== null && _transactionsList$lis3 !== void 0 && _transactionsList$lis3.length)) && !walletList.loading && !userLoyaltyLevel.loading && !walletList.error && ((_walletList$wallets5 = walletList.wallets) === null || _walletList$wallets5 === void 0 ? void 0 : _walletList$wallets5.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.NotFoundText, null, transactionsList !== null && transactionsList !== void 0 && transactionsList.error ? t('ERROR_NOT_FOUND_TRANSACTIONS', 'Sorry, an error has occurred') : t('NOT_FOUND_TRANSACTIONS', 'No transactions to show at this time.')), !(walletList !== null && walletList !== void 0 && walletList.loading) && !userLoyaltyLevel.loading && ((walletList === null || walletList === void 0 ? void 0 : walletList.error) || !(walletList !== null && walletList !== void 0 && (_walletList$wallets6 = walletList.wallets) !== null && _walletList$wallets6 !== void 0 && _walletList$wallets6.length)) && /*#__PURE__*/_react.default.createElement(_styles.NotFoundText, null, walletList !== null && walletList !== void 0 && walletList.error ? t('ERROR_NOT_FOUND_WALLETS', 'Sorry, an error has occurred') : t('NOT_FOUND_WALLETS', 'No wallets to show at this time.')));
 };
-var Wallets = function Wallets(props) {
+var Wallets = exports.Wallets = function Wallets(props) {
   var _configs$wallet_cash_, _configs$wallet_credi;
   var _useConfig3 = (0, _orderingComponents.useConfig)(),
     _useConfig4 = _slicedToArray(_useConfig3, 1),
@@ -163,4 +163,3 @@ var Wallets = function Wallets(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.WalletList, walletsProps);
 };
-exports.Wallets = Wallets;

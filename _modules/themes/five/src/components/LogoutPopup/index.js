@@ -193,11 +193,10 @@ var LogoutUI = function LogoutUI(props) {
     closeOnBackdrop: false
   }));
 };
-var LogoutPopup = function LogoutPopup(props) {
+var LogoutPopup = exports.LogoutPopup = function LogoutPopup(props) {
   var logoutProps = _objectSpread(_objectSpread({}, props), {}, {
     isNative: true,
     UIComponent: LogoutUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.LogoutAction, logoutProps);
 };
-exports.LogoutPopup = LogoutPopup;

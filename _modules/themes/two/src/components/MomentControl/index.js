@@ -133,7 +133,7 @@ var MomentControlUI = function MomentControlUI(props) {
     }, AfterElement);
   }));
 };
-var MomentControl = function MomentControl(props) {
+var MomentControl = exports.MomentControl = function MomentControl(props) {
   var _configs$max_days_pre2;
   var _useConfig3 = (0, _orderingComponents.useConfig)(),
     _useConfig4 = _slicedToArray(_useConfig3, 1),
@@ -152,4 +152,3 @@ var MomentControl = function MomentControl(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.MomentOption, momentProps);
 };
-exports.MomentControl = MomentControl;

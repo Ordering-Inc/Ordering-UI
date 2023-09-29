@@ -593,7 +593,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }, AfterElement);
   }));
 };
-var OrderDetails = function OrderDetails(props) {
+var OrderDetails = exports.OrderDetails = function OrderDetails(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -632,4 +632,3 @@ var OrderDetails = function OrderDetails(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetails, orderDetailsProps);
 };
-exports.OrderDetails = OrderDetails;

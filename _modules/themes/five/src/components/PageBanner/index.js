@@ -190,10 +190,9 @@ var PageBannerUI = function PageBannerUI(props) {
     })));
   }))));
 };
-var PageBanner = function PageBanner(props) {
+var PageBanner = exports.PageBanner = function PageBanner(props) {
   var pageBannerProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PageBannerUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PageBanner, pageBannerProps);
 };
-exports.PageBanner = PageBanner;

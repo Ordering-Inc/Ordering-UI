@@ -454,7 +454,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     }, AfterElement);
   }));
 };
-var BusinessProductsListing = function BusinessProductsListing(props) {
+var BusinessProductsListing = exports.BusinessProductsListing = function BusinessProductsListing(props) {
   var _useState23 = (0, _react.useState)(false),
     _useState24 = _slicedToArray(_useState23, 2),
     isInitialRender = _useState24[0],
@@ -468,8 +468,7 @@ var BusinessProductsListing = function BusinessProductsListing(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessAndProductList, businessProductslistingProps);
 };
-exports.BusinessProductsListing = BusinessProductsListing;
-var AgeCheckForm = function AgeCheckForm(props) {
+var AgeCheckForm = exports.AgeCheckForm = function AgeCheckForm(props) {
   var _theme$images, _theme$images2;
   var theme = (0, _styledComponents.useTheme)();
   var windowSize = useWindowSize();
@@ -496,8 +495,7 @@ var AgeCheckForm = function AgeCheckForm(props) {
     }
   }, " ", t('NO', 'No')))));
 };
-exports.AgeCheckForm = AgeCheckForm;
-var BreackFastCheck = function BreackFastCheck(props) {
+var BreackFastCheck = exports.BreackFastCheck = function BreackFastCheck(props) {
   var _useLanguage5 = (0, _orderingComponents.useLanguage)(),
     _useLanguage6 = _slicedToArray(_useLanguage5, 2),
     t = _useLanguage6[1];
@@ -510,8 +508,7 @@ var BreackFastCheck = function BreackFastCheck(props) {
     }
   }, " ", t('OK', 'Ok'))));
 };
-exports.BreackFastCheck = BreackFastCheck;
-var useWindowSize = function useWindowSize() {
+var useWindowSize = exports.useWindowSize = function useWindowSize() {
   var _useState25 = (0, _react.useState)({
       width: undefined,
       height: undefined
@@ -534,4 +531,3 @@ var useWindowSize = function useWindowSize() {
   }, []);
   return windowSize;
 };
-exports.useWindowSize = useWindowSize;

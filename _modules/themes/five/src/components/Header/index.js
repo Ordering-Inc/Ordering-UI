@@ -51,7 +51,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var Header = function Header(props) {
+var Header = exports.Header = function Header(props) {
   var _window$location$path, _configState$configs, _configState$configs2, _theme$header, _theme$header2, _orderState$options, _orderState$options2, _theme$my_products, _Object$keys, _customerState$user, _orderState$options5, _theme$images, _theme$my_products2, _theme$images2, _theme$images3, _theme$images4, _theme$my_products3, _theme$images5, _orderState$options7, _orderState$options8, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options9, _orderState$options10, _configState$configs6, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options11, _configState$configs8, _orderState$options12, _configState$configs9, _configState$configs10, _orderState$options13, _configState$configs11, _orderState$options14, _configState$configs12, _configState$configs13, _orderState$options15, _orderState$options16, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
   var location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
@@ -592,9 +592,7 @@ var Header = function Header(props) {
     showButton: true
   })));
 };
-exports.Header = Header;
 Header.defaultProps = {
   isShowOrderOptions: true
 };
-var _default = Header;
-exports.default = _default;
+var _default = exports.default = Header;

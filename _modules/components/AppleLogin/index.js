@@ -59,10 +59,9 @@ var AppleLoginUI = function AppleLoginUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_FaApple.default, null), /*#__PURE__*/_react.default.createElement("div", null, t('LOGIN_WITH_APPLE', 'Login with Apple')));
 };
-var AppleLogin = function AppleLogin(props) {
+var AppleLogin = exports.AppleLogin = function AppleLogin(props) {
   var propss = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: AppleLoginUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.AppleLogin, propss);
 };
-exports.AppleLogin = AppleLogin;

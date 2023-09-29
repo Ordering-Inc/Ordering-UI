@@ -60,10 +60,9 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
     isHome: isHome
   }, t('LOGOUT', 'Logout'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))));
 };
-var LogoutButton = function LogoutButton(props) {
+var LogoutButton = exports.LogoutButton = function LogoutButton(props) {
   var logoutButtonProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LogoutButtonUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.LogoutAction, logoutButtonProps);
 };
-exports.LogoutButton = LogoutButton;

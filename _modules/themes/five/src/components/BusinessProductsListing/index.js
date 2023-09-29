@@ -654,7 +654,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setCanOpenUpselling: setCanOpenUpselling
   }));
 };
-var BusinessProductsListing = function BusinessProductsListing(props) {
+var BusinessProductsListing = exports.BusinessProductsListing = function BusinessProductsListing(props) {
   var _useState19 = (0, _react.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
     isInitialRender = _useState20[0],
@@ -669,4 +669,3 @@ var BusinessProductsListing = function BusinessProductsListing(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessAndProductList, businessProductslistingProps);
 };
-exports.BusinessProductsListing = BusinessProductsListing;

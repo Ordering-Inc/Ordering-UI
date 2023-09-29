@@ -226,7 +226,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     utc: false
   }), "\xA0-\xA0", convertDiffToHours(lastOrder.delivery_type === 1 ? lastOrder === null || lastOrder === void 0 || (_lastOrder$business2 = lastOrder.business) === null || _lastOrder$business2 === void 0 ? void 0 : _lastOrder$business2.delivery_time : lastOrder === null || lastOrder === void 0 || (_lastOrder$business3 = lastOrder.business) === null || _lastOrder$business3 === void 0 ? void 0 : _lastOrder$business3.pickup_time)))))));
 };
-var OrderProgress = function OrderProgress(props) {
+var OrderProgress = exports.OrderProgress = function OrderProgress(props) {
   var orderProgressProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrderProgressUI,
     orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 15, 18, 19, 20, 21, 22, 23],
@@ -239,4 +239,3 @@ var OrderProgress = function OrderProgress(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderList, orderProgressProps);
 };
-exports.OrderProgress = OrderProgress;

@@ -12,7 +12,7 @@ var _AppointmentsBusinessListing = require("./layouts/AppointmentsBusinessListin
 var _styledComponents = require("styled-components");
 var _OloBusinessesListing = require("./franchises/OloBusinessesListing");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var BusinessesListing = function BusinessesListing(props) {
+var BusinessesListing = exports.BusinessesListing = function BusinessesListing(props) {
   var _theme$my_products, _theme$my_products2, _theme$business_listi;
   var logosLayout = props.logosLayout;
   var theme = (0, _styledComponents.useTheme)();
@@ -23,4 +23,3 @@ var BusinessesListing = function BusinessesListing(props) {
   var oloLayout = ['franchise_1', 'franchise_2'];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, websiteTheme === 'franchise' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, oloLayout.includes(franchiseLayout) && /*#__PURE__*/_react.default.createElement(_OloBusinessesListing.OloBusinessesListing, props), !franchiseLayout && /*#__PURE__*/_react.default.createElement(_OriginalBusinessesListing.OriginalBusinessesListing, props)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (layout === 'original' || logosLayout) && /*#__PURE__*/_react.default.createElement(_OriginalBusinessesListing.OriginalBusinessesListing, props), isStarbucksLayout && !logosLayout && /*#__PURE__*/_react.default.createElement(_StarbucksBusinessesListing.StarbucksBusinessesListing, props), layout === 'red' && !logosLayout && /*#__PURE__*/_react.default.createElement(_RedBusinessesListing.RedBusinessesListing, props), layout === 'appointments' && !logosLayout && /*#__PURE__*/_react.default.createElement(_AppointmentsBusinessListing.BusinessListing, props)));
 };
-exports.BusinessesListing = BusinessesListing;

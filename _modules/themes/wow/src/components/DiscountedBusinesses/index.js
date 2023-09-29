@@ -75,11 +75,10 @@ var DiscountedBusinessesUI = function DiscountedBusinessesUI(props) {
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
   })));
 };
-var DiscountedBusinesses = function DiscountedBusinesses(props) {
+var DiscountedBusinesses = exports.DiscountedBusinesses = function DiscountedBusinesses(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     isOfferBusinesses: true,
     UIComponent: DiscountedBusinessesUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
-exports.DiscountedBusinesses = DiscountedBusinesses;

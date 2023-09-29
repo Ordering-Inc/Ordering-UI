@@ -25,7 +25,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var OrderBill = function OrderBill(props) {
+var OrderBill = exports.OrderBill = function OrderBill(props) {
   var _order$products, _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$offers4, _order$offers5, _order$summary12, _order$summary13, _order$offers6, _order$offers7, _order$summary14, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _order$summary17, _order$payment_events, _order$payment_events2, _order$payment_events3, _order$payment_events4, _order$delivery_optio, _order$delivery_optio2, _order$vehicle, _order$vehicle2, _order$vehicle3, _order$vehicle4, _order$vehicle5, _order$paymethod;
   var order = props.order,
     actionStatus = props.actionStatus,
@@ -270,4 +270,3 @@ var OrderBill = function OrderBill(props) {
     closeOnBackdrop: false
   }));
 };
-exports.OrderBill = OrderBill;

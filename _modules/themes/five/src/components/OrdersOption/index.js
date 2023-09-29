@@ -375,7 +375,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     }, AfterElement);
   }));
 };
-var OrdersOption = function OrdersOption(props) {
+var OrdersOption = exports.OrdersOption = function OrdersOption(props) {
   var getAllOrders = props.activeOrders && props.pastOrders && props.preOrders;
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersOptionUI,
@@ -390,4 +390,3 @@ var OrdersOption = function OrdersOption(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderList, orderListProps);
 };
-exports.OrdersOption = OrdersOption;

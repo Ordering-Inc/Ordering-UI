@@ -596,7 +596,7 @@ var AddressFormUI = function AddressFormUI(props) {
     }, AfterElement);
   }));
 };
-var AddressForm = function AddressForm(props) {
+var AddressForm = exports.AddressForm = function AddressForm(props) {
   var googleMapsControls = {
     defaultZoom: 17,
     zoomControl: true,
@@ -617,4 +617,3 @@ var AddressForm = function AddressForm(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.AddressForm, addressFormProps);
 };
-exports.AddressForm = AddressForm;

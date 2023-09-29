@@ -228,10 +228,9 @@ var MultiCartsPaymethodsAndWalletsUI = function MultiCartsPaymethodsAndWalletsUI
     handlePlaceOrder: handlePlaceOrder
   })));
 };
-var MultiCartsPaymethodsAndWallets = function MultiCartsPaymethodsAndWallets(props) {
+var MultiCartsPaymethodsAndWallets = exports.MultiCartsPaymethodsAndWallets = function MultiCartsPaymethodsAndWallets(props) {
   var multiCartsPaymethodsAndWalletsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: MultiCartsPaymethodsAndWalletsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.MultiCartsPaymethodsAndWallets, multiCartsPaymethodsAndWalletsProps);
 };
-exports.MultiCartsPaymethodsAndWallets = MultiCartsPaymethodsAndWallets;

@@ -242,11 +242,10 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     }
   }, t('CLEAR', 'Clear')))));
 };
-var OrdersFilterGroup = function OrdersFilterGroup(props) {
+var OrdersFilterGroup = exports.OrdersFilterGroup = function OrdersFilterGroup(props) {
   var FilterControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersFilterGroupUI,
     driverGroupList: props.driverGroupList
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.OrdersFilter, FilterControlProps));
 };
-exports.OrdersFilterGroup = OrdersFilterGroup;

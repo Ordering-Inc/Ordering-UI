@@ -400,10 +400,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }, AfterElement);
   }));
 };
-var ProductForm = function ProductForm(props) {
+var ProductForm = exports.ProductForm = function ProductForm(props) {
   var productOptionsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProductOptionsUI
   });
   return /*#__PURE__*/_react.default.createElement(_productForm.ProductForm, productOptionsProps);
 };
-exports.ProductForm = ProductForm;

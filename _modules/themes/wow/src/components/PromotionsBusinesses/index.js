@@ -75,11 +75,10 @@ var PromotionsBusinessesUI = function PromotionsBusinessesUI(props) {
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
   })));
 };
-var PromotionsBusinesses = function PromotionsBusinesses(props) {
+var PromotionsBusinesses = exports.PromotionsBusinesses = function PromotionsBusinesses(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     isOfferBusinesses: true,
     UIComponent: PromotionsBusinessesUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
-exports.PromotionsBusinesses = PromotionsBusinesses;

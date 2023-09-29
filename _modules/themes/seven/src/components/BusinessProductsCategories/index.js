@@ -158,14 +158,13 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     }, AfterElement);
   }));
 };
-var BusinessProductsCategories = function BusinessProductsCategories(props) {
+var BusinessProductsCategories = exports.BusinessProductsCategories = function BusinessProductsCategories(props) {
   var businessProductsCategoriesProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsCategoriesUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessProductsCategories, businessProductsCategoriesProps);
 };
-exports.BusinessProductsCategories = BusinessProductsCategories;
-var ActiveMarker = function ActiveMarker() {
+var ActiveMarker = exports.ActiveMarker = function ActiveMarker() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     width: 12,
     height: 40,
@@ -201,4 +200,3 @@ var ActiveMarker = function ActiveMarker() {
     fill: "#fff"
   }))));
 };
-exports.ActiveMarker = ActiveMarker;

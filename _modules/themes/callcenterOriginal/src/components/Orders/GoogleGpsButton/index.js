@@ -28,10 +28,9 @@ var GoogleGpsButtonUI = function GoogleGpsButtonUI(props) {
     onClick: handleGPS
   }, isLoading ? IconLoadingButton ? /*#__PURE__*/_react.default.createElement(IconLoadingButton, null) : '...' : IconButton ? /*#__PURE__*/_react.default.createElement(IconButton, null) : 'GPS');
 };
-var GoogleGpsButton = function GoogleGpsButton(props) {
+var GoogleGpsButton = exports.GoogleGpsButton = function GoogleGpsButton(props) {
   var gpsButtonProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: GoogleGpsButtonUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleGpsButton, gpsButtonProps);
 };
-exports.GoogleGpsButton = GoogleGpsButton;

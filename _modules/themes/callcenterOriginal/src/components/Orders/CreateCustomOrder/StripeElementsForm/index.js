@@ -64,10 +64,9 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
     businessIds: props.businessIds
   })) : /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, null, t('SOMETHING_WRONG', 'Something is wrong!')));
 };
-var StripeElementsForm = function StripeElementsForm(props) {
+var StripeElementsForm = exports.StripeElementsForm = function StripeElementsForm(props) {
   var stripeElementsFormProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: StripeElementsFormUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.StripeElementsForm, stripeElementsFormProps);
 };
-exports.StripeElementsForm = StripeElementsForm;

@@ -184,10 +184,9 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     closeOnBackdrop: false
   }));
 };
-var BusinessController = function BusinessController(props) {
+var BusinessController = exports.BusinessController = function BusinessController(props) {
   var businessControllerProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessControllerUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessController, businessControllerProps);
 };
-exports.BusinessController = BusinessController;

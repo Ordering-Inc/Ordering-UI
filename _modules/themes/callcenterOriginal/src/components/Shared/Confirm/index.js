@@ -67,13 +67,11 @@ var ConfirmUI = function ConfirmUI(props) {
     }
   }, acceptText || t('ACCEPT'))));
 };
-var Confirm = function Confirm(props) {
+var Confirm = exports.Confirm = function Confirm(props) {
   var popupProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ConfirmUI
   });
   var theme = (0, _styledComponents.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, theme && /*#__PURE__*/_react.default.createElement(_orderingComponents.Popup, popupProps));
 };
-exports.Confirm = Confirm;
-var Alert = Confirm;
-exports.Alert = Alert;
+var Alert = exports.Alert = Confirm;

@@ -172,10 +172,9 @@ var HtmlEditorUI = function HtmlEditorUI(props) {
     setSelectedImageUrl: setSelectedImageUrl
   })));
 };
-var HtmlEditor = function HtmlEditor(props) {
+var HtmlEditor = exports.HtmlEditor = function HtmlEditor(props) {
   var htmlEditorProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: HtmlEditorUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.HtmlEditor, htmlEditorProps);
 };
-exports.HtmlEditor = HtmlEditor;

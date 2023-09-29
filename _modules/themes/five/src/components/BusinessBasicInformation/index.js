@@ -38,7 +38,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _dayjs.default.extend(_timezone.default);
 _dayjs.default.extend(_isBetween.default);
 var types = ['food', 'laundry', 'alcohol', 'groceries'];
-var BusinessBasicInformation = function BusinessBasicInformation(props) {
+var BusinessBasicInformation = exports.BusinessBasicInformation = function BusinessBasicInformation(props) {
   var _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view5, _theme$header, _props$beforeElements, _props$beforeComponen, _business$reviews, _business$reviews2, _props$afterComponent, _props$afterElements;
   var isSkeleton = props.isSkeleton,
     businessState = props.businessState,
@@ -278,4 +278,3 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     }, AfterElement);
   }));
 };
-exports.BusinessBasicInformation = BusinessBasicInformation;

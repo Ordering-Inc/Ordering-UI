@@ -81,7 +81,7 @@ var OurBusinessesUI = function OurBusinessesUI(props) {
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
   })));
 };
-var OurBusinesses = function OurBusinesses(props) {
+var OurBusinesses = exports.OurBusinesses = function OurBusinesses(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     paginationSettings: {
       pageSize: 20
@@ -90,4 +90,3 @@ var OurBusinesses = function OurBusinesses(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
-exports.OurBusinesses = OurBusinesses;

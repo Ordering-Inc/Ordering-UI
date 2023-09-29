@@ -23,7 +23,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var UserProfileDropDown = function UserProfileDropDown(props) {
+var UserProfileDropDown = exports.UserProfileDropDown = function UserProfileDropDown(props) {
   var _theme$images;
   var auth = props.auth,
     selectedItem = props.selectedItem,
@@ -73,7 +73,6 @@ var UserProfileDropDown = function UserProfileDropDown(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement(_HiLocationMarker.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('HELP', 'Help'))), /*#__PURE__*/_react.default.createElement(_styles.Item, null, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement(_FaHandHoldingHeart.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('MY_OWN', 'My Own'))), /*#__PURE__*/_react.default.createElement(_styles.Item, null, /*#__PURE__*/_react.default.createElement(_styles.IconWrap, null, /*#__PURE__*/_react.default.createElement(_AiFillExclamationCircle.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('ABOUT_WOW', 'About Wow'))), auth && /*#__PURE__*/_react.default.createElement(ProfileLogout, null));
 };
-exports.UserProfileDropDown = UserProfileDropDown;
 var ProfileLogoutUI = function ProfileLogoutUI(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),

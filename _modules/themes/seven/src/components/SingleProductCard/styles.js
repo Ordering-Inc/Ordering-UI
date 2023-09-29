@@ -14,7 +14,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  align-items: center;\n  width: 100%;\n  margin-bottom: 20px;\n  position: relative;\n  box-sizing: border-box;\n  border-bottom: 1px solid ", ";\n  background: ", ";\n  padding-bottom: ", ";\n\n  @media (min-width: 681px) {\n    display: flex;\n  }\n"])), function (props) {
+var CardContainer = exports.CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  align-items: center;\n  width: 100%;\n  margin-bottom: 20px;\n  position: relative;\n  box-sizing: border-box;\n  border-bottom: 1px solid ", ";\n  background: ", ";\n  padding-bottom: ", ";\n\n  @media (min-width: 681px) {\n    display: flex;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref) {
   var soldOut = _ref.soldOut;
@@ -23,13 +23,11 @@ var CardContainer = _styledComponents.default.div(_templateObject || (_templateO
   var soldOut = _ref2.soldOut;
   return soldOut ? '0' : '20px';
 });
-exports.CardContainer = CardContainer;
-var SoldOut = _styledComponents.default.span(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-weight: bold;\n  position: absolute;\n  background: #D6D6D6 0% 0% no-repeat padding-box;\n  border-radius: 23px;\n  padding: 5px 10px;\n  top: 8px;\n  right: 6px;\n  text-transform: uppercase;\n  font-size: 14px;\n  ", "\n"])), function (props) {
+var SoldOut = exports.SoldOut = _styledComponents.default.span(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-weight: bold;\n  position: absolute;\n  background: #D6D6D6 0% 0% no-repeat padding-box;\n  border-radius: 23px;\n  padding: 5px 10px;\n  top: 8px;\n  right: 6px;\n  text-transform: uppercase;\n  font-size: 14px;\n  ", "\n"])), function (props) {
   var _props$theme;
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    left: 6px;\n    right: initial;\n  "])));
 });
-exports.SoldOut = SoldOut;
-var CardInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  > * {\n    margin: 5px;\n  }\n\n  h1 {\n    font-size: 18px;\n    font-weight: 700;\n    color: #263238;\n  }\n\n  p {\n    font-weight: ", ";\n    text-align: left;\n    ", "\n\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    color: ", ";\n    font-weight: bold;\n  }\n\n  p, span {\n    font-size: 13px;\n  }\n\n  @media (min-width: 768px) {\n    height: 130px;\n    h1 {\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: normal;\n    }\n  }\n\n  @media (min-width: 1024px) {\n    height: 150px;\n    h1 {\n      font-size: 20px;\n    }\n\n    p {\n      font-size: 16px;\n    }\n\n    span {\n      font-size: 15px;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    height: 195px;\n  }\n"])), function (_ref3) {
+var CardInfo = exports.CardInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  > * {\n    margin: 5px;\n  }\n\n  h1 {\n    font-size: 18px;\n    font-weight: 700;\n    color: #263238;\n  }\n\n  p {\n    font-weight: ", ";\n    text-align: left;\n    ", "\n\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  span {\n    color: ", ";\n    font-weight: bold;\n  }\n\n  p, span {\n    font-size: 13px;\n  }\n\n  @media (min-width: 768px) {\n    height: 130px;\n    h1 {\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: normal;\n    }\n  }\n\n  @media (min-width: 1024px) {\n    height: 150px;\n    h1 {\n      font-size: 20px;\n    }\n\n    p {\n      font-size: 16px;\n    }\n\n    span {\n      font-size: 15px;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    height: 195px;\n  }\n"])), function (_ref3) {
   var soldOut = _ref3.soldOut;
   return soldOut ? 'bold' : '200';
 }, function (props) {
@@ -40,14 +38,12 @@ var CardInfo = _styledComponents.default.div(_templateObject4 || (_templateObjec
     theme = _ref4.theme;
   return soldOut ? (0, _polished.lighten)(0.05, theme.colors.primary) : theme.colors.primary;
 });
-exports.CardInfo = CardInfo;
-var WrapLogo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  ", "\n\n  @media (min-width: 768px) {\n    margin-right: 15px;\n  }\n"])), function (props) {
+var WrapLogo = exports.WrapLogo = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  ", "\n\n  @media (min-width: 768px) {\n    margin-right: 15px;\n  }\n"])), function (props) {
   var _props$theme3;
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    margin-left: 25px;\n    margin-right: 0px;\n  "])));
 });
-exports.WrapLogo = WrapLogo;
 var CardLogoStyled = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 75px;\n  width: 130px;\n  height: 130px;\n  background-color: #dddddd;\n  @media (min-width: 1024px) {\n    width: 150px;\n    height: 150px;\n  }\n\n  @media (min-width: 1200px) {\n    width: 195px;\n    height: 195px;\n  }\n"])));
-var CardLogo = function CardLogo(props) {
+var CardLogo = exports.CardLogo = function CardLogo(props) {
   var style = {};
   if (props.bgimage) {
     style.backgroundImage = "url(".concat(props.bgimage, ")");
@@ -59,8 +55,7 @@ var CardLogo = function CardLogo(props) {
     style: style
   }), props.children);
 };
-exports.CardLogo = CardLogo;
-var ProductInfo = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display:flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  @media (min-width: 768px) {\n    flex-direction: row;\n    width: 70%;\n    border-right: 2px solid ", ";\n    ", "\n  }\n  @media (min-width: 1440px) {\n    font-size: 20px;\n  }\n\n"])), function (props) {
+var ProductInfo = exports.ProductInfo = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display:flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  @media (min-width: 768px) {\n    flex-direction: row;\n    width: 70%;\n    border-right: 2px solid ", ";\n    ", "\n  }\n  @media (min-width: 1440px) {\n    font-size: 20px;\n  }\n\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   var _props$theme4;
@@ -68,20 +63,17 @@ var ProductInfo = _styledComponents.default.div(_templateObject9 || (_templateOb
     return props.theme.colors.borderColor;
   });
 });
-exports.ProductInfo = ProductInfo;
-var CartAction = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  height: 140px;\n  justify-content: space-around;\n  \n  button {\n    padding: 7px 0;\n    text-transform: uppercase;\n    background-color: transparent;\n    @media (min-width: 1440px) {\n      padding: 11px 0;\n    }\n  }\n  @media (min-width: 768px) {\n    width: 30%;\n    padding-left: 15px;\n    ", "\n  }\n  @media (min-width: 1024px) {\n    height: 155px;\n  }\n  @media (min-width: 1200px) {\n    height: 195px;\n  }\n"])), function (props) {
+var CartAction = exports.CartAction = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  height: 140px;\n  justify-content: space-around;\n  \n  button {\n    padding: 7px 0;\n    text-transform: uppercase;\n    background-color: transparent;\n    @media (min-width: 1440px) {\n      padding: 11px 0;\n    }\n  }\n  @media (min-width: 768px) {\n    width: 30%;\n    padding-left: 15px;\n    ", "\n  }\n  @media (min-width: 1024px) {\n    height: 155px;\n  }\n  @media (min-width: 1200px) {\n    height: 195px;\n  }\n"])), function (props) {
   var _props$theme5;
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      padding-right: 15px;\n      padding-left: 0;\n    "])));
 });
-exports.CartAction = CartAction;
-var ProductCost = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  font-weight: bold;\n  font-size: 18px;\n  line-height: 30px;\n  color: ", ";\n  justify-content: ", ";\n  @media (min-width: 1440px) {\n    font-size: 20px;\n  }\n"])), function (props) {
+var ProductCost = exports.ProductCost = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  font-weight: bold;\n  font-size: 18px;\n  line-height: 30px;\n  color: ", ";\n  justify-content: ", ";\n  @media (min-width: 1440px) {\n    font-size: 20px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (_ref5) {
   var textLeft = _ref5.textLeft;
   return textLeft ? 'flex-start' : 'center';
 });
-exports.ProductCost = ProductCost;
-var Quantity = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-right: ", ";\n  ", "\n  span {\n    font-size: 16px;\n    line-height: 26px;\n    color: #000000;\n  }\n  input {\n    width: 85px;\n    height: 38px;\n    box-sizing: border-box;\n    text-align: center; \n\n    @media (min-width: 768px) {\n      width: 45px;\n      height: 33px;\n    }\n    \n    @media (min-width: 1200px) {\n      width: 85px;\n      height: 38px;\n    }\n  }\n"])), function (_ref6) {
+var Quantity = exports.Quantity = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-right: ", ";\n  ", "\n  span {\n    font-size: 16px;\n    line-height: 26px;\n    color: #000000;\n  }\n  input {\n    width: 85px;\n    height: 38px;\n    box-sizing: border-box;\n    text-align: center; \n\n    @media (min-width: 768px) {\n      width: 45px;\n      height: 33px;\n    }\n    \n    @media (min-width: 1200px) {\n      width: 85px;\n      height: 38px;\n    }\n  }\n"])), function (_ref6) {
   var isSoldOut = _ref6.isSoldOut;
   return isSoldOut ? '10px' : '0px';
 }, function (props) {
@@ -94,4 +86,3 @@ var Quantity = _styledComponents.default.div(_templateObject14 || (_templateObje
     return isSoldOut ? '10px' : '0px';
   });
 });
-exports.Quantity = Quantity;

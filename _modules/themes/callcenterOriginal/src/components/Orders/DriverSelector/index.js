@@ -249,11 +249,10 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     })));
   }
 };
-var DriverSelector = function DriverSelector(props) {
+var DriverSelector = exports.DriverSelector = function DriverSelector(props) {
   var DriversControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: DriverSelectorUI,
     propsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo']
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.DriverListDashboard, DriversControlProps));
 };
-exports.DriverSelector = DriverSelector;

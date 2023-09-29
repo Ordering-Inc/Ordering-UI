@@ -121,11 +121,10 @@ var DriversManagerUI = function DriversManagerUI(props) {
     }
   }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null)));
 };
-var DriversManager = function DriversManager(props) {
+var DriversManager = exports.DriversManager = function DriversManager(props) {
   var DriversControlProps = _objectSpread(_objectSpread({}, props), {}, {
     asDashboard: true,
     UIComponent: DriversManagerUI
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.DriverListDashboard, DriversControlProps));
 };
-exports.DriversManager = DriversManager;

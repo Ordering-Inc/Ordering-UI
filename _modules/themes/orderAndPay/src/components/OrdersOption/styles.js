@@ -10,9 +10,8 @@ var _templateObject, _templateObject2, _templateObject3, _templateObject4, _temp
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var OptionTitle = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: row;\n  h1{\n    text-transform: capitalize;\n    font-size: 16px;\n    cursor: pointer;\n    font-weight: 500;\n  }\n"])));
-exports.OptionTitle = OptionTitle;
-var OrdersContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  ", "\n\n  ", "\n"])), function (_ref) {
+var OptionTitle = exports.OptionTitle = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: row;\n  h1{\n    text-transform: capitalize;\n    font-size: 16px;\n    cursor: pointer;\n    font-weight: 500;\n  }\n"])));
+var OrdersContainer = exports.OrdersContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  ", "\n\n  ", "\n"])), function (_ref) {
   var activeOrders = _ref.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    text-align: center;\n    display: flex;\n    overflow-x: auto;\n    overflow-y: hidden;\n    justify-content: ", ";\n    width: 100%;\n    margin: auto 0px auto auto;\n    box-sizing: border-box;\n    ", "\n    ::-webkit-scrollbar {\n      width: 0px;\n      height: 0px;\n    }\n\n    ", "\n    \n    @media (min-width: 768px) {\n      width: ", ";\n      justify-content: flex-start;\n      ", "\n  "])), function (_ref2) {
     var ordersLength = _ref2.ordersLength;
@@ -51,8 +50,7 @@ var OrdersContainer = _styledComponents.default.div(_templateObject2 || (_templa
   var activeOrders = _ref8.activeOrders;
   return !activeOrders && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column-reverse;\n    margin: 0 auto;\n    p{\n      margin-block-end: 0;\n      margin-block-start: 0;\n      color: #9A9A9A\n    }\n\n    @media(min-width: 480px){\n      div:last-child {\n        border-top: none;\n      }\n    }\n  "])));
 });
-exports.OrdersContainer = OrdersContainer;
-var SkeletonOrder = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n\n  ", "\n\n  ", "\n"])), function (_ref9) {
+var SkeletonOrder = exports.SkeletonOrder = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n\n  ", "\n\n  ", "\n"])), function (_ref9) {
   var activeOrders = _ref9.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    width: auto;\n    text-align: center;\n    margin-left: 10px;\n\n    ", "\n  "])), function (props) {
     var _props$theme5;
@@ -62,36 +60,27 @@ var SkeletonOrder = _styledComponents.default.div(_templateObject13 || (_templat
   var activeOrders = _ref10.activeOrders;
   return !activeOrders && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    width: 100%;\n    flex-direction: column;\n    margin: 10px 0;\n    > * {\n      margin: 20px 0;\n    }\n  "])));
 });
-exports.SkeletonOrder = SkeletonOrder;
-var SkeletonCard = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 10px 5px 10px 5px;\n"])));
-exports.SkeletonCard = SkeletonCard;
-var SkeletonMap = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  border-radius: 16px;\n  span{\n    width: 300px;\n    height: 88px;\n  }\n  @media(min-width: 480px){\n    span{\n      height: 100px;\n      width: 400px;\n    }\n  }\n"])));
-exports.SkeletonMap = SkeletonMap;
-var SkeletonContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  ", "\n"])), function (_ref11) {
+var SkeletonCard = exports.SkeletonCard = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 10px 5px 10px 5px;\n"])));
+var SkeletonMap = exports.SkeletonMap = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  border-radius: 16px;\n  span{\n    width: 300px;\n    height: 88px;\n  }\n  @media(min-width: 480px){\n    span{\n      height: 100px;\n      width: 400px;\n    }\n  }\n"])));
+var SkeletonContent = exports.SkeletonContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  ", "\n"])), function (_ref11) {
   var activeOrders = _ref11.activeOrders;
   return !activeOrders && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    justify-content: space-between;\n  "])));
 });
-exports.SkeletonContent = SkeletonContent;
-var SkeletonText = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  text-align: left;\n\n  ", "\n"])), function (props) {
+var SkeletonText = exports.SkeletonText = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  text-align: left;\n\n  ", "\n"])), function (props) {
   var _props$theme6;
   return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    text-align: right;\n  "])));
 });
-exports.SkeletonText = SkeletonText;
-var SkeletonButton = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    span{\n      border-radius: 24px;\n      width: 270px;\n      height: 36px;\n    }\n  @media(min-width: 480px){\n    span{\n      width: 360px;\n    }\n  }\n"])));
-exports.SkeletonButton = SkeletonButton;
-var SkeletonInformation = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n\n  > *{\n    margin: 5px;\n  }\n"])));
-exports.SkeletonInformation = SkeletonInformation;
-var SkeletonReorder = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  text-align: center;\n  align-items: center;\n\n  ", "\n\n  span:first-child span{\n    width: 40px;\n  }\n\n  span:last-child{\n    width: 75px;\n    height: 30px;\n  }\n\n  @media(min-width: 480px){\n    ", "\n    span:first-child span{\n      width: 80px;\n    }\n    span:last-child{\n      width: 150px;\n    }\n  }\n"])), function (props) {
+var SkeletonButton = exports.SkeletonButton = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    span{\n      border-radius: 24px;\n      width: 270px;\n      height: 36px;\n    }\n  @media(min-width: 480px){\n    span{\n      width: 360px;\n    }\n  }\n"])));
+var SkeletonInformation = exports.SkeletonInformation = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n\n  > *{\n    margin: 5px;\n  }\n"])));
+var SkeletonReorder = exports.SkeletonReorder = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  text-align: center;\n  align-items: center;\n\n  ", "\n\n  span:first-child span{\n    width: 40px;\n  }\n\n  span:last-child{\n    width: 75px;\n    height: 30px;\n  }\n\n  @media(min-width: 480px){\n    ", "\n    span:first-child span{\n      width: 80px;\n    }\n    span:last-child{\n      width: 150px;\n    }\n  }\n"])), function (props) {
   var _props$theme7;
   return ((_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.rtl) && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    margin-left: 25px;\n    margin-right: 0;\n  "])));
 }, function (props) {
   var _props$theme8;
   return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      margin-left: 0;\n    "]))) : (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n      margin-right: 0;\n    "])));
 });
-exports.SkeletonReorder = SkeletonReorder;
-var ImageNotFound = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  \n  margin: 0 auto;\n  img{\n    width: 100%\n  }\n"])));
-exports.ImageNotFound = ImageNotFound;
-var BusinessInformation = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: inline-flex;\n  flex-direction: column;\n  width: 70%;\n  padding-left: 5px;\n  ", "\n  ", "\n  h2 {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 12px;\n    margin-block-end: 0;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    color : #9A9A9A;\n    white-space: nowrap;\n    font-size: 10px;\n  }\n\n  p[name='order_number']{\n    width: 170px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  p[name='view_order'] {\n    color: ", ";\n    cursor: pointer;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  p[name='order_status'] {\n    color: ", " !important;\n  }\n\n  @media (min-width: 480px){\n    h2 {\n    font-size: 14px;\n    }\n    p{\n      ", "\n    }\n    p[name='order_number']{\n      width: 230px;\n    }\n  }\n"])), function (_ref12) {
+var ImageNotFound = exports.ImageNotFound = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  \n  margin: 0 auto;\n  img{\n    width: 100%\n  }\n"])));
+var BusinessInformation = exports.BusinessInformation = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: inline-flex;\n  flex-direction: column;\n  width: 70%;\n  padding-left: 5px;\n  ", "\n  ", "\n  h2 {\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    overflow: hidden;\n    font-size: 12px;\n    margin-block-end: 0;\n    margin-block-start: 0;\n  }\n  p {\n    margin-block-end: 0.1em;\n    margin-block-start: 0.1em;\n    color : #9A9A9A;\n    white-space: nowrap;\n    font-size: 10px;\n  }\n\n  p[name='order_number']{\n    width: 170px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  p[name='view_order'] {\n    color: ", ";\n    cursor: pointer;\n    text-decoration: none;\n    width: fit-content;\n  }\n\n  p[name='order_status'] {\n    color: ", " !important;\n  }\n\n  @media (min-width: 480px){\n    h2 {\n    font-size: 14px;\n    }\n    p{\n      ", "\n    }\n    p[name='order_number']{\n      width: 230px;\n    }\n  }\n"])), function (_ref12) {
   var activeOrders = _ref12.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n      width: 30%;\n  "])));
 }, function (props) {
@@ -105,8 +94,5 @@ var BusinessInformation = _styledComponents.default.div(_templateObject30 || (_t
   var activeOrders = _ref13.activeOrders;
   return activeOrders && (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n        font-size: 12px;\n      "])));
 });
-exports.BusinessInformation = BusinessInformation;
-var TitleContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 30px;\n  h1{\n    text-transform: capitalize;\n    font-size: 18px;\n    cursor: pointer;\n    margin: 0;\n    font-weight: 600;\n  }\n"])));
-exports.TitleContainer = TitleContainer;
-var Container = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  padding: 30px 40px;\n"])));
-exports.Container = Container;
+var TitleContainer = exports.TitleContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 30px;\n  h1{\n    text-transform: capitalize;\n    font-size: 18px;\n    cursor: pointer;\n    margin: 0;\n    font-weight: 600;\n  }\n"])));
+var Container = exports.Container = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  padding: 30px 40px;\n"])));

@@ -533,7 +533,7 @@ var OloBusinessesListingUI = function OloBusinessesListingUI(props) {
     closeOnBackdrop: false
   }));
 };
-var OloBusinessesListing = function OloBusinessesListing(props) {
+var OloBusinessesListing = exports.OloBusinessesListing = function OloBusinessesListing(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -569,4 +569,3 @@ var OloBusinessesListing = function OloBusinessesListing(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
-exports.OloBusinessesListing = OloBusinessesListing;

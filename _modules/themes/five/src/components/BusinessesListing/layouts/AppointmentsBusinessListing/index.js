@@ -270,10 +270,9 @@ var BusinessListingUI = function BusinessListingUI(props) {
     showButton: true
   })));
 };
-var BusinessListing = function BusinessListing(props) {
+var BusinessListing = exports.BusinessListing = function BusinessListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessListingUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
-exports.BusinessListing = BusinessListing;

@@ -74,10 +74,9 @@ var ModalUI = function ModalUI(props) {
     }
   }, acceptText || t('ACCEPT', 'Accept'))));
 };
-var Modal = function Modal(props) {
+var Modal = exports.Modal = function Modal(props) {
   var ModalProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ModalUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.Popup, ModalProps);
 };
-exports.Modal = Modal;

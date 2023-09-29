@@ -489,10 +489,9 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     isGuest: true
   }))));
 };
-var MultiCheckout = function MultiCheckout(props) {
+var MultiCheckout = exports.MultiCheckout = function MultiCheckout(props) {
   var multiCheckoutProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: MultiCheckoutUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.MultiCheckout, multiCheckoutProps);
 };
-exports.MultiCheckout = MultiCheckout;

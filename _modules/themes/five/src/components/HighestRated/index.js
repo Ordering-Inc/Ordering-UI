@@ -121,11 +121,10 @@ var HighestRatedUI = function HighestRatedUI(props) {
     }, AfterElement);
   }));
 };
-var HighestRated = function HighestRated(props) {
+var HighestRated = exports.HighestRated = function HighestRated(props) {
   var highestRatedProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: HighestRatedUI,
     initialOrderByValue: 'rating'
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, highestRatedProps);
 };
-exports.HighestRated = HighestRated;

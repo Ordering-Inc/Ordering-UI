@@ -117,10 +117,9 @@ var SocketStatusUI = function SocketStatusUI(props) {
     closeOnBackdrop: false
   }));
 };
-var WebsocketStatus = function WebsocketStatus(props) {
+var WebsocketStatus = exports.WebsocketStatus = function WebsocketStatus(props) {
   var socketProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SocketStatusUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.WebsocketStatus, socketProps);
 };
-exports.WebsocketStatus = WebsocketStatus;

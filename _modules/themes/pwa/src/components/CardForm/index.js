@@ -85,11 +85,10 @@ var CardFormUI = function CardFormUI(props) {
     }, AfterElement);
   }));
 };
-var CardForm = function CardForm(props) {
+var CardForm = exports.CardForm = function CardForm(props) {
   var cardFormProps = _objectSpread(_objectSpread({}, props), {}, {
     isSplitForm: props.SplitForm,
     UIComponent: CardFormUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.CardForm, cardFormProps);
 };
-exports.CardForm = CardForm;

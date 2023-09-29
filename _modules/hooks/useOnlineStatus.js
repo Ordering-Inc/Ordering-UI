@@ -14,7 +14,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var getOnlineStatus = function getOnlineStatus() {
   return typeof navigator !== 'undefined' && typeof navigator.onLine === 'boolean' ? navigator.onLine : true;
 };
-var useOnlineStatus = function useOnlineStatus() {
+var useOnlineStatus = exports.useOnlineStatus = function useOnlineStatus() {
   var _useState = (0, _react.useState)(getOnlineStatus()),
     _useState2 = _slicedToArray(_useState, 2),
     onlineStatus = _useState2[0],
@@ -35,4 +35,3 @@ var useOnlineStatus = function useOnlineStatus() {
   }, []);
   return onlineStatus;
 };
-exports.useOnlineStatus = useOnlineStatus;

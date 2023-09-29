@@ -140,7 +140,7 @@ var ProfileBusinessesUI = function ProfileBusinessesUI(props) {
     }
   }, t('SHOW_MAP', 'Show map')))));
 };
-var ProfileBusinesses = function ProfileBusinesses(props) {
+var ProfileBusinesses = exports.ProfileBusinesses = function ProfileBusinesses(props) {
   var BusinessesListingProps = _objectSpread(_objectSpread({}, props), {}, {
     isSearchByName: true,
     isSearchByDescription: true,
@@ -149,4 +149,3 @@ var ProfileBusinesses = function ProfileBusinesses(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, BusinessesListingProps);
 };
-exports.ProfileBusinesses = ProfileBusinesses;

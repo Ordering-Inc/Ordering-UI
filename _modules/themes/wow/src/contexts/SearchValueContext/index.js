@@ -18,14 +18,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  * Create SearchValueContext
  * Context to use theme on the app
  */
-var SearchValueContext = /*#__PURE__*/(0, _react.createContext)();
+var SearchValueContext = exports.SearchValueContext = /*#__PURE__*/(0, _react.createContext)();
 
 /**
  * provider to manage search value
  * @param {props} props
  */
-exports.SearchValueContext = SearchValueContext;
-var SearchValueProvider = function SearchValueProvider(_ref) {
+var SearchValueProvider = exports.SearchValueProvider = function SearchValueProvider(_ref) {
   var children = _ref.children;
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -39,9 +38,7 @@ var SearchValueProvider = function SearchValueProvider(_ref) {
 /**
  * Hook to get and update search value
  */
-exports.SearchValueProvider = SearchValueProvider;
-var useSearchValue = function useSearchValue() {
+var useSearchValue = exports.useSearchValue = function useSearchValue() {
   var searchValueManager = (0, _react.useContext)(SearchValueContext);
   return searchValueManager || [{}];
 };
-exports.useSearchValue = useSearchValue;

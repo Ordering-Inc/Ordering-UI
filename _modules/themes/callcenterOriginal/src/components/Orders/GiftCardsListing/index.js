@@ -131,7 +131,7 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
     handleChangePageSize: handleChangePageSize
   })));
 };
-var GiftCardsListing = function GiftCardsListing(props) {
+var GiftCardsListing = exports.GiftCardsListing = function GiftCardsListing(props) {
   var giftCardsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: GiftCardsListingUI,
     isSearchById: true,
@@ -141,4 +141,3 @@ var GiftCardsListing = function GiftCardsListing(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.GiftCardsList, giftCardsProps);
 };
-exports.GiftCardsListing = GiftCardsListing;

@@ -86,10 +86,9 @@ var ProfessionalInfoUI = function ProfessionalInfoUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_styles.ReviewQualityTextContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('TERRIBLE', 'Terrible')), /*#__PURE__*/_react.default.createElement("p", null, t('BAD', 'Bad')), /*#__PURE__*/_react.default.createElement("p", null, t('OKAY', 'Okay')), /*#__PURE__*/_react.default.createElement("p", null, t('GOOD', 'Good')), /*#__PURE__*/_react.default.createElement("p", null, t('GREAT', 'Great')))), /*#__PURE__*/_react.default.createElement(_styles.Comment, null, review === null || review === void 0 ? void 0 : review.comment));
   }), !userReviewState.loading && userReviewState.reviews.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotReviewed, null, t('ERROR_REVIEW_FIND', 'The review does not exist.'))));
 };
-var ProfessionalInfo = function ProfessionalInfo(props) {
+var ProfessionalInfo = exports.ProfessionalInfo = function ProfessionalInfo(props) {
   var professionalInfoProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProfessionalInfoUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProfessionalInfo, professionalInfoProps);
 };
-exports.ProfessionalInfo = ProfessionalInfo;

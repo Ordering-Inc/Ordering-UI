@@ -371,10 +371,9 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
     closeOnBackdrop: false
   }));
 };
-var SignUpBusiness = function SignUpBusiness(props) {
+var SignUpBusiness = exports.SignUpBusiness = function SignUpBusiness(props) {
   var signUpBusinessProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SignUpBusinessUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.SignupForm, signUpBusinessProps);
 };
-exports.SignUpBusiness = SignUpBusiness;

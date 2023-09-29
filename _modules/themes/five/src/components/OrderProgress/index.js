@@ -112,7 +112,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     outputFormat: configs === null || configs === void 0 || (_configs$general_hour3 = configs.general_hour_format) === null || _configs$general_hour3 === void 0 ? void 0 : _configs$general_hour3.value
   }))))))));
 };
-var OrderProgress = function OrderProgress(props) {
+var OrderProgress = exports.OrderProgress = function OrderProgress(props) {
   var propsToFetchBusiness = ['name', 'logo', 'slug', 'id'];
   var propsToFetch = ['cart', 'business', 'status', 'id', 'uuid', 'cart_group_id', 'business_id', 'delivery_datetime', 'delivery_datetime_utc', 'total', 'summary', 'eta_current_status_time', 'eta_previous_status_times', 'eta_time', 'delivered_in', 'prepared_in', 'eta_drive_time'];
   var orderProgressProps = _objectSpread(_objectSpread({}, props), {}, {
@@ -130,4 +130,3 @@ var OrderProgress = function OrderProgress(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderList, orderProgressProps);
 };
-exports.OrderProgress = OrderProgress;

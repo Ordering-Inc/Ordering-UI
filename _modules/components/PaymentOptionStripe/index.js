@@ -171,10 +171,9 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     }, AfterElement);
   }));
 };
-var PaymentOptionStripe = function PaymentOptionStripe(props) {
+var PaymentOptionStripe = exports.PaymentOptionStripe = function PaymentOptionStripe(props) {
   var paymentOptionStripeProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PaymentOptionStripeUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PaymentOptionStripe, paymentOptionStripeProps);
 };
-exports.PaymentOptionStripe = PaymentOptionStripe;

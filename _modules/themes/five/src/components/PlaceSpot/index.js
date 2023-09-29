@@ -313,7 +313,7 @@ var PlaceSpotUI = function PlaceSpotUI(props) {
     closeOnBackdrop: false
   }));
 };
-var PlaceSpot = function PlaceSpot(props) {
+var PlaceSpot = exports.PlaceSpot = function PlaceSpot(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -338,4 +338,3 @@ var PlaceSpot = function PlaceSpot(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PlaceSpot, placeSpotProps);
 };
-exports.PlaceSpot = PlaceSpot;

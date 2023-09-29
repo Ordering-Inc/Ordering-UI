@@ -17,7 +17,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var getIconCard = function getIconCard() {
+var getIconCard = exports.getIconCard = function getIconCard() {
   var _theme$images$general, _theme$images, _theme$images2;
   var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var value = brand.toLowerCase();
@@ -32,7 +32,6 @@ var getIconCard = function getIconCard() {
  * @param {*} c = change in value
  * @param {*} d = duration
  */
-exports.getIconCard = getIconCard;
 var easeInOutQuad = function easeInOutQuad(t, b, c, d) {
   t /= d / 2;
   if (t < 1) return c / 2 * t * t + b;
@@ -46,7 +45,7 @@ var easeInOutQuad = function easeInOutQuad(t, b, c, d) {
  * @param {*} to = position Top of child element
  * @param {*} duration = time to animation
  */
-var scrollTo = function scrollTo(element, to, duration) {
+var scrollTo = exports.scrollTo = function scrollTo(element, to, duration) {
   if (!element) return;
   var start = element.scrollTop;
   var change = to - start;
@@ -67,8 +66,7 @@ var scrollTo = function scrollTo(element, to, duration) {
  * Function to get formatted link to include in iframes
  * @param {string} url = youtube - vimeo link video
  */
-exports.scrollTo = scrollTo;
-var formatUrlVideo = function formatUrlVideo(url) {
+var formatUrlVideo = exports.formatUrlVideo = function formatUrlVideo(url) {
   var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
   var match = url.match(regExp);
   var id = match && match[7].length === 11 ? match[7] : false;
@@ -79,8 +77,7 @@ var formatUrlVideo = function formatUrlVideo(url) {
  * Function to convert delivery time in minutes
  * @param {string} time business delivery time
  */
-exports.formatUrlVideo = formatUrlVideo;
-var convertHoursToMinutes = function convertHoursToMinutes(time) {
+var convertHoursToMinutes = exports.convertHoursToMinutes = function convertHoursToMinutes(time) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -97,8 +94,7 @@ var convertHoursToMinutes = function convertHoursToMinutes(time) {
  * Function to convert a string in string capitalized
  * @param {string} str string to capitalize
  */
-exports.convertHoursToMinutes = convertHoursToMinutes;
-var capitalize = function capitalize(str) {
+var capitalize = exports.capitalize = function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
@@ -106,8 +102,7 @@ var capitalize = function capitalize(str) {
  * Function to return a static google maps image based in location
  * @param {object} param object with latitude and logitude
  */
-exports.capitalize = capitalize;
-var getGoogleMapImage = function getGoogleMapImage(location, apiKey, mapConfigs) {
+var getGoogleMapImage = exports.getGoogleMapImage = function getGoogleMapImage(location, apiKey, mapConfigs) {
   var _mapConfigs$size$w, _mapConfigs$size, _mapConfigs$size$h, _mapConfigs$size2, _mapConfigs$zoom, _mapConfigs$scale;
   var lat = location === null || location === void 0 ? void 0 : location.lat;
   var lng = location === null || location === void 0 ? void 0 : location.lng;
@@ -118,8 +113,7 @@ var getGoogleMapImage = function getGoogleMapImage(location, apiKey, mapConfigs)
  * _Function to flat array of one level
  * @param {Array} arr to flat
  */
-exports.getGoogleMapImage = getGoogleMapImage;
-var flatArray = function flatArray(arr) {
+var flatArray = exports.flatArray = function flatArray(arr) {
   var _ref;
   return (_ref = []).concat.apply(_ref, _toConsumableArray(arr));
 };
@@ -128,8 +122,7 @@ var flatArray = function flatArray(arr) {
  * Function to return the traduction depending of a key 't'
  * @param {string} key for traduction
  */
-exports.flatArray = flatArray;
-var getTraduction = function getTraduction(key) {
+var getTraduction = exports.getTraduction = function getTraduction(key) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -163,16 +156,14 @@ var getTraduction = function getTraduction(key) {
  * @param {number} bytes for transform
  *
  */
-exports.getTraduction = getTraduction;
-var bytesConverter = function bytesConverter(bytes) {
+var bytesConverter = exports.bytesConverter = function bytesConverter(bytes) {
   return Math.floor(bytes / 1024);
 };
 
 /**
  * Function to get brightness of color.
  */
-exports.bytesConverter = bytesConverter;
-var lightenDarkenColor = function lightenDarkenColor(color) {
+var lightenDarkenColor = exports.lightenDarkenColor = function lightenDarkenColor(color) {
   var r, g, b, hsp;
   if (color.match(/^rgb/)) {
     // If HEX --> store the red, green, blue values in separate variables
@@ -202,8 +193,7 @@ var lightenDarkenColor = function lightenDarkenColor(color) {
 /**
  * Function to get time in 12 hours format.
  */
-exports.lightenDarkenColor = lightenDarkenColor;
-var getHourMin = function getHourMin(hour, min) {
+var getHourMin = exports.getHourMin = function getHourMin(hour, min) {
   var _hour;
   if (hour < 12) {
     _hour = hour < 10 ? "0".concat(hour) : "".concat(hour);
@@ -220,15 +210,13 @@ var getHourMin = function getHourMin(hour, min) {
 /**
  * List of fields with correct order
  */
-exports.getHourMin = getHourMin;
-var fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
+var fieldsToSort = exports.fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
 /**
   * Function to return a array sorted by certain fields
   * @param fields Array with right order
   * @param array Array to sort
   */
-exports.fieldsToSort = fieldsToSort;
-var sortInputFields = function sortInputFields(_ref2) {
+var sortInputFields = exports.sortInputFields = function sortInputFields(_ref2) {
   var fields = _ref2.fields,
     values = _ref2.values;
   var fieldsBase = fields;
@@ -254,8 +242,7 @@ var sortInputFields = function sortInputFields(_ref2) {
  * @param {*} parser function fallback when is decimal
  * @returns string
  */
-exports.sortInputFields = sortInputFields;
-var verifyDecimals = function verifyDecimals(value, parser) {
+var verifyDecimals = exports.verifyDecimals = function verifyDecimals(value, parser) {
   if (value % 1 === 0) {
     return value;
   } else {
@@ -266,8 +253,7 @@ var verifyDecimals = function verifyDecimals(value, parser) {
  * Format seconds to hh:mm:ss
  * @param {number} seconds
  */
-exports.verifyDecimals = verifyDecimals;
-var formatSeconds = function formatSeconds(seconds) {
+var formatSeconds = exports.formatSeconds = function formatSeconds(seconds) {
   // Hours, minutes and seconds
   var hrs = ~~(seconds / 3600);
   var mins = ~~(seconds % 3600 / 60);
@@ -288,8 +274,7 @@ var formatSeconds = function formatSeconds(seconds) {
  * @param {number} value for transform
  *
  */
-exports.formatSeconds = formatSeconds;
-var convertToRadian = function convertToRadian(value) {
+var convertToRadian = exports.convertToRadian = function convertToRadian(value) {
   return value * Math.PI / 180;
 };
 
@@ -298,8 +283,7 @@ var convertToRadian = function convertToRadian(value) {
  * @param {string} url URL of page
  * @param {string} fallback default URL
  */
-exports.convertToRadian = convertToRadian;
-var checkSiteUrl = function checkSiteUrl(url, fallback) {
+var checkSiteUrl = exports.checkSiteUrl = function checkSiteUrl(url, fallback) {
   if (!url) return fallback;
   return url[0] === '/' ? url : "/".concat(url);
 };
@@ -311,8 +295,8 @@ var checkSiteUrl = function checkSiteUrl(url, fallback) {
  * @param {*} lat2 lat from second point
  * @param {*} lon2 lon from second point
  */
-exports.checkSiteUrl = checkSiteUrl;
-var getDistance = function getDistance(lat1, lon1, lat2, lon2) {
+
+var getDistance = exports.getDistance = function getDistance(lat1, lon1, lat2, lon2) {
   var R = 6371; // km
   var dLat = convertToRadian(lat2 - lat1);
   var dLon = convertToRadian(lon2 - lon1);
@@ -326,8 +310,7 @@ var getDistance = function getDistance(lat1, lon1, lat2, lon2) {
 /**
  * List shape for ribbon
  */
-exports.getDistance = getDistance;
-var shape = {
+var shape = exports.shape = {
   rectangle: 'rectangle',
   rectangleRound: 'rectangle_round',
   capsuleShape: 'capsule_shape'
@@ -339,8 +322,7 @@ var shape = {
  * @param {*} schedule = schedule list
  * @param {*} is12Hours = variable for time format
  */
-exports.shape = shape;
-var getTimes = function getTimes(selectedDate, schedule, is12Hours) {
+var getTimes = exports.getTimes = function getTimes(selectedDate, schedule, is12Hours) {
   var date = new Date();
   var times = [];
   for (var k = 0; k < schedule[selectedDate.getDay()].lapses.length; k++) {
@@ -390,8 +372,7 @@ var getTimes = function getTimes(selectedDate, schedule, is12Hours) {
 /**
  * List of price to filter businesses
  */
-exports.getTimes = getTimes;
-var priceList = [{
+var priceList = exports.priceList = [{
   level: '1',
   content: '$'
 }, {
@@ -411,16 +392,14 @@ var priceList = [{
 /**
  * List of order type
  */
-exports.priceList = priceList;
-var orderTypeList = ['delivery', 'pickup', 'eatin', 'curbside', 'drivethru', 'seatdelivery'];
+var orderTypeList = exports.orderTypeList = ['delivery', 'pickup', 'eatin', 'curbside', 'drivethru', 'seatdelivery'];
 
 /**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
  */
-exports.orderTypeList = orderTypeList;
-var reviewCommentList = function reviewCommentList(type) {
+var reviewCommentList = exports.reviewCommentList = function reviewCommentList(type) {
   var _useLanguage5 = (0, _orderingComponents.useLanguage)(),
     _useLanguage6 = _slicedToArray(_useLanguage5, 2),
     t = _useLanguage6[1];
@@ -885,16 +864,14 @@ var reviewCommentList = function reviewCommentList(type) {
  * Function to convert star rate in width to display
  * @param {int} qualification star rate or qualification
  */
-exports.reviewCommentList = reviewCommentList;
-var getStarWidth = function getStarWidth(qualification) {
+var getStarWidth = exports.getStarWidth = function getStarWidth(qualification) {
   if (qualification) {
     return qualification / 5 * 100 + '%';
   } else {
     return '0%';
   }
 };
-exports.getStarWidth = getStarWidth;
-var getOrderStatus = function getOrderStatus(s) {
+var getOrderStatus = exports.getOrderStatus = function getOrderStatus(s) {
   var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24;
   var _useLanguage7 = (0, _orderingComponents.useLanguage)(),
     _useLanguage8 = _slicedToArray(_useLanguage7, 2),
@@ -1027,8 +1004,7 @@ var getOrderStatus = function getOrderStatus(s) {
   });
   return objectStatus && objectStatus;
 };
-exports.getOrderStatus = getOrderStatus;
-var getOrderStatuPickUp = function getOrderStatuPickUp(s) {
+var getOrderStatuPickUp = exports.getOrderStatuPickUp = function getOrderStatuPickUp(s) {
   var _theme$defaultLanguag25, _theme$defaultLanguag26, _theme$defaultLanguag27, _theme$defaultLanguag28, _theme$defaultLanguag29, _theme$defaultLanguag30, _theme$defaultLanguag31, _theme$defaultLanguag32, _theme$defaultLanguag33, _theme$defaultLanguag34, _theme$defaultLanguag35, _theme$defaultLanguag36, _theme$defaultLanguag37;
   var _useLanguage9 = (0, _orderingComponents.useLanguage)(),
     _useLanguage10 = _slicedToArray(_useLanguage9, 2),
@@ -1106,8 +1082,7 @@ var getOrderStatuPickUp = function getOrderStatuPickUp(s) {
   });
   return objectStatus && objectStatus;
 };
-exports.getOrderStatuPickUp = getOrderStatuPickUp;
-var calendarLanguages = {
+var calendarLanguages = exports.calendarLanguages = {
   months: {
     January: 'MONTH1',
     February: 'MONTH2',
@@ -1132,8 +1107,7 @@ var calendarLanguages = {
     Su: 'DAYMIN7'
   }
 };
-exports.calendarLanguages = calendarLanguages;
-var getCateringValues = function getCateringValues(cateringTypeString, configs) {
+var getCateringValues = exports.getCateringValues = function getCateringValues(cateringTypeString, configs) {
   var splitCateringValue;
   if (configs !== null && configs !== void 0 && configs.preorder_slot_interval) {
     splitCateringValue = function splitCateringValue(configName) {
@@ -1165,8 +1139,7 @@ var getCateringValues = function getCateringValues(cateringTypeString, configs) 
     preorderMinimumDays: preorderMinimumDays
   };
 };
-exports.getCateringValues = getCateringValues;
-var getCurrenySymbol = function getCurrenySymbol(code) {
+var getCurrenySymbol = exports.getCurrenySymbol = function getCurrenySymbol(code) {
   var _CURRENCY$code$symbol, _CURRENCY$code;
   return (_CURRENCY$code$symbol = _currency.CURRENCY === null || _currency.CURRENCY === void 0 || (_CURRENCY$code = _currency.CURRENCY[code]) === null || _CURRENCY$code === void 0 ? void 0 : _CURRENCY$code.symbol) !== null && _CURRENCY$code$symbol !== void 0 ? _CURRENCY$code$symbol : code;
 };
@@ -1174,8 +1147,7 @@ var getCurrenySymbol = function getCurrenySymbol(code) {
 /**
  * Function to get unique id
  */
-exports.getCurrenySymbol = getCurrenySymbol;
-var getUniqueId = function getUniqueId() {
+var getUniqueId = exports.getUniqueId = function getUniqueId() {
   var dateString = Date.now().toString(36);
   var randomness = Math.random().toString(36).substr(2);
   return dateString + randomness;
@@ -1186,8 +1158,7 @@ var getUniqueId = function getUniqueId() {
  * @param {string} code // language code
  * @param {any} locales // language settings
  */
-exports.getUniqueId = getUniqueId;
-var getLocale = function getLocale(code, locales) {
+var getLocale = exports.getLocale = function getLocale(code, locales) {
   var locale = locales === null || locales === void 0 ? void 0 : locales[code];
   if (code === 'es-419-1' || code === 'es-419-2') locale = locales === null || locales === void 0 ? void 0 : locales.es;
   if (code === 'zh-CN') locale = locales === null || locales === void 0 ? void 0 : locales.zhCN;
@@ -1197,11 +1168,9 @@ var getLocale = function getLocale(code, locales) {
   if (!locale) return locales === null || locales === void 0 ? void 0 : locales.enUS;
   return locale;
 };
-exports.getLocale = getLocale;
-var findExitingCode = function findExitingCode(countryCode) {
+var findExitingCode = exports.findExitingCode = function findExitingCode(countryCode) {
   var code = _orderingComponents.CODES.find(function (code) {
     return code.countryCode === (countryCode || '').toUpperCase();
   });
   return code === null || code === void 0 ? void 0 : code.countryCode;
 };
-exports.findExitingCode = findExitingCode;

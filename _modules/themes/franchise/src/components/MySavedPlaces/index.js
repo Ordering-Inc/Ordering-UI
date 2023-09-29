@@ -42,10 +42,9 @@ var MySavedPlacesUI = function MySavedPlacesUI(props) {
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.'))));
 };
-var MySavedPlaces = function MySavedPlaces(props) {
+var MySavedPlaces = exports.MySavedPlaces = function MySavedPlaces(props) {
   var mySavedPlacesProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: MySavedPlacesUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UserFormDetails, mySavedPlacesProps);
 };
-exports.MySavedPlaces = MySavedPlaces;

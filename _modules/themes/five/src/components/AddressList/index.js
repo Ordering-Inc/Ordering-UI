@@ -385,10 +385,9 @@ var AddressListUI = function AddressListUI(props) {
     }, AfterElement);
   }));
 };
-var AddressList = /*#__PURE__*/_react.default.memo(function (props) {
+var AddressList = exports.AddressList = /*#__PURE__*/_react.default.memo(function (props) {
   var addressListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: AddressListUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.AddressList, addressListProps);
 });
-exports.AddressList = AddressList;

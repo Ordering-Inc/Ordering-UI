@@ -201,10 +201,9 @@ var ReviewCustomerUI = function ReviewCustomerUI(props) {
     closeOnBackdrop: false
   }));
 };
-var ReviewCustomer = function ReviewCustomer(props) {
+var ReviewCustomer = exports.ReviewCustomer = function ReviewCustomer(props) {
   var reviewProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ReviewCustomerUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ReviewCustomer, reviewProps);
 };
-exports.ReviewCustomer = ReviewCustomer;

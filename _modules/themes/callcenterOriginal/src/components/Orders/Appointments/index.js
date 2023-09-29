@@ -132,10 +132,9 @@ var AppointmentsUI = function AppointmentsUI(props) {
     }
   }));
 };
-var Appointments = function Appointments(props) {
+var Appointments = exports.Appointments = function Appointments(props) {
   var appointmentsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: AppointmentsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.Appointments, appointmentsProps);
 };
-exports.Appointments = Appointments;

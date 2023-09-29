@@ -313,10 +313,9 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     closeOnBackdrop: false
   }));
 };
-var SingleProductCard = function SingleProductCard(props) {
+var SingleProductCard = exports.SingleProductCard = function SingleProductCard(props) {
   var singleProductCardProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SingleProductCardUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.SingleProductCard, singleProductCardProps);
 };
-exports.SingleProductCard = SingleProductCard;

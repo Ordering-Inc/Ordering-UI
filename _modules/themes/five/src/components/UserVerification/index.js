@@ -312,10 +312,9 @@ var UserVerificationUI = function UserVerificationUI(props) {
     closeOnBackdrop: false
   }));
 };
-var UserVerification = function UserVerification(props) {
+var UserVerification = exports.UserVerification = function UserVerification(props) {
   var verifyProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UserVerificationUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UserVerification, verifyProps);
 };
-exports.UserVerification = UserVerification;

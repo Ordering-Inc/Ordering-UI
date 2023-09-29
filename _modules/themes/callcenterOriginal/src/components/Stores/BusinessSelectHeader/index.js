@@ -129,7 +129,7 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     }
   }, t('ADD_NEW_STORE', 'Add new store'))));
 };
-var BusinessSelectHeader = function BusinessSelectHeader(props) {
+var BusinessSelectHeader = exports.BusinessSelectHeader = function BusinessSelectHeader(props) {
   var _props$defaultPageSiz, _props$defaultPageSiz2, _props$defaultPropsTo;
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessessListingUI,
@@ -145,4 +145,3 @@ var BusinessSelectHeader = function BusinessSelectHeader(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.DashboardBusinessList, businessListingProps);
 };
-exports.BusinessSelectHeader = BusinessSelectHeader;

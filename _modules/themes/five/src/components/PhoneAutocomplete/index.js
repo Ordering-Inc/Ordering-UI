@@ -377,7 +377,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onAccept: handleCloseAlert
   }));
 };
-var PhoneAutocomplete = function PhoneAutocomplete(props) {
+var PhoneAutocomplete = exports.PhoneAutocomplete = function PhoneAutocomplete(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -408,7 +408,6 @@ var PhoneAutocomplete = function PhoneAutocomplete(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PhoneAutocomplete, phoneProps);
 };
-exports.PhoneAutocomplete = PhoneAutocomplete;
 PhoneAutocompleteUI.defaultProps = {
   limitPhoneLength: 10
 };

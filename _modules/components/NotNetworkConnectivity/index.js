@@ -10,7 +10,7 @@ var _useOnlineStatus = require("../../hooks/useOnlineStatus");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-var NotNetworkConnectivity = function NotNetworkConnectivity(props) {
+var NotNetworkConnectivity = exports.NotNetworkConnectivity = function NotNetworkConnectivity(props) {
   var _props$beforeElements, _props$beforeComponen, _props$isOnline, _theme$images, _props$afterComponent, _props$afterElements;
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
   var theme = (0, _styledComponents.useTheme)();
@@ -42,4 +42,3 @@ var NotNetworkConnectivity = function NotNetworkConnectivity(props) {
     }, AfterElement);
   }));
 };
-exports.NotNetworkConnectivity = NotNetworkConnectivity;

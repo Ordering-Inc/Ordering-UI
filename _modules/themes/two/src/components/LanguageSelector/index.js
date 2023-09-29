@@ -35,11 +35,10 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     notReload: notReload
   });
 };
-var LanguageSelector = function LanguageSelector(props) {
+var LanguageSelector = exports.LanguageSelector = function LanguageSelector(props) {
   var DefaultChangeLanguage = function DefaultChangeLanguage() {};
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.LanguageSelector, _extends({}, props, {
     UIComponent: LanguageSelectorUI,
     onChangeLanguage: props.onChangeLanguage || DefaultChangeLanguage
   }));
 };
-exports.LanguageSelector = LanguageSelector;

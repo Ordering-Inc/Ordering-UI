@@ -85,10 +85,9 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
     isLoading: formState.loading
   }));
 };
-var LogoutButton = function LogoutButton(props) {
+var LogoutButton = exports.LogoutButton = function LogoutButton(props) {
   var logoutButtonProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LogoutButtonUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.LogoutAction, logoutButtonProps);
 };
-exports.LogoutButton = LogoutButton;

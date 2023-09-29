@@ -290,11 +290,10 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
     closeOnBackdrop: false
   }));
 };
-var OrderMetaFields = function OrderMetaFields(props) {
+var OrderMetaFields = exports.OrderMetaFields = function OrderMetaFields(props) {
   var MetaFieldsProps = _objectSpread(_objectSpread({}, props), {}, {
     asDashboard: true,
     UIComponent: MetaFieldsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.MetaFields, MetaFieldsProps);
 };
-exports.OrderMetaFields = OrderMetaFields;

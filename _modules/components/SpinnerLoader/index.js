@@ -8,7 +8,7 @@ var _react = _interopRequireDefault(require("react"));
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-var SpinnerLoader = function SpinnerLoader(props) {
+var SpinnerLoader = exports.SpinnerLoader = function SpinnerLoader(props) {
   var logotype = props.logotype,
     content = props.content,
     style = props.style,
@@ -28,4 +28,3 @@ var SpinnerLoader = function SpinnerLoader(props) {
     className: "spinner-content"
   }, /*#__PURE__*/_react.default.createElement("div", null))));
 };
-exports.SpinnerLoader = SpinnerLoader;

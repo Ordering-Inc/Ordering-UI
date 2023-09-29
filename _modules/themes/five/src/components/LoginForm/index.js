@@ -655,7 +655,7 @@ var LoginFormUI = function LoginFormUI(props) {
     }, AfterElement);
   }));
 };
-var LoginForm = function LoginForm(props) {
+var LoginForm = exports.LoginForm = function LoginForm(props) {
   var isKioskApp = props.useKioskApp;
   var loginControllerProps = _objectSpread(_objectSpread({}, props), {}, {
     isRecaptchaEnable: !isKioskApp,
@@ -667,4 +667,3 @@ var LoginForm = function LoginForm(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.LoginForm, loginControllerProps);
 };
-exports.LoginForm = LoginForm;

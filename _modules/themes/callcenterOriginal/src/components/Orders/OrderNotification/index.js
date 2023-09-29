@@ -175,10 +175,9 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     closeOnBackdrop: false
   }));
 };
-var OrderNotification = function OrderNotification(props) {
+var OrderNotification = exports.OrderNotification = function OrderNotification(props) {
   var orderNotificationProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrderNotificationUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderNotification, orderNotificationProps);
 };
-exports.OrderNotification = OrderNotification;

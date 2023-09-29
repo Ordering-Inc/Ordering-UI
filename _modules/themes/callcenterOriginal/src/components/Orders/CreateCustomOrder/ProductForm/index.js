@@ -597,7 +597,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     closeOnBackdrop: false
   }));
 };
-var ProductForm = function ProductForm(props) {
+var ProductForm = exports.ProductForm = function ProductForm(props) {
   var _props$productCart, _props$productCart2, _props$product;
   var productOptionsProps = _objectSpread(_objectSpread({}, props), {}, {
     productCart: _objectSpread(_objectSpread({}, props.productCart), {}, {
@@ -607,7 +607,6 @@ var ProductForm = function ProductForm(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductForm, productOptionsProps);
 };
-exports.ProductForm = ProductForm;
 ProductForm.defaultProps = {
   productAddedToCartLength: 0
 };

@@ -30,5 +30,4 @@ var ProviderMock = function ProviderMock(props) {
     settings: configFile
   }, props.children));
 };
-var _default = ProviderMock;
-exports.default = _default;
+var _default = exports.default = ProviderMock;

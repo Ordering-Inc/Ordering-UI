@@ -28,7 +28,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var RedHomeHero = function RedHomeHero(props) {
+var RedHomeHero = exports.RedHomeHero = function RedHomeHero(props) {
   var _configState$configs, _props$beforeElements, _props$beforeComponen, _theme$images9, _theme$defaultLanguag, _orderState$options4, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
   var onFindBusiness = props.onFindBusiness;
   var _useConfig = (0, _orderingComponents.useConfig)(),
@@ -197,7 +197,6 @@ var RedHomeHero = function RedHomeHero(props) {
     }, AfterElement);
   }));
 };
-exports.RedHomeHero = RedHomeHero;
 var ArchiesOrderTypeUI = function ArchiesOrderTypeUI(props) {
   var handleChangeOrderType = props.handleChangeOrderType,
     configTypes = props.configTypes,
@@ -218,7 +217,7 @@ var ArchiesOrderTypeUI = function ArchiesOrderTypeUI(props) {
     }, orderType.icon, orderType.content);
   }));
 };
-var ArchiesOrderTypes = function ArchiesOrderTypes(props) {
+var ArchiesOrderTypes = exports.ArchiesOrderTypes = function ArchiesOrderTypes(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -236,8 +235,7 @@ var ArchiesOrderTypes = function ArchiesOrderTypes(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderTypeControl, orderTypeProps);
 };
-exports.ArchiesOrderTypes = ArchiesOrderTypes;
-var StorePickupIcon = function StorePickupIcon() {
+var StorePickupIcon = exports.StorePickupIcon = function StorePickupIcon() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 64 64"
@@ -262,8 +260,7 @@ var StorePickupIcon = function StorePickupIcon() {
     d: "M44.79,40.38A1,1,0,0,0,44,40H41V38h3V36H40a1,1,0,0,0-1,1v3H36a1,1,0,0,0-.79.38,1.022,1.022,0,0,0-.18.86l2,8A1,1,0,0,0,38,50h4a1,1,0,0,0,.97-.76l2-8A1.022,1.022,0,0,0,44.79,40.38ZM41.22,48H38.78l-1.5-6h5.44Z"
   })));
 };
-exports.StorePickupIcon = StorePickupIcon;
-var DeliveryBike = function DeliveryBike() {
+var DeliveryBike = exports.DeliveryBike = function DeliveryBike() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     id: "svg",
     version: "1.1",
@@ -306,4 +303,3 @@ var DeliveryBike = function DeliveryBike() {
     fillRule: "evenodd"
   })));
 };
-exports.DeliveryBike = DeliveryBike;

@@ -239,10 +239,9 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     }, AfterElement);
   }));
 };
-var ResetPassword = function ResetPassword(props) {
+var ResetPassword = exports.ResetPassword = function ResetPassword(props) {
   var resetPasswordProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ResetPasswordUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ResetPassword, resetPasswordProps);
 };
-exports.ResetPassword = ResetPassword;

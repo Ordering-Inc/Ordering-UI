@@ -64,10 +64,9 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
     }, AfterElement);
   }));
 };
-var StripeElementsForm = function StripeElementsForm(props) {
+var StripeElementsForm = exports.StripeElementsForm = function StripeElementsForm(props) {
   var stripeElementsFormProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: StripeElementsFormUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.StripeElementsForm, stripeElementsFormProps);
 };
-exports.StripeElementsForm = StripeElementsForm;
