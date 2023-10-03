@@ -2169,9 +2169,9 @@
     tslib "^2.4.1"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.56.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.56.0.tgz#ee553bd77a2cd8988f635cad48735fe19f57385e"
-  integrity sha512-c28NOcyB64ARNCwQclPLr86yIu+SidqUgp7LlsGgGaA8d8nmrKJr1G8CSAcWt7X/ULPL7o/NjtY2HeGqLjnQGA==
+  version "1.57.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.57.0.tgz#2559c28e63d8f92b28818ee5a8878337b0adee4a"
+  integrity sha512-AfHuuN/X7dJT/7K4gesynEuh3x9bocC1+Kjn4JxHoTJVi/0qb4X3tvBI2FV4dtzlO6f/93wS2lR37f8ZfZMIig==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics-core" "1.3.1"
@@ -3208,9 +3208,9 @@
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
-  version "20.7.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.7.1.tgz#06d732ead0bd5ad978ef0ea9cbdeb24dc8717514"
-  integrity sha512-LT+OIXpp2kj4E2S/p91BMe+VgGX2+lfO+XTpfXhh+bCk2LkQtHZSub8ewFBMGP5ClysPjTDFa4sMI8Q3n4T0wg==
+  version "20.8.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.8.2.tgz#d76fb80d87d0d8abfe334fc6d292e83e5524efc4"
+  integrity sha512-Vvycsc9FQdwhxE3y3DzeIxuEJbWGDsnrxvMADzTDF/lcdR9/K+AQIeAghTQsHtotg/q0j3WEOYS/jQgSdWue3w==
 
 "@types/node@12.12.50":
   version "12.12.50"
@@ -4302,7 +4302,7 @@ browserify@^16.1.0:
     vm-browserify "^1.0.0"
     xtend "^4.0.0"
 
-browserslist@^4.21.10, browserslist@^4.21.9, browserslist@^4.6.0:
+browserslist@^4.21.9, browserslist@^4.22.1, browserslist@^4.6.0:
   version "4.22.1"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.22.1.tgz#ba91958d1a59b87dab6fed8dfbcb3da5e2e9c619"
   integrity sha512-FEVc202+2iuClEhZhrWy6ZiAcRLvNMyYcxZ8raemul1DYVOVdFsbqckWLdsixQZCpJlwe77Z3UTalE7jsjnKfQ==
@@ -4513,9 +4513,9 @@ camelize@^1.0.0:
   integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
 
 caniuse-lite@^1.0.30001541:
-  version "1.0.30001541"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001541.tgz#b1aef0fadd87fb72db4dcb55d220eae17b81cdb1"
-  integrity sha512-bLOsqxDgTqUBkzxbNlSBt8annkDpQB9NdzdTbO2ooJ+eC/IQcvDspDc058g84ejCelF7vHUx57KIOjEecOHXaw==
+  version "1.0.30001543"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001543.tgz#478a3e9dddbb353c5ab214b0ecb0dbed529ed1d8"
+  integrity sha512-qxdO8KPWPQ+Zk6bvNpPeQIOH47qZSYdFZd6dXQzb2KzhnSXju4Kd7H1PkSJx6NICSMgo/IhRZRhhfPTHYpJUCA==
 
 canvg@^3.0.6:
   version "3.0.10"
@@ -4990,16 +4990,16 @@ copy-webpack-plugin@^6.3.2:
     webpack-sources "^1.4.3"
 
 core-js-compat@^3.1.1, core-js-compat@^3.31.0, core-js-compat@^3.32.2:
-  version "3.32.2"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.32.2.tgz#8047d1a8b3ac4e639f0d4f66d4431aa3b16e004c"
-  integrity sha512-+GjlguTDINOijtVRUxrQOv3kfu9rl+qPNdX2LTbJ/ZyVTuxK+ksVSAGX1nHstu4hrv1En/uPTtWgq2gI5wt4AQ==
+  version "3.33.0"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.33.0.tgz#24aa230b228406450b2277b7c8bfebae932df966"
+  integrity sha512-0w4LcLXsVEuNkIqwjjf9rjCoPhK8uqA4tMRh4Ge26vfLtUutshn+aRJU21I9LCJlh2QQHfisNToLjw1XEJLTWw==
   dependencies:
-    browserslist "^4.21.10"
+    browserslist "^4.22.1"
 
 core-js@^3.6.0, core-js@^3.8.3:
-  version "3.32.2"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.32.2.tgz#172fb5949ef468f93b4be7841af6ab1f21992db7"
-  integrity sha512-pxXSw1mYZPDGvTQqEc5vgIb83jGQKFGYWY76z4a7weZXUolw3G+OvpZqSRcfYOoOVUQJYEPsWeQK8pKEnUtWxQ==
+  version "3.33.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.33.0.tgz#70366dbf737134761edb017990cf5ce6c6369c40"
+  integrity sha512-HoZr92+ZjFEKar5HS6MC776gYslNOKHt75mEBKWKnPeFDpZ6nH5OeF3S6HFT1mUAUZKrzkez05VboaX8myjSuw==
 
 core-util-is@1.0.2:
   version "1.0.2"
@@ -5684,9 +5684,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.535:
-  version "1.4.536"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.536.tgz#ebdf960fbc27fb8bd0b0dfa9a899cc333bb15f1c"
-  integrity sha512-L4VgC/76m6y8WVCgnw5kJy/xs7hXrViCFdNKVG8Y7B2isfwrFryFyJzumh3ugxhd/oB1uEaEEvRdmeLrnd7OFA==
+  version "1.4.540"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.540.tgz#c685f2f035e93eb21dd6a9cfe2c735bad8f77401"
+  integrity sha512-aoCqgU6r9+o9/S7wkcSbmPRFi7OWZWiXS9rtjEd+Ouyu/Xyw5RSq2XN8s5Qp8IaFOLiRrhQCphCIjAxgG3eCAg==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -7041,11 +7041,9 @@ has-values@^1.0.0:
     kind-of "^4.0.0"
 
 has@^1.0.0, has@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/has/-/has-1.0.3.tgz#722d7cbfc1f6aa8241f16dd814e011e1f41e8796"
-  integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
-  dependencies:
-    function-bind "^1.1.1"
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/has/-/has-1.0.4.tgz#2eb2860e000011dae4f1406a86fe80e530fb2ec6"
+  integrity sha512-qdSAmqLF6209RFj4VVItywPMbm3vWylknmB3nvNiUIs72xAimcM8nVYxYr7ncvZq5qzk9MKIZR8ijqD/1QuYjQ==
 
 hash-base@^3.0.0:
   version "3.1.0"
@@ -9227,7 +9225,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a98d7a0b0ffdfb1b987f8935ccd8f11bd87aacea"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/2f328870d21f0dd258b61523ac2e83508ab2f68b"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -10212,9 +10210,9 @@ react-smartbanner@^5.1.4:
     ua-parser-js "^0.7.9"
 
 react-to-print@^2.12.3:
-  version "2.14.13"
-  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.13.tgz#cd0349f7ef93c8af5120fac0ef6c4f3d100df490"
-  integrity sha512-PqUGgTRZvkyBzWgaZHVBECWPX2nGEc3HOUy6WNXof6HT4yTFI92wtIkqQtr4jfvHbadqjwTgzgh6vgN8KXlWWw==
+  version "2.14.15"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.15.tgz#edb4ce8a92205cf37fd8c3d57de829034aa5c911"
+  integrity sha512-SKnwOzU2cJ8eaAkoJO7+gNhvfEDmm+Y34IdcHsjtHioUevUPhprqbVtvNJlZ2JkGJ8ExK2QNWM9pXECTDR5D8w==
 
 react-transition-group@^4.3.0:
   version "4.4.5"
@@ -11667,9 +11665,9 @@ terser@^4.1.2, terser@^4.6.3:
     source-map-support "~0.5.12"
 
 terser@^5.0.0, terser@^5.3.4:
-  version "5.20.0"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-5.20.0.tgz#ea42aea62578703e33def47d5c5b93c49772423e"
-  integrity sha512-e56ETryaQDyebBwJIWYB2TT6f2EZ0fL0sW/JRXNMN26zZdKi2u/E/5my5lG6jNxym6qsrVXfFRmOdV42zlAgLQ==
+  version "5.21.0"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.21.0.tgz#d2b27e92b5e56650bc83b6defa00a110f0b124b2"
+  integrity sha512-WtnFKrxu9kaoXuiZFSGrcAvvBqAdmKx0SFNmVNYdJamMu9yyN3I/QF0FbH4QcqJQ+y1CJnzxGIKH0cSj+FGYRw==
   dependencies:
     "@jridgewell/source-map" "^0.3.3"
     acorn "^8.8.2"

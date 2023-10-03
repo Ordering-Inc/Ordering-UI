@@ -83,7 +83,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     isCustomerMode = props.isCustomerMode,
     isCustomLayout = props.isCustomLayout,
     notFound = props.notFound,
-    setNotFound = props.setNotFound;
+    setNotFound = props.setNotFound,
+    loadedFirstTime = props.loadedFirstTime;
   var business = businessState.business,
     loading = businessState.loading,
     error = businessState.error;
@@ -528,7 +529,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleUpdateProfessionals: handleUpdateProfessionals,
     isCustomerMode: isCustomerMode,
     handleCustomProductBannerClick: handleCustomProductBannerClick
-  }), isMounted && !loading && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), isMounted && !loading && loadedFirstTime && business && !Object.keys(business).length && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESS_PRODUCTS', (theme === null || theme === void 0 || (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.NOT_FOUND_BUSINESS_PRODUCTS) || 'No products to show at this business, please try with other business.'),
     btnTitle: t('SEARCH_REDIRECT', (theme === null || theme === void 0 || (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.SEARCH_REDIRECT) || 'Go to Businesses'),
     onClickButton: function onClickButton() {
