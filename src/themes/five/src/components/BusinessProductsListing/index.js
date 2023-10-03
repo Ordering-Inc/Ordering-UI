@@ -87,7 +87,8 @@ const BusinessProductsListingUI = (props) => {
     isCustomerMode,
     isCustomLayout,
     notFound,
-    setNotFound
+    setNotFound,
+    loadedFirstTime
   } = props
 
   const { business, loading, error } = businessState
@@ -435,7 +436,7 @@ const BusinessProductsListingUI = (props) => {
         />
 
         {
-          isMounted && !loading && business && !Object.keys(business).length && (
+          isMounted && !loading && loadedFirstTime && business && !Object.keys(business).length && (
             <NotFoundSource
               content={t('NOT_FOUND_BUSINESS_PRODUCTS', theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS || 'No products to show at this business, please try with other business.')}
               btnTitle={t('SEARCH_REDIRECT', theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses')}
