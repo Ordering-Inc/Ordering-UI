@@ -92,10 +92,9 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     }, AfterElement);
   }));
 };
-var BusinessProductsCategories = function BusinessProductsCategories(props) {
+var BusinessProductsCategories = exports.BusinessProductsCategories = function BusinessProductsCategories(props) {
   var businessProductsCategoriesProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsCategoriesUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessProductsCategories, businessProductsCategoriesProps);
 };
-exports.BusinessProductsCategories = BusinessProductsCategories;

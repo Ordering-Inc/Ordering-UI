@@ -87,10 +87,9 @@ var CardFormUI = function CardFormUI(props) {
     disabled: loading
   }, loading ? t('LOADING', 'Loading...') : t('ADD_CARD', 'Add card')))));
 };
-var CardForm = function CardForm(props) {
+var CardForm = exports.CardForm = function CardForm(props) {
   var cardFormProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CardFormUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.CardForm, cardFormProps);
 };
-exports.CardForm = CardForm;

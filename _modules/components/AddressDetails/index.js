@@ -138,10 +138,9 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     }, AfterElement);
   }));
 };
-var AddressDetails = function AddressDetails(props) {
+var AddressDetails = exports.AddressDetails = function AddressDetails(props) {
   var addressDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: AddressDetailsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.AddressDetails, addressDetailsProps);
 };
-exports.AddressDetails = AddressDetails;

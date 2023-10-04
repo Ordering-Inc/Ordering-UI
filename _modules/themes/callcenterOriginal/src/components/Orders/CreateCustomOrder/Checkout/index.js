@@ -249,7 +249,7 @@ var CheckoutUI = function CheckoutUI(props) {
     closeOnBackdrop: false
   }));
 };
-var Checkout = function Checkout(props) {
+var Checkout = exports.Checkout = function Checkout(props) {
   var _Object$values, _cartState$error, _cartState$cart2;
   var errors = props.errors,
     clearErrors = props.clearErrors,
@@ -495,4 +495,3 @@ var Checkout = function Checkout(props) {
     closeOnBackdrop: false
   }));
 };
-exports.Checkout = Checkout;

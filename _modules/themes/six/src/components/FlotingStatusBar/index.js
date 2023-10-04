@@ -18,7 +18,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var FlotingStatusBar = function FlotingStatusBar(props) {
+var FlotingStatusBar = exports.FlotingStatusBar = function FlotingStatusBar(props) {
   var _currentCart$products, _currentCart$products2, _currentCart$products3;
   var currentCart = props.currentCart,
     goToCart = props.goToCart,
@@ -97,4 +97,3 @@ var FlotingStatusBar = function FlotingStatusBar(props) {
     fill: "white"
   }))), addNotify && /*#__PURE__*/_react.default.createElement(_styles.NotifyTost, null, /*#__PURE__*/_react.default.createElement(_styles.NotifyContent, null, currentProductName !== '' ? currentProductName : 'Product', "\xA0", t('CART_NOTIFY', 'added successfully'), /*#__PURE__*/_react.default.createElement(_MdClose.default, null))));
 };
-exports.FlotingStatusBar = FlotingStatusBar;

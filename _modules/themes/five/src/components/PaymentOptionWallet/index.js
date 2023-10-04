@@ -164,10 +164,9 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
     closeOnBackdrop: false
   }));
 };
-var PaymentOptionWallet = function PaymentOptionWallet(props) {
+var PaymentOptionWallet = exports.PaymentOptionWallet = function PaymentOptionWallet(props) {
   var paymentWalletProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PaymentOptionWalletUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PaymentOptionWallet, paymentWalletProps);
 };
-exports.PaymentOptionWallet = PaymentOptionWallet;

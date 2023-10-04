@@ -56,10 +56,9 @@ var ProductOptionUI = function ProductOptionUI(props) {
     }, AfterElement);
   }));
 };
-var ProductOption = function ProductOption(props) {
+var ProductOption = exports.ProductOption = function ProductOption(props) {
   var productOptionProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProductOptionUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductOption, productOptionProps);
 };
-exports.ProductOption = ProductOption;

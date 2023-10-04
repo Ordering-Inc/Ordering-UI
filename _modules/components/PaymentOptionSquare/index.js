@@ -121,10 +121,9 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     }, AfterElement);
   }));
 };
-var PaymentOptionSquare = function PaymentOptionSquare(props) {
+var PaymentOptionSquare = exports.PaymentOptionSquare = function PaymentOptionSquare(props) {
   var paymentPaypalProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PaymentOptionSquareUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PaymentOptionSquare, paymentPaypalProps);
 };
-exports.PaymentOptionSquare = PaymentOptionSquare;

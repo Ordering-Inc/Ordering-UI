@@ -142,10 +142,9 @@ var PromotionsUI = function PromotionsUI(props) {
     }, t('GO_TO_BUSINESSS', 'Go to business'))));
   })))));
 };
-var Promotions = function Promotions(props) {
+var Promotions = exports.Promotions = function Promotions(props) {
   var PromotionsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PromotionsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PromotionsController, PromotionsProps);
 };
-exports.Promotions = Promotions;

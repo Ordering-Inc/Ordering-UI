@@ -436,7 +436,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }, AfterElement);
   }));
 };
-var OrderDetails = function OrderDetails(props) {
+var OrderDetails = exports.OrderDetails = function OrderDetails(props) {
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
@@ -456,4 +456,3 @@ var OrderDetails = function OrderDetails(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetails, orderDetailsProps);
 };
-exports.OrderDetails = OrderDetails;

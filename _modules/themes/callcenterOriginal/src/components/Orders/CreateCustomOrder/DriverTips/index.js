@@ -92,10 +92,9 @@ var DriverTipsUI = function DriverTipsUI(props) {
     }
   }, t('APPLY_TIP', 'Apply Tip')))), currentTip && /*#__PURE__*/_react.default.createElement(_styles2.DriverTipMessage, null, t('CURRENT_DRIVER_TIP_AMOUNT', 'Current driver tip amount'), !isFixedPriceType && " (".concat(driverTip, "%)"), ": ", parsePrice(isMulti ? multiCartTipsAmmout : isFixedPriceType ? driverTip : cart === null || cart === void 0 ? void 0 : cart.driver_tip))));
 };
-var DriverTips = function DriverTips(props) {
+var DriverTips = exports.DriverTips = function DriverTips(props) {
   var driverTipsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: DriverTipsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.DriverTips, driverTipsProps);
 };
-exports.DriverTips = DriverTips;

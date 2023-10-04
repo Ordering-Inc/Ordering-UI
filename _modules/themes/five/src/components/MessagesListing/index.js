@@ -165,7 +165,7 @@ var OrdersListingUI = function OrdersListingUI(props) {
     }
   })));
 };
-var IdOrderList = function IdOrderList(props) {
+var IdOrderList = exports.IdOrderList = function IdOrderList(props) {
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersListingUI,
     orderStatus: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
@@ -175,8 +175,7 @@ var IdOrderList = function IdOrderList(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderList, orderListProps);
 };
-exports.IdOrderList = IdOrderList;
-var NewestOrderList = function NewestOrderList(props) {
+var NewestOrderList = exports.NewestOrderList = function NewestOrderList(props) {
   var orderListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersListingUI,
     orderStatus: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
@@ -187,7 +186,6 @@ var NewestOrderList = function NewestOrderList(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderList, orderListProps);
 };
-exports.NewestOrderList = NewestOrderList;
 var OrderDetailsUI = function OrderDetailsUI(props) {
   var messages = props.messages,
     setMessages = props.setMessages,
@@ -232,7 +230,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     handleChangeOpenMessages: handleChangeOpenMessages
   });
 };
-var MessageControler = function MessageControler(props) {
+var MessageControler = exports.MessageControler = function MessageControler(props) {
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     userCustomerId: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id,
@@ -252,8 +250,7 @@ var MessageControler = function MessageControler(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetails, orderDetailsProps);
 };
-exports.MessageControler = MessageControler;
-var MessagesListing = function MessagesListing(props) {
+var MessagesListing = exports.MessagesListing = function MessagesListing(props) {
   var _theme$images2;
   var onRedirectPage = props.onRedirectPage;
   var _useState3 = (0, _react.useState)('last_direct_message_at'),
@@ -315,4 +312,3 @@ var MessagesListing = function MessagesListing(props) {
     image: imageFails
   }))));
 };
-exports.MessagesListing = MessagesListing;

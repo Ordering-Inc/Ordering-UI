@@ -9,7 +9,7 @@ var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdK
 var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var PaginationButton = function PaginationButton(_ref) {
+var PaginationButton = exports.PaginationButton = function PaginationButton(_ref) {
   var pageSize = _ref.pageSize,
     total = _ref.total,
     currentPage = _ref.currentPage,
@@ -30,4 +30,3 @@ var PaginationButton = function PaginationButton(_ref) {
     disabled: currentPage === totalPages || totalPages === 1
   }, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null)));
 };
-exports.PaginationButton = PaginationButton;

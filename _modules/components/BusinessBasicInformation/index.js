@@ -25,7 +25,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var types = ['food', 'laundry', 'alcohol', 'groceries'];
-var BusinessBasicInformation = function BusinessBasicInformation(props) {
+var BusinessBasicInformation = exports.BusinessBasicInformation = function BusinessBasicInformation(props) {
   var _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view5, _theme$business_view6, _props$beforeElements, _props$beforeComponen, _theme$images, _business$reviews, _orderState$options, _props$afterComponent, _props$afterElements;
   var isSkeleton = props.isSkeleton,
     businessState = props.businessState,
@@ -127,4 +127,3 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     }, AfterElement);
   }));
 };
-exports.BusinessBasicInformation = BusinessBasicInformation;

@@ -413,10 +413,9 @@ var MessagesUI = function MessagesUI(props) {
     loading: "lazy"
   }))));
 };
-var Messages = function Messages(props) {
+var Messages = exports.Messages = function Messages(props) {
   var MessagesProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: MessagesUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.Messages, MessagesProps);
 };
-exports.Messages = Messages;

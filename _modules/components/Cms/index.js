@@ -78,10 +78,9 @@ var CmsUI = function CmsUI(props) {
     }, AfterElement);
   }));
 };
-var Cms = function Cms(props) {
+var Cms = exports.Cms = function Cms(props) {
   var CmsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CmsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.CmsContent, CmsProps);
 };
-exports.Cms = Cms;

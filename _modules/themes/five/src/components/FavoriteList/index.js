@@ -365,10 +365,9 @@ var FavoriteListUI = function FavoriteListUI(props) {
     }, AfterElement);
   }));
 };
-var FavoriteList = function FavoriteList(props) {
+var FavoriteList = exports.FavoriteList = function FavoriteList(props) {
   var favoriteListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: FavoriteListUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.FavoriteList, favoriteListProps);
 };
-exports.FavoriteList = FavoriteList;

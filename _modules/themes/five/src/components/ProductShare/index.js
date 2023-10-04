@@ -100,10 +100,9 @@ var ProductShareUI = function ProductShareUI(props) {
     }
   })));
 };
-var ProductShare = function ProductShare(props) {
+var ProductShare = exports.ProductShare = function ProductShare(props) {
   var productShareProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProductShareUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductShare, productShareProps);
 };
-exports.ProductShare = ProductShare;

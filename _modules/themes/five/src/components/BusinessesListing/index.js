@@ -11,7 +11,7 @@ var _StarbucksBusinessesListing = require("./layouts/StarbucksBusinessesListing"
 var _AppointmentsBusinessListing = require("./layouts/AppointmentsBusinessListing");
 var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var BusinessesListing = function BusinessesListing(props) {
+var BusinessesListing = exports.BusinessesListing = function BusinessesListing(props) {
   var _theme$business_listi;
   var logosLayout = props.logosLayout;
   var theme = (0, _styledComponents.useTheme)();
@@ -19,4 +19,3 @@ var BusinessesListing = function BusinessesListing(props) {
   var isStarbucksLayout = ['starbucks', 'mapview'].includes(layout);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (layout === 'original' || logosLayout) && /*#__PURE__*/_react.default.createElement(_OriginalBusinessesListing.OriginalBusinessesListing, props), isStarbucksLayout && !logosLayout && /*#__PURE__*/_react.default.createElement(_StarbucksBusinessesListing.StarbucksBusinessesListing, props), layout === 'red' && !logosLayout && /*#__PURE__*/_react.default.createElement(_RedBusinessesListing.RedBusinessesListing, props), layout === 'appointments' && !logosLayout && /*#__PURE__*/_react.default.createElement(_AppointmentsBusinessListing.BusinessListing, props));
 };
-exports.BusinessesListing = BusinessesListing;

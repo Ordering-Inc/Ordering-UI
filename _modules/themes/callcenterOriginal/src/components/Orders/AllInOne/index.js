@@ -327,11 +327,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     closeOnBackdrop: false
   }));
 };
-var AllInOne = function AllInOne(props) {
+var AllInOne = exports.AllInOne = function AllInOne(props) {
   var OrdersListControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersManagerUI,
     driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrdersManage, OrdersListControlProps);
 };
-exports.AllInOne = AllInOne;

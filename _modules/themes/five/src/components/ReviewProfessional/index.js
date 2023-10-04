@@ -250,11 +250,10 @@ var ReviewProfessionalUI = function ReviewProfessionalUI(props) {
     closeOnBackdrop: false
   })));
 };
-var ReviewProfessional = function ReviewProfessional(props) {
+var ReviewProfessional = exports.ReviewProfessional = function ReviewProfessional(props) {
   var reviewDriverProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ReviewProfessionalUI,
     isToast: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ReviewDriver, reviewDriverProps);
 };
-exports.ReviewProfessional = ReviewProfessional;

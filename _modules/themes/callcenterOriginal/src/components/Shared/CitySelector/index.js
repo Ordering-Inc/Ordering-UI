@@ -103,10 +103,9 @@ var CitySelectorUI = function CitySelectorUI(props) {
     }
   })));
 };
-var CitySelector = function CitySelector(props) {
+var CitySelector = exports.CitySelector = function CitySelector(props) {
   var cityListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CitySelectorUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.CityList, cityListProps);
 };
-exports.CitySelector = CitySelector;

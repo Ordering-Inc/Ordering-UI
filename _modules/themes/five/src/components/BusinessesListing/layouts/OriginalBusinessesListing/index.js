@@ -552,7 +552,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     closeOnBackdrop: false
   }));
 };
-var OriginalBusinessesListing = function OriginalBusinessesListing(props) {
+var OriginalBusinessesListing = exports.OriginalBusinessesListing = function OriginalBusinessesListing(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -587,4 +587,3 @@ var OriginalBusinessesListing = function OriginalBusinessesListing(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
-exports.OriginalBusinessesListing = OriginalBusinessesListing;

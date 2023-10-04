@@ -104,11 +104,10 @@ var SendGiftCardUI = function SendGiftCardUI(props) {
     closeOnBackdrop: false
   }));
 };
-var SendGiftCard = function SendGiftCard(props) {
+var SendGiftCard = exports.SendGiftCard = function SendGiftCard(props) {
   var sendGiftCardProps = _objectSpread(_objectSpread({}, props), {}, {
     showToastMsg: true,
     UIComponent: SendGiftCardUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.SendGiftCard, sendGiftCardProps);
 };
-exports.SendGiftCard = SendGiftCard;

@@ -250,10 +250,9 @@ var MomentControlUI = function MomentControlUI(props) {
     disabled: !isASP ? !timeSelected : false
   }, /*#__PURE__*/_react.default.createElement("span", null, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRight, null))));
 };
-var MomentControl = function MomentControl(props) {
+var MomentControl = exports.MomentControl = function MomentControl(props) {
   var momentProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: MomentControlUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.MomentOption, momentProps);
 };
-exports.MomentControl = MomentControl;

@@ -279,10 +279,9 @@ var CartUI = function CartUI(props) {
     }, AfterElement);
   }));
 };
-var Cart = function Cart(props) {
+var Cart = exports.Cart = function Cart(props) {
   var cartProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CartUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.Cart, cartProps);
 };
-exports.Cart = Cart;

@@ -273,7 +273,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
     }, AfterElement);
   }));
 };
-var ReviewOrder = function ReviewOrder(props) {
+var ReviewOrder = exports.ReviewOrder = function ReviewOrder(props) {
   var ReviewOrderProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ReviewOrderUI,
     isToast: true,
@@ -281,4 +281,3 @@ var ReviewOrder = function ReviewOrder(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderReview, ReviewOrderProps);
 };
-exports.ReviewOrder = ReviewOrder;

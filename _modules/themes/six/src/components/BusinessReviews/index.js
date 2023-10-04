@@ -35,7 +35,7 @@ var Score = function Score(_ref) {
     color: "#D81212"
   }), " ", star), /*#__PURE__*/_react.default.createElement("p", null, text));
 };
-var BusinessReviewsUI = function BusinessReviewsUI(props) {
+var BusinessReviewsUI = exports.BusinessReviewsUI = function BusinessReviewsUI(props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var businessName = props.businessName,
     stars = props.stars,
@@ -143,11 +143,9 @@ var BusinessReviewsUI = function BusinessReviewsUI(props) {
     }, AfterElement);
   }));
 };
-exports.BusinessReviewsUI = BusinessReviewsUI;
-var BusinessReviews = function BusinessReviews(props) {
+var BusinessReviews = exports.BusinessReviews = function BusinessReviews(props) {
   var BusinessReviewProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessReviewsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessReviews, BusinessReviewProps);
 };
-exports.BusinessReviews = BusinessReviews;

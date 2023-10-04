@@ -49,7 +49,7 @@ var optionsDefault = [{
   name: 'orders',
   pathname: '/profile/orders'
 }];
-var UserPopover = function UserPopover(props) {
+var UserPopover = exports.UserPopover = function UserPopover(props) {
   var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
   var open = props.open,
     optionsList = props.optionsList,
@@ -173,7 +173,6 @@ var UserPopover = function UserPopover(props) {
     }, AfterElement);
   }));
 };
-exports.UserPopover = UserPopover;
 var LogoutActionUI = function LogoutActionUI(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),

@@ -7,7 +7,7 @@ exports.SpinnerLoader = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var SpinnerLoader = function SpinnerLoader(props) {
+var SpinnerLoader = exports.SpinnerLoader = function SpinnerLoader(props) {
   var primary = props.primary,
     logotype = props.logotype,
     content = props.content,
@@ -24,4 +24,3 @@ var SpinnerLoader = function SpinnerLoader(props) {
     className: "spinner-content"
   }, /*#__PURE__*/_react.default.createElement("div", null))));
 };
-exports.SpinnerLoader = SpinnerLoader;

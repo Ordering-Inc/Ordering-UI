@@ -46,7 +46,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var Header = function Header(props) {
+var Header = exports.Header = function Header(props) {
   var _configState$configs, _customerState$user, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images2, _orderState$options2, _configState$configs2, _configState$configs3, _orderState$options3, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options4, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
   var isHome = props.isHome,
     location = props.location,
@@ -437,7 +437,6 @@ var Header = function Header(props) {
     }, AfterElement);
   }));
 };
-exports.Header = Header;
 var styles = {
   headCustomer: {
     margin: 0,
@@ -455,5 +454,4 @@ var styles = {
 Header.defaultProps = {
   isShowOrderOptions: true
 };
-var _default = Header;
-exports.default = _default;
+var _default = exports.default = Header;

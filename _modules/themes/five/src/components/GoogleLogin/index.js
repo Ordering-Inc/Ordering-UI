@@ -32,10 +32,9 @@ var GoogleLoginButtonUI = function GoogleLoginButtonUI(props) {
     onClick: signInWithGoogle
   }, /*#__PURE__*/_react.default.createElement(_FcGoogle.default, null), /*#__PURE__*/_react.default.createElement("div", null, t('CONTINUE_WITH_GOOGLE', 'Continue with Google')));
 };
-var GoogleLoginButton = function GoogleLoginButton(props) {
+var GoogleLoginButton = exports.GoogleLoginButton = function GoogleLoginButton(props) {
   var googleLoginProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: GoogleLoginButtonUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.FirebaseGoogleLoginButton, googleLoginProps);
 };
-exports.GoogleLoginButton = GoogleLoginButton;

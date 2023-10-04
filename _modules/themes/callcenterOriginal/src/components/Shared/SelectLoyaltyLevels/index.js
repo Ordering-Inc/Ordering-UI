@@ -112,10 +112,9 @@ var SelectLoyaltyLevelsUI = function SelectLoyaltyLevelsUI(props) {
     }
   }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')));
 };
-var SelectLoyaltyLevels = function SelectLoyaltyLevels(props) {
+var SelectLoyaltyLevels = exports.SelectLoyaltyLevels = function SelectLoyaltyLevels(props) {
   var levelsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SelectLoyaltyLevelsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PointsWalletLevels, levelsProps);
 };
-exports.SelectLoyaltyLevels = SelectLoyaltyLevels;

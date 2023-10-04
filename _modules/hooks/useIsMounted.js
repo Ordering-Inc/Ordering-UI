@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.useIsMounted = void 0;
 var _react = require("react");
-var useIsMounted = function useIsMounted() {
+var useIsMounted = exports.useIsMounted = function useIsMounted() {
   var isMounted = (0, _react.useRef)(false);
   (0, _react.useEffect)(function () {
     isMounted.current = true;
@@ -18,4 +18,3 @@ var useIsMounted = function useIsMounted() {
   }, []);
   return mounted();
 };
-exports.useIsMounted = useIsMounted;

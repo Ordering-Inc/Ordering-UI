@@ -29,14 +29,13 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
  * Create ThemeContext
  * Context to use theme on the app
  */
-var ThemeContext = /*#__PURE__*/(0, _react.createContext)();
+var ThemeContext = exports.ThemeContext = /*#__PURE__*/(0, _react.createContext)();
 
 /**
  * Api provider to manage theme
  * @param {props} props
  */
-exports.ThemeContext = ThemeContext;
-var ThemeProvider = function ThemeProvider(_ref) {
+var ThemeProvider = exports.ThemeProvider = function ThemeProvider(_ref) {
   var _theme$fonts$primary;
   var children = _ref.children,
     props = _objectWithoutProperties(_ref, _excluded);
@@ -90,9 +89,7 @@ var ThemeProvider = function ThemeProvider(_ref) {
 /**
  * Hook to get theme state
  */
-exports.ThemeProvider = ThemeProvider;
-var useTheme = function useTheme() {
+var useTheme = exports.useTheme = function useTheme() {
   var themeManager = (0, _react.useContext)(ThemeContext);
   return themeManager || [{}];
 };
-exports.useTheme = useTheme;

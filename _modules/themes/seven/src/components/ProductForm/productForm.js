@@ -32,7 +32,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import { useOrder } from '../../contexts/OrderContext'
 // import { useConfig } from '../../contexts/ConfigContext'
 // import { useApi } from '../../contexts/ApiContext'
-var ProductForm = function ProductForm(props) {
+var ProductForm = exports.ProductForm = function ProductForm(props) {
   var _props$productCart, _orderState$carts, _cart$products, _cart$products2, _product$product, _product$product2, _product$product3, _product$product4;
   var UIComponent = props.UIComponent,
     useOrderContext = props.useOrderContext,
@@ -706,7 +706,6 @@ var ProductForm = function ProductForm(props) {
     handleChangeCommentState: handleChangeCommentState
   })));
 };
-exports.ProductForm = ProductForm;
 ProductForm.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props

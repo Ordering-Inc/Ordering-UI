@@ -271,10 +271,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     }, AfterElement);
   }));
 };
-var PhoneAutocomplete = function PhoneAutocomplete(props) {
+var PhoneAutocomplete = exports.PhoneAutocomplete = function PhoneAutocomplete(props) {
   var phoneProps = _objectSpread({
     UIComponent: PhoneAutocompleteUI
   }, props);
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PhoneAutocomplete, phoneProps);
 };
-exports.PhoneAutocomplete = PhoneAutocomplete;

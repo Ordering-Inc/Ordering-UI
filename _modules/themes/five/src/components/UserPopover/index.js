@@ -29,7 +29,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var UserPopover = function UserPopover(props) {
+var UserPopover = exports.UserPopover = function UserPopover(props) {
   var _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _configs$advanced_off, _configs$advanced_off2, _theme$profile, _theme$header, _theme$bar_menu, _theme$bar_menu2, _theme$bar_menu3, _theme$bar_menu4, _theme$bar_menu5, _theme$bar_menu6, _theme$bar_menu7, _theme$bar_menu8, _theme$bar_menu9, _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
   var open = props.open,
     isHome = props.isHome,
@@ -257,7 +257,6 @@ var UserPopover = function UserPopover(props) {
     }, AfterElement);
   }));
 };
-exports.UserPopover = UserPopover;
 var LogoutActionUI = function LogoutActionUI(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),

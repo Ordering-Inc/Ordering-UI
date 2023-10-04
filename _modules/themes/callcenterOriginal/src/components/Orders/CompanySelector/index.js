@@ -249,11 +249,10 @@ var CompanySelectorUI = function CompanySelectorUI(props) {
     })));
   }
 };
-var CompanySelector = function CompanySelector(props) {
+var CompanySelector = exports.CompanySelector = function CompanySelector(props) {
   var CompanysControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CompanySelectorUI,
     propsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo']
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.DriverListDashboard, CompanysControlProps));
 };
-exports.CompanySelector = CompanySelector;

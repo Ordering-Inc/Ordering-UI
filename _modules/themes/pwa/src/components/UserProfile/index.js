@@ -228,14 +228,13 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     }, AfterElement);
   }));
 };
-var UserProfile = function UserProfile(props) {
+var UserProfile = exports.UserProfile = function UserProfile(props) {
   var UserProfileProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UserProfileFormUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UserFormDetails, UserProfileProps);
 };
-exports.UserProfile = UserProfile;
-var Bell = function Bell() {
+var Bell = exports.Bell = function Bell() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     width: "16",
     height: "16",
@@ -265,8 +264,7 @@ var Bell = function Bell() {
     fill: "white"
   }))));
 };
-exports.Bell = Bell;
-var GeoAlt = function GeoAlt() {
+var GeoAlt = exports.GeoAlt = function GeoAlt() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     width: "16",
     height: "16",
@@ -289,8 +287,7 @@ var GeoAlt = function GeoAlt() {
     fill: "white"
   }))));
 };
-exports.GeoAlt = GeoAlt;
-var LifePre = function LifePre() {
+var LifePre = exports.LifePre = function LifePre() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     width: "16",
     height: "16",
@@ -310,8 +307,7 @@ var LifePre = function LifePre() {
     fill: "white"
   }))));
 };
-exports.LifePre = LifePre;
-var Reward = function Reward() {
+var Reward = exports.Reward = function Reward() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     id: "Capa_1",
     enableBackground: "new 0 0 512 512",
@@ -325,7 +321,6 @@ var Reward = function Reward() {
     d: "m256 84.791c-64.428 0-116.844 52.416-116.844 116.845s52.416 116.843 116.844 116.843 116.844-52.416 116.844-116.844-52.416-116.844-116.844-116.844zm0 203.662c-47.871 0-86.818-38.947-86.818-86.818 0-47.872 38.947-86.818 86.818-86.818s86.818 38.947 86.818 86.818c0 47.872-38.947 86.818-86.818 86.818z"
   }));
 };
-exports.Reward = Reward;
 var LogoutActionUI = function LogoutActionUI(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),

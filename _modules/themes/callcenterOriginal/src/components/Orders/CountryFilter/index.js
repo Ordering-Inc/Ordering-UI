@@ -88,10 +88,9 @@ var CountryFilterUI = function CountryFilterUI(props) {
     }
   })));
 };
-var CountryFilter = function CountryFilter(props) {
+var CountryFilter = exports.CountryFilter = function CountryFilter(props) {
   var countryFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CountryFilterUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.CountryList, countryFilterProps);
 };
-exports.CountryFilter = CountryFilter;

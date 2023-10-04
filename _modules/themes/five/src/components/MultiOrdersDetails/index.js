@@ -165,10 +165,9 @@ var MultiOrdersDetailsUI = function MultiOrdersDetailsUI(props) {
     closeOnBackdrop: false
   }));
 };
-var MultiOrdersDetails = function MultiOrdersDetails(props) {
+var MultiOrdersDetails = exports.MultiOrdersDetails = function MultiOrdersDetails(props) {
   var MultiOrdersDetails = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: MultiOrdersDetailsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.MultiOrdersDetails, MultiOrdersDetails);
 };
-exports.MultiOrdersDetails = MultiOrdersDetails;

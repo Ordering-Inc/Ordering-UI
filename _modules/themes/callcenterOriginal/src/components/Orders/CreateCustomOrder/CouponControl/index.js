@@ -91,10 +91,9 @@ var CouponControlUI = function CouponControlUI(props) {
     closeOnBackdrop: false
   }));
 };
-var CouponControl = function CouponControl(props) {
+var CouponControl = exports.CouponControl = function CouponControl(props) {
   var couponProp = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CouponControlUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.CouponControl, couponProp);
 };
-exports.CouponControl = CouponControl;

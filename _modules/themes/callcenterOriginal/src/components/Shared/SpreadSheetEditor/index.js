@@ -229,5 +229,4 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
     });
   })));
 };
-var _default = /*#__PURE__*/(0, _react.memo)(SpreadSheetEditor);
-exports.default = _default;
+var _default = exports.default = /*#__PURE__*/(0, _react.memo)(SpreadSheetEditor);

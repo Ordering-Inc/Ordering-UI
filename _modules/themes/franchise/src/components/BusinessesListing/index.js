@@ -429,11 +429,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }, AfterElement);
   }));
 };
-var BusinessesListing = function BusinessesListing(props) {
+var BusinessesListing = exports.BusinessesListing = function BusinessesListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     franchiseId: 1,
     UIComponent: BusinessesListingUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
-exports.BusinessesListing = BusinessesListing;

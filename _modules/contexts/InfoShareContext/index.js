@@ -24,14 +24,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  * Create InfoShareContext
  * This context will manage the info between pages and provide an easy interface
  */
-var InfoShareContext = /*#__PURE__*/(0, _react.createContext)();
+var InfoShareContext = exports.InfoShareContext = /*#__PURE__*/(0, _react.createContext)();
 
 /**
   * Custom provider to mange shared info
   * @param {props} props
   */
-exports.InfoShareContext = InfoShareContext;
-var InfoShareProvider = function InfoShareProvider(_ref) {
+var InfoShareProvider = exports.InfoShareProvider = function InfoShareProvider(_ref) {
   var children = _ref.children;
   var _useState = (0, _react.useState)({
       isCollapse: false
@@ -53,7 +52,7 @@ var InfoShareProvider = function InfoShareProvider(_ref) {
 };
 
 // hook context
-exports.InfoShareProvider = InfoShareProvider;
+
 function useInfoShare() {
   var infoShareManager = _react.default.useContext(InfoShareContext);
   return infoShareManager || [{}, function () {}];

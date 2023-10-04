@@ -10,7 +10,7 @@ var clearNumber = function clearNumber() {
   var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   return value.replace(/\D+/g, '');
 };
-var formatCreditCardNumber = function formatCreditCardNumber(value) {
+var formatCreditCardNumber = exports.formatCreditCardNumber = function formatCreditCardNumber(value) {
   if (!value) {
     return value;
   }
@@ -30,8 +30,7 @@ var formatCreditCardNumber = function formatCreditCardNumber(value) {
   }
   return nextValue.trim();
 };
-exports.formatCreditCardNumber = formatCreditCardNumber;
-var formatCVC = function formatCVC(value, prevValue) {
+var formatCVC = exports.formatCVC = function formatCVC(value, prevValue) {
   var allValues = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var clearValue = clearNumber(value);
   var maxLength = 4;
@@ -41,16 +40,14 @@ var formatCVC = function formatCVC(value, prevValue) {
   }
   return clearValue.slice(0, maxLength);
 };
-exports.formatCVC = formatCVC;
-var formatExpirationDate = function formatExpirationDate(value) {
+var formatExpirationDate = exports.formatExpirationDate = function formatExpirationDate(value) {
   var clearValue = clearNumber(value);
   if (clearValue.length >= 3) {
     return "".concat(clearValue.slice(0, 2), "/").concat(clearValue.slice(2, 4));
   }
   return clearValue;
 };
-exports.formatExpirationDate = formatExpirationDate;
-var getCardType = function getCardType(number) {
+var getCardType = exports.getCardType = function getCardType(number) {
   // visa
   var re = new RegExp('^4');
   if (number.match(re) != null) {
@@ -99,4 +96,3 @@ var getCardType = function getCardType(number) {
   }
   return '';
 };
-exports.getCardType = getCardType;

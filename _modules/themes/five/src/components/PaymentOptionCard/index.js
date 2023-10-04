@@ -75,10 +75,9 @@ var PaymentOptionCardUI = function PaymentOptionCardUI(props) {
     setAddCardOpen: setAddCardOpen
   })));
 };
-var PaymentOptionCard = function PaymentOptionCard(props) {
+var PaymentOptionCard = exports.PaymentOptionCard = function PaymentOptionCard(props) {
   var paymentOptionStripeProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PaymentOptionCardUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PaymentOptionStripe, paymentOptionStripeProps);
 };
-exports.PaymentOptionCard = PaymentOptionCard;

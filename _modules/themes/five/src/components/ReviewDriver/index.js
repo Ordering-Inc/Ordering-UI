@@ -266,13 +266,11 @@ var ReviewDriverUI = function ReviewDriverUI(props) {
     }, AfterElement);
   }));
 };
-var ReviewDriver = function ReviewDriver(props) {
+var ReviewDriver = exports.ReviewDriver = function ReviewDriver(props) {
   var reviewDriverProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ReviewDriverUI,
     isToast: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ReviewDriver, reviewDriverProps);
 };
-exports.ReviewDriver = ReviewDriver;
-var _default = ReviewDriver;
-exports.default = _default;
+var _default = exports.default = ReviewDriver;

@@ -35,7 +35,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
+var PaymentOptionStripeUI = exports.PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   var _validationFields$fie, _validationFields$fie2, _props$beforeElements, _props$beforeComponen, _cardsList$error$, _cardsList$cards2, _props$afterComponent, _props$afterElements;
   var deleteCard = props.deleteCard,
     cardsList = props.cardsList,
@@ -169,8 +169,7 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
     }, AfterElement);
   }));
 };
-exports.PaymentOptionStripeUI = PaymentOptionStripeUI;
-var PaymentCard = function PaymentCard(props) {
+var PaymentCard = exports.PaymentCard = function PaymentCard(props) {
   var handleDeleteCard = props.handleDeleteCard,
     card = props.card,
     handleCardClick = props.handleCardClick,
@@ -249,11 +248,9 @@ var PaymentCard = function PaymentCard(props) {
     }
   })))));
 };
-exports.PaymentCard = PaymentCard;
-var PaymentOptionStripe = function PaymentOptionStripe(props) {
+var PaymentOptionStripe = exports.PaymentOptionStripe = function PaymentOptionStripe(props) {
   var paymentOptionStripeProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PaymentOptionStripeUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.PaymentOptionStripe, paymentOptionStripeProps);
 };
-exports.PaymentOptionStripe = PaymentOptionStripe;

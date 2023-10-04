@@ -103,10 +103,9 @@ var GoogleMapsApiKeySettingUI = function GoogleMapsApiKeySettingUI(props) {
     closeOnBackdrop: false
   }));
 };
-var GoogleMapsApiKeySettingButton = function GoogleMapsApiKeySettingButton(props) {
+var GoogleMapsApiKeySettingButton = exports.GoogleMapsApiKeySettingButton = function GoogleMapsApiKeySettingButton(props) {
   var apiKeySettingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: GoogleMapsApiKeySettingUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsApiKeySetting, apiKeySettingProps);
 };
-exports.GoogleMapsApiKeySettingButton = GoogleMapsApiKeySettingButton;

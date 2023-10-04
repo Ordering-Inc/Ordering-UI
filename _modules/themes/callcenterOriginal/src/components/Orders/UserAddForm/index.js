@@ -366,7 +366,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
     handleChangePhoto: handleChangePhoto
   })));
 };
-var UserAddForm = function UserAddForm(props) {
+var UserAddForm = exports.UserAddForm = function UserAddForm(props) {
   var UserAddProps = _objectSpread(_objectSpread({}, props), {}, {
     useSessionUser: false,
     useValidationFields: true,
@@ -374,4 +374,3 @@ var UserAddForm = function UserAddForm(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UserFormDetails, UserAddProps);
 };
-exports.UserAddForm = UserAddForm;

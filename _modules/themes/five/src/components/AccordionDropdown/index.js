@@ -10,7 +10,7 @@ var _AiOutlineCheck = _interopRequireDefault(require("@meronex/icons/ai/AiOutlin
 var _styles = require("./styles");
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var AccordionDropdown = function AccordionDropdown(props) {
+var AccordionDropdown = exports.AccordionDropdown = function AccordionDropdown(props) {
   var item = props.item,
     spaceTab = props.spaceTab,
     isOpen = props.isOpen,
@@ -46,4 +46,3 @@ var AccordionDropdown = function AccordionDropdown(props) {
     currentCat: item
   })));
 };
-exports.AccordionDropdown = AccordionDropdown;

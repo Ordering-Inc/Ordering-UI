@@ -66,10 +66,9 @@ var VerticalGiftCardOrdersLayoutUI = function VerticalGiftCardOrdersLayoutUI(pro
     onClick: loadMoreOrders
   }, t('LOAD_MORE_ORDERS', 'Load more orders'))));
 };
-var VerticalGiftCardOrdersLayout = function VerticalGiftCardOrdersLayout(props) {
+var VerticalGiftCardOrdersLayout = exports.VerticalGiftCardOrdersLayout = function VerticalGiftCardOrdersLayout(props) {
   var giftCardsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: VerticalGiftCardOrdersLayoutUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.GiftCardOrdersList, giftCardsProps);
 };
-exports.VerticalGiftCardOrdersLayout = VerticalGiftCardOrdersLayout;

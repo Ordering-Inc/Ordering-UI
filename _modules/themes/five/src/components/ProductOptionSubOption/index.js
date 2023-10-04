@@ -156,11 +156,10 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     }, AfterElement);
   }));
 };
-var ProductOptionSubOption = function ProductOptionSubOption(props) {
+var ProductOptionSubOption = exports.ProductOptionSubOption = function ProductOptionSubOption(props) {
   var productOptionSubOptionProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProductOptionSubOptionUI,
     isOrigin: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductOptionSuboption, productOptionSubOptionProps);
 };
-exports.ProductOptionSubOption = ProductOptionSubOption;

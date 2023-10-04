@@ -13,7 +13,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  ", "\n  background: ", ";\n  border: 1px solid #E9ECEF;\n  padding: 10px;\n  border-radius: 7.6px;\n  box-sizing: border-box;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  cursor: pointer;\n  position: relative;\n  > div {\n    display: flex;\n    justify-content: space-between;\n    ", "\n    align-items: center;\n    width: 100%;\n  }\n  button {\n    width: 100%;\n    margin-top: 10px;\n    padding: 4px;\n  }\n  ", "\n"])), function (_ref) {
+var CardContainer = exports.CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  ", "\n  background: ", ";\n  border: 1px solid #E9ECEF;\n  padding: 10px;\n  border-radius: 7.6px;\n  box-sizing: border-box;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  cursor: pointer;\n  position: relative;\n  > div {\n    display: flex;\n    justify-content: space-between;\n    ", "\n    align-items: center;\n    width: 100%;\n  }\n  button {\n    width: 100%;\n    margin-top: 10px;\n    padding: 4px;\n  }\n  ", "\n"])), function (_ref) {
   var isShowAddButt = _ref.isShowAddButt;
   return (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    min-height: ", ";\n  "])), isShowAddButt ? '162px' : '110px');
 }, function (_ref2) {
@@ -40,16 +40,14 @@ var CardContainer = _styledComponents.default.div(_templateObject || (_templateO
     });
   });
 });
-exports.CardContainer = CardContainer;
-var SoldOut = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  font-weight: bold;\n  position: absolute;\n  background: #495057 0% 0% no-repeat padding-box;\n  padding: 5px 10px;\n  top: 7px;\n  border-radius: 2px 0px 0px 2px;\n  right: 0px;\n  color: white;\n  font-size: 12px;\n  ", "\n  &:first-letter {\n    text-transform: uppercase;\n  }\n  ", "\n"])), function (props) {
+var SoldOut = exports.SoldOut = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  font-weight: bold;\n  position: absolute;\n  background: #495057 0% 0% no-repeat padding-box;\n  padding: 5px 10px;\n  top: 7px;\n  border-radius: 2px 0px 0px 2px;\n  right: 0px;\n  color: white;\n  font-size: 12px;\n  ", "\n  &:first-letter {\n    text-transform: uppercase;\n  }\n  ", "\n"])), function (props) {
   var _props$theme3;
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    left: 0px;\n    right: initial;\n  "])));
 }, function (_ref6) {
   var isBottom = _ref6.isBottom;
   return isBottom && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    bottom: 7px;\n    top: initial;\n  "])));
 });
-exports.SoldOut = SoldOut;
-var CardInfo = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  min-height: 86px;\n  ", "\n  > * {\n    margin: 3px;\n  }\n  p {\n    color: #909BA9;\n    text-align: left;\n    font-size: 10px;\n    ", "\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n    white-space: pre-wrap;\n  }\n  span {\n    color: ", ";\n    font-size: 14px;\n  }\n  ", "\n  @media (min-width: 1024px) {\n    p {\n      font-size: 12px;\n    }\n    span {\n      font-size: 14px;\n    }\n  }\n"])), function (_ref7) {
+var CardInfo = exports.CardInfo = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  min-height: 86px;\n  ", "\n  > * {\n    margin: 3px;\n  }\n  p {\n    color: #909BA9;\n    text-align: left;\n    font-size: 10px;\n    ", "\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n    white-space: pre-wrap;\n  }\n  span {\n    color: ", ";\n    font-size: 14px;\n  }\n  ", "\n  @media (min-width: 1024px) {\n    p {\n      font-size: 12px;\n    }\n    span {\n      font-size: 14px;\n    }\n  }\n"])), function (_ref7) {
   var isBgimage = _ref7.isBgimage;
   return (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    width: ", ";\n  "])), isBgimage ? 'calc(100% - 90px)' : '100%');
 }, function (props) {
@@ -61,8 +59,7 @@ var CardInfo = _styledComponents.default.div(_templateObject14 || (_templateObje
   var oneLine = _ref8.oneLine;
   return oneLine && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    p {\n      -webkit-line-clamp: 1;\n    }\n  "])));
 });
-exports.CardInfo = CardInfo;
-var WrapLogo = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: relative;\n  max-width: 86px;\n  max-height: 86px;\n  height: 86px;\n  ", "\n  ", "\n  ", "\n"])), function (_ref9) {
+var WrapLogo = exports.WrapLogo = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: relative;\n  max-width: 86px;\n  max-height: 86px;\n  height: 86px;\n  ", "\n  ", "\n  ", "\n"])), function (_ref9) {
   var isBgimage = _ref9.isBgimage;
   return isBgimage && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    width: 86px;\n  "])));
 }, function (_ref10) {
@@ -73,17 +70,15 @@ var WrapLogo = _styledComponents.default.div(_templateObject18 || (_templateObje
   var _props$theme5;
   return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n    margin-left: 0px;\n  "])));
 });
-exports.WrapLogo = WrapLogo;
-var WrapTags = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-left: 10px;\n  margin-right: 10px;\n  overflow-x: auto;\n  ", "\n  ", "\n  div {\n    display: flex;\n    margin: auto;\n  }\n  ::-webkit-scrollbar {\n    display: none;\n  }\n  img {\n    width: 30px;\n    height: 30px;\n    margin-right: 5px;\n  }\n"])), function (_ref11) {
+var WrapTags = exports.WrapTags = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-left: 10px;\n  margin-right: 10px;\n  overflow-x: auto;\n  ", "\n  ", "\n  div {\n    display: flex;\n    margin: auto;\n  }\n  ::-webkit-scrollbar {\n    display: none;\n  }\n  img {\n    width: 30px;\n    height: 30px;\n    margin-right: 5px;\n  }\n"])), function (_ref11) {
   var isBgimage = _ref11.isBgimage;
   return isBgimage && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    width: 50px;\n  "])));
 }, function (props) {
   var _props$theme6;
   return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n    margin-left: 0px;\n  "])));
 });
-exports.WrapTags = WrapTags;
 var CardLogoStyled = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  min-height: 86px;\n  border-radius: 10px;\n"])));
-var CardLogo = function CardLogo(props) {
+var CardLogo = exports.CardLogo = function CardLogo(props) {
   var style = {};
   if (props.bgimage) {
     style.backgroundImage = "url(".concat(props.bgimage, ")");
@@ -95,8 +90,7 @@ var CardLogo = function CardLogo(props) {
     style: style
   }), props.children);
 };
-exports.CardLogo = CardLogo;
-var PriceWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  .current-price {\n    min-width: 64px\n  }\n  .off-price {\n    font-size: 10px;\n    color: #909BA9;\n    margin-left: 5px;\n    text-decoration: line-through;\n    ", "\n    ", "\n    @media (min-width: 1024px) {\n      font-size: 13px;\n      ", "\n    }\n  }\n"])), function (_ref12) {
+var PriceWrapper = exports.PriceWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  .current-price {\n    min-width: 64px\n  }\n  .off-price {\n    font-size: 10px;\n    color: #909BA9;\n    margin-left: 5px;\n    text-decoration: line-through;\n    ", "\n    ", "\n    @media (min-width: 1024px) {\n      font-size: 13px;\n      ", "\n    }\n  }\n"])), function (_ref12) {
   var isOffPrice = _ref12.isOffPrice;
   return isOffPrice && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n      min-width: 46px;\n    "])));
 }, function (props) {
@@ -105,16 +99,14 @@ var PriceWrapper = _styledComponents.default.div(_templateObject27 || (_template
   var isOffPrice = _ref13.isOffPrice;
   return isOffPrice && (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n        min-width: 64px;\n      "])));
 });
-exports.PriceWrapper = PriceWrapper;
-var QuantityContainer = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 98%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-20px, 50%);\n  @media (min-width: 768px) {\n    transform: translate(-50%, 50%);\n  }\n"])), function (_ref14) {
+var QuantityContainer = exports.QuantityContainer = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 98%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-20px, 50%);\n  @media (min-width: 768px) {\n    transform: translate(-50%, 50%);\n  }\n"])), function (_ref14) {
   var theme = _ref14.theme;
   return theme.colors.primary;
 }, function (_ref15) {
   var theme = _ref15.theme;
   return theme.colors.primaryContrast;
 });
-exports.QuantityContainer = QuantityContainer;
-var RibbonBox = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: absolute;\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  top: -4px;\n  right: -3px;\n  background-color: ", ";\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  overflow: hidden;\n  max-width: 70px;\n  word-break: break-all;\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (props) {
+var RibbonBox = exports.RibbonBox = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: absolute;\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  top: -4px;\n  right: -3px;\n  background-color: ", ";\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  overflow: hidden;\n  max-width: 70px;\n  word-break: break-all;\n  ", "\n  ", "\n  ", "\n  ", "\n"])), function (props) {
   return props.theme.colors.colorTextSignForm;
 }, function (props) {
   return props.theme.colors.primary;
@@ -130,21 +122,16 @@ var RibbonBox = _styledComponents.default.div(_templateObject32 || (_templateObj
   var isCapsule = _ref18.isCapsule;
   return isCapsule && (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
 });
-exports.RibbonBox = RibbonBox;
-var LastOrder = _styledComponents.default.span(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px !important;\n  margin: 0px 3px;\n"])), function (props) {
+var LastOrder = exports.LastOrder = _styledComponents.default.span(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px !important;\n  margin: 0px 3px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
-exports.LastOrder = LastOrder;
-var TitleWrapper = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  h1 {\n    font-size: 14px;\n    font-weight: 500;\n    text-align: left;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    margin: 0px;\n  }\n  > span {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    svg {\n      color: ", ";\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
+var TitleWrapper = exports.TitleWrapper = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  h1 {\n    font-size: 14px;\n    font-weight: 500;\n    text-align: left;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    margin: 0px;\n  }\n  > span {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    svg {\n      color: ", ";\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.danger500;
 });
-exports.TitleWrapper = TitleWrapper;
-var SkeletonCardInfo = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: calc(100% - 90px);\n  > * {\n    margin: 3px;\n  }\n"])));
-exports.SkeletonCardInfo = SkeletonCardInfo;
-var SkeletonCardLogo = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  max-width: 86px;\n  max-height: 86px;\n  width: 86px;\n  height: 86px;\n  margin-left: 5px;\n  ", "\n"])), function (props) {
+var SkeletonCardInfo = exports.SkeletonCardInfo = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: calc(100% - 90px);\n  > * {\n    margin: 3px;\n  }\n"])));
+var SkeletonCardLogo = exports.SkeletonCardLogo = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  max-width: 86px;\n  max-height: 86px;\n  width: 86px;\n  height: 86px;\n  margin-left: 5px;\n  ", "\n"])), function (props) {
   var _props$theme7;
   return ((_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.rtl) && (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n    margin-right: 5px;\n    margin-left: 0px;\n  "])));
 });
-exports.SkeletonCardLogo = SkeletonCardLogo;

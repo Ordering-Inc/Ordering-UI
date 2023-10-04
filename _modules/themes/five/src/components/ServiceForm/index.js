@@ -514,11 +514,10 @@ var ServiceFormUI = function ServiceFormUI(props) {
     closeOnBackdrop: false
   }));
 };
-var ServiceForm = function ServiceForm(props) {
+var ServiceForm = exports.ServiceForm = function ServiceForm(props) {
   var serviceFormProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ServiceFormUI,
     isService: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductForm, serviceFormProps);
 };
-exports.ServiceForm = ServiceForm;

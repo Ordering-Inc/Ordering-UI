@@ -9,7 +9,7 @@ var _styles = require("./styles");
 var _AutoScroll = require("../../AutoScroll");
 var _SingleProfessionalCard = require("../../SingleProfessionalCard");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var PreviousProfessionalOrdered = function PreviousProfessionalOrdered(props) {
+var PreviousProfessionalOrdered = exports.PreviousProfessionalOrdered = function PreviousProfessionalOrdered(props) {
   var professionals = props.professionals,
     handleUpdateProfessionals = props.handleUpdateProfessionals;
   return /*#__PURE__*/_react.default.createElement(_styles.ProductsListContainer, {
@@ -22,4 +22,3 @@ var PreviousProfessionalOrdered = function PreviousProfessionalOrdered(props) {
     });
   }))));
 };
-exports.PreviousProfessionalOrdered = PreviousProfessionalOrdered;

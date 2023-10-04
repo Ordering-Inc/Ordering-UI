@@ -496,7 +496,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     getOrderStatus: progressBarObjt
   }));
 };
-var OrderDetails = function OrderDetails(props) {
+var OrderDetails = exports.OrderDetails = function OrderDetails(props) {
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     asDashboard: true,
     isDisableLoadMessages: true,
@@ -504,4 +504,3 @@ var OrderDetails = function OrderDetails(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetailsDashboard, orderDetailsProps);
 };
-exports.OrderDetails = OrderDetails;

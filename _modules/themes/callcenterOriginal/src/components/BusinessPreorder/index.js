@@ -226,7 +226,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
     }
   })));
 };
-var BusinessPreorder = function BusinessPreorder(props) {
+var BusinessPreorder = exports.BusinessPreorder = function BusinessPreorder(props) {
   var _configs$max_days_pre4;
   var _useConfig3 = (0, _orderingComponents.useConfig)(),
     _useConfig4 = _slicedToArray(_useConfig3, 1),
@@ -243,4 +243,3 @@ var BusinessPreorder = function BusinessPreorder(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.MomentOption, businessPreorderProps);
 };
-exports.BusinessPreorder = BusinessPreorder;

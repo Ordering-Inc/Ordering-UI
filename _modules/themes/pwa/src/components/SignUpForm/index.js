@@ -386,10 +386,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     }, AfterElement);
   }));
 };
-var SignUpForm = function SignUpForm(props) {
+var SignUpForm = exports.SignUpForm = function SignUpForm(props) {
   var loginControllerProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SignUpFormUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.SignupForm, loginControllerProps);
 };
-exports.SignUpForm = SignUpForm;

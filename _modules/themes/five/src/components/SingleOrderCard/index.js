@@ -356,10 +356,9 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     }, AfterElement);
   }));
 };
-var SingleOrderCard = function SingleOrderCard(props) {
+var SingleOrderCard = exports.SingleOrderCard = function SingleOrderCard(props) {
   var singleOrderCardProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SingleOrderCardUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.SingleOrderCard, singleOrderCardProps);
 };
-exports.SingleOrderCard = SingleOrderCard;

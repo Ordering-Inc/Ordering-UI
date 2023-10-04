@@ -167,7 +167,7 @@ var styles = {
     flexDirection: 'row'
   }
 };
-var BusinessTypeFilter = function BusinessTypeFilter(props) {
+var BusinessTypeFilter = exports.BusinessTypeFilter = function BusinessTypeFilter(props) {
   var businessTypeFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessTypeFilterUI,
     defaultBusinessType: props.defaultBusinessType || null,
@@ -175,4 +175,3 @@ var BusinessTypeFilter = function BusinessTypeFilter(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessTypeFilter, businessTypeFilterProps);
 };
-exports.BusinessTypeFilter = BusinessTypeFilter;

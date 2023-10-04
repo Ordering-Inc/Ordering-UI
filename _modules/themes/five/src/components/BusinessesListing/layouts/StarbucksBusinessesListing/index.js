@@ -374,10 +374,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }, AfterElement);
   }));
 };
-var StarbucksBusinessesListing = function StarbucksBusinessesListing(props) {
+var StarbucksBusinessesListing = exports.StarbucksBusinessesListing = function StarbucksBusinessesListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessesListingUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
-exports.StarbucksBusinessesListing = StarbucksBusinessesListing;

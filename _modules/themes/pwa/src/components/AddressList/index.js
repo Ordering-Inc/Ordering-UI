@@ -316,14 +316,13 @@ var AddressListUI = function AddressListUI(props) {
     }, AfterElement);
   }));
 };
-var AddressList = function AddressList(props) {
+var AddressList = exports.AddressList = function AddressList(props) {
   var addressListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: AddressListUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.AddressList, addressListProps);
 };
-exports.AddressList = AddressList;
-var HouseIcon = function HouseIcon() {
+var HouseIcon = exports.HouseIcon = function HouseIcon() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     width: "24",
     height: "24",
@@ -342,8 +341,7 @@ var HouseIcon = function HouseIcon() {
     fill: "#2C7BE5"
   }));
 };
-exports.HouseIcon = HouseIcon;
-var BuildingIcon = function BuildingIcon() {
+var BuildingIcon = exports.BuildingIcon = function BuildingIcon() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     width: "24",
     height: "24",
@@ -357,8 +355,7 @@ var BuildingIcon = function BuildingIcon() {
     fill: "#B1BCCC"
   }));
 };
-exports.BuildingIcon = BuildingIcon;
-var HeartIcon = function HeartIcon() {
+var HeartIcon = exports.HeartIcon = function HeartIcon() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     width: "24",
     height: "24",
@@ -378,8 +375,7 @@ var HeartIcon = function HeartIcon() {
     fill: "white"
   }))));
 };
-exports.HeartIcon = HeartIcon;
-var PlusIcon = function PlusIcon() {
+var PlusIcon = exports.PlusIcon = function PlusIcon() {
   return /*#__PURE__*/_react.default.createElement("svg", {
     width: "24",
     height: "24",
@@ -391,4 +387,3 @@ var PlusIcon = function PlusIcon() {
     fill: "#B1BCCC"
   }));
 };
-exports.PlusIcon = PlusIcon;

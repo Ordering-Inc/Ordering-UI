@@ -24,8 +24,7 @@ var CustomInputContainer = _styledComponents.default.div(_templateObject || (_te
 }, function (props) {
   return props.theme.colors.secundary;
 });
-var CustomInput = function CustomInput(props) {
+var CustomInput = exports.CustomInput = function CustomInput(props) {
   var placeholder = props.placeholder;
   return /*#__PURE__*/_react.default.createElement(CustomInputContainer, null, /*#__PURE__*/_react.default.createElement("span", null, placeholder), props.children);
 };
-exports.CustomInput = CustomInput;

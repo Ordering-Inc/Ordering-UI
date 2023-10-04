@@ -68,7 +68,7 @@ var optionsDefault = [{
   name: 'help',
   pathname: '/help'
 }];
-var UserPopover = function UserPopover(props) {
+var UserPopover = exports.UserPopover = function UserPopover(props) {
   var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _sessionState$user3, _theme$images, _theme$images2, _theme$images3, _props$afterComponent, _props$afterElements;
   var open = props.open,
     isHome = props.isHome,
@@ -217,7 +217,6 @@ var UserPopover = function UserPopover(props) {
     }, AfterElement);
   }));
 };
-exports.UserPopover = UserPopover;
 var LogoutActionUI = function LogoutActionUI(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),

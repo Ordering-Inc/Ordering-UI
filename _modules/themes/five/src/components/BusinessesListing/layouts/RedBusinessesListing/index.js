@@ -513,10 +513,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }, AfterElement);
   }));
 };
-var RedBusinessesListing = function RedBusinessesListing(props) {
+var RedBusinessesListing = exports.RedBusinessesListing = function RedBusinessesListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessesListingUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, businessListingProps);
 };
-exports.RedBusinessesListing = RedBusinessesListing;

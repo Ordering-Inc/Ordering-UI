@@ -76,10 +76,9 @@ var BusinessMenuListUI = function BusinessMenuListUI(props) {
     }
   })));
 };
-var BusinessMenuList = function BusinessMenuList(props) {
+var BusinessMenuList = exports.BusinessMenuList = function BusinessMenuList(props) {
   var businessMenuListProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessMenuListUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessMenuListing, businessMenuListProps);
 };
-exports.BusinessMenuList = BusinessMenuList;

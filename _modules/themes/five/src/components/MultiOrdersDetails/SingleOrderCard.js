@@ -163,7 +163,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     readMessages: readMessages
   })));
 };
-var SingleOrderCard = function SingleOrderCard(props) {
+var SingleOrderCard = exports.SingleOrderCard = function SingleOrderCard(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -190,4 +190,3 @@ var SingleOrderCard = function SingleOrderCard(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetails, orderDetailsProps);
 };
-exports.SingleOrderCard = SingleOrderCard;

@@ -324,10 +324,9 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
     closeOnBackdrop: false
   }));
 };
-var ConfirmAdmin = function ConfirmAdmin(props) {
+var ConfirmAdmin = exports.ConfirmAdmin = function ConfirmAdmin(props) {
   var checkPasswordControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ConfirmAdminUI
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, props.open && /*#__PURE__*/_react.default.createElement(_orderingComponents.CheckPassword, checkPasswordControlProps));
 };
-exports.ConfirmAdmin = ConfirmAdmin;

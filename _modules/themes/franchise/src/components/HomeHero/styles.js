@@ -13,12 +13,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  background-color: #0000004D;\n  padding-top: 53%;\n  position: relative;\n\n  button {\n    padding-top: 5px;\n    padding-bottom: 5px;\n  }\n\n  ", "\n"])), function (_ref) {
+var HeroContainerStyled = exports.HeroContainerStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  background-color: #0000004D;\n  padding-top: 53%;\n  position: relative;\n\n  button {\n    padding-top: 5px;\n    padding-bottom: 5px;\n  }\n\n  ", "\n"])), function (_ref) {
   var bgimage = _ref.bgimage;
   return bgimage && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 });
-exports.HeroContainerStyled = HeroContainerStyled;
-var HeroContainer = function HeroContainer(props) {
+var HeroContainer = exports.HeroContainer = function HeroContainer(props) {
   var style = {};
   if (props.bgimage && !props.isClosed) {
     style.backgroundImage = "url(".concat(props.bgimage, ")");
@@ -29,6 +28,4 @@ var HeroContainer = function HeroContainer(props) {
     style: style
   }), props.children);
 };
-exports.HeroContainer = HeroContainer;
-var ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 100%;\n    height: 100%;\n    background-color: #0000004D;\n"])));
-exports.ContentWrapper = ContentWrapper;
+var ContentWrapper = exports.ContentWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 100%;\n    height: 100%;\n    background-color: #0000004D;\n"])));
