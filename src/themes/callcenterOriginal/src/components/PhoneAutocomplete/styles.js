@@ -404,3 +404,12 @@ export const NotFoundUser = styled.div`
   margin: 70px 0px;
   text-align: center;
 `
+
+export const OptionContainer = styled.div`
+  display: flex;
+  img {
+    position: absolute;
+    right: 10px;
+    transform: translateY(55%);
+  }
+`
