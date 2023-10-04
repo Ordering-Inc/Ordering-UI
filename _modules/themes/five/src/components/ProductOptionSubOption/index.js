@@ -68,7 +68,7 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     decrement();
   };
   var handlePosition = function handlePosition(e, position) {
-    e.stopPropagation();
+    e.stopPropagation && e.stopPropagation();
     changePosition(position);
   };
   var handleSuboptionClick = function handleSuboptionClick() {
@@ -102,11 +102,12 @@ var ProductOptionSubOptionUI = function ProductOptionSubOptionUI(props) {
     onChange(newState, suboption, option);
   }, [suboption, dirtyRef, option]);
   (0, _react.useEffect)(function () {
-    if (pizzaType.type === 'Mitad y mitad' && option !== null && option !== void 0 && option.with_half_option) {
+    var _pizzaType$type, _pizzaType$type$toLow;
+    if (((_pizzaType$type = pizzaType.type) === null || _pizzaType$type === void 0 || (_pizzaType$type$toLow = _pizzaType$type.toLowerCase) === null || _pizzaType$type$toLow === void 0 ? void 0 : _pizzaType$type$toLow.call(_pizzaType$type)) === 'mitad y mitad' && option !== null && option !== void 0 && option.with_half_option) {
       var _Object$values, _Object$values3;
       var _option = (_Object$values = Object.values((productCart === null || productCart === void 0 ? void 0 : productCart.options) || {})) === null || _Object$values === void 0 ? void 0 : _Object$values.find(function (option) {
-        var _Object$values2;
-        return (option === null || option === void 0 ? void 0 : option.name) === 'Elige tus ingredientes' && ((_Object$values2 = Object.values(option === null || option === void 0 ? void 0 : option.suboptions)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.length) > 0;
+        var _option$name, _option$name$toLowerC, _Object$values2;
+        return (option === null || option === void 0 || (_option$name = option.name) === null || _option$name === void 0 || (_option$name$toLowerC = _option$name.toLowerCase) === null || _option$name$toLowerC === void 0 ? void 0 : _option$name$toLowerC.call(_option$name)) === 'elige tus ingredientes' && ((_Object$values2 = Object.values(option === null || option === void 0 ? void 0 : option.suboptions)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.length) > 0;
       });
       var alreadyRight = (_Object$values3 = Object.values((_option === null || _option === void 0 ? void 0 : _option.suboptions) || {})) === null || _Object$values3 === void 0 ? void 0 : _Object$values3.some(function (suboption) {
         return (suboption === null || suboption === void 0 ? void 0 : suboption.position) === 'right';
