@@ -225,3 +225,21 @@ export const WrapperSkeleton = styled.div`
     width: 100%;
   }
 `
+
+export const AddressMarkContainer = styled.div`
+  background: #FFE69C;
+  border: 1px solid #FFF3CD;
+  display: flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  position: absolute;
+  top: -35px;
+  width: max-content;
+  p {
+    margin: 0;
+    color: #664D03;
+    font-size: 12px;
+  }
+`
