@@ -456,12 +456,12 @@ var AddressFormUI = function AddressFormUI(props) {
       key: i
     }, props));
   }), inputNames.map(function (field) {
-    var _configState$configs5, _addressState$address12, _formState$changes26, _businessesList$busin, _theme$images, _ref9, _formState$changes$fi2, _formState$changes27, _addressState$address13, _ref10, _formState$changes$ad5, _formState$changes28;
+    var _address$location, _address$location2, _configState$configs5, _addressState$address12, _formState$changes26, _businessesList$busin, _theme$images, _ref9, _formState$changes$fi2, _formState$changes27, _addressState$address13, _ref10, _formState$changes$ad5, _formState$changes28;
     return showField && showField(field.name) && (field.name === 'address' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
       className: "google-control"
-    }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, (address === null || address === void 0 ? void 0 : address.address) && (!(address !== null && address !== void 0 && (_address$location = address.location) !== null && _address$location !== void 0 && _address$location.lat) || !(address !== null && address !== void 0 && (_address$location2 = address.location) !== null && _address$location2 !== void 0 && _address$location2.lng)) && /*#__PURE__*/_react.default.createElement(_styles.AddressMarkContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.'))), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
       className: "input-autocomplete",
       apiKey: googleMapsApiKey,
       placeholder: t('ADDRESS', 'Address'),

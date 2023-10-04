@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.PhoneAutocomplete = void 0;
 var _react = _interopRequireWildcard(require("react"));
-var _reactSelect = _interopRequireDefault(require("react-select"));
+var _reactSelect = _interopRequireWildcard(require("react-select"));
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 var _Modal = require("../Modal");
@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _orderState$options, _configState$configs, _orderState$options4, _orderState$options7, _theme$images, _theme$images2, _orderState$options8, _orderState$options9, _orderState$options11, _orderState$options12, _theme$colors, _theme$images3, _customerState$result, _customerState$result2;
+  var _orderState$options, _configState$configs, _orderState$options4, _orderState$options7, _theme$images2, _theme$images3, _orderState$options8, _orderState$options9, _orderState$options11, _orderState$options12, _theme$colors, _theme$images4, _customerState$result, _customerState$result2;
   var phone = props.phone,
     customerState = props.customerState,
     customersPhones = props.customersPhones,
@@ -230,11 +230,25 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     setIsPickupSelected(true);
   };
   var optionsToSelect = customersPhones.users.map(function (user) {
+    var _user$location, _user$location2;
     var obj = {};
     obj.value = user.cellphone || user.phone;
     obj.label = "".concat(user !== null && user !== void 0 && user.country_phone_code ? "(".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, ")") : '', " ").concat(user !== null && user !== void 0 && user.phone && !(user !== null && user !== void 0 && user.cellphone) ? "".concat(user === null || user === void 0 ? void 0 : user.phone) : '', " ").concat(user !== null && user !== void 0 && user.cellphone ? "".concat(user.cellphone) : '', " - {").concat(user.name, "}");
+    obj.flag = !(user !== null && user !== void 0 && (_user$location = user.location) !== null && _user$location !== void 0 && _user$location.lat) || !(user !== null && user !== void 0 && (_user$location2 = user.location) !== null && _user$location2 !== void 0 && _user$location2.lng);
     return obj;
   }) || [];
+  var Option = function Option(props) {
+    var _props$data, _theme$images;
+    return /*#__PURE__*/_react.default.createElement(_styles.OptionContainer, {
+      style: {
+        display: 'flex'
+      }
+    }, /*#__PURE__*/_react.default.createElement(_reactSelect.components.Option, props), " ", (props === null || props === void 0 || (_props$data = props.data) === null || _props$data === void 0 ? void 0 : _props$data.flag) && /*#__PURE__*/_react.default.createElement("img", {
+      src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.bookmarkCheck,
+      width: 20,
+      height: 20
+    }));
+  };
   (0, _react.useEffect)(function () {
     if (customersPhones !== null && customersPhones !== void 0 && customersPhones.loading) return;
     if (!urlPhone && isFromUrlPhone) {
@@ -280,7 +294,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.IconTypeButton, {
     activated: !isPickupSelected
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.deliveryIco,
+    src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.general) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.deliveryIco,
     width: 20,
     height: 20
   })), /*#__PURE__*/_react.default.createElement("p", null, t('DELIVERY', 'Delivery'))), configTypes.some(function (type) {
@@ -294,7 +308,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.IconTypeButton, {
     activated: isPickupSelected
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.general) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.pickupIco,
+    src: theme === null || theme === void 0 || (_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.general) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.pickupIco,
     width: 22,
     height: 22
   })), /*#__PURE__*/_react.default.createElement("p", null, t('PICKUP', 'Pickup')))), isPickupSelected && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, t('WHAT_PICKUP_YOU_NEED', 'What kind of pickup do you need?')), /*#__PURE__*/_react.default.createElement(_styles.AdditionalTypesContainer, null, /*#__PURE__*/_react.default.createElement(OrderTypesComponent, null))), configTypes.includes(orderState === null || orderState === void 0 || (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.type) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !userCustomer && /*#__PURE__*/_react.default.createElement(_styles.PhoneAutocompleteContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ADDING_CUSTOMERS_PHONE_NUMBER', 'Adding the customers’ phone number')), /*#__PURE__*/_react.default.createElement(_styles.WrappBtn, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -321,14 +335,17 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onChange: onChange,
     onInputChange: onInputChange,
     isLoading: customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading,
-    options: optionsToSelect
+    options: optionsToSelect,
+    components: {
+      Option: Option
+    }
   }), optSelected && /*#__PURE__*/_react.default.createElement(_styles.ContinueButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
       return onChange(optSelected);
     },
     color: "primary"
   }, t('CONTINUE', 'Continue'))))))), /*#__PURE__*/_react.default.createElement(_styles.ImageWrapper, {
-    bgimage: theme === null || theme === void 0 || (_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.general) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.phoneHero
+    bgimage: theme === null || theme === void 0 || (_theme$images4 = theme.images) === null || _theme$images4 === void 0 || (_theme$images4 = _theme$images4.general) === null || _theme$images4 === void 0 ? void 0 : _theme$images4.phoneHero
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.signup,
     width: "80%",

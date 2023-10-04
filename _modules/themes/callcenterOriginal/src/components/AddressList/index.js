@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressListUI = function AddressListUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _addressList$addresse, _addressList$addresse2, _orderState$options6, _addressList$addresse3, _theme$images, _addressList$error$, _orderState$options7, _orderState$options8, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options6, _addressList$addresse5, _theme$images2, _addressList$error$, _orderState$options7, _orderState$options8, _props$afterComponent, _props$afterElements;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -191,6 +191,18 @@ var AddressListUI = function AddressListUI(props) {
       handleCloseAddressForm();
     }
   }, [isOpenUserData]);
+  (0, _react.useEffect)(function () {
+    var _addressList$addresse;
+    if (((_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0) {
+      var _addressList$addresse2, _defaultAddress$locat, _defaultAddress$locat2;
+      var defaultAddress = (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.find(function (address) {
+        return address === null || address === void 0 ? void 0 : address.default;
+      });
+      if (!(defaultAddress !== null && defaultAddress !== void 0 && (_defaultAddress$locat = defaultAddress.location) !== null && _defaultAddress$locat !== void 0 && _defaultAddress$locat.lat) || !(defaultAddress !== null && defaultAddress !== void 0 && (_defaultAddress$locat2 = defaultAddress.location) !== null && _defaultAddress$locat2 !== void 0 && _defaultAddress$locat2.lng)) {
+        openAddress(defaultAddress);
+      }
+    }
+  }, [addressList.addresses]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -211,7 +223,7 @@ var AddressListUI = function AddressListUI(props) {
   }, (!isPopover || !addressOpen) && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
-    color: isEnableContinueButton && (addressList === null || addressList === void 0 || (_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0 ? 'secondary' : 'primary',
+    color: isEnableContinueButton && (addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) > 0 ? 'secondary' : 'primary',
     onClick: function onClick() {
       return openAddress({});
     },
@@ -226,9 +238,10 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup
-  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && !addressOpen && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse4 = addressList.addresses) === null || _addressList$addresse4 === void 0 ? void 0 : _addressList$addresse4.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && !addressOpen && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
   }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), uniqueAddressesList.map(function (address) {
+    var _address$location, _address$location2, _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
       key: address === null || address === void 0 ? void 0 : address.id
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -244,7 +257,13 @@ var AddressListUI = function AddressListUI(props) {
       className: checkAddress(address) ? 'selected-tag tag' : 'tag'
     }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "address"
-    }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
+    }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode)), (!(address !== null && address !== void 0 && (_address$location = address.location) !== null && _address$location !== void 0 && _address$location.lat) || !(address !== null && address !== void 0 && (_address$location2 = address.location) !== null && _address$location2 !== void 0 && _address$location2.lng)) && /*#__PURE__*/_react.default.createElement(_styles.AddressBookMarkContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddressBookMark, null, /*#__PURE__*/_react.default.createElement("img", {
+      src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.bookmark,
+      width: 20,
+      height: 20
+    })), /*#__PURE__*/_react.default.createElement(_styles.AddressHoverInfo, {
+      className: "hover-info"
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('PLEASE_VERIFY_CUSTOMER_ADDRESS', 'Please verify the address with the customer.'))))), /*#__PURE__*/_react.default.createElement(_styles.AddressItemActions, {
       className: "form"
     }, /*#__PURE__*/_react.default.createElement("a", {
       className: actionStatus.loading || isOpenUserData ? 'disabled' : '',
@@ -266,8 +285,8 @@ var AddressListUI = function AddressListUI(props) {
         return handleSetAddress(address);
       }
     }, t('CONTINUE_WITH', 'Continue with'), ": ", address.address));
-  })), !(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.notFound,
+  })), !(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse5 = addressList.addresses) === null || _addressList$addresse5 === void 0 ? void 0 : _addressList$addresse5.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.general) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.notFound,
     alt: "Not Found",
     width: "200px",
     height: "112px",
