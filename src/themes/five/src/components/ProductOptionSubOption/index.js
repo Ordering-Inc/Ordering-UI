@@ -60,7 +60,7 @@ const ProductOptionSubOptionUI = (props) => {
   }
 
   const handlePosition = (e, position) => {
-    e.stopPropagation()
+    e.stopPropagation && e.stopPropagation()
     changePosition(position)
   }
 
@@ -94,8 +94,8 @@ const ProductOptionSubOptionUI = (props) => {
   }, [suboption, dirtyRef, option])
 
   useEffect(() => {
-    if (pizzaType.type === 'Mitad y mitad' && option?.with_half_option) {
-      const option = Object.values(productCart?.options || {})?.find(option => option?.name === 'Elige tus ingredientes' && Object.values(option?.suboptions)?.length > 0)
+    if (pizzaType.type?.toLowerCase?.() === 'mitad y mitad' && option?.with_half_option) {
+      const option = Object.values(productCart?.options || {})?.find(option => option?.name?.toLowerCase?.() === 'elige tus ingredientes' && Object.values(option?.suboptions)?.length > 0)
       const alreadyRight = Object.values(option?.suboptions || {})?.some(suboption => suboption?.position === 'right')
       if (pizzaType.right && !alreadyRight) {
         if (state?.selected) {
