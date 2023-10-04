@@ -86,6 +86,10 @@ export const AddressItem = styled.li`
       opacity: 0.5;
       font-size: 12px;
     }
+    img{
+      position: relative;
+      transform: translateY(60%);
+    }
   }
 
   &:last-child {
@@ -235,4 +239,41 @@ export const TitleFormContainer = styled.div`
     margin: auto;
     font-size: 24px;
   }
+`
+
+export const AddressHoverInfo = styled.span`
+  background: #FFE69C;
+  border: 1px solid #FFF3CD;
+  display: flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  position: absolute;
+  top: 0px;
+  left: 25px;
+  opacity: 0;
+  width: max-content;
+  p {
+    margin: 0;
+    color: #664D03;
+    font-size: 12px;
+  }
+
+`
+
+export const AddressBookMark = styled.div`
+  span {
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+
+  }
+  &:hover + span {
+    opacity: 1;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+`
+
+export const AddressBookMarkContainer = styled.div`
+  position: relative;
 `

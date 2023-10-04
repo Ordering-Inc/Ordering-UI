@@ -34,7 +34,10 @@ import {
   List,
   AddressFormContainer,
   CloseIcon,
-  TitleFormContainer
+  TitleFormContainer,
+  AddressHoverInfo,
+  AddressBookMark,
+  AddressBookMarkContainer
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -191,6 +194,15 @@ const AddressListUI = (props) => {
     }
   }, [isOpenUserData])
 
+  useEffect(() => {
+    if (addressList.addresses?.length > 0) {
+      const defaultAddress = addressList.addresses?.find(address => address?.default)
+      if (!defaultAddress?.location?.lat || !defaultAddress?.location?.lng) {
+        openAddress(defaultAddress)
+      }
+    }
+  }, [addressList.addresses])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -262,6 +274,20 @@ const AddressListUI = (props) => {
                           <span>{address.address}</span>
                           <span>{address.internal_number} {address.zipcode}</span>
                         </div>
+                        {(!address?.location?.lat || !address?.location?.lng) && (
+                          <AddressBookMarkContainer>
+                            <AddressBookMark>
+                              <img
+                                src={theme?.images?.general?.bookmark}
+                                width={20}
+                                height={20}
+                              />
+                            </AddressBookMark>
+                            <AddressHoverInfo className='hover-info'>
+                              <p>{t('PLEASE_VERIFY_CUSTOMER_ADDRESS', 'Please verify the address with the customer.')}</p>
+                            </AddressHoverInfo>
+                          </AddressBookMarkContainer>
+                        )}
                       </div>
                       <AddressItemActions className='form'>
                         <a className={actionStatus.loading || isOpenUserData ? 'disabled' : ''} onClick={() => openAddress(address)}>

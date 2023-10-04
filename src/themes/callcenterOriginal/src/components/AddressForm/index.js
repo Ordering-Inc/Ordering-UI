@@ -28,7 +28,8 @@ import {
   WrapAddressInput,
   AddressTagSection,
   WrapperMap,
-  WrapperSkeleton
+  WrapperSkeleton,
+  AddressMarkContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -391,6 +392,13 @@ const AddressFormUI = (props) => {
               <React.Fragment key={field.name}>
                 <AddressWrap className='google-control'>
                   <WrapAddressInput>
+                    {address?.address && (!address?.location?.lat || !address?.location?.lng) && (
+                      <AddressMarkContainer>
+                        <p>
+                          {t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.')}
+                        </p>
+                      </AddressMarkContainer>
+                    )}
                     <GoogleAutocompleteInput
                       className='input-autocomplete'
                       apiKey={googleMapsApiKey}
