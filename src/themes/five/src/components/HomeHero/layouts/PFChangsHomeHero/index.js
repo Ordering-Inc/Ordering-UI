@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useTheme } from 'styled-components'
 import { useSession, useOrder, useLanguage, useEvent, useSite, useOrderingTheme, useConfig, GoogleMapsMap } from 'ordering-components'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
@@ -36,6 +36,7 @@ export const PFChangsHomeHero = (props) => {
   const [{ site }] = useSite()
   const [orderingTheme] = useOrderingTheme()
   const [configState] = useConfig()
+  const nearestBusinessContainer = useRef(null)
 
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
 
@@ -48,6 +49,7 @@ export const PFChangsHomeHero = (props) => {
   const [geoLocation, setGeoLocation] = useState(false)
   const [isMapReady, setIsMapReady] = useState(false)
   const [mapActivated, setMapActivated] = useState(false)
+  const [goToElement, setGoToElement] = useState(false)
   const [imageMapDimensions, setImageMapDimension] = useState({})
   const [canBeRedirected, setCanBeRedirected] = useState(false)
   const [innerWidth, setInnerWidth] = useState(window.innerWidth)
@@ -146,6 +148,22 @@ export const PFChangsHomeHero = (props) => {
   }, [user?.name])
 
   useEffect(() => {
+    if (orderState?.options?.address?.location) {
+      setGoToElement(!goToElement)
+    }
+  }, [orderState?.options?.address?.location])
+
+  useEffect(() => {
+    if (goToElement && nearestBusinessContainer.current) {
+      nearestBusinessContainer.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      })
+    }
+  }, [goToElement])
+
+  useEffect(() => {
     const resizeEvent = window.addEventListener('resize', (e) => {
       setInnerWidth(e.target.innerWidth)
     })
@@ -191,7 +209,7 @@ export const PFChangsHomeHero = (props) => {
               </WrapInput>
               <IosSend className='geolocation-button' />
             </AddressInputContainer>
-            <StartOrder>
+            <StartOrder ref={nearestBusinessContainer}>
               <Button onClick={handleAddressInput}>
                 {t('START_ORDER', 'Start order')}
               </Button>

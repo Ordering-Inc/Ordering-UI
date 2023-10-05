@@ -137,7 +137,7 @@ const BusinessesListingUI = (props) => {
         business,
         t('GO_TO_THE_STORE', 'Go to the store'),
         business?.cellphone || business?.phone || '',
-        business?.open && (businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) || business?.delivery_zone) ? 'block' : 'none'
+        business?.open && (businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) || business?.delivery_zone || orderState?.options?.type === 2) ? 'block' : 'none'
       ),
       id: business?.id,
       address: business?.address
@@ -299,7 +299,7 @@ const BusinessesListingUI = (props) => {
                     <>
                       {
                         businessesSearchList.businesses?.filter(business => business?.city_id === city?.id)?.map((business) => (
-                          <SingleBusinessController key={business?.id} business={business} showGoToStore={(businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) || business?.delivery_zone)} />
+                          <SingleBusinessController key={business?.id} business={business} showGoToStore={(businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) || business?.delivery_zone || orderState?.options?.type === 2)} />
                         ))
                       }
                       {paginationProps?.totalPages && paginationProps?.currentPage < paginationProps?.totalPages && (
@@ -321,7 +321,7 @@ const BusinessesListingUI = (props) => {
           <>
             {
               filterByAddress && !filterByCity && orderState?.options?.address?.location && businessesSearchList.businesses?.sort((a, b) => sortBusinessFunction(a, b))?.map((business) => (
-                <SingleBusinessController key={business?.id} business={business} showGoToStore={business?.open && (businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) || business?.delivery_zone)} />
+                <SingleBusinessController key={business?.id} business={business} showGoToStore={business?.open && (businessesInsideZone?.businesses?.find(_business => _business?.id === business?.id) || business?.delivery_zone || orderState?.options?.type === 2)} />
               ))
             }
           </>

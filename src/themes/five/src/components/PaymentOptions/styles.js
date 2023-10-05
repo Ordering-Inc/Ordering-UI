@@ -26,7 +26,7 @@ export const PayCard = styled.div`
 
   ${props => props.isDisabled && css`
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.3;
   `}
 
   > div {

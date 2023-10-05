@@ -296,10 +296,18 @@ const SignUpFormUI = (props) => {
         content: checkPhoneCodeState?.result?.result || [t('ATENTION', 'Atención')]
       })
     } else if (checkPhoneCodeState?.result?.result && checkPhoneCodeState?.result?.result?.[0] === 'VERIFICATION_CODE_WAS_SENT_TO') {
+      let timeout = null
       setAlertState({
         open: true,
-        content: t('CODE_SENT', 'The code has been sent')
+        content: t('CODE_SENT', 'The code has been sent'),
+        automaticPopup: true
       })
+      timeout = setTimeout(() => {
+        setAlertState({
+          open: false,
+          content: []
+        })
+      }, 1500)
       resetOtpLeftTime()
     }
   }, [checkPhoneCodeState])
@@ -686,10 +694,10 @@ const SignUpFormUI = (props) => {
         <Alert
           title={t('SIGN_UP', 'Sign up')}
           content={alertState.content}
-          acceptText={t('ACCEPT', 'Accept')}
+          acceptText={!alertState?.automaticPopup && t('ACCEPT', 'Accept')}
           open={alertState.open}
-          onClose={() => closeAlert()}
-          onAccept={() => closeAlert()}
+          onClose={!alertState?.automaticPopup && (() => closeAlert())}
+          onAccept={!alertState?.automaticPopup && (() => closeAlert())}
           closeOnBackdrop={false}
         />
       </SignUpContainer>

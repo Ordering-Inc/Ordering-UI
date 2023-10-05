@@ -250,10 +250,18 @@ const LoginFormUI = (props) => {
         setWillVerifyOtpState(false)
       }
     } else if (checkPhoneCodeState?.result?.result && !checkPhoneCodeState?.loading) {
+      let timeout = null
       setAlertState({
         open: true,
-        content: t('CODE_SENT', 'The code has been sent')
+        content: t('CODE_SENT', 'The code has been sent'),
+        automaticPopup: true
       })
+      timeout = setTimeout(() => {
+        setAlertState({
+          open: false,
+          content: []
+        })
+      }, 1500)
       resetOtpLeftTime()
     }
   }, [checkPhoneCodeState])
@@ -527,10 +535,10 @@ const LoginFormUI = (props) => {
         <Alert
           title={t('LOGIN', 'Login')}
           content={alertState.content}
-          acceptText={t('ACCEPT', 'Accept')}
+          acceptText={!alertState?.automaticPopup && t('ACCEPT', 'Accept')}
           open={alertState.open}
-          onClose={() => closeAlert()}
-          onAccept={() => closeAlert()}
+          onClose={!alertState?.automaticPopup && (() => closeAlert())}
+          onAccept={!alertState?.automaticPopup && (() => closeAlert())}
           closeOnBackdrop={false}
         />
       </LoginContainer>

@@ -73,7 +73,7 @@ export const Footer = () => {
     <>
       {
         footerState.body && (
-          <div style={{ wordBreak: 'break-all', padding: '0px 10px'}} dangerouslySetInnerHTML={{
+          <div style={{ wordBreak: 'break-all', padding: '0px 2px'}} dangerouslySetInnerHTML={{
             __html: footerState.body
           }}
           />
