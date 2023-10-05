@@ -293,10 +293,18 @@ var SignUpFormUI = function SignUpFormUI(props) {
         content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ATENTION', 'Atención')]
       });
     } else if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$3 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$3 !== void 0 && _checkPhoneCodeState$3.result && (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$4 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$4 === void 0 ? void 0 : (_checkPhoneCodeState$5 = _checkPhoneCodeState$4.result) === null || _checkPhoneCodeState$5 === void 0 ? void 0 : _checkPhoneCodeState$5[0]) === 'VERIFICATION_CODE_WAS_SENT_TO') {
+      var timeout = null;
       setAlertState({
         open: true,
-        content: t('CODE_SENT', 'The code has been sent')
+        content: t('CODE_SENT', 'The code has been sent'),
+        automaticPopup: true
       });
+      timeout = setTimeout(function () {
+        setAlertState({
+          open: false,
+          content: []
+        });
+      }, 1500);
       resetOtpLeftTime();
     }
   }, [checkPhoneCodeState]);
@@ -510,12 +518,12 @@ var SignUpFormUI = function SignUpFormUI(props) {
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('SIGN_UP', 'Sign up'),
     content: alertState.content,
-    acceptText: t('ACCEPT', 'Accept'),
+    acceptText: !(alertState !== null && alertState !== void 0 && alertState.automaticPopup) && t('ACCEPT', 'Accept'),
     open: alertState.open,
-    onClose: function onClose() {
+    onClose: !(alertState !== null && alertState !== void 0 && alertState.automaticPopup) && function () {
       return closeAlert();
     },
-    onAccept: function onAccept() {
+    onAccept: !(alertState !== null && alertState !== void 0 && alertState.automaticPopup) && function () {
       return closeAlert();
     },
     closeOnBackdrop: false

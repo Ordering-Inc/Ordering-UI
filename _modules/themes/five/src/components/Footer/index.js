@@ -141,7 +141,7 @@ var Footer = function Footer() {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, footerState.body && /*#__PURE__*/_react.default.createElement("div", {
     style: {
       wordBreak: 'break-all',
-      padding: '0px 10px'
+      padding: '0px 2px'
     },
     dangerouslySetInnerHTML: {
       __html: footerState.body

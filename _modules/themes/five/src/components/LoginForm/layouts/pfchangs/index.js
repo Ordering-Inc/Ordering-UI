@@ -301,10 +301,18 @@ var LoginFormUI = function LoginFormUI(props) {
         setWillVerifyOtpState(false);
       }
     } else if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$6 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$6 !== void 0 && _checkPhoneCodeState$6.result && !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading)) {
+      var timeout = null;
       setAlertState({
         open: true,
-        content: t('CODE_SENT', 'The code has been sent')
+        content: t('CODE_SENT', 'The code has been sent'),
+        automaticPopup: true
       });
+      timeout = setTimeout(function () {
+        setAlertState({
+          open: false,
+          content: []
+        });
+      }, 1500);
       resetOtpLeftTime();
     }
   }, [checkPhoneCodeState]);
@@ -459,12 +467,12 @@ var LoginFormUI = function LoginFormUI(props) {
   })))), /*#__PURE__*/_react.default.createElement(_pfchangs.Alert, {
     title: t('LOGIN', 'Login'),
     content: alertState.content,
-    acceptText: t('ACCEPT', 'Accept'),
+    acceptText: !(alertState !== null && alertState !== void 0 && alertState.automaticPopup) && t('ACCEPT', 'Accept'),
     open: alertState.open,
-    onClose: function onClose() {
+    onClose: !(alertState !== null && alertState !== void 0 && alertState.automaticPopup) && function () {
       return closeAlert();
     },
-    onAccept: function onAccept() {
+    onAccept: !(alertState !== null && alertState !== void 0 && alertState.automaticPopup) && function () {
       return closeAlert();
     },
     closeOnBackdrop: false

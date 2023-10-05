@@ -39,7 +39,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _orderState$options3, _orderState$options3$, _citiesState$cities, _citiesState$cities$f, _orderState$options4, _orderState$options4$, _businessesSearchList11, _businessesSearchList12, _businessesSearchList13, _orderState$options5, _orderState$options5$, _businessesSearchList14, _businessesSearchList15, _businessesSearchList16, _orderState$options6;
+  var _businessesSearchList, _businessesSearchList2, _businessesSearchList4, _orderState$options4, _orderState$options4$, _citiesState$cities, _citiesState$cities$f, _orderState$options6, _orderState$options6$, _businessesSearchList11, _businessesSearchList12, _businessesSearchList13, _orderState$options8, _orderState$options8$, _businessesSearchList14, _businessesSearchList15, _businessesSearchList16, _orderState$options9;
   var businessesSearchList = props.businessesSearchList,
     paginationProps = props.paginationProps,
     isCustomerMode = props.isCustomerMode,
@@ -188,13 +188,13 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   (0, _react.useEffect)(function () {
     var _businessesSearchList5;
     setBusinessesLocations(businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList5 = businessesSearchList.businesses) === null || _businessesSearchList5 === void 0 ? void 0 : _businessesSearchList5.map(function (business) {
-      var _theme$images, _theme$images$dummies, _businessesInsideZone;
+      var _theme$images, _theme$images$dummies, _businessesInsideZone, _orderState$options2;
       return _objectSpread(_objectSpread({}, business === null || business === void 0 ? void 0 : business.location), {}, {
         icon: (business === null || business === void 0 ? void 0 : business.logo) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
         slug: business === null || business === void 0 ? void 0 : business.slug,
         markerPopup: markerPopup(business, t('GO_TO_THE_STORE', 'Go to the store'), (business === null || business === void 0 ? void 0 : business.cellphone) || (business === null || business === void 0 ? void 0 : business.phone) || '', business !== null && business !== void 0 && business.open && (businessesInsideZone !== null && businessesInsideZone !== void 0 && (_businessesInsideZone = businessesInsideZone.businesses) !== null && _businessesInsideZone !== void 0 && _businessesInsideZone.find(function (_business) {
           return (_business === null || _business === void 0 ? void 0 : _business.id) === (business === null || business === void 0 ? void 0 : business.id);
-        }) || business !== null && business !== void 0 && business.delivery_zone) ? 'block' : 'none'),
+        }) || business !== null && business !== void 0 && business.delivery_zone || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 2) ? 'block' : 'none'),
         id: business === null || business === void 0 ? void 0 : business.id,
         address: business === null || business === void 0 ? void 0 : business.address
       });
@@ -243,8 +243,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     window.open("https://www.google.com/maps/search/?api=1&query=".concat(business.address), '_blank');
   };
   (0, _react.useEffect)(function () {
-    var _orderState$options2, _orderState$options2$, _businessesSearchList6;
-    if (canBeRedirected && filterByAddress && orderState !== null && orderState !== void 0 && (_orderState$options2 = orderState.options) !== null && _orderState$options2 !== void 0 && (_orderState$options2$ = _orderState$options2.address) !== null && _orderState$options2$ !== void 0 && _orderState$options2$.location && ((_businessesSearchList6 = businessesSearchList.businesses) === null || _businessesSearchList6 === void 0 ? void 0 : _businessesSearchList6.length) === 1 && !businessesSearchList.loading && !(orderState !== null && orderState !== void 0 && orderState.loading)) {
+    var _orderState$options3, _orderState$options3$, _businessesSearchList6;
+    if (canBeRedirected && filterByAddress && orderState !== null && orderState !== void 0 && (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && (_orderState$options3$ = _orderState$options3.address) !== null && _orderState$options3$ !== void 0 && _orderState$options3$.location && ((_businessesSearchList6 = businessesSearchList.businesses) === null || _businessesSearchList6 === void 0 ? void 0 : _businessesSearchList6.length) === 1 && !businessesSearchList.loading && !(orderState !== null && orderState !== void 0 && orderState.loading)) {
       onBusinessClick({
         slug: businessesSearchList.businesses[0].slug
       });
@@ -314,7 +314,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
         location: currentLocation
       });
     }
-  }, t('SEARCH_THIS_AREA', 'Search This Area')), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterByAddress && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location) && /*#__PURE__*/_react.default.createElement("p", null, t('SHOWING', 'Showing'), " ", businessNearestLength, " ", t('LOCATIONS_WITHIN', 'locations within'), " ", ' ', /*#__PURE__*/_react.default.createElement(_styles.LocationSelect, {
+  }, t('SEARCH_THIS_AREA', 'Search This Area')), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterByAddress && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location) && /*#__PURE__*/_react.default.createElement("p", null, t('SHOWING', 'Showing'), " ", businessNearestLength, " ", t('LOCATIONS_WITHIN', 'locations within'), " ", ' ', /*#__PURE__*/_react.default.createElement(_styles.LocationSelect, {
     value: distanceSelected,
     onChange: function onChange(e) {
       return handleChangeDistance(e.target.value);
@@ -343,13 +343,13 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     })), (citySelected === null || citySelected === void 0 ? void 0 : citySelected.id) === (city === null || city === void 0 ? void 0 : city.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_businessesSearchList9 = businessesSearchList.businesses) === null || _businessesSearchList9 === void 0 ? void 0 : (_businessesSearchList10 = _businessesSearchList9.filter(function (business) {
       return (business === null || business === void 0 ? void 0 : business.city_id) === (city === null || city === void 0 ? void 0 : city.id);
     })) === null || _businessesSearchList10 === void 0 ? void 0 : _businessesSearchList10.map(function (business) {
-      var _businessesInsideZone2;
+      var _businessesInsideZone2, _orderState$options5;
       return /*#__PURE__*/_react.default.createElement(SingleBusinessController, {
         key: business === null || business === void 0 ? void 0 : business.id,
         business: business,
         showGoToStore: (businessesInsideZone === null || businessesInsideZone === void 0 ? void 0 : (_businessesInsideZone2 = businessesInsideZone.businesses) === null || _businessesInsideZone2 === void 0 ? void 0 : _businessesInsideZone2.find(function (_business) {
           return (_business === null || _business === void 0 ? void 0 : _business.id) === (business === null || business === void 0 ? void 0 : business.id);
-        })) || (business === null || business === void 0 ? void 0 : business.delivery_zone)
+        })) || (business === null || business === void 0 ? void 0 : business.delivery_zone) || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type) === 2
       });
     }), (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) < (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) && /*#__PURE__*/_react.default.createElement(_styles.LoadMoreButtonCityWrap, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
       onClick: function onClick() {
@@ -357,16 +357,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       },
       color: "primary"
     }, t('LOAD_MORE_BUSINESSES', 'Load more businesses')))));
-  })), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterByAddress && !filterByCity && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location) && ((_businessesSearchList11 = businessesSearchList.businesses) === null || _businessesSearchList11 === void 0 ? void 0 : (_businessesSearchList12 = _businessesSearchList11.sort(function (a, b) {
+  })), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterByAddress && !filterByCity && (orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : (_orderState$options6$ = _orderState$options6.address) === null || _orderState$options6$ === void 0 ? void 0 : _orderState$options6$.location) && ((_businessesSearchList11 = businessesSearchList.businesses) === null || _businessesSearchList11 === void 0 ? void 0 : (_businessesSearchList12 = _businessesSearchList11.sort(function (a, b) {
     return sortBusinessFunction(a, b);
   })) === null || _businessesSearchList12 === void 0 ? void 0 : _businessesSearchList12.map(function (business) {
-    var _businessesInsideZone3;
+    var _businessesInsideZone3, _orderState$options7;
     return /*#__PURE__*/_react.default.createElement(SingleBusinessController, {
       key: business === null || business === void 0 ? void 0 : business.id,
       business: business,
       showGoToStore: (business === null || business === void 0 ? void 0 : business.open) && ((businessesInsideZone === null || businessesInsideZone === void 0 ? void 0 : (_businessesInsideZone3 = businessesInsideZone.businesses) === null || _businessesInsideZone3 === void 0 ? void 0 : _businessesInsideZone3.find(function (_business) {
         return (_business === null || _business === void 0 ? void 0 : _business.id) === (business === null || business === void 0 ? void 0 : business.id);
-      })) || (business === null || business === void 0 ? void 0 : business.delivery_zone))
+      })) || (business === null || business === void 0 ? void 0 : business.delivery_zone) || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.type) === 2)
     });
   }))), filterByAddress && businessesSearchList.loading && _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.nextPageItems) > 4 ? 30 : 8).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SingleBusinessContainer, {
@@ -390,7 +390,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       width: 100,
       height: 30
     })));
-  }), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList13 = businessesSearchList.businesses) === null || _businessesSearchList13 === void 0 ? void 0 : _businessesSearchList13.length) === 0 && ((orderState === null || orderState === void 0 ? void 0 : (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : _orderState$options5$.location) || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) !== 'Failed to fetch') && /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), !businessesSearchList.loading && (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : (_businessesSearchList13 = businessesSearchList.businesses) === null || _businessesSearchList13 === void 0 ? void 0 : _businessesSearchList13.length) === 0 && ((orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : (_orderState$options8$ = _orderState$options8.address) === null || _orderState$options8$ === void 0 ? void 0 : _orderState$options8$.location) || (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) !== 'Failed to fetch') && /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) === 'Failed to fetch' ? t('NOT_FOUND_BUSINESSES_FETCH', 'Error trying to get businesses') : t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')
   }, (businessesSearchList === null || businessesSearchList === void 0 ? void 0 : businessesSearchList.error) === 'Failed to fetch' ? /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     outline: true,
@@ -425,7 +425,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false
