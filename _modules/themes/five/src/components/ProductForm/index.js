@@ -72,6 +72,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     handleChangeSuboptionState = props.handleChangeSuboptionState,
     handleChangeCommentState = props.handleChangeCommentState,
     productAddedToCartLength = props.productAddedToCartLength,
+    pizzaType = props.pizzaType,
     handleFavoriteProduct = props.handleFavoriteProduct,
     handleCreateGuestUser = props.handleCreateGuestUser,
     actionStatus = props.actionStatus,
@@ -617,7 +618,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
           state: currentState,
           isSoldOut: isSoldOut,
           scrollDown: scrollDown,
-          setIsScrollAvailable: setIsScrollAvailable
+          setIsScrollAvailable: setIsScrollAvailable,
+          pizzaType: pizzaType,
+          productCart: productCart
         });
       }))));
     });
