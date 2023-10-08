@@ -27,9 +27,9 @@ import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
 
 const ProductOptionSubOptionPropsAreEqual = (prevProps, nextProps) => {
   return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) &&
-  prevProps.pizzaType === nextProps.pizzaType &&
-  prevProps.balance === nextProps.balance &&
-  JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart)
+    JSON.stringify(prevProps.pizzaType) === JSON.stringify(nextProps.pizzaType) &&
+    prevProps.balance === nextProps.balance &&
+    JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart)
 }
 
 const ProductOptionSubOptionUI = React.memo((props) => {
@@ -95,7 +95,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
   }, [state?.selected])
 
   useEffect(() => {
-    if (pizzaType.type?.toLowerCase?.() === 'mitad y mitad' && option?.with_half_option) {
+    if (pizzaType?.type?.toLowerCase?.() === 'mitad y mitad' && option?.with_half_option) {
       const option = Object.values(productCart?.options || {})?.find(option => option?.name?.toLowerCase?.() === 'elige tus ingredientes' && Object.values(option?.suboptions)?.length > 0)
       const alreadyRight = Object.values(option?.suboptions || {})?.some(suboption => suboption?.position === 'right')
       if (pizzaType.right && !alreadyRight) {
@@ -108,7 +108,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
         }
       }
     }
-  }, [pizzaType.type, state?.selected, suboption?.id])
+  }, [pizzaType?.type, state?.selected, suboption?.id])
 
   return (
     <>
