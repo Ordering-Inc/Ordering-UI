@@ -25,7 +25,14 @@ import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
 import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
 
-const ProductOptionSubOptionUI = (props) => {
+const ProductOptionSubOptionPropsAreEqual = (prevProps, nextProps) => {
+  return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) &&
+    JSON.stringify(prevProps.pizzaType) === JSON.stringify(nextProps.pizzaType) &&
+    prevProps.balance === nextProps.balance &&
+    JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart)
+}
+
+const ProductOptionSubOptionUI = React.memo((props) => {
   const {
     state,
     increment,
@@ -88,13 +95,7 @@ const ProductOptionSubOptionUI = (props) => {
   }, [state?.selected])
 
   useEffect(() => {
-    if (dirtyRef?.current || !suboption?.preselected || !option?.respect_to) return
-    const newState = { ...state, selected: suboption?.preselected, quantity: state.selected ? 0 : 1 }
-    onChange(newState, suboption, option)
-  }, [suboption, dirtyRef, option])
-
-  useEffect(() => {
-    if (pizzaType.type?.toLowerCase?.() === 'mitad y mitad' && option?.with_half_option) {
+    if (pizzaType?.type?.toLowerCase?.() === 'mitad y mitad' && option?.with_half_option) {
       const option = Object.values(productCart?.options || {})?.find(option => option?.name?.toLowerCase?.() === 'elige tus ingredientes' && Object.values(option?.suboptions)?.length > 0)
       const alreadyRight = Object.values(option?.suboptions || {})?.some(suboption => suboption?.position === 'right')
       if (pizzaType.right && !alreadyRight) {
@@ -107,7 +108,7 @@ const ProductOptionSubOptionUI = (props) => {
         }
       }
     }
-  }, [pizzaType.type, state?.selected, suboption?.id])
+  }, [pizzaType?.type, state?.selected, suboption?.id])
 
   return (
     <>
@@ -207,7 +208,7 @@ const ProductOptionSubOptionUI = (props) => {
         </React.Fragment>))}
     </>
   )
-}
+}, ProductOptionSubOptionPropsAreEqual)
 
 export const ProductOptionSubOption = (props) => {
   const productOptionSubOptionProps = {
