@@ -34,18 +34,18 @@ export const OrderBillSection = (props) => {
     }
   }
 
-  const getIncludedTaxes = () => {
+  const getIncludedTaxes = (isDeliveryFee) => {
     if (order?.taxes?.length === 0) {
       return order.tax_type === 1 ? order?.summary?.tax ?? 0 : 0
     } else {
       return order?.taxes.reduce((taxIncluded, tax) => {
-        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+        return taxIncluded + (((!isDeliveryFee && tax.type === 1 && tax.target === 'product') || (isDeliveryFee && tax.type === 1 && tax.target === 'delivery_fee')) ? tax.summary?.tax : 0)
       }, 0)
     }
   }
 
   const getIncludedTaxesDiscounts = () => {
-    return order?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
+    return order?.taxes?.filter(tax => (tax?.type === 1 && tax?.target === 'product'))?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
   }
 
   return (
@@ -124,7 +124,7 @@ export const OrderBillSection = (props) => {
             )
           }
           {
-            order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
+            order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'product').map(tax => (
               <tr key={tax?.id}>
                 <td>
                   {t(tax?.name?.toUpperCase()?.replace(/ /g, '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
@@ -178,9 +178,25 @@ export const OrderBillSection = (props) => {
           {typeof order?.summary?.delivery_price === 'number' && (
             <tr>
               <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
-              <td>{parsePrice(order?.summary?.delivery_price)}</td>
+              <td>{parsePrice(order?.summary?.delivery_price + getIncludedTaxes(true))}</td>
             </tr>
           )}
+          {
+            order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'delivery_fee').map(tax => (
+              <tr key={tax?.id}>
+                <td>
+                  {t(tax?.name?.toUpperCase()?.replace(/ /g, '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                  {setOpenTaxModal && (
+                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
+                      <BsInfoCircle size='20' color={theme.colors.primary} />
+                    </Exclamation>
+                  )}
+                </td>
+                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
+              </tr>
+            ))
+          }
           {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
               <tr key={offer.id}>
