@@ -179,7 +179,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     businessData = _props$order.businessData,
     error = _props$order.error;
   var yourSpotString = (order === null || order === void 0 ? void 0 : order.delivery_type) === 3 ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number');
-  var acceptedStatus = [1, 2, 5, 6, 10, 11, 12];
+  var acceptedStatus = [1, 2, 5, 6, 10, 11, 12, 15];
   var completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
   var placeSpotTypes = [3, 4, 5];
   var activeStatus = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23];

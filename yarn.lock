@@ -2159,22 +2159,22 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@segment/analytics-core@1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.3.1.tgz#78bb8f9c163722cdd6c6df769d91ec12eba2a150"
-  integrity sha512-KGblJ8WQNC4t0j31zeyYBm2thHWuPULNAoP7waU5ts7Asz9ipvGoHqFSLG6warqvcnBdkiRbNam242zmxX53oA==
+"@segment/analytics-core@1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-core/-/analytics-core-1.3.2.tgz#c80975afda044f6197dace63f4edf7241ae8c912"
+  integrity sha512-NpeBCfOyMdO2/BDKfhCUNHcEwxg88N2iTnswBoEMh38rtsQ03TWLVYwgiTakPjNQFezdKkR6jq3JhQ3WWgq67g==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     dset "^3.1.2"
     tslib "^2.4.1"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.57.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.57.0.tgz#2559c28e63d8f92b28818ee5a8878337b0adee4a"
-  integrity sha512-AfHuuN/X7dJT/7K4gesynEuh3x9bocC1+Kjn4JxHoTJVi/0qb4X3tvBI2FV4dtzlO6f/93wS2lR37f8ZfZMIig==
+  version "1.58.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.58.0.tgz#c5c0c6ad65f21b0ea607c32b168f1d88aab1a21e"
+  integrity sha512-Wh+/D3QsjbO42N6O542FCf74wnL5JMj9HWq309NGcNbjo7WwIGHOHgE+tUFm1b0CsBL5zWI+mGJBU+U6PBaNWw==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
-    "@segment/analytics-core" "1.3.1"
+    "@segment/analytics-core" "1.3.2"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
     "@segment/tsub" "^2.0.0"
@@ -3208,9 +3208,11 @@
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
-  version "20.8.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.8.3.tgz#c4ae2bb1cfab2999ed441a95c122bbbe1567a66d"
-  integrity sha512-jxiZQFpb+NlH5kjW49vXxvxTjeeqlbsnTAdBTKpzEdPs9itay7MscYXz3Fo9VYFEsfQ6LJFitHad3faerLAjCw==
+  version "20.8.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.8.4.tgz#0e9ebb2ff29d5c3302fc84477d066fa7c6b441aa"
+  integrity sha512-ZVPnqU58giiCjSxjVUESDtdPk4QR5WQhhINbc9UBrKLU68MX5BF6kbQzTrkwbolyr0X8ChBpXfavr5mZFKZQ5A==
+  dependencies:
+    undici-types "~5.25.1"
 
 "@types/node@12.12.50":
   version "12.12.50"
@@ -5684,9 +5686,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.535:
-  version "1.4.544"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.544.tgz#fcb156d83f0ee6e4c9d030c6fedb2a37594f3abf"
-  integrity sha512-54z7squS1FyFRSUqq/knOFSptjjogLZXbKcYk3B0qkE1KZzvqASwRZnY2KzZQJqIYLVD38XZeoiMRflYSwyO4w==
+  version "1.4.547"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.547.tgz#b8f34e83641aca0858cbb4dc98b033ff1f298128"
+  integrity sha512-QC99aDjzNir+D4c1jE7QWt3RybAxBWYXBdCoaUaAumkD7nDwPLgyt03qNgpVscn18UIGJIZZbFlzNaUSwhPLiA==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -9225,7 +9227,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/ec0555fbfcf935f4ff9ed04ca98e2d8bc9af7882"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/1d4e737f048ee1ab18dabe2b7114eb212af12d93"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -10029,9 +10031,9 @@ react-date-range@^1.4.0:
     shallow-equal "^1.2.1"
 
 react-datepicker@^4.12.0:
-  version "4.19.0"
-  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.19.0.tgz#4b8e5016ee6b88e73682302e761972da00be2fbf"
-  integrity sha512-p2IVcOdtMDGvaq27yBGQm43rWnPVJ3w6EMGOmNoG3Gh/Li9maDIfrAWJUeLXDXAxYbXkIsQRs5SwrHvKP65juA==
+  version "4.20.0"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.20.0.tgz#611943721ab0847bfacadc38c8760018e9859294"
+  integrity sha512-I29yHN9SabUDSy7Xq3P8+E8E+D2vyeuYAYYWWjeMisGGtsatltV4CSHodyA7W9z0BuGycc/bhSClDbizx4gZHA==
   dependencies:
     "@popperjs/core" "^2.11.8"
     classnames "^2.2.6"
@@ -10670,9 +10672,9 @@ sass-loader@^9.0.2:
     semver "^7.3.2"
 
 sass@^1.26.10:
-  version "1.69.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.69.0.tgz#5195075371c239ed556280cf2f5944d234f42679"
-  integrity sha512-l3bbFpfTOGgQZCLU/gvm1lbsQ5mC/WnLz3djL2v4WCJBDrWm58PO+jgngcGRNnKUh6wSsdm50YaovTqskZ0xDQ==
+  version "1.69.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.69.1.tgz#659b3b04452245dcf82f731684831e990ddb0c89"
+  integrity sha512-nc969GvTVz38oqKgYYVHM/Iq7Yl33IILy5uqaH2CWSiSUmRCvw+UR7tA3845Sp4BD5ykCUimvrT3k1EjTwpVUA==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -11993,6 +11995,11 @@ undeclared-identifiers@^1.1.2:
     get-assigned-identifiers "^1.2.0"
     simple-concat "^1.0.0"
     xtend "^4.0.1"
+
+undici-types@~5.25.1:
+  version "5.25.3"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-5.25.3.tgz#e044115914c85f0bcbb229f346ab739f064998c3"
+  integrity sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==
 
 unfetch@4.1.0:
   version "4.1.0"
