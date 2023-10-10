@@ -16,7 +16,7 @@ export const TaxInformation = (props) => {
   const offersHideArray = ['offer_target_2', 'offer_target_3']
   const hideProductsSectionOffers = offersHideArray.includes(type)
   const dataHideArray = ['platform', 'business']
-  const hideProductsSectionData = dataHideArray.includes(data.type)
+  const hideProductsSectionData = dataHideArray.includes(data.type) || data?.target === 'delivery_fee'
 
   const getFilterValidation = (product) => {
     return (
