@@ -52,8 +52,8 @@ const PhoneAutocompleteUI = (props) => {
     orderTypes,
     localPhoneCode,
     isFromUrlPhone,
-    onRedirectPhoneUrlPage
-
+    onRedirectPhoneUrlPage,
+    franchiseId
   } = props
   const allOrderTypes = [1, 2, 3, 4, 5]
   const pickupTypes = [2, 3, 4, 5]
@@ -353,6 +353,7 @@ const PhoneAutocompleteUI = (props) => {
                 isOpenUserData={isOpenUserData}
                 setIsOpenUserData={setIsOpenUserData}
                 setIsAddressFormOpen={setIsAddressFormOpen}
+                franchiseId={franchiseId}
               />
             </>
           )}
