@@ -1,6 +1,7 @@
 import settings from './config.json'
 
 const keysToNull = [
+  'franchiseId',
   'franchiseSlug',
   'businessSlug'
 ]
