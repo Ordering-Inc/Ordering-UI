@@ -70,7 +70,10 @@ var OrderEta = exports.OrderEta = function OrderEta(props) {
     var _estimatedTime = outputFormat ? (0, _moment.default)(estimatedUtcTime).local().format(outputFormat) : parseDate(estimatedUtcTime, {
       utc: false
     });
-    setEstimatedDeliveryTime(_estimatedTime);
+    setEstimatedDeliveryTime((order === null || order === void 0 ? void 0 : order.status) === 13 ? parseDate(_delivery, {
+      utc: !!(order !== null && order !== void 0 && order.delivery_datetime_utc),
+      outputFormat: outputFormat
+    }) : _estimatedTime);
   };
   (0, _react.useEffect)(function () {
     getEstimatedDeliveryTime();
