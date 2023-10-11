@@ -34,7 +34,10 @@ import {
   List,
   AddressFormContainer,
   CloseIcon,
-  TitleFormContainer
+  TitleFormContainer,
+  AddressHoverInfo,
+  AddressBookMark,
+  AddressBookMarkContainer
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -78,7 +81,7 @@ const AddressListUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
   const [{ user }] = useCustomer()
-
+  const addFormRestrictions = userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
     (address, i, self) =>
       i === self.findIndex(obj => (
@@ -191,6 +194,14 @@ const AddressListUI = (props) => {
     }
   }, [isOpenUserData])
 
+  useEffect(() => {
+    if (userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error) {
+      openAddress({
+        address: userCustomerSetup?.imported_address_text
+      })
+    }
+  }, [userCustomerSetup?.imported_address_text, addressList.addresses, addressList?.loading, addressList?.error])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -207,9 +218,10 @@ const AddressListUI = (props) => {
             isHeader={isHeader}
             isEnableContinueButton={isEnableContinueButton}
             notUseCustomerInfo={notUseCustomerInfo}
+            addFormRestrictions={addFormRestrictions}
           >
             {
-              (!isPopover || !addressOpen) && !isOpenUserData && (
+              !addFormRestrictions && (!isPopover || !addressOpen) && !isOpenUserData && (
                 <Button
                   className='add'
                   outline
@@ -262,6 +274,20 @@ const AddressListUI = (props) => {
                           <span>{address.address}</span>
                           <span>{address.internal_number} {address.zipcode}</span>
                         </div>
+                        {(!address?.location?.lat || !address?.location?.lng) && (
+                          <AddressBookMarkContainer>
+                            <AddressBookMark>
+                              <img
+                                src={theme?.images?.general?.bookmark}
+                                width={20}
+                                height={20}
+                              />
+                            </AddressBookMark>
+                            <AddressHoverInfo className='hover-info'>
+                              <p>{t('PLEASE_VERIFY_CUSTOMER_ADDRESS', 'Please verify the address with the customer.')}</p>
+                            </AddressHoverInfo>
+                          </AddressBookMarkContainer>
+                        )}
                       </div>
                       <AddressItemActions className='form'>
                         <a className={actionStatus.loading || isOpenUserData ? 'disabled' : ''} onClick={() => openAddress(address)}>
@@ -320,6 +346,7 @@ const AddressListUI = (props) => {
                   isEnableContinueButton={isEnableContinueButton}
                   notUseCustomerInfo={notUseCustomerInfo}
                   franchiseId={franchiseId}
+                  addFormRestrictions={addFormRestrictions}
                 />
               </AddressFormContainer>
             )}
@@ -327,9 +354,11 @@ const AddressListUI = (props) => {
           {addressOpen && !notUseCustomerInfo && (
             <AddressFormContainer width='50%' isEnableContinueButton={isEnableContinueButton}>
               <TitleFormContainer>
-                <CloseIcon>
-                  <MdClose onClick={() => handleCloseAddressForm()} />
-                </CloseIcon>
+                {!addFormRestrictions && (
+                  <CloseIcon>
+                    <MdClose onClick={() => handleCloseAddressForm()} />
+                  </CloseIcon>
+                )}
                 <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
               </TitleFormContainer>
             </AddressFormContainer>

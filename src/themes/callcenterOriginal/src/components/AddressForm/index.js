@@ -28,7 +28,8 @@ import {
   WrapAddressInput,
   AddressTagSection,
   WrapperMap,
-  WrapperSkeleton
+  WrapperSkeleton,
+  AddressMarkContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -52,7 +53,8 @@ const AddressFormUI = (props) => {
     getBusinessDeliveryZones,
     isEnableContinueButton,
     address,
-    notUseCustomerInfo
+    notUseCustomerInfo,
+    addFormRestrictions
   } = props
 
   const [configState] = useConfig()
@@ -62,7 +64,7 @@ const AddressFormUI = (props) => {
   const [{ auth }] = useSession()
   const theme = useTheme()
 
-  const [state, setState] = useState({ selectedFromAutocomplete: true })
+  const [selectedFromAutocomplete, setSelectedFromAutocomplete] = useState(false)
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
@@ -241,10 +243,7 @@ const AddressFormUI = (props) => {
     if (address?.address) {
       getBusinessDeliveryZones(address?.location)
     }
-    setState({
-      ...state,
-      selectedFromAutocomplete: true
-    })
+    setSelectedFromAutocomplete(true)
     updateChanges({
       ...address,
       address: googleInputRef?.current?.value
@@ -395,6 +394,13 @@ const AddressFormUI = (props) => {
               <React.Fragment key={field.name}>
                 <AddressWrap className='google-control'>
                   <WrapAddressInput>
+                    {!selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng) && (
+                      <AddressMarkContainer>
+                        <p>
+                          {t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.')}
+                        </p>
+                      </AddressMarkContainer>
+                    )}
                     <GoogleAutocompleteInput
                       className='input-autocomplete'
                       apiKey={googleMapsApiKey}
@@ -510,7 +516,7 @@ const AddressFormUI = (props) => {
           }
           <FormActions>
             {
-              Object.keys(formState?.changes).length === 0 && (
+              !addFormRestrictions && Object.keys(formState?.changes).length === 0 && (
                 <Button
                   outline
                   type='button'

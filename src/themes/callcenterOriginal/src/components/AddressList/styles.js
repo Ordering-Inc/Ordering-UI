@@ -201,6 +201,9 @@ export const List = styled.div`
   ` : css`
     margin-top: 222px;
   `} 
+  ${({ addFormRestrictions }) => addFormRestrictions && css`
+    height: 405px;
+  `}
   button {
     width: 100%;
   }
