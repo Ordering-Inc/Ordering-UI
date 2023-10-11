@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage, useOrder, BusinessList as BusinessListController } from 'ordering-components'
 import { BusinessController } from '../BusinessController'
 import { Button } from '../../styles/Buttons'
@@ -12,6 +12,9 @@ import {
   BusinessListWrapper
 } from './styles'
 import { AutoScroll } from '../AutoScroll'
+import Modal from '../Modal'
+import { BusinessPreorder } from '../BusinessPreorder'
+import { getCateringValues } from '../../../../../utils'
 
 const HighestRatedUI = (props) => {
   const {
@@ -27,8 +30,25 @@ const HighestRatedUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
+  const [isPreorder, setIsPreorder] = useState(false)
+  const [preorderBusiness, setPreorderBusiness] = useState(null)
 
   const isBusinessWithReviews = businessesList?.businesses?.every((business) => business?.reviews?.total === 0)
+  const cateringTypeString = orderState?.options?.type === 7
+    ? 'catering_delivery'
+    : orderState?.options?.type === 8
+      ? 'catering_pickup'
+      : null
+  const cateringValues = preorderBusiness?.configs && getCateringValues(cateringTypeString, preorderBusiness?.configs)
+
+  const handleClosePreorder = () => {
+    setIsPreorder(false)
+    setPreorderBusiness(null)
+  }
+
+  useEffect(() => {
+    if (preorderBusiness) setIsPreorder(true)
+  }, [preorderBusiness])
 
   useEffect(() => {
     if (!businessesList.loading) {
@@ -67,7 +87,7 @@ const HighestRatedUI = (props) => {
                 >
                   <Button
                     outline
-                    color='primary'
+                    color='primary' 
                     onClick={() => handleClickAddress()}
                   >
                     {t('CHANGE_ADDRESS', 'Select other Address')}
@@ -90,6 +110,7 @@ const HighestRatedUI = (props) => {
                       isCustomerMode={isCustomerMode}
                       favoriteIds={favoriteIds}
                       setFavoriteIds={setFavoriteIds}
+                      onPreorderBusiness={setPreorderBusiness}
                     />
                   )
                 ))
@@ -114,6 +135,19 @@ const HighestRatedUI = (props) => {
           </BusinessList>
         </BusinessListWrapper>
       </HighestRatedContainer>
+      <Modal
+        open={isPreorder}
+        width='760px'
+        onClose={() => handleClosePreorder()}
+      >
+        <BusinessPreorder
+          business={preorderBusiness}
+          handleClick={handleBusinessClick}
+          showButton
+          cateringPreorder={!!cateringTypeString}
+          {...cateringValues}
+        />
+      </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
