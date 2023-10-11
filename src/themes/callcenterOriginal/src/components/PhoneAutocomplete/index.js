@@ -173,14 +173,14 @@ const PhoneAutocompleteUI = (props) => {
     const obj = {}
     obj.value = user.cellphone || user.phone
     obj.label = `${user?.country_phone_code ? `(${user?.country_phone_code})` : ''} ${user?.phone && !user?.cellphone ? `${user?.phone}` : ''} ${user?.cellphone ? `${user.cellphone}` : ''} - {${user.name}}`
-    obj.flag = !user?.location?.lat || !user?.location?.lng
+    obj.flag = user?.imported_address_text && user?.addresses?.length === 0
     return obj
   }) || []
 
   const Option = (props) => {
     return (
       <OptionContainer style={{ display: 'flex' }}>
-        <components.Option {...props} /> {props?.data?.flag && <img src={theme?.images?.general?.bookmarkCheck} width={20} height={20} />}
+        <components.Option {...props} /> {props?.data?.flag && <img src={theme?.images?.general?.bookmark} width={20} height={20} />}
       </OptionContainer>
     )
   }

@@ -53,7 +53,8 @@ const AddressFormUI = (props) => {
     getBusinessDeliveryZones,
     isEnableContinueButton,
     address,
-    notUseCustomerInfo
+    notUseCustomerInfo,
+    addFormRestrictions
   } = props
 
   const [configState] = useConfig()
@@ -392,7 +393,7 @@ const AddressFormUI = (props) => {
               <React.Fragment key={field.name}>
                 <AddressWrap className='google-control'>
                   <WrapAddressInput>
-                    {address?.address && (!address?.location?.lat || !address?.location?.lng) && (
+                    {!state.selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng) && (
                       <AddressMarkContainer>
                         <p>
                           {t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.')}
@@ -507,7 +508,7 @@ const AddressFormUI = (props) => {
           }
           <FormActions>
             {
-              Object.keys(formState?.changes).length === 0 && (
+              !addFormRestrictions && Object.keys(formState?.changes).length === 0 && (
                 <Button
                   outline
                   type='button'
