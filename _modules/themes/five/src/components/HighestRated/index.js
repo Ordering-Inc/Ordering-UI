@@ -12,6 +12,10 @@ var _Buttons = require("../../styles/Buttons");
 var _NotFoundSource = require("../NotFoundSource");
 var _styles = require("./styles");
 var _AutoScroll = require("../AutoScroll");
+var _Modal = _interopRequireDefault(require("../Modal"));
+var _BusinessPreorder = require("../BusinessPreorder");
+var _utils = require("../../../../../utils");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -31,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var HighestRatedUI = function HighestRatedUI(props) {
-  var _businessesList$busin, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _businessesList$busin4, _props$afterComponent, _props$afterElements;
+  var _businessesList$busin, _orderState$options, _orderState$options2, _businessesList$busin3, _props$beforeElements, _props$beforeComponen, _businessesList$busin4, _props$afterComponent, _props$afterElements;
   var businessesList = props.businessesList,
     handleBusinessClick = props.handleBusinessClick,
     isCustomLayout = props.isCustomLayout,
@@ -46,10 +50,27 @@ var HighestRatedUI = function HighestRatedUI(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
+  var _useState = (0, _react.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isPreorder = _useState2[0],
+    setIsPreorder = _useState2[1];
+  var _useState3 = (0, _react.useState)(null),
+    _useState4 = _slicedToArray(_useState3, 2),
+    preorderBusiness = _useState4[0],
+    setPreorderBusiness = _useState4[1];
   var isBusinessWithReviews = businessesList === null || businessesList === void 0 || (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.every(function (business) {
     var _business$reviews;
     return (business === null || business === void 0 || (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) === 0;
   });
+  var cateringTypeString = (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 7 ? 'catering_delivery' : (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 8 ? 'catering_pickup' : null;
+  var cateringValues = (preorderBusiness === null || preorderBusiness === void 0 ? void 0 : preorderBusiness.configs) && (0, _utils.getCateringValues)(cateringTypeString, preorderBusiness === null || preorderBusiness === void 0 ? void 0 : preorderBusiness.configs);
+  var handleClosePreorder = function handleClosePreorder() {
+    setIsPreorder(false);
+    setPreorderBusiness(null);
+  };
+  (0, _react.useEffect)(function () {
+    if (preorderBusiness) setIsPreorder(true);
+  }, [preorderBusiness]);
   (0, _react.useEffect)(function () {
     if (!businessesList.loading) {
       setHasHighRatedBusiness(!isBusinessWithReviews);
@@ -85,33 +106,45 @@ var HighestRatedUI = function HighestRatedUI(props) {
   }, t('CHANGE_ADDRESS', 'Select other Address'))), /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: "highestRated"
   }, !(businessesList !== null && businessesList !== void 0 && businessesList.loading) && (businessesList === null || businessesList === void 0 || (_businessesList$busin4 = businessesList.businesses) === null || _businessesList$busin4 === void 0 ? void 0 : _businessesList$busin4.map(function (business) {
-    var _business$reviews2, _orderState$options;
+    var _business$reviews2, _orderState$options3;
     return (business === null || business === void 0 || (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total) > 0 && /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: business.id,
       className: "card",
       business: business,
       isBusinessOpen: business.open,
       handleCustomClick: handleBusinessClick,
-      orderType: orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type,
+      orderType: orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type,
       isCustomLayout: isCustomLayout,
       isCustomerMode: isCustomerMode,
       favoriteIds: favoriteIds,
-      setFavoriteIds: setFavoriteIds
+      setFavoriteIds: setFavoriteIds,
+      onPreorderBusiness: setPreorderBusiness
     });
   }))), businessesList.loading && _toConsumableArray(Array(8).keys()).map(function (i) {
-    var _orderState$options2;
+    var _orderState$options4;
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",
       business: {},
       isSkeleton: true,
-      orderType: orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type
+      orderType: orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type
     });
   }), businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && businessesList.error.map(function (e, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ErrorMessage, {
       key: i
     }, t('ERROR', 'ERROR'), ": [", (e === null || e === void 0 ? void 0 : e.message) || e, "]");
-  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_Modal.default, {
+    open: isPreorder,
+    width: "760px",
+    onClose: function onClose() {
+      return handleClosePreorder();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessPreorder.BusinessPreorder, _extends({
+    business: preorderBusiness,
+    handleClick: handleBusinessClick,
+    showButton: true,
+    cateringPreorder: !!cateringTypeString
+  }, cateringValues))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
