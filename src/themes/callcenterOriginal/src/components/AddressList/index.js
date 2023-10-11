@@ -81,7 +81,7 @@ const AddressListUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
   const [{ user }] = useCustomer()
-
+  const addFormRestrictions = userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
     (address, i, self) =>
       i === self.findIndex(obj => (
@@ -195,13 +195,12 @@ const AddressListUI = (props) => {
   }, [isOpenUserData])
 
   useEffect(() => {
-    if (addressList.addresses?.length > 0) {
-      const defaultAddress = addressList.addresses?.find(address => address?.default)
-      if (!defaultAddress?.location?.lat || !defaultAddress?.location?.lng) {
-        openAddress(defaultAddress)
-      }
+    if (userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error) {
+      openAddress({
+        address: userCustomerSetup?.imported_address_text
+      })
     }
-  }, [addressList.addresses])
+  }, [userCustomerSetup?.imported_address_text, addressList.addresses, addressList?.loading, addressList?.error])
 
   return (
     <>
@@ -219,9 +218,10 @@ const AddressListUI = (props) => {
             isHeader={isHeader}
             isEnableContinueButton={isEnableContinueButton}
             notUseCustomerInfo={notUseCustomerInfo}
+            addFormRestrictions={addFormRestrictions}
           >
             {
-              (!isPopover || !addressOpen) && !isOpenUserData && (
+              !addFormRestrictions && (!isPopover || !addressOpen) && !isOpenUserData && (
                 <Button
                   className='add'
                   outline
@@ -346,6 +346,7 @@ const AddressListUI = (props) => {
                   isEnableContinueButton={isEnableContinueButton}
                   notUseCustomerInfo={notUseCustomerInfo}
                   franchiseId={franchiseId}
+                  addFormRestrictions={addFormRestrictions}
                 />
               </AddressFormContainer>
             )}
@@ -353,9 +354,11 @@ const AddressListUI = (props) => {
           {addressOpen && !notUseCustomerInfo && (
             <AddressFormContainer width='50%' isEnableContinueButton={isEnableContinueButton}>
               <TitleFormContainer>
-                <CloseIcon>
-                  <MdClose onClick={() => handleCloseAddressForm()} />
-                </CloseIcon>
+                {!addFormRestrictions && (
+                  <CloseIcon>
+                    <MdClose onClick={() => handleCloseAddressForm()} />
+                  </CloseIcon>
+                )}
                 <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
               </TitleFormContainer>
             </AddressFormContainer>
