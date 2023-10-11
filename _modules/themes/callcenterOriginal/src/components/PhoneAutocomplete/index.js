@@ -231,11 +231,11 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     setIsPickupSelected(true);
   };
   var optionsToSelect = customersPhones.users.map(function (user) {
-    var _user$location, _user$location2;
+    var _user$addresses;
     var obj = {};
     obj.value = user.cellphone || user.phone;
     obj.label = "".concat(user !== null && user !== void 0 && user.country_phone_code ? "(".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, ")") : '', " ").concat(user !== null && user !== void 0 && user.phone && !(user !== null && user !== void 0 && user.cellphone) ? "".concat(user === null || user === void 0 ? void 0 : user.phone) : '', " ").concat(user !== null && user !== void 0 && user.cellphone ? "".concat(user.cellphone) : '', " - {").concat(user.name, "}");
-    obj.flag = !(user !== null && user !== void 0 && (_user$location = user.location) !== null && _user$location !== void 0 && _user$location.lat) || !(user !== null && user !== void 0 && (_user$location2 = user.location) !== null && _user$location2 !== void 0 && _user$location2.lng);
+    obj.flag = (user === null || user === void 0 ? void 0 : user.imported_address_text) && (user === null || user === void 0 || (_user$addresses = user.addresses) === null || _user$addresses === void 0 ? void 0 : _user$addresses.length) === 0;
     return obj;
   }) || [];
   var Option = function Option(props) {
@@ -245,7 +245,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
         display: 'flex'
       }
     }, /*#__PURE__*/_react.default.createElement(_reactSelect.components.Option, props), " ", (props === null || props === void 0 || (_props$data = props.data) === null || _props$data === void 0 ? void 0 : _props$data.flag) && /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.bookmarkCheck,
+      src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.bookmark,
       width: 20,
       height: 20
     }));

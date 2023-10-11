@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressListUI = function AddressListUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options6, _addressList$addresse5, _theme$images2, _addressList$error$, _orderState$options7, _orderState$options8, _props$afterComponent, _props$afterElements;
+  var _addressList$addresse, _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options6, _addressList$addresse5, _theme$images2, _addressList$error$, _orderState$options7, _orderState$options8, _props$afterComponent, _props$afterElements;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -87,6 +87,7 @@ var AddressListUI = function AddressListUI(props) {
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
     _useCustomer2 = _slicedToArray(_useCustomer, 1),
     user = _useCustomer2[0].user;
+  var addFormRestrictions = (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text) && ((_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error);
   var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
     return i === self.findIndex(function (obj) {
       return address.address === obj.address && address.address_notes === obj.address_notes && address.zipcode === obj.zipcode && address.internal_number === obj.internal_number;
@@ -192,17 +193,13 @@ var AddressListUI = function AddressListUI(props) {
     }
   }, [isOpenUserData]);
   (0, _react.useEffect)(function () {
-    var _addressList$addresse;
-    if (((_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) > 0) {
-      var _addressList$addresse2, _defaultAddress$locat, _defaultAddress$locat2;
-      var defaultAddress = (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.find(function (address) {
-        return address === null || address === void 0 ? void 0 : address.default;
+    var _addressList$addresse2;
+    if (userCustomerSetup !== null && userCustomerSetup !== void 0 && userCustomerSetup.imported_address_text && ((_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error)) {
+      openAddress({
+        address: userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text
       });
-      if (!(defaultAddress !== null && defaultAddress !== void 0 && (_defaultAddress$locat = defaultAddress.location) !== null && _defaultAddress$locat !== void 0 && _defaultAddress$locat.lat) || !(defaultAddress !== null && defaultAddress !== void 0 && (_defaultAddress$locat2 = defaultAddress.location) !== null && _defaultAddress$locat2 !== void 0 && _defaultAddress$locat2.lng)) {
-        openAddress(defaultAddress);
-      }
     }
-  }, [addressList.addresses]);
+  }, [userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text, addressList.addresses, addressList === null || addressList === void 0 ? void 0 : addressList.loading, addressList === null || addressList === void 0 ? void 0 : addressList.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -219,8 +216,9 @@ var AddressListUI = function AddressListUI(props) {
     isOpenUserData: isOpenUserData,
     isHeader: isHeader,
     isEnableContinueButton: isEnableContinueButton,
-    notUseCustomerInfo: notUseCustomerInfo
-  }, (!isPopover || !addressOpen) && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    notUseCustomerInfo: notUseCustomerInfo,
+    addFormRestrictions: addFormRestrictions
+  }, !addFormRestrictions && (!isPopover || !addressOpen) && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
     color: isEnableContinueButton && (addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) > 0 ? 'secondary' : 'primary',
@@ -307,11 +305,12 @@ var AddressListUI = function AddressListUI(props) {
     userCustomerSetup: userCustomerSetup,
     isEnableContinueButton: isEnableContinueButton,
     notUseCustomerInfo: notUseCustomerInfo,
-    franchiseId: franchiseId
+    franchiseId: franchiseId,
+    addFormRestrictions: addFormRestrictions
   }))), addressOpen && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
     width: "50%",
     isEnableContinueButton: isEnableContinueButton
-  }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, !addFormRestrictions && /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return handleCloseAddressForm();
     }
