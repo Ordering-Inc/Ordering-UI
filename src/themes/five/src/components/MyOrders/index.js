@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components'
+import { useConfig, useLanguage } from 'ordering-components'
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
 import { OrdersOption } from '../OrdersOption'
 import { GiftCardOrdersList } from '../GiftCard/GiftCardOrdersList'
@@ -28,6 +28,7 @@ export const MyOrders = (props) => {
   const [, t] = useLanguage()
   const history = useHistory()
   const theme = useTheme()
+  const [{ configs }] = useConfig()
   const layout = theme?.orders?.components?.layout?.type || 'original'
 
   const [isEmptyActive, setIsEmptyActive] = useState(false)
@@ -39,12 +40,13 @@ export const MyOrders = (props) => {
 
   const hideProductsTab = theme?.orders?.components?.products_tab?.hidden
   const hideBusinessTab = theme?.orders?.components?.business_tab?.hidden
+  const isWalletEnabled = configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' && (configs?.wallet_cash_enabled?.value === '1' || configs?.wallet_credit_point_enabled?.value === '1')
 
   const MyOrdersMenu = [
     { key: 'orders', value: t('ORDERS', 'Orders'), disabled: false },
     { key: 'business', value: t('BUSINESS', 'Business'), disabled: hideBusinessTab },
     { key: 'products', value: t('PRODUCTS', 'Products'), disabled: hideProductsTab },
-    { key: 'giftCards', value: t('GIFT_CARD', 'Gift card'), disabled: false }
+    { key: 'giftCards', value: t('GIFT_CARD', 'Gift card'), disabled: !isWalletEnabled }
   ]
 
   const notOrderOptions = ['business', 'products', 'professionals']
