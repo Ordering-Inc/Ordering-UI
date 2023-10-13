@@ -386,7 +386,7 @@ export const TitleWrapper = styled.div`
       padding: 10px 0;
       font-size: 18px;
       ${({ isCustomLayout }) => !isCustomLayout ? css`
-        width: calc(100vw - 200px);
+        width: calc(100vw - 230px);
         ${props => props.theme?.rtl ? css`
         right: 50px;
         ` : css`
