@@ -359,6 +359,10 @@ const CheckoutUI = (props) => {
     }
   }
 
+  const handleCartPlaced = (cart) => {
+    handleOrderRedirect(cart.order.uuid)
+  }
+
   useEffect(() => {
     if (validationFields && validationFields?.fields?.checkout) {
       checkValidationFields()
@@ -406,7 +410,9 @@ const CheckoutUI = (props) => {
 
   useEffect(() => {
     if (cart?.products?.length) return
-    handleStoreRedirect(cart?.business?.slug)
+    if (cart?.business?.slug) {
+      handleStoreRedirect(cart?.business?.slug)
+    }
   }, [cart?.products])
 
   useEffect(() => {
@@ -417,6 +423,13 @@ const CheckoutUI = (props) => {
 
   useEffect(() => {
     events.emit('in-checkout', cart)
+  }, [])
+
+  useEffect(() => {
+    events.on('cart_placed', handleCartPlaced)
+    return () => {
+      events.off('cart_placed', handleCartPlaced)
+    }
   }, [])
 
   const CartComponent = layout === 'pfchangs'
