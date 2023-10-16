@@ -649,7 +649,9 @@ export const App = () => {
                       ? isUserVerifyRequired && !guestCheckoutEnabled
                         ? <Redirect to='/verify' />
                         : (<MyOrders />)
-                      : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
+                      : queryIntegrationToken && queryIntegrationCode === 'spoonity'
+                        ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
+                        : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />}
                   </Route>
                   <Route exact path='/profile/addresses'>
                     {auth
