@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import {
@@ -68,6 +68,7 @@ const AddressFormUI = (props) => {
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
+  const googleInputRef = useRef()
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
   const isEditing = !!addressState.address?.id
   const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
@@ -240,7 +241,10 @@ const AddressFormUI = (props) => {
       ...state,
       selectedFromAutocomplete: true
     })
-    updateChanges(address)
+    updateChanges({
+      ...address,
+      address: googleInputRef?.current?.value
+    })
   }
 
   const setMapErrors = (errKey) => {
@@ -308,8 +312,8 @@ const AddressFormUI = (props) => {
           lng: formState?.changes?.location?.lng?.toFixed(5)
         }
         if (
-					prevLocation?.lat !== newLocation?.lat &&
-					prevLocation?.lng !== newLocation?.lng
+          prevLocation?.lat !== newLocation?.lat &&
+          prevLocation?.lng !== newLocation?.lng
         ) {
           setLocationChange(formState?.changes?.location)
         }
@@ -406,8 +410,15 @@ const AddressFormUI = (props) => {
                         handleChangeInput({ target: { name: 'address', value: e.target.value } })
                         setAddressValue(e.target.value)
                       }}
-                      value={addressValue}
-                      autoComplete='new-field'
+                      childRef={(ref) => {
+                        googleInputRef.current = ref
+                      }}
+                      defaultValue={
+                        formState?.result?.result
+                          ? formState?.result?.result?.address
+                          : formState?.changes?.address ?? addressValue
+                      }
+                      autoComplete='new-password'
                       countryCode={configState?.configs?.country_autocomplete?.value || '*'}
                     />
                   </WrapAddressInput>
