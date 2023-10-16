@@ -93,6 +93,7 @@ const MultiCheckoutUI = (props) => {
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [openModal, setOpenModal] = useState({ login: false, signup: false, isGuest: false })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [productLoading, setProductLoading] = useState(false)
 
   const walletCarts = (Object.values(orderState?.carts)?.filter(cart => cart?.products && cart?.products?.length && cart?.status !== 2 && cart?.valid_schedule && cart?.valid_products && cart?.valid_address && cart?.valid_maximum && cart?.valid_minimum && cart?.wallets) || null) || []
   const isDisablePlaceOrderButton = cartGroup?.loading ||
@@ -399,6 +400,8 @@ const MultiCheckoutUI = (props) => {
                     hideDeliveryFee={configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'}
                     hideDriverTip={configs?.multi_business_checkout_show_combined_driver_tip?.value === '1'}
                     businessConfigs={cart?.business?.configs}
+                    productLoading={productLoading}
+                    setProductLoading={setProductLoading}
                   />
                   <DriverTipDivider />
                 </React.Fragment>

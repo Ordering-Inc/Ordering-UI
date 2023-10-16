@@ -128,6 +128,9 @@ const CheckoutUI = (props) => {
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
   const [paymethodClicked, setPaymethodClicked] = useState(null)
+  const [orderTypeValidationFields, setOrderTypeValidationFields] = useState([])
+  const [productLoading, setProductLoading] = useState(false)
+
   const cardsMethods = ['stripe', 'credomatic']
   const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
   const businessConfigs = businessDetails?.business?.configs ?? []
@@ -623,6 +626,8 @@ const CheckoutUI = (props) => {
               }
               guestCheckoutComment={guestCheckoutComment}
               guestCheckoutCupon={guestCheckoutCupon}
+              productLoading={productLoading}
+              setProductLoading={setProductLoading}
             />
           </CartContainer>
         )}
