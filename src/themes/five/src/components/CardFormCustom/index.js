@@ -74,6 +74,9 @@ export const CardFormCustom = (props) => {
         focused={formState.focus}
         name={formState.name}
         number={formState.number}
+        locale={{
+          valid: t('VALID_THRU', 'Valid thru')
+        }}
         placeholders={{
           name: t('YOUR_NAME_HERE', 'Your name here')
         }}

@@ -172,6 +172,13 @@ const PaymentOptionsUI = (props) => {
     })
   }
 
+  const getNamePaymethod = (paymethod) => {
+    if (paymethod?.id === 132) {
+      return t(`CREDIT_CARD_${paymethod.gateway.toUpperCase()}`, `Credit card (${paymethod.name})`)
+    }
+    return t(paymethod.gateway.toUpperCase(), paymethod.name)
+  }
+
   useEffect(() => {
     if (supportedMethods?.length === 1 && !paymethodSelected && !popupMethods.includes(supportedMethods[0]?.gateway)) {
       handlePaymethodClick && handlePaymethodClick(supportedMethods[0])
@@ -231,13 +238,14 @@ const PaymentOptionsUI = (props) => {
                         {getPayIcon(paymethod.id)}
                       </div>
                       <p>
-                        {t(paymethod.gateway.toUpperCase(), paymethod.name)}
+                        {getNamePaymethod(paymethod)}
                       </p>
                     </PayCard>
                   )
                 }
               </React.Fragment>
-            ))
+            )
+            )
           )}
 
           {(paymethodsList.loading || isLoading) && (
