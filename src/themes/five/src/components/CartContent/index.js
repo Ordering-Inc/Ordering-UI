@@ -26,6 +26,8 @@ export const CartContent = (props) => {
   const [{ configs }] = useConfig()
 
   const [currentCartUuid, setCurrentCartUuid] = useState(null)
+  const [productLoading, setProductLoading] = useState(false)
+
   const checkoutMultiBusinessEnabled = configs?.checkout_multi_business_enabled?.value === '1'
 
   const totalCartsPrice = carts?.length && carts.reduce((total, cart) => { return total + cart?.total }, 0)
@@ -113,6 +115,8 @@ export const CartContent = (props) => {
                     hideDeliveryFee={configs?.multi_business_checkout_show_combined_delivery_fee?.value === '1'}
                     hideDriverTip={configs?.multi_business_checkout_show_combined_driver_tip?.value === '1'}
                     isCustomerMode={isCustomerMode}
+                    productLoading={productLoading}
+                    setProductLoading={setProductLoading}
                   />
                 )}
               </React.Fragment>

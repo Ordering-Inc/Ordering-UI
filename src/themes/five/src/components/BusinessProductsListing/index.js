@@ -17,7 +17,6 @@ import {
   useConfig,
   useBusiness
 } from 'ordering-components'
-
 import {
   ProductsContainer,
   ProductLoading,
@@ -111,7 +110,7 @@ const BusinessProductsListingUI = (props) => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isCartModal, setisCartModal] = useState(false)
   const [subcategoriesSelected, setSubcategoriesSelected] = useState([])
-  const [productToIdLoading, setProductIdToLoading] = useState(null)
+  const [productLoading, setProductLoading] = useState(false)
   const isMounted = useIsMounted()
 
   const isQuickAddProduct = configs?.add_product_with_one_click?.value === '1'
@@ -144,7 +143,7 @@ const BusinessProductsListingUI = (props) => {
 
   const onProductClick = async (product) => {
     if (product.extras.length === 0 && !product.inventoried && auth && isQuickAddProduct) {
-      setProductIdToLoading(product.id)
+      setProductLoading(true)
       const isProductAddedToCart = currentCart?.products?.find(Cproduct => Cproduct.id === product.id)
       const productQuantity = isProductAddedToCart?.quantity
       const minimumPerOrder = product?.minimum_per_order || 1
@@ -163,7 +162,7 @@ const BusinessProductsListingUI = (props) => {
       } else {
         await addProduct(addCurrentProduct, cartData, isQuickAddProduct)
       }
-      setProductIdToLoading(null)
+      setProductLoading(false)
     } else {
       if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
         if (site?.product_url_template) {
@@ -429,7 +428,8 @@ const BusinessProductsListingUI = (props) => {
           onBusinessClick={onBusinessClick}
           priceFilterValues={priceFilterValues}
           handleChangePriceFilterValues={handleChangePriceFilterValues}
-          productToIdLoading={productToIdLoading}
+          productLoading={productLoading}
+          setProductLoading={setProductLoading}
           handleUpdateProfessionals={handleUpdateProfessionals}
           isCustomerMode={isCustomerMode}
           handleCustomProductBannerClick={handleCustomProductBannerClick}
@@ -510,6 +510,7 @@ const BusinessProductsListingUI = (props) => {
                 isCartOnProductsList={isCartOnProductsList}
                 handleCartOpen={(val) => setIsCartOpen(val)}
                 businessConfigs={business?.configs}
+                productLoading={productLoading}
               />
             </>
           ) : (
@@ -569,6 +570,7 @@ const BusinessProductsListingUI = (props) => {
                 handleChangeProfessional={handleChangeProfessionalSelected}
                 handleUpdateProfessionals={handleUpdateProfessionals}
                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0) || 0}
+                setProductLoading={setProductLoading}
               />
             ) : (
               <ProductForm
@@ -582,6 +584,7 @@ const BusinessProductsListingUI = (props) => {
                 onSave={handlerProductAction}
                 isCustomerMode={isCustomerMode}
                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === (productModal.product || curProduct)?.id ? Cproduct?.quantity : 0) }, 0) || 0}
+                setProductLoading={setProductLoading}
               />
             )}
           </>

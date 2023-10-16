@@ -38,7 +38,8 @@ import {
   CommentContainer,
   IconContainer,
   NoValidProductMessage,
-  DriverTipContainer
+  DriverTipContainer,
+  SpinnerCart
 } from './styles'
 import { getCateringValues, verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
@@ -76,7 +77,9 @@ const CartUI = (props) => {
     loyaltyRewardRate,
     isCustomerMode,
     guestCheckoutComment,
-    guestCheckoutCupon
+    guestCheckoutCupon,
+    productLoading,
+    setProductLoading
   } = props
 
   const theme = useTheme()
@@ -281,6 +284,13 @@ const CartUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
+      {productLoading && (
+        <SpinnerCart>
+          <SpinnerLoader
+            style={{ height: 100 }}
+          />
+        </SpinnerCart>
+      )}
       <CartContainer className='cart'>
         <CartSticky isCartOnProductsList={isCartOnProductsList}>
           <BusinessItemAccordion
@@ -682,6 +692,7 @@ const CartUI = (props) => {
                 productId={curProduct?.id}
                 onSave={handlerProductAction}
                 viewString={viewString}
+                setProductLoading={setProductLoading}
               />
             ) : (
               <ServiceForm
@@ -694,6 +705,7 @@ const CartUI = (props) => {
                 productId={curProduct?.id}
                 onSave={handlerProductAction}
                 professionalSelected={curProduct?.calendar_event?.professional}
+                setProductLoading={setProductLoading}
               />
             )}
           </Modal>

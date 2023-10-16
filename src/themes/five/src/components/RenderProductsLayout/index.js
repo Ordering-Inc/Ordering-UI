@@ -89,7 +89,9 @@ export const RenderProductsLayout = (props) => {
     priceFilterValues,
     handleUpdateProfessionals,
     isCustomerMode,
-    handleCustomProductBannerClick
+    handleCustomProductBannerClick,
+    productLoading,
+    setProductLoading
   } = props
 
   const theme = useTheme()
@@ -361,6 +363,8 @@ export const RenderProductsLayout = (props) => {
                             isCartOnProductsList={isCartOnProductsList}
                             handleCartOpen={handleCartOpen}
                             businessConfigs={business?.configs}
+                            productLoading={productLoading}
+                            setProductLoading={setProductLoading}
                           />
                         </>
                       ) : (
@@ -524,6 +528,8 @@ export const RenderProductsLayout = (props) => {
                 isCartOnProductsList={isCartOnProductsList}
                 handleCartOpen={handleCartOpen}
                 businessConfigs={business?.configs}
+                productLoading={productLoading}
+                setProductLoading={setProductLoading}
               />
             </>
           ) : (
