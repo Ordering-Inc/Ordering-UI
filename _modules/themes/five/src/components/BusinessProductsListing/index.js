@@ -152,10 +152,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     _useState16 = _slicedToArray(_useState15, 2),
     subcategoriesSelected = _useState16[0],
     setSubcategoriesSelected = _useState16[1];
-  var _useState17 = (0, _react.useState)(null),
+  var _useState17 = (0, _react.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    productToIdLoading = _useState18[0],
-    setProductIdToLoading = _useState18[1];
+    productLoading = _useState18[0],
+    setProductLoading = _useState18[1];
   var isMounted = (0, _useIsMounted.useIsMounted)();
   var isQuickAddProduct = (configs === null || configs === void 0 || (_configs$add_product_ = configs.add_product_with_one_click) === null || _configs$add_product_ === void 0 ? void 0 : _configs$add_product_.value) === '1';
   var checkoutMultiBusinessEnabled = (configs === null || configs === void 0 || (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
@@ -204,7 +204,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
               _context.next = 18;
               break;
             }
-            setProductIdToLoading(product.id);
+            setProductLoading(true);
             isProductAddedToCart = currentCart === null || currentCart === void 0 || (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.find(function (Cproduct) {
               return Cproduct.id === product.id;
             });
@@ -234,7 +234,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
             _context.next = 15;
             return addProduct(addCurrentProduct, cartData, isQuickAddProduct);
           case 15:
-            setProductIdToLoading(null);
+            setProductLoading(false);
             _context.next = 22;
             break;
           case 18:
@@ -525,7 +525,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onBusinessClick: onBusinessClick,
     priceFilterValues: priceFilterValues,
     handleChangePriceFilterValues: handleChangePriceFilterValues,
-    productToIdLoading: productToIdLoading,
+    productLoading: productLoading,
+    setProductLoading: setProductLoading,
     handleUpdateProfessionals: handleUpdateProfessionals,
     isCustomerMode: isCustomerMode,
     handleCustomProductBannerClick: handleCustomProductBannerClick
@@ -581,7 +582,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleCartOpen: function handleCartOpen(val) {
       return setIsCartOpen(val);
     },
-    businessConfigs: business === null || business === void 0 ? void 0 : business.configs
+    businessConfigs: business === null || business === void 0 ? void 0 : business.configs,
+    productLoading: productLoading
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyCart, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart')))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
@@ -614,7 +616,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     productAddedToCartLength: (currentCart === null || currentCart === void 0 || (_currentCart$products7 = currentCart.products) === null || _currentCart$products7 === void 0 ? void 0 : _currentCart$products7.reduce(function (productsLength, Cproduct) {
       var _ref3;
       return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === ((_ref3 = productModal.product || curProduct) === null || _ref3 === void 0 ? void 0 : _ref3.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-    }, 0)) || 0
+    }, 0)) || 0,
+    setProductLoading: setProductLoading
   }) : /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     businessSlug: business === null || business === void 0 ? void 0 : business.slug,
     useKioskApp: props.useKioskApp,
@@ -628,7 +631,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     productAddedToCartLength: (currentCart === null || currentCart === void 0 || (_currentCart$products8 = currentCart.products) === null || _currentCart$products8 === void 0 ? void 0 : _currentCart$products8.reduce(function (productsLength, Cproduct) {
       var _ref4;
       return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === ((_ref4 = productModal.product || curProduct) === null || _ref4 === void 0 ? void 0 : _ref4.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
-    }, 0)) || 0
+    }, 0)) || 0,
+    setProductLoading: setProductLoading
   }))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState === null || alertState === void 0 ? void 0 : alertState.open,

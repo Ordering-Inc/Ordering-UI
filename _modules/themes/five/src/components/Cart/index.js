@@ -74,7 +74,9 @@ var CartUI = function CartUI(props) {
     loyaltyRewardRate = props.loyaltyRewardRate,
     isCustomerMode = props.isCustomerMode,
     guestCheckoutComment = props.guestCheckoutComment,
-    guestCheckoutCupon = props.guestCheckoutCupon;
+    guestCheckoutCupon = props.guestCheckoutCupon,
+    productLoading = props.productLoading,
+    setProductLoading = props.setProductLoading;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -337,7 +339,11 @@ var CartUI = function CartUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.CartContainer, {
+  }), productLoading && /*#__PURE__*/_react.default.createElement(_styles.SpinnerCart, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, {
+    style: {
+      height: 100
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.CartContainer, {
     className: "cart"
   }, /*#__PURE__*/_react.default.createElement(_styles.CartSticky, {
     isCartOnProductsList: isCartOnProductsList
@@ -608,7 +614,8 @@ var CartUI = function CartUI(props) {
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
     onSave: handlerProductAction,
-    viewString: viewString
+    viewString: viewString,
+    setProductLoading: setProductLoading
   }) : /*#__PURE__*/_react.default.createElement(_ServiceForm.ServiceForm, {
     isCartProduct: true,
     isService: true,
@@ -618,7 +625,8 @@ var CartUI = function CartUI(props) {
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
     onSave: handlerProductAction,
-    professionalSelected: curProduct === null || curProduct === void 0 || (_curProduct$calendar_ = curProduct.calendar_event) === null || _curProduct$calendar_ === void 0 ? void 0 : _curProduct$calendar_.professional
+    professionalSelected: curProduct === null || curProduct === void 0 || (_curProduct$calendar_ = curProduct.calendar_event) === null || _curProduct$calendar_ === void 0 ? void 0 : _curProduct$calendar_.professional,
+    setProductLoading: setProductLoading
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     open: openTaxModal.open,

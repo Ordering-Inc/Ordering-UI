@@ -49,6 +49,10 @@ var CartContent = exports.CartContent = function CartContent(props) {
     _useState2 = _slicedToArray(_useState, 2),
     currentCartUuid = _useState2[0],
     setCurrentCartUuid = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    productLoading = _useState4[0],
+    setProductLoading = _useState4[1];
   var checkoutMultiBusinessEnabled = (configs === null || configs === void 0 || (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var totalCartsPrice = (carts === null || carts === void 0 ? void 0 : carts.length) && carts.reduce(function (total, cart) {
     return total + (cart === null || cart === void 0 ? void 0 : cart.total);
@@ -131,7 +135,9 @@ var CartContent = exports.CartContent = function CartContent(props) {
       hideCouponInput: (configs === null || configs === void 0 || (_configs$multi_busine = configs.multi_business_checkout_coupon_input_style) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === 'group',
       hideDeliveryFee: (configs === null || configs === void 0 || (_configs$multi_busine2 = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine2 === void 0 ? void 0 : _configs$multi_busine2.value) === '1',
       hideDriverTip: (configs === null || configs === void 0 || (_configs$multi_busine3 = configs.multi_business_checkout_show_combined_driver_tip) === null || _configs$multi_busine3 === void 0 ? void 0 : _configs$multi_busine3.value) === '1',
-      isCustomerMode: isCustomerMode
+      isCustomerMode: isCustomerMode,
+      productLoading: productLoading,
+      setProductLoading: setProductLoading
     }));
   }), checkoutMultiBusinessEnabled && !!carts.length && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, null, !!totalCartsFee && (configs === null || configs === void 0 || (_configs$multi_busine4 = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine4 === void 0 ? void 0 : _configs$multi_busine4.value) === '1' && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, t('TOTAL_DELIVERY_FEE', 'Total delivery fee')), /*#__PURE__*/_react.default.createElement("p", null, parsePrice(totalCartsFee))), carts.reduce(function (sum, cart) {
     return sum + (cart === null || cart === void 0 ? void 0 : cart.driver_tip);

@@ -172,6 +172,14 @@ var CheckoutUI = function CheckoutUI(props) {
     _useState24 = _slicedToArray(_useState23, 2),
     paymethodClicked = _useState24[0],
     setPaymethodClicked = _useState24[1];
+  var _useState25 = (0, _react.useState)([]),
+    _useState26 = _slicedToArray(_useState25, 2),
+    orderTypeValidationFields = _useState26[0],
+    setOrderTypeValidationFields = _useState26[1];
+  var _useState27 = (0, _react.useState)(false),
+    _useState28 = _slicedToArray(_useState27, 2),
+    productLoading = _useState28[0],
+    setProductLoading = _useState28[1];
   var cardsMethods = ['stripe', 'credomatic'];
   var stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect'];
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 || (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
@@ -589,7 +597,9 @@ var CheckoutUI = function CheckoutUI(props) {
     businessConfigs: businessConfigs,
     loyaltyRewardRate: (_ref = (_creditPointPlanOnBus = creditPointPlanOnBusiness === null || creditPointPlanOnBusiness === void 0 ? void 0 : creditPointPlanOnBusiness.accumulation_rate) !== null && _creditPointPlanOnBus !== void 0 ? _creditPointPlanOnBus : !!creditPointPlanOnBusiness && (creditPointPlan === null || creditPointPlan === void 0 ? void 0 : creditPointPlan.accumulation_rate)) !== null && _ref !== void 0 ? _ref : 0,
     guestCheckoutComment: guestCheckoutComment,
-    guestCheckoutCupon: guestCheckoutCupon
+    guestCheckoutCupon: guestCheckoutCupon,
+    productLoading: productLoading,
+    setProductLoading: setProductLoading
   })), !!(isMultiDriverTips && driverTipsField) && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
@@ -711,37 +721,37 @@ var Checkout = exports.Checkout = function Checkout(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
-  var _useState25 = (0, _react.useState)({
+  var _useState29 = (0, _react.useState)({
       loading: true,
       error: null,
       cart: null
     }),
-    _useState26 = _slicedToArray(_useState25, 2),
-    cartState = _useState26[0],
-    setCartState = _useState26[1];
-  var _useState27 = (0, _react.useState)(false),
-    _useState28 = _slicedToArray(_useState27, 2),
-    openUpselling = _useState28[0],
-    setOpenUpselling = _useState28[1];
-  var _useState29 = (0, _react.useState)(false),
     _useState30 = _slicedToArray(_useState29, 2),
-    canOpenUpselling = _useState30[0],
-    setCanOpenUpselling = _useState30[1];
-  var _useState31 = (0, _react.useState)(null),
+    cartState = _useState30[0],
+    setCartState = _useState30[1];
+  var _useState31 = (0, _react.useState)(false),
     _useState32 = _slicedToArray(_useState31, 2),
-    currentCart = _useState32[0],
-    setCurrentCart = _useState32[1];
-  var _useState33 = (0, _react.useState)({
+    openUpselling = _useState32[0],
+    setOpenUpselling = _useState32[1];
+  var _useState33 = (0, _react.useState)(false),
+    _useState34 = _slicedToArray(_useState33, 2),
+    canOpenUpselling = _useState34[0],
+    setCanOpenUpselling = _useState34[1];
+  var _useState35 = (0, _react.useState)(null),
+    _useState36 = _slicedToArray(_useState35, 2),
+    currentCart = _useState36[0],
+    setCurrentCart = _useState36[1];
+  var _useState37 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState34 = _slicedToArray(_useState33, 2),
-    alertState = _useState34[0],
-    setAlertState = _useState34[1];
-  var _useState35 = (0, _react.useState)(false),
-    _useState36 = _slicedToArray(_useState35, 2),
-    isResetPaymethod = _useState36[0],
-    setIsResetPaymethod = _useState36[1];
+    _useState38 = _slicedToArray(_useState37, 2),
+    alertState = _useState38[0],
+    setAlertState = _useState38[1];
+  var _useState39 = (0, _react.useState)(false),
+    _useState40 = _slicedToArray(_useState39, 2),
+    isResetPaymethod = _useState40[0],
+    setIsResetPaymethod = _useState40[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 || (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);

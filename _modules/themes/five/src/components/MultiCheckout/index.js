@@ -130,6 +130,10 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     _useState18 = _slicedToArray(_useState17, 2),
     alertState = _useState18[0],
     setAlertState = _useState18[1];
+  var _useState19 = (0, _react.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    productLoading = _useState20[0],
+    setProductLoading = _useState20[1];
   var walletCarts = ((_Object$values = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values === void 0 ? void 0 : _Object$values.filter(function (cart) {
     var _cart$products;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 || (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (cart === null || cart === void 0 ? void 0 : cart.valid_schedule) && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.valid_maximum) && (cart === null || cart === void 0 ? void 0 : cart.valid_minimum) && (cart === null || cart === void 0 ? void 0 : cart.wallets);
@@ -408,7 +412,9 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       isProducts: (cart === null || cart === void 0 || (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) || 0,
       hideDeliveryFee: (configs === null || configs === void 0 || (_configs$multi_busine4 = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine4 === void 0 ? void 0 : _configs$multi_busine4.value) === '1',
       hideDriverTip: (configs === null || configs === void 0 || (_configs$multi_busine5 = configs.multi_business_checkout_show_combined_driver_tip) === null || _configs$multi_busine5 === void 0 ? void 0 : _configs$multi_busine5.value) === '1',
-      businessConfigs: cart === null || cart === void 0 || (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.configs
+      businessConfigs: cart === null || cart === void 0 || (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.configs,
+      productLoading: productLoading,
+      setProductLoading: setProductLoading
     }), /*#__PURE__*/_react.default.createElement(_styles.DriverTipDivider, null));
   }), walletCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_PARTIAL_WALLET_CARTS', 'Important: One or more carts can`t be completed due a partial payment with cash/points wallet and requires to be paid individually')), openCarts.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.MultiCartPriceContainer, {
     totalFeeEnabled: totalFeeEnabled

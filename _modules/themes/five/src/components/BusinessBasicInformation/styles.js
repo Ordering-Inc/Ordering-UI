@@ -109,7 +109,7 @@ var TitleWrapper = exports.TitleWrapper = _styledComponents.default.div(_templat
   return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.backgroundPage;
 }, function (_ref6) {
   var isCustomLayout = _ref6.isCustomLayout;
-  return !isCustomLayout ? (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n        width: calc(100vw - 200px);\n        ", "\n      "])), function (props) {
+  return !isCustomLayout ? (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n        width: calc(100vw - 230px);\n        ", "\n      "])), function (props) {
     var _props$theme11;
     return (_props$theme11 = props.theme) !== null && _props$theme11 !== void 0 && _props$theme11.rtl ? (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n        right: 50px;\n        "]))) : (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n        left: 50px;\n        "])));
   }) : (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n      ", "\n      "])), function (props) {

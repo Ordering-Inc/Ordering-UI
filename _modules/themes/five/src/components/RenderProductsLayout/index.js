@@ -88,7 +88,9 @@ var RenderProductsLayout = exports.RenderProductsLayout = function RenderProduct
     priceFilterValues = props.priceFilterValues,
     handleUpdateProfessionals = props.handleUpdateProfessionals,
     isCustomerMode = props.isCustomerMode,
-    handleCustomProductBannerClick = props.handleCustomProductBannerClick;
+    handleCustomProductBannerClick = props.handleCustomProductBannerClick,
+    productLoading = props.productLoading,
+    setProductLoading = props.setProductLoading;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -313,7 +315,9 @@ var RenderProductsLayout = exports.RenderProductsLayout = function RenderProduct
     isProducts: currentCart.products.length,
     isCartOnProductsList: isCartOnProductsList,
     handleCartOpen: handleCartOpen,
-    businessConfigs: business === null || business === void 0 ? void 0 : business.configs
+    businessConfigs: business === null || business === void 0 ? void 0 : business.configs,
+    productLoading: productLoading,
+    setProductLoading: setProductLoading
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyCart, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart'))))))), businessLayout.layoutOne && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (business === null || business === void 0 || (_business$professiona4 = business.professionals) === null || _business$professiona4 === void 0 ? void 0 : _business$professiona4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProfessionalFilterWrapper, {
@@ -435,7 +439,9 @@ var RenderProductsLayout = exports.RenderProductsLayout = function RenderProduct
     isProducts: currentCart.products.length,
     isCartOnProductsList: isCartOnProductsList,
     handleCartOpen: handleCartOpen,
-    businessConfigs: business === null || business === void 0 ? void 0 : business.configs
+    businessConfigs: business === null || business === void 0 ? void 0 : business.configs,
+    productLoading: productLoading,
+    setProductLoading: setProductLoading
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyCart, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "empty-content"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("p", null, t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart'))), /*#__PURE__*/_react.default.createElement(_styles.EmptyBtnWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(0)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, null, t('EMPTY_CART', 'Empty cart')))))));
