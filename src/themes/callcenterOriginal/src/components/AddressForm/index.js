@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import {
@@ -70,6 +70,7 @@ const AddressFormUI = (props) => {
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
   const isEditing = !!addressState.address?.id
+  const googleInputRef = useRef()
 
   const [locationChange, setLocationChange] = useState(
     isEditing
@@ -246,7 +247,10 @@ const AddressFormUI = (props) => {
       ...state,
       selectedFromAutocomplete: true
     })
-    updateChanges(address)
+    updateChanges({
+      ...address,
+      address: googleInputRef?.current?.value
+    })
   }
 
   const setMapErrors = (errKey) => {
@@ -412,7 +416,14 @@ const AddressFormUI = (props) => {
                         handleChangeInput({ target: { name: 'address', value: e.target.value } })
                         setAddressValue(e.target.value)
                       }}
-                      value={addressValue}
+                      childRef={(ref) => {
+                        googleInputRef.current = ref
+                      }}
+                      defaultValue={
+                        formState?.result?.result
+                          ? formState?.result?.result?.address
+                          : formState?.changes?.address ?? addressValue
+                      }
                       autoComplete='new-field'
                       countryCode={configState?.configs?.country_autocomplete?.value || '*'}
                     />
