@@ -240,4 +240,7 @@ export const SpinnerCart = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${({ emptyCart }) => emptyCart && css`
+    top: 0;
+  `}
 `
