@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductOptionSubOptionPropsAreEqual = function ProductOptionSubOptionPropsAreEqual(prevProps, nextProps) {
-  return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) && JSON.stringify(prevProps.pizzaType) === JSON.stringify(nextProps.pizzaType) && prevProps.balance === nextProps.balance && JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart);
+  return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) && prevProps.pizzaType === nextProps.pizzaType && prevProps.balance === nextProps.balance && JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart);
 };
 var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props) {
   var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
@@ -97,27 +97,10 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     }
   }, [state === null || state === void 0 ? void 0 : state.selected]);
   (0, _react.useEffect)(function () {
-    var _pizzaType$type, _pizzaType$type$toLow;
-    if ((pizzaType === null || pizzaType === void 0 || (_pizzaType$type = pizzaType.type) === null || _pizzaType$type === void 0 || (_pizzaType$type$toLow = _pizzaType$type.toLowerCase) === null || _pizzaType$type$toLow === void 0 ? void 0 : _pizzaType$type$toLow.call(_pizzaType$type)) === 'mitad y mitad' && option !== null && option !== void 0 && option.with_half_option) {
-      var _Object$values, _Object$values3;
-      var _option = (_Object$values = Object.values((productCart === null || productCart === void 0 ? void 0 : productCart.options) || {})) === null || _Object$values === void 0 ? void 0 : _Object$values.find(function (option) {
-        var _option$name, _option$name$toLowerC, _Object$values2;
-        return (option === null || option === void 0 || (_option$name = option.name) === null || _option$name === void 0 || (_option$name$toLowerC = _option$name.toLowerCase) === null || _option$name$toLowerC === void 0 ? void 0 : _option$name$toLowerC.call(_option$name)) === 'elige tus ingredientes' && ((_Object$values2 = Object.values(option === null || option === void 0 ? void 0 : option.suboptions)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.length) > 0;
-      });
-      var alreadyRight = (_Object$values3 = Object.values((_option === null || _option === void 0 ? void 0 : _option.suboptions) || {})) === null || _Object$values3 === void 0 ? void 0 : _Object$values3.some(function (suboption) {
-        return (suboption === null || suboption === void 0 ? void 0 : suboption.position) === 'right';
-      });
-      if (pizzaType.right && !alreadyRight) {
-        if (state !== null && state !== void 0 && state.selected) {
-          handlePosition({}, 'right');
-        }
-      } else if (pizzaType.left || alreadyRight) {
-        if (state !== null && state !== void 0 && state.selected) {
-          handlePosition({}, 'left');
-        }
-      }
+    if (pizzaType === 'mitad y mitad' && option !== null && option !== void 0 && option.with_half_option) {
+      handlePosition({}, 'left');
     }
-  }, [pizzaType === null || pizzaType === void 0 ? void 0 : pizzaType.type, state === null || state === void 0 ? void 0 : state.selected, suboption === null || suboption === void 0 ? void 0 : suboption.id]);
+  }, [pizzaType, state === null || state === void 0 ? void 0 : state.selected, suboption === null || suboption === void 0 ? void 0 : suboption.id]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -143,21 +126,21 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     disabled: disableIncrement || isSoldOut,
     onClick: handleIncrement
   }))), /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, (option === null || option === void 0 ? void 0 : option.with_half_option) && (state === null || state === void 0 ? void 0 : state.selected) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
-    className: [pizzaType.center ? 'disabled' : '', pizzaType.type === 'Mitad y mitad' && 'disable-clicks', 'reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(function (classname) {
+    className: [pizzaType === 'center' ? 'disabled disable-clicks' : '', 'reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),
     onClick: function onClick(e) {
       return handlePosition(e, 'left');
     }
   }), /*#__PURE__*/_react.default.createElement(_BsCircleFill.default, {
-    className: [!pizzaType.center && pizzaType.type === 'Mitad y mitad' ? 'disabled' : '', state.selected && state.position === 'whole' ? 'selected' : null].filter(function (classname) {
+    className: [pizzaType === 'mitad y mitad' ? 'disabled' : '', state.selected && state.position === 'whole' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),
     onClick: function onClick(e) {
       return handlePosition(e, 'whole');
     }
   }), /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
-    className: [pizzaType.center ? 'disabled' : '', pizzaType.type === 'Mitad y mitad' && 'disable-clicks', state.selected && state.position === 'right' ? 'selected' : null].filter(function (classname) {
+    className: [pizzaType === 'center' ? 'disabled disable-clicks' : '', state.selected && state.position === 'right' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),
     onClick: function onClick(e) {
