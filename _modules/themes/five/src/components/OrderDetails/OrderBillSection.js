@@ -18,7 +18,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderBillSection = exports.OrderBillSection = function OrderBillSection(props) {
-  var _theme$defaultLanguag, _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _theme$defaultLanguag2, _theme$defaultLanguag3, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$offers4, _order$offers5, _order$summary12, _theme$defaultLanguag4, _order$summary13, _order$offers6, _order$offers7, _order$summary14, _theme$defaultLanguag5, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _theme$defaultLanguag6, _order$summary$total, _order$summary17, _order$payment_events, _order$payment_events2;
+  var _theme$defaultLanguag, _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _theme$defaultLanguag2, _theme$defaultLanguag3, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$offers4, _order$offers5, _order$summary12, _theme$defaultLanguag4, _order$summary13, _order$taxes6, _order$taxes7, _order$offers6, _order$offers7, _order$summary14, _theme$defaultLanguag5, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _theme$defaultLanguag6, _order$summary$total, _order$summary17, _order$payment_events, _order$payment_events2;
   var order = props.order,
     setOpenTaxModal = props.setOpenTaxModal;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -41,7 +41,7 @@ var OrderBillSection = exports.OrderBillSection = function OrderBillSection(prop
       name: t('PAY_WITH_CREDITS_POINTS_WALLET', 'Pay with Credit Points Wallet')
     }
   };
-  var getIncludedTaxes = function getIncludedTaxes() {
+  var getIncludedTaxes = function getIncludedTaxes(isDeliveryFee) {
     var _order$taxes;
     if ((order === null || order === void 0 || (_order$taxes = order.taxes) === null || _order$taxes === void 0 ? void 0 : _order$taxes.length) === 0) {
       var _order$summary$tax, _order$summary;
@@ -49,14 +49,14 @@ var OrderBillSection = exports.OrderBillSection = function OrderBillSection(prop
     } else {
       return order === null || order === void 0 ? void 0 : order.taxes.reduce(function (taxIncluded, tax) {
         var _tax$summary;
-        return taxIncluded + (tax.type === 1 ? (_tax$summary = tax.summary) === null || _tax$summary === void 0 ? void 0 : _tax$summary.tax : 0);
+        return taxIncluded + (!isDeliveryFee && tax.type === 1 && tax.target === 'product' || isDeliveryFee && tax.type === 1 && tax.target === 'delivery_fee' ? (_tax$summary = tax.summary) === null || _tax$summary === void 0 ? void 0 : _tax$summary.tax : 0);
       }, 0);
     }
   };
   var getIncludedTaxesDiscounts = function getIncludedTaxesDiscounts() {
     var _order$taxes2;
     return order === null || order === void 0 || (_order$taxes2 = order.taxes) === null || _order$taxes2 === void 0 || (_order$taxes2 = _order$taxes2.filter(function (tax) {
-      return (tax === null || tax === void 0 ? void 0 : tax.type) === 1;
+      return (tax === null || tax === void 0 ? void 0 : tax.type) === 1 && (tax === null || tax === void 0 ? void 0 : tax.target) === 'product';
     })) === null || _order$taxes2 === void 0 ? void 0 : _order$taxes2.reduce(function (carry, tax) {
       var _tax$summary$tax_afte, _tax$summary2, _tax$summary3;
       return carry + ((_tax$summary$tax_afte = tax === null || tax === void 0 || (_tax$summary2 = tax.summary) === null || _tax$summary2 === void 0 ? void 0 : _tax$summary2.tax_after_discount) !== null && _tax$summary$tax_afte !== void 0 ? _tax$summary$tax_afte : tax === null || tax === void 0 || (_tax$summary3 = tax.summary) === null || _tax$summary3 === void 0 ? void 0 : _tax$summary3.tax);
@@ -81,7 +81,7 @@ var OrderBillSection = exports.OrderBillSection = function OrderBillSection(prop
       color: theme.colors.primary
     }))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 || (_offer$summary = offer.summary) === null || _offer$summary === void 0 ? void 0 : _offer$summary.discount)));
   })), (order === null || order === void 0 || (_order$summary5 = order.summary) === null || _order$summary5 === void 0 ? void 0 : _order$summary5.subtotal_with_discount) > 0 && (order === null || order === void 0 || (_order$summary6 = order.summary) === null || _order$summary6 === void 0 ? void 0 : _order$summary6.discount) > 0 && (order === null || order === void 0 || (_order$summary7 = order.summary) === null || _order$summary7 === void 0 ? void 0 : _order$summary7.total) >= 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')), (order === null || order === void 0 ? void 0 : order.tax_type) === 1 ? /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_ref2 = (order === null || order === void 0 || (_order$summary8 = order.summary) === null || _order$summary8 === void 0 ? void 0 : _order$summary8.subtotal_with_discount) + getIncludedTaxesDiscounts()) !== null && _ref2 !== void 0 ? _ref2 : 0)) : /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_order$summary$subtot2 = order === null || order === void 0 || (_order$summary9 = order.summary) === null || _order$summary9 === void 0 ? void 0 : _order$summary9.subtotal_with_discount) !== null && _order$summary$subtot2 !== void 0 ? _order$summary$subtot2 : 0))), (order === null || order === void 0 || (_order$taxes3 = order.taxes) === null || _order$taxes3 === void 0 ? void 0 : _order$taxes3.length) === 0 && (order === null || order === void 0 ? void 0 : order.tax_type) === 2 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('TAX', 'Tax'), /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(order === null || order === void 0 ? void 0 : order.tax, parseNumber), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_order$summary$tax2 = order === null || order === void 0 || (_order$summary10 = order.summary) === null || _order$summary10 === void 0 ? void 0 : _order$summary10.tax) !== null && _order$summary$tax2 !== void 0 ? _order$summary$tax2 : 0))), (order === null || order === void 0 || (_order$fees = order.fees) === null || _order$fees === void 0 ? void 0 : _order$fees.length) === 0 && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('SERVICE_FEE', 'Service fee'), /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(order === null || order === void 0 ? void 0 : order.service_fee, parseNumber), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_order$summary$servic = order === null || order === void 0 || (_order$summary11 = order.summary) === null || _order$summary11 === void 0 ? void 0 : _order$summary11.service_fee) !== null && _order$summary$servic !== void 0 ? _order$summary$servic : 0))), (order === null || order === void 0 || (_order$taxes4 = order.taxes) === null || _order$taxes4 === void 0 ? void 0 : _order$taxes4.length) > 0 && (order === null || order === void 0 || (_order$taxes5 = order.taxes) === null || _order$taxes5 === void 0 ? void 0 : _order$taxes5.filter(function (tax) {
-    return (tax === null || tax === void 0 ? void 0 : tax.type) === 2 && (tax === null || tax === void 0 ? void 0 : tax.rate) !== 0;
+    return (tax === null || tax === void 0 ? void 0 : tax.type) === 2 && (tax === null || tax === void 0 ? void 0 : tax.rate) !== 0 && (tax === null || tax === void 0 ? void 0 : tax.target) === 'product';
   }).map(function (tax) {
     var _tax$name, _ref3, _tax$summary$tax_afte2, _tax$summary4, _tax$summary5;
     return /*#__PURE__*/_react.default.createElement("tr", {
@@ -134,7 +134,25 @@ var OrderBillSection = exports.OrderBillSection = function OrderBillSection(prop
       size: "20",
       color: theme.colors.primary
     }))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 || (_offer$summary2 = offer.summary) === null || _offer$summary2 === void 0 ? void 0 : _offer$summary2.discount)));
-  })), typeof (order === null || order === void 0 || (_order$summary12 = order.summary) === null || _order$summary12 === void 0 ? void 0 : _order$summary12.delivery_price) === 'number' && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', (theme === null || theme === void 0 || (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.DELIVERY_FEE) || 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 || (_order$summary13 = order.summary) === null || _order$summary13 === void 0 ? void 0 : _order$summary13.delivery_price))), (order === null || order === void 0 || (_order$offers6 = order.offers) === null || _order$offers6 === void 0 ? void 0 : _order$offers6.length) > 0 && (order === null || order === void 0 || (_order$offers7 = order.offers) === null || _order$offers7 === void 0 || (_order$offers7 = _order$offers7.filter(function (offer) {
+  })), typeof (order === null || order === void 0 || (_order$summary12 = order.summary) === null || _order$summary12 === void 0 ? void 0 : _order$summary12.delivery_price) === 'number' && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', (theme === null || theme === void 0 || (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.DELIVERY_FEE) || 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 || (_order$summary13 = order.summary) === null || _order$summary13 === void 0 ? void 0 : _order$summary13.delivery_price) + getIncludedTaxes(true)))), (order === null || order === void 0 || (_order$taxes6 = order.taxes) === null || _order$taxes6 === void 0 ? void 0 : _order$taxes6.length) > 0 && (order === null || order === void 0 || (_order$taxes7 = order.taxes) === null || _order$taxes7 === void 0 ? void 0 : _order$taxes7.filter(function (tax) {
+    return (tax === null || tax === void 0 ? void 0 : tax.type) === 2 && (tax === null || tax === void 0 ? void 0 : tax.rate) !== 0 && (tax === null || tax === void 0 ? void 0 : tax.target) === 'delivery_fee';
+  }).map(function (tax) {
+    var _tax$name2, _ref5, _tax$summary$tax_afte3, _tax$summary6, _tax$summary7;
+    return /*#__PURE__*/_react.default.createElement("tr", {
+      key: tax === null || tax === void 0 ? void 0 : tax.id
+    }, /*#__PURE__*/_react.default.createElement("td", null, t(tax === null || tax === void 0 || (_tax$name2 = tax.name) === null || _tax$name2 === void 0 || (_tax$name2 = _tax$name2.toUpperCase()) === null || _tax$name2 === void 0 ? void 0 : _tax$name2.replace(/ /g, '_'), tax === null || tax === void 0 ? void 0 : tax.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business'), /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(tax === null || tax === void 0 ? void 0 : tax.rate, parseNumber), "%)")), setOpenTaxModal && /*#__PURE__*/_react.default.createElement(_styles.Exclamation, {
+      onClick: function onClick() {
+        return setOpenTaxModal({
+          open: true,
+          data: tax,
+          type: 'tax'
+        });
+      }
+    }, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, {
+      size: "20",
+      color: theme.colors.primary
+    }))), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((_ref5 = (_tax$summary$tax_afte3 = tax === null || tax === void 0 || (_tax$summary6 = tax.summary) === null || _tax$summary6 === void 0 ? void 0 : _tax$summary6.tax_after_discount) !== null && _tax$summary$tax_afte3 !== void 0 ? _tax$summary$tax_afte3 : tax === null || tax === void 0 || (_tax$summary7 = tax.summary) === null || _tax$summary7 === void 0 ? void 0 : _tax$summary7.tax) !== null && _ref5 !== void 0 ? _ref5 : 0)));
+  })), (order === null || order === void 0 || (_order$offers6 = order.offers) === null || _order$offers6 === void 0 ? void 0 : _order$offers6.length) > 0 && (order === null || order === void 0 || (_order$offers7 = order.offers) === null || _order$offers7 === void 0 || (_order$offers7 = _order$offers7.filter(function (offer) {
     return (offer === null || offer === void 0 ? void 0 : offer.target) === 2;
   })) === null || _order$offers7 === void 0 ? void 0 : _order$offers7.map(function (offer) {
     var _offer$name3, _offer$summary3;

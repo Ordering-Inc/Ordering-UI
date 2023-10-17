@@ -27,7 +27,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MyOrders = exports.MyOrders = function MyOrders(props) {
-  var _theme$orders, _theme$orders2, _theme$orders3, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _theme$orders, _theme$orders2, _theme$orders3, _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
   var hideOrders = props.hideOrders,
     isFromBusinessListingSearch = props.isFromBusinessListingSearch,
     businessesSearchList = props.businessesSearchList,
@@ -38,6 +38,9 @@ var MyOrders = exports.MyOrders = function MyOrders(props) {
     t = _useLanguage2[1];
   var history = (0, _reactRouterDom.useHistory)();
   var theme = (0, _styledComponents.useTheme)();
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var layout = (theme === null || theme === void 0 || (_theme$orders = theme.orders) === null || _theme$orders === void 0 || (_theme$orders = _theme$orders.components) === null || _theme$orders === void 0 || (_theme$orders = _theme$orders.layout) === null || _theme$orders === void 0 ? void 0 : _theme$orders.type) || 'original';
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -65,6 +68,7 @@ var MyOrders = exports.MyOrders = function MyOrders(props) {
     setBusinessOrderIds = _useState12[1];
   var hideProductsTab = theme === null || theme === void 0 || (_theme$orders2 = theme.orders) === null || _theme$orders2 === void 0 || (_theme$orders2 = _theme$orders2.components) === null || _theme$orders2 === void 0 || (_theme$orders2 = _theme$orders2.products_tab) === null || _theme$orders2 === void 0 ? void 0 : _theme$orders2.hidden;
   var hideBusinessTab = theme === null || theme === void 0 || (_theme$orders3 = theme.orders) === null || _theme$orders3 === void 0 || (_theme$orders3 = _theme$orders3.components) === null || _theme$orders3 === void 0 || (_theme$orders3 = _theme$orders3.business_tab) === null || _theme$orders3 === void 0 ? void 0 : _theme$orders3.hidden;
+  var isWalletEnabled = (configs === null || configs === void 0 || (_configs$cash_wallet = configs.cash_wallet) === null || _configs$cash_wallet === void 0 ? void 0 : _configs$cash_wallet.value) && (configs === null || configs === void 0 || (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && ((configs === null || configs === void 0 || (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1' || (configs === null || configs === void 0 || (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1');
   var MyOrdersMenu = [{
     key: 'orders',
     value: t('ORDERS', 'Orders'),
@@ -80,7 +84,7 @@ var MyOrders = exports.MyOrders = function MyOrders(props) {
   }, {
     key: 'giftCards',
     value: t('GIFT_CARD', 'Gift card'),
-    disabled: false
+    disabled: !isWalletEnabled
   }];
   var notOrderOptions = ['business', 'products', 'professionals'];
   var allEmpty = isEmptyActive && isEmptyPast && isEmptyPreorder || (isEmptyBusinesses || (businessOrderIds === null || businessOrderIds === void 0 ? void 0 : businessOrderIds.length) === 0) && hideOrders;

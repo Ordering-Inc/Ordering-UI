@@ -193,6 +193,12 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       content: []
     });
   };
+  var getNamePaymethod = function getNamePaymethod(paymethod) {
+    if ((paymethod === null || paymethod === void 0 ? void 0 : paymethod.id) === 132) {
+      return t("CREDIT_CARD_".concat(paymethod.gateway.toUpperCase()), "Credit card (".concat(paymethod.name, ")"));
+    }
+    return t(paymethod.gateway.toUpperCase(), paymethod.name);
+  };
   (0, _react.useEffect)(function () {
     var _supportedMethods$;
     if ((supportedMethods === null || supportedMethods === void 0 ? void 0 : supportedMethods.length) === 1 && !paymethodSelected && !popupMethods.includes((_supportedMethods$ = supportedMethods[0]) === null || _supportedMethods$ === void 0 ? void 0 : _supportedMethods$.gateway)) {
@@ -248,7 +254,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       onClick: function onClick() {
         return handlePaymentMethodClick(paymethod);
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod.gateway.toUpperCase(), paymethod.name))));
+    }, /*#__PURE__*/_react.default.createElement("div", null, getPayIcon(paymethod.id)), /*#__PURE__*/_react.default.createElement("p", null, getNamePaymethod(paymethod))));
   }), (paymethodsList.loading || isLoading) && _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       key: i,
