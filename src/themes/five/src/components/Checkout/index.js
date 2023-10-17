@@ -59,7 +59,9 @@ import {
   Column,
   InputContainer,
   PayCardSelected,
-  CardItemContent
+  CardItemContent,
+  IframeContainer,
+  IframeMainContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -176,7 +178,8 @@ const CheckoutUI = (props) => {
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
 
   const daysForApplyCoupon = [0, 2, 4] // Domingo 0
-  const isApplyMasterCoupon = !hasCateringProducts?.result && daysForApplyCoupon.includes(moment().days());
+  const isApplyMasterCoupon = !hasCateringProducts?.result && daysForApplyCoupon.includes(moment().days())
+  const isShowDeUnaCheckout = configs?.webview_checkout_deuna?.value === '1' || configs?.webview_checkout_deuna?.value === true
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -441,23 +444,9 @@ const CheckoutUI = (props) => {
     : UserDetails
 
   return (
-    <Container>
-      <WrapperLeftContainer>
-        <WrapperLeftContent>
-          <TitleContainer>
-            {layout !== 'pfchangs' && (
-              <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
-            )}
-            {!cartState.loading && cart?.status === 2 && (
-              <WarningMessage>
-                <VscWarning />
-                <h1>
-                  {t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page')}
-                </h1>
-              </WarningMessage>
-            )}
-            <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
-          </TitleContainer>
+    <>
+      {isShowDeUnaCheckout ? (
+        <IframeMainContainer>
           {layout === 'pfchangs' && (
             <>
               {cart?.business?.slug && (
@@ -469,502 +458,539 @@ const CheckoutUI = (props) => {
                   <p>{t('MENU', 'Menu')}</p>
                 </GoToMenu>
               )}
-              <SubtitleContainer>
-                <h2>{t('YOUR_INFORMATION', 'Your Information')}</h2>
-              </SubtitleContainer>
             </>
           )}
-          {!useKioskApp ? (
-            <>
-              {(businessDetails?.loading || cartState.loading) ? (
-                <div style={{ width: '100%', marginBottom: '20px' }}>
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={150} />
-                </div>
-              ) : (
-                <AddressDetails
-                  location={businessDetails?.business?.location}
-                  businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
-                  isCartPending={cart?.status === 2}
-                  businessId={cart?.business_id}
-                  apiKey={configs?.google_maps_api_key?.value}
-                  mapConfigs={mapConfigs}
-                  isCustomerMode={isCustomerMode}
-                />
-              )}
-              <UserDetailsContainer>
-                <WrapperUserDetails>
-                  {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
-                    <div>
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                    </div>
-                  ) : (
-                    <UserDetailsComponent
-                      isUserDetailsEdit={isUserDetailsEdit}
-                      cartStatus={cart?.status}
-                      businessId={cart?.business_id}
-                      useValidationFields
-                      useDefualtSessionManager
-                      useSessionUser={!isCustomerMode}
-                      isCustomerMode={isCustomerMode}
-                      userData={isCustomerMode && customerState.user}
-                      userId={isCustomerMode && customerState?.user?.id}
-                      isSuccess={isSuccess}
-                      isCheckout
-                      isEdit={layout === 'pfchangs'}
-                    />
-                  )}
-                </WrapperUserDetails>
-              </UserDetailsContainer>
-              {layout !== 'pfchangs' && (
-                <BusinessDetailsContainer>
-                  {businessInformationLoading && (
-                    <div>
-                      <div>
-                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                        <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                      </div>
-                    </div>
-                  )}
-                  {businessInformationAvailable && layout !== 'pfchangs' && (
-                    <div>
-                      <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                      <div>
-                        <p>{businessDetails?.business?.address}</p>
-                        <p>{businessDetails?.business?.name}</p>
-                        <p>{businessDetails?.business?.email}</p>
-                        <p>{businessDetails?.business?.cellphone}</p>
-                      </div>
-                    </div>
-                  )}
-                  {businessDetails?.error && businessDetails?.error?.length > 0 && (
-                    <div>
-                      <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
-                      <NotFoundSource
-                        content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
-                      />
-                    </div>
-                  )}
-                </BusinessDetailsContainer>
-              )}
-              {layout !== 'pfchangs' && (
-                <CheckOutDivider />
-              )}
-            </>
-          ) : (
-            <WrapperActionsInput>
-              <h1>
-                {t('WHATS_YOUR_NAME', "What's your name?")}
-              </h1>
-              <Input
-                placeholder={t('WRITE_YOUR_NAME', 'Write your name')}
-                autoComplete='off'
-                onChange={(e) => setBehalfName(e?.target?.value)}
-              />
-            </WrapperActionsInput>
-          )}
-
-          {cartState.loading && (
-            <div>
-              <div>
-                <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                <Skeleton height={55} style={{ marginBottom: '10px' }} />
-              </div>
-            </div>
-          )}
-
-          {!useKioskApp && (
-            <>
-              {layout === 'pfchangs' && !hasCateringProducts?.loading && (
-                <>
-                  {/* <SubtitleContainer>
-                    <h2>{t('PREORDER_CONFIGUTARION', 'Preorder configuration')}</h2>
-                  </SubtitleContainer> */}
-                  <MomentContentPF
-                    hasCateringProducts={hasCateringProducts?.result}
-                    cateringHours={cateringHours}
-                    cateringDayError={cateringDayError}
-                    setCateringDayError={setCateringDayError}
-                  />
-                </>
-              )}
-              {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
-                <>
-                  {layout === 'pfchangs' && (
-                    <SubtitleContainer>
-                      <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
-                    </SubtitleContainer>
-                  )}
-                  <DeliveryOptionsContainer>
-                    {layout !== 'pfchangs' && (
-                      <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
-                    )}
-                    <Select
-                      defaultValue={deliveryOptionSelected}
-                      options={deliveryOptions}
-                      onChange={(val) => handleChangeDeliveryOption(val)}
-                    />
-                  </DeliveryOptionsContainer>
-                </>
-              )}
-              {layout !== 'pfchangs' && (
-                <CheckOutDivider />
-              )}
-            </>
-          )}
-
-          {
-            deliveryTipsAvailable &&
-            layout === 'pfchangs' && (
-              <>
-                <SubtitleContainer>
-                  <h2>{t('ADD_TIP', 'Add Tip')}</h2>
-                </SubtitleContainer>
-                <DriverTipContainer>
-                  <DriverTips
-                    businessId={cart?.business_id}
-                    driverTipsOptions={driverTipsOptions}
-                    isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                    driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                      ? cart?.driver_tip
-                      : cart?.driver_tip_rate}
-                    cart={cart}
-                    useOrderContext
-                    pfchangs
-                  />
-                </DriverTipContainer>
-              </>
-            )
-          }
-
-          {!cartState.loading && cart && (
-            <>
-              {layout === 'pfchangs' && (
-                <SubtitleContainer>
-                  <h2>{t('PAYMENT_METHODS', 'Payment Methods')}</h2>
-                </SubtitleContainer>
-              )}
-              <PaymentMethodContainer>
+          <IframeContainer>
+            <iframe src={t(`IFRAME_DEUNA_MARKETPLACE_${configSlug.toUpperCase()}`, 'https://vips-staging.tryordering.com/checkout/791c99ba-f103-47e7-a76d-18a2032be505')} width='100%' height='100%' loading='true' sandbox='allow-scripts allow-modals allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox' referrerPolicy='same-origin origin-when-cross-origin' />
+          </IframeContainer>
+        </IframeMainContainer>
+      ) : (
+        <Container>
+          <WrapperLeftContainer>
+            <WrapperLeftContent>
+              <TitleContainer>
                 {layout !== 'pfchangs' && (
-                  <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+                  <ArrowLeft className='back-arrow' onClick={() => history.goBack()} />
                 )}
-                {!cartState.loading && cart?.status === 4 && (
-                  <WarningMessage style={{ marginTop: 20 }}>
+                {!cartState.loading && cart?.status === 2 && (
+                  <WarningMessage>
                     <VscWarning />
                     <h1>
-                      {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
+                      {t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page')}
                     </h1>
                   </WarningMessage>
                 )}
-                {isApplyMasterCoupon && !hasCateringProducts?.loading && (
-                  <MasterCardCoupon>
-                    <img src={"https://d347gjkxx0g7x1.cloudfront.net/wow-plus/banners/dev/Banner_APP_Wow_MasterCard.jpg"} />
-                  </MasterCardCoupon>
+                <h2 className='checkout-title'>{t('CHECK_OUT', 'Checkout')}</h2>
+              </TitleContainer>
+              {layout === 'pfchangs' && (
+                <>
+                  {cart?.business?.slug && (
+                    <GoToMenu onClick={() => handleStoreRedirect(cart?.business?.slug)}>
+                      <ColumnDivider />
+                      <BackIcon>
+                        <EnChevronWithCircleLeft color={theme.colors.primary} />
+                      </BackIcon>
+                      <p>{t('MENU', 'Menu')}</p>
+                    </GoToMenu>
+                  )}
+                  <SubtitleContainer>
+                    <h2>{t('YOUR_INFORMATION', 'Your Information')}</h2>
+                  </SubtitleContainer>
+                </>
+              )}
+              {!useKioskApp ? (
+                <>
+                  {(businessDetails?.loading || cartState.loading) ? (
+                    <div style={{ width: '100%', marginBottom: '20px' }}>
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={150} />
+                    </div>
+                  ) : (
+                    <AddressDetails
+                      location={businessDetails?.business?.location}
+                      businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
+                      isCartPending={cart?.status === 2}
+                      businessId={cart?.business_id}
+                      apiKey={configs?.google_maps_api_key?.value}
+                      mapConfigs={mapConfigs}
+                      isCustomerMode={isCustomerMode}
+                    />
+                  )}
+                  <UserDetailsContainer>
+                    <WrapperUserDetails>
+                      {cartState.loading || (isCustomerMode && !customerState?.user?.id) ? (
+                        <div>
+                          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                        </div>
+                      ) : (
+                        <UserDetailsComponent
+                          isUserDetailsEdit={isUserDetailsEdit}
+                          cartStatus={cart?.status}
+                          businessId={cart?.business_id}
+                          useValidationFields
+                          useDefualtSessionManager
+                          useSessionUser={!isCustomerMode}
+                          isCustomerMode={isCustomerMode}
+                          userData={isCustomerMode && customerState.user}
+                          userId={isCustomerMode && customerState?.user?.id}
+                          isSuccess={isSuccess}
+                          isCheckout
+                          isEdit={layout === 'pfchangs'}
+                        />
+                      )}
+                    </WrapperUserDetails>
+                  </UserDetailsContainer>
+                  {layout !== 'pfchangs' && (
+                    <BusinessDetailsContainer>
+                      {businessInformationLoading && (
+                        <div>
+                          <div>
+                            <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                            <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                            <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                            <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                            <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                          </div>
+                        </div>
+                      )}
+                      {businessInformationAvailable && layout !== 'pfchangs' && (
+                        <div>
+                          <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                          <div>
+                            <p>{businessDetails?.business?.address}</p>
+                            <p>{businessDetails?.business?.name}</p>
+                            <p>{businessDetails?.business?.email}</p>
+                            <p>{businessDetails?.business?.cellphone}</p>
+                          </div>
+                        </div>
+                      )}
+                      {businessDetails?.error && businessDetails?.error?.length > 0 && (
+                        <div>
+                          <h1>{t('BUSINESS_DETAILS', 'Business Details')}</h1>
+                          <NotFoundSource
+                            content={businessDetails?.error[0]?.message || businessDetails?.error[0]}
+                          />
+                        </div>
+                      )}
+                    </BusinessDetailsContainer>
+                  )}
+                  {layout !== 'pfchangs' && (
+                    <CheckOutDivider />
+                  )}
+                </>
+              ) : (
+                <WrapperActionsInput>
+                  <h1>
+                    {t('WHATS_YOUR_NAME', "What's your name?")}
+                  </h1>
+                  <Input
+                    placeholder={t('WRITE_YOUR_NAME', 'Write your name')}
+                    autoComplete='off'
+                    onChange={(e) => setBehalfName(e?.target?.value)}
+                  />
+                </WrapperActionsInput>
+              )}
+
+              {cartState.loading && (
+                <div>
+                  <div>
+                    <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                    <Skeleton height={55} style={{ marginBottom: '10px' }} />
+                  </div>
+                </div>
+              )}
+
+              {!useKioskApp && (
+                <>
+                  {layout === 'pfchangs' && !hasCateringProducts?.loading && (
+                    <>
+                      {/* <SubtitleContainer>
+                        <h2>{t('PREORDER_CONFIGUTARION', 'Preorder configuration')}</h2>
+                      </SubtitleContainer> */}
+                      <MomentContentPF
+                        hasCateringProducts={hasCateringProducts?.result}
+                        cateringHours={cateringHours}
+                        cateringDayError={cateringDayError}
+                        setCateringDayError={setCateringDayError}
+                      />
+                    </>
+                  )}
+                  {!cartState.loading && deliveryOptionSelected !== undefined && options?.type === 1 && (
+                    <>
+                      {layout === 'pfchangs' && (
+                        <SubtitleContainer>
+                          <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
+                        </SubtitleContainer>
+                      )}
+                      <DeliveryOptionsContainer>
+                        {layout !== 'pfchangs' && (
+                          <h2>{t('DELIVERY_DETAILS', 'Delivery Details')}</h2>
+                        )}
+                        <Select
+                          defaultValue={deliveryOptionSelected}
+                          options={deliveryOptions}
+                          onChange={(val) => handleChangeDeliveryOption(val)}
+                        />
+                      </DeliveryOptionsContainer>
+                    </>
+                  )}
+                  {layout !== 'pfchangs' && (
+                    <CheckOutDivider />
+                  )}
+                </>
+              )}
+
+              {
+                deliveryTipsAvailable &&
+                layout === 'pfchangs' && (
+                  <>
+                    <SubtitleContainer>
+                      <h2>{t('ADD_TIP', 'Add Tip')}</h2>
+                    </SubtitleContainer>
+                    <DriverTipContainer>
+                      <DriverTips
+                        businessId={cart?.business_id}
+                        driverTipsOptions={driverTipsOptions}
+                        isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                        driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                          ? cart?.driver_tip
+                          : cart?.driver_tip_rate}
+                        cart={cart}
+                        useOrderContext
+                        pfchangs
+                      />
+                    </DriverTipContainer>
+                  </>
+                )
+              }
+
+              {!cartState.loading && cart && (
+                <>
+                  {layout === 'pfchangs' && (
+                    <SubtitleContainer>
+                      <h2>{t('PAYMENT_METHODS', 'Payment Methods')}</h2>
+                    </SubtitleContainer>
+                  )}
+                  <PaymentMethodContainer>
+                    {layout !== 'pfchangs' && (
+                      <h1>{t('PAYMENT_METHODS', 'Payment Methods')}</h1>
+                    )}
+                    {!cartState.loading && cart?.status === 4 && (
+                      <WarningMessage style={{ marginTop: 20 }}>
+                        <VscWarning />
+                        <h1>
+                          {t('CART_STATUS_CANCEL_MESSAGE', 'The payment has not been successful, please try again')}
+                        </h1>
+                      </WarningMessage>
+                    )}
+                    {isApplyMasterCoupon && !hasCateringProducts?.loading && (
+                      <MasterCardCoupon>
+                        <img src={"https://d347gjkxx0g7x1.cloudfront.net/wow-plus/banners/dev/Banner_APP_Wow_MasterCard.jpg"} />
+                      </MasterCardCoupon>
+                    )}
+                    <PaymentOptions
+                      cart={cart}
+                      useKioskApp={useKioskApp}
+                      isDisabled={cart?.status === 2}
+                      businessId={businessDetails?.business?.id}
+                      isLoading={businessDetails.loading}
+                      paymethods={businessDetails?.business?.paymethods}
+                      onPaymentChange={handlePaymethodChange}
+                      errorCash={errorCash}
+                      setErrorCash={setErrorCash}
+                      handleOrderRedirect={handleOrderRedirect}
+                      isCustomerMode={isCustomerMode}
+                      paySelected={paymethodSelected}
+                      handlePlaceOrder={handlePlaceOrder}
+                      onPlaceOrderClick={onPlaceOrderClick}
+                      brandInformation={brandInformation}
+                      isHideCash={isHideCash}
+                      isApplyMasterCoupon={isApplyMasterCoupon}
+                      hasCateringProducts={hasCateringProducts}
+                    />
+                  </PaymentMethodContainer>
+                </>
+              )}
+
+              {isWalletEnabled && !businessDetails?.loading && (
+                <WalletPaymentOptionContainer>
+                  <PaymentOptionWallet
+                    cart={cart}
+                    businessConfigs={businessDetails?.business?.configs}
+                  />
+                </WalletPaymentOptionContainer>
+              )}
+            </WrapperLeftContent>
+          </WrapperLeftContainer>
+          <WrapperRightContainer>
+            {layout === 'pfchangs' && (
+              <>
+                {businessInformationLoading && (
+                  <div>
+                    <div>
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                      <Skeleton height={35} style={{ marginBottom: '10px' }} />
+                    </div>
+                  </div>
                 )}
-                <PaymentOptions
+                {!vaXMiCuenta.loading && defaultOptionsVaXMiCuenta.enable && (
+                  <VaXMiCuenta
+                    defaultOptionsVaXMiCuenta={defaultOptionsVaXMiCuenta}
+                    vaXMiCuenta={vaXMiCuenta}
+                    handleChangeVaXMiCuenta={handleChangeVaXMiCuenta}
+                  />
+                )}
+                {businessInformationAvailable && (
+                  <BusinessDetails>
+                    <img src={businessDetails?.business?.header} />
+                    <div>
+                      <h2>{businessDetails?.business?.name}</h2>
+                      <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business?.slug)}>{t('GO_TO_BUSINESS', 'Go to business')}</span>
+                    </div>
+                  </BusinessDetails>
+                )}
+              </>
+            )}
+            {!cartState.loading && placeSpotsEnabled && (
+              <SelectSpotContainer>
+                <PlaceSpot
+                  isCheckout
+                  isInputMode
+                  isHomeStyle
+                  cart={cart}
+                  spotNumberDefault={cartState?.cart?.spot_number ?? cart?.spot_number}
+                  vehicleDefault={cart?.vehicle}
+                />
+              </SelectSpotContainer>
+            )}
+            {
+              deliveryTipsAvailable &&
+              layout !== 'pfchangs' && (
+                <>
+                  <DriverTipContainer>
+                    <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                    <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                    <DriverTips
+                      businessId={cart?.business_id}
+                      driverTipsOptions={driverTipsOptions}
+                      isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                      isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                      driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                        ? cart?.driver_tip
+                        : cart?.driver_tip_rate}
+                      cart={cart}
+                      useOrderContext
+                    />
+                  </DriverTipContainer>
+                  <DriverTipDivider />
+                </>
+              )
+            }
+
+            {!cartState.loading && cart && (
+              <CartContainer>
+                {layout !== 'pfchangs' && (
+                  <CartHeader>
+                    <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
+                    <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business)}>{('ADD_PRODUCTS', 'Add products')}</span>
+                  </CartHeader>
+                )}
+                <CartComponent
+                  isCartPending={cart?.status === 2}
                   cart={cart}
                   useKioskApp={useKioskApp}
-                  isDisabled={cart?.status === 2}
-                  businessId={businessDetails?.business?.id}
-                  isLoading={businessDetails.loading}
-                  paymethods={businessDetails?.business?.paymethods}
-                  onPaymentChange={handlePaymethodChange}
-                  errorCash={errorCash}
-                  setErrorCash={setErrorCash}
-                  handleOrderRedirect={handleOrderRedirect}
-                  isCustomerMode={isCustomerMode}
-                  paySelected={paymethodSelected}
-                  handlePlaceOrder={handlePlaceOrder}
-                  onPlaceOrderClick={onPlaceOrderClick}
-                  brandInformation={brandInformation}
-                  isHideCash={isHideCash}
-                  isApplyMasterCoupon={isApplyMasterCoupon}
+                  isCheckout
+                  isProducts={cart?.products?.length || 0}
                   hasCateringProducts={hasCateringProducts}
                 />
-              </PaymentMethodContainer>
-            </>
-          )}
+              </CartContainer>
+            )}
+            {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && configSlug !== 'starbucks' && (
+              <RewardContainer>
+                <RewardBox>
+                  <RewardBoxContainer>
+                    <div className='image-reward'>
+                      <div style={{ paddingRight: 10 }}><img src={theme.images?.general?.rewardsIcon} /></div>
+                      <div style={{ margin: 'auto' }} className='name'>{t('WOW_CART_NEW_POINTS', 'Saldo que acumulas')}</div>
+                    </div>
+                    <div className='value'>{parsePrice(wowAcumulationPoints?.result?.pesos)}</div>
+                  </RewardBoxContainer>
+                </RewardBox>
+                <RewardDisclaimerContainer>
+                  {t('REWARDS_DISCLAIMER', '*Cálculo aproximado, el saldo real se verá reflejado máx en 24 hrs.')}
+                </RewardDisclaimerContainer>
+              </RewardContainer>
+            )}
+            {!cartState.loading && cart && cart?.status !== 2 && (
+              <WrapperPlaceOrderButton>
+                <Button
+                  color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
+                  disabled={isDisablePlaceOrderButton}
+                  onClick={() => ((paymethodSelected?.gateway === 'openpay' || paymethodSelected?.gateway === 'openpay_mastercard') && isCSVPopup) ? checkAddressNote(true) : checkAddressNote()}
+                >
+                  {!cart?.valid_maximum ? (
+                    `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
+                  ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
+                    `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
+                  ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
+                </Button>
+              </WrapperPlaceOrderButton>
+            )}
 
-          {isWalletEnabled && !businessDetails?.loading && (
-            <WalletPaymentOptionContainer>
-              <PaymentOptionWallet
-                cart={cart}
-                businessConfigs={businessDetails?.business?.configs}
-              />
-            </WalletPaymentOptionContainer>
-          )}
-        </WrapperLeftContent>
-      </WrapperLeftContainer>
-      <WrapperRightContainer>
-        {layout === 'pfchangs' && (
-          <>
-            {businessInformationLoading && (
-              <div>
-                <div>
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                  <Skeleton height={35} style={{ marginBottom: '10px' }} />
-                </div>
-              </div>
+            {!cart?.valid_address && cart?.status !== 2 && (
+              <WarningText>
+                {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
+              </WarningText>
             )}
-            {!vaXMiCuenta.loading && defaultOptionsVaXMiCuenta.enable && (
-              <VaXMiCuenta
-                defaultOptionsVaXMiCuenta={defaultOptionsVaXMiCuenta}
-                vaXMiCuenta={vaXMiCuenta}
-                handleChangeVaXMiCuenta={handleChangeVaXMiCuenta}
-              />
+
+            {(!paymethodSelected && cart?.balance > 0) && cart?.status !== 2 && (
+              <WarningText>
+                {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
+              </WarningText>
             )}
-            {businessInformationAvailable && (
-              <BusinessDetails>
-                <img src={businessDetails?.business?.header} />
-                <div>
-                  <h2>{businessDetails?.business?.name}</h2>
-                  <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business?.slug)}>{t('GO_TO_BUSINESS', 'Go to business')}</span>
-                </div>
-              </BusinessDetails>
+
+            {!cart?.valid_products && cart?.status !== 2 && (
+              <WarningText>
+                {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
+              </WarningText>
             )}
-          </>
-        )}
-        {!cartState.loading && placeSpotsEnabled && (
-          <SelectSpotContainer>
-            <PlaceSpot
+
+            {cateringDayError && (
+              <WarningText>
+                {t('WARNING_CATERING_BUSINESS_CLOSED', 'The Business will be closed before preparing catering')}
+              </WarningText>
+            )}
+
+            {/* {placeSpotTypes.includes(options?.type) && !cart?.place && hasBusinessPlaces && (
+              <WarningText>
+                {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
+              </WarningText>
+            )} */}
+
+            {options.type === 1 &&
+              validationFields?.fields?.checkout?.driver_tip?.enabled &&
+              validationFields?.fields?.checkout?.driver_tip?.required &&
+              (Number(cart?.driver_tip) <= 0) && (
+              <WarningText>
+                {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
+              </WarningText>
+            )}
+          </WrapperRightContainer>
+          <AlertComponent
+            title={t('CUSTOMER_DETAILS', 'Customer Details')}
+            content={alertState.content}
+            acceptText={t('ACCEPT', 'Accept')}
+            open={alertState.open}
+            onClose={() => closeAlert()}
+            onAccept={() => closeAlert()}
+            closeOnBackdrop={false}
+          />
+          <AlertComponent
+            title={t('DISCLAIMER_CATERING_TITLE', 'Disclaimer catering title')}
+            content={t('DISCLAIMER_CATERING', 'Disclaimer Catering')}
+            acceptText={t('ACCEPT', 'Accept')}
+            open={openAlertCatering}
+            onClose={() => closeCateringAlert()}
+            onAccept={() => closeCateringAlert()}
+            closeOnBackdrop={false}
+          />
+          <Modal
+            open={isOpen}
+            width='760px'
+            padding='30px'
+            onClose={() => setIsOpen(false)}
+          >
+            <UserDetails
+              isUserDetailsEdit={isUserDetailsEdit}
+              cartStatus={cart?.status}
+              businessId={cart?.business_id}
+              useValidationFields
+              useDefualtSessionManager
+              useSessionUser={!isCustomerMode}
+              isCustomerMode={isCustomerMode}
+              userData={isCustomerMode && customerState.user}
+              userId={isCustomerMode && customerState?.user?.id}
+              requiredFields={requiredFields}
+              setIsSuccess={setIsSuccess}
               isCheckout
-              isInputMode
-              isHomeStyle
-              cart={cart}
-              spotNumberDefault={cartState?.cart?.spot_number ?? cart?.spot_number}
-              vehicleDefault={cart?.vehicle}
+              isEdit
+              isModal
+              onClose={() => setIsOpen(false)}
             />
-          </SelectSpotContainer>
-        )}
-        {
-          deliveryTipsAvailable &&
-          layout !== 'pfchangs' && (
-            <>
-              <DriverTipContainer>
-                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-                <DriverTips
-                  businessId={cart?.business_id}
-                  driverTipsOptions={driverTipsOptions}
-                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                    ? cart?.driver_tip
-                    : cart?.driver_tip_rate}
-                  cart={cart}
-                  useOrderContext
-                />
-              </DriverTipContainer>
-              <DriverTipDivider />
-            </>
-          )
-        }
-
-        {!cartState.loading && cart && (
-          <CartContainer>
-            {layout !== 'pfchangs' && (
-              <CartHeader>
-                <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
-                <span onClick={() => cart?.business?.slug && handleStoreRedirect(cart?.business)}>{('ADD_PRODUCTS', 'Add products')}</span>
-              </CartHeader>
+          </Modal>
+          <Modal
+            title={openCardCSV ? t('CSV_DESCRIPTION', 'CSV_DESCRIPTION') : t('ADD_NOTES_TO_ADDRESS', 'ADD_NOTES_TO_ADDRESS')}
+            className='modal-info'
+            open={openAddressNotes || openCardCSV}
+            onClose={() => {
+              setOpenAddressNotes(false)
+              setOpenCardCSV(false)
+            }}
+            width={windowSize.width > 1500 ? '25%' : '35%'}
+          >
+            {openCardCSV && (
+              <CardForm>
+                <PayCardSelected>
+                  <CardItemContent>
+                    <span className='brand'>
+                      <img src={getIconCard(paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName)} alt={paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName} />
+                    </span>
+                    <span>
+                      XXXX-XXXX-XXXX-{paymethodSelected?.data?.card?.last4}
+                    </span>
+                  </CardItemContent>
+                </PayCardSelected>
+                <Row>
+                  <InputContainer isValid={errorsCheckout.csv} showBorder={errorsCheckout.border}>
+                    <Input
+                      name='cardSecurityCode'
+                      id='csv'
+                      type={'password'}
+                      minLength={3}
+                      maxLength={paymethodSelected?.data && paymethodSelected?.data?.brandCardName !== 'american_express' ? 3 : 4}
+                      onChange={handleChange}
+                      placeholder='CVV'
+                      onKeyPress={(e) => {
+                        if (!/[0-9]/.test(e.key)) {
+                          e.preventDefault();
+                        }
+                      }}
+                    />
+                  </InputContainer>
+                </Row>
+                <Button onClick={handleSubmit} color='primary'>
+                  {t('CONTINUE', 'CONTINUE')}
+                </Button>
+              </CardForm>
             )}
-            <CartComponent
-              isCartPending={cart?.status === 2}
-              cart={cart}
-              useKioskApp={useKioskApp}
-              isCheckout
-              isProducts={cart?.products?.length || 0}
-              hasCateringProducts={hasCateringProducts}
-            />
-          </CartContainer>
-        )}
-        {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && configSlug !== 'starbucks' && (
-          <RewardContainer>
-            <RewardBox>
-              <RewardBoxContainer>
-                <div className='image-reward'>
-                  <div style={{ paddingRight: 10 }}><img src={theme.images?.general?.rewardsIcon} /></div>
-                  <div style={{ margin: 'auto' }} className='name'>{t('WOW_CART_NEW_POINTS', 'Saldo que acumulas')}</div>
-                </div>
-                <div className='value'>{parsePrice(wowAcumulationPoints?.result?.pesos)}</div>
-              </RewardBoxContainer>
-            </RewardBox>
-            <RewardDisclaimerContainer>
-              {t('REWARDS_DISCLAIMER', '*Cálculo aproximado, el saldo real se verá reflejado máx en 24 hrs.')}
-            </RewardDisclaimerContainer>
-          </RewardContainer>
-        )}
-        {!cartState.loading && cart && cart?.status !== 2 && (
-          <WrapperPlaceOrderButton>
-            <Button
-              color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
-              disabled={isDisablePlaceOrderButton}
-              onClick={() => ((paymethodSelected?.gateway === 'openpay' || paymethodSelected?.gateway === 'openpay_mastercard') && isCSVPopup) ? checkAddressNote(true) : checkAddressNote()}
-            >
-              {!cart?.valid_maximum ? (
-                `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
-              ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
-                `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-              ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
-            </Button>
-          </WrapperPlaceOrderButton>
-        )}
-
-        {!cart?.valid_address && cart?.status !== 2 && (
-          <WarningText>
-            {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
-          </WarningText>
-        )}
-
-        {(!paymethodSelected && cart?.balance > 0) && cart?.status !== 2 && (
-          <WarningText>
-            {t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')}
-          </WarningText>
-        )}
-
-        {!cart?.valid_products && cart?.status !== 2 && (
-          <WarningText>
-            {t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')}
-          </WarningText>
-        )}
-
-        {cateringDayError && (
-          <WarningText>
-            {t('WARNING_CATERING_BUSINESS_CLOSED', 'The Business will be closed before preparing catering')}
-          </WarningText>
-        )}
-
-        {/* {placeSpotTypes.includes(options?.type) && !cart?.place && hasBusinessPlaces && (
-          <WarningText>
-            {t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')}
-          </WarningText>
-        )} */}
-
-        {options.type === 1 &&
-          validationFields?.fields?.checkout?.driver_tip?.enabled &&
-          validationFields?.fields?.checkout?.driver_tip?.required &&
-          (Number(cart?.driver_tip) <= 0) && (
-          <WarningText>
-            {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
-          </WarningText>
-        )}
-      </WrapperRightContainer>
-      <AlertComponent
-        title={t('CUSTOMER_DETAILS', 'Customer Details')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-      <AlertComponent
-        title={t('DISCLAIMER_CATERING_TITLE', 'Disclaimer catering title')}
-        content={t('DISCLAIMER_CATERING', 'Disclaimer Catering')}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={openAlertCatering}
-        onClose={() => closeCateringAlert()}
-        onAccept={() => closeCateringAlert()}
-        closeOnBackdrop={false}
-      />
-      <Modal
-        open={isOpen}
-        width='760px'
-        padding='30px'
-        onClose={() => setIsOpen(false)}
-      >
-        <UserDetails
-          isUserDetailsEdit={isUserDetailsEdit}
-          cartStatus={cart?.status}
-          businessId={cart?.business_id}
-          useValidationFields
-          useDefualtSessionManager
-          useSessionUser={!isCustomerMode}
-          isCustomerMode={isCustomerMode}
-          userData={isCustomerMode && customerState.user}
-          userId={isCustomerMode && customerState?.user?.id}
-          requiredFields={requiredFields}
-          setIsSuccess={setIsSuccess}
-          isCheckout
-          isEdit
-          isModal
-          onClose={() => setIsOpen(false)}
-        />
-      </Modal>
-      <Modal
-        title={openCardCSV ? t('CSV_DESCRIPTION', 'CSV_DESCRIPTION') : t('ADD_NOTES_TO_ADDRESS', 'ADD_NOTES_TO_ADDRESS')}
-        className='modal-info'
-        open={openAddressNotes || openCardCSV}
-        onClose={() => {
-          setOpenAddressNotes(false)
-          setOpenCardCSV(false)
-        }}
-        width={windowSize.width > 1500 ? '25%' : '35%'}
-      >
-        {openCardCSV && (
-          <CardForm>
-            <PayCardSelected>
-              <CardItemContent>
-                <span className='brand'>
-                  <img src={getIconCard(paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName)} alt={paymethodSelected?.data?.card?.brand || paymethodSelected?.data?.brandCardName} />
-                </span>
-                <span>
-                  XXXX-XXXX-XXXX-{paymethodSelected?.data?.card?.last4}
-                </span>
-              </CardItemContent>
-            </PayCardSelected>
-            <Row>
-              <InputContainer isValid={errorsCheckout.csv} showBorder={errorsCheckout.border}>
-                <Input
-                  name='cardSecurityCode'
-                  id='csv'
-                  type={'password'}
-                  minLength={3}
-                  maxLength={paymethodSelected?.data && paymethodSelected?.data?.brandCardName !== 'american_express' ? 3 : 4}
-                  onChange={handleChange}
-                  placeholder='CVV'
-                  onKeyPress={(e) => {
-                    if (!/[0-9]/.test(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
-                />
-              </InputContainer>
-            </Row>
-            <Button onClick={handleSubmit} color='primary'>
-              {t('CONTINUE', 'CONTINUE')}
-            </Button>
-          </CardForm>
-        )}
-        {openAddressNotes && (
-          <CardForm>
-            <Column>
-              <p>{t('ENTER_REFERENCE', 'ENTER_REFERENCE')}</p>
-              <InputContainer isValid={errorsCheckout.addressNotes} showBorder={errorsCheckout.addressBorder}>
-                <TextArea
-                  name='addressNotes'
-                  id='addressNotes'
-                  type='text'
-                  maxLength={100}
-                  onChange={handleChange}
-                  placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-                />
-              </InputContainer>
-            </Column>
-            <Button onClick={handleSubmitAddressNotes} color='primary'>
-              {t('CONTINUE', 'CONTINUE')}
-            </Button>
-          </CardForm>
-        )}
-      </Modal>
-    </Container>
+            {openAddressNotes && (
+              <CardForm>
+                <Column>
+                  <p>{t('ENTER_REFERENCE', 'ENTER_REFERENCE')}</p>
+                  <InputContainer isValid={errorsCheckout.addressNotes} showBorder={errorsCheckout.addressBorder}>
+                    <TextArea
+                      name='addressNotes'
+                      id='addressNotes'
+                      type='text'
+                      maxLength={100}
+                      onChange={handleChange}
+                      placeholder={t('ADDRESS_NOTES', 'Address Notes')}
+                    />
+                  </InputContainer>
+                </Column>
+                <Button onClick={handleSubmitAddressNotes} color='primary'>
+                  {t('CONTINUE', 'CONTINUE')}
+                </Button>
+              </CardForm>
+            )}
+          </Modal>
+        </Container>
+      )}
+    </>
   )
 }
 
