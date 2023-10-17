@@ -182,3 +182,13 @@ export const OrderContextUIWrapper = styled.div`
     margin-right: 15px;
   `}
 `
+
+export const SpinnerCart = styled.div`
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

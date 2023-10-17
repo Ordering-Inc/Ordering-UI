@@ -46,6 +46,8 @@ import { ProfessionalBusinessFilter } from '../ProfessionalBusinessFilter'
 import { PageBanner } from '../PageBanner'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { scrollTo } from '../../../../../utils'
+import { SpinnerCart } from '../Cart/styles'
+import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 
 const layoutOne = 'groceries'
 
@@ -377,6 +379,13 @@ export const RenderProductsLayout = (props) => {
                             <span>{parsePrice(0)}</span>
                             <Button>{t('EMPTY_CART', 'Empty cart')}</Button>
                           </EmptyBtnWrapper>
+                          {productLoading && (
+                            <SpinnerCart emptyCart>
+                              <SpinnerLoader
+                                style={{ height: 100 }}
+                              />
+                            </SpinnerCart>
+                          )}
                         </EmptyCart>
                       )}
                     </BusinessCartContent>
