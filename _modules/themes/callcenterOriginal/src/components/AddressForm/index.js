@@ -54,7 +54,8 @@ var AddressFormUI = function AddressFormUI(props) {
     getBusinessDeliveryZones = props.getBusinessDeliveryZones,
     isEnableContinueButton = props.isEnableContinueButton,
     address = props.address,
-    notUseCustomerInfo = props.notUseCustomerInfo;
+    notUseCustomerInfo = props.notUseCustomerInfo,
+    addFormRestrictions = props.addFormRestrictions;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -69,12 +70,10 @@ var AddressFormUI = function AddressFormUI(props) {
     _useSession2 = _slicedToArray(_useSession, 1),
     auth = _useSession2[0].auth;
   var theme = (0, _styledComponents.useTheme)();
-  var _useState = (0, _react.useState)({
-      selectedFromAutocomplete: true
-    }),
+  var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    state = _useState2[0],
-    setState = _useState2[1];
+    selectedFromAutocomplete = _useState2[0],
+    setSelectedFromAutocomplete = _useState2[1];
   var _useState3 = (0, _react.useState)(addressState === null || addressState === void 0 || (_addressState$address = addressState.address) === null || _addressState$address === void 0 ? void 0 : _addressState$address.tag),
     _useState4 = _slicedToArray(_useState3, 2),
     addressTag = _useState4[0],
@@ -315,9 +314,7 @@ var AddressFormUI = function AddressFormUI(props) {
     if (address !== null && address !== void 0 && address.address) {
       getBusinessDeliveryZones(address === null || address === void 0 ? void 0 : address.location);
     }
-    setState(_objectSpread(_objectSpread({}, state), {}, {
-      selectedFromAutocomplete: true
-    }));
+    setSelectedFromAutocomplete(true);
     updateChanges(_objectSpread(_objectSpread({}, address), {}, {
       address: googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value
     }));
@@ -460,12 +457,12 @@ var AddressFormUI = function AddressFormUI(props) {
       key: i
     }, props));
   }), inputNames.map(function (field) {
-    var _formState$result3, _formState$result4, _formState$changes$ad5, _formState$changes26, _configState$configs5, _addressState$address12, _formState$changes27, _businessesList$busin, _theme$images, _ref9, _formState$changes$fi2, _formState$changes28, _addressState$address13, _ref10, _formState$changes$ad6, _formState$changes29;
+    var _address$location, _address$location2, _formState$result3, _formState$result4, _formState$changes$ad5, _formState$changes26, _configState$configs5, _addressState$address12, _formState$changes27, _businessesList$busin, _theme$images, _ref9, _formState$changes$fi2, _formState$changes28, _addressState$address13, _ref10, _formState$changes$ad6, _formState$changes29;
     return showField && showField(field.name) && (field.name === 'address' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
       className: "google-control"
-    }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, !selectedFromAutocomplete && (address === null || address === void 0 ? void 0 : address.address) && (!(address !== null && address !== void 0 && (_address$location = address.location) !== null && _address$location !== void 0 && _address$location.lat) || !(address !== null && address !== void 0 && (_address$location2 = address.location) !== null && _address$location2 !== void 0 && _address$location2.lng)) && /*#__PURE__*/_react.default.createElement(_styles.AddressMarkContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.'))), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
       className: "input-autocomplete",
       apiKey: googleMapsApiKey,
       placeholder: t('ADDRESS', 'Address'),
@@ -589,7 +586,7 @@ var AddressFormUI = function AddressFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, !addFormRestrictions && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     type: "button",
     disabled: formState.loading,
