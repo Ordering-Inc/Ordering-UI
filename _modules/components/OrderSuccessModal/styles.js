@@ -1,0 +1,22 @@
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Title = exports.StatusImage = exports.PayCardSelected = exports.OrderItem = exports.OrderContent = exports.Container = exports.CardItemContent = void 0;
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var Container = exports.Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: block;\n  width: 100%;\n"])));
+var Title = exports.Title = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n"])));
+var StatusImage = exports.StatusImage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n\n  image {\n    object-fit: contain;\n  }\n"])));
+var OrderContent = exports.OrderContent = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 70%;\n  margin: 0 auto;\n\n  &:last-child {\n    margin-bottom: 0.9em;\n  }\n"])));
+var OrderItem = exports.OrderItem = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 20px;\n\n  .item-icon {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    margin-right: 20px;\n    width: 24px;\n    height: 24px;\n    min-width: 24px;\n    min-height: 24px;\n    ", "\n\n    .location-icon {\n      font-size: 20px;\n    }\n\n    .clock-icon {\n      font-size: 18px;\n    }\n\n    &.card-icon {\n      svg {\n        font-size: 22px;\n      }\n    }\n\n  }\n\n  .item-text {\n    display: flex;\n    justify-content: space-between;\n    width:100%;\n  }\n\n  .business-logo {\n    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n    border-radius: 3px;\n    img {\n      width: 20px;\n      height: 18px;\n      border-radius: 2px;\n    }\n  }\n"])), function (props) {
+  var _props$theme;
+  return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n        margin-right: 0;\n    "])));
+});
+var CardItemContent = exports.CardItemContent = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 90%;\n"])));
+var PayCardSelected = exports.PayCardSelected = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding: 30px 0px 0px;\n"])));
