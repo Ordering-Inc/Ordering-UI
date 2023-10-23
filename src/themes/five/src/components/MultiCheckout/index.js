@@ -46,6 +46,7 @@ import {
   AuthButtonList
 } from './styles'
 import { DriverTips } from '../DriverTips'
+import { useTheme } from 'styled-components'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -83,7 +84,7 @@ const MultiCheckoutUI = (props) => {
   const [orderState] = useOrder()
   const history = useHistory()
   const [, { showToast }] = useToast()
-
+  const theme = useTheme()
   const [cardList, setCardList] = useState([])
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
@@ -121,8 +122,9 @@ const MultiCheckoutUI = (props) => {
   const loyalBusinessAvailable = creditPointGeneralPlan?.businesses?.filter((b) => b.accumulates) ?? []
   const isWalletEnabled = (configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' &&
     (configs?.wallet_cash_enabled?.value === '1' ||
-    configs?.wallet_credit_point_enabled?.value === '1'))
-
+      configs?.wallet_credit_point_enabled?.value === '1'))
+  const hexTest = /[0-9A-Fa-f]{6}/g
+  const primaryColor = theme?.colors?.primary?.split?.('#')?.[1]
   const accumulationRateBusiness = (businessId) => {
     const value = loyalBusinessAvailable?.find((loyal) => loyal.business_id === businessId)?.accumulation_rate ?? 0
     return value || (creditPointGeneralPlan?.accumulation_rate ?? 0)
@@ -288,6 +290,7 @@ const MultiCheckoutUI = (props) => {
                 apiKey={configs?.google_maps_api_key?.value}
                 mapConfigs={mapConfigs}
                 isCustomerMode={isCustomerMode}
+                primaryColor={hexTest.test(primaryColor || '') ? `0x${primaryColor}` : 'red'}
               />
 
               <UserDetailsContainer>

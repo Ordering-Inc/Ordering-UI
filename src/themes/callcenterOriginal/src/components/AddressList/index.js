@@ -70,7 +70,9 @@ const AddressListUI = (props) => {
     setIsAddressFormOpen,
     isHeader,
     notUseCustomerInfo,
-    franchiseId
+    franchiseId,
+    setIsSavedAddress,
+    isFromPhoneAutocomplete
   } = props
 
   const [, t] = useLanguage()
@@ -121,6 +123,7 @@ const AddressListUI = (props) => {
       handleSetAddress(address)
       return
     }
+    setIsSavedAddress && setIsSavedAddress(true)
     handleCloseAddressForm()
   }
 
@@ -131,12 +134,16 @@ const AddressListUI = (props) => {
       userCustomerSetup?.id === user?.id &&
       !isFromCheckout
     ) {
-      events.emit('go_to_page', { page: 'search' })
+      setIsSavedAddress && setIsSavedAddress(true)
       handleSetDefault(address, userCustomerSetup, true)
       setCustomerModalOpen && setCustomerModalOpen(false)
+      if (!isFromPhoneAutocomplete) {
+        events.emit('go_to_page', { page: 'search' })
+      }
       return
     }
 
+    setIsSavedAddress && setIsSavedAddress(true)
     handleCloseAddressForm()
     handleSetDefault(address, userCustomerSetup)
   }

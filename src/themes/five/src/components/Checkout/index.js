@@ -141,7 +141,8 @@ const CheckoutUI = (props) => {
     (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp && !isCustomerMode
   const isMultiDriverTips = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes', 'comments']
-
+  const hexTest = /[0-9A-Fa-f]{6}/g;
+  const primaryColor = theme?.colors?.primary?.split?.('#')?.[1]
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
   const isGiftCardCart = !cart?.business_id
@@ -386,13 +387,15 @@ const CheckoutUI = (props) => {
                     </div>
                   ) : (
                     <AddressDetails
-                      location={options?.address?.location}
+                      location={cart?.business?.location}
                       businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
                       isCartPending={cart?.status === 2}
                       businessId={cart?.business_id}
                       apiKey={configs?.google_maps_api_key?.value}
                       mapConfigs={mapConfigs}
                       isCustomerMode={isCustomerMode}
+                      cart={cart}
+                      primaryColor={hexTest.test(primaryColor || '') ? `0x${primaryColor}`: 'red'}
                     />
                   )}
                 </>

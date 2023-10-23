@@ -81,13 +81,13 @@ const HighestRatedUI = (props) => {
         <BusinessListWrapper>
           <BusinessList>
             {
-              !businessesList.loading && (businessesList.businesses.length === 0 || isBusinessWithReviews) && (
+              !isCustomerMode && !businessesList.loading && (businessesList.businesses.length === 0 || isBusinessWithReviews) && (
                 <NotFoundSource
                   content={t('NOT_FOUND_BUSINESSES_HIGHEST_RATED', 'No highest rated businesses found, please change filters or change address.')}
                 >
                   <Button
                     outline
-                    color='primary' 
+                    color='primary'
                     onClick={() => handleClickAddress()}
                   >
                     {t('CHANGE_ADDRESS', 'Select other Address')}
