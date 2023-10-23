@@ -6,6 +6,7 @@ import {
   Header,
   Map,
   Text,
+  ToggleMap,
   WrappMap
 } from './styles'
 
@@ -27,6 +28,7 @@ const AddressDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [openModal, setOpenModal] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isShowMap, setIsShowMap] = useState(false)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [{ user }] = useCustomer()
 
@@ -51,11 +53,22 @@ const AddressDetailsUI = (props) => {
           </Text>
         </Header>
         {apiKey && (
-          <WrappMap>
-            <Map>
-              <img src={googleMapsUrl} id='google-maps-image' alt='google-maps-location' width='288px' height='162px' loading='lazy' />
-            </Map>
-          </WrappMap>
+          <>
+            {!isShowMap && (
+              <ToggleMap>
+                <Text>
+                  <span onClick={() => setIsShowMap(!isShowMap)}>{t('SHOW_MAP', 'Show map')}</span>
+                </Text>
+              </ToggleMap>
+            )}
+            {isShowMap && (
+              <WrappMap>
+                <Map>
+                  <img src={googleMapsUrl} id='google-maps-image' alt='google-maps-location' width='288px' height='162px' loading='lazy' />
+                </Map>
+              </WrappMap>
+            )}
+          </>
         )}
 
         <Modal

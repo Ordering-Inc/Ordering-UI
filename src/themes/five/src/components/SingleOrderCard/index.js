@@ -44,7 +44,8 @@ const SingleOrderCardUI = (props) => {
     isSkeleton,
     isFavorite,
     handleRemoveCart,
-    cartState
+    cartState,
+    reorderLoading
   } = props
 
   const [, t] = useLanguage()
@@ -115,7 +116,7 @@ const SingleOrderCardUI = (props) => {
       setConfirm({
         open: true,
         content: t('QUESTION_DELETE_PRODUCTS_FROM_CART', 'Are you sure that you want to delete all products from cart?'),
-        handleOnAccept: async () => {
+        handleOnAccept: () => {
           handleRemoveCart()
           setConfirm({ ...confirm, open: false })
         }
@@ -270,8 +271,14 @@ const SingleOrderCardUI = (props) => {
                 </Button>
               )}
               {order.cart && typeof order?.id === 'number' && !hideReorderButton && (
-                <Button color='primary' className='reorder' outline onClick={() => handleClickReorder(order)}>
-                  {cartState?.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
+                <Button
+                  color='primary'
+                  className='reorder'
+                  outline
+                  onClick={() => handleClickReorder(order)}
+                  disabled={reorderLoading || cartState?.loading}
+                >
+                  {reorderLoading || cartState?.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
                 </Button>
               )}
             </ButtonWrapper>

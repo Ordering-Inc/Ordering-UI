@@ -143,9 +143,14 @@ const UserDetailsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {(validationFields.loading || formState.loading || userState.loading) && (
         <UserData>
-          <Skeleton width={250} height={25} />
-          <Skeleton width={180} height={25} />
-          <Skeleton width={210} height={25} />
+          {requiredFields?.map(field => (
+            <React.Fragment key={field?.id}>
+              <Skeleton width={250} height={25} />
+              <Skeleton width={180} height={25} />
+              <Skeleton width={210} height={25} />
+              <Skeleton width={210} height={25} />
+            </React.Fragment>
+          ))}
         </UserData>
       )}
 
