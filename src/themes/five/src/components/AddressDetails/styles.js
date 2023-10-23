@@ -11,6 +11,7 @@ export const Header = styled.div``
 export const WrappMap = styled.div`
   width: 100%;
   margin: auto;
+  height: 300px;
 `
 
 export const Map = styled.div`
@@ -61,5 +62,11 @@ export const Text = styled.div`
       margin-right: 10px;
       margin-left: initial;
     `}
+  }
+`
+
+export const ToggleMap = styled.div`
+  span {
+    margin: 0 auto;
   }
 `

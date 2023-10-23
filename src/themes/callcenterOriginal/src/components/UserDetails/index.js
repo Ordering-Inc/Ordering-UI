@@ -44,6 +44,8 @@ const UserDetailsUI = (props) => {
   const [{ user }] = useSession()
   const userData = userState.result?.result || props.userData || formState.result?.result || user
 
+  const validationFieldsLength = Object.values(validationFields?.fields?.checkout)?.map(field => field.enabled)
+
   useEffect(() => {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit()
@@ -69,9 +71,13 @@ const UserDetailsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {(validationFields.loading || formState.loading || userState.loading) && (
         <UserData>
-          <Skeleton width={250} height={25} />
-          <Skeleton width={180} height={25} />
-          <Skeleton width={210} height={25} />
+          {validationFieldsLength?.map(field => (
+            <React.Fragment key={field?.id}>
+              <Skeleton width={250} height={50} />
+              <Skeleton width={180} height={25} />
+              <Skeleton width={210} height={50} />
+            </React.Fragment>
+          ))}
         </UserData>
       )}
 
