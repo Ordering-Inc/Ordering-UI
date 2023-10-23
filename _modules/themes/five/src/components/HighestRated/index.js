@@ -95,7 +95,7 @@ var HighestRatedUI = function HighestRatedUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.HighestRatedContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('HIGHEST_RATED', 'Highest rated')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('TOP_RATINGS_AND_GREAT_SERVICE', 'Top ratings and great service')), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !businessesList.loading && (businessesList.businesses.length === 0 || isBusinessWithReviews) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.HighestRatedContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('HIGHEST_RATED', 'Highest rated')), /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('TOP_RATINGS_AND_GREAT_SERVICE', 'Top ratings and great service')), /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, !isCustomerMode && !businessesList.loading && (businessesList.businesses.length === 0 || isBusinessWithReviews) && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NOT_FOUND_BUSINESSES_HIGHEST_RATED', 'No highest rated businesses found, please change filters or change address.')
   }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,

@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _userState$result, _formState$result, _props$beforeElements, _props$beforeComponen, _parsePhoneNumber, _userData$country_pho, _props$afterComponent, _props$afterElements;
+  var _userState$result, _formState$result, _Object$values, _validationFields$fie, _props$beforeElements, _props$beforeComponen, _parsePhoneNumber, _userData$country_pho, _props$afterComponent, _props$afterElements;
   var isEdit = props.isEdit,
     formState = props.formState,
     cleanFormState = props.cleanFormState,
@@ -51,6 +51,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
   var userData = ((_userState$result = userState.result) === null || _userState$result === void 0 ? void 0 : _userState$result.result) || props.userData || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) || user;
+  var validationFieldsLength = (_Object$values = Object.values(validationFields === null || validationFields === void 0 || (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.checkout)) === null || _Object$values === void 0 ? void 0 : _Object$values.map(function (field) {
+    return field.enabled;
+  });
   (0, _react.useEffect)(function () {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit();
@@ -73,15 +76,19 @@ var UserDetailsUI = function UserDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), (validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 250,
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 180,
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 210,
-    height: 25
+  }), (validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, validationFieldsLength === null || validationFieldsLength === void 0 ? void 0 : validationFieldsLength.map(function (field) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: field === null || field === void 0 ? void 0 : field.id
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 250,
+      height: 50
+    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 180,
+      height: 25
+    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 210,
+      height: 50
+    }));
   })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
     isAddressFormOpen: isAddressFormOpen && !isEdit
   }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {

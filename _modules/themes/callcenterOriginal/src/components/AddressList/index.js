@@ -57,7 +57,9 @@ var AddressListUI = function AddressListUI(props) {
     setIsAddressFormOpen = props.setIsAddressFormOpen,
     isHeader = props.isHeader,
     notUseCustomerInfo = props.notUseCustomerInfo,
-    franchiseId = props.franchiseId;
+    franchiseId = props.franchiseId,
+    setIsSavedAddress = props.setIsSavedAddress,
+    isFromPhoneAutocomplete = props.isFromPhoneAutocomplete;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -121,17 +123,22 @@ var AddressListUI = function AddressListUI(props) {
       handleSetAddress(address);
       return;
     }
+    setIsSavedAddress && setIsSavedAddress(true);
     handleCloseAddressForm();
   };
   var handleSetAddress = function handleSetAddress(address) {
     if (checkAddress(address) && isCustomerMode && (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.id) === (user === null || user === void 0 ? void 0 : user.id) && !isFromCheckout) {
-      events.emit('go_to_page', {
-        page: 'search'
-      });
+      setIsSavedAddress && setIsSavedAddress(true);
       handleSetDefault(address, userCustomerSetup, true);
       setCustomerModalOpen && setCustomerModalOpen(false);
+      if (!isFromPhoneAutocomplete) {
+        events.emit('go_to_page', {
+          page: 'search'
+        });
+      }
       return;
     }
+    setIsSavedAddress && setIsSavedAddress(true);
     handleCloseAddressForm();
     handleSetDefault(address, userCustomerSetup);
   };
