@@ -226,7 +226,7 @@ const BusinessProductsListUI = (props) => {
                           productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                         />
                       ))}
-                      {!business?.food && !categoryState?.loading && categoryState?.products?.length > 9 && (
+                      {business?.front_layout !== 'food' && !categoryState?.loading && categoryState?.products?.length > 9 && (
                         <SingleProductCard
                           useCustomFunctionality
                           onCustomClick={() => onClickCategory(category)}
@@ -246,7 +246,7 @@ const BusinessProductsListUI = (props) => {
             </>
           )
         }
-
+        
         {
           !category?.id && categories.filter(category => category?.id !== null).map((category, i, _categories) => {
             const _products = !isUseParentCategory
@@ -299,7 +299,7 @@ const BusinessProductsListUI = (props) => {
                       <ProductsListing isSubcategorySearch={isSubcategorySearch}>
                         {isSearchMode && category?.subcategories?.length > 0 ? (
                           <>
-                            {products?.filter((product, i) => (i < 9 && product?.category_id === category?.id) || business?.food)?.map((product, i) => (
+                            {products?.filter((product, i) => (i < 9 && product?.category_id === category?.id) || business?.front_layout === 'food')?.map((product, i) => (
                               <SingleProductCard
                                 key={i}
                                 isSoldOut={product.inventoried && !product.quantity}
@@ -312,7 +312,7 @@ const BusinessProductsListUI = (props) => {
                                 productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                               />
                             ))}
-                            {!business?.food && !categoryState?.loading && products?.length > 9 && (
+                            {business?.front_layout !== 'food' && !categoryState?.loading && products?.length > 9 && (
                               <SingleProductCard
                                 useCustomFunctionality
                                 onCustomClick={() => onClickCategory(category)}
@@ -329,7 +329,7 @@ const BusinessProductsListUI = (props) => {
                         ) : (
                           <>
                             {
-                              products.filter((_, i) => i < 9 || business?.food).map((product, i) => (
+                              products.filter((_, i) => i < 9 || business?.front_layout === 'food').map((product, i) => (
                                 <SingleProductCard
                                   key={i}
                                   isSoldOut={product.inventoried && !product.quantity}
@@ -343,7 +343,7 @@ const BusinessProductsListUI = (props) => {
                                 />
                               ))
                             }
-                            {!business?.food && !categoryState?.loading && products?.length > 9 && (
+                            {business?.front_layout !== 'food' && !categoryState?.loading && products?.length > 9 && (
                               <SingleProductCard
                                 useCustomFunctionality
                                 onCustomClick={() => onClickCategory(category)}
