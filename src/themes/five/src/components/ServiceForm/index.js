@@ -467,7 +467,7 @@ const ServiceFormUI = (props) => {
                             active={timeSelected === time.value}
                             disabled={isBusyTime(currentProfessional, getMomentTime(time.value))}
                             onClick={() => handleChangeTime(time.value)}
-                            >
+                          >
                             <span>{time.text}</span>
                           </TimeItem>
                         ))}
