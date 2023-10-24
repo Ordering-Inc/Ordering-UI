@@ -160,7 +160,7 @@ const ServiceFormUI = (props) => {
   }
 
   const isBusyTime = (professional, selectedMoment) => {
-    if (!professional?.schedule) return true
+if (!professional?.schedule) return true
     if (!selectedMoment) return false
     const startDay = moment(selectedMoment).utc().format('d')
     const isStartScheduleEnabled = professional?.schedule?.[startDay]?.enabled
@@ -177,8 +177,8 @@ const ServiceFormUI = (props) => {
     const valid = busyTimes.some(item => {
       return (moment.utc(item?.start).local().valueOf() <= moment(selectedMoment).valueOf() &&
         moment(selectedMoment).valueOf() < moment.utc(item?.end).local().valueOf()) ||
-        (moment.utc(item?.start).local().valueOf() < moment(selectedMoment).add(duration, 'minutes').valueOf() &&
-        moment(selectedMoment).add(duration, 'minutes').valueOf() < moment.utc(item?.end).local().valueOf())
+        (moment.utc(item?.start).local().valueOf() < moment(selectedMoment).valueOf() &&
+          moment(selectedMoment).add(duration, 'minutes').valueOf() < moment.utc(item?.end).local().valueOf())
     })
     return valid
   }
@@ -320,7 +320,6 @@ const ServiceFormUI = (props) => {
               <p>{product?.description}</p>
             </HeaderInfoWrapper>
             <Divider />
-            {!professionalSelected && (
               <ProfessionalInfoWrapper>
                 <SectionHeader>
                   <h2>{t('PROFESSIONALS', 'Professionals')}</h2>
@@ -399,7 +398,6 @@ const ServiceFormUI = (props) => {
                   )}
                 </ProfessionalSelectWrapper>
               </ProfessionalInfoWrapper>
-            )}
             <ScheduleWrapper>
               <SectionHeader>
                 <h2>{t('SCHEDULE', 'Schedule')}</h2>
@@ -409,7 +407,7 @@ const ServiceFormUI = (props) => {
                 <OrderTimeWrapper>
                   <DateWrapper>
                     <MonthYearLayer>
-                      <span>{moment(dateSelected).format('MMMM, yyyy')}</span>
+                      <span>{dateSelected && moment(dateSelected).format('MMMM, yyyy')}</span>
                     </MonthYearLayer>
                     <DaysSwiper left={<BsCaretLeftFill />}>
                       <Swiper
@@ -469,7 +467,7 @@ const ServiceFormUI = (props) => {
                             active={timeSelected === time.value}
                             disabled={isBusyTime(currentProfessional, getMomentTime(time.value))}
                             onClick={() => handleChangeTime(time.value)}
-                          >
+                            >
                             <span>{time.text}</span>
                           </TimeItem>
                         ))}
