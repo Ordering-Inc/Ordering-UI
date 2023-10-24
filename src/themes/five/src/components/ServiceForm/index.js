@@ -160,7 +160,7 @@ const ServiceFormUI = (props) => {
   }
 
   const isBusyTime = (professional, selectedMoment) => {
-  if (!professional?.schedule) return true
+    if (!professional?.schedule) return true
     if (!selectedMoment) return false
     const startDay = moment(selectedMoment).utc().format('d')
     const isStartScheduleEnabled = professional?.schedule?.[startDay]?.enabled
@@ -320,84 +320,84 @@ const ServiceFormUI = (props) => {
               <p>{product?.description}</p>
             </HeaderInfoWrapper>
             <Divider />
-              <ProfessionalInfoWrapper>
-                <SectionHeader>
-                  <h2>{t('PROFESSIONALS', 'Professionals')}</h2>
-                  <span>{t('REQUIRED', 'Required')}</span>
-                </SectionHeader>
-                <ProfessionalSelectWrapper ref={dropDownRef}>
-                  <SelectedItem onClick={() => setIsDropDown(prev => !prev)}>
-                    {currentProfessional ? (
-                      <InfoWrapper>
-                        {currentProfessional?.photo ? (
-                          <ProfessionalPhoto
-                            bgimage={currentProfessional?.photo}
-                          />
-                        ) : <FaUserAlt />}
-                        <NameWrapper>
-                          <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
-                          <StatusInfo available={!isBusyTime(currentProfessional, dateSelected)}>
-                            {currentProfessional?.schedule ? (
-                              <>
-                                {isBusyTime(currentProfessional, dateSelected) ? (
-                                  <>
-                                    <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
-                                  </>
-                                ) : (
-                                  <span className='status'>{t('AVAILABLE', 'Available')}</span>
-                                )}
-                              </>
-                            ) : (
-                              <span className='status'>{t('NOT_AVAILABLE', 'Not available')}</span>
-                            )}
-                          </StatusInfo>
-                        </NameWrapper>
-                      </InfoWrapper>
-                    ) : (
-                      <p>{t('SELECT_PROFESSIONAL', 'Select professional')}</p>
-                    )}
-                    <ChevronDown />
-                  </SelectedItem>
-                  {isDropDown && (
-                    <DropDownWrapper>
-                      {professionalListState?.professionals?.map((professional) => (
-                        <SelectedItem
-                          key={professional?.id}
-                          isDropDown
-                          active={professional?.id === currentProfessional?.id}
-                          onClick={() => handleChangeProfessional(professional)}
-                        >
-                          <InfoWrapper>
-                            {professional?.photo ? (
-                              <ProfessionalPhoto
-                                bgimage={professional?.photo}
-                              />
-                            ) : <FaUserAlt />}
-                            <NameWrapper>
-                              <p>{professional?.name} {professional?.lastname}</p>
-                              <StatusInfo available={!isBusyTime(professional, dateSelected)}>
-                                {professional?.schedule ? (
-                                  <>
-                                    {isBusyTime(professional, dateSelected) ? (
-                                      <>
-                                        <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
-                                      </>
-                                    ) : (
-                                      <span className='status'>{t('AVAILABLE', 'Available')}</span>
-                                    )}
-                                  </>
-                                ) : (
-                                  <span className='status'>{t('NOT_AVAILABLE', 'Not available')}</span>
-                                )}
-                              </StatusInfo>
-                            </NameWrapper>
-                          </InfoWrapper>
-                        </SelectedItem>
-                      ))}
-                    </DropDownWrapper>
+            <ProfessionalInfoWrapper>
+              <SectionHeader>
+                <h2>{t('PROFESSIONALS', 'Professionals')}</h2>
+                <span>{t('REQUIRED', 'Required')}</span>
+              </SectionHeader>
+              <ProfessionalSelectWrapper ref={dropDownRef}>
+                <SelectedItem onClick={() => setIsDropDown(prev => !prev)}>
+                  {currentProfessional ? (
+                    <InfoWrapper>
+                      {currentProfessional?.photo ? (
+                        <ProfessionalPhoto
+                          bgimage={currentProfessional?.photo}
+                        />
+                      ) : <FaUserAlt />}
+                      <NameWrapper>
+                        <p>{currentProfessional?.name} {currentProfessional?.lastname}</p>
+                        <StatusInfo available={!isBusyTime(currentProfessional, dateSelected)}>
+                          {currentProfessional?.schedule ? (
+                            <>
+                              {isBusyTime(currentProfessional, dateSelected) ? (
+                                <>
+                                  <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                                </>
+                              ) : (
+                                <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                              )}
+                            </>
+                          ) : (
+                            <span className='status'>{t('NOT_AVAILABLE', 'Not available')}</span>
+                          )}
+                        </StatusInfo>
+                      </NameWrapper>
+                    </InfoWrapper>
+                  ) : (
+                    <p>{t('SELECT_PROFESSIONAL', 'Select professional')}</p>
                   )}
-                </ProfessionalSelectWrapper>
-              </ProfessionalInfoWrapper>
+                  <ChevronDown />
+                </SelectedItem>
+                {isDropDown && (
+                  <DropDownWrapper>
+                    {professionalListState?.professionals?.map((professional) => (
+                      <SelectedItem
+                        key={professional?.id}
+                        isDropDown
+                        active={professional?.id === currentProfessional?.id}
+                        onClick={() => handleChangeProfessional(professional)}
+                      >
+                        <InfoWrapper>
+                          {professional?.photo ? (
+                            <ProfessionalPhoto
+                              bgimage={professional?.photo}
+                            />
+                          ) : <FaUserAlt />}
+                          <NameWrapper>
+                            <p>{professional?.name} {professional?.lastname}</p>
+                            <StatusInfo available={!isBusyTime(professional, dateSelected)}>
+                              {professional?.schedule ? (
+                                <>
+                                  {isBusyTime(professional, dateSelected) ? (
+                                    <>
+                                      <span className='status'>{t('BUSY_ON_SELECTED_TIME', 'Busy on selected time')}</span>
+                                    </>
+                                  ) : (
+                                    <span className='status'>{t('AVAILABLE', 'Available')}</span>
+                                  )}
+                                </>
+                              ) : (
+                                <span className='status'>{t('NOT_AVAILABLE', 'Not available')}</span>
+                              )}
+                            </StatusInfo>
+                          </NameWrapper>
+                        </InfoWrapper>
+                      </SelectedItem>
+                    ))}
+                  </DropDownWrapper>
+                )}
+              </ProfessionalSelectWrapper>
+            </ProfessionalInfoWrapper>
             <ScheduleWrapper>
               <SectionHeader>
                 <h2>{t('SCHEDULE', 'Schedule')}</h2>
@@ -467,7 +467,7 @@ const ServiceFormUI = (props) => {
                             active={timeSelected === time.value}
                             disabled={isBusyTime(currentProfessional, getMomentTime(time.value))}
                             onClick={() => handleChangeTime(time.value)}
-                            >
+                          >
                             <span>{time.text}</span>
                           </TimeItem>
                         ))}
