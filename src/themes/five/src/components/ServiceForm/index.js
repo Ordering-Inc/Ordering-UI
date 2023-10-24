@@ -160,7 +160,7 @@ const ServiceFormUI = (props) => {
   }
 
   const isBusyTime = (professional, selectedMoment) => {
-if (!professional?.schedule) return true
+  if (!professional?.schedule) return true
     if (!selectedMoment) return false
     const startDay = moment(selectedMoment).utc().format('d')
     const isStartScheduleEnabled = professional?.schedule?.[startDay]?.enabled
@@ -178,7 +178,7 @@ if (!professional?.schedule) return true
       return (moment.utc(item?.start).local().valueOf() <= moment(selectedMoment).valueOf() &&
         moment(selectedMoment).valueOf() < moment.utc(item?.end).local().valueOf()) ||
         (moment.utc(item?.start).local().valueOf() < moment(selectedMoment).valueOf() &&
-          moment(selectedMoment).add(duration, 'minutes').valueOf() < moment.utc(item?.end).local().valueOf())
+        moment(selectedMoment).add(duration, 'minutes').valueOf() < moment.utc(item?.end).local().valueOf())
     })
     return valid
   }
