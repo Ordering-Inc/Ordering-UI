@@ -239,18 +239,6 @@ const ServiceFormUI = (props) => {
   }, [isDropDown])
 
   useEffect(() => {
-    if (!professionalSelected?.schedule) return
-    setCurrentProfessional(professionalSelected)
-  }, [professionalSelected])
-
-  useEffect(() => {
-    if (isCartProduct && professionalListState?.professionals?.length > 0) {
-      const professional = professionalListState?.professionals?.find(item => item.id === professionalSelected?.id)
-      setCurrentProfessional(professional)
-    }
-  }, [isCartProduct, professionalListState?.professionals])
-
-  useEffect(() => {
     if (selectDate === null || currentProfessional === null) return
     const _times = currentProfessional?.schedule ? getTimeList(selectDate, currentProfessional) : []
     setTimeList(_times)
@@ -320,7 +308,6 @@ const ServiceFormUI = (props) => {
               <p>{product?.description}</p>
             </HeaderInfoWrapper>
             <Divider />
-            {!professionalSelected && (
               <ProfessionalInfoWrapper>
                 <SectionHeader>
                   <h2>{t('PROFESSIONALS', 'Professionals')}</h2>
@@ -399,7 +386,6 @@ const ServiceFormUI = (props) => {
                   )}
                 </ProfessionalSelectWrapper>
               </ProfessionalInfoWrapper>
-            )}
             <ScheduleWrapper>
               <SectionHeader>
                 <h2>{t('SCHEDULE', 'Schedule')}</h2>
