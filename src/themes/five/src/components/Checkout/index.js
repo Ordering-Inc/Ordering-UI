@@ -180,6 +180,7 @@ const CheckoutUI = (props) => {
   const daysForApplyCoupon = [0, 2, 4] // Domingo 0
   const isApplyMasterCoupon = !hasCateringProducts?.result && daysForApplyCoupon.includes(moment().days())
   const isShowDeUnaCheckout = configs?.webview_checkout_deuna?.value === '1' || configs?.webview_checkout_deuna?.value === true
+  const loyaltyBrands = configs?.brands_wow_loyalty_program?.value && JSON.parse(configs?.brands_wow_loyalty_program?.value)[0]
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -809,7 +810,7 @@ const CheckoutUI = (props) => {
                 />
               </CartContainer>
             )}
-            {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && configSlug !== 'starbucks' && (
+            {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && !!loyaltyBrands[brandInformation?.brand_id] && (
               <RewardContainer>
                 <RewardBox>
                   <RewardBoxContainer>
