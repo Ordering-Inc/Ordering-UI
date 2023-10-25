@@ -204,6 +204,10 @@ const BusinessesListingUI = (props) => {
   useEffect(() => {
     setActiveMap(false)
     if (!businessesList?.businesses?.length) return
+    if (businessesList?.businesses?.length === 1 && configs?.activate_single_store_automatically?.value) {
+      onBusinessClick(businessesList?.businesses[0])
+      return
+    }
     const ids = [...favoriteIds]
     businessesList.businesses.forEach(business => {
       if (business?.favorite) {
