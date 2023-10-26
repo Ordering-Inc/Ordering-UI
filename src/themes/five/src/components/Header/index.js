@@ -59,7 +59,9 @@ export const Header = (props) => {
     isHideSignup,
     isCustomerMode,
     franchiseId,
-    slug
+    slug,
+    isShowGuestLogin,
+    handleSetGuestLogin
   } = props
   const { pathname } = useLocation()
   const [events] = useEvent()
@@ -295,6 +297,12 @@ export const Header = (props) => {
       setOtpDataUser(null)
     }
   }, [auth])
+
+  useEffect(() => {
+    if (isShowGuestLogin?.loginModal) {
+      handleOpenLoginSignUp('login')
+    }
+  }, [isShowGuestLogin?.loginModal])
 
   return (
     <>
@@ -673,6 +681,9 @@ export const Header = (props) => {
                 defaultLoginTab={isloginSignupLayoutPF && 'otp'}
                 setOtpDataUser={setOtpDataUser}
                 handleOpenSignup={() => setModalPageToShow('signup')}
+                isShowGuestLogin={isShowGuestLogin}
+                handleSetGuestLogin={handleSetGuestLogin}
+                closeAuthModal={closeAuthModal}
               />
             )}
             {modalPageToShow === 'signup' && (

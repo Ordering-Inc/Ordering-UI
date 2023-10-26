@@ -32,7 +32,8 @@ import {
   LogotypeContainer,
   HeroSide,
   ResendCode,
-  WrapperButtons
+  WrapperButtons,
+  GuestLoginButton
 } from './styles'
 
 import { Tabs, Tab } from '../../../../styles/Tabs'
@@ -76,7 +77,10 @@ const LoginFormUI = (props) => {
     createOtpUser,
     handleLoginFacebookAlsea,
     handleLoginGoogleAlsea,
-    isDirectLogin
+    isDirectLogin,
+    isShowGuestLogin,
+    handleSetGuestLogin,
+    closeAuthModal
   } = props
   const numOtpInputs = 4
   const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
@@ -307,7 +311,7 @@ const LoginFormUI = (props) => {
               <img alt='Logotype-callcenter' width='250px' height='105px' src={theme?.images?.logos?.logoCallcenter} loading='lazy' />
             </LogotypeContainer>
           ) : (
-            isDirectLogin ? <Title>{t('VERIFICATIOn', 'Verificacion')}</Title> : <Title>{t('LOGIN', 'Login')}</Title>
+            isDirectLogin ? <Title>{t('VERIFICATION', 'Verificacion')}</Title> : <Title>{t('LOGIN_MARKETPLACE', '¡Inicia sesión o regístrate!')}</Title>
           )}
 
           {!loginWithOtpState && !willVerifyOtpState && !isDirectLogin && (
@@ -520,6 +524,18 @@ const LoginFormUI = (props) => {
                       })}
                     />
                   )} */}
+                {isShowGuestLogin?.loginModal && (
+                  <GuestLoginButton
+                    initialIcon
+                    color='secondary'
+                    onClick={() => {
+                      handleSetGuestLogin && handleSetGuestLogin('addressModal', true)
+                      closeAuthModal && closeAuthModal()
+                    }}
+                  >
+                    {t('LOGIN_GUEST_TEXT', 'Omitir por ahora')}
+                  </GuestLoginButton>
+                )}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>
