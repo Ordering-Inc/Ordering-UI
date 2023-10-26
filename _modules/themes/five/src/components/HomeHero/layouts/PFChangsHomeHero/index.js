@@ -34,7 +34,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PFChangsHomeHero = function PFChangsHomeHero(props) {
   var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderState$options4, _orderState$options4$, _orderState$options6, _orderState$options6$, _theme$images, _theme$images$general, _theme$colors, _theme$colors2, _orderState$options7, _orderState$options7$, _orderState$options8, _orderState$options8$, _configState$configs2, _configState$configs3, _orderState$options9, _orderState$options9$, _orderState$options10, _orderState$options11, _configState$configs4, _configState$configs5, _theme$images2, _theme$images2$genera, _orderState$options12;
   var contentPosition = props.contentPosition,
-    brandId = props.brandId;
+    brandId = props.brandId,
+    handleSetGuestLogin = props.handleSetGuestLogin,
+    isShowGuestLogin = props.isShowGuestLogin;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 2),
     _useSession2$ = _useSession2[0],
@@ -217,9 +219,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
   (0, _react.useEffect)(function () {
     var _orderState$options3, _orderState$options3$;
     if (geoLocation && !auth && !(orderState !== null && orderState !== void 0 && (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && (_orderState$options3$ = _orderState$options3.address) !== null && _orderState$options3$ !== void 0 && _orderState$options3$.location)) {
-      setModals(_objectSpread(_objectSpread({}, modals), {}, {
-        formOpen: true
-      }));
+      handleSetGuestLogin && handleSetGuestLogin('loginModal', true);
     }
   }, [geoLocation, auth, orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location]);
   (0, _react.useEffect)(function () {
@@ -257,6 +257,12 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       window.removeEventListener('resize', resizeEvent);
     };
   }, []);
+  (0, _react.useEffect)(function () {
+    if (!(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.loginModal) && !(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.addressModal) || isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.loginModal && !(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.addressModal)) return;
+    setModals(_objectSpread(_objectSpread({}, modals), {}, {
+      formOpen: true
+    }));
+  }, [isShowGuestLogin]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: homeBackgroundImage || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero)
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {

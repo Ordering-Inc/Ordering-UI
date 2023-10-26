@@ -62,7 +62,9 @@ var Header = function Header(props) {
     isHideSignup = props.isHideSignup,
     isCustomerMode = props.isCustomerMode,
     franchiseId = props.franchiseId,
-    slug = props.slug;
+    slug = props.slug,
+    isShowGuestLogin = props.isShowGuestLogin,
+    handleSetGuestLogin = props.handleSetGuestLogin;
   var _useLocation = (0, _reactRouterDom.useLocation)(),
     pathname = _useLocation.pathname;
   var _useEvent = (0, _orderingComponents.useEvent)(),
@@ -366,6 +368,11 @@ var Header = function Header(props) {
       setOtpDataUser(null);
     }
   }, [auth]);
+  (0, _react.useEffect)(function () {
+    if (isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.loginModal) {
+      handleOpenLoginSignUp('login');
+    }
+  }, [isShowGuestLogin === null || isShowGuestLogin === void 0 ? void 0 : isShowGuestLogin.loginModal]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -603,7 +610,10 @@ var Header = function Header(props) {
     setOtpDataUser: setOtpDataUser,
     handleOpenSignup: function handleOpenSignup() {
       return setModalPageToShow('signup');
-    }
+    },
+    isShowGuestLogin: isShowGuestLogin,
+    handleSetGuestLogin: handleSetGuestLogin,
+    closeAuthModal: closeAuthModal
   }), modalPageToShow === 'signup' && /*#__PURE__*/_react.default.createElement(SignFormComponent, {
     elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick(e) {

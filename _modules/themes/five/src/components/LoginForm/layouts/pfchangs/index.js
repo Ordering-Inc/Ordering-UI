@@ -70,7 +70,10 @@ var LoginFormUI = function LoginFormUI(props) {
     createOtpUser = props.createOtpUser,
     handleLoginFacebookAlsea = props.handleLoginFacebookAlsea,
     handleLoginGoogleAlsea = props.handleLoginGoogleAlsea,
-    isDirectLogin = props.isDirectLogin;
+    isDirectLogin = props.isDirectLogin,
+    isShowGuestLogin = props.isShowGuestLogin,
+    handleSetGuestLogin = props.handleSetGuestLogin,
+    closeAuthModal = props.closeAuthModal;
   var numOtpInputs = 4;
   var otpPlaceholder = _toConsumableArray(Array(numOtpInputs)).fill(0).join('');
   var _useApi = (0, _orderingComponents.useApi)(),
@@ -358,7 +361,7 @@ var LoginFormUI = function LoginFormUI(props) {
     height: "105px",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logoCallcenter,
     loading: "lazy"
-  })) : isDirectLogin ? /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('VERIFICATIOn', 'Verificacion')) : /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LOGIN', 'Login')), !loginWithOtpState && !willVerifyOtpState && !isDirectLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+  })) : isDirectLogin ? /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('VERIFICATION', 'Verificacion')) : /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LOGIN_MARKETPLACE', '¡Inicia sesión o regístrate!')), !loginWithOtpState && !willVerifyOtpState && !isDirectLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
@@ -458,7 +461,14 @@ var LoginFormUI = function LoginFormUI(props) {
   }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login7 = configs.google_login_client_id) === null || _configs$google_login7 === void 0 ? void 0 : _configs$google_login7.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login8 = configs.google_login_auth_domain) === null || _configs$google_login8 === void 0 ? void 0 : _configs$google_login8.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login9 = configs.google_login_api_key) === null || _configs$google_login9 === void 0 ? void 0 : _configs$google_login9.value) && googleLoginEnabled && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
     initParams: initParams,
     handleSuccessGoogleLogin: handleLoginGoogleAlsea
-  })) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonSocialWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), (isShowGuestLogin === null || isShowGuestLogin === void 0 ? void 0 : isShowGuestLogin.loginModal) && /*#__PURE__*/_react.default.createElement(_styles.GuestLoginButton, {
+    initialIcon: true,
+    color: "secondary",
+    onClick: function onClick() {
+      handleSetGuestLogin && handleSetGuestLogin('addressModal', true);
+      closeAuthModal && closeAuthModal();
+    }
+  }, t('LOGIN_GUEST_TEXT', 'Omitir por ahora'))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonSocialWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 43
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 43
