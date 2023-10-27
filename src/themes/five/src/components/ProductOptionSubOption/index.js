@@ -27,7 +27,7 @@ import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
 
 const ProductOptionSubOptionPropsAreEqual = (prevProps, nextProps) => {
   return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) &&
-    prevProps.pizzaType === nextProps.pizzaType &&
+    JSON.stringify(prevProps.pizzaState) === JSON.stringify(nextProps.pizzaState) &&
     prevProps.balance === nextProps.balance &&
     JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart)
 }
@@ -44,9 +44,8 @@ const ProductOptionSubOptionUI = React.memo((props) => {
     changePosition,
     isSoldOut,
     setIsScrollAvailable,
-    onChange,
-    pizzaType,
-    productCart
+    usePizzaValidation,
+    pizzaState
   } = props
 
   const disableIncrement = option?.limit_suboptions_by_max ? (balance === option?.max || state.quantity === suboption.max) : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
@@ -74,16 +73,18 @@ const ProductOptionSubOptionUI = React.memo((props) => {
   const handleSuboptionClick = () => {
     dirtyRef.current = true
     toggleSelect()
-    if (balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1) && !state.selected) {
+    const minMaxValidation = option?.with_half_option ? usePizzaValidation : (balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1))
+    if (!state.selected && minMaxValidation) {
       setShowMessage(true)
     }
   }
 
   useEffect(() => {
-    if (!(balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1) && !state.selected)) {
+    const minMaxValidation = option?.with_half_option ? usePizzaValidation : (!state.selected && balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1))
+    if (!minMaxValidation) {
       setShowMessage(false)
     }
-  }, [balance])
+  }, [balance, pizzaState?.[`option:${option?.id}`]?.value])
 
   useEffect(() => {
     if (balance === option?.max && state?.selected && dirtyRef) {
@@ -95,10 +96,10 @@ const ProductOptionSubOptionUI = React.memo((props) => {
   }, [state?.selected])
 
   useEffect(() => {
-    if (pizzaType === 'mitad y mitad' && option?.with_half_option) {
+    if (option?.with_half_option) {
       handlePosition({}, 'left')
     }
-  }, [pizzaType, state?.selected, suboption?.id])
+  }, [state?.selected, suboption?.id])
 
   return (
     <>
@@ -155,20 +156,18 @@ const ProductOptionSubOptionUI = React.memo((props) => {
                 <>
                   <BsCircleHalf
                     className={[
-                      pizzaType === 'center' ? 'disabled disable-clicks' : '',
                       'reverse',
                       state.selected && state.position === 'left' ? 'selected' : null].filter(classname => classname).join(' ')}
                     onClick={(e) => handlePosition(e, 'left')}
                   />
                   <BsCircleFill
                     className={[
-                      pizzaType === 'mitad y mitad' ? 'disabled' : '',
+                      pizzaState?.[`option:${option?.id}`]?.value === option?.max ? 'disabled' : '',
                       state.selected && state.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
                     onClick={(e) => handlePosition(e, 'whole')}
                   />
                   <BsCircleHalf
                     className={[
-                      pizzaType === 'center' ? 'disabled disable-clicks' : '',
                       state.selected && state.position === 'right' ? 'selected' : null].filter(classname => classname).join(' ')}
                     onClick={(e) => handlePosition(e, 'right')}
                   />
