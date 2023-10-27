@@ -32,10 +32,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductOptionSubOptionPropsAreEqual = function ProductOptionSubOptionPropsAreEqual(prevProps, nextProps) {
-  return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) && prevProps.pizzaType === nextProps.pizzaType && prevProps.balance === nextProps.balance && JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart);
+  return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) && JSON.stringify(prevProps.pizzaState) === JSON.stringify(nextProps.pizzaState) && prevProps.balance === nextProps.balance && JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart);
 };
 var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props) {
-  var _props$beforeElements, _props$beforeComponen, _props$afterComponent, _props$afterElements;
+  var _pizzaState, _props$beforeElements, _props$beforeComponen, _pizzaState2, _props$afterComponent, _props$afterElements;
   var state = props.state,
     increment = props.increment,
     decrement = props.decrement,
@@ -46,9 +46,8 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     changePosition = props.changePosition,
     isSoldOut = props.isSoldOut,
     setIsScrollAvailable = props.setIsScrollAvailable,
-    onChange = props.onChange,
-    pizzaType = props.pizzaType,
-    productCart = props.productCart;
+    usePizzaValidation = props.usePizzaValidation,
+    pizzaState = props.pizzaState;
   var disableIncrement = option !== null && option !== void 0 && option.limit_suboptions_by_max ? balance === (option === null || option === void 0 ? void 0 : option.max) || state.quantity === suboption.max : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
   var price = option !== null && option !== void 0 && option.with_half_option && suboption !== null && suboption !== void 0 && suboption.half_price && state.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -78,16 +77,18 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     var _option$suboptions;
     dirtyRef.current = true;
     toggleSelect();
-    if (balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 || (_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : _option$suboptions.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1) && !state.selected) {
+    var minMaxValidation = option !== null && option !== void 0 && option.with_half_option ? usePizzaValidation : balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 || (_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : _option$suboptions.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1);
+    if (!state.selected && minMaxValidation) {
       setShowMessage(true);
     }
   };
   (0, _react.useEffect)(function () {
     var _option$suboptions2;
-    if (!(balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 || (_option$suboptions2 = option.suboptions) === null || _option$suboptions2 === void 0 ? void 0 : _option$suboptions2.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1) && !state.selected)) {
+    var minMaxValidation = option !== null && option !== void 0 && option.with_half_option ? usePizzaValidation : !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max) && (option === null || option === void 0 || (_option$suboptions2 = option.suboptions) === null || _option$suboptions2 === void 0 ? void 0 : _option$suboptions2.length) > balance && !((option === null || option === void 0 ? void 0 : option.min) === 1 && (option === null || option === void 0 ? void 0 : option.max) === 1);
+    if (!minMaxValidation) {
       setShowMessage(false);
     }
-  }, [balance]);
+  }, [balance, pizzaState === null || pizzaState === void 0 || (_pizzaState = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState === void 0 ? void 0 : _pizzaState.value]);
   (0, _react.useEffect)(function () {
     if (balance === (option === null || option === void 0 ? void 0 : option.max) && state !== null && state !== void 0 && state.selected && dirtyRef) {
       if ((dirtyRef === null || dirtyRef === void 0 ? void 0 : dirtyRef.current) !== null) {
@@ -97,10 +98,10 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     }
   }, [state === null || state === void 0 ? void 0 : state.selected]);
   (0, _react.useEffect)(function () {
-    if (pizzaType === 'mitad y mitad' && option !== null && option !== void 0 && option.with_half_option) {
+    if (option !== null && option !== void 0 && option.with_half_option) {
       handlePosition({}, 'left');
     }
-  }, [pizzaType, state === null || state === void 0 ? void 0 : state.selected, suboption === null || suboption === void 0 ? void 0 : suboption.id]);
+  }, [state === null || state === void 0 ? void 0 : state.selected, suboption === null || suboption === void 0 ? void 0 : suboption.id]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -126,21 +127,21 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     disabled: disableIncrement || isSoldOut,
     onClick: handleIncrement
   }))), /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, (option === null || option === void 0 ? void 0 : option.with_half_option) && (state === null || state === void 0 ? void 0 : state.selected) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
-    className: [pizzaType === 'center' ? 'disabled disable-clicks' : '', 'reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(function (classname) {
+    className: ['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),
     onClick: function onClick(e) {
       return handlePosition(e, 'left');
     }
   }), /*#__PURE__*/_react.default.createElement(_BsCircleFill.default, {
-    className: [pizzaType === 'mitad y mitad' ? 'disabled' : '', state.selected && state.position === 'whole' ? 'selected' : null].filter(function (classname) {
+    className: [(pizzaState === null || pizzaState === void 0 || (_pizzaState2 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState2 === void 0 ? void 0 : _pizzaState2.value) === (option === null || option === void 0 ? void 0 : option.max) ? 'disabled' : '', state.selected && state.position === 'whole' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),
     onClick: function onClick(e) {
       return handlePosition(e, 'whole');
     }
   }), /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
-    className: [pizzaType === 'center' ? 'disabled disable-clicks' : '', state.selected && state.position === 'right' ? 'selected' : null].filter(function (classname) {
+    className: [state.selected && state.position === 'right' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),
     onClick: function onClick(e) {
