@@ -98,7 +98,7 @@ const ProductOptionsUI = (props) => {
     handleChangeSuboptionState,
     handleChangeCommentState,
     productAddedToCartLength,
-    pizzaType,
+    pizzaState,
     handleFavoriteProduct,
     handleCreateGuestUser,
     actionStatus,
@@ -654,7 +654,7 @@ const ProductOptionsUI = (props) => {
                                       isSoldOut={isSoldOut}
                                       scrollDown={scrollDown}
                                       setIsScrollAvailable={setIsScrollAvailable}
-                                      pizzaType={pizzaType}
+                                      pizzaState={pizzaState}
                                       productCart={productCart}
                                     />
                                   )
