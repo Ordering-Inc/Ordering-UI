@@ -205,8 +205,10 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     navigator.permissions.query({
       name: 'geolocation'
     }).then(function (result) {
-      if (result.state === 'granted') {
+      if (result.state === 'granted' || result.state === 'prompt') {
         setGeoLocation(true);
+      } else {
+        handleSetGuestLogin && handleSetGuestLogin('loginModal', true);
       }
     });
     return function () {
