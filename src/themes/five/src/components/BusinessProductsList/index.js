@@ -6,7 +6,6 @@ import { NotFoundSource } from '../NotFoundSource'
 import { Modal } from '../Modal'
 import { shape } from '../../../../../utils'
 import { AutoScroll } from '../AutoScroll'
-import { XLg as Close } from 'react-bootstrap-icons'
 
 import {
   ProductsContainer,
@@ -17,16 +16,13 @@ import {
   HeaderWrapper,
   DescriptionModalContainer,
   RibbonBox,
-  SubCategoriesContainer,
-  ContainerButton,
   CategoryDescription,
   DescriptionContainer,
   SubcategorySearchContainer,
-  SubCategoriesInnerContainer,
   PreviouslyOrderedContainer,
   PreviouslyOrderedWrapper
 } from './styles'
-import { Button } from '../../styles/Buttons'
+import { SubcategoriesComponent } from './SubcategoriesComponent'
 
 const BusinessProductsListUI = (props) => {
   const {
@@ -60,6 +56,7 @@ const BusinessProductsListUI = (props) => {
   const isUseParentCategory = configs?.use_parent_category?.value === 'true' || configs?.use_parent_category?.value === '1'
   const [openDescription, setOpenDescription] = useState(null)
   const headerRef = useRef()
+
   const onClickSubcategory = (subCategory, parentCategory) => {
     if (parentCategory && isLazy) {
       onClickCategory(parentCategory)
@@ -76,46 +73,6 @@ const BusinessProductsListUI = (props) => {
     }
   }
 
-  const SubcategoriesComponent = ({ category }) => {
-    const allsubcategorySelected = !subcategoriesSelected?.some(subcategory => category?.id === subcategory?.parent_category_id)
-
-    return (
-      <SubCategoriesContainer>
-        <SubCategoriesInnerContainer>
-          <AutoScroll scrollId={`scroll_${category?.id}`}>
-            <ContainerButton
-              isSelected={allsubcategorySelected}
-            >
-              <Button
-                onClick={() => onClickSubcategory(null, category)}
-                color={allsubcategorySelected ? 'primary' : 'lightGray'}
-              >
-                {t('ALL', 'All')}
-              </Button>
-            </ContainerButton>
-            {category?.subcategories?.map(subcategory => {
-              const isSubcategorySelected = subcategoriesSelected?.find(_subcategory => _subcategory?.id === subcategory?.id)
-              return (
-                <ContainerButton
-                  key={subcategory?.id}
-                  isSelected={isSubcategorySelected}
-                >
-                  <Button
-                    onClick={() => onClickSubcategory(subcategory, category)}
-                    color={isSubcategorySelected ? 'primary' : 'lightGray'}
-                  >
-                    {subcategory?.name} {isSubcategorySelected && <Close />}
-                  </Button>
-                </ContainerButton>
-              )
-            }
-            )}
-          </AutoScroll>
-        </SubCategoriesInnerContainer>
-      </SubCategoriesContainer>
-    )
-  }
-
   const productsCategorySelected = categoryState.products
     ?.filter(product =>
       !subcategoriesSelected?.find(subcategory => subcategory?.parent_category_id === category?.id) ||
@@ -123,18 +80,16 @@ const BusinessProductsListUI = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       <ProductsContainer>
         {category?.id && (
           <>
             <HeaderWrapper>
               {category?.subcategories?.length > 0 && !isSearchMode && (
-                <SubcategoriesComponent category={category} />
+                <SubcategoriesComponent
+                  category={category}
+                  subcategoriesSelected={subcategoriesSelected}
+                  onClickSubcategory={onClickSubcategory}
+                />
               )}
             </HeaderWrapper>
             <ProductsListing>
@@ -293,7 +248,11 @@ const BusinessProductsListUI = (props) => {
                           </CategoryDescription>
                         )}
                         {category?.subcategories?.length > 0 && !isSearchMode && (
-                          <SubcategoriesComponent category={category} />
+                          <SubcategoriesComponent
+                            category={category}
+                            subcategoriesSelected={subcategoriesSelected}
+                            onClickSubcategory={onClickSubcategory}
+                          />
                         )}
                       </HeaderWrapper>
                       <ProductsListing isSubcategorySearch={isSubcategorySearch}>
@@ -444,16 +403,6 @@ const BusinessProductsListUI = (props) => {
           </DescriptionModalContainer>
         </Modal>
       </ProductsContainer>
-      {
-        props.afterComponents?.map((AfterComponent, i) => (
-          <AfterComponent key={i} {...props} />))
-      }
-      {
-        props.afterElements?.map((AfterElement, i) => (
-          <React.Fragment key={i}>
-            {AfterElement}
-          </React.Fragment>))
-      }
     </>
   )
 }
