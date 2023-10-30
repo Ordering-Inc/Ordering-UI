@@ -181,7 +181,7 @@ const BusinessProductsListUI = (props) => {
                           productAddedToCartLength={currentCart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === product?.id ? Cproduct?.quantity : 0) }, 0)}
                         />
                       ))}
-                      {!business?.food && !categoryState?.loading && categoryState?.products?.length > 9 && (
+                      {!business?.food && !categoryState?.loading && categoryState?.products?.filter(product => product.featured)?.length > 9 && (
                         <SingleProductCard
                           useCustomFunctionality
                           onCustomClick={() => onClickCategory(category)}
