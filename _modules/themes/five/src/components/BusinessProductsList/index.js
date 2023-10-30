@@ -183,7 +183,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
       }, 0)
     });
-  }), (business === null || business === void 0 ? void 0 : business.front_layout) !== 'food' && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (categoryState === null || categoryState === void 0 || (_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+  }), !(business !== null && business !== void 0 && business.food) && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (categoryState === null || categoryState === void 0 || (_categoryState$produc4 = categoryState.products) === null || _categoryState$produc4 === void 0 || (_categoryState$produc4 = _categoryState$produc4.filter(function (product) {
+    return product.featured;
+  })) === null || _categoryState$produc4 === void 0 ? void 0 : _categoryState$produc4.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
     useCustomFunctionality: true,
     onCustomClick: function onCustomClick() {
       return onClickCategory(category);
@@ -250,7 +252,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, {
       isSubcategorySearch: isSubcategorySearch
     }, isSearchMode && (category === null || category === void 0 || (_category$subcategori7 = category.subcategories) === null || _category$subcategori7 === void 0 ? void 0 : _category$subcategori7.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, products === null || products === void 0 || (_products$filter = products.filter(function (product, i) {
-      return i < 9 && (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id) || (business === null || business === void 0 ? void 0 : business.front_layout) === 'food';
+      return i < 9 && (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id) || (business === null || business === void 0 ? void 0 : business.food);
     })) === null || _products$filter === void 0 ? void 0 : _products$filter.map(function (product, i) {
       var _currentCart$products5;
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
@@ -266,7 +268,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
         }, 0)
       });
-    }), (business === null || business === void 0 ? void 0 : business.front_layout) !== 'food' && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (products === null || products === void 0 ? void 0 : products.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+    }), !(business !== null && business !== void 0 && business.food) && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (products === null || products === void 0 ? void 0 : products.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       useCustomFunctionality: true,
       onCustomClick: function onCustomClick() {
         return onClickCategory(category);
@@ -279,7 +281,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         justifyContent: 'center'
       }
     })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, products.filter(function (_, i) {
-      return i < 9 || (business === null || business === void 0 ? void 0 : business.front_layout) === 'food';
+      return i < 9 || (business === null || business === void 0 ? void 0 : business.food);
     }).map(function (product, i) {
       var _currentCart$products6;
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
@@ -295,7 +297,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
           return productsLength + ((Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.id) === (product === null || product === void 0 ? void 0 : product.id) ? Cproduct === null || Cproduct === void 0 ? void 0 : Cproduct.quantity : 0);
         }, 0)
       });
-    }), (business === null || business === void 0 ? void 0 : business.front_layout) !== 'food' && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (products === null || products === void 0 ? void 0 : products.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+    }), !(business !== null && business !== void 0 && business.food) && !(categoryState !== null && categoryState !== void 0 && categoryState.loading) && (products === null || products === void 0 ? void 0 : products.length) > 9 && /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       useCustomFunctionality: true,
       onCustomClick: function onCustomClick() {
         return onClickCategory(category);
