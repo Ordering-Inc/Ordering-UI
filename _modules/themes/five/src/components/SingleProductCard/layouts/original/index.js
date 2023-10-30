@@ -37,7 +37,10 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var SingleProductCardUI = function SingleProductCardUI(props) {
+var singleProductCardPropsAreEqual = function singleProductCardPropsAreEqual(prevProps, nextProps) {
+  return JSON.stringify(prevProps.product) === JSON.stringify(nextProps.product) && prevProps.isSkeleton === nextProps.isSkeleton && prevProps.isSoldOut === nextProps.isSoldOut && prevProps.isCartOnProductsList === nextProps.isCartOnProductsList && prevProps.productAddedToCartLength === nextProps.productAddedToCartLength;
+};
+var SingleProductCardUI = /*#__PURE__*/_react.default.memo(function (props) {
   var _theme$business_view$, _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$viewString, _theme$business_view4, _theme$images, _theme$images2, _product$ribbon, _product$ribbon2, _product$ribbon3, _product$ribbon4, _product$ribbon5, _theme$images3, _product$ribbon6, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
   var product = props.product,
     isSoldOut = props.isSoldOut,
@@ -175,7 +178,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     style: useCustomFunctionality && customStyle,
     className: "product-card",
     isShowAddButt: !useCustomFunctionality && !hideAddButton && !isSkeleton
-  }, isObservedValidation ? /*#__PURE__*/_react.default.createElement("div", null, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
+  }, isObservedValidation && /*#__PURE__*/_react.default.createElement("div", null, !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0,
     isBgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || (theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.product), 'h_86,c_limit'),
     oneLine: isPreviously
@@ -230,16 +233,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
       fontSize: 16,
       fontWeight: 500
     }
-  }, customText)) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonCardInfo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 100
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 100
-  })), /*#__PURE__*/_react.default.createElement(_styles.SkeletonCardLogo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 75,
-    width: 75
-  }))), !useCustomFunctionality && !hideAddButton && !isSkeleton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, customText)), !useCustomFunctionality && !hideAddButton && !isSkeleton && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     disabled: productAddedToCartLength && (product === null || product === void 0 ? void 0 : product.maximum_per_order) && productAddedToCartLength >= (product === null || product === void 0 ? void 0 : product.maximum_per_order)
@@ -312,7 +306,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     },
     closeOnBackdrop: false
   }));
-};
+}, singleProductCardPropsAreEqual);
 var SingleProductCard = exports.SingleProductCard = function SingleProductCard(props) {
   var singleProductCardProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SingleProductCardUI

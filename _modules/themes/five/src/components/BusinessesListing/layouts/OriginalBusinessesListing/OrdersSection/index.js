@@ -22,7 +22,8 @@ var OrdersSection = exports.OrdersSection = function OrdersSection(props) {
     getCustomArray = props.getCustomArray,
     businessesList = props.businessesList,
     isCustomerMode = props.isCustomerMode,
-    userCustomer = props.userCustomer;
+    userCustomer = props.userCustomer,
+    disableSkeletons = props.disableSkeletons;
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
@@ -54,7 +55,8 @@ var OrdersSection = exports.OrdersSection = function OrdersSection(props) {
     isBusinessesLoading: businessesList.loading,
     isCustomerMode: isCustomerMode,
     franchiseId: props.franchiseId,
-    handleRedirectToCheckout: handleRedirectToCheckout
+    handleRedirectToCheckout: handleRedirectToCheckout,
+    disableSkeletons: disableSkeletons
   }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
     propsToFetch: propsToFetch,
     propsToFetchBusiness: propsToFetchBusiness,
@@ -70,7 +72,8 @@ var OrdersSection = exports.OrdersSection = function OrdersSection(props) {
     isBusinessesLoading: businessesList.loading,
     isCustomerMode: isCustomerMode,
     franchiseId: props.franchiseId,
-    handleRedirectToCheckout: handleRedirectToCheckout
+    handleRedirectToCheckout: handleRedirectToCheckout,
+    disableSkeletons: disableSkeletons
   }), /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, {
     propsToFetch: propsToFetch,
     propsToFetchBusiness: propsToFetchBusiness,
@@ -86,6 +89,7 @@ var OrdersSection = exports.OrdersSection = function OrdersSection(props) {
     isBusinessesLoading: businessesList.loading,
     isCustomerMode: isCustomerMode,
     franchiseId: props.franchiseId,
-    handleRedirectToCheckout: handleRedirectToCheckout
+    handleRedirectToCheckout: handleRedirectToCheckout,
+    disableSkeletons: disableSkeletons
   })));
 };
