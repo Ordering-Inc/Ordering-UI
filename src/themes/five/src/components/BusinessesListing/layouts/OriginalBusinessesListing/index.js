@@ -357,6 +357,7 @@ const BusinessesListingUI = (props) => {
           businessesList={businessesList}
           isCustomerMode={isCustomerMode}
           userCustomer={userCustomer}
+          disableSkeletons
         />
       )}
       {!isCustomerMode && !hideSearchSection && (
