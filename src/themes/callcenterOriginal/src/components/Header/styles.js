@@ -184,7 +184,7 @@ export const Menu = styled.div`
       min-width: auto;
       text-overflow: ellipsis;
       overflow: hidden;
-      width: 40px;
+      min-width: 40px;
     }
 
     @media (min-width: 1123px) {
@@ -336,7 +336,7 @@ export const MomentMenu = styled.div`
   }
 
   @media (min-width: 1400px) {
-    width: 400px;
+    width: 300px;
   }
 
   > div {

@@ -66,7 +66,8 @@ const OrdersOptionUI = (props) => {
     businesses,
     handleUpdateBusinesses,
     getPage,
-    loadOrders
+    loadOrders,
+    disableSkeletons
   } = props
 
   const [, t] = useLanguage()
@@ -230,7 +231,7 @@ const OrdersOptionUI = (props) => {
         />
       )}
 
-      {(isCustomLayout ? (loading || businesses?.loading) : showSkeletons) && (
+      {!disableSkeletons && (isCustomLayout ? (loading || businesses?.loading) : showSkeletons) && (
         <>
           {(businesses?.loading && isBusiness) ? (
             <BusinessControllerSkeleton>

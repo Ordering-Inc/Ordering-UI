@@ -22,13 +22,19 @@ import {
   QuantityContainer,
   RibbonBox,
   TitleWrapper,
-  LastOrder,
-  SkeletonCardInfo,
-  SkeletonCardLogo
+  LastOrder
 } from './styles'
 import { Button } from '../../../../styles/Buttons'
 
-const SingleProductCardUI = (props) => {
+const singleProductCardPropsAreEqual = (prevProps, nextProps) => {
+  return JSON.stringify(prevProps.product) === JSON.stringify(nextProps.product) &&
+    prevProps.isSkeleton === nextProps.isSkeleton &&
+    prevProps.isSoldOut === nextProps.isSoldOut &&
+    prevProps.isCartOnProductsList === nextProps.isCartOnProductsList &&
+    prevProps.productAddedToCartLength === nextProps.productAddedToCartLength
+}
+
+const SingleProductCardUI = React.memo((props) => {
   const {
     product,
     isSoldOut,
@@ -155,7 +161,7 @@ const SingleProductCardUI = (props) => {
         className='product-card'
         isShowAddButt={!useCustomFunctionality && !hideAddButton && !isSkeleton}
       >
-        {isObservedValidation ? (
+        {isObservedValidation && (
           <div>
             {!useCustomFunctionality && (
               <>
@@ -229,17 +235,6 @@ const SingleProductCardUI = (props) => {
             {useCustomFunctionality && customText && (
               <span style={{ fontSize: 16, fontWeight: 500 }}>{customText}</span>
             )}
-          </div>
-        ) : (
-          <div>
-            <SkeletonCardInfo>
-              <Skeleton width={100} />
-              <Skeleton width={100} />
-              <Skeleton width={100} />
-            </SkeletonCardInfo>
-            <SkeletonCardLogo>
-              <Skeleton height={75} width={75} />
-            </SkeletonCardLogo>
           </div>
         )}
         {!useCustomFunctionality && !hideAddButton && !isSkeleton && (
@@ -320,7 +315,7 @@ const SingleProductCardUI = (props) => {
       />
     </>
   )
-}
+}, singleProductCardPropsAreEqual)
 
 export const SingleProductCard = (props) => {
   const singleProductCardProps = {
