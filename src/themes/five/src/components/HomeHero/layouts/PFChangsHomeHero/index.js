@@ -120,8 +120,11 @@ export const PFChangsHomeHero = (props) => {
 
   useEffect(() => {
     navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-      if (result.state === 'granted') {
+      console.log('result', result)
+      if (result.state === 'granted' || result.state === 'prompt') {
         setGeoLocation(true)
+      } else {
+        handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
       }
     })
     return () => setModals({ listOpen: false, formOpen: false })
