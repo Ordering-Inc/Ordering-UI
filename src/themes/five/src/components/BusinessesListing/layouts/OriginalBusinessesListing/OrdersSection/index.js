@@ -9,7 +9,8 @@ export const OrdersSection = (props) => {
     getCustomArray,
     businessesList,
     isCustomerMode,
-    userCustomer
+    userCustomer,
+    disableSkeletons
   } = props
   const [orderState] = useOrder()
   const [, t] = useLanguage()
@@ -41,6 +42,7 @@ export const OrdersSection = (props) => {
             isCustomerMode={isCustomerMode}
             franchiseId={props.franchiseId}
             handleRedirectToCheckout={handleRedirectToCheckout}
+            disableSkeletons={disableSkeletons}
           />
           <OrdersOption
             propsToFetch={propsToFetch}
@@ -58,6 +60,7 @@ export const OrdersSection = (props) => {
             isCustomerMode={isCustomerMode}
             franchiseId={props.franchiseId}
             handleRedirectToCheckout={handleRedirectToCheckout}
+            disableSkeletons={disableSkeletons}
           />
           <OrdersOption
             propsToFetch={propsToFetch}
@@ -75,6 +78,7 @@ export const OrdersSection = (props) => {
             isCustomerMode={isCustomerMode}
             franchiseId={props.franchiseId}
             handleRedirectToCheckout={handleRedirectToCheckout}
+            disableSkeletons={disableSkeletons}
           />
         </>
       )}
