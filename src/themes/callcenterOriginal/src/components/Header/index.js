@@ -40,7 +40,6 @@ import { HeaderOption } from '../HeaderOption'
 import { SidebarMenu } from '../SidebarMenu'
 import { UserDetails } from '../UserDetails'
 import { Confirm } from '../Confirm'
-import { getDistance } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
 import { AdminAreaPopover } from '../AdminAreaPopover'
 
