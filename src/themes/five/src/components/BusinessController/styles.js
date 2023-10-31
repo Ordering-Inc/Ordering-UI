@@ -32,6 +32,10 @@ export const ContainerCard = styled.div`
   ${({ firstCard }) => firstCard && css`
     margin-left: 0;
   `}
+
+  ${({ disabled }) => disabled && css`
+    cursor: not-allowed;
+  `}
   
   ${({ businessRows }) => css`
     width: calc(100% - 40px);
@@ -59,6 +63,10 @@ export const WrapperBusinessCard = styled.div`
   height: 100%;
   position: relative;
   cursor: ${({ isSkeleton }) => isSkeleton ? 'default' : 'pointer'};
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+    cursor: not-allowed;
+  `}
 `
 
 export const BusinessHero = styled.div`
@@ -84,12 +92,12 @@ const BusinessHeaderStyled = styled.div`
   align-items: center;
   border-radius: 7.6px 7.6px 0px 0px;
 
-  h1 {
+  h1, h2 {
     color: #FFF;
     opacity: 0.7;
   }
 
-  .closed {
+  .closed, .disabled {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 28px;
@@ -97,6 +105,10 @@ const BusinessHeaderStyled = styled.div`
     opacity: 1;
     position: relative;
     z-index: 2;
+  }
+
+  .disabled {
+    font-size: 24px;
   }
 
   @media (min-width: 481px) {
@@ -118,6 +130,13 @@ export const BusinessHeader = (props) => {
     </BusinessHeaderStyled>
   )
 }
+
+export const BusinessHeaderClosedContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
 
 export const BusinessTags = styled.div`
   display: flex;
@@ -452,11 +471,11 @@ export const RibbonBox = styled.div`
   `}
 
   ${({ colorText }) => colorText && css`
-    color: ${colorText ? 'black': 'white'};
+    color: ${colorText ? 'black' : 'white'};
   `}
 
   ${({ borderRibbon }) => borderRibbon && css`
-    border: 1px solid ${borderRibbon ? 'black': 'white'};
+    border: 1px solid ${borderRibbon ? 'black' : 'white'};
   `}
 `
 
