@@ -33,6 +33,14 @@ const BusinessProductsListUI = (props) => {
 
   const [, t] = useLanguage()
 
+  const uniqueFeaturedProducts = (data, key) => {
+    return [
+      ...new Map(
+        data.map(p => [key(p), p])
+      ).values()
+    ]
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -69,7 +77,7 @@ const BusinessProductsListUI = (props) => {
                   <WrapAllCategories>
                     <h3>{t('FEATURED', 'Featured')}</h3>
                     <ProductsListing>
-                      {categoryState.products?.sort((a, b) => a.rank - b.rank).map(product => product.featured && (
+                      {uniqueFeaturedProducts(categoryState.products?.sort((a, b) => a.rank - b.rank).filter((p, i, hash) => p.featured), (product) => product.name)?.sort((a, b) => a.rank - b.rank).map(product => (
                         <SingleProductCard
                           key={product?.id}
                           isSoldOut={(product.inventoried && !product.quantity)}
