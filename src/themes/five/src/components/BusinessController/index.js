@@ -32,7 +32,8 @@ import {
   InfoLength,
   InfoDescription,
   RibbonBox,
-  FavoriteWrapper
+  FavoriteWrapper,
+  BusinessHeaderClosedContainer
   // CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
@@ -179,10 +180,17 @@ const BusinessControllerUI = (props) => {
                     </div>
                   )}
                 </BusinessTags>
-                {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && (
-                  <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
-                )}
-                {!isBusinessOpen && <h1 className='closed'>{t('CLOSED', 'Closed')}</h1>}
+                <BusinessHeaderClosedContainer>
+                  <div>
+                    {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && business?.enabled !== false && (
+                      <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
+                    )}
+                    {!isBusinessOpen && <h1 className='closed'>{t('CLOSED', 'Closed')}{business?.enabled === false && `(${t('DISABLED', 'Disabled')})`}</h1>}
+                  </div>
+                  {business?.disabled_reason && business?.enabled === false && (
+                    <h2 className='disabled'>{business?.disabled_reason}</h2>
+                  )}
+                </BusinessHeaderClosedContainer>
               </BusinessHeader>
             )}
           </BusinessHero>
