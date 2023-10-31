@@ -181,6 +181,12 @@ export const OrderBillSection = (props) => {
               <td>{parsePrice(order?.summary?.delivery_price + getIncludedTaxes(true))}</td>
             </tr>
           )}
+          {order?.extra_value_checkprice && order?.extra_value_checkprice > 0 && (
+            <tr>
+              <td>{t('EXTRA_VALUE_CHECKPRICE', 'Extra value checkprice')}</td>
+              <td>{parsePrice(order?.extra_value_checkprice)}</td>
+            </tr>
+          )}
           {
             order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'delivery_fee').map(tax => (
               <tr key={tax?.id}>
