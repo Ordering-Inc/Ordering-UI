@@ -150,8 +150,9 @@ const BusinessControllerUI = (props) => {
         firstCard={firstCard}
         minWidthEnabled={minWidthEnabled}
         businessRows={businessRows}
+        disabled={business?.enabled === false}
       >
-        <WrapperBusinessCard isSkeleton={isSkeleton} onClick={(e) => !isSkeleton && handleClick && handleBusinessClick(e)}>
+        <WrapperBusinessCard disabled={business?.enabled === false} isSkeleton={isSkeleton} onClick={(e) => !isSkeleton && handleClick && handleBusinessClick(e)}>
           {business?.ribbon?.enabled && (
             <RibbonBox
               bgColor={business?.ribbon?.color}

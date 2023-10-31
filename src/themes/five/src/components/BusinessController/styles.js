@@ -32,6 +32,10 @@ export const ContainerCard = styled.div`
   ${({ firstCard }) => firstCard && css`
     margin-left: 0;
   `}
+
+  ${({ disabled }) => disabled && css`
+    cursor: not-allowed;
+  `}
   
   ${({ businessRows }) => css`
     width: calc(100% - 40px);
@@ -59,6 +63,10 @@ export const WrapperBusinessCard = styled.div`
   height: 100%;
   position: relative;
   cursor: ${({ isSkeleton }) => isSkeleton ? 'default' : 'pointer'};
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+    cursor: not-allowed;
+  `}
 `
 
 export const BusinessHero = styled.div`
