@@ -113,6 +113,9 @@ var OrdersTable = exports.OrdersTable = function OrdersTable(props) {
     value: 'orderNumber',
     content: t('INVOICE_ORDER_NO', 'Order No.')
   }, {
+    value: 'agent',
+    content: t('AGENT', 'Agent')
+  }, {
     value: 'cartGroupId',
     content: t('GROUP_ORDER', 'Group Order')
   }, {
@@ -303,9 +306,7 @@ var OrdersTable = exports.OrdersTable = function OrdersTable(props) {
       visable: !(_column !== null && _column !== void 0 && _column.visable)
     })));
     setAllowColumns(updatedAllowColumns);
-    if (type === 'externalId') {
-      saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)));
-    }
+    saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)));
   };
   var handleClickOrder = function handleClickOrder(order, e) {
     var inValid = !isSelectedOrders && (e.target.closest('.orderCheckBox') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'));
@@ -717,6 +718,17 @@ var OrdersTable = exports.OrdersTable = function OrdersTable(props) {
         }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
         }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)));
+      }
+      if (column === 'agent') {
+        var _order$agent, _order$agent2;
+        return /*#__PURE__*/_react.default.createElement("td", {
+          className: "statusInfo",
+          key: "agentInfo".concat(i, "-").concat(index)
+        }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
+          className: "info"
+        }, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, order === null || order === void 0 || (_order$agent = order.agent) === null || _order$agent === void 0 ? void 0 : _order$agent.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$agent2 = order.agent) === null || _order$agent2 === void 0 ? void 0 : _order$agent2.email))));
       }
       if (column === 'cartGroupId') {
         return /*#__PURE__*/_react.default.createElement("td", {
