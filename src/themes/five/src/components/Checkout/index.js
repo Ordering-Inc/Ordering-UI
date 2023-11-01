@@ -150,8 +150,6 @@ const CheckoutUI = (props) => {
   })
   const [errorsCheckout, setErrorsCheckout] = useState({})
 
-  const isAlsea = ordering.project === 'alsea'
-
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -426,29 +424,6 @@ const CheckoutUI = (props) => {
       setOpenAlertCatering(true)
     }
   }, [hasCateringProducts])
-
-  useEffect(() => {
-    const getEnabledWowPayment = async () => {
-      try {
-        const response = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging'}.ordering.co/alseaplatform/attributes.php`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userCrmId: user?.wow_rewards_user_id,
-            attributeId: '1',
-            value: 1,
-            user_id: user?.id
-          })
-        })
-        await response.json()
-      } catch (err) {
-
-      }
-    }
-    if (user?.wow_rewards_user_id && (!user?.attribute_value || parseInt(user?.attribute_value) === 1)) {
-      getEnabledWowPayment()
-    }
-  }, [])
 
   useEffect(() => {
     events.emit('in-checkout', cart)
