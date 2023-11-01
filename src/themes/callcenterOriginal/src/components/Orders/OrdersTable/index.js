@@ -28,7 +28,8 @@ import {
   Timestatus,
   Timer,
   OrdersCountWrapper,
-  DragTh
+  DragTh,
+  InfoWrapper
 } from './styles'
 
 import { useTheme } from 'styled-components'
@@ -99,6 +100,10 @@ export const OrdersTable = (props) => {
     {
       value: 'orderNumber',
       content: t('INVOICE_ORDER_NO', 'Order No.')
+    },
+    {
+      value: 'agent',
+      content: t('AGENT', 'Agent')
     },
     {
       value: 'cartGroupId',
@@ -263,9 +268,7 @@ export const OrdersTable = (props) => {
       [type]: { ..._column, visable: !_column?.visable }
     }
     setAllowColumns(updatedAllowColumns)
-    if (type === 'externalId') {
-      saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)))
-    }
+    saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)))
   }
 
   const handleClickOrder = (order, e) => {
@@ -704,6 +707,18 @@ export const OrdersTable = (props) => {
                             <StatusInfo>
                               <p className='bold'>{getOrderStatus(order.status)?.value}</p>
                             </StatusInfo>
+                          </td>
+                        )
+                      }
+                      if (column === 'agent') {
+                        return (
+                          <td className='statusInfo' key={`agentInfo${i}-${index}`}>
+                            <InfoWrapper>
+                              <div className='info'>
+                                <p className='bold'>{order?.agent?.name}</p>
+                                <p>{order?.agent?.email}</p>
+                              </div>
+                            </InfoWrapper>
                           </td>
                         )
                       }
