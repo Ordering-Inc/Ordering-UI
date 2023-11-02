@@ -110,6 +110,7 @@ const BusinessHeaderStyled = styled.div`
   .disabled {
     font-size: 16px;
     text-align: center;
+
   }
 
   @media (min-width: 481px) {
@@ -143,6 +144,7 @@ export const BusinessHeaderClosedContainer = styled.div`
       width: 100%;
       line-break: anywhere;
     }
+
 `
 
 export const BusinessTags = styled.div`

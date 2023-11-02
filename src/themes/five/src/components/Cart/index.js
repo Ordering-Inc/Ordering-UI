@@ -453,6 +453,12 @@ const CartUI = (props) => {
                         <td>{parsePrice(cart?.delivery_price_with_discount + getIncludedTaxes(true))}</td>
                       </tr>
                     )}
+                    {cart?.extra_value_checkprice && cart?.extra_value_checkprice > 0 && (
+                      <tr>
+                        <td>{t('EXTRA_VALUE_CHECKPRICE', 'Extra value checkprice')}</td>
+                        <td>{parsePrice(cart?.extra_value_checkprice)}</td>
+                      </tr>
+                    )}
                     {
                       cart?.taxes?.length > 0 && cart?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'delivery_fee').map(tax => (
                         <tr key={tax?.id}>
