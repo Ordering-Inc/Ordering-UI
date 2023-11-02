@@ -185,7 +185,9 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     className: "closed"
   }, t('CLOSED', 'Closed'), (business === null || business === void 0 ? void 0 : business.enabled) === false && "(".concat(t('DISABLED', 'Disabled'), ")"))), (business === null || business === void 0 ? void 0 : business.disabled_reason) && (business === null || business === void 0 ? void 0 : business.enabled) === false && /*#__PURE__*/_react.default.createElement("h2", {
     className: "disabled"
-  }, business === null || business === void 0 ? void 0 : business.disabled_reason)))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, null, !hideBusinessLogo && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, {
+  }, business === null || business === void 0 ? void 0 : business.disabled_reason)))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
+    isCustomerMode: isCustomerMode
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, null, !hideBusinessLogo && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, {
     isSkeleton: isSkeleton,
     isCustomerMode: isCustomerMode
   }, !isSkeleton && (businessLogo || business !== null && business !== void 0 && business.logo || (_theme$images2 = theme.images) !== null && _theme$images2 !== void 0 && (_theme$images2 = _theme$images2.dummies) !== null && _theme$images2 !== void 0 && _theme$images2.businessLogo) ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
@@ -204,7 +206,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     width: 16,
     height: 16
   })))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
-    className: "info"
+    className: "info",
+    isCustomerMode: isCustomerMode
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), /*#__PURE__*/_react.default.createElement(_styles.Medadata, {
