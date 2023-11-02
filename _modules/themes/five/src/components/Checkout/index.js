@@ -149,7 +149,6 @@ var CheckoutUI = function CheckoutUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     errorsCheckout = _useState8[0],
     setErrorsCheckout = _useState8[1];
-  var isAlsea = ordering.project === 'alsea';
   var _useState9 = (0, _react.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
     errorCash = _useState10[0],
@@ -455,53 +454,6 @@ var CheckoutUI = function CheckoutUI(props) {
       setOpenAlertCatering(true);
     }
   }, [hasCateringProducts]);
-  (0, _react.useEffect)(function () {
-    var getEnabledWowPayment = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var response;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging', ".ordering.co/alseaplatform/attributes.php"), {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    userCrmId: user === null || user === void 0 ? void 0 : user.wow_rewards_user_id,
-                    attributeId: '1',
-                    value: 1,
-                    user_id: user === null || user === void 0 ? void 0 : user.id
-                  })
-                });
-              case 3:
-                response = _context2.sent;
-                _context2.next = 6;
-                return response.json();
-              case 6:
-                _context2.next = 10;
-                break;
-              case 8:
-                _context2.prev = 8;
-                _context2.t0 = _context2["catch"](0);
-              case 10:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[0, 8]]);
-      }));
-      return function getEnabledWowPayment() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-    if (user !== null && user !== void 0 && user.wow_rewards_user_id && (!(user !== null && user !== void 0 && user.attribute_value) || parseInt(user === null || user === void 0 ? void 0 : user.attribute_value) === 1)) {
-      getEnabledWowPayment();
-    }
-  }, []);
   (0, _react.useEffect)(function () {
     events.emit('in-checkout', cart);
   }, []);
@@ -953,19 +905,19 @@ var Checkout = function Checkout(props) {
     }
   }, [errors]);
   var getOrder = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(cartId) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(cartId) {
       var _result$order, userCustomer, url, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart, spotNumberFromStorage, _JSON$parse, _JSON$parse2, _cart, _cart$business10, spotNumber, slug;
-      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context3.prev = 0;
+              _context2.prev = 0;
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: true
               }));
               userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
               url = userCustomer ? "".concat(ordering.root, "/carts/").concat(cartId, "?user_id=").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) : "".concat(ordering.root, "/carts/").concat(cartId);
-              _context3.next = 6;
+              _context2.next = 6;
               return fetch(url, {
                 method: 'GET',
                 headers: {
@@ -975,32 +927,32 @@ var Checkout = function Checkout(props) {
                 }
               });
             case 6:
-              response = _context3.sent;
-              _context3.next = 9;
+              response = _context2.sent;
+              _context2.next = 9;
               return response.json();
             case 9:
-              _yield$response$json = _context3.sent;
+              _yield$response$json = _context2.sent;
               result = _yield$response$json.result;
               if (!(result.status === 1 && (_result$order = result.order) !== null && _result$order !== void 0 && _result$order.uuid)) {
-                _context3.next = 16;
+                _context2.next = 16;
                 break;
               }
               handleOrderRedirect(result.order.uuid);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false
               }));
-              _context3.next = 35;
+              _context2.next = 35;
               break;
             case 16:
               if (!(result.status === 2)) {
-                _context3.next = 31;
+                _context2.next = 31;
                 break;
               }
-              _context3.prev = 17;
-              _context3.next = 20;
+              _context2.prev = 17;
+              _context2.next = 20;
               return confirmCart(cartUuid);
             case 20:
-              confirmCartRes = _context3.sent;
+              confirmCartRes = _context2.sent;
               if (confirmCartRes.error) {
                 setAlertState({
                   open: true,
@@ -1015,17 +967,17 @@ var Checkout = function Checkout(props) {
                 loading: false,
                 cart: result
               }));
-              _context3.next = 29;
+              _context2.next = 29;
               break;
             case 26:
-              _context3.prev = 26;
-              _context3.t0 = _context3["catch"](17);
+              _context2.prev = 26;
+              _context2.t0 = _context2["catch"](17);
               setAlertState({
                 open: true,
-                content: [_context3.t0.message]
+                content: [_context2.t0.message]
               });
             case 29:
-              _context3.next = 35;
+              _context2.next = 35;
               break;
             case 31:
               cart = Array.isArray(result) ? null : result;
@@ -1045,24 +997,24 @@ var Checkout = function Checkout(props) {
                 error: cart ? null : result
               }));
             case 35:
-              _context3.next = 40;
+              _context2.next = 40;
               break;
             case 37:
-              _context3.prev = 37;
-              _context3.t1 = _context3["catch"](0);
+              _context2.prev = 37;
+              _context2.t1 = _context2["catch"](0);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
-                error: [_context3.t1.toString()]
+                error: [_context2.t1.toString()]
               }));
             case 40:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3, null, [[0, 37], [17, 26]]);
+      }, _callee2, null, [[0, 37], [17, 26]]);
     }));
     return function getOrder(_x2) {
-      return _ref3.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
   (0, _react.useEffect)(function () {
