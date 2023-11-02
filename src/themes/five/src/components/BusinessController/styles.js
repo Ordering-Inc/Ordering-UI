@@ -100,15 +100,16 @@ const BusinessHeaderStyled = styled.div`
   .closed, .disabled {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 28px;
-    line-height: 42px;
+    font-size: 22px;
+    line-height: 35px;
     opacity: 1;
     position: relative;
     z-index: 2;
   }
 
   .disabled {
-    font-size: 24px;
+    font-size: 16px;
+    text-align: center;
   }
 
   @media (min-width: 481px) {
@@ -136,6 +137,12 @@ export const BusinessHeaderClosedContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    div {
+      text-align: center;
+      width: 100%;
+      line-break: anywhere;
+    }
 `
 
 export const BusinessTags = styled.div`
@@ -188,11 +195,13 @@ export const BusinessContent = styled.div`
   justify-content: space-between;
   max-height: 135px;
   padding: 0 20px 20px 20px;
-  height: calc(100% - 145px);
+  ${({ isCustomerMode }) => !isCustomerMode && css`
+    height: calc(100% - 145px);
 
-  @media (min-width: 481px) {
-    height: calc(100% - 165px);
-  }
+    @media (min-width: 481px) {
+      height: calc(100% - 165px);
+    }
+  `}
 `
 
 export const WrapperBusinessLogo = styled.div`
@@ -265,7 +274,11 @@ export const BusinessLogo = (props) => {
 
 export const BusinessInfo = styled.div`
   display: flex;
-  width: 100%;
+  ${({ isCustomerMode }) => isCustomerMode ? css`
+    width: 90%;
+  ` : css`
+    width: 100%;
+  `}
 `
 
 export const BusinessInfoItem = styled.div`

@@ -195,7 +195,7 @@ const BusinessControllerUI = (props) => {
               </BusinessHeader>
             )}
           </BusinessHero>
-          <BusinessContent>
+          <BusinessContent isCustomerMode={isCustomerMode}>
             <BusinessLogoWrapper>
               {!hideBusinessLogo && (
                 <WrapperBusinessLogo isSkeleton={isSkeleton} isCustomerMode={isCustomerMode}>
@@ -234,7 +234,7 @@ const BusinessControllerUI = (props) => {
                 )}
               </BusinessStarInfo>
             </BusinessLogoWrapper>
-            <BusinessInfo className='info'>
+            <BusinessInfo className='info' isCustomerMode={isCustomerMode}>
               <BusinessInfoItem>
                 <div>
                   {business?.name ? (
