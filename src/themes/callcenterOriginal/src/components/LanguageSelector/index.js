@@ -23,12 +23,17 @@ const LanguageSelectorUI = (props) => {
   )
 
   const transformLanguageToCountry = (currentLanguage) => {
-    const language = currentLanguage.slice(0, 2)?.toUpperCase()
+    const language = currentLanguage?.toUpperCase()
     if (language === 'EN') return 'US'
     if (language === 'AR') return 'AE'
     if (language === 'CA') return 'ES'
     if (language === 'DA') return 'DK'
-    if (language === 'ZH') return 'CN'
+    if (language === 'ZH-CN') return 'CN'
+    if (language === 'JA') return 'JP'
+    if (language === 'EL') return 'GR'
+    if (language === 'HI') return 'IN'
+    if (language === 'ES-419-1') return 'MX'
+    if (language === 'ES-419-2') return 'GT'
     return language
   }
 
