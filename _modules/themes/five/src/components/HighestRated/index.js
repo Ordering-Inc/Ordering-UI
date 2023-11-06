@@ -111,7 +111,7 @@ var HighestRatedUI = function HighestRatedUI(props) {
       key: business.id,
       className: "card",
       business: business,
-      isBusinessOpen: business.open,
+      isBusinessOpen: business.open && (business === null || business === void 0 ? void 0 : business.enabled) !== false,
       handleCustomClick: handleBusinessClick,
       orderType: orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type,
       isCustomLayout: isCustomLayout,
