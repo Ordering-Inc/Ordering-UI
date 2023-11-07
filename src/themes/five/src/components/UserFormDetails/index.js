@@ -51,8 +51,9 @@ export const UserFormDetailsUI = (props) => {
     handleChangeNotifications,
     handlePlaceOrderAsGuest,
     isAllowGuest,
-    isGuest,
-    orderTypeValidationFields
+    isOrderTypeValidationField,
+    checkoutFields,
+    isCheckoutPlace
   } = props
 
   const formMethods = useForm()
@@ -105,8 +106,8 @@ export const UserFormDetailsUI = (props) => {
     handlePlaceOrderAsGuest && handlePlaceOrderAsGuest()
   }
 
-  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
-  const showInputBirthday = validationFields?.fields?.checkout?.birthdate?.enabled ?? false
+  const showInputPhoneNumber = isOrderTypeValidationField ? checkoutFields?.find(field => field?.validation_field?.code === 'mobile_phone')?.enabled : (validationFields?.fields?.checkout?.cellphone?.enabled ?? false)
+  const showInputBirthday = isOrderTypeValidationField ? checkoutFields?.find(field => field?.validation_field?.code === 'birthdate')?.enabled : (validationFields?.fields?.checkout?.birthdate?.enabled ?? false)
 
   const setUserCellPhone = (isEdit = false) => {
     if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
@@ -132,28 +133,35 @@ export const UserFormDetailsUI = (props) => {
   }
 
   const onSubmit = () => {
-    const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
+    const isPhoneNumberValid = userPhoneNumber && showInputPhoneNumber ? isValidPhoneNumber : true
     const requiredPhone = (user?.guest_id && requiredFields?.includes?.('cellphone')) || (validationFields?.fields?.checkout?.cellphone?.enabled && validationFields?.fields?.checkout?.cellphone?.required)
+    const content = []
+    if (requiredFields?.includes?.('birthdate') && !birthdate) {
+      content.push(t('VALIDATION_ERROR_BIRTHDATE_REQUIRED', 'Birthdate is required'))
+    }
     if (!userPhoneNumber &&
       (requiredPhone || configs?.verification_phone_required?.value === '1')
     ) {
+      content.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.'))
       setAlertState({
         open: true,
-        content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.')]
+        content: content
       })
       return
     }
     if (!isPhoneNumberValid && userPhoneNumber) {
       if (user?.country_phone_code) {
+        content.push(t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid'))
         setAlertState({
           open: true,
-          content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
+          content: content
         })
         return
       }
+      content.push(t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid'))
       setAlertState({
         open: true,
-        content: [t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')]
+        content: content
       })
       return
     }
@@ -208,9 +216,6 @@ export const UserFormDetailsUI = (props) => {
   const handleChangeInputEmail = (e) => {
     handleChangeInput({ target: { name: 'email', value: e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '') } })
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
-    if (emailInput.current) {
-      emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
-    }
   }
 
   const showFieldWithTheme = (name) => {
@@ -260,33 +265,12 @@ export const UserFormDetailsUI = (props) => {
   }, [user, isEdit])
 
   useEffect(() => {
-    if (!validationFields.loading && emailInput.current) {
-      formMethods.setValue('email', formState?.result?.result
-        ? formState?.result?.result?.email
-        : formState?.changes?.email ?? (user && user?.email) ?? '')
-    }
-  }, [validationFields, emailInput.current])
-
-  useEffect(() => {
     if (!validationFields.loading && birthdate) {
       formMethods.setValue('birthdate', formState?.result?.result
         ? formState?.result?.result?.birthdate
         : formState?.changes?.birthdate ?? (user && user?.birthdate) ?? '')
     }
   }, [validationFields, birthdate])
-
-  useEffect(() => {
-    if (requiredFields) return
-    formMethods.register('email', {
-      required: isRequiredField('email')
-        ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
-        : null,
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-      }
-    })
-  }, [formMethods])
 
   useEffect(() => {
     if (isChanged && userPhoneNumber && isValidPhoneNumber && formState?.changes?.country_phone_code && formState?.changes?.cellphone && configs?.verification_phone_required?.value === '1') {
@@ -330,12 +314,12 @@ export const UserFormDetailsUI = (props) => {
               props.beforeMidComponents?.map((BeforeMidComponents, i) => (
                 <BeforeMidComponents key={i} {...props} />))
             }
-            {sortInputFields({ values: isGuest ? orderTypeValidationFields : validationFields?.fields?.checkout }).map(item => {
+            {sortInputFields({ values: isOrderTypeValidationField ? checkoutFields : validationFields?.fields?.checkout }).map(item => {
               const field = item?.validation_field || item
               return (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
-                    (isGuest ? item?.enabled : showField && showField(field.code)) && ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields) && (
+                    ((isOrderTypeValidationField ? item?.enabled : (showField && showField(field.code))) && ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields || !isCheckoutPlace)) && (
                       <InputGroup>
                         <p>{t(field.code.toUpperCase(), field?.name)}</p>
                         <Input
@@ -348,15 +332,18 @@ export const UserFormDetailsUI = (props) => {
                           placeholder={t(field.code.toUpperCase(), field?.name)}
                           defaultValue={formState?.changes[field.code] ?? (user && user[field.code]) ?? ''}
                           onChange={handleChangeInputEmail}
-                          ref={(e) => {
-                            emailInput.current = e
-                          }}
+                          ref={
+                            formMethods.register({
+                              required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+                              pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                            })
+                          }
                           autoComplete='off'
                         />
                       </InputGroup>
                     )
                   ) : (
-                    (isGuest ? item?.enabled : (showField && showField(field.code)) && ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields)) && (
+                    ((isOrderTypeValidationField ? item?.enabled : (showField && showField(field.code))) && ((requiredFields && requiredFields?.includes?.(field.code)) || !requiredFields || !isCheckoutPlace)) && (
                       <InputGroup>
                         <p>{t(field.code.toUpperCase(), field?.name)}</p>
                         <Input
@@ -382,33 +369,44 @@ export const UserFormDetailsUI = (props) => {
                 </React.Fragment>
               )
             })}
-            {((!user?.guest_id && showInputBirthday) || (user?.guest_id && requiredFields?.includes?.('birthdate'))) && (
-              <InputPhoneNumberWrapper>
-                <p>{t('BIRTHDATE', 'Birthdate')}</p>
-                <Input
-                  borderBottom
-                  className='form'
-                  value={birthdate ? moment(birthdate).format('YYYY/MM/DD') : ''}
-                  autoComplete='off'
-                  onFocus={() => setOpenCalendar(true)}
-                />
-                {openCalendar && (
-                  <DatePickerUI value={birthdate} onChange={_handleChangeDate} name={'birthdate'} />
-                )}
-              </InputPhoneNumberWrapper>
-            )}
-            {((!user?.guest_id && !!showInputPhoneNumber) || (user?.guest_id && requiredFields?.includes?.('cellphone'))) && showCustomerCellphone && ((requiredFields && requiredFields?.includes?.('cellphone')) || !requiredFields) && (
-              <InputPhoneNumberWrapper>
-                <p>{t('PHONE', 'Phone')}</p>
-                <InputPhoneNumber
-                  user={user}
-                  value={userPhoneNumber}
-                  setValue={handleChangePhoneNumber}
-                  handleIsValid={setIsValidPhoneNumber}
-                  disabled={!isEdit}
-                />
-              </InputPhoneNumberWrapper>
-            )}
+            {((!user?.guest_id && showInputBirthday) || (isOrderTypeValidationField || user?.guest_id)) &&
+              showInputBirthday &&
+              ((requiredFields && requiredFields?.includes?.('birthdate')) || !requiredFields || !isCheckoutPlace) &&
+              (
+                <InputPhoneNumberWrapper>
+                  <p>{t('BIRTHDATE', 'Birthdate')}</p>
+                  <Input
+                    borderBottom
+                    className='form'
+                    value={birthdate ? moment(birthdate).format('YYYY/MM/DD') : ''}
+                    autoComplete='off'
+                    onFocus={() => setOpenCalendar(true)}
+                    ref={formMethods.register({
+                      required: isRequiredField('birthdate')
+                        ? t('VALIDATION_ERROR_BIRTHDATE_REQUIRED', 'Birthdate is required')
+                        : null
+                    })}
+                  />
+                  {openCalendar && (
+                    <DatePickerUI value={birthdate} onChange={_handleChangeDate} name={'birthdate'} />
+                  )}
+                </InputPhoneNumberWrapper>
+              )}
+            {((!user?.guest_id && !!showInputPhoneNumber) || (isOrderTypeValidationField || user?.guest_id)) &&
+              showCustomerCellphone &&
+              ((requiredFields && requiredFields?.includes?.('cellphone')) || !requiredFields || !isCheckoutPlace) &&
+              (
+                <InputPhoneNumberWrapper>
+                  <p>{t('PHONE', 'Phone')}</p>
+                  <InputPhoneNumber
+                    user={user}
+                    value={userPhoneNumber}
+                    setValue={handleChangePhoneNumber}
+                    handleIsValid={setIsValidPhoneNumber}
+                    disabled={!isEdit}
+                  />
+                </InputPhoneNumberWrapper>
+              )}
             {!isCheckout && showCustomerPassword && !requiredFields && !isCustomerMode && (
               <InputGroup>
                 <p>{t('PASSWORD', 'Password')}</p>
