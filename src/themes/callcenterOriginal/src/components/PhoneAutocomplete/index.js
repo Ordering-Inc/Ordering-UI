@@ -139,7 +139,7 @@ const PhoneAutocompleteUI = (props) => {
       setCustomerState({ ...customerState, result: user })
       setOpenModal({ ...openModal, signup: false, customer: true })
     } else {
-      setOpenModal({ ...openModal, error: true })
+      setOpenModal({ ...openModal, signup: true })
     }
   }
 
