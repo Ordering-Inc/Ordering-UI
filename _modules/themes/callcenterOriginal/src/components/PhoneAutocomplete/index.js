@@ -219,7 +219,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       }));
     } else {
       setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
-        error: true
+        signup: true
       }));
     }
   };
