@@ -3801,9 +3801,9 @@ async@^2.6.4:
     lodash "^4.17.14"
 
 async@^3.2.0, async@^3.2.3:
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/async/-/async-3.2.4.tgz#2d22e00f8cddeb5fde5dd33522b56d1cf569a81c"
-  integrity sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.5.tgz#ebd52a8fdaf7a2289a24df399f8d8485c8a46b66"
+  integrity sha512-baNZyqaaLhyLVKm/DlvdW051MSgO6b8eVfIezl9E5PqWxFgzLm/wQntEW4zOytVburDEr0JlALEpdOFwvErLsg==
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -4536,9 +4536,9 @@ camelize@^1.0.0:
   integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
 
 caniuse-lite@^1.0.30001541:
-  version "1.0.30001559"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001559.tgz#95a982440d3d314c471db68d02664fb7536c5a30"
-  integrity sha512-cPiMKZgqgkg5LY3/ntGeLFUpi6tzddBNS58A4tnTgQw1zON7u2sZMU7SzOeVH4tj20++9ggL+V6FDOFMTaFFYA==
+  version "1.0.30001561"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001561.tgz#752f21f56f96f1b1a52e97aae98c57c562d5d9da"
+  integrity sha512-NTt0DNoKe958Q0BE0j0c1V9jbUzhBxHIEJy7asmGrpE0yG63KTV7PLHPnK2E1O9RsQrQ081I3NLuXGS6zht3cw==
 
 canvg@^3.0.6:
   version "3.0.10"
@@ -5724,9 +5724,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.535:
-  version "1.4.573"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.573.tgz#aa6e5edf86448bb9398f529357abcc6a17b6341d"
-  integrity sha512-tzxxvKDTO3V5vzN2F+3v9jrK9gEbCdf1YYJUx/zVq1cyzyh+x1ddeYNNWh0ZS2ETNCVK3+Pns1LHIBq4w20X2Q==
+  version "1.4.576"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.576.tgz#0c6940fdc0d60f7e34bd742b29d8fa847c9294d1"
+  integrity sha512-yXsZyXJfAqzWk1WKryr0Wl0MN2D47xodPvEEwlVePBnhU5E7raevLQR+E6b9JAD3GfL/7MbAL9ZtWQQPcLx7wA==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -6340,9 +6340,9 @@ fast-deep-equal@^3.1.1:
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
 
 fast-glob@^3.1.1, fast-glob@^3.2.4, fast-glob@^3.2.9:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.1.tgz#784b4e897340f3dbbef17413b3f11acf03c874c4"
-  integrity sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg==
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.2.tgz#a904501e57cfdd2ffcded45e99a54fef55e46129"
+  integrity sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==
   dependencies:
     "@nodelib/fs.stat" "^2.0.2"
     "@nodelib/fs.walk" "^1.2.3"
@@ -7971,9 +7971,9 @@ istanbul-lib-coverage@3.0.0:
   integrity sha512-UiUIqxMgRDET6eR+o5HbfRYP1l0hqkWOs7vNxC/mggutCMUIhWMm8gAHb8tHlyfD3/l6rlgNA5cKdDzEAf6hEg==
 
 istanbul-lib-coverage@^3.0.0, istanbul-lib-coverage@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-3.2.0.tgz#189e7909d0a39fa5a3dfad5b03f71947770191d3"
-  integrity sha512-eOeJ5BHCmHYvQK7xt9GkdHuzuCGS1Y6g9Gvnx3Ym33fz/HpLRYxiS0wHNr+m/MBC8B647Xt608vCDEvhl9c6Mw==
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-3.2.1.tgz#c680fd1544600460367af5811866c34c44c6f3b1"
+  integrity sha512-opCrKqbthmq3SKZ10mFMQG9dk3fTa3quaOLD35kJa5ejwZHd9xAr+kLuziiZz2cG32s4lMZxNdmdcEQnTDP4+g==
 
 istanbul-lib-hook@^3.0.0:
   version "3.0.0"
@@ -9290,7 +9290,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/64f223c7e266939b9318843f0e51b60aca61482e"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a9275281cfae094390226c09a0f898c937615c7a"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -11841,9 +11841,9 @@ tiny-warning@^1.0.0:
   integrity sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==
 
 tlds@^1.199.0:
-  version "1.244.0"
-  resolved "https://registry.yarnpkg.com/tlds/-/tlds-1.244.0.tgz#b25468d18c53633706081434a337786f695d7662"
-  integrity sha512-nkacnxHmN5USM/cpmPx29sc2/AnmvUA9han0tNtAJ9yOhh4bPmZm4dGhyg/isWBIES4a70mjd0Q8FSaof6Vf0g==
+  version "1.245.0"
+  resolved "https://registry.yarnpkg.com/tlds/-/tlds-1.245.0.tgz#afd4c0c33be7227f8f2d4578573fc922b839ba84"
+  integrity sha512-fbSQFQr8f41/e9q9IoKKVv7CUFvvE3TVJo7m0JQJZcf7jOOXRRf9DIP4Uf04aovYGKG686OvtV4ZrNY1bOz3aA==
 
 tmp@^0.0.33:
   version "0.0.33"

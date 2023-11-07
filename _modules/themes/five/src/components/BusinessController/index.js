@@ -160,8 +160,10 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     isCustomerMode: isCustomerMode && hasInformationLength,
     firstCard: firstCard,
     minWidthEnabled: minWidthEnabled,
-    businessRows: businessRows
+    businessRows: businessRows,
+    disabled: (business === null || business === void 0 ? void 0 : business.enabled) === false
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessCard, {
+    disabled: (business === null || business === void 0 ? void 0 : business.enabled) === false,
     isSkeleton: isSkeleton,
     onClick: function onClick(e) {
       return !isSkeleton && handleClick && handleBusinessClick(e);
@@ -179,9 +181,13 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     isClosed: !isBusinessOpen
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessTags, null, (businessFeatured !== null && businessFeatured !== void 0 ? businessFeatured : business === null || business === void 0 ? void 0 : business.featured) && !hideBusinessFavoriteBadge && /*#__PURE__*/_react.default.createElement("span", {
     className: "crown"
-  }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), !hideBusinessOffer && !isCustomLayout && (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.preorder_status_enabled) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1' && /*#__PURE__*/_react.default.createElement("div", null, !!getBusinessOffer(businessOffers !== null && businessOffers !== void 0 ? businessOffers : business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, t('DISCOUNT', 'Discount'), ' ', getBusinessOffer(businessOffers !== null && businessOffers !== void 0 ? businessOffers : business === null || business === void 0 ? void 0 : business.offers)), !isBusinessOpen && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'PreOrder')))), !!businessWillCloseSoonMinutes && (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.moment) === null && isBusinessOpen && /*#__PURE__*/_react.default.createElement("h1", null, businessWillCloseSoonMinutes, " ", t('MINUTES_TO_CLOSE', 'minutes to close')), !isBusinessOpen && /*#__PURE__*/_react.default.createElement("h1", {
+  }, /*#__PURE__*/_react.default.createElement(_FaCrown.default, null)), !hideBusinessOffer && !isCustomLayout && (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.preorder_status_enabled) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1' && /*#__PURE__*/_react.default.createElement("div", null, !!getBusinessOffer(businessOffers !== null && businessOffers !== void 0 ? businessOffers : business === null || business === void 0 ? void 0 : business.offers) && /*#__PURE__*/_react.default.createElement("span", null, t('DISCOUNT', 'Discount'), ' ', getBusinessOffer(businessOffers !== null && businessOffers !== void 0 ? businessOffers : business === null || business === void 0 ? void 0 : business.offers)), !isBusinessOpen && /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'PreOrder')))), /*#__PURE__*/_react.default.createElement(_styles.BusinessHeaderClosedContainer, null, /*#__PURE__*/_react.default.createElement("div", null, !!businessWillCloseSoonMinutes && (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.moment) === null && isBusinessOpen && (business === null || business === void 0 ? void 0 : business.enabled) !== false && /*#__PURE__*/_react.default.createElement("h1", null, businessWillCloseSoonMinutes, " ", t('MINUTES_TO_CLOSE', 'minutes to close')), !isBusinessOpen && /*#__PURE__*/_react.default.createElement("h1", {
     className: "closed"
-  }, t('CLOSED', 'Closed')))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, null, !hideBusinessLogo && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, {
+  }, t('CLOSED', 'Closed'), (business === null || business === void 0 ? void 0 : business.enabled) === false && "(".concat(t('DISABLED', 'Disabled'), ")"))), (business === null || business === void 0 ? void 0 : business.disabled_reason) && (business === null || business === void 0 ? void 0 : business.enabled) === false && /*#__PURE__*/_react.default.createElement("h2", {
+    className: "disabled"
+  }, business === null || business === void 0 ? void 0 : business.disabled_reason)))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, {
+    isCustomerMode: isCustomerMode
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogoWrapper, null, !hideBusinessLogo && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, {
     isSkeleton: isSkeleton,
     isCustomerMode: isCustomerMode
   }, !isSkeleton && (businessLogo || business !== null && business !== void 0 && business.logo || (_theme$images2 = theme.images) !== null && _theme$images2 !== void 0 && (_theme$images2 = _theme$images2.dummies) !== null && _theme$images2 !== void 0 && _theme$images2.businessLogo) ? /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
@@ -200,7 +206,8 @@ var BusinessControllerUI = function BusinessControllerUI(props) {
     width: 16,
     height: 16
   })))), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
-    className: "info"
+    className: "info",
+    isCustomerMode: isCustomerMode
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, business !== null && business !== void 0 && business.name ? /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), /*#__PURE__*/_react.default.createElement(_styles.Medadata, {

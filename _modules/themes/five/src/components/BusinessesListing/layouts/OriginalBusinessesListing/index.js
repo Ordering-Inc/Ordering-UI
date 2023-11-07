@@ -447,7 +447,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       key: business.id,
       className: "card",
       business: business,
-      isBusinessOpen: business.open,
+      isBusinessOpen: business.open && (business === null || business === void 0 ? void 0 : business.enabled) !== false,
       handleCustomClick: handleBusinessClick,
       orderType: orderState === null || orderState === void 0 || (_orderState$options18 = orderState.options) === null || _orderState$options18 === void 0 ? void 0 : _orderState$options18.type,
       isCustomLayout: isCustomLayout,
