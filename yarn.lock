@@ -3188,9 +3188,9 @@
   integrity sha512-h4lTMgMJctJybDp8CQrxTUiiYmedihHWkjnF/8Pxseu2S6Nlfcy8kwboQ8yejh456rP2yWoEVm1sS/FVsfM48w==
 
 "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.8":
-  version "7.0.14"
-  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.14.tgz#74a97a5573980802f32c8e47b663530ab3b6b7d1"
-  integrity sha512-U3PUjAudAdJBeC2pgN8uTIKgxrb4nlDF3SF0++EldXQvQBGkpFZMSnwQiIoDU77tv45VgNkl/L4ouD+rEomujw==
+  version "7.0.15"
+  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
+  integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
 "@types/long@^4.0.1":
   version "4.0.2"
@@ -3215,14 +3215,14 @@
   integrity sha512-5ImO01Fb8YsEOYpV+aeyGYztcYcjGsBvN4D7G5r1ef2cuQOpymjWNQi5V0rKHE6PC2ru3HkoUr/Br2/8GUA84w==
 
 "@types/parse-json@^4.0.0":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.1.tgz#27f7559836ad796cea31acb63163b203756a5b4e"
-  integrity sha512-3YmXzzPAdOTVljVMkTMBdBEvlOLg2cDQaDhnnhT3nT9uDbnJzjWhKlzb+desT12Y7tGqaN6d+AbozcKzyL36Ng==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.2.tgz#5950e50960793055845e956c427fc2b0d70c5239"
+  integrity sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==
 
 "@types/raf@^3.4.0":
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/@types/raf/-/raf-3.4.2.tgz#4e2ea094fcce9ed693cd236e530c0c88f2e09e68"
-  integrity sha512-sM4HyDVlDFl4goOXPF+g9nNHJFZQGot+HgySjM4cRjqXzjdatcEvYrtG4Ia8XumR9T6k8G2tW9B7hnUj51Uf0A==
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@types/raf/-/raf-3.4.3.tgz#85f1d1d17569b28b8db45e16e996407a56b0ab04"
+  integrity sha512-c4YAvMedbPZ5tEyxzQdMoOhhJ4RD3rngZIdwC2/qDN3d7JpEhB6fiBRKVY1lg5B7Wk+uPBjn5f39j1/2MY1oOw==
 
 "@types/resolve@1.17.1":
   version "1.17.1"
@@ -3237,9 +3237,9 @@
   integrity sha512-IFQTJARgMUBF+xVd2b+hIgXWrZEjND3vJtRCvIelcFB5SIXfjV4bOHbHJ0eXKh+0COrBRc8MqteKAz/j88rE0A==
 
 "@types/sizzle@^2.3.2":
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.5.tgz#d93dd29cdcd5801d90be968073b09a6b370780e4"
-  integrity sha512-tAe4Q+OLFOA/AMD+0lq8ovp8t3ysxAOeaScnfNdZpUxaGl51ZMDEITxkvFl1STudQ58mz6gzVGl9VhMKhwRnZQ==
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.6.tgz#e39b7123dac4631001939bd4c2a26d46010f2275"
+  integrity sha512-m04Om5Gz6kbjUwAQ7XJJQ30OdEFsSmAVsvn4NYwcTRyMVpKKa1aPuESw1n2CxS5fYkOQv3nHgDKeNa8e76fUkw==
 
 "@types/source-list-map@*":
   version "0.1.4"
@@ -5724,9 +5724,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.535:
-  version "1.4.576"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.576.tgz#0c6940fdc0d60f7e34bd742b29d8fa847c9294d1"
-  integrity sha512-yXsZyXJfAqzWk1WKryr0Wl0MN2D47xodPvEEwlVePBnhU5E7raevLQR+E6b9JAD3GfL/7MbAL9ZtWQQPcLx7wA==
+  version "1.4.577"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.577.tgz#a732f11cf4532be96e5e3f1197dcda54c2cec7ad"
+  integrity sha512-/5xHPH6f00SxhHw6052r+5S1xO7gHNc89hV7tqlvnStvKbSrDqc/u6AlwPvVWWNj+s4/KL6T6y8ih+nOY0qYNA==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -9290,7 +9290,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a9275281cfae094390226c09a0f898c937615c7a"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a8b28a59b87570e8a64d83175c40b27d9f9f8b3c"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
