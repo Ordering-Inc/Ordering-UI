@@ -7971,9 +7971,9 @@ istanbul-lib-coverage@3.0.0:
   integrity sha512-UiUIqxMgRDET6eR+o5HbfRYP1l0hqkWOs7vNxC/mggutCMUIhWMm8gAHb8tHlyfD3/l6rlgNA5cKdDzEAf6hEg==
 
 istanbul-lib-coverage@^3.0.0, istanbul-lib-coverage@^3.2.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-3.2.1.tgz#c680fd1544600460367af5811866c34c44c6f3b1"
-  integrity sha512-opCrKqbthmq3SKZ10mFMQG9dk3fTa3quaOLD35kJa5ejwZHd9xAr+kLuziiZz2cG32s4lMZxNdmdcEQnTDP4+g==
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-3.2.2.tgz#2d166c4b0644d43a39f04bf6c2edd1e585f31756"
+  integrity sha512-O8dpsF+r0WV/8MNRKfnmrtCWhuKjxrq2w+jpzBL5UZKTi2LeVWnWOmWRxFlesJONmc+wLAGvKQZEOanko0LFTg==
 
 istanbul-lib-hook@^3.0.0:
   version "3.0.0"
@@ -9290,7 +9290,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/a8b28a59b87570e8a64d83175c40b27d9f9f8b3c"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/891a4a1fa01a7fd50e4d2428680721a5d93eedc1"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

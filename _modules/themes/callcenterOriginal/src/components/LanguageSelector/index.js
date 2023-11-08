@@ -35,13 +35,17 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     return a.content > b.content ? 1 : b.content > a.content ? -1 : 0;
   });
   var transformLanguageToCountry = function transformLanguageToCountry(currentLanguage) {
-    var _currentLanguage$slic;
-    var language = (_currentLanguage$slic = currentLanguage.slice(0, 2)) === null || _currentLanguage$slic === void 0 ? void 0 : _currentLanguage$slic.toUpperCase();
+    var language = currentLanguage === null || currentLanguage === void 0 ? void 0 : currentLanguage.toUpperCase();
     if (language === 'EN') return 'US';
     if (language === 'AR') return 'AE';
     if (language === 'CA') return 'ES';
     if (language === 'DA') return 'DK';
-    if (language === 'ZH') return 'CN';
+    if (language === 'ZH-CN') return 'CN';
+    if (language === 'JA') return 'JP';
+    if (language === 'EL') return 'GR';
+    if (language === 'HI') return 'IN';
+    if (language === 'ES-419-1') return 'MX';
+    if (language === 'ES-419-2') return 'GT';
     return language;
   };
   return _languages && _languages.length > 1 ? /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("img", {
