@@ -200,7 +200,7 @@ const OrderDetailsUI = (props) => {
 
   const handleOpenReview = () => {
     if (!order?.review && !isOrderReviewed) setReviewStatus({ order: true, product: false, driver: false, professional: false })
-    else if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false, professional: false })
+    else if (!isProductReviewed && order?.customer_id && order?.paymethod_id) setReviewStatus({ order: false, product: true, driver: false, professional: false })
     else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true, professional: false })
     else if (isService && !isProReviewed) setReviewStatus({ order: false, product: false, driver: false, professional: true })
     else {
@@ -216,7 +216,7 @@ const OrderDetailsUI = (props) => {
   }
 
   const closeReviewOrder = () => {
-    if (!isProductReviewed) setReviewStatus({ order: false, product: true, driver: false, professional: false })
+    if (!isProductReviewed && order?.customer_id && order?.paymethod_id) setReviewStatus({ order: false, product: true, driver: false, professional: false })
     else if (order?.driver && !order?.user_review && !isDriverReviewed) setReviewStatus({ order: false, product: false, driver: true, professional: false })
     else handleCloseReivew()
   }
