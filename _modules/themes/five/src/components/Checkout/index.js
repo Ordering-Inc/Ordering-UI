@@ -104,7 +104,9 @@ var CheckoutUI = function CheckoutUI(props) {
     _useOrder2$ = _useOrder2[0],
     options = _useOrder2$.options,
     loading = _useOrder2$.loading,
-    refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
+    _useOrder2$2 = _useOrder2[1],
+    refreshOrderOptions = _useOrder2$2.refreshOrderOptions,
+    applyOffer = _useOrder2$2.applyOffer;
   var _useApi = (0, _orderingComponents.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
@@ -463,6 +465,19 @@ var CheckoutUI = function CheckoutUI(props) {
       events.off('cart_placed', handleCartPlaced);
     };
   }, []);
+  (0, _react.useEffect)(function () {
+    var _configs$advanced_off2;
+    if (!isApplyMasterCoupon || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay_mastercard' || cartState.loading) return;
+    if (configs !== null && configs !== void 0 && (_configs$advanced_off2 = configs.advanced_offers_module) !== null && _configs$advanced_off2 !== void 0 && _configs$advanced_off2.value && (cart === null || cart === void 0 ? void 0 : cart.offers.length) === 0 && (cart === null || cart === void 0 ? void 0 : cart.paymethod_id) === (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id)) {
+      var dataOffer = {
+        business_id: cart === null || cart === void 0 ? void 0 : cart.business_id,
+        user_id: cart === null || cart === void 0 ? void 0 : cart.user_id,
+        offer_id: parseInt(t('MARKETPLACE_OFFER_ID_MASTERCARD', '4432')),
+        force: true
+      };
+      applyOffer(dataOffer);
+    }
+  }, [isApplyMasterCoupon, paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway, cart === null || cart === void 0 ? void 0 : cart.paymethod_id]);
   var CartComponent = layout === 'pfchangs' ? _pfchangs2.Cart : _Cart.Cart;
   var UserDetailsComponent = layout === 'pfchangs' ? _pfchangs.UserDetails : _UserDetails.UserDetails;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowDeUnaCheckout ? /*#__PURE__*/_react.default.createElement(_styles.IframeMainContainer, null, layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.slug) && /*#__PURE__*/_react.default.createElement(_styles.GoToMenu, {
