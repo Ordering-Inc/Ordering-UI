@@ -279,7 +279,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       product: false,
       driver: false,
       professional: false
-    });else if (!isProductReviewed) setReviewStatus({
+    });else if (!isProductReviewed && order !== null && order !== void 0 && order.customer_id && order !== null && order !== void 0 && order.paymethod_id) setReviewStatus({
       order: false,
       product: true,
       driver: false,
@@ -310,7 +310,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setIsReviewOpen(false);
   };
   var closeReviewOrder = function closeReviewOrder() {
-    if (!isProductReviewed) setReviewStatus({
+    if (!isProductReviewed && order !== null && order !== void 0 && order.customer_id && order !== null && order !== void 0 && order.paymethod_id) setReviewStatus({
       order: false,
       product: true,
       driver: false,
