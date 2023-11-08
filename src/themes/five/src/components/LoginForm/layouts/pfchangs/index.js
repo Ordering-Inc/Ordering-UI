@@ -110,6 +110,8 @@ const LoginFormUI = (props) => {
   const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
   const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
   const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
+  const showWhatsAppOtp = configs?.otp_whatsapp_enabled?.value === '1' || configs?.otp_whatsapp_enabled?.value === true
+  const showSmsOtp = configs?.otp_cellphone_enabled?.value === '1' || configs?.otp_cellphone_enabled?.value === true
 
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
@@ -444,7 +446,7 @@ const LoginFormUI = (props) => {
               </>
             ) : (
               <WrapperButtons>
-                {(!willVerifyOtpState &&
+                {(!willVerifyOtpState && showWhatsAppOtp &&
                   <Button
                     color='primary'
                     onClick={formMethods.handleSubmit(() => onSubmit('whatsapp'))}
@@ -458,7 +460,7 @@ const LoginFormUI = (props) => {
                         : t('LOGIN', 'Login')}
                   </Button>
                 )}
-                {(!willVerifyOtpState &&
+                {(!willVerifyOtpState && showSmsOtp &&
                   <Button
                     color='primary'
                     onClick={formMethods.handleSubmit(() => onSubmit('sms'))}

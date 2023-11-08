@@ -88,6 +88,9 @@ const SignUpFormUI = (props) => {
 
   const showInputPhoneNumber = (validationFields?.fields?.checkout?.cellphone?.enabled ?? false) || configs?.verification_phone_required?.value === '1'
 
+  const showWhatsAppOtp = configs?.otp_whatsapp_enabled?.value === '1' || configs?.otp_whatsapp_enabled?.value === true
+  const showSmsOtp = configs?.otp_cellphone_enabled?.value === '1' || configs?.otp_cellphone_enabled?.value === true
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -567,22 +570,26 @@ const SignUpFormUI = (props) => {
           <SendCodeContainer>
             <h2>{t('WILL_SEND_CODE_CONFIRM_PHONE', 'We will send you a code to confirm your cellphone')}</h2>
             <WrapperButtons>
-              <Button
-                color='primary'
-                onClick={() => openVerifyState('whatsapp')}
-                disabled={formState.loading || checkPhoneCodeState?.loading}
-              >
-                <AiOutlineWhatsApp />
-                {t('WHATSAPP', 'Whatsapp')}
-              </Button>
-              <Button
-                color='primary'
-                onClick={() => openVerifyState('sms')}
-                disabled={formState.loading || checkPhoneCodeState?.loading}
-              >
-                <FaSms />
-                {t('SMS', 'Sms')}
-              </Button>
+              {showWhatsAppOtp && (
+                <Button
+                  color='primary'
+                  onClick={() => openVerifyState('whatsapp')}
+                  disabled={formState.loading || checkPhoneCodeState?.loading}
+                >
+                  <AiOutlineWhatsApp />
+                  {t('WHATSAPP', 'Whatsapp')}
+                </Button>
+              )}
+              {showSmsOtp && (
+                <Button
+                  color='primary'
+                  onClick={() => openVerifyState('sms')}
+                  disabled={formState.loading || checkPhoneCodeState?.loading}
+                >
+                  <FaSms />
+                  {t('SMS', 'Sms')}
+                </Button>
+              )}
             </WrapperButtons>
           </SendCodeContainer>
         </Modal>
