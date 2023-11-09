@@ -46,7 +46,7 @@ var mapConfigs = {
   }
 };
 var MultiCheckoutUI = function MultiCheckoutUI(props) {
-  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _cartGroup$result2, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _loyaltyPlansState$re2, _creditPointGeneralPl, _creditPointGeneralPl2, _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _theme$colors, _theme$colors$split, _configs$google_maps_, _customerState$user, _cartGroup$result3, _cartGroup$result4, _validationFields$fie5, _configs$multi_busine2, _validationFields$fie6, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _configs$multi_busine6, _configs$multi_busine7, _customerState$user2;
+  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _cartGroup$result2, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _loyaltyPlansState$re2, _creditPointGeneralPl, _creditPointGeneralPl2, _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _theme$colors, _theme$colors$split, _orderState$options6, _configs$google_maps_, _customerState$user, _cartGroup$result3, _cartGroup$result4, _validationFields$fie, _configs$multi_busine2, _validationFields$fie2, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _configs$multi_busine6, _configs$multi_busine7, _customerState$user2;
   var placing = props.placing,
     isCustomerMode = props.isCustomerMode,
     openCarts = props.openCarts,
@@ -61,7 +61,8 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     cartUuid = props.cartUuid,
     totalCartsFee = props.totalCartsFee,
     walletState = props.walletState,
-    handleSearchRedirect = props.handleSearchRedirect;
+    handleSearchRedirect = props.handleSearchRedirect,
+    checkoutFieldsState = props.checkoutFieldsState;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -79,7 +80,9 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     validationFields = _useValidationFields2[0];
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 2),
-    user = _useSession2[0].user,
+    _useSession2$ = _useSession2[0],
+    user = _useSession2$.user,
+    userLoading = _useSession2$.loading,
     login = _useSession2[1].login;
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
@@ -141,6 +144,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 || (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (cart === null || cart === void 0 ? void 0 : cart.valid_schedule) && (cart === null || cart === void 0 ? void 0 : cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.valid_maximum) && (cart === null || cart === void 0 ? void 0 : cart.valid_minimum) && (cart === null || cart === void 0 ? void 0 : cart.wallets);
   })) || null || [];
   var isDisablePlaceOrderButton = (cartGroup === null || cartGroup === void 0 ? void 0 : cartGroup.loading) || !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_id || paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.wallet_id) && (cartGroup === null || cartGroup === void 0 || (_cartGroup$result = cartGroup.result) === null || _cartGroup$result === void 0 ? void 0 : _cartGroup$result.balance) > 0 || (paymethodSelected === null || paymethodSelected === void 0 || (_paymethodSelected$pa = paymethodSelected.paymethod) === null || _paymethodSelected$pa === void 0 ? void 0 : _paymethodSelected$pa.gateway) === 'stripe' && !(paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.paymethod_data) || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe' && (cardList === null || cardList === void 0 || (_cardList$cards = cardList.cards) === null || _cardList$cards === void 0 ? void 0 : _cardList$cards.length) === 0 || walletCarts.length > 0;
+  var notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes', 'comments'];
   var isMultiDriverTips = (configs === null || configs === void 0 || (_configs$checkout_mul = configs.checkout_multi_business_enabled) === null || _configs$checkout_mul === void 0 ? void 0 : _configs$checkout_mul.value) === '1';
   var driverTipsOptions = typeof (configs === null || configs === void 0 || (_configs$driver_tip_o = configs.driver_tip_options) === null || _configs$driver_tip_o === void 0 ? void 0 : _configs$driver_tip_o.value) === 'string' ? JSON.parse(configs === null || configs === void 0 || (_configs$driver_tip_o2 = configs.driver_tip_options) === null || _configs$driver_tip_o2 === void 0 ? void 0 : _configs$driver_tip_o2.value) || [] : (configs === null || configs === void 0 || (_configs$driver_tip_o3 = configs.driver_tip_options) === null || _configs$driver_tip_o3 === void 0 ? void 0 : _configs$driver_tip_o3.value) || [];
   var totalFeeEnabled = (configs === null || configs === void 0 || (_configs$multi_busine = configs.multi_business_checkout_show_combined_delivery_fee) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === '1' ? JSON.parse(configs === null || configs === void 0 || (_configs$driver_tip_o4 = configs.driver_tip_options) === null || _configs$driver_tip_o4 === void 0 ? void 0 : _configs$driver_tip_o4.value) || [] : (configs === null || configs === void 0 || (_configs$driver_tip_o5 = configs.driver_tip_options) === null || _configs$driver_tip_o5 === void 0 ? void 0 : _configs$driver_tip_o5.value) || [];
@@ -168,6 +172,13 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     return b.accumulates;
   })) !== null && _creditPointGeneralPl !== void 0 ? _creditPointGeneralPl : [];
   var isWalletEnabled = (configs === null || configs === void 0 || (_configs$cash_wallet = configs.cash_wallet) === null || _configs$cash_wallet === void 0 ? void 0 : _configs$cash_wallet.value) && (configs === null || configs === void 0 || (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1' && ((configs === null || configs === void 0 || (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1' || (configs === null || configs === void 0 || (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1');
+  var checkoutFields = (0, _react.useMemo)(function () {
+    var _checkoutFieldsState$;
+    return checkoutFieldsState === null || checkoutFieldsState === void 0 || (_checkoutFieldsState$ = checkoutFieldsState.fields) === null || _checkoutFieldsState$ === void 0 ? void 0 : _checkoutFieldsState$.filter(function (field) {
+      var _orderState$options;
+      return field.order_type_id === (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type);
+    });
+  }, [checkoutFieldsState, orderState === null || orderState === void 0 ? void 0 : orderState.options]);
   var hexTest = /[0-9A-Fa-f]{6}/g;
   var primaryColor = theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 || (_theme$colors = _theme$colors.primary) === null || _theme$colors === void 0 || (_theme$colors$split = _theme$colors.split) === null || _theme$colors$split === void 0 || (_theme$colors$split = _theme$colors$split.call(_theme$colors, '#')) === null || _theme$colors$split === void 0 ? void 0 : _theme$colors$split[1];
   var accumulationRateBusiness = function accumulationRateBusiness(businessId) {
@@ -203,7 +214,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       }));
       return;
     }
-    if (!userErrors.length && (!(requiredFields !== null && requiredFields !== void 0 && requiredFields.length) || allowedGuest && ((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'cash' || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'card_delivery'))) {
+    if (!userErrors.length && !(requiredFields !== null && requiredFields !== void 0 && requiredFields.length)) {
       handleGroupPlaceOrder && handleGroupPlaceOrder();
       return;
     }
@@ -230,28 +241,54 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     });
     setIsUserDetailsEdit(false);
   };
+  var checkGuestValidationFields = function checkGuestValidationFields() {
+    var _checkoutFieldsState$2, _configs$verification;
+    var userSelected = isCustomerMode ? customerState.user : user;
+    var _requiredFields = checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields.filter(function (field) {
+      var _orderState$options2, _field$validation_fie, _field$validation_fie2;
+      return (field === null || field === void 0 ? void 0 : field.order_type_id) === (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) && (field === null || field === void 0 ? void 0 : field.enabled) && (field === null || field === void 0 ? void 0 : field.required_with_guest) && !notFields.includes(field === null || field === void 0 || (_field$validation_fie = field.validation_field) === null || _field$validation_fie === void 0 ? void 0 : _field$validation_fie.code) && userSelected && !userSelected[field === null || field === void 0 || (_field$validation_fie2 = field.validation_field) === null || _field$validation_fie2 === void 0 ? void 0 : _field$validation_fie2.code];
+    });
+    var requiredFieldsCode = _requiredFields.map(function (item) {
+      var _item$validation_fiel;
+      return item === null || item === void 0 || (_item$validation_fiel = item.validation_field) === null || _item$validation_fiel === void 0 ? void 0 : _item$validation_fiel.code;
+    });
+    var guestCheckoutCellPhone = checkoutFieldsState === null || checkoutFieldsState === void 0 || (_checkoutFieldsState$2 = checkoutFieldsState.fields) === null || _checkoutFieldsState$2 === void 0 ? void 0 : _checkoutFieldsState$2.find(function (field) {
+      var _orderState$options3, _field$validation_fie3;
+      return field.order_type_id === (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) && (field === null || field === void 0 || (_field$validation_fie3 = field.validation_field) === null || _field$validation_fie3 === void 0 ? void 0 : _field$validation_fie3.code) === 'mobile_phone';
+    });
+    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.enabled && guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.required_with_guest || (configs === null || configs === void 0 || (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
+      requiredFieldsCode.push('cellphone');
+    }
+    setRequiredFields(requiredFieldsCode);
+  };
   var checkValidationFields = function checkValidationFields() {
-    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$verification;
+    var _Object$values2, _configs$verification2;
     setUserErrors([]);
     var errors = [];
-    var notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes'];
     var userSelected = isCustomerMode ? customerState.user : user;
     var _requiredFields = [];
-    Object.values(validationFields === null || validationFields === void 0 || (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.checkout).map(function (field) {
-      if (field !== null && field !== void 0 && field.enabled && field !== null && field !== void 0 && field.required && !notFields.includes(field.code)) {
-        if (userSelected && !userSelected[field === null || field === void 0 ? void 0 : field.code]) {
-          _requiredFields.push(field === null || field === void 0 ? void 0 : field.code);
+    Object.values(checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields).map(function (field) {
+      var _orderState$options4, _field$validation_fie4;
+      if (((_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) === (field === null || field === void 0 ? void 0 : field.order_type_id) && field !== null && field !== void 0 && field.enabled && field !== null && field !== void 0 && field.required && !notFields.includes(field === null || field === void 0 || (_field$validation_fie4 = field.validation_field) === null || _field$validation_fie4 === void 0 ? void 0 : _field$validation_fie4.code)) {
+        var _field$validation_fie5;
+        if (userSelected && !userSelected[field === null || field === void 0 || (_field$validation_fie5 = field.validation_field) === null || _field$validation_fie5 === void 0 ? void 0 : _field$validation_fie5.code]) {
+          var _field$validation_fie6;
+          _requiredFields.push(field === null || field === void 0 || (_field$validation_fie6 = field.validation_field) === null || _field$validation_fie6 === void 0 ? void 0 : _field$validation_fie6.code);
         }
       }
     });
-    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (validationFields !== null && validationFields !== void 0 && (_validationFields$fie2 = validationFields.fields) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.cellphone) !== null && _validationFields$fie2 !== void 0 && _validationFields$fie2.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie3 = validationFields.fields) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie3 = _validationFields$fie3.checkout) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie3 = _validationFields$fie3.cellphone) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.required || (configs === null || configs === void 0 || (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
+    var mobilePhoneField = (_Object$values2 = Object.values(checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.find(function (field) {
+      var _orderState$options5, _field$validation_fie7;
+      return (field === null || field === void 0 ? void 0 : field.order_type_id) === (orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type) && (field === null || field === void 0 || (_field$validation_fie7 = field.validation_field) === null || _field$validation_fie7 === void 0 ? void 0 : _field$validation_fie7.code) === 'mobile_phone';
+    });
+    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (mobilePhoneField !== null && mobilePhoneField !== void 0 && mobilePhoneField.enabled && mobilePhoneField !== null && mobilePhoneField !== void 0 && mobilePhoneField.required || (configs === null || configs === void 0 || (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1')) {
       _requiredFields.push('cellphone');
     }
     setRequiredFields(_requiredFields);
     if (userSelected && userSelected !== null && userSelected !== void 0 && userSelected.cellphone) {
       if (userSelected !== null && userSelected !== void 0 && userSelected.country_phone_code) {
         var phone = null;
-        phone = "+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code).concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.cellphone);
+        phone = "+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code).concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.cellphone.replace("+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code), ''));
         var phoneNumber = (0, _libphonenumberJs.default)(phone);
         if (!(phoneNumber !== null && phoneNumber !== void 0 && phoneNumber.isValid())) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'));
@@ -280,11 +317,13 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     }));
   };
   (0, _react.useEffect)(function () {
-    var _validationFields$fie4;
-    if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && _validationFields$fie4.checkout) {
+    if (checkoutFieldsState !== null && checkoutFieldsState !== void 0 && checkoutFieldsState.loading || customerState.loading || userLoading) return;
+    if (user !== null && user !== void 0 && user.guest_id) {
+      checkGuestValidationFields();
+    } else {
       checkValidationFields();
     }
-  }, [validationFields, user, customerState]);
+  }, [checkoutFieldsState, user, customerState, orderState === null || orderState === void 0 || (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.type]);
   (0, _react.useEffect)(function () {
     if (openCarts.length || cartGroup.loading) {
       if (openCarts.length === 1) {
@@ -358,14 +397,16 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     }
   }, t('CONTINUE_AS_GUEST', 'Continue as guest'))) : /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     isUserDetailsEdit: isUserDetailsEdit,
-    useValidationFields: true,
     useDefualtSessionManager: true,
     useSessionUser: !isCustomerMode,
     isCustomerMode: isCustomerMode,
     userData: isCustomerMode && customerState.user,
     userId: isCustomerMode && (customerState === null || customerState === void 0 || (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.id),
     isCheckout: true,
-    isSuccess: isSuccess
+    isSuccess: isSuccess,
+    isOrderTypeValidationField: true,
+    requiredFields: requiredFields,
+    checkoutFields: checkoutFields
   }))), /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMENT_METHODS', 'Payment Methods')), /*#__PURE__*/_react.default.createElement(_MultiCartsPaymethodsAndWallets.MultiCartsPaymethodsAndWallets, {
     userId: props.userId,
     openCarts: openCarts,
@@ -380,7 +421,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     cartGroup: cartGroup,
     setCardList: setCardList,
     handlePlaceOrder: handlePlaceOrder
-  })), (validationFields === null || validationFields === void 0 || (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 || (_validationFields$fie5 = _validationFields$fie5.checkout) === null || _validationFields$fie5 === void 0 || (_validationFields$fie5 = _validationFields$fie5.coupon) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.enabled) && openCarts.every(function (cart) {
+  })), (validationFields === null || validationFields === void 0 || (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 || (_validationFields$fie = _validationFields$fie.checkout) === null || _validationFields$fie === void 0 || (_validationFields$fie = _validationFields$fie.coupon) === null || _validationFields$fie === void 0 ? void 0 : _validationFields$fie.enabled) && openCarts.every(function (cart) {
     return cart.business_id && cart.status !== 2;
   }) && (configs === null || configs === void 0 || (_configs$multi_busine2 = configs.multi_business_checkout_coupon_input_style) === null || _configs$multi_busine2 === void 0 ? void 0 : _configs$multi_busine2.value) === 'group' && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DISCOUNT_COUPON', 'Discount coupon')), /*#__PURE__*/_react.default.createElement(_styles.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_CouponControl.CouponControl, {
     carts: openCarts,
@@ -390,7 +431,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     price: openCarts.reduce(function (total, cart) {
       return total + cart.total;
     }, 0)
-  }))), isMultiDriverTips && (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && (validationFields === null || validationFields === void 0 || (_validationFields$fie6 = validationFields.fields) === null || _validationFields$fie6 === void 0 || (_validationFields$fie6 = _validationFields$fie6.checkout) === null || _validationFields$fie6 === void 0 || (_validationFields$fie6 = _validationFields$fie6.driver_tip) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.enabled) && openCarts.every(function (cart) {
+  }))), isMultiDriverTips && (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && (validationFields === null || validationFields === void 0 || (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.checkout) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.driver_tip) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.enabled) && openCarts.every(function (cart) {
     return cart.business_id && cart.status !== 2;
   }) && driverTipsOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     isMulti: true,
@@ -452,13 +493,15 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     isUserDetailsEdit: isUserDetailsEdit,
-    useValidationFields: true,
     useDefualtSessionManager: true,
     useSessionUser: !isCustomerMode,
     isCustomerMode: isCustomerMode,
     userData: isCustomerMode && customerState.user,
     userId: isCustomerMode && (customerState === null || customerState === void 0 || (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id),
     requiredFields: requiredFields,
+    isOrderTypeValidationField: true,
+    checkoutFields: checkoutFields,
+    isCheckoutPlace: true,
     setIsSuccess: setIsSuccess,
     isCheckout: true,
     isEdit: true,
