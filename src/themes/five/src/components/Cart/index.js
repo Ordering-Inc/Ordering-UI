@@ -76,10 +76,10 @@ const CartUI = (props) => {
     businessConfigs,
     loyaltyRewardRate,
     isCustomerMode,
-    guestCheckoutComment,
-    guestCheckoutCupon,
     productLoading,
-    setProductLoading
+    setProductLoading,
+    hideCommentsByValidationCheckout,
+    hideCouponByValidationCheckout
   } = props
 
   const theme = useTheme()
@@ -114,8 +114,8 @@ const CartUI = (props) => {
   const isMultiCheckout = configs?.checkout_multi_business_enabled?.value === '1'
   const cart = cartMulticart || orderState?.carts?.[`businessId:${props.cart?.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
-  const hideCartComments = theme?.[viewString]?.components?.cart?.components?.comments?.hidden || ((loginUser?.guest_id && guestCheckoutComment) ? !guestCheckoutComment?.enabled : !validationFields?.fields?.checkout?.comments?.enabled)
-  const hideCartDiscount = theme?.[viewString]?.components?.cart?.components?.discount_coupon?.hidden || ((loginUser?.guest_id && guestCheckoutCupon) ? !guestCheckoutCupon?.enabled : !validationFields?.fields?.checkout?.comments?.enabled)
+  const hideCartComments = isCheckout ? hideCommentsByValidationCheckout : !validationFields?.fields?.checkout?.comments?.enabled || theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const hideCartDiscount = isCheckout ? hideCouponByValidationCheckout : !validationFields?.fields?.checkout?.coupon?.enabled || theme?.[viewString]?.components?.cart?.components?.discount_coupon?.hidden
   const cateringTypeString = orderState?.options?.type === 7
     ? 'catering_delivery'
     : orderState?.options?.type === 8
@@ -566,7 +566,7 @@ const CartUI = (props) => {
                     )}
                   </tbody>
                 </table>
-                {cart?.status !== 2 && !hideCartComments && (
+                {cart?.status !== 2 && !hideCartComments && !hideCommentsByValidationCheckout && (
                   <table className='comments'>
                     <tbody>
                       <tr>

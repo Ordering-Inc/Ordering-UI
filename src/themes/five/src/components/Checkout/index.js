@@ -10,7 +10,6 @@ import {
   useApi,
   useLanguage,
   useUtils,
-  useValidationFields,
   useConfig,
   useCustomer,
   useEvent
@@ -104,7 +103,6 @@ const CheckoutUI = (props) => {
   } = props
 
   const theme = useTheme()
-  const [validationFields] = useValidationFields()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -128,7 +126,6 @@ const CheckoutUI = (props) => {
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
   const [paymethodClicked, setPaymethodClicked] = useState(null)
-  const [orderTypeValidationFields, setOrderTypeValidationFields] = useState([])
   const [productLoading, setProductLoading] = useState(false)
 
   const cardsMethods = ['stripe', 'credomatic']
@@ -141,20 +138,22 @@ const CheckoutUI = (props) => {
     (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp && !isCustomerMode
   const isMultiDriverTips = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes', 'comments']
-
+  const hexTest = /[0-9A-Fa-f]{6}/g;
+  const primaryColor = theme?.colors?.primary?.split?.('#')?.[1]
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
   const isGiftCardCart = !cart?.business_id
-  const guestCheckoutDriveTip = checkoutFieldsState?.fields?.find(field => field.order_type_id === 1 && field?.validation_field?.code === 'driver_tip')
-  const guestCheckoutComment = useMemo(() => checkoutFieldsState?.fields?.find(field => field.order_type_id === options?.type && field?.validation_field?.code === 'comments'), [checkoutFieldsState, options])
-  const guestCheckoutCupon = useMemo(() => checkoutFieldsState?.fields?.find(field => field.order_type_id === options?.type && field?.validation_field?.code === 'coupon'), [checkoutFieldsState, options])
+  const checkoutFields = useMemo(() => checkoutFieldsState?.fields?.filter(field => field.order_type_id === options?.type), [checkoutFieldsState, options])
+  const guestCheckoutDriveTip = useMemo(() => checkoutFields?.find(field => field.order_type_id === 1 && field?.validation_field?.code === 'driver_tip'), [JSON.stringify(checkoutFields), options])
+  const guestCheckoutComment = useMemo(() => checkoutFields?.find(field => field.order_type_id === options?.type && field?.validation_field?.code === 'comments'), [JSON.stringify(checkoutFields), options])
+  const guestCheckoutCoupon = useMemo(() => checkoutFields?.find(field => field.order_type_id === options?.type && field?.validation_field?.code === 'coupon'), [JSON.stringify(checkoutFields), options])
+  const guestCheckoutZipcode = useMemo(() => checkoutFields?.find(field => field.order_type_id === options?.type && field?.validation_field?.code === 'zipcode'), [JSON.stringify(checkoutFields), options])
+
   // const [hasBusinessPlaces, setHasBusinessPlaces] = useState(null)
-
-  const validateCommentsCartField = (!user?.guest_id ? (validationFields?.fields?.checkout?.comments?.enabled && validationFields?.fields?.checkout?.comments?.required) : (guestCheckoutComment?.enabled && guestCheckoutComment?.required_with_guest)) && (cart?.comment === null || cart?.comment?.trim().length === 0)
-  const validateDriverTipField = options.type === 1 && (!user?.guest_id ? (validationFields?.fields?.checkout?.driver_tip?.enabled && validationFields?.fields?.checkout?.driver_tip?.required) : (guestCheckoutDriveTip?.enabled && guestCheckoutDriveTip?.required_with_guest)) && (Number(cart?.driver_tip) <= 0)
-
-  const validateZipcodeCard =
-    validationFields?.fields?.card?.zipcode?.enabled && validationFields?.fields?.card?.zipcode?.required && paymethodSelected?.gateway === 'stripe' && paymethodSelected?.data?.card && !paymethodSelected?.data?.card?.zipcode
+  const validateCommentsCartField = (guestCheckoutComment?.enabled && (user?.guest_id ? guestCheckoutComment?.required_with_guest : guestCheckoutComment?.required)) && (cart?.comment === null || cart?.comment?.trim().length === 0)
+  const validateDriverTipField = options.type === 1 && (guestCheckoutDriveTip?.enabled && (user?.guest_id ? guestCheckoutDriveTip?.required_with_guest : guestCheckoutDriveTip?.required)) && (Number(cart?.driver_tip) <= 0)
+  const validateCouponField = (guestCheckoutCoupon?.enabled && (user?.guest_id ? guestCheckoutCoupon?.required_with_guest : guestCheckoutCoupon?.required)) && !cart?.offers?.some(offer => offer?.type === 2)
+  const validateZipcodeCard = (guestCheckoutZipcode?.enabled && (user?.guest_id ? guestCheckoutZipcode?.required_with_guest : guestCheckoutZipcode?.required)) && paymethodSelected?.gateway === 'stripe' && paymethodSelected?.data?.card && !paymethodSelected?.data?.card?.zipcode
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -166,8 +165,9 @@ const CheckoutUI = (props) => {
     !cart?.valid_maximum ||
     (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
     // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
-    (validateDriverTipField && !isGiftCardCart) ||
-    (validateCommentsCartField) ||
+    validateCommentsCartField ||
+    validateDriverTipField ||
+    validateCouponField ||
     validateZipcodeCard
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
@@ -184,7 +184,7 @@ const CheckoutUI = (props) => {
   const hideBusinessDetails = theme?.checkout?.components?.business?.hidden
   const hideBusinessMap = theme?.checkout?.components?.map?.hidden
   const hideCustomerDetails = theme?.checkout?.components?.customer?.hidden
-  const driverTipsField = !cartState.loading && cart && cart?.business_id && options.type === 1 && cart?.status !== 2 && ((!user?.guest_id && validationFields?.fields?.checkout?.driver_tip?.enabled) || (user?.guest_id && guestCheckoutDriveTip?.enabled)) && driverTipsOptions.length > 0 && !useKioskApp
+  const driverTipsField = !cartState.loading && cart && cart?.business_id && options.type === 1 && cart?.status !== 2 && (guestCheckoutDriveTip?.enabled) && driverTipsOptions.length > 0 && !useKioskApp
 
   const creditPointPlan = loyaltyPlansState?.result?.find(loyal => loyal.type === 'credit_point')
   const creditPointPlanOnBusiness = creditPointPlan?.businesses?.find(b => b.business_id === cart?.business_id && b.accumulates)
@@ -250,33 +250,35 @@ const CheckoutUI = (props) => {
       requiredFieldsCode.push('cellphone')
     }
     setRequiredFields(requiredFieldsCode)
-    setOrderTypeValidationFields(_requiredFields)
   }
+
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
     const userSelected = isCustomerMode ? customerState.user : user
     const _requiredFields = []
-
-    Object.values(validationFields?.fields?.checkout).map(field => {
-      if (field?.enabled && field?.required && !notFields.includes(field.code)) {
-        if (userSelected && !userSelected[field?.code]) {
-          _requiredFields.push(field?.code)
+    Object.values(checkoutFieldsState?.fields).map(field => {
+      if (options?.type === field?.order_type_id &&
+        field?.enabled &&
+        field?.required &&
+        !notFields.includes(field?.validation_field?.code)
+      ) {
+        if (userSelected && !userSelected[field?.validation_field?.code]) {
+          _requiredFields.push(field?.validation_field?.code)
         }
       }
     })
-
+    const mobilePhoneField = Object.values(checkoutFieldsState?.fields)?.find(field => field?.order_type_id === options?.type && field?.validation_field?.code === 'mobile_phone')
     if (
       userSelected &&
       !userSelected?.cellphone &&
-      ((validationFields?.fields?.checkout?.cellphone?.enabled &&
-        validationFields?.fields?.checkout?.cellphone?.required) ||
+      ((mobilePhoneField?.enabled &&
+        mobilePhoneField?.required) ||
         configs?.verification_phone_required?.value === '1')
     ) {
       _requiredFields.push('cellphone')
     }
     setRequiredFields(_requiredFields)
-
     if (userSelected && userSelected?.cellphone) {
       if (userSelected?.country_phone_code) {
         let phone = null
@@ -313,15 +315,13 @@ const CheckoutUI = (props) => {
   }
 
   useEffect(() => {
-    if (validationFields && validationFields?.fields?.checkout && !customerState.loading && !userLoading && !user?.guest_id) {
+    if (checkoutFieldsState?.loading || customerState.loading || userLoading) return
+    if (user?.guest_id) {
+      checkGuestValidationFields()
+    } else {
       checkValidationFields()
     }
-  }, [validationFields, user, customerState])
-
-  useEffect(() => {
-    if (checkoutFieldsState?.loading || !user?.guest_id || customerState.loading || userLoading) return
-    checkGuestValidationFields()
-  }, [user, checkoutFieldsState, customerState])
+  }, [checkoutFieldsState, user, customerState, options?.type])
 
   useEffect(() => {
     if (errors) {
@@ -386,13 +386,15 @@ const CheckoutUI = (props) => {
                     </div>
                   ) : (
                     <AddressDetails
-                      location={options?.address?.location}
+                      location={cart?.business?.location}
                       businessLogo={businessDetails?.business?.logo || theme.images?.dummies?.businessLogo}
                       isCartPending={cart?.status === 2}
                       businessId={cart?.business_id}
                       apiKey={configs?.google_maps_api_key?.value}
                       mapConfigs={mapConfigs}
                       isCustomerMode={isCustomerMode}
+                      cart={cart}
+                      primaryColor={hexTest.test(primaryColor || '') ? `0x${primaryColor}` : 'red'}
                     />
                   )}
                 </>
@@ -427,12 +429,14 @@ const CheckoutUI = (props) => {
                           isUserDetailsEdit={isUserDetailsEdit}
                           cartStatus={cart?.status}
                           businessId={cart?.business_id}
-                          useValidationFields
                           useDefualtSessionManager
                           useSessionUser={!isCustomerMode}
                           isCustomerMode={isCustomerMode}
                           userData={isCustomerMode && customerState.user}
                           userId={isCustomerMode && customerState?.user?.id}
+                          isOrderTypeValidationField
+                          requiredFields={requiredFields}
+                          checkoutFields={checkoutFields}
                           isSuccess={isSuccess}
                           isCheckout
                         />
@@ -623,8 +627,8 @@ const CheckoutUI = (props) => {
                 creditPointPlanOnBusiness?.accumulation_rate ??
                 (!!creditPointPlanOnBusiness && creditPointPlan?.accumulation_rate) ?? 0
               }
-              guestCheckoutComment={guestCheckoutComment}
-              guestCheckoutCupon={guestCheckoutCupon}
+              hideCommentsByValidationCheckout={!guestCheckoutComment?.enabled}
+              hideCouponByValidationCheckout={!guestCheckoutCoupon?.enabled}
               productLoading={productLoading}
               setProductLoading={setProductLoading}
             />
@@ -697,7 +701,12 @@ const CheckoutUI = (props) => {
               {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
             </WarningText>
           )}
-
+        {validateCouponField &&
+          (
+            <WarningText>
+              {t('WARNING_INVALID_COUPON_FIELD', 'Coupon is required.')}
+            </WarningText>
+          )}
         {validateCommentsCartField && (
           <WarningText>
             {t('WARNING_INVALID_CART_COMMENTS', 'Cart comments is required.')}
@@ -750,7 +759,6 @@ const CheckoutUI = (props) => {
           isUserDetailsEdit={isUserDetailsEdit}
           cartStatus={cart?.status}
           businessId={cart?.business_id}
-          useValidationFields
           useDefualtSessionManager
           useSessionUser={!isCustomerMode}
           isCustomerMode={isCustomerMode}
@@ -762,9 +770,9 @@ const CheckoutUI = (props) => {
           isCheckoutPlace
           isEdit
           isModal
-          orderTypeValidationFields={orderTypeValidationFields}
           handlePlaceOrderAsGuest={handlePlaceOrderAsGuest}
-          isGuest={!!user?.guest_id}
+          isOrderTypeValidationField
+          checkoutFields={checkoutFields}
           isAllowGuest={paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery'}
           onClose={() => {
             setIsOpen(false)

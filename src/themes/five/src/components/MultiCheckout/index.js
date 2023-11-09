@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
   MultiCheckout as MultiCheckoutController,
@@ -71,7 +71,8 @@ const MultiCheckoutUI = (props) => {
     cartUuid,
     totalCartsFee,
     walletState,
-    handleSearchRedirect
+    handleSearchRedirect,
+    checkoutFieldsState
   } = props
 
   const [, t] = useLanguage()
@@ -79,7 +80,7 @@ const MultiCheckoutUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [customerState] = useCustomer()
   const [validationFields] = useValidationFields()
-  const [{ user }, { login }] = useSession()
+  const [{ user, loading: userLoading }, { login }] = useSession()
   const [orderState] = useOrder()
   const history = useHistory()
   const [, { showToast }] = useToast()
@@ -102,6 +103,7 @@ const MultiCheckoutUI = (props) => {
     (paymethodSelected?.gateway === 'stripe' && cardList?.cards?.length === 0) ||
     walletCarts.length > 0
 
+  const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes', 'comments']
   const isMultiDriverTips = configs?.checkout_multi_business_enabled?.value === '1'
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -121,8 +123,11 @@ const MultiCheckoutUI = (props) => {
   const loyalBusinessAvailable = creditPointGeneralPlan?.businesses?.filter((b) => b.accumulates) ?? []
   const isWalletEnabled = (configs?.cash_wallet?.value && configs?.wallet_enabled?.value === '1' &&
     (configs?.wallet_cash_enabled?.value === '1' ||
-    configs?.wallet_credit_point_enabled?.value === '1'))
+      configs?.wallet_credit_point_enabled?.value === '1'))
+  const checkoutFields = useMemo(() => checkoutFieldsState?.fields?.filter(field => field.order_type_id === orderState?.options?.type), [checkoutFieldsState, orderState?.options])
 
+  const hexTest = /[0-9A-Fa-f]{6}/g
+  const primaryColor = theme?.colors?.primary?.split?.('#')?.[1]
   const accumulationRateBusiness = (businessId) => {
     const value = loyalBusinessAvailable?.find((loyal) => loyal.business_id === businessId)?.accumulation_rate ?? 0
     return value || (creditPointGeneralPlan?.accumulation_rate ?? 0)
@@ -147,8 +152,7 @@ const MultiCheckoutUI = (props) => {
       return
     }
 
-    if (!userErrors.length && (!requiredFields?.length ||
-      (allowedGuest && (paymethodSelected?.gateway === 'cash' || paymethodSelected?.gateway === 'card_delivery')))) {
+    if (!userErrors.length && !requiredFields?.length) {
       handleGroupPlaceOrder && handleGroupPlaceOrder()
       return
     }
@@ -176,36 +180,57 @@ const MultiCheckoutUI = (props) => {
     setIsUserDetailsEdit(false)
   }
 
-  const checkValidationFields = () => {
-    setUserErrors([])
-    const errors = []
-    const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes']
+  const checkGuestValidationFields = () => {
     const userSelected = isCustomerMode ? customerState.user : user
-    const _requiredFields = []
-
-    Object.values(validationFields?.fields?.checkout).map(field => {
-      if (field?.enabled && field?.required && !notFields.includes(field.code)) {
-        if (userSelected && !userSelected[field?.code]) {
-          _requiredFields.push(field?.code)
-        }
-      }
-    })
-
+    const _requiredFields = checkoutFieldsState?.fields
+      .filter((field) => (field?.order_type_id === orderState?.options?.type) && field?.enabled && field?.required_with_guest &&
+        !notFields.includes(field?.validation_field?.code) &&
+        userSelected && !userSelected[field?.validation_field?.code])
+    const requiredFieldsCode = _requiredFields.map((item) => item?.validation_field?.code)
+    const guestCheckoutCellPhone = checkoutFieldsState?.fields?.find((field) => field.order_type_id === orderState?.options?.type && field?.validation_field?.code === 'mobile_phone')
     if (
       userSelected &&
       !userSelected?.cellphone &&
-      ((validationFields?.fields?.checkout?.cellphone?.enabled &&
-        validationFields?.fields?.checkout?.cellphone?.required) ||
+      ((guestCheckoutCellPhone?.enabled &&
+        guestCheckoutCellPhone?.required_with_guest) ||
+        configs?.verification_phone_required?.value === '1')
+    ) {
+      requiredFieldsCode.push('cellphone')
+    }
+    setRequiredFields(requiredFieldsCode)
+  }
+
+  const checkValidationFields = () => {
+    setUserErrors([])
+    const errors = []
+    const userSelected = isCustomerMode ? customerState.user : user
+    const _requiredFields = []
+    Object.values(checkoutFieldsState?.fields).map(field => {
+      if (orderState.options?.type === field?.order_type_id &&
+        field?.enabled &&
+        field?.required &&
+        !notFields.includes(field?.validation_field?.code)
+      ) {
+        if (userSelected && !userSelected[field?.validation_field?.code]) {
+          _requiredFields.push(field?.validation_field?.code)
+        }
+      }
+    })
+    const mobilePhoneField = Object.values(checkoutFieldsState?.fields)?.find(field => field?.order_type_id === orderState?.options?.type && field?.validation_field?.code === 'mobile_phone')
+    if (
+      userSelected &&
+      !userSelected?.cellphone &&
+      ((mobilePhoneField?.enabled &&
+        mobilePhoneField?.required) ||
         configs?.verification_phone_required?.value === '1')
     ) {
       _requiredFields.push('cellphone')
     }
     setRequiredFields(_requiredFields)
-
     if (userSelected && userSelected?.cellphone) {
       if (userSelected?.country_phone_code) {
         let phone = null
-        phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone}`
+        phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone.replace(`+${userSelected?.country_phone_code}`, '')}`
         const phoneNumber = parsePhoneNumber(phone)
         if (!phoneNumber?.isValid()) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'))
@@ -232,10 +257,13 @@ const MultiCheckoutUI = (props) => {
   }
 
   useEffect(() => {
-    if (validationFields && validationFields?.fields?.checkout) {
+    if (checkoutFieldsState?.loading || customerState.loading || userLoading) return
+    if (user?.guest_id) {
+      checkGuestValidationFields()
+    } else {
       checkValidationFields()
     }
-  }, [validationFields, user, customerState])
+  }, [checkoutFieldsState, user, customerState, orderState?.options?.type])
 
   useEffect(() => {
     if (openCarts.length || cartGroup.loading) {
@@ -308,7 +336,6 @@ const MultiCheckoutUI = (props) => {
                   ) : (
                     <UserDetails
                       isUserDetailsEdit={isUserDetailsEdit}
-                      useValidationFields
                       useDefualtSessionManager
                       useSessionUser={!isCustomerMode}
                       isCustomerMode={isCustomerMode}
@@ -316,6 +343,9 @@ const MultiCheckoutUI = (props) => {
                       userId={isCustomerMode && customerState?.user?.id}
                       isCheckout
                       isSuccess={isSuccess}
+                      isOrderTypeValidationField
+                      requiredFields={requiredFields}
+                      checkoutFields={checkoutFields}
                     />
                   )}
                 </WrapperUserDetails>
@@ -474,13 +504,15 @@ const MultiCheckoutUI = (props) => {
           >
             <UserDetails
               isUserDetailsEdit={isUserDetailsEdit}
-              useValidationFields
               useDefualtSessionManager
               useSessionUser={!isCustomerMode}
               isCustomerMode={isCustomerMode}
               userData={isCustomerMode && customerState.user}
               userId={isCustomerMode && customerState?.user?.id}
               requiredFields={requiredFields}
+              isOrderTypeValidationField
+              checkoutFields={checkoutFields}
+              isCheckoutPlace
               setIsSuccess={setIsSuccess}
               isCheckout
               isEdit
