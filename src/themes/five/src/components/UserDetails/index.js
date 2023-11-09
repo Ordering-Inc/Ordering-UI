@@ -158,7 +158,7 @@ const UserDetailsUI = (props) => {
         <Container>
           {isModal && (
             <TitleContainer isAddressFormOpen={isAddressFormOpen && !isEdit}>
-              {!requiredFields && (
+              {!isCheckoutPlace && (
                 <ModalIcon>
                   <MdClose onClick={() => onClose()} />
                 </ModalIcon>
@@ -166,7 +166,7 @@ const UserDetailsUI = (props) => {
               <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
             </TitleContainer>
           )}
-          {!requiredFields && (
+          {!isCheckoutPlace && (
             <Header className='user-form'>
               {!isModal && (
                 <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
