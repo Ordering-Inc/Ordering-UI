@@ -111,7 +111,7 @@ const LoginFormUI = (props) => {
   const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
   const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
   const showWhatsAppOtp = configs?.otp_whatsapp_enabled?.value === '1' || configs?.otp_whatsapp_enabled?.value === true
-  const showSmsOtp = configs?.otp_cellphone_enabled?.value === '1' || configs?.otp_cellphone_enabled?.value === true
+  const showSmsOtp = configs?.otp_sms_enabled?.value === '1' || configs?.otp_sms_enabled?.value === true
 
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||

@@ -89,7 +89,7 @@ const SignUpFormUI = (props) => {
   const showInputPhoneNumber = (validationFields?.fields?.checkout?.cellphone?.enabled ?? false) || configs?.verification_phone_required?.value === '1'
 
   const showWhatsAppOtp = configs?.otp_whatsapp_enabled?.value === '1' || configs?.otp_whatsapp_enabled?.value === true
-  const showSmsOtp = configs?.otp_cellphone_enabled?.value === '1' || configs?.otp_cellphone_enabled?.value === true
+  const showSmsOtp = configs?.otp_sms_enabled?.value === '1' || configs?.otp_sms_enabled?.value === true
 
   const closeAlert = () => {
     setAlertState({
