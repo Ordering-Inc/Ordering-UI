@@ -174,8 +174,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
   };
   var handleSwitchQtyUnit = function handleSwitchQtyUnit(val) {
-    var _setQtyBy;
-    setQtyBy((_setQtyBy = {}, _defineProperty(_setQtyBy, val, true), _defineProperty(_setQtyBy, !val, false), _setQtyBy));
+    setQtyBy(_defineProperty(_defineProperty({}, val, true), !val, false));
   };
   var getOverFlowImage = function getOverFlowImage(url) {
     var keys = url.split('/');
