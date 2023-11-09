@@ -176,6 +176,13 @@ export const UserFormDetailsUI = (props) => {
       if (isCustomerMode) {
         setUserCustomer(formState.result.result, true)
       }
+      if (content?.length > 0) {
+        setAlertState({
+          open: true,
+          content: content
+        })
+        return
+      }
       handleButtonUpdateClick(changes)
     }
   }
