@@ -204,33 +204,34 @@ const MultiCheckoutUI = (props) => {
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
-    const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes']
     const userSelected = isCustomerMode ? customerState.user : user
     const _requiredFields = []
-
-    Object.values(validationFields?.fields?.checkout).map(field => {
-      if (field?.enabled && field?.required && !notFields.includes(field.code)) {
-        if (userSelected && !userSelected[field?.code]) {
-          _requiredFields.push(field?.code)
+    Object.values(checkoutFieldsState?.fields).map(field => {
+      if (orderState.options?.type === field?.order_type_id &&
+        field?.enabled &&
+        field?.required &&
+        !notFields.includes(field?.validation_field?.code)
+      ) {
+        if (userSelected && !userSelected[field?.validation_field?.code]) {
+          _requiredFields.push(field?.validation_field?.code)
         }
       }
     })
-
+    const mobilePhoneField = Object.values(checkoutFieldsState?.fields)?.find(field => field?.order_type_id === orderState?.options?.type && field?.validation_field?.code === 'mobile_phone')
     if (
       userSelected &&
       !userSelected?.cellphone &&
-      ((validationFields?.fields?.checkout?.cellphone?.enabled &&
-        validationFields?.fields?.checkout?.cellphone?.required) ||
+      ((mobilePhoneField?.enabled &&
+        mobilePhoneField?.required) ||
         configs?.verification_phone_required?.value === '1')
     ) {
       _requiredFields.push('cellphone')
     }
     setRequiredFields(_requiredFields)
-
     if (userSelected && userSelected?.cellphone) {
       if (userSelected?.country_phone_code) {
         let phone = null
-        phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone}`
+        phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone.replace(`+${userSelected?.country_phone_code}`, '')}`
         const phoneNumber = parsePhoneNumber(phone)
         if (!phoneNumber?.isValid()) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'))
