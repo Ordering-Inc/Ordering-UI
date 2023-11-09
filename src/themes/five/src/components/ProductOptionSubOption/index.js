@@ -95,12 +95,6 @@ const ProductOptionSubOptionUI = React.memo((props) => {
     }
   }, [state?.selected])
 
-  useEffect(() => {
-    if (option?.with_half_option) {
-      handlePosition({}, 'left')
-    }
-  }, [state?.selected, suboption?.id])
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -144,7 +138,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
                 />
                 {state.quantity}
                 <BsPlusCircle
-                  disabled={disableIncrement || isSoldOut}
+                  disabled={disableIncrement || isSoldOut || pizzaState?.[`option:${option?.id}`]?.value === option?.max}
                   onClick={handleIncrement}
                 />
               </>
