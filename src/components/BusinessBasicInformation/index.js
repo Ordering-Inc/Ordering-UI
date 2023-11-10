@@ -22,8 +22,6 @@ import {
   BusinessInfoItem
 } from './styles'
 
-const types = ['food', 'laundry', 'alcohol', 'groceries']
-
 export const BusinessBasicInformation = (props) => {
   const {
     isSkeleton,
@@ -40,11 +38,8 @@ export const BusinessBasicInformation = (props) => {
 
   const getBusinessType = () => {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General')
-    const _types = []
-    types.forEach(type => business[type] && _types.push(
-      t(`BUSINESS_TYPE_${type?.replace(/\s/g, '_')?.toUpperCase()}`, type)
-    ))
-    return _types.join(', ')
+    const _types = business?.types?.map(type => t(`BUSINESS_TYPE_${type?.name?.replace(/\s/g, '_')?.toUpperCase()}`, type?.name))
+    return _types?.join(', ')
   }
 
   const showLogo = !theme?.business_view?.components?.header?.components?.business?.components?.logo?.hidden
