@@ -35,7 +35,7 @@ var ProductOptionSubOptionPropsAreEqual = function ProductOptionSubOptionPropsAr
   return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) && JSON.stringify(prevProps.pizzaState) === JSON.stringify(nextProps.pizzaState) && prevProps.balance === nextProps.balance && JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart);
 };
 var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props) {
-  var _pizzaState, _props$beforeElements, _props$beforeComponen, _pizzaState2, _pizzaState3, _props$afterComponent, _props$afterElements;
+  var _pizzaState, _pizzaState2, _props$beforeElements, _props$beforeComponen, _pizzaState3, _props$afterComponent, _props$afterElements;
   var state = props.state,
     increment = props.increment,
     decrement = props.decrement,
@@ -48,7 +48,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     setIsScrollAvailable = props.setIsScrollAvailable,
     usePizzaValidation = props.usePizzaValidation,
     pizzaState = props.pizzaState;
-  var disableIncrement = option !== null && option !== void 0 && option.limit_suboptions_by_max ? balance === (option === null || option === void 0 ? void 0 : option.max) || state.quantity === suboption.max : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
+  var disableIncrement = option !== null && option !== void 0 && option.with_half_option ? (pizzaState === null || pizzaState === void 0 || (_pizzaState = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState === void 0 ? void 0 : _pizzaState.value) === (option === null || option === void 0 ? void 0 : option.max) : option !== null && option !== void 0 && option.limit_suboptions_by_max ? balance === (option === null || option === void 0 ? void 0 : option.max) || state.quantity === suboption.max : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
   var price = option !== null && option !== void 0 && option.with_half_option && suboption !== null && suboption !== void 0 && suboption.half_price && state.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -88,7 +88,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     if (!minMaxValidation) {
       setShowMessage(false);
     }
-  }, [balance, pizzaState === null || pizzaState === void 0 || (_pizzaState = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState === void 0 ? void 0 : _pizzaState.value]);
+  }, [balance, pizzaState === null || pizzaState === void 0 || (_pizzaState2 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState2 === void 0 ? void 0 : _pizzaState2.value]);
   (0, _react.useEffect)(function () {
     if (balance === (option === null || option === void 0 ? void 0 : option.max) && state !== null && state !== void 0 && state.selected && dirtyRef) {
       if ((dirtyRef === null || dirtyRef === void 0 ? void 0 : dirtyRef.current) !== null) {
@@ -119,7 +119,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     disabled: state.quantity === 0 || isSoldOut,
     onClick: handleDecrement
   }), state.quantity, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, {
-    disabled: disableIncrement || isSoldOut || (pizzaState === null || pizzaState === void 0 || (_pizzaState2 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState2 === void 0 ? void 0 : _pizzaState2.value) === (option === null || option === void 0 ? void 0 : option.max),
+    disabled: disableIncrement || isSoldOut || usePizzaValidation,
     onClick: handleIncrement
   }))), /*#__PURE__*/_react.default.createElement(_styles.PositionControl, null, (option === null || option === void 0 ? void 0 : option.with_half_option) && (state === null || state === void 0 ? void 0 : state.selected) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
     className: ['reverse', state.selected && state.position === 'left' ? 'selected' : null].filter(function (classname) {
