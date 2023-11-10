@@ -137,7 +137,8 @@ export const BusinessProductsList = (props) => {
       'snapchat_profile',
       'previously_products',
       'configs',
-      'previously_products'
+      'previously_products',
+      'types'
     ],
     handleSearchRedirect: () => {
       events.emit('go_to_page', { page: 'search' })
