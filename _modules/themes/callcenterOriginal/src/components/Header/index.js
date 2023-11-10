@@ -141,7 +141,7 @@ var Header = exports.Header = function Header(props) {
         content: t('QUESTION_CLEAR_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.QUESTION_CLEAR_CUSTOMER) || 'Are you sure that you want to clear the customer?'),
         handleOnAccept: function handleOnAccept() {
           deleteUserCustomer(true);
-          refreshOrderOptions();
+          // refreshOrderOptions()
           handleGoToPage({
             page: 'home'
           });
