@@ -48,7 +48,13 @@ const ProductOptionSubOptionUI = React.memo((props) => {
     pizzaState
   } = props
 
-  const disableIncrement = option?.limit_suboptions_by_max ? (balance === option?.max || state.quantity === suboption.max) : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
+  const disableIncrement =
+    option?.with_half_option
+      ? pizzaState?.[`option:${option?.id}`]?.value === option?.max
+      : option?.limit_suboptions_by_max
+        ? (balance === option?.max || state.quantity === suboption.max)
+        : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
+
   const price = option?.with_half_option && suboption?.half_price && state.position !== 'whole' ? suboption?.half_price : suboption?.price
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -138,7 +144,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
                 />
                 {state.quantity}
                 <BsPlusCircle
-                  disabled={disableIncrement || isSoldOut || pizzaState?.[`option:${option?.id}`]?.value === option?.max}
+                  disabled={disableIncrement || isSoldOut || usePizzaValidation}
                   onClick={handleIncrement}
                 />
               </>
