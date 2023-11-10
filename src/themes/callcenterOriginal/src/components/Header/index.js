@@ -93,7 +93,7 @@ export const Header = (props) => {
         content: t('QUESTION_CLEAR_CUSTOMER', theme?.defaultLanguages?.QUESTION_CLEAR_CUSTOMER || 'Are you sure that you want to clear the customer?'),
         handleOnAccept: () => {
           deleteUserCustomer(true)
-          refreshOrderOptions()
+          // refreshOrderOptions()
           handleGoToPage({ page: 'home' })
           setConfirm({ ...confirm, open: false })
         }
