@@ -326,8 +326,8 @@ export const ProductItemAccordion = (props) => {
                           {getFormattedSubOptionName({
                             quantity: suboption.quantity,
                             name: suboption.name,
-                            position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
-                            price: parsePrice(suboption.price)
+                            position: (suboption?.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
+                            price: (['left', 'right'].includes(suboption.position)) ? parsePrice(suboption.half_price ?? suboption.price) : parsePrice(suboption.price)
                           })}
                         </span>
                       </li>
