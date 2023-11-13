@@ -48,7 +48,7 @@ const SingleOrderCardUI = (props) => {
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false })
   const hideIndividualButton = configs.multi_business_checkout_remove_individual_buttons?.value === '1'
 
-  const activeStatus = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23]
+  const activeStatus = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26]
 
   const handleGoToOrderDetails = (uuid) => {
     events.emit('go_to_page', { page: 'order_detail', params: { orderId: uuid }, replace: !props.isMultiOrders })
