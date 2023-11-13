@@ -243,13 +243,14 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
     }, /*#__PURE__*/_react.default.createElement("p", null, option.name), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, {
       className: "suboption"
     }, option.suboptions.map(function (suboption) {
+      var _suboption$half_price;
       return /*#__PURE__*/_react.default.createElement("li", {
         key: suboption.id
       }, /*#__PURE__*/_react.default.createElement("span", null, getFormattedSubOptionName({
         quantity: suboption.quantity,
         name: suboption.name,
-        position: suboption.position !== 'whole' ? t(suboption.position.toUpperCase(), suboption.position) : '',
-        price: parsePrice(suboption.price)
+        position: (suboption === null || suboption === void 0 ? void 0 : suboption.position) !== 'whole' ? t(suboption.position.toUpperCase(), suboption.position) : '',
+        price: ['left', 'right'].includes(suboption.position) ? parsePrice((_suboption$half_price = suboption.half_price) !== null && _suboption$half_price !== void 0 ? _suboption$half_price : suboption.price) : parsePrice(suboption.price)
       })));
     })));
   })), product.comment && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement("p", null, t('SPECIAL_COMMENT', 'Special Comment')), /*#__PURE__*/_react.default.createElement("h3", null, product.comment)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
