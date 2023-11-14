@@ -98,6 +98,12 @@ export const OrderHistory = (props) => {
         return 'ORDER_LOOKING_FOR_DRIVER'
       case 23:
         return 'ORDER_DRIVER_ON_WAY'
+      case 24:
+        return 'ORDER_DRIVER_WAITING_FOR_ORDER'
+      case 25:
+        return 'ORDER_ACCEPTED_BY_DRIVER_COMPANY'
+      case 26:
+        return 'ORDER_DRIVER_ARRIVED_CUSTOMER'
       default:
         return getTraduction(status)
     }
