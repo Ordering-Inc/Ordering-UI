@@ -115,3 +115,7 @@ export const PhoneContainer = styled.div`
   align-items: center;
   height: 30px;
 `
+
+export const SkeletonsContainer = styled.div`
+  margin-top: 25px;
+`
