@@ -2177,9 +2177,9 @@
     tslib "^2.4.1"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.59.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.59.0.tgz#5d0282d32157fd927399af34d32e66eae35b2e53"
-  integrity sha512-1DE95SSJ6pS1t8tshoo5B2qOrzM4ede1JIxXoaiCG475xG5h2bVMXWoKayZ2Hh3vU9te3ZFV/kOMkS32vLDaUA==
+  version "1.60.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.60.0.tgz#8126b437c4f84fe758f6d635c9dfe239f15ace18"
+  integrity sha512-ujYs5kbDBsRqX7KrkrLZ8hizXKZfng2vrUEUoStGekUkAwDYYV9ZaKm7WEXZbIzzBh9R/C0l7ihK3DGN7PA2UQ==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics-core" "1.3.2"
@@ -5695,9 +5695,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.535:
-  version "1.4.581"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.581.tgz#23b684c67bf56d4284e95598c05a5d266653b6d8"
-  integrity sha512-6uhqWBIapTJUxgPTCHH9sqdbxIMPt7oXl0VcAL1kOtlU6aECdcMncCrX5Z7sHQ/invtrC9jUQUef7+HhO8vVFw==
+  version "1.4.582"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.582.tgz#4908215182266793499ac57d80e2680d7dd9b3db"
+  integrity sha512-89o0MGoocwYbzqUUjc+VNpeOFSOK9nIdC5wY4N+PVUarUK0MtjyTjks75AZS2bW4Kl8MdewdFsWaH0jLy+JNoA==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -9227,7 +9227,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/d5a054131baac21e6894cb5ff47fafed7dbf9c7f"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/42aa3f852cfba122314ba2940ba5b17a86c89d72"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
