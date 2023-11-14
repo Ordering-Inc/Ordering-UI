@@ -11,7 +11,8 @@ import {
   ModalIcon,
   TitleContainer,
   CountryFlag,
-  PhoneContainer
+  PhoneContainer,
+  SkeletonsContainer
 } from './styles'
 import MdClose from '@meronex/icons/md/MdClose'
 import PhoneInput from 'react-phone-number-input'
@@ -142,16 +143,17 @@ const UserDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       {(validationFields.loading || formState.loading || userState.loading) && (
-        <UserData>
-          {requiredFields?.map(field => (
-            <React.Fragment key={field?.id}>
-              <Skeleton width={250} height={25} />
-              <Skeleton width={180} height={25} />
-              <Skeleton width={210} height={25} />
-              <Skeleton width={210} height={25} />
-            </React.Fragment>
-          ))}
-        </UserData>
+        <SkeletonsContainer>
+          <UserData>
+            {requiredFields?.map(field => (
+              <div key={field?.id}>
+                <Skeleton width={250} height={35} />
+                <Skeleton width='100%' height={40} />
+              </div>
+            ))}
+            <Skeleton width='100%' height={44} style={{ marginTop: 20 }} />
+          </UserData>
+        </SkeletonsContainer>
       )}
 
       {!(validationFields.loading || formState.loading || userState.loading) && (
