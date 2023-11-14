@@ -129,7 +129,7 @@ const OrderDetailsUI = (props) => {
   const acceptedStatus = [1, 2, 5, 6, 10, 11, 12, 15]
   const completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const placeSpotTypes = [3, 4, 5]
-  const activeStatus = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23]
+  const activeStatus = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26]
   const preorderStatus = [0, 13]
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
@@ -158,7 +158,7 @@ const OrderDetailsUI = (props) => {
   const hideCustomerEmail = theme?.confirmation?.components?.customer?.components?.email?.hidden
   const hideCustomerPhoto = theme?.confirmation?.components?.customer?.components?.photo?.hidden
 
-  const validTrackingStatus = [9, 19, 23]
+  const validTrackingStatus = [9, 19, 23, 26]
   const mapConfigs = { zoom: 15 }
 
   const handleGoToPage = (data) => {

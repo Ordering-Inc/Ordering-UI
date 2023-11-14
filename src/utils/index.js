@@ -651,7 +651,10 @@ export const getOrderStatus = (s) => {
     { key: 20, value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS || 'Customer almost arrived to business'), slug: 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', percentage: 90 },
     { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ARRIVED_BUSINESS || 'Customer arrived to business'), slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS', percentage: 90 },
     { key: 22, value: t('ORDER_LOOKING_FOR_DRIVER', theme?.defaultLanguages?.ORDER_LOOKING_FOR_DRIVER || 'Looking for driver'), slug: 'ORDER_LOOKING_FOR_DRIVER', percentage: 30 },
-    { key: 23, value: t('ORDER_DRIVER_ON_WAY', theme?.defaultLanguages?.ORDER_DRIVER_ON_WAY || 'Driver on way'), slug: 'ORDER_DRIVER_ON_WAY', percentage: 80 }
+    { key: 23, value: t('ORDER_DRIVER_ON_WAY', theme?.defaultLanguages?.ORDER_DRIVER_ON_WAY || 'Driver on way'), slug: 'ORDER_DRIVER_ON_WAY', percentage: 80 },
+    { key: 24, value: t('ORDER_DRIVER_WAITING_FOR_ORDER', theme?.defaultLanguages?.ORDER_DRIVER_WAITING_FOR_ORDER || 'Driver waiting for order'), slug: 'ORDER_DRIVER_WAITING_FOR_ORDER', percentage: 25 },
+    { key: 25, value: t('ORDER_ACCEPTED_BY_DRIVER_COMPANY', theme?.defaultLanguages?.ORDER_ACCEPTED_BY_DRIVER_COMPANY || 'Accepted by driver company'), slug: 'ORDER_ACCEPTED_BY_DRIVER_COMPANY', percentage: 25 },
+    { key: 26, value: t('ORDER_DRIVER_ARRIVED_CUSTOMER', theme?.defaultLanguages?.ORDER_DRIVER_ARRIVED_CUSTOMER || 'Driver arrived to customer'), slug: 'ORDER_DRIVER_ARRIVED_CUSTOMER', percentage: 80 }
   ]
   const objectStatus = orderStatus.find((o) => o.key === status)
   return objectStatus && objectStatus
