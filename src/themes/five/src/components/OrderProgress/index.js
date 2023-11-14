@@ -37,7 +37,7 @@ const OrderProgressUI = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [lastOrder, setLastOrder] = useState(null)
-  const statusToShow = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23]
+  const statusToShow = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26]
 
   const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
@@ -137,7 +137,7 @@ export const OrderProgress = (props) => {
   const orderProgressProps = {
     ...props,
     UIComponent: OrderProgressUI,
-    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23],
+    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26],
     useDefualtSessionManager: true,
     noGiftCardOrders: true,
     propsToFetchBusiness,
