@@ -68,7 +68,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     unreadAlert = _useState4[0],
     setUnreadAlert = _useState4[1];
   var hideIndividualButton = ((_configs$multi_busine = configs.multi_business_checkout_remove_individual_buttons) === null || _configs$multi_busine === void 0 ? void 0 : _configs$multi_busine.value) === '1';
-  var activeStatus = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23];
+  var activeStatus = [0, 3, 4, 7, 8, 9, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26];
   var handleGoToOrderDetails = function handleGoToOrderDetails(uuid) {
     events.emit('go_to_page', {
       page: 'order_detail',

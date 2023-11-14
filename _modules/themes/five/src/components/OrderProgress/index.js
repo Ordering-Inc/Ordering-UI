@@ -52,7 +52,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     lastOrder = _useState2[0],
     setLastOrder = _useState2[1];
-  var statusToShow = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23];
+  var statusToShow = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26];
   var isChew = (theme === null || theme === void 0 || (_theme$header = theme.header) === null || _theme$header === void 0 || (_theme$header = _theme$header.components) === null || _theme$header === void 0 || (_theme$header = _theme$header.layout) === null || _theme$header === void 0 || (_theme$header = _theme$header.type) === null || _theme$header === void 0 ? void 0 : _theme$header.toLowerCase()) === 'chew';
   var handleGoToPage = function handleGoToPage(index) {
     events.emit('go_to_page', {
@@ -117,7 +117,7 @@ var OrderProgress = exports.OrderProgress = function OrderProgress(props) {
   var propsToFetch = ['cart', 'business', 'status', 'id', 'uuid', 'cart_group_id', 'business_id', 'delivery_datetime', 'delivery_datetime_utc', 'total', 'summary', 'eta_current_status_time', 'eta_previous_status_times', 'eta_time', 'delivered_in', 'prepared_in', 'eta_drive_time'];
   var orderProgressProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrderProgressUI,
-    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23],
+    orderStatus: [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26],
     useDefualtSessionManager: true,
     noGiftCardOrders: true,
     propsToFetchBusiness: propsToFetchBusiness,

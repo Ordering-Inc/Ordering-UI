@@ -182,7 +182,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var acceptedStatus = [1, 2, 5, 6, 10, 11, 12, 15];
   var completedStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
   var placeSpotTypes = [3, 4, 5];
-  var activeStatus = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23];
+  var activeStatus = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26];
   var preorderStatus = [0, 13];
   var googleMapsApiKey = configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var enabledPoweredByOrdering = configs === null || configs === void 0 || (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
@@ -206,7 +206,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var hideCustomerAddress = theme === null || theme === void 0 || (_theme$confirmation16 = theme.confirmation) === null || _theme$confirmation16 === void 0 || (_theme$confirmation16 = _theme$confirmation16.components) === null || _theme$confirmation16 === void 0 || (_theme$confirmation16 = _theme$confirmation16.customer) === null || _theme$confirmation16 === void 0 || (_theme$confirmation16 = _theme$confirmation16.components) === null || _theme$confirmation16 === void 0 || (_theme$confirmation16 = _theme$confirmation16.address) === null || _theme$confirmation16 === void 0 ? void 0 : _theme$confirmation16.hidden;
   var hideCustomerEmail = theme === null || theme === void 0 || (_theme$confirmation17 = theme.confirmation) === null || _theme$confirmation17 === void 0 || (_theme$confirmation17 = _theme$confirmation17.components) === null || _theme$confirmation17 === void 0 || (_theme$confirmation17 = _theme$confirmation17.customer) === null || _theme$confirmation17 === void 0 || (_theme$confirmation17 = _theme$confirmation17.components) === null || _theme$confirmation17 === void 0 || (_theme$confirmation17 = _theme$confirmation17.email) === null || _theme$confirmation17 === void 0 ? void 0 : _theme$confirmation17.hidden;
   var hideCustomerPhoto = theme === null || theme === void 0 || (_theme$confirmation18 = theme.confirmation) === null || _theme$confirmation18 === void 0 || (_theme$confirmation18 = _theme$confirmation18.components) === null || _theme$confirmation18 === void 0 || (_theme$confirmation18 = _theme$confirmation18.customer) === null || _theme$confirmation18 === void 0 || (_theme$confirmation18 = _theme$confirmation18.components) === null || _theme$confirmation18 === void 0 || (_theme$confirmation18 = _theme$confirmation18.photo) === null || _theme$confirmation18 === void 0 ? void 0 : _theme$confirmation18.hidden;
-  var validTrackingStatus = [9, 19, 23];
+  var validTrackingStatus = [9, 19, 23, 26];
   var mapConfigs = {
     zoom: 15
   };
