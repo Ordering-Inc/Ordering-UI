@@ -24,6 +24,7 @@ export const OrderBillSection = (props) => {
   const theme = useTheme()
   const [{ parsePrice, parseNumber }] = useUtils()
   const [{ configs }] = useConfig()
+  const isPickup = order?.delivery_type === 2
 
   const walletName = {
     cash: {
@@ -175,7 +176,7 @@ export const OrderBillSection = (props) => {
               </tr>
             ))
           }
-          {typeof order?.summary?.delivery_price === 'number' && (
+          {typeof order?.summary?.delivery_price === 'number' && !isPickup && (
             <tr>
               <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
               <td>{parsePrice(order?.summary?.delivery_price + getIncludedTaxes(true))}</td>
