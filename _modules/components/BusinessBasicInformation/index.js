@@ -24,7 +24,6 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var types = ['food', 'laundry', 'alcohol', 'groceries'];
 var BusinessBasicInformation = exports.BusinessBasicInformation = function BusinessBasicInformation(props) {
   var _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view5, _theme$business_view6, _props$beforeElements, _props$beforeComponen, _theme$images, _business$reviews, _orderState$options, _props$afterComponent, _props$afterElements;
   var isSkeleton = props.isSkeleton,
@@ -47,13 +46,13 @@ var BusinessBasicInformation = exports.BusinessBasicInformation = function Busin
     parseDistance = _useUtils2$.parseDistance,
     optimizeImage = _useUtils2$.optimizeImage;
   var getBusinessType = function getBusinessType() {
+    var _business$types;
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
-    var _types = [];
-    types.forEach(function (type) {
-      var _type$replace;
-      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 || (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
+    var _types = business === null || business === void 0 || (_business$types = business.types) === null || _business$types === void 0 ? void 0 : _business$types.map(function (type) {
+      var _type$name;
+      return t("BUSINESS_TYPE_".concat(type === null || type === void 0 || (_type$name = type.name) === null || _type$name === void 0 || (_type$name = _type$name.replace(/\s/g, '_')) === null || _type$name === void 0 ? void 0 : _type$name.toUpperCase()), type === null || type === void 0 ? void 0 : type.name);
     });
-    return _types.join(', ');
+    return _types === null || _types === void 0 ? void 0 : _types.join(', ');
   };
   var showLogo = !(theme !== null && theme !== void 0 && (_theme$business_view = theme.business_view) !== null && _theme$business_view !== void 0 && (_theme$business_view = _theme$business_view.components) !== null && _theme$business_view !== void 0 && (_theme$business_view = _theme$business_view.header) !== null && _theme$business_view !== void 0 && (_theme$business_view = _theme$business_view.components) !== null && _theme$business_view !== void 0 && (_theme$business_view = _theme$business_view.business) !== null && _theme$business_view !== void 0 && (_theme$business_view = _theme$business_view.components) !== null && _theme$business_view !== void 0 && (_theme$business_view = _theme$business_view.logo) !== null && _theme$business_view !== void 0 && _theme$business_view.hidden);
   var showDeliveryFee = !(theme !== null && theme !== void 0 && (_theme$business_view2 = theme.business_view) !== null && _theme$business_view2 !== void 0 && (_theme$business_view2 = _theme$business_view2.components) !== null && _theme$business_view2 !== void 0 && (_theme$business_view2 = _theme$business_view2.header) !== null && _theme$business_view2 !== void 0 && (_theme$business_view2 = _theme$business_view2.components) !== null && _theme$business_view2 !== void 0 && (_theme$business_view2 = _theme$business_view2.business) !== null && _theme$business_view2 !== void 0 && (_theme$business_view2 = _theme$business_view2.components) !== null && _theme$business_view2 !== void 0 && (_theme$business_view2 = _theme$business_view2.fee) !== null && _theme$business_view2 !== void 0 && _theme$business_view2.hidden);
