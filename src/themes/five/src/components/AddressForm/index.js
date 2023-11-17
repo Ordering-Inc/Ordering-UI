@@ -243,7 +243,7 @@ const AddressFormUI = (props) => {
     })
     updateChanges({
       ...address,
-      address: googleInputRef?.current?.value
+      address: googleInputRef?.current?.value || address?.address
     })
   }
 
