@@ -115,7 +115,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     disabled: true
   })), suboption.image && suboption.image !== '-' && /*#__PURE__*/_react.default.createElement(_styles.SubOptionThumbnail, {
     src: suboption.image
-  }), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name))), /*#__PURE__*/_react.default.createElement(_styles.RightOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && (state === null || state === void 0 ? void 0 : state.selected) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name))), /*#__PURE__*/_react.default.createElement(_styles.RightOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.QuantityControl, null, !((option === null || option === void 0 ? void 0 : option.max) === 1 && (option === null || option === void 0 ? void 0 : option.min) === 1) && (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && (state === null || state === void 0 ? void 0 : state.selected) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, {
     disabled: state.quantity === 0 || isSoldOut,
     onClick: handleDecrement
   }), state.quantity, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, {
@@ -129,7 +129,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
       return handlePosition(e, 'left');
     }
   }), /*#__PURE__*/_react.default.createElement(_BsCircleFill.default, {
-    className: [(pizzaState === null || pizzaState === void 0 || (_pizzaState3 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState3 === void 0 ? void 0 : _pizzaState3.value) === (option === null || option === void 0 ? void 0 : option.max) ? 'disabled' : '', state.selected && state.position === 'whole' ? 'selected' : null].filter(function (classname) {
+    className: [(pizzaState === null || pizzaState === void 0 || (_pizzaState3 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState3 === void 0 ? void 0 : _pizzaState3.value) === (option === null || option === void 0 ? void 0 : option.max) && !((option === null || option === void 0 ? void 0 : option.max) === 1 && (option === null || option === void 0 ? void 0 : option.min) === 1) ? 'disabled' : '', state.selected && state.position === 'whole' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),
     onClick: function onClick(e) {
