@@ -314,7 +314,7 @@ var AddressFormUI = function AddressFormUI(props) {
       selectedFromAutocomplete: true
     }));
     updateChanges(_objectSpread(_objectSpread({}, address), {}, {
-      address: googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value
+      address: (googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value) || (address === null || address === void 0 ? void 0 : address.address)
     }));
   };
   var setMapErrors = function setMapErrors(errKey) {
