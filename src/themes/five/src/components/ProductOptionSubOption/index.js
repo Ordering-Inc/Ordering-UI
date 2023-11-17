@@ -136,7 +136,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
         <RightOptionContainer>
 
           <QuantityControl>
-            {option?.allow_suboption_quantity && state?.selected && (
+            {!(option?.max === 1 && option?.min === 1) && option?.allow_suboption_quantity && state?.selected && (
               <>
                 <BsDashCircle
                   disabled={state.quantity === 0 || isSoldOut}
@@ -162,7 +162,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
                   />
                   <BsCircleFill
                     className={[
-                      pizzaState?.[`option:${option?.id}`]?.value === option?.max ? 'disabled' : '',
+                      (pizzaState?.[`option:${option?.id}`]?.value === option?.max) && !(option?.max === 1 && option?.min === 1) ? 'disabled' : '',
                       state.selected && state.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
                     onClick={(e) => handlePosition(e, 'whole')}
                   />
