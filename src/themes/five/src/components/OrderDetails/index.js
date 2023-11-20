@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
+  OrderDetails as OrderDetailsController,
   useLanguage,
   useEvent,
   useUtils,
@@ -13,7 +14,6 @@ import {
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import ExclamationTriangleIcon from '@meronex/icons/bs/BsExclamationTriangle'
-import {  OrderDetails as OrderDetailsController } from './test'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
 
