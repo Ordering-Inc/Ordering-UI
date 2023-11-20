@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import moment from 'moment'
 import { useLocation } from 'react-router-dom'
 import {
@@ -62,6 +62,8 @@ const MomentControlUI = (props) => {
     preorderMinimumDays
   } = props
 
+  const scheduleItemRef = useRef()
+  const timeListRef = useRef()
   const [{ configs }] = useConfig()
   const is12hours = configs?.general_hour_format?.value?.includes('hh:mm')
   const [{ parseTime }] = useUtils()
@@ -72,6 +74,7 @@ const MomentControlUI = (props) => {
   const [timeList, setTimeList] = useState([])
   const [scheduleList, setScheduleList] = useState(null)
   const [isEnabled, setIsEnabled] = useState(true)
+  const [nextTime, setNextTime] = useState(null)
 
   const handleCheckBoxChange = (index) => {
     if (index) {
@@ -167,8 +170,8 @@ const MomentControlUI = (props) => {
       _timeLists = hoursList
         .filter(hour => (Object.keys(business || {})?.length === 0 || schedule?.lapses?.some(lapse =>
           moment(dateSelected + ` ${hour.startTime}`) >= moment(dateSelected + ` ${lapse.open.hour}:${lapse.open.minute}`).add(preorderLeadTime, 'minutes') && moment(dateSelected + ` ${hour.endTime}`) <= moment(dateSelected + ` ${lapse.close.hour}:${lapse.close.minute}`))) &&
-        moment(dateSelected + ` ${hour.startTime}`) < moment(dateSelected + ` ${hour.endTime}`) &&
-        (moment().add(preorderLeadTime, 'minutes') < moment(dateSelected + ` ${hour.startTime}`) || !cateringPreorder))
+          moment(dateSelected + ` ${hour.startTime}`) < moment(dateSelected + ` ${hour.endTime}`) &&
+          (moment().add(preorderLeadTime, 'minutes') < moment(dateSelected + ` ${hour.startTime}`) || !cateringPreorder))
         .map(hour => {
           return {
             value: hour.startTime,
@@ -213,6 +216,32 @@ const MomentControlUI = (props) => {
     setLocalMoment()
   }, [])
 
+  useEffect(() => {
+    if (timeListRef?.current && !orderState.loading && timeSelected) {
+      timeListRef.current.scroll({
+        left: 0,
+        top: scheduleItemRef?.current?.offsetTop - 300
+      })
+    }
+  }, [timeListRef?.current, timeSelected, orderState.loading, timeList?.length])
+
+  useEffect(() => {
+    if (preorderMinimumDays === 0 && preorderLeadTime === 0) return
+    const isToday = dateSelected === moment().format('YYYY-MM-DD')
+    if (isCart && isToday && !orderState?.loading && timeList?.length > 0) {
+      setNextTime(timeList?.[0] ?? null)
+    }
+  }, [timeList?.length])
+
+  useEffect(() => {
+    if (nextTime?.value && timeList?.length > 0 && isCart && !orderState?.loading && !(preorderMinimumDays === 0 && preorderLeadTime === 0)) {
+      const notime = timeList?.filter((_, i) => i !== 0)?.find?.(time => time?.value === timeSelected)
+      if (!notime) {
+        handleChangeTime(nextTime?.value)
+      }
+    }
+  }, [nextTime?.value])
+
   return (
     <div id='moment_control'>
       {!isAppoint && (
@@ -227,7 +256,7 @@ const MomentControlUI = (props) => {
               isLoading={orderState?.loading}
             >
               {isASP ? <CheckedIcon /> : <CgRadioCheck />}
-              <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} - {t('DELIVERY_TIME', 'delivery time')})</span>
+              <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} + {t('DELIVERY_TIME', 'delivery time')})</span>
             </CheckBoxWrapper>
           )}
           <CheckBoxWrapper
@@ -300,7 +329,7 @@ const MomentControlUI = (props) => {
                   </Swiper>
                 </DaysSwiper>
               </DateWrapper>
-              <TimeListWrapper>
+              <TimeListWrapper ref={timeListRef}>
                 {(isEnabled && timeList?.length > 0) ? (
                   <>
                     {timeList.map((time, i) => (
@@ -314,7 +343,7 @@ const MomentControlUI = (props) => {
                         <span>
                           {cateringPreorder && (
                             <CheckIcon>
-                              {timeSelected === time.value ? <CheckedIcon cateringPreorder={cateringPreorder} /> : <CgRadioCheck />}
+                              {timeSelected === time.value ? <CheckedIcon ref={scheduleItemRef} cateringPreorder={cateringPreorder} /> : <CgRadioCheck />}
                             </CheckIcon>
                           )}
                           <p>

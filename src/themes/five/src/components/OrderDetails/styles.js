@@ -183,7 +183,6 @@ export const OrderInfo = styled.div`
   }
   .date {
     margin-bottom: 6px;
-    text-transform: uppercase;
   }
   .types {
     margin-bottom: 6px;
