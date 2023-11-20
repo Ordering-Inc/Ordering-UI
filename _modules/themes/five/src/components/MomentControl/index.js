@@ -55,6 +55,8 @@ var MomentControlUI = function MomentControlUI(props) {
     getActualSchedule = props.getActualSchedule,
     preorderMaximumDays = props.preorderMaximumDays,
     preorderMinimumDays = props.preorderMinimumDays;
+  var scheduleItemRef = (0, _react.useRef)();
+  var timeListRef = (0, _react.useRef)();
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
@@ -86,6 +88,10 @@ var MomentControlUI = function MomentControlUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     isEnabled = _useState8[0],
     setIsEnabled = _useState8[1];
+  var _useState9 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState9, 2),
+    nextTime = _useState10[0],
+    setNextTime = _useState10[1];
   var handleCheckBoxChange = function handleCheckBoxChange(index) {
     if (index) {
       !orderState.loading && handleAsap();
@@ -165,6 +171,36 @@ var MomentControlUI = function MomentControlUI(props) {
   (0, _react.useEffect)(function () {
     setLocalMoment();
   }, []);
+  (0, _react.useEffect)(function () {
+    if (timeListRef !== null && timeListRef !== void 0 && timeListRef.current && !orderState.loading && timeSelected) {
+      var _scheduleItemRef$curr;
+      timeListRef.current.scroll({
+        left: 0,
+        top: (scheduleItemRef === null || scheduleItemRef === void 0 || (_scheduleItemRef$curr = scheduleItemRef.current) === null || _scheduleItemRef$curr === void 0 ? void 0 : _scheduleItemRef$curr.offsetTop) - 300
+      });
+    }
+  }, [timeListRef === null || timeListRef === void 0 ? void 0 : timeListRef.current, timeSelected, orderState.loading, timeList === null || timeList === void 0 ? void 0 : timeList.length]);
+  (0, _react.useEffect)(function () {
+    if (preorderMinimumDays === 0 && preorderLeadTime === 0) return;
+    var isToday = dateSelected === (0, _moment.default)().format('YYYY-MM-DD');
+    if (isCart && isToday && !(orderState !== null && orderState !== void 0 && orderState.loading) && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0) {
+      var _timeList$;
+      setNextTime((_timeList$ = timeList === null || timeList === void 0 ? void 0 : timeList[0]) !== null && _timeList$ !== void 0 ? _timeList$ : null);
+    }
+  }, [timeList === null || timeList === void 0 ? void 0 : timeList.length]);
+  (0, _react.useEffect)(function () {
+    if (nextTime !== null && nextTime !== void 0 && nextTime.value && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 && isCart && !(orderState !== null && orderState !== void 0 && orderState.loading) && !(preorderMinimumDays === 0 && preorderLeadTime === 0)) {
+      var _timeList$filter, _timeList$filter$find;
+      var notime = timeList === null || timeList === void 0 || (_timeList$filter = timeList.filter(function (_, i) {
+        return i !== 0;
+      })) === null || _timeList$filter === void 0 || (_timeList$filter$find = _timeList$filter.find) === null || _timeList$filter$find === void 0 ? void 0 : _timeList$filter$find.call(_timeList$filter, function (time) {
+        return (time === null || time === void 0 ? void 0 : time.value) === timeSelected;
+      });
+      if (!notime) {
+        handleChangeTime(nextTime === null || nextTime === void 0 ? void 0 : nextTime.value);
+      }
+    }
+  }, [nextTime === null || nextTime === void 0 ? void 0 : nextTime.value]);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
   }, !isAppoint && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCart && /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('WHEN_DO_WE_DELIVERY', 'When do we delivery?')), (preorderMinimumDays === 0 && preorderLeadTime === 0 || !cateringPreorder) && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
@@ -173,7 +209,7 @@ var MomentControlUI = function MomentControlUI(props) {
       return handleCheckBoxChange(true);
     },
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP'), " (", (0, _moment.default)(new Date()).format('LLLL'), " - ", t('DELIVERY_TIME', 'delivery time'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP'), " (", (0, _moment.default)(new Date()).format('LLLL'), " + ", t('DELIVERY_TIME', 'delivery time'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
     highlight: !isASP,
     onClick: function onClick() {
       return handleCheckBoxChange(null);
@@ -222,7 +258,9 @@ var MomentControlUI = function MomentControlUI(props) {
     }, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, {
       isAppoint: isAppoint
     }, dayNumber)));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, isEnabled && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, timeList.map(function (time, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, {
+    ref: timeListRef
+  }, isEnabled && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, timeList.map(function (time, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TimeItem, {
       key: i,
       active: timeSelected === time.value,
@@ -232,6 +270,7 @@ var MomentControlUI = function MomentControlUI(props) {
       isAppoint: isAppoint,
       cateringPreorder: cateringPreorder
     }, /*#__PURE__*/_react.default.createElement("span", null, cateringPreorder && /*#__PURE__*/_react.default.createElement(_styles.CheckIcon, null, timeSelected === time.value ? /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, {
+      ref: scheduleItemRef,
       cateringPreorder: cateringPreorder
     }) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null)), /*#__PURE__*/_react.default.createElement("p", null, time.text, " ", cateringPreorder && "- ".concat(time.endText))));
   })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, !business ? t('ERROR_SHEDULE_UNAVAILABLE', 'There are no schedules for this date') : t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))) : /*#__PURE__*/_react.default.createElement(_CustomLayout.CustomLayout, {

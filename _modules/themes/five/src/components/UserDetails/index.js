@@ -59,7 +59,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
     t = _useLanguage2[1];
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
-    user = _useSession2[0].user;
+    _useSession2$ = _useSession2[0],
+    user = _useSession2$.user,
+    loading = _useSession2$.loading;
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -67,11 +69,14 @@ var UserDetailsUI = function UserDetailsUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
+  var _useState3 = (0, _react.useState)(requiredFields),
+    _useState4 = _slicedToArray(_useState3, 1),
+    skeletonsLength = _useState4[0];
   var userData = ((_userState$result = userState.result) === null || _userState$result === void 0 ? void 0 : _userState$result.result) || props.userData || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) || user;
-  var _useState3 = (0, _react.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    willVerifyOtpState = _useState4[0],
-    setWillVerifyOtpState = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    willVerifyOtpState = _useState6[0],
+    setWillVerifyOtpState = _useState6[1];
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, willVerifyOtpState),
     _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
     otpLeftTime = _useCountdownTimer2[0],
@@ -154,7 +159,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), (validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.SkeletonsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UserData, null, requiredFields === null || requiredFields === void 0 ? void 0 : requiredFields.map(function (field) {
+  }), (validationFields.loading || formState.loading || userState.loading || loading) && /*#__PURE__*/_react.default.createElement(_styles.SkeletonsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.UserData, null, skeletonsLength === null || skeletonsLength === void 0 ? void 0 : skeletonsLength.map(function (field) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: field === null || field === void 0 ? void 0 : field.id
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -170,7 +175,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     style: {
       marginTop: 20
     }
-  }))), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
+  }))), !(validationFields.loading || formState.loading || userState.loading || loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
     isAddressFormOpen: isAddressFormOpen && !isEdit
   }, !isCheckoutPlace && /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {

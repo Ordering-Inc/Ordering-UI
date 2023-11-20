@@ -11,6 +11,7 @@ var _orderingComponents = require("ordering-components");
 var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _BsExclamationTriangle = _interopRequireDefault(require("@meronex/icons/bs/BsExclamationTriangle"));
+var _test = require("./test");
 var _Buttons = require("../../styles/Buttons");
 var _NotFoundSource = require("../NotFoundSource");
 var _ProductItemAccordion = require("../ProductItemAccordion");
@@ -186,6 +187,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var preorderStatus = [0, 13];
   var googleMapsApiKey = configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var enabledPoweredByOrdering = configs === null || configs === void 0 || (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
+  var cateringTypes = [7, 8];
   var hideOrderActions = (order === null || order === void 0 ? void 0 : order.delivery_type) === 1;
   var isGiftCardOrder = !(order !== null && order !== void 0 && order.business_id);
   var isOriginalLayout = (theme === null || theme === void 0 || (_theme$confirmation = theme.confirmation) === null || _theme$confirmation === void 0 || (_theme$confirmation = _theme$confirmation.components) === null || _theme$confirmation === void 0 || (_theme$confirmation = _theme$confirmation.layout) === null || _theme$confirmation === void 0 ? void 0 : _theme$confirmation.type) === 'original';
@@ -532,14 +534,16 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     className: "types"
   }, isService ? t('SERVICE_AT_HOME', 'Service at home') : orderTypes === null || orderTypes === void 0 || (_orderTypes$find = orderTypes.find(function (type) {
     return (order === null || order === void 0 ? void 0 : order.delivery_type) === (type === null || type === void 0 ? void 0 : type.value);
-  })) === null || _orderTypes$find === void 0 ? void 0 : _orderTypes$find.text), !hideDeliveryDate && /*#__PURE__*/_react.default.createElement("p", {
+  })) === null || _orderTypes$find === void 0 ? void 0 : _orderTypes$find.text), !hideDeliveryDate && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
-  }, activeStatus.includes(order === null || order === void 0 ? void 0 : order.status) ? /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
+  }, t('CREATED_AT', 'Created at'), ": ", parseDate(order === null || order === void 0 ? void 0 : order.created_at)), /*#__PURE__*/_react.default.createElement("p", {
+    className: "date"
+  }, activeStatus.includes(order === null || order === void 0 ? void 0 : order.status) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ", /*#__PURE__*/_react.default.createElement(_OrderEta.OrderEta, {
     order: order,
     outputFormat: "YYYY-MM-DD ".concat(configs === null || configs === void 0 || (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.value)
-  }) : parseDate(order === null || order === void 0 || (_order$reporting_data = order.reporting_data) === null || _order$reporting_data === void 0 ? void 0 : _order$reporting_data.at["status:".concat(order.status)], {
+  })) : parseDate(order === null || order === void 0 || (_order$reporting_data = order.reporting_data) === null || _order$reporting_data === void 0 ? void 0 : _order$reporting_data.at["status:".concat(order.status)], {
     outputFormat: "YYYY-MM-DD ".concat(configs === null || configs === void 0 || (_configs$general_hour2 = configs.general_hour_format) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.value)
-  })), (acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) || !isOriginalLayout) && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.ReOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), (acceptedStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status, 10)) || !isOriginalLayout) && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.ReOrder, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     outline: true,
     onClick: function onClick() {
@@ -845,5 +849,5 @@ var OrderDetails = exports.OrderDetails = function OrderDetails(props) {
     }],
     UIComponent: OrderDetailsUI
   });
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetails, orderDetailsProps);
+  return /*#__PURE__*/_react.default.createElement(_test.OrderDetails, orderDetailsProps);
 };
