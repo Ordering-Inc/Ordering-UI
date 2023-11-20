@@ -11,7 +11,6 @@ var _orderingComponents = require("ordering-components");
 var _RiUser2Fill = _interopRequireDefault(require("@meronex/icons/ri/RiUser2Fill"));
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _BsExclamationTriangle = _interopRequireDefault(require("@meronex/icons/bs/BsExclamationTriangle"));
-var _test = require("./test");
 var _Buttons = require("../../styles/Buttons");
 var _NotFoundSource = require("../NotFoundSource");
 var _ProductItemAccordion = require("../ProductItemAccordion");
@@ -849,5 +848,5 @@ var OrderDetails = exports.OrderDetails = function OrderDetails(props) {
     }],
     UIComponent: OrderDetailsUI
   });
-  return /*#__PURE__*/_react.default.createElement(_test.OrderDetails, orderDetailsProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.OrderDetails, orderDetailsProps);
 };
