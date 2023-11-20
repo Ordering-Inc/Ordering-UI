@@ -51,8 +51,9 @@ const UserDetailsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ user }] = useSession()
+  const [{ user, loading }] = useSession()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [skeletonsLength] = useState(requiredFields)
   const userData = userState.result?.result || props.userData || formState.result?.result || user
 
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
@@ -142,10 +143,10 @@ const UserDetailsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      {(validationFields.loading || formState.loading || userState.loading) && (
+      {((validationFields.loading || formState.loading || userState.loading || loading)) && (
         <SkeletonsContainer>
           <UserData>
-            {requiredFields?.map(field => (
+            {skeletonsLength?.map(field => (
               <div key={field?.id}>
                 <Skeleton width={250} height={35} />
                 <Skeleton width='100%' height={40} />
@@ -156,7 +157,7 @@ const UserDetailsUI = (props) => {
         </SkeletonsContainer>
       )}
 
-      {!(validationFields.loading || formState.loading || userState.loading) && (
+      {!(validationFields.loading || formState.loading || userState.loading || loading) && (
         <Container>
           {isModal && (
             <TitleContainer isAddressFormOpen={isAddressFormOpen && !isEdit}>
