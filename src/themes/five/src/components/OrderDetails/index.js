@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
-  OrderDetails as OrderDetailsController,
   useEvent,
   useUtils,
   useConfig,
@@ -14,7 +13,7 @@ import {
 import RiUser2Fill from '@meronex/icons/ri/RiUser2Fill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import ExclamationTriangleIcon from '@meronex/icons/bs/BsExclamationTriangle'
-
+import {  OrderDetails as OrderDetailsController } from './test'
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
 
@@ -133,6 +132,7 @@ const OrderDetailsUI = (props) => {
   const preorderStatus = [0, 13]
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
+  const cateringTypes = [7, 8]
 
   const hideOrderActions = order?.delivery_type === 1
   const isGiftCardOrder = !order?.business_id
@@ -431,13 +431,22 @@ const OrderDetailsUI = (props) => {
                   </p>
                 )}
                 {!hideDeliveryDate && (
-                  <p className='date'>
-                    {activeStatus.includes(order?.status) ? (
-                      <OrderEta order={order} outputFormat={`YYYY-MM-DD ${configs?.general_hour_format?.value}`} />
-                    ) : (
-                      parseDate(order?.reporting_data?.at[`status:${order.status}`], { outputFormat: `YYYY-MM-DD ${configs?.general_hour_format?.value}` })
+                  <>
+                    {cateringTypes.includes(order?.delivery_type) && (
+                      <p className='date'>
+                        {t('CREATED_AT', 'Created at')}: {parseDate(order?.created_at)}
+                      </p>
                     )}
-                  </p>
+                    <p className='date'>
+                      {activeStatus.includes(order?.status) ? (
+                        <>
+                          {cateringTypes.includes(order?.delivery_type) ? `${t('PLACED_TO', 'Placed to')}:` : ''} <OrderEta order={order} outputFormat={`YYYY-MM-DD ${configs?.general_hour_format?.value}`} />
+                        </>
+                      ) : (
+                        parseDate(order?.reporting_data?.at[`status:${order.status}`], { outputFormat: `YYYY-MM-DD ${configs?.general_hour_format?.value}` })
+                      )}
+                    </p>
+                  </>
                 )}
                 {(acceptedStatus.includes(parseInt(order?.status, 10)) ||
                   !isOriginalLayout
