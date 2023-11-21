@@ -133,6 +133,8 @@ const OrderDetailsUI = (props) => {
   const preorderStatus = [0, 13]
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
+  const changeIdToExternalId = configs?.change_order_id?.value === '1'
+  const cateringTypes = [7, 8]
 
   const hideOrderActions = order?.delivery_type === 1
   const isGiftCardOrder = !order?.business_id
@@ -396,7 +398,7 @@ const OrderDetailsUI = (props) => {
           <WrapperLeftContainer>
             <OrderInfo>
               <TitleContainer>
-                <OrderIdSec>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</OrderIdSec>
+                <OrderIdSec>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} {(changeIdToExternalId && order?.external_id) || `#${order?.id}`}</OrderIdSec>
                 {enabledPoweredByOrdering && (
                   <PoweredByOrdering>
                     {t('POWERED_BY', 'Powered by')}
@@ -842,7 +844,7 @@ const OrderDetailsUI = (props) => {
         open={isOrderHistory}
         width='760px'
         onClose={() => setIsOrderHistory(false)}
-        title={t('DETAILS_OF_ORDER', 'Details of Order_NUMBER_').replace('_NUMBER_', ` # ${order?.id}`)}
+        title={t('DETAILS_OF_ORDER', 'Details of Order_NUMBER_').replace('_NUMBER_', (changeIdToExternalId && order?.external_id) || `# ${order?.id}`)}
       >
         <OrderHistory
           messages={messages}

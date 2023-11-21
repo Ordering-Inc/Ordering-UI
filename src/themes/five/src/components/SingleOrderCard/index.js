@@ -138,6 +138,7 @@ const SingleOrderCardUI = (props) => {
   const hideReorderButton = theme?.orders?.components?.reorder_button?.hidden
   const hideFavorite = theme?.orders?.components?.favorite?.hidden
   const hideOrderStatus = theme?.orders?.components?.order_status?.hidden
+  const changeIdToExternalId = configs?.change_order_id?.value === '1'
 
   return (
     <>
@@ -220,7 +221,7 @@ const SingleOrderCardUI = (props) => {
                   {order?.id && !hideOrderNumber && (
                     <>
                       <BsDot />
-                      <p name='order_number'>{order?.business?.length > 1 ? `${order?.business?.length} ${t('ORDERS', 'orders')}` : `${t('ORDER_NUM', 'Order No.')} ${order.id}`}</p>
+                      <p name='order_number'>{order?.business?.length > 1 ? `${order?.business?.length} ${t('ORDERS', 'orders')}` : (changeIdToExternalId && order?.external_id) || (`${t('ORDER_NUM', 'Order No.')} ${order.id}`)}</p>
                     </>
                   )}
                   {!hideDate && (
