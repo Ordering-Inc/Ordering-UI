@@ -218,7 +218,7 @@ const SingleOrderCardUI = (props) => {
                 </div>
               ) : (
                 <div className='orders-detail'>
-                  {order?.id && !hideOrderNumber && (
+                  {(order?.id || (changeIdToExternalId && order?.external_id)) && !hideOrderNumber && (
                     <>
                       <BsDot />
                       <p name='order_number'>{order?.business?.length > 1 ? `${order?.business?.length} ${t('ORDERS', 'orders')}` : (changeIdToExternalId && order?.external_id) || (`${t('ORDER_NUM', 'Order No.')} ${order.id}`)}</p>
