@@ -262,7 +262,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     width: 150
   })) : /*#__PURE__*/_react.default.createElement("div", {
     className: "orders-detail"
-  }, (order === null || order === void 0 ? void 0 : order.id) && !hideOrderNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", {
+  }, ((order === null || order === void 0 ? void 0 : order.id) || changeIdToExternalId && (order === null || order === void 0 ? void 0 : order.external_id)) && !hideOrderNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", {
     name: "order_number"
   }, (order === null || order === void 0 || (_order$business13 = order.business) === null || _order$business13 === void 0 ? void 0 : _order$business13.length) > 1 ? "".concat(order === null || order === void 0 || (_order$business14 = order.business) === null || _order$business14 === void 0 ? void 0 : _order$business14.length, " ").concat(t('ORDERS', 'orders')) : changeIdToExternalId && (order === null || order === void 0 ? void 0 : order.external_id) || "".concat(t('ORDER_NUM', 'Order No.'), " ").concat(order.id))), !hideDate && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("p", null, pastOrders ? order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc, {
     outputFormat: 'MM/DD/YY hh:mm A'
