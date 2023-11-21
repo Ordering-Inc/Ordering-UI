@@ -852,7 +852,7 @@ const OrderDetailsUI = (props) => {
         open={isOrderHistory}
         width='760px'
         onClose={() => setIsOrderHistory(false)}
-        title={t('DETAILS_OF_ORDER', 'Details of Order_NUMBER_').replace('_NUMBER_', ` # ${order?.id}`)}
+        title={t('DETAILS_OF_ORDER', 'Details of Order_NUMBER_').replace('_NUMBER_', (changeIdToExternalId && order?.external_id) || `# ${order?.id}`)}
       >
         <OrderHistory
           messages={messages}
