@@ -2117,9 +2117,9 @@
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
 "@react-native-async-storage/async-storage@^1.13.1":
-  version "1.19.6"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.19.6.tgz#0f91666eb209b1f719ea245a33b88920c1fd6791"
-  integrity sha512-Qjd1HlEusQQtPyDTM7zpO2P3G2mYY+z5at/aqsVJLJpzytZ+8QT+jgDQmt6BVgZcwk/74jSrhDIdu2j3YCmoEg==
+  version "1.19.7"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.19.7.tgz#05cab023eeb9ac2c2c1223f6fb57a564244f59a9"
+  integrity sha512-zvfhOWWnjzeP4exfgNwDUot7MQafEEJnbjjNsVKWRxRuQT521GLSHUJQHjMTLg19QPT+HbsGjL7rJzKkmXuq7w==
   dependencies:
     merge-options "^3.0.4"
 
@@ -3211,9 +3211,9 @@
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
-  version "20.9.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.9.3.tgz#e089e1634436f676ff299596c9531bd2b59fffc6"
-  integrity sha512-nk5wXLAXGBKfrhLB0cyHGbSqopS+nz0BUgZkUQqSHSSgdee0kssp1IAqlQOu333bW+gMNs2QREx7iynm19Abxw==
+  version "20.9.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.9.4.tgz#cc8f970e869c26834bdb7ed480b30ede622d74c7"
+  integrity sha512-wmyg8HUhcn6ACjsn8oKYjkN/zUzQeNtMy44weTJSM6p4MMzEOuKbA3OjJ267uPCOW7Xex9dyrNTful8XTQYoDA==
   dependencies:
     undici-types "~5.26.4"
 
@@ -3245,9 +3245,9 @@
   integrity sha512-IFQTJARgMUBF+xVd2b+hIgXWrZEjND3vJtRCvIelcFB5SIXfjV4bOHbHJ0eXKh+0COrBRc8MqteKAz/j88rE0A==
 
 "@types/sizzle@^2.3.2":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.7.tgz#ab5744eceb30daea3e0c6a9c2d9e1a3817ef7656"
-  integrity sha512-sU5MNKvSFdbT97qLSabU6jxceY9BfYQe9uF+b8E1rdTecpq9ROkkKoiHlblUlhgfaz9bdCByWjAI40Y3mHf1iQ==
+  version "2.3.8"
+  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.8.tgz#518609aefb797da19bf222feb199e8f653ff7627"
+  integrity sha512-0vWLNK2D5MT9dg0iOo8GlKguPAU02QjmZitPEsXRuJXU/OGIOt9vT9Fc26wtYuavLxtO45v9PGleoL9Z0k1LHg==
 
 "@types/source-list-map@*":
   version "0.1.6"
@@ -3281,9 +3281,9 @@
     source-map "^0.7.3"
 
 "@types/webpack@^4.41.8":
-  version "4.41.37"
-  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.37.tgz#3678c30c4270566b2a8c2a3fd2baa71117dc38d1"
-  integrity sha512-oUs4nP9PJMannYwLkfT0HppaqHL890ACYAaquH1EroPAeRGeruB2NUXkBdm9AXimohWXwuq8wzbFOwu+5dJ2KQ==
+  version "4.41.38"
+  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.38.tgz#5a40ac81bdd052bf405e8bdcf3e1236f6db6dc26"
+  integrity sha512-oOW7E931XJU1mVfCnxCVgv8GLFL768pDO5u2Gzk82i8yTIgX6i7cntyZOkZYb/JtYM8252SN9bQp9tgkVDSsRw==
   dependencies:
     "@types/node" "*"
     "@types/tapable" "^1"
@@ -4544,9 +4544,9 @@ camelize@^1.0.0:
   integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
 
 caniuse-lite@^1.0.30001541:
-  version "1.0.30001563"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001563.tgz#aa68a64188903e98f36eb9c56e48fba0c1fe2a32"
-  integrity sha512-na2WUmOxnwIZtwnFI2CZ/3er0wdNzU7hN+cPYz/z2ajHThnkWjNBOpEPP4n+4r2WPM847JaMotaJE3bnfzjyKw==
+  version "1.0.30001564"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001564.tgz#eaa8bbc58c0cbccdcb7b41186df39dd2ba591889"
+  integrity sha512-DqAOf+rhof+6GVx1y+xzbFPeOumfQnhYzVnZD6LAXijR77yPtm9mfOcqOnT3mpnJiZVT+kwLAFnRlZcIz+c6bg==
 
 canvg@^3.0.6:
   version "3.0.10"
@@ -5732,9 +5732,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.535:
-  version "1.4.589"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.589.tgz#3fc83c284ed8f1f58e0cb3c664c8ebcb4d0b42fb"
-  integrity sha512-zF6y5v/YfoFIgwf2dDfAqVlPPsyQeWNpEWXbAlDUS8Ax4Z2VoiiZpAPC0Jm9hXEkJm2vIZpwB6rc4KnLTQffbQ==
+  version "1.4.590"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.590.tgz#85a428fbabb77265a4804040837ed4f2538e3300"
+  integrity sha512-hohItzsQcG7/FBsviCYMtQwUSWvVF7NVqPOnJCErWsAshsP/CR2LAXdmq276RbESNdhxiAq5/vRo1g2pxGXVww==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -8277,9 +8277,9 @@ levn@^0.3.0, levn@~0.3.0:
     type-check "~0.3.2"
 
 libphonenumber-js@^1.10.48, libphonenumber-js@^1.9.17, libphonenumber-js@^1.9.4:
-  version "1.10.49"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.49.tgz#c871661c62452348d228c96425f75ddf7e10f05a"
-  integrity sha512-gvLtyC3tIuqfPzjvYLH9BmVdqzGDiSi4VjtWe2fAgSdBf0yt8yPmbNnRIHNbR5IdtVkm0ayGuzwQKTWmU0hdjQ==
+  version "1.10.50"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.50.tgz#d7ea406dd86f9b1056f261bdfe66c3016ed0bd2e"
+  integrity sha512-AOYOJslxKQ49mpwvpkSFcagoMtxeH1UpUHm+05pmPkenPpFbt6ofdeEvQ+ZylmQiJS99ocRWeEeEp7quVlFyVA==
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
@@ -9298,7 +9298,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/bbf92bd5e44f227d259d4f6fd7a3f7d7b10f1478"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/e7b68991f52ed9a6b5c4dde7a1b67228aa3350be"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
