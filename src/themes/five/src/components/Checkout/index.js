@@ -135,6 +135,8 @@ const CheckoutUI = (props) => {
   const [ordering] = useApi()
   const windowSize = useWindowSize()
 
+  const isValidMinimum = cart?.minimum < (cart?.subtotal_with_discount + cart?.tax_after_discount)
+
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [{ user, token }] = useSession()
@@ -188,7 +190,7 @@ const CheckoutUI = (props) => {
     errorCash ||
     loading ||
     !cart?.valid_maximum ||
-    (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
+    (!isValidMinimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ||
     // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
     (options.type === 1 &&
       validationFields?.fields?.checkout?.driver_tip?.enabled &&
@@ -842,13 +844,13 @@ const CheckoutUI = (props) => {
             {!cartState.loading && cart && cart?.status !== 2 && (
               <WrapperPlaceOrderButton>
                 <Button
-                  color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
+                  color={(!cart?.valid_maximum || (!isValidMinimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
                   disabled={isDisablePlaceOrderButton}
                   onClick={() => ((paymethodSelected?.gateway === 'openpay' || paymethodSelected?.gateway === 'openpay_mastercard') && isCSVPopup) ? checkAddressNote(true) : checkAddressNote()}
                 >
                   {!cart?.valid_maximum ? (
                     `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
-                  ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
+                  ) : (!isValidMinimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
                     `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
                   ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
                 </Button>
