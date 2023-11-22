@@ -340,14 +340,16 @@ export const ProductItemAccordion = (props) => {
           )}
           {toppingsRemoved?.removed?.length > 0 && (
             <ProductOptionsList>
-              <li>{t('TOPPINGS_REMOVED', 'Toppings removed')}</li>
-              <ProductOptionsList className='suboption'>
-                {toppingsRemoved?.removed.map(topping => (
-                  <li key={topping.code}>
-                    <span>{topping.name}</span>
-                  </li>
-                ))}
-              </ProductOptionsList>
+              <li>
+                <p>{t('TOPPINGS_REMOVED', 'Toppings removed')}</p>
+                <ProductOptionsList className='suboption'>
+                  {toppingsRemoved?.removed.map(topping => (
+                    <li key={topping.code}>
+                      <span>{topping.name}</span>
+                    </li>
+                  ))}
+                </ProductOptionsList>
+              </li>
             </ProductOptionsList>
           )}
           {product.comment && (
@@ -358,12 +360,16 @@ export const ProductItemAccordion = (props) => {
           )}
         </AccordionContent>
       </AccordionSection>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
+      {
+        props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))
+      }
+      {
+        props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))
+      }
     </>
   )
 }
