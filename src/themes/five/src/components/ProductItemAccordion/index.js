@@ -44,7 +44,8 @@ export const ProductItemAccordion = (props) => {
     onEditProduct,
     isCheckout,
     isStore,
-    isConfirmationPage
+    isConfirmationPage,
+    toppingsRemoved
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -335,6 +336,18 @@ export const ProductItemAccordion = (props) => {
                   </ProductOptionsList>
                 </li>
               ))}
+            </ProductOptionsList>
+          )}
+          {toppingsRemoved?.removed?.length > 0 && (
+            <ProductOptionsList>
+              <li>{t('TOPPINGS_REMOVED', 'Toppings removed')}</li>
+              <ProductOptionsList className='suboption'>
+                {toppingsRemoved?.removed.map(topping => (
+                  <li key={topping.code}>
+                    <span>{topping.name}</span>
+                  </li>
+                ))}
+              </ProductOptionsList>
             </ProductOptionsList>
           )}
           {product.comment && (
