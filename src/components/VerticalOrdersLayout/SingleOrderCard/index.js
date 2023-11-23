@@ -2,7 +2,7 @@ import React from 'react'
 import { Heart as DisLike, HeartFill as Like } from 'react-bootstrap-icons'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { BusinessInformation } from '../../OrdersOption/styles'
-import { useLanguage, useUtils, SingleOrderCard as SingleOrderCardController } from 'ordering-components'
+import { useLanguage, useUtils, SingleOrderCard as SingleOrderCardController, useConfig } from 'ordering-components'
 import { Button } from '../../../styles/Buttons'
 import { useTheme } from 'styled-components'
 
@@ -33,7 +33,7 @@ const SingleOrderCardUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parseDate }] = useUtils()
-
+  const [{ configs }] = useConfig()
   const isGiftCardOrder = !order?.business_id
 
   const handleChangeFavorite = (order) => {
@@ -56,6 +56,7 @@ const SingleOrderCardUI = (props) => {
   const hideReviewOrderButton = theme?.orders?.components?.review_order_button?.hidden
   const hideReorderButton = theme?.orders?.components?.reorder_button?.hidden
   const hideOrderStatus = theme?.orders?.components?.order_status?.hidden
+  const changeIdToExternalId = configs?.change_order_id?.value === '1'
 
   return (
     <SingleCard key={order.id} id='order-card' onClick={(e) => handleClickCard(e, order)}>
@@ -97,9 +98,9 @@ const SingleOrderCardUI = (props) => {
             )}
           </WrapperBusinessTitle>
           <OrderInfo>
-            {!hideOrderNumber && order?.id && (
+            {(order?.id || (changeIdToExternalId && order?.external_id)) && !hideOrderNumber && (
               <>
-                <p name='order_number'>{order?.business?.length > 1 ? `${order?.business?.length} ${t('ORDERS', 'orders')}` : `${t('ORDER_NUM', 'Order No.')} ${order.id}`}</p>
+                <p name='order_number'>{order?.business?.length > 1 ? `${order?.business?.length} ${t('ORDERS', 'orders')}` : (changeIdToExternalId && order?.external_id) || (`${t('ORDER_NUM', 'Order No.')} ${order.id}`)}</p>
                 <BsDot className='dot' />
               </>
             )}
