@@ -326,6 +326,7 @@ const CartUI = (props) => {
                 isDisabledEdit={!cart?.business_id}
                 product={product}
                 isCheckout={isCheckout}
+                toppingsRemoved={cart?.toppings_removed?.[product?.code]}
                 changeQuantity={changeQuantity}
                 getProductMax={getProductMax}
                 offsetDisabled={offsetDisabled}
