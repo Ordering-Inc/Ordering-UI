@@ -110,6 +110,7 @@ export const WrapperPlaceOrderButton = styled.div`
     width: 100%;
     padding: 5px 20px;
     cursor: pointer;
+    border-radius: 7.6px;
 
     &:disabled {
       opacity: 0.5;
@@ -370,4 +371,10 @@ export const SectionTitleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`
+
+export const OrderDetailContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px 20px;
 `
