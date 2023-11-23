@@ -534,7 +534,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       images: (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.logo,
       name: (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.name
     }
-  })))), (order === null || order === void 0 ? void 0 : order.status) !== 0 && (order === null || order === void 0 ? void 0 : order.integration_id) && /*#__PURE__*/_react.default.createElement("h1", null, t('TICKET', 'Ticket'), ": ", order === null || order === void 0 ? void 0 : order.integration_id), !hideDeliveryType && /*#__PURE__*/_react.default.createElement("p", {
+  })))), !!(order !== null && order !== void 0 && order.integration_id) && /*#__PURE__*/_react.default.createElement("h1", null, t('TICKET', 'Ticket'), ": ", order === null || order === void 0 ? void 0 : order.integration_id), !hideDeliveryType && /*#__PURE__*/_react.default.createElement("p", {
     className: "types"
   }, isService ? t('SERVICE_AT_HOME', 'Service at home') : orderTypes === null || orderTypes === void 0 || (_orderTypes$find = orderTypes.find(function (type) {
     return (order === null || order === void 0 ? void 0 : order.delivery_type) === (type === null || type === void 0 ? void 0 : type.value);
