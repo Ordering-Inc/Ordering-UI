@@ -44,7 +44,8 @@ export const ProductItemAccordion = (props) => {
     onEditProduct,
     isCheckout,
     isStore,
-    isConfirmationPage
+    isConfirmationPage,
+    toppingsRemoved
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -337,6 +338,20 @@ export const ProductItemAccordion = (props) => {
               ))}
             </ProductOptionsList>
           )}
+          {toppingsRemoved?.removed?.length > 0 && (
+            <ProductOptionsList>
+              <li>
+                <p>{t('TOPPINGS_REMOVED', 'Toppings removed')}</p>
+                <ProductOptionsList className='suboption'>
+                  {toppingsRemoved?.removed.map(topping => (
+                    <li key={topping.code}>
+                      <span>{topping.name}</span>
+                    </li>
+                  ))}
+                </ProductOptionsList>
+              </li>
+            </ProductOptionsList>
+          )}
           {product.comment && (
             <ProductComment>
               <p>{t('SPECIAL_COMMENT', 'Special Comment')}</p>
@@ -345,12 +360,16 @@ export const ProductItemAccordion = (props) => {
           )}
         </AccordionContent>
       </AccordionSection>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
+      {
+        props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))
+      }
+      {
+        props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))
+      }
     </>
   )
 }
