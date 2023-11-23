@@ -418,19 +418,23 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         var _product$calendar_eve;
         return (product === null || product === void 0 || (_product$calendar_eve = product.calendar_event) === null || _product$calendar_eve === void 0 || (_product$calendar_eve = _product$calendar_eve.professional) === null || _product$calendar_eve === void 0 ? void 0 : _product$calendar_eve.id) === (professional === null || professional === void 0 ? void 0 : professional.id);
       }).map(function (product) {
+        var _order$toppings_remov;
         return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
           key: product.id,
           product: product,
-          showArrowIcon: true
+          showArrowIcon: true,
+          toppingsRemoved: order === null || order === void 0 || (_order$toppings_remov = order.toppings_removed) === null || _order$toppings_remov === void 0 ? void 0 : _order$toppings_remov[product === null || product === void 0 ? void 0 : product.code]
         });
       }));
     }), order === null || order === void 0 ? void 0 : order.products.filter(function (product) {
       return !(product !== null && product !== void 0 && product.calendar_event);
     }).map(function (product) {
+      var _order$toppings_remov2;
       return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
         key: product.id,
         product: product,
-        showArrowIcon: true
+        showArrowIcon: true,
+        toppingsRemoved: order === null || order === void 0 || (_order$toppings_remov2 = order.toppings_removed) === null || _order$toppings_remov2 === void 0 ? void 0 : _order$toppings_remov2[product === null || product === void 0 ? void 0 : product.code]
       });
     }));
   };
