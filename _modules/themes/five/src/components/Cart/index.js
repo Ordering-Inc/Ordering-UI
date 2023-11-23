@@ -372,6 +372,7 @@ var CartUI = function CartUI(props) {
     isMultiCheckout: isMultiCheckout,
     isGiftCart: !(cart !== null && cart !== void 0 && cart.business_id)
   }, (cart === null || cart === void 0 || (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0 && (cart === null || cart === void 0 ? void 0 : cart.products.map(function (product) {
+    var _cart$toppings_remove;
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.code,
       isCartPending: isCartPending,
@@ -379,6 +380,7 @@ var CartUI = function CartUI(props) {
       isDisabledEdit: !(cart !== null && cart !== void 0 && cart.business_id),
       product: product,
       isCheckout: isCheckout,
+      toppingsRemoved: cart === null || cart === void 0 || (_cart$toppings_remove = cart.toppings_removed) === null || _cart$toppings_remove === void 0 ? void 0 : _cart$toppings_remove[product === null || product === void 0 ? void 0 : product.code],
       changeQuantity: changeQuantity,
       getProductMax: getProductMax,
       offsetDisabled: offsetDisabled,
