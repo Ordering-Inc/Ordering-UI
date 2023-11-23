@@ -67,6 +67,7 @@ import { PlaceSpot } from '../PlaceSpot'
 import { OrderContextUI } from '../OrderContextUI'
 import { SignUpForm } from '../SignUpForm'
 import { LoginForm } from '../LoginForm'
+import { OrderDetail } from './OrderDetail'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -103,6 +104,7 @@ const CheckoutUI = (props) => {
   } = props
 
   const theme = useTheme()
+  const [ordering] = useApi()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -128,6 +130,7 @@ const CheckoutUI = (props) => {
   const [paymethodClicked, setPaymethodClicked] = useState(null)
   const [productLoading, setProductLoading] = useState(false)
 
+  const shouldActivateOrderDetailModal = ordering?.project === 'alsea'
   const cardsMethods = ['stripe', 'credomatic']
   const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
   const businessConfigs = businessDetails?.business?.configs ?? []
@@ -138,7 +141,7 @@ const CheckoutUI = (props) => {
     (isWalletCashEnabled || isWalletCreditPointsEnabled) && !useKioskApp && !isCustomerMode
   const isMultiDriverTips = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
   const notFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'zipcode', 'address_notes', 'comments']
-  const hexTest = /[0-9A-Fa-f]{6}/g;
+  const hexTest = /[0-9A-Fa-f]{6}/g
   const primaryColor = theme?.colors?.primary?.split?.('#')?.[1]
   const placeSpotTypes = [3, 4, 5]
   const placeSpotsEnabled = placeSpotTypes.includes(options?.type) && !useKioskApp
@@ -575,24 +578,24 @@ const CheckoutUI = (props) => {
 
         {
           !!(!isMultiDriverTips && driverTipsField) &&
-          <>
-            <DriverTipContainer>
-              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-              <DriverTips
-                businessId={cart?.business_id}
-                driverTipsOptions={driverTipsOptions}
-                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                  ? cart?.driver_tip
-                  : cart?.driver_tip_rate}
-                cart={cart}
-                useOrderContext
-              />
-            </DriverTipContainer>
-            <DriverTipDivider />
-          </>
+            <>
+              <DriverTipContainer>
+                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                <DriverTips
+                  businessId={cart?.business_id}
+                  driverTipsOptions={driverTipsOptions}
+                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate}
+                  cart={cart}
+                  useOrderContext
+                />
+              </DriverTipContainer>
+              <DriverTipDivider />
+            </>
         }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
@@ -660,7 +663,9 @@ const CheckoutUI = (props) => {
             <Button
               color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
               disabled={isDisablePlaceOrderButton}
-              onClick={() => handlePlaceOrder()}
+              onClick={() => shouldActivateOrderDetailModal
+                ? setOpenModal({ ...openModal, orderDetail: true })
+                : handlePlaceOrder()}
             >
               {!cart?.valid_maximum ? (
                 `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
@@ -730,7 +735,11 @@ const CheckoutUI = (props) => {
           <Button
             color={(!cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100))) ? 'secundary' : 'primary'}
             disabled={isDisablePlaceOrderButton}
-            onClick={() => isDisablePlaceOrderButton ? handleScrollTo('.paymentsContainer') : handlePlaceOrder()}
+            onClick={() => isDisablePlaceOrderButton
+              ? handleScrollTo('.paymentsContainer')
+              : shouldActivateOrderDetailModal
+                ? setOpenModal({ ...openModal, orderDetail: true })
+                : handlePlaceOrder()}
           >
             {!cart?.valid_maximum ? (
               `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
@@ -811,6 +820,20 @@ const CheckoutUI = (props) => {
           handleSuccessLogin={handleSuccessLogin}
           isPopup
           isGuest
+        />
+      </Modal>
+      <Modal
+        open={openModal.orderDetail}
+        width='760px'
+        padding='30px'
+        onClose={() => setOpenModal({ ...openModal, orderDetail: false })}
+      >
+        <OrderDetail
+          item={cart}
+          placingOrder={placing}
+          orderType={options?.type}
+          customerAddress={options?.address?.address}
+          onClick={handlePlaceOrder}
         />
       </Modal>
     </Container>

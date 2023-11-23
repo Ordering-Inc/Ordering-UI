@@ -424,7 +424,7 @@ const OrderDetailsUI = (props) => {
                     </ShareOrder>
                   </Content>
                 )}
-                {order?.status !== 0 && order?.integration_id && (
+                {!!order?.integration_id && (
                   <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
                 )}
                 {!hideDeliveryType && (
