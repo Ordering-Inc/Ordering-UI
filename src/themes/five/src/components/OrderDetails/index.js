@@ -295,6 +295,7 @@ const OrderDetailsUI = (props) => {
                 key={product.id}
                 product={product}
                 showArrowIcon
+                toppingsRemoved={order?.toppings_removed?.[product?.code]}
               />
             ))}
           </ProfessionalBlock>
@@ -304,6 +305,7 @@ const OrderDetailsUI = (props) => {
             key={product.id}
             product={product}
             showArrowIcon
+            toppingsRemoved={order?.toppings_removed?.[product?.code]}
           />
         ))}
       </>
