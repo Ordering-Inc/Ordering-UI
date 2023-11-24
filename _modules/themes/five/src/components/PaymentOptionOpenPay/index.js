@@ -40,7 +40,8 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
   var deleteCard = props.deleteCard,
     cardsList = props.cardsList,
     _handleCardClick = props.handleCardClick,
-    handleNewCard = props.handleNewCard;
+    handleNewCard = props.handleNewCard,
+    fromProfile = props.fromProfile;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     token = _useSession2[0].token;
@@ -133,7 +134,9 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.OptionStripeContainer, null, !token && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')), token && cardsList.error && cardsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OptionStripeContainer, {
+    fromProfile: fromProfile
+  }, !token && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')), token && cardsList.error && cardsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$error$ = cardsList.error[0]) === null || _cardsList$error$ === void 0 ? void 0 : _cardsList$error$.message) || (cardsList === null || cardsList === void 0 ? void 0 : cardsList.error[0])
   }), token && cardsList.cards && cardsList.cards.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$cards = cardsList.cards) === null || _cardsList$cards === void 0 ? void 0 : _cardsList$cards.map(function (card, i) {
     return /*#__PURE__*/_react.default.createElement(PaymentCard, _extends({}, props, {
@@ -149,7 +152,7 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     }));
   })), token && !cardsList.loading && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
-      return setAddCardOpen(true);
+      fromProfile ? handleNewCard() : setAddCardOpen(true);
     },
     color: "primary"
   }, t('ADD_NEW_CARD', 'Add new card')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
@@ -262,7 +265,8 @@ var PaymentCard = function PaymentCard(props) {
   var handleDeleteCard = props.handleDeleteCard,
     card = props.card,
     handleCardClick = props.handleCardClick,
-    onSelectCard = props.onSelectCard;
+    onSelectCard = props.onSelectCard,
+    fromProfile = props.fromProfile;
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -296,7 +300,7 @@ var PaymentCard = function PaymentCard(props) {
   };
   var handleChangeDefaultCard = function handleChangeDefaultCard(e) {
     var _actionWrapperRef$cur, _window, _window$OpenPay, _window$OpenPay$devic, _window$OpenPay$devic2;
-    if ((_actionWrapperRef$cur = actionWrapperRef.current) !== null && _actionWrapperRef$cur !== void 0 && _actionWrapperRef$cur.contains(e.target)) return;
+    if ((_actionWrapperRef$cur = actionWrapperRef.current) !== null && _actionWrapperRef$cur !== void 0 && _actionWrapperRef$cur.contains(e.target) || fromProfile) return;
     handleCardClick(card);
     onSelectCard(_objectSpread(_objectSpread({}, card), {}, {
       id: card.id,
