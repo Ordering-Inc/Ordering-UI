@@ -26,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SingleOrderCardUI = function SingleOrderCardUI(props) {
-  var _theme$orders, _theme$orders2, _theme$orders3, _theme$orders4, _theme$orders5, _theme$orders6, _theme$orders7, _order$business, _theme$images, _order$business2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _theme$images3, _order$business8, _order$business9, _order$business10, _order$business11, _order$business12, _getOrderStatus;
+  var _theme$orders, _theme$orders2, _theme$orders3, _theme$orders4, _theme$orders5, _theme$orders6, _theme$orders7, _configs$change_order, _order$business, _theme$images, _order$business2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _theme$images3, _order$business8, _order$business9, _order$business10, _order$business11, _order$business12, _getOrderStatus;
   var order = props.order,
     getOrderStatus = props.getOrderStatus,
     handleReorder = props.handleReorder,
@@ -43,6 +43,9 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   var _useUtils = (0, _orderingComponents.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseDate = _useUtils2[0].parseDate;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var isGiftCardOrder = !(order !== null && order !== void 0 && order.business_id);
   var handleChangeFavorite = function handleChangeFavorite(order) {
     handleFavoriteOrder && handleFavoriteOrder(!(order !== null && order !== void 0 && order.favorite));
@@ -64,6 +67,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   var hideReviewOrderButton = theme === null || theme === void 0 || (_theme$orders5 = theme.orders) === null || _theme$orders5 === void 0 || (_theme$orders5 = _theme$orders5.components) === null || _theme$orders5 === void 0 || (_theme$orders5 = _theme$orders5.review_order_button) === null || _theme$orders5 === void 0 ? void 0 : _theme$orders5.hidden;
   var hideReorderButton = theme === null || theme === void 0 || (_theme$orders6 = theme.orders) === null || _theme$orders6 === void 0 || (_theme$orders6 = _theme$orders6.components) === null || _theme$orders6 === void 0 || (_theme$orders6 = _theme$orders6.reorder_button) === null || _theme$orders6 === void 0 ? void 0 : _theme$orders6.hidden;
   var hideOrderStatus = theme === null || theme === void 0 || (_theme$orders7 = theme.orders) === null || _theme$orders7 === void 0 || (_theme$orders7 = _theme$orders7.components) === null || _theme$orders7 === void 0 || (_theme$orders7 = _theme$orders7.order_status) === null || _theme$orders7 === void 0 ? void 0 : _theme$orders7.hidden;
+  var changeIdToExternalId = (configs === null || configs === void 0 || (_configs$change_order = configs.change_order_id) === null || _configs$change_order === void 0 ? void 0 : _configs$change_order.value) === '1';
   return /*#__PURE__*/_react.default.createElement(_styles2.SingleCard, {
     key: order.id,
     id: "order-card",
@@ -93,9 +97,9 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
       return handleChangeFavorite(order);
     },
     className: "favorite"
-  }, order !== null && order !== void 0 && order.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), /*#__PURE__*/_react.default.createElement(_styles2.OrderInfo, null, !hideOrderNumber && (order === null || order === void 0 ? void 0 : order.id) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
+  }, order !== null && order !== void 0 && order.favorite ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HeartFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null))), /*#__PURE__*/_react.default.createElement(_styles2.OrderInfo, null, ((order === null || order === void 0 ? void 0 : order.id) || changeIdToExternalId && (order === null || order === void 0 ? void 0 : order.external_id)) && !hideOrderNumber && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
     name: "order_number"
-  }, (order === null || order === void 0 || (_order$business11 = order.business) === null || _order$business11 === void 0 ? void 0 : _order$business11.length) > 1 ? "".concat(order === null || order === void 0 || (_order$business12 = order.business) === null || _order$business12 === void 0 ? void 0 : _order$business12.length, " ").concat(t('ORDERS', 'orders')) : "".concat(t('ORDER_NUM', 'Order No.'), " ").concat(order.id)), /*#__PURE__*/_react.default.createElement(_BsDot.default, {
+  }, (order === null || order === void 0 || (_order$business11 = order.business) === null || _order$business11 === void 0 ? void 0 : _order$business11.length) > 1 ? "".concat(order === null || order === void 0 || (_order$business12 = order.business) === null || _order$business12 === void 0 ? void 0 : _order$business12.length, " ").concat(t('ORDERS', 'orders')) : changeIdToExternalId && (order === null || order === void 0 ? void 0 : order.external_id) || "".concat(t('ORDER_NUM', 'Order No.'), " ").concat(order.id)), /*#__PURE__*/_react.default.createElement(_BsDot.default, {
     className: "dot"
   })), !hideDate && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
