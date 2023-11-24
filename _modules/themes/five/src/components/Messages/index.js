@@ -90,7 +90,7 @@ var MessagesUI = function MessagesUI(props) {
     modalImage = _useState4[0],
     setModalImage = _useState4[1];
   var imageRef = (0, _react.useRef)(null);
-  var previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17];
+  var previousStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
   var chatDisabled = previousStatus.includes(order === null || order === void 0 ? void 0 : order.status);
   var quickMessageList = [{
     key: 'message_1',
