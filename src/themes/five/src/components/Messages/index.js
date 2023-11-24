@@ -90,7 +90,7 @@ const MessagesUI = (props) => {
   const buttonRef = useRef(null)
   const [modalImage, setModalImage] = useState({ open: false, src: '' })
   const imageRef = useRef(null)
-  const previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17]
+  const previousStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const chatDisabled = previousStatus.includes(order?.status)
 
   const quickMessageList = [
