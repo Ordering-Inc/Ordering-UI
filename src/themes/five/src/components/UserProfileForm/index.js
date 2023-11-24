@@ -19,9 +19,10 @@ import { AddressList } from '../AddressList'
 import { Alert } from '../Confirm'
 import { Alert as AlertPFChangs } from '../Confirm/layouts/pfchangs'
 import { LoginForm as LoginFormComponent } from '../LoginForm/layouts/pfchangs'
+import { PaymentOptionOpenPay } from '../PaymentOptionOpenPay'
 
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
-import { bytesConverter } from '../../../../../utils'
+import { bytesConverter, deUnaApiKey } from '../../../../../utils'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { useTheme } from 'styled-components'
@@ -60,6 +61,7 @@ const UserProfileFormUI = (props) => {
   const [{ user }] = useSession()
   const [orderingTheme] = useOrderingTheme()
   const [otpDataUser, setOtpDataUser] = useState(null)
+  const [showMyCards, setShowMyCards] = useState(false)
 
   const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
     600, willVerifyOtpState)
@@ -190,69 +192,81 @@ const UserProfileFormUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       {!isHiddenAddress && (
-        <ProfileOptions value='account' pfchangs={pfchangs} />
+        <ProfileOptions value='account' pfchangs={pfchangs} setShowMyCards={setShowMyCards} />
       )}
-      <Container>
-        <UserProfileContainer mbottom={isHiddenAddress && 25}>
-          {showCustomerPicture && (
-            <UserImage className='user-image'>
-              <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
-                <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
-                  <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
-                    {formState.changes?.photo && formState.loading
-                      ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                      : ((!formState.changes?.photo || formState.result?.result === 'Network Error' || formState.result.error)
-                        ? user?.photo
-                          ? (<img src={user?.photo} alt='user image' width='200px' height='200px' loading='lazy' />)
-                          : (
-                            <UploadImageIcon>
-                              <BiImage />
-                              <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
-                            </UploadImageIcon>
+      {showMyCards ? (
+        <Container>
+          <UserProfileContainer fromProfile>
+            <PaymentOptionOpenPay
+              fromProfile
+              deUnaApiKey={deUnaApiKey}
+            />
+          </UserProfileContainer>
+        </Container>
+      ) : (
+        <Container>
+          <UserProfileContainer mbottom={isHiddenAddress && 25}>
+            {showCustomerPicture && (
+              <UserImage className='user-image'>
+                <Image onClick={() => handleClickImage()} isImage={user?.photo || (formState?.changes?.photo && !formState.result.error)}>
+                  <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
+                    <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
+                      {formState.changes?.photo && formState.loading
+                        ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
+                        : ((!formState.changes?.photo || formState.result?.result === 'Network Error' || formState.result.error)
+                          ? user?.photo
+                            ? (<img src={user?.photo} alt='user image' width='200px' height='200px' loading='lazy' />)
+                            : (
+                              <UploadImageIcon>
+                                <BiImage />
+                                <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
+                              </UploadImageIcon>
+                            )
+                          : formState?.changes?.photo && formState.result.error &&
+                          (
+                            <img
+                              src={formState?.changes?.photo}
+                              alt='user image'
+                              loading='lazy'
+                            />
                           )
-                        : formState?.changes?.photo && formState.result.error &&
-                        (
-                          <img
-                            src={formState?.changes?.photo}
-                            alt='user image'
-                            loading='lazy'
-                          />
-                        )
-                      )}
-                  </DragAndDrop>
-                </ExamineClick>
-              </Image>
-              <Camera><FiCamera /></Camera>
-            </UserImage>
+                        )}
+                    </DragAndDrop>
+                  </ExamineClick>
+                </Image>
+                <Camera><FiCamera /></Camera>
+              </UserImage>
+            )}
+            <SideForm className='user-form'>
+              <WrapperForm>
+                {userFormLayoutRow ? (
+                  <UserFormDetailsOldUI
+                    {...props}
+                    onCancel={toggleEditState}
+                    isOriginalLayout
+                    isHiddenAddress={isHiddenAddress}
+                    isOldLayout
+                  />
+                ) : (
+                  <UserFormDetailComponent
+                    {...props}
+                    onCancel={toggleEditState}
+                    isHiddenAddress={isHiddenAddress}
+                    setWillVerifyOtpState={setWillVerifyOtpState}
+                  />
+                )}
+              </WrapperForm>
+            </SideForm>
+          </UserProfileContainer>
+          {(userData?.addresses || user?.addresses) && !isHiddenAddress && showAddressList && (
+            <SavedPlaces>
+              <h1>{t('MY_ADDRESSES', 'My Saved places')}</h1>
+              <AddressList isModal addressList={user?.addresses} isProfile pfchangs={pfchangs} />
+            </SavedPlaces>
           )}
-          <SideForm className='user-form'>
-            <WrapperForm>
-              {userFormLayoutRow ? (
-                <UserFormDetailsOldUI
-                  {...props}
-                  onCancel={toggleEditState}
-                  isOriginalLayout
-                  isHiddenAddress={isHiddenAddress}
-                  isOldLayout
-                />
-              ) : (
-                <UserFormDetailComponent
-                  {...props}
-                  onCancel={toggleEditState}
-                  isHiddenAddress={isHiddenAddress}
-                  setWillVerifyOtpState={setWillVerifyOtpState}
-                />
-              )}
-            </WrapperForm>
-          </SideForm>
-        </UserProfileContainer>
-        {(userData?.addresses || user?.addresses) && !isHiddenAddress && showAddressList && (
-          <SavedPlaces>
-            <h1>{t('MY_ADDRESSES', 'My Saved places')}</h1>
-            <AddressList isModal addressList={user?.addresses} isProfile pfchangs={pfchangs} />
-          </SavedPlaces>
-        )}
-      </Container>
+        </Container>
+      )}
+
       <AlertComponent
         title={t('PROFILE', 'Profile')}
         content={alertState.content}

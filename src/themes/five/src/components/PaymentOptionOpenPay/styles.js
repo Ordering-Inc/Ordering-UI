@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components'
 export const OptionStripeContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  ${({ fromProfile }) => fromProfile && css`
+    width: 65%;
+  `}
 `
 
 export const WarningMessage = styled.p`
