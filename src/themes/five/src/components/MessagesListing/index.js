@@ -157,7 +157,7 @@ const OrdersListingUI = (props) => {
                     <p>{order?.business?.city?.name}</p>
                   </div>
                 </BusinessInfo>
-                {order?.delivery_type === 1 && (
+                {[1, 7]?.includes(order?.delivery_type) && (
                   <DriverInfo>
                     <WrapperImage>
                       {(order?.driver && order?.driver?.photo) ? (
