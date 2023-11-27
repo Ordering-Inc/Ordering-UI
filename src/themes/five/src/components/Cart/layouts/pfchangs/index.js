@@ -525,7 +525,7 @@ const CartUI = (props) => {
                 </Button>
               </CheckoutAction>
             )}
-            {((openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address) && (
+            {(!isCheckout && ((openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address)) && (
               <CartError>
                 <p>
                   {!cart?.valid_address ? (
