@@ -134,8 +134,9 @@ const OrderDetailsUI = (props) => {
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
   const changeIdToExternalId = configs?.change_order_id?.value === '1'
   const cateringTypes = [7, 8]
+  const deliveryTypes = [1, 7]
 
-  const hideOrderActions = order?.delivery_type === 1
+  const hideOrderActions = deliveryTypes?.includes(order?.delivery_type)
   const isGiftCardOrder = !order?.business_id
 
   const isOriginalLayout = theme?.confirmation?.components?.layout?.type === 'original'
@@ -687,7 +688,7 @@ const OrderDetailsUI = (props) => {
                 }
               </>
             )}
-            {(order?.delivery_type === 1 || order?.comment) && !isGiftCardOrder && (
+            {(deliveryTypes?.includes(order?.delivery_type) || order?.comment) && !isGiftCardOrder && (
               <OrderPreferences>
                 <OrderPreferencesSection
                   order={order}
