@@ -45,7 +45,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 var LoginFormUI = function LoginFormUI(props) {
-  var _configs$google_login, _configs$google_login2, _configs$google_login3, _configs$facebook_log, _configs$facebook_log2, _configs$apple_login_, _configs$apple_login_2, _configs$facebook_log3, _configs$facebook_log4, _configs$facebook_id, _configs$google_login4, _configs$google_login5, _configs$google_login6, _configs$apple_login_3, _configs$twilio_servi, _configs$twilio_servi2, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _theme$colors, _theme$colors2, _formMethods$errors, _formMethods$errors$e, _formMethods$errors2, _formMethods$errors2$, _formMethods$errors3, _formMethods$errors3$, _formMethods$errors4, _formMethods$errors5, _formMethods$errors6, _formMethods$errors6$, _formMethods$errors7, _formMethods$errors7$, _formMethods$errors8, _configs$facebook_log5, _configs$facebook_log6, _configs$facebook_id2, _configs$facebook_id3, _configs$google_login7, _configs$google_login8, _configs$google_login9;
+  var _configs$google_login, _configs$google_login2, _configs$google_login3, _configs$facebook_log, _configs$facebook_log2, _configs$apple_login_, _configs$apple_login_2, _configs$otp_whatsapp, _configs$otp_whatsapp2, _configs$otp_sms_enab, _configs$otp_sms_enab2, _configs$facebook_log3, _configs$facebook_log4, _configs$facebook_id, _configs$google_login4, _configs$google_login5, _configs$google_login6, _configs$apple_login_3, _configs$twilio_servi, _configs$twilio_servi2, _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos, _theme$colors, _theme$colors2, _formMethods$errors, _formMethods$errors$e, _formMethods$errors2, _formMethods$errors2$, _formMethods$errors3, _formMethods$errors3$, _formMethods$errors4, _formMethods$errors5, _formMethods$errors6, _formMethods$errors6$, _formMethods$errors7, _formMethods$errors7$, _formMethods$errors8, _configs$facebook_log5, _configs$facebook_log6, _configs$facebook_id2, _configs$facebook_id3, _configs$google_login7, _configs$google_login8, _configs$google_login9;
   var useLoginByEmail = props.useLoginByEmail,
     useLoginByCellphone = props.useLoginByCellphone,
     handleChangeInput = props.handleChangeInput,
@@ -70,7 +70,10 @@ var LoginFormUI = function LoginFormUI(props) {
     createOtpUser = props.createOtpUser,
     handleLoginFacebookAlsea = props.handleLoginFacebookAlsea,
     handleLoginGoogleAlsea = props.handleLoginGoogleAlsea,
-    isDirectLogin = props.isDirectLogin;
+    isDirectLogin = props.isDirectLogin,
+    isShowGuestLogin = props.isShowGuestLogin,
+    handleSetGuestLogin = props.handleSetGuestLogin,
+    closeAuthModal = props.closeAuthModal;
   var numOtpInputs = 4;
   var otpPlaceholder = _toConsumableArray(Array(numOtpInputs)).fill(0).join('');
   var _useApi = (0, _orderingComponents.useApi)(),
@@ -130,6 +133,8 @@ var LoginFormUI = function LoginFormUI(props) {
   var googleLoginEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$google_login2 = configs.google_login_enabled) === null || _configs$google_login2 === void 0 ? void 0 : _configs$google_login2.value) === '1' || !(configs !== null && configs !== void 0 && (_configs$google_login3 = configs.google_login_enabled) !== null && _configs$google_login3 !== void 0 && _configs$google_login3.enabled);
   var facebookLoginEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log = configs.facebook_login_enabled) === null || _configs$facebook_log === void 0 ? void 0 : _configs$facebook_log.value) === '1' || !(configs !== null && configs !== void 0 && (_configs$facebook_log2 = configs.facebook_login_enabled) !== null && _configs$facebook_log2 !== void 0 && _configs$facebook_log2.enabled);
   var appleLoginEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_ = configs.apple_login_enabled) === null || _configs$apple_login_ === void 0 ? void 0 : _configs$apple_login_.value) === '1' || !(configs !== null && configs !== void 0 && (_configs$apple_login_2 = configs.apple_login_enabled) !== null && _configs$apple_login_2 !== void 0 && _configs$apple_login_2.enabled);
+  var showWhatsAppOtp = (configs === null || configs === void 0 ? void 0 : (_configs$otp_whatsapp = configs.otp_whatsapp_enabled) === null || _configs$otp_whatsapp === void 0 ? void 0 : _configs$otp_whatsapp.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$otp_whatsapp2 = configs.otp_whatsapp_enabled) === null || _configs$otp_whatsapp2 === void 0 ? void 0 : _configs$otp_whatsapp2.value) === true;
+  var showSmsOtp = (configs === null || configs === void 0 ? void 0 : (_configs$otp_sms_enab = configs.otp_sms_enabled) === null || _configs$otp_sms_enab === void 0 ? void 0 : _configs$otp_sms_enab.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$otp_sms_enab2 = configs.otp_sms_enabled) === null || _configs$otp_sms_enab2 === void 0 ? void 0 : _configs$otp_sms_enab2.value) === true;
   var hasSocialLogin = ((configs === null || configs === void 0 ? void 0 : (_configs$facebook_log3 = configs.facebook_login) === null || _configs$facebook_log3 === void 0 ? void 0 : _configs$facebook_log3.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$facebook_log4 = configs.facebook_login) === null || _configs$facebook_log4 === void 0 ? void 0 : _configs$facebook_log4.value) === '1') && (configs === null || configs === void 0 ? void 0 : (_configs$facebook_id = configs.facebook_id) === null || _configs$facebook_id === void 0 ? void 0 : _configs$facebook_id.value) || (configs === null || configs === void 0 ? void 0 : (_configs$google_login4 = configs.google_login_client_id) === null || _configs$google_login4 === void 0 ? void 0 : _configs$google_login4.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login5 = configs.google_login_auth_domain) === null || _configs$google_login5 === void 0 ? void 0 : _configs$google_login5.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login6 = configs.google_login_api_key) === null || _configs$google_login6 === void 0 ? void 0 : _configs$google_login6.value) && googleLoginEnabled || (configs === null || configs === void 0 ? void 0 : (_configs$apple_login_3 = configs.apple_login_client_id) === null || _configs$apple_login_3 === void 0 ? void 0 : _configs$apple_login_3.value) && appleLoginEnabled || loginTab === 'cellphone' && ((configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi = configs.twilio_service_enabled) === null || _configs$twilio_servi === void 0 ? void 0 : _configs$twilio_servi.value) === 'true' || (configs === null || configs === void 0 ? void 0 : (_configs$twilio_servi2 = configs.twilio_service_enabled) === null || _configs$twilio_servi2 === void 0 ? void 0 : _configs$twilio_servi2.value) === '1');
   var hasSocialEnabled = googleLoginEnabled || facebookLoginEnabled || appleLoginEnabled;
   var onSubmit = /*#__PURE__*/function () {
@@ -358,7 +363,7 @@ var LoginFormUI = function LoginFormUI(props) {
     height: "105px",
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logoCallcenter,
     loading: "lazy"
-  })) : isDirectLogin ? /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('VERIFICATIOn', 'Verificacion')) : /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LOGIN', 'Login')), !loginWithOtpState && !willVerifyOtpState && !isDirectLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+  })) : isDirectLogin ? /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('VERIFICATION', 'Verificacion')) : /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LOGIN_MARKETPLACE', '¡Inicia sesión o regístrate!')), !loginWithOtpState && !willVerifyOtpState && !isDirectLogin && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
     variant: "primary"
@@ -429,13 +434,13 @@ var LoginFormUI = function LoginFormUI(props) {
     color: "primary",
     onClick: formMethods.handleSubmit(onSubmit),
     disabled: formState.loading || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)
-  }, t('CONTINUE', 'Continue'))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperButtons, null, !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('CONTINUE', 'Continue'))) : /*#__PURE__*/_react.default.createElement(_styles.WrapperButtons, null, !willVerifyOtpState && showWhatsAppOtp && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: formMethods.handleSubmit(function () {
       return onSubmit('whatsapp');
     }),
     disabled: formState.loading || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)
-  }, /*#__PURE__*/_react.default.createElement(_AiOutlineWhatsApp.default, null), formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : loginWithOtpState || loginTab === 'otp' ? t('WHATSAPP', 'Whatsapp') : t('LOGIN', 'Login')), !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineWhatsApp.default, null), formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : loginWithOtpState || loginTab === 'otp' ? t('WHATSAPP', 'Whatsapp') : t('LOGIN', 'Login')), !willVerifyOtpState && showSmsOtp && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: formMethods.handleSubmit(function () {
       return onSubmit('sms');
@@ -458,7 +463,14 @@ var LoginFormUI = function LoginFormUI(props) {
   }), (configs === null || configs === void 0 ? void 0 : (_configs$google_login7 = configs.google_login_client_id) === null || _configs$google_login7 === void 0 ? void 0 : _configs$google_login7.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login8 = configs.google_login_auth_domain) === null || _configs$google_login8 === void 0 ? void 0 : _configs$google_login8.value) && (configs === null || configs === void 0 ? void 0 : (_configs$google_login9 = configs.google_login_api_key) === null || _configs$google_login9 === void 0 ? void 0 : _configs$google_login9.value) && googleLoginEnabled && /*#__PURE__*/_react.default.createElement(_GoogleLogin.GoogleLoginButton, {
     initParams: initParams,
     handleSuccessGoogleLogin: handleLoginGoogleAlsea
-  })) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonSocialWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }), (isShowGuestLogin === null || isShowGuestLogin === void 0 ? void 0 : isShowGuestLogin.loginModal) && /*#__PURE__*/_react.default.createElement(_styles.GuestLoginButton, {
+    initialIcon: true,
+    color: "secondary",
+    onClick: function onClick() {
+      handleSetGuestLogin && handleSetGuestLogin('addressModal', true);
+      closeAuthModal && closeAuthModal();
+    }
+  }, t('LOGIN_GUEST_TEXT', 'Omitir por ahora'))) : /*#__PURE__*/_react.default.createElement(_styles.SkeletonSocialWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 43
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 43

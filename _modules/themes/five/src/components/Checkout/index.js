@@ -65,7 +65,7 @@ var mapConfigs = {
   }
 };
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3, _theme$layouts2, _theme$layouts2$gener, _theme$layouts2$gener2, _theme$layouts2$gener3, _businessDetails$busi3, _businessDetails$busi4, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _Object$values, _cart$business3, _businessDetails$busi5, _businessDetails$busi6, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$erro, _businessDetails$erro2, _configs$driver_tip_t, _configs$driver_tip_t2, _businessDetails$busi11, _businessDetails$busi12, _businessDetails$busi13, _businessDetails$busi14, _businessDetails$busi15, _cartState$cart$spot_, _cartState$cart, _configs$driver_tip_t3, _configs$driver_tip_u, _configs$driver_tip_t4, _cart$products2, _theme$images2, _theme$images2$genera, _wowAcumulationPoints, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3, _paymethodSelected$da3, _paymethodSelected$da4, _paymethodSelected$da5, _paymethodSelected$da6, _paymethodSelected$da7, _paymethodSelected$da8, _paymethodSelected$da9, _paymethodSelected$da10, _paymethodSelected$da11;
+  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3, _theme$layouts2, _theme$layouts2$gener, _theme$layouts2$gener2, _theme$layouts2$gener3, _businessDetails$busi3, _businessDetails$busi4, _configs$brands_wow_l, _configs$brands_wow_l2, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _Object$values, _cart$business3, _businessDetails$busi5, _businessDetails$busi6, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$erro, _businessDetails$erro2, _configs$driver_tip_t, _configs$driver_tip_t2, _businessDetails$busi11, _businessDetails$busi12, _businessDetails$busi13, _businessDetails$busi14, _businessDetails$busi15, _cartState$cart$spot_, _cartState$cart, _configs$driver_tip_t3, _configs$driver_tip_u, _configs$driver_tip_t4, _cart$products2, _theme$images2, _theme$images2$genera, _wowAcumulationPoints, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3, _paymethodSelected$da3, _paymethodSelected$da4, _paymethodSelected$da5, _paymethodSelected$da6, _paymethodSelected$da7, _paymethodSelected$da8, _paymethodSelected$da9, _paymethodSelected$da10, _paymethodSelected$da11;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
@@ -104,7 +104,9 @@ var CheckoutUI = function CheckoutUI(props) {
     _useOrder2$ = _useOrder2[0],
     options = _useOrder2$.options,
     loading = _useOrder2$.loading,
-    refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
+    _useOrder2$2 = _useOrder2[1],
+    refreshOrderOptions = _useOrder2$2.refreshOrderOptions,
+    applyOffer = _useOrder2$2.applyOffer;
   var _useApi = (0, _orderingComponents.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
@@ -217,6 +219,7 @@ var CheckoutUI = function CheckoutUI(props) {
 
   var daysForApplyCoupon = [0, 2, 4]; // Domingo 0
   var isApplyMasterCoupon = !(hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result) && daysForApplyCoupon.includes((0, _moment.default)().days());
+  var loyaltyBrands = (configs === null || configs === void 0 ? void 0 : (_configs$brands_wow_l = configs.brands_wow_loyalty_program) === null || _configs$brands_wow_l === void 0 ? void 0 : _configs$brands_wow_l.value) && JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$brands_wow_l2 = configs.brands_wow_loyalty_program) === null || _configs$brands_wow_l2 === void 0 ? void 0 : _configs$brands_wow_l2.value)[0];
   var isDisablePlaceOrderButton = !(cart !== null && cart !== void 0 && cart.valid) || !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 || placing || errorCash || loading || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !isValidMinimum && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ||
   // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
   options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.driver_tip) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.checkout) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.driver_tip) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 || cateringDayError || (hasCateringProducts === null || hasCateringProducts === void 0 ? void 0 : hasCateringProducts.loading);
@@ -462,6 +465,19 @@ var CheckoutUI = function CheckoutUI(props) {
       events.off('cart_placed', handleCartPlaced);
     };
   }, []);
+  (0, _react.useEffect)(function () {
+    var _configs$advanced_off2;
+    if (!isApplyMasterCoupon || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay_mastercard' || cartState.loading) return;
+    if (configs !== null && configs !== void 0 && (_configs$advanced_off2 = configs.advanced_offers_module) !== null && _configs$advanced_off2 !== void 0 && _configs$advanced_off2.value && (cart === null || cart === void 0 ? void 0 : cart.offers.length) === 0 && (cart === null || cart === void 0 ? void 0 : cart.paymethod_id) === (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id)) {
+      var dataOffer = {
+        business_id: cart === null || cart === void 0 ? void 0 : cart.business_id,
+        user_id: cart === null || cart === void 0 ? void 0 : cart.user_id,
+        offer_id: parseInt(t('MARKETPLACE_OFFER_ID_MASTERCARD', '4432')),
+        force: true
+      };
+      applyOffer(dataOffer);
+    }
+  }, [isApplyMasterCoupon, paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway, cart === null || cart === void 0 ? void 0 : cart.paymethod_id]);
   var CartComponent = layout === 'pfchangs' ? _pfchangs2.Cart : _Cart.Cart;
   var UserDetailsComponent = layout === 'pfchangs' ? _pfchangs.UserDetails : _UserDetails.UserDetails;
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
@@ -675,7 +691,7 @@ var CheckoutUI = function CheckoutUI(props) {
     isCheckout: true,
     isProducts: (cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.length) || 0,
     hasCateringProducts: hasCateringProducts
-  })), !(wowAcumulationPoints !== null && wowAcumulationPoints !== void 0 && wowAcumulationPoints.loading) && !(wowAcumulationPoints !== null && wowAcumulationPoints !== void 0 && wowAcumulationPoints.error) && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'wow_rewards' && configSlug !== 'starbucks' && /*#__PURE__*/_react.default.createElement(_styles.RewardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.RewardBox, null, /*#__PURE__*/_react.default.createElement(_styles.RewardBoxContainer, null, /*#__PURE__*/_react.default.createElement("div", {
+  })), !(wowAcumulationPoints !== null && wowAcumulationPoints !== void 0 && wowAcumulationPoints.loading) && !(wowAcumulationPoints !== null && wowAcumulationPoints !== void 0 && wowAcumulationPoints.error) && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'wow_rewards' && !!loyaltyBrands[brandInformation === null || brandInformation === void 0 ? void 0 : brandInformation.brand_id] && /*#__PURE__*/_react.default.createElement(_styles.RewardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.RewardBox, null, /*#__PURE__*/_react.default.createElement(_styles.RewardBoxContainer, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "image-reward"
   }, /*#__PURE__*/_react.default.createElement("div", {
     style: {

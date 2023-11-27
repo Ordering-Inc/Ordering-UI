@@ -46,7 +46,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 var notValidationFields = ['coupon', 'driver_tip', 'mobile_phone', 'address', 'address_notes'];
 var SignUpFormUI = function SignUpFormUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _validationFields$fie12, _validationFields$fie13, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _formMethods$errors16, _formMethods$errors17, _formMethods$errors18, _formMethods$errors19, _configs$terms_and_co, _formMethods$errors20, _formMethods$errors21, _formMethods$errors22, _configs$terms_and_co2;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _configs$verification, _configs$otp_whatsapp, _configs$otp_whatsapp2, _configs$otp_sms_enab, _configs$otp_sms_enab2, _validationFields$fie12, _validationFields$fie13, _formMethods$errors9, _formMethods$errors10, _formMethods$errors11, _formMethods$errors12, _formMethods$errors13, _formMethods$errors14, _formMethods$errors15, _formMethods$errors16, _formMethods$errors17, _formMethods$errors18, _formMethods$errors19, _configs$terms_and_co, _formMethods$errors20, _formMethods$errors21, _formMethods$errors22, _configs$terms_and_co2;
   var handleChangeInput = props.handleChangeInput,
     useChekoutFileds = props.useChekoutFileds,
     validationFields = props.validationFields,
@@ -107,6 +107,8 @@ var SignUpFormUI = function SignUpFormUI(props) {
     _ = _useCountdownTimer2[1],
     resetOtpLeftTime = _useCountdownTimer2[2];
   var showInputPhoneNumber = ((_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false) || (configs === null || configs === void 0 ? void 0 : (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1';
+  var showWhatsAppOtp = (configs === null || configs === void 0 ? void 0 : (_configs$otp_whatsapp = configs.otp_whatsapp_enabled) === null || _configs$otp_whatsapp === void 0 ? void 0 : _configs$otp_whatsapp.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$otp_whatsapp2 = configs.otp_whatsapp_enabled) === null || _configs$otp_whatsapp2 === void 0 ? void 0 : _configs$otp_whatsapp2.value) === true;
+  var showSmsOtp = (configs === null || configs === void 0 ? void 0 : (_configs$otp_sms_enab = configs.otp_sms_enabled) === null || _configs$otp_sms_enab === void 0 ? void 0 : _configs$otp_sms_enab.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$otp_sms_enab2 = configs.otp_sms_enabled) === null || _configs$otp_sms_enab2 === void 0 ? void 0 : _configs$otp_sms_enab2.value) === true;
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -468,13 +470,13 @@ var SignUpFormUI = function SignUpFormUI(props) {
       return setOpenOtpOptions(false);
     },
     width: "500px"
-  }, /*#__PURE__*/_react.default.createElement(_styles.SendCodeContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WILL_SEND_CODE_CONFIRM_PHONE', 'We will send you a code to confirm your cellphone')), /*#__PURE__*/_react.default.createElement(_styles.WrapperButtons, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.SendCodeContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WILL_SEND_CODE_CONFIRM_PHONE', 'We will send you a code to confirm your cellphone')), /*#__PURE__*/_react.default.createElement(_styles.WrapperButtons, null, showWhatsAppOtp && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return openVerifyState('whatsapp');
     },
     disabled: formState.loading || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)
-  }, /*#__PURE__*/_react.default.createElement(_AiOutlineWhatsApp.default, null), t('WHATSAPP', 'Whatsapp')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineWhatsApp.default, null), t('WHATSAPP', 'Whatsapp')), showSmsOtp && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return openVerifyState('sms');
