@@ -51,6 +51,7 @@ const OrdersListingUI = (props) => {
   const theme = useTheme()
   const [events] = useEvent()
   const [{ parseDate, optimizeImage }] = useUtils()
+  const deliveryTypes = [1, 7]
 
   const handleOrderClick = (e, order) => {
     const isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector')
@@ -157,7 +158,7 @@ const OrdersListingUI = (props) => {
                     <p>{order?.business?.city?.name}</p>
                   </div>
                 </BusinessInfo>
-                {[1, 7]?.includes(order?.delivery_type) && (
+                {deliveryTypes?.includes(order?.delivery_type) && (
                   <DriverInfo>
                     <WrapperImage>
                       {(order?.driver && order?.driver?.photo) ? (

@@ -38,6 +38,7 @@ const OrderProgressUI = (props) => {
   const [events] = useEvent()
   const [lastOrder, setLastOrder] = useState(null)
   const statusToShow = [0, 3, 4, 7, 8, 9, 13, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+  const deliveryTypes = [1, 7]
 
   const isChew = theme?.header?.components?.layout?.type?.toLowerCase() === 'chew'
 
@@ -108,7 +109,7 @@ const OrderProgressUI = (props) => {
               <ProgressTextWrapper>
                 <StatusWrapper>{progressBarObjt(lastOrder?.status)?.value}</StatusWrapper>
                 <TimeWrapper>
-                  <span>{[1, 7]?.includes(lastOrder?.delivery_type) ? t('ESTIMATED_DELIVERY', 'Estimated delivery') : t('ESTIMATED_TIME', 'Estimated time')}:&nbsp;</span>
+                  <span>{deliveryTypes?.includes(lastOrder?.delivery_type) ? t('ESTIMATED_DELIVERY', 'Estimated delivery') : t('ESTIMATED_TIME', 'Estimated time')}:&nbsp;</span>
                   <span>
                     {lastOrder?.delivery_datetime_utc
                       ? parseTime(lastOrder?.delivery_datetime_utc, { outputFormat: configs?.general_hour_format?.value || 'HH:mm' })
