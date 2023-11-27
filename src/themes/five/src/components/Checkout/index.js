@@ -129,7 +129,7 @@ const CheckoutUI = (props) => {
   const theme = useTheme()
   const [validationFields] = useValidationFields()
   // const [{ options, loading }, { changePaymethod }] = useOrder()
-  const [{ options, loading }, { refreshOrderOptions }] = useOrder()
+  const [{ options, loading }, { refreshOrderOptions, applyOffer }] = useOrder()
   const [ordering] = useApi()
   const windowSize = useWindowSize()
 
@@ -179,6 +179,7 @@ const CheckoutUI = (props) => {
 
   const daysForApplyCoupon = [0, 2, 4] // Domingo 0
   const isApplyMasterCoupon = !hasCateringProducts?.result && daysForApplyCoupon.includes(moment().days());
+  const loyaltyBrands = configs?.brands_wow_loyalty_program?.value && JSON.parse(configs?.brands_wow_loyalty_program?.value)[0]
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -434,6 +435,19 @@ const CheckoutUI = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (!isApplyMasterCoupon || paymethodSelected?.gateway !== 'openpay_mastercard' || cartState.loading) return
+    if (configs?.advanced_offers_module?.value && cart?.offers.length === 0 && cart?.paymethod_id === paymethodSelected?.id) {
+      const dataOffer = {
+        business_id: cart?.business_id,
+        user_id: cart?.user_id,
+        offer_id: parseInt(t('MARKETPLACE_OFFER_ID_MASTERCARD', '4432')),
+        force: true
+      }
+      applyOffer(dataOffer)
+    }
+  }, [isApplyMasterCoupon, paymethodSelected?.gateway, cart?.paymethod_id])
+
   const CartComponent = layout === 'pfchangs'
     ? CartPF
     : Cart
@@ -667,7 +681,7 @@ const CheckoutUI = (props) => {
                 )}
                 {isApplyMasterCoupon && !hasCateringProducts?.loading && (
                   <MasterCardCoupon>
-                    <img src={"https://d347gjkxx0g7x1.cloudfront.net/wow-plus/banners/dev/Banner_APP_Wow_MasterCard.jpg"} />
+                    <img src='https://d347gjkxx0g7x1.cloudfront.net/wow-plus/banners/dev/Banner_APP_Wow_MasterCard.jpg' />
                   </MasterCardCoupon>
                 )}
                 <PaymentOptions
@@ -787,7 +801,7 @@ const CheckoutUI = (props) => {
             />
           </CartContainer>
         )}
-        {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && configSlug !== 'starbucks' && (
+        {!wowAcumulationPoints?.loading && !wowAcumulationPoints?.error && paymethodSelected?.gateway !== 'wow_rewards' && !!loyaltyBrands[brandInformation?.brand_id] && (
           <RewardContainer>
             <RewardBox>
               <RewardBoxContainer>

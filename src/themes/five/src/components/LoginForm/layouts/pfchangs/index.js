@@ -32,7 +32,8 @@ import {
   LogotypeContainer,
   HeroSide,
   ResendCode,
-  WrapperButtons
+  WrapperButtons,
+  GuestLoginButton
 } from './styles'
 
 import { Tabs, Tab } from '../../../../styles/Tabs'
@@ -76,7 +77,10 @@ const LoginFormUI = (props) => {
     createOtpUser,
     handleLoginFacebookAlsea,
     handleLoginGoogleAlsea,
-    isDirectLogin
+    isDirectLogin,
+    isShowGuestLogin,
+    handleSetGuestLogin,
+    closeAuthModal
   } = props
   const numOtpInputs = 4
   const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
@@ -106,6 +110,8 @@ const LoginFormUI = (props) => {
   const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
   const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
   const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
+  const showWhatsAppOtp = configs?.otp_whatsapp_enabled?.value === '1' || configs?.otp_whatsapp_enabled?.value === true
+  const showSmsOtp = configs?.otp_sms_enabled?.value === '1' || configs?.otp_sms_enabled?.value === true
 
   const hasSocialLogin = (
     (configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1') && configs?.facebook_id?.value) ||
@@ -307,7 +313,7 @@ const LoginFormUI = (props) => {
               <img alt='Logotype-callcenter' width='250px' height='105px' src={theme?.images?.logos?.logoCallcenter} loading='lazy' />
             </LogotypeContainer>
           ) : (
-            isDirectLogin ? <Title>{t('VERIFICATIOn', 'Verificacion')}</Title> : <Title>{t('LOGIN', 'Login')}</Title>
+            isDirectLogin ? <Title>{t('VERIFICATION', 'Verificacion')}</Title> : <Title>{t('LOGIN_MARKETPLACE', '¡Inicia sesión o regístrate!')}</Title>
           )}
 
           {!loginWithOtpState && !willVerifyOtpState && !isDirectLogin && (
@@ -440,7 +446,7 @@ const LoginFormUI = (props) => {
               </>
             ) : (
               <WrapperButtons>
-                {(!willVerifyOtpState &&
+                {(!willVerifyOtpState && showWhatsAppOtp &&
                   <Button
                     color='primary'
                     onClick={formMethods.handleSubmit(() => onSubmit('whatsapp'))}
@@ -454,7 +460,7 @@ const LoginFormUI = (props) => {
                         : t('LOGIN', 'Login')}
                   </Button>
                 )}
-                {(!willVerifyOtpState &&
+                {(!willVerifyOtpState && showSmsOtp &&
                   <Button
                     color='primary'
                     onClick={formMethods.handleSubmit(() => onSubmit('sms'))}
@@ -520,6 +526,18 @@ const LoginFormUI = (props) => {
                       })}
                     />
                   )} */}
+                {isShowGuestLogin?.loginModal && (
+                  <GuestLoginButton
+                    initialIcon
+                    color='secondary'
+                    onClick={() => {
+                      handleSetGuestLogin && handleSetGuestLogin('addressModal', true)
+                      closeAuthModal && closeAuthModal()
+                    }}
+                  >
+                    {t('LOGIN_GUEST_TEXT', 'Omitir por ahora')}
+                  </GuestLoginButton>
+                )}
               </SocialButtons>
             ) : (
               <SkeletonSocialWrapper>

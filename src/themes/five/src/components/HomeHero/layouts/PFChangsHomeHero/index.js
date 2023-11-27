@@ -27,7 +27,7 @@ import { PFChangsBusinesListing } from '../../../BusinessesListing/layouts/PFCha
 import { getGoogleMapImage } from '../../../../../../../utils'
 
 export const PFChangsHomeHero = (props) => {
-  const { contentPosition, brandId } = props
+  const { contentPosition, brandId, handleSetGuestLogin, isShowGuestLogin } = props
 
   const [{ auth, user }, { refreshUserInfo }] = useSession()
   const [orderState, { changeType }] = useOrder()
@@ -120,8 +120,10 @@ export const PFChangsHomeHero = (props) => {
 
   useEffect(() => {
     navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-      if (result.state === 'granted') {
+      if (result.state === 'granted' || result.state === 'prompt') {
         setGeoLocation(true)
+      } else {
+        handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
       }
     })
     return () => setModals({ listOpen: false, formOpen: false })
@@ -129,7 +131,7 @@ export const PFChangsHomeHero = (props) => {
 
   useEffect(() => {
     if (geoLocation && !auth && !orderState?.options?.address?.location) {
-      setModals({ ...modals, formOpen: true })
+      handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
     }
   }, [geoLocation, auth, orderState?.options?.address?.location])
 
@@ -172,6 +174,11 @@ export const PFChangsHomeHero = (props) => {
       window.removeEventListener('resize', resizeEvent)
     }
   }, [])
+
+  useEffect(() => {
+    if ((!isShowGuestLogin?.loginModal && !isShowGuestLogin?.addressModal) || (isShowGuestLogin?.loginModal && !isShowGuestLogin?.addressModal)) return
+    setModals({ ...modals, formOpen: true })
+  }, [isShowGuestLogin])
 
   return (
     <>
