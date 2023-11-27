@@ -11,10 +11,11 @@ import {
 export const OrderPreferencesSection = (props) => {
   const { order } = props
   const [, t] = useLanguage()
+  const deliveryTypes = [1, 7]
 
   return (
     <>
-      {order?.delivery_type === 1 && (
+      {deliveryTypes?.includes(order?.delivery_type) && (
         <CommentContainer>
           <h3>{t('DELIVERY_PREFERENCE', 'Delivery preference')}</h3>
           <span>{order?.delivery_option?.name ? t(order?.delivery_option?.name.toUpperCase().replace(/\s/g, '_'), order?.delivery_option?.name) : t('EITHER_WAY', 'Either way')}</span>
