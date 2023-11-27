@@ -188,7 +188,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var enabledPoweredByOrdering = configs === null || configs === void 0 || (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
   var changeIdToExternalId = (configs === null || configs === void 0 || (_configs$change_order = configs.change_order_id) === null || _configs$change_order === void 0 ? void 0 : _configs$change_order.value) === '1';
   var cateringTypes = [7, 8];
-  var hideOrderActions = (order === null || order === void 0 ? void 0 : order.delivery_type) === 1;
+  var deliveryTypes = [1, 7];
+  var hideOrderActions = deliveryTypes === null || deliveryTypes === void 0 ? void 0 : deliveryTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type);
   var isGiftCardOrder = !(order !== null && order !== void 0 && order.business_id);
   var isOriginalLayout = (theme === null || theme === void 0 || (_theme$confirmation = theme.confirmation) === null || _theme$confirmation === void 0 || (_theme$confirmation = _theme$confirmation.components) === null || _theme$confirmation === void 0 || (_theme$confirmation = _theme$confirmation.layout) === null || _theme$confirmation === void 0 ? void 0 : _theme$confirmation.type) === 'original';
   var hideDeliveryType = theme === null || theme === void 0 || (_theme$confirmation2 = theme.confirmation) === null || _theme$confirmation2 === void 0 || (_theme$confirmation2 = _theme$confirmation2.components) === null || _theme$confirmation2 === void 0 || (_theme$confirmation2 = _theme$confirmation2.order) === null || _theme$confirmation2 === void 0 || (_theme$confirmation2 = _theme$confirmation2.components) === null || _theme$confirmation2 === void 0 || (_theme$confirmation2 = _theme$confirmation2.delivery_type) === null || _theme$confirmation2 === void 0 ? void 0 : _theme$confirmation2.hidden;
@@ -651,7 +652,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     mapControls: googleMapsControls,
     apiKey: configs === null || configs === void 0 || (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
     manualZoom: true
-  }))), ((order === null || order === void 0 ? void 0 : order.delivery_type) === 1 || (order === null || order === void 0 ? void 0 : order.comment)) && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderPreferences, null, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
+  }))), ((deliveryTypes === null || deliveryTypes === void 0 ? void 0 : deliveryTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type)) || (order === null || order === void 0 ? void 0 : order.comment)) && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderPreferences, null, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
     order: order,
     placeSpotTypes: placeSpotTypes
   }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, /*#__PURE__*/_react.default.createElement(_OrderHeaderInfoSection.OrderHeaderInfoSection, {
