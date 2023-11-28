@@ -23,6 +23,7 @@ var _MultiCartsPaymethodsAndWallets = require("../MultiCartsPaymethodsAndWallets
 var _CouponControl = require("../../../../../components/CouponControl");
 var _styles = require("./styles");
 var _DriverTips = require("../DriverTips");
+var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -45,7 +46,7 @@ var mapConfigs = {
   }
 };
 var MultiCheckoutUI = function MultiCheckoutUI(props) {
-  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _cartGroup$result2, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _loyaltyPlansState$re2, _creditPointGeneralPl, _creditPointGeneralPl2, _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _theme, _theme$split, _orderState$options6, _configs$google_maps_, _customerState$user, _cartGroup$result3, _cartGroup$result4, _validationFields$fie, _configs$multi_busine2, _validationFields$fie2, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _configs$multi_busine6, _configs$multi_busine7, _customerState$user2;
+  var _Object$values, _cartGroup$result, _paymethodSelected$pa, _cardList$cards, _configs$checkout_mul, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _configs$multi_busine, _configs$driver_tip_o4, _configs$driver_tip_o5, _cartGroup$result2, _loyaltyPlansState$re, _creditPointPlan$busi, _creditPointPlan$busi2, _loyaltyPlansState$re2, _creditPointGeneralPl, _creditPointGeneralPl2, _configs$cash_wallet, _configs$wallet_enabl, _configs$wallet_cash_, _configs$wallet_credi, _theme$colors, _theme$colors$split, _orderState$options6, _configs$google_maps_, _customerState$user, _cartGroup$result3, _cartGroup$result4, _validationFields$fie, _configs$multi_busine2, _validationFields$fie2, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _openCarts$, _configs$multi_busine6, _configs$multi_busine7, _customerState$user2;
   var placing = props.placing,
     isCustomerMode = props.isCustomerMode,
     openCarts = props.openCarts,
@@ -90,6 +91,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
   var _useToast = (0, _orderingComponents.useToast)(),
     _useToast2 = _slicedToArray(_useToast, 2),
     showToast = _useToast2[1].showToast;
+  var theme = (0, _styledComponents.useTheme)();
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     cardList = _useState2[0],
@@ -178,7 +180,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     });
   }, [checkoutFieldsState, orderState === null || orderState === void 0 ? void 0 : orderState.options]);
   var hexTest = /[0-9A-Fa-f]{6}/g;
-  var primaryColor = (_theme = theme) === null || _theme === void 0 || (_theme = _theme.colors) === null || _theme === void 0 || (_theme = _theme.primary) === null || _theme === void 0 || (_theme$split = _theme.split) === null || _theme$split === void 0 || (_theme$split = _theme$split.call(_theme, '#')) === null || _theme$split === void 0 ? void 0 : _theme$split[1];
+  var primaryColor = theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 || (_theme$colors = _theme$colors.primary) === null || _theme$colors === void 0 || (_theme$colors$split = _theme$colors.split) === null || _theme$colors$split === void 0 || (_theme$colors$split = _theme$colors$split.call(_theme$colors, '#')) === null || _theme$colors$split === void 0 ? void 0 : _theme$colors$split[1];
   var accumulationRateBusiness = function accumulationRateBusiness(businessId) {
     var _loyalBusinessAvailab, _loyalBusinessAvailab2, _creditPointGeneralPl3;
     var value = (_loyalBusinessAvailab = loyalBusinessAvailable === null || loyalBusinessAvailable === void 0 || (_loyalBusinessAvailab2 = loyalBusinessAvailable.find(function (loyal) {
@@ -370,7 +372,8 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
     openCarts: openCarts,
     apiKey: configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
     mapConfigs: mapConfigs,
-    isCustomerMode: isCustomerMode
+    isCustomerMode: isCustomerMode,
+    primaryColor: hexTest.test(primaryColor || '') ? "0x".concat(primaryColor) : 'red'
   }), /*#__PURE__*/_react.default.createElement(_styles.UserDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperUserDetails, null, user !== null && user !== void 0 && user.guest_id && !allowedGuest ? /*#__PURE__*/_react.default.createElement(_styles.AuthButtonList, null, /*#__PURE__*/_react.default.createElement("h2", null, t('CUSTOMER_DETAILS', 'Customer details')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {

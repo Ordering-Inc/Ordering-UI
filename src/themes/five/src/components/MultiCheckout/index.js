@@ -46,6 +46,7 @@ import {
   AuthButtonList
 } from './styles'
 import { DriverTips } from '../DriverTips'
+import { useTheme } from 'styled-components'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -84,7 +85,7 @@ const MultiCheckoutUI = (props) => {
   const [orderState] = useOrder()
   const history = useHistory()
   const [, { showToast }] = useToast()
-
+  const theme = useTheme()
   const [cardList, setCardList] = useState([])
   const [userErrors, setUserErrors] = useState([])
   const [isUserDetailsEdit, setIsUserDetailsEdit] = useState(null)
@@ -316,6 +317,7 @@ const MultiCheckoutUI = (props) => {
                 apiKey={configs?.google_maps_api_key?.value}
                 mapConfigs={mapConfigs}
                 isCustomerMode={isCustomerMode}
+                primaryColor={hexTest.test(primaryColor || '') ? `0x${primaryColor}` : 'red'}
               />
 
               <UserDetailsContainer>
