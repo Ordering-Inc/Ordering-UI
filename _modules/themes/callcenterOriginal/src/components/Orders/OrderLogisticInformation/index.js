@@ -111,6 +111,15 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     }, {
       key: 23,
       value: t('ORDER_DRIVER_ON_WAY', 'Driver on way')
+    }, {
+      key: 24,
+      value: t('ORDER_STATUS_DRIVER_WAITING_FOR_ORDER', 'Driver waiting for order')
+    }, {
+      key: 25,
+      value: t('ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY', 'Accepted by driver company')
+    }, {
+      key: 26,
+      value: t('ORDER_DRIVER_ARRIVED_CUSTOMER', 'Driver arrived to customer')
     }];
     var objectStatus = orderStatus.find(function (o) {
       return o.key === status;
