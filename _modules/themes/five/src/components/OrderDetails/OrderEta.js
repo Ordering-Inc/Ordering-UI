@@ -27,12 +27,13 @@ var OrderEta = exports.OrderEta = function OrderEta(props) {
     _useState2 = _slicedToArray(_useState, 2),
     estimatedDeliveryTime = _useState2[0],
     setEstimatedDeliveryTime = _useState2[1];
+  var deliveryTypes = [1, 7];
   var getEstimatedDeliveryTime = function getEstimatedDeliveryTime() {
     var estimatedUtcTime = null;
     var totalEta = 0;
     if (order !== null && order !== void 0 && order.delivered_in) totalEta += order === null || order === void 0 ? void 0 : order.delivered_in;
     if (order !== null && order !== void 0 && order.prepared_in) totalEta += order === null || order === void 0 ? void 0 : order.prepared_in;
-    if ((order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && order !== null && order !== void 0 && order.eta_drive_time) {
+    if (deliveryTypes !== null && deliveryTypes !== void 0 && deliveryTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && order !== null && order !== void 0 && order.eta_drive_time) {
       totalEta += order === null || order === void 0 ? void 0 : order.eta_drive_time;
     }
     var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? order === null || order === void 0 ? void 0 : order.delivery_datetime_utc : order === null || order === void 0 ? void 0 : order.delivery_datetime;

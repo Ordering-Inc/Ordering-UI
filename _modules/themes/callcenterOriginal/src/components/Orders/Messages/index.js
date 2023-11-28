@@ -117,7 +117,7 @@ var MessagesUI = exports.MessagesUI = function MessagesUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     isChatDisabled = _useState14[0],
     setIsChatDisabled = _useState14[1];
-  var previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17];
+  var previousStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
   var chatDisabled = previousStatus.includes(order === null || order === void 0 ? void 0 : order.status);
   var adminMessageList = [{
     key: 'message_1',
