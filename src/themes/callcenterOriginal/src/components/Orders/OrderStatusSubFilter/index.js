@@ -33,7 +33,10 @@ export const OrderStatusSubFilter = (props) => {
       { key: 20, value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business') },
       { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business') },
       { key: 22, value: t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver') },
-      { key: 23, value: t('ORDER_DRIVER_ON_WAY', 'Driver on way') }
+      { key: 23, value: t('ORDER_DRIVER_ON_WAY', 'Driver on way') },
+      { key: 24, value: t('ORDER_STATUS_DRIVER_WAITING_FOR_ORDER', 'Driver waiting for order') },
+      { key: 25, value: t('ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY', 'Accepted by driver company') },
+      { key: 26, value: t('ORDER_DRIVER_ARRIVED_CUSTOMER', 'Driver arrived to customer') }
     ],
     completed: [
       { key: 1, value: t('COMPLETED_BY_ADMIN', 'Completed by admin') },
