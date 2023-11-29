@@ -85,7 +85,7 @@ import { Select } from '../../styles/Select'
 import { PlaceSpot } from '../PlaceSpot'
 import { VaXMiCuenta } from '../VaXMiCuenta'
 import { MomentContent as MomentContentPF } from '../MomentContent/layouts/pfchangs'
-import { getIconCard } from '../../../../../utils'
+import { getIconCard, deUnaApiKey } from '../../../../../utils'
 
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 
@@ -181,8 +181,11 @@ const CheckoutUI = (props) => {
 
   const daysForApplyCoupon = [0, 2, 4] // Domingo 0
   const isApplyMasterCoupon = !hasCateringProducts?.result && daysForApplyCoupon.includes(moment().days())
-  const isShowDeUnaCheckout = configs?.webview_checkout_deuna?.value === '1' || configs?.webview_checkout_deuna?.value === true
+  const [isShowDeUnaCheckout, setShowDeUnaCheckout] = useState(configs?.webview_checkout_deuna?.value === '1' || configs?.webview_checkout_deuna?.value === true)
   const loyaltyBrands = configs?.brands_wow_loyalty_program?.value && JSON.parse(configs?.brands_wow_loyalty_program?.value)[0]
+  const isAlsea = ordering.project === 'alsea'
+
+  const DEUNA_URL = isAlsea ? 'https://api.deuna.com' : 'https://api.stg.deuna.io'
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -369,6 +372,112 @@ const CheckoutUI = (props) => {
     handleOrderRedirect(cart.order.uuid)
   }
 
+  const tokenizeOrder = async () => {
+    const currency = 'MXN'
+    const data = {
+      order_type: 'PAYMENT_LINK',
+      order: {
+        currency: currency,
+        items: [],
+        store_code: 'all',
+        order_id: cart?.uuid,
+        total_amount: (cart?.total) * 100,
+        webhook_urls: {
+          notify_order: 'https://alsea-website-staging.ordering.co/'
+        },
+        payer_info: {
+          email: user?.email
+        }
+      },
+      custom_fields: {
+        data: {
+          external_auth_token: 'Bearer ' + token,
+          user_id: user?.id,
+          brand_id: parseInt(businessDetails?.business?.brand_id),
+          // wow_rewards_user_id: user?.wow_rewards_user_id,
+          cash_rule: {
+            min_amount: 10,
+            max_amount: 100
+          }
+        }
+      }
+    }
+    const params = {
+      method: 'POST',
+      timeout: 0,
+      accept: 'application/json',
+      headers: {
+        'X-API-KEY': 'e40affdfbee57e43de41d1ce1451859bbe85626c1e87adaa93e538a6fb68488d09bb578f561122c1177e66ab1238563359acb70aa0b972ac8f44a52bceb7',
+        // "X-API-KEY": deUnaApiKey,
+        'X-User-Agent': 'Ordering'
+      },
+      body: JSON.stringify(data)
+    }
+    const url = `${DEUNA_URL}/merchants/orders`
+    try {
+      const response = await fetch(url, params)
+      const result = await response.json()
+      console.log('tokized order', result)
+      if (!result.error) {
+        initCheckout(result.token)
+        return
+      }
+      setShowDeUnaCheckout(false)
+    } catch (err) {
+      console.log('err tokized order', err)
+      setShowDeUnaCheckout(false)
+    }
+  }
+
+  function importScript (src) {
+    return new Promise((resolve) => {
+      const script = document.createElement('script')
+      script.src = src
+      document.body.appendChild(script)
+      script.onload = () => {
+        resolve()
+      }
+    })
+  }
+
+  const initCheckout = async (token) => {
+    await importScript('https://cdn.getduna.com/cdl/index.js')
+    await importScript('https://cdn.getduna.com/checkout-widget/v1.2.0/index.js')
+
+    const deunaCheckout = window.DeunaCheckout()
+
+    const config = {
+      orderToken: token,
+      apiKey: deUnaApiKey, // deUnaApiKey
+      env: 'staging', // Cambia a 'production' para ambiente de producción
+      callbacks: {
+        onSuccess: (payload) => {
+          console.log('onSuccess', payload)
+          // $scope.goToOrder(payload.uuid)
+        },
+        onFailure: (error) => {
+          console.log('onFailure', error)
+          handleStoreRedirect(cart?.business?.slug)
+
+        },
+        onClose: () => {
+          console.log('onClose')
+          handleStoreRedirect(cart?.business?.slug)
+
+        }
+      }
+    }
+    await deunaCheckout.config(config)
+
+    await deunaCheckout.initCheckout()
+  }
+
+  useEffect(() => {
+    if (isShowDeUnaCheckout && brandInformation?.brand_id) {
+      tokenizeOrder()
+    }
+  }, [brandInformation?.brand_id])
+
   useEffect(() => {
     if (validationFields && validationFields?.fields?.checkout) {
       checkValidationFields()
@@ -477,7 +586,7 @@ const CheckoutUI = (props) => {
             </>
           )}
           <IframeContainer>
-            <iframe src={t(`IFRAME_DEUNA_MARKETPLACE_${configSlug.toUpperCase()}`, 'https://vips-staging.tryordering.com/checkout/791c99ba-f103-47e7-a76d-18a2032be505')} width='100%' height='100%' loading='true' sandbox='allow-scripts allow-modals allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox' referrerPolicy='same-origin origin-when-cross-origin' />
+            {/* <iframe src={t(`IFRAME_DEUNA_MARKETPLACE_${configSlug.toUpperCase()}`, 'https://vips-staging.tryordering.com/checkout/791c99ba-f103-47e7-a76d-18a2032be505')} width='100%' height='100%' loading='true' sandbox='allow-scripts allow-modals allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox' referrerPolicy='same-origin origin-when-cross-origin' /> */}
           </IframeContainer>
         </IframeMainContainer>
       ) : (
