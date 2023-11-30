@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BubbleBusines, BubbleConsole, BubbleCustomer, ChatImage, MessageBusiness, MessageConsole, MessageContentWrapper, MessageCreatedDate, MessageCustomer, MyName, TimeofSent, TimeofSentByAdmin } from './styles'
 import { useLanguage, useSession, useUtils } from 'ordering-components'
 
 export const MapMessages = (props) => {
   const {
-    messages,
-    messagesToShow,
     order,
     filterSpecialStatus,
     handleModalImage,
+    hideLogBookMessages,
     getLevel,
     business,
     driver,
@@ -18,6 +17,25 @@ export const MapMessages = (props) => {
   const [, t] = useLanguage()
   const [{ parseDate, parseTime }] = useUtils()
   const [{ user }] = useSession()
+
+  const [messages, setMessages] = useState(props.messages)
+  const [messagesToShow, setMessagesToShow] = useState(props.messagesToShow)
+
+  useEffect(() => {
+    if ((!props.messages?.messages?.length && !props.messagesToShow?.messages?.length) || !hideLogBookMessages) return
+    const messages_ = {
+      ...props.messages,
+      messages: props.messages?.messages?.filter(msg => msg.type !== 1 && msg.type !== 0)
+    }
+    const messagesToShow_ = {
+      ...props.messagesToShow,
+      messages: props.messagesToShow?.messages?.filter(msg => msg.type !== 1 && msg.type !== 0)
+    }
+
+    setMessages(messages_)
+    setMessagesToShow(messagesToShow_)
+  }, [JSON.stringify(props.messages), JSON.stringify(props.messagesToShow)])
+
   return (
     <>
       {messages?.messages.map((message) => (
