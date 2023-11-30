@@ -146,7 +146,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     handleSendOtp();
   }, [willVerifyOtpState]);
   (0, _react.useEffect)(function () {
-    if (isCheckoutPlace && (requiredFields === null || requiredFields === void 0 ? void 0 : requiredFields.length) === 0 && !(formState !== null && formState !== void 0 && formState.loading)) {
+    if (isCheckoutPlace && ((requiredFields === null || requiredFields === void 0 ? void 0 : requiredFields.length) === 0 || (requiredFields === null || requiredFields === void 0 ? void 0 : requiredFields.length) === 1 && requiredFields !== null && requiredFields !== void 0 && requiredFields.includes('email') && isCustomerMode) && !(formState !== null && formState !== void 0 && formState.loading)) {
       setIsSuccess && setIsSuccess(true);
       onClose && onClose();
     }

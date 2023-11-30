@@ -217,7 +217,6 @@ var AddressFormUI = function AddressFormUI(props) {
               });
               // history.goBack()
             }
-
             return;
           }
           setAlertState({

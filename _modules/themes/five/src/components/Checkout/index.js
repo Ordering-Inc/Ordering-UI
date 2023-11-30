@@ -267,7 +267,7 @@ var CheckoutUI = function CheckoutUI(props) {
       }));
       return;
     }
-    if (!userErrors.length && !(requiredFields !== null && requiredFields !== void 0 && requiredFields.length)) {
+    if (!userErrors.length && !(requiredFields !== null && requiredFields !== void 0 && requiredFields.length) || (requiredFields === null || requiredFields === void 0 ? void 0 : requiredFields.length) === 1 && isCustomerMode && requiredFields !== null && requiredFields !== void 0 && requiredFields.includes('email')) {
       var body = {};
       if (behalfName) {
         body.on_behalf_of = behalfName;
