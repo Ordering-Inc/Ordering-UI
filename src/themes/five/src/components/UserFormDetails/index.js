@@ -338,12 +338,12 @@ export const UserFormDetailsUI = (props) => {
                           className='form'
                           borderBottom
                           disabled={!isEdit}
-                          placeholder={t(field.code.toUpperCase(), field?.name)}
+                          placeholder={isCustomerMode ? t(field.code.toUpperCase() + '_OPTIONAL', field.name + ' (Optional)') : t(field.code.toUpperCase(), field?.name)}
                           defaultValue={formState?.changes[field.code] ?? (user && user[field.code]) ?? ''}
                           onChange={handleChangeInputEmail}
                           ref={
                             formMethods.register({
-                              required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+                              required: !isCustomerMode ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
                               pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                             })
                           }
