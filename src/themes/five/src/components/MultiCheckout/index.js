@@ -153,7 +153,7 @@ const MultiCheckoutUI = (props) => {
       return
     }
 
-    if (!userErrors.length && !requiredFields?.length) {
+    if ((!userErrors.length && !requiredFields?.length) || (requiredFields?.length === 1 && isCustomerMode && requiredFields?.includes('email'))) {
       handleGroupPlaceOrder && handleGroupPlaceOrder()
       return
     }

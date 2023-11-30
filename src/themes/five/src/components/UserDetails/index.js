@@ -129,7 +129,10 @@ const UserDetailsUI = (props) => {
   }, [willVerifyOtpState])
 
   useEffect(() => {
-    if (isCheckoutPlace && requiredFields?.length === 0 && !formState?.loading) {
+    if (isCheckoutPlace &&
+      (requiredFields?.length === 0 || (requiredFields?.length === 1 && requiredFields?.includes('email') && isCustomerMode)) &&
+      !formState?.loading
+    ) {
       setIsSuccess && setIsSuccess(true)
       onClose && onClose()
     }
