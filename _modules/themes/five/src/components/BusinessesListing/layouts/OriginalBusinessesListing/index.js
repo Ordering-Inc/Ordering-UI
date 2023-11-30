@@ -359,7 +359,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     getCustomArray: getCustomArray,
     businessesList: businessesList,
     isCustomerMode: isCustomerMode,
-    userCustomer: userCustomer
+    userCustomer: userCustomer,
+    disableSkeletons: true
   }), !isCustomerMode && !hideSearchSection && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout,
     isCustomerMode: isCustomerMode

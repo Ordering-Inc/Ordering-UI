@@ -65,7 +65,6 @@ var MomentPopover = exports.MomentPopover = function MomentPopover(props) {
       }
     }]
   };
-
   var normalProperProperty = {
     placement: 'auto',
     modifiers: [{

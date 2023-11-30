@@ -381,11 +381,11 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       className: "form",
       borderBottom: true,
       disabled: !isEdit,
-      placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
+      placeholder: isCustomerMode ? t(field.code.toUpperCase() + '_OPTIONAL', field.name + ' (Optional)') : t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
       defaultValue: (_ref2 = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user && user[field.code]) !== null && _ref2 !== void 0 ? _ref2 : '',
       onChange: handleChangeInputEmail,
       ref: formMethods.register({
-        required: t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')),
+        required: !isCustomerMode ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
         pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
       }),
       autoComplete: "off"

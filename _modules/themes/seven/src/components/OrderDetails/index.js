@@ -261,7 +261,6 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     window.open(hrefUrl, '_blank' // <- This is what makes it open in a new window.
     );
   };
-
   (0, _react.useEffect)(function () {
     if (driverLocation) {
       locations[0] = driverLocation;

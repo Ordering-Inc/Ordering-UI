@@ -78,7 +78,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
     businesses = props.businesses,
     handleUpdateBusinesses = props.handleUpdateBusinesses,
     getPage = props.getPage,
-    loadOrders = props.loadOrders;
+    loadOrders = props.loadOrders,
+    disableSkeletons = props.disableSkeletons;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -260,7 +261,7 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
   }), isProfessionals && /*#__PURE__*/_react.default.createElement(_PreviousProfessionalOrdered.PreviousProfessionalOrdered, {
     professionals: professionals,
     handleUpdateProfessionals: handleUpdateProfessionals
-  }), (isCustomLayout ? loading || (businesses === null || businesses === void 0 ? void 0 : businesses.loading) : showSkeletons) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businesses !== null && businesses !== void 0 && businesses.loading && isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.BusinessControllerSkeleton, null, _toConsumableArray(Array(3).keys()).map(function (item, i) {
+  }), !disableSkeletons && (isCustomLayout ? loading || (businesses === null || businesses === void 0 ? void 0 : businesses.loading) : showSkeletons) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businesses !== null && businesses !== void 0 && businesses.loading && isBusiness ? /*#__PURE__*/_react.default.createElement(_styles.BusinessControllerSkeleton, null, _toConsumableArray(Array(3).keys()).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       key: i,
       className: "card",

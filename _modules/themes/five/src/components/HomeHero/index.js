@@ -26,7 +26,6 @@ var HomeHero = exports.HomeHero = function HomeHero(props) {
       contentPosition: (theme === null || theme === void 0 || (_theme$homepage_view2 = theme.homepage_view) === null || _theme$homepage_view2 === void 0 || (_theme$homepage_view2 = _theme$homepage_view2.components) === null || _theme$homepage_view2 === void 0 || (_theme$homepage_view2 = _theme$homepage_view2.layout) === null || _theme$homepage_view2 === void 0 ? void 0 : _theme$homepage_view2.position) || 'left' // 'left', 'right', top, 'bottom', 'center'
     }
   };
-
   var layout = (HomeLayoutConfig === null || HomeLayoutConfig === void 0 || (_HomeLayoutConfig$hom = HomeLayoutConfig.homepage_settings) === null || _HomeLayoutConfig$hom === void 0 ? void 0 : _HomeLayoutConfig$hom.layout) !== undefined ? HomeLayoutConfig === null || HomeLayoutConfig === void 0 || (_HomeLayoutConfig$hom2 = HomeLayoutConfig.homepage_settings) === null || _HomeLayoutConfig$hom2 === void 0 ? void 0 : _HomeLayoutConfig$hom2.layout : 'original';
   var homeLayoutProps = _objectSpread(_objectSpread({}, props), {}, {
     layout: layout,

@@ -214,7 +214,7 @@ var MultiCheckoutUI = function MultiCheckoutUI(props) {
       }));
       return;
     }
-    if (!userErrors.length && !(requiredFields !== null && requiredFields !== void 0 && requiredFields.length)) {
+    if (!userErrors.length && !(requiredFields !== null && requiredFields !== void 0 && requiredFields.length) || (requiredFields === null || requiredFields === void 0 ? void 0 : requiredFields.length) === 1 && isCustomerMode && requiredFields !== null && requiredFields !== void 0 && requiredFields.includes('email')) {
       handleGroupPlaceOrder && handleGroupPlaceOrder();
       return;
     }

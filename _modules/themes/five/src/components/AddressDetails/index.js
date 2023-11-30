@@ -50,6 +50,10 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     alertState = _useState4[0],
     setAlertState = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isShowMap = _useState6[0],
+    setIsShowMap = _useState6[1];
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
     _useCustomer2 = _slicedToArray(_useCustomer, 1),
@@ -71,14 +75,18 @@ var AddressDetailsUI = function AddressDetailsUI(props) {
     onClick: function onClick() {
       return setOpenModal(true);
     }
-  }, t('CHANGE_ADDRESS', 'Change address')))), apiKey && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
+  }, t('CHANGE_ADDRESS', 'Change address')))), apiKey && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isShowMap && /*#__PURE__*/_react.default.createElement(_styles.ToggleMap, null, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return setIsShowMap(!isShowMap);
+    }
+  }, t('SHOW_MAP', 'Show map')))), isShowMap && /*#__PURE__*/_react.default.createElement(_styles.WrappMap, null, /*#__PURE__*/_react.default.createElement(_styles.Map, null, /*#__PURE__*/_react.default.createElement("img", {
     src: googleMapsUrl,
     id: "google-maps-image",
     alt: "google-maps-location",
     width: "288px",
     height: "162px",
     loading: "lazy"
-  }))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+  })))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal,
     width: "70%",
     onClose: function onClose() {

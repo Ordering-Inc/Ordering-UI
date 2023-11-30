@@ -296,7 +296,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
       name: field.code,
       "aria-label": field.code,
       className: "form",
-      placeholder: t(field.code.toUpperCase(), field.name),
+      placeholder: !field.required ? t(field.code.toUpperCase() + '_OPTIONAL', field.name + ' (Optional)') : t(field.code.toUpperCase(), field.name),
       onChange: handleChangeInputEmail,
       ref: function ref(e) {
         emailInput.current = e;
