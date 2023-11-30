@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { useUtils, useLanguage, useSession, MessagesDashboard as MessagesController } from 'ordering-components'
+import { useUtils, useLanguage, useSession, MessagesDashboard as MessagesController, useConfig } from 'ordering-components'
 import { useForm, Controller } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -82,7 +82,6 @@ export const MessagesUI = (props) => {
     getHistoryComment
   } = props
 
-  const routerHistory = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -101,6 +100,9 @@ export const MessagesUI = (props) => {
   const [isChatDisabled, setIsChatDisabled] = useState(false)
   const previousStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const chatDisabled = previousStatus.includes(order?.status)
+  const [{ configs }] = useConfig()
+  const showExternalId = configs?.change_order_id?.value === '1'
+  const hideLogBookMessages = configs?.order_logbook_enabled?.value === '0'
 
   const adminMessageList = [
     { key: 'message_1', text: t('ADMIN_MESSAGE_1', 'admin_message_1') },
@@ -258,6 +260,20 @@ export const MessagesUI = (props) => {
     })
   }
 
+  const queryStringToObject = url => {
+    const params = new URLSearchParams(url.split('?')[1])
+    return Object.fromEntries(params)
+  }
+
+  const addQueryToUrl = (newObj) => {
+    const queryObj = queryStringToObject(location.href)
+    for (const key in newObj) {
+      queryObj[key] = newObj[key]
+    }
+    const query = new URLSearchParams(queryObj)
+    history && history.replaceState(null, '', `${location.pathname}?${query}`)
+  }
+
   const unreadMessageControl = () => {
     if (messages.loading || messages.messages.length === 0) return
     if (messages.messages[messages.messages.length - 1].read) return
@@ -302,9 +318,9 @@ export const MessagesUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setTabActive(tab)
     if (!isInitialRender) {
-      const orderId = query.get('id')
-      const section = query.get('section')
-      routerHistory.replace(`${location.pathname}?id=${orderId}&section=${section}&tab=${tab}`)
+      addQueryToUrl({
+        tab: tab
+      })
     }
   }
 
@@ -330,7 +346,7 @@ export const MessagesUI = (props) => {
               {isChat && (
                 <ChatHeader>
                   <OrderNumber>
-                    {t('INVOICE_ORDER_NO', 'Order No')} {order.id}
+                    {t('INVOICE_ORDER_NO', 'Order No')} {(showExternalId && !!order?.external_id) ? order.external_id : order.id}
                   </OrderNumber>
                   <ImageContainer>
                     {user?.level !== 2 && (
@@ -468,13 +484,15 @@ export const MessagesUI = (props) => {
                   <React.Fragment key={message.id}>
                     {history && tabActive === 'order_history' && (
                       <>
-                        {message.type === 0 && (
+                        {message.type === 0 && !hideLogBookMessages && (
                           <MessageConsole key={message.id}>
                             <BubbleConsole>
                               <p
                                 dangerouslySetInnerHTML={{
                                   __html: t('ORDER_PLACED_FOR_VIA', 'Order placed for _for_ via _via_.')
-                                    .replace('_for_', '<b>' + parseDate(order.delivery_datetime) + '</b>')
+                                    .replace('_for_', '<b>' + order?.delivery_datetime_utc
+                                      ? parseDate(order?.delivery_datetime_utc)
+                                      : parseDate(order?.delivery_datetime, { utc: false }) + '</b>')
                                     .replace('_via_', '<b>' + t(order.app_id ? order.app_id.toUpperCase() : 'OTHER') + '</b>')
                                 }}
                               />
@@ -486,7 +504,7 @@ export const MessagesUI = (props) => {
                             </BubbleConsole>
                           </MessageConsole>
                         )}
-                        {message.type === 1 && (
+                        {message.type === 1 && !hideLogBookMessages && (
                           <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
                             {getHistoryComment(message) && (
                               <BubbleConsole>
@@ -509,7 +527,7 @@ export const MessagesUI = (props) => {
                     )}
                     {isChat && (
                       <>
-                        {message.type === 0 && (
+                        {message.type === 0 && !hideLogBookMessages && (
                           <MessageConsole key={message.id}>
                             <BubbleConsole>
                               <p>
@@ -528,7 +546,7 @@ export const MessagesUI = (props) => {
                             </BubbleConsole>
                           </MessageConsole>
                         )}
-                        {message.type === 1 && (
+                        {message.type === 1 && !hideLogBookMessages && (
                           <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
                             {getHistoryComment(message) && (
                               <BubbleConsole>
