@@ -51,7 +51,7 @@ const OrderTypeSelectorHeaderUI = (props) => {
           ? (
             <OrderTypeBoxGroup>
               {
-                orderTypes && orderTypes.map((orderType) => {
+                orderTypes && orderTypes.filter((orderType) => configTypes?.includes(orderType?.value)).map(orderType => {
                   return (
                     <OrderItem key={orderType.value} onClick={openModal}>
                       <OrderItemWraper>
@@ -117,7 +117,7 @@ export const OrderTypeSelectorHeader = (props) => {
         itemcontent: <OrderType><MdcTruckDeliveryOutline /><ItemContent>{t('DELIVERY', 'Delivery')}</ItemContent></OrderType>,
         itemdescription: <OrderDescription>{t('ORDERTYPE_DESCRIPTION_DELIVERY', 'Delivery description')}</OrderDescription>
       },
-      { 
+      {
         value: 2,
         content: <Option><FaTruckPickup /><ContentOption>{t('PICKUP', 'Pickup')}</ContentOption></Option>,
         showOnSelected: <Option><FaTruckPickup /><SelectedOption>{t('PICKUP', 'Pickup')}</SelectedOption></Option>,
