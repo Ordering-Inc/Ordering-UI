@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
-import { useLanguage } from 'ordering-components'
+import { useConfig, useLanguage } from 'ordering-components'
 import {
   HeroContainer,
   ContentWrapper,
@@ -12,7 +12,10 @@ import { OrderTypeSelectorHeader } from '../../../../../../six/src/components/Or
 export const StarbucksHomeHero = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [{ configs }] = useConfig()
   const orderTypeStyle = 'Rectangle'
+  const allOrderTypes = [1, 2, 3, 4, 5]
+  const configTypes = configs?.order_types_allowed?.value.split('|').filter(value => (allOrderTypes.includes(Number(value)))).map(value => Number(value)) || []
 
   return (
     <>
@@ -28,7 +31,7 @@ export const StarbucksHomeHero = (props) => {
           <Slogan>{t(theme?.defaultLanguages?.SUBTITLE_HOME || 'Order ahead for pickup or let us deliver to your location.')}</Slogan>
         </ContentWrapper>
         <OrderTypes>
-          <OrderTypeSelectorHeader orderTypeStyle={orderTypeStyle} />
+          <OrderTypeSelectorHeader configTypes={configTypes} orderTypeStyle={orderTypeStyle} />
         </OrderTypes>
       </HeroContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
