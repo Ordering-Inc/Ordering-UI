@@ -57,7 +57,9 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
   var openModal = function openModal() {
     setModalIsOpen(true);
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, orderTypeStyle ? /*#__PURE__*/_react.default.createElement(_styles.OrderTypeBoxGroup, null, orderTypes && orderTypes.map(function (orderType) {
+  return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, orderTypeStyle ? /*#__PURE__*/_react.default.createElement(_styles.OrderTypeBoxGroup, null, orderTypes && orderTypes.filter(function (orderType) {
+    return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(orderType === null || orderType === void 0 ? void 0 : orderType.value);
+  }).map(function (orderType) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderItem, {
       key: orderType.value,
       onClick: openModal

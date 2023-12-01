@@ -18,12 +18,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var StarbucksHomeHero = exports.StarbucksHomeHero = function StarbucksHomeHero(props) {
-  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
+  var _configs$order_types_, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$defaultLanguag, _theme$defaultLanguag2, _props$afterComponent, _props$afterElements;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var orderTypeStyle = 'Rectangle';
+  var allOrderTypes = [1, 2, 3, 4, 5];
+  var configTypes = (configs === null || configs === void 0 || (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 ? void 0 : _configs$order_types_.value.split('|').filter(function (value) {
+    return allOrderTypes.includes(Number(value));
+  }).map(function (value) {
+    return Number(value);
+  })) || [];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -35,6 +44,7 @@ var StarbucksHomeHero = exports.StarbucksHomeHero = function StarbucksHomeHero(p
   }), /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.homeHero
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t((theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.TITLE_HOME) || 'What type of order can we get started for you?')), /*#__PURE__*/_react.default.createElement(_styles.Slogan, null, t((theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.SUBTITLE_HOME) || 'Order ahead for pickup or let us deliver to your location.'))), /*#__PURE__*/_react.default.createElement(_styles.OrderTypes, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
+    configTypes: configTypes,
     orderTypeStyle: orderTypeStyle
   }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
