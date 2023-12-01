@@ -40,7 +40,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime'];
 var MessagesUI = function MessagesUI(props) {
-  var _messages$messages, _order$business, _theme$images, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _order$driver3, _order$business4, _order$driver4, _order$business6, _theme$images3, _order$driver5, _messagesToShow$messa;
+  var _configs$order_logboo, _messages$messages, _order$business, _theme$images, _order$business2, _order$driver, _order$driver2, _order$business3, _theme$images2, _order$driver3, _order$business4, _order$driver4, _order$business6, _theme$images3, _order$driver5, _messagesToShow$messa;
   var order = props.order,
     messages = props.messages,
     handleSend = props.handleSend,
@@ -58,6 +58,9 @@ var MessagesUI = function MessagesUI(props) {
     setCanRead = props.setCanRead,
     profileMessages = props.profileMessages;
   var theme = (0, _styledComponents.useTheme)();
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -92,6 +95,7 @@ var MessagesUI = function MessagesUI(props) {
   var imageRef = (0, _react.useRef)(null);
   var previousStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
   var chatDisabled = previousStatus.includes(order === null || order === void 0 ? void 0 : order.status);
+  var hideLogBookMessages = (configs === null || configs === void 0 || (_configs$order_logboo = configs.order_logbook_enabled) === null || _configs$order_logboo === void 0 ? void 0 : _configs$order_logboo.value) === '0';
   var quickMessageList = [{
     key: 'message_1',
     text: t('CUSTOMER_MESSAGE_1', 'Lorem ipsum 1')
@@ -396,11 +400,12 @@ var MessagesUI = function MessagesUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles.MessageCustomer, null, /*#__PURE__*/_react.default.createElement(_styles.SkeletonBubbleCustomer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 100
-  })))), !(messages !== null && messages !== void 0 && messages.loading) && order && /*#__PURE__*/_react.default.createElement(_styles.MessageContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.MessageCreatedDate, null, /*#__PURE__*/_react.default.createElement("span", null, parseDate(order.created_at, {
+  })))), !(messages !== null && messages !== void 0 && messages.loading) && order && /*#__PURE__*/_react.default.createElement(_styles.MessageContentWrapper, null, !hideLogBookMessages && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MessageCreatedDate, null, /*#__PURE__*/_react.default.createElement("span", null, parseDate(order.created_at, {
     outputFormat: 'MMM DD, YYYY'
-  }))), /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'Via'), ' ', /*#__PURE__*/_react.default.createElement("strong", null, order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')), ' ', /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, parseTime(order.created_at)))), /*#__PURE__*/_react.default.createElement(_MapMessages.MapMessages, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'Via'), ' ', /*#__PURE__*/_react.default.createElement("strong", null, order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')), ' ', /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, parseTime(order.created_at))))), /*#__PURE__*/_react.default.createElement(_MapMessages.MapMessages, {
     messages: messagesToShow !== null && messagesToShow !== void 0 && (_messagesToShow$messa = messagesToShow.messages) !== null && _messagesToShow$messa !== void 0 && _messagesToShow$messa.length ? messagesToShow : messages,
     messagesToShow: messagesToShow,
+    hideLogBookMessages: hideLogBookMessages,
     order: order,
     filterSpecialStatus: filterSpecialStatus,
     handleModalImage: handleModalImage,
