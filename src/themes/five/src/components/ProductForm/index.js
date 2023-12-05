@@ -140,6 +140,7 @@ const ProductOptionsUI = (props) => {
   const orderTypeEnabled = !orderTypeList[orderState?.options?.type - 1] || configs?.allowed_order_types_guest_checkout?.value?.includes(orderTypeList[orderState?.options?.type - 1])
   const hideProductDescription = theme?.business_view?.components?.products?.components?.product?.components?.description?.hidden
   const hideProductDummyLogo = theme?.business_view?.components?.products?.components?.product?.components?.dummy?.hidden
+  const hideFavoriteIcon = theme?.business_view?.components?.products?.components?.product?.components?.favorite?.hidden
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -511,7 +512,7 @@ const ProductOptionsUI = (props) => {
                 <ProductName>
                   <span>{product?.name}</span>
                 </ProductName>
-                {!isCustomerMode && (
+                {!isCustomerMode && !hideFavoriteIcon && (
                   <span className='favorite' onClick={() => handleChangeFavorite()}>
                     {product?.favorite ? <Like /> : <DisLike />}
                   </span>
