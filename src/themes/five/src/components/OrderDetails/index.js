@@ -31,6 +31,7 @@ import { PlaceSpot } from '../PlaceSpot'
 import { SendGiftCard } from '../GiftCard/SendGiftCard'
 import { Confirm } from '../Confirm'
 import { OrderEta } from './OrderEta'
+import { HeaderContent as HeaderContentTwo } from './layouts/Starbucks'
 
 import {
   Container,
@@ -132,6 +133,7 @@ const OrderDetailsUI = (props) => {
   const preorderStatus = [0, 13]
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const enabledPoweredByOrdering = configs?.powered_by_ordering_module?.value
+  const showStarbucksHeader = configs?.alternative_confirmation_page?.value === '1'
   const changeIdToExternalId = configs?.change_order_id?.value === '1'
   const cateringTypes = [7, 8]
   const deliveryTypes = [1, 7]
@@ -398,227 +400,247 @@ const OrderDetailsUI = (props) => {
       {!loading && order && Object.keys(order).length > 0 && !(openMessages.driver || openMessages.business) && (
         <WrapperContainer>
           <WrapperLeftContainer>
-            <OrderInfo>
-              <TitleContainer>
-                <OrderIdSec>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} {(changeIdToExternalId && order?.external_id) || `#${order?.id}`}</OrderIdSec>
-                {enabledPoweredByOrdering && (
-                  <PoweredByOrdering>
-                    {t('POWERED_BY', 'Powered by')}
-                    <a href='https://www.ordering.co'>
-                      {t('ORDERING_CO', 'Ordering.co')}
-                    </a>
-                  </PoweredByOrdering>
-                )}
-                {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-                  <Content className='order-content'>
-                    <ShareOrder>
-                      <div className='wrap'>
-                        <ProductShare
-                          defaultUrl={urlToShare(order?.hash_key)}
-                          product={{
-                            images: order.business?.logo,
-                            name: order.business?.name
-                          }}
-                        />
-                      </div>
-                    </ShareOrder>
-                  </Content>
-                )}
-                {!!order?.integration_id && (
-                  <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
-                )}
-                {!hideDeliveryType && (
-                  <p className='types'>
-                    {isService
-                      ? t('SERVICE_AT_HOME', 'Service at home')
-                      : orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
-                  </p>
-                )}
-                {!hideDeliveryDate && (
-                  <>
-                    {cateringTypes.includes(order?.delivery_type) && (
-                      <p className='date'>
-                        {t('CREATED_AT', 'Created at')}: {parseDate(order?.created_at)}
+            {!showStarbucksHeader && (
+              <>
+                <OrderInfo>
+                  <TitleContainer>
+                    <OrderIdSec>{isService ? t('APPOINTMENT', 'Appointment') : t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} {(changeIdToExternalId && order?.external_id) || `#${order?.id}`}</OrderIdSec>
+                    {enabledPoweredByOrdering && (
+                      <PoweredByOrdering>
+                        {t('POWERED_BY', 'Powered by')}
+                        <a href='https://www.ordering.co'>
+                          {t('ORDERING_CO', 'Ordering.co')}
+                        </a>
+                      </PoweredByOrdering>
+                    )}
+                    {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
+                      <Content className='order-content'>
+                        <ShareOrder>
+                          <div className='wrap'>
+                            <ProductShare
+                              defaultUrl={urlToShare(order?.hash_key)}
+                              product={{
+                                images: order.business?.logo,
+                                name: order.business?.name
+                              }}
+                            />
+                          </div>
+                        </ShareOrder>
+                      </Content>
+                    )}
+                    {!!order?.integration_id && (
+                      <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                    )}
+                    {!hideDeliveryType && (
+                      <p className='types'>
+                        {isService
+                          ? t('SERVICE_AT_HOME', 'Service at home')
+                          : orderTypes?.find(type => order?.delivery_type === type?.value)?.text}
                       </p>
                     )}
-                    <p className='date'>
-                      {activeStatus.includes(order?.status) ? (
-                        <>
-                          {cateringTypes.includes(order?.delivery_type) ? `${t('PLACED_TO', 'Placed to')}:` : ''} <OrderEta order={order} outputFormat={`YYYY-MM-DD ${configs?.general_hour_format?.value}`} />
-                        </>
-                      ) : (
-                        parseDate(order?.reporting_data?.at[`status:${order.status}`], { outputFormat: `YYYY-MM-DD ${configs?.general_hour_format?.value}` })
-                      )}
-                    </p>
-                  </>
-                )}
-                {(acceptedStatus.includes(parseInt(order?.status, 10)) ||
-                  !isOriginalLayout
-                ) && !isGiftCardOrder &&
-                  (
-                    <ReOrder>
-                      <Button
-                        color='primary'
-                        outline
-                        onClick={() => handleStartNewOrder(order.id)}
-                        disabled={reorderState?.loading}
-                      >
-                        {t('START_NEW_ORDER', 'Start new order')}
-                      </Button>
-                      {completedStatus.includes(parseInt(order?.status, 10)) && (
-                        <Button
-                          color='primary'
-                          outline
-                          onClick={() => handleClickReorder(order)}
-                          disabled={reorderState?.loading}
-                        >
-                          {reorderState?.loading
-                            ? t('LOADING', 'Loading...')
-                            : t('REORDER', 'Reorder')}
-                        </Button>
-                      )}
-                    </ReOrder>
-                  )}
-              </TitleContainer>
-              {props.isCustomerMode && !!order?.debug_payment_response?.message && (
-                <div id='error-subs'>
-                  <ValidationText>
-                    <ExclamationTriangleIcon />
-                    <span>{order?.debug_payment_response?.message}</span>
-                  </ValidationText>
-                </div>
-              )}
-              {!hideDeliveryProgress && !isGiftCardOrder && (
-                <>
-                  <StatusBar percentage={progressBarObjt(order?.status)?.percentage} />
-                  <OrderStatusAndLinkContainer>
-                    <p className='order-status'>{progressBarObjt(order?.status)?.value}</p>
-                    <LinkWrapper>
-                      <ReviewOrderLink
-                        active
-                        isMargin
-                      >
-                        <span onClick={() => setIsOrderHistory(true)}>{t('VIEW_DETAILS', 'View details')}</span>
-                      </ReviewOrderLink>
-                      {(!props.isCustomerMode || (props.isCustomerMode && !!props.hashKey && !token)) && (
-                        <ReviewOrderLink
-                          className='Review-order'
-                          active={
-                            [...acceptedStatus, 16].includes(parseInt(order?.status, 10)) &&
-                            (!order?.review || (order.driver && !order?.user_review)) &&
-                            (!isOrderReviewed || !isProductReviewed || (isService && !isProReviewed) || !isDriverReviewed)
-                          }
-                        >
-                          <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                        </ReviewOrderLink>
-                      )}
-                    </LinkWrapper>
-                  </OrderStatusAndLinkContainer>
-                </>
-              )}
-            </OrderInfo>
-            {!isGiftCardOrder && (
-              <OrderBusiness>
-                <BusinessExternalWrapper>
-                  <BusinessWrapper
-                    w='calc(100% - 20px)'
-                    borderTop={!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type)}
-                  >
-                    {isShowBusinessLogo && <img src={order?.business?.logo} />}
-                    <BusinessInfo>
-                      <h2>{order?.business?.name}</h2>
-                      <ActionsSection
-                        {...ActionsSectionProps}
-                        actionType='business'
-                        showPhone={!hideBusinessPhone}
-                        showMessages={!hideBusinessMessages}
-                      />
-                      {!hideBusinessEmail && (
-                        <p>{order?.business?.email}</p>
-                      )}
-                      {!hideBusinessPhone && (
-                        <p>{order?.business?.cellphone}</p>
-                      )}
-                      {!hideBusinessAddress && (
-                        <p>{order?.business?.address}</p>
-                      )}
-                      {order?.place?.name && (
-                        <PlaceSpotSection>
-                          <p>
-                            {yourSpotString}: {order?.place?.name}
+                    {!hideDeliveryDate && (
+                      <>
+                        {cateringTypes.includes(order?.delivery_type) && (
+                          <p className='date'>
+                            {t('CREATED_AT', 'Created at')}: {parseDate(order?.created_at)}
                           </p>
-                        </PlaceSpotSection>
-                      )}
-                      {!hideOrderActions && (
-                        <DirectionButtonWrapper>
+                        )}
+                        <p className='date'>
+                          {activeStatus.includes(order?.status) ? (
+                            <>
+                              {cateringTypes.includes(order?.delivery_type) ? `${t('PLACED_TO', 'Placed to')}:` : ''} <OrderEta order={order} outputFormat={`YYYY-MM-DD ${configs?.general_hour_format?.value}`} />
+                            </>
+                          ) : (
+                            parseDate(order?.reporting_data?.at[`status:${order.status}`], { outputFormat: `YYYY-MM-DD ${configs?.general_hour_format?.value}` })
+                          )}
+                        </p>
+                      </>
+                    )}
+                    {(acceptedStatus.includes(parseInt(order?.status, 10)) ||
+                      !isOriginalLayout
+                    ) && !isGiftCardOrder &&
+                      (
+                        <ReOrder>
                           <Button
                             color='primary'
-                            onClick={() => window.open(`http://maps.google.com/?q=${order?.business?.address}`)}
+                            outline
+                            onClick={() => handleStartNewOrder(order.id)}
+                            disabled={reorderState?.loading}
                           >
-                            {t('GET_DIRECTIONS', 'Get Directions')}
+                            {t('START_NEW_ORDER', 'Start new order')}
                           </Button>
-                        </DirectionButtonWrapper>
+                          {completedStatus.includes(parseInt(order?.status, 10)) && (
+                            <Button
+                              color='primary'
+                              outline
+                              onClick={() => handleClickReorder(order)}
+                              disabled={reorderState?.loading}
+                            >
+                              {reorderState?.loading
+                                ? t('LOADING', 'Loading...')
+                                : t('REORDER', 'Reorder')}
+                            </Button>
+                          )}
+                        </ReOrder>
                       )}
-                    </BusinessInfo>
-                    {!hideOrderActions && !preorderStatus.includes(order?.status) && (
-                      <BtsOrderStatus>
-                        <div>
-                          <Button
-                            style={{ fontSize: 14 }}
-                            color={order?.status === 20 ? 'secundary' : 'primary'}
-                            onClick={() => handleChangeOrderStatus(20)}
-                            disabled={disableLeftButton.includes(order?.status)}
-                          >
-                            {progressBarObjt(20)?.value}
-                          </Button>
-                        </div>
-                        <div>
-                          <Button
-                            style={{ fontSize: 14 }}
-                            color={order?.status === 20 ? 'primary' : 'secundary'}
-                            disabled={disableRightButton.includes(order?.status)}
-                            onClick={() => handleChangeOrderStatus(21)}
-                          >
-                            {progressBarObjt(21)?.value}
-                          </Button>
-                        </div>
-                      </BtsOrderStatus>
-                    )}
-                  </BusinessWrapper>
-
-                  {!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
-                    <PlaceSpotWrapper>
-                      <PlaceSpot
-                        isInputMode
-                        cart={order}
-                        spotNumberDefault={order?.spot_number}
-                        vehicleDefault={order?.vehicle}
-                      />
-                    </PlaceSpotWrapper>
+                  </TitleContainer>
+                  {props.isCustomerMode && !!order?.debug_payment_response?.message && (
+                    <div id='error-subs'>
+                      <ValidationText>
+                        <ExclamationTriangleIcon />
+                        <span>{order?.debug_payment_response?.message}</span>
+                      </ValidationText>
+                    </div>
                   )}
-                </BusinessExternalWrapper>
-                {googleMapsApiKey && !hideBusinessMap && (
-                  <MapWrapper>
-                    <Map style={{ width: '100%' }}>
-                      <img
-                        src={getGoogleMapImage(order?.business?.location, googleMapsApiKey, mapConfigs)}
-                        id='google-maps-image'
-                        alt='google-maps-location'
-                        width='100%'
-                        height='100%'
-                        loading='lazy'
-                      />
-                    </Map>
-                  </MapWrapper>
+                  {!hideDeliveryProgress && !isGiftCardOrder && (
+                    <>
+                      <StatusBar percentage={progressBarObjt(order?.status)?.percentage} />
+                      <OrderStatusAndLinkContainer>
+                        <p className='order-status'>{progressBarObjt(order?.status)?.value}</p>
+                        <LinkWrapper>
+                          <ReviewOrderLink
+                            active
+                            isMargin
+                          >
+                            <span onClick={() => setIsOrderHistory(true)}>{t('VIEW_DETAILS', 'View details')}</span>
+                          </ReviewOrderLink>
+                          {(!props.isCustomerMode || (props.isCustomerMode && !!props.hashKey && !token)) && (
+                            <ReviewOrderLink
+                              className='Review-order'
+                              active={
+                                [...acceptedStatus, 16].includes(parseInt(order?.status, 10)) &&
+                                (!order?.review || (order.driver && !order?.user_review)) &&
+                                (!isOrderReviewed || !isProductReviewed || (isService && !isProReviewed) || !isDriverReviewed)
+                              }
+                            >
+                              <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                            </ReviewOrderLink>
+                          )}
+                        </LinkWrapper>
+                      </OrderStatusAndLinkContainer>
+                    </>
+                  )}
+                </OrderInfo>
+                {!isGiftCardOrder && (
+                  <OrderBusiness>
+                    <BusinessExternalWrapper>
+                      <BusinessWrapper
+                        w='calc(100% - 20px)'
+                        borderTop={!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type)}
+                      >
+                        {isShowBusinessLogo && <img src={order?.business?.logo} />}
+                        <BusinessInfo>
+                          <h2>{order?.business?.name}</h2>
+                          <ActionsSection
+                            {...ActionsSectionProps}
+                            actionType='business'
+                            showPhone={!hideBusinessPhone}
+                            showMessages={!hideBusinessMessages}
+                          />
+                          {!hideBusinessEmail && (
+                            <p>{order?.business?.email}</p>
+                          )}
+                          {!hideBusinessPhone && (
+                            <p>{order?.business?.cellphone}</p>
+                          )}
+                          {!hideBusinessAddress && (
+                            <p>{order?.business?.address}</p>
+                          )}
+                          {order?.place?.name && (
+                            <PlaceSpotSection>
+                              <p>
+                                {yourSpotString}: {order?.place?.name}
+                              </p>
+                            </PlaceSpotSection>
+                          )}
+                          {!hideOrderActions && (
+                            <DirectionButtonWrapper>
+                              <Button
+                                color='primary'
+                                onClick={() => window.open(`http://maps.google.com/?q=${order?.business?.address}`)}
+                              >
+                                {t('GET_DIRECTIONS', 'Get Directions')}
+                              </Button>
+                            </DirectionButtonWrapper>
+                          )}
+                        </BusinessInfo>
+                        {!hideOrderActions && !preorderStatus.includes(order?.status) && (
+                          <BtsOrderStatus>
+                            <div>
+                              <Button
+                                style={{ fontSize: 14 }}
+                                color={order?.status === 20 ? 'secundary' : 'primary'}
+                                onClick={() => handleChangeOrderStatus(20)}
+                                disabled={disableLeftButton.includes(order?.status)}
+                              >
+                                {progressBarObjt(20)?.value}
+                              </Button>
+                            </div>
+                            <div>
+                              <Button
+                                style={{ fontSize: 14 }}
+                                color={order?.status === 20 ? 'primary' : 'secundary'}
+                                disabled={disableRightButton.includes(order?.status)}
+                                onClick={() => handleChangeOrderStatus(21)}
+                              >
+                                {progressBarObjt(21)?.value}
+                              </Button>
+                            </div>
+                          </BtsOrderStatus>
+                        )}
+                      </BusinessWrapper>
+
+                      {!hideDeliveryType && placeSpotTypes.includes(order?.delivery_type) && (
+                        <PlaceSpotWrapper>
+                          <PlaceSpot
+                            isInputMode
+                            cart={order}
+                            spotNumberDefault={order?.spot_number}
+                            vehicleDefault={order?.vehicle}
+                          />
+                        </PlaceSpotWrapper>
+                      )}
+                    </BusinessExternalWrapper>
+                    {googleMapsApiKey && !hideBusinessMap && (
+                      <MapWrapper>
+                        <Map style={{ width: '100%' }}>
+                          <img
+                            src={getGoogleMapImage(order?.business?.location, googleMapsApiKey, mapConfigs)}
+                            id='google-maps-image'
+                            alt='google-maps-location'
+                            width='100%'
+                            height='100%'
+                            loading='lazy'
+                          />
+                        </Map>
+                      </MapWrapper>
+                    )}
+                  </OrderBusiness>
                 )}
-              </OrderBusiness>
+              </>
+            )}
+            {showStarbucksHeader && (
+              <HeaderContentTwo
+                order={order}
+                hashKey={props.hashKey}
+                changeIdToExternalId={changeIdToExternalId}
+                enabledPoweredByOrdering={enabledPoweredByOrdering}
+                orderStatus={progressBarObjt(order?.status)?.value}
+                percentage={progressBarObjt(order?.status)?.percentage}
+                orderId={{ id: order?.id, external: order?.external_id }}
+                showReview={
+                  [...acceptedStatus, 16].includes(parseInt(order?.status, 10)) &&
+                  (!order?.review || (order.driver && !order?.user_review)) &&
+                  (!isOrderReviewed || !isDriverReviewed)
+                }
+              />
             )}
             <OrderCustomer>
-              <BusinessWrapper>
+              <WrapperDriver>
                 {!hideCustomerPhoto && order?.customer?.photo && (
-                  <img src={order?.customer?.photo} />
+                  <PhotoBlock src={order?.customer?.photo} />
                 )}
-                <BusinessInfo>
+                <div>
                   <p>{order?.customer?.name} {order?.customer?.lastname}</p>
                   {!hideCustomerEmail && (
                     <p>{order?.customer?.email}</p>
@@ -629,8 +651,8 @@ const OrderDetailsUI = (props) => {
                   {!hideCustomerAddress && (
                     <p>{order?.customer?.address}</p>
                   )}
-                </BusinessInfo>
-              </BusinessWrapper>
+                </div>
+              </WrapperDriver>
             </OrderCustomer>
             {order?.driver && (
               <>
