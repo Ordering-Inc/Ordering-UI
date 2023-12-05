@@ -12,7 +12,9 @@ import {
   Icon,
   OrderTitle,
   DelayedTime,
-  ReviewedText
+  ReviewedText,
+  MapWrapper,
+  Map
 } from './styles'
 import { PoweredByOrdering } from '../../styles'
 import moment from 'moment'
@@ -28,7 +30,8 @@ export const HeaderContent = (props) => {
     changeIdToExternalId,
     enabledPoweredByOrdering,
     orderStatus,
-    percentage
+    percentage,
+    googleMapsUrl
   } = props
 
   const theme = useTheme()
@@ -133,6 +136,7 @@ export const HeaderContent = (props) => {
         <ReviewOrder
           order={order}
           hashKey={hashKey}
+          defaultStar={5}
           setIsReviewed={() => setReviewState({ ...reviewState, order: true })}
         />
       )}
@@ -140,6 +144,7 @@ export const HeaderContent = (props) => {
         <ReviewDriver
           order={order}
           hashKey={hashKey}
+          defaultStar={5}
           setIsReviewed={() => setReviewState({ ...reviewState, driver: true })}
         />
       )}
@@ -147,6 +152,20 @@ export const HeaderContent = (props) => {
         <ReviewedText>
           <p>{t('ORDER_ALREADY_REVIEWED_MESSAGE', 'This order has already been attended to, thank you for your preference.')}</p>
         </ReviewedText>
+      )}
+      {googleMapsUrl && (
+        <MapWrapper>
+          <Map style={{ width: '100%' }}>
+            <img
+              src={googleMapsUrl}
+              id='google-maps-image'
+              alt='google-maps-location'
+              width='100%'
+              height='100%'
+              loading='lazy'
+            />
+          </Map>
+        </MapWrapper>
       )}
     </Container>
   )

@@ -17,7 +17,8 @@ import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 export const OrderBillSection = (props) => {
   const {
     order,
-    setOpenTaxModal
+    setOpenTaxModal,
+    showOnlyTotals
   } = props
 
   const [, t] = useLanguage()
@@ -60,192 +61,196 @@ export const OrderBillSection = (props) => {
               {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()))}
             </td>
           </tr>
-          {(order?.summary?.discount > 0 ?? order?.discount > 0) && order?.offers?.length === 0 && (
-            <tr>
-              {order?.offer_type === 1 ? (
-                <td>
-                  {t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}{' '}
-                  <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
-                </td>
-              ) : (
-                <td>{t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}</td>
+          {!showOnlyTotals && (
+            <>
+              {(order?.summary?.discount > 0 ?? order?.discount > 0) && order?.offers?.length === 0 && (
+                <tr>
+                  {order?.offer_type === 1 ? (
+                    <td>
+                      {t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}{' '}
+                      <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
+                    </td>
+                  ) : (
+                    <td>{t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}</td>
+                  )}
+                  <td>- {parsePrice(order?.summary?.discount ?? order?.discount)}</td>
+                </tr>
               )}
-              <td>- {parsePrice(order?.summary?.discount ?? order?.discount)}</td>
-            </tr>
-          )}
-          {
-            order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
-              <tr key={offer.id}>
-                <td>
-                  {t(offer.name?.toUpperCase()?.replace(/ /g, '_'), offer.name)}
-                  {offer.rate_type === 1 && (
-                    <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+              {
+                order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
+                  <tr key={offer.id}>
+                    <td>
+                      {t(offer.name?.toUpperCase()?.replace(/ /g, '_'), offer.name)}
+                      {offer.rate_type === 1 && (
+                        <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                      )}
+                      {setOpenTaxModal && (
+                        <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
+                          <BsInfoCircle size='20' color={theme.colors.primary} />
+                        </Exclamation>
+                      )}
+                    </td>
+                    <td>
+                      - {parsePrice(offer?.summary?.discount)}
+                    </td>
+                  </tr>
+                ))
+              }
+              {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
+                <tr>
+                  <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
+                  {order?.tax_type === 1 ? (
+                    <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0))}</td>
+                  ) : (
+                    <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0)}</td>
                   )}
-                  {setOpenTaxModal && (
-                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
-                    </Exclamation>
-                  )}
-                </td>
-                <td>
-                  - {parsePrice(offer?.summary?.discount)}
-                </td>
-              </tr>
-            ))
-          }
-          {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
-            <tr>
-              <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
-              {order?.tax_type === 1 ? (
-                <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0))}</td>
-              ) : (
-                <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0)}</td>
+                </tr>
               )}
-            </tr>
-          )}
-          {
-            order?.taxes?.length === 0 && order?.tax_type === 2 && (
-              <tr>
-                <td>
-                  {t('TAX', 'Tax')}
-                  <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
-                </td>
-                <td>{parsePrice(order?.summary?.tax ?? 0)}</td>
-              </tr>
-            )
-          }
-          {
-            order?.fees?.length === 0 && (
-              <tr>
-                <td>
-                  {t('SERVICE_FEE', 'Service fee')}
-                  <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
-                </td>
-                <td>{parsePrice(order?.summary?.service_fee ?? 0)}</td>
-              </tr>
-            )
-          }
-          {
-            order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'product').map(tax => (
-              <tr key={tax?.id}>
-                <td>
-                  {t(tax?.name?.toUpperCase()?.replace(/ /g, '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                  <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                  {setOpenTaxModal && (
-                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
-                    </Exclamation>
-                  )}
-                </td>
-                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
-              </tr>
-            ))
-          }
-          {
-            order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
-              <tr key={fee.id}>
-                <td>
-                  {t(fee?.name?.toUpperCase()?.replace(/ /g, '_'), fee?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                  ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
-                  {setOpenTaxModal && (
-                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
-                    </Exclamation>
-                  )}
-                </td>
-                <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
-              </tr>
-            ))
-          }
-          {
-            order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
-              <tr key={offer.id}>
-                <td>
-                  {t(offer.name?.toUpperCase()?.replace(/ /g, '_'), offer.name)}
-                  {offer.rate_type === 1 && (
-                    <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                  )}
-                  {setOpenTaxModal && (
-                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
-                    </Exclamation>
-                  )}
-                </td>
-                <td>
-                  - {parsePrice(offer?.summary?.discount)}
-                </td>
-              </tr>
-            ))
-          }
-          {typeof order?.summary?.delivery_price === 'number' && !isPickup && (
-            <tr>
-              <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
-              <td>{parsePrice(order?.summary?.delivery_price + getIncludedTaxes(true))}</td>
-            </tr>
-          )}
-          {order?.extra_value_checkprice && order?.extra_value_checkprice > 0 && (
-            <tr>
-              <td>{t('EXTRA_VALUE_CHECKPRICE', 'Extra value checkprice')}</td>
-              <td>{parsePrice(order?.extra_value_checkprice)}</td>
-            </tr>
-          )}
-          {
-            order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'delivery_fee').map(tax => (
-              <tr key={tax?.id}>
-                <td>
-                  {t(tax?.name?.toUpperCase()?.replace(/ /g, '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                  <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                  {setOpenTaxModal && (
-                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
-                    </Exclamation>
-                  )}
-                </td>
-                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
-              </tr>
-            ))
-          }
-          {
-            order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
-              <tr key={offer.id}>
-                <td>
-                  {t(offer.name?.toUpperCase()?.replace(/ /g, '_'), offer.name)}
-                  {offer.rate_type === 1 && (
-                    <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                  )}
-                  {setOpenTaxModal && (
-                    <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
-                      <BsInfoCircle size='20' color={theme.colors.primary} />
-                    </Exclamation>
-                  )}
-                </td>
-                <td>
-                  - {parsePrice(offer?.summary?.discount)}
-                </td>
-              </tr>
-            ))
-          }
-          {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
-            <tr>
-              <td>
-                {t('DRIVER_TIP', theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip')}{' '}
-                {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
-                  parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                  !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                  (
-                    <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
-                  )}
-              </td>
-              <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip)}</td>
-            </tr>
-          )}
-          {extraValueAdjustment && !!parseFloat(extraValueAdjustment?.value) && (
-            <tr>
-              <td>
-                {t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
-              </td>
-              <td>{parseFloat(extraValueAdjustment?.value) > 0 ? parsePrice(parseFloat(extraValueAdjustment?.value)) : `- ${parsePrice(parseFloat(extraValueAdjustment?.value) * -1)}`}</td>
-            </tr>
+              {
+                order?.taxes?.length === 0 && order?.tax_type === 2 && (
+                  <tr>
+                    <td>
+                      {t('TAX', 'Tax')}
+                      <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
+                    </td>
+                    <td>{parsePrice(order?.summary?.tax ?? 0)}</td>
+                  </tr>
+                )
+              }
+              {
+                order?.fees?.length === 0 && (
+                  <tr>
+                    <td>
+                      {t('SERVICE_FEE', 'Service fee')}
+                      <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
+                    </td>
+                    <td>{parsePrice(order?.summary?.service_fee ?? 0)}</td>
+                  </tr>
+                )
+              }
+              {
+                order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'product').map(tax => (
+                  <tr key={tax?.id}>
+                    <td>
+                      {t(tax?.name?.toUpperCase()?.replace(/ /g, '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                      <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                      {setOpenTaxModal && (
+                        <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
+                          <BsInfoCircle size='20' color={theme.colors.primary} />
+                        </Exclamation>
+                      )}
+                    </td>
+                    <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
+                  </tr>
+                ))
+              }
+              {
+                order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
+                  <tr key={fee.id}>
+                    <td>
+                      {t(fee?.name?.toUpperCase()?.replace(/ /g, '_'), fee?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                      ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
+                      {setOpenTaxModal && (
+                        <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
+                          <BsInfoCircle size='20' color={theme.colors.primary} />
+                        </Exclamation>
+                      )}
+                    </td>
+                    <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
+                  </tr>
+                ))
+              }
+              {
+                order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
+                  <tr key={offer.id}>
+                    <td>
+                      {t(offer.name?.toUpperCase()?.replace(/ /g, '_'), offer.name)}
+                      {offer.rate_type === 1 && (
+                        <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                      )}
+                      {setOpenTaxModal && (
+                        <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
+                          <BsInfoCircle size='20' color={theme.colors.primary} />
+                        </Exclamation>
+                      )}
+                    </td>
+                    <td>
+                      - {parsePrice(offer?.summary?.discount)}
+                    </td>
+                  </tr>
+                ))
+              }
+              {typeof order?.summary?.delivery_price === 'number' && !isPickup && (
+                <tr>
+                  <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
+                  <td>{parsePrice(order?.summary?.delivery_price + getIncludedTaxes(true))}</td>
+                </tr>
+              )}
+              {order?.extra_value_checkprice && order?.extra_value_checkprice > 0 && (
+                <tr>
+                  <td>{t('EXTRA_VALUE_CHECKPRICE', 'Extra value checkprice')}</td>
+                  <td>{parsePrice(order?.extra_value_checkprice)}</td>
+                </tr>
+              )}
+              {
+                order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'delivery_fee').map(tax => (
+                  <tr key={tax?.id}>
+                    <td>
+                      {t(tax?.name?.toUpperCase()?.replace(/ /g, '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                      <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                      {setOpenTaxModal && (
+                        <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
+                          <BsInfoCircle size='20' color={theme.colors.primary} />
+                        </Exclamation>
+                      )}
+                    </td>
+                    <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
+                  </tr>
+                ))
+              }
+              {
+                order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
+                  <tr key={offer.id}>
+                    <td>
+                      {t(offer.name?.toUpperCase()?.replace(/ /g, '_'), offer.name)}
+                      {offer.rate_type === 1 && (
+                        <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                      )}
+                      {setOpenTaxModal && (
+                        <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
+                          <BsInfoCircle size='20' color={theme.colors.primary} />
+                        </Exclamation>
+                      )}
+                    </td>
+                    <td>
+                      - {parsePrice(offer?.summary?.discount)}
+                    </td>
+                  </tr>
+                ))
+              }
+              {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
+                <tr>
+                  <td>
+                    {t('DRIVER_TIP', theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip')}{' '}
+                    {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
+                      parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
+                      !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
+                      (
+                        <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
+                      )}
+                  </td>
+                  <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip)}</td>
+                </tr>
+              )}
+              {extraValueAdjustment && !!parseFloat(extraValueAdjustment?.value) && (
+                <tr>
+                  <td>
+                    {t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
+                  </td>
+                  <td>{parseFloat(extraValueAdjustment?.value) > 0 ? parsePrice(parseFloat(extraValueAdjustment?.value)) : `- ${parsePrice(parseFloat(extraValueAdjustment?.value) * -1)}`}</td>
+                </tr>
+              )}
+            </>
           )}
         </tbody>
       </table>
@@ -257,7 +262,7 @@ export const OrderBillSection = (props) => {
           </tr>
         </tbody>
       </table>
-      {order?.payment_events?.length > 0 && (
+      {order?.payment_events?.length > 0 && !showOnlyTotals && (
         <div style={{ marginTop: 10 }}>
           <span style={{ fontSize: 20 }}>{t('PAYMENTS', 'Payments')}</span>
           <div
