@@ -4,9 +4,9 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.StatusBarContainer = exports.ReviewedText = exports.OrderTitle = exports.Icon = exports.DelayedTime = exports.Container = void 0;
+exports.StatusBarContainer = exports.ReviewedText = exports.OrderTitle = exports.MapWrapper = exports.Map = exports.Icon = exports.DelayedTime = exports.Container = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -33,3 +33,5 @@ var DelayedTime = exports.DelayedTime = _styledComponents.default.div(_templateO
   return props.theme.colors.primary;
 });
 var ReviewedText = exports.ReviewedText = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  border-radius: 7.6px;\n  padding: 20px;\n  box-shadow: 0px 4px 10px 0px #0000001F;\n  margin: 55px 0 30px;\n\n  p {\n    font-weight: bold;\n    text-align: center;\n  }\n"])));
+var MapWrapper = exports.MapWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 30px;\n"])));
+var Map = exports.Map = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  width: 100%;\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n  }\n\n  img {\n    object-fit: cover;\n  }\n"])));

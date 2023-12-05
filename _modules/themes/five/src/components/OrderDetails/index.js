@@ -59,7 +59,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _configs$google_maps_, _configs$powered_by_o, _configs$alternative_, _configs$change_order, _theme$confirmation, _theme$confirmation2, _theme$confirmation3, _theme$confirmation4, _theme$confirmation5, _theme$confirmation6, _theme$confirmation7, _theme$confirmation8, _theme$confirmation9, _theme$confirmation10, _theme$confirmation11, _theme$confirmation12, _theme$confirmation13, _theme$confirmation14, _theme$confirmation15, _theme$confirmation16, _theme$confirmation17, _theme$confirmation18, _order$driver, _order$driver2, _theme$images, _order$business2, _order$business3, _theme$images2, _order$customer, _order$customer2, _theme$images3, _order$driver3, _order$driver4, _theme$defaultLanguag, _configs$guest_uuid_a, _order$business4, _order$business5, _orderTypes$find, _configs$general_hour, _order$reporting_data, _configs$general_hour2, _order$debug_payment_, _order$debug_payment_2, _progressBarObjt, _progressBarObjt2, _theme$defaultLanguag2, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$place, _order$place2, _progressBarObjt3, _progressBarObjt4, _order$business12, _progressBarObjt5, _progressBarObjt6, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _theme$defaultLanguag3, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11, _order$driver12, _order$driver13, _order$driver14, _configs$google_maps_2, _order$products$, _order$products$2, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6;
+  var _configs$google_maps_, _configs$powered_by_o, _configs$alternative_, _configs$change_order, _theme$confirmation, _theme$confirmation2, _theme$confirmation3, _theme$confirmation4, _theme$confirmation5, _theme$confirmation6, _theme$confirmation7, _theme$confirmation8, _theme$confirmation9, _theme$confirmation10, _theme$confirmation11, _theme$confirmation12, _theme$confirmation13, _theme$confirmation14, _theme$confirmation15, _theme$confirmation16, _theme$confirmation17, _theme$confirmation18, _order$driver, _order$driver2, _theme$images, _order$business2, _order$business3, _theme$images2, _order$customer, _order$customer2, _theme$images3, _order$driver3, _order$driver4, _theme$defaultLanguag, _configs$guest_uuid_a, _order$business4, _order$business5, _orderTypes$find, _configs$general_hour, _order$reporting_data, _configs$general_hour2, _order$debug_payment_, _order$debug_payment_2, _progressBarObjt, _progressBarObjt2, _theme$defaultLanguag2, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$place, _order$place2, _progressBarObjt3, _progressBarObjt4, _order$business12, _order$business13, _progressBarObjt5, _progressBarObjt6, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _theme$defaultLanguag3, _order$driver5, _order$driver6, _order$driver7, _order$driver8, _order$driver9, _order$driver10, _order$driver11, _order$driver12, _order$driver13, _order$driver14, _configs$google_maps_2, _order$products$, _order$products$2, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6;
   var userCustomerId = props.userCustomerId,
     handleChangeOrderStatus = props.handleChangeOrderStatus,
     handleBusinessRedirect = props.handleBusinessRedirect,
@@ -634,6 +634,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }))))), showStarbucksHeader && /*#__PURE__*/_react.default.createElement(_Starbucks.HeaderContent, {
     order: order,
     hashKey: props.hashKey,
+    googleMapsUrl: googleMapsApiKey && !validTrackingStatus.includes(parseInt(order === null || order === void 0 ? void 0 : order.status)) && (0, _utils.getGoogleMapImage)(order === null || order === void 0 || (_order$business13 = order.business) === null || _order$business13 === void 0 ? void 0 : _order$business13.location, googleMapsApiKey, mapConfigs),
     changeIdToExternalId: changeIdToExternalId,
     enabledPoweredByOrdering: enabledPoweredByOrdering,
     orderStatus: (_progressBarObjt5 = progressBarObjt(order === null || order === void 0 ? void 0 : order.status)) === null || _progressBarObjt5 === void 0 ? void 0 : _progressBarObjt5.value,
@@ -666,18 +667,27 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     mapControls: googleMapsControls,
     apiKey: configs === null || configs === void 0 || (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
     manualZoom: true
-  }))), ((deliveryTypes === null || deliveryTypes === void 0 ? void 0 : deliveryTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type)) || (order === null || order === void 0 ? void 0 : order.comment)) && !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_styles.OrderPreferences, null, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
+  }))), ((deliveryTypes === null || deliveryTypes === void 0 ? void 0 : deliveryTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type)) || (order === null || order === void 0 ? void 0 : order.comment)) && !isGiftCardOrder && !showStarbucksHeader && /*#__PURE__*/_react.default.createElement(_styles.OrderPreferences, null, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
     order: order,
     placeSpotTypes: placeSpotTypes
-  }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, /*#__PURE__*/_react.default.createElement(_OrderHeaderInfoSection.OrderHeaderInfoSection, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitle, null, !showStarbucksHeader ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrderHeaderInfoSection.OrderHeaderInfoSection, {
     isService: isService
   }), /*#__PURE__*/_react.default.createElement(_OrderActionsSection.OrderActionsSection, {
     userCustomerId: userCustomerId,
     isService: isService,
     handleGoToPage: handleGoToPage
-  })), sortedProductList, /*#__PURE__*/_react.default.createElement(_OrderBillSection.OrderBillSection, {
+  })) : /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_OrderPreferencesSections.OrderPreferencesSection, {
     order: order,
-    setOpenTaxModal: setOpenTaxModal
+    placeSpotTypes: placeSpotTypes
+  }))), !showStarbucksHeader && sortedProductList, /*#__PURE__*/_react.default.createElement(_OrderBillSection.OrderBillSection, {
+    order: order,
+    setOpenTaxModal: setOpenTaxModal,
+    showOnlyTotals: showStarbucksHeader
   }))), isGiftCardOrder && (order === null || order === void 0 || (_order$products$ = order.products[0]) === null || _order$products$ === void 0 || (_order$products$ = _order$products$.gift_card) === null || _order$products$ === void 0 ? void 0 : _order$products$.status) === 'pending' && !isGiftCardSent && /*#__PURE__*/_react.default.createElement(_SendGiftCard.SendGiftCard, {
     giftCardId: order === null || order === void 0 || (_order$products$2 = order.products[0]) === null || _order$products$2 === void 0 || (_order$products$2 = _order$products$2.gift_card) === null || _order$products$2 === void 0 ? void 0 : _order$products$2.id,
     setIsGiftCardSent: setIsGiftCardSent

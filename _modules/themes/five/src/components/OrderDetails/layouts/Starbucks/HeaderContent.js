@@ -40,7 +40,8 @@ var HeaderContent = exports.HeaderContent = function HeaderContent(props) {
     changeIdToExternalId = props.changeIdToExternalId,
     enabledPoweredByOrdering = props.enabledPoweredByOrdering,
     orderStatus = props.orderStatus,
-    percentage = props.percentage;
+    percentage = props.percentage,
+    googleMapsUrl = props.googleMapsUrl;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -122,6 +123,7 @@ var HeaderContent = exports.HeaderContent = function HeaderContent(props) {
   }, /*#__PURE__*/_react.default.createElement(_FaCheck.default, null))), showReview && !reviewState.order && !(order !== null && order !== void 0 && order.review) && /*#__PURE__*/_react.default.createElement(_Simple.ReviewOrder, {
     order: order,
     hashKey: hashKey,
+    defaultStar: 5,
     setIsReviewed: function setIsReviewed() {
       return setReviewState(_objectSpread(_objectSpread({}, reviewState), {}, {
         order: true
@@ -130,10 +132,22 @@ var HeaderContent = exports.HeaderContent = function HeaderContent(props) {
   }), reviewState.order && !reviewState.driver && (order === null || order === void 0 ? void 0 : order.driver) && !(order !== null && order !== void 0 && order.user_review) && /*#__PURE__*/_react.default.createElement(_Simple2.ReviewDriver, {
     order: order,
     hashKey: hashKey,
+    defaultStar: 5,
     setIsReviewed: function setIsReviewed() {
       return setReviewState(_objectSpread(_objectSpread({}, reviewState), {}, {
         driver: true
       }));
     }
-  }), ((order === null || order === void 0 ? void 0 : order.review) || reviewState.order) && ((order === null || order === void 0 ? void 0 : order.driver) && ((order === null || order === void 0 ? void 0 : order.user_review) || reviewState.driver) || !(order !== null && order !== void 0 && order.driver)) && /*#__PURE__*/_react.default.createElement(_styles.ReviewedText, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_ALREADY_REVIEWED_MESSAGE', 'This order has already been attended to, thank you for your preference.'))));
+  }), ((order === null || order === void 0 ? void 0 : order.review) || reviewState.order) && ((order === null || order === void 0 ? void 0 : order.driver) && ((order === null || order === void 0 ? void 0 : order.user_review) || reviewState.driver) || !(order !== null && order !== void 0 && order.driver)) && /*#__PURE__*/_react.default.createElement(_styles.ReviewedText, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_ALREADY_REVIEWED_MESSAGE', 'This order has already been attended to, thank you for your preference.'))), googleMapsUrl && /*#__PURE__*/_react.default.createElement(_styles.MapWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Map, {
+    style: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: googleMapsUrl,
+    id: "google-maps-image",
+    alt: "google-maps-location",
+    width: "100%",
+    height: "100%",
+    loading: "lazy"
+  }))));
 };
