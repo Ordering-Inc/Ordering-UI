@@ -404,89 +404,91 @@ var CheckoutUI = function CheckoutUI(props) {
       });
     }
   };
-  var handleCartPlaced = function handleCartPlaced(cart) {
-    handleOrderRedirect(cart.order.uuid);
+  var handleGoToPage = function handleGoToPage(data) {
+    events.emit('go_to_page', data);
   };
   var tokenizeOrder = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       var _businessDetails$busi5;
-      var currency, data, params, url, response, result;
+      var currency, data, params, url, response, result, eventDeUna;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               currency = 'MXN';
+              _context2.t0 = cart === null || cart === void 0 ? void 0 : cart.uuid;
+              _context2.t1 = (cart === null || cart === void 0 ? void 0 : cart.total) * 100;
+              _context2.t2 = user === null || user === void 0 ? void 0 : user.email;
+              _context2.t3 = user === null || user === void 0 ? void 0 : user.id;
+              _context2.t4 = parseInt(businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi5 = businessDetails.business) === null || _businessDetails$busi5 === void 0 ? void 0 : _businessDetails$busi5.brand_id);
+              _context2.t5 = user === null || user === void 0 ? void 0 : user.wow_rewards_user_id;
+              _context2.t6 = cart === null || cart === void 0 ? void 0 : cart.minimum;
+              _context2.next = 10;
+              return getMaxCashDelivery();
+            case 10:
+              _context2.t7 = _context2.sent;
               data = {
-                order_type: 'PAYMENT_LINK',
-                order: {
-                  currency: currency,
-                  items: [],
-                  store_code: 'all',
-                  order_id: cart === null || cart === void 0 ? void 0 : cart.uuid,
-                  total_amount: (cart === null || cart === void 0 ? void 0 : cart.total) * 100,
-                  webhook_urls: {
-                    notify_order: 'https://alsea-website-staging.ordering.co/'
-                  },
-                  payer_info: {
-                    email: user === null || user === void 0 ? void 0 : user.email
-                  }
-                },
-                custom_fields: {
-                  data: {
-                    external_auth_token: 'Bearer ' + token,
-                    user_id: user === null || user === void 0 ? void 0 : user.id,
-                    brand_id: parseInt(businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi5 = businessDetails.business) === null || _businessDetails$busi5 === void 0 ? void 0 : _businessDetails$busi5.brand_id),
-                    // wow_rewards_user_id: user?.wow_rewards_user_id,
-                    cash_rule: {
-                      min_amount: 10,
-                      max_amount: 100
-                    }
-                  }
-                }
+                order_id: _context2.t0,
+                total_amount: _context2.t1,
+                notify_order: 'https://alsea-website-staging.ordering.co/',
+                email: _context2.t2,
+                user_id: _context2.t3,
+                brand_id: _context2.t4,
+                wow_rewards_user_id: _context2.t5,
+                min_amount: _context2.t6,
+                max_amount: _context2.t7
               };
               params = {
                 method: 'POST',
                 timeout: 0,
                 accept: 'application/json',
                 headers: {
-                  'X-API-KEY': 'e40affdfbee57e43de41d1ce1451859bbe85626c1e87adaa93e538a6fb68488d09bb578f561122c1177e66ab1238563359acb70aa0b972ac8f44a52bceb7',
-                  // "X-API-KEY": deUnaApiKey,
-                  'X-User-Agent': 'Ordering'
+                  // 'X-API-KEY': 'e40affdfbee57e43de41d1ce1451859bbe85626c1e87adaa93e538a6fb68488d09bb578f561122c1177e66ab1238563359acb70aa0b972ac8f44a52bceb7',
+                  Authorization: "Bearer ".concat(token),
+                  'X-User-Agent': 'MarketPlace'
                 },
                 body: JSON.stringify(data)
-              };
-              url = "".concat(DEUNA_URL, "/merchants/orders");
-              _context2.prev = 4;
-              _context2.next = 7;
+              }; // const url = `${DEUNA_URL}/merchants/orders`
+              url = "https://alsea-plugins".concat(isAlsea ? '' : '-staging', ".ordering.co/alseaplatform/deuna_order.php");
+              _context2.prev = 14;
+              _context2.next = 17;
               return fetch(url, params);
-            case 7:
+            case 17:
               response = _context2.sent;
-              _context2.next = 10;
+              _context2.next = 20;
               return response.json();
-            case 10:
+            case 20:
               result = _context2.sent;
-              console.log('tokized order', result);
+              eventDeUna = !result.error ? 'deuna_checkout' : 'deuna_checkout_tokenize_error';
+              events.emit(eventDeUna, {
+                event: eventDeUna,
+                data: data
+              });
               if (result.error) {
-                _context2.next = 15;
+                _context2.next = 26;
                 break;
               }
               initCheckout(result.token);
               return _context2.abrupt("return");
-            case 15:
+            case 26:
               setShowDeUnaCheckout(false);
-              _context2.next = 22;
+              _context2.next = 34;
               break;
-            case 18:
-              _context2.prev = 18;
-              _context2.t0 = _context2["catch"](4);
-              console.log('err tokized order', _context2.t0);
+            case 29:
+              _context2.prev = 29;
+              _context2.t8 = _context2["catch"](14);
+              console.log('err tokized order', _context2.t8);
+              events.emit('deuna_checkout_tokenize_error', {
+                event: 'deuna_checkout_tokenize_error',
+                data: _context2.t8
+              });
               setShowDeUnaCheckout(false);
-            case 22:
+            case 34:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[4, 18]]);
+      }, _callee2, null, [[14, 29]]);
     }));
     return function tokenizeOrder() {
       return _ref2.apply(this, arguments);
@@ -502,20 +504,71 @@ var CheckoutUI = function CheckoutUI(props) {
       };
     });
   }
-  var initCheckout = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(token) {
-      var deunaCheckout, config;
+  var getMaxCashDelivery = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var response, result;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
+              _context3.prev = 0;
+              _context3.next = 3;
+              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-development', ".ordering.co/alseaplatform/max_cash_delivery.php"), {
+                method: 'POST',
+                body: JSON.stringify({
+                  uuid: cart === null || cart === void 0 ? void 0 : cart.uuid
+                }),
+                headers: {
+                  Authorization: "Bearer ".concat(token),
+                  'X-APP-X': ordering.appId
+                }
+              });
+            case 3:
+              response = _context3.sent;
+              _context3.next = 6;
+              return response.json();
+            case 6:
+              result = _context3.sent;
+              if (result.error) {
+                _context3.next = 11;
+                break;
+              }
+              return _context3.abrupt("return", result);
+            case 11:
+              return _context3.abrupt("return", 600);
+            case 12:
+              _context3.next = 18;
+              break;
+            case 14:
+              _context3.prev = 14;
+              _context3.t0 = _context3["catch"](0);
+              console.error('Error al realizar la solicitud getMaxCashDelivery:', _context3.t0);
+              return _context3.abrupt("return", 600);
+            case 18:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 14]]);
+    }));
+    return function getMaxCashDelivery() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+  var initCheckout = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(token) {
+      var CheckoutWidget, config;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
               return importScript('https://cdn.getduna.com/cdl/index.js');
             case 2:
-              _context3.next = 4;
+              _context4.next = 4;
               return importScript('https://cdn.getduna.com/checkout-widget/v1.2.0/index.js');
             case 4:
-              deunaCheckout = window.DeunaCheckout();
+              CheckoutWidget = window.DeunaCheckout();
               config = {
                 orderToken: token,
                 apiKey: _utils.deUnaApiKey,
@@ -524,36 +577,57 @@ var CheckoutUI = function CheckoutUI(props) {
                 // Cambia a 'production' para ambiente de producción
                 callbacks: {
                   onSuccess: function onSuccess(payload) {
+                    var _payload$order;
                     console.log('onSuccess', payload);
-                    // $scope.goToOrder(payload.uuid)
+                    events.emit('deuna_checkout_completed', {
+                      event: 'deuna_checkout_completed',
+                      data: payload === null || payload === void 0 ? void 0 : payload.order
+                    });
+                    handleOrderRedirect(payload === null || payload === void 0 ? void 0 : (_payload$order = payload.order) === null || _payload$order === void 0 ? void 0 : _payload$order.order_id);
                   },
-
                   onFailure: function onFailure(error) {
                     var _cart$business;
                     console.log('onFailure', error);
+                    events.emit('deuna_checkout_failed_launch', {
+                      event: 'deuna_checkout_failed_launch',
+                      data: error
+                    });
                     handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug);
                   },
                   onClose: function onClose() {
                     var _cart$business2;
                     console.log('onClose');
+                    events.emit('deuna_checkout_callback_close', {
+                      event: 'deuna_checkout_callback_close',
+                      data: {
+                        onClose: true
+                      }
+                    });
                     handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.slug);
+                  },
+                  eventListener: function eventListener(eventType, payload) {
+                    if (eventType === 'changeAddress') {
+                      CheckoutWidget.closeCheckout();
+                      window.localStorage.setItem('isOpenAddressList', JSON.stringify(true));
+                      handleGoToPage({
+                        page: 'search'
+                      });
+                    }
                   }
                 }
               };
-              _context3.next = 8;
-              return deunaCheckout.config(config);
-            case 8:
-              _context3.next = 10;
-              return deunaCheckout.initCheckout();
-            case 10:
+              CheckoutWidget.config(config).then(function () {
+                CheckoutWidget.initCheckout();
+              });
+            case 7:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }));
     return function initCheckout(_x2) {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
   (0, _react.useEffect)(function () {
@@ -619,12 +693,14 @@ var CheckoutUI = function CheckoutUI(props) {
   (0, _react.useEffect)(function () {
     events.emit('in-checkout', cart);
   }, []);
-  (0, _react.useEffect)(function () {
-    events.on('cart_placed', handleCartPlaced);
-    return function () {
-      events.off('cart_placed', handleCartPlaced);
-    };
-  }, []);
+
+  // useEffect(() => {
+  //   events.on('cart_placed', handleCartPlaced)
+  //   return () => {
+  //     events.off('cart_placed', handleCartPlaced)
+  //   }
+  // }, [])
+
   (0, _react.useEffect)(function () {
     var _configs$advanced_off2;
     if (!isApplyMasterCoupon || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay_mastercard' || cartState.loading) return;
@@ -1073,19 +1149,19 @@ var Checkout = function Checkout(props) {
     }
   }, [errors]);
   var getOrder = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(cartId) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(cartId) {
       var _result$order, userCustomer, url, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart, spotNumberFromStorage, _JSON$parse, _JSON$parse2, _cart, _cart$business12, spotNumber, slug;
-      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
-              _context4.prev = 0;
+              _context5.prev = 0;
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: true
               }));
               userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
               url = userCustomer ? "".concat(ordering.root, "/carts/").concat(cartId, "?user_id=").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) : "".concat(ordering.root, "/carts/").concat(cartId);
-              _context4.next = 6;
+              _context5.next = 6;
               return fetch(url, {
                 method: 'GET',
                 headers: {
@@ -1095,32 +1171,32 @@ var Checkout = function Checkout(props) {
                 }
               });
             case 6:
-              response = _context4.sent;
-              _context4.next = 9;
+              response = _context5.sent;
+              _context5.next = 9;
               return response.json();
             case 9:
-              _yield$response$json = _context4.sent;
+              _yield$response$json = _context5.sent;
               result = _yield$response$json.result;
               if (!(result.status === 1 && (_result$order = result.order) !== null && _result$order !== void 0 && _result$order.uuid)) {
-                _context4.next = 16;
+                _context5.next = 16;
                 break;
               }
               handleOrderRedirect(result.order.uuid);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false
               }));
-              _context4.next = 35;
+              _context5.next = 35;
               break;
             case 16:
               if (!(result.status === 2)) {
-                _context4.next = 31;
+                _context5.next = 31;
                 break;
               }
-              _context4.prev = 17;
-              _context4.next = 20;
+              _context5.prev = 17;
+              _context5.next = 20;
               return confirmCart(cartUuid);
             case 20:
-              confirmCartRes = _context4.sent;
+              confirmCartRes = _context5.sent;
               if (confirmCartRes.error) {
                 setAlertState({
                   open: true,
@@ -1135,17 +1211,17 @@ var Checkout = function Checkout(props) {
                 loading: false,
                 cart: result
               }));
-              _context4.next = 29;
+              _context5.next = 29;
               break;
             case 26:
-              _context4.prev = 26;
-              _context4.t0 = _context4["catch"](17);
+              _context5.prev = 26;
+              _context5.t0 = _context5["catch"](17);
               setAlertState({
                 open: true,
-                content: [_context4.t0.message]
+                content: [_context5.t0.message]
               });
             case 29:
-              _context4.next = 35;
+              _context5.next = 35;
               break;
             case 31:
               cart = Array.isArray(result) ? null : result;
@@ -1165,24 +1241,24 @@ var Checkout = function Checkout(props) {
                 error: cart ? null : result
               }));
             case 35:
-              _context4.next = 40;
+              _context5.next = 40;
               break;
             case 37:
-              _context4.prev = 37;
-              _context4.t1 = _context4["catch"](0);
+              _context5.prev = 37;
+              _context5.t1 = _context5["catch"](0);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
-                error: [_context4.t1.toString()]
+                error: [_context5.t1.toString()]
               }));
             case 40:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
-      }, _callee4, null, [[0, 37], [17, 26]]);
+      }, _callee5, null, [[0, 37], [17, 26]]);
     }));
     return function getOrder(_x3) {
-      return _ref4.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }();
   (0, _react.useEffect)(function () {

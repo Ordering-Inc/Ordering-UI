@@ -263,6 +263,13 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     var resizeEvent = window.addEventListener('resize', function (e) {
       setInnerWidth(e.target.innerWidth);
     });
+    var isOpenAddressList = JSON.parse(window.localStorage.getItem('isOpenAddressList'));
+    if (isOpenAddressList) {
+      setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        listOpen: true
+      }));
+      window.localStorage.removeItem('isOpenAddressList');
+    }
     return function () {
       window.removeEventListener('resize', resizeEvent);
     };
