@@ -85,6 +85,7 @@ const SingleProductCardUI = React.memo((props) => {
   const hideProductLogo = viewString
     ? theme?.[viewString]?.components?.cart?.components?.products?.image?.hidden
     : theme?.business_view?.components?.products?.components?.product?.components?.image?.hidden
+  const hideFavoriteIcon = theme?.business_view?.components?.products?.components?.product?.components?.favorite?.hidden
 
   // const productsRows = theme?.layouts?.business_view?.components?.products?.components?.layout?.rows
 
@@ -173,7 +174,7 @@ const SingleProductCardUI = React.memo((props) => {
                 <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0} isBgimage={optimizeImage(product?.images || theme?.images?.dummies?.product, 'h_86,c_limit')} oneLine={isPreviously}>
                   <TitleWrapper>
                     {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-                    {(!useKioskApp && !isPreviously && isCustomerMode) && (
+                    {(!useKioskApp && !isPreviously && isCustomerMode && !hideFavoriteIcon) && (
                       !isSkeleton ? (
                         <span onClick={() => handleChangeFavorite()} ref={favoriteRef}>
                           {product?.favorite ? <Like /> : <DisLike />}

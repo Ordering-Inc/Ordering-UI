@@ -525,7 +525,7 @@ const ProductOptionsUI = (props) => {
                 <ProductName>
                   <span>{product?.name}</span>
                 </ProductName>
-                {!isCustomerMode && (
+                {!isCustomerMode && !hideFavoriteIcon && (
                   <span className='favorite' onClick={() => handleChangeFavorite()}>
                     {product?.favorite ? <Like /> : <DisLike />}
                   </span>
