@@ -121,3 +121,22 @@ export const ReviewedText = styled.div`
     text-align: center;
   }
 `
+
+export const MapWrapper = styled.div`
+  width: 100%;
+  margin-top: 30px;
+`
+
+export const Map = styled.div`
+  margin-bottom: 10px;
+  width: 100%;
+  > div {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  img {
+    object-fit: cover;
+  }
+`
