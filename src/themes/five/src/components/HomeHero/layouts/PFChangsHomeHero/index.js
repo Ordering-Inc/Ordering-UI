@@ -180,7 +180,11 @@ export const PFChangsHomeHero = (props) => {
     const resizeEvent = window.addEventListener('resize', (e) => {
       setInnerWidth(e.target.innerWidth)
     })
-
+    const isOpenAddressList = JSON.parse(window.localStorage.getItem('isOpenAddressList'))
+    if (isOpenAddressList) {
+      setModals({ ...modals, listOpen: true })
+      window.localStorage.removeItem('isOpenAddressList')
+    }
     return () => {
       window.removeEventListener('resize', resizeEvent)
     }

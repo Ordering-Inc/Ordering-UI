@@ -368,56 +368,68 @@ const CheckoutUI = (props) => {
     }
   }
 
-  const handleCartPlaced = (cart) => {
-    handleOrderRedirect(cart.order.uuid)
+  const handleGoToPage = (data) => {
+    events.emit('go_to_page', data)
   }
 
   const tokenizeOrder = async () => {
     const currency = 'MXN'
     const data = {
-      order_type: 'PAYMENT_LINK',
-      order: {
-        currency: currency,
-        items: [],
-        store_code: 'all',
-        order_id: cart?.uuid,
-        total_amount: (cart?.total) * 100,
-        webhook_urls: {
-          notify_order: 'https://alsea-website-staging.ordering.co/'
-        },
-        payer_info: {
-          email: user?.email
-        }
-      },
-      custom_fields: {
-        data: {
-          external_auth_token: 'Bearer ' + token,
-          user_id: user?.id,
-          brand_id: parseInt(businessDetails?.business?.brand_id),
-          // wow_rewards_user_id: user?.wow_rewards_user_id,
-          cash_rule: {
-            min_amount: 10,
-            max_amount: 100
-          }
-        }
-      }
+      // order_type: 'PAYMENT_LINK',
+      // order: {
+      //   currency: currency,
+      //   items: [],
+      //   store_code: 'all',
+      //   order_id: cart?.uuid,
+      //   total_amount: (cart?.total) * 100,
+      //   webhook_urls: {
+      //     notify_order: 'https://alsea-website-staging.ordering.co/'
+      //   },
+      //   payer_info: {
+      //     email: user?.email
+      //   }
+      // },
+      order_id: cart?.uuid,
+      total_amount: (cart?.total) * 100,
+      notify_order: 'https://alsea-website-staging.ordering.co/',
+      email: user?.email,
+      user_id: user?.id,
+      brand_id: parseInt(businessDetails?.business?.brand_id),
+      wow_rewards_user_id: user?.wow_rewards_user_id,
+      min_amount: cart?.minimum,
+      max_amount: await getMaxCashDelivery()
+      // custom_fields: {
+      //   data: {
+      //     external_auth_token: 'Bearer ' + token,
+      //     user_id: user?.id,
+      //     brand_id: parseInt(businessDetails?.business?.brand_id),
+      //     wow_rewards_user_id: user?.wow_rewards_user_id,
+      //     cash_rule: {
+      //       min_amount: businessDetails?.business?.minimum,
+      //       max_amount: await getMaxCashDelivery()
+      //     }
+      //   }
+      // }
     }
     const params = {
       method: 'POST',
       timeout: 0,
       accept: 'application/json',
       headers: {
-        'X-API-KEY': 'e40affdfbee57e43de41d1ce1451859bbe85626c1e87adaa93e538a6fb68488d09bb578f561122c1177e66ab1238563359acb70aa0b972ac8f44a52bceb7',
-        // "X-API-KEY": deUnaApiKey,
-        'X-User-Agent': 'Ordering'
+        // 'X-API-KEY': 'e40affdfbee57e43de41d1ce1451859bbe85626c1e87adaa93e538a6fb68488d09bb578f561122c1177e66ab1238563359acb70aa0b972ac8f44a52bceb7',
+        Authorization: `Bearer ${token}`,
+        'X-User-Agent': 'MarketPlace'
       },
       body: JSON.stringify(data)
     }
-    const url = `${DEUNA_URL}/merchants/orders`
+    // const url = `${DEUNA_URL}/merchants/orders`
+    const url = `https://alsea-plugins${isAlsea ? '' : '-staging'}.ordering.co/alseaplatform/deuna_order.php`
     try {
       const response = await fetch(url, params)
       const result = await response.json()
-      console.log('tokized order', result)
+      const eventDeUna = !result.error ? 'deuna_checkout' : 'deuna_checkout_tokenize_error'
+      events.emit(eventDeUna, { event: eventDeUna, data: data })
+
       if (!result.error) {
         initCheckout(result.token)
         return
@@ -425,6 +437,7 @@ const CheckoutUI = (props) => {
       setShowDeUnaCheckout(false)
     } catch (err) {
       console.log('err tokized order', err)
+      events.emit('deuna_checkout_tokenize_error', { event: 'deuna_checkout_tokenize_error', data: err })
       setShowDeUnaCheckout(false)
     }
   }
@@ -440,11 +453,35 @@ const CheckoutUI = (props) => {
     })
   }
 
+  const getMaxCashDelivery = async () => {
+    try {
+      const response = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-development'}.ordering.co/alseaplatform/max_cash_delivery.php`, {
+        method: 'POST',
+        body: JSON.stringify({
+          uuid: cart?.uuid
+        }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'X-APP-X': ordering.appId
+        }
+      })
+      const result = await response.json()
+      if (!result.error) {
+        return result
+      } else {
+        return 600
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud getMaxCashDelivery:', error)
+      return 600
+    }
+  }
+
   const initCheckout = async (token) => {
     await importScript('https://cdn.getduna.com/cdl/index.js')
     await importScript('https://cdn.getduna.com/checkout-widget/v1.2.0/index.js')
 
-    const deunaCheckout = window.DeunaCheckout()
+    const CheckoutWidget = window.DeunaCheckout()
 
     const config = {
       orderToken: token,
@@ -453,23 +490,31 @@ const CheckoutUI = (props) => {
       callbacks: {
         onSuccess: (payload) => {
           console.log('onSuccess', payload)
-          // $scope.goToOrder(payload.uuid)
+          events.emit('deuna_checkout_completed', { event: 'deuna_checkout_completed', data: payload?.order })
+          handleOrderRedirect(payload?.order?.order_id)
         },
         onFailure: (error) => {
           console.log('onFailure', error)
+          events.emit('deuna_checkout_failed_launch', { event: 'deuna_checkout_failed_launch', data: error })
           handleStoreRedirect(cart?.business?.slug)
-
         },
         onClose: () => {
           console.log('onClose')
+          events.emit('deuna_checkout_callback_close', { event: 'deuna_checkout_callback_close', data: { onClose: true } })
           handleStoreRedirect(cart?.business?.slug)
-
+        },
+        eventListener: (eventType, payload) => {
+          if (eventType === 'changeAddress') {
+            CheckoutWidget.closeCheckout()
+            window.localStorage.setItem('isOpenAddressList', JSON.stringify(true))
+            handleGoToPage({ page: 'search' })
+          }
         }
       }
     }
-    await deunaCheckout.config(config)
-
-    await deunaCheckout.initCheckout()
+    CheckoutWidget.config(config).then(() => {
+      CheckoutWidget.initCheckout()
+    })
   }
 
   useEffect(() => {
@@ -540,12 +585,12 @@ const CheckoutUI = (props) => {
     events.emit('in-checkout', cart)
   }, [])
 
-  useEffect(() => {
-    events.on('cart_placed', handleCartPlaced)
-    return () => {
-      events.off('cart_placed', handleCartPlaced)
-    }
-  }, [])
+  // useEffect(() => {
+  //   events.on('cart_placed', handleCartPlaced)
+  //   return () => {
+  //     events.off('cart_placed', handleCartPlaced)
+  //   }
+  // }, [])
 
   useEffect(() => {
     if (!isApplyMasterCoupon || paymethodSelected?.gateway !== 'openpay_mastercard' || cartState.loading) return
