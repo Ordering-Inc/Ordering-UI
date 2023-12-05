@@ -623,6 +623,11 @@ const OrderDetailsUI = (props) => {
               <HeaderContentTwo
                 order={order}
                 hashKey={props.hashKey}
+                googleMapsUrl={
+                  googleMapsApiKey &&
+                  !validTrackingStatus.includes(parseInt(order?.status)) &&
+                  getGoogleMapImage(order?.business?.location, googleMapsApiKey, mapConfigs)
+                }
                 changeIdToExternalId={changeIdToExternalId}
                 enabledPoweredByOrdering={enabledPoweredByOrdering}
                 orderStatus={progressBarObjt(order?.status)?.value}
@@ -710,7 +715,7 @@ const OrderDetailsUI = (props) => {
                 }
               </>
             )}
-            {(deliveryTypes?.includes(order?.delivery_type) || order?.comment) && !isGiftCardOrder && (
+            {(deliveryTypes?.includes(order?.delivery_type) || order?.comment) && !isGiftCardOrder && !showStarbucksHeader && (
               <OrderPreferences>
                 <OrderPreferencesSection
                   order={order}
@@ -722,17 +727,31 @@ const OrderDetailsUI = (props) => {
           <WrapperRightContainer>
             <OrderProducts>
               <HeaderTitle>
-                <OrderHeaderInfoSection isService={isService} />
-                <OrderActionsSection
-                  userCustomerId={userCustomerId}
-                  isService={isService}
-                  handleGoToPage={handleGoToPage}
-                />
+                {!showStarbucksHeader ? (
+                  <>
+                    <OrderHeaderInfoSection isService={isService} />
+                    <OrderActionsSection
+                      userCustomerId={userCustomerId}
+                      isService={isService}
+                      handleGoToPage={handleGoToPage}
+                    />
+                  </>
+                ) : (
+                  <div
+                    style={{ display: 'flex', flexDirection: 'column' }}
+                  >
+                    <OrderPreferencesSection
+                      order={order}
+                      placeSpotTypes={placeSpotTypes}
+                    />
+                  </div>
+                )}
               </HeaderTitle>
-              {sortedProductList}
+              {!showStarbucksHeader && sortedProductList}
               <OrderBillSection
                 order={order}
                 setOpenTaxModal={setOpenTaxModal}
+                showOnlyTotals={showStarbucksHeader}
               />
             </OrderProducts>
           </WrapperRightContainer>
