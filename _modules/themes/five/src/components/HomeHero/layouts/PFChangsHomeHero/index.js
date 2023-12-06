@@ -239,17 +239,25 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
   (0, _react.useEffect)(function () {
     var _orderState$options5, _orderState$options5$;
     if (orderState !== null && orderState !== void 0 && (_orderState$options5 = orderState.options) !== null && _orderState$options5 !== void 0 && (_orderState$options5$ = _orderState$options5.address) !== null && _orderState$options5$ !== void 0 && _orderState$options5$.location) {
-      setGoToElement(!goToElement);
+      setGoToElement(true);
     }
   }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : (_orderState$options6$ = _orderState$options6.address) === null || _orderState$options6$ === void 0 ? void 0 : _orderState$options6$.location]);
   (0, _react.useEffect)(function () {
-    if (goToElement && nearestBusinessContainer.current) {
-      nearestBusinessContainer.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest'
-      });
+    var timeout;
+    if (goToElement && nearestBusinessContainer !== null && nearestBusinessContainer !== void 0 && nearestBusinessContainer.current) {
+      timeout = setTimeout(function () {
+        var elementRect = nearestBusinessContainer.current.getBoundingClientRect();
+        var offsetTop = elementRect.top + window.scrollY;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+        setGoToElement(false);
+      }, 2000);
     }
+    return function () {
+      typeof timeout === 'number' && clearTimeout(timeout);
+    };
   }, [goToElement]);
   (0, _react.useEffect)(function () {
     var resizeEvent = window.addEventListener('resize', function (e) {

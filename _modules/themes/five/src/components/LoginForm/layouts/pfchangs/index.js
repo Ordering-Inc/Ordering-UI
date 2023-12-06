@@ -11,6 +11,7 @@ var _styledComponents = require("styled-components");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _reactOtpInput = _interopRequireDefault(require("react-otp-input"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+var _CgSearchLoading = _interopRequireDefault(require("@meronex/icons/cg/CgSearchLoading"));
 var _orderingComponents = require("ordering-components");
 var _pfchangs = require("../../../Confirm/layouts/pfchangs");
 var _InputPhoneNumber = require("../../../InputPhoneNumber");
@@ -271,6 +272,7 @@ var LoginFormUI = function LoginFormUI(props) {
     if ((otpState === null || otpState === void 0 ? void 0 : otpState.length) === numOtpInputs) {
       var localUserInfoRequired = JSON.parse(window.localStorage.getItem('user-info-required'));
       if (loginTab === 'otp') {
+        setSubmitted(true);
         if (createOtpUser && !localUserInfoRequired) {
           alseaOtpCreateUser({
             country_code: parseNumber(credentials === null || credentials === void 0 ? void 0 : credentials.cellphone).countryPhoneCode,
@@ -342,10 +344,12 @@ var LoginFormUI = function LoginFormUI(props) {
   (0, _react.useEffect)(function () {
     formMethods.reset();
   }, [loginTab]);
-  (0, _react.useEffect)(function () {
-    if (ordering.project === null || !submitted || !useRootPoint) return;
-    handleButtonLoginClick();
-  }, [ordering, submitted]);
+
+  // useEffect(() => {
+  //   if (ordering.project === null || !submitted || !useRootPoint) return
+  //   handleButtonLoginClick()
+  // }, [ordering, submitted])
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, {
     isPopup: isPopup
   }, isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.HeroSide, null, /*#__PURE__*/_react.default.createElement("img", {
@@ -415,7 +419,11 @@ var LoginFormUI = function LoginFormUI(props) {
     placeholder: otpPlaceholder,
     isInputNum: true,
     shouldAutoFocus: true
-  })), /*#__PURE__*/_react.default.createElement(_styles.ResendCode, {
+  })), submitted && /*#__PURE__*/_react.default.createElement(_styles.Title, {
+    style: {
+      textAlign: 'center'
+    }
+  }, t('VALIDATING', 'Validando...')), /*#__PURE__*/_react.default.createElement(_styles.ResendCode, {
     disabled: otpLeftTime > 500,
     onClick: formMethods.handleSubmit(function () {
       return onSubmit(cellphoneOtpType);
