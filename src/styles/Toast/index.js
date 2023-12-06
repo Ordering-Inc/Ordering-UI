@@ -10,8 +10,8 @@ const ToastBar = styled.div`
   border-radius: 2px;
   padding: 16px;
   position: fixed;
+  bottom: 80px;
   z-index: 9999;
-  bottom: 30px;
   font-size: 14px;
   min-width: 200px;
   max-width: 200px;
@@ -41,6 +41,10 @@ const ToastBar = styled.div`
     font-size: 16px;
     min-width: 250px;
     max-width: initial;
+  }
+
+  @media(min-width: 1000px){
+    bottom: 30px;
   }
 `
 
