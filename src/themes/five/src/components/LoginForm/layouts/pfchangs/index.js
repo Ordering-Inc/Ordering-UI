@@ -4,6 +4,8 @@ import { useTheme } from 'styled-components'
 import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import Skeleton from 'react-loading-skeleton'
+import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
+
 import {
   LoginForm as LoginFormController,
   useLanguage,
@@ -224,6 +226,7 @@ const LoginFormUI = (props) => {
     if (otpState?.length === numOtpInputs) {
       const localUserInfoRequired = JSON.parse(window.localStorage.getItem('user-info-required'))
       if (loginTab === 'otp') {
+        setSubmitted(true)
         if (createOtpUser && !localUserInfoRequired) {
           alseaOtpCreateUser({
             country_code: parseNumber(credentials?.cellphone).countryPhoneCode,
@@ -294,10 +297,10 @@ const LoginFormUI = (props) => {
     formMethods.reset()
   }, [loginTab])
 
-  useEffect(() => {
-    if (ordering.project === null || !submitted || !useRootPoint) return
-    handleButtonLoginClick()
-  }, [ordering, submitted])
+  // useEffect(() => {
+  //   if (ordering.project === null || !submitted || !useRootPoint) return
+  //   handleButtonLoginClick()
+  // }, [ordering, submitted])
 
   return (
     <>
@@ -412,6 +415,11 @@ const LoginFormUI = (props) => {
                     shouldAutoFocus
                   />
                 </OtpWrapper>
+                {submitted && (
+                  <Title style={{ textAlign: 'center' }}>
+                    {t('VALIDATING', 'Validando...')}
+                  </Title>
+                )}
                 <ResendCode disabled={otpLeftTime > 500} onClick={formMethods.handleSubmit(() => onSubmit(cellphoneOtpType))}>
                   {t('RESEND_AGAIN', 'Resend again')}?
                 </ResendCode>

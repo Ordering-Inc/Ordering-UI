@@ -151,17 +151,28 @@ export const PFChangsHomeHero = (props) => {
 
   useEffect(() => {
     if (orderState?.options?.address?.location) {
-      setGoToElement(!goToElement)
+      setGoToElement(true)
     }
   }, [orderState?.options?.address?.location])
 
   useEffect(() => {
-    if (goToElement && nearestBusinessContainer.current) {
-      nearestBusinessContainer.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest'
-      })
+    let timeout
+
+    if (goToElement && nearestBusinessContainer?.current) {
+      timeout = setTimeout(() => {
+        const elementRect = nearestBusinessContainer.current.getBoundingClientRect()
+        const offsetTop = elementRect.top + window.scrollY
+
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        })
+        setGoToElement(false)
+      }, 2000)
+    }
+
+    return () => {
+      typeof timeout === 'number' && clearTimeout(timeout)
     }
   }, [goToElement])
 
