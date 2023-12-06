@@ -34,6 +34,7 @@ import { SpinnerLoader } from '../src/components/SpinnerLoader'
 import { Input } from '../src/themes/five/src/styles/Inputs'
 import { QueryLoginSpoonity } from '../src/themes/five/src/components/QueryLoginSpoonity'
 import { orderTypeList } from '../src/utils'
+import { WebsocketStatus } from '../src/themes/five'
 
 const Header = loadable(() => import('../src/themes/five/src/components/Header'))
 const HeaderKiosk = loadable(() => import('../src/themes/five/src/components/Header/layouts/Kiosk'))
@@ -911,6 +912,9 @@ export const App = () => {
             )}
             {(!isFooterPage || enabledPoweredByOrdering) && (
               <Footer isFooterPage={isFooterPage} />
+            )}
+            {auth && (
+              <WebsocketStatus useReconnectByLogin />
             )}
             {(windowSize.width < 576 && onlineStatus) && (
               <NavigationBar />

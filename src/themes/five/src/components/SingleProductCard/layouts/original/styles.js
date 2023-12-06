@@ -8,6 +8,7 @@ export const CardContainer = styled.div`
   background: ${({ soldOut, theme }) => soldOut ? '#6c757d33' : theme?.colors?.backgroundPage};
   border: 1px solid #E9ECEF;
   padding: 10px;
+  margin: 10px;
   border-radius: 7.6px;
   box-sizing: border-box;
   display: flex;
@@ -39,7 +40,7 @@ export const CardContainer = styled.div`
     margin: 10px 0;
   ` : css`
     width: 100%;
-    margin: 10px 0;
+    margin: 10px;
     @media (min-width: 576px) {
       margin: 10px;
       width: calc(100% - 20px);
