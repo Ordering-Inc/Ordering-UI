@@ -13,7 +13,7 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var CardContainer = exports.CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  ", "\n  background: ", ";\n  border: 1px solid #E9ECEF;\n  padding: 10px;\n  border-radius: 7.6px;\n  box-sizing: border-box;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  cursor: pointer;\n  position: relative;\n\n  > div {\n    display: flex;\n    justify-content: space-between;\n    ", "\n    align-items: center;\n    width: 100%;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n    padding: 4px;\n  }\n  ", "\n"])), function (_ref) {
+var CardContainer = exports.CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  ", "\n  background: ", ";\n  border: 1px solid #E9ECEF;\n  padding: 10px;\n  margin: 10px;\n  border-radius: 7.6px;\n  box-sizing: border-box;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  cursor: pointer;\n  position: relative;\n\n  > div {\n    display: flex;\n    justify-content: space-between;\n    ", "\n    align-items: center;\n    width: 100%;\n  }\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n    padding: 4px;\n  }\n  ", "\n"])), function (_ref) {
   var isShowAddButt = _ref.isShowAddButt;
   return (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    min-height: ", ";\n  "])), isShowAddButt ? '162px' : '110px');
 }, function (_ref2) {
@@ -29,7 +29,7 @@ var CardContainer = exports.CardContainer = _styledComponents.default.div(_templ
   var productsRows = _ref4.productsRows;
   return productsRows ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    width: ", ";\n    margin: 10px 0;\n\n  "])), function () {
     return productsRows === 3 ? 'calc(33% - 20px)' : 'calc(50% - 20px)';
-  }) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: 100%;\n    margin: 10px 0;\n    @media (min-width: 576px) {\n      margin: 10px;\n      width: calc(100% - 20px);\n    }\n\n  ", "\n  \n  "])), function (_ref5) {
+  }) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: 100%;\n    margin: 10px;\n    @media (min-width: 576px) {\n      margin: 10px;\n      width: calc(100% - 20px);\n    }\n\n  ", "\n  \n  "])), function (_ref5) {
     var isCartOnProductsList = _ref5.isCartOnProductsList;
     return isCartOnProductsList ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    @media (min-width: 993px) {\n      width: calc(50% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
       var _props$theme;
