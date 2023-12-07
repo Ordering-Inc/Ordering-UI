@@ -248,7 +248,8 @@ var CheckoutUI = function CheckoutUI(props) {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     apiKey: (_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.google_maps_api_key) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value,
     mapConfigs: mapConfigs,
-    isCustomerMode: isCustomerMode
+    isCustomerMode: isCustomerMode,
+    cart: cart
   })), (_props$beforeElements3 = props.beforeElementsSectionTwo) === null || _props$beforeElements3 === void 0 ? void 0 : _props$beforeElements3.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
