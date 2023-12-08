@@ -76,7 +76,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     handleFavoriteProduct = props.handleFavoriteProduct,
     handleCreateGuestUser = props.handleCreateGuestUser,
     actionStatus = props.actionStatus,
-    isCustomerMode = props.isCustomerMode;
+    isCustomerMode = props.isCustomerMode,
+    isAlsea = props.isAlsea;
   var product = productObject.product,
     loading = productObject.loading,
     error = productObject.error;
@@ -151,13 +152,17 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     _useState22 = _slicedToArray(_useState21, 2),
     pricePerWeightUnit = _useState22[0],
     setPricePerWeightUnit = _useState22[1];
-  var _useState23 = (0, _react.useState)({
+  var _useState23 = (0, _react.useState)(null),
+    _useState24 = _slicedToArray(_useState23, 2),
+    alseaIngredientsValidation = _useState24[0],
+    setAlseaIngredientsValidation = _useState24[1];
+  var _useState25 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState24 = _slicedToArray(_useState23, 2),
-    alertState = _useState24[0],
-    setAlertState = _useState24[1];
+    _useState26 = _slicedToArray(_useState25, 2),
+    alertState = _useState26[0],
+    setAlertState = _useState26[1];
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var galleryLength = (gallery === null || gallery === void 0 ? void 0 : gallery.length) + (videoGallery === null || videoGallery === void 0 ? void 0 : videoGallery.length);
   var _useConfig = (0, _orderingComponents.useConfig)(),
@@ -418,6 +423,22 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     }
     setUrlToShare(_urlToShare);
   }, []);
+  (0, _react.useEffect)(function () {
+    if (!isAlsea) return;
+    var keywords = ['1 ingrediente', 'ingredientes'];
+    if (keywords !== null && keywords !== void 0 && keywords.some(function (word) {
+      var _product$name;
+      return (_product$name = product.name) === null || _product$name === void 0 || (_product$name = _product$name.toLowerCase()) === null || _product$name === void 0 ? void 0 : _product$name.includes(word);
+    })) {
+      var _product$name2;
+      var arrayWord = product === null || product === void 0 || (_product$name2 = product.name) === null || _product$name2 === void 0 || (_product$name2 = _product$name2.toLowerCase()) === null || _product$name2 === void 0 ? void 0 : _product$name2.split(' ');
+      var index = arrayWord.findIndex(function (word) {
+        return word === 'ingredientes' || word === 'ingrediente';
+      });
+      var maxValidation = parseInt(arrayWord[index - 1].split('-').pop());
+      setAlseaIngredientsValidation(maxValidation);
+    }
+  }, [product === null || product === void 0 ? void 0 : product.name]);
   return /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, {
     className: "product-container",
     ref: productContainerRef,
@@ -598,7 +619,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       }, showOption(option) && /*#__PURE__*/_react.default.createElement(_ProductOption.ProductOption, {
         option: option,
         currentState: currentState,
-        error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)]
+        error: errors["id:".concat(option === null || option === void 0 ? void 0 : option.id)],
+        alseaIngredientsValidation: alseaIngredientsValidation,
+        isAlsea: isAlsea
       }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSubOption, {
         className: isError(option === null || option === void 0 ? void 0 : option.id)
       }, option.suboptions.filter(function (suboptions) {
@@ -620,7 +643,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
           scrollDown: scrollDown,
           setIsScrollAvailable: setIsScrollAvailable,
           pizzaState: pizzaState,
-          productCart: productCart
+          productCart: productCart,
+          isAlsea: isAlsea
         });
       }))));
     });

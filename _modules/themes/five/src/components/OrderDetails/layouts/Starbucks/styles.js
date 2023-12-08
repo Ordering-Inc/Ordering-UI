@@ -20,7 +20,7 @@ var StatusBarContainer = exports.StatusBarContainer = _styledComponents.default.
   var _props$theme;
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    background: linear-gradient(to left, ", " ", "%, ", " ", "%);\n  "])), props.theme.colors.primary, props.percentage, props.theme.colors.disabled, props.percentage);
 });
-var Icon = exports.Icon = _styledComponents.default.span(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 50%;\n  font-size: 35px;\n  transform: translateY(-50%);\n  color: #FFFFFF;\n  left: calc(", "% - 25px);\n\n  width: 50px;\n  height: 50px;\n  background-color: ", ";\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])), function (props) {
+var Icon = exports.Icon = _styledComponents.default.span(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 50%;\n  font-size: 35px;\n  transform: translateY(-50%);\n  color: #FFFFFF;\n  left: calc(", "% - 25px);\n\n  img {\n    width: 50px;\n    height: 50px;\n    object-fit: contain;\n  }\n\n  width: 50px;\n  height: 50px;\n  background-color: ", ";\n  border-radius: 50%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n"])), function (props) {
   return props.position;
 }, function (props) {
   return props.bgColor || props.theme.colors.disabled;

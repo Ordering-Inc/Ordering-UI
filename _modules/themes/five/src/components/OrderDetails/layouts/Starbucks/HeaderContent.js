@@ -8,10 +8,6 @@ exports.HeaderContent = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
-var _FaStore = _interopRequireDefault(require("@meronex/icons/fa/FaStore"));
-var _MdMotorcycle = _interopRequireDefault(require("@meronex/icons/md/MdMotorcycle"));
-var _IosHome = _interopRequireDefault(require("@meronex/icons/ios/IosHome"));
-var _FaCheck = _interopRequireDefault(require("@meronex/icons/fa/FaCheck"));
 var _styles = require("./styles");
 var _styles2 = require("../../styles");
 var _moment = _interopRequireDefault(require("moment"));
@@ -111,16 +107,24 @@ var HeaderContent = exports.HeaderContent = function HeaderContent(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Icon, {
     position: 0,
     bgColor: percentage >= 0 && theme.colors.primary
-  }, /*#__PURE__*/_react.default.createElement(_FaStore.default, null)), /*#__PURE__*/_react.default.createElement(_styles.Icon, {
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.icons.store
+  })), /*#__PURE__*/_react.default.createElement(_styles.Icon, {
     position: 33.33,
     bgColor: percentage >= 33.33 && theme.colors.primary
-  }, /*#__PURE__*/_react.default.createElement(_MdMotorcycle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.Icon, {
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.icons.driver
+  })), /*#__PURE__*/_react.default.createElement(_styles.Icon, {
     position: 66.66,
     bgColor: percentage >= 66.66 && theme.colors.primary
-  }, /*#__PURE__*/_react.default.createElement(_IosHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.Icon, {
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.icons.home
+  })), /*#__PURE__*/_react.default.createElement(_styles.Icon, {
     position: 100,
     bgColor: percentage === 100 && theme.colors.primary
-  }, /*#__PURE__*/_react.default.createElement(_FaCheck.default, null))), showReview && !reviewState.order && !(order !== null && order !== void 0 && order.review) && /*#__PURE__*/_react.default.createElement(_Simple.ReviewOrder, {
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.icons.delivered
+  }))), showReview && !reviewState.order && !(order !== null && order !== void 0 && order.review) && /*#__PURE__*/_react.default.createElement(_Simple.ReviewOrder, {
     order: order,
     hashKey: hashKey,
     defaultStar: 5,
