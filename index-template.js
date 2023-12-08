@@ -17,6 +17,11 @@ import logotypeInvert from './template/assets/images/logotype-invert.svg'
 import isotype from './template/assets/images/isotype.svg'
 import isotypeInvert from './template/assets/images/isotype-invert.svg'
 
+import delivered from './template/assets/icons/delivered.png'
+import driver from './template/assets/icons/driver.png'
+import home from './template/assets/icons/home.png'
+import store from './template/assets/icons/store.png'
+
 import homeHero from './template/assets/images/home-hero.jpg'
 import homeHeroMobile from './template/assets/images/home-hero-mobile.jpg'
 import businessHero from './template/assets/images/business-hero.jpg'
@@ -133,7 +138,12 @@ theme.images = {
     drivethruIco,
     cateringIco
   },
-
+  icons: {
+    delivered,
+    driver,
+    home,
+    store
+  },
   order: {
     status0: orderStatus0,
     status1: orderStatus1,

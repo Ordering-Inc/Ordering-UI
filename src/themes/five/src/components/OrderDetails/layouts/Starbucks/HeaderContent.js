@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
-import IStore from '@meronex/icons/fa/FaStore'
-import IDelivery from '@meronex/icons/md/MdMotorcycle'
-import IHouse from '@meronex/icons/ios/IosHome'
-import ICheck from '@meronex/icons/fa/FaCheck'
 
 import {
   Container,
@@ -111,25 +107,25 @@ export const HeaderContent = (props) => {
           position={0}
           bgColor={percentage >= 0 && theme.colors.primary}
         >
-          <IStore />
+          <img src={theme.images.icons.store} />
         </Icon>
         <Icon
           position={33.33}
           bgColor={percentage >= 33.33 && theme.colors.primary}
         >
-          <IDelivery />
+          <img src={theme.images.icons.driver} />
         </Icon>
         <Icon
           position={66.66}
           bgColor={percentage >= 66.66 && theme.colors.primary}
         >
-          <IHouse />
+          <img src={theme.images.icons.home} />
         </Icon>
         <Icon
           position={100}
           bgColor={percentage === 100 && theme.colors.primary}
         >
-          <ICheck />
+          <img src={theme.images.icons.delivered} />
         </Icon>
       </StatusBarContainer>
       {showReview && !reviewState.order && !order?.review && (

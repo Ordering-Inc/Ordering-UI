@@ -201,3 +201,33 @@ export const RightOptionContainer = styled.div`
     flex-direction: row;
   }
 `
+
+export const ExtraControl = styled.div`
+  display: flex;
+  align-items: center;
+  color: #CBCBCB;
+  font-weight: 300;
+  font-size: 18px;
+  margin: 0 5px;
+
+  svg {
+    color: ${props => props.theme.colors.primary};
+    font-size: 20px;
+    margin-right: 3px;
+    ${props => props.theme?.rtl && css`
+      margin-left: 3px;
+      margin-right: 0px;
+    `}
+  }
+  svg[disabled] {
+    color: ${props => props.theme.colors.lightGray};
+  }
+`
+
+export const ExtraItem = styled.div`
+  display: flex;
+  &.disabled {
+      pointer-events: none;
+      opacity: 0.2
+    }
+`
