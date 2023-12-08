@@ -58,6 +58,12 @@ export const Icon = styled.span`
   color: #FFFFFF;
   left: calc(${props => props.position}% - 25px);
 
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
   width: 50px;
   height: 50px;
   background-color: ${props => props.bgColor || props.theme.colors.disabled};
