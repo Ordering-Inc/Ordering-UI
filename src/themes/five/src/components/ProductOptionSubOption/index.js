@@ -18,12 +18,15 @@ import {
   Text,
   SubOptionThumbnail,
   LeftOptionContainer,
-  RightOptionContainer
+  RightOptionContainer,
+  ExtraControl,
+  ExtraItem
 } from './styles'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
 import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
+import { Alert } from '../Confirm'
 
 const ProductOptionSubOptionPropsAreEqual = (prevProps, nextProps) => {
   return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) &&
@@ -45,12 +48,14 @@ const ProductOptionSubOptionUI = React.memo((props) => {
     isSoldOut,
     setIsScrollAvailable,
     usePizzaValidation,
-    pizzaState
+    pizzaState,
+    changeQuantity,
+    isAlsea
   } = props
 
   const disableIncrement =
     option?.with_half_option
-      ? pizzaState?.[`option:${option?.id}`]?.value === option?.max
+      ? pizzaState?.[`option:${option?.id}`]?.value >= option?.max
       : option?.limit_suboptions_by_max
         ? (balance === option?.max || state.quantity === suboption.max)
         : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
@@ -59,6 +64,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [showMessage, setShowMessage] = useState(false)
+  const [showAlert, setShowAlert] = useState(false)
   const dirtyRef = useRef(null)
 
   const handleIncrement = (e) => {
@@ -82,7 +88,13 @@ const ProductOptionSubOptionUI = React.memo((props) => {
     const minMaxValidation = option?.with_half_option ? usePizzaValidation : (balance === option?.max && option?.suboptions?.length > balance && !(option?.min === 1 && option?.max === 1))
     if (!state.selected && minMaxValidation) {
       setShowMessage(true)
+      setShowAlert(true)
     }
+  }
+
+  const handleChangeQuantity = (e, quantity) => {
+    e.stopPropagation()
+    changeQuantity(quantity)
   }
 
   useEffect(() => {
@@ -109,11 +121,11 @@ const ProductOptionSubOptionUI = React.memo((props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Container onClick={() => handleSuboptionClick()}>
+      <Container onClick={(e) => option?.name?.toLowerCase() === 'queso y salsa' && isAlsea ? handleChangeQuantity(e, state.quantity === 0 ? 1 : 0) : handleSuboptionClick()}>
         <LeftOptionContainer>
           <IconControl>
             {((option?.min === 0 && option?.max === 1) || option?.max > 1) ? (
-              state?.selected ? (
+              state?.selected && !(option?.name?.toLowerCase() === 'queso y salsa' && isAlsea && state.quantity === 0) ? (
                 <MdCheckBox />
               ) : (
                 <MdCheckBoxOutlineBlank disabled />
@@ -162,7 +174,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
                   />
                   <BsCircleFill
                     className={[
-                      (pizzaState?.[`option:${option?.id}`]?.value === option?.max) && !(option?.max === 1 && option?.min === 1) ? 'disabled' : '',
+                      (pizzaState?.[`option:${option?.id}`]?.value >= option?.max) && !(option?.max === 1 && option?.min === 1) ? 'disabled' : '',
                       state.selected && state.position === 'whole' ? 'selected' : null].filter(classname => classname).join(' ')}
                     onClick={(e) => handlePosition(e, 'whole')}
                   />
@@ -175,6 +187,24 @@ const ProductOptionSubOptionUI = React.memo((props) => {
               )
             }
           </PositionControl>
+          {option?.with_half_option && state?.selected && isAlsea && (
+            <ExtraControl>
+              {(state.quantity >= 2) ? (
+                <ExtraItem
+                  onClick={(e) => handleChangeQuantity(e, 1)}
+                >
+                  <Text><div>{t('EXTRA', 'Extra')}</div></Text> <MdCheckBox />
+                </ExtraItem>
+              ) : (
+                <ExtraItem
+                  onClick={(e) => handleChangeQuantity(e, 2)}
+                  className={(pizzaState?.[`option:${option?.id}`]?.value >= option?.max) && !(option?.max === 1 && option?.min === 1) ? 'disabled' : ''}
+                >
+                  <Text><div>{t('EXTRA', 'Extra')}</div></Text> <MdCheckBoxOutlineBlank disabled />
+                </ExtraItem>
+              )}
+            </ExtraControl>
+          )}
         </RightOptionContainer>
         <SuboptionPrice>
           {price > 0 && (
@@ -187,6 +217,15 @@ const ProductOptionSubOptionUI = React.memo((props) => {
           <span>{`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option?.max}`}</span>
         </Text>
       )}
+      <Alert
+        title={t('PRODUCT_FORM', 'Product form')}
+        content={`${t('OPTIONS_MAX_LIMIT', 'Maximum options to choose')}: ${option?.max}`}
+        open={showAlert && showMessage}
+        acceptText={t('ACCEPT', 'Accept')}
+        onClose={() => setShowAlert(false)}
+        onAccept={() => setShowAlert(false)}
+        closeOnBackdrop={false}
+      />
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
