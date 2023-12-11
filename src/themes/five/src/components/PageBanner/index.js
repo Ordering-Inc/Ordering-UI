@@ -132,34 +132,28 @@ const PageBannerUI = (props) => {
 
   return (
     <>
-      {pageBannerState.loading ? (
+      {pageBannerState.banner?.items?.length > 0 && (
         <BannerContainer>
-          <Skeleton height={250} />
+          <Swiper
+            navigation={pageBannerState.banner?.items?.length > 1}
+            spaceBetween={0}
+            shortSwipes={false}
+            loop={pageBannerState.banner?.items.length > 1}
+            touchStartPreventDefault={false}
+            slidesPerView={1}
+          >
+            {pageBannerState.banner?.items.map((img, i) => (
+              <SwiperSlide
+                key={i}
+                onClick={() => handleGoToPage(img?.action)}
+              >
+                <ImageWrapper>
+                  <img src={img.url} className='banner-img' alt='' />
+                </ImageWrapper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </BannerContainer>
-      ) : (
-        pageBannerState.banner?.items?.length > 0 && (
-          <BannerContainer>
-            <Swiper
-              navigation={pageBannerState.banner?.items?.length > 1}
-              spaceBetween={0}
-              shortSwipes={false}
-              loop={pageBannerState.banner?.items.length > 1}
-              touchStartPreventDefault={false}
-              slidesPerView={1}
-            >
-              {pageBannerState.banner?.items.map((img, i) => (
-                <SwiperSlide
-                  key={i}
-                  onClick={() => handleGoToPage(img?.action)}
-                >
-                  <ImageWrapper>
-                    <img src={img.url} className='banner-img' alt='' />
-                  </ImageWrapper>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </BannerContainer>
-        )
       )}
     </>
   )
