@@ -16,6 +16,7 @@ import {
   useCustomer,
   useEvent
 } from 'ordering-components'
+import { SpinnerLoader } from '../../../../../index'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useHistory } from 'react-router-dom'
@@ -455,7 +456,7 @@ const CheckoutUI = (props) => {
 
   const getMaxCashDelivery = async () => {
     try {
-      const response = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging-development'}.ordering.co/alseaplatform/max_cash_delivery.php`, {
+      const response = await fetch(`https://alsea-plugins${isAlsea ? '' : '-staging'}.ordering.co/alseaplatform/max_cash_delivery.php`, {
         method: 'POST',
         body: JSON.stringify({
           uuid: cart?.uuid
@@ -472,7 +473,7 @@ const CheckoutUI = (props) => {
         return 600
       }
     } catch (error) {
-      console.error('Error al realizar la solicitud getMaxCashDelivery:', error)
+      console.log('Error al realizar la solicitud getMaxCashDelivery:', error)
       return 600
     }
   }
@@ -518,10 +519,13 @@ const CheckoutUI = (props) => {
   }
 
   useEffect(() => {
-    if (isShowDeUnaCheckout && brandInformation?.brand_id) {
+    if (businessDetails?.loading) return
+    if (isShowDeUnaCheckout && businessDetails?.business?.brand_id) {
       tokenizeOrder()
+    } else {
+      setShowDeUnaCheckout(false)
     }
-  }, [brandInformation?.brand_id])
+  }, [businessDetails?.loading])
 
   useEffect(() => {
     if (validationFields && validationFields?.fields?.checkout) {
@@ -617,6 +621,9 @@ const CheckoutUI = (props) => {
     <>
       {isShowDeUnaCheckout ? (
         <IframeMainContainer>
+          {isShowDeUnaCheckout && (
+            <SpinnerLoader />
+          )}
           {layout === 'pfchangs' && (
             <>
               {cart?.business?.slug && (
