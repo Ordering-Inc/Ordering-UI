@@ -204,10 +204,12 @@ const BusinessesListingUI = (props) => {
   useEffect(() => {
     setActiveMap(false)
     if (!businessesList?.businesses?.length) return
-    if (businessesList?.businesses?.length === 1 && configs?.activate_single_store_automatically?.value) {
+    if (businessesList?.businesses?.length === 1 && configs?.activate_single_store_automatically?.value === '1') {
       onBusinessClick(businessesList?.businesses[0])
+      window.localStorage.setItem('single_business', true)
       return
     }
+    window.localStorage.removeItem('single_business')
     const ids = [...favoriteIds]
     businessesList.businesses.forEach(business => {
       if (business?.favorite) {

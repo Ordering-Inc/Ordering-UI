@@ -187,7 +187,7 @@ export const BusinessInfoContainer = styled.div`
     ${({ isChew }) => isChew && css`
         background: none;
       `
-    }
+  }
   }
 
   @media (min-width: 576px) {
@@ -397,6 +397,13 @@ export const TitleWrapper = styled.div`
           right: 10px;
           ` : css`
           left: 10px;
+        `}
+      `}
+      ${({ disableLeftSpace }) => disableLeftSpace && css`
+      ${props => props.theme?.rtl ? css`
+          right: 48px;
+          ` : css`
+          left: 48px;
         `}
       `}
     }
