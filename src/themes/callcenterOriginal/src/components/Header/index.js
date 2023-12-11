@@ -59,7 +59,7 @@ export const Header = (props) => {
   const [{ parseDate }] = useUtils()
   const [, t] = useLanguage()
   const [{ auth, user }] = useSession()
-  const [orderState, { refreshOrderOptions }] = useOrder()
+  const [orderState, { refreshOrderOptions, changeType }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
   const [configState] = useConfig()
@@ -93,7 +93,7 @@ export const Header = (props) => {
         content: t('QUESTION_CLEAR_CUSTOMER', theme?.defaultLanguages?.QUESTION_CLEAR_CUSTOMER || 'Are you sure that you want to clear the customer?'),
         handleOnAccept: () => {
           deleteUserCustomer(true)
-          // refreshOrderOptions()
+          changeType(1)
           handleGoToPage({ page: 'home' })
           setConfirm({ ...confirm, open: false })
         }
