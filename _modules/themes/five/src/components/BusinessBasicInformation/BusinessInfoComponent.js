@@ -67,6 +67,7 @@ var BusinessInfoComponent = exports.BusinessInfoComponent = function BusinessInf
   var layoutsWithOldSearch = ['starbucks', 'old', 'floating'];
   var hideSearch = layoutsWithOldSearch.includes(theme === null || theme === void 0 || (_theme$business_view7 = theme.business_view) === null || _theme$business_view7 === void 0 || (_theme$business_view7 = _theme$business_view7.components) === null || _theme$business_view7 === void 0 || (_theme$business_view7 = _theme$business_view7.product_search) === null || _theme$business_view7 === void 0 || (_theme$business_view7 = _theme$business_view7.components) === null || _theme$business_view7 === void 0 || (_theme$business_view7 = _theme$business_view7.layout) === null || _theme$business_view7 === void 0 ? void 0 : _theme$business_view7.type);
   var isPreOrderSetting = (configs === null || configs === void 0 || (_configs$preorder_sta = configs.preorder_status_enabled) === null || _configs$preorder_sta === void 0 ? void 0 : _configs$preorder_sta.value) === '1';
+  var singleBusinessRedirect = window.localStorage.getItem('single_business');
   var searchComponentProps = {
     setOpenSearchProducts: setOpenSearchProducts,
     handleChangeSortBy: handleChangeSortBy,
@@ -81,7 +82,8 @@ var BusinessInfoComponent = exports.BusinessInfoComponent = function BusinessInf
   }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, {
     isInfoShrunken: isInfoShrunken
   }, !loading ? /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, {
-    isCustomLayout: isCustomLayout
+    isCustomLayout: isCustomLayout,
+    disableLeftSpace: singleBusinessRedirect
   }, /*#__PURE__*/_react.default.createElement("h2", {
     className: "bold",
     id: "business_name"

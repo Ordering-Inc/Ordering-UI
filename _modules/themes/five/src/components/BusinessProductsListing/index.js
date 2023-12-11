@@ -165,6 +165,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
   var isLazy = businessState === null || businessState === void 0 || (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended;
   var showViewOrderButton = !(theme !== null && theme !== void 0 && (_theme$business_view = theme.business_view) !== null && _theme$business_view !== void 0 && (_theme$business_view = _theme$business_view.components) !== null && _theme$business_view !== void 0 && (_theme$business_view = _theme$business_view.order_view_button) !== null && _theme$business_view !== void 0 && _theme$business_view.hidden);
+  var singleBusinessRedirect = window.localStorage.getItem('single_business');
   var headerThemeType = theme === null || theme === void 0 || (_theme$business_view2 = theme.business_view) === null || _theme$business_view2 === void 0 || (_theme$business_view2 = _theme$business_view2.components) === null || _theme$business_view2 === void 0 || (_theme$business_view2 = _theme$business_view2.header) === null || _theme$business_view2 === void 0 || (_theme$business_view2 = _theme$business_view2.components) === null || _theme$business_view2 === void 0 || (_theme$business_view2 = _theme$business_view2.layout) === null || _theme$business_view2 === void 0 ? void 0 : _theme$business_view2.type;
   var searchThemeType = theme === null || theme === void 0 || (_theme$business_view3 = theme.business_view) === null || _theme$business_view3 === void 0 || (_theme$business_view3 = _theme$business_view3.components) === null || _theme$business_view3 === void 0 || (_theme$business_view3 = _theme$business_view3.product_search) === null || _theme$business_view3 === void 0 || (_theme$business_view3 = _theme$business_view3.components) === null || _theme$business_view3 === void 0 || (_theme$business_view3 = _theme$business_view3.layout) === null || _theme$business_view3 === void 0 ? void 0 : _theme$business_view3.type;
   var fullWidthArrowThemes = ['starbucks', 'old', 'red'];
@@ -475,7 +476,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }, [cateringPreorder, business]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductsContainer, null, !props.useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.HeaderContent, {
     useFullWidth: fullWidthArrowThemes.includes(searchThemeType) || fullWidthArrowThemes.includes(headerThemeType)
-  }, !isCustomLayout && !location.pathname.includes('/marketplace') && /*#__PURE__*/_react.default.createElement("div", {
+  }, !isCustomLayout && !location.pathname.includes('/marketplace') && !singleBusinessRedirect && /*#__PURE__*/_react.default.createElement("div", {
     id: "back-arrow"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
     className: "back-arrow",
