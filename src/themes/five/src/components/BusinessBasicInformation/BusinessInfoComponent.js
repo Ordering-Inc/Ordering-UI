@@ -42,6 +42,7 @@ export const BusinessInfoComponent = (props) => {
   const layoutsWithOldSearch = ['starbucks', 'old', 'floating']
   const hideSearch = layoutsWithOldSearch.includes(theme?.business_view?.components?.product_search?.components?.layout?.type)
   const isPreOrderSetting = configs?.preorder_status_enabled?.value === '1'
+  const singleBusinessRedirect = window.localStorage.getItem('single_business')
 
   const searchComponentProps = {
     setOpenSearchProducts,
@@ -56,7 +57,7 @@ export const BusinessInfoComponent = (props) => {
         <BusinessInfo className='info'>
           <BusinessInfoItem isInfoShrunken={isInfoShrunken}>
             {!loading ? (
-              <TitleWrapper isCustomLayout={isCustomLayout}>
+              <TitleWrapper isCustomLayout={isCustomLayout} disableLeftSpace={singleBusinessRedirect}>
                 <h2 className='bold' id='business_name'>{business?.name}</h2>
                 {business?.ribbon?.enabled && (
                   <RibbonBox
