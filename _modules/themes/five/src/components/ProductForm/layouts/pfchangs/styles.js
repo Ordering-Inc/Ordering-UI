@@ -16,11 +16,11 @@ var ProductContainer = _styledComponents.default.div(_templateObject || (_templa
 exports.ProductContainer = ProductContainer;
 var WrapperImage = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 320px;\n  position: absolute;\n  top: 0;\n  left: 0;\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n  }  \n"])));
 exports.WrapperImage = WrapperImage;
-var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 0px;\n  margin-top: 300px;\n  /* position: relative; */\n"])));
+var ProductInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 0px;\n  margin-top: 210px;\n  /* position: relative; */\n\n  @media (min-width: 769px) {\n    margin-top: 300px;\n  }\n"])));
 exports.ProductInfo = ProductInfo;
 var ProductFormTitle = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  overflow-wrap: break-word;\n\n  .price-discount {\n    text-decoration: line-through;\n  }\n"])));
 exports.ProductFormTitle = ProductFormTitle;
-var ProductEdition = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  margin-bottom: 20px;\n"])));
+var ProductEdition = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  /* margin-top: 20px; */\n  margin-bottom: 20px;\n"])));
 exports.ProductEdition = ProductEdition;
 var SectionTitle = _styledComponents.default.h3(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  text-transform: capitalize;\n  font-weight: 600;\n  font-size: 16px;\n  line-height: 24px;\n  padding: 7px 0px;\n  margin-bottom: 0px;\n  margin-top: 15px;\n  color: #000;\n"])));
 exports.SectionTitle = SectionTitle;

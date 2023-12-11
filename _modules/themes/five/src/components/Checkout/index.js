@@ -12,6 +12,7 @@ var _styledComponents = require("styled-components");
 var _moment = _interopRequireDefault(require("moment"));
 var _Modal = require("../Modal");
 var _orderingComponents = require("ordering-components");
+var _index = require("../../../../../index");
 var _UpsellingPage = require("../UpsellingPage");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _reactRouterDom = require("react-router-dom");
@@ -65,7 +66,7 @@ var mapConfigs = {
   }
 };
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3, _theme$layouts2, _theme$layouts2$gener, _theme$layouts2$gener2, _theme$layouts2$gener3, _businessDetails$busi3, _businessDetails$busi4, _configs$webview_chec, _configs$webview_chec2, _configs$brands_wow_l, _configs$brands_wow_l2, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _Object$values, _cart$business5, _cart$business7, _businessDetails$busi6, _businessDetails$busi7, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$erro, _businessDetails$erro2, _configs$driver_tip_t, _configs$driver_tip_t2, _businessDetails$busi12, _businessDetails$busi13, _businessDetails$busi14, _businessDetails$busi15, _businessDetails$busi16, _cartState$cart$spot_, _cartState$cart, _configs$driver_tip_t3, _configs$driver_tip_u, _configs$driver_tip_t4, _cart$products2, _theme$images2, _theme$images2$genera, _wowAcumulationPoints, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3, _paymethodSelected$da3, _paymethodSelected$da4, _paymethodSelected$da5, _paymethodSelected$da6, _paymethodSelected$da7, _paymethodSelected$da8, _paymethodSelected$da9, _paymethodSelected$da10, _paymethodSelected$da11;
+  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3, _theme$layouts2, _theme$layouts2$gener, _theme$layouts2$gener2, _theme$layouts2$gener3, _businessDetails$busi3, _businessDetails$busi4, _configs$webview_chec, _configs$webview_chec2, _configs$brands_wow_l, _configs$brands_wow_l2, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _Object$values, _cart$business5, _cart$business7, _businessDetails$busi7, _businessDetails$busi8, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _businessDetails$erro, _businessDetails$erro2, _configs$driver_tip_t, _configs$driver_tip_t2, _businessDetails$busi13, _businessDetails$busi14, _businessDetails$busi15, _businessDetails$busi16, _businessDetails$busi17, _cartState$cart$spot_, _cartState$cart, _configs$driver_tip_t3, _configs$driver_tip_u, _configs$driver_tip_t4, _cart$products2, _theme$images2, _theme$images2$genera, _wowAcumulationPoints, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3, _paymethodSelected$da3, _paymethodSelected$da4, _paymethodSelected$da5, _paymethodSelected$da6, _paymethodSelected$da7, _paymethodSelected$da8, _paymethodSelected$da9, _paymethodSelected$da10, _paymethodSelected$da11;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
@@ -513,7 +514,7 @@ var CheckoutUI = function CheckoutUI(props) {
             case 0:
               _context3.prev = 0;
               _context3.next = 3;
-              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging-development', ".ordering.co/alseaplatform/max_cash_delivery.php"), {
+              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging', ".ordering.co/alseaplatform/max_cash_delivery.php"), {
                 method: 'POST',
                 body: JSON.stringify({
                   uuid: cart === null || cart === void 0 ? void 0 : cart.uuid
@@ -542,7 +543,7 @@ var CheckoutUI = function CheckoutUI(props) {
             case 14:
               _context3.prev = 14;
               _context3.t0 = _context3["catch"](0);
-              console.error('Error al realizar la solicitud getMaxCashDelivery:', _context3.t0);
+              console.log('Error al realizar la solicitud getMaxCashDelivery:', _context3.t0);
               return _context3.abrupt("return", 600);
             case 18:
             case "end":
@@ -631,10 +632,14 @@ var CheckoutUI = function CheckoutUI(props) {
     };
   }();
   (0, _react.useEffect)(function () {
-    if (isShowDeUnaCheckout && brandInformation !== null && brandInformation !== void 0 && brandInformation.brand_id) {
+    var _businessDetails$busi6;
+    if (businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) return;
+    if (isShowDeUnaCheckout && businessDetails !== null && businessDetails !== void 0 && (_businessDetails$busi6 = businessDetails.business) !== null && _businessDetails$busi6 !== void 0 && _businessDetails$busi6.brand_id) {
       tokenizeOrder();
+    } else {
+      setShowDeUnaCheckout(false);
     }
-  }, [brandInformation === null || brandInformation === void 0 ? void 0 : brandInformation.brand_id]);
+  }, [businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.loading]);
   (0, _react.useEffect)(function () {
     var _validationFields$fie17;
     if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie17 = validationFields.fields) !== null && _validationFields$fie17 !== void 0 && _validationFields$fie17.checkout) {
@@ -716,7 +721,7 @@ var CheckoutUI = function CheckoutUI(props) {
   }, [isApplyMasterCoupon, paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway, cart === null || cart === void 0 ? void 0 : cart.paymethod_id]);
   var CartComponent = layout === 'pfchangs' ? _pfchangs2.Cart : _Cart.Cart;
   var UserDetailsComponent = layout === 'pfchangs' ? _pfchangs.UserDetails : _UserDetails.UserDetails;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowDeUnaCheckout ? /*#__PURE__*/_react.default.createElement(_styles.IframeMainContainer, null, layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : (_cart$business5 = cart.business) === null || _cart$business5 === void 0 ? void 0 : _cart$business5.slug) && /*#__PURE__*/_react.default.createElement(_styles.GoToMenu, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowDeUnaCheckout ? /*#__PURE__*/_react.default.createElement(_styles.IframeMainContainer, null, isShowDeUnaCheckout && /*#__PURE__*/_react.default.createElement(_index.SpinnerLoader, null), layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : (_cart$business5 = cart.business) === null || _cart$business5 === void 0 ? void 0 : _cart$business5.slug) && /*#__PURE__*/_react.default.createElement(_styles.GoToMenu, {
     onClick: function onClick() {
       var _cart$business6;
       return handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business6 = cart.business) === null || _cart$business6 === void 0 ? void 0 : _cart$business6.slug);
@@ -750,8 +755,8 @@ var CheckoutUI = function CheckoutUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
   })) : /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
-    location: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi6 = businessDetails.business) === null || _businessDetails$busi6 === void 0 ? void 0 : _businessDetails$busi6.location,
-    businessLogo: (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi7 = businessDetails.business) === null || _businessDetails$busi7 === void 0 ? void 0 : _businessDetails$busi7.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
+    location: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi7 = businessDetails.business) === null || _businessDetails$busi7 === void 0 ? void 0 : _businessDetails$busi7.location,
+    businessLogo: (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi8 = businessDetails.business) === null || _businessDetails$busi8 === void 0 ? void 0 : _businessDetails$busi8.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
@@ -820,7 +825,7 @@ var CheckoutUI = function CheckoutUI(props) {
     style: {
       marginBottom: '10px'
     }
-  }))), businessInformationAvailable && layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi8 = businessDetails.business) === null || _businessDetails$busi8 === void 0 ? void 0 : _businessDetails$busi8.address), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi9 = businessDetails.business) === null || _businessDetails$busi9 === void 0 ? void 0 : _businessDetails$busi9.name), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi10 = businessDetails.business) === null || _businessDetails$busi10 === void 0 ? void 0 : _businessDetails$busi10.email), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi11 = businessDetails.business) === null || _businessDetails$busi11 === void 0 ? void 0 : _businessDetails$busi11.cellphone))), (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error) && (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro = businessDetails.error) === null || _businessDetails$erro === void 0 ? void 0 : _businessDetails$erro.length) > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }))), businessInformationAvailable && layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi9 = businessDetails.business) === null || _businessDetails$busi9 === void 0 ? void 0 : _businessDetails$busi9.address), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi10 = businessDetails.business) === null || _businessDetails$busi10 === void 0 ? void 0 : _businessDetails$busi10.name), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi11 = businessDetails.business) === null || _businessDetails$busi11 === void 0 ? void 0 : _businessDetails$busi11.email), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi12 = businessDetails.business) === null || _businessDetails$busi12 === void 0 ? void 0 : _businessDetails$busi12.cellphone))), (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error) && (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro = businessDetails.error) === null || _businessDetails$erro === void 0 ? void 0 : _businessDetails$erro.length) > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro2 = businessDetails.error[0]) === null || _businessDetails$erro2 === void 0 ? void 0 : _businessDetails$erro2.message) || (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error[0])
   }))), layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement(_styles.CheckOutDivider, null)) : /*#__PURE__*/_react.default.createElement(_styles.WrapperActionsInput, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WHATS_YOUR_NAME', "What's your name?")), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     placeholder: t('WRITE_YOUR_NAME', 'Write your name'),
@@ -868,9 +873,9 @@ var CheckoutUI = function CheckoutUI(props) {
     cart: cart,
     useKioskApp: useKioskApp,
     isDisabled: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
-    businessId: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi12 = businessDetails.business) === null || _businessDetails$busi12 === void 0 ? void 0 : _businessDetails$busi12.id,
+    businessId: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi13 = businessDetails.business) === null || _businessDetails$busi13 === void 0 ? void 0 : _businessDetails$busi13.id,
     isLoading: businessDetails.loading,
-    paymethods: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi13 = businessDetails.business) === null || _businessDetails$busi13 === void 0 ? void 0 : _businessDetails$busi13.paymethods,
+    paymethods: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi14 = businessDetails.business) === null || _businessDetails$busi14 === void 0 ? void 0 : _businessDetails$busi14.paymethods,
     onPaymentChange: handlePaymethodChange,
     errorCash: errorCash,
     setErrorCash: setErrorCash,
@@ -885,7 +890,7 @@ var CheckoutUI = function CheckoutUI(props) {
     hasCateringProducts: hasCateringProducts
   }))), isWalletEnabled && !(businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart,
-    businessConfigs: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi14 = businessDetails.business) === null || _businessDetails$busi14 === void 0 ? void 0 : _businessDetails$busi14.configs
+    businessConfigs: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi15 = businessDetails.business) === null || _businessDetails$busi15 === void 0 ? void 0 : _businessDetails$busi15.configs
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessInformationLoading && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 35,
     style: {
@@ -901,8 +906,8 @@ var CheckoutUI = function CheckoutUI(props) {
     vaXMiCuenta: vaXMiCuenta,
     handleChangeVaXMiCuenta: handleChangeVaXMiCuenta
   }), businessInformationAvailable && /*#__PURE__*/_react.default.createElement(_styles.BusinessDetails, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi15 = businessDetails.business) === null || _businessDetails$busi15 === void 0 ? void 0 : _businessDetails$busi15.header
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi16 = businessDetails.business) === null || _businessDetails$busi16 === void 0 ? void 0 : _businessDetails$busi16.name), /*#__PURE__*/_react.default.createElement("span", {
+    src: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi16 = businessDetails.business) === null || _businessDetails$busi16 === void 0 ? void 0 : _businessDetails$busi16.header
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi17 = businessDetails.business) === null || _businessDetails$busi17 === void 0 ? void 0 : _businessDetails$busi17.name), /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       var _cart$business9, _cart$business10;
       return (cart === null || cart === void 0 ? void 0 : (_cart$business9 = cart.business) === null || _cart$business9 === void 0 ? void 0 : _cart$business9.slug) && handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business10 = cart.business) === null || _cart$business10 === void 0 ? void 0 : _cart$business10.slug);
