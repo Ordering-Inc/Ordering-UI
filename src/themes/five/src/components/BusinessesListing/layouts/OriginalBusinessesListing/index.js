@@ -298,7 +298,9 @@ const BusinessesListingUI = (props) => {
       )}
       {(userCustomer && orderState?.options?.address?.address && isCustomerMode) && (
         <>
-          <Title>{t('DELIVERY_TYPE', 'Delivery Type')}</Title>
+          {(configTypes.includes(1) || configTypes.some(type => pickupTypes.includes(type))) && (
+            <Title>{t('DELIVERY_TYPE', 'Delivery Type')}</Title>
+          )}
           <TypesContainer>
             {configTypes.includes(1) && (
               <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={!isPickupSelected}>
