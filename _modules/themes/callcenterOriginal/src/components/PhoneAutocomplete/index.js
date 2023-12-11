@@ -294,9 +294,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }, [urlPhone, customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading]);
   (0, _react.useEffect)(function () {
     var _orderState$options4;
-    if (pickupTypes.includes(orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type)) {
-      setIsPickupSelected(true);
-    }
+    setIsPickupSelected(!!pickupTypes.includes(orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type));
   }, [orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type]);
   (0, _react.useEffect)(function () {
     var _orderState$options6, _orderState$options7;
