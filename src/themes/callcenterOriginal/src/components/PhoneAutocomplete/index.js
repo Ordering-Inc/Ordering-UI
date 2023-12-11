@@ -219,9 +219,7 @@ const PhoneAutocompleteUI = (props) => {
   }, [urlPhone, customersPhones?.loading])
 
   useEffect(() => {
-    if (pickupTypes.includes(orderState?.options?.type)) {
-      setIsPickupSelected(true)
-    }
+    setIsPickupSelected(!!pickupTypes.includes(orderState?.options?.type))
   }, [orderState?.options?.type])
 
   useEffect(() => {
