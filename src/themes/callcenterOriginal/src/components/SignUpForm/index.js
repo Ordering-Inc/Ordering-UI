@@ -153,6 +153,12 @@ const SignUpFormUI = (props) => {
     }
   }
 
+  const preventWhiteSpaceOnKeyDown = (e) => {
+    if (e.key === " ") {
+      e.preventDefault()
+    }
+  }
+
   useEffect(() => {
     if (!formState.loading && formState.result?.error) {
       if (formState.result?.result?.[0] === 'ERROR_AUTH_VERIFICATION_CODE') {
@@ -192,17 +198,7 @@ const SignUpFormUI = (props) => {
   useEffect(() => {
     if (!validationFields.loading) {
       Object.values(validationFields?.fields?.checkout).map(field => !notValidationFields.includes(field.code) && (
-        field.code === 'email' ? (
-          formMethods.register('email', {
-            required: isRequiredField(field.code)
-              ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email'))
-              : null,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-            }
-          })
-        ) : (
+        field.code !== 'email' && (
           formMethods.register(field.code, {
             required: isRequiredField(field.code)
               ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field.name} is required`).replace('_attribute_', t(field.name, field.code))
@@ -278,13 +274,15 @@ const SignUpFormUI = (props) => {
                                 name={field.code}
                                 aria-label={field.code}
                                 className='form'
-                                placeholder={!field.required ? t(field.code.toUpperCase() + '_OPTIONAL', field.name + ' (Optional)') : t(field.code.toUpperCase(), field.name)}
+                                placeholder={t(field.code.toUpperCase() + '_OPTIONAL', field.name + ' (Optional)')}
                                 onChange={handleChangeInputEmail}
-                                ref={(e) => {
-                                  emailInput.current = e
-                                }}
-                                required={!!field.required}
-                                autoComplete='off'
+                                ref={formMethods.register({
+                                  required: null,
+                                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                                })}
+                                onKeyDown={preventWhiteSpaceOnKeyDown}
+                                autoComplete='on'
+                                isError={formMethods.errors?.email && !notValidationFields.includes(field.code)}
                               />
                               <InputBeforeIcon>
                                 <Envelope />
