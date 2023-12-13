@@ -18,7 +18,12 @@ import {
   ErrorMessage,
   FavoriteListWrapper,
   ReadMoreCard,
-  FavoriteListing
+  FavoriteListing,
+  FavPopupView,
+  SingleBusinessOffer,
+  BusinessInfo,
+  BusinessLogo,
+  Image
 } from './styles'
 
 const FavoriteListUI = (props) => {
@@ -32,7 +37,9 @@ const FavoriteListUI = (props) => {
     isOrder,
     isProfessional,
     handleReorder,
-    reorderState
+    reorderState,
+    favProduct,
+    setFavProduct
   } = props
 
   const [, t] = useLanguage()
@@ -47,6 +54,7 @@ const FavoriteListUI = (props) => {
 
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
+  const [openModal, setOpenModal] = useState(false)
 
   const pastOrders = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
 
@@ -76,7 +84,9 @@ const FavoriteListUI = (props) => {
   }
 
   const onProductClick = (product) => {
-    const slug = product?.category?.business?.slug
+    setOpenModal(true)
+    setFavProduct(product)
+    /*const slug = product?.category?.business?.slug
     const categoryId = product?.category?.id
     const productId = product?.id
 
@@ -132,7 +142,7 @@ const FavoriteListUI = (props) => {
         },
         search: `?${categoryParameter}=${categoryId}&${productParameter}=${productId}`
       })
-    }
+    }*/
   }
 
   const closeOrderModal = (e) => {
@@ -343,6 +353,47 @@ const FavoriteListUI = (props) => {
           handleClick={handleClickBusiness}
           showButton
         />
+      </Modal>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+      >
+        <FavPopupView>
+          {(favProduct?.images) && (
+            <Image>
+             <img src={favProduct.images} alt={`product-${i}`} width='150px' height='150px' loading='lazy' />
+            </Image>
+            )}
+            <h2>
+             {favProduct?.name}
+            </h2>
+            <h2>
+            { favProduct?.businesses && favProduct?.businesses?.length > 1 
+              ? t('AVAILABLE_BUSINESSES_FOR_PRODUCT', 'Available businesses for this product') 
+              : favProduct?.businesses && favProduct?.businesses?.length == 1
+                ? t('AVAILABLE_BUSINESSE_FOR_PRODUCT', 'Available business for this product')
+                : t('NOT_AVAILABLE_BUSINESSE', 'Business is not available for this product')
+            }
+          </h2>
+          <div>
+            {favProduct?.businesses?.map(business => {
+              return (
+                <SingleBusinessOffer key={business.id}>
+                  <BusinessLogo bgimage={business?.logo} />
+                  <BusinessInfo>
+                    <p>{business.name}</p>
+                    <Button
+                      onClick={() => handleClickBusiness(business)}
+                      color='primary'
+                    >
+                      {t('GO_TO_BUSINESSS', 'Go to business')}
+                    </Button>
+                  </BusinessInfo>
+                </SingleBusinessOffer>
+              )
+            })}
+          </div>
+        </FavPopupView>
       </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
