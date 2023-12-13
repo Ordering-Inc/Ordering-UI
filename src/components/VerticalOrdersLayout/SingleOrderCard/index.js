@@ -56,6 +56,8 @@ const SingleOrderCardUI = (props) => {
   const hideReviewOrderButton = theme?.orders?.components?.review_order_button?.hidden
   const hideReorderButton = theme?.orders?.components?.reorder_button?.hidden
   const hideOrderStatus = theme?.orders?.components?.order_status?.hidden
+  const hideFavorite = theme?.orders?.components?.favorite?.hidden
+
   const changeIdToExternalId = configs?.change_order_id?.value === '1'
 
   return (
@@ -91,7 +93,7 @@ const SingleOrderCardUI = (props) => {
             {!hideBusinessName && (
               <h2>{order?.business?.length > 1 ? `${t('GROUP_ORDER', 'Group Order')} ${t('No', 'No')}. ${order?.cart_group_id}` : order.business?.name}</h2>
             )}
-            {!order?.business?.length && (
+            {!order?.business?.length && !hideFavorite && (
               <FavoriteWrapper onClick={() => handleChangeFavorite(order)} className='favorite'>
                 {order?.favorite ? <Like /> : <DisLike />}
               </FavoriteWrapper>
