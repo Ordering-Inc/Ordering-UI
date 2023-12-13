@@ -168,9 +168,7 @@ var PageBannerUI = function PageBannerUI(props) {
       }
     }
   };
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, pageBannerState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    height: 250
-  })) : ((_pageBannerState$bann = pageBannerState.banner) === null || _pageBannerState$bann === void 0 || (_pageBannerState$bann = _pageBannerState$bann.items) === null || _pageBannerState$bann === void 0 ? void 0 : _pageBannerState$bann.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_pageBannerState$bann = pageBannerState.banner) === null || _pageBannerState$bann === void 0 || (_pageBannerState$bann = _pageBannerState$bann.items) === null || _pageBannerState$bann === void 0 ? void 0 : _pageBannerState$bann.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BannerContainer, null, /*#__PURE__*/_react.default.createElement(_react2.Swiper, {
     navigation: ((_pageBannerState$bann2 = pageBannerState.banner) === null || _pageBannerState$bann2 === void 0 || (_pageBannerState$bann2 = _pageBannerState$bann2.items) === null || _pageBannerState$bann2 === void 0 ? void 0 : _pageBannerState$bann2.length) > 1,
     spaceBetween: 0,
     shortSwipes: false,

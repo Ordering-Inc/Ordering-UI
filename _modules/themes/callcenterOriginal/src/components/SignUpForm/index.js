@@ -172,6 +172,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
       emailInput.current.value = e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
     }
   };
+  var preventWhiteSpaceOnKeyDown = function preventWhiteSpaceOnKeyDown(e) {
+    if (e.key === " ") {
+      e.preventDefault();
+    }
+  };
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result4, _formState$result5;
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
@@ -219,15 +224,9 @@ var SignUpFormUI = function SignUpFormUI(props) {
     if (!validationFields.loading) {
       var _validationFields$fie5;
       Object.values(validationFields === null || validationFields === void 0 || (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout).map(function (field) {
-        return !notValidationFields.includes(field.code) && (field.code === 'email' ? formMethods.register('email', {
-          required: isRequiredField(field.code) ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'))
-          }
-        }) : formMethods.register(field.code, {
+        return !notValidationFields.includes(field.code) && field.code !== 'email' && formMethods.register(field.code, {
           required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field.name, " is required")).replace('_attribute_', t(field.name, field.code)) : null
-        }));
+        });
       });
     }
   }, [formMethods]);
@@ -289,6 +288,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }), !(useChekoutFileds && validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (validationFields === null || validationFields === void 0 || (_validationFields$fie7 = validationFields.fields) === null || _validationFields$fie7 === void 0 ? void 0 : _validationFields$fie7.checkout) && (0, _utils.sortInputFields)({
     values: validationFields === null || validationFields === void 0 || (_validationFields$fie8 = validationFields.fields) === null || _validationFields$fie8 === void 0 ? void 0 : _validationFields$fie8.checkout
   }).map(function (field) {
+    var _formMethods$errors;
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
     }, field.code === 'email' ? /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
@@ -296,13 +296,15 @@ var SignUpFormUI = function SignUpFormUI(props) {
       name: field.code,
       "aria-label": field.code,
       className: "form",
-      placeholder: !field.required ? t(field.code.toUpperCase() + '_OPTIONAL', field.name + ' (Optional)') : t(field.code.toUpperCase(), field.name),
+      placeholder: t(field.code.toUpperCase() + '_OPTIONAL', field.name + ' (Optional)'),
       onChange: handleChangeInputEmail,
-      ref: function ref(e) {
-        emailInput.current = e;
-      },
-      required: !!field.required,
-      autoComplete: "off"
+      ref: formMethods.register({
+        required: null,
+        pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+      }),
+      onKeyDown: preventWhiteSpaceOnKeyDown,
+      autoComplete: "on",
+      isError: ((_formMethods$errors = formMethods.errors) === null || _formMethods$errors === void 0 ? void 0 : _formMethods$errors.email) && !notValidationFields.includes(field.code)
     }), /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null))) : /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, {
       isHalf: fieldNumber % 2 === 0
     }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {

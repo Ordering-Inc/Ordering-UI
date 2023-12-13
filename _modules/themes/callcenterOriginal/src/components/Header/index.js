@@ -73,7 +73,9 @@ var Header = exports.Header = function Header(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 2),
     orderState = _useOrder2[0],
-    refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
+    _useOrder2$ = _useOrder2[1],
+    refreshOrderOptions = _useOrder2$.refreshOrderOptions,
+    changeType = _useOrder2$.changeType;
   var _useState = (0, _react.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     openPopover = _useState2[0],
@@ -141,7 +143,7 @@ var Header = exports.Header = function Header(props) {
         content: t('QUESTION_CLEAR_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.QUESTION_CLEAR_CUSTOMER) || 'Are you sure that you want to clear the customer?'),
         handleOnAccept: function handleOnAccept() {
           deleteUserCustomer(true);
-          // refreshOrderOptions()
+          changeType(1);
           handleGoToPage({
             page: 'home'
           });
