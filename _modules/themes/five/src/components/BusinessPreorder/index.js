@@ -134,16 +134,21 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
   };
   (0, _react.useEffect)(function () {
     if (cateringPreorder) {
-      var _Object$keys;
+      var _timeLists2;
+      var _timeLists = [];
       var schedule = business && getActualSchedule();
-      if (!schedule && cateringPreorder && ((_Object$keys = Object.keys(business)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) > 0) {
-        setIsEnabled(false);
+      if (!schedule && business) {
+        setTimeList([]);
         return;
       }
-      var _timeLists = hoursList.filter(function (hour) {
-        var _Object$keys2, _schedule$lapses;
-        return (((_Object$keys2 = Object.keys(business || {})) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) === 0 || (schedule === null || schedule === void 0 || (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.some(function (lapse) {
-          return (0, _moment2.default)(dateSelected + " ".concat(hour.startTime)) >= (0, _moment2.default)(dateSelected + " ".concat(lapse.open.hour, ":").concat(lapse.open.minute)).add(preorderLeadTime, 'minutes') && (0, _moment2.default)(dateSelected + " ".concat(hour.endTime)) <= (0, _moment2.default)(dateSelected + " ".concat(lapse.close.hour, ":").concat(lapse.close.minute));
+      _timeLists = hoursList.filter(function (hour) {
+        var _Object$keys, _schedule$lapses;
+        return (((_Object$keys = Object.keys(business || {})) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) === 0 || (schedule === null || schedule === void 0 || (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.some(function (lapse) {
+          var openHour = lapse.open.hour < 10 ? "0".concat(lapse.open.hour) : lapse.open.hour;
+          var openMinute = lapse.open.minute < 10 ? "0".concat(lapse.open.minute) : lapse.open.minute;
+          var closeHour = lapse.close.hour < 10 ? "0".concat(lapse.close.hour) : lapse.close.hour;
+          var closeMinute = lapse.close.minute < 10 ? "0".concat(lapse.close.minute) : lapse.close.minute;
+          return (0, _moment2.default)(dateSelected + " ".concat(hour.startTime)) >= (0, _moment2.default)(dateSelected + " ".concat(openHour, ":").concat(openMinute)).add(preorderLeadTime, 'minutes') && (0, _moment2.default)(dateSelected + " ".concat(hour.endTime)) <= (0, _moment2.default)(dateSelected + " ".concat(closeHour, ":").concat(closeMinute));
         }))) && (0, _moment2.default)(dateSelected + " ".concat(hour.startTime)) < (0, _moment2.default)(dateSelected + " ".concat(hour.endTime)) && ((0, _moment2.default)().add(preorderLeadTime, 'minutes') < (0, _moment2.default)(dateSelected + " ".concat(hour.startTime)) || !cateringPreorder);
       }).map(function (hour) {
         return {
@@ -160,14 +165,15 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
           })
         };
       });
-      setIsEnabled(true);
-      setTimeList(_timeLists);
+      if (((_timeLists2 = _timeLists) === null || _timeLists2 === void 0 ? void 0 : _timeLists2.length) > 0) {
+        setTimeList(_timeLists);
+      }
     } else {
       var selectedMenu = menu ? menu !== null && menu !== void 0 && menu.use_business_schedule ? business : menu : business;
       var _times = getTimeList(dateSelected, selectedMenu);
       setTimeList(_times);
     }
-  }, [dateSelected, menu, business, cateringPreorder, hoursList]);
+  }, [dateSelected, menu, JSON.stringify(business), cateringPreorder, JSON.stringify(hoursList), dateSelected]);
   (0, _react.useEffect)(function () {
     if (type === 'business_hours') setMenu(null);
   }, [type]);
@@ -227,7 +233,7 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
         return handleChangeDate(date);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.DayName, null, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, null, dayNumber)));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, isEnabled && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, timeList.map(function (time, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, (isEnabled || cateringPreorder) && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, timeList.map(function (time, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TimeItem, {
       key: i,
       active: timeSelected === time.value,
