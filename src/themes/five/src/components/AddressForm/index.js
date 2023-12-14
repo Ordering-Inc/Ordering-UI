@@ -522,7 +522,7 @@ const AddressFormUI = (props) => {
               <Button
                 id='submit-btn'
                 type='submit'
-                disabled={formState.loading || !formState?.changes?.address_notes || (formState?.changes?.address_notes?.trim().split(/\s+/).length < 3)}
+                disabled={formState.loading || !formState?.changes?.address_notes || (formState?.changes?.address_notes?.trim().split(/\s+/).length <= 2)}
                 color='primary'
               >
                 {!formState.loading ? (
