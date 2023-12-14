@@ -446,7 +446,7 @@ var CheckoutUI = function CheckoutUI(props) {
                 headers: {
                   // 'X-API-KEY': 'e40affdfbee57e43de41d1ce1451859bbe85626c1e87adaa93e538a6fb68488d09bb578f561122c1177e66ab1238563359acb70aa0b972ac8f44a52bceb7',
                   Authorization: "Bearer ".concat(token),
-                  'X-User-Agent': 'MarketPlace'
+                  'X-App-X': ordering.appId
                 },
                 body: JSON.stringify(data)
               }; // const url = `${DEUNA_URL}/merchants/orders`
