@@ -37,9 +37,7 @@ const FavoriteListUI = (props) => {
     isOrder,
     isProfessional,
     handleReorder,
-    reorderState,
-    favProduct,
-    setFavProduct
+    reorderState
   } = props
 
   const [, t] = useLanguage()
@@ -55,6 +53,7 @@ const FavoriteListUI = (props) => {
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [openModal, setOpenModal] = useState(false)
+  const [favProduct, setFavProduct] = useState(null)
 
   const pastOrders = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
 
@@ -83,10 +82,11 @@ const FavoriteListUI = (props) => {
     events.emit('go_to_page', data)
   }
 
-  const onProductClick = (product) => {
-    setOpenModal(true)
-    setFavProduct(product)
-    /*const slug = product?.category?.business?.slug
+  const handleOpenProduct = (business) => {
+    const slug = business.slug
+    const categoryId = favProduct?.category?.id
+    const productId = favProduct?.id
+    const slug = product?.category?.business?.slug
     const categoryId = product?.category?.id
     const productId = product?.id
 
@@ -142,7 +142,12 @@ const FavoriteListUI = (props) => {
         },
         search: `?${categoryParameter}=${categoryId}&${productParameter}=${productId}`
       })
-    }*/
+    }
+  }
+
+  const onProductClick = (product) => {
+    setOpenModal(true)
+    setFavProduct(product)
   }
 
   const closeOrderModal = (e) => {
@@ -383,7 +388,7 @@ const FavoriteListUI = (props) => {
                   <BusinessInfo>
                     <p>{business.name}</p>
                     <Button
-                      onClick={() => handleClickBusiness(business)}
+                      onClick={() => handleOpenProduct(business)}
                       color='primary'
                     >
                       {t('GO_TO_BUSINESSS', 'Go to business')}

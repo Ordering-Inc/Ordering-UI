@@ -123,12 +123,11 @@ export const BusinessInfo = styled.div`
 
 export const Image = styled.div`
   width: 100%;
-  padding-top: 10px;
   img{
-    width: 300Px;
-    height: 300px;
+    width: 100%;
+    height: auto;
     border-radius: 16px;
-    //aspect-ratio: attr(width) / attr(height)
+    aspect-ratio: attr(width) / attr(height)
   }
 `
 
