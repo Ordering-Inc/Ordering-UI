@@ -86,10 +86,7 @@ const FavoriteListUI = (props) => {
     const slug = business.slug
     const categoryId = favProduct?.category?.id
     const productId = favProduct?.id
-    const slug = product?.category?.business?.slug
-    const categoryId = product?.category?.id
-    const productId = product?.id
-
+    
     if (!categoryId && !productId) {
       if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
         events.emit('go_to_page', { page: 'business', params: { business_slug: slug } })
