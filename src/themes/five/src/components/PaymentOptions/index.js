@@ -9,6 +9,7 @@ import EnPaypal from '@meronex/icons/en/EnPaypal'
 import { Cash, CreditCard } from 'react-bootstrap-icons'
 import {
   PaymentOptions as PaymentOptionsController,
+  useApi,
   useLanguage,
   useOrder,
   useSession,
@@ -111,6 +112,7 @@ const PaymentOptionsUI = (props) => {
   const [, t] = useLanguage()
   const [{ token, user }] = useSession()
   const [{ options }] = useOrder()
+  const [ordering] = useApi()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [validationFields] = useValidationFields()
   const paymethodSelected = props.paySelected || props.paymethodSelected
@@ -130,6 +132,8 @@ const PaymentOptionsUI = (props) => {
   const supportedMethods = list?.filter(p => !multiCheckoutMethods.includes(p.gateway))?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
 
   const paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay']
+
+  const isAlsea = ['alsea', 'alsea-staging'].includes(ordering.project)
 
   const handlePaymentMethodClick = (paymethod) => {
     if (paymethodsFieldRequired.includes(paymethod?.gateway) &&
@@ -228,7 +232,7 @@ const PaymentOptionsUI = (props) => {
             supportedMethods.sort((a, b) => a.id - b.id).map(paymethod => (
               <React.Fragment key={paymethod.id}>
                 {
-                  ((!isCustomerMode && paymethod.gateway) || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
+                  (((!isCustomerMode || (isAlsea && isCustomerMode)) && paymethod.gateway) || (isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash'))) && (
                     <PayCard
                       isDisabled={isDisabled}
                       className={`${(paymethodSelected?.id || isOpenMethod?.paymethod?.id) === paymethod.id ? 'active' : ''}`}
