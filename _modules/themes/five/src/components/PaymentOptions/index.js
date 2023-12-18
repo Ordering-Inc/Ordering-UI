@@ -33,8 +33,8 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -135,6 +135,9 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     options = _useOrder2[0].options;
+  var _useApi = (0, _orderingComponents.useApi)(),
+    _useApi2 = _slicedToArray(_useApi, 1),
+    ordering = _useApi2[0];
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -160,6 +163,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
   });
   var paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay'];
+  var isAlsea = ['alsea', 'alsea-staging'].includes(ordering.project);
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
     var _validationFields$fie, _validationFields$fie2;
     if (paymethodsFieldRequired.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) && options.type === 1 && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.checkout) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.driver_tip) !== null && _validationFields$fie !== void 0 && _validationFields$fie.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie2 = validationFields.fields) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.driver_tip) !== null && _validationFields$fie2 !== void 0 && _validationFields$fie2.required && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0) {
@@ -248,7 +252,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     var _isOpenMethod$paymeth;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: paymethod.id
-    }, (!isCustomerMode && paymethod.gateway || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
+    }, ((!isCustomerMode || isAlsea && isCustomerMode) && paymethod.gateway || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isDisabled: isDisabled,
       className: "".concat(((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) || (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth === void 0 ? void 0 : _isOpenMethod$paymeth.id)) === paymethod.id ? 'active' : ''),
       onClick: function onClick() {
