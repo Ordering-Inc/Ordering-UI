@@ -101,7 +101,8 @@ const CheckoutUI = (props) => {
     setPlaceSpotNumber,
     placeSpotNumber,
     checkoutFieldsState,
-    alseaCheckPriceError
+    alseaCheckPriceError,
+    isLoadingCheckprice
   } = props
 
   const theme = useTheme()
@@ -173,7 +174,8 @@ const CheckoutUI = (props) => {
     validateDriverTipField ||
     validateCouponField ||
     validateZipcodeCard ||
-    !!alseaCheckPriceError
+    !!alseaCheckPriceError ||
+    isLoadingCheckprice
 
   const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
     ? JSON.parse(configs?.driver_tip_options?.value) || []
@@ -729,6 +731,12 @@ const CheckoutUI = (props) => {
         {!!alseaCheckPriceError && (
           <WarningText>
             {alseaCheckPriceError}
+          </WarningText>
+        )}
+
+        {isLoadingCheckprice && (
+          <WarningText>
+            {t('RECALCULATING_TOTAL_PRICE', 'Recalculating total price')}
           </WarningText>
         )}
         {cart?.valid_preorder !== undefined && !cart?.valid_preorder && (
