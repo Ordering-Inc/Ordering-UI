@@ -392,7 +392,7 @@ const ProductOptionsUI = (props) => {
   useEffect(() => {
     if (!isAlsea) return
     const keywords = ['1 ingrediente', 'ingredientes']
-    if (keywords?.some(word => product.name?.toLowerCase()?.includes(word))) {
+    if (keywords?.some(word => product?.name?.toLowerCase()?.includes(word))) {
       const arrayWord = product?.name?.toLowerCase()?.split(' ')
       const index = arrayWord.findIndex(word => word === 'ingredientes' || word === 'ingrediente')
       const maxValidation = parseInt(arrayWord[index - 1].split('-').pop())
