@@ -648,10 +648,10 @@ const OrderDetailsUI = (props) => {
                 <div>
                   <p>{order?.customer?.name} {order?.customer?.lastname}</p>
                   {!hideCustomerEmail && (
-                    <p>{order?.customer?.email}</p>
+                    <p>{order?.customer?.guest_id ? order?.customer?.guest_email : order?.customer?.email}</p>
                   )}
                   {!hideCustomerPhone && (
-                    <p>{order?.customer?.cellphone || order?.customer?.phone}</p>
+                    <p>{order?.customer?.guest_id ? order?.customer?.guest_cellphone : (order?.customer?.cellphone || order?.customer?.phone)}</p>
                   )}
                   {!hideCustomerAddress && (
                     <p>{order?.customer?.address}</p>
