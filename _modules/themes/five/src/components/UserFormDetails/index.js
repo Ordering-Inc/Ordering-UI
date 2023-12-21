@@ -161,7 +161,8 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       setUserPhoneNumber(userPhoneNumber);
       return;
     }
-    if (user !== null && user !== void 0 && user.cellphone) {
+    var cellphone = user !== null && user !== void 0 && user.guest_id ? user === null || user === void 0 ? void 0 : user.guest_cellphone : user === null || user === void 0 ? void 0 : user.cellphone;
+    if (cellphone) {
       var _formState$changes4, _formState$changes5;
       var phone = null;
       if (formState.result.error && (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.cellphone && (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.country_phone_code) {
@@ -171,14 +172,14 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
         return;
       }
       if (user !== null && user !== void 0 && user.country_phone_code) {
-        phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ").concat(user === null || user === void 0 ? void 0 : user.cellphone);
+        phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ").concat(cellphone);
       } else {
-        phone = user === null || user === void 0 ? void 0 : user.cellphone;
+        phone = cellphone;
       }
       setUserPhoneNumber(phone);
       return;
     }
-    setUserPhoneNumber((user === null || user === void 0 ? void 0 : user.cellphone) || '');
+    setUserPhoneNumber(cellphone || '');
   };
   var onSubmit = function onSubmit() {
     var _requiredFields$inclu, _validationFields$fie5, _validationFields$fie6, _requiredFields$inclu2, _configs$verification;
@@ -382,7 +383,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       borderBottom: true,
       disabled: !isEdit,
       placeholder: isCustomerMode ? t(field.code.toUpperCase() + '_OPTIONAL', field.name + ' (Optional)') : t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
-      defaultValue: (_ref2 = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user && user[field.code]) !== null && _ref2 !== void 0 ? _ref2 : '',
+      defaultValue: (_ref2 = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user && user !== null && user !== void 0 && user.guest_id ? user === null || user === void 0 ? void 0 : user.guest_email : user[field.code]) !== null && _ref2 !== void 0 ? _ref2 : '',
       onChange: handleChangeInputEmail,
       ref: formMethods.register({
         required: !isCustomerMode ? t('VALIDATION_ERROR_EMAIL_REQUIRED', 'The field Email is required').replace('_attribute_', t('EMAIL', 'Email')) : null,
