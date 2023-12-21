@@ -244,17 +244,27 @@ const CheckoutUI = (props) => {
     const _requiredFields = checkoutFieldsState?.fields
       .filter((field) => (field?.order_type_id === options?.type) && field?.enabled && field?.required_with_guest &&
         !notFields.includes(field?.validation_field?.code) &&
+        field?.validation_field?.code !== 'email' &&
         userSelected && !userSelected[field?.validation_field?.code])
     const requiredFieldsCode = _requiredFields.map((item) => item?.validation_field?.code)
     const guestCheckoutCellPhone = checkoutFieldsState?.fields?.find((field) => field.order_type_id === options?.type && field?.validation_field?.code === 'mobile_phone')
+    const guestCheckoutEmail = checkoutFieldsState?.fields?.find((field) => field.order_type_id === options?.type && field?.validation_field?.code === 'email')
     if (
       userSelected &&
-      !userSelected?.cellphone &&
+      !userSelected?.guest_cellphone &&
       ((guestCheckoutCellPhone?.enabled &&
         guestCheckoutCellPhone?.required_with_guest) ||
         configs?.verification_phone_required?.value === '1')
     ) {
       requiredFieldsCode.push('cellphone')
+    }
+    if (
+      userSelected &&
+      !userSelected?.guest_email &&
+      guestCheckoutEmail?.enabled &&
+      guestCheckoutEmail?.required_with_guest
+    ) {
+      requiredFieldsCode.push('email')
     }
     setRequiredFields(requiredFieldsCode)
   }
