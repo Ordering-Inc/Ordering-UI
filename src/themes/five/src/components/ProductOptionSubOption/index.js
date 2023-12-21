@@ -60,6 +60,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
         ? (balance === option?.max || state.quantity === suboption.max)
         : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
 
+  const quesoYSalsa = option?.name?.toLowerCase?.() === 'queso y salsa'
   const price = option?.with_half_option && suboption?.half_price && state.position !== 'whole' ? suboption?.half_price : suboption?.price
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -187,7 +188,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
               )
             }
           </PositionControl>
-          {option?.with_half_option && state?.selected && isAlsea && (
+          {(option?.with_half_option || quesoYSalsa) && state?.selected && isAlsea && (
             <ExtraControl>
               {(state.quantity >= 2) ? (
                 <ExtraItem
