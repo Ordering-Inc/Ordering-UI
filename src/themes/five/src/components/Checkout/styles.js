@@ -95,6 +95,7 @@ export const DriverTipContainer = styled(PaymentMethodContainer)`
 
 export const CartContainer = styled(PaymentMethodContainer)`
   margin-bottom: 20px;
+  position: relative;
 `
 
 export const WalletPaymentOptionContainer = styled(PaymentMethodContainer)`
@@ -377,4 +378,11 @@ export const OrderDetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 30px 20px;
+`
+
+export const SpinnerContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: -100%;
 `

@@ -46,7 +46,8 @@ import {
   HeaderContent,
   AuthButtonList,
   Flag,
-  SectionTitleContainer
+  SectionTitleContainer,
+  SpinnerContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -68,6 +69,7 @@ import { OrderContextUI } from '../OrderContextUI'
 import { SignUpForm } from '../SignUpForm'
 import { LoginForm } from '../LoginForm'
 import { OrderDetail } from './OrderDetail'
+import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -637,6 +639,11 @@ const CheckoutUI = (props) => {
               productLoading={productLoading}
               setProductLoading={setProductLoading}
             />
+            {isLoadingCheckprice && (
+              <SpinnerContainer>
+                <SpinnerLoader />
+              </SpinnerContainer>
+            )}
           </CartContainer>
         )}
         {
