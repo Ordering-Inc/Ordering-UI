@@ -34,6 +34,7 @@ var _OrderContextUI = require("../OrderContextUI");
 var _SignUpForm = require("../SignUpForm");
 var _LoginForm = require("../LoginForm");
 var _OrderDetail = require("./OrderDetail");
+var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -634,7 +635,7 @@ var CheckoutUI = function CheckoutUI(props) {
     hideCouponByValidationCheckout: !(guestCheckoutCoupon !== null && guestCheckoutCoupon !== void 0 && guestCheckoutCoupon.enabled),
     productLoading: productLoading,
     setProductLoading: setProductLoading
-  })), !!(isMultiDriverTips && driverTipsField) && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+  }), isLoadingCheckprice && /*#__PURE__*/_react.default.createElement(_styles.SpinnerContainer, null, /*#__PURE__*/_react.default.createElement(_SpinnerLoader.SpinnerLoader, null))), !!(isMultiDriverTips && driverTipsField) && /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
     isFixedPrice: parseInt(configs === null || configs === void 0 || (_configs$driver_tip_t3 = configs.driver_tip_type) === null || _configs$driver_tip_t3 === void 0 ? void 0 : _configs$driver_tip_t3.value, 10) === 1,

@@ -36,7 +36,7 @@ var ProductOptionSubOptionPropsAreEqual = function ProductOptionSubOptionPropsAr
   return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) && JSON.stringify(prevProps.pizzaState) === JSON.stringify(nextProps.pizzaState) && prevProps.balance === nextProps.balance && JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart);
 };
 var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props) {
-  var _pizzaState, _pizzaState2, _props$beforeElements, _props$beforeComponen, _option$name2, _pizzaState3, _pizzaState4, _props$afterComponent, _props$afterElements;
+  var _pizzaState, _option$name, _option$name$toLowerC, _pizzaState2, _props$beforeElements, _props$beforeComponen, _option$name3, _pizzaState3, _pizzaState4, _props$afterComponent, _props$afterElements;
   var state = props.state,
     increment = props.increment,
     decrement = props.decrement,
@@ -52,6 +52,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     changeQuantity = props.changeQuantity,
     isAlsea = props.isAlsea;
   var disableIncrement = option !== null && option !== void 0 && option.with_half_option ? (pizzaState === null || pizzaState === void 0 || (_pizzaState = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState === void 0 ? void 0 : _pizzaState.value) >= (option === null || option === void 0 ? void 0 : option.max) : option !== null && option !== void 0 && option.limit_suboptions_by_max ? balance === (option === null || option === void 0 ? void 0 : option.max) || state.quantity === suboption.max : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
+  var quesoYSalsa = (option === null || option === void 0 || (_option$name = option.name) === null || _option$name === void 0 || (_option$name$toLowerC = _option$name.toLowerCase) === null || _option$name$toLowerC === void 0 ? void 0 : _option$name$toLowerC.call(_option$name)) === 'queso y salsa';
   var price = option !== null && option !== void 0 && option.with_half_option && suboption !== null && suboption !== void 0 && suboption.half_price && state.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -119,10 +120,10 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     onClick: function onClick(e) {
-      var _option$name;
-      return (option === null || option === void 0 || (_option$name = option.name) === null || _option$name === void 0 ? void 0 : _option$name.toLowerCase()) === 'queso y salsa' && isAlsea ? handleChangeQuantity(e, state.quantity === 0 ? 1 : 0) : handleSuboptionClick();
+      var _option$name2;
+      return (option === null || option === void 0 || (_option$name2 = option.name) === null || _option$name2 === void 0 ? void 0 : _option$name2.toLowerCase()) === 'queso y salsa' && isAlsea ? handleChangeQuantity(e, state.quantity === 0 ? 1 : 0) : handleSuboptionClick();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.LeftOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? state !== null && state !== void 0 && state.selected && !((option === null || option === void 0 || (_option$name2 = option.name) === null || _option$name2 === void 0 ? void 0 : _option$name2.toLowerCase()) === 'queso y salsa' && isAlsea && state.quantity === 0) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.LeftOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? state !== null && state !== void 0 && state.selected && !((option === null || option === void 0 || (_option$name3 = option.name) === null || _option$name3 === void 0 ? void 0 : _option$name3.toLowerCase()) === 'queso y salsa' && isAlsea && state.quantity === 0) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
     disabled: true
   }) : state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
     disabled: true
@@ -155,7 +156,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     onClick: function onClick(e) {
       return handlePosition(e, 'right');
     }
-  }))), (option === null || option === void 0 ? void 0 : option.with_half_option) && (state === null || state === void 0 ? void 0 : state.selected) && isAlsea && /*#__PURE__*/_react.default.createElement(_styles.ExtraControl, null, state.quantity >= 2 ? /*#__PURE__*/_react.default.createElement(_styles.ExtraItem, {
+  }))), ((option === null || option === void 0 ? void 0 : option.with_half_option) || quesoYSalsa) && (state === null || state === void 0 ? void 0 : state.selected) && isAlsea && /*#__PURE__*/_react.default.createElement(_styles.ExtraControl, null, state.quantity >= 2 ? /*#__PURE__*/_react.default.createElement(_styles.ExtraItem, {
     onClick: function onClick(e) {
       return handleChangeQuantity(e, 1);
     }
