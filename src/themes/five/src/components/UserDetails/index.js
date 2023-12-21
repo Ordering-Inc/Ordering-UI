@@ -202,7 +202,7 @@ const UserDetailsUI = (props) => {
                   <CountryFlag>
                     {
                       userData?.country_phone_code && (userData?.cellphone ?? userData?.guest_cellphone) && (
-                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.[userData?.guest_id ? userData?.guest_cellphone : userData?.cellphone]?.replace(`+${userData?.country_phone_code}`, '')}`)?.country} />
+                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.[userData?.guest_id ? 'guest_cellphone' : 'cellphone']?.replace(`+${userData?.country_phone_code}`, '')}`)?.country} />
                       )
                     }
                   </CountryFlag>
