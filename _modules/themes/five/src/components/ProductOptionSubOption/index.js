@@ -23,8 +23,8 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -36,7 +36,7 @@ var ProductOptionSubOptionPropsAreEqual = function ProductOptionSubOptionPropsAr
   return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) && JSON.stringify(prevProps.pizzaState) === JSON.stringify(nextProps.pizzaState) && prevProps.balance === nextProps.balance && JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart);
 };
 var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props) {
-  var _pizzaState, _pizzaState2, _props$beforeElements, _props$beforeComponen, _option$name2, _pizzaState3, _pizzaState4, _props$afterComponent, _props$afterElements;
+  var _pizzaState, _option$name, _option$name$toLowerC, _pizzaState2, _props$beforeElements, _props$beforeComponen, _option$name3, _pizzaState3, _pizzaState4, _props$afterComponent, _props$afterElements;
   var state = props.state,
     increment = props.increment,
     decrement = props.decrement,
@@ -52,6 +52,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     changeQuantity = props.changeQuantity,
     isAlsea = props.isAlsea;
   var disableIncrement = option !== null && option !== void 0 && option.with_half_option ? (pizzaState === null || pizzaState === void 0 || (_pizzaState = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState === void 0 ? void 0 : _pizzaState.value) >= (option === null || option === void 0 ? void 0 : option.max) : option !== null && option !== void 0 && option.limit_suboptions_by_max ? balance === (option === null || option === void 0 ? void 0 : option.max) || state.quantity === suboption.max : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
+  var quesoYSalsa = (option === null || option === void 0 || (_option$name = option.name) === null || _option$name === void 0 || (_option$name$toLowerC = _option$name.toLowerCase) === null || _option$name$toLowerC === void 0 ? void 0 : _option$name$toLowerC.call(_option$name)) === 'queso y salsa';
   var price = option !== null && option !== void 0 && option.with_half_option && suboption !== null && suboption !== void 0 && suboption.half_price && state.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -119,10 +120,10 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     onClick: function onClick(e) {
-      var _option$name;
-      return (option === null || option === void 0 || (_option$name = option.name) === null || _option$name === void 0 ? void 0 : _option$name.toLowerCase()) === 'queso y salsa' && isAlsea ? handleChangeQuantity(e, state.quantity === 0 ? 1 : 0) : handleSuboptionClick();
+      var _option$name2;
+      return (option === null || option === void 0 || (_option$name2 = option.name) === null || _option$name2 === void 0 ? void 0 : _option$name2.toLowerCase()) === 'queso y salsa' && isAlsea ? handleChangeQuantity(e, state.quantity === 0 ? 1 : 0) : handleSuboptionClick();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.LeftOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? state !== null && state !== void 0 && state.selected && !((option === null || option === void 0 || (_option$name2 = option.name) === null || _option$name2 === void 0 ? void 0 : _option$name2.toLowerCase()) === 'queso y salsa' && isAlsea && state.quantity === 0) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.LeftOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? state !== null && state !== void 0 && state.selected && !((option === null || option === void 0 || (_option$name3 = option.name) === null || _option$name3 === void 0 ? void 0 : _option$name3.toLowerCase()) === 'queso y salsa' && isAlsea && state.quantity === 0) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
     disabled: true
   }) : state !== null && state !== void 0 && state.selected ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
     disabled: true
@@ -155,7 +156,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     onClick: function onClick(e) {
       return handlePosition(e, 'right');
     }
-  }))), (option === null || option === void 0 ? void 0 : option.with_half_option) && (state === null || state === void 0 ? void 0 : state.selected) && isAlsea && /*#__PURE__*/_react.default.createElement(_styles.ExtraControl, null, state.quantity >= 2 ? /*#__PURE__*/_react.default.createElement(_styles.ExtraItem, {
+  }))), ((option === null || option === void 0 ? void 0 : option.with_half_option) || quesoYSalsa) && (state === null || state === void 0 ? void 0 : state.selected) && isAlsea && /*#__PURE__*/_react.default.createElement(_styles.ExtraControl, null, state.quantity >= 2 ? /*#__PURE__*/_react.default.createElement(_styles.ExtraItem, {
     onClick: function onClick(e) {
       return handleChangeQuantity(e, 1);
     }
