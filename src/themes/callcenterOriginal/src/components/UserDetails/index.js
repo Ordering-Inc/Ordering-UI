@@ -45,6 +45,7 @@ const UserDetailsUI = (props) => {
   const userData = userState.result?.result || props.userData || formState.result?.result || user
 
   const validationFieldsLength = Object.values(validationFields?.fields?.checkout)?.map(field => field.enabled)
+  const countryPhoneCode = userData?.country_phone_code ?? userData?.country_code
 
   useEffect(() => {
     if (isUserDetailsEdit) {
@@ -121,8 +122,8 @@ const UserDetailsUI = (props) => {
                 <PhoneContainer>
                   <CountryFlag>
                     {
-                      userData?.country_phone_code && userData?.cellphone && (
-                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.cellphone.replace(`+${userData?.country_phone_code}`, '')}`)?.country} />
+                      countryPhoneCode && userData?.cellphone && (
+                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(countryPhoneCode?.replace('+', ''))} ${userData?.cellphone?.replace(`+${countryPhoneCode}`, '')}`)?.country} />
                       )
                     }
                   </CountryFlag>
