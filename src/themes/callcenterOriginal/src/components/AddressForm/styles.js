@@ -70,6 +70,7 @@ export const FormControl = styled.form`
   .google-control {
     .gps-button {
       border-radius: 7.6px;
+      width: 43px;
     }
 
     input {
@@ -106,7 +107,7 @@ export const AddressWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  bottom: 75%;
+  bottom: 79%;
   right: 0px;
   padding-right: 20px;
   button {
@@ -132,6 +133,7 @@ export const WrapAddressInput = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  z-index: 1000;
   i {
     padding: 0px 10px;
   }

@@ -316,17 +316,6 @@ const AddressListUI = (props) => {
                 </AddressListUl>
               )
             }
-            {!(addressList.loading || actionStatus.loading || orderState.loading) &&
-              !addressList.error &&
-              addressList?.addresses?.length === 0 &&
-              !isProductForm &&
-              (
-                <WrappNotAddresses>
-                  <img src={theme.images?.general?.notFound} alt='Not Found' width='200px' height='112px' loading='lazy' />
-                  <h1>{t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.')}</h1>
-                </WrappNotAddresses>
-              )}
-
             {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
               addressList.error.length > 0 && (
                 <NotFoundSource
@@ -372,7 +361,7 @@ const AddressListUI = (props) => {
           )}
         </AddressHalfContainer>
 
-        {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && (
+        {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && !addressOpen && (
           <AddressListUl>
             <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
           </AddressListUl>
