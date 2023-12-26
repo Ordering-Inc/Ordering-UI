@@ -48,8 +48,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -305,22 +305,29 @@ var CheckoutUI = function CheckoutUI(props) {
     setIsUserDetailsEdit(false);
   };
   var checkGuestValidationFields = function checkGuestValidationFields() {
-    var _checkoutFieldsState$2, _configs$verification;
+    var _checkoutFieldsState$2, _checkoutFieldsState$3, _configs$verification;
     var userSelected = isCustomerMode ? customerState.user : user;
     var _requiredFields = checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields.filter(function (field) {
-      var _field$validation_fie5, _field$validation_fie6;
-      return (field === null || field === void 0 ? void 0 : field.order_type_id) === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 ? void 0 : field.enabled) && (field === null || field === void 0 ? void 0 : field.required_with_guest) && !notFields.includes(field === null || field === void 0 || (_field$validation_fie5 = field.validation_field) === null || _field$validation_fie5 === void 0 ? void 0 : _field$validation_fie5.code) && userSelected && !userSelected[field === null || field === void 0 || (_field$validation_fie6 = field.validation_field) === null || _field$validation_fie6 === void 0 ? void 0 : _field$validation_fie6.code];
+      var _field$validation_fie5, _field$validation_fie6, _field$validation_fie7;
+      return (field === null || field === void 0 ? void 0 : field.order_type_id) === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 ? void 0 : field.enabled) && (field === null || field === void 0 ? void 0 : field.required_with_guest) && !notFields.includes(field === null || field === void 0 || (_field$validation_fie5 = field.validation_field) === null || _field$validation_fie5 === void 0 ? void 0 : _field$validation_fie5.code) && (field === null || field === void 0 || (_field$validation_fie6 = field.validation_field) === null || _field$validation_fie6 === void 0 ? void 0 : _field$validation_fie6.code) !== 'email' && userSelected && !userSelected[field === null || field === void 0 || (_field$validation_fie7 = field.validation_field) === null || _field$validation_fie7 === void 0 ? void 0 : _field$validation_fie7.code];
     });
     var requiredFieldsCode = _requiredFields.map(function (item) {
       var _item$validation_fiel;
       return item === null || item === void 0 || (_item$validation_fiel = item.validation_field) === null || _item$validation_fiel === void 0 ? void 0 : _item$validation_fiel.code;
     });
     var guestCheckoutCellPhone = checkoutFieldsState === null || checkoutFieldsState === void 0 || (_checkoutFieldsState$2 = checkoutFieldsState.fields) === null || _checkoutFieldsState$2 === void 0 ? void 0 : _checkoutFieldsState$2.find(function (field) {
-      var _field$validation_fie7;
-      return field.order_type_id === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 || (_field$validation_fie7 = field.validation_field) === null || _field$validation_fie7 === void 0 ? void 0 : _field$validation_fie7.code) === 'mobile_phone';
+      var _field$validation_fie8;
+      return field.order_type_id === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 || (_field$validation_fie8 = field.validation_field) === null || _field$validation_fie8 === void 0 ? void 0 : _field$validation_fie8.code) === 'mobile_phone';
     });
-    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.enabled && guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.required_with_guest || (configs === null || configs === void 0 || (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
+    var guestCheckoutEmail = checkoutFieldsState === null || checkoutFieldsState === void 0 || (_checkoutFieldsState$3 = checkoutFieldsState.fields) === null || _checkoutFieldsState$3 === void 0 ? void 0 : _checkoutFieldsState$3.find(function (field) {
+      var _field$validation_fie9;
+      return field.order_type_id === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 || (_field$validation_fie9 = field.validation_field) === null || _field$validation_fie9 === void 0 ? void 0 : _field$validation_fie9.code) === 'email';
+    });
+    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.guest_cellphone) && (guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.enabled && guestCheckoutCellPhone !== null && guestCheckoutCellPhone !== void 0 && guestCheckoutCellPhone.required_with_guest || (configs === null || configs === void 0 || (_configs$verification = configs.verification_phone_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1')) {
       requiredFieldsCode.push('cellphone');
+    }
+    if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.guest_email) && guestCheckoutEmail !== null && guestCheckoutEmail !== void 0 && guestCheckoutEmail.enabled && guestCheckoutEmail !== null && guestCheckoutEmail !== void 0 && guestCheckoutEmail.required_with_guest) {
+      requiredFieldsCode.push('email');
     }
     setRequiredFields(requiredFieldsCode);
   };
@@ -331,18 +338,18 @@ var CheckoutUI = function CheckoutUI(props) {
     var userSelected = isCustomerMode ? customerState.user : user;
     var _requiredFields = [];
     Object.values(checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields).map(function (field) {
-      var _field$validation_fie8;
-      if ((options === null || options === void 0 ? void 0 : options.type) === (field === null || field === void 0 ? void 0 : field.order_type_id) && field !== null && field !== void 0 && field.enabled && field !== null && field !== void 0 && field.required && !notFields.includes(field === null || field === void 0 || (_field$validation_fie8 = field.validation_field) === null || _field$validation_fie8 === void 0 ? void 0 : _field$validation_fie8.code)) {
-        var _field$validation_fie9;
-        if (userSelected && !userSelected[field === null || field === void 0 || (_field$validation_fie9 = field.validation_field) === null || _field$validation_fie9 === void 0 ? void 0 : _field$validation_fie9.code]) {
-          var _field$validation_fie10;
-          _requiredFields.push(field === null || field === void 0 || (_field$validation_fie10 = field.validation_field) === null || _field$validation_fie10 === void 0 ? void 0 : _field$validation_fie10.code);
+      var _field$validation_fie10;
+      if ((options === null || options === void 0 ? void 0 : options.type) === (field === null || field === void 0 ? void 0 : field.order_type_id) && field !== null && field !== void 0 && field.enabled && field !== null && field !== void 0 && field.required && !notFields.includes(field === null || field === void 0 || (_field$validation_fie10 = field.validation_field) === null || _field$validation_fie10 === void 0 ? void 0 : _field$validation_fie10.code)) {
+        var _field$validation_fie11;
+        if (userSelected && !userSelected[field === null || field === void 0 || (_field$validation_fie11 = field.validation_field) === null || _field$validation_fie11 === void 0 ? void 0 : _field$validation_fie11.code]) {
+          var _field$validation_fie12;
+          _requiredFields.push(field === null || field === void 0 || (_field$validation_fie12 = field.validation_field) === null || _field$validation_fie12 === void 0 ? void 0 : _field$validation_fie12.code);
         }
       }
     });
     var mobilePhoneField = (_Object$values = Object.values(checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields)) === null || _Object$values === void 0 ? void 0 : _Object$values.find(function (field) {
-      var _field$validation_fie11;
-      return (field === null || field === void 0 ? void 0 : field.order_type_id) === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 || (_field$validation_fie11 = field.validation_field) === null || _field$validation_fie11 === void 0 ? void 0 : _field$validation_fie11.code) === 'mobile_phone';
+      var _field$validation_fie13;
+      return (field === null || field === void 0 ? void 0 : field.order_type_id) === (options === null || options === void 0 ? void 0 : options.type) && (field === null || field === void 0 || (_field$validation_fie13 = field.validation_field) === null || _field$validation_fie13 === void 0 ? void 0 : _field$validation_fie13.code) === 'mobile_phone';
     });
     if (userSelected && !(userSelected !== null && userSelected !== void 0 && userSelected.cellphone) && (mobilePhoneField !== null && mobilePhoneField !== void 0 && mobilePhoneField.enabled && mobilePhoneField !== null && mobilePhoneField !== void 0 && mobilePhoneField.required || (configs === null || configs === void 0 || (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1')) {
       _requiredFields.push('cellphone');
