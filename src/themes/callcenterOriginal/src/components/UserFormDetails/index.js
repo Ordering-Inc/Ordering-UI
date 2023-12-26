@@ -47,6 +47,7 @@ export const UserFormDetailsUI = (props) => {
   const emailInput = useRef(null)
 
   const user = userData || userSession
+  const countryPhoneCode = user?.country_phone_code ?? user?.country_code
 
   const closeAlert = () => {
     setAlertState({
@@ -70,8 +71,8 @@ export const UserFormDetailsUI = (props) => {
         setUserPhoneNumber(phone)
         return
       }
-      if (user?.country_phone_code) {
-        phone = `+${user?.country_phone_code} ${user?.cellphone}`
+      if (countryPhoneCode) {
+        phone = `+${countryPhoneCode} ${user?.cellphone}`
       } else {
         phone = user?.cellphone
       }
@@ -94,7 +95,7 @@ export const UserFormDetailsUI = (props) => {
       return
     }
     if (!isPhoneNumberValid && userPhoneNumber) {
-      if (user?.country_phone_code) {
+      if (countryPhoneCode) {
         setAlertState({
           open: true,
           content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
@@ -307,29 +308,6 @@ export const UserFormDetailsUI = (props) => {
                   disabled={!isEdit}
                 />
               </InputPhoneNumberWrapper>
-            )}
-            {!isCheckout && (
-              <InputGroup>
-                <p>{t('PASSWORD', 'Password')}</p>
-                <Input
-                  type='password'
-                  name='password'
-                  className='form'
-                  disabled={!isEdit}
-                  borderBottom
-                  placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
-                  onChange={handleChangeInput}
-                  ref={formMethods.register({
-                    required: isRequiredField('password')
-                      ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                      : null,
-                    minLength: {
-                      value: 8,
-                      message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                    }
-                  })}
-                />
-              </InputGroup>
             )}
             <Divider />
             {
