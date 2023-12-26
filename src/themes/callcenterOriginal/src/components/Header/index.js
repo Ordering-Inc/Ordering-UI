@@ -212,7 +212,14 @@ export const Header = (props) => {
                 />
               )}
             </Menu>
-            {user?.level === 0 && (
+          </>
+        )}
+        <>
+          {user?.level === 0 && (
+            <>
+              {!isShowOrderOptions && (
+                <Menu className='left-header invisible' id='center-side' />
+              )}
               <AdminAreaPopover
                 withLogout
                 isCustomerMode={isCustomerMode}
@@ -220,9 +227,9 @@ export const Header = (props) => {
                 onClick={() => handleTogglePopover('admin')}
                 onClose={() => handleClosePopover('admin')}
               />
-            )}
-          </>
-        )}
+            </>
+          )}
+        </>
         {onlineStatus && (
           <RightHeader>
             <Menu>

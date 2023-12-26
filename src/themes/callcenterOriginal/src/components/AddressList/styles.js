@@ -203,7 +203,7 @@ export const List = styled.div`
   ${({ isEnableContinueButton, isOpenUserData, notUseCustomerInfo }) => isEnableContinueButton || isOpenUserData || notUseCustomerInfo ? css`
     margin-top: 0px;
   ` : css`
-    margin-top: 222px;
+    margin-top: 200px;
   `} 
   ${({ addFormRestrictions }) => addFormRestrictions && css`
     height: 405px;
@@ -215,14 +215,13 @@ export const List = styled.div`
 
 export const AddressFormContainer = styled.div`
   z-index: 10;
-  height: 100%;
   padding-left: 10px;
   ${({ width }) => css`
     width: ${width};
   `}
   ${({ isEnableContinueButton }) => isEnableContinueButton && css`
     position: relative;
-    bottom: 190px;
+    bottom: 189px;
   `}
 `
 

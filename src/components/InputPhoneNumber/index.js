@@ -45,7 +45,7 @@ export const InputPhoneNumber = (props) => {
           <BeforeComponent key={i} {...props} />))}
         <PhoneInput
           disabled={disabled}
-          placeholder={t('PHONE_NUMBER', theme?.defaultLanguages?.PHONE_NUMBER ||'Phone number')}
+          placeholder={t('PHONE_NUMBER', theme?.defaultLanguages?.PHONE_NUMBER || 'Phone number')}
           defaultCountry={configs?.default_country_code?.value}
           value={value}
           displayInitialValueAsLocalNumber
@@ -53,11 +53,11 @@ export const InputPhoneNumber = (props) => {
         />
         {value && !isValidPhoneNumber(value) && !disabled && (
           <>
-            {((auth && user?.country_phone_code) || !auth || value.includes('+')) && (
+            {((auth && (user?.country_phone_code ?? user?.country_code)) || !auth || value.includes('+')) && (
               <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')}</ErrorMsg>
             )}
 
-            {auth && !user?.country_phone_code && !value.includes('+') && (
+            {auth && !(user?.country_phone_code ?? user?.country_code) && !value.includes('+') && (
               <ErrorMsg>{t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid')}</ErrorMsg>
             )}
           </>
