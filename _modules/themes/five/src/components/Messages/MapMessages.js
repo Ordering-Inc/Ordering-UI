@@ -22,6 +22,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MapMessages = exports.MapMessages = function MapMessages(props) {
+  var _props$messages3;
   var order = props.order,
     filterSpecialStatus = props.filterSpecialStatus,
     handleModalImage = props.handleModalImage,
@@ -66,7 +67,7 @@ var MapMessages = exports.MapMessages = function MapMessages(props) {
     setMessages(messages_);
     setMessagesToShow(messagesToShow_);
   }, [JSON.stringify(props.messages), JSON.stringify(props.messagesToShow)]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, messages === null || messages === void 0 ? void 0 : messages.messages.map(function (message) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, props === null || props === void 0 || (_props$messages3 = props.messages) === null || _props$messages3 === void 0 ? void 0 : _props$messages3.messages.map(function (message) {
     var _message$change, _message$change2, _message$change3, _message$change4, _message$driver, _message$driver2, _messagesToShow$messa, _message$can_see, _message$can_see2;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: message.id
