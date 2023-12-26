@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options6, _addressList$addresse5, _theme$images2, _addressList$error$, _orderState$options7, _orderState$options8, _props$afterComponent, _props$afterElements;
+  var _addressList$addresse, _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options6, _addressList$error$, _orderState$options7, _orderState$options8, _props$afterComponent, _props$afterElements;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -290,13 +290,7 @@ var AddressListUI = function AddressListUI(props) {
         return handleSetAddress(address);
       }
     }, t('CONTINUE_WITH', 'Continue with'), ": ", address.address));
-  })), !(addressList.loading || actionStatus.loading || orderState.loading) && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse5 = addressList.addresses) === null || _addressList$addresse5 === void 0 ? void 0 : _addressList$addresse5.length) === 0 && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.WrappNotAddresses, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.general) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.notFound,
-    alt: "Not Found",
-    width: "200px",
-    height: "112px",
-    loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement("h1", null, t('NOT_FOUND_ADDRESS', 'Sorry, You don\'t seem to have any addresses.'))), !(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && addressList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  })), !(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && addressList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_addressList$error$ = addressList.error[0]) === null || _addressList$error$ === void 0 ? void 0 : _addressList$error$.message) || addressList.error[0]
   }), !(addressList.loading || actionStatus.loading || orderState.loading) && _typeof((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.address) !== 'object' && !addressList.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NETWORK_ERROR', 'Network error, please reload the page')
@@ -321,7 +315,7 @@ var AddressListUI = function AddressListUI(props) {
     onClick: function onClick() {
       return handleCloseAddressForm();
     }
-  })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))))), (addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))))), (addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && !addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50,
     count: 3,
     style: {

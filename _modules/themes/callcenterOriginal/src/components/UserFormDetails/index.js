@@ -31,7 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie5, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
+  var _user$country_phone_c, _validationFields$fie, _validationFields$fie2, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie5, _props$afterMidElemen, _props$afterMidCompon, _props$afterComponent, _props$afterElements;
   var isEdit = props.isEdit,
     formState = props.formState,
     onCancel = props.onCancel,
@@ -72,6 +72,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
     setUserCustomer = _useCustomer2[1].setUserCustomer;
   var emailInput = (0, _react.useRef)(null);
   var user = userData || userSession;
+  var countryPhoneCode = (_user$country_phone_c = user === null || user === void 0 ? void 0 : user.country_phone_code) !== null && _user$country_phone_c !== void 0 ? _user$country_phone_c : user === null || user === void 0 ? void 0 : user.country_code;
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -99,8 +100,8 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
         setUserPhoneNumber(phone);
         return;
       }
-      if (user !== null && user !== void 0 && user.country_phone_code) {
-        phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ").concat(user === null || user === void 0 ? void 0 : user.cellphone);
+      if (countryPhoneCode) {
+        phone = "+".concat(countryPhoneCode, " ").concat(user === null || user === void 0 ? void 0 : user.cellphone);
       } else {
         phone = user === null || user === void 0 ? void 0 : user.cellphone;
       }
@@ -120,7 +121,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       return;
     }
     if (!isPhoneNumberValid && userPhoneNumber) {
-      if (user !== null && user !== void 0 && user.country_phone_code) {
+      if (countryPhoneCode) {
         setAlertState({
           open: true,
           content: [t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')]
@@ -304,21 +305,6 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
     disabled: !isEdit
-  })), !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.InputGroup, null, /*#__PURE__*/_react.default.createElement("p", null, t('PASSWORD', 'Password')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    type: "password",
-    name: "password",
-    className: "form",
-    disabled: !isEdit,
-    borderBottom: true,
-    placeholder: t('FRONT_VISUALS_PASSWORD', 'Password'),
-    onChange: handleChangeInput,
-    ref: formMethods.register({
-      required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')) : null,
-      minLength: {
-        value: 8,
-        message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-      }
-    })
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

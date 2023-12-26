@@ -242,7 +242,10 @@ var Header = exports.Header = function Header(props) {
     onClick: function onClick() {
       return openModal('delivery');
     }
-  })), (user === null || user === void 0 ? void 0 : user.level) === 0 && /*#__PURE__*/_react.default.createElement(_AdminAreaPopover.AdminAreaPopover, {
+  }))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (user === null || user === void 0 ? void 0 : user.level) === 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
+    className: "left-header invisible",
+    id: "center-side"
+  }), /*#__PURE__*/_react.default.createElement(_AdminAreaPopover.AdminAreaPopover, {
     withLogout: true,
     isCustomerMode: isCustomerMode,
     open: openPopover.admin,
@@ -252,7 +255,7 @@ var Header = exports.Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('admin');
     }
-  })), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, isShowRedirectButton && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+  }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, null, isShowRedirectButton && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return window.open("".concat(t('CALL_CENTER_REDIRECT_URL', '#')));
     },
