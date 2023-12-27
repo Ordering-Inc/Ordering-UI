@@ -428,7 +428,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     var keywords = ['1 ingrediente', 'ingredientes'];
     if (keywords !== null && keywords !== void 0 && keywords.some(function (word) {
       var _product$name;
-      return (_product$name = product.name) === null || _product$name === void 0 || (_product$name = _product$name.toLowerCase()) === null || _product$name === void 0 ? void 0 : _product$name.includes(word);
+      return product === null || product === void 0 || (_product$name = product.name) === null || _product$name === void 0 || (_product$name = _product$name.toLowerCase()) === null || _product$name === void 0 ? void 0 : _product$name.includes(word);
     })) {
       var _product$name2;
       var arrayWord = product === null || product === void 0 || (_product$name2 = product.name) === null || _product$name2 === void 0 || (_product$name2 = _product$name2.toLowerCase()) === null || _product$name2 === void 0 ? void 0 : _product$name2.split(' ');
