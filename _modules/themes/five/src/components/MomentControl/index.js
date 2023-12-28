@@ -37,7 +37,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 var MomentControlUI = function MomentControlUI(props) {
-  var _configs$general_hour, _datesList$slice, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _configs$max_days_pre4, _configs$max_days_pre5, _configs$max_days_pre6;
+  var _configs$general_hour, _configs$general_hour2, _datesList$slice, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _configs$max_days_pre4, _configs$max_days_pre5, _configs$max_days_pre6;
   var isAsap = props.isAsap,
     datesList = props.datesList,
     hoursList = props.hoursList,
@@ -209,7 +209,7 @@ var MomentControlUI = function MomentControlUI(props) {
       return handleCheckBoxChange(true);
     },
     isLoading: orderState === null || orderState === void 0 ? void 0 : orderState.loading
-  }, isASP ? /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP'), " (", (0, _moment.default)(new Date()).format('LLLL'), " + ", t('DELIVERY_TIME', 'delivery time'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
+  }, isASP ? /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, null) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP'), " (", (0, _moment.default)(new Date()).format("dddd, MMMM DD, YYYY ".concat(configs === null || configs === void 0 || (_configs$general_hour2 = configs.general_hour_format) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.value)), " + ", t('DELIVERY_TIME', 'delivery time'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
     highlight: !isASP,
     onClick: function onClick() {
       return handleCheckBoxChange(null);
