@@ -52,17 +52,17 @@ var List = exports.List = _styledComponents.default.div(_templateObject16 || (_t
   var isEnableContinueButton = _ref3.isEnableContinueButton,
     isOpenUserData = _ref3.isOpenUserData,
     notUseCustomerInfo = _ref3.notUseCustomerInfo;
-  return isEnableContinueButton || isOpenUserData || notUseCustomerInfo ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-top: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-top: 222px;\n  "])));
+  return isEnableContinueButton || isOpenUserData || notUseCustomerInfo ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-top: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-top: 200px;\n  "])));
 }, function (_ref4) {
   var addFormRestrictions = _ref4.addFormRestrictions;
   return addFormRestrictions && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    height: 405px;\n  "])));
 });
-var AddressFormContainer = exports.AddressFormContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  z-index: 10;\n  height: 100%;\n  padding-left: 10px;\n  ", "\n  ", "\n"])), function (_ref5) {
+var AddressFormContainer = exports.AddressFormContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  z-index: 10;\n  padding-left: 10px;\n  ", "\n  ", "\n"])), function (_ref5) {
   var width = _ref5.width;
   return (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    width: ", ";\n  "])), width);
 }, function (_ref6) {
   var isEnableContinueButton = _ref6.isEnableContinueButton;
-  return isEnableContinueButton && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    position: relative;\n    bottom: 190px;\n  "])));
+  return isEnableContinueButton && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    position: relative;\n    bottom: 189px;\n  "])));
 });
 var CloseIcon = exports.CloseIcon = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  svg{\n    width: 30px;\n    height: 30px;\n  }\n"])));
 var TitleFormContainer = exports.TitleFormContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: center;\n  margin-top: 7px;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n"])));

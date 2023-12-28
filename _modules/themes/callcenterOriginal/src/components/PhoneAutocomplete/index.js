@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _orderState$options, _ref, _userCustomer$address, _configState$configs, _userCustomer$name, _orderState$options5, _orderState$options8, _orderState$options9, _theme$images2, _theme$images3, _orderState$options12, _orderState$options13, _orderState$options15, _orderState$options16, _theme$colors, _theme$images4, _customerState$result, _customerState$result2;
+  var _orderState$options, _ref, _userCustomer$country, _userCustomer$address, _configState$configs, _userCustomer$name, _orderState$options5, _orderState$options8, _orderState$options9, _theme$images2, _theme$images3, _orderState$options12, _orderState$options13, _orderState$options15, _orderState$options16, _theme$colors, _theme$images4, _customerState$result, _customerState$result2;
   var phone = props.phone,
     customerState = props.customerState,
     customersPhones = props.customersPhones,
@@ -101,9 +101,10 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isSavedAddress = _useState12[0],
     setIsSavedAddress = _useState12[1];
+  var countryPhoneCode = (_userCustomer$country = userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.country_phone_code) !== null && _userCustomer$country !== void 0 ? _userCustomer$country : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.country_code;
   var _useState13 = (0, _react.useState)(userCustomer ? {
       value: userCustomer.cellphone || userCustomer.phone,
-      label: "".concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.country_phone_code ? "(".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.country_phone_code, ")") : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.phone && !(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone) ? "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.phone) : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone ? "".concat(userCustomer.cellphone) : '', " - {").concat(userCustomer.name, "}"),
+      label: "".concat(countryPhoneCode ? "(".concat(countryPhoneCode, ")") : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.phone && !(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone) ? "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.phone) : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone ? "".concat(userCustomer.cellphone) : '', " - {").concat(userCustomer.name, "}"),
       flag: (userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.imported_address_text) && (userCustomer === null || userCustomer === void 0 || (_userCustomer$address = userCustomer.addresses) === null || _userCustomer$address === void 0 ? void 0 : _userCustomer$address.length) === 0,
       lastname: userCustomer.lastname
     } : null),
@@ -259,10 +260,11 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     setIsPickupSelected(true);
   };
   var optionsToSelect = customersPhones.users.map(function (user) {
-    var _user$addresses;
+    var _user$country_phone_c, _user$addresses;
+    var countryPhoneCode = (_user$country_phone_c = user === null || user === void 0 ? void 0 : user.country_phone_code) !== null && _user$country_phone_c !== void 0 ? _user$country_phone_c : user === null || user === void 0 ? void 0 : user.country_code;
     var obj = {};
     obj.value = user.cellphone || user.phone;
-    obj.label = "".concat(user !== null && user !== void 0 && user.country_phone_code ? "(".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, ")") : '', " ").concat(user !== null && user !== void 0 && user.phone && !(user !== null && user !== void 0 && user.cellphone) ? "".concat(user === null || user === void 0 ? void 0 : user.phone) : '', " ").concat(user !== null && user !== void 0 && user.cellphone ? "".concat(user.cellphone) : '', " - {").concat(user.name, "}");
+    obj.label = "".concat(countryPhoneCode ? "(".concat(countryPhoneCode, ")") : '', " ").concat(user !== null && user !== void 0 && user.phone && !(user !== null && user !== void 0 && user.cellphone) ? "".concat(user === null || user === void 0 ? void 0 : user.phone) : '', " ").concat(user !== null && user !== void 0 && user.cellphone ? "".concat(user.cellphone) : '', " - {").concat(user.name, "}");
     obj.flag = (user === null || user === void 0 ? void 0 : user.imported_address_text) && (user === null || user === void 0 || (_user$addresses = user.addresses) === null || _user$addresses === void 0 ? void 0 : _user$addresses.length) === 0;
     return obj;
   }) || [];
