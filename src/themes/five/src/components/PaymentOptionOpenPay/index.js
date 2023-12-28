@@ -263,14 +263,18 @@ export const PaymentCard = (props) => {
   const actionWrapperRef = useRef(null)
 
   const getIconCard = (brand = '') => {
-    const value = brand.toLowerCase()
-    switch (value) {
-      case 'visa':
-        return theme.images?.general?.visa
-      case 'mastercard':
-        return theme.images?.general?.mastercard
-      default:
-        return theme.images?.general?.credit
+    const cardsVisa = ['visa']
+    const cardsMaster = ['mastercard', 'master']
+    const cardsAmerica = ['american_express', 'amex']
+
+    if (cardsVisa.includes(brand)) {
+      return theme.images?.general?.visa
+    } else if (cardsMaster.includes(brand)) {
+      return theme.images?.general?.mastercard
+    } else if (cardsAmerica.includes(brand)) {
+      return theme.images?.general?.american_express
+    } else {
+      return theme.images?.general?.credit
     }
   }
 

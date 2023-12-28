@@ -161,6 +161,12 @@ export const MyOrdersMenuContainer = styled.div`
       }
   `}
 
+  ${({ fromOrders }) => fromOrders && css`
+    justify-content: center;
+    margin: 60px auto 44vh;
+    border-bottom: 0px;
+  `}
+
   @media (min-width: 381px) {
     padding: 15px 0px 0px 0px;
     ${({ pfchangs }) => pfchangs && css`
