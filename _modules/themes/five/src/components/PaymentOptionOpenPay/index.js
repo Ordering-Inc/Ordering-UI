@@ -278,16 +278,22 @@ var PaymentCard = function PaymentCard(props) {
   var cardActionsRef = (0, _react.useRef)(null);
   var actionWrapperRef = (0, _react.useRef)(null);
   var getIconCard = function getIconCard() {
-    var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$genera;
     var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var value = brand.toLowerCase();
-    switch (value) {
-      case 'visa':
-        return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.visa;
-      case 'mastercard':
-        return (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.mastercard;
-      default:
-        return (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.credit;
+    var cardsVisa = ['visa'];
+    var cardsMaster = ['mastercard', 'master'];
+    var cardsAmerica = ['american_express', 'amex'];
+    if (cardsVisa.includes(brand)) {
+      var _theme$images, _theme$images$general;
+      return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.visa;
+    } else if (cardsMaster.includes(brand)) {
+      var _theme$images2, _theme$images2$genera;
+      return (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.mastercard;
+    } else if (cardsAmerica.includes(brand)) {
+      var _theme$images3, _theme$images3$genera;
+      return (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.american_express;
+    } else {
+      var _theme$images4, _theme$images4$genera;
+      return (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$genera = _theme$images4.general) === null || _theme$images4$genera === void 0 ? void 0 : _theme$images4$genera.credit;
     }
   };
   var handleClickOutside = function handleClickOutside(e) {

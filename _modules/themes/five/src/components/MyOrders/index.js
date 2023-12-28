@@ -8,6 +8,7 @@ exports.MyOrders = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _ProfileOptions = require("../../../../../components/UserProfileForm/ProfileOptions");
+var _PaymentOptionOpenPay = require("../PaymentOptionOpenPay");
 var _OrdersOption = require("../OrdersOption");
 var _Buttons = require("../../styles/Buttons");
 var _MdClose = _interopRequireDefault(require("@meronex/icons/ios/MdClose"));
@@ -15,6 +16,7 @@ var _reactRouterDom = require("react-router-dom");
 var _styles = require("./styles");
 var _Tabs = require("../../styles/Tabs");
 var _styledComponents = require("styled-components");
+var _utils = require("../../../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -80,6 +82,10 @@ var MyOrders = function MyOrders(props) {
     wowPointsList = _useState16[0],
     setWowPointsList = _useState16[1];
   var isAlsea = ordering.project === 'alsea';
+  var _useState17 = (0, _react.useState)(false),
+    _useState18 = _slicedToArray(_useState17, 2),
+    showMyCards = _useState18[0],
+    setShowMyCards = _useState18[1];
   var filterList = [{
     key: 'all',
     value: t('ALL', 'All')
@@ -189,8 +195,14 @@ var MyOrders = function MyOrders(props) {
     }, props));
   }), hideOrders && !allEmpty && /*#__PURE__*/_react.default.createElement("h2", null, t('PREVIOUSLY_ORDERED', 'Previously ordered')), !hideOrders && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "orders",
-    pfchangs: pfchangs
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    pfchangs: pfchangs,
+    setShowMyCards: setShowMyCards
+  }), showMyCards ? /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
+    fromOrders: true
+  }, /*#__PURE__*/_react.default.createElement(_PaymentOptionOpenPay.PaymentOptionOpenPay, {
+    fromProfile: true,
+    deUnaApiKey: _utils.deUnaApiKey
+  }))) : /*#__PURE__*/_react.default.createElement(_styles.Container, {
     hideOrders: hideOrders,
     pfchangs: pfchangs
   }, !hideOrders && /*#__PURE__*/_react.default.createElement("h1", null, t('MY_ORDERS', 'My orders')), !allEmpty && /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
