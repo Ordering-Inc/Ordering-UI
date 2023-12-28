@@ -104,7 +104,7 @@ export const BusinessListingSearchUI = (props) => {
     { level: '5', content: `${Array(5).fill(currency).join('')}` }
   ]
 
-  const filterOptionsEnabled = configs?.filter_search_options?.s
+  const filterOptionsEnabled = configs?.filter_search_options?.enabled
     ? configs?.filter_search_options?.value?.split('|')
     : ['brands', 'max_delivery_fee', 'max_delivery_time', 'sort', 'price_range', 'business_categories', 'max_distance']
 
