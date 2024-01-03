@@ -200,7 +200,7 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
   })))), !(category !== null && category !== void 0 && category.id) && categories.filter(function (category) {
     return (category === null || category === void 0 ? void 0 : category.id) !== null;
   }).map(function (category, i, _categories) {
-    var _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _categoryState$produc8, _category$description, _category$description2, _category$subcategori4, _category$subcategori5, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _headerRef$current2, _category$description3, _category$subcategori6, _category$subcategori7, _products$filter, _category$subcategori8, _category$subcategori9;
+    var _categoryState$produc5, _categoryState$produc6, _categoryState$produc7, _categoryState$produc8, _category$description, _category$description2, _category$subcategori4, _category$subcategori5, _category$ribbon, _category$ribbon2, _category$ribbon3, _category$ribbon4, _category$ribbon5, _headerRef$current2, _category$description3, _category$subcategori6, _category$subcategori7, _products$sort$filter, _category$subcategori8, _category$subcategori9;
     var _products = !isUseParentCategory ? (_categoryState$produc5 = categoryState === null || categoryState === void 0 || (_categoryState$produc6 = categoryState.products) === null || _categoryState$produc6 === void 0 ? void 0 : _categoryState$produc6.filter(function (product) {
       return (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id);
     })) !== null && _categoryState$produc5 !== void 0 ? _categoryState$produc5 : [] : (_categoryState$produc7 = categoryState === null || categoryState === void 0 || (_categoryState$produc8 = categoryState.products) === null || _categoryState$produc8 === void 0 ? void 0 : _categoryState$produc8.filter(function (product) {
@@ -251,9 +251,11 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
       onClickSubcategory: onClickSubcategory
     })), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, {
       isSubcategorySearch: isSubcategorySearch
-    }, isSearchMode && (category === null || category === void 0 || (_category$subcategori7 = category.subcategories) === null || _category$subcategori7 === void 0 ? void 0 : _category$subcategori7.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, products === null || products === void 0 || (_products$filter = products.filter(function (product, i) {
+    }, isSearchMode && (category === null || category === void 0 || (_category$subcategori7 = category.subcategories) === null || _category$subcategori7 === void 0 ? void 0 : _category$subcategori7.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, products === null || products === void 0 || (_products$sort$filter = products.sort(function (a, b) {
+      return (a.rank || 0) - (b.rank || 0);
+    }).filter(function (product, i) {
       return i < 9 && (product === null || product === void 0 ? void 0 : product.category_id) === (category === null || category === void 0 ? void 0 : category.id) || (business === null || business === void 0 ? void 0 : business.food);
-    })) === null || _products$filter === void 0 ? void 0 : _products$filter.map(function (product, i) {
+    })) === null || _products$sort$filter === void 0 ? void 0 : _products$sort$filter.map(function (product, i) {
       var _currentCart$products5;
       return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
         key: i,
@@ -280,7 +282,9 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         display: 'flex',
         justifyContent: 'center'
       }
-    })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, products.filter(function (_, i) {
+    })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, products === null || products === void 0 ? void 0 : products.sort(function (a, b) {
+      return (a.rank || 0) - (b.rank || 0);
+    }).filter(function (_, i) {
       return i < 9 || (business === null || business === void 0 ? void 0 : business.food);
     }).map(function (product, i) {
       var _currentCart$products6;
@@ -319,14 +323,14 @@ var BusinessProductsListUI = function BusinessProductsListUI(props) {
         return (product === null || product === void 0 ? void 0 : product.category_id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
       });
     })) === null || _category$subcategori9 === void 0 ? void 0 : _category$subcategori9.map(function (subcategory) {
-      var _products$filter2;
+      var _products$filter;
       return /*#__PURE__*/_react.default.createElement(_styles.SubcategorySearchContainer, {
         key: subcategory === null || subcategory === void 0 ? void 0 : subcategory.id
       }, /*#__PURE__*/_react.default.createElement("h4", null, subcategory === null || subcategory === void 0 ? void 0 : subcategory.name), /*#__PURE__*/_react.default.createElement(_styles.ProductsListing, {
         isSubcategorySearch: isSubcategorySearch
-      }, products === null || products === void 0 || (_products$filter2 = products.filter(function (product) {
+      }, products === null || products === void 0 || (_products$filter = products.filter(function (product) {
         return (product === null || product === void 0 ? void 0 : product.category_id) === (subcategory === null || subcategory === void 0 ? void 0 : subcategory.id);
-      })) === null || _products$filter2 === void 0 ? void 0 : _products$filter2.map(function (product, i) {
+      })) === null || _products$filter === void 0 ? void 0 : _products$filter.map(function (product, i) {
         var _currentCart$products7;
         return /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
           key: i,
