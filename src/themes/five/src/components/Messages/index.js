@@ -4,8 +4,7 @@ import {
   Messages as MessagesController,
   useUtils,
   useLanguage,
-  useEvent,
-  useConfig
+  useEvent
 } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import IosSend from '@meronex/icons/ios/IosSend'
@@ -83,7 +82,6 @@ const MessagesUI = (props) => {
   } = props
 
   const theme = useTheme()
-  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
   const { handleSubmit, register, errors, setValue } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -94,8 +92,6 @@ const MessagesUI = (props) => {
   const imageRef = useRef(null)
   const previousStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const chatDisabled = previousStatus.includes(order?.status)
-
-  const hideLogBookMessages = configs?.order_logbook_enabled?.value === '0'
 
   const quickMessageList = [
     { key: 'message_1', text: t('CUSTOMER_MESSAGE_1', 'Lorem ipsum 1') },
@@ -480,28 +476,25 @@ const MessagesUI = (props) => {
             {
               !messages?.loading && order && (
                 <MessageContentWrapper>
-                  {!hideLogBookMessages && (
-                    <>
-                      <MessageCreatedDate>
-                        <span>{parseDate(order.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
-                      </MessageCreatedDate>
-                      <MessageConsole>
-                        <BubbleConsole>
-                          {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-                          <strong>{parseDate(order.created_at)}</strong> {' '}
-                          {t('VIA', 'Via')}{' '}
-                          <strong>
-                            {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
-                          </strong>{' '}
-                          <TimeofSent>{parseTime(order.created_at)}</TimeofSent>
-                        </BubbleConsole>
-                      </MessageConsole>
-                    </>
-                  )}
+                  <>
+                    <MessageCreatedDate>
+                      <span>{parseDate(order.created_at, { outputFormat: 'MMM DD, YYYY' })}</span>
+                    </MessageCreatedDate>
+                    <MessageConsole>
+                      <BubbleConsole>
+                        {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+                        <strong>{parseDate(order.created_at)}</strong> {' '}
+                        {t('VIA', 'Via')}{' '}
+                        <strong>
+                          {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
+                        </strong>{' '}
+                        <TimeofSent>{parseTime(order.created_at)}</TimeofSent>
+                      </BubbleConsole>
+                    </MessageConsole>
+                  </>
                   <MapMessages
                     messages={messagesToShow?.messages?.length ? messagesToShow : messages}
                     messagesToShow={messagesToShow}
-                    hideLogBookMessages={hideLogBookMessages}
                     order={order}
                     filterSpecialStatus={filterSpecialStatus}
                     handleModalImage={handleModalImage}
