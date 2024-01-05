@@ -7,7 +7,6 @@ export const MapMessages = (props) => {
     order,
     filterSpecialStatus,
     handleModalImage,
-    hideLogBookMessages,
     getLevel,
     business,
     driver,
@@ -22,7 +21,7 @@ export const MapMessages = (props) => {
   const [messagesToShow, setMessagesToShow] = useState(props.messagesToShow)
 
   useEffect(() => {
-    if ((!props.messages?.messages?.length && !props.messagesToShow?.messages?.length) || !hideLogBookMessages) return
+    if (!props.messages?.messages?.length && !props.messagesToShow?.messages?.length) return
     const messages_ = {
       ...props.messages,
       messages: props.messages?.messages?.filter(msg => msg.type !== 1 && msg.type !== 0)
