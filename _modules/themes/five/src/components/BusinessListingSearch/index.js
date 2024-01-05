@@ -48,7 +48,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessListingSearchUI = exports.BusinessListingSearchUI = function BusinessListingSearchUI(props) {
-  var _configs$format_numbe, _configs$distance_uni, _configs$filter_searc, _configs$filter_searc2, _businessesSearchList, _Object$values$find, _businessesSearchList3, _businessesSearchList4, _businessesSearchList6, _curProduct$business2, _curProduct$business3, _curProduct$product, _curProduct$product2, _currentCart$products;
+  var _configs$format_numbe, _configs$distance_uni, _configs$filter_searc, _businessesSearchList, _Object$values$find, _businessesSearchList3, _businessesSearchList4, _businessesSearchList6, _curProduct$business2, _curProduct$business3, _curProduct$product, _curProduct$product2, _currentCart$products;
   var businessesSearchList = props.businessesSearchList,
     onBusinessClick = props.onBusinessClick,
     handleChangeFilters = props.handleChangeFilters,
@@ -125,7 +125,7 @@ var BusinessListingSearchUI = exports.BusinessListingSearchUI = function Busines
     level: '5',
     content: "".concat(Array(5).fill(currency).join(''))
   }];
-  var filterOptionsEnabled = configs !== null && configs !== void 0 && (_configs$filter_searc = configs.filter_search_options) !== null && _configs$filter_searc !== void 0 && _configs$filter_searc.enabled ? configs === null || configs === void 0 || (_configs$filter_searc2 = configs.filter_search_options) === null || _configs$filter_searc2 === void 0 || (_configs$filter_searc2 = _configs$filter_searc2.value) === null || _configs$filter_searc2 === void 0 ? void 0 : _configs$filter_searc2.split('|') : ['brands', 'max_delivery_fee', 'max_delivery_time', 'sort', 'price_range', 'business_categories', 'max_distance'];
+  var filterOptionsEnabled = (configs === null || configs === void 0 || (_configs$filter_searc = configs.filter_search_options) === null || _configs$filter_searc === void 0 || (_configs$filter_searc = _configs$filter_searc.value) === null || _configs$filter_searc === void 0 ? void 0 : _configs$filter_searc.split('|')) || [];
   var noResults = !businessesSearchList.loading && !businessesSearchList.lengthError && (businessesSearchList === null || businessesSearchList === void 0 || (_businessesSearchList = businessesSearchList.businesses) === null || _businessesSearchList === void 0 ? void 0 : _businessesSearchList.length) === 0;
   var currentCart = (_Object$values$find = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).find(function (cart) {
     var _cart$business, _curProduct$business;
