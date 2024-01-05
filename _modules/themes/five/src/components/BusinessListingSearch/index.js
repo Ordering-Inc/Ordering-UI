@@ -48,7 +48,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessListingSearchUI = exports.BusinessListingSearchUI = function BusinessListingSearchUI(props) {
-  var _configs$format_numbe, _configs$distance_uni, _businessesSearchList, _Object$values$find, _businessesSearchList3, _businessesSearchList4, _businessesSearchList6, _curProduct$business2, _curProduct$business3, _curProduct$product, _curProduct$product2, _currentCart$products;
+  var _configs$format_numbe, _configs$distance_uni, _configs$filter_searc, _businessesSearchList, _Object$values$find, _businessesSearchList3, _businessesSearchList4, _businessesSearchList6, _curProduct$business2, _curProduct$business3, _curProduct$product, _curProduct$product2, _currentCart$products;
   var businessesSearchList = props.businessesSearchList,
     onBusinessClick = props.onBusinessClick,
     handleChangeFilters = props.handleChangeFilters,
@@ -125,6 +125,7 @@ var BusinessListingSearchUI = exports.BusinessListingSearchUI = function Busines
     level: '5',
     content: "".concat(Array(5).fill(currency).join(''))
   }];
+  var filterOptionsEnabled = (configs === null || configs === void 0 || (_configs$filter_searc = configs.filter_search_options) === null || _configs$filter_searc === void 0 || (_configs$filter_searc = _configs$filter_searc.value) === null || _configs$filter_searc === void 0 ? void 0 : _configs$filter_searc.split('|')) || [];
   var noResults = !businessesSearchList.loading && !businessesSearchList.lengthError && (businessesSearchList === null || businessesSearchList === void 0 || (_businessesSearchList = businessesSearchList.businesses) === null || _businessesSearchList === void 0 ? void 0 : _businessesSearchList.length) === 0;
   var currentCart = (_Object$values$find = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).find(function (cart) {
     var _cart$business, _curProduct$business;
@@ -176,7 +177,7 @@ var BusinessListingSearchUI = exports.BusinessListingSearchUI = function Busines
   }, [handleScroll]);
   var filtersComponent = function filtersComponent() {
     var _sortItems$filter, _brandList$brands, _orderState$options3, _orderState$options4, _orderState$options5;
-    return /*#__PURE__*/_react.default.createElement(_styles.Filters, null, /*#__PURE__*/_react.default.createElement(_styles.SortContainer, null, /*#__PURE__*/_react.default.createElement(_Accordion.FilterAccordion, {
+    return /*#__PURE__*/_react.default.createElement(_styles.Filters, null, filterOptionsEnabled.includes('sort') && /*#__PURE__*/_react.default.createElement(_styles.SortContainer, null, /*#__PURE__*/_react.default.createElement(_Accordion.FilterAccordion, {
       title: t('SORT', 'Sort')
     }, sortItems === null || sortItems === void 0 || (_sortItems$filter = sortItems.filter(function (item) {
       var _orderState$options, _orderState$options2;
@@ -190,7 +191,7 @@ var BusinessListingSearchUI = exports.BusinessListingSearchUI = function Busines
         },
         active: filters === null || filters === void 0 || (_filters$orderBy = filters.orderBy) === null || _filters$orderBy === void 0 ? void 0 : _filters$orderBy.includes(item === null || item === void 0 ? void 0 : item.value)
       }, item === null || item === void 0 ? void 0 : item.text, "  ", (filters === null || filters === void 0 || (_filters$orderBy2 = filters.orderBy) === null || _filters$orderBy2 === void 0 ? void 0 : _filters$orderBy2.includes(item === null || item === void 0 ? void 0 : item.value)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filters !== null && filters !== void 0 && (_filters$orderBy3 = filters.orderBy) !== null && _filters$orderBy3 !== void 0 && _filters$orderBy3.includes('-') ? /*#__PURE__*/_react.default.createElement(_BisUpArrow.default, null) : /*#__PURE__*/_react.default.createElement(_BisDownArrow.default, null)));
-    }))), /*#__PURE__*/_react.default.createElement(_styles.BrandContainer, null, /*#__PURE__*/_react.default.createElement(_Accordion.FilterAccordion, {
+    }))), filterOptionsEnabled.includes('brands') && /*#__PURE__*/_react.default.createElement(_styles.BrandContainer, null, /*#__PURE__*/_react.default.createElement(_Accordion.FilterAccordion, {
       title: t('BRANDS', 'Brands')
     }, /*#__PURE__*/_react.default.createElement(_styles.BrandListWrapper, null, (brandList === null || brandList === void 0 ? void 0 : brandList.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (index) {
       return /*#__PURE__*/_react.default.createElement(_styles.BrandItem, {
@@ -212,7 +213,7 @@ var BusinessListingSearchUI = exports.BusinessListingSearchUI = function Busines
       }, /*#__PURE__*/_react.default.createElement("span", null, brand === null || brand === void 0 ? void 0 : brand.name), (filters === null || filters === void 0 || (_filters$franchise_id3 = filters.franchise_ids) === null || _filters$franchise_id3 === void 0 ? void 0 : _filters$franchise_id3.includes(brand === null || brand === void 0 ? void 0 : brand.id)) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2, null));
     })), !(brandList !== null && brandList !== void 0 && brandList.loading) && (brandList === null || brandList === void 0 || (_brandList$brands = brandList.brands) === null || _brandList$brands === void 0 || (_brandList$brands = _brandList$brands.filter(function (brand) {
       return brand === null || brand === void 0 ? void 0 : brand.enabled;
-    })) === null || _brandList$brands === void 0 ? void 0 : _brandList$brands.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.NoResult, null, t('NO_RESULTS_FOUND', 'Sorry, no results found'))))), /*#__PURE__*/_react.default.createElement(_styles.PriceFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Accordion.FilterAccordion, {
+    })) === null || _brandList$brands === void 0 ? void 0 : _brandList$brands.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.NoResult, null, t('NO_RESULTS_FOUND', 'Sorry, no results found'))))), filterOptionsEnabled.includes('price_range') && /*#__PURE__*/_react.default.createElement(_styles.PriceFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_Accordion.FilterAccordion, {
       title: t('PRICE_RANGE', 'Price range')
     }, /*#__PURE__*/_react.default.createElement(_styles.PriceFilterListWrapper, null, priceList.map(function (price, i) {
       return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -222,25 +223,25 @@ var BusinessListingSearchUI = exports.BusinessListingSearchUI = function Busines
           return handleChangePriceRange(price === null || price === void 0 ? void 0 : price.level);
         }
       }, price.content, (filters === null || filters === void 0 ? void 0 : filters.price_level) === (price === null || price === void 0 ? void 0 : price.level) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null));
-    })))), (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && /*#__PURE__*/_react.default.createElement(_MaxSectionItem.MaxSectionItem, {
+    })))), (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type) === 1 && filterOptionsEnabled.includes('max_delivery_fee') && /*#__PURE__*/_react.default.createElement(_MaxSectionItem.MaxSectionItem, {
       title: t('MAX_DELIVERY_FEE', 'Max delivery fee'),
       options: maxDeliveryFeeOptions,
       filter: "max_delivery_price",
       filters: filters,
       handleChangeFilters: handleChangeFilters
-    }), [1, 2].includes(orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) && /*#__PURE__*/_react.default.createElement(_MaxSectionItem.MaxSectionItem, {
+    }), [1, 2].includes(orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) && filterOptionsEnabled.includes('max_delivery_time') && /*#__PURE__*/_react.default.createElement(_MaxSectionItem.MaxSectionItem, {
       title: (orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type) === 1 ? t('MAX_DELIVERY_TIME', 'Max delivery time') : t('MAX_PICKUP_TIME', 'Max pickup time'),
       options: maxTimeOptions,
       filter: "max_eta",
       filters: filters,
       handleChangeFilters: handleChangeFilters
-    }), /*#__PURE__*/_react.default.createElement(_MaxSectionItem.MaxSectionItem, {
+    }), filterOptionsEnabled.includes('max_distance') && /*#__PURE__*/_react.default.createElement(_MaxSectionItem.MaxSectionItem, {
       title: t('MAX_DISTANCE', 'Max distance'),
       options: maxDistanceOptions,
       filter: "max_distance",
       filters: filters,
       handleChangeFilters: handleChangeFilters
-    }), /*#__PURE__*/_react.default.createElement(_styles.TagsContainer, null, /*#__PURE__*/_react.default.createElement(_Accordion.FilterAccordion, {
+    }), filterOptionsEnabled.includes('business_categories') && /*#__PURE__*/_react.default.createElement(_styles.TagsContainer, null, /*#__PURE__*/_react.default.createElement(_Accordion.FilterAccordion, {
       title: t('BUSINESS_CATEGORIES', 'Business categories')
     }, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
       isSearchMode: true,
