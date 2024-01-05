@@ -104,9 +104,7 @@ export const BusinessListingSearchUI = (props) => {
     { level: '5', content: `${Array(5).fill(currency).join('')}` }
   ]
 
-  const filterOptionsEnabled = configs?.filter_search_options?.enabled
-    ? configs?.filter_search_options?.value?.split('|')
-    : ['brands', 'max_delivery_fee', 'max_delivery_time', 'sort', 'price_range', 'business_categories', 'max_distance']
+  const filterOptionsEnabled = configs?.filter_search_options?.value?.split('|') || []
 
   const noResults = (!businessesSearchList.loading && !businessesSearchList.lengthError && businessesSearchList?.businesses?.length === 0)
   const currentCart = Object.values(orderState?.carts).find(cart => cart?.business?.slug === curProduct?.business?.slug) ?? {}
