@@ -141,7 +141,7 @@ export const UserFormDetailsUI = (props) => {
       content.push(t('VALIDATION_ERROR_BIRTHDATE_REQUIRED', 'Birthdate is required'))
     }
     if (!userPhoneNumber &&
-      (requiredPhone || (configs?.verification_phone_required?.value === '1' && !user?.guest_id))
+      (requiredPhone || (configs?.verification_phone_required?.value === '1'))
     ) {
       content.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.'))
       setAlertState({
