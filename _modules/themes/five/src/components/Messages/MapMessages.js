@@ -26,7 +26,6 @@ var MapMessages = exports.MapMessages = function MapMessages(props) {
   var order = props.order,
     filterSpecialStatus = props.filterSpecialStatus,
     handleModalImage = props.handleModalImage,
-    hideLogBookMessages = props.hideLogBookMessages,
     getLevel = props.getLevel,
     business = props.business,
     driver = props.driver,
@@ -53,7 +52,7 @@ var MapMessages = exports.MapMessages = function MapMessages(props) {
     setMessagesToShow = _useState4[1];
   (0, _react.useEffect)(function () {
     var _props$messages, _props$messagesToShow, _props$messages2, _props$messagesToShow2;
-    if (!((_props$messages = props.messages) !== null && _props$messages !== void 0 && (_props$messages = _props$messages.messages) !== null && _props$messages !== void 0 && _props$messages.length) && !((_props$messagesToShow = props.messagesToShow) !== null && _props$messagesToShow !== void 0 && (_props$messagesToShow = _props$messagesToShow.messages) !== null && _props$messagesToShow !== void 0 && _props$messagesToShow.length) || !hideLogBookMessages) return;
+    if (!((_props$messages = props.messages) !== null && _props$messages !== void 0 && (_props$messages = _props$messages.messages) !== null && _props$messages !== void 0 && _props$messages.length) && !((_props$messagesToShow = props.messagesToShow) !== null && _props$messagesToShow !== void 0 && (_props$messagesToShow = _props$messagesToShow.messages) !== null && _props$messagesToShow !== void 0 && _props$messagesToShow.length)) return;
     var messages_ = _objectSpread(_objectSpread({}, props.messages), {}, {
       messages: (_props$messages2 = props.messages) === null || _props$messages2 === void 0 || (_props$messages2 = _props$messages2.messages) === null || _props$messages2 === void 0 ? void 0 : _props$messages2.filter(function (msg) {
         return msg.type !== 1 && msg.type !== 0;
