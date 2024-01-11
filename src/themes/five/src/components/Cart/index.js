@@ -39,7 +39,8 @@ import {
   IconContainer,
   NoValidProductMessage,
   DriverTipContainer,
-  SpinnerCart
+  SpinnerCart,
+  WarningText
 } from './styles'
 import { getCateringValues, verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
@@ -659,6 +660,11 @@ const CartUI = (props) => {
                   {...cateringValues}
                 />
               </div>
+            )}
+            {!cart?.valid_address && cart?.status !== 2 && (
+              <WarningText>
+                {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
+              </WarningText>
             )}
             {(onClickCheckout || isForceOpenCart) && !isCheckout && cart?.valid && (!isMultiCheckout || isStore || !cart?.business_id) && (
               <CheckoutAction>
