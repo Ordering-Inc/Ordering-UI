@@ -50,7 +50,8 @@ const ProductOptionSubOptionUI = React.memo((props) => {
     usePizzaValidation,
     pizzaState,
     changeQuantity,
-    isAlsea
+    isAlsea,
+    quesoYSalsaOptions
   } = props
 
   const disableIncrement =
@@ -60,7 +61,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
         ? (balance === option?.max || state.quantity === suboption.max)
         : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
 
-  const quesoYSalsa = option?.name?.toLowerCase?.() === 'queso y salsa'
+  const quesoYSalsa = quesoYSalsaOptions.includes(option?.name?.toLowerCase?.())
   const price = option?.with_half_option && suboption?.half_price && state.position !== 'whole' ? suboption?.half_price : suboption?.price
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -122,11 +123,11 @@ const ProductOptionSubOptionUI = React.memo((props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <Container onClick={(e) => option?.name?.toLowerCase() === 'queso y salsa' && isAlsea ? handleChangeQuantity(e, state.quantity === 0 ? 1 : 0) : handleSuboptionClick()}>
+      <Container onClick={(e) => quesoYSalsa && isAlsea ? handleChangeQuantity(e, state.quantity === 0 ? 1 : 0) : handleSuboptionClick()}>
         <LeftOptionContainer>
           <IconControl>
             {((option?.min === 0 && option?.max === 1) || option?.max > 1) ? (
-              state?.selected && !(option?.name?.toLowerCase() === 'queso y salsa' && isAlsea && state.quantity === 0) ? (
+              state?.selected && !(quesoYSalsa && isAlsea && state.quantity === 0) ? (
                 <MdCheckBox />
               ) : (
                 <MdCheckBoxOutlineBlank disabled />
@@ -188,7 +189,7 @@ const ProductOptionSubOptionUI = React.memo((props) => {
               )
             }
           </PositionControl>
-          {(option?.with_half_option || quesoYSalsa) && state?.selected && isAlsea && (
+          {(option?.with_half_option || quesoYSalsa) && state?.selected && state.quantity > 0 && isAlsea && (
             <ExtraControl>
               {(state.quantity >= 2) ? (
                 <ExtraItem
