@@ -182,7 +182,7 @@ var CheckoutUI = function CheckoutUI(props) {
     setProductLoading = _useState26[1];
   var shouldActivateOrderDetailModal = ordering === null || ordering === void 0 || (_ordering$project = ordering.project) === null || _ordering$project === void 0 ? void 0 : _ordering$project.includes('alsea');
   var cardsMethods = ['stripe', 'credomatic'];
-  var stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect'];
+  var stripePaymethods = ['stripe', 'stripe_connect', 'stripe_redirect'];
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 || (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
   var isTableNumberEnabled = configs === null || configs === void 0 || (_configs$table_numer_ = configs.table_numer_enabled) === null || _configs$table_numer_ === void 0 ? void 0 : _configs$table_numer_.value;
   var isWalletCashEnabled = ((_businessConfigs$find = businessConfigs.find(function (config) {
