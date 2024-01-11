@@ -135,15 +135,13 @@ export const UserFormDetailsUI = (props) => {
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber && showInputPhoneNumber ? isValidPhoneNumber : true
-    const requiredPhone = (user?.guest_id && requiredFields?.includes?.('cellphone')) || (validationFields?.fields?.checkout?.cellphone?.enabled && validationFields?.fields?.checkout?.cellphone?.required)
+    const requiredPhone = (user?.guest_id && requiredFields?.includes?.('cellphone')) || (validationFields?.fields?.checkout?.cellphone?.enabled && validationFields?.fields?.checkout?.cellphone?.required && !user?.guest_id)
     const content = []
     if (requiredFields?.includes?.('birthdate') && !birthdate) {
       content.push(t('VALIDATION_ERROR_BIRTHDATE_REQUIRED', 'Birthdate is required'))
     }
     if (!userPhoneNumber &&
-      ((validationFields?.fields?.checkout?.cellphone?.enabled &&
-        validationFields?.fields?.checkout?.cellphone?.required) ||
-        configs?.verification_phone_required?.value === '1')
+      (requiredPhone || (configs?.verification_phone_required?.value === '1'))
     ) {
       content.push(t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.'))
       setAlertState({
@@ -398,7 +396,7 @@ export const UserFormDetailsUI = (props) => {
                     })}
                   />
                   {openCalendar && (
-                    <DatePickerUI value={birthdate} onChange={_handleChangeDate} name={'birthdate'} />
+                    <DatePickerUI value={birthdate} onChange={_handleChangeDate} name='birthdate' />
                   )}
                 </InputPhoneNumberWrapper>
               )}
