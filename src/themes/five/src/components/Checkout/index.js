@@ -136,7 +136,7 @@ const CheckoutUI = (props) => {
 
   const shouldActivateOrderDetailModal = ordering?.project?.includes('alsea')
   const cardsMethods = ['stripe', 'credomatic']
-  const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
+  const stripePaymethods = ['stripe', 'stripe_connect', 'stripe_redirect']
   const businessConfigs = businessDetails?.business?.configs ?? []
   const isTableNumberEnabled = configs?.table_numer_enabled?.value
   const isWalletCashEnabled = businessConfigs.find(config => config.key === 'wallet_cash_enabled')?.value === '1'
