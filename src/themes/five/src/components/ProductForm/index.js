@@ -103,7 +103,8 @@ const ProductOptionsUI = (props) => {
     handleCreateGuestUser,
     actionStatus,
     isCustomerMode,
-    isAlsea
+    isAlsea,
+    quesoYSalsaOptions
   } = props
 
   const { product, loading, error } = productObject
@@ -673,6 +674,7 @@ const ProductOptionsUI = (props) => {
                                       pizzaState={pizzaState}
                                       productCart={productCart}
                                       isAlsea={isAlsea}
+                                      quesoYSalsaOptions={quesoYSalsaOptions}
                                     />
                                   )
                                 })
