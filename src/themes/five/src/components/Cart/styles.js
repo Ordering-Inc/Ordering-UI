@@ -244,3 +244,9 @@ export const SpinnerCart = styled.div`
     top: 0;
   `}
 `
+
+export const WarningText = styled.p`
+  margin: 10px auto;
+  text-align: center;
+  color: ${props => props.theme.colors.primary};
+`
