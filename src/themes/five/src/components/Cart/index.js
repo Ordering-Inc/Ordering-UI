@@ -661,7 +661,7 @@ const CartUI = (props) => {
                 />
               </div>
             )}
-            {!cart?.valid_address && cart?.status !== 2 && (
+            {!cart?.valid_address && cart?.status !== 2 && !isCheckout && (
               <WarningText>
                 {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
               </WarningText>
