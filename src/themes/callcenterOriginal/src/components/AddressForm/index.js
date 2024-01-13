@@ -439,10 +439,11 @@ const AddressFormUI = (props) => {
                 </AddressWrap>
 
                 {locationChange && (addressState?.address?.location || formState?.changes?.location) && (
-                  <WrapperMap isEnableContinueButton={isEnableContinueButton} notUseCustomerInfo={notUseCustomerInfo}>
+                  <WrapperMap isEnableContinueButton={isEnableContinueButton} notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
                     <GoogleMapsMap
                       useMapWithBusinessZones
                       deactiveAlerts
+                      avoidFitBounds
                       apiKey={googleMapsApiKey}
                       location={locationChange}
                       locations={businessesList?.businesses}
@@ -522,6 +523,7 @@ const AddressFormUI = (props) => {
                   type='button'
                   disabled={formState.loading}
                   onClick={() => onCancel()}
+                  hoverColor='#CCC'
                 >
                   {t('CANCEL', 'Cancel')}
                 </Button>

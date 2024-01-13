@@ -219,9 +219,9 @@ export const AddressFormContainer = styled.div`
   ${({ width }) => css`
     width: ${width};
   `}
-  ${({ isEnableContinueButton }) => isEnableContinueButton && css`
+  ${({ isEnableContinueButton, addFormRestrictions }) => isEnableContinueButton && css`
     position: relative;
-    bottom: 189px;
+    bottom: ${addFormRestrictions ? '189px' : '164px'};
   `}
 `
 

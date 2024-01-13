@@ -7,7 +7,7 @@ export const OptionTitle = styled.div`
   h1{
     text-transform: capitalize;
     font-size: 18px;
-    margin: 18px 0;
+    margin: 0;
   }
 
   @media (min-width: 768px){

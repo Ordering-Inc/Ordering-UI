@@ -109,7 +109,7 @@ export const Button = styled.button`
     `}
     }
   `}
-  ${({ outline }) => outline && css`
+  ${({ outline, hoverColor }) => outline && css`
     background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     color: #CCC;
     border-color: #CCC;
@@ -119,7 +119,7 @@ export const Button = styled.button`
     }
     &:hover {
       background: '#CCC';
-      color: #FFF;
+      color: ${hoverColor ?? '#FFF'};
     }
   `}
   ${({ circle }) => circle && css`
@@ -154,7 +154,7 @@ export const Button = styled.button`
   `}
   ${({ color }) => color === 'primary' && css`
     background: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.primaryContrast};
+    color: #FFF;
     border-color: ${props => props.theme.colors.primary};
     &:hover {
       background: ${props => props.theme.colors.primary};

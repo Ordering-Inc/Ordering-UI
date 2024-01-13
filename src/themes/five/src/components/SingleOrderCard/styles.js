@@ -68,7 +68,7 @@ export const Container = styled.div`
 
   @media(min-width: 993px){
     ${({ isBusinessesPage }) => isBusinessesPage && css`
-      margin: 30px 20px;
+      margin: 20px;
       width: calc(33% - 40px);
     `}
   }
