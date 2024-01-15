@@ -42,7 +42,7 @@ var Container = exports.Container = _styledComponents.default.div(_templateObjec
   return isBusinessesPage ? '300px' : '250px';
 }, function (_ref7) {
   var isBusinessesPage = _ref7.isBusinessesPage;
-  return isBusinessesPage && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin: 30px 20px;\n      width: calc(33% - 40px);\n    "])));
+  return isBusinessesPage && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin: 20px;\n      width: calc(33% - 40px);\n    "])));
 });
 var Content = exports.Content = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  position: relative;\n  border-radius: 16px;\n  padding: 0;\n  ", "\n\n  @media (min-width: 768px) {\n    padding: 10px;\n  }\n"])), function (_ref8) {
   var isCustomerMode = _ref8.isCustomerMode;

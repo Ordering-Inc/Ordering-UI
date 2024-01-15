@@ -8,6 +8,7 @@ exports.BusinessesMap = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _orderingComponents = require("ordering-components");
 var _styles = require("./styles");
+var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -22,19 +23,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessesMapUI = function BusinessesMapUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _configState$configs, _configState$configs2, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _configState$configs, _configState$configs2, _theme$images, _props$afterComponent, _props$afterElements;
   var userLocation = props.userLocation,
     businessLocations = props.businessLocations,
     onBusinessClick = props.onBusinessClick,
-    setErrors = props.setErrors;
+    setErrors = props.setErrors,
+    businessList = props.businessList;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
+  var theme = (0, _styledComponents.useTheme)();
   var googleMapsControls = {
-    defaultZoom: 15,
+    defaultZoom: 18,
     zoomControl: true,
     streetViewControl: false,
     fullscreenControl: false,
@@ -44,7 +47,7 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
     },
-    isMarkerDraggable: true
+    isMarkerDraggable: false
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -57,13 +60,19 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
     disabled: orderState.loading
   }, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+    useMapWithBusinessZones: true,
+    deactiveAlerts: true,
+    businessMap: true,
     apiKey: configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.google_maps_api_key) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value,
     location: userLocation,
     locations: businessLocations,
     mapControls: googleMapsControls,
     maxLimitLocation: parseInt(configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.meters_to_change_address) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value),
-    businessMap: true,
     onBusinessClick: onBusinessClick,
+    businessZones: businessList === null || businessList === void 0 ? void 0 : businessList.map(function (business) {
+      return business === null || business === void 0 ? void 0 : business.zones;
+    }),
+    fallbackIcon: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo,
     setErrors: setErrors
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({

@@ -201,10 +201,14 @@ var AddressListUI = function AddressListUI(props) {
   }, [isOpenUserData]);
   (0, _react.useEffect)(function () {
     var _addressList$addresse2;
-    if (userCustomerSetup !== null && userCustomerSetup !== void 0 && userCustomerSetup.imported_address_text && ((_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error)) {
+    var addressValidation = ((_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error);
+    if (userCustomerSetup !== null && userCustomerSetup !== void 0 && userCustomerSetup.imported_address_text && addressValidation) {
       openAddress({
         address: userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text
       });
+    }
+    if (!(userCustomerSetup !== null && userCustomerSetup !== void 0 && userCustomerSetup.imported_address_text) && addressValidation) {
+      openAddress({});
     }
   }, [userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text, addressList.addresses, addressList === null || addressList === void 0 ? void 0 : addressList.loading, addressList === null || addressList === void 0 ? void 0 : addressList.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -225,14 +229,15 @@ var AddressListUI = function AddressListUI(props) {
     isEnableContinueButton: isEnableContinueButton,
     notUseCustomerInfo: notUseCustomerInfo,
     addFormRestrictions: addFormRestrictions
-  }, !addFormRestrictions && (!isPopover || !addressOpen) && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, !addFormRestrictions && !addressOpen && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
     color: isEnableContinueButton && (addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) > 0 ? 'secondary' : 'primary',
     onClick: function onClick() {
       return openAddress({});
     },
-    disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading
+    disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading,
+    hoverColor: "#CCC"
   }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
@@ -310,7 +315,8 @@ var AddressListUI = function AddressListUI(props) {
     addFormRestrictions: addFormRestrictions
   }))), addressOpen && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
     width: "50%",
-    isEnableContinueButton: isEnableContinueButton
+    isEnableContinueButton: isEnableContinueButton,
+    addFormRestrictions: addFormRestrictions
   }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, !addFormRestrictions && /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return handleCloseAddressForm();
@@ -327,7 +333,8 @@ var AddressListUI = function AddressListUI(props) {
     disabled: addressList.loading || actionStatus.loading || orderState.loading,
     onClick: function onClick() {
       return onCancel();
-    }
+    },
+    hoverColor: "#CCC"
   }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     disabled: addressList.loading || actionStatus.loading || orderState.loading,
     id: "second-btn",

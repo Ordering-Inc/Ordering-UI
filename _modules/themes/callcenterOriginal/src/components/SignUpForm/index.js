@@ -272,7 +272,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('CREATE_NEW_USER', 'Create new user')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('CREATE_USER', 'Create new user')), /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: formMethods.handleSubmit(onSubmit),
@@ -371,11 +371,11 @@ var SignUpFormUI = function SignUpFormUI(props) {
     color: "primary",
     type: "submit",
     disabled: formState.loading || (validationFields === null || validationFields === void 0 ? void 0 : validationFields.loading)
-  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('CREATE_NEW_USER', 'Create new user')))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }, formState.loading ? "".concat(t('LOADING', 'Loading'), "...") : t('CREATE_USER', 'Create new user')))), elementLinkToLogin && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('MOBILE_FRONT_ALREADY_HAVE_AN_ACCOUNT', 'Already have an account?')), elementLinkToLogin)), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
-    title: t('CREATE_NEW_USER', 'Create new user'),
+    title: t('CREATE_USER', 'Create new user'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

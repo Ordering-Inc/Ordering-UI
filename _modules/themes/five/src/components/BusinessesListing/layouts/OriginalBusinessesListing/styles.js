@@ -94,7 +94,7 @@ var TypeButton = exports.TypeButton = _styledComponents.default.div(_templateObj
     theme = _ref8.theme;
   return activated && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), theme === null || theme === void 0 || (_theme$colors5 = theme.colors) === null || _theme$colors5 === void 0 ? void 0 : _theme$colors5.white);
 });
-var Title = exports.Title = _styledComponents.default.h2(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  margin: 0px 20px 5px 20px;\n"])), function (props) {
+var Title = exports.Title = _styledComponents.default.h2(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 24px;\n  color: ", ";\n  margin: 20px 20px 5px 20px;\n"])), function (props) {
   var _props$theme3;
   return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.headingColor;
 });

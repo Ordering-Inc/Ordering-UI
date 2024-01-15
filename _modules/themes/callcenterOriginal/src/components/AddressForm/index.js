@@ -497,10 +497,12 @@ var AddressFormUI = function AddressFormUI(props) {
       IconLoadingButton: _CgSearchLoading.default
     })), locationChange && ((addressState === null || addressState === void 0 || (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 || (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
       isEnableContinueButton: isEnableContinueButton,
-      notUseCustomerInfo: notUseCustomerInfo
+      notUseCustomerInfo: notUseCustomerInfo,
+      addFormRestrictions: addFormRestrictions
     }, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
       useMapWithBusinessZones: true,
       deactiveAlerts: true,
+      avoidFitBounds: true,
       apiKey: googleMapsApiKey,
       location: locationChange,
       locations: businessesList === null || businessesList === void 0 ? void 0 : businessesList.businesses,
@@ -592,7 +594,8 @@ var AddressFormUI = function AddressFormUI(props) {
     disabled: formState.loading,
     onClick: function onClick() {
       return onCancel();
-    }
+    },
+    hoverColor: "#CCC"
   }, t('CANCEL', 'Cancel')), Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "submit-btn",
     type: "submit",
