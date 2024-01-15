@@ -12,7 +12,8 @@ import {
   TitleContainer,
   CountryFlag,
   PhoneContainer,
-  SkeletonsContainer
+  SkeletonsContainer,
+  ChangeCustomerText
 } from './styles'
 import MdClose from '@meronex/icons/md/MdClose'
 import PhoneInput from 'react-phone-number-input'
@@ -177,13 +178,7 @@ const UserDetailsUI = (props) => {
               {!isModal && (
                 <h1>{t('CUSTOMER_DETAILS', 'Customer Details')}</h1>
               )}
-              {cartStatus !== 2 && (
-                !isEdit ? (
-                  <span onClick={() => toggleIsEdit()}>{t('CHANGE_USER_DETAILS', 'Change customer details')}</span>
-                ) : (
-                  <FcCancel className='cancel' onClick={() => toggleEditState()} />
-                )
-              )}
+              {cartStatus !== 2 && isEdit && <FcCancel className='cancel' onClick={() => toggleEditState()} />}
             </Header>
           )}
 
@@ -211,6 +206,11 @@ const UserDetailsUI = (props) => {
                   </p>
                 </PhoneContainer>
               )}
+              <ChangeCustomerText>
+                {cartStatus !== 2 && (
+                  <span onClick={() => toggleIsEdit()}>{t('CHANGE_USER_DETAILS', 'Change customer details')}</span>
+                )}
+              </ChangeCustomerText>
             </UserData>
           ) : (
             <SideForm>

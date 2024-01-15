@@ -27,15 +27,6 @@ export const Header = styled.div`
     cursor: pointer;
   }
 
-  span {
-    font-size: 13px;
-    color: ${props => props.theme.colors.primary};
-    cursor: pointer;
-    user-select: none;
-    &:hover {
-        text-decoration: underline;
-      }
-  }
 `
 
 export const SideForm = styled.div`
@@ -114,8 +105,24 @@ export const PhoneContainer = styled.div`
   display: flex;
   align-items: center;
   height: 30px;
+  p {
+    margin: 1rem 0;
+  }
 `
 
 export const SkeletonsContainer = styled.div`
   margin-top: 25px;
+`
+
+export const ChangeCustomerText = styled.div`
+
+  span {
+    font-size: 13px;
+    color: ${props => props.theme.colors.primary};
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+        text-decoration: underline;
+      }
+  }
 `

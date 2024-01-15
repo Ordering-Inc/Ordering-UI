@@ -202,10 +202,14 @@ const AddressListUI = (props) => {
   }, [isOpenUserData])
 
   useEffect(() => {
-    if (userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error) {
+    const addressValidation = addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error
+    if (userCustomerSetup?.imported_address_text && addressValidation) {
       openAddress({
         address: userCustomerSetup?.imported_address_text
       })
+    }
+    if (!userCustomerSetup?.imported_address_text && addressValidation) {
+      openAddress({})
     }
   }, [userCustomerSetup?.imported_address_text, addressList.addresses, addressList?.loading, addressList?.error])
 
@@ -228,13 +232,14 @@ const AddressListUI = (props) => {
             addFormRestrictions={addFormRestrictions}
           >
             {
-              !addFormRestrictions && (!isPopover || !addressOpen) && !isOpenUserData && (
+              !addFormRestrictions && !addressOpen && !isOpenUserData && (
                 <Button
                   className='add'
                   outline
                   color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
                   onClick={() => openAddress({})}
                   disabled={orderState?.loading || actionStatus.loading}
+                  hoverColor='#CCC'
                 >
                   {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
                 </Button>
@@ -348,7 +353,7 @@ const AddressListUI = (props) => {
             )}
           </List>
           {addressOpen && !notUseCustomerInfo && (
-            <AddressFormContainer width='50%' isEnableContinueButton={isEnableContinueButton}>
+            <AddressFormContainer width='50%' isEnableContinueButton={isEnableContinueButton} addFormRestrictions={addFormRestrictions}>
               <TitleFormContainer>
                 {!addFormRestrictions && (
                   <CloseIcon>
@@ -374,6 +379,7 @@ const AddressListUI = (props) => {
               type='button'
               disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
               onClick={() => onCancel()}
+              hoverColor='#CCC'
             >
               {t('CANCEL', 'Cancel')}
             </Button>

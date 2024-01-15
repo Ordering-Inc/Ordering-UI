@@ -261,7 +261,7 @@ export const Title = styled.h2`
   font-weight: 600;
   font-size: 24px;
   color: ${props => props.theme?.colors.headingColor};
-  margin: 0px 20px 5px 20px;
+  margin: 20px 20px 5px 20px;
 `
 
 export const TypesWrapper = styled.div`

@@ -132,7 +132,7 @@ export const BusinessBasicInformation = (props) => {
   const handleScroll = () => {
     const searchElement = document.getElementById('search-component')
     if (searchElement) {
-      const limit = window.pageYOffset >= (isChew ? searchElement?.offsetTop + 40 : searchElement?.offsetTop) && window.pageYOffset > 0
+      const limit = window.scrollY >= (isChew ? searchElement?.offsetTop + 40 : searchElement?.offsetTop) && window.scrollY > 0
       if (limit) {
         const classAdded = searchElement.classList.contains('fixed-search')
         !classAdded && searchElement.classList.add('fixed-search')
@@ -140,15 +140,26 @@ export const BusinessBasicInformation = (props) => {
         searchElement && searchElement.classList.remove('fixed-search')
       }
     }
+    const backArrowElement = document.getElementById('back-arrow')
 
     const businessNameElement = document.getElementById('business_name')
+    const businessNameFeedbackElement = document.getElementById('business_name_feedback')
     if (businessNameElement) {
-      const limit = window.pageYOffset >= (isChew && searchElement ? searchElement?.offsetTop + 40 : (businessNameElement?.offsetTop - 55)) && window.pageYOffset > 0
+      const limit = window.scrollY >= (isChew && searchElement ? searchElement?.offsetTop + 40 : (businessNameElement?.offsetTop - 55)) && window.scrollY > 0
       if (limit) {
         const classAdded = businessNameElement.classList.contains('fixed-name')
         !classAdded && businessNameElement.classList.add('fixed-name')
+        if (!isChew) {
+          const classAdded2 = backArrowElement?.classList?.contains?.('fixed-arrow')
+          !classAdded2 && backArrowElement.classList.add('fixed-arrow')
+        }
+        if (businessNameFeedbackElement) businessNameFeedbackElement.style.display = 'block'
       } else {
         businessNameElement && businessNameElement.classList.remove('fixed-name')
+        if (!isChew) {
+          backArrowElement && backArrowElement.classList.remove('fixed-arrow')
+        }
+        if (businessNameFeedbackElement) businessNameFeedbackElement.style.display = 'none'
       }
     }
   }
@@ -236,10 +247,10 @@ export const BusinessBasicInformation = (props) => {
                     />
                   </WrapperFloatingSearch>
                 )}
-                {!hideInfoIcon  && (
-                <BusinessMoreDetail>
-                  <BsInfoCircle onClick={() => setOpenBusinessInformation(true)} />
-                </BusinessMoreDetail>
+                {!hideInfoIcon && (
+                  <BusinessMoreDetail>
+                    <BsInfoCircle onClick={() => setOpenBusinessInformation(true)} />
+                  </BusinessMoreDetail>
                 )}
               </>
             )}
