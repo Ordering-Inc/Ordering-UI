@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  height: ${({ isEdit }) => isEdit ? 'auto' : '145px'};
+`
 
 export const Header = styled.div`
   display: flex;

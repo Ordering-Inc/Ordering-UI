@@ -72,18 +72,18 @@ const UserDetailsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {(validationFields.loading || formState.loading || userState.loading) && (
         <UserData>
-          {validationFieldsLength?.map(field => (
+          {[...Array(isCustomerMode ? 1 : validationFieldsLength?.length)]?.map(field => (
             <React.Fragment key={field?.id}>
-              <Skeleton width={250} height={50} />
-              <Skeleton width={180} height={25} />
-              <Skeleton width={210} height={50} />
+              <Skeleton width={250} height={isCustomerMode ? 10 : 50} />
+              <Skeleton width={180} height={isCustomerMode ? 10 : 25} />
+              <Skeleton width={210} height={isCustomerMode ? 10 : 50} />
             </React.Fragment>
           ))}
         </UserData>
       )}
 
       {!(validationFields.loading || formState.loading || userState.loading) && (
-        <Container>
+        <Container isEdit={isEdit}>
           {isModal && (
             <TitleContainer isAddressFormOpen={isAddressFormOpen && !isEdit}>
               <ModalIcon>

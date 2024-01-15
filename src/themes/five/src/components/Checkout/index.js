@@ -692,7 +692,7 @@ const CheckoutUI = (props) => {
                 `${t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order')}: ${parsePrice(cart?.maximum)}`
               ) : (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) ? (
                 `${t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:')} ${parsePrice(cart?.minimum)}`
-              ) : placing ? t('PLACING', 'Placing') : t('PLACE_ORDER', 'Place Order')}
+              ) : placing ? t('PLACING_ORDER', 'Placing order') : t('PLACE_ORDER', 'Place Order')}
             </Button>
           </WrapperPlaceOrderButton>
         )}

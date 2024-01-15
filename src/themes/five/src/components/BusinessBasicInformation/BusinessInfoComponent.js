@@ -59,6 +59,7 @@ export const BusinessInfoComponent = (props) => {
             {!loading ? (
               <TitleWrapper isCustomLayout={isCustomLayout} disableLeftSpace={singleBusinessRedirect}>
                 <h2 className='bold' id='business_name'>{business?.name}</h2>
+                <span id='business_name_feedback' />
                 {business?.ribbon?.enabled && (
                   <RibbonBox
                     bgColor={business?.ribbon?.color}
@@ -204,11 +205,11 @@ export const BusinessInfoComponent = (props) => {
                 <div className='preorder-Reviews'>
                   {isPreOrderSetting && (
                     <>
-                      <span onClick={() => setIsPreOrder(true)}>{t('PREORDER', 'Preorder')}</span>
+                      <span onClick={() => setIsPreOrder(true)}>{isCustomerMode ? t('CHANGE_SCHEDULE', 'Change schedule') : t('PREORDER', 'Preorder')}</span>
                       <span className='dot'>•</span>
                     </>
                   )}
-                  {business.reviews?.reviews && !hideReviewsPopup && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
+                  {business.reviews?.reviews && !hideReviewsPopup && !isCustomerMode && <span onClick={() => setIsBusinessReviews(true)}>{t('REVIEWS', 'Reviews')}</span>}
                 </div>
               ) : (
                 <Skeleton width={isCustomerMode ? 100 : 150} />

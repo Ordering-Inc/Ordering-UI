@@ -230,8 +230,8 @@ const BusinessProductsListingUI = (props) => {
     const backArrowElement = document.getElementById('back-arrow')
     const searchElement = document.getElementById('search-component')
     if (backArrowElement) {
-      const limit = window.pageYOffset >= backArrowElement?.offsetTop && window.pageYOffset > 0
-      const limitWidth = window.pageYOffset >= searchElement?.offsetTop + 40 && window.pageYOffset > 0
+      const limit = window.scrollY >= backArrowElement?.offsetTop - 10 && window.scrollY > 0
+      const limitWidth = window.scrollY >= searchElement?.offsetTop + 45 && window.scrollY > 0
       if (isChew) {
         if (limit && !limitWidth) {
           const classWidthAdded = backArrowElement.classList.contains('fixed-arrow-width')
@@ -239,13 +239,6 @@ const BusinessProductsListingUI = (props) => {
         } else {
           backArrowElement && backArrowElement.classList.remove('fixed-arrow-width')
         }
-      }
-
-      if (limit) {
-        const classAdded = backArrowElement.classList.contains('fixed-arrow')
-        !classAdded && backArrowElement.classList.add('fixed-arrow')
-      } else {
-        backArrowElement && backArrowElement.classList.remove('fixed-arrow')
       }
     }
 

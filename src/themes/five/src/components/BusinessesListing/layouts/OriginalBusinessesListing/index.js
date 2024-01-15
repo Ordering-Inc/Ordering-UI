@@ -418,7 +418,7 @@ const BusinessesListingUI = (props) => {
         </HightestRatedWrapper>
       )}
 
-      {(((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && !isAllCategoriesHidden) && (
+      {(((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && !isAllCategoriesHidden && !isCustomerMode) && (
         <BusinessTypeFilter
           images={props.images}
           businessTypes={props.businessTypes}
@@ -430,7 +430,7 @@ const BusinessesListingUI = (props) => {
         <SearchContainer>
           {isCustomLayout && (
             <BusinessesTitle isCustomerMode={isCustomerMode}>
-              {t('BUSINESSES', 'Businesses')}
+              {isCustomerMode ? t('SELECT_THE_BUSINESS', 'Select the business') : t('BUSINESSES', 'businesses')}
             </BusinessesTitle>
           )}
           <WrapperSearch isCustomLayout={isCustomLayout} isCustomerMode={isCustomerMode}>

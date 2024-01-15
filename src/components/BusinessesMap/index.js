@@ -1,20 +1,22 @@
 import React from 'react'
 import { BusinessesMap as BusinessesMapController, GoogleMapsMap, useConfig, useOrder } from 'ordering-components'
 import { WrapperMap } from './styles'
+import { useTheme } from 'styled-components'
 
 const BusinessesMapUI = (props) => {
   const {
     userLocation,
     businessLocations,
     onBusinessClick,
-    setErrors
+    setErrors,
+    businessList
   } = props
 
   const [configState] = useConfig()
   const [orderState] = useOrder()
-
+  const theme = useTheme()
   const googleMapsControls = {
-    defaultZoom: 15,
+    defaultZoom: 18,
     zoomControl: true,
     streetViewControl: false,
     fullscreenControl: false,
@@ -23,7 +25,7 @@ const BusinessesMapUI = (props) => {
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
     },
-    isMarkerDraggable: true
+    isMarkerDraggable: false
   }
 
   return (
@@ -36,13 +38,17 @@ const BusinessesMapUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       <WrapperMap disabled={orderState.loading}>
         <GoogleMapsMap
+          useMapWithBusinessZones
+          deactiveAlerts
+          businessMap
           apiKey={configState?.configs?.google_maps_api_key?.value}
           location={userLocation}
           locations={businessLocations}
           mapControls={googleMapsControls}
           maxLimitLocation={parseInt(configState?.configs?.meters_to_change_address?.value)}
-          businessMap
           onBusinessClick={onBusinessClick}
+          businessZones={businessList?.map(business => business?.zones)}
+          fallbackIcon={theme.images?.dummies?.businessLogo}
           setErrors={setErrors}
         />
       </WrapperMap>

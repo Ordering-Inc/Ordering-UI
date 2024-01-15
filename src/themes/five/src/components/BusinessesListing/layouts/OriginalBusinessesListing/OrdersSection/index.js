@@ -32,7 +32,7 @@ export const OrdersSection = (props) => {
             horizontal
             isBusinessesPage
             onRedirectPage={onRedirectPage}
-            titleContent={t('CARTS', 'Carts')}
+            titleContent={t('OPEN_CARTS', 'Open carts')}
             businessesIds={businessesIds}
             customArray={
               getCustomArray(orderState.carts)?.filter(cart => cart.products.length > 0)

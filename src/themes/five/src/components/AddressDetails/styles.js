@@ -38,9 +38,7 @@ export const Text = styled.div`
   white-space: nowrap;
 
   h1{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
     width: 100%;
     font-weight: 600;
     font-size: 16px;
@@ -67,6 +65,6 @@ export const Text = styled.div`
 
 export const ToggleMap = styled.div`
   span {
-    margin: 0 auto;
+    margin: 0;
   }
 `
