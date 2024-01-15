@@ -368,7 +368,11 @@ export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-
+  span {
+    height: 70px;
+    width: 1px;
+    display: none;
+  }
   h2 {
     font-size: 24px;
     line-height: 36px;
@@ -409,6 +413,7 @@ export const TitleWrapper = styled.div`
     }
     @media (min-width: 768px) {
       font-size: 32px;
+      
     }
   }
 `

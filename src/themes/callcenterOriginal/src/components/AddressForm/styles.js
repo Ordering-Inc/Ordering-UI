@@ -198,18 +198,20 @@ export const AddressTagSection = styled.div`
 `
 
 export const WrapperMap = styled.div`
+  z-index: 100;
   width: 50%;
   position: absolute;
   bottom: 2%;
   right: 0;
   padding-right: 20px;
-  ${({ isEnableContinueButton, notUseCustomerInfo }) => isEnableContinueButton ? css`
-    height: 460px;
-  ` : notUseCustomerInfo ? css`
-    height: 370px;
-  ` : css`
-    height: 480px;
-  `}
+  height: ${({ isEnableContinueButton, notUseCustomerInfo, addFormRestrictions }) =>
+    isEnableContinueButton
+      ? addFormRestrictions ? '460px' : '425px'
+      : notUseCustomerInfo
+        ? '370px'
+        : '480px'
+  };
+
   > div {
     position: relative !important;
     width: 100% !important;
@@ -237,7 +239,7 @@ export const AddressMarkContainer = styled.div`
   align-items: center;
   border-radius: 4px;
   position: absolute;
-  top: -35px;
+  top: 50px;
   width: max-content;
   p {
     margin: 0;
