@@ -492,7 +492,8 @@ const CheckoutUI = (props) => {
         onSuccess: (payload) => {
           console.log('onSuccess', payload)
           events.emit('deuna_checkout_completed', { event: 'deuna_checkout_completed', data: payload?.order })
-          handleOrderRedirect(payload?.order?.order_id)
+          handleOrderRedirect(payload?.order?.order_id.split('_')[0])
+          CheckoutWidget.closeCheckout()
         },
         onFailure: (error) => {
           console.log('onFailure', error)
