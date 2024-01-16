@@ -357,7 +357,7 @@ export const IconTypeButton = styled.div`
   align-items: center;
   width: 44px;
   height: 44px;
-  background: ${({ activated, theme }) => activated ? theme?.colors?.white : '#F3F9FF'};
+  background: ${({ theme }) => theme?.colors?.danger100 ?? '#FEEDF0'};
   border-radius: 44px;
 `
 
