@@ -584,7 +584,8 @@ var CheckoutUI = function CheckoutUI(props) {
                       event: 'deuna_checkout_completed',
                       data: payload === null || payload === void 0 ? void 0 : payload.order
                     });
-                    handleOrderRedirect(payload === null || payload === void 0 ? void 0 : (_payload$order = payload.order) === null || _payload$order === void 0 ? void 0 : _payload$order.order_id);
+                    handleOrderRedirect(payload === null || payload === void 0 ? void 0 : (_payload$order = payload.order) === null || _payload$order === void 0 ? void 0 : _payload$order.order_id.split('_')[0]);
+                    CheckoutWidget.closeCheckout();
                   },
                   onFailure: function onFailure(error) {
                     var _cart$business;
