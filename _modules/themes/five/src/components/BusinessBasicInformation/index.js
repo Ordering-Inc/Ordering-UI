@@ -140,7 +140,7 @@ var BusinessBasicInformation = exports.BusinessBasicInformation = function Busin
   var handleScroll = function handleScroll() {
     var searchElement = document.getElementById('search-component');
     if (searchElement) {
-      var limit = window.pageYOffset >= (isChew ? (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) + 40 : searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) && window.pageYOffset > 0;
+      var limit = window.scrollY >= (isChew ? (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) + 40 : searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) && window.scrollY > 0;
       if (limit) {
         var classAdded = searchElement.classList.contains('fixed-search');
         !classAdded && searchElement.classList.add('fixed-search');
@@ -148,14 +148,26 @@ var BusinessBasicInformation = exports.BusinessBasicInformation = function Busin
         searchElement && searchElement.classList.remove('fixed-search');
       }
     }
+    var backArrowElement = document.getElementById('back-arrow');
     var businessNameElement = document.getElementById('business_name');
+    var businessNameFeedbackElement = document.getElementById('business_name_feedback');
     if (businessNameElement) {
-      var _limit = window.pageYOffset >= (isChew && searchElement ? (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) + 40 : (businessNameElement === null || businessNameElement === void 0 ? void 0 : businessNameElement.offsetTop) - 55) && window.pageYOffset > 0;
+      var _limit = window.scrollY >= (isChew && searchElement ? (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) + 40 : (businessNameElement === null || businessNameElement === void 0 ? void 0 : businessNameElement.offsetTop) - 55) && window.scrollY > 0;
       if (_limit) {
         var _classAdded = businessNameElement.classList.contains('fixed-name');
         !_classAdded && businessNameElement.classList.add('fixed-name');
+        if (!isChew) {
+          var _backArrowElement$cla, _backArrowElement$cla2;
+          var classAdded2 = backArrowElement === null || backArrowElement === void 0 || (_backArrowElement$cla = backArrowElement.classList) === null || _backArrowElement$cla === void 0 || (_backArrowElement$cla2 = _backArrowElement$cla.contains) === null || _backArrowElement$cla2 === void 0 ? void 0 : _backArrowElement$cla2.call(_backArrowElement$cla, 'fixed-arrow');
+          !classAdded2 && backArrowElement.classList.add('fixed-arrow');
+        }
+        if (businessNameFeedbackElement) businessNameFeedbackElement.style.display = 'block';
       } else {
         businessNameElement && businessNameElement.classList.remove('fixed-name');
+        if (!isChew) {
+          backArrowElement && backArrowElement.classList.remove('fixed-arrow');
+        }
+        if (businessNameFeedbackElement) businessNameFeedbackElement.style.display = 'none';
       }
     }
   };

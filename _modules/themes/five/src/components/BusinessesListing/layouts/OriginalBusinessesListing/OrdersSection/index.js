@@ -46,7 +46,7 @@ var OrdersSection = exports.OrdersSection = function OrdersSection(props) {
     horizontal: true,
     isBusinessesPage: true,
     onRedirectPage: onRedirectPage,
-    titleContent: t('CARTS', 'Carts'),
+    titleContent: t('OPEN_CARTS', 'Open carts'),
     businessesIds: businessesIds,
     customArray: (_getCustomArray = getCustomArray(orderState.carts)) === null || _getCustomArray === void 0 ? void 0 : _getCustomArray.filter(function (cart) {
       return cart.products.length > 0;

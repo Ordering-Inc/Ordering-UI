@@ -61,8 +61,9 @@ var AddressFormContainer = exports.AddressFormContainer = _styledComponents.defa
   var width = _ref5.width;
   return (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    width: ", ";\n  "])), width);
 }, function (_ref6) {
-  var isEnableContinueButton = _ref6.isEnableContinueButton;
-  return isEnableContinueButton && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    position: relative;\n    bottom: 189px;\n  "])));
+  var isEnableContinueButton = _ref6.isEnableContinueButton,
+    addFormRestrictions = _ref6.addFormRestrictions;
+  return isEnableContinueButton && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    position: relative;\n    bottom: ", ";\n  "])), addFormRestrictions ? '189px' : '164px');
 });
 var CloseIcon = exports.CloseIcon = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  svg{\n    width: 30px;\n    height: 30px;\n  }\n"])));
 var TitleFormContainer = exports.TitleFormContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex; \n  align-items: center;\n  margin-top: 7px;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n"])));

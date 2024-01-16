@@ -311,8 +311,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     var backArrowElement = document.getElementById('back-arrow');
     var searchElement = document.getElementById('search-component');
     if (backArrowElement) {
-      var limit = window.pageYOffset >= (backArrowElement === null || backArrowElement === void 0 ? void 0 : backArrowElement.offsetTop) && window.pageYOffset > 0;
-      var limitWidth = window.pageYOffset >= (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) + 40 && window.pageYOffset > 0;
+      var limit = window.scrollY >= (backArrowElement === null || backArrowElement === void 0 ? void 0 : backArrowElement.offsetTop) - 10 && window.scrollY > 0;
+      var limitWidth = window.scrollY >= (searchElement === null || searchElement === void 0 ? void 0 : searchElement.offsetTop) + 45 && window.scrollY > 0;
       if (isChew) {
         if (limit && !limitWidth) {
           var classWidthAdded = backArrowElement.classList.contains('fixed-arrow-width');
@@ -320,12 +320,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
         } else {
           backArrowElement && backArrowElement.classList.remove('fixed-arrow-width');
         }
-      }
-      if (limit) {
-        var classAdded = backArrowElement.classList.contains('fixed-arrow');
-        !classAdded && backArrowElement.classList.add('fixed-arrow');
-      } else {
-        backArrowElement && backArrowElement.classList.remove('fixed-arrow');
       }
     }
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + PIXELS_TO_SCROLL;

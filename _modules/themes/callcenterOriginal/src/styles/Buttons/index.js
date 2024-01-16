@@ -54,11 +54,12 @@ var Button = exports.Button = _styledComponents.default.button(_templateObject6 
     return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        padding-right: 15%;\n        padding-left: 0;\n    "])));
   });
 }, function (_ref9) {
-  var outline = _ref9.outline;
-  return outline && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: #CCC;\n    border-color: #CCC;\n    &:active {\n      color: #FFF;\n      background: '#CCC';\n    }\n    &:hover {\n      background: '#CCC';\n      color: #FFF;\n    }\n  "])), function (props) {
+  var outline = _ref9.outline,
+    hoverColor = _ref9.hoverColor;
+  return outline && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: #CCC;\n    border-color: #CCC;\n    &:active {\n      color: #FFF;\n      background: '#CCC';\n    }\n    &:hover {\n      background: '#CCC';\n      color: ", ";\n    }\n  "])), function (props) {
     var _props$theme$colors;
     return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
-  });
+  }, hoverColor !== null && hoverColor !== void 0 ? hoverColor : '#FFF');
 }, function (_ref10) {
   var circle = _ref10.circle;
   return circle && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background: #CCC;\n    color: #FFF;\n    border-color: #CCC;\n    padding: 0;\n    width: 34px;\n    height: 34px;\n    line-height: 34px;\n    text-align: center;\n    border-radius: 50%;\n    &:active {\n      color: #FFF;\n      background: '#CCC';\n    }\n  "])));
@@ -71,10 +72,8 @@ var Button = exports.Button = _styledComponents.default.button(_templateObject6 
   });
 }, function (_ref12) {
   var color = _ref12.color;
-  return color === 'primary' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: ", ";\n    border-color: ", ";\n    &:hover {\n      background: ", ";\n    }\n    &:active {\n      background: ", ";\n    }\n    ", "\n    ", "\n    ", "\n  "])), function (props) {
+  return color === 'primary' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: #FFF;\n    border-color: ", ";\n    &:hover {\n      background: ", ";\n    }\n    &:active {\n      background: ", ";\n    }\n    ", "\n    ", "\n    ", "\n  "])), function (props) {
     return props.theme.colors.primary;
-  }, function (props) {
-    return props.theme.colors.primaryContrast;
   }, function (props) {
     return props.theme.colors.primary;
   }, function (props) {

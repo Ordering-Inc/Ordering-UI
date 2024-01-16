@@ -87,7 +87,9 @@ var BusinessInfoComponent = exports.BusinessInfoComponent = function BusinessInf
   }, /*#__PURE__*/_react.default.createElement("h2", {
     className: "bold",
     id: "business_name"
-  }, business === null || business === void 0 ? void 0 : business.name), (business === null || business === void 0 || (_business$ribbon = business.ribbon) === null || _business$ribbon === void 0 ? void 0 : _business$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
+  }, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("span", {
+    id: "business_name_feedback"
+  }), (business === null || business === void 0 || (_business$ribbon = business.ribbon) === null || _business$ribbon === void 0 ? void 0 : _business$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
     bgColor: business === null || business === void 0 || (_business$ribbon2 = business.ribbon) === null || _business$ribbon2 === void 0 ? void 0 : _business$ribbon2.color,
     colorText: (0, _utils.lightenDarkenColor)(business === null || business === void 0 || (_business$ribbon3 = business.ribbon) === null || _business$ribbon3 === void 0 ? void 0 : _business$ribbon3.color),
     borderRibbon: (0, _utils.lightenDarkenColor)(business === null || business === void 0 || (_business$ribbon4 = business.ribbon) === null || _business$ribbon4 === void 0 ? void 0 : _business$ribbon4.color),
@@ -154,9 +156,9 @@ var BusinessInfoComponent = exports.BusinessInfoComponent = function BusinessInf
     onClick: function onClick() {
       return setIsPreOrder(true);
     }
-  }, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement("span", {
+  }, isCustomerMode ? t('CHANGE_SCHEDULE', 'Change schedule') : t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
-  }, "\u2022")), ((_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.reviews) && !hideReviewsPopup && /*#__PURE__*/_react.default.createElement("span", {
+  }, "\u2022")), ((_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.reviews) && !hideReviewsPopup && !isCustomerMode && /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return setIsBusinessReviews(true);
     }
