@@ -64,9 +64,6 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
-  var _useCustomer = (0, _orderingComponents.useCustomer)(),
-    _useCustomer2 = _slicedToArray(_useCustomer, 2),
-    deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -190,6 +187,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
         users: []
       }));
       setInputValue('');
+      onChangeNumber('');
       return;
     }
     var user;
@@ -246,7 +244,6 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
         error: false
       }
     }));
-    deleteUserCustomer(true);
     if (isFromUrlPhone) {
       onRedirectPhoneUrlPage && onRedirectPhoneUrlPage('home');
     }
@@ -372,7 +369,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onChange: onChange,
     onInputChange: onInputChange,
     isLoading: customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading,
-    options: optionsToSelect,
+    options: optionsToSelect.filter(function (opt) {
+      return inputValue ? opt.value.toString().includes(inputValue) : opt;
+    }),
     components: {
       Option: Option
     }
