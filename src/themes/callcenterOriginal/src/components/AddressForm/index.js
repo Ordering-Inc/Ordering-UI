@@ -69,6 +69,7 @@ const AddressFormUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
+  const [showMap, setShowMap] = useState(false)
   const isEditing = !!addressState.address?.id
   const googleInputRef = useRef()
 
@@ -438,23 +439,53 @@ const AddressFormUI = (props) => {
                   />
                 </AddressWrap>
 
-                {locationChange && (addressState?.address?.location || formState?.changes?.location) && (
+                {(addressState?.address?.location || formState?.changes?.location) && (
                   <WrapperMap isEnableContinueButton={isEnableContinueButton} notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
-                    <GoogleMapsMap
-                      useMapWithBusinessZones
-                      deactiveAlerts
-                      avoidFitBounds
-                      apiKey={googleMapsApiKey}
-                      location={locationChange}
-                      locations={businessesList?.businesses}
-                      fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
-                      mapControls={googleMapsControls}
-                      handleChangeAddressMap={handleChangeAddress}
-                      setErrors={setMapErrors}
-                      maxLimitLocation={parseInt(maxLimitLocation, 10)}
-                      businessZones={businessesList?.businesses?.map(business => business?.zones)}
-                      fallbackIcon={theme.images?.dummies?.businessLogo}
-                    />
+                    <section>
+                      {!showMap && (
+                        <>
+                          <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
+                          {(addressState?.address?.address || formState?.changes?.address) && (
+                            <span>{addressState?.address?.address || formState?.changes?.address}{', '}</span>
+                          )}
+                          {(addressState?.address?.country || formState?.changes?.country) && (
+                            <span>{addressState?.address?.country || formState?.changes?.country}{', '}</span>
+                          )}
+                          {(addressState?.address?.address_notes || formState?.changes?.address_notes) && (
+                            <span>{addressState?.address?.address_notes || formState?.changes?.address_notes}{', '}</span>
+                          )}
+                          {(addressState?.address?.internal_number || formState?.changes?.internal_number) && (
+                            <span>{addressState?.address?.internal_number || formState?.changes?.internal_number}{', '}</span>
+                          )}
+                          {(addressState?.address?.zipcode || formState?.changes?.zipcode) && (
+                            <span>{addressState?.address?.zipcode || formState?.changes?.zipcode}{', '}</span>
+                          )}
+                        </>
+                      )}
+                      <a
+                        style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
+                        onClick={() => setShowMap(!showMap)}
+                      >
+                        {showMap ? t('HIDE_MAP', 'Hide Map') : t('SHOW_MAP', 'Show Map')}
+                      </a>
+                    </section>
+                    {locationChange && showMap && (
+                      <GoogleMapsMap
+                        useMapWithBusinessZones
+                        deactiveAlerts
+                        avoidFitBounds
+                        apiKey={googleMapsApiKey}
+                        location={locationChange}
+                        locations={businessesList?.businesses}
+                        fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
+                        mapControls={googleMapsControls}
+                        handleChangeAddressMap={handleChangeAddress}
+                        setErrors={setMapErrors}
+                        maxLimitLocation={parseInt(maxLimitLocation, 10)}
+                        businessZones={businessesList?.businesses?.map(business => business?.zones)}
+                        fallbackIcon={theme.images?.dummies?.businessLogo}
+                      />
+                    )}
                   </WrapperMap>
                 )}
               </React.Fragment>
