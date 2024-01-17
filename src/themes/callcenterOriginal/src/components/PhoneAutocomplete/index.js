@@ -4,7 +4,6 @@ import {
   PhoneAutocomplete as PhoneAutocompleteController,
   useLanguage,
   useOrder,
-  useCustomer,
   useConfig,
   useEvent
 } from 'ordering-components'
@@ -62,7 +61,6 @@ const PhoneAutocompleteUI = (props) => {
   const [orderState, { changeType }] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [, { deleteUserCustomer }] = useCustomer()
   const [configState] = useConfig()
   const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -141,6 +139,7 @@ const PhoneAutocompleteUI = (props) => {
       setOptSelected(null)
       setCustomersPhones({ ...customersPhones, users: [] })
       setInputValue('')
+      onChangeNumber('')
       return
     }
     let user
@@ -181,7 +180,6 @@ const PhoneAutocompleteUI = (props) => {
   const handleCloseAddressList = () => {
     setOpenModal({ ...openModal, customer: false })
     setCustomerState({ ...customerState, result: { error: false } })
-    deleteUserCustomer(true)
     if (isFromUrlPhone) {
       onRedirectPhoneUrlPage && onRedirectPhoneUrlPage('home')
     }
@@ -328,7 +326,7 @@ const PhoneAutocompleteUI = (props) => {
                     onChange={onChange}
                     onInputChange={onInputChange}
                     isLoading={customersPhones?.loading}
-                    options={optionsToSelect}
+                    options={optionsToSelect.filter(opt => inputValue ? opt.value.toString().includes(inputValue) : opt)}
                     components={{ Option }}
                   />
                   {optSelected && (
