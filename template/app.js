@@ -517,14 +517,14 @@ export const App = () => {
     />
   ) : (
     <div style={{ marginBottom: windowSize.width < 576 && onlineStatus ? 80 : 0 }}>
-      {!!configs?.track_id_google_analytics?.value && (
-        <Analytics trackId={configs?.track_id_google_analytics?.value} />
+      {(!!configs?.track_id_google_analytics?.value || !!settings?.store_google_analytics_id) && (
+        <Analytics trackId={singleBusinessConfig?.isActive ? settings?.store_google_analytics_id : configs?.track_id_google_analytics?.value} />
       )}
-      {!!configs?.segment_track_id?.value && (
-        <AnalyticsSegment writeKey={configs?.segment_track_id?.value} />
+      {(!!configs?.segment_track_id?.value || !!settings?.store_segment_id) && (
+        <AnalyticsSegment writeKey={singleBusinessConfig?.isActive ? settings?.store_segment_id : configs?.segment_track_id?.value} />
       )}
-      {!!configs?.facebook_id?.value && FacebookPixel && (
-        <FacebookPixel trackId={configs?.facebook_id?.value} />
+      {(!!configs?.facebook_id?.value || !!settings?.store_facebook_pixel_id) && FacebookPixel && (
+        <FacebookPixel trackId={singleBusinessConfig?.isActive ? settings?.store_facebook_pixel_id : configs?.facebook_id?.value} />
       )}
       {!loaded && <SpinnerLoader />}
       <SmartAppBanner
