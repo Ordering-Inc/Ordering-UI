@@ -100,7 +100,8 @@ const OrderDetailsUI = (props) => {
     reorderState,
     handleReorder,
     orderTypes,
-    handleRemoveCart
+    handleRemoveCart,
+    hideStaticMap
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -183,8 +184,8 @@ const OrderDetailsUI = (props) => {
       }
       try {
         const image = new Image()
+        image.onload = resolve
         image.src = src
-        image.complete ? resolve(true) : resolve(false)
       } catch (err) {
         resolve(false)
       }
@@ -521,7 +522,7 @@ const OrderDetailsUI = (props) => {
                     </>
                   )}
                 </OrderInfo>
-                {!isGiftCardOrder && (
+                {!isGiftCardOrder && !hideStaticMap && (
                   <OrderBusiness>
                     <BusinessExternalWrapper>
                       <BusinessWrapper
@@ -639,6 +640,40 @@ const OrderDetailsUI = (props) => {
                   (!isOrderReviewed || !isDriverReviewed)
                 }
               />
+            )}
+            {hideStaticMap && (
+              <OrderCustomer>
+                <WrapperDriver>
+                  {isShowBusinessLogo && order?.business?.logo && (
+                    <PhotoBlock src={order?.business?.logo} />
+                  )}
+                  <div>
+                    <p>{order?.business?.name}</p>
+                    <ActionsSection
+                      {...ActionsSectionProps}
+                      actionType='business'
+                      showPhone={!hideBusinessPhone}
+                      showMessages={!hideBusinessMessages}
+                    />
+                    {!hideBusinessEmail && (
+                      <p>{order?.business?.email}</p>
+                    )}
+                    {!hideBusinessPhone && (
+                      <p>{order?.business?.cellphone}</p>
+                    )}
+                    {!hideBusinessAddress && (
+                      <p>{order?.business?.address}</p>
+                    )}
+                    {order?.place?.name && (
+                      <PlaceSpotSection>
+                        <p>
+                          {yourSpotString}: {order?.place?.name}
+                        </p>
+                      </PlaceSpotSection>
+                    )}
+                  </div>
+                </WrapperDriver>
+              </OrderCustomer>
             )}
             <OrderCustomer>
               <WrapperDriver>
