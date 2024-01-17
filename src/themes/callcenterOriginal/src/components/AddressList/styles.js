@@ -221,7 +221,7 @@ export const AddressFormContainer = styled.div`
   `}
   ${({ isEnableContinueButton, addFormRestrictions }) => isEnableContinueButton && css`
     position: relative;
-    bottom: ${addFormRestrictions ? '189px' : '164px'};
+    bottom: 164px;
   `}
 `
 
