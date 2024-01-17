@@ -89,10 +89,9 @@ var TypeButton = exports.TypeButton = _styledComponents.default.div(_templateObj
   return activated && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), theme === null || theme === void 0 || (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.white);
 });
 var IconTypeButton = exports.IconTypeButton = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 44px;\n  height: 44px;\n  background: ", ";\n  border-radius: 44px;\n"])), function (_ref6) {
-  var _theme$colors4;
-  var activated = _ref6.activated,
-    theme = _ref6.theme;
-  return activated ? theme === null || theme === void 0 || (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.white : '#F3F9FF';
+  var _theme$colors$danger, _theme$colors4;
+  var theme = _ref6.theme;
+  return (_theme$colors$danger = theme === null || theme === void 0 || (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.danger100) !== null && _theme$colors$danger !== void 0 ? _theme$colors$danger : '#FEEDF0';
 });
 var TypesContainer = exports.TypesContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 var AdditionalTypesContainer = exports.AdditionalTypesContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n  margin-bottom: 20px;\n  button {\n    padding: 4px 10px;\n    border-radius: 50px;\n    font-size: 10px;\n    line-height: 0;\n    height: 25px;\n    margin-right: 20px;\n  }\n  .activated {\n    color: ", "\n  }\n"])), function (_ref7) {
