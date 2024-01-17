@@ -159,7 +159,7 @@ export const ErrorMsg = styled.span`
 export const InputBeforeIconWrapper = styled.div`
   position: absolute;
   height: 100%;
-  top: 13px;
+  top: 10px;
   left: 100px;
 
   ${props => props.theme.rtl && css`
