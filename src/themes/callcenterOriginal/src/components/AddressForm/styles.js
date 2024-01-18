@@ -204,12 +204,11 @@ export const WrapperMap = styled.div`
   bottom: 2%;
   right: 0;
   padding-right: 20px;
-  height: ${({ isEnableContinueButton, notUseCustomerInfo, addFormRestrictions }) =>
-    isEnableContinueButton
-      ? addFormRestrictions ? '460px' : '425px'
-      : notUseCustomerInfo
-        ? '370px'
-        : '480px'
+  padding-top: 30px;
+  height: ${({ notUseCustomerInfo }) =>
+    notUseCustomerInfo
+      ? '370px'
+      : '480px'
   };
 
   > div {
