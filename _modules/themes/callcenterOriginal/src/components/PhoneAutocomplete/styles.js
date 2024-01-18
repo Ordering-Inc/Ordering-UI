@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.WrappBtn = exports.WrapInput = exports.UserEdit = exports.TypesContainer = exports.TypeButton = exports.Title = exports.Slogan = exports.SelectContainer = exports.SearchContainer = exports.PhoneContainer = exports.PhoneAutocompleteContainer = exports.OptionContainer = exports.NotFoundUser = exports.Info = exports.ImageWrapper = exports.IconTypeButton = exports.ContinueButton = exports.ContentWrapper = exports.AutoComplete = exports.AdditionalTypesContainer = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34;
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -45,7 +45,7 @@ var Slogan = exports.Slogan = _styledComponents.default.p(_templateObject9 || (_
   var _props$theme7;
   return ((_props$theme7 = props.theme) === null || _props$theme7 === void 0 ? void 0 : _props$theme7.rtl) && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      text-align: right;\n  "])));
 });
-var WrapInput = exports.WrapInput = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n\n  ", "\n  \n  div{\n    color: #FFF;\n    position: relative;\n    bottom: 25px;\n    left: 15px;\n    ", "\n  }\n\n  svg {\n    color: #FFF;\n    position: absolute;\n    font-size: 22px;\n\n    margin-right: 10px;\n      ", "\n\n    ", "\n\n  }\n"])), function (_ref2) {
+var WrapInput = exports.WrapInput = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n\n  ", "\n\n  div{\n    color: #FFF;\n    position: relative;\n    bottom: 25px;\n    left: 15px;\n    ", "\n  }\n\n  svg {\n    color: #FFF;\n    position: absolute;\n    font-size: 22px;\n\n    margin-right: 10px;\n      ", "\n\n    ", "\n\n  }\n"])), function (_ref2) {
   var withIcon = _ref2.withIcon;
   return withIcon && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    width: calc(100% - 20px);\n    box-sizing: border-box;\n\n    &::before {\n      content: \"\";\n      position: absolute;\n      right: 5px;\n      top: 0;\n      bottom: 18px;\n      width: 15px;\n\n      ", "\n    }\n\n    @media (min-width: 1024px) {\n      width: calc(50% - 20px);\n    }\n  "])), function (props) {
     var _props$theme8;
@@ -61,14 +61,16 @@ var WrapInput = exports.WrapInput = _styledComponents.default.div(_templateObjec
   var _props$theme11;
   return (_props$theme11 = props.theme) !== null && _props$theme11 !== void 0 && _props$theme11.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      left: 0px;\n    "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      right: 0px;\n    "])));
 });
-var AutoComplete = exports.AutoComplete = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 45%; \n  button {\n    position: absolute;\n    left: 100%;\n    transform: translate(-90%, -165%)\n  }\n"])));
-var UserEdit = exports.UserEdit = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  > :first-child{\n     margin-bottom: 20px;  \n  }\n"])));
-var Info = exports.Info = _styledComponents.default.p(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral([""])));
-var SelectContainer = exports.SelectContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 60%;\n  position: relative;\n  align-items: center;\n  svg{\n    position: absolute;\n    top: 0;\n    left: 20px;\n    transform: translate(50%, 70%);\n    z-index: 10;\n  }\n  > div {\n    width: 100%;\n    .select__placeholder, .select__single-value, input {\n      margin-left: 40px;\n      z-index: 100;\n      bottom: -10px;\n    }\n    .select__menu {\n      position: relative;\n      padding: 20px;\n    }\n    .select__clear-indicator {\n      position: relative;\n      left: 0;\n      transform: translate(-300%, -165%);\n      svg{\n        width: 30px;\n        height: 30px;\n      }\n    }\n    .select__control {\n      height: 45px;\n      padding-left: 10px;\n    }\n    .select__indicator {\n      bottom: 8px;\n      position: relative;\n    }\n    .select__menu{\n      top: 45px;\n    }\n    input {\n      position: relative;\n      top: -5px;\n    }\n  }\n"])));
-var SearchContainer = exports.SearchContainer = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0;\n  width: 90%;\n"])));
-var ImageWrapperStyled = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  width: 30%;\n  ", "\n  @media (min-width: 1400px){\n    width: 40%;\n  }\n"])), function (_ref3) {
+var AutoComplete = exports.AutoComplete = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  width: 45%;\n  button {\n    position: absolute;\n    left: 100%;\n    transform: translate(-90%, -165%);\n  }\n"])));
+var UserEdit = exports.UserEdit = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  > :first-child {\n     margin-bottom: 20px;\n     width: 100%;\n     ", "\n  }\n"])), function (props) {
+  return !props.isOpenUserData && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n     position: absolute;\n     "])));
+});
+var Info = exports.Info = _styledComponents.default.p(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral([""])));
+var SelectContainer = exports.SelectContainer = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 60%;\n  position: relative;\n  align-items: center;\n  svg{\n    position: absolute;\n    top: 0;\n    left: 20px;\n    transform: translate(50%, 70%);\n    z-index: 10;\n  }\n  > div {\n    width: 100%;\n    .select__placeholder, .select__single-value, input {\n      margin-left: 40px;\n      z-index: 100;\n      bottom: -10px;\n    }\n    .select__menu {\n      position: relative;\n      padding: 20px;\n    }\n    .select__clear-indicator {\n      position: relative;\n      left: 0;\n      transform: translate(-300%, -165%);\n      svg{\n        width: 30px;\n        height: 30px;\n      }\n    }\n    .select__control {\n      height: 45px;\n      padding-left: 10px;\n    }\n    .select__indicator {\n      bottom: 8px;\n      position: relative;\n    }\n    .select__menu{\n      top: 45px;\n    }\n    input {\n      position: relative;\n      top: -5px;\n    }\n  }\n"])));
+var SearchContainer = exports.SearchContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0;\n  width: 90%;\n"])));
+var ImageWrapperStyled = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  width: 30%;\n  ", "\n  @media (min-width: 1400px){\n    width: 40%;\n  }\n"])), function (_ref3) {
   var bgimage = _ref3.bgimage;
-  return bgimage && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
+  return bgimage && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat, repeat;\n    background-size: cover;\n    object-fit: cover;\n    background-position: center;\n  "])));
 });
 var ImageWrapper = exports.ImageWrapper = function ImageWrapper(props) {
   var style = {};
@@ -77,7 +79,7 @@ var ImageWrapper = exports.ImageWrapper = function ImageWrapper(props) {
     style: style
   }), props.children);
 };
-var TypeButton = exports.TypeButton = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 215px;\n  height: 75px;\n  border-radius: 7.6px;\n  padding: 16px;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.10);\n  margin-right: 32px;\n  margin-bottom: 32px;\n  cursor: pointer;\n  background: ", ";\n  p{\n    margin: 0;\n    margin-left: 33px;\n    ", "\n  }\n"])), function (_ref4) {
+var TypeButton = exports.TypeButton = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 215px;\n  height: 75px;\n  border-radius: 7.6px;\n  padding: 16px;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.10);\n  margin-right: 32px;\n  margin-bottom: 32px;\n  cursor: pointer;\n  background: ", ";\n  p{\n    margin: 0;\n    margin-left: 33px;\n    ", "\n  }\n"])), function (_ref4) {
   var _theme$colors, _theme$colors2;
   var activated = _ref4.activated,
     theme = _ref4.theme;
@@ -86,20 +88,21 @@ var TypeButton = exports.TypeButton = _styledComponents.default.div(_templateObj
   var _theme$colors3;
   var activated = _ref5.activated,
     theme = _ref5.theme;
-  return activated && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), theme === null || theme === void 0 || (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.white);
+  return activated && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), theme === null || theme === void 0 || (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.white);
 });
-var IconTypeButton = exports.IconTypeButton = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 44px;\n  height: 44px;\n  background: ", ";\n  border-radius: 44px;\n"])), function (_ref6) {
-  var _theme$colors$danger, _theme$colors4;
-  var theme = _ref6.theme;
-  return (_theme$colors$danger = theme === null || theme === void 0 || (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.danger100) !== null && _theme$colors$danger !== void 0 ? _theme$colors$danger : '#FEEDF0';
+var IconTypeButton = exports.IconTypeButton = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 44px;\n  height: 44px;\n  background: ", ";\n  border-radius: 44px;\n"])), function (_ref6) {
+  var _theme$colors4;
+  var activated = _ref6.activated,
+    theme = _ref6.theme;
+  return activated ? theme === null || theme === void 0 || (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.white : '#F3F9FF';
 });
-var TypesContainer = exports.TypesContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
-var AdditionalTypesContainer = exports.AdditionalTypesContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n  margin-bottom: 20px;\n  button {\n    padding: 4px 10px;\n    border-radius: 50px;\n    font-size: 10px;\n    line-height: 0;\n    height: 25px;\n    margin-right: 20px;\n  }\n  .activated {\n    color: ", "\n  }\n"])), function (_ref7) {
+var TypesContainer = exports.TypesContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
+var AdditionalTypesContainer = exports.AdditionalTypesContainer = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n  margin-bottom: 20px;\n  button {\n    padding: 4px 10px;\n    border-radius: 50px;\n    font-size: 10px;\n    line-height: 0;\n    height: 25px;\n    margin-right: 20px;\n  }\n  .activated {\n    color: ", "\n  }\n"])), function (_ref7) {
   var _theme$colors5;
   var theme = _ref7.theme;
   return theme === null || theme === void 0 || (_theme$colors5 = theme.colors) === null || _theme$colors5 === void 0 ? void 0 : _theme$colors5.darkTextColor;
 });
-var PhoneAutocompleteContainer = exports.PhoneAutocompleteContainer = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  position: relative;\n  h2 {\n    font-size: 20px;\n    margin-bottom: 20px;\n  }\n"])));
-var ContinueButton = exports.ContinueButton = _styledComponents.default.span(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 35px;\n  bottom: 5px;\n  width: \n  button {\n    cursor: pointer;\n  }\n"])));
-var NotFoundUser = exports.NotFoundUser = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  margin: 70px 0px;\n  text-align: center;\n"])));
-var OptionContainer = exports.OptionContainer = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  img {\n    position: absolute;\n    right: 10px;\n    transform: translateY(55%);\n  }\n"])));
+var PhoneAutocompleteContainer = exports.PhoneAutocompleteContainer = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  position: relative;\n  h2 {\n    font-size: 20px;\n    margin-bottom: 20px;\n  }\n"])));
+var ContinueButton = exports.ContinueButton = _styledComponents.default.span(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 35px;\n  bottom: 5px;\n  width:\n  button {\n    cursor: pointer;\n  }\n"])));
+var NotFoundUser = exports.NotFoundUser = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  margin: 70px 0px;\n  text-align: center;\n"])));
+var OptionContainer = exports.OptionContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  img {\n    position: absolute;\n    right: 10px;\n    transform: translateY(55%);\n  }\n"])));

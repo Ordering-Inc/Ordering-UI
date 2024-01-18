@@ -272,7 +272,9 @@ var MomentControlUI = function MomentControlUI(props) {
     }, /*#__PURE__*/_react.default.createElement("span", null, cateringPreorder && /*#__PURE__*/_react.default.createElement(_styles.CheckIcon, null, timeSelected === time.value ? /*#__PURE__*/_react.default.createElement(_styles.CheckedIcon, {
       ref: scheduleItemRef,
       cateringPreorder: cateringPreorder
-    }) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null)), /*#__PURE__*/_react.default.createElement("p", null, time.text, " ", cateringPreorder && "- ".concat(time.endText))));
+    }) : /*#__PURE__*/_react.default.createElement(_CgRadioCheck.default, null)), /*#__PURE__*/_react.default.createElement("p", {
+      id: "time"
+    }, time.text, " ", cateringPreorder && "- ".concat(time.endText))));
   })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, !business ? t('ERROR_SHEDULE_UNAVAILABLE', 'There are no schedules for this date') : t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))) : /*#__PURE__*/_react.default.createElement(_CustomLayout.CustomLayout, {
     handleChangeDate: handleChangeDate,
     datesList: datesList,

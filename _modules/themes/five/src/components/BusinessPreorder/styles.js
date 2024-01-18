@@ -43,14 +43,14 @@ var ButtonWrapper = exports.ButtonWrapper = _styledComponents.default.div(_templ
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n        left: 15px;\n        right: initial;\n      "])));
 });
 var TimeListWrapper = exports.TimeListWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  margin-left: -12px;\n  width: calc(100% + 24px);\n  margin-top: 30px;\n  max-height: 250px;\n  overflow: auto;\n"])));
-var TimeItem = exports.TimeItem = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  span {\n    font-size: 14px;\n    white-space: nowrap;\n  }\n  ", "\n", "\n  ", "\n"])), function (_ref) {
+var TimeItem = exports.TimeItem = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  span {\n    font-size: 14px;\n    white-space: nowrap;\n\n    p#time {\n      margin: auto;\n      padding: 10px;\n    }\n  }\n  ", "\n", "\n  ", "\n"])), function (_ref) {
   var active = _ref.active;
   return active && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    background: #F5F9FF;\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.primary;
   });
 }, function (_ref2) {
   var cateringPreorder = _ref2.cateringPreorder;
-  return cateringPreorder ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    background: ", ";\n    width: 100%;\n    min-width: 100%;\n    height: 50px;\n    \n    span {\n      font-size: 18px;\n      display: flex;\n      align-items: center;\n      margin: 10px 0;\n      margin-left: 15px;\n      p{\n        position: relative;\n        bottom: 2px;\n      }\n    }\n    ", "\n  "])), function (props) {
+  return cateringPreorder ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    background: ", ";\n    width: 100%;\n    min-width: 100%;\n    height: 50px;\n\n    span {\n      font-size: 18px;\n      display: flex;\n      align-items: center;\n      margin: 10px 0;\n      margin-left: 15px;\n      p{\n        position: relative;\n        bottom: 2px;\n      }\n    }\n    ", "\n  "])), function (props) {
     var _props$theme;
     return (_props$theme = props.theme) === null || _props$theme === void 0 || (_props$theme = _props$theme.colors) === null || _props$theme === void 0 ? void 0 : _props$theme.backgroundPage;
   }, function (_ref3) {
@@ -58,7 +58,7 @@ var TimeItem = exports.TimeItem = _styledComponents.default.div(_templateObject1
     return active && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      background: #F5F9FF;\n      color: ", ";\n      span {\n        p{\n          bottom: 0;\n          margin-left: 2px;\n        }\n      }\n    "])), function (props) {
       return props.theme.colors.primary;
     });
-  }) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    justify-content: center;\n    align-items: center;\n    background: #E9ECEF;\n    border-radius: 7.6px;\n    padding: 5px 15px;\n    margin: 12px;\n    width: calc(50% - 24px);\n    min-width: calc(50% - 24px);\n    box-sizing: border-box;\n    user-select: none;\n      \n      @media (min-width: 400px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n      }\n      \n      @media (min-width: 576px) {\n      width: calc(25% - 24px);\n      min-width: calc(25% - 24px);\n      }\n      \n      @media (min-width: 769px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n        ", "\n      }\n    "])), function (_ref4) {
+  }) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    justify-content: center;\n    align-items: center;\n    background: #E9ECEF;\n    border-radius: 7.6px;\n    padding: 5px 15px;\n    margin: 12px;\n    width: calc(50% - 24px);\n    min-width: calc(50% - 24px);\n    box-sizing: border-box;\n    user-select: none;\n\n      @media (min-width: 400px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n      }\n\n      @media (min-width: 576px) {\n      width: calc(25% - 24px);\n      min-width: calc(25% - 24px);\n      }\n\n      @media (min-width: 769px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n        ", "\n      }\n    "])), function (_ref4) {
     var isAppoint = _ref4.isAppoint;
     return isAppoint && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n          width: calc(33.33% - 24px);\n          min-width: calc(33.33% - 24px);\n          span {\n            font-size: 12px;\n          }\n        "])));
   });

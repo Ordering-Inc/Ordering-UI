@@ -405,16 +405,20 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     },
     hideCloseDefault: true,
     padding: "20px"
-  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, null, !(customerState !== null && customerState !== void 0 && customerState.loading) && !(customersPhones !== null && customersPhones !== void 0 && customersPhones.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserEdit, {
+    isOpenUserData: isOpenUserData
+  }, !(customerState !== null && customerState !== void 0 && customerState.loading) && !(customersPhones !== null && customersPhones !== void 0 && customersPhones.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     isAddressFormOpen: isAddressFormOpen,
-    isOpenUserData: isOpenUserData,
+    userData: customerState === null || customerState === void 0 ? void 0 : customerState.result,
     userId: customerState === null || customerState === void 0 || (_customerState$result = customerState.result) === null || _customerState$result === void 0 ? void 0 : _customerState$result.id,
+    isOpenUserData: isOpenUserData,
     isCustomerMode: true,
     isModal: true,
     setIsOpenUserData: setIsOpenUserData,
     onClose: function onClose() {
       return handleCloseAddressList();
-    }
+    },
+    franchiseId: franchiseId
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     userId: customerState === null || customerState === void 0 || (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
@@ -423,14 +427,13 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       phone: phone,
       urlPhone: urlPhone
     }),
-    isEnableContinueButton: true,
-    isCustomerMode: true,
-    isFromPhoneAutocomplete: true,
     isOpenUserData: isOpenUserData,
+    isEnableContinueButton: true,
     setIsOpenUserData: setIsOpenUserData,
+    setIsSavedAddress: setIsSavedAddress,
     setIsAddressFormOpen: setIsAddressFormOpen,
     franchiseId: franchiseId,
-    setIsSavedAddress: setIsSavedAddress
+    isHeader: true
   })))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.error,
     width: "50%",

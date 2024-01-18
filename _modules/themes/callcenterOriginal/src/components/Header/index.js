@@ -10,7 +10,6 @@ var _reactRouterDom = require("react-router-dom");
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-var _TiWarningOutline = _interopRequireDefault(require("@meronex/icons/ti/TiWarningOutline"));
 var _OrderTypeSelectorContent = require("../OrderTypeSelectorContent");
 var _LanguageSelector = require("../LanguageSelector");
 var _AiOutlineClose = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineClose"));
