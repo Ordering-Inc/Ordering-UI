@@ -440,35 +440,33 @@ const AddressFormUI = (props) => {
                 </AddressWrap>
 
                 {(addressState?.address?.location || formState?.changes?.location) && (
-                  <WrapperMap isEnableContinueButton={isEnableContinueButton} notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
-                    <section>
-                      {!showMap && (
-                        <>
-                          <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
-                          {(addressState?.address?.address || formState?.changes?.address) && (
-                            <span>{addressState?.address?.address || formState?.changes?.address}{', '}</span>
-                          )}
-                          {(addressState?.address?.country || formState?.changes?.country) && (
-                            <span>{addressState?.address?.country || formState?.changes?.country}{', '}</span>
-                          )}
-                          {(addressState?.address?.address_notes || formState?.changes?.address_notes) && (
-                            <span>{addressState?.address?.address_notes || formState?.changes?.address_notes}{', '}</span>
-                          )}
-                          {(addressState?.address?.internal_number || formState?.changes?.internal_number) && (
-                            <span>{addressState?.address?.internal_number || formState?.changes?.internal_number}{', '}</span>
-                          )}
-                          {(addressState?.address?.zipcode || formState?.changes?.zipcode) && (
-                            <span>{addressState?.address?.zipcode || formState?.changes?.zipcode}{', '}</span>
-                          )}
-                        </>
-                      )}
-                      <a
-                        style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
-                        onClick={() => setShowMap(!showMap)}
-                      >
-                        {showMap ? t('HIDE_MAP', 'Hide Map') : t('SHOW_MAP', 'Show Map')}
-                      </a>
-                    </section>
+                  <WrapperMap notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
+                    {!showMap && (
+                      <section>
+                        <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
+                        {(addressState?.address?.address || formState?.changes?.address) && (
+                          <span>{addressState?.address?.address || formState?.changes?.address}{', '}</span>
+                        )}
+                        {(addressState?.address?.country || formState?.changes?.country) && (
+                          <span>{addressState?.address?.country || formState?.changes?.country}{', '}</span>
+                        )}
+                        {(addressState?.address?.address_notes || formState?.changes?.address_notes) && (
+                          <span>{addressState?.address?.address_notes || formState?.changes?.address_notes}{', '}</span>
+                        )}
+                        {(addressState?.address?.internal_number || formState?.changes?.internal_number) && (
+                          <span>{addressState?.address?.internal_number || formState?.changes?.internal_number}{', '}</span>
+                        )}
+                        {(addressState?.address?.zipcode || formState?.changes?.zipcode) && (
+                          <span>{addressState?.address?.zipcode || formState?.changes?.zipcode}{', '}</span>
+                        )}
+                        <a
+                          style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
+                          onClick={() => setShowMap(!showMap)}
+                        >
+                          {t('SHOW_MAP', 'Show Map')}
+                        </a>
+                      </section>
+                    )}
                     {locationChange && showMap && (
                       <GoogleMapsMap
                         useMapWithBusinessZones

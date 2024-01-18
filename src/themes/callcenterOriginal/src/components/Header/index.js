@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import { GeoAlt } from 'react-bootstrap-icons'
-import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
 import { LanguageSelector } from '../LanguageSelector'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
@@ -22,7 +21,6 @@ import {
   UserEdit,
   AddressMenu,
   MomentMenu,
-  FarAwayMessage,
   Divider
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'

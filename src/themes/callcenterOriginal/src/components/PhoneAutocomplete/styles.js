@@ -201,7 +201,7 @@ export const WrapInput = styled.div`
       width: calc(50% - 20px);
     }
   `}
-  
+
   div{
     color: #FFF;
     position: relative;
@@ -234,17 +234,21 @@ export const WrapInput = styled.div`
 `
 
 export const AutoComplete = styled.div`
-  width: 45%; 
+  width: 45%;
   button {
     position: absolute;
     left: 100%;
-    transform: translate(-90%, -165%)
+    transform: translate(-90%, -165%);
   }
 `
 
 export const UserEdit = styled.div`
-  > :first-child{
-     margin-bottom: 20px;  
+  > :first-child {
+     margin-bottom: 20px;
+     width: 100%;
+     ${props => !props.isOpenUserData && css`
+     position: absolute;
+     `}
   }
 `
 
@@ -357,7 +361,7 @@ export const IconTypeButton = styled.div`
   align-items: center;
   width: 44px;
   height: 44px;
-  background: ${({ theme }) => theme?.colors?.danger100 ?? '#FEEDF0'};
+  background: ${({ activated, theme }) => activated ? theme?.colors?.white : '#F3F9FF'};
   border-radius: 44px;
 `
 
@@ -394,7 +398,7 @@ export const ContinueButton = styled.span`
   position: absolute;
   right: 35px;
   bottom: 5px;
-  width: 
+  width:
   button {
     cursor: pointer;
   }
