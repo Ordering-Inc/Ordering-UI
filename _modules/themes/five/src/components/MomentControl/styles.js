@@ -65,19 +65,19 @@ var DayNumber = exports.DayNumber = _styledComponents.default.div(_templateObjec
   var isAppoint = _ref7.isAppoint;
   return isAppoint && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    font-weight: 400;\n    font-size: 16px;\n    line-height: 26px;\n  "])));
 });
-var TimeItem = exports.TimeItem = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  span {\n    font-size: 14px;\n    white-space: nowrap;\n  }\n  ", "\n", "\n"])), function (_ref8) {
+var TimeItem = exports.TimeItem = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  span {\n    font-size: 14px;\n    white-space: nowrap;\n\n    p#time {\n      margin: auto;\n      padding: 10px;\n    }\n  }\n  ", "\n", "\n"])), function (_ref8) {
   var active = _ref8.active;
   return active && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    background: #F5F9FF;\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.primary;
   });
 }, function (_ref9) {
   var cateringPreorder = _ref9.cateringPreorder;
-  return cateringPreorder ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    background: #fff;\n    width: 100%;\n    min-width: 100%;\n    height: 50px;\n    \n    span {\n      font-size: 18px;\n      display: flex;\n      align-items: center;\n      margin: 10px 0;\n      margin-left: 15px;\n      p{\n        position: relative;\n        bottom: 2px;\n      }\n    }\n    ", "\n  "])), function (_ref10) {
+  return cateringPreorder ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    background: #fff;\n    width: 100%;\n    min-width: 100%;\n    height: 50px;\n\n    span {\n      font-size: 18px;\n      display: flex;\n      align-items: center;\n      margin: 10px 0;\n      margin-left: 15px;\n      p{\n        position: relative;\n        bottom: 2px;\n      }\n    }\n    ", "\n  "])), function (_ref10) {
     var active = _ref10.active;
     return active && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n      background: #F5F9FF;\n      color: ", ";\n      span {\n        p{\n          bottom: 0;\n          margin-left: 2px;\n        }\n      }\n    "])), function (props) {
       return props.theme.colors.primary;
     });
-  }) : (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    justify-content: center;\n    align-items: center;\n    background: #E9ECEF;\n    border-radius: 7.6px;\n    padding: 5px 15px;\n    margin: 12px;\n    width: calc(50% - 24px);\n    min-width: calc(50% - 24px);\n    box-sizing: border-box;\n    user-select: none;\n      \n      @media (min-width: 400px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n      }\n      \n      @media (min-width: 576px) {\n      width: calc(25% - 24px);\n      min-width: calc(25% - 24px);\n      }\n      \n      @media (min-width: 769px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n        ", "\n      }\n    "])), function (_ref11) {
+  }) : (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    justify-content: center;\n    align-items: center;\n    background: #E9ECEF;\n    border-radius: 7.6px;\n    padding: 5px 15px;\n    margin: 12px;\n    width: calc(50% - 24px);\n    min-width: calc(50% - 24px);\n    box-sizing: border-box;\n    user-select: none;\n\n      @media (min-width: 400px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n      }\n\n      @media (min-width: 576px) {\n      width: calc(25% - 24px);\n      min-width: calc(25% - 24px);\n      }\n\n      @media (min-width: 769px) {\n        width: calc(33.33% - 24px);\n        min-width: calc(33.33% - 24px);\n        ", "\n      }\n    "])), function (_ref11) {
     var isAppoint = _ref11.isAppoint;
     return isAppoint && (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n          width: calc(33.33% - 24px);\n          min-width: calc(33.33% - 24px);\n          span {\n            font-size: 12px;\n          }\n        "])));
   });

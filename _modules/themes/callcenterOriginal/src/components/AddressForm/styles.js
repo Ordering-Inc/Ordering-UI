@@ -38,11 +38,9 @@ var WrapAddressInput = exports.WrapAddressInput = _styledComponents.default.div(
 var AddressTagSection = exports.AddressTagSection = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 10px 0px;\n  display: flex;\n  justify-content: space-between;\n\n  button {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 46px;\n    height: 46px;\n    border: none;\n    color: #B1BCCC;\n\n    img {\n      width: 25px;\n      height: 25px;\n    }\n\n    span {\n      display: flex;\n      justify-content: center;\n      align-items: center;\n\n      svg {\n        font-size: 30px;\n      }\n    }\n  }\n\n  button.active {\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
-var WrapperMap = exports.WrapperMap = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  z-index: 100;\n  width: 50%;\n  position: absolute;\n  bottom: 2%;\n  right: 0;\n  padding-right: 20px;\n  height: ", ";\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"])), function (_ref) {
-  var isEnableContinueButton = _ref.isEnableContinueButton,
-    notUseCustomerInfo = _ref.notUseCustomerInfo,
-    addFormRestrictions = _ref.addFormRestrictions;
-  return isEnableContinueButton ? addFormRestrictions ? '460px' : '425px' : notUseCustomerInfo ? '370px' : '480px';
+var WrapperMap = exports.WrapperMap = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  z-index: 100;\n  width: 50%;\n  position: absolute;\n  bottom: 2%;\n  right: 0;\n  padding-right: 20px;\n  padding-top: 30px;\n  height: ", ";\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"])), function (_ref) {
+  var notUseCustomerInfo = _ref.notUseCustomerInfo;
+  return notUseCustomerInfo ? '370px' : '480px';
 });
 var WrapperSkeleton = exports.WrapperSkeleton = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 10px;\n\n  span {\n    width: 100%;\n  }\n"])));
 var AddressMarkContainer = exports.AddressMarkContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFE69C;\n  border: 1px solid #FFF3CD;\n  display: flex;\n  padding: 8px;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  position: absolute;\n  top: 50px;\n  width: max-content;\n  p {\n    margin: 0;\n    color: #664D03;\n    font-size: 12px;\n  }\n"])));

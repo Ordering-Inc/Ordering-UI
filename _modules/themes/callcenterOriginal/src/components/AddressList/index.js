@@ -226,13 +226,12 @@ var AddressListUI = function AddressListUI(props) {
     halfWidth: addressOpen,
     isOpenUserData: isOpenUserData,
     isHeader: isHeader,
-    isEnableContinueButton: isEnableContinueButton,
     notUseCustomerInfo: notUseCustomerInfo,
     addFormRestrictions: addFormRestrictions
   }, !addFormRestrictions && !addressOpen && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
-    color: isEnableContinueButton && (addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) > 0 ? 'secondary' : 'primary',
+    color: (addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) > 0 ? 'secondary' : 'primary',
     onClick: function onClick() {
       return openAddress({});
     },
@@ -309,13 +308,11 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup,
-    isEnableContinueButton: isEnableContinueButton,
     notUseCustomerInfo: notUseCustomerInfo,
     franchiseId: franchiseId,
     addFormRestrictions: addFormRestrictions
   }))), addressOpen && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
     width: "50%",
-    isEnableContinueButton: isEnableContinueButton,
     addFormRestrictions: addFormRestrictions
   }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormContainer, null, !addFormRestrictions && /*#__PURE__*/_react.default.createElement(_styles.CloseIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
