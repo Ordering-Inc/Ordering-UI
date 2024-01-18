@@ -203,15 +203,15 @@ const AddressListUI = (props) => {
 
   useEffect(() => {
     const addressValidation = addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error
-    if (userCustomerSetup?.imported_address_text && addressValidation) {
+    if (userCustomerSetup?.imported_address_text && addressValidation && !isOpenUserData) {
       openAddress({
         address: userCustomerSetup?.imported_address_text
       })
     }
-    if (!userCustomerSetup?.imported_address_text && addressValidation) {
+    if (!userCustomerSetup?.imported_address_text && addressValidation && !isOpenUserData) {
       openAddress({})
     }
-  }, [userCustomerSetup?.imported_address_text, addressList.addresses, addressList?.loading, addressList?.error])
+  }, [userCustomerSetup?.imported_address_text, addressList.addresses, addressList?.loading, addressList?.error, isOpenUserData])
 
   return (
     <>
