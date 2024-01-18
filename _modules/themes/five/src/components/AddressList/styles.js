@@ -59,16 +59,12 @@ var List = exports.List = _styledComponents.default.div(_templateObject20 || (_t
   var halfWidth = _ref5.halfWidth;
   return halfWidth ? '50%' : '100%';
 });
-var AddressFormContainer = exports.AddressFormContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  width: 50%;\n  position: sticky;\n  right: 0;\n  top: 0;\n  margin-top: ", ";\n  height: 100%;\n  padding-left: 10px;\n"])), function (_ref6) {
-  var isCustomerMode = _ref6.isCustomerMode,
-    isOpenUserData = _ref6.isOpenUserData;
-  return isCustomerMode && !isOpenUserData ? '-190px' : '0';
-});
+var AddressFormContainer = exports.AddressFormContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  width: 50%;\n  position: sticky;\n  right: 0;\n  top: 0;\n  height: 100%;\n  padding-left: 10px;\n"])));
 var CloseIcon = exports.CloseIcon = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 2;\n  ", "\n  ", "\n  svg{\n    /* background: rgba(255,255,255,0.5); */\n    transition: all .2s ease-in;\n\n    &:hover {\n      background-color: #1507260a;\n\n      > svg {\n        color:  #151b26;\n      }\n    }\n\n    &:active {\n      background-color: ", ";\n    }\n  \n    border-radius: 50%;\n  }\n"])), function (props) {
   var _props$theme6;
   return ((_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.rtl) && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    right: 25px;\n    left: initial;\n  "])));
-}, function (_ref7) {
-  var isProductForm = _ref7.isProductForm;
+}, function (_ref6) {
+  var isProductForm = _ref6.isProductForm;
   return isProductForm && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    top: 18px;\n  "])));
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');

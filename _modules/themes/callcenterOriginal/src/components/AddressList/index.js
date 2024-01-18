@@ -202,15 +202,15 @@ var AddressListUI = function AddressListUI(props) {
   (0, _react.useEffect)(function () {
     var _addressList$addresse2;
     var addressValidation = ((_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error);
-    if (userCustomerSetup !== null && userCustomerSetup !== void 0 && userCustomerSetup.imported_address_text && addressValidation) {
+    if (userCustomerSetup !== null && userCustomerSetup !== void 0 && userCustomerSetup.imported_address_text && addressValidation && !isOpenUserData) {
       openAddress({
         address: userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text
       });
     }
-    if (!(userCustomerSetup !== null && userCustomerSetup !== void 0 && userCustomerSetup.imported_address_text) && addressValidation) {
+    if (!(userCustomerSetup !== null && userCustomerSetup !== void 0 && userCustomerSetup.imported_address_text) && addressValidation && !isOpenUserData) {
       openAddress({});
     }
-  }, [userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text, addressList.addresses, addressList === null || addressList === void 0 ? void 0 : addressList.loading, addressList === null || addressList === void 0 ? void 0 : addressList.error]);
+  }, [userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text, addressList.addresses, addressList === null || addressList === void 0 ? void 0 : addressList.loading, addressList === null || addressList === void 0 ? void 0 : addressList.error, isOpenUserData]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
