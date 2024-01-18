@@ -201,7 +201,7 @@ export const WrapperMap = styled.div`
   z-index: 100;
   width: 50%;
   position: absolute;
-  bottom: 10%;
+  bottom: 2%;
   right: 0;
   padding-right: 20px;
   padding-top: 30px;
