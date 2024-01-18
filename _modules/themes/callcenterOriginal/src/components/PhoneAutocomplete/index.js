@@ -64,9 +64,6 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
-  var _useCustomer = (0, _orderingComponents.useCustomer)(),
-    _useCustomer2 = _slicedToArray(_useCustomer, 2),
-    deleteUserCustomer = _useCustomer2[1].deleteUserCustomer;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -106,7 +103,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       value: userCustomer.cellphone || userCustomer.phone,
       label: "".concat(countryPhoneCode ? "(".concat(countryPhoneCode, ")") : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.phone && !(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone) ? "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.phone) : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone ? "".concat(userCustomer.cellphone) : '', " - {").concat(userCustomer.name, "}"),
       flag: (userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.imported_address_text) && (userCustomer === null || userCustomer === void 0 || (_userCustomer$address = userCustomer.addresses) === null || _userCustomer$address === void 0 ? void 0 : _userCustomer$address.length) === 0,
-      lastname: userCustomer.lastname
+      lastname: "".concat(userCustomer.name, " ").concat(userCustomer.lastname)
     } : null),
     _useState14 = _slicedToArray(_useState13, 2),
     optSelected = _useState14[0],
@@ -183,13 +180,14 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onChangeNumber(inputValue);
   };
   var onChange = function onChange(option, triggeredAction) {
-    var _user$lastname, _user, _user2;
+    var _user, _user2;
     if ((triggeredAction === null || triggeredAction === void 0 ? void 0 : triggeredAction.action) === 'clear') {
       setOptSelected(null);
       setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
         users: []
       }));
       setInputValue('');
+      onChangeNumber('');
       return;
     }
     var user;
@@ -200,7 +198,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       });
     }
     setOptSelected(_objectSpread(_objectSpread({}, option), {}, {
-      lastname: (_user$lastname = (_user = user) === null || _user === void 0 ? void 0 : _user.lastname) !== null && _user$lastname !== void 0 ? _user$lastname : (_user2 = user) === null || _user2 === void 0 ? void 0 : _user2.name
+      lastname: "".concat((_user = user) === null || _user === void 0 ? void 0 : _user.name, " ").concat((_user2 = user) === null || _user2 === void 0 ? void 0 : _user2.lastname)
     }));
     setInputValue(option ? option === null || option === void 0 ? void 0 : option.value : '');
     if (!option) {
@@ -246,7 +244,6 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
         error: false
       }
     }));
-    deleteUserCustomer(true);
     if (isFromUrlPhone) {
       onRedirectPhoneUrlPage && onRedirectPhoneUrlPage('home');
     }
@@ -260,11 +257,11 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     setIsPickupSelected(true);
   };
   var optionsToSelect = customersPhones.users.map(function (user) {
-    var _user$country_phone_c, _user$addresses;
+    var _user$country_phone_c, _user$lastname, _user$addresses;
     var countryPhoneCode = (_user$country_phone_c = user === null || user === void 0 ? void 0 : user.country_phone_code) !== null && _user$country_phone_c !== void 0 ? _user$country_phone_c : user === null || user === void 0 ? void 0 : user.country_code;
     var obj = {};
     obj.value = user.cellphone || user.phone;
-    obj.label = "".concat(countryPhoneCode ? "(".concat(countryPhoneCode, ")") : '', " ").concat(user !== null && user !== void 0 && user.phone && !(user !== null && user !== void 0 && user.cellphone) ? "".concat(user === null || user === void 0 ? void 0 : user.phone) : '', " ").concat(user !== null && user !== void 0 && user.cellphone ? "".concat(user.cellphone) : '', " - {").concat(user.name, "}");
+    obj.label = "".concat(countryPhoneCode ? "(".concat(countryPhoneCode, ")") : '', " ").concat(user !== null && user !== void 0 && user.phone && !(user !== null && user !== void 0 && user.cellphone) ? "".concat(user === null || user === void 0 ? void 0 : user.phone) : '', " ").concat(user !== null && user !== void 0 && user.cellphone ? "".concat(user.cellphone) : '', " - {").concat(user.name, " ").concat((_user$lastname = user === null || user === void 0 ? void 0 : user.lastname) !== null && _user$lastname !== void 0 ? _user$lastname : '', "}");
     obj.flag = (user === null || user === void 0 ? void 0 : user.imported_address_text) && (user === null || user === void 0 || (_user$addresses = user.addresses) === null || _user$addresses === void 0 ? void 0 : _user$addresses.length) === 0;
     return obj;
   }) || [];
@@ -372,7 +369,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onChange: onChange,
     onInputChange: onInputChange,
     isLoading: customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading,
-    options: optionsToSelect,
+    options: optionsToSelect.filter(function (opt) {
+      return inputValue ? opt.value.toString().includes(inputValue) : opt;
+    }),
     components: {
       Option: Option
     }
@@ -392,7 +391,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       }));
     }
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
-    externalPhoneNumber: "".concat(localPhoneCode || countryCallingCode, " ").concat((optSelected === null || optSelected === void 0 ? void 0 : optSelected.value) || phone),
+    externalPhoneNumber: "".concat(countryCallingCode || localPhoneCode, " ").concat((optSelected === null || optSelected === void 0 ? void 0 : optSelected.value) || phone),
     saveCustomerUser: saveCustomerUser,
     fieldsNotValid: props.fieldsNotValid,
     useChekoutFileds: true,

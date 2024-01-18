@@ -22,6 +22,6 @@ var Container = exports.Container = _styledComponents.default.div(_templateObjec
 var ErrorMsg = exports.ErrorMsg = _styledComponents.default.span(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0;\n  padding: 0;\n  color: ", ";\n  font-weight: 400;\n  font-size: 16px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
-var InputBeforeIconWrapper = exports.InputBeforeIconWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  position: absolute;\n  height: 100%;\n  top: 13px;\n  left: 100px;\n\n  ", "\n\n  svg {\n    color: #B1BCCC;\n    font-size: 16px;\n  }\n"])), function (props) {
+var InputBeforeIconWrapper = exports.InputBeforeIconWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  position: absolute;\n  height: 100%;\n  top: 10px;\n  left: 100px;\n\n  ", "\n\n  svg {\n    color: #B1BCCC;\n    font-size: 16px;\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    right: 100px;\n    left: initial;\n  "])));
 });
