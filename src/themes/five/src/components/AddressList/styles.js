@@ -224,7 +224,6 @@ export const AddressFormContainer = styled.div`
   position: sticky;
   right: 0;
   top: 0;
-  margin-top: ${({ isCustomerMode, isOpenUserData }) => isCustomerMode && !isOpenUserData ? '-190px' : '0'};
   height: 100%;
   padding-left: 10px;
 `
