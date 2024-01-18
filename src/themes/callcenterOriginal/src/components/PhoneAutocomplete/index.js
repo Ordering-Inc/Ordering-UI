@@ -364,17 +364,19 @@ const PhoneAutocompleteUI = (props) => {
         hideCloseDefault
         padding='20px'
       >
-        <UserEdit>
+        <UserEdit isOpenUserData={isOpenUserData}>
           {!customerState?.loading && !customersPhones?.loading && (
             <>
               <UserDetails
                 isAddressFormOpen={isAddressFormOpen}
-                isOpenUserData={isOpenUserData}
+                userData={customerState?.result}
                 userId={customerState?.result?.id}
+                isOpenUserData={isOpenUserData}
                 isCustomerMode
                 isModal
                 setIsOpenUserData={setIsOpenUserData}
                 onClose={() => handleCloseAddressList()}
+                franchiseId={franchiseId}
               />
               <AddressList
                 isModal
@@ -385,14 +387,13 @@ const PhoneAutocompleteUI = (props) => {
                   phone,
                   urlPhone
                 }}
-                isEnableContinueButton
-                isCustomerMode
-                isFromPhoneAutocomplete
                 isOpenUserData={isOpenUserData}
+                isEnableContinueButton
                 setIsOpenUserData={setIsOpenUserData}
+                setIsSavedAddress={setIsSavedAddress}
                 setIsAddressFormOpen={setIsAddressFormOpen}
                 franchiseId={franchiseId}
-                setIsSavedAddress={setIsSavedAddress}
+                isHeader
               />
             </>
           )}

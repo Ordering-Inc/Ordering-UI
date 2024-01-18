@@ -123,7 +123,7 @@ export const Menu = styled.div`
       margin-left: 35px;
       margin-right: 10px;
     }
-    
+
     @media (min-width: 1200px) {
       padding: 0 30px;
       margin-left: 50px;
@@ -157,7 +157,7 @@ export const Menu = styled.div`
     @media (min-width: 1175px) {
       width: 250px;
     }
-    
+
     @media (min-width: 1400px) {
       width: 400px;
     }
@@ -262,8 +262,8 @@ export const CustomerInfo = styled.div`
         color: #909BA9;
         margin: 0;
       }
-      svg {       
-        color: #748194; 
+      svg {
+        color: #748194;
         margin: 0;
         font-size: 20px;
       }
@@ -277,7 +277,7 @@ export const UserEdit = styled.div`
      width: 100%;
      ${props => !props.isOpenUserData && css`
      position: absolute;
-     `
+     `}
   }
 `
 
@@ -326,7 +326,7 @@ export const MomentMenu = styled.div`
   justify-content: center;
   width: 200px;
   display: none;
-  
+
   @media (min-width: 821px) {
     display: flex;
   }

@@ -156,6 +156,11 @@ export const TimeItem = styled.div`
   span {
     font-size: 14px;
     white-space: nowrap;
+
+    p#time {
+      margin: auto;
+      padding: 10px;
+    }
   }
   ${({ active }) => active && css`
     background: #F5F9FF;
@@ -166,7 +171,7 @@ ${({ cateringPreorder }) => cateringPreorder ? css`
     width: 100%;
     min-width: 100%;
     height: 50px;
-    
+
     span {
       font-size: 18px;
       display: flex;
@@ -199,17 +204,17 @@ ${({ cateringPreorder }) => cateringPreorder ? css`
     min-width: calc(50% - 24px);
     box-sizing: border-box;
     user-select: none;
-      
+
       @media (min-width: 400px) {
         width: calc(33.33% - 24px);
         min-width: calc(33.33% - 24px);
       }
-      
+
       @media (min-width: 576px) {
       width: calc(25% - 24px);
       min-width: calc(25% - 24px);
       }
-      
+
       @media (min-width: 769px) {
         width: calc(33.33% - 24px);
         min-width: calc(33.33% - 24px);
