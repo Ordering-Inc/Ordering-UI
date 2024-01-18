@@ -346,7 +346,7 @@ const MomentControlUI = (props) => {
                               {timeSelected === time.value ? <CheckedIcon ref={scheduleItemRef} cateringPreorder={cateringPreorder} /> : <CgRadioCheck />}
                             </CheckIcon>
                           )}
-                          <p>
+                          <p id='time'>
                             {time.text} {cateringPreorder && `- ${time.endText}`}
                           </p>
                         </span>

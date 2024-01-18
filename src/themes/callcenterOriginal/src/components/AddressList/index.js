@@ -227,7 +227,6 @@ const AddressListUI = (props) => {
             halfWidth={addressOpen}
             isOpenUserData={isOpenUserData}
             isHeader={isHeader}
-            isEnableContinueButton={isEnableContinueButton}
             notUseCustomerInfo={notUseCustomerInfo}
             addFormRestrictions={addFormRestrictions}
           >
@@ -236,7 +235,7 @@ const AddressListUI = (props) => {
                 <Button
                   className='add'
                   outline
-                  color={isEnableContinueButton && addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
+                  color={addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
                   onClick={() => openAddress({})}
                   disabled={orderState?.loading || actionStatus.loading}
                   hoverColor='#CCC'
@@ -344,7 +343,6 @@ const AddressListUI = (props) => {
                   onCancel={() => handleCloseAddressForm()}
                   onSaveAddress={handleSaveAddress}
                   userCustomerSetup={userCustomerSetup}
-                  isEnableContinueButton={isEnableContinueButton}
                   notUseCustomerInfo={notUseCustomerInfo}
                   franchiseId={franchiseId}
                   addFormRestrictions={addFormRestrictions}
@@ -353,7 +351,10 @@ const AddressListUI = (props) => {
             )}
           </List>
           {addressOpen && !notUseCustomerInfo && (
-            <AddressFormContainer width='50%' isEnableContinueButton={isEnableContinueButton} addFormRestrictions={addFormRestrictions}>
+            <AddressFormContainer
+              width='50%'
+              addFormRestrictions={addFormRestrictions}
+            >
               <TitleFormContainer>
                 {!addFormRestrictions && (
                   <CloseIcon>

@@ -291,7 +291,7 @@ const BusinessPreorderUI = (props) => {
                           {timeSelected === time.value ? <CheckedIcon cateringPreorder={cateringPreorder} /> : <CgRadioCheck />}
                         </CheckIcon>
                       )}
-                      <p>
+                      <p id='time'>
                         {time.text} {cateringPreorder && `- ${time.endText}`}
                       </p>
                     </span>
