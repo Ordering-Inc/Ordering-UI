@@ -334,14 +334,16 @@ const ProductOptionsUI = (props) => {
                 </ProductDescription>
               )}
             </ProductFormTitle>
-            <ProductTagsListContainer>
-              {product.tags.map(tag => (
-                <ProductTagWrapper key={tag.id}>
-                  <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
-                  <span>{tag.name}</span>
-                </ProductTagWrapper>
-              ))}
-            </ProductTagsListContainer>
+            {product?.tags?.length > 0 && (
+              <ProductTagsListContainer>
+                {product.tags.map(tag => (
+                  <ProductTagWrapper key={tag.id}>
+                    <img src={optimizeImage(tag?.image || theme.images?.dummies?.product, 'h_40,c_limit')} alt='' />
+                    <span>{tag.name}</span>
+                  </ProductTagWrapper>
+                ))}
+              </ProductTagsListContainer>
+            )}
             <ProductEdition>
               <div id='ingredients'>
                 {product?.ingredients.length > 0 && (<SectionTitle>{t('INGREDIENTS', theme?.defaultLanguages?.INGREDIENTS || 'Ingredients')}</SectionTitle>)}

@@ -33,7 +33,8 @@ const PaymentOptionOpenPayUI = (props) => {
     deleteCard,
     cardsList,
     handleCardClick,
-    handleNewCard
+    handleNewCard,
+    fromProfile
   } = props
   const [{ token }] = useSession()
   const [, t] = useLanguage()
@@ -112,7 +113,7 @@ const PaymentOptionOpenPayUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <OptionStripeContainer>
+      <OptionStripeContainer fromProfile={fromProfile}>
         {!token && <WarningMessage>{t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')}</WarningMessage>}
 
         {token && cardsList.error && cardsList.error.length > 0 && (
@@ -135,7 +136,7 @@ const PaymentOptionOpenPayUI = (props) => {
           </>
         )}
         {token && !cardsList.loading && (
-          <Button onClick={() => setAddCardOpen(true)} color='primary'>
+          <Button onClick={() => { fromProfile ? handleNewCard() : setAddCardOpen(true) }} color='primary'>
             {t('ADD_NEW_CARD', 'Add new card')}
           </Button>
         )}
@@ -252,7 +253,8 @@ export const PaymentCard = (props) => {
     handleDeleteCard,
     card,
     handleCardClick,
-    onSelectCard
+    onSelectCard,
+    fromProfile
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -261,14 +263,18 @@ export const PaymentCard = (props) => {
   const actionWrapperRef = useRef(null)
 
   const getIconCard = (brand = '') => {
-    const value = brand.toLowerCase()
-    switch (value) {
-      case 'visa':
-        return theme.images?.general?.visa
-      case 'mastercard':
-        return theme.images?.general?.mastercard
-      default:
-        return theme.images?.general?.credit
+    const cardsVisa = ['visa']
+    const cardsMaster = ['mastercard', 'master']
+    const cardsAmerica = ['american_express', 'amex']
+
+    if (cardsVisa.includes(brand)) {
+      return theme.images?.general?.visa
+    } else if (cardsMaster.includes(brand)) {
+      return theme.images?.general?.mastercard
+    } else if (cardsAmerica.includes(brand)) {
+      return theme.images?.general?.american_express
+    } else {
+      return theme.images?.general?.credit
     }
   }
 
@@ -281,7 +287,7 @@ export const PaymentCard = (props) => {
   }
 
   const handleChangeDefaultCard = (e) => {
-    if (actionWrapperRef.current?.contains(e.target)) return
+    if (actionWrapperRef.current?.contains(e.target) || fromProfile) return
     handleCardClick(card)
     onSelectCard({
       ...card,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, useSession, useApi } from 'ordering-components'
 import { ProfileOptions } from '../../../../../components/UserProfileForm/ProfileOptions'
+import { PaymentOptionOpenPay } from '../PaymentOptionOpenPay'
 import { OrdersOption } from '../OrdersOption'
 import { Button } from '../../styles/Buttons'
 import MdClose from '@meronex/icons/ios/MdClose'
@@ -14,6 +15,7 @@ import {
 } from './styles'
 import { Tab, Tabs } from '../../styles/Tabs'
 import { useTheme } from 'styled-components'
+import { deUnaApiKey } from '../../../../../utils'
 
 export const MyOrders = (props) => {
   const {
@@ -37,6 +39,8 @@ export const MyOrders = (props) => {
   const [businessOrderIds, setBusinessOrderIds] = useState([])
   const [wowPointsList, setWowPointsList] = useState([])
   const isAlsea = ordering.project === 'alsea'
+
+  const [showMyCards, setShowMyCards] = useState(false)
 
   const filterList = [
     { key: 'all', value: t('ALL', 'All') },
@@ -109,114 +113,125 @@ export const MyOrders = (props) => {
         <h2>{t('PREVIOUSLY_ORDERED', 'Previously ordered')}</h2>
       )}
       {!hideOrders && (
-        <ProfileOptions value='orders' pfchangs={pfchangs} />
+        <ProfileOptions value='orders' pfchangs={pfchangs} setShowMyCards={setShowMyCards} />
       )}
-      <Container hideOrders={hideOrders} pfchangs={pfchangs}>
-        {!hideOrders && (
-          <h1>{t('MY_ORDERS', 'My orders')}</h1>
-        )}
-        {!allEmpty && (
-          <MyOrdersMenuContainer className='category-lists' pfchangs={pfchangs}>
-            <Tabs variant='primary'>
-              {MyOrdersMenu.filter(option => !hideOrders || option.key !== 'orders').map(option => (
-                <Tab
-                  key={option.key}
-                  onClick={() => setSelectedOption(option.key)}
-                  active={selectedOption === option.key}
-                  borderBottom
-                  activeColor={theme?.layouts?.general?.components?.layout?.type === 'pfchangs' ? theme?.colors?.gold : ''}
-                  {...pfchangsTabProps}
-                >
-                  {option?.value}
-                </Tab>
-              ))}
-            </Tabs>
+      {showMyCards ? (
+        <Container>
+          <MyOrdersMenuContainer fromOrders>
+            <PaymentOptionOpenPay
+              fromProfile
+              deUnaApiKey={deUnaApiKey}
+            />
           </MyOrdersMenuContainer>
-        )}
-        {!(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && !pfchangs && (
-          <OrderGroupFilterWrapper>
-            {filterList?.map((order, i) => (
-              <Button
-                key={i}
-                color={selectItem === order.key ? 'primary' : 'secundary'}
-                onClick={() => handleChangeFilter(order.key)}
-              >
-                {order.value}{selectItem === order.key && <MdClose />}
-              </Button>
-            ))}
-          </OrderGroupFilterWrapper>
-        )}
-        {selectedOption === 'orders' && (
-          <>
-            {(isEmptyActive && isEmptyPast && isEmptyPreorder) ? (
-              <NoOrdersWrapper>
-                <p>{t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')}</p>
+        </Container>
+      ) : (
+        <Container hideOrders={hideOrders} pfchangs={pfchangs}>
+          {!hideOrders && (
+            <h1>{t('MY_ORDERS', 'My orders')}</h1>
+          )}
+          {!allEmpty && (
+            <MyOrdersMenuContainer className='category-lists' pfchangs={pfchangs}>
+              <Tabs variant='primary'>
+                {MyOrdersMenu.filter(option => !hideOrders || option.key !== 'orders').map(option => (
+                  <Tab
+                    key={option.key}
+                    onClick={() => setSelectedOption(option.key)}
+                    active={selectedOption === option.key}
+                    borderBottom
+                    activeColor={theme?.layouts?.general?.components?.layout?.type === 'pfchangs' ? theme?.colors?.gold : ''}
+                    {...pfchangsTabProps}
+                  >
+                    {option?.value}
+                  </Tab>
+                ))}
+              </Tabs>
+            </MyOrdersMenuContainer>
+          )}
+          {!(isEmptyActive && isEmptyPast && isEmptyPreorder) && selectedOption === 'orders' && !pfchangs && (
+            <OrderGroupFilterWrapper>
+              {filterList?.map((order, i) => (
                 <Button
-                  color='primary'
-                  onClick={() => history.push('/')}
+                  key={i}
+                  color={selectItem === order.key ? 'primary' : 'secundary'}
+                  onClick={() => handleChangeFilter(order.key)}
                 >
-                  {t('ORDER_NOW', 'Order now')}
+                  {order.value}{selectItem === order.key && <MdClose />}
                 </Button>
-              </NoOrdersWrapper>
-            ) : (
-              <>
-                {(selectItem === 'all' || selectItem === 'preorder') && (
-                  <>
-                    <OrdersOption
-                      {...props}
-                      preOrders
-                      horizontal
-                      setIsEmptyPreorder={setIsEmptyPreorder}
-                      selectItem={selectItem}
-                    />
-                  </>
-                )}
-                {(selectItem === 'all' || selectItem === 'active') && (
-                  <>
-                    <OrdersOption
-                      {...props}
-                      activeOrders
-                      horizontal
-                      setIsEmptyActive={setIsEmptyActive}
-                      selectItem={selectItem}
-                    />
-                  </>
-                )}
-                {(selectItem === 'all' || selectItem === 'past') && (
-                  <>
-                    <OrdersOption
-                      {...props}
-                      pastOrders
-                      horizontal
-                      setIsEmptyPast={setIsEmptyPast}
-                      selectItem={selectItem}
-                      wowPointsList={wowPointsList}
-                    />
-                  </>
-                )}
-              </>
-            )}
-          </>
-        )}
-        {notOrderOptions.includes(selectedOption) && (
-          <OrdersOption
-            {...props}
-            titleContent={t('PREVIOUSLY_ORDERED', 'Previously ordered')}
-            hideOrders
-            horizontal
-            isBusiness={selectedOption === 'business'}
-            isProducts={selectedOption === 'products'}
-            activeOrders
-            pastOrders
-            preOrders
-            businessesSearchList={businessesSearchList}
-            setIsEmptyBusinesses={setIsEmptyBusinesses}
-            businessOrderIds={businessOrderIds}
-            setBusinessOrderIds={setBusinessOrderIds}
-            onProductRedirect={onProductRedirect}
-          />
-        )}
-      </Container>
+              ))}
+            </OrderGroupFilterWrapper>
+          )}
+          {selectedOption === 'orders' && (
+            <>
+              {(isEmptyActive && isEmptyPast && isEmptyPreorder) ? (
+                <NoOrdersWrapper>
+                  <p>{t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')}</p>
+                  <Button
+                    color='primary'
+                    onClick={() => history.push('/')}
+                  >
+                    {t('ORDER_NOW', 'Order now')}
+                  </Button>
+                </NoOrdersWrapper>
+              ) : (
+                <>
+                  {(selectItem === 'all' || selectItem === 'preorder') && (
+                    <>
+                      <OrdersOption
+                        {...props}
+                        preOrders
+                        horizontal
+                        setIsEmptyPreorder={setIsEmptyPreorder}
+                        selectItem={selectItem}
+                      />
+                    </>
+                  )}
+                  {(selectItem === 'all' || selectItem === 'active') && (
+                    <>
+                      <OrdersOption
+                        {...props}
+                        activeOrders
+                        horizontal
+                        setIsEmptyActive={setIsEmptyActive}
+                        selectItem={selectItem}
+                      />
+                    </>
+                  )}
+                  {(selectItem === 'all' || selectItem === 'past') && (
+                    <>
+                      <OrdersOption
+                        {...props}
+                        pastOrders
+                        horizontal
+                        setIsEmptyPast={setIsEmptyPast}
+                        selectItem={selectItem}
+                        wowPointsList={wowPointsList}
+                      />
+                    </>
+                  )}
+                </>
+              )}
+            </>
+          )}
+          {notOrderOptions.includes(selectedOption) && (
+            <OrdersOption
+              {...props}
+              titleContent={t('PREVIOUSLY_ORDERED', 'Previously ordered')}
+              hideOrders
+              horizontal
+              isBusiness={selectedOption === 'business'}
+              isProducts={selectedOption === 'products'}
+              activeOrders
+              pastOrders
+              preOrders
+              businessesSearchList={businessesSearchList}
+              setIsEmptyBusinesses={setIsEmptyBusinesses}
+              businessOrderIds={businessOrderIds}
+              setBusinessOrderIds={setBusinessOrderIds}
+              onProductRedirect={onProductRedirect}
+            />
+          )}
+        </Container>
+      )}
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

@@ -40,8 +40,12 @@ export const ProductInfo = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 0px;
-  margin-top: 300px;
+  margin-top: 210px;
   /* position: relative; */
+
+  @media (min-width: 769px) {
+    margin-top: 300px;
+  }
 `
 
 export const ProductFormTitle = styled.div`
@@ -53,7 +57,7 @@ export const ProductFormTitle = styled.div`
 `
 
 export const ProductEdition = styled.div`
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-bottom: 20px;
 `
 

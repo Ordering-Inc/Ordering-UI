@@ -70,7 +70,7 @@ export const PFChangsHomeHero = (props) => {
       }
     },
     currentPageParam: 0,
-    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'city', 'city_id'],
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'ribbon', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'city', 'city_id', 'configs', 'metadata'],
     onRedirectPage: (data) => events.emit('go_to_page', data),
     brandId: brandId
   }
@@ -180,7 +180,11 @@ export const PFChangsHomeHero = (props) => {
     const resizeEvent = window.addEventListener('resize', (e) => {
       setInnerWidth(e.target.innerWidth)
     })
-
+    const isOpenAddressList = JSON.parse(window.localStorage.getItem('isOpenAddressList'))
+    if (isOpenAddressList) {
+      setModals({ ...modals, listOpen: true })
+      window.localStorage.removeItem('isOpenAddressList')
+    }
     return () => {
       window.removeEventListener('resize', resizeEvent)
     }

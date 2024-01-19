@@ -8,10 +8,10 @@ export const Container = styled.div`
   cursor: pointer;
   max-width: 270px;
   border: 2px solid rgb(244,245,246);
-  padding: 20px 10px;
+  padding: 12px 10px;
   width: 100%;
   margin: 0 10px 10px 10px;
-  min-height: 100px;
+  min-height: 60px;
   box-sizing: border-box;
   -webkit-touch-callout: none;
     -webkit-user-select: none;

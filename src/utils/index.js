@@ -1,6 +1,8 @@
 import { useLanguage } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
+export const deUnaApiKey = '77c319962031a1762d98b5a5dff8916c0070a71b747a4104fc88e3f1269653ccfc2b49a6f224af3aa7c0677b8d9210099480d48b7f3461a95efb39117c00';
+
 export const getIconCard = (brand = '') => {
   const value = brand.toLowerCase()
   const theme = useTheme()

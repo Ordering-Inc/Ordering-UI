@@ -11,6 +11,9 @@ export const UserProfileContainer = styled.div`
   width: 90%;
   margin: 25px auto ${props => props.mbottom ? `${props.mbottom}px` : 'auto'};
 
+  ${({ fromProfile }) => fromProfile && css`
+    margin: 60px auto 44vh;
+  `}
   @media (min-width: 768px) {
     align-items: flex-start;
     flex-direction: row;

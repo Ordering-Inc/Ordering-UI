@@ -641,3 +641,10 @@ export const CardItemContent = styled.div`
     `}
   }
 `
+export const IframeMainContainer = styled.div`
+  height: 100vh;
+`
+export const IframeContainer = styled.div`
+  height: 100%;
+  width: 100%;
+`
