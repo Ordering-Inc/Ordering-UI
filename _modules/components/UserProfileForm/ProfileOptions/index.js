@@ -27,10 +27,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProfileOptions = function ProfileOptions(props) {
   var _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _theme$colors, _theme$colors2;
   var value = props.value,
-    pfchangs = props.pfchangs;
+    pfchangs = props.pfchangs,
+    setShowMyCards = props.setShowMyCards;
   var _useState = (0, _react.useState)(value),
-    _useState2 = _slicedToArray(_useState, 1),
-    tabValue = _useState2[0];
+    _useState2 = _slicedToArray(_useState, 2),
+    tabValue = _useState2[0],
+    setTabValue = _useState2[1];
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -41,9 +43,19 @@ var ProfileOptions = function ProfileOptions(props) {
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
   var theme = (0, _styledComponents.useTheme)();
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var showAddressListTab = (orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme.profile) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.address_list) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.layout) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.position) === 'new_page';
+  var showMyCardsTab = (configs === null || configs === void 0 ? void 0 : configs.webview_checkout_deuna.value) === '1';
   var handleGoToPage = function handleGoToPage(data) {
-    events.emit('go_to_page', data);
+    setTabValue(data.page === 'profile' ? 'account' : data.page);
+    if ((data === null || data === void 0 ? void 0 : data.page) === 'myCards') {
+      setShowMyCards && setShowMyCards(true);
+    } else {
+      setShowMyCards && setShowMyCards(false);
+      events.emit('go_to_page', data);
+    }
   };
   var TabsComponent = pfchangs ? _Tabs2.Tabs : _Tabs.Tabs;
   var TabComponent = pfchangs ? _Tabs2.Tab : _Tabs.Tab;
@@ -78,6 +90,13 @@ var ProfileOptions = function ProfileOptions(props) {
       });
     },
     active: tabValue === 'orders'
-  }, pfchangsTabProps), /*#__PURE__*/_react.default.createElement("a", null, /*#__PURE__*/_react.default.createElement(_AiOutlineUnorderedList.default, null), " ", t('MY_ORDERS', 'My orders')))));
+  }, pfchangsTabProps), /*#__PURE__*/_react.default.createElement("a", null, /*#__PURE__*/_react.default.createElement(_AiOutlineUnorderedList.default, null), " ", t('MY_ORDERS', 'My orders'))), showMyCardsTab && /*#__PURE__*/_react.default.createElement(TabComponent, _extends({
+    onClick: function onClick() {
+      return handleGoToPage({
+        page: 'myCards'
+      });
+    },
+    active: tabValue === 'myCards'
+  }, pfchangsTabProps), /*#__PURE__*/_react.default.createElement("a", null, /*#__PURE__*/_react.default.createElement(_AiOutlineUnorderedList.default, null), " ", t('MY_CARDS', 'Mis Tarjetas')))));
 };
 exports.ProfileOptions = ProfileOptions;

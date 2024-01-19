@@ -18,6 +18,7 @@ var _AddressList = require("../AddressList");
 var _Confirm = require("../Confirm");
 var _pfchangs2 = require("../Confirm/layouts/pfchangs");
 var _pfchangs3 = require("../LoginForm/layouts/pfchangs");
+var _PaymentOptionOpenPay = require("../PaymentOptionOpenPay");
 var _ProfileOptions = require("../../../../../components/UserProfileForm/ProfileOptions");
 var _utils = require("../../../../../utils");
 var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
@@ -65,17 +66,21 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     otpDataUser = _useState2[0],
     setOtpDataUser = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    showMyCards = _useState4[0],
+    setShowMyCards = _useState4[1];
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, willVerifyOtpState),
     _useCountdownTimer2 = _slicedToArray(_useCountdownTimer, 3),
     otpLeftTime = _useCountdownTimer2[0],
     resetOtpLeftTime = _useCountdownTimer2[2];
-  var _useState3 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState4 = _slicedToArray(_useState3, 2),
-    alertState = _useState4[0],
-    setAlertState = _useState4[1];
+    _useState6 = _slicedToArray(_useState5, 2),
+    alertState = _useState6[0],
+    setAlertState = _useState6[1];
   var inputRef = (0, _react.useRef)(null);
   var showCustomerPicture = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme = orderingTheme.theme) !== null && _orderingTheme$theme !== void 0 && (_orderingTheme$theme$ = _orderingTheme$theme.profile) !== null && _orderingTheme$theme$ !== void 0 && (_orderingTheme$theme$2 = _orderingTheme$theme$.components) !== null && _orderingTheme$theme$2 !== void 0 && (_orderingTheme$theme$3 = _orderingTheme$theme$2.picture) !== null && _orderingTheme$theme$3 !== void 0 && _orderingTheme$theme$3.hidden);
   var showAddressList = !(orderingTheme !== null && orderingTheme !== void 0 && (_orderingTheme$theme2 = orderingTheme.theme) !== null && _orderingTheme$theme2 !== void 0 && (_orderingTheme$theme3 = _orderingTheme$theme2.profile) !== null && _orderingTheme$theme3 !== void 0 && (_orderingTheme$theme4 = _orderingTheme$theme3.components) !== null && _orderingTheme$theme4 !== void 0 && (_orderingTheme$theme5 = _orderingTheme$theme4.address_list) !== null && _orderingTheme$theme5 !== void 0 && _orderingTheme$theme5.hidden);
@@ -190,8 +195,14 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     }, props));
   }), !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "account",
-    pfchangs: pfchangs
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
+    pfchangs: pfchangs,
+    setShowMyCards: setShowMyCards
+  }), showMyCards ? /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
+    fromProfile: true
+  }, /*#__PURE__*/_react.default.createElement(_PaymentOptionOpenPay.PaymentOptionOpenPay, {
+    fromProfile: true,
+    deUnaApiKey: _utils.deUnaApiKey
+  }))) : /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
     mbottom: isHiddenAddress && 25
   }, showCustomerPicture && /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"

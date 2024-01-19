@@ -40,7 +40,8 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
   var deleteCard = props.deleteCard,
     cardsList = props.cardsList,
     _handleCardClick = props.handleCardClick,
-    handleNewCard = props.handleNewCard;
+    handleNewCard = props.handleNewCard,
+    fromProfile = props.fromProfile;
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     token = _useSession2[0].token;
@@ -133,7 +134,9 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.OptionStripeContainer, null, !token && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')), token && cardsList.error && cardsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OptionStripeContainer, {
+    fromProfile: fromProfile
+  }, !token && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, t('NEED_LOGIN_TO_USE', 'Sorry, you need to login to use this method')), token && cardsList.error && cardsList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$error$ = cardsList.error[0]) === null || _cardsList$error$ === void 0 ? void 0 : _cardsList$error$.message) || (cardsList === null || cardsList === void 0 ? void 0 : cardsList.error[0])
   }), token && cardsList.cards && cardsList.cards.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cardsList === null || cardsList === void 0 ? void 0 : (_cardsList$cards = cardsList.cards) === null || _cardsList$cards === void 0 ? void 0 : _cardsList$cards.map(function (card, i) {
     return /*#__PURE__*/_react.default.createElement(PaymentCard, _extends({}, props, {
@@ -149,7 +152,7 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     }));
   })), token && !cardsList.loading && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: function onClick() {
-      return setAddCardOpen(true);
+      fromProfile ? handleNewCard() : setAddCardOpen(true);
     },
     color: "primary"
   }, t('ADD_NEW_CARD', 'Add new card')), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
@@ -262,7 +265,8 @@ var PaymentCard = function PaymentCard(props) {
   var handleDeleteCard = props.handleDeleteCard,
     card = props.card,
     handleCardClick = props.handleCardClick,
-    onSelectCard = props.onSelectCard;
+    onSelectCard = props.onSelectCard,
+    fromProfile = props.fromProfile;
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
@@ -274,16 +278,22 @@ var PaymentCard = function PaymentCard(props) {
   var cardActionsRef = (0, _react.useRef)(null);
   var actionWrapperRef = (0, _react.useRef)(null);
   var getIconCard = function getIconCard() {
-    var _theme$images, _theme$images$general, _theme$images2, _theme$images2$genera, _theme$images3, _theme$images3$genera;
     var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var value = brand.toLowerCase();
-    switch (value) {
-      case 'visa':
-        return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.visa;
-      case 'mastercard':
-        return (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.mastercard;
-      default:
-        return (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.credit;
+    var cardsVisa = ['visa'];
+    var cardsMaster = ['mastercard', 'master'];
+    var cardsAmerica = ['american_express', 'amex'];
+    if (cardsVisa.includes(brand)) {
+      var _theme$images, _theme$images$general;
+      return (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.visa;
+    } else if (cardsMaster.includes(brand)) {
+      var _theme$images2, _theme$images2$genera;
+      return (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$genera = _theme$images2.general) === null || _theme$images2$genera === void 0 ? void 0 : _theme$images2$genera.mastercard;
+    } else if (cardsAmerica.includes(brand)) {
+      var _theme$images3, _theme$images3$genera;
+      return (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$genera = _theme$images3.general) === null || _theme$images3$genera === void 0 ? void 0 : _theme$images3$genera.american_express;
+    } else {
+      var _theme$images4, _theme$images4$genera;
+      return (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$genera = _theme$images4.general) === null || _theme$images4$genera === void 0 ? void 0 : _theme$images4$genera.credit;
     }
   };
   var handleClickOutside = function handleClickOutside(e) {
@@ -296,7 +306,7 @@ var PaymentCard = function PaymentCard(props) {
   };
   var handleChangeDefaultCard = function handleChangeDefaultCard(e) {
     var _actionWrapperRef$cur, _window, _window$OpenPay, _window$OpenPay$devic, _window$OpenPay$devic2;
-    if ((_actionWrapperRef$cur = actionWrapperRef.current) !== null && _actionWrapperRef$cur !== void 0 && _actionWrapperRef$cur.contains(e.target)) return;
+    if ((_actionWrapperRef$cur = actionWrapperRef.current) !== null && _actionWrapperRef$cur !== void 0 && _actionWrapperRef$cur.contains(e.target) || fromProfile) return;
     handleCardClick(card);
     onSelectCard(_objectSpread(_objectSpread({}, card), {}, {
       id: card.id,

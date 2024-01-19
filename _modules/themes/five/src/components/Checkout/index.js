@@ -12,6 +12,7 @@ var _styledComponents = require("styled-components");
 var _moment = _interopRequireDefault(require("moment"));
 var _Modal = require("../Modal");
 var _orderingComponents = require("ordering-components");
+var _index = require("../../../../../index");
 var _UpsellingPage = require("../UpsellingPage");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _reactRouterDom = require("react-router-dom");
@@ -65,7 +66,7 @@ var mapConfigs = {
   }
 };
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3, _theme$layouts2, _theme$layouts2$gener, _theme$layouts2$gener2, _theme$layouts2$gener3, _businessDetails$busi3, _businessDetails$busi4, _configs$brands_wow_l, _configs$brands_wow_l2, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _Object$values, _cart$business3, _businessDetails$busi5, _businessDetails$busi6, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$erro, _businessDetails$erro2, _configs$driver_tip_t, _configs$driver_tip_t2, _businessDetails$busi11, _businessDetails$busi12, _businessDetails$busi13, _businessDetails$busi14, _businessDetails$busi15, _cartState$cart$spot_, _cartState$cart, _configs$driver_tip_t3, _configs$driver_tip_u, _configs$driver_tip_t4, _cart$products2, _theme$images2, _theme$images2$genera, _wowAcumulationPoints, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3, _paymethodSelected$da3, _paymethodSelected$da4, _paymethodSelected$da5, _paymethodSelected$da6, _paymethodSelected$da7, _paymethodSelected$da8, _paymethodSelected$da9, _paymethodSelected$da10, _paymethodSelected$da11;
+  var _businessDetails$busi, _businessDetails$busi2, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$layouts, _theme$layouts$checko, _theme$layouts$checko2, _theme$layouts$checko3, _theme$layouts2, _theme$layouts2$gener, _theme$layouts2$gener2, _theme$layouts2$gener3, _businessDetails$busi3, _businessDetails$busi4, _configs$webview_chec, _configs$webview_chec2, _configs$brands_wow_l, _configs$brands_wow_l2, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _instructionsOptions$2, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _Object$values, _cart$business5, _cart$business7, _businessDetails$busi7, _businessDetails$busi8, _theme$images, _theme$images$dummies, _configs$google_maps_, _customerState$user, _customerState$user2, _businessDetails$busi9, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _businessDetails$erro, _businessDetails$erro2, _configs$driver_tip_t, _configs$driver_tip_t2, _businessDetails$busi13, _businessDetails$busi14, _businessDetails$busi15, _businessDetails$busi16, _businessDetails$busi17, _cartState$cart$spot_, _cartState$cart, _configs$driver_tip_t3, _configs$driver_tip_u, _configs$driver_tip_t4, _cart$products2, _theme$images2, _theme$images2$genera, _wowAcumulationPoints, _validationFields$fie18, _validationFields$fie19, _validationFields$fie20, _validationFields$fie21, _validationFields$fie22, _validationFields$fie23, _customerState$user3, _paymethodSelected$da3, _paymethodSelected$da4, _paymethodSelected$da5, _paymethodSelected$da6, _paymethodSelected$da7, _paymethodSelected$da8, _paymethodSelected$da9, _paymethodSelected$da10, _paymethodSelected$da11;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
@@ -219,7 +220,13 @@ var CheckoutUI = function CheckoutUI(props) {
 
   var daysForApplyCoupon = [0, 2, 4]; // Domingo 0
   var isApplyMasterCoupon = !(hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result) && daysForApplyCoupon.includes((0, _moment.default)().days());
+  var _useState31 = (0, _react.useState)((configs === null || configs === void 0 ? void 0 : (_configs$webview_chec = configs.webview_checkout_deuna) === null || _configs$webview_chec === void 0 ? void 0 : _configs$webview_chec.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$webview_chec2 = configs.webview_checkout_deuna) === null || _configs$webview_chec2 === void 0 ? void 0 : _configs$webview_chec2.value) === true),
+    _useState32 = _slicedToArray(_useState31, 2),
+    isShowDeUnaCheckout = _useState32[0],
+    setShowDeUnaCheckout = _useState32[1];
   var loyaltyBrands = (configs === null || configs === void 0 ? void 0 : (_configs$brands_wow_l = configs.brands_wow_loyalty_program) === null || _configs$brands_wow_l === void 0 ? void 0 : _configs$brands_wow_l.value) && JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$brands_wow_l2 = configs.brands_wow_loyalty_program) === null || _configs$brands_wow_l2 === void 0 ? void 0 : _configs$brands_wow_l2.value)[0];
+  var isAlsea = ordering.project === 'alsea';
+  var DEUNA_URL = isAlsea ? 'https://api.deuna.com' : 'https://api.stg.deuna.io';
   var isDisablePlaceOrderButton = !(cart !== null && cart !== void 0 && cart.valid) || !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 || placing || errorCash || loading || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !isValidMinimum && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ||
   // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
   options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.driver_tip) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.checkout) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.driver_tip) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 || cateringDayError || (hasCateringProducts === null || hasCateringProducts === void 0 ? void 0 : hasCateringProducts.loading);
@@ -401,6 +408,242 @@ var CheckoutUI = function CheckoutUI(props) {
   var handleCartPlaced = function handleCartPlaced(cart) {
     handleOrderRedirect(cart.order.uuid);
   };
+  var handleGoToPage = function handleGoToPage(data) {
+    events.emit('go_to_page', data);
+  };
+  var tokenizeOrder = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var _businessDetails$busi5;
+      var currency, data, params, url, response, result, eventDeUna;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              currency = 'MXN';
+              _context2.t0 = cart === null || cart === void 0 ? void 0 : cart.uuid;
+              _context2.t1 = (cart === null || cart === void 0 ? void 0 : cart.total) * 100;
+              _context2.t2 = user === null || user === void 0 ? void 0 : user.email;
+              _context2.t3 = user === null || user === void 0 ? void 0 : user.id;
+              _context2.t4 = parseInt(businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi5 = businessDetails.business) === null || _businessDetails$busi5 === void 0 ? void 0 : _businessDetails$busi5.brand_id);
+              _context2.t5 = user === null || user === void 0 ? void 0 : user.wow_rewards_user_id;
+              _context2.t6 = cart === null || cart === void 0 ? void 0 : cart.minimum;
+              _context2.next = 10;
+              return getMaxCashDelivery();
+            case 10:
+              _context2.t7 = _context2.sent;
+              data = {
+                order_id: _context2.t0,
+                total_amount: _context2.t1,
+                notify_order: 'https://alsea-website-staging.ordering.co/',
+                email: _context2.t2,
+                user_id: _context2.t3,
+                brand_id: _context2.t4,
+                wow_rewards_user_id: _context2.t5,
+                min_amount: _context2.t6,
+                max_amount: _context2.t7
+              };
+              params = {
+                method: 'POST',
+                timeout: 0,
+                accept: 'application/json',
+                headers: {
+                  // 'X-API-KEY': 'e40affdfbee57e43de41d1ce1451859bbe85626c1e87adaa93e538a6fb68488d09bb578f561122c1177e66ab1238563359acb70aa0b972ac8f44a52bceb7',
+                  Authorization: "Bearer ".concat(token),
+                  'X-App-X': ordering.appId
+                },
+                body: JSON.stringify(data)
+              }; // const url = `${DEUNA_URL}/merchants/orders`
+              url = "https://alsea-plugins".concat(isAlsea ? '' : '-staging', ".ordering.co/alseaplatform/deuna_order.php");
+              _context2.prev = 14;
+              _context2.next = 17;
+              return fetch(url, params);
+            case 17:
+              response = _context2.sent;
+              _context2.next = 20;
+              return response.json();
+            case 20:
+              result = _context2.sent;
+              eventDeUna = !result.error ? 'deuna_checkout' : 'deuna_checkout_tokenize_error';
+              events.emit(eventDeUna, {
+                event: eventDeUna,
+                data: data
+              });
+              if (result.error) {
+                _context2.next = 26;
+                break;
+              }
+              initCheckout(result.token);
+              return _context2.abrupt("return");
+            case 26:
+              setShowDeUnaCheckout(false);
+              _context2.next = 34;
+              break;
+            case 29:
+              _context2.prev = 29;
+              _context2.t8 = _context2["catch"](14);
+              console.log('err tokized order', _context2.t8);
+              events.emit('deuna_checkout_tokenize_error', {
+                event: 'deuna_checkout_tokenize_error',
+                data: _context2.t8
+              });
+              setShowDeUnaCheckout(false);
+            case 34:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[14, 29]]);
+    }));
+    return function tokenizeOrder() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  function importScript(src) {
+    return new Promise(function (resolve) {
+      var script = document.createElement('script');
+      script.src = src;
+      document.body.appendChild(script);
+      script.onload = function () {
+        resolve();
+      };
+    });
+  }
+  var getMaxCashDelivery = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var response, result;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return fetch("https://alsea-plugins".concat(isAlsea ? '' : '-staging', ".ordering.co/alseaplatform/max_cash_delivery.php"), {
+                method: 'POST',
+                body: JSON.stringify({
+                  uuid: cart === null || cart === void 0 ? void 0 : cart.uuid
+                }),
+                headers: {
+                  Authorization: "Bearer ".concat(token),
+                  'X-APP-X': ordering.appId
+                }
+              });
+            case 3:
+              response = _context3.sent;
+              _context3.next = 6;
+              return response.json();
+            case 6:
+              result = _context3.sent;
+              if (result.error) {
+                _context3.next = 11;
+                break;
+              }
+              return _context3.abrupt("return", result);
+            case 11:
+              return _context3.abrupt("return", 600);
+            case 12:
+              _context3.next = 18;
+              break;
+            case 14:
+              _context3.prev = 14;
+              _context3.t0 = _context3["catch"](0);
+              console.log('Error al realizar la solicitud getMaxCashDelivery:', _context3.t0);
+              return _context3.abrupt("return", 600);
+            case 18:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 14]]);
+    }));
+    return function getMaxCashDelivery() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+  var initCheckout = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(token) {
+      var CheckoutWidget, config;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return importScript('https://cdn.getduna.com/cdl/index.js');
+            case 2:
+              _context4.next = 4;
+              return importScript('https://cdn.getduna.com/checkout-widget/v1.2.0/index.js');
+            case 4:
+              CheckoutWidget = window.DeunaCheckout();
+              config = {
+                orderToken: token,
+                apiKey: _utils.deUnaApiKey,
+                // deUnaApiKey
+                env: 'staging',
+                // Cambia a 'production' para ambiente de producción
+                callbacks: {
+                  onSuccess: function onSuccess(payload) {
+                    var _payload$order;
+                    console.log('onSuccess', payload);
+                    events.emit('deuna_checkout_completed', {
+                      event: 'deuna_checkout_completed',
+                      data: payload === null || payload === void 0 ? void 0 : payload.order
+                    });
+                    handleOrderRedirect(payload === null || payload === void 0 ? void 0 : (_payload$order = payload.order) === null || _payload$order === void 0 ? void 0 : _payload$order.order_id.split('_')[0]);
+                    CheckoutWidget.closeCheckout();
+                  },
+                  onFailure: function onFailure(error) {
+                    var _cart$business;
+                    console.log('onFailure', error);
+                    events.emit('deuna_checkout_failed_launch', {
+                      event: 'deuna_checkout_failed_launch',
+                      data: error
+                    });
+                    handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug);
+                  },
+                  onClose: function onClose() {
+                    var _cart$business2;
+                    console.log('onClose');
+                    events.emit('deuna_checkout_callback_close', {
+                      event: 'deuna_checkout_callback_close',
+                      data: {
+                        onClose: true
+                      }
+                    });
+                    handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.slug);
+                  },
+                  eventListener: function eventListener(eventType, payload) {
+                    if (eventType === 'changeAddress') {
+                      CheckoutWidget.closeCheckout();
+                      window.localStorage.setItem('isOpenAddressList', JSON.stringify(true));
+                      handleGoToPage({
+                        page: 'search'
+                      });
+                    }
+                  }
+                }
+              };
+              CheckoutWidget.config(config).then(function () {
+                CheckoutWidget.initCheckout();
+              });
+            case 7:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+    return function initCheckout(_x2) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+  (0, _react.useEffect)(function () {
+    var _businessDetails$busi6;
+    if (businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) return;
+    if (isShowDeUnaCheckout && businessDetails !== null && businessDetails !== void 0 && (_businessDetails$busi6 = businessDetails.business) !== null && _businessDetails$busi6 !== void 0 && _businessDetails$busi6.brand_id) {
+      tokenizeOrder();
+    } else {
+      setShowDeUnaCheckout(false);
+    }
+  }, [businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.loading]);
   (0, _react.useEffect)(function () {
     var _validationFields$fie17;
     if (validationFields && validationFields !== null && validationFields !== void 0 && (_validationFields$fie17 = validationFields.fields) !== null && _validationFields$fie17 !== void 0 && _validationFields$fie17.checkout) {
@@ -444,11 +687,11 @@ var CheckoutUI = function CheckoutUI(props) {
     }
   }, [paymethodSelected, cartState.loading]);
   (0, _react.useEffect)(function () {
-    var _cart$products, _cart$business;
+    var _cart$products, _cart$business3;
     if (cart !== null && cart !== void 0 && (_cart$products = cart.products) !== null && _cart$products !== void 0 && _cart$products.length) return;
-    if (cart !== null && cart !== void 0 && (_cart$business = cart.business) !== null && _cart$business !== void 0 && _cart$business.slug) {
-      var _cart$business2;
-      handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.slug);
+    if (cart !== null && cart !== void 0 && (_cart$business3 = cart.business) !== null && _cart$business3 !== void 0 && _cart$business3.slug) {
+      var _cart$business4;
+      handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business4 = cart.business) === null || _cart$business4 === void 0 ? void 0 : _cart$business4.slug);
     }
   }, [cart === null || cart === void 0 ? void 0 : cart.products]);
   (0, _react.useEffect)(function () {
@@ -459,12 +702,14 @@ var CheckoutUI = function CheckoutUI(props) {
   (0, _react.useEffect)(function () {
     events.emit('in-checkout', cart);
   }, []);
-  (0, _react.useEffect)(function () {
-    events.on('cart_placed', handleCartPlaced);
-    return function () {
-      events.off('cart_placed', handleCartPlaced);
-    };
-  }, []);
+
+  // useEffect(() => {
+  //   events.on('cart_placed', handleCartPlaced)
+  //   return () => {
+  //     events.off('cart_placed', handleCartPlaced)
+  //   }
+  // }, [])
+
   (0, _react.useEffect)(function () {
     var _configs$advanced_off2;
     if (!isApplyMasterCoupon || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay_mastercard' || cartState.loading) return;
@@ -478,19 +723,39 @@ var CheckoutUI = function CheckoutUI(props) {
       applyOffer(dataOffer);
     }
   }, [isApplyMasterCoupon, paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway, cart === null || cart === void 0 ? void 0 : cart.paymethod_id]);
+  (0, _react.useEffect)(function () {
+    var _configs$advanced_off3;
+    if (!isApplyMasterCoupon || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay_mastercard' || cartState.loading) return;
+    if (configs !== null && configs !== void 0 && (_configs$advanced_off3 = configs.advanced_offers_module) !== null && _configs$advanced_off3 !== void 0 && _configs$advanced_off3.value && (cart === null || cart === void 0 ? void 0 : cart.offers.length) === 0 && (cart === null || cart === void 0 ? void 0 : cart.paymethod_id) === (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id)) {
+      var dataOffer = {
+        business_id: cart === null || cart === void 0 ? void 0 : cart.business_id,
+        user_id: cart === null || cart === void 0 ? void 0 : cart.user_id,
+        offer_id: parseInt(t('MARKETPLACE_OFFER_ID_MASTERCARD', '4432')),
+        force: true
+      };
+      applyOffer(dataOffer);
+    }
+  }, [isApplyMasterCoupon, paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway, cart === null || cart === void 0 ? void 0 : cart.paymethod_id]);
   var CartComponent = layout === 'pfchangs' ? _pfchangs2.Cart : _Cart.Cart;
   var UserDetailsComponent = layout === 'pfchangs' ? _pfchangs.UserDetails : _UserDetails.UserDetails;
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isShowDeUnaCheckout ? /*#__PURE__*/_react.default.createElement(_styles.IframeMainContainer, null, isShowDeUnaCheckout && /*#__PURE__*/_react.default.createElement(_index.SpinnerLoader, null), layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : (_cart$business5 = cart.business) === null || _cart$business5 === void 0 ? void 0 : _cart$business5.slug) && /*#__PURE__*/_react.default.createElement(_styles.GoToMenu, {
+    onClick: function onClick() {
+      var _cart$business6;
+      return handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business6 = cart.business) === null || _cart$business6 === void 0 ? void 0 : _cart$business6.slug);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.ColumnDivider, null), /*#__PURE__*/_react.default.createElement(_styles.BackIcon, null, /*#__PURE__*/_react.default.createElement(_EnChevronWithCircleLeft.default, {
+    color: theme.colors.primary
+  })), /*#__PURE__*/_react.default.createElement("p", null, t('MENU', 'Menu')))), /*#__PURE__*/_react.default.createElement(_styles.IframeContainer, null)) : /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperLeftContent, null, /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, null, layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowLeft, {
     className: "back-arrow",
     onClick: function onClick() {
       return history.goBack();
     }
   }), !cartState.loading && (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_VscWarning.default, null), /*#__PURE__*/_react.default.createElement("h1", null, t('CART_STATUS_PENDING_MESSAGE', 'Your order is being processed, please wait a little more. if you\'ve been waiting too long, please reload the page'))), /*#__PURE__*/_react.default.createElement("h2", {
     className: "checkout-title"
-  }, t('CHECK_OUT', 'Checkout'))), layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : (_cart$business3 = cart.business) === null || _cart$business3 === void 0 ? void 0 : _cart$business3.slug) && /*#__PURE__*/_react.default.createElement(_styles.GoToMenu, {
+  }, t('CHECK_OUT', 'Checkout'))), layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cart === null || cart === void 0 ? void 0 : (_cart$business7 = cart.business) === null || _cart$business7 === void 0 ? void 0 : _cart$business7.slug) && /*#__PURE__*/_react.default.createElement(_styles.GoToMenu, {
     onClick: function onClick() {
-      var _cart$business4;
-      return handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business4 = cart.business) === null || _cart$business4 === void 0 ? void 0 : _cart$business4.slug);
+      var _cart$business8;
+      return handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business8 = cart.business) === null || _cart$business8 === void 0 ? void 0 : _cart$business8.slug);
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.ColumnDivider, null), /*#__PURE__*/_react.default.createElement(_styles.BackIcon, null, /*#__PURE__*/_react.default.createElement(_EnChevronWithCircleLeft.default, {
     color: theme.colors.primary
@@ -507,8 +772,8 @@ var CheckoutUI = function CheckoutUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
   })) : /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
-    location: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi5 = businessDetails.business) === null || _businessDetails$busi5 === void 0 ? void 0 : _businessDetails$busi5.location,
-    businessLogo: (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi6 = businessDetails.business) === null || _businessDetails$busi6 === void 0 ? void 0 : _businessDetails$busi6.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
+    location: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi7 = businessDetails.business) === null || _businessDetails$busi7 === void 0 ? void 0 : _businessDetails$busi7.location,
+    businessLogo: (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi8 = businessDetails.business) === null || _businessDetails$busi8 === void 0 ? void 0 : _businessDetails$busi8.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo),
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
@@ -577,7 +842,7 @@ var CheckoutUI = function CheckoutUI(props) {
     style: {
       marginBottom: '10px'
     }
-  }))), businessInformationAvailable && layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi7 = businessDetails.business) === null || _businessDetails$busi7 === void 0 ? void 0 : _businessDetails$busi7.address), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi8 = businessDetails.business) === null || _businessDetails$busi8 === void 0 ? void 0 : _businessDetails$busi8.name), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi9 = businessDetails.business) === null || _businessDetails$busi9 === void 0 ? void 0 : _businessDetails$busi9.email), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi10 = businessDetails.business) === null || _businessDetails$busi10 === void 0 ? void 0 : _businessDetails$busi10.cellphone))), (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error) && (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro = businessDetails.error) === null || _businessDetails$erro === void 0 ? void 0 : _businessDetails$erro.length) > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }))), businessInformationAvailable && layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi9 = businessDetails.business) === null || _businessDetails$busi9 === void 0 ? void 0 : _businessDetails$busi9.address), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi10 = businessDetails.business) === null || _businessDetails$busi10 === void 0 ? void 0 : _businessDetails$busi10.name), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi11 = businessDetails.business) === null || _businessDetails$busi11 === void 0 ? void 0 : _businessDetails$busi11.email), /*#__PURE__*/_react.default.createElement("p", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi12 = businessDetails.business) === null || _businessDetails$busi12 === void 0 ? void 0 : _businessDetails$busi12.cellphone))), (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error) && (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro = businessDetails.error) === null || _businessDetails$erro === void 0 ? void 0 : _businessDetails$erro.length) > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_DETAILS', 'Business Details')), /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: (businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$erro2 = businessDetails.error[0]) === null || _businessDetails$erro2 === void 0 ? void 0 : _businessDetails$erro2.message) || (businessDetails === null || businessDetails === void 0 ? void 0 : businessDetails.error[0])
   }))), layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement(_styles.CheckOutDivider, null)) : /*#__PURE__*/_react.default.createElement(_styles.WrapperActionsInput, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WHATS_YOUR_NAME', "What's your name?")), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     placeholder: t('WRITE_YOUR_NAME', 'Write your name'),
@@ -625,9 +890,9 @@ var CheckoutUI = function CheckoutUI(props) {
     cart: cart,
     useKioskApp: useKioskApp,
     isDisabled: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
-    businessId: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi11 = businessDetails.business) === null || _businessDetails$busi11 === void 0 ? void 0 : _businessDetails$busi11.id,
+    businessId: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi13 = businessDetails.business) === null || _businessDetails$busi13 === void 0 ? void 0 : _businessDetails$busi13.id,
     isLoading: businessDetails.loading,
-    paymethods: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi12 = businessDetails.business) === null || _businessDetails$busi12 === void 0 ? void 0 : _businessDetails$busi12.paymethods,
+    paymethods: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi14 = businessDetails.business) === null || _businessDetails$busi14 === void 0 ? void 0 : _businessDetails$busi14.paymethods,
     onPaymentChange: handlePaymethodChange,
     errorCash: errorCash,
     setErrorCash: setErrorCash,
@@ -642,7 +907,7 @@ var CheckoutUI = function CheckoutUI(props) {
     hasCateringProducts: hasCateringProducts
   }))), isWalletEnabled && !(businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart,
-    businessConfigs: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi13 = businessDetails.business) === null || _businessDetails$busi13 === void 0 ? void 0 : _businessDetails$busi13.configs
+    businessConfigs: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi15 = businessDetails.business) === null || _businessDetails$busi15 === void 0 ? void 0 : _businessDetails$busi15.configs
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, layout === 'pfchangs' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessInformationLoading && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 35,
     style: {
@@ -658,11 +923,11 @@ var CheckoutUI = function CheckoutUI(props) {
     vaXMiCuenta: vaXMiCuenta,
     handleChangeVaXMiCuenta: handleChangeVaXMiCuenta
   }), businessInformationAvailable && /*#__PURE__*/_react.default.createElement(_styles.BusinessDetails, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi14 = businessDetails.business) === null || _businessDetails$busi14 === void 0 ? void 0 : _businessDetails$busi14.header
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi15 = businessDetails.business) === null || _businessDetails$busi15 === void 0 ? void 0 : _businessDetails$busi15.name), /*#__PURE__*/_react.default.createElement("span", {
+    src: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi16 = businessDetails.business) === null || _businessDetails$busi16 === void 0 ? void 0 : _businessDetails$busi16.header
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi17 = businessDetails.business) === null || _businessDetails$busi17 === void 0 ? void 0 : _businessDetails$busi17.name), /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
-      var _cart$business5, _cart$business6;
-      return (cart === null || cart === void 0 ? void 0 : (_cart$business5 = cart.business) === null || _cart$business5 === void 0 ? void 0 : _cart$business5.slug) && handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business6 = cart.business) === null || _cart$business6 === void 0 ? void 0 : _cart$business6.slug);
+      var _cart$business9, _cart$business10;
+      return (cart === null || cart === void 0 ? void 0 : (_cart$business9 = cart.business) === null || _cart$business9 === void 0 ? void 0 : _cart$business9.slug) && handleStoreRedirect(cart === null || cart === void 0 ? void 0 : (_cart$business10 = cart.business) === null || _cart$business10 === void 0 ? void 0 : _cart$business10.slug);
     }
   }, t('GO_TO_BUSINESS', 'Go to business'))))), !cartState.loading && placeSpotsEnabled && /*#__PURE__*/_react.default.createElement(_styles.SelectSpotContainer, null, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
     isCheckout: true,
@@ -681,8 +946,8 @@ var CheckoutUI = function CheckoutUI(props) {
     useOrderContext: true
   })), /*#__PURE__*/_react.default.createElement(_styles.DriverTipDivider, null)), !cartState.loading && cart && /*#__PURE__*/_react.default.createElement(_styles.CartContainer, null, layout !== 'pfchangs' && /*#__PURE__*/_react.default.createElement(_styles.CartHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MOBILE_FRONT_YOUR_ORDER', 'Your order')), /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
-      var _cart$business7;
-      return (cart === null || cart === void 0 ? void 0 : (_cart$business7 = cart.business) === null || _cart$business7 === void 0 ? void 0 : _cart$business7.slug) && handleStoreRedirect(cart === null || cart === void 0 ? void 0 : cart.business);
+      var _cart$business11;
+      return (cart === null || cart === void 0 ? void 0 : (_cart$business11 = cart.business) === null || _cart$business11 === void 0 ? void 0 : _cart$business11.slug) && handleStoreRedirect(cart === null || cart === void 0 ? void 0 : cart.business);
     }
   }, ('ADD_PRODUCTS', 'Add products'))), /*#__PURE__*/_react.default.createElement(CartComponent, {
     isCartPending: (cart === null || cart === void 0 ? void 0 : cart.status) === 2,
@@ -807,7 +1072,7 @@ var CheckoutUI = function CheckoutUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     onClick: handleSubmitAddressNotes,
     color: "primary"
-  }, t('CONTINUE', 'CONTINUE')))));
+  }, t('CONTINUE', 'CONTINUE'))))));
 };
 var Checkout = function Checkout(props) {
   var _Object$values2, _theme$layouts3, _theme$layouts3$check, _theme$layouts3$check2, _theme$layouts3$check3, _theme$layouts4, _theme$layouts4$gener, _theme$layouts4$gener2, _theme$layouts4$gener3, _cartState$error, _cartState$cart2;
@@ -834,37 +1099,37 @@ var Checkout = function Checkout(props) {
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
   var theme = (0, _styledComponents.useTheme)();
-  var _useState31 = (0, _react.useState)({
+  var _useState33 = (0, _react.useState)({
       loading: true,
       error: null,
       cart: null
     }),
-    _useState32 = _slicedToArray(_useState31, 2),
-    cartState = _useState32[0],
-    setCartState = _useState32[1];
-  var _useState33 = (0, _react.useState)(false),
     _useState34 = _slicedToArray(_useState33, 2),
-    openUpselling = _useState34[0],
-    setOpenUpselling = _useState34[1];
+    cartState = _useState34[0],
+    setCartState = _useState34[1];
   var _useState35 = (0, _react.useState)(false),
     _useState36 = _slicedToArray(_useState35, 2),
-    canOpenUpselling = _useState36[0],
-    setCanOpenUpselling = _useState36[1];
-  var _useState37 = (0, _react.useState)(null),
+    openUpselling = _useState36[0],
+    setOpenUpselling = _useState36[1];
+  var _useState37 = (0, _react.useState)(false),
     _useState38 = _slicedToArray(_useState37, 2),
-    currentCart = _useState38[0],
-    setCurrentCart = _useState38[1];
-  var _useState39 = (0, _react.useState)({
+    canOpenUpselling = _useState38[0],
+    setCanOpenUpselling = _useState38[1];
+  var _useState39 = (0, _react.useState)(null),
+    _useState40 = _slicedToArray(_useState39, 2),
+    currentCart = _useState40[0],
+    setCurrentCart = _useState40[1];
+  var _useState41 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState40 = _slicedToArray(_useState39, 2),
-    alertState = _useState40[0],
-    setAlertState = _useState40[1];
-  var _useState41 = (0, _react.useState)(false),
     _useState42 = _slicedToArray(_useState41, 2),
-    isResetPaymethod = _useState42[0],
-    setIsResetPaymethod = _useState42[1];
+    alertState = _useState42[0],
+    setAlertState = _useState42[1];
+  var _useState43 = (0, _react.useState)(false),
+    _useState44 = _slicedToArray(_useState43, 2),
+    isResetPaymethod = _useState44[0],
+    setIsResetPaymethod = _useState44[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && (((_Object$values2 = Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts)) === null || _Object$values2 === void 0 ? void 0 : _Object$values2.filter(function (cart) {
     var _cart$products3;
     return (cart === null || cart === void 0 ? void 0 : cart.products) && (cart === null || cart === void 0 ? void 0 : (_cart$products3 = cart.products) === null || _cart$products3 === void 0 ? void 0 : _cart$products3.length);
@@ -906,19 +1171,19 @@ var Checkout = function Checkout(props) {
     }
   }, [errors]);
   var getOrder = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(cartId) {
-      var _result$order, userCustomer, url, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart, spotNumberFromStorage, _JSON$parse, _JSON$parse2, _cart, _cart$business8, spotNumber, slug;
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(cartId) {
+      var _result$order, userCustomer, url, response, _yield$response$json, result, _confirmCartRes$resul, confirmCartRes, cart, spotNumberFromStorage, _JSON$parse, _JSON$parse2, _cart, _cart$business12, spotNumber, slug;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
-              _context2.prev = 0;
+              _context5.prev = 0;
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: true
               }));
               userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
               url = userCustomer ? "".concat(ordering.root, "/carts/").concat(cartId, "?user_id=").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id) : "".concat(ordering.root, "/carts/").concat(cartId);
-              _context2.next = 6;
+              _context5.next = 6;
               return fetch(url, {
                 method: 'GET',
                 headers: {
@@ -928,32 +1193,32 @@ var Checkout = function Checkout(props) {
                 }
               });
             case 6:
-              response = _context2.sent;
-              _context2.next = 9;
+              response = _context5.sent;
+              _context5.next = 9;
               return response.json();
             case 9:
-              _yield$response$json = _context2.sent;
+              _yield$response$json = _context5.sent;
               result = _yield$response$json.result;
               if (!(result.status === 1 && (_result$order = result.order) !== null && _result$order !== void 0 && _result$order.uuid)) {
-                _context2.next = 16;
+                _context5.next = 16;
                 break;
               }
               handleOrderRedirect(result.order.uuid);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false
               }));
-              _context2.next = 35;
+              _context5.next = 35;
               break;
             case 16:
               if (!(result.status === 2)) {
-                _context2.next = 31;
+                _context5.next = 31;
                 break;
               }
-              _context2.prev = 17;
-              _context2.next = 20;
+              _context5.prev = 17;
+              _context5.next = 20;
               return confirmCart(cartUuid);
             case 20:
-              confirmCartRes = _context2.sent;
+              confirmCartRes = _context5.sent;
               if (confirmCartRes.error) {
                 setAlertState({
                   open: true,
@@ -968,17 +1233,17 @@ var Checkout = function Checkout(props) {
                 loading: false,
                 cart: result
               }));
-              _context2.next = 29;
+              _context5.next = 29;
               break;
             case 26:
-              _context2.prev = 26;
-              _context2.t0 = _context2["catch"](17);
+              _context5.prev = 26;
+              _context5.t0 = _context5["catch"](17);
               setAlertState({
                 open: true,
-                content: [_context2.t0.message]
+                content: [_context5.t0.message]
               });
             case 29:
-              _context2.next = 35;
+              _context5.next = 35;
               break;
             case 31:
               cart = Array.isArray(result) ? null : result;
@@ -986,7 +1251,7 @@ var Checkout = function Checkout(props) {
               if (spotNumberFromStorage) {
                 spotNumber = (_JSON$parse = JSON.parse(spotNumberFromStorage)) === null || _JSON$parse === void 0 ? void 0 : _JSON$parse.tableNumber;
                 slug = (_JSON$parse2 = JSON.parse(spotNumberFromStorage)) === null || _JSON$parse2 === void 0 ? void 0 : _JSON$parse2.slug;
-                if (((_cart = cart) === null || _cart === void 0 ? void 0 : (_cart$business8 = _cart.business) === null || _cart$business8 === void 0 ? void 0 : _cart$business8.slug) === slug) {
+                if (((_cart = cart) === null || _cart === void 0 ? void 0 : (_cart$business12 = _cart.business) === null || _cart$business12 === void 0 ? void 0 : _cart$business12.slug) === slug) {
                   cart = _objectSpread(_objectSpread({}, cart), {}, {
                     spot_number: parseInt(spotNumber, 10)
                   });
@@ -998,24 +1263,24 @@ var Checkout = function Checkout(props) {
                 error: cart ? null : result
               }));
             case 35:
-              _context2.next = 40;
+              _context5.next = 40;
               break;
             case 37:
-              _context2.prev = 37;
-              _context2.t1 = _context2["catch"](0);
+              _context5.prev = 37;
+              _context5.t1 = _context5["catch"](0);
               setCartState(_objectSpread(_objectSpread({}, cartState), {}, {
                 loading: false,
-                error: [_context2.t1.toString()]
+                error: [_context5.t1.toString()]
               }));
             case 40:
             case "end":
-              return _context2.stop();
+              return _context5.stop();
           }
         }
-      }, _callee2, null, [[0, 37], [17, 26]]);
+      }, _callee5, null, [[0, 37], [17, 26]]);
     }));
-    return function getOrder(_x2) {
-      return _ref2.apply(this, arguments);
+    return function getOrder(_x3) {
+      return _ref5.apply(this, arguments);
     };
   }();
   (0, _react.useEffect)(function () {

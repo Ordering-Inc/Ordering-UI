@@ -142,7 +142,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       }
     },
     currentPageParam: 0,
-    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'city', 'city_id'],
+    propsToFetch: ['id', 'name', 'header', 'logo', 'location', 'address', 'ribbon', 'timezone', 'schedule', 'open', 'delivery_price', 'distance', 'delivery_time', 'pickup_time', 'reviews', 'featured', 'offers', 'food', 'laundry', 'alcohol', 'groceries', 'slug', 'city', 'city_id', 'configs', 'metadata'],
     onRedirectPage: function onRedirectPage(data) {
       return events.emit('go_to_page', data);
     },
@@ -263,6 +263,13 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     var resizeEvent = window.addEventListener('resize', function (e) {
       setInnerWidth(e.target.innerWidth);
     });
+    var isOpenAddressList = JSON.parse(window.localStorage.getItem('isOpenAddressList'));
+    if (isOpenAddressList) {
+      setModals(_objectSpread(_objectSpread({}, modals), {}, {
+        listOpen: true
+      }));
+      window.localStorage.removeItem('isOpenAddressList');
+    }
     return function () {
       window.removeEventListener('resize', resizeEvent);
     };
