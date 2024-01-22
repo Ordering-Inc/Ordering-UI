@@ -24,6 +24,7 @@ export const OrderHistory = (props) => {
   const [{ configs }] = useConfig()
 
   const excludedMessages = ['manual_driver_assignment_comment', 'driver_group_id', 'manual_driver_assignment_author_id']
+
   const getLogisticTagStatus = (status) => {
     switch (status) {
       case 0:
