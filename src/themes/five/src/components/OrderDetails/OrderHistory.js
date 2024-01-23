@@ -23,6 +23,8 @@ export const OrderHistory = (props) => {
   const [{ parseDate }] = useUtils()
   const [{ configs }] = useConfig()
 
+  const excludedMessages = ['manual_driver_assignment_comment', 'driver_group_id', 'manual_driver_assignment_author_id']
+
   const getLogisticTagStatus = (status) => {
     switch (status) {
       case 0:
@@ -128,7 +130,7 @@ export const OrderHistory = (props) => {
           </DetailWrapper>
         </HistoryItemWrapper>
       )}
-      {messages && messages?.messages.map((message, i) => message.type === 1 && (
+      {messages && messages?.messages.map((message, i) => (message.type === 1 && !excludedMessages.includes(message?.change?.attribute)) && (
         <HistoryItemWrapper
           key={i}
         >
@@ -138,20 +140,21 @@ export const OrderHistory = (props) => {
               <h3>
                 {message.change?.attribute === 'logistic_status'
                   ? getLogisticTagStatus(parseInt(message.change.new, 10))
-                  : message.change?.attribute === 'delivered_in' ? (
-                    <h3>
-                      <strong>{t('TIME_ADDED_BY_DRIVER', 'Time added by driver')}</strong><br />
-                      {formatSeconds(parseInt(message.change.new, 10))}
-                    </h3>
-                  )
-                    : message.change?.attribute === 'prepared_in' ? (
+                  : message.change?.attribute === 'delivered_in'
+                    ? (
                       <h3>
-                        <strong>{t('TIME_ADDED_BY_BUSINESS', 'Time added by business')}</strong><br />
+                        <strong>{t('TIME_ADDED_BY_DRIVER', 'Time added by driver')}</strong><br />
                         {formatSeconds(parseInt(message.change.new, 10))}
                       </h3>
                     )
-                      : t(getStatus(parseInt(message.change.new, 10)))
-                }
+                    : message.change?.attribute === 'prepared_in'
+                      ? (
+                        <h3>
+                          <strong>{t('TIME_ADDED_BY_BUSINESS', 'Time added by business')}</strong><br />
+                          {formatSeconds(parseInt(message.change.new, 10))}
+                        </h3>
+                      )
+                      : t(getStatus(parseInt(message.change.new, 10)))}
               </h3>
             ) : (
               <h3>
