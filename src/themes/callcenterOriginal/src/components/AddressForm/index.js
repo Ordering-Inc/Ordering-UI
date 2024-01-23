@@ -17,7 +17,9 @@ import {
   GoogleMapsMap,
   useSession,
   useOrder,
-  useConfig
+  useConfig,
+  ToastType,
+  useToast
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
@@ -62,6 +64,7 @@ const AddressFormUI = (props) => {
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
+  const [, { showToast }] = useToast()
   const theme = useTheme()
 
   const [selectedFromAutocomplete, setSelectedFromAutocomplete] = useState(false)
@@ -79,6 +82,7 @@ const AddressFormUI = (props) => {
       : formState.changes?.location ?? null
   )
 
+  const businessZones = businessesList?.businesses?.map(business => business?.zones)
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
@@ -240,9 +244,12 @@ const AddressFormUI = (props) => {
     })
   }
 
-  const handleChangeAddress = (address) => {
-    if (address?.address) {
-      getBusinessDeliveryZones(address?.location)
+  const handleChangeAddress = async (address) => {
+    if (address?.location) {
+      const result = await getBusinessDeliveryZones(address?.location)
+      if (result?.length === 0) {
+        showToast(ToastType.Error, t('NO_NEAR_DELIVERY_ZONES', 'No near delivery zones'), 3000)
+      }
     }
     setSelectedFromAutocomplete(true)
     updateChanges({
@@ -475,12 +482,11 @@ const AddressFormUI = (props) => {
                         apiKey={googleMapsApiKey}
                         location={locationChange}
                         locations={businessesList?.businesses}
-                        fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
                         mapControls={googleMapsControls}
                         handleChangeAddressMap={handleChangeAddress}
                         setErrors={setMapErrors}
                         maxLimitLocation={parseInt(maxLimitLocation, 10)}
-                        businessZones={businessesList?.businesses?.map(business => business?.zones)}
+                        businessZones={businessZones}
                         fallbackIcon={theme.images?.dummies?.businessLogo}
                       />
                     )}

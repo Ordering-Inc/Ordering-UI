@@ -11,7 +11,7 @@ const ToastBar = styled.div`
   padding: 16px;
   position: fixed;
   bottom: 80px;
-  z-index: 9999;
+  z-index: 99999;
   font-size: 14px;
   min-width: 200px;
   max-width: 200px;

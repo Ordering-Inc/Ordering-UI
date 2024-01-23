@@ -279,3 +279,14 @@ export const AddressBookMark = styled.div`
 export const AddressBookMarkContainer = styled.div`
   position: relative;
 `
+
+export const AddressTitleContainer = styled.div`
+  display: flex;
+  white-space: break-spaces;
+`
+
+export const WithoutAddressText = styled.p`
+  text-decoration: underline;
+  color: ${({ theme }) => theme?.colors?.primary};
+  cursor: pointer;
+`
