@@ -246,3 +246,21 @@ export const AddressMarkContainer = styled.div`
     font-size: 12px;
   }
 `
+
+export const StreetViewText = styled.span`
+  position: absolute;
+  right: 35px;
+  top: 30px;
+  text-decoration: underline;
+  color: ${({ theme }) => theme?.colors?.primary};
+  z-index: 9999;
+`
+
+export const WithoutAddressContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  p {
+    margin-bottom: 0;
+  }
+`

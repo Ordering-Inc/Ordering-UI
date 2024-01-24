@@ -18,8 +18,9 @@ import {
   useSession,
   useOrder,
   useConfig,
+  useToast,
   ToastType,
-  useToast
+  useEvent
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
@@ -31,11 +32,14 @@ import {
   AddressTagSection,
   WrapperMap,
   WrapperSkeleton,
-  AddressMarkContainer
+  AddressMarkContainer,
+  StreetViewText,
+  WithoutAddressContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
+import { WithoutAddressText } from '../AddressList/styles'
 
 const AddressFormUI = (props) => {
   const {
@@ -56,7 +60,8 @@ const AddressFormUI = (props) => {
     isEnableContinueButton,
     address,
     notUseCustomerInfo,
-    addFormRestrictions
+    addFormRestrictions,
+    isAllowUnaddressOrderType
   } = props
 
   const [configState] = useConfig()
@@ -65,6 +70,7 @@ const AddressFormUI = (props) => {
   const formMethods = useForm()
   const [{ auth }] = useSession()
   const [, { showToast }] = useToast()
+  const [events] = useEvent()
   const theme = useTheme()
 
   const [selectedFromAutocomplete, setSelectedFromAutocomplete] = useState(false)
@@ -267,6 +273,12 @@ const AddressFormUI = (props) => {
     })
   }
 
+  const openStreetView = () => {
+    console.log(formState)
+    const url = `http://maps.google.com/maps?q=&layer=c&cbll=${formState?.changes?.location?.lat},${formState?.changes?.location?.lng}`
+    window.open(url, '_blank')
+  }
+
   useEffect(() => {
     if (!auth) {
       setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
@@ -386,6 +398,7 @@ const AddressFormUI = (props) => {
           onKeyDown={(e) => checkKeyDown(e)}
           autoComplete='off'
         >
+
           {
             props.beforeMidElements?.map((BeforeMidElements, i) => (
               <React.Fragment key={i}>
@@ -448,6 +461,7 @@ const AddressFormUI = (props) => {
 
                 {(addressState?.address?.location || formState?.changes?.location) && (
                   <WrapperMap notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
+
                     {!showMap && (
                       <section>
                         <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
@@ -489,6 +503,11 @@ const AddressFormUI = (props) => {
                         businessZones={businessZones}
                         fallbackIcon={theme.images?.dummies?.businessLogo}
                       />
+                    )}
+                    {formState?.changes?.location?.lat && formState?.changes?.location?.lng && formState?.changes?.address && showMap && (
+                      <StreetViewText onClick={() => openStreetView()}>
+                        {t('OPEN_STREET_VIEW', 'Open Street view')}
+                      </StreetViewText>
                     )}
                   </WrapperMap>
                 )}
@@ -586,6 +605,11 @@ const AddressFormUI = (props) => {
               </Button>
             )}
           </FormActions>
+          {isAllowUnaddressOrderType && (
+            <WithoutAddressContainer>
+              <WithoutAddressText onClick={() => events.emit('go_to_page', { page: 'search' })}>{t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')}</WithoutAddressText>
+            </WithoutAddressContainer>
+          )}
         </FormControl>
       )}
 
