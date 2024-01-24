@@ -23,7 +23,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessesMapUI = function BusinessesMapUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _configState$configs, _configState$configs2, _theme$images, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _configState$configs, _configState$configs2, _theme$images, _configState$configs$, _configState$configs3, _configState$configs$2, _configState$configs4, _props$afterComponent, _props$afterElements;
   var userLocation = props.userLocation,
     businessLocations = props.businessLocations,
     onBusinessClick = props.onBusinessClick,
@@ -73,7 +73,12 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
       return business === null || business === void 0 ? void 0 : business.zones;
     }),
     fallbackIcon: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo,
-    setErrors: setErrors
+    setErrors: setErrors,
+    fixedLocation: !userLocation && {
+      lat: parseFloat((_configState$configs$ = configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.location_default_latitude) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) !== null && _configState$configs$ !== void 0 ? _configState$configs$ : 0, 10),
+      lng: parseFloat((_configState$configs$2 = configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.location_default_longitude) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) !== null && _configState$configs$2 !== void 0 ? _configState$configs$2 : 0, 10),
+      zoom: 18
+    }
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
