@@ -50,11 +50,13 @@ const BusinessesMapUI = (props) => {
           businessZones={businessList?.map(business => business?.zones)}
           fallbackIcon={theme.images?.dummies?.businessLogo}
           setErrors={setErrors}
-          fixedLocation={!userLocation && {
-            lat: parseFloat(configState?.configs?.location_default_latitude?.value ?? 0, 10),
-            lng: parseFloat(configState?.configs?.location_default_longitude?.value ?? 0, 10),
-            zoom: 18
-          }}
+          fixedLocation={!userLocation && (businessLocations?.length
+            ? { ...businessLocations[0], hideicon: true }
+            : {
+              lat: parseFloat(configState?.configs?.location_default_latitude?.value ?? 0, 10),
+              lng: parseFloat(configState?.configs?.location_default_longitude?.value ?? 0, 10)
+            }
+          )}
         />
       </WrapperMap>
       {props.afterComponents?.map((AfterComponent, i) => (
