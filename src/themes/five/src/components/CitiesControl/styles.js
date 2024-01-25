@@ -17,7 +17,8 @@ export const CityItem = styled.div`
 `
 
 export const ButtonWrapper = styled.div`
-  position: relative;
+  position: sticky;
+  bottom: 0;
   svg {
     position: absolute;
     right: 10px;
@@ -29,4 +30,8 @@ export const ButtonWrapper = styled.div`
     width: 100%;
     padding: 5px;
   }
+`
+
+export const SearchBarContainer = styled.div`
+  margin-bottom: 10px;
 `

@@ -18,7 +18,8 @@ import {
   useLanguage,
   useOrder,
   useCustomer,
-  useEvent
+  useEvent,
+  useConfig
 } from 'ordering-components'
 
 import {
@@ -37,7 +38,9 @@ import {
   TitleFormContainer,
   AddressHoverInfo,
   AddressBookMark,
-  AddressBookMarkContainer
+  AddressBookMarkContainer,
+  AddressTitleContainer,
+  WithoutAddressText
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -78,11 +81,13 @@ const AddressListUI = (props) => {
   const [, t] = useLanguage()
   const [orderState] = useOrder()
   const [events] = useEvent()
+  const [{ configs }] = useConfig()
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
   const [{ user }] = useCustomer()
+
   const addFormRestrictions = userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
     (address, i, self) =>
@@ -92,7 +97,8 @@ const AddressListUI = (props) => {
         address.zipcode === obj.zipcode &&
         address.internal_number === obj.internal_number
       )))) || []
-
+  const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
+  const isAllowUnaddressOrderType = unaddressedTypes.includes(orderState?.options?.type)
   const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
@@ -134,6 +140,10 @@ const AddressListUI = (props) => {
       userCustomerSetup?.id === user?.id &&
       !isFromCheckout
     ) {
+      if (!address?.location?.lat || !address?.location?.lng) {
+        openAddress(address)
+        return
+      }
       setIsSavedAddress && setIsSavedAddress(true)
       handleSetDefault(address, userCustomerSetup, true)
       setCustomerModalOpen && setCustomerModalOpen(false)
@@ -142,7 +152,10 @@ const AddressListUI = (props) => {
       }
       return
     }
-
+    if (!address?.location?.lat || !address?.location?.lng) {
+      openAddress(address)
+      return
+    }
     setIsSavedAddress && setIsSavedAddress(true)
     handleCloseAddressForm()
     handleSetDefault(address, userCustomerSetup)
@@ -254,6 +267,7 @@ const AddressListUI = (props) => {
                   onCancel={() => handleCloseAddressForm()}
                   onSaveAddress={handleSaveAddress}
                   userCustomerSetup={userCustomerSetup}
+                  isAllowUnaddressOrderType={isAllowUnaddressOrderType}
                 />
               )
             }
@@ -268,7 +282,15 @@ const AddressListUI = (props) => {
               !addressOpen &&
               ((!addressOpen && isPopover) || isModal) && (
                 <AddressListUl id='list'>
-                  <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
+                  <AddressTitleContainer style={{ display: 'flex' }}>
+                    <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
+                    {isAllowUnaddressOrderType && (
+                      <>
+                        <p>{' '}{t('OR', 'or')}{' '}</p>
+                        <WithoutAddressText onClick={() => events.emit('go_to_page', { page: 'search' })}>{t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')}</WithoutAddressText>
+                      </>
+                    )}
+                  </AddressTitleContainer>
                   {uniqueAddressesList.map(address => (
                     <AddressItem key={address?.id}>
                       <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
@@ -346,6 +368,7 @@ const AddressListUI = (props) => {
                   notUseCustomerInfo={notUseCustomerInfo}
                   franchiseId={franchiseId}
                   addFormRestrictions={addFormRestrictions}
+                  isAllowUnaddressOrderType={isAllowUnaddressOrderType}
                 />
               </AddressFormContainer>
             )}
@@ -410,6 +433,7 @@ const AddressListUI = (props) => {
                 onCancel={() => handleCloseAddressForm()}
                 onSaveAddress={handleSaveAddress}
                 userCustomerSetup={userCustomerSetup}
+                isAllowUnaddressOrderType={isAllowUnaddressOrderType}
               />
             </Modal>
           )
