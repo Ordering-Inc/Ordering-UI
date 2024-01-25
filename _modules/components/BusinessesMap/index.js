@@ -74,11 +74,12 @@ var BusinessesMapUI = function BusinessesMapUI(props) {
     }),
     fallbackIcon: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo,
     setErrors: setErrors,
-    fixedLocation: !userLocation && {
+    fixedLocation: !userLocation && (businessLocations !== null && businessLocations !== void 0 && businessLocations.length ? _objectSpread(_objectSpread({}, businessLocations[0]), {}, {
+      hideicon: true
+    }) : {
       lat: parseFloat((_configState$configs$ = configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.location_default_latitude) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) !== null && _configState$configs$ !== void 0 ? _configState$configs$ : 0, 10),
-      lng: parseFloat((_configState$configs$2 = configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.location_default_longitude) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) !== null && _configState$configs$2 !== void 0 ? _configState$configs$2 : 0, 10),
-      zoom: 18
-    }
+      lng: parseFloat((_configState$configs$2 = configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.location_default_longitude) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) !== null && _configState$configs$2 !== void 0 ? _configState$configs$2 : 0, 10)
+    })
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
