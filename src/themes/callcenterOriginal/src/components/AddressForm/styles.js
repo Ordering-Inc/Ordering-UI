@@ -254,6 +254,7 @@ export const StreetViewText = styled.span`
   text-decoration: underline;
   color: ${({ theme }) => theme?.colors?.primary};
   z-index: 9999;
+  cursor: pointer;
 `
 
 export const WithoutAddressContainer = styled.div`

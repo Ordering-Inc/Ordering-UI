@@ -289,6 +289,7 @@ export const SelectContainer = styled.div`
     .select__control {
       height: 45px;
       padding-left: 10px;
+      width: 110%;
     }
     .select__indicator {
       bottom: 8px;
@@ -396,7 +397,7 @@ export const PhoneAutocompleteContainer = styled.div`
 
 export const ContinueButton = styled.span`
   position: absolute;
-  right: 35px;
+  right: -20px;
   bottom: 5px;
   width:
   button {
