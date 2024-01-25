@@ -429,8 +429,11 @@ const OrderDetailsUI = (props) => {
                         </ShareOrder>
                       </Content>
                     )}
-                    {(!!order?.integration_id_date || !!order?.integration_id) && (
-                      <h1>{t('TICKET', 'Ticket')}: {(order?.integration_id_date || order?.integration_id)}</h1>
+                    {!!order?.integration_id && (
+                      <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                    )}
+                    {!!order?.integration_id_date && (
+                      <h1>{order?.integration_id_date}</h1>
                     )}
                     {!hideDeliveryType && (
                       <p className='types'>
