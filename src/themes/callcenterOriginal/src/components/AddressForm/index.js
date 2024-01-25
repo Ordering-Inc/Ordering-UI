@@ -17,7 +17,10 @@ import {
   GoogleMapsMap,
   useSession,
   useOrder,
-  useConfig
+  useConfig,
+  useToast,
+  ToastType,
+  useEvent
 } from 'ordering-components'
 import { Alert } from '../Confirm'
 import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
@@ -29,11 +32,14 @@ import {
   AddressTagSection,
   WrapperMap,
   WrapperSkeleton,
-  AddressMarkContainer
+  AddressMarkContainer,
+  StreetViewText,
+  WithoutAddressContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
+import { WithoutAddressText } from '../AddressList/styles'
 
 const AddressFormUI = (props) => {
   const {
@@ -54,7 +60,8 @@ const AddressFormUI = (props) => {
     isEnableContinueButton,
     address,
     notUseCustomerInfo,
-    addFormRestrictions
+    addFormRestrictions,
+    isAllowUnaddressOrderType
   } = props
 
   const [configState] = useConfig()
@@ -62,6 +69,8 @@ const AddressFormUI = (props) => {
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
+  const [, { showToast }] = useToast()
+  const [events] = useEvent()
   const theme = useTheme()
 
   const [selectedFromAutocomplete, setSelectedFromAutocomplete] = useState(false)
@@ -79,6 +88,7 @@ const AddressFormUI = (props) => {
       : formState.changes?.location ?? null
   )
 
+  const businessZones = businessesList?.businesses?.map(business => business?.zones)
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
   const isLocationRequired = configState.configs?.google_autocomplete_selection_required?.value === '1' ||
@@ -240,9 +250,12 @@ const AddressFormUI = (props) => {
     })
   }
 
-  const handleChangeAddress = (address) => {
-    if (address?.address) {
-      getBusinessDeliveryZones(address?.location)
+  const handleChangeAddress = async (address) => {
+    if (address?.location) {
+      const result = await getBusinessDeliveryZones(address?.location)
+      if (result?.length === 0) {
+        showToast(ToastType.Error, t('NO_NEAR_DELIVERY_ZONES', 'No near delivery zones'), 3000)
+      }
     }
     setSelectedFromAutocomplete(true)
     updateChanges({
@@ -258,6 +271,13 @@ const AddressFormUI = (props) => {
         ? [t(errKey, mapErrors[errKey])]
         : `${[t(errKey, mapErrors[errKey])]} ${maxLimitLocation} ${[t('METTERS', 'meters')]}`
     })
+  }
+
+  const openStreetView = () => {
+    const lat = formState?.changes?.location?.lat ?? address?.location?.lat
+    const lng = formState?.changes?.location?.lng ?? address?.location?.lng
+    const url = `http://maps.google.com/maps?q=&layer=c&cbll=${lat},${lng}`
+    window.open(url, '_blank')
   }
 
   useEffect(() => {
@@ -379,6 +399,7 @@ const AddressFormUI = (props) => {
           onKeyDown={(e) => checkKeyDown(e)}
           autoComplete='off'
         >
+
           {
             props.beforeMidElements?.map((BeforeMidElements, i) => (
               <React.Fragment key={i}>
@@ -441,6 +462,7 @@ const AddressFormUI = (props) => {
 
                 {(addressState?.address?.location || formState?.changes?.location) && (
                   <WrapperMap notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
+
                     {!showMap && (
                       <section>
                         <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
@@ -475,14 +497,18 @@ const AddressFormUI = (props) => {
                         apiKey={googleMapsApiKey}
                         location={locationChange}
                         locations={businessesList?.businesses}
-                        fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
                         mapControls={googleMapsControls}
                         handleChangeAddressMap={handleChangeAddress}
                         setErrors={setMapErrors}
                         maxLimitLocation={parseInt(maxLimitLocation, 10)}
-                        businessZones={businessesList?.businesses?.map(business => business?.zones)}
+                        businessZones={businessZones}
                         fallbackIcon={theme.images?.dummies?.businessLogo}
                       />
+                    )}
+                    {showMap && (
+                      <StreetViewText onClick={() => openStreetView()}>
+                        {t('OPEN_STREET_VIEW', 'Open Street view')}
+                      </StreetViewText>
                     )}
                   </WrapperMap>
                 )}
@@ -580,6 +606,11 @@ const AddressFormUI = (props) => {
               </Button>
             )}
           </FormActions>
+          {isAllowUnaddressOrderType && (
+            <WithoutAddressContainer>
+              <WithoutAddressText onClick={() => events.emit('go_to_page', { page: 'search' })}>{t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')}</WithoutAddressText>
+            </WithoutAddressContainer>
+          )}
         </FormControl>
       )}
 
