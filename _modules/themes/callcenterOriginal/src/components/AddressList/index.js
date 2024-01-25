@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options6, _addressList$error$, _orderState$options7, _orderState$options8, _props$afterComponent, _props$afterElements;
+  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options7, _addressList$error$, _orderState$options8, _orderState$options9, _props$afterComponent, _props$afterElements;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -69,6 +69,9 @@ var AddressListUI = function AddressListUI(props) {
   var _useEvent = (0, _orderingComponents.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     curAddress = _useState2[0],
@@ -95,6 +98,10 @@ var AddressListUI = function AddressListUI(props) {
       return address.address === obj.address && address.address_notes === obj.address_notes && address.zipcode === obj.zipcode && address.internal_number === obj.internal_number;
     });
   }) || [];
+  var unaddressedTypes = (configs === null || configs === void 0 || (_configs$unaddressed_ = configs.unaddressed_order_types_allowed) === null || _configs$unaddressed_ === void 0 ? void 0 : _configs$unaddressed_.value.split('|').map(function (value) {
+    return Number(value);
+  })) || [];
+  var isAllowUnaddressOrderType = unaddressedTypes.includes(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type);
   var openAddress = function openAddress(address) {
     setCurAddress(address);
     setAddressOpen(true);
@@ -127,7 +134,13 @@ var AddressListUI = function AddressListUI(props) {
     handleCloseAddressForm();
   };
   var handleSetAddress = function handleSetAddress(address) {
+    var _address$location3, _address$location4;
     if (checkAddress(address) && isCustomerMode && (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.id) === (user === null || user === void 0 ? void 0 : user.id) && !isFromCheckout) {
+      var _address$location, _address$location2;
+      if (!(address !== null && address !== void 0 && (_address$location = address.location) !== null && _address$location !== void 0 && _address$location.lat) || !(address !== null && address !== void 0 && (_address$location2 = address.location) !== null && _address$location2 !== void 0 && _address$location2.lng)) {
+        openAddress(address);
+        return;
+      }
       setIsSavedAddress && setIsSavedAddress(true);
       handleSetDefault(address, userCustomerSetup, true);
       setCustomerModalOpen && setCustomerModalOpen(false);
@@ -136,6 +149,10 @@ var AddressListUI = function AddressListUI(props) {
           page: 'search'
         });
       }
+      return;
+    }
+    if (!(address !== null && address !== void 0 && (_address$location3 = address.location) !== null && _address$location3 !== void 0 && _address$location3.lat) || !(address !== null && address !== void 0 && (_address$location4 = address.location) !== null && _address$location4 !== void 0 && _address$location4.lng)) {
+      openAddress(address);
       return;
     }
     setIsSavedAddress && setIsSavedAddress(true);
@@ -163,15 +180,15 @@ var AddressListUI = function AddressListUI(props) {
     props.forEach(function (prop) {
       if (address !== null && address !== void 0 && address[prop]) {
         if (prop === 'location') {
-          var _orderState$options, _orderState$options2;
-          values.push((address === null || address === void 0 ? void 0 : address[prop].lat) === (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 || (_orderState$options = _orderState$options.address) === null || _orderState$options === void 0 || (_orderState$options = _orderState$options[prop]) === null || _orderState$options === void 0 ? void 0 : _orderState$options.lat) && (address === null || address === void 0 ? void 0 : address[prop].lng) === (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2.address) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2[prop]) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.lng));
+          var _orderState$options2, _orderState$options3;
+          values.push((address === null || address === void 0 ? void 0 : address[prop].lat) === (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2.address) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2[prop]) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.lat) && (address === null || address === void 0 ? void 0 : address[prop].lng) === (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.address) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3[prop]) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.lng));
         } else {
-          var _orderState$options3;
-          values.push((address === null || address === void 0 ? void 0 : address[prop]) === (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.address) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3[prop]));
+          var _orderState$options4;
+          values.push((address === null || address === void 0 ? void 0 : address[prop]) === (orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 || (_orderState$options4 = _orderState$options4.address) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4[prop]));
         }
       } else {
-        var _orderState$options4, _orderState$options5;
-        values.push((orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 || (_orderState$options4 = _orderState$options4.address) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4[prop]) === null || (orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 || (_orderState$options5 = _orderState$options5.address) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5[prop]) === '');
+        var _orderState$options5, _orderState$options6;
+        values.push((orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 || (_orderState$options5 = _orderState$options5.address) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5[prop]) === null || (orderState === null || orderState === void 0 || (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 || (_orderState$options6 = _orderState$options6.address) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6[prop]) === '');
       }
     });
     return values.every(function (value) {
@@ -246,11 +263,22 @@ var AddressListUI = function AddressListUI(props) {
       return handleCloseAddressForm();
     },
     onSaveAddress: handleSaveAddress,
-    userCustomerSetup: userCustomerSetup
-  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse4 = addressList.addresses) === null || _addressList$addresse4 === void 0 ? void 0 : _addressList$addresse4.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && !addressOpen && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+    userCustomerSetup: userCustomerSetup,
+    isAllowUnaddressOrderType: isAllowUnaddressOrderType
+  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse4 = addressList.addresses) === null || _addressList$addresse4 === void 0 ? void 0 : _addressList$addresse4.length) > 0 && _typeof((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.address) === 'object' && !addressOpen && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
-  }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), uniqueAddressesList.map(function (address) {
-    var _address$location, _address$location2, _theme$images;
+  }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitleContainer, {
+    style: {
+      display: 'flex'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), isAllowUnaddressOrderType && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, ' ', t('OR', 'or'), ' '), /*#__PURE__*/_react.default.createElement(_styles.WithoutAddressText, {
+    onClick: function onClick() {
+      return events.emit('go_to_page', {
+        page: 'search'
+      });
+    }
+  }, t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')))), uniqueAddressesList.map(function (address) {
+    var _address$location5, _address$location6, _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
       key: address === null || address === void 0 ? void 0 : address.id
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -266,7 +294,7 @@ var AddressListUI = function AddressListUI(props) {
       className: checkAddress(address) ? 'selected-tag tag' : 'tag'
     }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.House, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Heart, null), (address === null || address === void 0 ? void 0 : address.tag) === 'other' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "address"
-    }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode)), (!(address !== null && address !== void 0 && (_address$location = address.location) !== null && _address$location !== void 0 && _address$location.lat) || !(address !== null && address !== void 0 && (_address$location2 = address.location) !== null && _address$location2 !== void 0 && _address$location2.lng)) && /*#__PURE__*/_react.default.createElement(_styles.AddressBookMarkContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddressBookMark, null, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement("span", null, address.address), /*#__PURE__*/_react.default.createElement("span", null, address.internal_number, " ", address.zipcode)), (!(address !== null && address !== void 0 && (_address$location5 = address.location) !== null && _address$location5 !== void 0 && _address$location5.lat) || !(address !== null && address !== void 0 && (_address$location6 = address.location) !== null && _address$location6 !== void 0 && _address$location6.lng)) && /*#__PURE__*/_react.default.createElement(_styles.AddressBookMarkContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddressBookMark, null, /*#__PURE__*/_react.default.createElement("img", {
       src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.bookmark,
       width: 20,
       height: 20
@@ -296,7 +324,7 @@ var AddressListUI = function AddressListUI(props) {
     }, t('CONTINUE_WITH', 'Continue with'), ": ", address.address));
   })), !(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && addressList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_addressList$error$ = addressList.error[0]) === null || _addressList$error$ === void 0 ? void 0 : _addressList$error$.message) || addressList.error[0]
-  }), !(addressList.loading || actionStatus.loading || orderState.loading) && _typeof((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.address) !== 'object' && !addressList.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), !(addressList.loading || actionStatus.loading || orderState.loading) && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) !== 'object' && !addressList.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NETWORK_ERROR', 'Network error, please reload the page')
   }), !isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
@@ -310,7 +338,8 @@ var AddressListUI = function AddressListUI(props) {
     userCustomerSetup: userCustomerSetup,
     notUseCustomerInfo: notUseCustomerInfo,
     franchiseId: franchiseId,
-    addFormRestrictions: addFormRestrictions
+    addFormRestrictions: addFormRestrictions,
+    isAllowUnaddressOrderType: isAllowUnaddressOrderType
   }))), addressOpen && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
     width: "50%",
     addFormRestrictions: addFormRestrictions
@@ -324,7 +353,7 @@ var AddressListUI = function AddressListUI(props) {
     style: {
       marginBottom: '10px'
     }
-  })), onCancel && onAccept && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) === 'object' && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), onCancel && onAccept && _typeof((_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.address) === 'object' && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     type: "button",
     disabled: addressList.loading || actionStatus.loading || orderState.loading,
@@ -354,7 +383,8 @@ var AddressListUI = function AddressListUI(props) {
       return handleCloseAddressForm();
     },
     onSaveAddress: handleSaveAddress,
-    userCustomerSetup: userCustomerSetup
+    userCustomerSetup: userCustomerSetup,
+    isAllowUnaddressOrderType: isAllowUnaddressOrderType
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('SEARCH', 'Search'),
     content: confirm.content,
