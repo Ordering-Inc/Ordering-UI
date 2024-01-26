@@ -433,7 +433,7 @@ const OrderDetailsUI = (props) => {
                       <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
                     )}
                     {!!order?.integration_id_date && (
-                      <h1>{order?.integration_id_date}</h1>
+                      <h1>{t('N_ORDER', 'N. Orden')}: {order?.integration_id_date}</h1>
                     )}
                     {!hideDeliveryType && (
                       <p className='types'>
