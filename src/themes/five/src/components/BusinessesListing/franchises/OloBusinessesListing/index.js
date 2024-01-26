@@ -488,10 +488,11 @@ const OloBusinessesListingUI = (props) => {
         />
       </Modal>
       <Modal
-        title={t('SELECT_A_STORE', 'Select a store')}
         open={modals.citiesOpen}
         width='70%'
         onClose={() => setModals({ ...modals, citiesOpen: false })}
+        padding='0px'
+        hideCloseDefault
       >
         <CitiesControl
           cities={citiesState?.cities}

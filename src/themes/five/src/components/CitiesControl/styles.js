@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  padding: 30px 20px;
+`
 
 export const CityItem = styled.div`
   display: flex;
@@ -19,10 +21,12 @@ export const CityItem = styled.div`
 export const ButtonWrapper = styled.div`
   position: sticky;
   bottom: 0;
+  padding: 10px 20px 30px 20px;
+  background: white;
   svg {
     position: absolute;
-    right: 10px;
-    top: 8px;
+    right: 30px;
+    top: 40px;
     font-size: 25px;
     color: #ffffff;
   }
