@@ -222,6 +222,11 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
         customer: true
       }));
     } else {
+      var _option$value;
+      if (!(customersPhones !== null && customersPhones !== void 0 && customersPhones.fetched) && (option === null || option === void 0 || (_option$value = option.value) === null || _option$value === void 0 ? void 0 : _option$value.length) >= 7) {
+        getUsers();
+        return;
+      }
       setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         signup: true
       }));
@@ -273,11 +278,23 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       getUsers(value);
     }
   };
+  var handleSetInitialValues = function handleSetInitialValues() {
+    setOptSelected(null);
+    setInputValue('');
+    setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
+      users: []
+    }));
+  };
   var handleCloseSignupForm = function handleCloseSignupForm() {
     setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
       signup: false
     }));
-    onRedirectPhoneUrlPage('home');
+    if (onRedirectPhoneUrlPage) {
+      onRedirectPhoneUrlPage('home');
+    } else {
+      onRedirectPage('home');
+      handleSetInitialValues();
+    }
   };
   var optionsToSelect = customersPhones.users.map(function (user) {
     var _user$country_phone_c, _user$lastname, _user$addresses, _user$addresses2, _user$addresses3, _user$addresses4;
@@ -345,11 +362,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }, [isSavedAddress, userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id, orderState === null || orderState === void 0 || (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.user_id, orderState === null || orderState === void 0 || (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 || (_orderState$options9 = _orderState$options9.address) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.address]);
   (0, _react.useEffect)(function () {
     if (!(userCustomer !== null && userCustomer !== void 0 && userCustomer.id) && !(orderState !== null && orderState !== void 0 && orderState.loading)) {
-      setOptSelected(null);
-      setInputValue('');
-      setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
-        users: []
-      }));
+      handleSetInitialValues();
     }
   }, [userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id, orderState === null || orderState === void 0 ? void 0 : orderState.loading]);
   var OrderTypesComponent = function OrderTypesComponent() {
