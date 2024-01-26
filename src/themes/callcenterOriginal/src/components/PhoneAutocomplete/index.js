@@ -207,6 +207,11 @@ const PhoneAutocompleteUI = (props) => {
     }
   }
 
+  const handleCloseSignupForm = () => {
+    setOpenModal({ ...openModal, signup: false })
+    onRedirectPhoneUrlPage('home')
+  }
+
   const optionsToSelect = customersPhones.users.map(user => {
     const countryPhoneCode = user?.country_phone_code ?? user?.country_code
     const obj = {}
@@ -264,6 +269,14 @@ const PhoneAutocompleteUI = (props) => {
       events.emit('go_to_page', { page: 'search' })
     }
   }, [isSavedAddress, userCustomer?.id, orderState?.options?.user_id, orderState?.options?.address?.address])
+
+  useEffect(() => {
+    if (!userCustomer?.id && !orderState?.loading) {
+      setOptSelected(null)
+      setInputValue('')
+      setCustomersPhones({ ...customersPhones, users: [] })
+    }
+  }, [userCustomer?.id, orderState?.loading])
 
   const OrderTypesComponent = () => {
     return (
@@ -380,7 +393,7 @@ const PhoneAutocompleteUI = (props) => {
       <Modal
         open={openModal.signup}
         width='80%'
-        onClose={() => setOpenModal({ ...openModal, signup: false })}
+        onClose={() => handleCloseSignupForm()}
       >
         <SignUpForm
           externalPhoneNumber={`${countryCallingCode || localPhoneCode} ${optSelected?.value || phone}`}

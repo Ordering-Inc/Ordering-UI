@@ -585,7 +585,7 @@ const AddressFormUI = (props) => {
               )
             }
 
-            {Object.keys(formState?.changes).length > 0 && (
+            {!(!selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng)) && Object.keys(formState?.changes).length > 0 && (
               <Button
                 id='submit-btn'
                 type='submit'
