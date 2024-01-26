@@ -38,7 +38,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _businessesList$busin, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _props$afterComponent, _props$afterElements;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _businessesList$busin, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _address$location5, _address$location6, _orderState$options6, _props$afterComponent, _props$afterElements;
   var addressesList = props.addressesList,
     googleMapsControls = props.googleMapsControls,
     formState = props.formState,
@@ -655,7 +655,7 @@ var AddressFormUI = function AddressFormUI(props) {
       return onCancel();
     },
     hoverColor: "#CCC"
-  }, t('CANCEL', 'Cancel')), Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('CANCEL', 'Cancel')), !(!selectedFromAutocomplete && address !== null && address !== void 0 && address.address && (!(address !== null && address !== void 0 && (_address$location5 = address.location) !== null && _address$location5 !== void 0 && _address$location5.lat) || !(address !== null && address !== void 0 && (_address$location6 = address.location) !== null && _address$location6 !== void 0 && _address$location6.lng))) && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "submit-btn",
     type: "submit",
     disabled: formState.loading,

@@ -273,6 +273,12 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       getUsers(value);
     }
   };
+  var handleCloseSignupForm = function handleCloseSignupForm() {
+    setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+      signup: false
+    }));
+    onRedirectPhoneUrlPage('home');
+  };
   var optionsToSelect = customersPhones.users.map(function (user) {
     var _user$country_phone_c, _user$lastname, _user$addresses, _user$addresses2, _user$addresses3, _user$addresses4;
     var countryPhoneCode = (_user$country_phone_c = user === null || user === void 0 ? void 0 : user.country_phone_code) !== null && _user$country_phone_c !== void 0 ? _user$country_phone_c : user === null || user === void 0 ? void 0 : user.country_code;
@@ -337,6 +343,15 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       });
     }
   }, [isSavedAddress, userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id, orderState === null || orderState === void 0 || (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.user_id, orderState === null || orderState === void 0 || (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 || (_orderState$options9 = _orderState$options9.address) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.address]);
+  (0, _react.useEffect)(function () {
+    if (!(userCustomer !== null && userCustomer !== void 0 && userCustomer.id) && !(orderState !== null && orderState !== void 0 && orderState.loading)) {
+      setOptSelected(null);
+      setInputValue('');
+      setCustomersPhones(_objectSpread(_objectSpread({}, customersPhones), {}, {
+        users: []
+      }));
+    }
+  }, [userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id, orderState === null || orderState === void 0 ? void 0 : orderState.loading]);
   var OrderTypesComponent = function OrderTypesComponent() {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orderTypes && (configTypes ? orderTypes.filter(function (type) {
       return (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value)) && type.value !== 1;
@@ -423,9 +438,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     open: openModal.signup,
     width: "80%",
     onClose: function onClose() {
-      return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
-        signup: false
-      }));
+      return handleCloseSignupForm();
     }
   }, /*#__PURE__*/_react.default.createElement(_SignUpForm.SignUpForm, {
     externalPhoneNumber: "".concat(countryCallingCode || localPhoneCode, " ").concat((optSelected === null || optSelected === void 0 ? void 0 : optSelected.value) || phone),

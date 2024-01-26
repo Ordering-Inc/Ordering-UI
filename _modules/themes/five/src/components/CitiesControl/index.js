@@ -14,6 +14,8 @@ var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRig
 var _styles = require("./styles");
 var _Buttons = require("../../styles/Buttons");
 var _SearchBar = require("../SearchBar");
+var _styles2 = require("../Modal/styles");
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -47,7 +49,11 @@ var CitiesControl = exports.CitiesControl = function CitiesControl(props) {
     cityState !== (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.city_id) && handleChangeCity(cityState);
     onClose && onClose();
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, orderState !== null && orderState !== void 0 && orderState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.ModalIconWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return onClose();
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.ModalHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ModalTitle, null, t('SELECT_A_STORE', 'Select a store'))), orderState !== null && orderState !== void 0 && orderState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 40,
     count: 3,
     style: {
@@ -74,10 +80,10 @@ var CitiesControl = exports.CitiesControl = function CitiesControl(props) {
     }, (city === null || city === void 0 ? void 0 : city.id) === cityState ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, {
       className: "city-checked"
     }) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), city === null || city === void 0 ? void 0 : city.name);
-  }), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return handleClick();
     }
-  }, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))));
+  }, t('CONTINUE', 'Continue')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)));
 };
