@@ -165,6 +165,10 @@ const PhoneAutocompleteUI = (props) => {
       setCustomerState({ ...customerState, result: user })
       setOpenModal({ ...openModal, signup: false, customer: true })
     } else {
+      if (!customersPhones?.fetched && option?.value?.length >= 7) {
+        getUsers()
+        return
+      }
       setOpenModal({ ...openModal, signup: true })
     }
   }
@@ -207,9 +211,20 @@ const PhoneAutocompleteUI = (props) => {
     }
   }
 
+  const handleSetInitialValues = () => {
+    setOptSelected(null)
+    setInputValue('')
+    setCustomersPhones({ ...customersPhones, users: [] })
+  }
+
   const handleCloseSignupForm = () => {
     setOpenModal({ ...openModal, signup: false })
-    onRedirectPhoneUrlPage('home')
+    if (onRedirectPhoneUrlPage) {
+      onRedirectPhoneUrlPage('home')
+    } else {
+      onRedirectPage('home')
+      handleSetInitialValues()
+    }
   }
 
   const optionsToSelect = customersPhones.users.map(user => {
@@ -272,9 +287,7 @@ const PhoneAutocompleteUI = (props) => {
 
   useEffect(() => {
     if (!userCustomer?.id && !orderState?.loading) {
-      setOptSelected(null)
-      setInputValue('')
-      setCustomersPhones({ ...customersPhones, users: [] })
+      handleSetInitialValues()
     }
   }, [userCustomer?.id, orderState?.loading])
 
