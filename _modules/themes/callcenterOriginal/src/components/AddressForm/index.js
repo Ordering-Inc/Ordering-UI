@@ -17,6 +17,7 @@ var _GoogleGpsButton = require("../../../../../components/GoogleGpsButton");
 var _styles = require("./styles");
 var _Buttons = require("../../styles/Buttons");
 var _Inputs = require("../../styles/Inputs");
+var _styles2 = require("../AddressList/styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -37,7 +38,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _orderState$options6, _props$afterComponent, _props$afterElements;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _businessesList$busin, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _props$afterMidElemen, _props$afterMidCompon, _address$location5, _address$location6, _orderState$options6, _props$afterComponent, _props$afterElements;
   var addressesList = props.addressesList,
     googleMapsControls = props.googleMapsControls,
     formState = props.formState,
@@ -55,7 +56,8 @@ var AddressFormUI = function AddressFormUI(props) {
     isEnableContinueButton = props.isEnableContinueButton,
     address = props.address,
     notUseCustomerInfo = props.notUseCustomerInfo,
-    addFormRestrictions = props.addFormRestrictions;
+    addFormRestrictions = props.addFormRestrictions,
+    isAllowUnaddressOrderType = props.isAllowUnaddressOrderType;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -69,6 +71,12 @@ var AddressFormUI = function AddressFormUI(props) {
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     auth = _useSession2[0].auth;
+  var _useToast = (0, _orderingComponents.useToast)(),
+    _useToast2 = _slicedToArray(_useToast, 2),
+    showToast = _useToast2[1].showToast;
+  var _useEvent = (0, _orderingComponents.useEvent)(),
+    _useEvent2 = _slicedToArray(_useEvent, 1),
+    events = _useEvent2[0];
   var theme = (0, _styledComponents.useTheme)();
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -105,6 +113,9 @@ var AddressFormUI = function AddressFormUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     locationChange = _useState14[0],
     setLocationChange = _useState14[1];
+  var businessZones = businessesList === null || businessesList === void 0 || (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
+    return business === null || business === void 0 ? void 0 : business.zones;
+  });
   var maxLimitLocation = configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.meters_to_change_address) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value;
   var googleMapsApiKey = configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.google_maps_api_key) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value;
   var isLocationRequired = ((_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.google_autocomplete_selection_required) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1' || ((_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.google_autocomplete_selection_required) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) === 'true';
@@ -313,28 +324,58 @@ var AddressFormUI = function AddressFormUI(props) {
       }
     });
   };
-  var handleChangeAddress = function handleChangeAddress(address) {
-    var _googleInputRef$curre;
-    if (address !== null && address !== void 0 && address.address) {
-      getBusinessDeliveryZones(address === null || address === void 0 ? void 0 : address.location);
-    }
-    setSelectedFromAutocomplete(true);
-    updateChanges(_objectSpread(_objectSpread({}, address), {}, {
-      address: googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value
+  var handleChangeAddress = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(address) {
+      var _googleInputRef$curre;
+      var result;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            if (!(address !== null && address !== void 0 && address.location)) {
+              _context2.next = 5;
+              break;
+            }
+            _context2.next = 3;
+            return getBusinessDeliveryZones(address === null || address === void 0 ? void 0 : address.location);
+          case 3:
+            result = _context2.sent;
+            if ((result === null || result === void 0 ? void 0 : result.length) === 0) {
+              showToast(_orderingComponents.ToastType.Error, t('NO_NEAR_DELIVERY_ZONES', 'No near delivery zones'), 3000);
+            }
+          case 5:
+            setSelectedFromAutocomplete(true);
+            updateChanges(_objectSpread(_objectSpread({}, address), {}, {
+              address: googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value
+            }));
+          case 7:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
     }));
-  };
+    return function handleChangeAddress(_x) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
   var setMapErrors = function setMapErrors(errKey) {
     setAlertState({
       open: true,
       content: !(errKey === 'ERROR_MAX_LIMIT_LOCATION') ? [t(errKey, mapErrors[errKey])] : "".concat([t(errKey, mapErrors[errKey])], " ").concat(maxLimitLocation, " ").concat([t('METTERS', 'meters')])
     });
   };
+  var openStreetView = function openStreetView() {
+    var _formState$changes$lo2, _formState$changes7, _address$location, _formState$changes$lo3, _formState$changes8, _address$location2;
+    var lat = (_formState$changes$lo2 = formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 || (_formState$changes7 = _formState$changes7.location) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.lat) !== null && _formState$changes$lo2 !== void 0 ? _formState$changes$lo2 : address === null || address === void 0 || (_address$location = address.location) === null || _address$location === void 0 ? void 0 : _address$location.lat;
+    var lng = (_formState$changes$lo3 = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 || (_formState$changes8 = _formState$changes8.location) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.lng) !== null && _formState$changes$lo3 !== void 0 ? _formState$changes$lo3 : address === null || address === void 0 || (_address$location2 = address.location) === null || _address$location2 === void 0 ? void 0 : _address$location2.lng;
+    var url = "http://maps.google.com/maps?q=&layer=c&cbll=".concat(lat, ",").concat(lng);
+    window.open(url, '_blank');
+  };
   (0, _react.useEffect)(function () {
-    var _formState$result, _ref5, _formState$changes$ad3, _formState$changes9, _addressState$address8, _ref6, _formState$changes$ad4, _formState$changes10, _addressState$address9;
+    var _formState$result, _ref6, _formState$changes$ad3, _formState$changes11, _addressState$address8, _ref7, _formState$changes$ad4, _formState$changes12, _addressState$address9;
     if (!auth) {
-      var _ref3, _formState$changes$lo2, _formState$changes7, _orderState$options, _ref4, _formState$changes$ad2, _formState$changes8, _orderState$options2;
-      setLocationChange((_ref3 = (_formState$changes$lo2 = formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.location) !== null && _formState$changes$lo2 !== void 0 ? _formState$changes$lo2 : orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 || (_orderState$options = _orderState$options.address) === null || _orderState$options === void 0 ? void 0 : _orderState$options.location) !== null && _ref3 !== void 0 ? _ref3 : '');
-      setAddressValue((_ref4 = (_formState$changes$ad2 = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.address) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2.address) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address) !== null && _ref4 !== void 0 ? _ref4 : '');
+      var _ref4, _formState$changes$lo4, _formState$changes9, _orderState$options, _ref5, _formState$changes$ad2, _formState$changes10, _orderState$options2;
+      setLocationChange((_ref4 = (_formState$changes$lo4 = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.location) !== null && _formState$changes$lo4 !== void 0 ? _formState$changes$lo4 : orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 || (_orderState$options = _orderState$options.address) === null || _orderState$options === void 0 ? void 0 : _orderState$options.location) !== null && _ref4 !== void 0 ? _ref4 : '');
+      setAddressValue((_ref5 = (_formState$changes$ad2 = formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.address) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 || (_orderState$options2 = _orderState$options2.address) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.address) !== null && _ref5 !== void 0 ? _ref5 : '');
       inputNames.forEach(function (field) {
         var _orderState$options3, _orderState$options4;
         return formMethods.setValue(field.name, (formState === null || formState === void 0 ? void 0 : formState.changes[field.name]) || (orderState === null || orderState === void 0 || (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.address) && (orderState === null || orderState === void 0 || (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.address[field.name]) || '');
@@ -348,37 +389,37 @@ var AddressFormUI = function AddressFormUI(props) {
         content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR', 'Error')]
       });
     }
-    setAddressValue((_ref5 = (_formState$changes$ad3 = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.address) !== null && _formState$changes$ad3 !== void 0 ? _formState$changes$ad3 : (_addressState$address8 = addressState.address) === null || _addressState$address8 === void 0 ? void 0 : _addressState$address8.address) !== null && _ref5 !== void 0 ? _ref5 : '');
-    formMethods.setValue('address', (_ref6 = (_formState$changes$ad4 = formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.address) !== null && _formState$changes$ad4 !== void 0 ? _formState$changes$ad4 : (_addressState$address9 = addressState.address) === null || _addressState$address9 === void 0 ? void 0 : _addressState$address9.address) !== null && _ref6 !== void 0 ? _ref6 : '');
+    setAddressValue((_ref6 = (_formState$changes$ad3 = formState === null || formState === void 0 || (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.address) !== null && _formState$changes$ad3 !== void 0 ? _formState$changes$ad3 : (_addressState$address8 = addressState.address) === null || _addressState$address8 === void 0 ? void 0 : _addressState$address8.address) !== null && _ref6 !== void 0 ? _ref6 : '');
+    formMethods.setValue('address', (_ref7 = (_formState$changes$ad4 = formState === null || formState === void 0 || (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.address) !== null && _formState$changes$ad4 !== void 0 ? _formState$changes$ad4 : (_addressState$address9 = addressState.address) === null || _addressState$address9 === void 0 ? void 0 : _addressState$address9.address) !== null && _ref7 !== void 0 ? _ref7 : '');
     if (!isEditing) {
-      var _formState$changes11, _formState$changes12, _formState$changes13, _formState$changes14, _formState$changes15, _formState$changes16, _firstLocationNoEdit$, _formState$changes17, _firstLocationNoEdit$2;
+      var _formState$changes13, _formState$changes14, _formState$changes15, _formState$changes16, _formState$changes17, _formState$changes18, _firstLocationNoEdit$, _formState$changes19, _firstLocationNoEdit$2;
       inputNames.forEach(function (field) {
         return formMethods.setValue(field.name, (formState === null || formState === void 0 ? void 0 : formState.changes[field.name]) || '');
       });
-      (formState === null || formState === void 0 || (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.address) && setLocationChange(formState === null || formState === void 0 || (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.location);
-      if (formState !== null && formState !== void 0 && (_formState$changes13 = formState.changes) !== null && _formState$changes13 !== void 0 && _formState$changes13.address && (formState === null || formState === void 0 || (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.address) !== (firstLocationNoEdit === null || firstLocationNoEdit === void 0 ? void 0 : firstLocationNoEdit.address) && formState !== null && formState !== void 0 && (_formState$changes15 = formState.changes) !== null && _formState$changes15 !== void 0 && _formState$changes15.location && (formState === null || formState === void 0 || (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 || (_formState$changes16 = _formState$changes16.location) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.lat) !== ((_firstLocationNoEdit$ = firstLocationNoEdit.value) === null || _firstLocationNoEdit$ === void 0 ? void 0 : _firstLocationNoEdit$.lat) && (formState === null || formState === void 0 || (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 || (_formState$changes17 = _formState$changes17.location) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.lng) !== ((_firstLocationNoEdit$2 = firstLocationNoEdit.value) === null || _firstLocationNoEdit$2 === void 0 ? void 0 : _firstLocationNoEdit$2.lng)) {
-        var _formState$changes18, _formState$changes19;
+      (formState === null || formState === void 0 || (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.address) && setLocationChange(formState === null || formState === void 0 || (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.location);
+      if (formState !== null && formState !== void 0 && (_formState$changes15 = formState.changes) !== null && _formState$changes15 !== void 0 && _formState$changes15.address && (formState === null || formState === void 0 || (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.address) !== (firstLocationNoEdit === null || firstLocationNoEdit === void 0 ? void 0 : firstLocationNoEdit.address) && formState !== null && formState !== void 0 && (_formState$changes17 = formState.changes) !== null && _formState$changes17 !== void 0 && _formState$changes17.location && (formState === null || formState === void 0 || (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 || (_formState$changes18 = _formState$changes18.location) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.lat) !== ((_firstLocationNoEdit$ = firstLocationNoEdit.value) === null || _firstLocationNoEdit$ === void 0 ? void 0 : _firstLocationNoEdit$.lat) && (formState === null || formState === void 0 || (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 || (_formState$changes19 = _formState$changes19.location) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.lng) !== ((_firstLocationNoEdit$2 = firstLocationNoEdit.value) === null || _firstLocationNoEdit$2 === void 0 ? void 0 : _firstLocationNoEdit$2.lng)) {
+        var _formState$changes20, _formState$changes21;
         setFirstLocationNoEdit({
-          value: formState === null || formState === void 0 || (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.location,
-          address: formState === null || formState === void 0 || (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.address
+          value: formState === null || formState === void 0 || (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.location,
+          address: formState === null || formState === void 0 || (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.address
         });
       }
     }
     if (isEditing) {
-      var _formState$changes20;
-      if (formState !== null && formState !== void 0 && (_formState$changes20 = formState.changes) !== null && _formState$changes20 !== void 0 && _formState$changes20.location) {
-        var _formState$changes21, _formState$changes22;
+      var _formState$changes22;
+      if (formState !== null && formState !== void 0 && (_formState$changes22 = formState.changes) !== null && _formState$changes22 !== void 0 && _formState$changes22.location) {
+        var _formState$changes23, _formState$changes24;
         var prevLocation = {
           lat: Math.trunc(locationChange === null || locationChange === void 0 ? void 0 : locationChange.lat),
           lng: Math.trunc(locationChange === null || locationChange === void 0 ? void 0 : locationChange.lng)
         };
         var newLocation = {
-          lat: Math.trunc(formState === null || formState === void 0 || (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 || (_formState$changes21 = _formState$changes21.location) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.lat),
-          lng: Math.trunc(formState === null || formState === void 0 || (_formState$changes22 = formState.changes) === null || _formState$changes22 === void 0 || (_formState$changes22 = _formState$changes22.location) === null || _formState$changes22 === void 0 ? void 0 : _formState$changes22.lng)
+          lat: Math.trunc(formState === null || formState === void 0 || (_formState$changes23 = formState.changes) === null || _formState$changes23 === void 0 || (_formState$changes23 = _formState$changes23.location) === null || _formState$changes23 === void 0 ? void 0 : _formState$changes23.lat),
+          lng: Math.trunc(formState === null || formState === void 0 || (_formState$changes24 = formState.changes) === null || _formState$changes24 === void 0 || (_formState$changes24 = _formState$changes24.location) === null || _formState$changes24 === void 0 ? void 0 : _formState$changes24.lng)
         };
         if (prevLocation.lat !== newLocation.lat && prevLocation.lng !== newLocation.lng) {
-          var _formState$changes23;
-          setLocationChange(formState === null || formState === void 0 || (_formState$changes23 = formState.changes) === null || _formState$changes23 === void 0 ? void 0 : _formState$changes23.location);
+          var _formState$changes25;
+          setLocationChange(formState === null || formState === void 0 || (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25.location);
         }
       }
     }
@@ -394,8 +435,8 @@ var AddressFormUI = function AddressFormUI(props) {
   }, [addressState]);
   (0, _react.useEffect)(function () {
     if (!auth) {
-      var _ref7, _formState$changes$lo3, _formState$changes24, _orderState$options5;
-      setLocationChange((_ref7 = (_formState$changes$lo3 = formState === null || formState === void 0 || (_formState$changes24 = formState.changes) === null || _formState$changes24 === void 0 ? void 0 : _formState$changes24.location) !== null && _formState$changes$lo3 !== void 0 ? _formState$changes$lo3 : orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 || (_orderState$options5 = _orderState$options5.address) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.location) !== null && _ref7 !== void 0 ? _ref7 : '');
+      var _ref8, _formState$changes$lo5, _formState$changes26, _orderState$options5;
+      setLocationChange((_ref8 = (_formState$changes$lo5 = formState === null || formState === void 0 || (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.location) !== null && _formState$changes$lo5 !== void 0 ? _formState$changes$lo5 : orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 || (_orderState$options5 = _orderState$options5.address) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.location) !== null && _ref8 !== void 0 ? _ref8 : '');
     }
     return function () {
       setFirstLocationNoEdit({
@@ -418,11 +459,11 @@ var AddressFormUI = function AddressFormUI(props) {
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     inputNames.forEach(function (field) {
-      var _ref8, _formState$changes$fi, _formState$changes25, _addressState$address11;
+      var _ref9, _formState$changes$fi, _formState$changes27, _addressState$address11;
       formMethods.register(field.name, {
         required: isRequiredField(field.name) ? t("VALIDATION_ERROR_".concat(field.name, "_REQUIRED"), "The field ".concat(field.code, " is required")) : null
       });
-      formMethods.setValue(field.name, (_ref8 = (_formState$changes$fi = (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25[field.name]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11[field.name]) !== null && _ref8 !== void 0 ? _ref8 : '');
+      formMethods.setValue(field.name, (_ref9 = (_formState$changes$fi = (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27[field.name]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : (_addressState$address11 = addressState.address) === null || _addressState$address11 === void 0 ? void 0 : _addressState$address11[field.name]) !== null && _ref9 !== void 0 ? _ref9 : '');
     });
   }, [formMethods]);
   (0, _react.useEffect)(function () {
@@ -461,12 +502,12 @@ var AddressFormUI = function AddressFormUI(props) {
       key: i
     }, props));
   }), inputNames.map(function (field) {
-    var _address$location, _address$location2, _formState$result3, _formState$result4, _formState$changes$ad5, _formState$changes26, _configState$configs5, _addressState$address12, _formState$changes27, _addressState$address13, _formState$changes28, _addressState$address14, _formState$changes29, _addressState$address15, _formState$changes30, _addressState$address16, _formState$changes31, _addressState$address17, _formState$changes32, _addressState$address18, _formState$changes33, _addressState$address19, _formState$changes34, _addressState$address20, _formState$changes35, _addressState$address21, _formState$changes36, _addressState$address22, _formState$changes37, _businessesList$busin, _theme$images, _ref9, _formState$changes$fi2, _formState$changes38, _addressState$address23, _ref10, _formState$changes$ad6, _formState$changes39;
+    var _address$location3, _address$location4, _formState$result3, _formState$result4, _formState$changes$ad5, _formState$changes28, _configState$configs5, _addressState$address12, _formState$changes29, _addressState$address13, _formState$changes30, _addressState$address14, _formState$changes31, _addressState$address15, _formState$changes32, _addressState$address16, _formState$changes33, _addressState$address17, _formState$changes34, _addressState$address18, _formState$changes35, _addressState$address19, _formState$changes36, _addressState$address20, _formState$changes37, _addressState$address21, _formState$changes38, _addressState$address22, _formState$changes39, _theme$images, _ref10, _formState$changes$fi2, _formState$changes40, _addressState$address23, _ref11, _formState$changes$ad6, _formState$changes41;
     return showField && showField(field.name) && (field.name === 'address' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
       className: "google-control"
-    }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, !selectedFromAutocomplete && (address === null || address === void 0 ? void 0 : address.address) && (!(address !== null && address !== void 0 && (_address$location = address.location) !== null && _address$location !== void 0 && _address$location.lat) || !(address !== null && address !== void 0 && (_address$location2 = address.location) !== null && _address$location2 !== void 0 && _address$location2.lng)) && /*#__PURE__*/_react.default.createElement(_styles.AddressMarkContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.'))), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, !selectedFromAutocomplete && (address === null || address === void 0 ? void 0 : address.address) && (!(address !== null && address !== void 0 && (_address$location3 = address.location) !== null && _address$location3 !== void 0 && _address$location3.lat) || !(address !== null && address !== void 0 && (_address$location4 = address.location) !== null && _address$location4 !== void 0 && _address$location4.lng)) && /*#__PURE__*/_react.default.createElement(_styles.AddressMarkContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.'))), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
       className: "input-autocomplete",
       apiKey: googleMapsApiKey,
       placeholder: t('ADDRESS', 'Address'),
@@ -486,7 +527,7 @@ var AddressFormUI = function AddressFormUI(props) {
       childRef: function childRef(ref) {
         googleInputRef.current = ref;
       },
-      defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 || (_formState$result4 = formState.result) === null || _formState$result4 === void 0 || (_formState$result4 = _formState$result4.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.address : (_formState$changes$ad5 = formState === null || formState === void 0 || (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.address) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressValue,
+      defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 || (_formState$result4 = formState.result) === null || _formState$result4 === void 0 || (_formState$result4 = _formState$result4.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.address : (_formState$changes$ad5 = formState === null || formState === void 0 || (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.address) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressValue,
       autoComplete: "new-field",
       countryCode: (configState === null || configState === void 0 || (_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.country_autocomplete) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) || '*'
     })), /*#__PURE__*/_react.default.createElement(_GoogleGpsButton.GoogleGpsButton, {
@@ -499,7 +540,7 @@ var AddressFormUI = function AddressFormUI(props) {
       onError: setMapErrors,
       IconButton: _reactBootstrapIcons.GeoAlt,
       IconLoadingButton: _CgSearchLoading.default
-    })), ((addressState === null || addressState === void 0 || (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 || (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
+    })), ((addressState === null || addressState === void 0 || (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 || (_formState$changes29 = formState.changes) === null || _formState$changes29 === void 0 ? void 0 : _formState$changes29.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
       notUseCustomerInfo: notUseCustomerInfo,
       addFormRestrictions: addFormRestrictions
     }, !showMap && /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, {
@@ -507,7 +548,7 @@ var AddressFormUI = function AddressFormUI(props) {
         fontSize: 25,
         marginRight: 5
       }
-    }), ((addressState === null || addressState === void 0 || (_addressState$address13 = addressState.address) === null || _addressState$address13 === void 0 ? void 0 : _addressState$address13.address) || (formState === null || formState === void 0 || (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.address)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address14 = addressState.address) === null || _addressState$address14 === void 0 ? void 0 : _addressState$address14.address) || (formState === null || formState === void 0 || (_formState$changes29 = formState.changes) === null || _formState$changes29 === void 0 ? void 0 : _formState$changes29.address), ', '), ((addressState === null || addressState === void 0 || (_addressState$address15 = addressState.address) === null || _addressState$address15 === void 0 ? void 0 : _addressState$address15.country) || (formState === null || formState === void 0 || (_formState$changes30 = formState.changes) === null || _formState$changes30 === void 0 ? void 0 : _formState$changes30.country)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address16 = addressState.address) === null || _addressState$address16 === void 0 ? void 0 : _addressState$address16.country) || (formState === null || formState === void 0 || (_formState$changes31 = formState.changes) === null || _formState$changes31 === void 0 ? void 0 : _formState$changes31.country), ', '), ((addressState === null || addressState === void 0 || (_addressState$address17 = addressState.address) === null || _addressState$address17 === void 0 ? void 0 : _addressState$address17.address_notes) || (formState === null || formState === void 0 || (_formState$changes32 = formState.changes) === null || _formState$changes32 === void 0 ? void 0 : _formState$changes32.address_notes)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address18 = addressState.address) === null || _addressState$address18 === void 0 ? void 0 : _addressState$address18.address_notes) || (formState === null || formState === void 0 || (_formState$changes33 = formState.changes) === null || _formState$changes33 === void 0 ? void 0 : _formState$changes33.address_notes), ', '), ((addressState === null || addressState === void 0 || (_addressState$address19 = addressState.address) === null || _addressState$address19 === void 0 ? void 0 : _addressState$address19.internal_number) || (formState === null || formState === void 0 || (_formState$changes34 = formState.changes) === null || _formState$changes34 === void 0 ? void 0 : _formState$changes34.internal_number)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address20 = addressState.address) === null || _addressState$address20 === void 0 ? void 0 : _addressState$address20.internal_number) || (formState === null || formState === void 0 || (_formState$changes35 = formState.changes) === null || _formState$changes35 === void 0 ? void 0 : _formState$changes35.internal_number), ', '), ((addressState === null || addressState === void 0 || (_addressState$address21 = addressState.address) === null || _addressState$address21 === void 0 ? void 0 : _addressState$address21.zipcode) || (formState === null || formState === void 0 || (_formState$changes36 = formState.changes) === null || _formState$changes36 === void 0 ? void 0 : _formState$changes36.zipcode)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address22 = addressState.address) === null || _addressState$address22 === void 0 ? void 0 : _addressState$address22.zipcode) || (formState === null || formState === void 0 || (_formState$changes37 = formState.changes) === null || _formState$changes37 === void 0 ? void 0 : _formState$changes37.zipcode), ', '), /*#__PURE__*/_react.default.createElement("a", {
+    }), ((addressState === null || addressState === void 0 || (_addressState$address13 = addressState.address) === null || _addressState$address13 === void 0 ? void 0 : _addressState$address13.address) || (formState === null || formState === void 0 || (_formState$changes30 = formState.changes) === null || _formState$changes30 === void 0 ? void 0 : _formState$changes30.address)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address14 = addressState.address) === null || _addressState$address14 === void 0 ? void 0 : _addressState$address14.address) || (formState === null || formState === void 0 || (_formState$changes31 = formState.changes) === null || _formState$changes31 === void 0 ? void 0 : _formState$changes31.address), ', '), ((addressState === null || addressState === void 0 || (_addressState$address15 = addressState.address) === null || _addressState$address15 === void 0 ? void 0 : _addressState$address15.country) || (formState === null || formState === void 0 || (_formState$changes32 = formState.changes) === null || _formState$changes32 === void 0 ? void 0 : _formState$changes32.country)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address16 = addressState.address) === null || _addressState$address16 === void 0 ? void 0 : _addressState$address16.country) || (formState === null || formState === void 0 || (_formState$changes33 = formState.changes) === null || _formState$changes33 === void 0 ? void 0 : _formState$changes33.country), ', '), ((addressState === null || addressState === void 0 || (_addressState$address17 = addressState.address) === null || _addressState$address17 === void 0 ? void 0 : _addressState$address17.address_notes) || (formState === null || formState === void 0 || (_formState$changes34 = formState.changes) === null || _formState$changes34 === void 0 ? void 0 : _formState$changes34.address_notes)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address18 = addressState.address) === null || _addressState$address18 === void 0 ? void 0 : _addressState$address18.address_notes) || (formState === null || formState === void 0 || (_formState$changes35 = formState.changes) === null || _formState$changes35 === void 0 ? void 0 : _formState$changes35.address_notes), ', '), ((addressState === null || addressState === void 0 || (_addressState$address19 = addressState.address) === null || _addressState$address19 === void 0 ? void 0 : _addressState$address19.internal_number) || (formState === null || formState === void 0 || (_formState$changes36 = formState.changes) === null || _formState$changes36 === void 0 ? void 0 : _formState$changes36.internal_number)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address20 = addressState.address) === null || _addressState$address20 === void 0 ? void 0 : _addressState$address20.internal_number) || (formState === null || formState === void 0 || (_formState$changes37 = formState.changes) === null || _formState$changes37 === void 0 ? void 0 : _formState$changes37.internal_number), ', '), ((addressState === null || addressState === void 0 || (_addressState$address21 = addressState.address) === null || _addressState$address21 === void 0 ? void 0 : _addressState$address21.zipcode) || (formState === null || formState === void 0 || (_formState$changes38 = formState.changes) === null || _formState$changes38 === void 0 ? void 0 : _formState$changes38.zipcode)) && /*#__PURE__*/_react.default.createElement("span", null, (addressState === null || addressState === void 0 || (_addressState$address22 = addressState.address) === null || _addressState$address22 === void 0 ? void 0 : _addressState$address22.zipcode) || (formState === null || formState === void 0 || (_formState$changes39 = formState.changes) === null || _formState$changes39 === void 0 ? void 0 : _formState$changes39.zipcode), ', '), /*#__PURE__*/_react.default.createElement("a", {
       style: {
         textDecoration: 'underline',
         color: 'blue',
@@ -523,21 +564,22 @@ var AddressFormUI = function AddressFormUI(props) {
       apiKey: googleMapsApiKey,
       location: locationChange,
       locations: businessesList === null || businessesList === void 0 ? void 0 : businessesList.businesses,
-      fixedLocation: !isEditing ? firstLocationNoEdit.value : null,
       mapControls: googleMapsControls,
       handleChangeAddressMap: handleChangeAddress,
       setErrors: setMapErrors,
       maxLimitLocation: parseInt(maxLimitLocation, 10),
-      businessZones: businessesList === null || businessesList === void 0 || (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
-        return business === null || business === void 0 ? void 0 : business.zones;
-      }),
+      businessZones: businessZones,
       fallbackIcon: (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo
-    }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+    }), showMap && /*#__PURE__*/_react.default.createElement(_styles.StreetViewText, {
+      onClick: function onClick() {
+        return openStreetView();
+      }
+    }, t('OPEN_STREET_VIEW', 'Open Street view')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, field.name !== 'address_notes' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       className: field.name,
       placeholder: t(field.name.toUpperCase(), field.code),
-      value: (_ref9 = (_formState$changes$fi2 = (_formState$changes38 = formState.changes) === null || _formState$changes38 === void 0 ? void 0 : _formState$changes38[field.name]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : (_addressState$address23 = addressState.address) === null || _addressState$address23 === void 0 ? void 0 : _addressState$address23[field.name]) !== null && _ref9 !== void 0 ? _ref9 : '',
+      value: (_ref10 = (_formState$changes$fi2 = (_formState$changes40 = formState.changes) === null || _formState$changes40 === void 0 ? void 0 : _formState$changes40[field.name]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : (_addressState$address23 = addressState.address) === null || _addressState$address23 === void 0 ? void 0 : _addressState$address23[field.name]) !== null && _ref10 !== void 0 ? _ref10 : '',
       onChange: function onChange(e) {
         formMethods.setValue(field.name, e.target.value);
         handleChangeInput({
@@ -552,7 +594,7 @@ var AddressFormUI = function AddressFormUI(props) {
     }) : /*#__PURE__*/_react.default.createElement(_Inputs.TextArea, {
       rows: 4,
       placeholder: t('ADDRESS_NOTES', 'Address Notes'),
-      value: (_ref10 = (_formState$changes$ad6 = (_formState$changes39 = formState.changes) === null || _formState$changes39 === void 0 ? void 0 : _formState$changes39.address_notes) !== null && _formState$changes$ad6 !== void 0 ? _formState$changes$ad6 : addressState.address.address_notes) !== null && _ref10 !== void 0 ? _ref10 : '',
+      value: (_ref11 = (_formState$changes$ad6 = (_formState$changes41 = formState.changes) === null || _formState$changes41 === void 0 ? void 0 : _formState$changes41.address_notes) !== null && _formState$changes$ad6 !== void 0 ? _formState$changes$ad6 : addressState.address.address_notes) !== null && _ref11 !== void 0 ? _ref11 : '',
       onChange: function onChange(e) {
         formMethods.setValue('address_notes', e.target.value);
         handleChangeInput({
@@ -613,12 +655,18 @@ var AddressFormUI = function AddressFormUI(props) {
       return onCancel();
     },
     hoverColor: "#CCC"
-  }, t('CANCEL', 'Cancel')), Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('CANCEL', 'Cancel')), !(!selectedFromAutocomplete && address !== null && address !== void 0 && address.address && (!(address !== null && address !== void 0 && (_address$location5 = address.location) !== null && _address$location5 !== void 0 && _address$location5.lat) || !(address !== null && address !== void 0 && (_address$location6 = address.location) !== null && _address$location6 !== void 0 && _address$location6.lng))) && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "submit-btn",
     type: "submit",
     disabled: formState.loading,
     color: "primary"
-  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6 = _orderState$options6.address) !== null && _orderState$options6 !== void 0 && _orderState$options6.address ? t('UPDATE', 'Update') : t('ADD_ADDRESS', 'Add address')) : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6 = _orderState$options6.address) !== null && _orderState$options6 !== void 0 && _orderState$options6.address ? t('UPDATE', 'Update') : t('ADD_ADDRESS', 'Add address')) : t('LOADING', 'Loading'))), isAllowUnaddressOrderType && /*#__PURE__*/_react.default.createElement(_styles.WithoutAddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WithoutAddressText, {
+    onClick: function onClick() {
+      return events.emit('go_to_page', {
+        page: 'search'
+      });
+    }
+  }, t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ADDRESS', 'Address'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

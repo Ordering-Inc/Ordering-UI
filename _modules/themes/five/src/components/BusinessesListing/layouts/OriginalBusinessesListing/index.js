@@ -496,14 +496,15 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     showButton: true,
     cateringPreorder: !!cateringTypeString
   }, cateringValues))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    title: t('SELECT_A_STORE', 'Select a store'),
     open: modals.citiesOpen,
     width: "70%",
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         citiesOpen: false
       }));
-    }
+    },
+    padding: "0px",
+    hideCloseDefault: true
   }, /*#__PURE__*/_react.default.createElement(_CitiesControl.CitiesControl, {
     cities: citiesState === null || citiesState === void 0 ? void 0 : citiesState.cities,
     handleChangeCity: handleChangeCity,
