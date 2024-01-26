@@ -98,7 +98,7 @@ const AddressListUI = (props) => {
         address.internal_number === obj.internal_number
       )))) || []
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
-  const isAllowUnaddressOrderType = unaddressedTypes.includes(orderState?.options?.type)
+  const isAllowUnaddressOrderType = unaddressedTypes.includes(orderState?.options?.type) && user?.id === orderState?.options?.user_id
   const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
@@ -280,6 +280,7 @@ const AddressListUI = (props) => {
               addressList?.addresses?.length > 0 &&
               typeof orderState.options?.address === 'object' &&
               !addressOpen &&
+              user?.id === orderState?.options?.user_id &&
               ((!addressOpen && isPopover) || isModal) && (
                 <AddressListUl id='list'>
                   <AddressTitleContainer style={{ display: 'flex' }}>
@@ -390,7 +391,7 @@ const AddressListUI = (props) => {
           )}
         </AddressHalfContainer>
 
-        {(addressList.loading || actionStatus.loading || orderState.loading) && !isProductForm && !addressOpen && (
+        {(addressList.loading || actionStatus.loading || orderState.loading || (user?.id !== orderState?.options?.user_id)) && !isProductForm && !addressOpen && (
           <AddressListUl>
             <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
           </AddressListUl>
