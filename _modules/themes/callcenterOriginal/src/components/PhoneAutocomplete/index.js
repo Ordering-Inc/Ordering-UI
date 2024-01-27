@@ -270,12 +270,13 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     deleteUserCustomer(true);
   };
   var handleOnPaste = function handleOnPaste(e) {
-    var _e$clipboardData$getD;
+    var _e$clipboardData, _e$clipboardData$getD;
     var regex = /\D/;
-    var value = parseInt(e.clipboardData.getData('text'));
-    var length = (_e$clipboardData$getD = e.clipboardData.getData('text')) === null || _e$clipboardData$getD === void 0 ? void 0 : _e$clipboardData$getD.length;
-    if (!regex.test(value) && length >= 7 && !optSelected) {
+    var textCellphone = e === null || e === void 0 || (_e$clipboardData = e.clipboardData) === null || _e$clipboardData === void 0 || (_e$clipboardData$getD = _e$clipboardData.getData) === null || _e$clipboardData$getD === void 0 ? void 0 : _e$clipboardData$getD.call(_e$clipboardData, 'text').replace(/\s/g, '');
+    var value = parseInt(textCellphone);
+    if (!regex.test(value) && (textCellphone === null || textCellphone === void 0 ? void 0 : textCellphone.length) >= 7 && !optSelected) {
       getUsers(value);
+      setInputValue(textCellphone);
     }
   };
   var handleSetInitialValues = function handleSetInitialValues() {
