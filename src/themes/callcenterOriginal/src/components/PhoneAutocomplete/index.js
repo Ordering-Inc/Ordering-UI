@@ -204,10 +204,11 @@ const PhoneAutocompleteUI = (props) => {
 
   const handleOnPaste = (e) => {
     const regex = /\D/
-    const value = parseInt(e.clipboardData.getData('text'))
-    const length = e.clipboardData.getData('text')?.length
-    if (!regex.test(value) && length >= 7 && !optSelected) {
+    const textCellphone = e?.clipboardData?.getData?.('text').replace(/\s/g, '')
+    const value = parseInt(textCellphone)
+    if (!regex.test(value) && textCellphone?.length >= 7 && !optSelected) {
       getUsers(value)
+      setInputValue(textCellphone)
     }
   }
 
