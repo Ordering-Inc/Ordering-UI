@@ -277,6 +277,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     if (!regex.test(value) && (textCellphone === null || textCellphone === void 0 ? void 0 : textCellphone.length) >= 7 && !optSelected) {
       getUsers(value);
       setInputValue(textCellphone);
+      onChangeNumber(textCellphone);
     }
   };
   var handleSetInitialValues = function handleSetInitialValues() {
