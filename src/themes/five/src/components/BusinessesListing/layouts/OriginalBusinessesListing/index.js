@@ -223,6 +223,7 @@ const BusinessesListingUI = (props) => {
     if (!citiesState?.cities?.length || !orderState?.options?.city_id) return
     const selectedCity = citiesState?.cities?.find(city => city?.id === orderState?.options?.city_id)
     if (!selectedCity || !selectedCity?.enabled) changeCityFilter(null)
+    setHasHighRatedBusiness(true)
   }, [citiesState, orderState?.options?.city_id])
 
   useEffect(() => {
