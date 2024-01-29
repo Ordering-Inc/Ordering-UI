@@ -209,6 +209,7 @@ const PhoneAutocompleteUI = (props) => {
     if (!regex.test(value) && textCellphone?.length >= 7 && !optSelected) {
       getUsers(value)
       setInputValue(textCellphone)
+      onChangeNumber(textCellphone)
     }
   }
 
