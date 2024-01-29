@@ -26,7 +26,7 @@ export const ButtonWrapper = styled.div`
   svg {
     position: absolute;
     right: 30px;
-    top: 40px;
+    top: 20px;
     font-size: 25px;
     color: #ffffff;
   }
