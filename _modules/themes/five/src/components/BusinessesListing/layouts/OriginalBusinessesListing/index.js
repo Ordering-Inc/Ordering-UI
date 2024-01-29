@@ -269,6 +269,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       return (city === null || city === void 0 ? void 0 : city.id) === (orderState === null || orderState === void 0 || (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.city_id);
     });
     if (!selectedCity || !(selectedCity !== null && selectedCity !== void 0 && selectedCity.enabled)) changeCityFilter(null);
+    setHasHighRatedBusiness(true);
   }, [citiesState, orderState === null || orderState === void 0 || (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.city_id]);
   (0, _react.useEffect)(function () {
     var _orderState$options9;
