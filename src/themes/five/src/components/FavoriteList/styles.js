@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
@@ -168,4 +169,3 @@ export const BusinessLogo = (props) => {
     </BusinessLogoStyled>
   )
 }
-
