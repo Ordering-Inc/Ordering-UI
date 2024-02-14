@@ -10,6 +10,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _orderingComponents = require("ordering-components");
 var _reactHookForm = require("react-hook-form");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+var _reactPhoneNumberInput = require("react-phone-number-input");
 var _styledComponents = require("styled-components");
 var _SignUpForm = require("../SignUpForm");
 var _styles = require("./styles");
@@ -249,17 +250,23 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       }
     };
     if (isValid) {
+      var _configs$validation_p, _configs$validation_p2;
       phoneNumberParser = (0, _libphonenumberJs.default)(number);
+      if (!parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10)) {
+        var _phoneNumberParser;
+        if ((_phoneNumberParser = phoneNumberParser) !== null && _phoneNumberParser !== void 0 && _phoneNumberParser.nationalNumber) phoneNumberParser.nationalNumber = (0, _reactPhoneNumberInput.formatPhoneNumber)(number);
+      }
     }
     if (phoneNumberParser) {
+      var _phoneNumberParser2, _phoneNumberParser3;
       phoneNumber = {
         country_phone_code: {
           name: 'country_phone_code',
-          value: phoneNumberParser.countryCallingCode
+          value: (_phoneNumberParser2 = phoneNumberParser) === null || _phoneNumberParser2 === void 0 ? void 0 : _phoneNumberParser2.countryCallingCode
         },
         cellphone: {
           name: 'cellphone',
-          value: phoneNumberParser.nationalNumber
+          value: (_phoneNumberParser3 = phoneNumberParser) === null || _phoneNumberParser3 === void 0 ? void 0 : _phoneNumberParser3.nationalNumber
         }
       };
     }
@@ -419,7 +426,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
   }), openCalendar && /*#__PURE__*/_react.default.createElement(_DatePicker.DatePickerUI, {
     value: birthdate,
     onChange: _handleChangeDate,
-    name: 'birthdate'
+    name: "birthdate"
   })), (!(user !== null && user !== void 0 && user.guest_id) && !!showInputPhoneNumber || isOrderTypeValidationField || (user === null || user === void 0 ? void 0 : user.guest_id)) && showCustomerCellphone && (requiredFields && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu7 = requiredFields.includes) === null || _requiredFields$inclu7 === void 0 ? void 0 : _requiredFields$inclu7.call(requiredFields, 'cellphone')) || !requiredFields || !isCheckoutPlace) && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
