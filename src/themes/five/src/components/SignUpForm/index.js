@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import parsePhoneNumber from 'libphonenumber-js'
+import { formatPhoneNumber } from 'react-phone-number-input'
+
 import OtpInput from 'react-otp-input'
 
 import {
@@ -229,16 +231,19 @@ const SignUpFormUI = (props) => {
     }
     if (isValid) {
       phoneNumberParser = parsePhoneNumber(number)
+      if (!parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10)) {
+        if (phoneNumberParser?.nationalNumber) phoneNumberParser.nationalNumber = formatPhoneNumber(number)
+      }
     }
     if (phoneNumberParser) {
       phoneNumber = {
         country_phone_code: {
           name: 'country_phone_code',
-          value: phoneNumberParser.countryCallingCode
+          value: phoneNumberParser?.countryCallingCode
         },
         cellphone: {
           name: 'cellphone',
-          value: phoneNumberParser.nationalNumber
+          value: phoneNumberParser?.nationalNumber
         }
       }
     }
@@ -327,7 +332,7 @@ const SignUpFormUI = (props) => {
   }, [recaptchaConfig])
 
   const preventWhiteSpaceOnKeyDown = (e) => {
-    if (e.key === " ") {
+    if (e.key === ' ') {
       e.preventDefault()
     }
   }

@@ -3,6 +3,8 @@ import Skeleton from 'react-loading-skeleton'
 import { useSession, useLanguage, useCustomer, useConfig } from 'ordering-components'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
+import { formatPhoneNumber } from 'react-phone-number-input'
+
 import { useTheme } from 'styled-components'
 import { SignUpForm } from '../SignUpForm'
 
@@ -205,16 +207,19 @@ export const UserFormDetailsUI = (props) => {
     }
     if (isValid) {
       phoneNumberParser = parsePhoneNumber(number)
+      if (!parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10)) {
+        if (phoneNumberParser?.nationalNumber) phoneNumberParser.nationalNumber = formatPhoneNumber(number)
+      }
     }
     if (phoneNumberParser) {
       phoneNumber = {
         country_phone_code: {
           name: 'country_phone_code',
-          value: phoneNumberParser.countryCallingCode
+          value: phoneNumberParser?.countryCallingCode
         },
         cellphone: {
           name: 'cellphone',
-          value: phoneNumberParser.nationalNumber
+          value: phoneNumberParser?.nationalNumber
         }
       }
     }
