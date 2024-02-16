@@ -51,7 +51,8 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     verifyPhoneState = props.verifyPhoneState,
     setFormState = props.setFormState,
     willVerifyOtpState = props.willVerifyOtpState,
-    setWillVerifyOtpState = props.setWillVerifyOtpState;
+    setWillVerifyOtpState = props.setWillVerifyOtpState,
+    forceOrderingCheckout = props.forceOrderingCheckout;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -196,7 +197,8 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
   }), !isHiddenAddress && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "account",
     pfchangs: pfchangs,
-    setShowMyCards: setShowMyCards
+    setShowMyCards: setShowMyCards,
+    forceOrderingCheckout: forceOrderingCheckout
   }), showMyCards ? /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
     fromProfile: true
   }, /*#__PURE__*/_react.default.createElement(_PaymentOptionOpenPay.PaymentOptionOpenPay, {
