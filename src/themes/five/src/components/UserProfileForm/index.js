@@ -53,7 +53,8 @@ const UserProfileFormUI = (props) => {
     verifyPhoneState,
     setFormState,
     willVerifyOtpState,
-    setWillVerifyOtpState
+    setWillVerifyOtpState,
+    forceOrderingCheckout
   } = props
 
   const [, t] = useLanguage()
@@ -192,7 +193,7 @@ const UserProfileFormUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       {!isHiddenAddress && (
-        <ProfileOptions value='account' pfchangs={pfchangs} setShowMyCards={setShowMyCards} />
+        <ProfileOptions value='account' pfchangs={pfchangs} setShowMyCards={setShowMyCards} forceOrderingCheckout={forceOrderingCheckout} />
       )}
       {showMyCards ? (
         <Container>

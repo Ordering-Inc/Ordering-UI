@@ -22,7 +22,8 @@ export const MyOrders = (props) => {
     hideOrders,
     businessesSearchList,
     onProductRedirect,
-    pfchangs
+    pfchangs,
+    forceOrderingCheckout
   } = props
 
   const [, t] = useLanguage()
@@ -113,7 +114,7 @@ export const MyOrders = (props) => {
         <h2>{t('PREVIOUSLY_ORDERED', 'Previously ordered')}</h2>
       )}
       {!hideOrders && (
-        <ProfileOptions value='orders' pfchangs={pfchangs} setShowMyCards={setShowMyCards} />
+        <ProfileOptions value='orders' pfchangs={pfchangs} setShowMyCards={setShowMyCards} forceOrderingCheckout={forceOrderingCheckout} />
       )}
       {showMyCards ? (
         <Container>

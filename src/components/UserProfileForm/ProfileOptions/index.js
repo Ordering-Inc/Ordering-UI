@@ -12,7 +12,8 @@ export const ProfileOptions = (props) => {
   const {
     value,
     pfchangs,
-    setShowMyCards
+    setShowMyCards,
+    forceOrderingCheckout
   } = props
   const [tabValue, setTabValue] = useState(value)
   const [, t] = useLanguage()
@@ -22,7 +23,7 @@ export const ProfileOptions = (props) => {
   const [{ configs }] = useConfig()
 
   const showAddressListTab = orderingTheme?.theme?.profile?.components?.address_list?.components?.layout?.position === 'new_page'
-  const showMyCardsTab = configs?.webview_checkout_deuna.value === '1'
+  const showMyCardsTab = (configs?.webview_checkout_deuna.value === '1' && !forceOrderingCheckout)
 
   const handleGoToPage = (data) => {
     setTabValue(data.page === 'profile' ? 'account' : data.page)
