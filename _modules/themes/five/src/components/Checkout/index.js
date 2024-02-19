@@ -94,7 +94,8 @@ var CheckoutUI = function CheckoutUI(props) {
     cateringHours = props.cateringHours,
     wowAcumulationPoints = props.wowAcumulationPoints,
     configSlug = props.configSlug,
-    isCSVPopup = props.isCSVPopup;
+    isCSVPopup = props.isCSVPopup,
+    forceOrderingCheckout = props.forceOrderingCheckout;
   var theme = (0, _styledComponents.useTheme)();
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
     _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
@@ -220,7 +221,7 @@ var CheckoutUI = function CheckoutUI(props) {
 
   var daysForApplyCoupon = [0, 2, 4]; // Domingo 0
   var isApplyMasterCoupon = !(hasCateringProducts !== null && hasCateringProducts !== void 0 && hasCateringProducts.result) && daysForApplyCoupon.includes((0, _moment.default)().days());
-  var _useState31 = (0, _react.useState)((configs === null || configs === void 0 ? void 0 : (_configs$webview_chec = configs.webview_checkout_deuna) === null || _configs$webview_chec === void 0 ? void 0 : _configs$webview_chec.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$webview_chec2 = configs.webview_checkout_deuna) === null || _configs$webview_chec2 === void 0 ? void 0 : _configs$webview_chec2.value) === true),
+  var _useState31 = (0, _react.useState)(((configs === null || configs === void 0 ? void 0 : (_configs$webview_chec = configs.webview_checkout_deuna) === null || _configs$webview_chec === void 0 ? void 0 : _configs$webview_chec.value) === '1' || (configs === null || configs === void 0 ? void 0 : (_configs$webview_chec2 = configs.webview_checkout_deuna) === null || _configs$webview_chec2 === void 0 ? void 0 : _configs$webview_chec2.value) === true) && !forceOrderingCheckout),
     _useState32 = _slicedToArray(_useState31, 2),
     isShowDeUnaCheckout = _useState32[0],
     setShowDeUnaCheckout = _useState32[1];
@@ -1046,7 +1047,7 @@ var CheckoutUI = function CheckoutUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     name: "cardSecurityCode",
     id: "csv",
-    type: 'password',
+    type: "password",
     minLength: 3,
     maxLength: paymethodSelected !== null && paymethodSelected !== void 0 && paymethodSelected.data && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : (_paymethodSelected$da11 = paymethodSelected.data) === null || _paymethodSelected$da11 === void 0 ? void 0 : _paymethodSelected$da11.brandCardName) !== 'american_express' ? 3 : 4,
     onChange: handleChange,

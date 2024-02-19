@@ -35,7 +35,8 @@ var MyOrders = function MyOrders(props) {
   var hideOrders = props.hideOrders,
     businessesSearchList = props.businessesSearchList,
     onProductRedirect = props.onProductRedirect,
-    pfchangs = props.pfchangs;
+    pfchangs = props.pfchangs,
+    forceOrderingCheckout = props.forceOrderingCheckout;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -196,7 +197,8 @@ var MyOrders = function MyOrders(props) {
   }), hideOrders && !allEmpty && /*#__PURE__*/_react.default.createElement("h2", null, t('PREVIOUSLY_ORDERED', 'Previously ordered')), !hideOrders && /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "orders",
     pfchangs: pfchangs,
-    setShowMyCards: setShowMyCards
+    setShowMyCards: setShowMyCards,
+    forceOrderingCheckout: forceOrderingCheckout
   }), showMyCards ? /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.MyOrdersMenuContainer, {
     fromOrders: true
   }, /*#__PURE__*/_react.default.createElement(_PaymentOptionOpenPay.PaymentOptionOpenPay, {
