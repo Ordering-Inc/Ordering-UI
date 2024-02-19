@@ -127,7 +127,8 @@ const CheckoutUI = (props) => {
     cateringHours,
     wowAcumulationPoints,
     configSlug,
-    isCSVPopup
+    isCSVPopup,
+    forceOrderingCheckout
   } = props
   const theme = useTheme()
   const [validationFields] = useValidationFields()
@@ -182,7 +183,7 @@ const CheckoutUI = (props) => {
 
   const daysForApplyCoupon = [0, 2, 4] // Domingo 0
   const isApplyMasterCoupon = !hasCateringProducts?.result && daysForApplyCoupon.includes(moment().days())
-  const [isShowDeUnaCheckout, setShowDeUnaCheckout] = useState(configs?.webview_checkout_deuna?.value === '1' || configs?.webview_checkout_deuna?.value === true)
+  const [isShowDeUnaCheckout, setShowDeUnaCheckout] = useState((configs?.webview_checkout_deuna?.value === '1' || configs?.webview_checkout_deuna?.value === true) && !forceOrderingCheckout)
   const loyaltyBrands = configs?.brands_wow_loyalty_program?.value && JSON.parse(configs?.brands_wow_loyalty_program?.value)[0]
   const isAlsea = ordering.project === 'alsea'
 
@@ -1071,8 +1072,8 @@ const CheckoutUI = (props) => {
               validationFields?.fields?.checkout?.driver_tip?.required &&
               (Number(cart?.driver_tip) <= 0) && (
               <WarningText>
-                {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
-              </WarningText>
+                  {t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')}
+                </WarningText>
             )}
           </WrapperRightContainer>
           <AlertComponent
@@ -1144,14 +1145,14 @@ const CheckoutUI = (props) => {
                     <Input
                       name='cardSecurityCode'
                       id='csv'
-                      type={'password'}
+                      type='password'
                       minLength={3}
                       maxLength={paymethodSelected?.data && paymethodSelected?.data?.brandCardName !== 'american_express' ? 3 : 4}
                       onChange={handleChange}
                       placeholder='CVV'
                       onKeyPress={(e) => {
                         if (!/[0-9]/.test(e.key)) {
-                          e.preventDefault();
+                          e.preventDefault()
                         }
                       }}
                     />
