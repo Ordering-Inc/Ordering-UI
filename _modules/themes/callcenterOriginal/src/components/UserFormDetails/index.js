@@ -10,6 +10,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _orderingComponents = require("ordering-components");
 var _reactHookForm = require("react-hook-form");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+var _reactPhoneNumberInput = require("react-phone-number-input");
 var _styles = require("./styles");
 var _Inputs = require("../../styles/Inputs");
 var _Buttons = require("../../styles/Buttons");
@@ -52,6 +53,9 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
   var _useSession = (0, _orderingComponents.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     userSession = _useSession2[0].user;
+  var _useConfig = (0, _orderingComponents.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     isValidPhoneNumber = _useState2[0],
@@ -162,17 +166,23 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       }
     };
     if (isValid) {
+      var _configs$validation_p, _configs$validation_p2;
       phoneNumberParser = (0, _libphonenumberJs.default)(number);
+      if (!parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10)) {
+        var _phoneNumberParser, _formatPhoneNumber, _formatPhoneNumber$re;
+        if ((_phoneNumberParser = phoneNumberParser) !== null && _phoneNumberParser !== void 0 && _phoneNumberParser.nationalNumber) phoneNumberParser.nationalNumber = (_formatPhoneNumber = (0, _reactPhoneNumberInput.formatPhoneNumber)(number)) === null || _formatPhoneNumber === void 0 || (_formatPhoneNumber$re = _formatPhoneNumber.replace) === null || _formatPhoneNumber$re === void 0 ? void 0 : _formatPhoneNumber$re.call(_formatPhoneNumber, /\s/g, '');
+      }
     }
     if (phoneNumberParser) {
+      var _phoneNumberParser2, _phoneNumberParser3;
       phoneNumber = {
         country_phone_code: {
           name: 'country_phone_code',
-          value: phoneNumberParser.countryCallingCode
+          value: (_phoneNumberParser2 = phoneNumberParser) === null || _phoneNumberParser2 === void 0 ? void 0 : _phoneNumberParser2.countryCallingCode
         },
         cellphone: {
           name: 'cellphone',
-          value: phoneNumberParser.nationalNumber
+          value: (_phoneNumberParser3 = phoneNumberParser) === null || _phoneNumberParser3 === void 0 ? void 0 : _phoneNumberParser3.nationalNumber
         }
       };
     }
