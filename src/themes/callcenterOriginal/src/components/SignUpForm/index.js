@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../Confirm'
 import { InputPhoneNumber } from '../InputPhoneNumber'
 import parsePhoneNumber from 'libphonenumber-js'
-
+import { formatPhoneNumber } from 'react-phone-number-input'
 import {
   SignupForm as SignUpController,
   useLanguage,
@@ -129,16 +129,19 @@ const SignUpFormUI = (props) => {
     }
     if (isValid) {
       phoneNumberParser = parsePhoneNumber(number)
+      if (!parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10)) {
+        if (phoneNumberParser?.nationalNumber) phoneNumberParser.nationalNumber = formatPhoneNumber(number).replace(/\s/g, '')
+      }
     }
     if (phoneNumberParser) {
       phoneNumber = {
         country_phone_code: {
           name: 'country_phone_code',
-          value: phoneNumberParser.countryCallingCode
+          value: phoneNumberParser?.countryCallingCode
         },
         cellphone: {
           name: 'cellphone',
-          value: phoneNumberParser.nationalNumber
+          value: phoneNumberParser?.nationalNumber
         }
       }
     }
@@ -154,7 +157,7 @@ const SignUpFormUI = (props) => {
   }
 
   const preventWhiteSpaceOnKeyDown = (e) => {
-    if (e.key === " ") {
+    if (e.key === ' ') {
       e.preventDefault()
     }
   }
