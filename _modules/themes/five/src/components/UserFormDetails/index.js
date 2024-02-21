@@ -253,8 +253,8 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       var _configs$validation_p, _configs$validation_p2;
       phoneNumberParser = (0, _libphonenumberJs.default)(number);
       if (!parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10)) {
-        var _phoneNumberParser;
-        if ((_phoneNumberParser = phoneNumberParser) !== null && _phoneNumberParser !== void 0 && _phoneNumberParser.nationalNumber) phoneNumberParser.nationalNumber = (0, _reactPhoneNumberInput.formatPhoneNumber)(number);
+        var _phoneNumberParser, _formatPhoneNumber, _formatPhoneNumber$re;
+        if ((_phoneNumberParser = phoneNumberParser) !== null && _phoneNumberParser !== void 0 && _phoneNumberParser.nationalNumber) phoneNumberParser.nationalNumber = (_formatPhoneNumber = (0, _reactPhoneNumberInput.formatPhoneNumber)(number)) === null || _formatPhoneNumber === void 0 || (_formatPhoneNumber$re = _formatPhoneNumber.replace) === null || _formatPhoneNumber$re === void 0 ? void 0 : _formatPhoneNumber$re.call(_formatPhoneNumber, /\s/g, '');
       }
     }
     if (phoneNumberParser) {
