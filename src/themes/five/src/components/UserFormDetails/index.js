@@ -208,7 +208,7 @@ export const UserFormDetailsUI = (props) => {
     if (isValid) {
       phoneNumberParser = parsePhoneNumber(number)
       if (!parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10)) {
-        if (phoneNumberParser?.nationalNumber) phoneNumberParser.nationalNumber = formatPhoneNumber(number)
+        if (phoneNumberParser?.nationalNumber) phoneNumberParser.nationalNumber = formatPhoneNumber(number)?.replace?.(/\s/g, '')
       }
     }
     if (phoneNumberParser) {
