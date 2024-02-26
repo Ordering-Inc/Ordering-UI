@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useForm } from 'react-hook-form'
+import { useLocation } from 'react-router-dom'
 import {
   AddressForm as AddressFormController,
   GoogleAutocompleteInput,
@@ -75,6 +76,7 @@ const AddressFormUI = (props) => {
   const [, { showToast }] = useToast()
   const [events] = useEvent()
   const theme = useTheme()
+  const { pathname } = useLocation()
 
   const [selectedFromAutocomplete, setSelectedFromAutocomplete] = useState(false)
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
@@ -82,6 +84,7 @@ const AddressFormUI = (props) => {
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
   const [showMap, setShowMap] = useState(false)
+  const [geolocationState, setGeolocationState] = useState({ result: null, error: false })
   const isEditing = !!addressState.address?.id
   const googleInputRef = useRef()
 
@@ -381,6 +384,34 @@ const AddressFormUI = (props) => {
       getBusinessDeliveryZones(address?.location)
     }
   }, [address])
+
+  const getPositionSuccessCallback = () => {
+
+  }
+
+  const getPositionErrorCallback = () => {
+
+  }
+
+  const queryGeolocationPermission = async () => {
+    const permissionsStatus = await navigator.permissions.query({ name: 'geolocation' })
+    if (permissionsStatus?.state !== 'denied') {
+      navigator.geolocation.getCurrentPosition(getPositionSuccessCallback, getPositionErrorCallback)
+      return
+    }
+    setGeolocationState({ result: null, error: t('PLEASE_ACCEPT_GEOLOCATION_PERMISSION', 'Please accept geolocation permission') })
+  }
+
+  useEffect(() => {
+    if (!(pathname.includes('/confirm-address'))) {
+      return
+    }
+    if (navigator?.geolocation) {
+      setGeolocationState({ result: null, error: t('GEOLOCATION_NOT_SUPPORTED_BROWSER', 'Geolocation not supported in your browser') })
+      return
+    }
+    queryGeolocationPermission()
+  }, [navigator?.geolocation, pathname])
 
   return (
     <div className='address-form'>

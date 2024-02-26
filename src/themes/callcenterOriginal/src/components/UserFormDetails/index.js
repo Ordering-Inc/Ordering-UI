@@ -34,7 +34,10 @@ export const UserFormDetailsUI = (props) => {
     handleButtonUpdateClick,
     isCheckout,
     userData,
-    isCustomerMode
+    isCustomerMode,
+    confirmDataLayout,
+    inputsconfirmData,
+    handleRequestCustomerAddress
   } = props
 
   const formMethods = useForm()
@@ -110,6 +113,9 @@ export const UserFormDetailsUI = (props) => {
       })
       return
     }
+    if (Object.keys(formState.changes).length === 0 && isPhoneNumberValid && confirmDataLayout) {
+      handleRequestCustomerAddress()
+    }
     if (Object.keys(formState.changes).length > 0 && isPhoneNumberValid) {
       let changes = null
       if (user?.cellphone && !userPhoneNumber) {
@@ -121,7 +127,10 @@ export const UserFormDetailsUI = (props) => {
       if (isCustomerMode) {
         setUserCustomer(formState.result.result, true)
       }
-      handleButtonUpdateClick(changes)
+      handleButtonUpdateClick({
+        ...changes,
+        confirmDataLayout
+      })
     }
   }
 
@@ -201,7 +210,7 @@ export const UserFormDetailsUI = (props) => {
         setUserCellPhone(true)
       }
     }
-    if (!isEdit) onCancel()
+    if (!isEdit) onCancel && onCancel()
   }, [user, isEdit])
 
   useEffect(() => {
@@ -232,7 +241,12 @@ export const UserFormDetailsUI = (props) => {
         </React.Fragment>))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
-      <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} isCheckout={isCheckout} isEdit={isEdit}>
+      <FormInput
+        onSubmit={formMethods.handleSubmit(onSubmit)}
+        isCheckout={isCheckout}
+        isEdit={isEdit}
+        confirmDataLayout={confirmDataLayout}
+      >
         {!validationFields?.loading ? (
           <>
             {
@@ -245,13 +259,17 @@ export const UserFormDetailsUI = (props) => {
               props.beforeMidComponents?.map((BeforeMidComponents, i) => (
                 <BeforeMidComponents key={i} {...props} />))
             }
-            <Divider />
-            {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
+            {!confirmDataLayout && (
+              <Divider />
+            )}
+            {sortInputFields({ values: inputsconfirmData || validationFields?.fields?.checkout }).map(field =>
               showField && showField(field.code) && (
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
                     <InputGroup>
-                      <p>{t(field.code.toUpperCase(), field?.name)}</p>
+                      {!confirmDataLayout && (
+                        <p>{t(field.code.toUpperCase(), field?.name)}</p>
+                      )}
                       <Input
                         key={field.id}
                         type={field.type}
@@ -273,8 +291,10 @@ export const UserFormDetailsUI = (props) => {
                       />
                     </InputGroup>
                   ) : (
-                    <InputGroup>
-                      <p>{t(field.code.toUpperCase(), field?.name)}</p>
+                    <InputGroup confirmDataLayout={confirmDataLayout}>
+                      {!confirmDataLayout && (
+                        <p>{t(field.code.toUpperCase(), field?.name)}</p>
+                      )}
                       <Input
                         key={field.id}
                         type={field.type}
@@ -303,8 +323,10 @@ export const UserFormDetailsUI = (props) => {
               )
             )}
             {!!showInputPhoneNumber && (
-              <InputPhoneNumberWrapper>
-                <p>{t('PHONE', 'Phone')}</p>
+              <InputPhoneNumberWrapper confirmDataLayout={confirmDataLayout}>
+                {!confirmDataLayout && (
+                  <p>{t('PHONE', 'Phone')}</p>
+                )}
                 <InputPhoneNumber
                   user={user}
                   value={userPhoneNumber}
@@ -314,7 +336,9 @@ export const UserFormDetailsUI = (props) => {
                 />
               </InputPhoneNumberWrapper>
             )}
-            <Divider />
+            {!confirmDataLayout && (
+              <Divider />
+            )}
             {
               props.afterMidElements?.map((MidElement, i) => (
                 <React.Fragment key={i}>
@@ -326,14 +350,18 @@ export const UserFormDetailsUI = (props) => {
                 <MidComponent key={i} {...props} />))
             }
             <ActionsForm>
-              {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
+              {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading || confirmDataLayout) && (
                 <Button
                   id='form-btn'
                   color='primary'
                   type='submit'
                   disabled={formState.loading}
                 >
-                  {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
+                  {confirmDataLayout
+                    ? t('SEND_SMS', 'Send sms')
+                    : formState.loading
+                      ? t('UPDATING', 'Updating...')
+                      : t('UPDATE', 'Update')}
                 </Button>
               )}
             </ActionsForm>
