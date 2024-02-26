@@ -77,7 +77,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
     handleCreateGuestUser = props.handleCreateGuestUser,
     actionStatus = props.actionStatus,
     isCustomerMode = props.isCustomerMode,
-    isAlsea = props.isAlsea;
+    isAlsea = props.isAlsea,
+    quesoYSalsaOptions = props.quesoYSalsaOptions;
   var product = productObject.product,
     loading = productObject.loading,
     error = productObject.error;
@@ -644,7 +645,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
           setIsScrollAvailable: setIsScrollAvailable,
           pizzaState: pizzaState,
           productCart: productCart,
-          isAlsea: isAlsea
+          isAlsea: isAlsea,
+          quesoYSalsaOptions: quesoYSalsaOptions
         });
       }))));
     });
