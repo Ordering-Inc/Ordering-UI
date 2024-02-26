@@ -2,7 +2,7 @@
   "app_id": "ordering-react",
 	"notification_app": "orderingweb",
   "app_name": "Ordering",
-  "project": "luisv4",
+  "project": "jorgev4",
   "api": {
     "url": "https://apiv4.ordering.co",
     "language": "en",

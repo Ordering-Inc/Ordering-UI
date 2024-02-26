@@ -1,7 +1,6 @@
-import React from 'react'
-import { GoogleGpsButton as GpsButton } from 'ordering-components'
+import React, { useEffect } from 'react'
 import { GpsButtonStyle } from './styles'
-
+import { GoogleGpsButton as GpsButton } from './test'
 const GoogleGpsButtonUI = (props) => {
   const {
     handleGPS,
@@ -9,8 +8,16 @@ const GoogleGpsButtonUI = (props) => {
     googleReady,
     isLoading,
     IconButton,
-    IconLoadingButton
+    IconLoadingButton,
+    geolocationState,
+    enableAutoGeolocation,
+    location
   } = props
+
+  useEffect(() => {
+    if (geolocationState?.result === 'OK' || location || !enableAutoGeolocation) return
+    handleGPS()
+  }, [geolocationState?.result, isGoogleButton, googleReady, location])
 
   return (
     <GpsButtonStyle

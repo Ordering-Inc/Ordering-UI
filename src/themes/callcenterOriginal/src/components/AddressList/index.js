@@ -14,14 +14,13 @@ import {
 } from 'react-bootstrap-icons'
 
 import {
-  AddressList as AddressListController,
   useLanguage,
   useOrder,
   useCustomer,
   useEvent,
   useConfig
 } from 'ordering-components'
-
+import { AddressList as AddressListController } from './test'
 import {
   AddressListContainer,
   AddressListUl,
@@ -47,7 +46,7 @@ import { NotFoundSource } from '../NotFoundSource'
 import { Button } from '../../styles/Buttons'
 import { Modal } from '../Modal'
 import { AddressForm } from '../AddressForm'
-import { Confirm } from '../Confirm'
+import { Alert, Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../../../../utils'
 
@@ -75,7 +74,9 @@ const AddressListUI = (props) => {
     notUseCustomerInfo,
     franchiseId,
     setIsSavedAddress,
-    isFromPhoneAutocomplete
+    isFromPhoneAutocomplete,
+    setUserConfirmPhone,
+    userConfirmPhone
   } = props
 
   const [, t] = useLanguage()
@@ -84,7 +85,7 @@ const AddressListUI = (props) => {
   const [{ configs }] = useConfig()
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [confirm, setConfirm] = useState({ open: false, title: null, content: null, handleOnAccept: null, handleOnCancel: null })
   const theme = useTheme()
   const [{ user }] = useCustomer()
 
@@ -198,6 +199,10 @@ const AddressListUI = (props) => {
     setIsAddressFormOpen && setIsAddressFormOpen(false)
   }
 
+  const handleOnCancel = () => {
+    setConfirm({ ...confirm, open: false })
+  }
+
   /**
    * Close modals and alerts
    */
@@ -225,6 +230,17 @@ const AddressListUI = (props) => {
       openAddress({})
     }
   }, [userCustomerSetup?.imported_address_text, addressList.addresses, addressList?.loading, addressList?.error, isOpenUserData])
+
+  useEffect(() => {
+    if (!addressList?.addedBySocket) return
+    setConfirm({
+      open: true,
+      title: t('NEW_ADDRESS_REGISTERED', 'New address registered'),
+      content: t('NEW_ADDRESS_REGISTERED_CONTENT', 'The user has sent the address'),
+      handleOnAccept: () => setConfirm({ ...confirm, open: false }),
+      handleOnCancel: ''
+    })
+  }, [addressList?.addedBySocket])
 
   return (
     <>
@@ -268,6 +284,8 @@ const AddressListUI = (props) => {
                   onSaveAddress={handleSaveAddress}
                   userCustomerSetup={userCustomerSetup}
                   isAllowUnaddressOrderType={isAllowUnaddressOrderType}
+                  userConfirmPhone={userConfirmPhone}
+                  setUserConfirmPhone={setUserConfirmPhone}
                 />
               )
             }
@@ -370,6 +388,8 @@ const AddressListUI = (props) => {
                   franchiseId={franchiseId}
                   addFormRestrictions={addFormRestrictions}
                   isAllowUnaddressOrderType={isAllowUnaddressOrderType}
+                  userConfirmPhone={userConfirmPhone}
+                  setUserConfirmPhone={setUserConfirmPhone}
                 />
               </AddressFormContainer>
             )}
@@ -435,17 +455,19 @@ const AddressListUI = (props) => {
                 onSaveAddress={handleSaveAddress}
                 userCustomerSetup={userCustomerSetup}
                 isAllowUnaddressOrderType={isAllowUnaddressOrderType}
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
               />
             </Modal>
           )
         }
         <Confirm
-          title={t('SEARCH', 'Search')}
+          title={confirm.title || t('SEARCH', 'Search')}
           content={confirm.content}
           acceptText={t('ACCEPT', 'Accept')}
           open={confirm.open}
           onClose={() => setConfirm({ ...confirm, open: false })}
-          onCancel={() => setConfirm({ ...confirm, open: false })}
+          onCancel={confirm.handleOnCancel ?? handleOnCancel}
           onAccept={confirm.handleOnAccept}
           closeOnBackdrop={false}
         />

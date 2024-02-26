@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useForm } from 'react-hook-form'
+import { useLocation } from 'react-router-dom'
 import {
   AddressForm as AddressFormController,
   GoogleAutocompleteInput,
@@ -35,12 +36,12 @@ import {
   AddressMarkContainer,
   StreetViewText,
   WithoutAddressContainer,
-  WrapperSMS
+  WrapperSMS,
+  AddressFormContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
-import { WithoutAddressText } from '../AddressList/styles'
 
 const AddressFormUI = (props) => {
   const {
@@ -75,6 +76,7 @@ const AddressFormUI = (props) => {
   const [, { showToast }] = useToast()
   const [events] = useEvent()
   const theme = useTheme()
+  const { pathname } = useLocation()
 
   const [selectedFromAutocomplete, setSelectedFromAutocomplete] = useState(false)
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
@@ -82,6 +84,7 @@ const AddressFormUI = (props) => {
   const [addressValue, setAddressValue] = useState(formState.changes?.address ?? addressState.address?.address ?? '')
   const [firstLocationNoEdit, setFirstLocationNoEdit] = useState({ value: null })
   const [showMap, setShowMap] = useState(false)
+  const [geolocationState, setGeolocationState] = useState({ result: null, error: false })
   const isEditing = !!addressState.address?.id
   const googleInputRef = useRef()
 
@@ -90,7 +93,8 @@ const AddressFormUI = (props) => {
       ? addressState?.address?.location
       : formState.changes?.location ?? null
   )
-
+  const isHideMap = theme?.address?.components?.map?.hidden
+  const isHideIcons = theme?.address?.components?.icons?.hidden
   const businessZones = businessesList?.businesses?.map(business => business?.zones)
   const maxLimitLocation = configState?.configs?.meters_to_change_address?.value
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
@@ -201,6 +205,10 @@ const AddressFormUI = (props) => {
     if (keyCode === 13) { e.preventDefault() }
   }
 
+  const showFieldWithTheme = (name) => {
+    return !theme?.address?.components?.[name]?.hidden
+  }
+
   const onSubmit = async () => {
     if (!auth && formState?.changes?.address === '' && addressState?.address?.address) {
       setAlertState({
@@ -253,18 +261,18 @@ const AddressFormUI = (props) => {
     })
   }
 
-  const handleChangeAddress = async (address) => {
-    if (address?.location) {
-      const result = await getBusinessDeliveryZones(address?.location)
-      if (result?.length === 0) {
-        showToast(ToastType.Error, t('NO_NEAR_DELIVERY_ZONES', 'No near delivery zones'), 3000)
-      }
-    }
+  const handleChangeAddress = async (address, isGps) => {
+    console.log('address', address)
+
     setSelectedFromAutocomplete(true)
     updateChanges({
       ...address,
-      address: googleInputRef?.current?.value
+      address: isGps ? address?.address : googleInputRef?.current?.value || address?.address
     })
+    if (isGps && googleInputRef.current) {
+      googleInputRef.current.value = address?.address
+    }
+    setGeolocationState({ result: 'OK', error: null })
   }
 
   const setMapErrors = (errKey) => {
@@ -276,11 +284,8 @@ const AddressFormUI = (props) => {
     })
   }
 
-  const openStreetView = () => {
-    const lat = formState?.changes?.location?.lat ?? address?.location?.lat
-    const lng = formState?.changes?.location?.lng ?? address?.location?.lng
-    const url = `http://maps.google.com/maps?q=&layer=c&cbll=${lat},${lng}`
-    window.open(url, '_blank')
+  const onErrorGps = (error) => {
+    setGeolocationState({ result: null, error })
   }
 
   useEffect(() => {
@@ -377,284 +382,223 @@ const AddressFormUI = (props) => {
   }, [formMethods])
 
   useEffect(() => {
-    if (address?.location) {
-      getBusinessDeliveryZones(address?.location)
+    if (!window.navigator?.geolocation) {
+      setGeolocationState({ result: null, error: t('GEOLOCATION_NOT_SUPPORTED_BROWSER', 'Geolocation not supported in your browser') })
     }
-  }, [address])
+  }, [navigator?.geolocation])
 
   return (
-    <div className='address-form'>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      {(configState.loading || addressState.loading) && (
-        <WrapperSkeleton>
-          <Skeleton height={50} count={5} style={{ marginBottom: '10px' }} />
-        </WrapperSkeleton>
-      )}
+    <AddressFormContainer>
+      <h1>
+        {t('ADD_YOUR_ADDRESS', 'Add your address')}
+      </h1>
+      <div className='address-form'>
+        {props.beforeElements?.map((BeforeElement, i) => (
+          <React.Fragment key={i}>
+            {BeforeElement}
+          </React.Fragment>))}
+        {props.beforeComponents?.map((BeforeComponent, i) => (
+          <BeforeComponent key={i} {...props} />))}
+        {(configState.loading || addressState.loading) && (
+          <WrapperSkeleton>
+            <Skeleton height={50} count={5} style={{ marginBottom: '10px' }} />
+          </WrapperSkeleton>
+        )}
 
-      {!configState.loading && !addressState.loading && (
-        <FormControl
-          onSubmit={formMethods.handleSubmit(onSubmit)}
-          onKeyDown={(e) => checkKeyDown(e)}
-          autoComplete='off'
-        >
+        {!configState.loading && !addressState.loading && (
+          <FormControl
+            onSubmit={formMethods.handleSubmit(onSubmit)}
+            onKeyDown={(e) => checkKeyDown(e)}
+            autoComplete='off'
+          >
+            {
+              props.beforeMidElements?.map((BeforeMidElements, i) => (
+                <React.Fragment key={i}>
+                  {BeforeMidElements}
+                </React.Fragment>))
+            }
+            {
+              props.beforeMidComponents?.map((BeforeMidComponents, i) => (
+                <BeforeMidComponents key={i} {...props} />))
+            }
 
-          {
-            props.beforeMidElements?.map((BeforeMidElements, i) => (
-              <React.Fragment key={i}>
-                {BeforeMidElements}
-              </React.Fragment>))
-          }
-          {
-            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-              <BeforeMidComponents key={i} {...props} />))
-          }
-
-          {inputNames.map(field => showField && showField(field.name) && (
-            field.name === 'address' ? (
-              <React.Fragment key={field.name}>
-                <AddressWrap className='google-control'>
-                  <WrapAddressInput>
-                    {!selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng) && (
-                      <AddressMarkContainer>
-                        <p>
-                          {t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.')}
-                        </p>
-                      </AddressMarkContainer>
-                    )}
-                    {(!showMap && !formState?.changes?.address?.location && userConfirmPhone?.result) && (
-                      <AddressMarkContainer blue>
-                        <p>
-                          {t('LINK_SENT_TO_USER', 'Link sent to user. We are waiting to the address update')}
-                        </p>
-                      </AddressMarkContainer>
-                    )}
-                    <GoogleAutocompleteInput
-                      className='input-autocomplete'
+            {inputNames.map(field => showField && showField(field.name) && (
+              field.name === 'address' ? (
+                <React.Fragment key={field.name}>
+                  <AddressWrap className='google-control'>
+                    <WrapAddressInput>
+                      {!(addressState?.address?.location || formState?.changes?.location) && (
+                        <>
+                          {!geolocationState?.result && !geolocationState?.error && (
+                            <AddressMarkContainer>
+                              <p>
+                                {t('GEOCALITION_PLEASE_ACCEPT_PERMISSIONS', 'We are geolocating you, please accept the permissions')}
+                              </p>
+                            </AddressMarkContainer>
+                          )}
+                          {geolocationState?.error && (
+                            <AddressMarkContainer error>
+                              <p>
+                                {geolocationState?.error}
+                              </p>
+                            </AddressMarkContainer>
+                          )}
+                        </>
+                      )}
+                      <GoogleAutocompleteInput
+                        className='input-autocomplete'
+                        apiKey={googleMapsApiKey}
+                        placeholder={t('ADDRESS', 'Address')}
+                        onChangeAddress={(e) => {
+                          formMethods.setValue('address', e.address)
+                          handleChangeAddress(e)
+                        }}
+                        onChange={(e) => {
+                          handleChangeInput({ target: { name: 'address', value: e.target.value } })
+                          setAddressValue(e.target.value)
+                        }}
+                        childRef={(ref) => {
+                          googleInputRef.current = ref
+                        }}
+                        defaultValue={
+                          formState?.result?.result
+                            ? formState?.result?.result?.address
+                            : formState?.changes?.address ?? addressValue
+                        }
+                        autoComplete='new-password'
+                        countryCode={configState?.configs?.country_autocomplete?.value || '*'}
+                      />
+                    </WrapAddressInput>
+                    <GoogleGpsButton
+                      enableAutoGeolocation
+                      className='gps-button'
                       apiKey={googleMapsApiKey}
-                      placeholder={t('ADDRESS', 'Address')}
-                      onChangeAddress={(e) => {
+                      onAddress={(e) => {
                         formMethods.setValue('address', e.address)
-                        handleChangeAddress(e)
+                        handleChangeAddress(e, true)
                       }}
-                      onChange={(e) => {
-                        handleChangeInput({ target: { name: 'address', value: e.target.value } })
-                        setAddressValue(e.target.value)
-                      }}
-                      childRef={(ref) => {
-                        googleInputRef.current = ref
-                      }}
-                      defaultValue={
-                        formState?.result?.result
-                          ? formState?.result?.result?.address
-                          : formState?.changes?.address ?? addressValue
-                      }
-                      autoComplete='new-field'
-                      countryCode={configState?.configs?.country_autocomplete?.value || '*'}
+                      onError={onErrorGps}
+                      IconButton={GeoAlt}
+                      IconLoadingButton={CgSearchLoading}
+                      geolocationState={geolocationState}
+                      location={addressState?.address?.location || formState?.changes?.location}
                     />
-                  </WrapAddressInput>
-                  <GoogleGpsButton
-                    className='gps-button'
-                    apiKey={googleMapsApiKey}
-                    onAddress={(e) => {
-                      formMethods.setValue('address', e.address)
-                      handleChangeAddress(e)
-                    }}
-                    onError={setMapErrors}
-                    IconButton={GeoAlt}
-                    IconLoadingButton={CgSearchLoading}
-                  />
-                </AddressWrap>
-                {(addressState?.address?.location || formState?.changes?.location) && (
-                  <WrapperMap notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
+                  </AddressWrap>
 
-                    {!showMap && (
-                      <section>
-                        <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
-                        {(addressState?.address?.address || formState?.changes?.address) && (
-                          <span>{addressState?.address?.address || formState?.changes?.address}{', '}</span>
-                        )}
-                        {(addressState?.address?.country || formState?.changes?.country) && (
-                          <span>{addressState?.address?.country || formState?.changes?.country}{', '}</span>
-                        )}
-                        {(addressState?.address?.address_notes || formState?.changes?.address_notes) && (
-                          <span>{addressState?.address?.address_notes || formState?.changes?.address_notes}{', '}</span>
-                        )}
-                        {(addressState?.address?.internal_number || formState?.changes?.internal_number) && (
-                          <span>{addressState?.address?.internal_number || formState?.changes?.internal_number}{', '}</span>
-                        )}
-                        {(addressState?.address?.zipcode || formState?.changes?.zipcode) && (
-                          <span>{addressState?.address?.zipcode || formState?.changes?.zipcode}{', '}</span>
-                        )}
-                        <a
-                          style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
-                          onClick={() => setShowMap(!showMap)}
-                        >
-                          {t('SHOW_MAP', 'Show Map')}
-                        </a>
-                      </section>
-                    )}
-
-                    {locationChange && showMap && (
+                  {!isHideMap && locationChange && (addressState?.address?.location || formState?.changes?.location) && (
+                    <WrapperMap>
                       <GoogleMapsMap
-                        useMapWithBusinessZones
-                        deactiveAlerts
-                        avoidFitBounds
                         apiKey={googleMapsApiKey}
                         location={locationChange}
-                        locations={businessesList?.businesses}
+                        fixedLocation={!isEditing ? firstLocationNoEdit.value : null}
                         mapControls={googleMapsControls}
                         handleChangeAddressMap={handleChangeAddress}
                         setErrors={setMapErrors}
                         maxLimitLocation={parseInt(maxLimitLocation, 10)}
-                        businessZones={businessZones}
-                        fallbackIcon={theme.images?.dummies?.businessLogo}
                       />
-                    )}
-                    {showMap && (
-                      <StreetViewText onClick={() => openStreetView()}>
-                        {t('OPEN_STREET_VIEW', 'Open Street view')}
-                      </StreetViewText>
-                    )}
-                  </WrapperMap>
-                )}
-                {(!showMap && !formState?.changes?.location && !userConfirmPhone?.result) && (
-                  <WrapperSMS>
-                    <section>
-                      <span>
-                        {t('CANT_FIND_DIRECTION', 'Can\'t find the direction')}{'? '}
-                      </span>
-                      <a
-                        style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
-                        onClick={() => setUserConfirmPhone({ open: true, result: null })}
-                      >
-                        {t('SEND_SMS_TO_CLIENT', 'Send SMS to client')}
-                      </a>
-                    </section>
-                  </WrapperSMS>
-                )}
-              </React.Fragment>
-            ) : (
-              <React.Fragment key={field.name}>
-                {field.name !== 'address_notes' ? (
-                  <Input
-                    className={field.name}
-                    placeholder={t(field.name.toUpperCase(), field.code)}
-                    value={formState.changes?.[field.name] ?? addressState.address?.[field.name] ?? ''}
-                    onChange={(e) => {
-                      formMethods.setValue(field.name, e.target.value)
-                      handleChangeInput({ target: { name: field.name, value: e.target.value } })
-                    }}
-                    autoComplete='new-field'
-                    maxLength={30}
-                  />
-                ) : (
-                  <TextArea
-                    rows={4}
-                    placeholder={t('ADDRESS_NOTES', 'Address Notes')}
-                    value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
-                    onChange={(e) => {
-                      formMethods.setValue('address_notes', e.target.value)
-                      handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
-                    }}
-                    autoComplete='new-field'
-                    maxLength={250}
-                  />
-                )}
-              </React.Fragment>
-            )
-          ))}
-
-          {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
-
-          <AddressTagSection>
-            <Button className={addressTag === 'home' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('home')}>
-              <span><House /></span>
-            </Button>
-            <Button className={addressTag === 'office' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('office')}>
-              <span><Building /></span>
-            </Button>
-            <Button className={addressTag === 'favorite' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('favorite')}>
-              <span><Heart /></span>
-            </Button>
-            <Button className={addressTag === 'other' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('other')}>
-              <span><PlusLg /></span>
-            </Button>
-          </AddressTagSection>
-          {
-            props.afterMidElements?.map((MidElement, i) => (
-              <React.Fragment key={i}>
-                {MidElement}
-              </React.Fragment>))
-          }
-          {
-            props.afterMidComponents?.map((MidComponent, i) => (
-              <MidComponent key={i} {...props} />))
-          }
-          <FormActions>
-            {
-              !addFormRestrictions && Object.keys(formState?.changes).length === 0 && (
-                <Button
-                  outline
-                  type='button'
-                  disabled={formState.loading}
-                  onClick={() => onCancel()}
-                  hoverColor='#CCC'
-                >
-                  {t('CANCEL', 'Cancel')}
-                </Button>
+                    </WrapperMap>
+                  )}
+                </React.Fragment>
+              ) : (
+                <React.Fragment key={field.name}>
+                  {(isRequiredField(field.name) || showFieldWithTheme(field.name)) && (
+                    <>
+                      {field.name !== 'address_notes' ? (
+                        <Input
+                          className={field.name}
+                          placeholder={t(field.name.toUpperCase(), field.code)}
+                          value={formState.changes?.[field.name] ?? addressState.address?.[field.name] ?? ''}
+                          onChange={(e) => {
+                            formMethods.setValue(field.name, e.target.value)
+                            handleChangeInput({ target: { name: field.name, value: e.target.value } })
+                          }}
+                          autoComplete='new-field'
+                          maxLength={30}
+                        />
+                      ) : (
+                        <TextArea
+                          rows={3}
+                          placeholder={t('ADDRESS_NOTES', 'Address Notes')}
+                          value={formState.changes?.address_notes ?? addressState.address.address_notes ?? ''}
+                          onChange={(e) => {
+                            formMethods.setValue('address_notes', e.target.value)
+                            handleChangeInput({ target: { name: 'address_notes', value: e.target.value } })
+                          }}
+                          autoComplete='new-field'
+                          maxLength={250}
+                        />
+                      )}
+                    </>
+                  )}
+                </React.Fragment>
               )
-            }
+            ))}
 
-            {!(!selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng)) && Object.keys(formState?.changes).length > 0 && (
-              <Button
-                id='submit-btn'
-                type='submit'
-                disabled={formState.loading}
-                color='primary'
-              >
-                {!formState.loading ? (
-                  <>
-                    {
-                      isEditing || (!auth && orderState.options?.address?.address)
-                        ? t('UPDATE', 'Update')
-                        : t('ADD_ADDRESS', 'Add address')
-                    }
-                  </>
-                ) : (
-                  t('LOADING', 'Loading')
-                )}
-              </Button>
+            {!formState.loading && formState.error && <p style={{ color: '#c10000' }}>{formState.error}</p>}
+            {!isHideIcons && (
+              <AddressTagSection>
+                <Button className={addressTag === 'home' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('home')}>
+                  <span><House /></span>
+                </Button>
+                <Button className={addressTag === 'office' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('office')}>
+                  <span><Building /></span>
+                </Button>
+                <Button className={addressTag === 'favorite' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('favorite')}>
+                  <span><Heart /></span>
+                </Button>
+                <Button className={addressTag === 'other' ? 'active' : ''} bgtransparent type='button' onClick={() => handleAddressTag('other')}>
+                  <span><PlusLg /></span>
+                </Button>
+              </AddressTagSection>
             )}
-          </FormActions>
-          {isAllowUnaddressOrderType && (
-            <WithoutAddressContainer>
-              <WithoutAddressText onClick={() => events.emit('go_to_page', { page: 'search' })}>{t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')}</WithoutAddressText>
-            </WithoutAddressContainer>
-          )}
-        </FormControl>
-      )}
+            {
+              props.afterMidElements?.map((MidElement, i) => (
+                <React.Fragment key={i}>
+                  {MidElement}
+                </React.Fragment>))
+            }
+            {
+              props.afterMidComponents?.map((MidComponent, i) => (
+                <MidComponent key={i} {...props} />))
+            }
+            <FormActions>
+              {Object.keys(formState?.changes).length > 0 && (
+                <Button
+                  id='submit-btn'
+                  type='submit'
+                  disabled={formState.loading}
+                  color='primary'
+                >
+                  {!formState.loading ? (
+                    <>
+                      {t('ADD_ADDRESS', 'Add address')}
+                    </>
+                  ) : (
+                    t('LOADING', 'Loading')
+                  )}
+                </Button>
+              )}
+            </FormActions>
+          </FormControl>
+        )}
 
-      <Alert
-        title={t('ADDRESS', 'Address')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
-    </div>
+        <Alert
+          title={t('ADDRESS', 'Address')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
+          closeOnBackdrop={false}
+        />
+        {props.afterComponents?.map((AfterComponent, i) => (
+          <AfterComponent key={i} {...props} />))}
+        {props.afterElements?.map((AfterElement, i) => (
+          <React.Fragment key={i}>
+            {AfterElement}
+          </React.Fragment>))}
+      </div>
+    </AddressFormContainer>
   )
 }
 

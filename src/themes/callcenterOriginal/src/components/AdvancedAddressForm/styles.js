@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const FormActions = styled.div`
-  margin-top: 5px;
+  margin-top: 35px;
   padding: 10px 0px;
   display: flex;
   justify-content: space-between;
@@ -26,7 +26,7 @@ export const FormControl = styled.form`
   input {
     box-sizing: border-box;
     margin: 10px 0px;
-    height: 43px;
+    height: 50px;
     width: 100%;
     &.internal_number,
     &.zipcode {
@@ -49,7 +49,8 @@ export const FormControl = styled.form`
     border: 1px solid #BBB;
     border-radius: 30px;
     font-size: 16px;
-    padding: 7px 15px;
+    padding: 7px 15px !important;
+    height: 50px;
     outline: none;
     ::placeholder {
       color: #DBDCDB;
@@ -70,7 +71,7 @@ export const FormControl = styled.form`
   .google-control {
     .gps-button {
       border-radius: 7.6px;
-      width: 43px;
+      width: auto;
     }
 
     input {
@@ -102,24 +103,20 @@ export const FormControl = styled.form`
 `
 
 export const AddressWrap = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
-  bottom: 79%;
-  right: 0px;
-  padding-right: 20px;
+  position: relative;
+  margin-top: -11px;
+
   button {
     height: 41px;
-    right: 25px;
+    right: 1px;
     border: none;
-    width: 25px;
-    position: absolute;
-    z-index: 1000;
 
     ${props => props.theme?.rtl && css`
-      left: 25px;
+      left: 1px;
       right: initial;
     `}
 
@@ -133,7 +130,6 @@ export const WrapAddressInput = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  z-index: 1000;
   i {
     padding: 0px 10px;
   }
@@ -198,19 +194,8 @@ export const AddressTagSection = styled.div`
 `
 
 export const WrapperMap = styled.div`
-  z-index: 100;
-  width: 50%;
-  position: absolute;
-  bottom: 2%;
-  right: 0;
-  padding-right: 20px;
-  padding-top: 30px;
-  height: ${({ notUseCustomerInfo }) =>
-    notUseCustomerInfo
-      ? '370px'
-      : '480px'
-  };
-
+  width: 100%;
+  height: 170px;
   > div {
     position: relative !important;
     width: 100% !important;
@@ -218,23 +203,50 @@ export const WrapperMap = styled.div`
     border-radius: 15px;
   }
 `
-export const WrapperSMS = styled.div`
-  z-index: 100;
-  width: 50%;
-  position: absolute;
-  top: 15%;
-  right: 0;
-  padding-right: 20px;
-  padding-top: 30px;
-`
 
 export const WrapperSkeleton = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 9px 10px;
 
   span {
     width: 100%;
+  }
+`
+
+export const AddressFormContainer = styled.div`
+  width: 90%;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 20px;
+
+
+  h1{
+    font-size: 24px;
+    text-align: center;
+
+  }
+
+  > div{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  button{
+    width: 100%;
+    align-self: center;
+  }
+
+  @media (min-width: 768px){
+    width: 90%;
+    margin-top: 40px;
+
+    ul{
+      width: 100%;
+    }
+
   }
 `
 
@@ -255,30 +267,11 @@ export const AddressMarkContainer = styled.div`
     font-size: 12px;
   }
 
-  ${({ blue }) => blue && css`
-      background-color: #CFF4FC;
-      border: 1px solid #9EEAF9;
+  ${({ error }) => error && css`
+      background-color: #F8D7DA;
+      border: 1px solid #F1AEB5;
       p {
-        color: #055160;
+        color: #842029;
       }
   `}
-`
-
-export const StreetViewText = styled.span`
-  position: absolute;
-  right: 35px;
-  top: 30px;
-  text-decoration: underline;
-  color: ${({ theme }) => theme?.colors?.primary};
-  z-index: 9999;
-  cursor: pointer;
-`
-
-export const WithoutAddressContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  p {
-    margin-bottom: 0;
-  }
 `
