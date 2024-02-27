@@ -438,7 +438,8 @@ var CheckoutUI = function CheckoutUI(props) {
                 brand_id: _context2.t4,
                 wow_rewards_user_id: _context2.t5,
                 min_amount: _context2.t6,
-                max_amount: _context2.t7
+                max_amount: _context2.t7,
+                reward_behavior_name: null
               };
               params = {
                 method: 'POST',

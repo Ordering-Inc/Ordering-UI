@@ -10,7 +10,7 @@ var _templateObject, _templateObject2, _templateObject3, _templateObject4, _temp
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var Tabs = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;  \n  justify-content: center;\n  ", "\n  \n  ", "\n"])), function (_ref) {
+var Tabs = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  ", "\n  \n  ", "\n"])), function (_ref) {
   var variant = _ref.variant;
   return variant === 'primary' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.darkTextColor;
@@ -21,7 +21,7 @@ var Tabs = _styledComponents.default.div(_templateObject || (_templateObject = _
   return (theme === null || theme === void 0 ? void 0 : (_theme$general = theme.general) === null || _theme$general === void 0 ? void 0 : (_theme$general$compon = _theme$general.components) === null || _theme$general$compon === void 0 ? void 0 : (_theme$general$compon2 = _theme$general$compon.layout) === null || _theme$general$compon2 === void 0 ? void 0 : _theme$general$compon2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    width: 100%;\n    @media (min-width: 768px){\n      width: initial;\n    }\n  "])));
 });
 exports.Tabs = Tabs;
-var Tab = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (_ref3) {
+var Tab = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  cursor: pointer;\n  font-weight: 700;\n  font-size: 16px;\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (_ref3) {
   var hover = _ref3.hover;
   return hover && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    border: 1px solid transparent;\n    @keyframes hoverTab {\n      from { \n        color: ", ";\n      }\n      to { \n        color: ", ";\n      }\n    }\n    \n    &:hover{\n      animation-name: hoverTab;\n      animation-duration: 1s;\n      color: ", ";\n      ", "\n    }\n  "])), function (props) {
     var _props$theme, _props$theme$colors;
@@ -56,7 +56,7 @@ var Tab = _styledComponents.default.div(_templateObject4 || (_templateObject4 = 
     fromLogin = _ref12.fromLogin;
   return !active && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     var _props$theme2, _props$theme2$colors;
-    return fromLogin ? '#000000' : ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : (_props$theme2$colors = _props$theme2.colors) === null || _props$theme2$colors === void 0 ? void 0 : _props$theme2$colors.tertiary) || props.theme.colors.darkGray;
+    return fromLogin ? '#909BA9' : ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : (_props$theme2$colors = _props$theme2.colors) === null || _props$theme2$colors === void 0 ? void 0 : _props$theme2$colors.tertiary) || props.theme.colors.darkGray;
   });
 });
 exports.Tab = Tab;

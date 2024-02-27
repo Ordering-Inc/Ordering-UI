@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PFChangsHomeHero = function PFChangsHomeHero(props) {
-  var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderState$options4, _orderState$options4$, _orderState$options6, _orderState$options6$, _theme$images, _theme$images$general, _theme$colors, _theme$colors2, _orderState$options7, _orderState$options7$, _orderState$options8, _orderState$options8$, _configState$configs2, _configState$configs3, _orderState$options9, _orderState$options9$, _orderState$options10, _orderState$options11, _configState$configs4, _configState$configs5, _theme$images2, _theme$images2$genera, _orderState$options12;
+  var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderState$options4, _orderState$options4$, _orderState$options6, _orderState$options6$, _theme$images, _theme$images$general, _theme$colors, _theme$colors2, _orderState$options7, _orderState$options7$, _orderState$options8, _orderState$options8$, _configState$configs2, _configState$configs3, _orderState$options9, _orderState$options9$, _orderState$options10, _orderState$options11, _configState$configs4, _configState$configs5, _theme$images2, _theme$images2$genera, _orderState$options12, _theme$colors3, _theme$colors4, _theme$colors5, _theme$colors6;
   var contentPosition = props.contentPosition,
     brandId = props.brandId,
     handleSetGuestLogin = props.handleSetGuestLogin,
@@ -71,54 +71,58 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     _useState2 = _slicedToArray(_useState, 2),
     modals = _useState2[0],
     setModals = _useState2[1];
-  var _useState3 = (0, _react.useState)(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type),
+  var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    orderTypeSelected = _useState4[0],
-    setOrderTypeSelected = _useState4[1];
-  var _useState5 = (0, _react.useState)(false),
+    orderTypeModal = _useState4[0],
+    setOrderTypeModal = _useState4[1];
+  var _useState5 = (0, _react.useState)(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type),
     _useState6 = _slicedToArray(_useState5, 2),
-    showAllLocations = _useState6[0],
-    setShowAllLocations = _useState6[1];
-  var _useState7 = (0, _react.useState)([]),
+    orderTypeSelected = _useState6[0],
+    setOrderTypeSelected = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    businessesLocations = _useState8[0],
-    setBusinessesLocations = _useState8[1];
-  var _useState9 = (0, _react.useState)(null),
+    showAllLocations = _useState8[0],
+    setShowAllLocations = _useState8[1];
+  var _useState9 = (0, _react.useState)([]),
     _useState10 = _slicedToArray(_useState9, 2),
-    currentLocation = _useState10[0],
-    setCurrentLocation = _useState10[1];
+    businessesLocations = _useState10[0],
+    setBusinessesLocations = _useState10[1];
   var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    businessClikedId = _useState12[0],
-    setBusinessClikedId = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
+    currentLocation = _useState12[0],
+    setCurrentLocation = _useState12[1];
+  var _useState13 = (0, _react.useState)(null),
     _useState14 = _slicedToArray(_useState13, 2),
-    geoLocation = _useState14[0],
-    setGeoLocation = _useState14[1];
+    businessClikedId = _useState14[0],
+    setBusinessClikedId = _useState14[1];
   var _useState15 = (0, _react.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    isMapReady = _useState16[0],
-    setIsMapReady = _useState16[1];
+    geoLocation = _useState16[0],
+    setGeoLocation = _useState16[1];
   var _useState17 = (0, _react.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    mapActivated = _useState18[0],
-    setMapActivated = _useState18[1];
+    isMapReady = _useState18[0],
+    setIsMapReady = _useState18[1];
   var _useState19 = (0, _react.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    goToElement = _useState20[0],
-    setGoToElement = _useState20[1];
-  var _useState21 = (0, _react.useState)({}),
+    mapActivated = _useState20[0],
+    setMapActivated = _useState20[1];
+  var _useState21 = (0, _react.useState)(false),
     _useState22 = _slicedToArray(_useState21, 2),
-    imageMapDimensions = _useState22[0],
-    setImageMapDimension = _useState22[1];
-  var _useState23 = (0, _react.useState)(false),
+    goToElement = _useState22[0],
+    setGoToElement = _useState22[1];
+  var _useState23 = (0, _react.useState)({}),
     _useState24 = _slicedToArray(_useState23, 2),
-    canBeRedirected = _useState24[0],
-    setCanBeRedirected = _useState24[1];
-  var _useState25 = (0, _react.useState)(window.innerWidth),
+    imageMapDimensions = _useState24[0],
+    setImageMapDimension = _useState24[1];
+  var _useState25 = (0, _react.useState)(false),
     _useState26 = _slicedToArray(_useState25, 2),
-    innerWidth = _useState26[0],
-    setInnerWidth = _useState26[1];
+    canBeRedirected = _useState26[0],
+    setCanBeRedirected = _useState26[1];
+  var _useState27 = (0, _react.useState)(window.innerWidth),
+    _useState28 = _slicedToArray(_useState27, 2),
+    innerWidth = _useState28[0],
+    setInnerWidth = _useState28[1];
   var theme = (0, _styledComponents.useTheme)();
   var isResponsive = innerWidth < 768;
   var userCustomer = parseInt(window.localStorage.getItem('user-customer'));
@@ -208,7 +212,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       if (result.state === 'granted' || result.state === 'prompt') {
         setGeoLocation(true);
       } else {
-        handleSetGuestLogin && handleSetGuestLogin('loginModal', true);
+        !auth && setOrderTypeModal(true);
       }
     });
     return function () {
@@ -221,7 +225,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
   (0, _react.useEffect)(function () {
     var _orderState$options3, _orderState$options3$;
     if (geoLocation && !auth && !(orderState !== null && orderState !== void 0 && (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && (_orderState$options3$ = _orderState$options3.address) !== null && _orderState$options3$ !== void 0 && _orderState$options3$.location)) {
-      handleSetGuestLogin && handleSetGuestLogin('loginModal', true);
+      setOrderTypeModal(true);
     }
   }, [geoLocation, auth, orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location]);
   (0, _react.useEffect)(function () {
@@ -428,6 +432,66 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       return handleFindBusinesses();
     },
     geoLocation: geoLocation
-  }))));
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('ELIGE_TIPO_DE_ENTREGA', 'Elige el tipo de entrega'),
+    titleAlign: "left",
+    open: orderTypeModal,
+    onClose: function onClose() {
+      return setOrderTypeModal(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
+    orderTypeSelected: orderTypeSelected,
+    style: {
+      marginBottom: 20
+    }
+  }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    color: orderTypeSelected === 2 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#FFF',
+    onClick: function onClick() {
+      handleChangeOrderType(2);
+      setOrderTypeModal(false);
+      handleSetGuestLogin && handleSetGuestLogin('addressModal', true);
+    },
+    disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
+  }, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    color: orderTypeSelected === 1 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.tertiary) || '#FFF',
+    onClick: function onClick() {
+      handleChangeOrderType(1);
+      setOrderTypeModal(false);
+      handleSetGuestLogin && handleSetGuestLogin('addressModal', true);
+    },
+    disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
+  }, t('DELIVERY_UPPER', 'Delivery'))), /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      height: 10,
+      display: 'flex',
+      background: '#F8F9FA'
+    }
+  }), /*#__PURE__*/_react.default.createElement("p", {
+    style: {
+      marginTop: 20,
+      fontSize: 16,
+      fontWeight: 700
+    }
+  }, t('LOGIN_OR_REGISTER', 'Iniciar sesión o regístrate')), /*#__PURE__*/_react.default.createElement(_styles.OrderTypeSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    color: (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF',
+    onClick: function onClick() {
+      handleSetGuestLogin && handleSetGuestLogin('loginModal', true);
+      setOrderTypeModal(false);
+    },
+    disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
+  }, t('LOGIN', 'Iniciar sesión')), /*#__PURE__*/_react.default.createElement("div", {
+    className: "seperator"
+  }, /*#__PURE__*/_react.default.createElement("p", null, "o")), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    color: (theme === null || theme === void 0 ? void 0 : (_theme$colors5 = theme.colors) === null || _theme$colors5 === void 0 ? void 0 : _theme$colors5.gold) || '#FFF',
+    onClick: function onClick() {
+      handleSetGuestLogin && handleSetGuestLogin('loginModal', true);
+      setOrderTypeModal(false);
+    },
+    disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading,
+    style: {
+      border: '1px solid' + (theme === null || theme === void 0 ? void 0 : (_theme$colors6 = theme.colors) === null || _theme$colors6 === void 0 ? void 0 : _theme$colors6.gold),
+      background: 'none'
+    }
+  }, t('REGISTER', 'Regístrate'))))));
 };
 exports.PFChangsHomeHero = PFChangsHomeHero;

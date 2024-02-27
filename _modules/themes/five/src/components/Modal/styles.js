@@ -16,7 +16,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
   return zx && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    .popup {\n      z-index: ", " !important;\n    }\n  "])), zx);
 });
 exports.Container = Container;
-var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 0px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: ", ";;\n  max-height: 100vh;\n  overflow: auto;\n  overflow-x: ", ";\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: ", ";\n    height: auto;\n    ", "\n  }\n"])), function (_ref2) {
+var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: 100vw;\n  border-radius: 5px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  height: ", ";;\n  max-height: 100vh;\n  overflow: auto;\n  overflow-x: ", ";\n  @media (min-width: 769px) {\n    width: ", ";\n    max-height: 90vh;\n    border-radius: ", ";\n    height: auto;\n    ", "\n  }\n"])), function (_ref2) {
   var isTransparent = _ref2.isTransparent;
   return isTransparent ? 'transparent' : '#FFF';
 }, function (_ref3) {
@@ -49,12 +49,15 @@ var ModalActions = _styledComponents.default.div(_templateObject7 || (_templateO
 exports.ModalActions = ModalActions;
 var ModalHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 30px;\n\n  @media(min-width: 450px){\n    margin-top: 0;\n  }\n\n"])));
 exports.ModalHeader = ModalHeader;
-var ModalTitle = _styledComponents.default.h2(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 22px;\n  text-align: center;\n  letter-spacing: 0px;\n  color: #010300;\n  opacity: 1;\n  margin: 0px 0px;\n  margin-bottom: 20px;\n  padding-left: 15px;\n  padding-right: 15px;\n  /* text-transform: capitalize; */\n  flex: 1;\n  ", "\n  ", "\n  &::first-letter {\n    text-transform: capitalize;\n  }\n"])), function (props) {
+var ModalTitle = _styledComponents.default.h2(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 22px;\n  text-align: ", ";\n  letter-spacing: 0px;\n  color: #010300;\n  opacity: 1;\n  margin: 0px 0px;\n  margin-bottom: 20px;\n  padding-left: 15px;\n  padding-right: 15px;\n  /* text-transform: capitalize; */\n  flex: 1;\n  ", "\n  ", "\n  &::first-letter {\n    text-transform: capitalize;\n  }\n"])), function (_ref9) {
+  var titleAlign = _ref9.titleAlign;
+  return titleAlign !== null && titleAlign !== void 0 ? titleAlign : 'center';
+}, function (props) {
   var _props$theme2;
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    text-align: left;\n    padding-right: 10px;\n    padding-left: 0px;\n  "])));
-}, function (_ref9) {
+}, function (_ref10) {
   var _theme$general2, _theme$general2$compo, _theme$general2$compo2, _theme$fonts, _theme$fonts$special;
-  var theme = _ref9.theme;
+  var theme = _ref10.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$general2 = theme.general) === null || _theme$general2 === void 0 ? void 0 : (_theme$general2$compo = _theme$general2.components) === null || _theme$general2$compo === void 0 ? void 0 : (_theme$general2$compo2 = _theme$general2$compo.layout) === null || _theme$general2$compo2 === void 0 ? void 0 : _theme$general2$compo2.type) === 'pfchangs' && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    font-family: ", ";\n  "])), theme === null || theme === void 0 ? void 0 : (_theme$fonts = theme.fonts) === null || _theme$fonts === void 0 ? void 0 : (_theme$fonts$special = _theme$fonts.special) === null || _theme$fonts$special === void 0 ? void 0 : _theme$fonts$special.name);
 });
 exports.ModalTitle = ModalTitle;
@@ -63,11 +66,11 @@ var ModalOrderTypes = _styledComponents.default.div(_templateObject13 || (_templ
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n    padding-right: 0px;\n  "])));
 });
 exports.ModalOrderTypes = ModalOrderTypes;
-var ModalIcon = _styledComponents.default.span(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: fixed;\n  left: 25px;\n  top: 30px;\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 2;\n  ", "\n  ", "\n  svg{\n    /* background: rgba(255,255,255,0.5); */\n    transition: all .2s ease-in;\n\n    &:hover {\n      background-color: #1507260a;\n\n      > svg {\n        color:  #151b26;\n      }\n    }\n\n    &:active {\n      background-color: ", ";\n    }\n  \n    border-radius: 50%;\n  }\n\n  @media(min-width: 769px){\n    position: absolute;\n  }\n"])), function (props) {
+var ModalIcon = _styledComponents.default.span(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: fixed;\n  left: 25px;\n  top: 30px;\n  font-size: 30px;\n  cursor: pointer;\n  z-index: 2;\n  ", "\n  ", "\n  svg{\n    /* background: rgba(255,255,255,0.5); */\n    transition: all .2s ease-in;\n    color: #748194;\n    &:hover {\n      background-color: #1507260a;\n\n      > svg {\n        color:  #151b26;\n      }\n    }\n\n    &:active {\n      background-color: ", ";\n    }\n  \n    border-radius: 50%;\n  }\n\n  @media(min-width: 769px){\n    position: absolute;\n  }\n"])), function (props) {
   var _props$theme4, _props$theme5, _props$theme5$layouts, _props$theme5$layouts2, _props$theme5$layouts3, _props$theme5$layouts4;
   return (((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) || ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : (_props$theme5$layouts = _props$theme5.layouts) === null || _props$theme5$layouts === void 0 ? void 0 : (_props$theme5$layouts2 = _props$theme5$layouts.general) === null || _props$theme5$layouts2 === void 0 ? void 0 : (_props$theme5$layouts3 = _props$theme5$layouts2.components) === null || _props$theme5$layouts3 === void 0 ? void 0 : (_props$theme5$layouts4 = _props$theme5$layouts3.layout) === null || _props$theme5$layouts4 === void 0 ? void 0 : _props$theme5$layouts4.type) === 'pfchangs') && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    right: 25px;\n    left: initial;\n  "])));
-}, function (_ref10) {
-  var isProductForm = _ref10.isProductForm;
+}, function (_ref11) {
+  var isProductForm = _ref11.isProductForm;
   return isProductForm && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    top: 18px;\n  "])));
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');

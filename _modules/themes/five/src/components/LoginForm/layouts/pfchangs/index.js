@@ -439,6 +439,9 @@ var LoginFormUI = function LoginFormUI(props) {
   }, t('CANCEL', 'Cancel'))), !loginWithOtpState && loginTab !== 'otp' && elementLinkToForgotPassword && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword), otpType === 'email' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    style: {
+      borderRadius: 10
+    },
     color: "primary",
     onClick: formMethods.handleSubmit(onSubmit),
     disabled: formState.loading || (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : checkPhoneCodeState.loading)

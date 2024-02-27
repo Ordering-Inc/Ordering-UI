@@ -31,7 +31,7 @@ var ErrorMsg = _styledComponents.default.span(_templateObject6 || (_templateObje
   return props.theme.colors.primary;
 });
 exports.ErrorMsg = ErrorMsg;
-var InputBeforeIconWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  position: absolute;\n  height: 100%;\n  top: 13px;\n  left: 100px;\n\n  ", "\n\n  svg {\n    color: #B1BCCC;\n    font-size: 16px;\n  }\n"])), function (props) {
+var InputBeforeIconWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  position: absolute;\n  height: 100%;\n  top: 18px;\n  left: 96px;\n\n  ", "\n\n  svg {\n    color: #B1BCCC;\n    font-size: 16px;\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    right: 100px;\n    left: initial;\n  "])));
 });
 exports.InputBeforeIconWrapper = InputBeforeIconWrapper;
