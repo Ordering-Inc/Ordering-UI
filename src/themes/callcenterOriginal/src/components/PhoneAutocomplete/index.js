@@ -59,7 +59,8 @@ const PhoneAutocompleteUI = (props) => {
     getUsers
   } = props
   const allOrderTypes = [1, 2, 3, 4, 5]
-  const pickupTypes = [2, 3, 4, 5]
+  const pickupTypes = [2, 4, 5]
+  const eatInType = 3
   const [orderState, { changeType }] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -70,7 +71,7 @@ const PhoneAutocompleteUI = (props) => {
   const [isOpenUserData, setIsOpenUserData] = useState(false)
   const [userConfirmPhone, setUserConfirmPhone] = useState({ open: false, result: null })
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
-  const [isPickupSelected, setIsPickupSelected] = useState(pickupTypes.includes(orderState?.options?.type))
+  const [orderTypeSelected, setOrderTypeSelected] = useState(orderState?.options?.type)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [inputValue, setInputValue] = useState(urlPhone ?? userCustomer?.cellphone ?? '')
   const [isSavedAddress, setIsSavedAddress] = useState(false)
@@ -111,9 +112,7 @@ const PhoneAutocompleteUI = (props) => {
   const handleChangeType = (value) => {
     if (!orderState?.loading) {
       changeType(value)
-      if (value === 1) {
-        setIsPickupSelected(false)
-      }
+      setOrderTypeSelected(value)
     }
   }
 
@@ -196,7 +195,7 @@ const PhoneAutocompleteUI = (props) => {
   const handleChangeToPickup = () => {
     const firstEnabledPickupType = orderTypes.find(type => configTypes?.includes(type.value) && type.value !== 1)?.value
     handleChangeType(firstEnabledPickupType)
-    setIsPickupSelected(true)
+    setOrderTypeSelected(firstEnabledPickupType)
   }
 
   const handleDeleteUser = () => {
@@ -276,7 +275,7 @@ const PhoneAutocompleteUI = (props) => {
   }, [urlPhone, customersPhones?.loading])
 
   useEffect(() => {
-    setIsPickupSelected(!!pickupTypes.includes(orderState?.options?.type))
+    setOrderTypeSelected(orderState?.options?.type)
   }, [orderState?.options?.type])
 
   useEffect(() => {
@@ -297,7 +296,7 @@ const PhoneAutocompleteUI = (props) => {
   const OrderTypesComponent = () => {
     return (
       <>
-        {orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value) && type.value !== 1) : orderTypes).map((item, i) => (
+        {orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value) && pickupTypes.includes(type?.value)) : orderTypes).map((item, i) => (
           <Button
             key={item.value}
             onClick={() => handleChangeType(item.value)}
@@ -320,8 +319,8 @@ const PhoneAutocompleteUI = (props) => {
           <Slogan>{t('SUBTITLE_HOME_CALLCENTER', 'Start first by selecting a delivery type')}</Slogan>
           <TypesContainer>
             {configTypes.includes(1) && (
-              <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={!isPickupSelected}>
-                <IconTypeButton activated={!isPickupSelected}>
+              <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={orderTypeSelected === 1}>
+                <IconTypeButton activated={orderTypeSelected === 1}>
                   <img
                     src={theme?.images?.general?.deliveryIco}
                     width={20}
@@ -334,10 +333,10 @@ const PhoneAutocompleteUI = (props) => {
             {configTypes.some(type => pickupTypes.includes(type)) && (
               <TypeButton
                 disabled={orderState?.loading}
-                activated={isPickupSelected}
+                activated={pickupTypes.includes(orderTypeSelected)}
                 onClick={() => handleChangeToPickup()}
               >
-                <IconTypeButton activated={isPickupSelected}>
+                <IconTypeButton activated={pickupTypes.includes(orderTypeSelected)}>
                   <img
                     src={theme?.images?.general?.pickupIco}
                     width={22}
@@ -347,8 +346,24 @@ const PhoneAutocompleteUI = (props) => {
                 <p>{t('PICKUP', 'Pickup')}</p>
               </TypeButton>
             )}
+            {configTypes.some(type => eatInType === type) && (
+              <TypeButton
+                disabled={orderState?.loading}
+                activated={orderTypeSelected === 3}
+                onClick={() => handleChangeType(3)}
+              >
+                <IconTypeButton activated={orderTypeSelected === 3}>
+                  <img
+                    src={theme?.images?.general?.eatinIco}
+                    width={22}
+                    height={22}
+                  />
+                </IconTypeButton>
+                <p>{t('EAT_IN', 'Eat in')}</p>
+              </TypeButton>
+            )}
           </TypesContainer>
-          {isPickupSelected && (
+          {pickupTypes.includes(orderTypeSelected) && (
             <>
               <p>{t('WHAT_PICKUP_YOU_NEED', 'What kind of pickup do you need?')}</p>
               <AdditionalTypesContainer>
