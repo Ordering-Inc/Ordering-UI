@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12, _props$afterComponent, _props$afterElements;
+  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12, _confirm$handleOnCanc, _props$afterComponent, _props$afterElements;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -59,7 +59,9 @@ var AddressListUI = function AddressListUI(props) {
     notUseCustomerInfo = props.notUseCustomerInfo,
     franchiseId = props.franchiseId,
     setIsSavedAddress = props.setIsSavedAddress,
-    isFromPhoneAutocomplete = props.isFromPhoneAutocomplete;
+    isFromPhoneAutocomplete = props.isFromPhoneAutocomplete,
+    setUserConfirmPhone = props.setUserConfirmPhone,
+    userConfirmPhone = props.userConfirmPhone;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -82,8 +84,10 @@ var AddressListUI = function AddressListUI(props) {
     setAddressOpen = _useState4[1];
   var _useState5 = (0, _react.useState)({
       open: false,
+      title: null,
       content: null,
-      handleOnAccept: null
+      handleOnAccept: null,
+      handleOnCancel: null
     }),
     _useState6 = _slicedToArray(_useState5, 2),
     confirm = _useState6[0],
@@ -199,6 +203,11 @@ var AddressListUI = function AddressListUI(props) {
     setAddressOpen(false);
     setIsAddressFormOpen && setIsAddressFormOpen(false);
   };
+  var handleOnCancel = function handleOnCancel() {
+    setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+      open: false
+    }));
+  };
 
   /**
    * Close modals and alerts
@@ -228,6 +237,20 @@ var AddressListUI = function AddressListUI(props) {
       openAddress({});
     }
   }, [userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text, addressList.addresses, addressList === null || addressList === void 0 ? void 0 : addressList.loading, addressList === null || addressList === void 0 ? void 0 : addressList.error, isOpenUserData]);
+  (0, _react.useEffect)(function () {
+    if (!(addressList !== null && addressList !== void 0 && addressList.addedBySocket)) return;
+    setConfirm({
+      open: true,
+      title: t('NEW_ADDRESS_REGISTERED', 'New address registered'),
+      content: t('NEW_ADDRESS_REGISTERED_CONTENT', 'The user has sent the address'),
+      handleOnAccept: function handleOnAccept() {
+        return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+      },
+      handleOnCancel: ''
+    });
+  }, [addressList === null || addressList === void 0 ? void 0 : addressList.addedBySocket]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -264,7 +287,9 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup,
-    isAllowUnaddressOrderType: isAllowUnaddressOrderType
+    isAllowUnaddressOrderType: isAllowUnaddressOrderType,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone
   }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse4 = addressList.addresses) === null || _addressList$addresse4 === void 0 ? void 0 : _addressList$addresse4.length) > 0 && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) === 'object' && !addressOpen && (user === null || user === void 0 ? void 0 : user.id) === (orderState === null || orderState === void 0 || (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.user_id) && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
   }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitleContainer, {
@@ -339,7 +364,9 @@ var AddressListUI = function AddressListUI(props) {
     notUseCustomerInfo: notUseCustomerInfo,
     franchiseId: franchiseId,
     addFormRestrictions: addFormRestrictions,
-    isAllowUnaddressOrderType: isAllowUnaddressOrderType
+    isAllowUnaddressOrderType: isAllowUnaddressOrderType,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone
   }))), addressOpen && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
     width: "50%",
     addFormRestrictions: addFormRestrictions
@@ -384,9 +411,11 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup,
-    isAllowUnaddressOrderType: isAllowUnaddressOrderType
+    isAllowUnaddressOrderType: isAllowUnaddressOrderType,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('SEARCH', 'Search'),
+    title: confirm.title || t('SEARCH', 'Search'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,
@@ -395,11 +424,7 @@ var AddressListUI = function AddressListUI(props) {
         open: false
       }));
     },
-    onCancel: function onCancel() {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
-      }));
-    },
+    onCancel: (_confirm$handleOnCanc = confirm.handleOnCancel) !== null && _confirm$handleOnCanc !== void 0 ? _confirm$handleOnCanc : handleOnCancel,
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {

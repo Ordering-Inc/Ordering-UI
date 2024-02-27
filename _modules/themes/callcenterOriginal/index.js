@@ -165,6 +165,12 @@ Object.defineProperty(exports, "Confirm", {
     return _Confirm.Confirm;
   }
 });
+Object.defineProperty(exports, "ConfirmAddressForm", {
+  enumerable: true,
+  get: function get() {
+    return _ConfirmAddressForm.ConfirmAddressForm;
+  }
+});
 Object.defineProperty(exports, "DriverTips", {
   enumerable: true,
   get: function get() {
@@ -496,6 +502,7 @@ var _CardForm = require("./src/components/CardForm");
 var _Cart = require("./src/components/Cart");
 var _CartContent = require("./src/components/CartContent");
 var _CartPopover = require("./src/components/CartPopover");
+var _ConfirmAddressForm = require("./src/components/ConfirmAddressForm");
 var _Checkout = require("./src/components/Checkout");
 var _DriverTips = require("./src/components/DriverTips");
 var _Footer = require("./src/components/Footer");

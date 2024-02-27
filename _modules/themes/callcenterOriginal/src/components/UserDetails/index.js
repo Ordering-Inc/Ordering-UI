@@ -14,6 +14,7 @@ var _reactPhoneNumberInput = _interopRequireDefault(require("react-phone-number-
 var _libphonenumberJs = require("libphonenumber-js");
 var _orderingComponents = require("ordering-components");
 var _UserFormDetails = require("../UserFormDetails");
+var _Modal = require("../Modal");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -22,10 +23,6 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -34,7 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _userState$result, _formState$result, _Object$values, _validationFields$fie, _userData$country_pho, _props$beforeElements, _props$beforeComponen, _ref, _parsePhoneNumber, _userData$cellphone, _props$afterComponent, _props$afterElements;
+  var _userState$result, _formState$result, _Object$values, _validationFields$fie, _userData$country_pho, _props$beforeElements, _props$beforeComponen, _parsePhoneNumber, _userData$cellphone, _props$afterComponent, _props$afterElements;
   var isEdit = props.isEdit,
     formState = props.formState,
     cleanFormState = props.cleanFormState,
@@ -47,7 +44,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
     isModal = props.isModal,
     setIsOpenUserData = props.setIsOpenUserData,
     isAddressFormOpen = props.isAddressFormOpen,
-    onClose = props.onClose;
+    onClose = props.onClose,
+    userConfirmPhone = props.userConfirmPhone,
+    setUserConfirmPhone = props.setUserConfirmPhone;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -59,6 +58,17 @@ var UserDetailsUI = function UserDetailsUI(props) {
     return field.enabled;
   });
   var countryPhoneCode = (_userData$country_pho = userData === null || userData === void 0 ? void 0 : userData.country_phone_code) !== null && _userData$country_pho !== void 0 ? _userData$country_pho : userData === null || userData === void 0 ? void 0 : userData.country_code;
+  var inputsConfirmAddress = [{
+    id: 1,
+    name: 'Name',
+    type: 'text',
+    code: 'name'
+  }, {
+    id: 2,
+    name: 'Lastname',
+    type: 'text',
+    code: 'lastname'
+  }];
   (0, _react.useEffect)(function () {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit();
@@ -81,22 +91,20 @@ var UserDetailsUI = function UserDetailsUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), (validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, (_ref = _toConsumableArray(Array(isCustomerMode ? 1 : validationFieldsLength === null || validationFieldsLength === void 0 ? void 0 : validationFieldsLength.length))) === null || _ref === void 0 ? void 0 : _ref.map(function (field) {
+  }), (validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.UserData, null, validationFieldsLength === null || validationFieldsLength === void 0 ? void 0 : validationFieldsLength.map(function (field) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field === null || field === void 0 ? void 0 : field.id
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 250,
-      height: isCustomerMode ? 10 : 50
+      height: 50
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 180,
-      height: isCustomerMode ? 10 : 25
+      height: 25
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 210,
-      height: isCustomerMode ? 10 : 50
+      height: 50
     }));
-  })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, {
-    isEdit: isEdit
-  }, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
+  })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
     isAddressFormOpen: isAddressFormOpen && !isEdit
   }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
@@ -119,7 +127,22 @@ var UserDetailsUI = function UserDetailsUI(props) {
   })), /*#__PURE__*/_react.default.createElement("p", null, userData === null || userData === void 0 ? void 0 : userData.cellphone))) : /*#__PURE__*/_react.default.createElement(_styles.SideForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
     userData: userData,
     isCustomerMode: isCustomerMode
-  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    title: t('CONFIRM_CELLPHONE_CLIENT', 'Confirm client\'s cellphone'),
+    open: userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.open,
+    onClose: function onClose() {
+      return setUserConfirmPhone({
+        open: false,
+        result: null
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+    confirmDataLayout: true,
+    isEdit: true,
+    inputsconfirmData: inputsConfirmAddress,
+    userData: userData,
+    isCustomerMode: isCustomerMode
+  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

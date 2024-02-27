@@ -86,33 +86,40 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     isOpenUserData = _useState4[0],
     setIsOpenUserData = _useState4[1];
-  var _useState5 = (0, _react.useState)(false),
+  var _useState5 = (0, _react.useState)({
+      open: false,
+      result: null
+    }),
     _useState6 = _slicedToArray(_useState5, 2),
-    isAddressFormOpen = _useState6[0],
-    setIsAddressFormOpen = _useState6[1];
-  var _useState7 = (0, _react.useState)(pickupTypes.includes(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type)),
+    userConfirmPhone = _useState6[0],
+    setUserConfirmPhone = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    isPickupSelected = _useState8[0],
-    setIsPickupSelected = _useState8[1];
-  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
-  var _useState9 = (0, _react.useState)((_ref = urlPhone !== null && urlPhone !== void 0 ? urlPhone : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.cellphone) !== null && _ref !== void 0 ? _ref : ''),
+    isAddressFormOpen = _useState8[0],
+    setIsAddressFormOpen = _useState8[1];
+  var _useState9 = (0, _react.useState)(pickupTypes.includes(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type)),
     _useState10 = _slicedToArray(_useState9, 2),
-    inputValue = _useState10[0],
-    setInputValue = _useState10[1];
-  var _useState11 = (0, _react.useState)(false),
+    isPickupSelected = _useState10[0],
+    setIsPickupSelected = _useState10[1];
+  var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
+  var _useState11 = (0, _react.useState)((_ref = urlPhone !== null && urlPhone !== void 0 ? urlPhone : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.cellphone) !== null && _ref !== void 0 ? _ref : ''),
     _useState12 = _slicedToArray(_useState11, 2),
-    isSavedAddress = _useState12[0],
-    setIsSavedAddress = _useState12[1];
+    inputValue = _useState12[0],
+    setInputValue = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    isSavedAddress = _useState14[0],
+    setIsSavedAddress = _useState14[1];
   var countryPhoneCode = (_userCustomer$country = userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.country_phone_code) !== null && _userCustomer$country !== void 0 ? _userCustomer$country : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.country_code;
-  var _useState13 = (0, _react.useState)(userCustomer ? {
+  var _useState15 = (0, _react.useState)(userCustomer ? {
       value: userCustomer.cellphone || userCustomer.phone,
       label: "".concat(countryPhoneCode ? "(".concat(countryPhoneCode, ")") : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.phone && !(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone) ? "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.phone) : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone ? "".concat(userCustomer.cellphone) : '', " - {").concat(userCustomer.name, "}"),
       flag: (userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.imported_address_text) && (userCustomer === null || userCustomer === void 0 || (_userCustomer$address = userCustomer.addresses) === null || _userCustomer$address === void 0 ? void 0 : _userCustomer$address.length) === 0,
       lastname: "".concat(userCustomer.name, " ").concat(userCustomer.lastname)
     } : null),
-    _useState14 = _slicedToArray(_useState13, 2),
-    optSelected = _useState14[0],
-    setOptSelected = _useState14[1];
+    _useState16 = _slicedToArray(_useState15, 2),
+    optSelected = _useState16[0],
+    setOptSelected = _useState16[1];
   var configTypes = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.order_types_allowed) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').filter(function (value) {
     return allOrderTypes.includes(Number(value));
   }).map(function (value) {
@@ -483,7 +490,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     onClose: function onClose() {
       return handleCloseAddressList();
     },
-    franchiseId: franchiseId
+    franchiseId: franchiseId,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     userId: customerState === null || customerState === void 0 || (_customerState$result2 = customerState.result) === null || _customerState$result2 === void 0 ? void 0 : _customerState$result2.id,
@@ -497,6 +506,8 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     setIsOpenUserData: setIsOpenUserData,
     setIsSavedAddress: setIsSavedAddress,
     setIsAddressFormOpen: setIsAddressFormOpen,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone,
     franchiseId: franchiseId,
     isHeader: true
   })))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {

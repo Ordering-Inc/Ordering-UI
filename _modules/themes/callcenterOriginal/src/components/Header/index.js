@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Header = void 0;
+exports.default = exports.Header = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactRouterDom = require("react-router-dom");
 var _orderingComponents = require("ordering-components");
@@ -120,6 +120,13 @@ var Header = exports.Header = function Header(props) {
     _useState16 = _slicedToArray(_useState15, 2),
     preorderBusiness = _useState16[0],
     setPreorderBusiness = _useState16[1];
+  var _useState17 = (0, _react.useState)({
+      open: false,
+      result: null
+    }),
+    _useState18 = _slicedToArray(_useState17, 2),
+    userConfirmPhone = _useState18[0],
+    setUserConfirmPhone = _useState18[1];
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
     return cart.products && ((_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.length) > 0;
@@ -394,7 +401,9 @@ var Header = exports.Header = function Header(props) {
     onClose: function onClose() {
       return setCustomerModalOpen(false);
     },
-    franchiseId: franchiseId
+    franchiseId: franchiseId,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone
   }), /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isModal: true,
     userId: customerState === null || customerState === void 0 || (_customerState$user2 = customerState.user) === null || _customerState$user2 === void 0 ? void 0 : _customerState$user2.id,
@@ -405,7 +414,9 @@ var Header = exports.Header = function Header(props) {
     setIsOpenUserData: setIsOpenUserData,
     setIsAddressFormOpen: setIsAddressFormOpen,
     franchiseId: franchiseId,
-    isHeader: true
+    isHeader: true,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone
   })))), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
     title: t('CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.CUSTOMER) || 'Customer'),
     content: confirm.content,
@@ -438,3 +449,4 @@ var Header = exports.Header = function Header(props) {
 Header.defaultProps = {
   isShowOrderOptions: true
 };
+var _default = exports.default = Header;
