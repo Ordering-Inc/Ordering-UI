@@ -399,7 +399,8 @@ const CheckoutUI = (props) => {
       brand_id: parseInt(businessDetails?.business?.brand_id),
       wow_rewards_user_id: user?.wow_rewards_user_id,
       min_amount: cart?.minimum,
-      max_amount: await getMaxCashDelivery()
+      max_amount: await getMaxCashDelivery(),
+      reward_behavior_name: null
       // custom_fields: {
       //   data: {
       //     external_auth_token: 'Bearer ' + token,
