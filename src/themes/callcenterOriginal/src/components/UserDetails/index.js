@@ -22,6 +22,7 @@ import {
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
+import { Modal } from '../Modal'
 
 const UserDetailsUI = (props) => {
   const {
@@ -37,7 +38,9 @@ const UserDetailsUI = (props) => {
     isModal,
     setIsOpenUserData,
     isAddressFormOpen,
-    onClose
+    onClose,
+    userConfirmPhone,
+    setUserConfirmPhone
   } = props
 
   const [, t] = useLanguage()
@@ -46,7 +49,17 @@ const UserDetailsUI = (props) => {
 
   const validationFieldsLength = Object.values(validationFields?.fields?.checkout)?.map(field => field.enabled)
   const countryPhoneCode = userData?.country_phone_code ?? userData?.country_code
-
+  const inputsConfirmAddress = [{
+    id: 1,
+    name: 'Name',
+    type: 'text',
+    code: 'name'
+  }, {
+    id: 2,
+    name: 'Lastname',
+    type: 'text',
+    code: 'lastname'
+  }]
   useEffect(() => {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit()
@@ -72,18 +85,18 @@ const UserDetailsUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {(validationFields.loading || formState.loading || userState.loading) && (
         <UserData>
-          {[...Array(isCustomerMode ? 1 : validationFieldsLength?.length)]?.map(field => (
+          {validationFieldsLength?.map(field => (
             <React.Fragment key={field?.id}>
-              <Skeleton width={250} height={isCustomerMode ? 10 : 50} />
-              <Skeleton width={180} height={isCustomerMode ? 10 : 25} />
-              <Skeleton width={210} height={isCustomerMode ? 10 : 50} />
+              <Skeleton width={250} height={50} />
+              <Skeleton width={180} height={25} />
+              <Skeleton width={210} height={50} />
             </React.Fragment>
           ))}
         </UserData>
       )}
 
       {!(validationFields.loading || formState.loading || userState.loading) && (
-        <Container isEdit={isEdit}>
+        <Container>
           {isModal && (
             <TitleContainer isAddressFormOpen={isAddressFormOpen && !isEdit}>
               <ModalIcon>
@@ -144,6 +157,20 @@ const UserDetailsUI = (props) => {
           )}
         </Container>
       )}
+      <Modal
+        title={t('CONFIRM_CELLPHONE_CLIENT', 'Confirm client\'s cellphone')}
+        open={userConfirmPhone?.open}
+        onClose={() => setUserConfirmPhone({ open: false, result: null })}
+      >
+        <UserFormDetailsUI
+          {...props}
+          confirmDataLayout
+          isEdit
+          inputsconfirmData={inputsConfirmAddress}
+          userData={userData}
+          isCustomerMode={isCustomerMode}
+        />
+      </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (
