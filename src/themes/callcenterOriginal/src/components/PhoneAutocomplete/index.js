@@ -68,6 +68,7 @@ const PhoneAutocompleteUI = (props) => {
   const [, { deleteUserCustomer }] = useCustomer()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isOpenUserData, setIsOpenUserData] = useState(false)
+  const [userConfirmPhone, setUserConfirmPhone] = useState({ open: false, result: null })
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [isPickupSelected, setIsPickupSelected] = useState(pickupTypes.includes(orderState?.options?.type))
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
@@ -439,6 +440,8 @@ const PhoneAutocompleteUI = (props) => {
                 setIsOpenUserData={setIsOpenUserData}
                 onClose={() => handleCloseAddressList()}
                 franchiseId={franchiseId}
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
               />
               <AddressList
                 isModal
@@ -454,6 +457,8 @@ const PhoneAutocompleteUI = (props) => {
                 setIsOpenUserData={setIsOpenUserData}
                 setIsSavedAddress={setIsSavedAddress}
                 setIsAddressFormOpen={setIsAddressFormOpen}
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
                 franchiseId={franchiseId}
                 isHeader
               />
