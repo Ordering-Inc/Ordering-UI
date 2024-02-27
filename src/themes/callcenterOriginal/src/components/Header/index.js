@@ -71,6 +71,7 @@ export const Header = (props) => {
   const [isOpenUserData, setIsOpenUserData] = useState(false)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
+  const [userConfirmPhone, setUserConfirmPhone] = useState({ open: false, result: null })
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
@@ -401,6 +402,8 @@ export const Header = (props) => {
                 setIsOpenUserData={setIsOpenUserData}
                 onClose={() => setCustomerModalOpen(false)}
                 franchiseId={franchiseId}
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
               />
               <AddressList
                 isModal
@@ -413,6 +416,8 @@ export const Header = (props) => {
                 setIsAddressFormOpen={setIsAddressFormOpen}
                 franchiseId={franchiseId}
                 isHeader
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
               />
             </>
           </UserEdit>
@@ -446,3 +451,5 @@ export const Header = (props) => {
 Header.defaultProps = {
   isShowOrderOptions: true
 }
+
+export default Header

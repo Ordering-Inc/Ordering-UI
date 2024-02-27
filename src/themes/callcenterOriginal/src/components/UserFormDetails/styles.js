@@ -96,7 +96,16 @@ export const SkeletonForm = styled.div`
 
 export const InputGroup = styled.div`
   width: 100%;
-
+  ${({ confirmDataLayout }) => confirmDataLayout && css`
+    padding: 0 20px;
+    width: 50%;
+    box-sizing: border-box;
+    input {
+      border: 1px solid #DEE2E6;
+      border-radius: 7.6px;
+      padding: 10px 15px !important;
+    }
+  `}
   p {
     font-weight: 500;
     font-size: 20px;
@@ -115,6 +124,7 @@ export const Divider = styled.div`
 `
 
 export const InputPhoneNumberWrapper = styled(InputGroup)`
+  width: 100%;
   .PhoneInput {
     border-bottom: 1px solid #E9ECEF;
     input {
@@ -122,6 +132,14 @@ export const InputPhoneNumberWrapper = styled(InputGroup)`
       border-radius: 0px;
       padding: 5px;
     }
+    ${({ confirmDataLayout }) => confirmDataLayout && css`
+      border-bottom: 0px;
+      input {
+        border: 1px solid #DEE2E6;
+        border-radius: 7.6px;
+        padding: 10px 15px !important;
+      }
+    `}
   }
 `
 
