@@ -445,6 +445,7 @@ const LoginFormUI = (props) => {
             {otpType === 'email' ? (
               <>
                 <Button
+                  style={{ borderRadius: 10 }}
                   color='primary'
                   onClick={formMethods.handleSubmit(onSubmit)}
                   disabled={formState.loading || checkPhoneCodeState?.loading}

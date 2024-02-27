@@ -131,7 +131,7 @@ export const DeliveryPickupContainer = styled.div`
   display: flex;
   flex-direction: row-reverse;
   position: relative;
-  border-radius: 0px;
+  border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.gold};
   height: 52px;
   background-color: transparent;
@@ -143,9 +143,12 @@ export const DeliveryPickupContainer = styled.div`
     cursor: pointer;
     width: 100%;
     z-index: 1;
+    border-radius: 10px;
   }
 
   &::after {
+    border-radius: 10px;
+
     ${({ orderTypeSelected }) => orderTypeSelected === 1 ? css`
       content: "";
       background:  ${({ theme }) => theme.colors.gold};
@@ -166,6 +169,30 @@ export const DeliveryPickupContainer = styled.div`
       left: 50%;
     `
   }}
+`
+export const OrderTypeSelectorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px;
+  background-color: transparent;
+
+  button {
+    border-radius: 10px;
+    outline: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 45px;
+    margin: 10px;
+    background:  ${({ theme }) => theme.colors.gold};
+  }
+  .seperator {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 export const AddressInputContainer = styled.div`

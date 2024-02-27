@@ -76,7 +76,7 @@ const ModalUI = (props) => {
       )}
       <ModalHeader>
         {title && (
-          <ModalTitle>
+          <ModalTitle titleAlign={props?.titleAlign}>
             {title}
           </ModalTitle>
         )}

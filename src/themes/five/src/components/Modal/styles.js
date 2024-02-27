@@ -14,7 +14,7 @@ export const ModalDialog = styled.div`
   background-color: ${({ isTransparent }) => isTransparent ? 'transparent' : '#FFF'};
   padding: ${({ padding }) => padding || '30px 20px'};
   width: 100vw;
-  border-radius: 0px;
+  border-radius: 5px;
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
@@ -100,7 +100,7 @@ export const ModalHeader = styled.div`
 export const ModalTitle = styled.h2`
   font-weight: 600;
   font-size: 22px;
-  text-align: center;
+  text-align: ${({ titleAlign }) => (titleAlign ?? 'center')};
   letter-spacing: 0px;
   color: #010300;
   opacity: 1;
@@ -147,7 +147,7 @@ export const ModalIcon = styled.span`
   svg{
     /* background: rgba(255,255,255,0.5); */
     transition: all .2s ease-in;
-
+    color: #748194;
     &:hover {
       background-color: #1507260a;
 

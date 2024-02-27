@@ -96,11 +96,14 @@ export const FormInput = styled.form`
   }
 
   .PhoneInputCountry {
-    border-color: ${({ theme }) => theme?.colors.gold};
+    border-color: '#DEE2E6';
+    height: 50px;
+
   }
 
   .PhoneInputInput {
-    border-color: ${({ theme }) => theme?.colors.gold} !important;
+    border-color: '#DEE2E6' !important;
+    height: 34px;
   }
 `
 
@@ -223,8 +226,10 @@ export const TogglePassword = styled.span`
 export const InputWrapper = styled.div`
   position: relative;
   margin-bottom: 5px;
-  
+
   input{
+    height: 50px;
+    border-radius: 10px;
     box-sizing: border-box;
     width: 100%;
     padding-right: 40px !important;
@@ -236,7 +241,7 @@ export const InputWrapper = styled.div`
     &:focus {
       border-color: ${({ theme }) => theme?.colors?.gold};
     }
-    border: 1px solid ${({ theme }) => theme?.colors?.gold};
+    border: 1px solid '#DEE2E6';
   }
 `
 
@@ -389,9 +394,13 @@ export const WrapperButtons = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
+  margin-top: 10px;
+
   button {
     flex: 1;
     margin: 0 10px;
+    height: 55px;
+    border-radius: 10px;
   }
   svg{
     margin-right: 20px;

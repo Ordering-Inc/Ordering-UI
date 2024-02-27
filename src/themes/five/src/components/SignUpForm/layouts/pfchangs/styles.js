@@ -72,11 +72,13 @@ export const FormInput = styled.form`
   }
   
   .PhoneInputCountry {
-    border-color: ${({ theme }) => theme?.colors.gold};
+    border-color: '#DEE2E6';
+    height: 50px;
   }
 
   .PhoneInputInput {
-    border-color: ${({ theme }) => theme?.colors.gold} !important;
+    border-color: '#DEE2E6' !important;
+    height: 50px;
   }
 `
 

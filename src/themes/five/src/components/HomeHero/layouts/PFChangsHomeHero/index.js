@@ -16,7 +16,8 @@ import {
   WrapperMap,
   ActiveMapContainer,
   ContainerResponsiveWrapper,
-  StartOrder
+  StartOrder,
+  OrderTypeSelectorContainer
 } from './styles'
 
 import { Modal } from '../../../Modal'
@@ -41,6 +42,7 @@ export const PFChangsHomeHero = (props) => {
   const businessUrlTemplate = site?.business_url_template || '/store/:business_slug'
 
   const [modals, setModals] = useState({ listOpen: false, formOpen: false })
+  const [orderTypeModal, setOrderTypeModal] = useState(false)
   const [orderTypeSelected, setOrderTypeSelected] = useState(orderState?.options?.type)
   const [showAllLocations, setShowAllLocations] = useState(false)
   const [businessesLocations, setBusinessesLocations] = useState([])
@@ -123,7 +125,7 @@ export const PFChangsHomeHero = (props) => {
       if (result.state === 'granted' || result.state === 'prompt') {
         setGeoLocation(true)
       } else {
-        handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
+        !auth && setOrderTypeModal(true)
       }
     })
     return () => setModals({ listOpen: false, formOpen: false })
@@ -131,7 +133,7 @@ export const PFChangsHomeHero = (props) => {
 
   useEffect(() => {
     if (geoLocation && !auth && !orderState?.options?.address?.location) {
-      handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
+      setOrderTypeModal(true)
     }
   }, [geoLocation, auth, orderState?.options?.address?.location])
 
@@ -379,6 +381,65 @@ export const PFChangsHomeHero = (props) => {
             onAccept={() => handleFindBusinesses()}
             geoLocation={geoLocation}
           />
+        </Modal>
+        <Modal
+          title={t('ELIGE_TIPO_DE_ENTREGA', 'Elige el tipo de entrega')}
+          titleAlign='left'
+          open={orderTypeModal}
+          onClose={() => setOrderTypeModal(false)}
+        >
+          <DeliveryPickupContainer orderTypeSelected={orderTypeSelected} style={{ marginBottom: 20 }}>
+            <Button
+              color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+              onClick={() => {
+                handleChangeOrderType(2)
+                setOrderTypeModal(false)
+                handleSetGuestLogin && handleSetGuestLogin('addressModal', true)
+              }}
+              disabled={orderState?.loading}
+            >
+              {t('PICKUP', 'Pickup')}
+            </Button>
+            <Button
+              color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+              onClick={() => {
+                handleChangeOrderType(1)
+                setOrderTypeModal(false)
+                handleSetGuestLogin && handleSetGuestLogin('addressModal', true)
+              }}
+              disabled={orderState?.loading}
+            >
+              {t('DELIVERY_UPPER', 'Delivery')}
+            </Button>
+          </DeliveryPickupContainer>
+          <div style={{ height: 10, display: 'flex', background: '#F8F9FA'}} />
+          <p style={{ marginTop: 20, fontSize: 16, fontWeight: 700 }}>{t('LOGIN_OR_REGISTER', 'Iniciar sesión o regístrate')}</p>
+          <OrderTypeSelectorContainer>
+            <Button
+              color={props?.slug === 'pf_changs' ? '#000' : '#FFF'}
+              onClick={() => {
+                handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
+                setOrderTypeModal(false)
+              }}
+              disabled={orderState?.loading}
+            >
+              {t('LOGIN', 'Iniciar sesión')}
+            </Button>
+            <div className='seperator'>
+              <p>o</p>
+            </div>
+            <Button
+              color={theme?.colors?.gold || '#FFF'}
+              onClick={() => {
+                handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
+                setOrderTypeModal(false)
+              }}
+              disabled={orderState?.loading}
+              style={{ border: '1px solid' + theme?.colors?.gold, background: 'none' }}
+            >
+              {t('REGISTER', 'Regístrate')}
+            </Button>
+          </OrderTypeSelectorContainer>
         </Modal>
       </HeroContainer>
     </>

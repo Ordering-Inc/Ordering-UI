@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
 export const Tabs = styled.div`
-  display: flex;  
-  justify-content: center;
+  display: flex;
+  justify-content: flex-start;
   ${({ variant }) => variant === 'primary' && css`
     color: ${props => props.theme.colors.darkTextColor};
   `}
@@ -18,6 +18,8 @@ export const Tabs = styled.div`
 export const Tab = styled.div`
   padding: 10px 15px;
   cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
 
   ${({ hover }) => hover && css`
     border: 1px solid transparent;
@@ -48,6 +50,6 @@ export const Tab = styled.div`
   `}
 
   ${({ active, fromLogin }) => !active && css`
-    color: ${props => fromLogin ? '#000000' : props.theme?.colors?.tertiary || props.theme.colors.darkGray};
+    color: ${props => fromLogin ? '#909BA9' : props.theme?.colors?.tertiary || props.theme.colors.darkGray};
   `}
 `
