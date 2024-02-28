@@ -360,7 +360,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.IconTypeButton, {
     activated: orderTypeSelected === 3
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 || (_theme$images5 = theme.images) === null || _theme$images5 === void 0 || (_theme$images5 = _theme$images5.general) === null || _theme$images5 === void 0 ? void 0 : _theme$images5.eatInIco,
+    src: theme === null || theme === void 0 || (_theme$images5 = theme.images) === null || _theme$images5 === void 0 || (_theme$images5 = _theme$images5.general) === null || _theme$images5 === void 0 ? void 0 : _theme$images5.eatinIco,
     width: 22,
     height: 22
   })), /*#__PURE__*/_react.default.createElement("p", null, t('EAT_IN', 'Eat in')))), pickupTypes.includes(orderTypeSelected) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, t('WHAT_PICKUP_YOU_NEED', 'What kind of pickup do you need?')), /*#__PURE__*/_react.default.createElement(_styles.AdditionalTypesContainer, null, /*#__PURE__*/_react.default.createElement(OrderTypesComponent, null)))), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_OrderProgress.OrderProgress, {
