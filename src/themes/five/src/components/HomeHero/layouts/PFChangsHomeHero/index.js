@@ -263,6 +263,7 @@ export const PFChangsHomeHero = (props) => {
                   canBeRedirected={canBeRedirected}
                   mapActivated={mapActivated}
                   isResponsive={isResponsive}
+                  handleSetGuestLogin={handleSetGuestLogin}
                 />
               </>
             )}
