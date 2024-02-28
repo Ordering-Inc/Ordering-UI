@@ -330,7 +330,8 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     orderTypeSelected: orderTypeSelected,
     canBeRedirected: canBeRedirected,
     mapActivated: mapActivated,
-    isResponsive: isResponsive
+    isResponsive: isResponsive,
+    handleSetGuestLogin: handleSetGuestLogin
   })))), !mapActivated && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
     id: "wrapper-map-id"
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.ActiveMapContainer, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
