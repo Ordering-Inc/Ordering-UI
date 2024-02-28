@@ -616,6 +616,7 @@ const CheckoutUI = (props) => {
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
             <PlaceSpot
+              isCustomerMode={isCustomerMode}
               isCheckout
               isInputMode
               isHomeStyle
