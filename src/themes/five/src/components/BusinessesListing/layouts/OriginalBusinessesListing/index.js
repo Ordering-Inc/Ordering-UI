@@ -336,7 +336,7 @@ const BusinessesListingUI = (props) => {
               >
                 <IconTypeButton activated={orderTypeSelected === 3}>
                   <img
-                    src={theme?.images?.general?.eatInIco}
+                    src={theme?.images?.general?.eatinIco}
                     width={22}
                     height={22}
                   />
