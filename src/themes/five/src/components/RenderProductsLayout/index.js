@@ -223,7 +223,7 @@ export const RenderProductsLayout = (props) => {
             {(!businessLayout.layoutOne || headerType === 'pfchangs') && (
               <BusinessContent isCustomLayout={isCustomLayout || useKioskApp} id='wrapper-categories'>
                 <BusinessCategoryProductWrapper showCartOnProductList={showCartOnProductList}>
-                  <div style={{ position: 'relative' }}>
+                  <div style={{ position: 'relative', width: '96vw' }}>
                     {
                       business?.professionals?.length > 0 && headerType !== 'pfchangs' && (
                         <ProfessionalFilterWrapper>
@@ -525,7 +525,7 @@ export const RenderProductsLayout = (props) => {
             }
           </div>
           {showGoTopButton && (
-            <BackToTop onClick={() => handleScrollToTop()}>
+            <BackToTop showCartOnProductList={showCartOnProductList && currentCart?.products?.length > 0} onClick={() => handleScrollToTop()}>
               <EnChevronThinUp />
               {t('BACK_TO_TOP', 'Back to top')}
             </BackToTop>

@@ -59,7 +59,7 @@ export const BusinessCategoryProductWrapper = styled.div`
 
   @media (min-width: 1000px) {
     width: ${({ showCartOnProductList, theme }) => theme?.business_view?.components?.header?.components?.layout?.type === 'pfchangs'
-    ? '100%'
+    ? showCartOnProductList ? '70%' : '100%'
     : showCartOnProductList
       ? '70%'
       : '85%'
@@ -78,7 +78,7 @@ export const BusinessCategoriesContainer = styled.div`
 
 export const BusinessCartContainer = styled(BusinessCategoriesContainer)`
   display: none;
-  margin-top: 70px;
+  margin-top: 90px;
   min-width: 325px;
   @media (min-width: 1000px) {
     display: block;
@@ -248,8 +248,8 @@ export const BackToTop = styled.div`
   align-items: center;
   flex-direction: column;
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: ${({ showCartOnProductList }) => showCartOnProductList ? '31vw' : '20px'};
+  bottom: ${({ showCartOnProductList }) => showCartOnProductList ? '10px' : '20px'};
   height: 80px;
   width: 80px;
   text-align: center;

@@ -8,6 +8,7 @@ import { Confirm } from '../Confirm'
 import { Modal } from '../Modal'
 import { CouponControl } from '../../../../../components/CouponControl'
 import { ProductForm } from '../ProductForm'
+import { ProductForm as ProductFormPFChangs } from '../ProductForm/layouts/pfchangs'
 import { UpsellingPage } from '../UpsellingPage'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { TaxInformation } from '../TaxInformation'
@@ -91,6 +92,10 @@ const CartUI = (props) => {
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
   const viewString = isStore ? 'business_view' : 'header'
   const hideCartComments = orderingTheme?.theme?.[viewString]?.components?.cart?.components?.comments?.hidden
+  const pfchangs = theme?.layouts?.business_view?.components?.layout?.type === 'pfchangs'
+
+  const ProductFormComponent = pfchangs ? ProductFormPFChangs : ProductForm
+
   const walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -564,8 +569,9 @@ const CartUI = (props) => {
             closeOnBackdrop
             onClose={() => setModalIsOpen(false)}
             disableOverflowX
+            hideCloseDefault
           >
-            <ProductForm
+            <ProductFormComponent
               isCartProduct
               productCart={curProduct}
               businessSlug={cart?.business?.slug}
@@ -573,6 +579,7 @@ const CartUI = (props) => {
               categoryId={curProduct?.category_id}
               productId={curProduct?.id}
               onSave={handlerProductAction}
+              closeModalProductForm={() => setModalIsOpen(false)}
             />
           </Modal>
           <Modal

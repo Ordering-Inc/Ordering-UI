@@ -42,7 +42,7 @@ export const CategoriesContainer = styled.div`
   }
   &.category-lists{
     display: flex;
-    width: 102%;
+    width: 100%;
     ${({ centerAutoscroll }) => centerAutoscroll && css`
       width: 100%;
       justify-content: center;

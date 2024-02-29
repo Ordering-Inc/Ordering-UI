@@ -368,14 +368,14 @@ const BusinessProductsListingUI = (props) => {
           />
         )}
       </ProductsContainer>
-      {openBottomToast && (
+      {/* {openBottomToast && (
         <BottomToast>
           <p>{t('ITEM_ADDED_TO_YOUR_CART', 'An item has added to your cart')}</p>
           <div>
             <GrFormClose onClick={() => setOpenBottomToast(false)} />
           </div>
         </BottomToast>
-      )}
+      )} */}
       {currentCart?.products?.length > 0 && auth && !isCartOpen && showViewOrderButton && (
         <FloatingButton
           btnText={

@@ -116,6 +116,12 @@ const BusinessProductsCategoriesUI = (props) => {
 
   useEffect(() => {
     const autoscrollWidth = document.getElementById('autoscroll')?.clientWidth
+    const navbar = document.getElementById('category-lists')
+    const cart = document.getElementById('BusinessCartContainer')
+    const search = document.getElementById('WrapperSearchAbsolute')
+    const wrapperCategories = document.getElementById('wrapper-categories')
+    const styleSheet = document.getElementById('styles').sheet
+
     const screenWidth = window.innerWidth
     if (screenWidth > autoscrollWidth) {
       setCenterAutoscroll(true)
@@ -135,23 +141,17 @@ const BusinessProductsCategoriesUI = (props) => {
         }
       })
 
-      const navbar = document.getElementById('category-lists')
-      const cart = document.getElementById('BusinessCartContainer')
-      const search = document.getElementById('WrapperSearchAbsolute')
-      const wrapperCategories = document.getElementById('wrapper-categories')
-
-      const styleSheet = document.getElementById('styles').sheet
-
       let style0 = '.sticky-prod-cat {'
       style0 += 'position: fixed !important;'
       style0 += 'top: 80px !important;'
-      style0 += 'width: 100% !important;'
+      style0 += 'width: 97% !important;'
+      style0 += 'transition: all 0.3s ease;'
       style0 += '}'
 
       let style1 = '.sticky-prod-cart {'
       style1 += 'position: fixed !important;'
       style1 += 'top: 80px !important;'
-      style1 += 'right: 2.5% !important;'
+      style1 += 'right: 1% !important;'
       style1 += 'width: 28.5% !important;'
       style1 += '}'
 
@@ -180,7 +180,14 @@ const BusinessProductsCategoriesUI = (props) => {
       }
     }
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (styleSheet.cssRules.length > 0) {
+        styleSheet.deleteRule(0)
+        styleSheet.deleteRule(1)
+        styleSheet.deleteRule(2)
+      }
+    }
   }, [categorySelected])
 
   return (
