@@ -611,6 +611,7 @@ var CheckoutUI = function CheckoutUI(props) {
     cart: cart,
     useOrderContext: true
   })), /*#__PURE__*/_react.default.createElement(_styles.DriverTipDivider, null)), !cartState.loading && placeSpotsEnabled && (cart === null || cart === void 0 ? void 0 : cart.business_id) && /*#__PURE__*/_react.default.createElement(_styles.SelectSpotContainer, null, /*#__PURE__*/_react.default.createElement(_PlaceSpot.PlaceSpot, {
+    isCustomerMode: isCustomerMode,
     isCheckout: true,
     isInputMode: true,
     isHomeStyle: true,
