@@ -35,12 +35,12 @@ var BusinessCategoryProductWrapper = _styledComponents.default.div(_templateObje
   var _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view5, _theme$business_view6;
   var showCartOnProductList = _ref3.showCartOnProductList,
     theme = _ref3.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$business_view2 = theme.business_view) === null || _theme$business_view2 === void 0 ? void 0 : (_theme$business_view3 = _theme$business_view2.components) === null || _theme$business_view3 === void 0 ? void 0 : (_theme$business_view4 = _theme$business_view3.header) === null || _theme$business_view4 === void 0 ? void 0 : (_theme$business_view5 = _theme$business_view4.components) === null || _theme$business_view5 === void 0 ? void 0 : (_theme$business_view6 = _theme$business_view5.layout) === null || _theme$business_view6 === void 0 ? void 0 : _theme$business_view6.type) === 'pfchangs' ? '100%' : showCartOnProductList ? '70%' : '85%';
+  return (theme === null || theme === void 0 ? void 0 : (_theme$business_view2 = theme.business_view) === null || _theme$business_view2 === void 0 ? void 0 : (_theme$business_view3 = _theme$business_view2.components) === null || _theme$business_view3 === void 0 ? void 0 : (_theme$business_view4 = _theme$business_view3.header) === null || _theme$business_view4 === void 0 ? void 0 : (_theme$business_view5 = _theme$business_view4.components) === null || _theme$business_view5 === void 0 ? void 0 : (_theme$business_view6 = _theme$business_view5.layout) === null || _theme$business_view6 === void 0 ? void 0 : _theme$business_view6.type) === 'pfchangs' ? showCartOnProductList ? '70%' : '100%' : showCartOnProductList ? '70%' : '85%';
 });
 exports.BusinessCategoryProductWrapper = BusinessCategoryProductWrapper;
 var BusinessCategoriesContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin: 0;\n  margin-right: 10px;\n  width: 100%;\n  @media (min-width: 993px) {\n    width: calc(31% - 25px);\n  }\n"])));
 exports.BusinessCategoriesContainer = BusinessCategoriesContainer;
-var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: 70px;\n  min-width: 325px;\n  @media (min-width: 1000px) {\n    display: block;\n  }\n"])));
+var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: 90px;\n  min-width: 325px;\n  @media (min-width: 1000px) {\n    display: block;\n  }\n"])));
 exports.BusinessCartContainer = BusinessCartContainer;
 var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 30px;\n  position: relative;\n  margin-bottom: 30px;\n  max-height: ", ";\n  overflow: auto;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  /* .accordion.active {\n    padding-bottom: 10px;\n  } */\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref4) {
   var maxHeight = _ref4.maxHeight;
@@ -77,10 +77,16 @@ var WrapperSearchAbsolute = _styledComponents.default.div(_templateObject21 || (
 exports.WrapperSearchAbsolute = WrapperSearchAbsolute;
 var NearBusiness = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 exports.NearBusiness = NearBusiness;
-var BackToTop = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  padding: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: fixed;\n  right: 20px;\n  bottom: 20px;\n  height: 80px;\n  width: 80px;\n  text-align: center;\n  color: ", ";\n  background: ", ";\n  border-radius: 6px;\n  cursor: pointer;\n  font-weight: 900;\n  opacity: 0.9;\n  svg {\n    font-size: 25px;\n  }\n"])), function (props) {
+var BackToTop = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  padding: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: fixed;\n  right: ", ";\n  bottom: ", ";\n  height: 80px;\n  width: 80px;\n  text-align: center;\n  color: ", ";\n  background: ", ";\n  border-radius: 6px;\n  cursor: pointer;\n  font-weight: 900;\n  opacity: 0.9;\n  svg {\n    font-size: 25px;\n  }\n"])), function (_ref7) {
+  var showCartOnProductList = _ref7.showCartOnProductList;
+  return showCartOnProductList ? '31vw' : '20px';
+}, function (_ref8) {
+  var showCartOnProductList = _ref8.showCartOnProductList;
+  return showCartOnProductList ? '10px' : '20px';
+}, function (props) {
   return props.theme.colors.buttonPrimaryContrast || '#000';
-}, function (_ref7) {
-  var theme = _ref7.theme;
+}, function (_ref9) {
+  var theme = _ref9.theme;
   return theme.colors.gold;
 });
 exports.BackToTop = BackToTop;

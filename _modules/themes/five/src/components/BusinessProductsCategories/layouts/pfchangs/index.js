@@ -130,6 +130,11 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
   (0, _react.useEffect)(function () {
     var _document$getElementB3;
     var autoscrollWidth = (_document$getElementB3 = document.getElementById('autoscroll')) === null || _document$getElementB3 === void 0 ? void 0 : _document$getElementB3.clientWidth;
+    var navbar = document.getElementById('category-lists');
+    var cart = document.getElementById('BusinessCartContainer');
+    var search = document.getElementById('WrapperSearchAbsolute');
+    var wrapperCategories = document.getElementById('wrapper-categories');
+    var styleSheet = document.getElementById('styles').sheet;
     var screenWidth = window.innerWidth;
     if (screenWidth > autoscrollWidth) {
       setCenterAutoscroll(true);
@@ -149,20 +154,16 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
           subcategoriesLayout ? setSubcategorySelected(category) : setSelectedCategory(category);
         }
       });
-      var navbar = document.getElementById('category-lists');
-      var cart = document.getElementById('BusinessCartContainer');
-      var search = document.getElementById('WrapperSearchAbsolute');
-      var wrapperCategories = document.getElementById('wrapper-categories');
-      var styleSheet = document.getElementById('styles').sheet;
       var style0 = '.sticky-prod-cat {';
       style0 += 'position: fixed !important;';
       style0 += 'top: 80px !important;';
-      style0 += 'width: 100% !important;';
+      style0 += 'width: 97% !important;';
+      style0 += 'transition: all 0.3s ease;';
       style0 += '}';
       var style1 = '.sticky-prod-cart {';
       style1 += 'position: fixed !important;';
       style1 += 'top: 80px !important;';
-      style1 += 'right: 2.5% !important;';
+      style1 += 'right: 1% !important;';
       style1 += 'width: 28.5% !important;';
       style1 += '}';
       var style2 = '.sticky-search {';
@@ -188,7 +189,12 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     };
     window.addEventListener('scroll', handleScroll);
     return function () {
-      return window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
+      if (styleSheet.cssRules.length > 0) {
+        styleSheet.deleteRule(0);
+        styleSheet.deleteRule(1);
+        styleSheet.deleteRule(2);
+      }
     };
   }, [categorySelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoriesWrapper, {

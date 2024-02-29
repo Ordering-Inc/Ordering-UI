@@ -15,6 +15,7 @@ var _Confirm = require("../Confirm");
 var _Modal = require("../Modal");
 var _CouponControl = require("../../../../../components/CouponControl");
 var _ProductForm = require("../ProductForm");
+var _pfchangs = require("../ProductForm/layouts/pfchangs");
 var _UpsellingPage = require("../UpsellingPage");
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _TaxInformation = require("../TaxInformation");
@@ -40,7 +41,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CartUI = function CartUI(props) {
-  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _Object$values, _orderState$carts, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products2, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options2, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_t2, _configs$driver_tip_u2, _configs$driver_tip_t3, _cart$payment_events, _cart$payment_events2, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
+  var _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _configs$checkout_mul, _Object$values, _orderState$carts, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _theme$layouts, _theme$layouts$busine, _theme$layouts$busine2, _theme$layouts$busine3, _orderState$option, _orderState$option2, _props$beforeElements, _props$beforeComponen, _cart$products2, _cart$offers, _cart$offers2, _cart$offers3, _cart$offers3$filter, _cart$offers4, _cart$offers4$filter, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers5, _cart$offers6, _cart$offers6$filter, _orderState$options, _cart$offers7, _cart$offers8, _cart$offers8$filter, _configs$driver_tip_t, _configs$driver_tip_u, _orderState$options2, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6, _configs$driver_tip_t2, _configs$driver_tip_u2, _configs$driver_tip_t3, _cart$payment_events, _cart$payment_events2, _cart$business2, _openTaxModal$data, _openTaxModal$data2, _openTaxModal$data3, _openTaxModal$data4, _openTaxModal$data$fi, _openTaxModal$data5, _openTaxModal$data6, _props$afterComponent, _props$afterElements;
   var currentCartUuid = props.currentCartUuid,
     clearCart = props.clearCart,
     isProducts = props.isProducts,
@@ -142,6 +143,8 @@ var CartUI = function CartUI(props) {
   var cart = orderState === null || orderState === void 0 ? void 0 : (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(props.cart.business_id)];
   var viewString = isStore ? 'business_view' : 'header';
   var hideCartComments = orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$theme = orderingTheme.theme) === null || _orderingTheme$theme === void 0 ? void 0 : (_orderingTheme$theme$ = _orderingTheme$theme[viewString]) === null || _orderingTheme$theme$ === void 0 ? void 0 : (_orderingTheme$theme$2 = _orderingTheme$theme$.components) === null || _orderingTheme$theme$2 === void 0 ? void 0 : (_orderingTheme$theme$3 = _orderingTheme$theme$2.cart) === null || _orderingTheme$theme$3 === void 0 ? void 0 : (_orderingTheme$theme$4 = _orderingTheme$theme$3.components) === null || _orderingTheme$theme$4 === void 0 ? void 0 : (_orderingTheme$theme$5 = _orderingTheme$theme$4.comments) === null || _orderingTheme$theme$5 === void 0 ? void 0 : _orderingTheme$theme$5.hidden;
+  var pfchangs = (theme === null || theme === void 0 ? void 0 : (_theme$layouts = theme.layouts) === null || _theme$layouts === void 0 ? void 0 : (_theme$layouts$busine = _theme$layouts.business_view) === null || _theme$layouts$busine === void 0 ? void 0 : (_theme$layouts$busine2 = _theme$layouts$busine.components) === null || _theme$layouts$busine2 === void 0 ? void 0 : (_theme$layouts$busine3 = _theme$layouts$busine2.layout) === null || _theme$layouts$busine3 === void 0 ? void 0 : _theme$layouts$busine3.type) === 'pfchangs';
+  var ProductFormComponent = pfchangs ? _pfchangs.ProductForm : _ProductForm.ProductForm;
   var walletName = {
     cash: {
       name: t('PAY_WITH_CASH_WALLET', 'Pay with Cash Wallet')
@@ -533,15 +536,19 @@ var CartUI = function CartUI(props) {
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
-    disableOverflowX: true
-  }, /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
+    disableOverflowX: true,
+    hideCloseDefault: true
+  }, /*#__PURE__*/_react.default.createElement(ProductFormComponent, {
     isCartProduct: true,
     productCart: curProduct,
     businessSlug: cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.slug,
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     categoryId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.category_id,
     productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id,
-    onSave: handlerProductAction
+    onSave: handlerProductAction,
+    closeModalProductForm: function closeModalProductForm() {
+      return setModalIsOpen(false);
+    }
   })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     width: "70%",
     open: openTaxModal.open,
