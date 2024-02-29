@@ -42,6 +42,8 @@ export const CategoriesContainer = styled.div`
     `}
   }
   @media (min-width: 992px) {
-    width: ${props => props.w ?? 'auto'};
+    ${(props) => props.w && css`
+      width: ${props.w};
+    `}
   }
 `
