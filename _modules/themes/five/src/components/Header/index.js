@@ -84,6 +84,9 @@ var Header = function Header(props) {
     _useOrder2 = _slicedToArray(_useOrder, 2),
     orderState = _useOrder2[0],
     refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
+  var _useSite = (0, _orderingComponents.useSite)(),
+    _useSite2 = _slicedToArray(_useSite, 1),
+    site = _useSite2[0].site;
   var _useState = (0, _react.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     openPopover = _useState2[0],
@@ -230,7 +233,15 @@ var Header = function Header(props) {
     setModalIsOpen(true);
   };
   var handleTogglePopover = function handleTogglePopover(type) {
-    setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, !openPopover[type])));
+    if (type === 'cart') {
+      if (windowSize.width > 768) {
+        var _cartsWithProducts$;
+        var cart = cartsWithProducts.length > 0 && ((_cartsWithProducts$ = cartsWithProducts[0]) === null || _cartsWithProducts$ === void 0 ? void 0 : _cartsWithProducts$.valid) && cartsWithProducts[0];
+        cart && handleClickCheckout(cart);
+      }
+    } else {
+      setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, !openPopover[type])));
+    }
   };
   var handleClosePopover = function handleClosePopover(type) {
     setOpenPopover(_objectSpread(_objectSpread({}, openPopover), {}, _defineProperty({}, type, false)));
@@ -328,6 +339,21 @@ var Header = function Header(props) {
       return _ref2.apply(this, arguments);
     };
   }();
+  var handleClickCheckout = function handleClickCheckout(cart) {
+    events.emit('go_to_page', {
+      page: 'checkout',
+      params: {
+        cartUuid: cart === null || cart === void 0 ? void 0 : cart.uuid
+      }
+    });
+    events.emit('go_to_checkout', {
+      page: 'checkout',
+      params: {
+        cart: cart
+      }
+    });
+    events.emit('cart_popover_closed');
+  };
   (0, _react.useEffect)(function () {
     if (isCustomerMode) {
       setCustomerModalOpen(false);
