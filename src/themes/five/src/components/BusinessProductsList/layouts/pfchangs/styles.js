@@ -47,7 +47,7 @@ export const WrapAllCategories = styled.div`
   .category-title {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     padding-top: 5px;
     padding-bottom: 12px;

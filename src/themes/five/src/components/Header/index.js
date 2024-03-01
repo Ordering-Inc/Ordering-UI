@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useApi } from 'ordering-components'
+import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useApi, useSite } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
 import { LanguageSelector } from '../LanguageSelector'
@@ -49,7 +49,7 @@ import { SignUpForm as SignUpFormPF } from '../SignUpForm/layouts/pfchangs'
 import { ForgotPasswordForm } from '../ForgotPasswordForm'
 import { getDistance } from '../../../../../utils'
 import { BusinessPreorder } from '../BusinessPreorder'
-import BsFillPersonFill from '@meronex/icons/bs/BsFillPersonFill';
+import BsFillPersonFill from '@meronex/icons/bs/BsFillPersonFill'
 
 export const Header = (props) => {
   const {
@@ -69,6 +69,7 @@ export const Header = (props) => {
   const [, t] = useLanguage()
   const [{ auth }, { login }] = useSession()
   const [orderState, { refreshOrderOptions }] = useOrder()
+  const [{ site }] = useSite()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
   const [configState] = useConfig()
@@ -170,10 +171,17 @@ export const Header = (props) => {
   }
 
   const handleTogglePopover = (type) => {
-    setOpenPopover({
-      ...openPopover,
-      [type]: !openPopover[type]
-    })
+    if (type === 'cart') {
+      if (windowSize.width > 768) {
+        const cart = cartsWithProducts.length > 0 && cartsWithProducts[0]?.valid && cartsWithProducts[0]
+        cart && handleClickCheckout(cart)
+      }
+    } else {
+      setOpenPopover({
+        ...openPopover,
+        [type]: !openPopover[type]
+      })
+    }
   }
 
   const handleClosePopover = (type) => {
@@ -254,6 +262,14 @@ export const Header = (props) => {
       })
     }
   }
+
+  const handleClickCheckout = (cart) => {
+    events.emit('go_to_page', { page: 'checkout', params: { cartUuid: cart?.uuid } })
+
+    events.emit('go_to_checkout', { page: 'checkout', params: { cart: cart } })
+    events.emit('cart_popover_closed')
+  }
+
   useEffect(() => {
     if (isCustomerMode) {
       setCustomerModalOpen(false)
