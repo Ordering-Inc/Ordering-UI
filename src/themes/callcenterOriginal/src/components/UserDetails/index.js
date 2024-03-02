@@ -84,14 +84,17 @@ const UserDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       {(validationFields.loading || formState.loading || userState.loading) && (
-        <UserData>
-          {validationFieldsLength?.map(field => (
-            <React.Fragment key={field?.id}>
-              <Skeleton width={250} height={50} />
-              <Skeleton width={180} height={25} />
-              <Skeleton width={210} height={50} />
-            </React.Fragment>
-          ))}
+        <UserData isModal={isModal}>
+          {isModal ? [...Array(4)].map((_, i) => (
+            <Skeleton key={i} width={150 + (i * 10)} height={15} />
+          ))
+            : validationFieldsLength?.map((field, i) => (
+              <React.Fragment key={field?.id}>
+                <Skeleton width={250} height={50} />
+                <Skeleton width={180} height={25} />
+                <Skeleton width={210} height={50} />
+              </React.Fragment>
+            ))}
         </UserData>
       )}
 

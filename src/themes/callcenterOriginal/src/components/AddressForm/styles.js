@@ -218,15 +218,6 @@ export const WrapperMap = styled.div`
     border-radius: 15px;
   }
 `
-export const WrapperSMS = styled.div`
-  z-index: 100;
-  width: 50%;
-  position: absolute;
-  top: 15%;
-  right: 0;
-  padding-right: 20px;
-  padding-top: 30px;
-`
 
 export const WrapperSkeleton = styled.div`
   display: flex;

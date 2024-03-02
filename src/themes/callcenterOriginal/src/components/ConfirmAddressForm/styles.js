@@ -2,8 +2,6 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const FormActions = styled.div`
-  margin-top: 35px;
-  padding: 10px 0px;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -196,11 +194,14 @@ export const AddressTagSection = styled.div`
 
 export const WrapperMap = styled.div`
   width: 100%;
-  height: 170px;
+  height: ${({ height }) => `${height}px` || '170px'};
   > div {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
+    border-radius: 15px;
+  }
+  span {
     border-radius: 15px;
   }
 `
@@ -216,20 +217,21 @@ export const WrapperSkeleton = styled.div`
 `
 
 export const AddressFormContainer = styled.div`
-  width: 90%;
   text-align: center;
-  margin: 0 auto;
-  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
   h1{
     font-size: 24px;
     text-align: center;
-
+    padding-bottom: 15px;
   }
 
   > div{
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
   }
 
@@ -239,8 +241,6 @@ export const AddressFormContainer = styled.div`
   }
 
   @media (min-width: 768px){
-    width: 90%;
-
     ul{
       width: 100%;
     }
@@ -258,7 +258,7 @@ export const AddressMarkContainer = styled.div`
   border-radius: 4px;
   position: absolute;
   top: 50px;
-  width: max-content;
+  width: 75%;
   p {
     margin: 0;
     color: #664D03;

@@ -105,7 +105,7 @@ export const AddressItemActions = styled.div`
     cursor: pointer;
     margin: 0px 5px;
     font-size: 20px;
-    
+
     svg {
       color: #B1BCCC;
     }
@@ -175,7 +175,7 @@ export const ContinueButton = styled.div`
   width: 100%;
   position: sticky;
   bottom: 1px;
-  
+
   button {
     width: 100%;
     white-space: nowrap;
@@ -204,7 +204,7 @@ export const List = styled.div`
     margin-top: 0px;
   ` : css`
     margin-top: 200px;
-  `} 
+  `}
   ${({ addFormRestrictions }) => addFormRestrictions && css`
     height: 405px;
   `}
@@ -234,7 +234,7 @@ export const CloseIcon = styled.div`
 `
 
 export const TitleFormContainer = styled.div`
-  display: flex; 
+  display: flex;
   align-items: center;
   margin-top: 7px;
   h1 {
@@ -289,4 +289,19 @@ export const WithoutAddressText = styled.p`
   text-decoration: underline;
   color: ${({ theme }) => theme?.colors?.primary};
   cursor: pointer;
+`
+
+export const WrapperSMS = styled.div`
+  margin-top: 20px;
+  p {
+    color: ${({ theme }) => theme?.colors?.primary}
+  }
+`
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  .sms{
+    margin-left: 20px;
+  }
 `
