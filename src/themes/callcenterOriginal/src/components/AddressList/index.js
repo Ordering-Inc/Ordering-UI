@@ -39,7 +39,9 @@ import {
   AddressBookMark,
   AddressBookMarkContainer,
   AddressTitleContainer,
-  WithoutAddressText
+  WithoutAddressText,
+  WrapperSMS,
+  ButtonsContainer
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -76,7 +78,8 @@ const AddressListUI = (props) => {
     setIsSavedAddress,
     isFromPhoneAutocomplete,
     setUserConfirmPhone,
-    userConfirmPhone
+    userConfirmPhone,
+    disabledSms
   } = props
 
   const [, t] = useLanguage()
@@ -134,7 +137,7 @@ const AddressListUI = (props) => {
     handleCloseAddressForm()
   }
 
-  const handleSetAddress = (address) => {
+  const handleSetAddress = (address, options) => {
     if (
       checkAddress(address) &&
       isCustomerMode &&
@@ -157,7 +160,7 @@ const AddressListUI = (props) => {
       openAddress(address)
       return
     }
-    setIsSavedAddress && setIsSavedAddress(true)
+    (!options?.avoidRedirect && setIsSavedAddress) && setIsSavedAddress(true)
     handleCloseAddressForm()
     handleSetDefault(address, userCustomerSetup)
   }
@@ -240,6 +243,7 @@ const AddressListUI = (props) => {
       handleOnAccept: () => setConfirm({ ...confirm, open: false }),
       handleOnCancel: ''
     })
+    handleSetAddress(addressList?.addresses[addressList?.addresses?.length - 1], { avoidRedirect: true })
   }, [addressList?.addedBySocket])
 
   return (
@@ -259,8 +263,8 @@ const AddressListUI = (props) => {
             notUseCustomerInfo={notUseCustomerInfo}
             addFormRestrictions={addFormRestrictions}
           >
-            {
-              !addFormRestrictions && !addressOpen && !isOpenUserData && (
+            {!addFormRestrictions && !addressOpen && !isOpenUserData && (
+              <ButtonsContainer>
                 <Button
                   className='add'
                   outline
@@ -271,8 +275,23 @@ const AddressListUI = (props) => {
                 >
                   {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
                 </Button>
-              )
-            }
+                <Button
+                  className='add sms'
+                  color={disabledSms ? 'secondary' : 'primary'}
+                  onClick={() => setUserConfirmPhone({ open: true, result: null })}
+                  disabled={orderState?.loading || actionStatus.loading || disabledSms}
+                >
+                  {t('SEND_SMS_TO_CLIENT', 'Send SMS to client')}
+                </Button>
+              </ButtonsContainer>
+            )}
+            {(userConfirmPhone?.result) && (
+              <WrapperSMS>
+                <p>
+                  {userConfirmPhone?.result}
+                </p>
+              </WrapperSMS>
+            )}
             {
               isPopover && addressOpen && (
                 <AddressForm
@@ -303,6 +322,7 @@ const AddressListUI = (props) => {
                 <AddressListUl id='list'>
                   <AddressTitleContainer style={{ display: 'flex' }}>
                     <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
+
                     {isAllowUnaddressOrderType && (
                       <>
                         <p>{' '}{t('OR', 'or')}{' '}</p>
