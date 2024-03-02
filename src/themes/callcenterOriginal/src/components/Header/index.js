@@ -72,6 +72,7 @@ export const Header = (props) => {
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [userConfirmPhone, setUserConfirmPhone] = useState({ open: false, result: null })
+  const [disabledSms, setDisableSms] = useState(false)
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
@@ -146,6 +147,19 @@ export const Header = (props) => {
       setCustomerModalOpen(false)
     }
   }, [JSON.stringify(orderState?.options?.address?.address)])
+
+  useEffect(() => {
+    let timeout = null
+    if (userConfirmPhone?.result) {
+      setDisableSms(true)
+      timeout = setTimeout(() => {
+        setDisableSms(false)
+      }, 30000)
+    }
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [userConfirmPhone?.result])
 
   return (
     <HeaderContainer>
@@ -418,6 +432,7 @@ export const Header = (props) => {
                 isHeader
                 userConfirmPhone={userConfirmPhone}
                 setUserConfirmPhone={setUserConfirmPhone}
+                disabledSms={disabledSms}
               />
             </>
           </UserEdit>

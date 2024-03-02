@@ -34,8 +34,7 @@ import {
   WrapperSkeleton,
   AddressMarkContainer,
   StreetViewText,
-  WithoutAddressContainer,
-  WrapperSMS
+  WithoutAddressContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -61,9 +60,7 @@ const AddressFormUI = (props) => {
     address,
     notUseCustomerInfo,
     addFormRestrictions,
-    isAllowUnaddressOrderType,
-    userConfirmPhone,
-    setUserConfirmPhone
+    isAllowUnaddressOrderType
   } = props
 
   const [configState] = useConfig()
@@ -425,13 +422,6 @@ const AddressFormUI = (props) => {
                         </p>
                       </AddressMarkContainer>
                     )}
-                    {(!showMap && !formState?.changes?.address?.location && userConfirmPhone?.result) && (
-                      <AddressMarkContainer blue>
-                        <p>
-                          {t('LINK_SENT_TO_USER', 'Link sent to user. We are waiting to the address update')}
-                        </p>
-                      </AddressMarkContainer>
-                    )}
                     <GoogleAutocompleteInput
                       className='input-autocomplete'
                       apiKey={googleMapsApiKey}
@@ -520,21 +510,6 @@ const AddressFormUI = (props) => {
                       </StreetViewText>
                     )}
                   </WrapperMap>
-                )}
-                {(!showMap && !formState?.changes?.location && !userConfirmPhone?.result) && (
-                  <WrapperSMS>
-                    <section>
-                      <span>
-                        {t('CANT_FIND_DIRECTION', 'Can\'t find the direction')}{'? '}
-                      </span>
-                      <a
-                        style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
-                        onClick={() => setUserConfirmPhone({ open: true, result: null })}
-                      >
-                        {t('SEND_SMS_TO_CLIENT', 'Send SMS to client')}
-                      </a>
-                    </section>
-                  </WrapperSMS>
                 )}
               </React.Fragment>
             ) : (

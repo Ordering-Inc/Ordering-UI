@@ -75,6 +75,8 @@ const PhoneAutocompleteUI = (props) => {
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [inputValue, setInputValue] = useState(urlPhone ?? userCustomer?.cellphone ?? '')
   const [isSavedAddress, setIsSavedAddress] = useState(false)
+  const [disabledSms, setDisableSms] = useState(false)
+
   const countryPhoneCode = userCustomer?.country_phone_code ?? userCustomer?.country_code
 
   const [optSelected, setOptSelected] = useState(userCustomer ? {
@@ -293,6 +295,19 @@ const PhoneAutocompleteUI = (props) => {
     }
   }, [userCustomer?.id, orderState?.loading])
 
+  useEffect(() => {
+    let timeout = null
+    if (userConfirmPhone?.result) {
+      setDisableSms(true)
+      timeout = setTimeout(() => {
+        setDisableSms(false)
+      }, 30000)
+    }
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [userConfirmPhone?.result])
+
   const OrderTypesComponent = () => {
     return (
       <>
@@ -475,6 +490,7 @@ const PhoneAutocompleteUI = (props) => {
                 userConfirmPhone={userConfirmPhone}
                 setUserConfirmPhone={setUserConfirmPhone}
                 franchiseId={franchiseId}
+                disabledSms={disabledSms}
                 isHeader
               />
             </>
