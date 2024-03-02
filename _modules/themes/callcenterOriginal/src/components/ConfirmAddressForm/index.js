@@ -467,7 +467,7 @@ var ConfirmAddressFormUI = function ConfirmAddressFormUI(props) {
     style: {
       marginBottom: '10px'
     }
-  })), !configState.loading && !addressState.loading && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
+  })), !configState.loading && !addressState.loading && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     onKeyDown: function onKeyDown(e) {
       return checkKeyDown(e);
@@ -517,7 +517,9 @@ var ConfirmAddressFormUI = function ConfirmAddressFormUI(props) {
       IconLoadingButton: _CgSearchLoading.default,
       geolocationState: geolocationState,
       location: (addressState === null || addressState === void 0 || (_addressState$address13 = addressState.address) === null || _addressState$address13 === void 0 ? void 0 : _addressState$address13.location) || (formState === null || formState === void 0 || (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.location)
-    })), !isHideMap && locationChange && ((addressState === null || addressState === void 0 || (_addressState$address14 = addressState.address) === null || _addressState$address14 === void 0 ? void 0 : _addressState$address14.location) || (formState === null || formState === void 0 || (_formState$changes29 = formState.changes) === null || _formState$changes29 === void 0 ? void 0 : _formState$changes29.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+    })), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
+      height: Math.ceil(window.innerHeight * 0.31)
+    }, !isHideMap && locationChange && (addressState !== null && addressState !== void 0 && (_addressState$address14 = addressState.address) !== null && _addressState$address14 !== void 0 && _addressState$address14.location || formState !== null && formState !== void 0 && (_formState$changes29 = formState.changes) !== null && _formState$changes29 !== void 0 && _formState$changes29.location) ? /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
       apiKey: googleMapsApiKey,
       location: locationChange,
       fixedLocation: !isEditing ? firstLocationNoEdit.value : null,
@@ -525,6 +527,8 @@ var ConfirmAddressFormUI = function ConfirmAddressFormUI(props) {
       handleChangeAddressMap: handleChangeAddress,
       setErrors: setMapErrors,
       maxLimitLocation: parseInt(maxLimitLocation, 10)
+    }) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      height: Math.ceil(window.innerHeight * 0.31)
     }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, (isRequiredField(field.name) || showFieldWithTheme(field.name)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, field.name !== 'address_notes' ? /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
@@ -595,7 +599,7 @@ var ConfirmAddressFormUI = function ConfirmAddressFormUI(props) {
     type: "submit",
     disabled: formState.loading,
     color: "primary"
-  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('ADD_ADDRESS', 'Add address')) : t('LOADING', 'Loading')))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('ADD_ADDRESS', 'Add address')) : t('LOADING', 'Loading'))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ADDRESS', 'Address'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

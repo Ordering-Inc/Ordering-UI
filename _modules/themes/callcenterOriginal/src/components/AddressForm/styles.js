@@ -4,10 +4,10 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSkeleton = exports.WrapperSMS = exports.WrapperMap = exports.WrapAddressInput = exports.WithoutAddressContainer = exports.StreetViewText = exports.FormControl = exports.FormActions = exports.AddressWrap = exports.AddressTagSection = exports.AddressMarkContainer = void 0;
+exports.WrapperSkeleton = exports.WrapperMap = exports.WrapAddressInput = exports.WithoutAddressContainer = exports.StreetViewText = exports.FormControl = exports.FormActions = exports.AddressWrap = exports.AddressTagSection = exports.AddressMarkContainer = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -42,15 +42,14 @@ var WrapperMap = exports.WrapperMap = _styledComponents.default.div(_templateObj
   var notUseCustomerInfo = _ref.notUseCustomerInfo;
   return notUseCustomerInfo ? '370px' : '480px';
 });
-var WrapperSMS = exports.WrapperSMS = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  z-index: 100;\n  width: 50%;\n  position: absolute;\n  top: 15%;\n  right: 0;\n  padding-right: 20px;\n  padding-top: 30px;\n"])));
-var WrapperSkeleton = exports.WrapperSkeleton = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 10px;\n\n  span {\n    width: 100%;\n  }\n"])));
-var AddressMarkContainer = exports.AddressMarkContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  background: #FFE69C;\n  border: 1px solid #FFF3CD;\n  display: flex;\n  padding: 8px;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  position: absolute;\n  top: 50px;\n  width: max-content;\n  p {\n    margin: 0;\n    color: #664D03;\n    font-size: 12px;\n  }\n\n  ", "\n"])), function (_ref2) {
+var WrapperSkeleton = exports.WrapperSkeleton = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 10px;\n\n  span {\n    width: 100%;\n  }\n"])));
+var AddressMarkContainer = exports.AddressMarkContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFE69C;\n  border: 1px solid #FFF3CD;\n  display: flex;\n  padding: 8px;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  position: absolute;\n  top: 50px;\n  width: max-content;\n  p {\n    margin: 0;\n    color: #664D03;\n    font-size: 12px;\n  }\n\n  ", "\n"])), function (_ref2) {
   var blue = _ref2.blue;
-  return blue && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      background-color: #CFF4FC;\n      border: 1px solid #9EEAF9;\n      p {\n        color: #055160;\n      }\n  "])));
+  return blue && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      background-color: #CFF4FC;\n      border: 1px solid #9EEAF9;\n      p {\n        color: #055160;\n      }\n  "])));
 });
-var StreetViewText = exports.StreetViewText = _styledComponents.default.span(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 35px;\n  top: 30px;\n  text-decoration: underline;\n  color: ", ";\n  z-index: 9999;\n  cursor: pointer;\n"])), function (_ref3) {
+var StreetViewText = exports.StreetViewText = _styledComponents.default.span(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 35px;\n  top: 30px;\n  text-decoration: underline;\n  color: ", ";\n  z-index: 9999;\n  cursor: pointer;\n"])), function (_ref3) {
   var _theme$colors;
   var theme = _ref3.theme;
   return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
 });
-var WithoutAddressContainer = exports.WithoutAddressContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  p {\n    margin-bottom: 0;\n  }\n"])));
+var WithoutAddressContainer = exports.WithoutAddressContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  p {\n    margin-bottom: 0;\n  }\n"])));

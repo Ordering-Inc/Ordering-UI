@@ -111,16 +111,20 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     isSavedAddress = _useState14[0],
     setIsSavedAddress = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    disabledSms = _useState16[0],
+    setDisableSms = _useState16[1];
   var countryPhoneCode = (_userCustomer$country = userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.country_phone_code) !== null && _userCustomer$country !== void 0 ? _userCustomer$country : userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.country_code;
-  var _useState15 = (0, _react.useState)(userCustomer ? {
+  var _useState17 = (0, _react.useState)(userCustomer ? {
       value: userCustomer.cellphone || userCustomer.phone,
       label: "".concat(countryPhoneCode ? "(".concat(countryPhoneCode, ")") : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.phone && !(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone) ? "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.phone) : '', " ").concat(userCustomer !== null && userCustomer !== void 0 && userCustomer.cellphone ? "".concat(userCustomer.cellphone) : '', " - {").concat(userCustomer.name, "}"),
       flag: (userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.imported_address_text) && (userCustomer === null || userCustomer === void 0 || (_userCustomer$address = userCustomer.addresses) === null || _userCustomer$address === void 0 ? void 0 : _userCustomer$address.length) === 0,
       lastname: "".concat(userCustomer.name, " ").concat(userCustomer.lastname)
     } : null),
-    _useState16 = _slicedToArray(_useState15, 2),
-    optSelected = _useState16[0],
-    setOptSelected = _useState16[1];
+    _useState18 = _slicedToArray(_useState17, 2),
+    optSelected = _useState18[0],
+    setOptSelected = _useState18[1];
   var configTypes = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.order_types_allowed) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').filter(function (value) {
     return allOrderTypes.includes(Number(value));
   }).map(function (value) {
@@ -373,6 +377,18 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       handleSetInitialValues();
     }
   }, [userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.id, orderState === null || orderState === void 0 ? void 0 : orderState.loading]);
+  (0, _react.useEffect)(function () {
+    var timeout = null;
+    if (userConfirmPhone !== null && userConfirmPhone !== void 0 && userConfirmPhone.result) {
+      setDisableSms(true);
+      timeout = setTimeout(function () {
+        setDisableSms(false);
+      }, 30000);
+    }
+    return function () {
+      clearTimeout(timeout);
+    };
+  }, [userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.result]);
   var OrderTypesComponent = function OrderTypesComponent() {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, orderTypes && (configTypes ? orderTypes.filter(function (type) {
       return (configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value)) && pickupTypes.includes(type === null || type === void 0 ? void 0 : type.value);
@@ -522,6 +538,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     userConfirmPhone: userConfirmPhone,
     setUserConfirmPhone: setUserConfirmPhone,
     franchiseId: franchiseId,
+    disabledSms: disabledSms,
     isHeader: true
   })))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: openModal.error,

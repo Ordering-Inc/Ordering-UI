@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12, _confirm$handleOnCanc, _props$afterComponent, _props$afterElements;
+  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _props$beforeElements, _props$beforeComponen, _addressList$addresse4, _addressList$addresse5, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12, _confirm$handleOnCanc, _props$afterComponent, _props$afterElements;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -61,7 +61,8 @@ var AddressListUI = function AddressListUI(props) {
     setIsSavedAddress = props.setIsSavedAddress,
     isFromPhoneAutocomplete = props.isFromPhoneAutocomplete,
     setUserConfirmPhone = props.setUserConfirmPhone,
-    userConfirmPhone = props.userConfirmPhone;
+    userConfirmPhone = props.userConfirmPhone,
+    disabledSms = props.disabledSms;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -137,7 +138,7 @@ var AddressListUI = function AddressListUI(props) {
     setIsSavedAddress && setIsSavedAddress(true);
     handleCloseAddressForm();
   };
-  var handleSetAddress = function handleSetAddress(address) {
+  var handleSetAddress = function handleSetAddress(address, options) {
     var _address$location3, _address$location4;
     if (checkAddress(address) && isCustomerMode && (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.id) === (user === null || user === void 0 ? void 0 : user.id) && !isFromCheckout) {
       var _address$location, _address$location2;
@@ -159,7 +160,7 @@ var AddressListUI = function AddressListUI(props) {
       openAddress(address);
       return;
     }
-    setIsSavedAddress && setIsSavedAddress(true);
+    !(options !== null && options !== void 0 && options.avoidRedirect) && setIsSavedAddress && setIsSavedAddress(true);
     handleCloseAddressForm();
     handleSetDefault(address, userCustomerSetup);
   };
@@ -238,6 +239,7 @@ var AddressListUI = function AddressListUI(props) {
     }
   }, [userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text, addressList.addresses, addressList === null || addressList === void 0 ? void 0 : addressList.loading, addressList === null || addressList === void 0 ? void 0 : addressList.error, isOpenUserData]);
   (0, _react.useEffect)(function () {
+    var _addressList$addresse3;
     if (!(addressList !== null && addressList !== void 0 && addressList.addedBySocket)) return;
     setConfirm({
       open: true,
@@ -249,6 +251,9 @@ var AddressListUI = function AddressListUI(props) {
         }));
       },
       handleOnCancel: ''
+    });
+    handleSetAddress(addressList === null || addressList === void 0 ? void 0 : addressList.addresses[(addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) - 1], {
+      avoidRedirect: true
     });
   }, [addressList === null || addressList === void 0 ? void 0 : addressList.addedBySocket]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -268,16 +273,26 @@ var AddressListUI = function AddressListUI(props) {
     isHeader: isHeader,
     notUseCustomerInfo: notUseCustomerInfo,
     addFormRestrictions: addFormRestrictions
-  }, !addFormRestrictions && !addressOpen && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, !addFormRestrictions && !addressOpen && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_styles.ButtonsContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
-    color: (addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) > 0 ? 'secondary' : 'primary',
+    color: (addressList === null || addressList === void 0 || (_addressList$addresse4 = addressList.addresses) === null || _addressList$addresse4 === void 0 ? void 0 : _addressList$addresse4.length) > 0 ? 'secondary' : 'primary',
     onClick: function onClick() {
       return openAddress({});
     },
     disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading,
     hoverColor: "#CCC"
-  }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+  }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    className: "add sms",
+    color: disabledSms ? 'secondary' : 'primary',
+    onClick: function onClick() {
+      return setUserConfirmPhone({
+        open: true,
+        result: null
+      });
+    },
+    disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading || disabledSms
+  }, t('SEND_SMS_TO_CLIENT', 'Send SMS to client'))), (userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.result) && /*#__PURE__*/_react.default.createElement(_styles.WrapperSMS, null, /*#__PURE__*/_react.default.createElement("p", null, userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.result)), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     useValidationFileds: true,
@@ -290,7 +305,7 @@ var AddressListUI = function AddressListUI(props) {
     isAllowUnaddressOrderType: isAllowUnaddressOrderType,
     userConfirmPhone: userConfirmPhone,
     setUserConfirmPhone: setUserConfirmPhone
-  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse4 = addressList.addresses) === null || _addressList$addresse4 === void 0 ? void 0 : _addressList$addresse4.length) > 0 && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) === 'object' && !addressOpen && (user === null || user === void 0 ? void 0 : user.id) === (orderState === null || orderState === void 0 || (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.user_id) && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse5 = addressList.addresses) === null || _addressList$addresse5 === void 0 ? void 0 : _addressList$addresse5.length) > 0 && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) === 'object' && !addressOpen && (user === null || user === void 0 ? void 0 : user.id) === (orderState === null || orderState === void 0 || (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.user_id) && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
   }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitleContainer, {
     style: {
