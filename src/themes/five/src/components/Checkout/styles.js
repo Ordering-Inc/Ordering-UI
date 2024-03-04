@@ -460,7 +460,7 @@ export const GoToMenu = styled.div`
   position: fixed;
   z-index: 2000;
   top: 0;
-  left: 200px;
+  left: 70vw;
   transform: translateY(75%);
   display: flex;
   align-items: center;
@@ -477,7 +477,7 @@ export const GoToMenu = styled.div`
     position: relative;
   }
   @media (min-width: 768px) {
-    left: 230px;
+    left: 70vw;
     transform: translateY(100%);
     p {
       font-size: 16px;

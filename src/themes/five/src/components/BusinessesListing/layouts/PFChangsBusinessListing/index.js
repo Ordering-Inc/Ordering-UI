@@ -201,7 +201,7 @@ const BusinessesListingUI = (props) => {
     ) {
       const nearestBusinesses = businessesSearchList?.businesses?.sort((a, b) => sortBusinessFunction(a, b))
       const checkCanRedirect = nearestBusinesses?.length > 0 && (nearestBusinesses[0]?.open && (businessesInsideZone?.businesses?.find(_business => _business?.id === nearestBusinesses[0]?.id) || nearestBusinesses[0]?.delivery_zone || orderState?.options?.type === 2))
-      handleSetGuestLogin('addressModal', false)
+      handleSetGuestLogin && handleSetGuestLogin('addressModal', false)
       checkCanRedirect && onBusinessClick({ slug: nearestBusinesses[0].slug })
     }
   }, [businessesSearchList.loading, orderState?.loading, filterByAddress])

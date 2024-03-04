@@ -126,7 +126,6 @@ export const Menu = styled.div`
   }
 
   &.left-header {
-    background: #F8F9FA;
     border: none;
     box-sizing: border-box;
     border-radius: 50px;
@@ -140,23 +139,23 @@ export const Menu = styled.div`
     height: 44px;
 
     @media (min-width: 821px) {
-      border: 1px solid #DEE2E6;
+      /* border: 1px solid #DEE2E6; */
       justify-content: space-between;
     }
 
     @media (min-width: 1024px) {
       padding: 0 20px;
-      margin: 0 70px;
+      /* margin: 0 70px; */
     }
     
     @media (min-width: 1200px) {
       padding: 0 30px;
-      margin: 0 100px;
+      /* margin: 0 100px; */
     }
 
     @media (min-width: 1500px) {
       padding: 0 30px;
-      margin: 0 130px;
+      /* margin: 0 130px; */
     }
   }
 
@@ -418,5 +417,49 @@ export const LoginButton = styled.div`
   svg{
     color: ${({ theme }) => theme?.colors?.gold};
     margin-right: 10px;
+  }
+`
+export const DeliveryPickupContainer = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  position: relative;
+  border-radius: 10px;
+  height: 52px;
+  background-color: #F4F4F4;
+
+  button {
+    outline: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    z-index: 1;
+    border-radius: 10px;
+  }
+
+  &::after {
+    border-radius: 5px;
+
+    ${({ orderTypeSelected }) => orderTypeSelected === 1 ? css`
+      content: "";
+      background:  ${({ theme }) => theme.colors.gold};
+      position: absolute;
+      transition: all 0.2s linear 0s;
+      left: 0px;
+      height: calc(100% - 0px);
+      width: calc(50% - 0px);
+    ` : css`
+      content: "";
+      background: ${({ theme }) => theme.colors.gold};
+      position: absolute;
+      transition: all 0.2s linear 0s;
+      height: calc(100% - 0px);
+      width: calc(50% - 0px);
+      left: 50%;
+    `
+  }}
+
+  @media (min-width: 468px) {
+    margin-right: 35px;
   }
 `

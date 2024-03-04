@@ -61,7 +61,7 @@ export const BusinessBasicInformationPFChangs = (props) => {
           </>
         )}
       </TitleContainer>
-      <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
+      {/* <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
         <Button
           color={orderTypeSelected === 2 ? props?.business?.slug?.includes('pf_changs') ? '#000' : (theme?.colors?.buttonPrimaryContrast || 'FFF') : theme?.colors?.tertiary || '#FFF'}
           onClick={() => handleChangeOrderType(2)}
@@ -76,7 +76,7 @@ export const BusinessBasicInformationPFChangs = (props) => {
         >
           {t('DELIVERY_UPPER', 'Delivery')}
         </Button>
-      </DeliveryPickupContainer>
+      </DeliveryPickupContainer> */}
       <BusinessContainer bgimage={business?.header} isSkeleton={isSkeleton} id='container' isClosed={!business?.open} />
       <Modal
         width={window.innerWidth > 1200 ? '50%' : '70%'}

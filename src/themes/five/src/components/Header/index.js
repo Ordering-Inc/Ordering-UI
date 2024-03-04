@@ -8,6 +8,7 @@ import { LanguageSelector } from '../LanguageSelector'
 import { GeoAlt } from 'react-bootstrap-icons'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { OrderTypeSelectorContent } from '../OrderTypeSelectorContent'
+import { Button } from '../../styles/Buttons/theme/pfchangs'
 
 import {
   Header as HeaderContainer,
@@ -24,14 +25,15 @@ import {
   MomentMenu,
   FarAwayMessage,
   Divider,
-  LoginButton
+  LoginButton,
+  DeliveryPickupContainer
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
 
 import { UserPopover } from '../UserPopover'
 import { CartPopover } from '../CartPopover'
-import { OrderTypeSelectorHeader } from '../OrderTypeSelectorHeader'
+import { OrderTypeSelectorHeader } from '../../../../../components/OrderTypeSelectorHeader'
 import { CartContent } from '../CartContent'
 import { Modal } from '../Modal'
 import { MomentContent } from '../MomentContent'
@@ -68,8 +70,7 @@ export const Header = (props) => {
   const [{ parseDate }] = useUtils()
   const [, t] = useLanguage()
   const [{ auth }, { login }] = useSession()
-  const [orderState, { refreshOrderOptions }] = useOrder()
-  const [{ site }] = useSite()
+  const [orderState, { refreshOrderOptions, changeType }] = useOrder()
   const [openPopover, setOpenPopover] = useState({})
   const theme = useTheme()
   const [configState] = useConfig()
@@ -90,6 +91,8 @@ export const Header = (props) => {
   const [otpDataUser, setOtpDataUser] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isFarAway, setIsFarAway] = useState(false)
+  const [orderTypeSelected, setOrderTypeSelected] = useState(orderState?.options?.type)
+
   const isAlsea = ordering.project === 'alsea'
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0 && (cart?.business?.slug.includes(slug || 'pf_changs')))) || null // change filter includes pf_changs for cart?.business?.franchise_id === franchiseId || !franchiseId || !cart?.business?.franchiseId) DON'T MERGE THIS TO MASTER
@@ -125,6 +128,11 @@ export const Header = (props) => {
   const ConfirmComponent = theme?.layouts?.general?.components?.layout?.type === 'pfchangs'
     ? ConfirmPFChangs
     : Confirm
+
+  const handleChangeOrderType = (orderType) => {
+    setOrderTypeSelected(orderType)
+    changeType(orderType)
+  }
 
   const handleSuccessSignup = (user) => {
     login({
@@ -276,7 +284,7 @@ export const Header = (props) => {
     }
   }, [customerState?.user?.address])
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!pathname.includes('/search') && pathname !== '/') {
       setIsFarAway(false)
       return
@@ -293,7 +301,7 @@ export const Header = (props) => {
       timeout: 5000,
       maximumAge: 0
     })
-  }, [orderState?.options?.address?.location, pathname])
+  }, [orderState?.options?.address?.location, pathname]) */
 
   useEffect(() => {
     if (!otpDataUser && isloginSignupLayoutPF && modalPageToShow === 'signup') {
@@ -319,6 +327,11 @@ export const Header = (props) => {
       handleOpenLoginSignUp('login')
     }
   }, [isShowGuestLogin?.loginModal])
+
+  useEffect(() => {
+    if (orderTypeSelected === orderState?.options?.type) return
+    setOrderTypeSelected(orderState?.options?.type)
+  }, [orderState?.options?.type])
 
   return (
     <>
@@ -353,7 +366,7 @@ export const Header = (props) => {
               )}
             </LogoHeader>
           </LeftHeader>
-          {/* {showOrderOptionsByTheme && isShowOrderOptions && !props.isCustomLayout && (
+          {showOrderOptionsByTheme && isShowOrderOptions && !props.isCustomLayout && (
             <Menu className='left-header' isCustomerMode={isCustomerMode}>
               {windowSize.width > 820 && isFarAway && (
                 <FarAwayMessage>
@@ -367,7 +380,7 @@ export const Header = (props) => {
                     isCustomerMode={isCustomerMode}
                     onClick={(e) => handleClickUserCustomer(e)}
                   >
-                    <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                    <GeoAlt /> {orderState.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
                   </AddressMenu>
                   <Divider />
                 </>
@@ -395,10 +408,10 @@ export const Header = (props) => {
                     <AddressMenu
                       onClick={() => openModal('address')}
                     >
-                      <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                      <GeoAlt /> {orderState.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
                     </AddressMenu>
                   )}
-                  {showMoment && !isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
+                  {/* {showMoment && !isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                     <MomentMenu
                       onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
                         ? null
@@ -410,27 +423,38 @@ export const Header = (props) => {
                           : t('ASAP_ABBREVIATION', 'ASAP')}
                       </div>
                     </MomentMenu>
-                  )}
+                  )} */}
                 </>
               )}
               {showOrderTypes && (
                 <>
-                  {windowSize.width > 768 ? (
-                    <OrderTypeSelectorHeader
-                      orderTypeList={orderTypeList}
-                      onClick={() => openModal('delivery')}
-                    />
+                  {windowSize.width > 468 ? (
+                    <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
+                      <Button
+                        color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+                        onClick={() => handleChangeOrderType(2)}
+                        disabled={orderState?.loading}
+                      >
+                        {t('PICKUP', 'Pickup')}
+                      </Button>
+                      <Button
+                        color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+                        onClick={() => handleChangeOrderType(1)}
+                        disabled={orderState?.loading}
+                      >
+                        {t('DELIVERY_UPPER', 'Delivery')}
+                      </Button>
+                    </DeliveryPickupContainer>
                   ) : (
-                    <HeaderOption
-                      variant='delivery'
-                      onClick={(variant) => openModal(variant)}
-                      orderTypeList={orderTypeList}
+                    <OrderTypeSelectorHeader
+                      configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
+                      defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
                     />
                   )}
                 </>
               )}
             </Menu>
-          )} */}
+          )}
           {onlineStatus && (
             <RightHeader>
               <Menu isCustomerMode={isCustomerMode}>

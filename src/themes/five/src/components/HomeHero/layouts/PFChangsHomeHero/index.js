@@ -179,6 +179,16 @@ export const PFChangsHomeHero = (props) => {
   }, [goToElement])
 
   useEffect(() => {
+    if ((!isShowGuestLogin?.loginModal && !isShowGuestLogin?.addressModal) || (isShowGuestLogin?.loginModal && !isShowGuestLogin?.addressModal)) return
+    setModals({ ...modals, formOpen: true })
+  }, [isShowGuestLogin])
+
+  useEffect(() => {
+    if (orderTypeSelected === orderState?.options?.type) return
+    setOrderTypeSelected(orderState?.options?.type)
+  }, [orderState?.options?.type])
+
+  useEffect(() => {
     const resizeEvent = window.addEventListener('resize', (e) => {
       setInnerWidth(e.target.innerWidth)
     })
@@ -191,11 +201,6 @@ export const PFChangsHomeHero = (props) => {
       window.removeEventListener('resize', resizeEvent)
     }
   }, [])
-
-  useEffect(() => {
-    if ((!isShowGuestLogin?.loginModal && !isShowGuestLogin?.addressModal) || (isShowGuestLogin?.loginModal && !isShowGuestLogin?.addressModal)) return
-    setModals({ ...modals, formOpen: true })
-  }, [isShowGuestLogin])
 
   return (
     <>
