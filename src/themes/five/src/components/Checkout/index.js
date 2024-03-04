@@ -891,6 +891,7 @@ const CheckoutUI = (props) => {
                       isHideCash={isHideCash}
                       isApplyMasterCoupon={isApplyMasterCoupon}
                       hasCateringProducts={hasCateringProducts}
+                      forceOrderingCheckout={forceOrderingCheckout}
                     />
                   </PaymentMethodContainer>
                 </>

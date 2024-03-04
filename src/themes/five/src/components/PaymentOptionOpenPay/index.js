@@ -174,16 +174,6 @@ const PaymentOptionOpenPayUI = (props) => {
               </InputContainer>
             </Row>
             <Row>
-              <InputContainer isValid={errors.year} showBorder={errors.border}>
-                <Input
-                  name='cardYear'
-                  data-openpay-card='expiration_year'
-                  id='expirationYear'
-                  onChange={handleChange}
-                  maxLength={2}
-                  placeholder={t('EXPIRATION_YEAR', 'Expiration year')}
-                />
-              </InputContainer>
               <InputContainer isValid={errors.month} showBorder={errors.border}>
                 <Input
                   name='cardMonth'
@@ -192,6 +182,16 @@ const PaymentOptionOpenPayUI = (props) => {
                   onChange={handleChange}
                   maxLength={2}
                   placeholder={t('EXPIRATION_MONTH', 'Expiration month')}
+                />
+              </InputContainer>
+              <InputContainer isValid={errors.year} showBorder={errors.border}>
+                <Input
+                  name='cardYear'
+                  data-openpay-card='expiration_year'
+                  id='expirationYear'
+                  onChange={handleChange}
+                  maxLength={2}
+                  placeholder={t('EXPIRATION_YEAR', 'Expiration year')}
                 />
               </InputContainer>
               <InputContainer isValid={errors.cvv} showBorder={errors.border}>
