@@ -254,7 +254,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
         var _nearestBusinesses$2;
         return (_business === null || _business === void 0 ? void 0 : _business.id) === ((_nearestBusinesses$2 = nearestBusinesses[0]) === null || _nearestBusinesses$2 === void 0 ? void 0 : _nearestBusinesses$2.id);
       })) || ((_nearestBusinesses$3 = nearestBusinesses[0]) === null || _nearestBusinesses$3 === void 0 ? void 0 : _nearestBusinesses$3.delivery_zone) || (orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type) === 2);
-      handleSetGuestLogin('addressModal', false);
+      handleSetGuestLogin && handleSetGuestLogin('addressModal', false);
       checkCanRedirect && onBusinessClick({
         slug: nearestBusinesses[0].slug
       });

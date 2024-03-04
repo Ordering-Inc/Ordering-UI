@@ -890,7 +890,8 @@ var CheckoutUI = function CheckoutUI(props) {
     brandInformation: brandInformation,
     isHideCash: isHideCash,
     isApplyMasterCoupon: isApplyMasterCoupon,
-    hasCateringProducts: hasCateringProducts
+    hasCateringProducts: hasCateringProducts,
+    forceOrderingCheckout: forceOrderingCheckout
   }))), isWalletEnabled && !(businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart,
     businessConfigs: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi15 = businessDetails.business) === null || _businessDetails$busi15 === void 0 ? void 0 : _businessDetails$busi15.configs

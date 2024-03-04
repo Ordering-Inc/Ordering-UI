@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PFChangsHomeHero = function PFChangsHomeHero(props) {
-  var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderState$options4, _orderState$options4$, _orderState$options6, _orderState$options6$, _theme$images, _theme$images$general, _theme$colors, _theme$colors2, _orderState$options7, _orderState$options7$, _orderState$options8, _orderState$options8$, _configState$configs2, _configState$configs3, _orderState$options9, _orderState$options9$, _orderState$options10, _orderState$options11, _configState$configs4, _configState$configs5, _theme$images2, _theme$images2$genera, _orderState$options12, _theme$colors3, _theme$colors4, _theme$colors5, _theme$colors6;
+  var _orderState$options, _configState$configs, _configState$configs$, _theme$layouts, _theme$layouts$homepa, _theme$layouts$homepa2, _theme$layouts$homepa3, _theme$layouts$homepa4, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderState$options4, _orderState$options4$, _orderState$options6, _orderState$options6$, _orderState$options9, _theme$images, _theme$images$general, _theme$colors, _theme$colors2, _orderState$options10, _orderState$options11, _orderState$options12, _orderState$options13, _configState$configs2, _configState$configs3, _orderState$options14, _orderState$options15, _orderState$options16, _orderState$options17, _configState$configs4, _configState$configs5, _theme$images2, _theme$images2$genera, _orderState$options18, _theme$colors3, _theme$colors4, _theme$colors5, _theme$colors6;
   var contentPosition = props.contentPosition,
     brandId = props.brandId,
     handleSetGuestLogin = props.handleSetGuestLogin,
@@ -264,6 +264,17 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     };
   }, [goToElement]);
   (0, _react.useEffect)(function () {
+    if (!(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.loginModal) && !(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.addressModal) || isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.loginModal && !(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.addressModal)) return;
+    setModals(_objectSpread(_objectSpread({}, modals), {}, {
+      formOpen: true
+    }));
+  }, [isShowGuestLogin]);
+  (0, _react.useEffect)(function () {
+    var _orderState$options7, _orderState$options8;
+    if (orderTypeSelected === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : _orderState$options7.type)) return;
+    setOrderTypeSelected(orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.type);
+  }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.type]);
+  (0, _react.useEffect)(function () {
     var resizeEvent = window.addEventListener('resize', function (e) {
       setInnerWidth(e.target.innerWidth);
     });
@@ -278,12 +289,6 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       window.removeEventListener('resize', resizeEvent);
     };
   }, []);
-  (0, _react.useEffect)(function () {
-    if (!(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.loginModal) && !(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.addressModal) || isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.loginModal && !(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.addressModal)) return;
-    setModals(_objectSpread(_objectSpread({}, modals), {}, {
-      formOpen: true
-    }));
-  }, [isShowGuestLogin]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
     bgimage: homeBackgroundImage || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.homeHero)
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
@@ -307,7 +312,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
   }, t('DELIVERY_UPPER', 'Delivery'))), /*#__PURE__*/_react.default.createElement(_styles.AddressInputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapInput, {
     onClick: handleAddressInput,
     withIcon: true
-  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : (_orderState$options7$ = _orderState$options7.address) === null || _orderState$options7$ === void 0 ? void 0 : _orderState$options7$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_IosSend.default, {
+  }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : (_orderState$options11 = _orderState$options10.address) === null || _orderState$options11 === void 0 ? void 0 : _orderState$options11.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_IosSend.default, {
     className: "geolocation-button"
   })), /*#__PURE__*/_react.default.createElement(_styles.StartOrder, {
     ref: nearestBusinessContainer
@@ -341,7 +346,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       return setMapActivated(true);
     }
   }, /*#__PURE__*/_react.default.createElement(_FiMap.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('OPEN_MAP', 'OPEN MAP')))), imageMapDimensions.w && imageMapDimensions.h && /*#__PURE__*/_react.default.createElement("img", {
-    src: (0, _utils.getGoogleMapImage)((orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : (_orderState$options8$ = _orderState$options8.address) === null || _orderState$options8$ === void 0 ? void 0 : _orderState$options8$.location) || defaultLocation, configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value, {
+    src: (0, _utils.getGoogleMapImage)((orderState === null || orderState === void 0 ? void 0 : (_orderState$options12 = orderState.options) === null || _orderState$options12 === void 0 ? void 0 : (_orderState$options13 = _orderState$options12.address) === null || _orderState$options13 === void 0 ? void 0 : _orderState$options13.location) || defaultLocation, configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value, {
       size: {
         w: imageMapDimensions.w,
         h: imageMapDimensions.h
@@ -354,8 +359,8 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     width: "100%"
   }))), !!googleMapsApiKey && mapActivated && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
     apiKey: googleMapsApiKey,
-    location: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : (_orderState$options9$ = _orderState$options9.address) === null || _orderState$options9$ === void 0 ? void 0 : _orderState$options9$.location) || defaultLocation,
-    locations: showAllLocations || orderState !== null && orderState !== void 0 && (_orderState$options10 = orderState.options) !== null && _orderState$options10 !== void 0 && (_orderState$options11 = _orderState$options10.address) !== null && _orderState$options11 !== void 0 && _orderState$options11.location ? businessesLocations : [],
+    location: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options14 = orderState.options) === null || _orderState$options14 === void 0 ? void 0 : (_orderState$options15 = _orderState$options14.address) === null || _orderState$options15 === void 0 ? void 0 : _orderState$options15.location) || defaultLocation,
+    locations: showAllLocations || orderState !== null && orderState !== void 0 && (_orderState$options16 = orderState.options) !== null && _orderState$options16 !== void 0 && (_orderState$options17 = _orderState$options16.address) !== null && _orderState$options17 !== void 0 && _orderState$options17.location ? businessesLocations : [],
     setCurrentLocation: setCurrentLocation,
     businessMap: true,
     pfchangs: true,
@@ -396,7 +401,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options12 = orderState.options) === null || _orderState$options12 === void 0 ? void 0 : _orderState$options12.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options18 = orderState.options) === null || _orderState$options18 === void 0 ? void 0 : _orderState$options18.address) || {},
     onClose: function onClose() {
       return setModals(_objectSpread(_objectSpread({}, modals), {}, {
         formOpen: false

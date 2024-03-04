@@ -117,7 +117,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     wowPoints = props.wowPoints,
     isHideCash = props.isHideCash,
     isApplyMasterCoupon = props.isApplyMasterCoupon,
-    hasCateringProducts = props.hasCateringProducts;
+    hasCateringProducts = props.hasCateringProducts,
+    forceOrderingCheckout = props.forceOrderingCheckout;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -418,7 +419,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     merchantId: (_configs$openpay_clie5 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie6 = configs.openpay_client_id) === null || _configs$openpay_clie6 === void 0 ? void 0 : _configs$openpay_clie6.key) !== null && _configs$openpay_clie5 !== void 0 ? _configs$openpay_clie5 : 'mz86y3z3qbpmxukfefll',
     publicKey: (_configs$openpay_clie7 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie8 = configs.openpay_client_id) === null || _configs$openpay_clie8 === void 0 ? void 0 : _configs$openpay_clie8.value) !== null && _configs$openpay_clie7 !== void 0 ? _configs$openpay_clie7 : 'pk_e871b3211d924956ad7de33c87af6ef9',
     isSandbox: (_configs$openpay_clie9 = configs === null || configs === void 0 ? void 0 : (_configs$openpay_clie10 = configs.openpay_client_id) === null || _configs$openpay_clie10 === void 0 ? void 0 : _configs$openpay_clie10.sandbox) !== null && _configs$openpay_clie9 !== void 0 ? _configs$openpay_clie9 : true,
-    isApplyMasterCoupon: isApplyMasterCoupon
+    isApplyMasterCoupon: isApplyMasterCoupon,
+    forceOrderingCheckout: forceOrderingCheckout
   })), /*#__PURE__*/_react.default.createElement(AlertComponent, {
     title: t('PAYMENT_METHODS', 'Payment methods'),
     content: alertState.content,

@@ -184,16 +184,6 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     maxLength: 16,
     placeholder: t('CARD_NUMBER', 'Card number')
   }))), /*#__PURE__*/_react.default.createElement(_styles.Row, null, /*#__PURE__*/_react.default.createElement(_styles.InputContainer, {
-    isValid: errors.year,
-    showBorder: errors.border
-  }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
-    name: "cardYear",
-    "data-openpay-card": "expiration_year",
-    id: "expirationYear",
-    onChange: handleChange,
-    maxLength: 2,
-    placeholder: t('EXPIRATION_YEAR', 'Expiration year')
-  })), /*#__PURE__*/_react.default.createElement(_styles.InputContainer, {
     isValid: errors.month,
     showBorder: errors.border
   }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
@@ -203,6 +193,16 @@ var PaymentOptionOpenPayUI = function PaymentOptionOpenPayUI(props) {
     onChange: handleChange,
     maxLength: 2,
     placeholder: t('EXPIRATION_MONTH', 'Expiration month')
+  })), /*#__PURE__*/_react.default.createElement(_styles.InputContainer, {
+    isValid: errors.year,
+    showBorder: errors.border
+  }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+    name: "cardYear",
+    "data-openpay-card": "expiration_year",
+    id: "expirationYear",
+    onChange: handleChange,
+    maxLength: 2,
+    placeholder: t('EXPIRATION_YEAR', 'Expiration year')
   })), /*#__PURE__*/_react.default.createElement(_styles.InputContainer, {
     isValid: errors.cvv,
     showBorder: errors.border

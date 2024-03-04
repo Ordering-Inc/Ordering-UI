@@ -14,12 +14,13 @@ var _LanguageSelector = require("../LanguageSelector");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _TiWarningOutline = _interopRequireDefault(require("@meronex/icons/ti/TiWarningOutline"));
 var _OrderTypeSelectorContent = require("../OrderTypeSelectorContent");
+var _pfchangs = require("../../styles/Buttons/theme/pfchangs");
 var _styles = require("./styles");
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _useOnlineStatus = require("../../../../../hooks/useOnlineStatus");
 var _UserPopover = require("../UserPopover");
 var _CartPopover = require("../CartPopover");
-var _OrderTypeSelectorHeader = require("../OrderTypeSelectorHeader");
+var _OrderTypeSelectorHeader = require("../../../../../components/OrderTypeSelectorHeader");
 var _CartContent = require("../CartContent");
 var _Modal = require("../Modal");
 var _MomentContent = require("../MomentContent");
@@ -29,11 +30,11 @@ var _HeaderOption = require("../HeaderOption");
 var _SidebarMenu = require("../SidebarMenu");
 var _UserDetails = require("../UserDetails");
 var _Confirm = require("../Confirm");
-var _pfchangs = require("../Confirm/layouts/pfchangs");
+var _pfchangs2 = require("../Confirm/layouts/pfchangs");
 var _LoginForm = require("../LoginForm");
-var _pfchangs2 = require("../LoginForm/layouts/pfchangs");
+var _pfchangs3 = require("../LoginForm/layouts/pfchangs");
 var _SignUpForm = require("../SignUpForm");
-var _pfchangs3 = require("../SignUpForm/layouts/pfchangs");
+var _pfchangs4 = require("../SignUpForm/layouts/pfchangs");
 var _ForgotPasswordForm = require("../ForgotPasswordForm");
 var _utils = require("../../../../../utils");
 var _BusinessPreorder = require("../BusinessPreorder");
@@ -55,7 +56,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Header = function Header(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$colors, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts3, _theme$layouts3$heade, _theme$layouts3$heade2, _theme$layouts3$heade3, _theme$layouts4, _theme$layouts4$heade, _theme$layouts4$heade2, _theme$layouts4$heade3, _theme$layouts4$heade4, _theme$layouts5, _theme$layouts5$heade, _theme$layouts5$heade2, _theme$layouts5$heade3, _theme$layouts5$heade4, _theme$layouts5$heade5, _theme$layouts6, _theme$layouts6$heade, _theme$layouts6$heade2, _theme$layouts6$heade3, _theme$layouts6$heade4, _theme$layouts6$heade5, _theme$layouts6$heade6, _theme$layouts7, _theme$layouts7$heade, _theme$layouts7$heade2, _theme$layouts7$heade3, _theme$layouts7$heade4, _theme$layouts7$heade5, _theme$layouts8, _theme$layouts8$heade, _theme$layouts8$heade2, _theme$layouts8$heade3, _theme$layouts9, _theme$layouts9$heade, _theme$layouts9$heade2, _theme$layouts9$heade3, _theme$layouts10, _theme$layouts10$head, _theme$layouts10$head2, _theme$layouts10$head3, _theme$layouts11, _theme$layouts11$gene, _theme$layouts11$gene2, _theme$layouts11$gene3, _customerState$user, _orderState$options3, _orderState$options3$, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options5, _orderState$options5$, _orderState$options5$2, _orderState$options5$3, _configState$configs4, _configState$configs5, _orderState$options6, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options7, _orderState$options7$, _orderState$options7$2, _orderState$options7$3, _configState$configs10, _configState$configs11, _orderState$options8, _configState$configs12, _configState$configs13, _configState$configs14, _configState$configs15, _orderState$options9, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
+  var _orderState$options, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$colors, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts3, _theme$layouts3$heade, _theme$layouts3$heade2, _theme$layouts3$heade3, _theme$layouts4, _theme$layouts4$heade, _theme$layouts4$heade2, _theme$layouts4$heade3, _theme$layouts4$heade4, _theme$layouts5, _theme$layouts5$heade, _theme$layouts5$heade2, _theme$layouts5$heade3, _theme$layouts5$heade4, _theme$layouts5$heade5, _theme$layouts6, _theme$layouts6$heade, _theme$layouts6$heade2, _theme$layouts6$heade3, _theme$layouts6$heade4, _theme$layouts6$heade5, _theme$layouts6$heade6, _theme$layouts7, _theme$layouts7$heade, _theme$layouts7$heade2, _theme$layouts7$heade3, _theme$layouts7$heade4, _theme$layouts7$heade5, _theme$layouts8, _theme$layouts8$heade, _theme$layouts8$heade2, _theme$layouts8$heade3, _theme$layouts9, _theme$layouts9$heade, _theme$layouts9$heade2, _theme$layouts9$heade3, _theme$layouts10, _theme$layouts10$head, _theme$layouts10$head2, _theme$layouts10$head3, _theme$layouts11, _theme$layouts11$gene, _theme$layouts11$gene2, _theme$layouts11$gene3, _customerState$user, _orderState$options4, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options6, _orderState$options6$, _orderState$options7, _orderState$options7$, _theme$colors2, _theme$colors3, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options8, _orderState$options8$, _orderState$options8$2, _orderState$options8$3, _configState$configs4, _configState$configs5, _orderState$options9, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options10, _orderState$options11, _orderState$options12, _orderState$options13, _configState$configs10, _configState$configs11, _orderState$options14, _configState$configs12, _configState$configs13, _configState$configs14, _configState$configs15, _orderState$options15, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
   var isHome = props.isHome,
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
@@ -83,10 +84,9 @@ var Header = function Header(props) {
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 2),
     orderState = _useOrder2[0],
-    refreshOrderOptions = _useOrder2[1].refreshOrderOptions;
-  var _useSite = (0, _orderingComponents.useSite)(),
-    _useSite2 = _slicedToArray(_useSite, 1),
-    site = _useSite2[0].site;
+    _useOrder2$ = _useOrder2[1],
+    refreshOrderOptions = _useOrder2$.refreshOrderOptions,
+    changeType = _useOrder2$.changeType;
   var _useState = (0, _react.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     openPopover = _useState2[0],
@@ -158,6 +158,10 @@ var Header = function Header(props) {
     _useState26 = _slicedToArray(_useState25, 2),
     isFarAway = _useState26[0],
     setIsFarAway = _useState26[1];
+  var _useState27 = (0, _react.useState)(orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type),
+    _useState28 = _slicedToArray(_useState27, 2),
+    orderTypeSelected = _useState28[0],
+    setOrderTypeSelected = _useState28[1];
   var isAlsea = ordering.project === 'alsea';
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products, _cart$business;
@@ -182,9 +186,13 @@ var Header = function Header(props) {
   var showOrderTypes = !(theme !== null && theme !== void 0 && (_theme$layouts9 = theme.layouts) !== null && _theme$layouts9 !== void 0 && (_theme$layouts9$heade = _theme$layouts9.header) !== null && _theme$layouts9$heade !== void 0 && (_theme$layouts9$heade2 = _theme$layouts9$heade.components) !== null && _theme$layouts9$heade2 !== void 0 && (_theme$layouts9$heade3 = _theme$layouts9$heade2.order_types) !== null && _theme$layouts9$heade3 !== void 0 && _theme$layouts9$heade3.hidden);
   var showMoment = !(theme !== null && theme !== void 0 && (_theme$layouts10 = theme.layouts) !== null && _theme$layouts10 !== void 0 && (_theme$layouts10$head = _theme$layouts10.header) !== null && _theme$layouts10$head !== void 0 && (_theme$layouts10$head2 = _theme$layouts10$head.components) !== null && _theme$layouts10$head2 !== void 0 && (_theme$layouts10$head3 = _theme$layouts10$head2.moment) !== null && _theme$layouts10$head3 !== void 0 && _theme$layouts10$head3.hidden);
   var showOrderOptionsByTheme = showMoment || showOrderTypes || showAddressForm;
-  var LoginFormComponent = isloginSignupLayoutPF ? _pfchangs2.LoginForm : _LoginForm.LoginForm;
-  var SignFormComponent = isloginSignupLayoutPF ? _pfchangs3.SignUpForm : _SignUpForm.SignUpForm;
-  var ConfirmComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts11 = theme.layouts) === null || _theme$layouts11 === void 0 ? void 0 : (_theme$layouts11$gene = _theme$layouts11.general) === null || _theme$layouts11$gene === void 0 ? void 0 : (_theme$layouts11$gene2 = _theme$layouts11$gene.components) === null || _theme$layouts11$gene2 === void 0 ? void 0 : (_theme$layouts11$gene3 = _theme$layouts11$gene2.layout) === null || _theme$layouts11$gene3 === void 0 ? void 0 : _theme$layouts11$gene3.type) === 'pfchangs' ? _pfchangs.Confirm : _Confirm.Confirm;
+  var LoginFormComponent = isloginSignupLayoutPF ? _pfchangs3.LoginForm : _LoginForm.LoginForm;
+  var SignFormComponent = isloginSignupLayoutPF ? _pfchangs4.SignUpForm : _SignUpForm.SignUpForm;
+  var ConfirmComponent = (theme === null || theme === void 0 ? void 0 : (_theme$layouts11 = theme.layouts) === null || _theme$layouts11 === void 0 ? void 0 : (_theme$layouts11$gene = _theme$layouts11.general) === null || _theme$layouts11$gene === void 0 ? void 0 : (_theme$layouts11$gene2 = _theme$layouts11$gene.components) === null || _theme$layouts11$gene2 === void 0 ? void 0 : (_theme$layouts11$gene3 = _theme$layouts11$gene2.layout) === null || _theme$layouts11$gene3 === void 0 ? void 0 : _theme$layouts11$gene3.type) === 'pfchangs' ? _pfchangs2.Confirm : _Confirm.Confirm;
+  var handleChangeOrderType = function handleChangeOrderType(orderType) {
+    setOrderTypeSelected(orderType);
+    changeType(orderType);
+  };
   var handleSuccessSignup = function handleSuccessSignup(user) {
     var _user$session;
     login({
@@ -359,24 +367,26 @@ var Header = function Header(props) {
       setCustomerModalOpen(false);
     }
   }, [customerState === null || customerState === void 0 ? void 0 : (_customerState$user = customerState.user) === null || _customerState$user === void 0 ? void 0 : _customerState$user.address]);
-  (0, _react.useEffect)(function () {
+
+  /* useEffect(() => {
     if (!pathname.includes('/search') && pathname !== '/') {
-      setIsFarAway(false);
-      return;
+      setIsFarAway(false)
+      return
     }
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      var _orderState$options, _orderState$options$a, _orderState$options$a2, _orderState$options2, _orderState$options2$, _orderState$options2$2;
-      var crd = pos.coords;
-      var distance = (0, _utils.getDistance)(crd.latitude, crd.longitude, orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : (_orderState$options$a = _orderState$options.address) === null || _orderState$options$a === void 0 ? void 0 : (_orderState$options$a2 = _orderState$options$a.location) === null || _orderState$options$a2 === void 0 ? void 0 : _orderState$options$a2.lat, orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : (_orderState$options2$ = _orderState$options2.address) === null || _orderState$options2$ === void 0 ? void 0 : (_orderState$options2$2 = _orderState$options2$.location) === null || _orderState$options2$2 === void 0 ? void 0 : _orderState$options2$2.lng);
-      if (distance > 20) setIsFarAway(true);else setIsFarAway(false);
-    }, function (err) {
-      console.warn("ERROR(".concat(err.code, "): ").concat(err.message));
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const crd = pos.coords
+      const distance = getDistance(crd.latitude, crd.longitude, orderState?.options?.address?.location?.lat, orderState?.options?.address?.location?.lng)
+      if (distance > 20) setIsFarAway(true)
+      else setIsFarAway(false)
+    }, (err) => {
+      console.warn(`ERROR(${err.code}): ${err.message}`)
     }, {
       enableHighAccuracy: true,
       timeout: 5000,
       maximumAge: 0
-    });
-  }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : (_orderState$options3$ = _orderState$options3.address) === null || _orderState$options3$ === void 0 ? void 0 : _orderState$options3$.location, pathname]);
+    })
+  }, [orderState?.options?.address?.location, pathname]) */
+
   (0, _react.useEffect)(function () {
     if (!otpDataUser && isloginSignupLayoutPF && modalPageToShow === 'signup') {
       setAuthModalOpen(false);
@@ -399,6 +409,11 @@ var Header = function Header(props) {
       handleOpenLoginSignUp('login');
     }
   }, [isShowGuestLogin === null || isShowGuestLogin === void 0 ? void 0 : isShowGuestLogin.loginModal]);
+  (0, _react.useEffect)(function () {
+    var _orderState$options2, _orderState$options3;
+    if (orderTypeSelected === (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type)) return;
+    setOrderTypeSelected(orderState === null || orderState === void 0 ? void 0 : (_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3.type);
+  }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : _orderState$options4.type]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -418,9 +433,9 @@ var Header = function Header(props) {
     handleOpenLoginSignUpCustom: handleOpenLoginSignUp
   }), /*#__PURE__*/_react.default.createElement(_styles.LogoHeader, {
     onClick: function onClick() {
-      var _orderState$options4, _orderState$options4$;
+      var _orderState$options5, _orderState$options5$;
       return handleGoToPage({
-        page: orderState !== null && orderState !== void 0 && (_orderState$options4 = orderState.options) !== null && _orderState$options4 !== void 0 && (_orderState$options4$ = _orderState$options4.address) !== null && _orderState$options4$ !== void 0 && _orderState$options4$.location && !isCustomerMode && headerLayout !== 'pfchangs' ? 'search' : 'home'
+        page: orderState !== null && orderState !== void 0 && (_orderState$options5 = orderState.options) !== null && _orderState$options5 !== void 0 && (_orderState$options5$ = _orderState$options5.address) !== null && _orderState$options5$ !== void 0 && _orderState$options5$.location && !isCustomerMode && headerLayout !== 'pfchangs' ? 'search' : 'home'
       });
     },
     disabledResponsive: !!headerLogo,
@@ -438,6 +453,41 @@ var Header = function Header(props) {
     height: "45px",
     src: isHome ? theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.isotypeInvert : theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$logos = _theme$images3.logos) === null || _theme$images3$logos === void 0 ? void 0 : _theme$images3$logos.isotype,
     loading: "lazy"
+  }))), showOrderOptionsByTheme && isShowOrderOptions && !props.isCustomLayout && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
+    className: "left-header",
+    isCustomerMode: isCustomerMode
+  }, windowSize.width > 820 && isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), isCustomerMode && showAddressForm && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+    isCustomerMode: isCustomerMode,
+    onClick: function onClick(e) {
+      return handleClickUserCustomer(e);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : (_orderState$options6$ = _orderState$options6.address) === null || _orderState$options6$ === void 0 ? void 0 : _orderState$options6$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
+    onClick: function onClick(e) {
+      return handleClickUserCustomer(e);
+    }
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ", userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname)), /*#__PURE__*/_react.default.createElement("span", {
+    ref: clearCustomer
+  }, /*#__PURE__*/_react.default.createElement(_AiOutlineClose.default, null))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isCustomerMode && showAddressForm && /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+    onClick: function onClick() {
+      return openModal('address');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : (_orderState$options7$ = _orderState$options7.address) === null || _orderState$options7$ === void 0 ? void 0 : _orderState$options7$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), showOrderTypes && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 468 ? /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
+    orderTypeSelected: orderTypeSelected
+  }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    color: orderTypeSelected === 2 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#FFF',
+    onClick: function onClick() {
+      return handleChangeOrderType(2);
+    },
+    disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
+  }, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    color: orderTypeSelected === 1 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#FFF',
+    onClick: function onClick() {
+      return handleChangeOrderType(1);
+    },
+    disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
+  }, t('DELIVERY_UPPER', 'Delivery'))) : /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
+    configTypes: !(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0 ? configTypes : null,
+    defaultValue: !(!(configState !== null && configState !== void 0 && configState.loading) && (configTypes === null || configTypes === void 0 ? void 0 : configTypes.length) > 0) && 1
   }))), onlineStatus && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     isCustomerMode: isCustomerMode
   }, !auth && windowSize.width > 920 && !isloginSignupLayoutPF && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
@@ -514,21 +564,21 @@ var Header = function Header(props) {
     onClick: function onClick() {
       return openModal('address');
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : (_orderState$options5$ = _orderState$options5.address) === null || _orderState$options5$ === void 0 ? void 0 : (_orderState$options5$2 = _orderState$options5$.address) === null || _orderState$options5$2 === void 0 ? void 0 : (_orderState$options5$3 = _orderState$options5$2.split(',')) === null || _orderState$options5$3 === void 0 ? void 0 : _orderState$options5$3[0]) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), showMoment && !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.preorder_status_enabled) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : (_orderState$options8$ = _orderState$options8.address) === null || _orderState$options8$ === void 0 ? void 0 : (_orderState$options8$2 = _orderState$options8$.address) === null || _orderState$options8$2 === void 0 ? void 0 : (_orderState$options8$3 = _orderState$options8$2.split(',')) === null || _orderState$options8$3 === void 0 ? void 0 : _orderState$options8$3[0]) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), showMoment && !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.preorder_status_enabled) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
-    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.moment,
+    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.max_days_preorder) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.max_days_preorder) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
   })) : /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, showAddressForm && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
-    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : (_orderState$options7$ = _orderState$options7.address) === null || _orderState$options7$ === void 0 ? void 0 : (_orderState$options7$2 = _orderState$options7$.address) === null || _orderState$options7$2 === void 0 ? void 0 : (_orderState$options7$3 = _orderState$options7$2.split(',')) === null || _orderState$options7$3 === void 0 ? void 0 : _orderState$options7$3[0],
+    addressState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : (_orderState$options11 = _orderState$options10.address) === null || _orderState$options11 === void 0 ? void 0 : (_orderState$options12 = _orderState$options11.address) === null || _orderState$options12 === void 0 ? void 0 : (_orderState$options13 = _orderState$options12.split(',')) === null || _orderState$options13 === void 0 ? void 0 : _orderState$options13[0],
     onClick: function onClick(variant) {
       return openModal(variant);
     }
   })), showMoment && !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 ? void 0 : (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 ? void 0 : (_configState$configs11 = _configState$configs10.preorder_status_enabled) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
-    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.moment,
+    momentState: orderState === null || orderState === void 0 ? void 0 : (_orderState$options14 = orderState.options) === null || _orderState$options14 === void 0 ? void 0 : _orderState$options14.moment,
     onClick: (configState === null || configState === void 0 ? void 0 : (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 ? void 0 : (_configState$configs13 = _configState$configs12.max_days_preorder) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === -1 || (configState === null || configState === void 0 ? void 0 : (_configState$configs14 = configState.configs) === null || _configState$configs14 === void 0 ? void 0 : (_configState$configs15 = _configState$configs14.max_days_preorder) === null || _configState$configs15 === void 0 ? void 0 : _configState$configs15.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
@@ -554,7 +604,7 @@ var Header = function Header(props) {
     isCustomerMode: isCustomerMode
   }) : /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.address) || {},
+    address: (orderState === null || orderState === void 0 ? void 0 : (_orderState$options15 = orderState.options) === null || _orderState$options15 === void 0 ? void 0 : _orderState$options15.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },
