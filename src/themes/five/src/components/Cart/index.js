@@ -125,6 +125,7 @@ const CartUI = (props) => {
 
   const cateringValues = businessConfigs && getCateringValues(cateringTypeString, businessConfigs)
   const extraValueAdjustment = cart?.metafields?.find?.(meta => meta?.key === 'extra_value_adjustment_amount')
+  const pulseCouponName = cart?.metafields?.find?.(meta => meta?.key === 'pulse_coupon_name')
 
   const walletName = {
     cash: {
@@ -514,7 +515,7 @@ const CartUI = (props) => {
                     {extraValueAdjustment && !!parseFloat(extraValueAdjustment?.value) && (
                       <tr>
                         <td>
-                          {t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
+                          {pulseCouponName ? pulseCouponName?.value : t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
                         </td>
                         <td>{parseFloat(extraValueAdjustment?.value) > 0 ? parsePrice(parseFloat(extraValueAdjustment?.value)) : `- ${parsePrice(parseFloat(extraValueAdjustment?.value) * -1)}`}</td>
                       </tr>
