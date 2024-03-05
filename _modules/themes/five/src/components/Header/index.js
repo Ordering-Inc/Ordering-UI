@@ -474,13 +474,13 @@ var Header = function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options7 = orderState.options) === null || _orderState$options7 === void 0 ? void 0 : (_orderState$options7$ = _orderState$options7.address) === null || _orderState$options7$ === void 0 ? void 0 : _orderState$options7$.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), showOrderTypes && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 468 ? /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
     orderTypeSelected: orderTypeSelected
   }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 2 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#FFF',
+    color: orderTypeSelected === 2 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) || '#FFF' : '#FFF' : '#000',
     onClick: function onClick() {
       return handleChangeOrderType(2);
     },
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 1 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#FFF',
+    color: orderTypeSelected === 1 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#FFF' : '#FFF' : '#000',
     onClick: function onClick() {
       return handleChangeOrderType(1);
     },

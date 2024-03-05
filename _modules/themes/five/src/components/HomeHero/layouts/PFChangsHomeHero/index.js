@@ -451,7 +451,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       marginBottom: 20
     }
   }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 2 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#FFF',
+    color: orderTypeSelected === 2 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#FFF' : '#FFF' : '#000',
     onClick: function onClick() {
       handleChangeOrderType(2);
       setOrderTypeModal(false);
@@ -459,7 +459,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     },
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, t('PICKUP', 'Pickup')), /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
-    color: orderTypeSelected === 1 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? '#000' : '#FFF' : (theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.tertiary) || '#FFF',
+    color: orderTypeSelected === 1 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? (theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.tertiary) || '#FFF' : '#FFF' : '#000',
     onClick: function onClick() {
       handleChangeOrderType(1);
       setOrderTypeModal(false);
