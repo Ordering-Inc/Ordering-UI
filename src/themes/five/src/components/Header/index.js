@@ -431,14 +431,14 @@ export const Header = (props) => {
                   {windowSize.width > 468 ? (
                     <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
                       <Button
-                        color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+                        color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? theme?.colors?.tertiary || '#FFF' : '#FFF' : '#000'}
                         onClick={() => handleChangeOrderType(2)}
                         disabled={orderState?.loading}
                       >
                         {t('PICKUP', 'Pickup')}
                       </Button>
                       <Button
-                        color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+                        color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? theme?.colors?.tertiary || '#FFF' : '#FFF' : '#000'}
                         onClick={() => handleChangeOrderType(1)}
                         disabled={orderState?.loading}
                       >

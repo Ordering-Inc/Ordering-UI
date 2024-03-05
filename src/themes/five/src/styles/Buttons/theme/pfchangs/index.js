@@ -13,6 +13,7 @@ export const Button = styled.button`
   min-width: 125px;
   color: ${({ color }) => color || '#FFF'};
   font-size: 14px;
+  border-radius: 5px;
   &:active {
     background: ${() => darken(0.07, '#CCC')};
   }

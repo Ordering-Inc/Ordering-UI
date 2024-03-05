@@ -396,7 +396,7 @@ export const PFChangsHomeHero = (props) => {
         >
           <DeliveryPickupContainer orderTypeSelected={orderTypeSelected} style={{ marginBottom: 20 }}>
             <Button
-              color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+              color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? theme?.colors?.tertiary || '#FFF' : '#FFF' : '#000'}
               onClick={() => {
                 handleChangeOrderType(2)
                 setOrderTypeModal(false)
@@ -407,7 +407,7 @@ export const PFChangsHomeHero = (props) => {
               {t('PICKUP', 'Pickup')}
             </Button>
             <Button
-              color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+              color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? theme?.colors?.tertiary || '#FFF' : '#FFF' : '#000'}
               onClick={() => {
                 handleChangeOrderType(1)
                 setOrderTypeModal(false)

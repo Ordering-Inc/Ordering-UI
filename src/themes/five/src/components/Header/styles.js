@@ -291,7 +291,7 @@ export const AddressMenu = styled.div`
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-  color: ${props => props.theme.colors?.headingColor};
+  color: ${({ theme }) => theme?.colors?.tertiary || 'initial'};
   display: flex;
   align-items: center;
   position: relative;
@@ -303,7 +303,7 @@ export const AddressMenu = styled.div`
   `}
 
   svg {
-    color: ${props => props.theme.colors?.lightGray};
+    color: ${({ theme }) => theme?.colors?.gold};
     font-size: 16px;
     margin-right: 10px;
     ${props => props.theme?.rtl && css`
