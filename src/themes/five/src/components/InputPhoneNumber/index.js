@@ -48,6 +48,7 @@ export const InputPhoneNumber = (props) => {
           <BsPhone />
         </InputBeforeIconWrapper>
         <PhoneInput
+          countries={t('COUNTRIES_TO_SHOW', 'MX').split(',')}
           disabled={disabled}
           placeholder={t('PHONE_NUMBER', 'Phone number')}
           defaultCountry={configs?.default_country_code?.value}
