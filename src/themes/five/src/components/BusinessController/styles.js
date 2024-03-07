@@ -28,7 +28,7 @@ export const ContainerCard = styled.div`
       padding: 10px 30px;
     }
   `}
-  
+
   ${({ firstCard }) => firstCard && css`
     margin-left: 0;
   `}
@@ -36,7 +36,7 @@ export const ContainerCard = styled.div`
   ${({ disabled }) => disabled && css`
     cursor: not-allowed;
   `}
-  
+
   ${({ businessRows }) => css`
     width: calc(100% - 40px);
 
@@ -56,7 +56,7 @@ export const ContainerCard = styled.div`
       width: ${() => businessRows === 4 ? 'calc(25% - 40px)' : businessRows === 3 ? 'calc(33% - 40px)' : 'calc(50% - 40px)'};
     }
   `}
-  
+
 `
 
 export const WrapperBusinessCard = styled.div`
@@ -139,12 +139,10 @@ export const BusinessHeaderClosedContainer = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    div {
-      text-align: center;
-      width: 100%;
-      line-break: anywhere;
-    }
 
+    h1, h2 {
+      margin: 0;
+    }
 `
 
 export const BusinessTags = styled.div`
@@ -340,7 +338,6 @@ export const Medadata = styled.div`
   font-size: 12px;
   color: #909BA9;
   flex-wrap: wrap;
-  
 
   ${({ isCustomerMode }) => isCustomerMode && css`
     > div {
@@ -509,4 +506,30 @@ export const FavoriteWrapper = styled.div`
     font-size: 16px;
     color: ${props => props.theme.colors.danger500};
   }
+`
+
+export const ScheduleContainer = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #4472C4;
+  border: 2px solid #000;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  p {
+    margin: 0;
+    color: #fff;
+    font-size: 12px;
+  }
+`
+
+export const ClosedContainer = styled.div`
+  text-align: center;
+  width: 100%;
+  line-break: anywhere;
 `
