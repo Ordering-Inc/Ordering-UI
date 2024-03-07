@@ -14,21 +14,22 @@ const OrderTypeSelectorHeaderUI = (props) => {
     typeSelected,
     defaultValue,
     configTypes,
-    orderTypes
+    orderTypes,
+    color,
+    borderColor
   } = props
 
   const defaultType = configTypes?.includes(typeSelected) ? null : configTypes?.[0]
 
   return (
-    <OrderTypeWrapper>
-        <Select
-          options={configTypes
-            ? orderTypes.filter(type => configTypes?.includes(type.value))
-            : orderTypes
-          }
-          defaultValue={defaultType || typeSelected || defaultValue}
-          onChange={(orderType) => handleChangeOrderType(orderType)}
-          />
+    <OrderTypeWrapper borderColor={borderColor} color={color}>
+      <Select
+        options={configTypes
+          ? orderTypes.filter(type => configTypes?.includes(type.value))
+          : orderTypes}
+        defaultValue={defaultType || typeSelected || defaultValue}
+        onChange={(orderType) => handleChangeOrderType(orderType)}
+      />
     </OrderTypeWrapper>
   )
 }

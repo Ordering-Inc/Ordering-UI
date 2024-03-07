@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 import { useLanguage, useConfig, useUtils, useOrderingTheme } from 'ordering-components'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
+
 import CgSearch from '@meronex/icons/cg/CgSearch'
 import { Cart3 } from 'react-bootstrap-icons'
 import EnChevronThinUp from '@meronex/icons/en/EnChevronThinUp'
@@ -94,6 +96,7 @@ export const RenderProductsLayout = (props) => {
   const [{ configs }] = useConfig()
   const [{ parsePrice }] = useUtils()
   const [orderingTheme] = useOrderingTheme()
+  const windowSize = useWindowSize()
   const [isCartModal, setisCartModal] = useState(false)
   const [openSearchProducts, setOpenSearchProducts] = useState(false)
   const [subcategorySelected, setSubcategorySelected] = useState(null)
@@ -246,7 +249,8 @@ export const RenderProductsLayout = (props) => {
                                 : [
                                   { id: null, name: t('ALL', theme?.defaultLanguages?.ALL || 'All') },
                                   { id: 'featured', name: t('FEATURED', theme?.defaultLanguages?.FEATURED || 'Featured') },
-                                  ...business?.categories.sort((a, b) => a.rank - b.rank)]}
+                                  ...business?.categories.sort((a, b) => a.rank - b.rank)]
+                          }
                           categorySelected={categorySelected?.id === null && categoriesMode === 'twocategories' ? pfChangsCategories[0] : categorySelected}
                           onClickCategory={onClickCategory}
                           featured={featuredProducts}
@@ -525,7 +529,7 @@ export const RenderProductsLayout = (props) => {
             }
           </div>
           {showGoTopButton && (
-            <BackToTop showCartOnProductList={showCartOnProductList && currentCart?.products?.length > 0} onClick={() => handleScrollToTop()}>
+            <BackToTop showCartOnProductList={showCartOnProductList && currentCart?.products?.length > 0 && windowSize.width > 1000} onClick={() => handleScrollToTop()}>
               <EnChevronThinUp />
               {t('BACK_TO_TOP', 'Back to top')}
             </BackToTop>

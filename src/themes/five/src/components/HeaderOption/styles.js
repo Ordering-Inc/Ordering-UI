@@ -21,7 +21,7 @@ export const Container = styled.div`
           margin-right: 5px;
         ` : css`
           margin-left: 5px;
-        `} 
+        `}
       }
       svg {
         font-size: 17px;
@@ -30,11 +30,12 @@ export const Container = styled.div`
   `}
 
   ${({ variant }) => variant === 'address' && css`
-    color: #909BA9;
+    color: ${({ theme }) => theme?.colors?.tertiary || 'initial'};
     display: flex;
     align-items: center;
 
     svg {
+      color: ${({ theme }) => theme?.colors?.gold};
       margin-right: 5px;
       ${props => props.theme?.rtl && css`
         margin-left: 5px;

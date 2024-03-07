@@ -3,6 +3,8 @@ import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useConfig, useOrder, useUtils, useSession, SingleProductCard as SingleProductCardController } from 'ordering-components'
 import { shape } from '../../../../../../../utils'
 import { useIntersectionObserver } from '../../../../../../../hooks/useIntersectionObserver'
+import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
+
 import { useTheme } from 'styled-components'
 import { Modal } from '../../../Modal'
 import { LoginForm } from '../../../LoginForm'
@@ -18,7 +20,8 @@ import {
   PriceWrapper,
   QuantityContainer,
   RibbonBox,
-  TitleWrapper
+  TitleWrapper,
+  TitleAndPriceContainer
 } from './styles'
 
 const SingleProductCardUI = (props) => {
@@ -45,6 +48,7 @@ const SingleProductCardUI = (props) => {
   const [, { login }] = useSession()
   const theme = useTheme()
   const favoriteRef = useRef(null)
+  const windowSize = useWindowSize()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
@@ -145,15 +149,33 @@ const SingleProductCardUI = (props) => {
                 )}
                 <CardInfo soldOut={isSoldOut || maxProductQuantity <= 0}>
                   <TitleWrapper>
-                    {!isSkeleton ? (<h1>{product?.name}</h1>) : (<Skeleton width={100} />)}
-                    {!isSkeleton ? (<p>{product?.description}</p>) : (<Skeleton width={100} />)}
                     {!isSkeleton ? (
-                      <PriceWrapper>
-                        <span>{product?.price ? parsePrice(product?.price) : ''}</span>
-                        {!(isSoldOut || maxProductQuantity <= 0) && (
-                          <span className='off-price'>{product?.offer_price && product?.in_offer ? parsePrice(product?.offer_price) : ''}</span>
+                      <TitleAndPriceContainer>
+                        <h1>{product?.name}</h1>
+                        {windowSize.width >= 798 && (
+                          <PriceWrapper className='price-wrapper'>
+                            <span>{product?.price ? parsePrice(product?.price) : ''}</span>
+                            {!(isSoldOut || maxProductQuantity <= 0) && (
+                              <span className='off-price'>{product?.offer_price && product?.in_offer ? parsePrice(product?.offer_price) : ''}</span>
+                            )}
+                          </PriceWrapper>
                         )}
-                      </PriceWrapper>
+                      </TitleAndPriceContainer>
+                    ) : (
+                      <Skeleton width={100} />
+                    )}
+                    {!isSkeleton ? (<p className='product-description'>{product?.description}</p>) : (<Skeleton width={100} />)}
+                    {!isSkeleton ? (
+                      <>
+                        {windowSize.width < 798 && (
+                          <PriceWrapper>
+                            <span>{product?.price ? parsePrice(product?.price) : ''}</span>
+                            {!(isSoldOut || maxProductQuantity <= 0) && (
+                              <span className='off-price'>{product?.offer_price && product?.in_offer ? parsePrice(product?.offer_price) : ''}</span>
+                            )}
+                          </PriceWrapper>
+                        )}
+                      </>
                     ) : (
                       <Skeleton width={100} />
                     )}

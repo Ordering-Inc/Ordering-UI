@@ -5,14 +5,15 @@ export const CardContainer = styled.div`
   /* min-height: 400px; */
   min-height: 250px;
   background: ${({ soldOut, theme }) => soldOut ? '#6c757d33' : theme?.colors?.tertiaryContrast || '#000'};
-  border: 1px solid ${({ theme }) => theme.colors.gold};
+  /* border: 1px solid ${({ theme }) => theme.colors.gold}; */
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;
   width: calc(50% - 40px);
-
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   button {
     width: 100%;
     margin-top: 10px;
@@ -34,11 +35,11 @@ export const CardContainer = styled.div`
       min-height: 325px;
     }
     @media (min-width: 769px){
-      min-height: 400px;
+      min-height: 350px;
     }
 
     transition: box-shadow 0.3s ease 0s;
-  
+
   &:hover{
     box-shadow: 0 2px 6px 3px ${({ theme }) => theme?.colors?.gold};
   }
@@ -53,7 +54,7 @@ export const CardContainer = styled.div`
     }
   ` : css`
     @media (min-width: 681px) {
-      width: calc(50% - 20px);
+      width: calc(33% - 20px);
     }
 
     @media (min-width: 1200px) {
@@ -108,13 +109,15 @@ export const CardInfo = styled.div`
   p {
     color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     text-align: left;
-    font-size: 10px;
+    font-size: 13px;
     ${props => props.theme?.rtl && css`
       text-align: right;
     `}
 
     overflow: hidden;
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     width: 100%;
   }
@@ -126,11 +129,11 @@ export const CardInfo = styled.div`
 
   @media (min-width: 1024px) {
     p {
-      font-size: 12px;
+      font-size: 14px;
     }
 
     span {
-      font-size: 14px;
+      font-size: 13px;
     }
   }
 `
@@ -144,11 +147,12 @@ export const WrapLogo = styled.div`
     height: 225px;
   }
   @media (min-width: 769px){
-    height: 300px;
+    height: 265px;
   }
 `
 
 const CardLogoStyled = styled.div`
+  border-radius: 5px 5px 0 0;
   box-sizing: border-box;
   position: relative;
   background-repeat: no-repeat, repeat;
@@ -161,7 +165,7 @@ const CardLogoStyled = styled.div`
     min-height: 225px;
   }
   @media (min-width: 769px){
-      min-height: 300px;
+      min-height: 240px;
   }
 `
 export const CardLogo = (props) => {
@@ -183,11 +187,13 @@ export const PriceWrapper = styled.div`
   display: flex;
   align-items: center;
   span {
-    color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
+    color: ${({ theme }) => theme?.colors?.gold};
+    font-weight: 800;
+    font-size: 13px;
   }
 
   .off-price {
-    font-size: 10px;
+    font-size: 13px;
     color: #909BA9;
     margin-left: 5px;
     text-decoration: line-through;
@@ -214,7 +220,7 @@ export const QuantityContainer = styled.div`
   text-align: center;
   border-radius: 50%;
   transform: translate(-50%, 50%);
-  span { 
+  span {
     position: relative;
     top: 2px;
     font-size: 12px;
@@ -263,13 +269,13 @@ export const RibbonBox = styled.div`
 export const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   flex: 1;
   overflow: hidden;
   h1 {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 800;
     text-align: left;
     color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
     overflow: hidden;
@@ -288,5 +294,21 @@ export const TitleWrapper = styled.div`
       color: ${props => props.theme.colors.danger500};
       font-size: 16px;
     }
+  }
+  .product-description {
+    margin-top: 10px;
+    line-height: 25px;
+  }
+`
+
+export const TitleAndPriceContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  .price-wrapper {
+    width: 50%;
+    min-width: 72px;
+    justify-content: flex-end;
   }
 `

@@ -428,7 +428,7 @@ export const Header = (props) => {
               )}
               {showOrderTypes && (
                 <>
-                  {windowSize.width > 468 ? (
+                  {windowSize.width > 576 ? (
                     <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
                       <Button
                         color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? theme?.colors?.tertiary || '#FFF' : '#FFF' : '#000'}
@@ -447,6 +447,8 @@ export const Header = (props) => {
                     </DeliveryPickupContainer>
                   ) : (
                     <OrderTypeSelectorHeader
+                      color={props?.slug === 'pf_changs' ? theme?.colors?.tertiary || '#FFF' : '#000'}
+                      borderColor={(orderTypeSelected === 1 || orderTypeSelected === 2) ? theme?.colors?.gold || '#FFF' : '#000'}
                       configTypes={!configState?.loading && configTypes?.length > 0 ? configTypes : null}
                       defaultValue={!(!configState?.loading && configTypes?.length > 0) && 1}
                     />
@@ -564,7 +566,7 @@ export const Header = (props) => {
               <AddressMenu
                 onClick={() => openModal('address')}
               >
-                <GeoAlt /> {orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                <GeoAlt /> {orderState.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
               </AddressMenu>
               {showMoment && !isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                 <HeaderOption

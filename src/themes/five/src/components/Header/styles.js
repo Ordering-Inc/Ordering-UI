@@ -4,7 +4,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 95px;
+  min-height: 85px;
   border-bottom: ${({ headerBorderBottom }) => headerBorderBottom || '1px solid #E9ECEF'};
   background-color: ${({ headerBackgroundColor }) => headerBackgroundColor || ''};
 
@@ -36,14 +36,14 @@ export const LogoHeader = styled.div`
     margin: 0;
     vertical-align: middle;
     margin-left: 10px;
-    
+
     ${props => props.theme?.rtl && css`
       margin-right: 10px;
       margin-left: 0;
     `}
-      
+
       ${({ theme }) => theme?.layouts?.header?.components?.layout?.type === 'pfchangs' ? css`
-        max-height: 40px;
+        max-height: 55px;
         max-width: 150px;
       ` : css`
       width: ${props => props.imgW ?? '35px'};
@@ -97,7 +97,7 @@ export const Menu = styled.div`
 
   #select-input {
     border-radius: 7.6px;
-    
+
     #list {
       border-radius: 7.6px;
     }
@@ -107,7 +107,7 @@ export const Menu = styled.div`
       height: 40px;
       border-color: #CCC;
       background-color: #CCC !important;
-      
+
       svg {
         font-size: 16px;
       }
@@ -147,7 +147,7 @@ export const Menu = styled.div`
       padding: 0 20px;
       /* margin: 0 70px; */
     }
-    
+
     @media (min-width: 1200px) {
       padding: 0 30px;
       /* margin: 0 100px; */
@@ -180,7 +180,7 @@ export const Menu = styled.div`
     @media (min-width: 1175px) {
       width: 250px;
     }
-    
+
     @media (min-width: 1400px) {
       width: 400px;
     }
@@ -270,8 +270,8 @@ export const CustomerInfo = styled.div`
         white-space: nowrap;
         color: #909BA9;
       }
-      svg {       
-        color: #748194; 
+      svg {
+        color: #748194;
         margin: 0;
         font-size: 20px;
         position: absolute;
@@ -283,7 +283,7 @@ export const CustomerInfo = styled.div`
 
 export const UserEdit = styled.div`
   > :first-child{
-     margin-bottom: 20px;  
+     margin-bottom: 20px;
   }
 `
 
@@ -311,6 +311,7 @@ export const AddressMenu = styled.div`
       margin-right: 0;
     `}
   }
+
   @media (min-width: 765px) {
     ${({ isCustomerMode }) => !isCustomerMode && css`
       width: 80%;
@@ -330,7 +331,7 @@ export const MomentMenu = styled.div`
   justify-content: center;
   width: 200px;
   display: none;
-  
+
   @media (min-width: 821px) {
     display: flex;
   }
@@ -424,7 +425,7 @@ export const DeliveryPickupContainer = styled.div`
   flex-direction: row-reverse;
   position: relative;
   border-radius: 10px;
-  height: 52px;
+  height: 45px;
   background-color: #F4F4F4;
 
   button {
@@ -435,31 +436,39 @@ export const DeliveryPickupContainer = styled.div`
     width: 100%;
     z-index: 1;
     border-radius: 10px;
+    min-width: 115px;
+
+    @media (min-width: 992px) {
+      min-width: 125px;
+    }
   }
 
   &::after {
     border-radius: 5px;
+    height: 100%;
+    width: 50%;
 
     ${({ orderTypeSelected }) => orderTypeSelected === 1 ? css`
-      content: "";
-      background:  ${({ theme }) => theme.colors.gold};
-      position: absolute;
-      transition: all 0.2s linear 0s;
-      left: 0px;
-      height: calc(100% - 0px);
-      width: calc(50% - 0px);
-    ` : css`
-      content: "";
-      background: ${({ theme }) => theme.colors.gold};
-      position: absolute;
-      transition: all 0.2s linear 0s;
-      height: calc(100% - 0px);
-      width: calc(50% - 0px);
-      left: 50%;
-    `
-  }}
+        content: "";
+        background:  ${({ theme }) => theme.colors.gold};
+        position: absolute;
+        transition: all 0.2s linear 0s;
+        left: 0px;
+      ` : css`
+        content: "";
+        background: ${({ theme }) => theme.colors.gold};
+        position: absolute;
+        transition: all 0.2s linear 0s;
+        left: 50%;
+      `
+    }
+  }
 
   @media (min-width: 468px) {
     margin-right: 35px;
+  }
+
+  @media (min-width: 992px) {
+    height: 52px;
   }
 `

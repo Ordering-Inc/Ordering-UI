@@ -19,6 +19,10 @@ export const OrderTypeWrapper = styled.span`
   div {
     max-width: 120px;
   }
+  > #select-input {
+    color: ${({ borderColor }) => borderColor} !important;
+    border-color: ${({ borderColor }) => borderColor} !important;
+  }
   @media (min-width: 380px) {
     div{
       max-width: initial;
