@@ -4,16 +4,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapLogo = exports.TitleWrapper = exports.SoldOut = exports.RibbonBox = exports.QuantityContainer = exports.PriceWrapper = exports.CardLogo = exports.CardInfo = exports.CardContainer = void 0;
+exports.WrapLogo = exports.TitleWrapper = exports.TitleAndPriceContainer = exports.SoldOut = exports.RibbonBox = exports.QuantityContainer = exports.PriceWrapper = exports.CardLogo = exports.CardInfo = exports.CardContainer = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  /* min-height: 400px; */\n  min-height: 250px;\n  background: ", ";\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  width: calc(50% - 40px);\n\n  button {\n    width: 100%;\n    margin-top: 10px;\n  }\n\n    width: 100%;\n    margin: 10px 0px;\n    @media (min-width: 320px) {\n      margin: 10px;\n      width: calc(56% - 40px);\n    }\n    @media (min-width: 384px ) {\n      margin: 10px;\n      width: calc(54% - 40px);\n    }\n    @media (min-width: 551px ) {\n      margin: 10px;\n      width: calc(52% - 40px);\n      min-height: 325px;\n    }\n    @media (min-width: 769px){\n      min-height: 400px;\n    }\n\n    transition: box-shadow 0.3s ease 0s;\n  \n  &:hover{\n    box-shadow: 0 2px 6px 3px ", ";\n  }\n\n  ", "\n\n"])), function (_ref) {
+var CardContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  /* min-height: 400px; */\n  min-height: 250px;\n  background: ", ";\n  /* border: 1px solid ", "; */\n  box-sizing: border-box;\n  cursor: pointer;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  width: calc(50% - 40px);\n  border-radius: 5px;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  button {\n    width: 100%;\n    margin-top: 10px;\n  }\n\n    width: 100%;\n    margin: 10px 0px;\n    @media (min-width: 320px) {\n      margin: 10px;\n      width: calc(56% - 40px);\n    }\n    @media (min-width: 384px ) {\n      margin: 10px;\n      width: calc(54% - 40px);\n    }\n    @media (min-width: 551px ) {\n      margin: 10px;\n      width: calc(52% - 40px);\n      min-height: 325px;\n    }\n    @media (min-width: 769px){\n      min-height: 350px;\n    }\n\n    transition: box-shadow 0.3s ease 0s;\n\n  &:hover{\n    box-shadow: 0 2px 6px 3px ", ";\n  }\n\n  ", "\n\n"])), function (_ref) {
   var _theme$colors;
   var soldOut = _ref.soldOut,
     theme = _ref.theme;
@@ -30,7 +30,7 @@ var CardContainer = _styledComponents.default.div(_templateObject || (_templateO
   return isCartOnProductsList ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    @media (min-width: 993px) {\n      width: calc(50% - 40px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
     var _props$theme;
     return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n        margin: 10px 0px 10px 20px;\n      "])));
-  }) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    @media (min-width: 681px) {\n      width: calc(50% - 20px);\n    }\n\n    @media (min-width: 1200px) {\n      width: calc(33% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n    @media (min-width: 1500px) {\n      width: calc(25% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
+  }) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    @media (min-width: 681px) {\n      width: calc(33% - 20px);\n    }\n\n    @media (min-width: 1200px) {\n      width: calc(33% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n    @media (min-width: 1500px) {\n      width: calc(25% - 20px);\n      margin: 10px 20px 10px 0px;\n      ", "\n    }\n  "])), function (props) {
     var _props$theme2;
     return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        margin: 10px 0px 10px 20px;\n      "])));
   }, function (props) {
@@ -47,7 +47,7 @@ var SoldOut = _styledComponents.default.span(_templateObject7 || (_templateObjec
   return isBottom && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    bottom: 7px;\n    top: initial;\n  "])));
 });
 exports.SoldOut = SoldOut;
-var CardInfo = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  flex: 1;\n  padding: 10px;\n  box-sizing: border-box;\n  p {\n    color: ", ";\n    text-align: left;\n    font-size: 10px;\n    ", "\n\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 100%;\n  }\n\n  span {\n    color: ", ";\n    font-size: 14px;\n  }\n\n  @media (min-width: 1024px) {\n    p {\n      font-size: 12px;\n    }\n\n    span {\n      font-size: 14px;\n    }\n  }\n"])), function (_ref6) {
+var CardInfo = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  flex: 1;\n  padding: 10px;\n  box-sizing: border-box;\n  p {\n    color: ", ";\n    text-align: left;\n    font-size: 13px;\n    ", "\n\n    overflow: hidden;\n    display: -webkit-box;\n    -webkit-line-clamp: 3;\n    -webkit-box-orient: vertical;\n    text-overflow: ellipsis;\n    width: 100%;\n  }\n\n  span {\n    color: ", ";\n    font-size: 14px;\n  }\n\n  @media (min-width: 1024px) {\n    p {\n      font-size: 14px;\n    }\n\n    span {\n      font-size: 13px;\n    }\n  }\n"])), function (_ref6) {
   var _theme$colors3;
   var theme = _ref6.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#fff';
@@ -58,9 +58,9 @@ var CardInfo = _styledComponents.default.div(_templateObject10 || (_templateObje
   return props.theme.colors.darkTextColor;
 });
 exports.CardInfo = CardInfo;
-var WrapLogo = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: relative;\n  /* height: 300px; */\n  height: 150px;\n  width: 100%;\n  @media (min-width: 551px ) {\n    height: 225px;\n  }\n  @media (min-width: 769px){\n    height: 300px;\n  }\n"])));
+var WrapLogo = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: relative;\n  /* height: 300px; */\n  height: 150px;\n  width: 100%;\n  @media (min-width: 551px ) {\n    height: 225px;\n  }\n  @media (min-width: 769px){\n    height: 265px;\n  }\n"])));
 exports.WrapLogo = WrapLogo;
-var CardLogoStyled = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  /* min-height: 300px; */\n  min-height: 150px;\n  @media (min-width: 551px ) {\n    min-height: 225px;\n  }\n  @media (min-width: 769px){\n      min-height: 300px;\n  }\n"])));
+var CardLogoStyled = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  border-radius: 5px 5px 0 0;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  background-position: center;\n  object-fit: cover;\n  /* min-height: 300px; */\n  min-height: 150px;\n  @media (min-width: 551px ) {\n    min-height: 225px;\n  }\n  @media (min-width: 769px){\n      min-height: 240px;\n  }\n"])));
 var CardLogo = function CardLogo(props) {
   var style = {};
   if (props.bgimage) {
@@ -74,15 +74,15 @@ var CardLogo = function CardLogo(props) {
   }), props.children);
 };
 exports.CardLogo = CardLogo;
-var PriceWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  span {\n    color: ", ";\n  }\n\n  .off-price {\n    font-size: 10px;\n    color: #909BA9;\n    margin-left: 5px;\n    text-decoration: line-through;\n\n    ", "\n\n    @media (min-width: 1024px) {\n      font-size: 13px;\n    }\n  }\n"])), function (_ref7) {
+var PriceWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  span {\n    color: ", ";\n    font-weight: 800;\n    font-size: 13px;\n  }\n\n  .off-price {\n    font-size: 13px;\n    color: #909BA9;\n    margin-left: 5px;\n    text-decoration: line-through;\n\n    ", "\n\n    @media (min-width: 1024px) {\n      font-size: 13px;\n    }\n  }\n"])), function (_ref7) {
   var _theme$colors4;
   var theme = _ref7.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.tertiary) || '#fff';
+  return theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.gold;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      margin-right: 5px;\n      margin-left: 0;\n    "])));
 });
 exports.PriceWrapper = PriceWrapper;
-var QuantityContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n  span { \n    position: relative;\n    top: 2px;\n    font-size: 12px;\n  }\n"])), function (_ref8) {
+var QuantityContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n  span {\n    position: relative;\n    top: 2px;\n    font-size: 12px;\n  }\n"])), function (_ref8) {
   var theme = _ref8.theme;
   return theme.colors.primary;
 }, function (_ref9) {
@@ -110,7 +110,7 @@ var RibbonBox = _styledComponents.default.div(_templateObject17 || (_templateObj
   return hasProductCount && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    right: 15px;\n  "])));
 });
 exports.RibbonBox = RibbonBox;
-var TitleWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: flex-start;\n  flex: 1;\n  overflow: hidden;\n  h1 {\n    font-size: 16px;\n    font-weight: 500;\n    text-align: left;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    margin: 0px;\n    width: 100%;\n  }\n\n  > span {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    svg {\n      color: ", ";\n      font-size: 16px;\n    }\n  }\n"])), function (_ref14) {
+var TitleWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: flex-start;\n  flex: 1;\n  overflow: hidden;\n  h1 {\n    font-size: 14px;\n    font-weight: 800;\n    text-align: left;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    margin: 0px;\n    width: 100%;\n  }\n\n  > span {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    svg {\n      color: ", ";\n      font-size: 16px;\n    }\n  }\n  .product-description {\n    margin-top: 10px;\n    line-height: 25px;\n  }\n"])), function (_ref14) {
   var _theme$colors5;
   var theme = _ref14.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$colors5 = theme.colors) === null || _theme$colors5 === void 0 ? void 0 : _theme$colors5.tertiary) || '#fff';
@@ -118,3 +118,5 @@ var TitleWrapper = _styledComponents.default.div(_templateObject23 || (_template
   return props.theme.colors.danger500;
 });
 exports.TitleWrapper = TitleWrapper;
+var TitleAndPriceContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  align-items: center;\n\n  .price-wrapper {\n    width: 50%;\n    min-width: 72px;\n    justify-content: flex-end;\n  }\n"])));
+exports.TitleAndPriceContainer = TitleAndPriceContainer;

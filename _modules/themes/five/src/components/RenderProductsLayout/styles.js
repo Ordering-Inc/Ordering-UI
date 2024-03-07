@@ -40,7 +40,7 @@ var BusinessCategoryProductWrapper = _styledComponents.default.div(_templateObje
 exports.BusinessCategoryProductWrapper = BusinessCategoryProductWrapper;
 var BusinessCategoriesContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin: 0;\n  margin-right: 10px;\n  width: 100%;\n  @media (min-width: 993px) {\n    width: calc(31% - 25px);\n  }\n"])));
 exports.BusinessCategoriesContainer = BusinessCategoriesContainer;
-var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: ", ";\n  min-width: 325px;\n  @media (min-width: 1000px) {\n    display: block;\n  }\n"])), function (_ref4) {
+var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesContainer)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: none;\n  margin-top: ", ";\n  /* min-width: 325px; */\n  @media (min-width: 1000px) {\n    display: block;\n  }\n"])), function (_ref4) {
   var showPrincipalCategories = _ref4.showPrincipalCategories;
   return showPrincipalCategories ? '210px' : '90px';
 });

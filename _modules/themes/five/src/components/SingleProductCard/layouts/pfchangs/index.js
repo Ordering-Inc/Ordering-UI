@@ -10,6 +10,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _orderingComponents = require("ordering-components");
 var _utils = require("../../../../../../../utils");
 var _useIntersectionObserver = require("../../../../../../../hooks/useIntersectionObserver");
+var _useWindowSize = require("../../../../../../../hooks/useWindowSize");
 var _styledComponents = require("styled-components");
 var _Modal = require("../../../Modal");
 var _LoginForm = require("../../../LoginForm");
@@ -69,6 +70,7 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     login = _useSession2[1].login;
   var theme = (0, _styledComponents.useTheme)();
   var favoriteRef = (0, _react.useRef)(null);
+  var windowSize = (0, _useWindowSize.useWindowSize)();
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isModalOpen = _useState2[0],
@@ -144,13 +146,19 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     width: "100%"
   }), !useCustomFunctionality && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isSkeleton && productAddedToCartLength > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuantityContainer, null, /*#__PURE__*/_react.default.createElement("span", null, productAddedToCartLength)), /*#__PURE__*/_react.default.createElement(_styles.CardInfo, {
     soldOut: isSoldOut || maxProductQuantity <= 0
-  }, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, !isSkeleton ? /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 100
-  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 100
-  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : ''), !(isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_styles.TitleWrapper, null, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.TitleAndPriceContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), windowSize.width >= 798 && /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, {
+    className: "price-wrapper"
+  }, /*#__PURE__*/_react.default.createElement("span", null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : ''), !(isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement("span", {
     className: "off-price"
-  }, product !== null && product !== void 0 && product.offer_price && product !== null && product !== void 0 && product.in_offer ? parsePrice(product === null || product === void 0 ? void 0 : product.offer_price) : '')) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, product !== null && product !== void 0 && product.offer_price && product !== null && product !== void 0 && product.in_offer ? parsePrice(product === null || product === void 0 ? void 0 : product.offer_price) : ''))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 100
+  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement("p", {
+    className: "product-description"
+  }, product === null || product === void 0 ? void 0 : product.description) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 100
+  }), !isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width < 798 && /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, product !== null && product !== void 0 && product.price ? parsePrice(product === null || product === void 0 ? void 0 : product.price) : ''), !(isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement("span", {
+    className: "off-price"
+  }, product !== null && product !== void 0 && product.offer_price && product !== null && product !== void 0 && product.in_offer ? parsePrice(product === null || product === void 0 ? void 0 : product.offer_price) : ''))) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })), useCustomFunctionality && customText && /*#__PURE__*/_react.default.createElement("span", {
     style: {

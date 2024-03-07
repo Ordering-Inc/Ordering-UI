@@ -12,7 +12,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (_ref) {
   var variant = _ref.variant;
-  return variant === 'cart' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    > span {\n      cursor: pointer;\n      height: 20px;\n      padding: 10px 9px;\n      display: flex;\n      align-items: center;\n      background: ", ";\n      color: #FFFFFF;\n      border-radius: 7.6px;\n\n      span {\n        margin: 0;\n        font-size: 14px;\n        ", " \n      }\n      svg {\n        font-size: 17px;\n      }\n    }\n  "])), function (props) {
+  return variant === 'cart' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    > span {\n      cursor: pointer;\n      height: 20px;\n      padding: 10px 9px;\n      display: flex;\n      align-items: center;\n      background: ", ";\n      color: #FFFFFF;\n      border-radius: 7.6px;\n\n      span {\n        margin: 0;\n        font-size: 14px;\n        ", "\n      }\n      svg {\n        font-size: 17px;\n      }\n    }\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
     var _props$theme;
@@ -20,18 +20,26 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
   });
 }, function (_ref2) {
   var variant = _ref2.variant;
-  return variant === 'address' && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    color: #909BA9;\n    display: flex;\n    align-items: center;\n\n    svg {\n      margin-right: 5px;\n      ", "\n    }\n\n  "])), function (props) {
+  return variant === 'address' && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    color: ", ";\n    display: flex;\n    align-items: center;\n\n    svg {\n      color: ", ";\n      margin-right: 5px;\n      ", "\n    }\n\n  "])), function (_ref3) {
+    var _theme$colors;
+    var theme = _ref3.theme;
+    return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.tertiary) || 'initial';
+  }, function (_ref4) {
+    var _theme$colors2;
+    var theme = _ref4.theme;
+    return theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.gold;
+  }, function (props) {
     var _props$theme2;
     return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-left: 5px;\n        margin-right: 0px;\n      "])));
   });
-}, function (_ref3) {
-  var variant = _ref3.variant;
+}, function (_ref5) {
+  var variant = _ref5.variant;
   return variant === 'moment' && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    color: #909BA9;\n    display: flex;\n    align-items: center;\n\n    svg {\n      margin-right: 5px;\n      ", "\n    }\n  "])), function (props) {
     var _props$theme3;
     return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n        margin-left: 5px;\n        margin-right: 0;\n      "])));
   });
-}, function (_ref4) {
-  var isHome = _ref4.isHome;
+}, function (_ref6) {
+  var isHome = _ref6.isHome;
   return isHome && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    color: #FFF;\n  "])));
 });
 exports.Container = Container;

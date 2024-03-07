@@ -28,9 +28,14 @@ var OrderTypeSelectorHeaderUI = function OrderTypeSelectorHeaderUI(props) {
     typeSelected = props.typeSelected,
     defaultValue = props.defaultValue,
     configTypes = props.configTypes,
-    orderTypes = props.orderTypes;
+    orderTypes = props.orderTypes,
+    color = props.color,
+    borderColor = props.borderColor;
   var defaultType = configTypes !== null && configTypes !== void 0 && configTypes.includes(typeSelected) ? null : configTypes === null || configTypes === void 0 ? void 0 : configTypes[0];
-  return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  return /*#__PURE__*/_react.default.createElement(_styles.OrderTypeWrapper, {
+    borderColor: borderColor,
+    color: color
+  }, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: configTypes ? orderTypes.filter(function (type) {
       return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
     }) : orderTypes,

@@ -8,6 +8,7 @@ exports.RenderProductsLayout = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _styledComponents = require("styled-components");
 var _orderingComponents = require("ordering-components");
+var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _CgSearch = _interopRequireDefault(require("@meronex/icons/cg/CgSearch"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _EnChevronThinUp = _interopRequireDefault(require("@meronex/icons/en/EnChevronThinUp"));
@@ -102,6 +103,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   var _useOrderingTheme = (0, _orderingComponents.useOrderingTheme)(),
     _useOrderingTheme2 = _slicedToArray(_useOrderingTheme, 1),
     orderingTheme = _useOrderingTheme2[0];
+  var windowSize = (0, _useWindowSize.useWindowSize)();
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isCartModal = _useState2[0],
@@ -433,7 +435,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleChangeProfessionalSelected: handleChangeProfessionalSelected,
     subcategorySelected: subcategorySelected
   })))))), showGoTopButton && /*#__PURE__*/_react.default.createElement(_styles.BackToTop, {
-    showCartOnProductList: showCartOnProductList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0,
+    showCartOnProductList: showCartOnProductList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 && windowSize.width > 1000,
     onClick: function onClick() {
       return handleScrollToTop();
     }

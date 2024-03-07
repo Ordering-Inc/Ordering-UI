@@ -16,7 +16,13 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      margin-left: 5px;\n      margin-right: 0px;\n    "])));
 });
 exports.Option = Option;
-var OrderTypeWrapper = _styledComponents.default.span(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  div {\n    max-width: 120px;\n  }\n  @media (min-width: 380px) {\n    div{\n      max-width: initial;\n    }\n  }\n"])));
+var OrderTypeWrapper = _styledComponents.default.span(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  div {\n    max-width: 120px;\n  }\n  > #select-input {\n    color: ", " !important;\n    border-color: ", " !important;\n  }\n  @media (min-width: 380px) {\n    div{\n      max-width: initial;\n    }\n  }\n"])), function (_ref) {
+  var borderColor = _ref.borderColor;
+  return borderColor;
+}, function (_ref2) {
+  var borderColor = _ref2.borderColor;
+  return borderColor;
+});
 exports.OrderTypeWrapper = OrderTypeWrapper;
 var SelectedOption = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-width: 60px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  @media (min-width: 380px) {\n      max-width: initial;\n  }\n"])));
 exports.SelectedOption = SelectedOption;
