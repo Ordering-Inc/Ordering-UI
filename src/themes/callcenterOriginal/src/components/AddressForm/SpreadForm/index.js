@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FormActions, FormControl, FormattedAddress } from './styles'
+import { FormActions, FormControl } from './styles'
 import { useLanguage, useApi, useSession, useConfig, useToast, ToastType } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
@@ -17,8 +17,27 @@ const inputNames = [
   { id: 7, name: 'country_code', enabled: false, required: false }
 ]
 
+const emptyFields = {
+  route: '',
+  street_number: '',
+  neighborhood: '',
+  city: '',
+  state: '',
+  country_code: '',
+  country: '',
+  address: '',
+  locality: '',
+  location: '',
+  zipcode: ''
+}
+
 export const SpreadForm = (props) => {
-  const { address, onChangeAddress, onCancel } = props
+  const {
+    address,
+    editSpreadAddress,
+    setEditSpreadAddress,
+    onChangeAddress
+  } = props
 
   const theme = useTheme()
   const [ordering] = useApi()
@@ -33,6 +52,7 @@ export const SpreadForm = (props) => {
   const handleAddAddress = () => {
     onChangeAddress(formState.changes)
     setFormState({ ...formState, added: true })
+    editSpreadAddress && setEditSpreadAddress(!editSpreadAddress)
   }
 
   const handleChangeInput = ({ name, value }) => {
@@ -61,7 +81,7 @@ export const SpreadForm = (props) => {
     return list[attr] ?? attr
   }
 
-  const handlePostAddress = async () => {
+  const handlePostAddress = async (addressLines) => {
     try {
       setFormState({ ...formState, loading: true })
       const _body = {
@@ -69,7 +89,7 @@ export const SpreadForm = (props) => {
         body: {
           address: {
             regionCode: 'MX',
-            addressLines: inputNames
+            addressLines: addressLines ?? inputNames
               .filter(i => i?.enabled !== false)
               .sort((a, b) => a.id - b.id)
               .map(input => formState.changes[input.name])
@@ -131,13 +151,17 @@ export const SpreadForm = (props) => {
 
   useEffect(() => {
     if (address) {
-      setFormState({
-        ...formState,
-        changes: {
-          ...formState.changes,
-          ...address
-        }
-      })
+      if (!address?.location) {
+        handlePostAddress(address?.address?.split(','))
+      } else {
+        setFormState({
+          ...formState,
+          changes: {
+            ...formState.changes,
+            ...address
+          }
+        })
+      }
     }
   }, [address])
 
@@ -148,63 +172,61 @@ export const SpreadForm = (props) => {
     }
   }, [JSON.stringify(formState.error)])
 
+  useEffect(() => {
+    if (editSpreadAddress) {
+      onChangeAddress(emptyFields)
+    }
+  }, [editSpreadAddress])
+
   return (
     <FormControl
       autoComplete='off'
       onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault() }}
     >
-      {(!!formState?.formattedAddress || address?.address) && <FormattedAddress>{formState?.formattedAddress ?? address?.address}</FormattedAddress>}
-      {inputNames.map(field => (
-        <React.Fragment key={field.name}>
-          <Input
-            className={field.name}
-            placeholder={t(`ADDRESS_${field.name.toUpperCase()}`, capitalize(field.name.replace('_', ' ')))}
-            value={formState.changes?.[field.name] ?? address?.[field.name] ?? (field.name === 'country_code' ? 'MX' : '')}
-            disabled={field?.enabled === false}
-            style={{
-              ...(field?.enabled === false ? { background: theme.colors.disabled } : {})
-            }}
-            onChange={(e) => {
-              handleChangeInput({ name: field.name, value: e.target.value })
-            }}
-            autoComplete='new-field'
-            maxLength={70}
-          />
-        </React.Fragment>
-      ))}
-      {!formState.added && (
-        <FormActions>
-          {/* <Button
-            outline
-            type='button'
-            disabled={formState.loading}
-            onClick={() => onCancel()}
-            hoverColor='#CCC'
-          >
-            {t('CANCEL', 'Cancel')}
-          </Button> */}
-          <Button
-            id='submit-btn'
-            type='button'
-            disabled={formState.loading || !inputNames
-              .filter(i => i.required)
-              .every(input => formState.changes?.[input.name])}
-            color='primary'
-            onClick={formState.changes?.location ? handleAddAddress : handlePostAddress}
-          >
-            {!formState.loading ? (
-              address?.address
-                ? formState.changes?.location
-                  ? t('UPDATE', 'Update')
-                  : t('VERIFY_ADDRESS', 'Verify address')
-                : formState.changes?.location
-                  ? t('CONFIRM_ADDRESS', 'Confirm address')
-                  : t('VERIFY_ADDRESS', 'Verify address')
-            ) : (
-              t('LOADING', 'Loading')
-            )}
-          </Button>
-        </FormActions>
+      {(!formState.added || editSpreadAddress) && (
+        <>
+          {inputNames.map(field => (
+            <React.Fragment key={field.name}>
+              <Input
+                className={field.name}
+                placeholder={t(`ADDRESS_${field.name.toUpperCase()}`, capitalize(field.name.replace('_', ' ')))}
+                value={formState.changes?.[field.name] ?? address?.[field.name] ?? (field.name === 'country_code' ? 'MX' : '')}
+                disabled={field?.enabled === false}
+                style={{
+                  ...(field?.enabled === false ? { background: theme.colors.disabled } : {})
+                }}
+                onChange={(e) => {
+                  handleChangeInput({ name: field.name, value: e.target.value })
+                }}
+                autoComplete='new-field'
+                maxLength={70}
+              />
+            </React.Fragment>
+          ))}
+          <FormActions>
+            <Button
+              id='submit-btn'
+              type='button'
+              disabled={formState.loading || !inputNames
+                .filter(i => i.required)
+                .every(input => formState.changes?.[input.name])}
+              color='primary'
+              onClick={formState.changes?.location ? handleAddAddress : handlePostAddress}
+            >
+              {!formState.loading ? (
+                address?.address
+                  ? formState.changes?.location
+                    ? t('UPDATE', 'Update')
+                    : t('VERIFY_ADDRESS', 'Verify address')
+                  : formState.changes?.location
+                    ? t('CONFIRM_ADDRESS', 'Confirm address')
+                    : t('VERIFY_ADDRESS', 'Verify address')
+              ) : (
+                t('LOADING', 'Loading')
+              )}
+            </Button>
+          </FormActions>
+        </>
       )}
     </FormControl>
   )
