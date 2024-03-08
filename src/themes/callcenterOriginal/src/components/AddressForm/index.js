@@ -60,7 +60,9 @@ const AddressFormUI = (props) => {
     address,
     notUseCustomerInfo,
     addFormRestrictions,
-    isAllowUnaddressOrderType
+    showSpreadForm,
+    isAllowUnaddressOrderType,
+    addressSpreadForm
   } = props
 
   const [configState] = useConfig()
@@ -378,14 +380,14 @@ const AddressFormUI = (props) => {
     }
   }, [address])
 
+  useEffect(() => {
+    if (addressSpreadForm) {
+      updateChanges(addressSpreadForm)
+    }
+  }, [addressSpreadForm])
+
   return (
     <div className='address-form'>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       {(configState.loading || addressState.loading) && (
         <WrapperSkeleton>
           <Skeleton height={50} count={5} style={{ marginBottom: '10px' }} />
@@ -398,118 +400,109 @@ const AddressFormUI = (props) => {
           onKeyDown={(e) => checkKeyDown(e)}
           autoComplete='off'
         >
-
-          {
-            props.beforeMidElements?.map((BeforeMidElements, i) => (
-              <React.Fragment key={i}>
-                {BeforeMidElements}
-              </React.Fragment>))
-          }
-          {
-            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-              <BeforeMidComponents key={i} {...props} />))
-          }
-
           {inputNames.map(field => showField && showField(field.name) && (
             field.name === 'address' ? (
               <React.Fragment key={field.name}>
-                <AddressWrap className='google-control'>
-                  <WrapAddressInput>
-                    {!selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng) && (
-                      <AddressMarkContainer>
-                        <p>
-                          {t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.')}
-                        </p>
-                      </AddressMarkContainer>
-                    )}
-                    <GoogleAutocompleteInput
-                      className='input-autocomplete'
-                      apiKey={googleMapsApiKey}
-                      placeholder={t('ADDRESS', 'Address')}
-                      onChangeAddress={(e) => {
-                        formMethods.setValue('address', e.address)
-                        handleChangeAddress(e)
-                      }}
-                      onChange={(e) => {
-                        handleChangeInput({ target: { name: 'address', value: e.target.value } })
-                        setAddressValue(e.target.value)
-                      }}
-                      childRef={(ref) => {
-                        googleInputRef.current = ref
-                      }}
-                      defaultValue={
-                        formState?.result?.result
-                          ? formState?.result?.result?.address
-                          : formState?.changes?.address ?? addressValue
-                      }
-                      autoComplete='new-field'
-                      countryCode={configState?.configs?.country_autocomplete?.value || '*'}
-                    />
-                  </WrapAddressInput>
-                  <GoogleGpsButton
-                    className='gps-button'
-                    apiKey={googleMapsApiKey}
-                    onAddress={(e) => {
-                      formMethods.setValue('address', e.address)
-                      handleChangeAddress(e)
-                    }}
-                    onError={setMapErrors}
-                    IconButton={GeoAlt}
-                    IconLoadingButton={CgSearchLoading}
-                  />
-                </AddressWrap>
-                {(addressState?.address?.location || formState?.changes?.location) && (
-                  <WrapperMap notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
-
-                    {!showMap && (
-                      <section>
-                        <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
-                        {(addressState?.address?.address || formState?.changes?.address) && (
-                          <span>{addressState?.address?.address || formState?.changes?.address}{', '}</span>
+                {!showSpreadForm && (
+                  <>
+                    <AddressWrap className='google-control'>
+                      <WrapAddressInput>
+                        {!selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng) && (
+                          <AddressMarkContainer>
+                            <p>
+                              {t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.')}
+                            </p>
+                          </AddressMarkContainer>
                         )}
-                        {(addressState?.address?.country || formState?.changes?.country) && (
-                          <span>{addressState?.address?.country || formState?.changes?.country}{', '}</span>
-                        )}
-                        {(addressState?.address?.address_notes || formState?.changes?.address_notes) && (
-                          <span>{addressState?.address?.address_notes || formState?.changes?.address_notes}{', '}</span>
-                        )}
-                        {(addressState?.address?.internal_number || formState?.changes?.internal_number) && (
-                          <span>{addressState?.address?.internal_number || formState?.changes?.internal_number}{', '}</span>
-                        )}
-                        {(addressState?.address?.zipcode || formState?.changes?.zipcode) && (
-                          <span>{addressState?.address?.zipcode || formState?.changes?.zipcode}{', '}</span>
-                        )}
-                        <a
-                          style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
-                          onClick={() => setShowMap(!showMap)}
-                        >
-                          {t('SHOW_MAP', 'Show Map')}
-                        </a>
-                      </section>
-                    )}
-
-                    {locationChange && showMap && (
-                      <GoogleMapsMap
-                        useMapWithBusinessZones
-                        deactiveAlerts
-                        avoidFitBounds
+                        <GoogleAutocompleteInput
+                          className='input-autocomplete'
+                          apiKey={googleMapsApiKey}
+                          placeholder={t('ADDRESS', 'Address')}
+                          onChangeAddress={(e) => {
+                            formMethods.setValue('address', e.address)
+                            handleChangeAddress(e)
+                          }}
+                          onChange={(e) => {
+                            handleChangeInput({ target: { name: 'address', value: e.target.value } })
+                            setAddressValue(e.target.value)
+                          }}
+                          childRef={(ref) => {
+                            googleInputRef.current = ref
+                          }}
+                          defaultValue={
+                              formState?.result?.result
+                                ? formState?.result?.result?.address
+                                : formState?.changes?.address ?? addressValue
+                          }
+                          autoComplete='new-field'
+                          countryCode={configState?.configs?.country_autocomplete?.value || '*'}
+                        />
+                      </WrapAddressInput>
+                      <GoogleGpsButton
+                        className='gps-button'
                         apiKey={googleMapsApiKey}
-                        location={locationChange}
-                        locations={businessesList?.businesses}
-                        mapControls={googleMapsControls}
-                        handleChangeAddressMap={handleChangeAddress}
-                        setErrors={setMapErrors}
-                        maxLimitLocation={parseInt(maxLimitLocation, 10)}
-                        businessZones={businessZones}
-                        fallbackIcon={theme.images?.dummies?.businessLogo}
+                        onAddress={(e) => {
+                          formMethods.setValue('address', e.address)
+                          handleChangeAddress(e)
+                        }}
+                        onError={setMapErrors}
+                        IconButton={GeoAlt}
+                        IconLoadingButton={CgSearchLoading}
                       />
+                    </AddressWrap>
+                    {(addressState?.address?.location || formState?.changes?.location) && (
+                      <WrapperMap notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
+                        {!showMap && (
+                          <section>
+                            <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
+                            {(addressState?.address?.address || formState?.changes?.address) && (
+                              <span>{addressState?.address?.address || formState?.changes?.address}{', '}</span>
+                            )}
+                            {(addressState?.address?.country || formState?.changes?.country) && (
+                              <span>{addressState?.address?.country || formState?.changes?.country}{', '}</span>
+                            )}
+                            {(addressState?.address?.address_notes || formState?.changes?.address_notes) && (
+                              <span>{addressState?.address?.address_notes || formState?.changes?.address_notes}{', '}</span>
+                            )}
+                            {(addressState?.address?.internal_number || formState?.changes?.internal_number) && (
+                              <span>{addressState?.address?.internal_number || formState?.changes?.internal_number}{', '}</span>
+                            )}
+                            {(addressState?.address?.zipcode || formState?.changes?.zipcode) && (
+                              <span>{addressState?.address?.zipcode || formState?.changes?.zipcode}{', '}</span>
+                            )}
+                            <a
+                              style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
+                              onClick={() => setShowMap(!showMap)}
+                            >
+                              {t('SHOW_MAP', 'Show Map')}
+                            </a>
+                          </section>
+                        )}
+
+                        {locationChange && showMap && (
+                          <GoogleMapsMap
+                            useMapWithBusinessZones
+                            deactiveAlerts
+                            avoidFitBounds
+                            apiKey={googleMapsApiKey}
+                            location={locationChange}
+                            locations={businessesList?.businesses}
+                            mapControls={googleMapsControls}
+                            handleChangeAddressMap={handleChangeAddress}
+                            setErrors={setMapErrors}
+                            maxLimitLocation={parseInt(maxLimitLocation, 10)}
+                            businessZones={businessZones}
+                            fallbackIcon={theme.images?.dummies?.businessLogo}
+                          />
+                        )}
+                        {showMap && (
+                          <StreetViewText onClick={() => openStreetView()}>
+                            {t('OPEN_STREET_VIEW', 'Open Street view')}
+                          </StreetViewText>
+                        )}
+                      </WrapperMap>
                     )}
-                    {showMap && (
-                      <StreetViewText onClick={() => openStreetView()}>
-                        {t('OPEN_STREET_VIEW', 'Open Street view')}
-                      </StreetViewText>
-                    )}
-                  </WrapperMap>
+                  </>
                 )}
               </React.Fragment>
             ) : (
@@ -559,16 +552,6 @@ const AddressFormUI = (props) => {
               <span><PlusLg /></span>
             </Button>
           </AddressTagSection>
-          {
-            props.afterMidElements?.map((MidElement, i) => (
-              <React.Fragment key={i}>
-                {MidElement}
-              </React.Fragment>))
-          }
-          {
-            props.afterMidComponents?.map((MidComponent, i) => (
-              <MidComponent key={i} {...props} />))
-          }
           <FormActions>
             {
               !addFormRestrictions && Object.keys(formState?.changes).length === 0 && (
@@ -622,12 +605,6 @@ const AddressFormUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </div>
   )
 }
