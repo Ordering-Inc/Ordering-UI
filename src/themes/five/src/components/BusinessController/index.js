@@ -29,11 +29,11 @@ import {
   CallCenterInformationBullet,
   BusinessLogoWrapper,
   BusinessStarInfo,
-  InfoLength,
-  InfoDescription,
   RibbonBox,
   FavoriteWrapper,
-  BusinessHeaderClosedContainer
+  BusinessHeaderClosedContainer,
+  ScheduleContainer,
+  ClosedContainer
   // CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
@@ -132,6 +132,11 @@ const BusinessControllerUI = (props) => {
     })
   }
 
+  const scheduleFormatted = ({ hour, minute }) => {
+    const checkTime = (val) => val < 10 ? `0${val}` : val
+    return `${checkTime(hour)}:${checkTime(minute)}`
+  }
+
   const hasInformationLength = !!business?.idle_drivers_count || !!business?.busy_drivers_count || !!business?.activated_orders
 
   if (typeButton) {
@@ -182,14 +187,24 @@ const BusinessControllerUI = (props) => {
                   )}
                 </BusinessTags>
                 <BusinessHeaderClosedContainer>
-                  <div>
+                  <ClosedContainer>
                     {!!businessWillCloseSoonMinutes && orderState?.options?.moment === null && isBusinessOpen && business?.enabled !== false && (
                       <h1>{businessWillCloseSoonMinutes} {t('MINUTES_TO_CLOSE', 'minutes to close')}</h1>
                     )}
                     {!isBusinessOpen && <h1 className='closed'>{t('CLOSED', 'Closed')}{business?.enabled === false && `(${t('DISABLED', 'Disabled')})`}</h1>}
-                  </div>
+                  </ClosedContainer>
                   {business?.disabled_reason && business?.enabled === false && (
                     <h2 className='disabled'>{business?.disabled_reason}</h2>
+                  )}
+                  {isCustomerMode && (
+                    <ScheduleContainer>
+                      <p>{t('OPERATION_SCHEDULE', 'Operatiion schedule')}</p>
+                      {business?.today?.lapses?.map((lapse, i) => (
+                        <div key={i}>
+                          <p>{scheduleFormatted(lapse?.open)} {t('TO', 'to')} {scheduleFormatted(lapse?.close)}</p>
+                        </div>
+                      ))}
+                    </ScheduleContainer>
                   )}
                 </BusinessHeaderClosedContainer>
               </BusinessHeader>
