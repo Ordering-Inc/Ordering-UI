@@ -62,7 +62,10 @@ const AddressFormUI = (props) => {
     addFormRestrictions,
     showSpreadForm,
     isAllowUnaddressOrderType,
-    addressSpreadForm
+    addressSpreadForm,
+    setAddressSpreadForm,
+    editSpreadAddress,
+    setEditSpreadAddress
   } = props
 
   const [configState] = useConfig()
@@ -349,6 +352,7 @@ const AddressFormUI = (props) => {
 
     return () => {
       setFirstLocationNoEdit({ value: null })
+      setAddressSpreadForm(null)
     }
   }, [])
 
@@ -383,6 +387,9 @@ const AddressFormUI = (props) => {
   useEffect(() => {
     if (addressSpreadForm) {
       updateChanges(addressSpreadForm)
+      if (addressSpreadForm?.location) {
+        setSelectedFromAutocomplete(true)
+      }
     }
   }, [addressSpreadForm])
 
@@ -394,7 +401,7 @@ const AddressFormUI = (props) => {
         </WrapperSkeleton>
       )}
 
-      {(!showSpreadForm || (showSpreadForm && addressSpreadForm)) && (
+      {(!showSpreadForm || (showSpreadForm && addressSpreadForm?.address)) && (
         <>
           {!configState.loading && !addressState.loading && (
             <FormControl
@@ -405,8 +412,8 @@ const AddressFormUI = (props) => {
               {inputNames.map(field => showField && showField(field.name) && (
                 field.name === 'address' ? (
                   <React.Fragment key={field.name}>
-                    {!showSpreadForm && (
-                      <>
+                    <>
+                      {!showSpreadForm && (
                         <AddressWrap className='google-control'>
                           <WrapAddressInput>
                             {!selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng) && (
@@ -452,60 +459,77 @@ const AddressFormUI = (props) => {
                             IconLoadingButton={CgSearchLoading}
                           />
                         </AddressWrap>
-                        {(addressState?.address?.location || formState?.changes?.location) && (
-                          <WrapperMap notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
-                            {!showMap && (
-                              <section>
-                                <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
-                                {(addressState?.address?.address || formState?.changes?.address) && (
-                                  <span>{addressState?.address?.address || formState?.changes?.address}{', '}</span>
-                                )}
-                                {(addressState?.address?.country || formState?.changes?.country) && (
-                                  <span>{addressState?.address?.country || formState?.changes?.country}{', '}</span>
-                                )}
-                                {(addressState?.address?.address_notes || formState?.changes?.address_notes) && (
-                                  <span>{addressState?.address?.address_notes || formState?.changes?.address_notes}{', '}</span>
-                                )}
-                                {(addressState?.address?.internal_number || formState?.changes?.internal_number) && (
-                                  <span>{addressState?.address?.internal_number || formState?.changes?.internal_number}{', '}</span>
-                                )}
-                                {(addressState?.address?.zipcode || formState?.changes?.zipcode) && (
-                                  <span>{addressState?.address?.zipcode || formState?.changes?.zipcode}{', '}</span>
-                                )}
+                      )}
+                      {(addressState?.address?.location || formState?.changes?.location) && (
+                        <WrapperMap notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
+                          {!showMap && (
+                            <section>
+                              <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
+                              {(addressState?.address?.address || formState?.changes?.address) && (
+                                <span>{addressState?.address?.address || formState?.changes?.address}{', '}</span>
+                              )}
+                              {(addressState?.address?.country || formState?.changes?.country) && (
+                                <span>{addressState?.address?.country || formState?.changes?.country}{', '}</span>
+                              )}
+                              {(addressState?.address?.address_notes || formState?.changes?.address_notes) && (
+                                <span>{addressState?.address?.address_notes || formState?.changes?.address_notes}{', '}</span>
+                              )}
+                              {(addressState?.address?.internal_number || formState?.changes?.internal_number) && (
+                                <span>{addressState?.address?.internal_number || formState?.changes?.internal_number}{', '}</span>
+                              )}
+                              {(addressState?.address?.zipcode || formState?.changes?.zipcode) && (
+                                <span>{addressState?.address?.zipcode || formState?.changes?.zipcode}{', '}</span>
+                              )}
+                              <br />
+                              <a
+                                style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
+                                onClick={() => setShowMap(!showMap)}
+                              >
+                                {t('SHOW_MAP', 'Show Map')}
+                              </a>
+                              {showSpreadForm && (
                                 <a
-                                  style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
-                                  onClick={() => setShowMap(!showMap)}
+                                  style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer', marginLeft: 20 }}
+                                  onClick={() => setEditSpreadAddress(!editSpreadAddress)}
                                 >
-                                  {t('SHOW_MAP', 'Show Map')}
+                                  {t('EDIT_ADDRESS', 'Edit Address')}
                                 </a>
-                              </section>
-                            )}
+                              )}
+                            </section>
+                          )}
 
-                            {locationChange && showMap && (
-                              <GoogleMapsMap
-                                useMapWithBusinessZones
-                                deactiveAlerts
-                                avoidFitBounds
-                                apiKey={googleMapsApiKey}
-                                location={locationChange}
-                                locations={businessesList?.businesses}
-                                mapControls={googleMapsControls}
-                                handleChangeAddressMap={handleChangeAddress}
-                                setErrors={setMapErrors}
-                                maxLimitLocation={parseInt(maxLimitLocation, 10)}
-                                businessZones={businessZones}
-                                fallbackIcon={theme.images?.dummies?.businessLogo}
-                              />
-                            )}
-                            {showMap && (
+                          {locationChange && showMap && (
+                            <GoogleMapsMap
+                              useMapWithBusinessZones
+                              deactiveAlerts
+                              avoidFitBounds
+                              apiKey={googleMapsApiKey}
+                              location={locationChange}
+                              locations={businessesList?.businesses}
+                              mapControls={googleMapsControls}
+                              handleChangeAddressMap={handleChangeAddress}
+                              setErrors={setMapErrors}
+                              maxLimitLocation={parseInt(maxLimitLocation, 10)}
+                              businessZones={businessZones}
+                              fallbackIcon={theme.images?.dummies?.businessLogo}
+                            />
+                          )}
+                          {showMap && !editSpreadAddress && (
+                            <>
+                              {showSpreadForm && (
+                                <StreetViewText style={{ top: '0' }} onClick={() => setEditSpreadAddress(!editSpreadAddress)}>
+                                  {t('EDIT_ADDRESS', 'Edit Address')}
+                                </StreetViewText>
+                              )}
                               <StreetViewText onClick={() => openStreetView()}>
                                 {t('OPEN_STREET_VIEW', 'Open Street view')}
                               </StreetViewText>
-                            )}
-                          </WrapperMap>
-                        )}
-                      </>
-                    )}
+                            </>
+                          )}
+                        </WrapperMap>
+                      )}
+                    </>
+
                   </React.Fragment>
                 ) : (
                   <React.Fragment key={field.name}>
@@ -569,7 +593,12 @@ const AddressFormUI = (props) => {
                   )
                 }
 
-                {!(!selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng)) && Object.keys(formState?.changes).length > 0 && (
+                {!(
+                  !selectedFromAutocomplete &&
+                  address?.address &&
+                  (!address?.location?.lat || !address?.location?.lng)) &&
+                  Object.keys(formState?.changes).length > 0 &&
+                (
                   <Button
                     id='submit-btn'
                     type='submit'

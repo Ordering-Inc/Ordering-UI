@@ -199,11 +199,10 @@ export const AddressTagSection = styled.div`
 
 export const WrapperMap = styled.div`
   z-index: 100;
-  width: 50%;
+  width: 48%;
   position: absolute;
   bottom: 2%;
   right: 0;
-  padding-right: 20px;
   padding-top: 30px;
   height: ${({ notUseCustomerInfo }) =>
     notUseCustomerInfo

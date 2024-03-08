@@ -93,6 +93,7 @@ const AddressListUI = (props) => {
   const theme = useTheme()
   const [{ user }] = useCustomer()
   const [addressSpreadForm, setAddressSpreadForm] = useState(null)
+  const [editSpreadAddress, setEditSpreadAddress] = useState(false)
 
   const addFormRestrictions = userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
@@ -298,6 +299,9 @@ const AddressListUI = (props) => {
                 addressesList={addressList?.addresses}
                 showSpreadForm={showSpreadForm}
                 addressSpreadForm={addressSpreadForm}
+                setAddressSpreadForm={setAddressSpreadForm}
+                editSpreadAddress={editSpreadAddress}
+                setEditSpreadAddress={setEditSpreadAddress}
                 useValidationFileds
                 address={curAddress}
                 onCancel={() => handleCloseAddressForm()}
@@ -402,6 +406,9 @@ const AddressListUI = (props) => {
                 addressesList={addressList?.addresses}
                 showSpreadForm={showSpreadForm}
                 addressSpreadForm={addressSpreadForm}
+                setAddressSpreadForm={setAddressSpreadForm}
+                editSpreadAddress={editSpreadAddress}
+                setEditSpreadAddress={setEditSpreadAddress}
                 useValidationFileds
                 address={curAddress}
                 onCancel={() => handleCloseAddressForm()}
@@ -445,6 +452,8 @@ const AddressListUI = (props) => {
                   location: curAddress?.location,
                   zipcode: curAddress?.zipcode
                 }}
+                editSpreadAddress={editSpreadAddress}
+                setEditSpreadAddress={setEditSpreadAddress}
                 onCancel={() => handleCloseAddressForm()}
                 onChangeAddress={setAddressSpreadForm}
               />
@@ -493,6 +502,9 @@ const AddressListUI = (props) => {
               addressesList={addressList?.addresses}
               showSpreadForm={showSpreadForm}
               addressSpreadForm={addressSpreadForm}
+              setAddressSpreadForm={setAddressSpreadForm}
+              editSpreadAddress={editSpreadAddress}
+              setEditSpreadAddress={setEditSpreadAddress}
               useValidationFileds
               address={curAddress}
               onCancel={() => handleCloseAddressForm()}
