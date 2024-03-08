@@ -50,6 +50,7 @@ import { AddressForm } from '../AddressForm'
 import { Confirm } from '../Confirm'
 import { useTheme } from 'styled-components'
 import { scrollTo } from '../../../../../utils'
+import { SpreadForm } from '../AddressForm/SpreadForm'
 
 const AddressListUI = (props) => {
   const {
@@ -87,6 +88,8 @@ const AddressListUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const theme = useTheme()
   const [{ user }] = useCustomer()
+  const [addressSpreadForm, setAddressSpreadForm] = useState(null)
+  const [editSpreadAddress, setEditSpreadAddress] = useState(false)
 
   const addFormRestrictions = userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
@@ -99,6 +102,9 @@ const AddressListUI = (props) => {
       )))) || []
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isAllowUnaddressOrderType = unaddressedTypes.includes(orderState?.options?.type) && user?.id === orderState?.options?.user_id
+  const countryAutocomplete = configs?.country_autocomplete?.value?.toUpperCase() ?? '*'
+  const showSpreadForm = configs?.addresses_form_type?.value === 'country'
+
   const openAddress = (address) => {
     setCurAddress(address)
     setAddressOpen(true)
@@ -227,208 +233,39 @@ const AddressListUI = (props) => {
   }, [userCustomerSetup?.imported_address_text, addressList.addresses, addressList?.loading, addressList?.error, isOpenUserData])
 
   return (
-    <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
-        <AddressHalfContainer>
-          <List
-            halfWidth={addressOpen}
-            isOpenUserData={isOpenUserData}
-            isHeader={isHeader}
-            notUseCustomerInfo={notUseCustomerInfo}
-            addFormRestrictions={addFormRestrictions}
-          >
-            {
-              !addFormRestrictions && !addressOpen && !isOpenUserData && (
-                <Button
-                  className='add'
-                  outline
-                  color={addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
-                  onClick={() => openAddress({})}
-                  disabled={orderState?.loading || actionStatus.loading}
-                  hoverColor='#CCC'
-                >
-                  {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
-                </Button>
-              )
-            }
-            {
-              isPopover && addressOpen && (
-                <AddressForm
-                  userId={userId}
-                  addressesList={addressList?.addresses}
-                  useValidationFileds
-                  address={curAddress}
-                  onCancel={() => handleCloseAddressForm()}
-                  onSaveAddress={handleSaveAddress}
-                  userCustomerSetup={userCustomerSetup}
-                  isAllowUnaddressOrderType={isAllowUnaddressOrderType}
-                />
-              )
-            }
-
-            {
-              !addressList.loading &&
-              !actionStatus.loading &&
-              !orderState.loading &&
-              !addressList.error &&
-              addressList?.addresses?.length > 0 &&
-              typeof orderState.options?.address === 'object' &&
-              !addressOpen &&
-              user?.id === orderState?.options?.user_id &&
-              ((!addressOpen && isPopover) || isModal) && (
-                <AddressListUl id='list'>
-                  <AddressTitleContainer style={{ display: 'flex' }}>
-                    <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
-                    {isAllowUnaddressOrderType && (
-                      <>
-                        <p>{' '}{t('OR', 'or')}{' '}</p>
-                        <WithoutAddressText onClick={() => events.emit('go_to_page', { page: 'search' })}>{t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')}</WithoutAddressText>
-                      </>
-                    )}
-                  </AddressTitleContainer>
-                  {uniqueAddressesList.map(address => (
-                    <AddressItem key={address?.id}>
-                      <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
-                        <span className='radio'>
-                          {checkAddress(address) ? <RiRadioButtonFill className='address-checked' /> : <IosRadioButtonOff />}
-                        </span>
-                        <span className={checkAddress(address) ? 'selected-tag tag' : 'tag'}>
-                          {address?.tag === 'home' && <House />}
-                          {address?.tag === 'office' && <Building />}
-                          {address?.tag === 'favorite' && <Heart />}
-                          {address?.tag === 'other' && <PlusLg />}
-                        </span>
-                        <div className='address'>
-                          <span>{address.address}</span>
-                          <span>{address.internal_number} {address.zipcode}</span>
-                        </div>
-                        {(!address?.location?.lat || !address?.location?.lng) && (
-                          <AddressBookMarkContainer>
-                            <AddressBookMark>
-                              <img
-                                src={theme?.images?.general?.bookmark}
-                                width={20}
-                                height={20}
-                              />
-                            </AddressBookMark>
-                            <AddressHoverInfo className='hover-info'>
-                              <p>{t('PLEASE_VERIFY_CUSTOMER_ADDRESS', 'Please verify the address with the customer.')}</p>
-                            </AddressHoverInfo>
-                          </AddressBookMarkContainer>
-                        )}
-                      </div>
-                      <AddressItemActions className='form'>
-                        <a className={actionStatus.loading || isOpenUserData ? 'disabled' : ''} onClick={() => openAddress(address)}>
-                          <Pencil />
-                        </a>
-                        <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
-                          <Trash />
-                        </a>
-                      </AddressItemActions>
-                    </AddressItem>
-                  ))}
-                  {isEnableContinueButton && uniqueAddressesList.map(address => address.default && (
-                    <ContinueButton key={address.id}>
-                      <Button color='primary' onClick={() => handleSetAddress(address)}>
-                        {t('CONTINUE_WITH', 'Continue with')}: {address.address}
-                      </Button>
-                    </ContinueButton>
-                  ))}
-                </AddressListUl>
-              )
-            }
-            {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
-              addressList.error.length > 0 && (
-                <NotFoundSource
-                  content={addressList.error[0]?.message || addressList.error[0]}
-                />
-              )
-            )}
-
-            {!(addressList.loading || actionStatus.loading || orderState.loading) && (typeof orderState.options?.address !== 'object') && !addressList.error && (
-              <NotFoundSource
-                content={t('NETWORK_ERROR', 'Network error, please reload the page')}
-              />
-            )}
-            {!isPopover && addressOpen && (
-              <AddressFormContainer>
-                <AddressForm
-                  userId={userId}
-                  addressesList={addressList?.addresses}
-                  useValidationFileds
-                  address={curAddress}
-                  onCancel={() => handleCloseAddressForm()}
-                  onSaveAddress={handleSaveAddress}
-                  userCustomerSetup={userCustomerSetup}
-                  notUseCustomerInfo={notUseCustomerInfo}
-                  franchiseId={franchiseId}
-                  addFormRestrictions={addFormRestrictions}
-                  isAllowUnaddressOrderType={isAllowUnaddressOrderType}
-                />
-              </AddressFormContainer>
-            )}
-          </List>
-          {addressOpen && !notUseCustomerInfo && (
-            <AddressFormContainer
-              width='50%'
-              addFormRestrictions={addFormRestrictions}
-            >
-              <TitleFormContainer>
-                {!addFormRestrictions && (
-                  <CloseIcon>
-                    <MdClose onClick={() => handleCloseAddressForm()} />
-                  </CloseIcon>
-                )}
-                <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
-              </TitleFormContainer>
-            </AddressFormContainer>
-          )}
-        </AddressHalfContainer>
-
-        {(addressList.loading || actionStatus.loading || orderState.loading || (user?.id !== orderState?.options?.user_id)) && !isProductForm && !addressOpen && (
-          <AddressListUl>
-            <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
-          </AddressListUl>
-        )}
-
-        {onCancel && onAccept && typeof orderState.options?.address === 'object' && !notUseCustomerInfo && (
-          <FormActions>
-            <Button
-              outline
-              type='button'
-              disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
-              onClick={() => onCancel()}
-              hoverColor='#CCC'
-            >
-              {t('CANCEL', 'Cancel')}
-            </Button>
-            <Button
-              disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
-              id='second-btn'
-              color='primary'
-              onClick={() => onAccept()}
-            >
-              {t('ACCEPT', 'Accept')}
-            </Button>
-          </FormActions>
-        )}
-
-        {
-          !isPopover && (
-            <Modal
-              title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
-              open={isPopover}
-              onClose={() => handleCloseAddressForm()}
-            >
+    <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
+      <AddressHalfContainer>
+        <List
+          halfWidth={addressOpen}
+          isOpenUserData={isOpenUserData}
+          isHeader={isHeader}
+          notUseCustomerInfo={notUseCustomerInfo}
+          addFormRestrictions={addFormRestrictions}
+        >
+          {
+            !addFormRestrictions && !addressOpen && !isOpenUserData && (
+              <Button
+                className='add'
+                outline
+                color={addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
+                onClick={() => openAddress({})}
+                disabled={orderState?.loading || actionStatus.loading}
+                hoverColor='#CCC'
+              >
+                {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
+              </Button>
+            )
+          }
+          {
+            isPopover && addressOpen && (
               <AddressForm
                 userId={userId}
                 addressesList={addressList?.addresses}
+                showSpreadForm={showSpreadForm}
+                addressSpreadForm={addressSpreadForm}
+                setAddressSpreadForm={setAddressSpreadForm}
+                editSpreadAddress={editSpreadAddress}
+                setEditSpreadAddress={setEditSpreadAddress}
                 useValidationFileds
                 address={curAddress}
                 onCancel={() => handleCloseAddressForm()}
@@ -436,27 +273,219 @@ const AddressListUI = (props) => {
                 userCustomerSetup={userCustomerSetup}
                 isAllowUnaddressOrderType={isAllowUnaddressOrderType}
               />
-            </Modal>
-          )
-        }
-        <Confirm
-          title={t('SEARCH', 'Search')}
-          content={confirm.content}
-          acceptText={t('ACCEPT', 'Accept')}
-          open={confirm.open}
-          onClose={() => setConfirm({ ...confirm, open: false })}
-          onCancel={() => setConfirm({ ...confirm, open: false })}
-          onAccept={confirm.handleOnAccept}
-          closeOnBackdrop={false}
-        />
-      </AddressListContainer>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
-    </>
+            )
+          }
+
+          {
+            !addressList.loading &&
+            !actionStatus.loading &&
+            !orderState.loading &&
+            !addressList.error &&
+            addressList?.addresses?.length > 0 &&
+            typeof orderState.options?.address === 'object' &&
+            !addressOpen &&
+            user?.id === orderState?.options?.user_id &&
+            ((!addressOpen && isPopover) || isModal) && (
+              <AddressListUl id='list'>
+                <AddressTitleContainer style={{ display: 'flex' }}>
+                  <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
+                  {isAllowUnaddressOrderType && (
+                    <>
+                      <p>{' '}{t('OR', 'or')}{' '}</p>
+                      <WithoutAddressText onClick={() => events.emit('go_to_page', { page: 'search' })}>{t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')}</WithoutAddressText>
+                    </>
+                  )}
+                </AddressTitleContainer>
+                {uniqueAddressesList.map(address => (
+                  <AddressItem key={address?.id}>
+                    <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
+                      <span className='radio'>
+                        {checkAddress(address) ? <RiRadioButtonFill className='address-checked' /> : <IosRadioButtonOff />}
+                      </span>
+                      <span className={checkAddress(address) ? 'selected-tag tag' : 'tag'}>
+                        {address?.tag === 'home' && <House />}
+                        {address?.tag === 'office' && <Building />}
+                        {address?.tag === 'favorite' && <Heart />}
+                        {address?.tag === 'other' && <PlusLg />}
+                      </span>
+                      <div className='address'>
+                        <span>{address.address}</span>
+                        <span>{address.internal_number} {address.zipcode}</span>
+                      </div>
+                      {(!address?.location?.lat || !address?.location?.lng) && (
+                        <AddressBookMarkContainer>
+                          <AddressBookMark>
+                            <img
+                              src={theme?.images?.general?.bookmark}
+                              width={20}
+                              height={20}
+                            />
+                          </AddressBookMark>
+                          <AddressHoverInfo className='hover-info'>
+                            <p>{t('PLEASE_VERIFY_CUSTOMER_ADDRESS', 'Please verify the address with the customer.')}</p>
+                          </AddressHoverInfo>
+                        </AddressBookMarkContainer>
+                      )}
+                    </div>
+                    <AddressItemActions className='form'>
+                      <a className={actionStatus.loading || isOpenUserData ? 'disabled' : ''} onClick={() => openAddress(address)}>
+                        <Pencil />
+                      </a>
+                      <a className={actionStatus.loading || address.default ? 'disabled' : ''} onClick={() => handleDeleteClick(address)}>
+                        <Trash />
+                      </a>
+                    </AddressItemActions>
+                  </AddressItem>
+                ))}
+                {isEnableContinueButton && uniqueAddressesList.map(address => address.default && (
+                  <ContinueButton key={address.id}>
+                    <Button color='primary' onClick={() => handleSetAddress(address)}>
+                      {t('CONTINUE_WITH', 'Continue with')}: {address.address}
+                    </Button>
+                  </ContinueButton>
+                ))}
+              </AddressListUl>
+            )
+          }
+          {!(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && (
+            addressList.error.length > 0 && (
+              <NotFoundSource
+                content={addressList.error[0]?.message || addressList.error[0]}
+              />
+            )
+          )}
+
+          {!(addressList.loading || actionStatus.loading || orderState.loading) && (typeof orderState.options?.address !== 'object') && !addressList.error && (
+            <NotFoundSource
+              content={t('NETWORK_ERROR', 'Network error, please reload the page')}
+            />
+          )}
+          {!isPopover && addressOpen && (
+            <AddressFormContainer>
+              <AddressForm
+                userId={userId}
+                addressesList={addressList?.addresses}
+                showSpreadForm={showSpreadForm}
+                addressSpreadForm={addressSpreadForm}
+                setAddressSpreadForm={setAddressSpreadForm}
+                editSpreadAddress={editSpreadAddress}
+                setEditSpreadAddress={setEditSpreadAddress}
+                useValidationFileds
+                address={curAddress}
+                onCancel={() => handleCloseAddressForm()}
+                onSaveAddress={handleSaveAddress}
+                userCustomerSetup={userCustomerSetup}
+                notUseCustomerInfo={notUseCustomerInfo}
+                franchiseId={franchiseId}
+                addFormRestrictions={addFormRestrictions}
+                isAllowUnaddressOrderType={isAllowUnaddressOrderType}
+              />
+            </AddressFormContainer>
+          )}
+        </List>
+        {addressOpen && !notUseCustomerInfo && (
+          <AddressFormContainer
+            width='50%'
+            addFormRestrictions={addFormRestrictions}
+          >
+            <TitleFormContainer>
+              {!addFormRestrictions && (
+                <CloseIcon>
+                  <MdClose onClick={() => handleCloseAddressForm()} />
+                </CloseIcon>
+              )}
+              <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
+            </TitleFormContainer>
+            {showSpreadForm && (
+              <SpreadForm
+                address={curAddress?.address && {
+                  route: curAddress?.route,
+                  street_number: curAddress?.street_number,
+                  neighborhood: curAddress?.neighborhood,
+                  city: curAddress?.city,
+                  state: curAddress?.state,
+                  country_code: curAddress?.country_code,
+                  country: curAddress?.country,
+                  address: curAddress?.address,
+                  locality: curAddress?.locality,
+                  location: curAddress?.location,
+                  zipcode: curAddress?.zipcode
+                }}
+                countryAutocomplete={countryAutocomplete}
+                editSpreadAddress={editSpreadAddress}
+                setEditSpreadAddress={setEditSpreadAddress}
+                onCancel={() => handleCloseAddressForm()}
+                onChangeAddress={setAddressSpreadForm}
+              />
+            )}
+          </AddressFormContainer>
+        )}
+      </AddressHalfContainer>
+
+      {(addressList.loading || actionStatus.loading || orderState.loading || (user?.id !== orderState?.options?.user_id)) && !isProductForm && !addressOpen && (
+        <AddressListUl>
+          <Skeleton height={50} count={3} style={{ marginBottom: '10px' }} />
+        </AddressListUl>
+      )}
+
+      {onCancel && onAccept && typeof orderState.options?.address === 'object' && !notUseCustomerInfo && (
+        <FormActions>
+          <Button
+            outline
+            type='button'
+            disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
+            onClick={() => onCancel()}
+            hoverColor='#CCC'
+          >
+            {t('CANCEL', 'Cancel')}
+          </Button>
+          <Button
+            disabled={(addressList.loading || actionStatus.loading || orderState.loading)}
+            id='second-btn'
+            color='primary'
+            onClick={() => onAccept()}
+          >
+            {t('ACCEPT', 'Accept')}
+          </Button>
+        </FormActions>
+      )}
+
+      {
+        !isPopover && (
+          <Modal
+            title={t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+            open={isPopover}
+            onClose={() => handleCloseAddressForm()}
+          >
+            <AddressForm
+              userId={userId}
+              addressesList={addressList?.addresses}
+              showSpreadForm={showSpreadForm}
+              addressSpreadForm={addressSpreadForm}
+              setAddressSpreadForm={setAddressSpreadForm}
+              editSpreadAddress={editSpreadAddress}
+              setEditSpreadAddress={setEditSpreadAddress}
+              useValidationFileds
+              address={curAddress}
+              onCancel={() => handleCloseAddressForm()}
+              onSaveAddress={handleSaveAddress}
+              userCustomerSetup={userCustomerSetup}
+              isAllowUnaddressOrderType={isAllowUnaddressOrderType}
+            />
+          </Modal>
+        )
+      }
+      <Confirm
+        title={t('SEARCH', 'Search')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
+    </AddressListContainer>
   )
 }
 
