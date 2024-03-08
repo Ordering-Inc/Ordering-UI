@@ -101,6 +101,10 @@ var AddressListUI = function AddressListUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     addressSpreadForm = _useState8[0],
     setAddressSpreadForm = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    editSpreadAddress = _useState10[0],
+    setEditSpreadAddress = _useState10[1];
   var addFormRestrictions = (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text) && ((_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error);
   var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
     return i === self.findIndex(function (obj) {
@@ -296,6 +300,9 @@ var AddressListUI = function AddressListUI(props) {
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     showSpreadForm: showSpreadForm,
     addressSpreadForm: addressSpreadForm,
+    setAddressSpreadForm: setAddressSpreadForm,
+    editSpreadAddress: editSpreadAddress,
+    setEditSpreadAddress: setEditSpreadAddress,
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
@@ -372,6 +379,9 @@ var AddressListUI = function AddressListUI(props) {
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     showSpreadForm: showSpreadForm,
     addressSpreadForm: addressSpreadForm,
+    setAddressSpreadForm: setAddressSpreadForm,
+    editSpreadAddress: editSpreadAddress,
+    setEditSpreadAddress: setEditSpreadAddress,
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
@@ -406,6 +416,8 @@ var AddressListUI = function AddressListUI(props) {
       location: curAddress === null || curAddress === void 0 ? void 0 : curAddress.location,
       zipcode: curAddress === null || curAddress === void 0 ? void 0 : curAddress.zipcode
     },
+    editSpreadAddress: editSpreadAddress,
+    setEditSpreadAddress: setEditSpreadAddress,
     onCancel: function onCancel() {
       return handleCloseAddressForm();
     },
@@ -442,6 +454,9 @@ var AddressListUI = function AddressListUI(props) {
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     showSpreadForm: showSpreadForm,
     addressSpreadForm: addressSpreadForm,
+    setAddressSpreadForm: setAddressSpreadForm,
+    editSpreadAddress: editSpreadAddress,
+    setEditSpreadAddress: setEditSpreadAddress,
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {

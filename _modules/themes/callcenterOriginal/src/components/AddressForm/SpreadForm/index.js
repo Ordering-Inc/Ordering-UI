@@ -58,11 +58,25 @@ var inputNames = [{
   enabled: false,
   required: false
 }];
+var emptyFields = {
+  route: '',
+  street_number: '',
+  neighborhood: '',
+  city: '',
+  state: '',
+  country_code: '',
+  country: '',
+  address: '',
+  locality: '',
+  location: '',
+  zipcode: ''
+};
 var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
-  var _configs$google_maps_, _formState$formattedA, _formState$changes4, _formState$changes5, _formState$changes6;
+  var _configs$google_maps_, _formState$changes4, _formState$changes5, _formState$changes6;
   var address = props.address,
-    onChangeAddress = props.onChangeAddress,
-    onCancel = props.onCancel;
+    editSpreadAddress = props.editSpreadAddress,
+    setEditSpreadAddress = props.setEditSpreadAddress,
+    onChangeAddress = props.onChangeAddress;
   var theme = (0, _styledComponents.useTheme)();
   var _useApi = (0, _orderingComponents.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
@@ -94,6 +108,7 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
     setFormState(_objectSpread(_objectSpread({}, formState), {}, {
       added: true
     }));
+    editSpreadAddress && setEditSpreadAddress(!editSpreadAddress);
   };
   var handleChangeInput = function handleChangeInput(_ref) {
     var name = _ref.name,
@@ -117,7 +132,7 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
     return (_list$attr = list[attr]) !== null && _list$attr !== void 0 ? _list$attr : attr;
   };
   var handlePostAddress = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(addressLines) {
       var _body, req, _yield$req$json, error, result, _formState, _result$result, _result$result2, _result$result3, _result$result4, _result$result5, _result$result6, addressComponents;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -131,7 +146,7 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
               body: {
                 address: {
                   regionCode: 'MX',
-                  addressLines: inputNames.filter(function (i) {
+                  addressLines: addressLines !== null && addressLines !== void 0 ? addressLines : inputNames.filter(function (i) {
                     return (i === null || i === void 0 ? void 0 : i.enabled) !== false;
                   }).sort(function (a, b) {
                     return a.id - b.id;
@@ -207,15 +222,20 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
         }
       }, _callee, null, [[0, 17]]);
     }));
-    return function handlePostAddress() {
+    return function handlePostAddress(_x) {
       return _ref2.apply(this, arguments);
     };
   }();
   (0, _react.useEffect)(function () {
     if (address) {
-      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-        changes: _objectSpread(_objectSpread({}, formState.changes), address)
-      }));
+      if (!(address !== null && address !== void 0 && address.location)) {
+        var _address$address;
+        handlePostAddress(address === null || address === void 0 || (_address$address = address.address) === null || _address$address === void 0 ? void 0 : _address$address.split(','));
+      } else {
+        setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+          changes: _objectSpread(_objectSpread({}, formState.changes), address)
+        }));
+      }
     }
   }, [address]);
   (0, _react.useEffect)(function () {
@@ -226,12 +246,17 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
       }));
     }
   }, [JSON.stringify(formState.error)]);
+  (0, _react.useEffect)(function () {
+    if (editSpreadAddress) {
+      onChangeAddress(emptyFields);
+    }
+  }, [editSpreadAddress]);
   return /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     autoComplete: "off",
     onKeyDown: function onKeyDown(e) {
       e.key === 'Enter' && e.preventDefault();
     }
-  }, (!!(formState !== null && formState !== void 0 && formState.formattedAddress) || (address === null || address === void 0 ? void 0 : address.address)) && /*#__PURE__*/_react.default.createElement(_styles.FormattedAddress, null, (_formState$formattedA = formState === null || formState === void 0 ? void 0 : formState.formattedAddress) !== null && _formState$formattedA !== void 0 ? _formState$formattedA : address === null || address === void 0 ? void 0 : address.address), inputNames.map(function (field) {
+  }, (!formState.added || editSpreadAddress) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, inputNames.map(function (field) {
     var _ref3, _formState$changes$fi, _formState$changes2;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
@@ -252,7 +277,7 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
       autoComplete: "new-field",
       maxLength: 70
     }));
-  }), !formState.added && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     id: "submit-btn",
     type: "button",
     disabled: formState.loading || !inputNames.filter(function (i) {
@@ -263,5 +288,5 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
     }),
     color: "primary",
     onClick: (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.location ? handleAddAddress : handlePostAddress
-  }, !formState.loading ? address !== null && address !== void 0 && address.address ? (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.location ? t('UPDATE', 'Update') : t('VERIFY_ADDRESS', 'Verify address') : (_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.location ? t('CONFIRM_ADDRESS', 'Confirm address') : t('VERIFY_ADDRESS', 'Verify address') : t('LOADING', 'Loading'))));
+  }, !formState.loading ? address !== null && address !== void 0 && address.address ? (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.location ? t('UPDATE', 'Update') : t('VERIFY_ADDRESS', 'Verify address') : (_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.location ? t('CONFIRM_ADDRESS', 'Confirm address') : t('VERIFY_ADDRESS', 'Verify address') : t('LOADING', 'Loading')))));
 };
