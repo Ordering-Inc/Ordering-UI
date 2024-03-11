@@ -257,6 +257,7 @@ const AddressFormUI = (props) => {
   const handleChangeAddress = async (address) => {
     if (address?.location) {
       const result = await getBusinessDeliveryZones(address?.location)
+      setLocationChange(address?.location)
       if (result?.length === 0) {
         showToast(ToastType.Error, t('NO_NEAR_DELIVERY_ZONES', 'No near delivery zones'), 3000)
       }
