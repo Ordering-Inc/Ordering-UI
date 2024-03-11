@@ -335,22 +335,23 @@ var AddressFormUI = function AddressFormUI(props) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             if (!(address !== null && address !== void 0 && address.location)) {
-              _context2.next = 5;
+              _context2.next = 6;
               break;
             }
             _context2.next = 3;
             return getBusinessDeliveryZones(address === null || address === void 0 ? void 0 : address.location);
           case 3:
             result = _context2.sent;
+            setLocationChange(address === null || address === void 0 ? void 0 : address.location);
             if ((result === null || result === void 0 ? void 0 : result.length) === 0) {
               showToast(_orderingComponents.ToastType.Error, t('NO_NEAR_DELIVERY_ZONES', 'No near delivery zones'), 3000);
             }
-          case 5:
+          case 6:
             setSelectedFromAutocomplete(true);
             updateChanges(_objectSpread(_objectSpread({}, address), {}, {
               address: googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value
             }));
-          case 7:
+          case 8:
           case "end":
             return _context2.stop();
         }
