@@ -610,7 +610,7 @@ const AddressFormUI = (props) => {
                       <>
                         {
                           isEditing || (!auth && orderState.options?.address?.address)
-                            ? t('UPDATE', 'Update')
+                            ? t('SAVE_AND_CONTINUE', 'Save and continue')
                             : t('ADD_ADDRESS', 'Add address')
                         }
                       </>
