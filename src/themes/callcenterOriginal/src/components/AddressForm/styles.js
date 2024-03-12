@@ -203,7 +203,7 @@ export const WrapperMap = styled.div`
   position: absolute;
   bottom: 2%;
   right: 0;
-  padding-top: 30px;
+  padding-top: ${props => props.showMap ? '30px' : 0};
   height: ${({ notUseCustomerInfo }) =>
     notUseCustomerInfo
       ? '370px'
