@@ -82,7 +82,7 @@ var PriceWrapper = _styledComponents.default.div(_templateObject14 || (_template
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      margin-right: 5px;\n      margin-left: 0;\n    "])));
 });
 exports.PriceWrapper = PriceWrapper;
-var QuantityContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n  span {\n    position: relative;\n    top: 2px;\n    font-size: 12px;\n  }\n"])), function (_ref8) {
+var QuantityContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  position: absolute;\n  left: 100%;\n  bottom: 100%;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  border-radius: 50%;\n  transform: translate(-50%, 50%);\n  span {\n    position: relative;\n    /* top: 2px; */\n    font-size: 12px;\n  }\n"])), function (_ref8) {
   var theme = _ref8.theme;
   return theme.colors.primary;
 }, function (_ref9) {

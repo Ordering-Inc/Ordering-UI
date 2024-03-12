@@ -151,6 +151,7 @@ var CartPopover = function CartPopover(props) {
     isHideCartText: !showCartText
   }, isCartButtonPF ? /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     color: "primary",
+    className: "no-shadow",
     style: {
       height: '50px',
       display: location.pathname.includes('/checkout/') ? 'none' : 'flex'

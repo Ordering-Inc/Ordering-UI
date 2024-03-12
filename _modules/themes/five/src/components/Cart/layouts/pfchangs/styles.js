@@ -63,7 +63,7 @@ var OrderBill = _styledComponents.default.div(_templateObject13 || (_templateObj
   return theme.colors.primary;
 });
 exports.OrderBill = OrderBill;
-var CouponContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px;\n  padding: 0 20px;\n  box-sizing: border-box;\n  input {\n    flex: 1;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n    ", "\n  }\n\n  input, button {\n    border-radius: 0;\n    border: 0;\n    height: 44px;\n    box-sizing: border-box;\n  }\n\n"])), function (_ref5) {
+var CouponContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 0px;\n  padding: 0 20px;\n  box-sizing: border-box;\n  input {\n    flex: 1;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n    ", "\n  }\n\n  input, button {\n    border-radius: 10px !important;\n    border: 0;\n    height: 44px;\n    box-sizing: border-box;\n  }\n\n"])), function (_ref5) {
   var _theme$colors2;
   var theme = _ref5.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.tertiary) && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      border: 1px solid rgb(230,230,230) !important;\n    "])));
@@ -73,7 +73,7 @@ var IconContainer = _styledComponents.default.div(_templateObject17 || (_templat
 exports.IconContainer = IconContainer;
 var Spinner = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0;\n  right: 0;\n  transform: translate(-20%, 15%);\n"])));
 exports.Spinner = Spinner;
-var CommentSection = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  h2 {\n    font-size: 16px;\n    color: ", ";\n  }\n  textarea {\n    width: 100%;\n    height: 76px;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n  }\n"])), function (_ref6) {
+var CommentSection = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  h2 {\n    font-size: 16px;\n    color: ", ";\n  }\n  textarea {\n    border-radius: 10px;\n    width: 100%;\n    height: 76px;\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #aaa;\n    }\n    &:-ms-input-placeholder {\n      color: #aaa;\n    }\n  }\n"])), function (_ref6) {
   var _theme$colors3;
   var theme = _ref6.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#fff';
