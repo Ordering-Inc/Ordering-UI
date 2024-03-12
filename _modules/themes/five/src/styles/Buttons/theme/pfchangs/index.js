@@ -43,9 +43,7 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
   });
 }, function (_ref5) {
   var color = _ref5.color;
-  return color === 'primary' && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: #FFF;\n    border-color: ", ";\n    &:active {\n      background: ", ";\n    }\n    ", "\n  "])), function (props) {
-    return props.theme.colors.primary;
-  }, function (props) {
+  return color === 'primary' && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: #FFF;\n    border-color: transparent;\n    &:active {\n      background: ", ";\n    }\n    ", "\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
     return (0, _polished.darken)(0.07, props.theme.colors.primary);

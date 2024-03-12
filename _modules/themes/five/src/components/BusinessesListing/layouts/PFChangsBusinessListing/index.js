@@ -8,6 +8,8 @@ exports.PFChangsBusinesListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _styledComponents = require("styled-components");
 var _RiArrowDropDownLine = _interopRequireDefault(require("@meronex/icons/ri/RiArrowDropDownLine"));
+var _HiOutlineLocationMarker = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineLocationMarker"));
+var _BiAlarm = _interopRequireDefault(require("@meronex/icons/bi/BiAlarm"));
 var _orderingComponents = require("ordering-components");
 var _styles = require("./styles");
 var _pfchangs = require("../../../../styles/Buttons/theme/pfchangs");
@@ -286,16 +288,24 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       onClick: function onClick() {
         return mapActivated && setBusinessClikedId(business === null || business === void 0 ? void 0 : business.id);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles.LeftContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement(_styles.BusinessAddress, {
-      onClick: function onClick() {
-        return handleGotoMaps(business);
-      }
-    }, business === null || business === void 0 ? void 0 : business.address), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.cellphone), getScheduleOpen(business) && /*#__PURE__*/_react.default.createElement("p", null, t('OPEN_UNTIL', 'Open until'), " ", getScheduleOpen(business))), /*#__PURE__*/_react.default.createElement(_styles.RightContainer, null, showGoToStore && /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.LeftContainer, null, /*#__PURE__*/_react.default.createElement("div", {
+      className: "title-wrapper"
+    }, /*#__PURE__*/_react.default.createElement("h2", null, business === null || business === void 0 ? void 0 : business.name), showGoToStore && /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
       color: "primary",
       onClick: function onClick() {
         return onBusinessClick(business);
       }
-    }, t('ORDER_NOW', 'Order now'))));
+    }, t('ORDER_NOW', 'Order now'))), /*#__PURE__*/_react.default.createElement(_styles.BusinessAddress, {
+      onClick: function onClick() {
+        return handleGotoMaps(business);
+      }
+    }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), business === null || business === void 0 ? void 0 : business.address), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.cellphone), getScheduleOpen(business) && /*#__PURE__*/_react.default.createElement("div", {
+      className: "time-wrapper"
+    }, /*#__PURE__*/_react.default.createElement(_BiAlarm.default, {
+      style: {
+        color: theme.colors.primary
+      }
+    }), /*#__PURE__*/_react.default.createElement("p", null, t('OPEN_UNTIL', 'Open until'), " ", getScheduleOpen(business)))));
   };
   var sortBusinessFunction = function sortBusinessFunction(businessA, businessB) {
     var businesses = businessesInsideZone === null || businessesInsideZone === void 0 ? void 0 : businessesInsideZone.businesses;
