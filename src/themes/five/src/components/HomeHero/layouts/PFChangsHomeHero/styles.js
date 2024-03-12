@@ -40,6 +40,7 @@ export const WrapInput = styled.div`
   padding: 10px 5px;
   background: #FFFFFF;
   border: 1px solid #DEE2E6;
+  border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   align-items: center;
@@ -294,18 +295,20 @@ export const ActiveMapContainer = styled.span`
     height: auto;
     font-size: 16px;
     font-weight: bold;
+    border-radius: 10px;
+    border-color: transparent;
   }
   svg {
     margin-right: 20px;
     width: 30px;
     height: 30px;
   }
-  p{
+  p {
     margin-top: 21px;
   }
 
   @media (min-width: 1024px){
-    button{ 
+    button {
       width: 40%;
       font-size: 18px;
     }
@@ -325,5 +328,6 @@ export const StartOrder = styled.div`
   margin-top: 10px;
   button {
     width: 100%;
+    border-color: transparent;
   }
 `

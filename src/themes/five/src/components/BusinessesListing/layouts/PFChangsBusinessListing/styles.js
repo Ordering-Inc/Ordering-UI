@@ -40,14 +40,15 @@ export const PreviousOrders = styled.div`
 export const SingleBusinessContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid rgb(230, 230, 230);
+  border: 1px solid rgb(197 197 197);
   background: ${({ theme }) => theme.colors.secundaryContrast};
   margin: 0 0 20px;
-  padding: 20px;
+  padding: 15px;
   width: 100%;
   box-sizing: border-box;
   align-items: center;
-  height: 220px;
+  max-height: 220px;
+  min-height: 190px;
   justify-content: space-between;
   ${({ isSelected, theme }) => isSelected && css`
     border: 1px solid ${theme?.colors?.gold};
@@ -62,30 +63,57 @@ export const SingleBusinessContainer = styled.div`
 export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0;
+  margin: 0 !important;
   width: 100%;
   color: ${({ theme }) => theme?.colors?.tertiary || '#FFF'};
-  padding-right: 10px;
+  /* padding-right: 10px; */
   overflow: hidden;
   text-align: center;
   align-items: center;
-  a{
+  a {
+    overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
   }
   p {
     margin: 0;
     overflow: hidden;
   }
-  h2{
-    margin: 0 0 10px 0;
+  h2 {
+    margin: 0;
     overflow: hidden;
     font-size: 18px;
     font-family: ${({ theme }) => theme?.fonts?.special?.name};
   }
+  .title-wrapper {
+    margin: 0 0 10px 0;
+    width: 100%;
+    height: 38px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    .button {
+      min-width: 150px;
+    }
+  }
+  .time-wrapper {
+    display: flex;
+
+    svg {
+      color: ${props => props.theme.colors.primary};
+      min-width: 22px;
+      padding-top: 3px;
+
+      ${props => props.theme?.rtl ? css`
+        margin-left: 5px;
+      ` : css`
+        margin-right: 5px;
+      `}
+    }
+  }
   @media (min-width: 768px){
-    width: 70%;
+    /* width: 70%; */
     text-align: start;
     align-items: flex-start;
   }
@@ -176,5 +204,17 @@ export const BusinessAddress = styled.a`
   cursor: pointer;
   &:hover{
     text-decoration: underline;
+  }
+
+  svg {
+    color: ${props => props.theme.colors.primary};
+    min-width: 22px;
+    padding-top: 3px;
+
+    ${props => props.theme?.rtl ? css`
+      margin-left: 5px;
+    ` : css`
+      margin-right: 5px;
+    `}
   }
 `

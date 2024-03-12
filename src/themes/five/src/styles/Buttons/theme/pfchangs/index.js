@@ -54,7 +54,7 @@ export const Button = styled.button`
   ${({ color }) => color === 'primary' && css`
     background: ${props => props.theme.colors.primary};
     color: #FFF;
-    border-color: ${props => props.theme.colors.primary};
+    border-color: transparent;
     &:active {
       background: ${props => darken(0.07, props.theme.colors.primary)};
     }

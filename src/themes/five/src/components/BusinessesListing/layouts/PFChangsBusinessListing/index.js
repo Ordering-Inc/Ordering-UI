@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 import RiArrowDropDownLine from '@meronex/icons/ri/RiArrowDropDownLine'
+import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
+import BiAlarm from '@meronex/icons/bi/BiAlarm'
 import {
   useOrder,
   useLanguage,
@@ -227,21 +229,34 @@ const BusinessesListingUI = (props) => {
     return (
       <SingleBusinessContainer isSelected={businessClikedId === business?.id} onClick={() => mapActivated && setBusinessClikedId(business?.id)}>
         <LeftContainer>
-          <h2>{business?.name}</h2>
-          <BusinessAddress onClick={() => handleGotoMaps(business)}>{business?.address}</BusinessAddress>
+          <div className='title-wrapper'>
+            <h2>{business?.name}</h2>
+            {showGoToStore && (
+              <Button color='primary' onClick={() => onBusinessClick(business)}>
+                {t('ORDER_NOW', 'Order now')}
+              </Button>
+            )}
+          </div>
+          <BusinessAddress onClick={() => handleGotoMaps(business)}>
+            <HiOutlineLocationMarker />
+            {business?.address}
+          </BusinessAddress>
           <p>{business?.city?.name}</p>
           <p>{business?.cellphone}</p>
           {getScheduleOpen(business) && (
-            <p>{t('OPEN_UNTIL', 'Open until')} {getScheduleOpen(business)}</p>
+            <div className='time-wrapper'>
+              <BiAlarm style={{ color: theme.colors.primary }} />
+              <p>{t('OPEN_UNTIL', 'Open until')} {getScheduleOpen(business)}</p>
+            </div>
           )}
         </LeftContainer>
-        <RightContainer>
+        {/* <RightContainer>
           {showGoToStore && (
             <Button color='primary' onClick={() => onBusinessClick(business)}>
               {t('ORDER_NOW', 'Order now')}
             </Button>
           )}
-        </RightContainer>
+        </RightContainer> */}
       </SingleBusinessContainer>
     )
   }
