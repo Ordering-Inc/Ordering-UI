@@ -330,28 +330,31 @@ var AddressFormUI = function AddressFormUI(props) {
   var handleChangeAddress = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(address) {
       var _googleInputRef$curre;
-      var result;
+      var updateFstValue,
+        result,
+        _args2 = arguments;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
+            updateFstValue = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : false;
             if (!(address !== null && address !== void 0 && address.location)) {
-              _context2.next = 6;
+              _context2.next = 7;
               break;
             }
-            _context2.next = 3;
+            _context2.next = 4;
             return getBusinessDeliveryZones(address === null || address === void 0 ? void 0 : address.location);
-          case 3:
+          case 4:
             result = _context2.sent;
             setLocationChange(address === null || address === void 0 ? void 0 : address.location);
             if ((result === null || result === void 0 ? void 0 : result.length) === 0) {
               showToast(_orderingComponents.ToastType.Error, t('NO_NEAR_DELIVERY_ZONES', 'No near delivery zones'), 3000);
             }
-          case 6:
+          case 7:
             setSelectedFromAutocomplete(true);
-            updateChanges(_objectSpread(_objectSpread({}, address), {}, {
+            updateChanges(updateFstValue ? address : _objectSpread(_objectSpread({}, address), {}, {
               address: googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value
             }));
-          case 8:
+          case 9:
           case "end":
             return _context2.stop();
         }
@@ -478,10 +481,7 @@ var AddressFormUI = function AddressFormUI(props) {
   }, [address]);
   (0, _react.useEffect)(function () {
     if (addressSpreadForm) {
-      updateChanges(addressSpreadForm);
-      if (addressSpreadForm !== null && addressSpreadForm !== void 0 && addressSpreadForm.location) {
-        setSelectedFromAutocomplete(true);
-      }
+      handleChangeAddress(addressSpreadForm, true);
     }
   }, [addressSpreadForm]);
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -538,6 +538,7 @@ var AddressFormUI = function AddressFormUI(props) {
       IconButton: _reactBootstrapIcons.GeoAlt,
       IconLoadingButton: _CgSearchLoading.default
     })), ((addressState === null || addressState === void 0 || (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 || (_formState$changes29 = formState.changes) === null || _formState$changes29 === void 0 ? void 0 : _formState$changes29.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
+      showMap: showMap || !showSpreadForm,
       notUseCustomerInfo: notUseCustomerInfo,
       addFormRestrictions: addFormRestrictions
     }, !showMap && /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, {

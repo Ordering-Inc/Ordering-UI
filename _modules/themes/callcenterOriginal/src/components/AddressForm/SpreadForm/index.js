@@ -72,8 +72,9 @@ var emptyFields = {
   zipcode: ''
 };
 var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
-  var _configs$google_maps_, _formState$changes5, _formState$changes6;
+  var _configs$google_maps_, _formState$changes6, _formState$changes7;
   var address = props.address,
+    countryAutocomplete = props.countryAutocomplete,
     editSpreadAddress = props.editSpreadAddress,
     setEditSpreadAddress = props.setEditSpreadAddress,
     onChangeAddress = props.onChangeAddress;
@@ -144,7 +145,7 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
               google_api_key: googleMapsApiKey,
               body: {
                 address: {
-                  regionCode: 'MX',
+                  regionCode: countryAutocomplete,
                   addressLines: addressLines !== null && addressLines !== void 0 ? addressLines : inputNames.filter(function (i) {
                     return (i === null || i === void 0 ? void 0 : i.enabled) !== false;
                   }).sort(function (a, b) {
@@ -207,7 +208,10 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
                   return item.name === 'locality';
                 })) === null || _addressComponents$fi3 === void 0 ? void 0 : _addressComponents$fi3.value) || null
               });
-              inputNames.map(function (_i) {
+              inputNames.concat({
+                id: 8,
+                name: 'country'
+              }).map(function (_i) {
                 return _i.name;
               }).forEach(function (field) {
                 var _addressComponents$fi4, _addressComponents$fi5, _formState$changes;
@@ -216,8 +220,7 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
                 })) === null || _addressComponents$fi5 === void 0 ? void 0 : _addressComponents$fi5.value) !== null && _addressComponents$fi4 !== void 0 ? _addressComponents$fi4 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes[field];
               });
               _formState.changes.locality = _formState.changes.city;
-              _formState.changes.country = 'México';
-              _formState.changes.country_code = 'MX';
+              _formState.changes.country_code = countryAutocomplete;
               _formState.changes.address = result === null || result === void 0 || (_result$result3 = result.result) === null || _result$result3 === void 0 || (_result$result3 = _result$result3.address) === null || _result$result3 === void 0 ? void 0 : _result$result3.formattedAddress;
               (result === null || result === void 0 || (_result$result4 = result.result) === null || _result$result4 === void 0 || (_result$result4 = _result$result4.geocode) === null || _result$result4 === void 0 ? void 0 : _result$result4.location) && (_formState.changes.location = {
                 lat: result === null || result === void 0 || (_result$result5 = result.result) === null || _result$result5 === void 0 || (_result$result5 = _result$result5.geocode) === null || _result$result5 === void 0 || (_result$result5 = _result$result5.location) === null || _result$result5 === void 0 ? void 0 : _result$result5.latitude,
@@ -247,8 +250,10 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
     };
   }();
   (0, _react.useEffect)(function () {
+    if (formState.loading) return;
     if (address) {
-      if (!(address !== null && address !== void 0 && address.location)) {
+      var _formState$changes2;
+      if (!(address !== null && address !== void 0 && address.location) && !((_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.location)) {
         var _address$address;
         handlePostAddress(address === null || address === void 0 || (_address$address = address.address) === null || _address$address === void 0 ? void 0 : _address$address.split(','));
       } else {
@@ -277,13 +282,13 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
       e.key === 'Enter' && e.preventDefault();
     }
   }, (!formState.added || editSpreadAddress) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, inputNames.map(function (field) {
-    var _ref3, _formState$changes$fi, _formState$changes2;
+    var _ref3, _formState$changes$fi, _formState$changes3;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
       className: field.name,
       placeholder: t("ADDRESS_".concat(field.name.toUpperCase()), (0, _utils.capitalize)(field.name.replace('_', ' '))),
-      value: (_ref3 = (_formState$changes$fi = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2[field.name]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : address === null || address === void 0 ? void 0 : address[field.name]) !== null && _ref3 !== void 0 ? _ref3 : field.name === 'country_code' ? 'MX' : '',
+      value: (_ref3 = (_formState$changes$fi = (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3[field.name]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : address === null || address === void 0 ? void 0 : address[field.name]) !== null && _ref3 !== void 0 ? _ref3 : field.name === 'country_code' ? countryAutocomplete : '',
       disabled: (field === null || field === void 0 ? void 0 : field.enabled) === false,
       style: _objectSpread({}, (field === null || field === void 0 ? void 0 : field.enabled) === false ? {
         background: theme.colors.disabled
@@ -303,13 +308,13 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
     disabled: formState.loading || !inputNames.filter(function (i) {
       return i.required;
     }).every(function (input) {
-      var _formState$changes3;
-      return (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3[input.name];
+      var _formState$changes4;
+      return (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4[input.name];
     }),
     color: "primary",
     onClick: function onClick() {
-      var _formState$changes4;
-      return (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.location ? handleAddAddress() : handlePostAddress();
+      var _formState$changes5;
+      return (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.location ? handleAddAddress() : handlePostAddress();
     }
-  }, !formState.loading ? address !== null && address !== void 0 && address.address ? (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.location ? t('CONTINUE', 'Continue') : t('VERIFY_ADDRESS', 'Verify address') : (_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.location ? t('CONFIRM_ADDRESS', 'Confirm address') : t('VERIFY_ADDRESS', 'Verify address') : t('LOADING', 'Loading')))));
+  }, !formState.loading ? address !== null && address !== void 0 && address.address ? (_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.location ? t('CONTINUE', 'Continue') : t('VERIFY_ADDRESS', 'Verify address') : (_formState$changes7 = formState.changes) !== null && _formState$changes7 !== void 0 && _formState$changes7.location ? t('CONFIRM_ADDRESS', 'Confirm address') : t('VERIFY_ADDRESS', 'Verify address') : t('LOADING', 'Loading')))));
 };

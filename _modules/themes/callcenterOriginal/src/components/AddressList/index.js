@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _configs$country_auto, _configs$addresses_fo, _addressList$addresse4, _addressList$addresse5, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12, _confirm$handleOnCanc;
+  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _configs$country_auto, _configs$country_auto2, _configs$addresses_fo, _addressList$addresse4, _addressList$addresse5, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12, _confirm$handleOnCanc;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -115,9 +115,8 @@ var AddressListUI = function AddressListUI(props) {
     return Number(value);
   })) || [];
   var isAllowUnaddressOrderType = unaddressedTypes.includes(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) && (user === null || user === void 0 ? void 0 : user.id) === (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.user_id);
-  var countryAutocomplete = configs === null || configs === void 0 || (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value;
-  var addressFormtype = configs === null || configs === void 0 || (_configs$addresses_fo = configs.addresses_form_type) === null || _configs$addresses_fo === void 0 ? void 0 : _configs$addresses_fo.value;
-  var showSpreadForm = (countryAutocomplete === null || countryAutocomplete === void 0 ? void 0 : countryAutocomplete.toUpperCase()) === 'MX' && addressFormtype === 'country';
+  var countryAutocomplete = (_configs$country_auto = configs === null || configs === void 0 || (_configs$country_auto2 = configs.country_autocomplete) === null || _configs$country_auto2 === void 0 || (_configs$country_auto2 = _configs$country_auto2.value) === null || _configs$country_auto2 === void 0 ? void 0 : _configs$country_auto2.toUpperCase()) !== null && _configs$country_auto !== void 0 ? _configs$country_auto : '*';
+  var showSpreadForm = (configs === null || configs === void 0 || (_configs$addresses_fo = configs.addresses_form_type) === null || _configs$addresses_fo === void 0 ? void 0 : _configs$addresses_fo.value) === 'country';
   var openAddress = function openAddress(address) {
     setCurAddress(address);
     setAddressOpen(true);
@@ -416,6 +415,7 @@ var AddressListUI = function AddressListUI(props) {
       location: curAddress === null || curAddress === void 0 ? void 0 : curAddress.location,
       zipcode: curAddress === null || curAddress === void 0 ? void 0 : curAddress.zipcode
     },
+    countryAutocomplete: countryAutocomplete,
     editSpreadAddress: editSpreadAddress,
     setEditSpreadAddress: setEditSpreadAddress,
     onCancel: function onCancel() {
