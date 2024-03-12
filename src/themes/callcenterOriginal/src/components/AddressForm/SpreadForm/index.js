@@ -74,7 +74,6 @@ export const SpreadForm = (props) => {
     const list = {
       sublocality_level_1: 'neighborhood',
       administrative_area_level_1: 'state',
-      locality: 'city',
       postal_code: 'zipcode'
     }
 
@@ -115,14 +114,28 @@ export const SpreadForm = (props) => {
         _formState.previousResponseId = result?.responseId
         _formState.formattedAddress = result?.result?.address?.formattedAddress
 
-        const addressComponents =
-          result?.result?.address?.addressComponents?.map(field => ({
-            name: changeAttrName(field.componentType),
-            value: field.componentName?.text
-          }))
+        const addressComponents = result?.result?.address?.addressComponents
+          .filter(_f => _f?.confirmationLevel !== 'UNEXPECTED')
+          .reduce((acc, field) => {
+            const existingField = acc.find(obj => obj.name === changeAttrName(field.componentType))
+            if (existingField) {
+              existingField.value = field.componentName?.text
+            } else {
+              acc.push({ name: changeAttrName(field.componentType), value: field.componentName?.text })
+            }
+            return acc
+          }, [])
+
+        addressComponents.push({
+          name: 'city',
+          value:
+            addressComponents.find(item => item.name === 'administrative_area_level_2')?.value ||
+            addressComponents.find(item => item.name === 'administrative_area_level_3')?.value ||
+            addressComponents.find(item => item.name === 'locality')?.value || null
+        })
 
         inputNames.map(_i => _i.name).forEach(field => {
-          _formState.changes[field] = addressComponents.find(c => c.name === field)?.value ?? formState.changes?.[field]
+          _formState.changes[field] = addressComponents.find(c => c?.name === field)?.value ?? formState.changes?.[field]
         })
 
         _formState.changes.locality = _formState.changes.city
@@ -211,12 +224,12 @@ export const SpreadForm = (props) => {
                 .filter(i => i.required)
                 .every(input => formState.changes?.[input.name])}
               color='primary'
-              onClick={formState.changes?.location ? handleAddAddress : handlePostAddress}
+              onClick={() => formState.changes?.location ? handleAddAddress() : handlePostAddress()}
             >
               {!formState.loading ? (
                 address?.address
                   ? formState.changes?.location
-                    ? t('UPDATE', 'Update')
+                    ? t('CONTINUE', 'Continue')
                     : t('VERIFY_ADDRESS', 'Verify address')
                   : formState.changes?.location
                     ? t('CONFIRM_ADDRESS', 'Confirm address')
