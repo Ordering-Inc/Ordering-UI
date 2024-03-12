@@ -165,7 +165,7 @@ export const WrapperPlaceOrderButton = styled.div`
     width: 100%;
     padding: 5px 20px;
     cursor: pointer;
-
+    border-radius: 10px;
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -279,6 +279,7 @@ export const DeliveryOptionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   #select-input {
+    border-radius: 10px;
     margin-bottom: 10px;
   }
   #list {
@@ -422,7 +423,8 @@ export const BusinessDetails = styled.div`
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
   background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
-  img{
+  img {
+    border-radius: 10px;
     width: 100%;
     height: 200px;
   }
@@ -447,11 +449,12 @@ export const MasterCardCoupon = styled.div`
   display: flex;
   justify-content: center;
   border: 1px solid #fff;
-  padding: 0px !important;
+  padding: 0px;
   width: 100%;
   box-sizing: border-box;
   background: ${({ theme }) => theme?.colors?.tertiaryContrast || '#000'};
   img {
+    border-radius: 10px;
     width: 100%
   }
 `

@@ -108,9 +108,10 @@ export const CheckoutAction = styled.div`
   }
 
   button {
+    border-radius: 10px;
     padding: 10px 30px;
     min-width: 150px;
-    width: 50%;
+    width: 100%;
     &:disabled{
       opacity: 0.5;
       cursor: not-allowed

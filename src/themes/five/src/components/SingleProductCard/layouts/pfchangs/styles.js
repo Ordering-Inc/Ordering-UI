@@ -222,7 +222,7 @@ export const QuantityContainer = styled.div`
   transform: translate(-50%, 50%);
   span {
     position: relative;
-    top: 2px;
+    /* top: 2px; */
     font-size: 12px;
   }
 `

@@ -18,7 +18,7 @@ export const CouponContainer = styled.div`
 
   input {
     width: 50%;
-      
+    border-radius: 10px;
   ${({ theme }) => theme?.layouts?.checkout?.components?.layout?.type === 'pfchangs' && css`
     color: #000;
   `}

@@ -193,7 +193,7 @@ export const CouponContainer = styled.div`
   }
 
   input, button {
-    border-radius: 0;
+    border-radius: 10px !important;
     border: 0;
     height: 44px;
     box-sizing: border-box;
@@ -232,6 +232,7 @@ export const CommentSection = styled.div`
     color: ${({ theme }) => theme?.colors?.tertiary || '#fff'};
   }
   textarea {
+    border-radius: 10px;
     width: 100%;
     height: 76px;
     &::placeholder,

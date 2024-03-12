@@ -20,10 +20,10 @@ export const InnerHeader = styled.div`
   color: #FFF;
   justify-content: space-between;
   width: 98%;
-  margin: auto;
+  margin: 15px auto;
   align-items: center;
-  @media (min-width: 786px){
-    margin: 15px auto;
+  @media (min-width: 821px){
+    margin: auto;
   }
 `
 
@@ -436,7 +436,7 @@ export const DeliveryPickupContainer = styled.div`
     width: 100%;
     z-index: 1;
     border-radius: 10px;
-    min-width: 115px;
+    min-width: 120px;
 
     @media (min-width: 992px) {
       min-width: 125px;

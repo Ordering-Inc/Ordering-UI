@@ -36,6 +36,9 @@ export const HeaderItem = styled.div`
       }
     }
   `}
+  .no-shadow {
+    border-color: transparent;
+  }
 `
 
 export const PopoverBody = styled.div`
@@ -101,11 +104,11 @@ export const CartLength = styled.span`
   margin-left: 5px;
   width: 20px;
   height: 20px;
-  p{
+  p {
     margin: 0;
     position: relative;
     font-size: 12px;
-    bottom: 3px;
+    bottom: calc(100% - 16px);
   }
 `
 
