@@ -116,7 +116,7 @@ export const SpreadForm = (props) => {
         _formState.formattedAddress = result?.result?.address?.formattedAddress
 
         const addressComponents = result?.result?.address?.addressComponents
-          .filter(_f => _f?.confirmationLevel !== 'UNEXPECTED')
+          .filter(_f => _f?.confirmationLevel !== 'UNEXPECTED' && !_f?.confirmationLevel?.includes('UNCONFIRMED'))
           .reduce((acc, field) => {
             const existingField = acc.find(obj => obj.name === changeAttrName(field.componentType))
             if (existingField) {
