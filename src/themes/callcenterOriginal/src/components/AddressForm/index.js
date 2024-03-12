@@ -254,7 +254,7 @@ const AddressFormUI = (props) => {
     })
   }
 
-  const handleChangeAddress = async (address) => {
+  const handleChangeAddress = async (address, updateFstValue = false) => {
     if (address?.location) {
       const result = await getBusinessDeliveryZones(address?.location)
       setLocationChange(address?.location)
@@ -263,10 +263,13 @@ const AddressFormUI = (props) => {
       }
     }
     setSelectedFromAutocomplete(true)
-    updateChanges({
-      ...address,
-      address: googleInputRef?.current?.value
-    })
+    updateChanges(updateFstValue
+      ? address
+      : {
+        ...address,
+        address: googleInputRef?.current?.value
+      }
+    )
   }
 
   const setMapErrors = (errKey) => {
@@ -387,10 +390,7 @@ const AddressFormUI = (props) => {
 
   useEffect(() => {
     if (addressSpreadForm) {
-      updateChanges(addressSpreadForm)
-      if (addressSpreadForm?.location) {
-        setSelectedFromAutocomplete(true)
-      }
+      handleChangeAddress(addressSpreadForm, true)
     }
   }, [addressSpreadForm])
 
@@ -462,7 +462,11 @@ const AddressFormUI = (props) => {
                         </AddressWrap>
                       )}
                       {(addressState?.address?.location || formState?.changes?.location) && (
-                        <WrapperMap notUseCustomerInfo={notUseCustomerInfo} addFormRestrictions={addFormRestrictions}>
+                        <WrapperMap
+                          showMap={showMap || !showSpreadForm}
+                          notUseCustomerInfo={notUseCustomerInfo}
+                          addFormRestrictions={addFormRestrictions}
+                        >
                           {!showMap && (
                             <section>
                               <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />

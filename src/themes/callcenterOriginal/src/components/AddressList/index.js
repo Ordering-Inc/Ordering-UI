@@ -106,9 +106,8 @@ const AddressListUI = (props) => {
       )))) || []
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isAllowUnaddressOrderType = unaddressedTypes.includes(orderState?.options?.type) && user?.id === orderState?.options?.user_id
-  const countryAutocomplete = configs?.country_autocomplete?.value
-  const addressFormtype = configs?.addresses_form_type?.value
-  const showSpreadForm = countryAutocomplete?.toUpperCase() === 'MX' && addressFormtype === 'country'
+  const countryAutocomplete = configs?.country_autocomplete?.value?.toUpperCase() ?? '*'
+  const showSpreadForm = configs?.addresses_form_type?.value === 'country'
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -452,6 +451,7 @@ const AddressListUI = (props) => {
                   location: curAddress?.location,
                   zipcode: curAddress?.zipcode
                 }}
+                countryAutocomplete={countryAutocomplete}
                 editSpreadAddress={editSpreadAddress}
                 setEditSpreadAddress={setEditSpreadAddress}
                 onCancel={() => handleCloseAddressForm()}
