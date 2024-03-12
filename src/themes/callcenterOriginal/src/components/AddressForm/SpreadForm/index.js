@@ -34,6 +34,7 @@ const emptyFields = {
 export const SpreadForm = (props) => {
   const {
     address,
+    countryAutocomplete,
     editSpreadAddress,
     setEditSpreadAddress,
     onChangeAddress
@@ -87,7 +88,7 @@ export const SpreadForm = (props) => {
         google_api_key: googleMapsApiKey,
         body: {
           address: {
-            regionCode: 'MX',
+            regionCode: countryAutocomplete,
             addressLines: addressLines ?? inputNames
               .filter(i => i?.enabled !== false)
               .sort((a, b) => a.id - b.id)
@@ -134,13 +135,12 @@ export const SpreadForm = (props) => {
             addressComponents.find(item => item.name === 'locality')?.value || null
         })
 
-        inputNames.map(_i => _i.name).forEach(field => {
+        inputNames.concat({ id: 8, name: 'country' }).map(_i => _i.name).forEach(field => {
           _formState.changes[field] = addressComponents.find(c => c?.name === field)?.value ?? formState.changes?.[field]
         })
 
         _formState.changes.locality = _formState.changes.city
-        _formState.changes.country = 'México'
-        _formState.changes.country_code = 'MX'
+        _formState.changes.country_code = countryAutocomplete
         _formState.changes.address = result?.result?.address?.formattedAddress
 
         result?.result?.geocode?.location && (
@@ -163,8 +163,9 @@ export const SpreadForm = (props) => {
   }
 
   useEffect(() => {
+    if (formState.loading) return
     if (address) {
-      if (!address?.location) {
+      if (!address?.location && !formState.changes?.location) {
         handlePostAddress(address?.address?.split(','))
       } else {
         setFormState({
@@ -203,7 +204,7 @@ export const SpreadForm = (props) => {
               <Input
                 className={field.name}
                 placeholder={t(`ADDRESS_${field.name.toUpperCase()}`, capitalize(field.name.replace('_', ' ')))}
-                value={formState.changes?.[field.name] ?? address?.[field.name] ?? (field.name === 'country_code' ? 'MX' : '')}
+                value={formState.changes?.[field.name] ?? address?.[field.name] ?? (field.name === 'country_code' ? countryAutocomplete : '')}
                 disabled={field?.enabled === false}
                 style={{
                   ...(field?.enabled === false ? { background: theme.colors.disabled } : {})
