@@ -72,7 +72,7 @@ var emptyFields = {
   zipcode: ''
 };
 var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
-  var _configs$google_maps_, _formState$changes4, _formState$changes5, _formState$changes6;
+  var _configs$google_maps_, _formState$changes5, _formState$changes6;
   var address = props.address,
     editSpreadAddress = props.editSpreadAddress,
     setEditSpreadAddress = props.setEditSpreadAddress,
@@ -126,14 +126,13 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
     var list = {
       sublocality_level_1: 'neighborhood',
       administrative_area_level_1: 'state',
-      locality: 'city',
       postal_code: 'zipcode'
     };
     return (_list$attr = list[attr]) !== null && _list$attr !== void 0 ? _list$attr : attr;
   };
   var handlePostAddress = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(addressLines) {
-      var _body, req, _yield$req$json, error, result, _formState, _result$result, _result$result2, _result$result3, _result$result4, _result$result5, _result$result6, addressComponents;
+      var _body, req, _yield$req$json, error, result, _formState, _result$result, _result$result2, _addressComponents$fi, _addressComponents$fi2, _addressComponents$fi3, _result$result3, _result$result4, _result$result5, _result$result6, addressComponents;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -180,20 +179,41 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
             if (!error && !(result !== null && result !== void 0 && result.error)) {
               _formState.previousResponseId = result === null || result === void 0 ? void 0 : result.responseId;
               _formState.formattedAddress = result === null || result === void 0 || (_result$result = result.result) === null || _result$result === void 0 || (_result$result = _result$result.address) === null || _result$result === void 0 ? void 0 : _result$result.formattedAddress;
-              addressComponents = result === null || result === void 0 || (_result$result2 = result.result) === null || _result$result2 === void 0 || (_result$result2 = _result$result2.address) === null || _result$result2 === void 0 || (_result$result2 = _result$result2.addressComponents) === null || _result$result2 === void 0 ? void 0 : _result$result2.map(function (field) {
-                var _field$componentName;
-                return {
-                  name: changeAttrName(field.componentType),
-                  value: (_field$componentName = field.componentName) === null || _field$componentName === void 0 ? void 0 : _field$componentName.text
-                };
+              addressComponents = result === null || result === void 0 || (_result$result2 = result.result) === null || _result$result2 === void 0 || (_result$result2 = _result$result2.address) === null || _result$result2 === void 0 ? void 0 : _result$result2.addressComponents.filter(function (_f) {
+                return (_f === null || _f === void 0 ? void 0 : _f.confirmationLevel) !== 'UNEXPECTED';
+              }).reduce(function (acc, field) {
+                var existingField = acc.find(function (obj) {
+                  return obj.name === changeAttrName(field.componentType);
+                });
+                if (existingField) {
+                  var _field$componentName;
+                  existingField.value = (_field$componentName = field.componentName) === null || _field$componentName === void 0 ? void 0 : _field$componentName.text;
+                } else {
+                  var _field$componentName2;
+                  acc.push({
+                    name: changeAttrName(field.componentType),
+                    value: (_field$componentName2 = field.componentName) === null || _field$componentName2 === void 0 ? void 0 : _field$componentName2.text
+                  });
+                }
+                return acc;
+              }, []);
+              addressComponents.push({
+                name: 'city',
+                value: ((_addressComponents$fi = addressComponents.find(function (item) {
+                  return item.name === 'administrative_area_level_2';
+                })) === null || _addressComponents$fi === void 0 ? void 0 : _addressComponents$fi.value) || ((_addressComponents$fi2 = addressComponents.find(function (item) {
+                  return item.name === 'administrative_area_level_3';
+                })) === null || _addressComponents$fi2 === void 0 ? void 0 : _addressComponents$fi2.value) || ((_addressComponents$fi3 = addressComponents.find(function (item) {
+                  return item.name === 'locality';
+                })) === null || _addressComponents$fi3 === void 0 ? void 0 : _addressComponents$fi3.value) || null
               });
               inputNames.map(function (_i) {
                 return _i.name;
               }).forEach(function (field) {
-                var _addressComponents$fi, _addressComponents$fi2, _formState$changes;
-                _formState.changes[field] = (_addressComponents$fi = (_addressComponents$fi2 = addressComponents.find(function (c) {
-                  return c.name === field;
-                })) === null || _addressComponents$fi2 === void 0 ? void 0 : _addressComponents$fi2.value) !== null && _addressComponents$fi !== void 0 ? _addressComponents$fi : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes[field];
+                var _addressComponents$fi4, _addressComponents$fi5, _formState$changes;
+                _formState.changes[field] = (_addressComponents$fi4 = (_addressComponents$fi5 = addressComponents.find(function (c) {
+                  return (c === null || c === void 0 ? void 0 : c.name) === field;
+                })) === null || _addressComponents$fi5 === void 0 ? void 0 : _addressComponents$fi5.value) !== null && _addressComponents$fi4 !== void 0 ? _addressComponents$fi4 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes[field];
               });
               _formState.changes.locality = _formState.changes.city;
               _formState.changes.country = 'México';
@@ -287,6 +307,9 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
       return (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3[input.name];
     }),
     color: "primary",
-    onClick: (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.location ? handleAddAddress : handlePostAddress
-  }, !formState.loading ? address !== null && address !== void 0 && address.address ? (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.location ? t('UPDATE', 'Update') : t('VERIFY_ADDRESS', 'Verify address') : (_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.location ? t('CONFIRM_ADDRESS', 'Confirm address') : t('VERIFY_ADDRESS', 'Verify address') : t('LOADING', 'Loading')))));
+    onClick: function onClick() {
+      var _formState$changes4;
+      return (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.location ? handleAddAddress() : handlePostAddress();
+    }
+  }, !formState.loading ? address !== null && address !== void 0 && address.address ? (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.location ? t('CONTINUE', 'Continue') : t('VERIFY_ADDRESS', 'Verify address') : (_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.location ? t('CONFIRM_ADDRESS', 'Confirm address') : t('VERIFY_ADDRESS', 'Verify address') : t('LOADING', 'Loading')))));
 };

@@ -666,7 +666,7 @@ var AddressFormUI = function AddressFormUI(props) {
     type: "submit",
     disabled: formState.loading,
     color: "primary"
-  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6 = _orderState$options6.address) !== null && _orderState$options6 !== void 0 && _orderState$options6.address ? t('UPDATE', 'Update') : t('ADD_ADDRESS', 'Add address')) : t('LOADING', 'Loading'))), isAllowUnaddressOrderType && /*#__PURE__*/_react.default.createElement(_styles.WithoutAddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WithoutAddressText, {
+  }, !formState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEditing || !auth && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6 = _orderState$options6.address) !== null && _orderState$options6 !== void 0 && _orderState$options6.address ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('ADD_ADDRESS', 'Add address')) : t('LOADING', 'Loading'))), isAllowUnaddressOrderType && /*#__PURE__*/_react.default.createElement(_styles.WithoutAddressContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WithoutAddressText, {
     onClick: function onClick() {
       return events.emit('go_to_page', {
         page: 'search'
