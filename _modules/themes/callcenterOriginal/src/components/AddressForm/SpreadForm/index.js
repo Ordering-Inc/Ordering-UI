@@ -71,6 +71,7 @@ var emptyFields = {
   location: '',
   zipcode: ''
 };
+var unexpectedFieldValid = ['postal_code'];
 var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
   var _configs$google_maps_, _formState$changes6, _formState$changes7;
   var address = props.address,
@@ -182,7 +183,7 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
               _formState.formattedAddress = result === null || result === void 0 || (_result$result = result.result) === null || _result$result === void 0 || (_result$result = _result$result.address) === null || _result$result === void 0 ? void 0 : _result$result.formattedAddress;
               addressComponents = result === null || result === void 0 || (_result$result2 = result.result) === null || _result$result2 === void 0 || (_result$result2 = _result$result2.address) === null || _result$result2 === void 0 ? void 0 : _result$result2.addressComponents.filter(function (_f) {
                 var _f$confirmationLevel;
-                return (_f === null || _f === void 0 ? void 0 : _f.confirmationLevel) !== 'UNEXPECTED' && !(_f !== null && _f !== void 0 && (_f$confirmationLevel = _f.confirmationLevel) !== null && _f$confirmationLevel !== void 0 && _f$confirmationLevel.includes('UNCONFIRMED'));
+                return (_f === null || _f === void 0 ? void 0 : _f.confirmationLevel) !== 'UNEXPECTED' && (!(_f !== null && _f !== void 0 && (_f$confirmationLevel = _f.confirmationLevel) !== null && _f$confirmationLevel !== void 0 && _f$confirmationLevel.includes('UNCONFIRMED')) || unexpectedFieldValid.includes(_f.componentType));
               }).reduce(function (acc, field) {
                 var existingField = acc.find(function (obj) {
                   return obj.name === changeAttrName(field.componentType);
@@ -263,7 +264,7 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
         }));
       }
     }
-  }, [address]);
+  }, [JSON.stringify(address)]);
   (0, _react.useEffect)(function () {
     if (formState.error) {
       showToast(_orderingComponents.ToastType.Error, formState.error, 3000);
