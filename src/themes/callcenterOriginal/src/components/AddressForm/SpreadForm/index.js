@@ -31,6 +31,8 @@ const emptyFields = {
   zipcode: ''
 }
 
+const unexpectedFieldValid = ['postal_code']
+
 export const SpreadForm = (props) => {
   const {
     address,
@@ -116,8 +118,10 @@ export const SpreadForm = (props) => {
         _formState.formattedAddress = result?.result?.address?.formattedAddress
 
         const addressComponents = result?.result?.address?.addressComponents
-          .filter(_f => _f?.confirmationLevel !== 'UNEXPECTED' && !_f?.confirmationLevel?.includes('UNCONFIRMED'))
-          .reduce((acc, field) => {
+          .filter(_f =>
+            _f?.confirmationLevel !== 'UNEXPECTED' &&
+            (!_f?.confirmationLevel?.includes('UNCONFIRMED') || unexpectedFieldValid.includes(_f.componentType))
+          ).reduce((acc, field) => {
             const existingField = acc.find(obj => obj.name === changeAttrName(field.componentType))
             if (existingField) {
               existingField.value = field.componentName?.text
@@ -177,7 +181,7 @@ export const SpreadForm = (props) => {
         })
       }
     }
-  }, [address])
+  }, [JSON.stringify(address)])
 
   useEffect(() => {
     if (formState.error) {
