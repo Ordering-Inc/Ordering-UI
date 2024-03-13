@@ -36,6 +36,7 @@ const SingleOrderCardUI = (props) => {
     order,
     getOrderStatus,
     isBusinessesPage,
+    reorderLoading,
     handleReorder,
     customArray,
     onRedirectPage,
@@ -254,7 +255,7 @@ const SingleOrderCardUI = (props) => {
               )}
               {order.cart && (
                 <Button color='primary' className='reorder' outline onClick={() => handleClickReorder(order)}>
-                  {cartState?.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
+                  {(cartState?.loading || reorderLoading) ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder')}
                 </Button>
               )}
             </ButtonWrapper>

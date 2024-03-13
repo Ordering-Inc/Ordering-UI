@@ -213,7 +213,7 @@ export const ButtonWrapper = styled.div`
   ${({ theme }) => theme?.layouts?.orders?.components?.layout?.type === 'pfchangs' && css`
       button {
         border: 0;
-        border-radius: 0;
+        border-radius: 5px;
         color: #fff;
         background: ${theme?.colors?.primary};
         

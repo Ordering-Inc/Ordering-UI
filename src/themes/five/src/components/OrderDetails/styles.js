@@ -118,6 +118,11 @@ export const BusinessWrapper = styled.div`
     margin-top: 15px;
     border-top: 1px solid ${props => props.theme.colors.lightGray};
   `}
+
+  button {
+    border-color: transparent !important;
+  }
+
   img {
     width: 100px;
     height: 100px;
@@ -599,7 +604,11 @@ export const Divider = styled.div`
   }
 `
 
-export const MyOrderActions = styled.div``
+export const MyOrderActions = styled.div`
+  button {
+    border-color: transparent !important;
+  }
+`
 
 export const ReviewWrapper = styled.div`
   .review-sent {
@@ -665,7 +674,7 @@ export const ReOrder = styled.div`
     padding: 5px 16px;
     min-width: unset;
     margin: 5px 5px;
-
+    border-color: transparent !important;
     @media (min-width: 650px) {
       margin: 0px 5px;
     }

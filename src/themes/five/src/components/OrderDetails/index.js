@@ -376,7 +376,7 @@ const OrderDetailsUI = (props) => {
     if (!reorderState?.error && reorderState.loading === false && businessData?.id) {
       const _businessId = 'businessId:' + businessData?.id
       const products = carts?.[_businessId]?.products
-      const available = products.every(product => product.valid === true)
+      const available = products?.every(product => product.valid === true)
       if (available && reorderState?.result?.uuid && (products?.length === order?.products.length)) {
         handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
       } else {
@@ -656,7 +656,7 @@ const OrderDetailsUI = (props) => {
                           <div>
                             <ButtonComponent
                               style={{ fontSize: 14 }}
-                              color={order?.status === 20 ? 'primary' : 'secundary'}
+                              color={order?.status === 21 ? 'secundary' : 'primary'}
                               disabled={order?.status === 21}
                               onClick={() => handleChangeOrderStatus(21)}
                             >
