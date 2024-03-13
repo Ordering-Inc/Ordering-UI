@@ -59,7 +59,7 @@ var OrderBusiness = _styledComponents.default.div(_templateObject11 || (_templat
   });
 });
 exports.OrderBusiness = OrderBusiness;
-var BusinessWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n\n  ", "\n  ", "\n  img {\n    width: 100px;\n    height: 100px;\n    border-radius: 7.6px;\n    margin-right: 0;\n\n    @media (min-width: 400px) {\n      margin-right: 40px;\n    }\n  }\n\n  @media (min-width: 400px) {\n    flex-direction: row;\n    width: ", ";\n  }\n"])), function (props) {
+var BusinessWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n\n  ", "\n  ", "\n\n  button {\n    border-color: transparent !important;\n  }\n\n  img {\n    width: 100px;\n    height: 100px;\n    border-radius: 7.6px;\n    margin-right: 0;\n\n    @media (min-width: 400px) {\n      margin-right: 40px;\n    }\n  }\n\n  @media (min-width: 400px) {\n    flex-direction: row;\n    width: ", ";\n  }\n"])), function (props) {
   return props.borderBottom && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    padding-bottom: 15px;\n    border-bottom: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.lightGray;
   });
@@ -201,7 +201,7 @@ var WrapperRightContainer = (0, _styledComponents.default)(WrapperLeftContainer)
 exports.WrapperRightContainer = WrapperRightContainer;
 var Divider = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  height: 8px;\n  background: #F8F9FA;\n  width: calc(100% + 40px);\n  margin-left: -20px;\n\n  @media(min-width: 769px) {\n    width: calc(100% + 80px);\n    margin-left: -40px;\n  }\n"])));
 exports.Divider = Divider;
-var MyOrderActions = _styledComponents.default.div(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral([""])));
+var MyOrderActions = _styledComponents.default.div(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["\n  button {\n    border-color: transparent !important;\n  }\n"])));
 exports.MyOrderActions = MyOrderActions;
 var ReviewWrapper = _styledComponents.default.div(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["\n  .review-sent {\n    border-radius: 7.6px;\n  }\n"])));
 exports.ReviewWrapper = ReviewWrapper;
@@ -215,7 +215,7 @@ var OrderActions = _styledComponents.default.div(_templateObject56 || (_template
 exports.OrderActions = OrderActions;
 var TitleContainer = _styledComponents.default.div(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 90%;\n  margin: auto;\n  button {\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    justify-content: space-around;\n    min-width: 200px;\n    max-height: 53px;\n  }\n  > h1 {\n    text-align: center;\n  }\n  @media (min-width: 650px) {\n    width: 50%;\n  }\n"])));
 exports.TitleContainer = TitleContainer;
-var ReOrder = _styledComponents.default.div(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  flex-direction: column;\n\n  button {\n    padding: 5px 16px;\n    min-width: unset;\n    margin: 5px 5px;\n\n    @media (min-width: 650px) {\n      margin: 0px 5px;\n    }\n  }\n\n  @media (min-width: 650px) {\n    flex-direction: row;\n  }\n"])));
+var ReOrder = _styledComponents.default.div(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  flex-direction: column;\n\n  button {\n    padding: 5px 16px;\n    min-width: unset;\n    margin: 5px 5px;\n    border-color: transparent !important;\n    @media (min-width: 650px) {\n      margin: 0px 5px;\n    }\n  }\n\n  @media (min-width: 650px) {\n    flex-direction: row;\n  }\n"])));
 exports.ReOrder = ReOrder;
 var BusinessTitle = _styledComponents.default.div(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
 exports.BusinessTitle = BusinessTitle;

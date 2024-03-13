@@ -435,7 +435,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleChangeProfessionalSelected: handleChangeProfessionalSelected,
     subcategorySelected: subcategorySelected
   })))))), showGoTopButton && /*#__PURE__*/_react.default.createElement(_styles.BackToTop, {
-    showCartOnProductList: showCartOnProductList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 && windowSize.width > 1000,
+    showCartOnProductList: showCartOnProductList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 && windowSize.width > 1000 && windowSize.height < 885,
     onClick: function onClick() {
       return handleScrollToTop();
     }

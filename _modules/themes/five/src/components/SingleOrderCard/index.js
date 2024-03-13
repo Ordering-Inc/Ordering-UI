@@ -42,6 +42,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
   var order = props.order,
     getOrderStatus = props.getOrderStatus,
     isBusinessesPage = props.isBusinessesPage,
+    reorderLoading = props.reorderLoading,
     handleReorder = props.handleReorder,
     customArray = props.customArray,
     onRedirectPage = props.onRedirectPage,
@@ -305,7 +306,7 @@ var SingleOrderCardUI = function SingleOrderCardUI(props) {
     onClick: function onClick() {
       return handleClickReorder(order);
     }
-  }, cartState !== null && cartState !== void 0 && cartState.loading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder'))), /*#__PURE__*/_react.default.createElement(_styles.FavoriteWrapper, {
+  }, cartState !== null && cartState !== void 0 && cartState.loading || reorderLoading ? t('LOADING', 'Loading...') : t('REORDER', 'Reorder'))), /*#__PURE__*/_react.default.createElement(_styles.FavoriteWrapper, {
     onClick: function onClick() {
       return handleChangeFavorite(order);
     },

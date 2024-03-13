@@ -588,7 +588,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       var _carts$_businessId, _reorderState$result;
       var _businessId = 'businessId:' + (businessData === null || businessData === void 0 ? void 0 : businessData.id);
       var products = carts === null || carts === void 0 ? void 0 : (_carts$_businessId = carts[_businessId]) === null || _carts$_businessId === void 0 ? void 0 : _carts$_businessId.products;
-      var available = products.every(function (product) {
+      var available = products === null || products === void 0 ? void 0 : products.every(function (product) {
         return product.valid === true;
       });
       if (available && reorderState !== null && reorderState !== void 0 && (_reorderState$result = reorderState.result) !== null && _reorderState$result !== void 0 && _reorderState$result.uuid && (products === null || products === void 0 ? void 0 : products.length) === (order === null || order === void 0 ? void 0 : order.products.length)) {
@@ -766,7 +766,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     style: {
       fontSize: 14
     },
-    color: (order === null || order === void 0 ? void 0 : order.status) === 20 ? 'primary' : 'secundary',
+    color: (order === null || order === void 0 ? void 0 : order.status) === 21 ? 'secundary' : 'primary',
     disabled: (order === null || order === void 0 ? void 0 : order.status) === 21,
     onClick: function onClick() {
       return handleChangeOrderStatus(21);
