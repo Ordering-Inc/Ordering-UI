@@ -30,7 +30,6 @@ import {
   AdditionalTypesContainer,
   PhoneAutocompleteContainer,
   ImageWrapper,
-  ContinueButton,
   NotFoundUser,
   OptionContainer
 } from './styles'
@@ -99,10 +98,8 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const handleFindClick = () => {
-    if (optSelected && !(userCustomer?.id && orderState?.options?.address?.address)) {
+    if (optSelected) {
       onChange(optSelected)
-    } else if (userCustomer?.id && orderState?.options?.address?.address) {
-      onRedirectPage && onRedirectPage('search')
     } else {
       setAlertState({ open: true, content: t('SELECT_ADDRESS_CUSTOMER', 'Please select an address for the selected customer') })
     }
@@ -406,13 +403,6 @@ const PhoneAutocompleteUI = (props) => {
                     options={optionsToSelect.filter(opt => inputValue ? opt.value.toString().includes(inputValue) : opt)}
                     components={{ Option, ClearIndicator }}
                   />
-                  {optSelected && (
-                    <ContinueButton>
-                      <Button onClick={() => onChange(optSelected)} color='primary'>
-                        {t('CONTINUE', 'Continue')}
-                      </Button>
-                    </ContinueButton>
-                  )}
                 </SelectContainer>
               </PhoneAutocompleteContainer>
             </>
