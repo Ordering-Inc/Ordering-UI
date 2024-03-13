@@ -89,12 +89,13 @@ export const LeftContainer = styled.div`
   .title-wrapper {
     margin: 0 0 10px 0;
     width: 100%;
-    height: 38px;
+    height: 40px;
     display: flex;
     justify-content: space-between;
     padding-bottom: 15px;
-    .button {
-      min-width: 150px;
+
+    button {
+      min-width: 145px;
     }
   }
   .time-wrapper {

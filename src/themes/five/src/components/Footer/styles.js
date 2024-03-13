@@ -13,17 +13,11 @@ export const Container = styled.div`
 `
 
 export const FooterWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  flex-wrap: wrap;
-  flex-direction: column;
-  border-bottom: 1px solid #d9d9d9;
+  word-break: break-all;
+  padding: 0px 2px;
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-    justify-content: flex-start;
+  * {
+    font-family: ${({ theme }) => (theme?.footer?.components?.slug === 'footer_pf_changs' ? theme?.fonts?.special?.name : theme?.fonts?.primary?.name) + '!important'};
   }
 `
 

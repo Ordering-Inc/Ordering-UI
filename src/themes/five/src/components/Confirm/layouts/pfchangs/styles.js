@@ -28,7 +28,7 @@ export const PopupDialog = styled.div`
   padding: 20px;
   width: 40%;
   border-radius: 10px;
-  font-family: TrajanPro-Bold;
+  font-family: ${({ theme }) => theme?.fonts?.special?.name};
   @media (min-width: 768px){
     width: 40%;
   }

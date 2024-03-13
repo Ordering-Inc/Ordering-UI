@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useApi, useEvent } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
+import { FooterWrapper } from './styles'
+
 export const Footer = () => {
   const [footerState, setfooterState] = useState({ body: null, loading: false, error: null })
   const [ordering] = useApi()
@@ -73,9 +75,10 @@ export const Footer = () => {
     <>
       {
         footerState.body && (
-          <div style={{ wordBreak: 'break-all', padding: '0px 2px'}} dangerouslySetInnerHTML={{
-            __html: footerState.body
-          }}
+          <FooterWrapper
+            dangerouslySetInnerHTML={{
+              __html: footerState.body
+            }}
           />
         )
       }
