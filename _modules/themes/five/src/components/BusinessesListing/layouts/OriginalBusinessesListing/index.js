@@ -244,7 +244,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, [preorderBusiness]);
   (0, _react.useEffect)(function () {
     var _businessesList$busin2, _businessesList$busin3, _configs$activate_sin;
-    setActiveMap(false);
+    !isCustomerMode && setActiveMap(false);
     if (!(businessesList !== null && businessesList !== void 0 && (_businessesList$busin2 = businessesList.businesses) !== null && _businessesList$busin2 !== void 0 && _businessesList$busin2.length)) return;
     if ((businessesList === null || businessesList === void 0 || (_businessesList$busin3 = businessesList.businesses) === null || _businessesList$busin3 === void 0 ? void 0 : _businessesList$busin3.length) === 1 && (configs === null || configs === void 0 || (_configs$activate_sin = configs.activate_single_store_automatically) === null || _configs$activate_sin === void 0 ? void 0 : _configs$activate_sin.value) === '1') {
       onBusinessClick(businessesList === null || businessesList === void 0 ? void 0 : businessesList.businesses[0]);
