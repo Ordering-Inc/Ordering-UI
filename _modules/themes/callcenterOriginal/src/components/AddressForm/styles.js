@@ -38,7 +38,9 @@ var WrapAddressInput = exports.WrapAddressInput = _styledComponents.default.div(
 var AddressTagSection = exports.AddressTagSection = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 10px 0px;\n  display: flex;\n  justify-content: space-between;\n\n  button {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 46px;\n    height: 46px;\n    border: none;\n    color: #B1BCCC;\n\n    img {\n      width: 25px;\n      height: 25px;\n    }\n\n    span {\n      display: flex;\n      justify-content: center;\n      align-items: center;\n\n      svg {\n        font-size: 30px;\n      }\n    }\n  }\n\n  button.active {\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
-var WrapperMap = exports.WrapperMap = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  z-index: 100;\n  width: 50%;\n  position: absolute;\n  bottom: 2%;\n  right: 0;\n  padding-right: 20px;\n  padding-top: 30px;\n  height: ", ";\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"])), function (_ref) {
+var WrapperMap = exports.WrapperMap = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  z-index: 100;\n  width: 48%;\n  position: absolute;\n  bottom: 2%;\n  right: 0;\n  padding-top: ", ";\n  height: ", ";\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"])), function (props) {
+  return props.showMap ? '30px' : 0;
+}, function (_ref) {
   var notUseCustomerInfo = _ref.notUseCustomerInfo;
   return notUseCustomerInfo ? '370px' : '480px';
 });

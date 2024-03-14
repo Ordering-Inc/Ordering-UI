@@ -19,11 +19,11 @@ var _AddressForm = require("../AddressForm");
 var _Confirm = require("../Confirm");
 var _styledComponents = require("styled-components");
 var _utils = require("../../../../../utils");
+var _SpreadForm = require("../AddressForm/SpreadForm");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _props$beforeElements, _props$beforeComponen, _addressList$addresse3, _addressList$addresse4, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12, _props$afterComponent, _props$afterElements;
+  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _configs$country_auto, _configs$country_auto2, _configs$addresses_fo, _addressList$addresse3, _addressList$addresse4, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -92,6 +92,14 @@ var AddressListUI = function AddressListUI(props) {
   var _useCustomer = (0, _orderingComponents.useCustomer)(),
     _useCustomer2 = _slicedToArray(_useCustomer, 1),
     user = _useCustomer2[0].user;
+  var _useState7 = (0, _react.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    addressSpreadForm = _useState8[0],
+    setAddressSpreadForm = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    editSpreadAddress = _useState10[0],
+    setEditSpreadAddress = _useState10[1];
   var addFormRestrictions = (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text) && ((_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error);
   var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
     return i === self.findIndex(function (obj) {
@@ -102,6 +110,8 @@ var AddressListUI = function AddressListUI(props) {
     return Number(value);
   })) || [];
   var isAllowUnaddressOrderType = unaddressedTypes.includes(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) && (user === null || user === void 0 ? void 0 : user.id) === (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.user_id);
+  var countryAutocomplete = (_configs$country_auto = configs === null || configs === void 0 || (_configs$country_auto2 = configs.country_autocomplete) === null || _configs$country_auto2 === void 0 || (_configs$country_auto2 = _configs$country_auto2.value) === null || _configs$country_auto2 === void 0 ? void 0 : _configs$country_auto2.toUpperCase()) !== null && _configs$country_auto !== void 0 ? _configs$country_auto : '*';
+  var showSpreadForm = (configs === null || configs === void 0 || (_configs$addresses_fo = configs.addresses_form_type) === null || _configs$addresses_fo === void 0 ? void 0 : _configs$addresses_fo.value) === 'country';
   var openAddress = function openAddress(address) {
     setCurAddress(address);
     setAddressOpen(true);
@@ -228,15 +238,7 @@ var AddressListUI = function AddressListUI(props) {
       openAddress({});
     }
   }, [userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text, addressList.addresses, addressList === null || addressList === void 0 ? void 0 : addressList.loading, addressList === null || addressList === void 0 ? void 0 : addressList.error, isOpenUserData]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
+  return /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
     id: "address_control",
     isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading)
   }, /*#__PURE__*/_react.default.createElement(_styles.AddressHalfContainer, null, /*#__PURE__*/_react.default.createElement(_styles.List, {
@@ -257,6 +259,11 @@ var AddressListUI = function AddressListUI(props) {
   }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
+    showSpreadForm: showSpreadForm,
+    addressSpreadForm: addressSpreadForm,
+    setAddressSpreadForm: setAddressSpreadForm,
+    editSpreadAddress: editSpreadAddress,
+    setEditSpreadAddress: setEditSpreadAddress,
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
@@ -329,6 +336,11 @@ var AddressListUI = function AddressListUI(props) {
   }), !isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
+    showSpreadForm: showSpreadForm,
+    addressSpreadForm: addressSpreadForm,
+    setAddressSpreadForm: setAddressSpreadForm,
+    editSpreadAddress: editSpreadAddress,
+    setEditSpreadAddress: setEditSpreadAddress,
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
@@ -347,7 +359,28 @@ var AddressListUI = function AddressListUI(props) {
     onClick: function onClick() {
       return handleCloseAddressForm();
     }
-  })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))))), (addressList.loading || actionStatus.loading || orderState.loading || (user === null || user === void 0 ? void 0 : user.id) !== (orderState === null || orderState === void 0 || (_orderState$options11 = orderState.options) === null || _orderState$options11 === void 0 ? void 0 : _orderState$options11.user_id)) && !isProductForm && !addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))), showSpreadForm && /*#__PURE__*/_react.default.createElement(_SpreadForm.SpreadForm, {
+    address: (curAddress === null || curAddress === void 0 ? void 0 : curAddress.address) && {
+      route: curAddress === null || curAddress === void 0 ? void 0 : curAddress.route,
+      street_number: curAddress === null || curAddress === void 0 ? void 0 : curAddress.street_number,
+      neighborhood: curAddress === null || curAddress === void 0 ? void 0 : curAddress.neighborhood,
+      city: curAddress === null || curAddress === void 0 ? void 0 : curAddress.city,
+      state: curAddress === null || curAddress === void 0 ? void 0 : curAddress.state,
+      country_code: curAddress === null || curAddress === void 0 ? void 0 : curAddress.country_code,
+      country: curAddress === null || curAddress === void 0 ? void 0 : curAddress.country,
+      address: curAddress === null || curAddress === void 0 ? void 0 : curAddress.address,
+      locality: curAddress === null || curAddress === void 0 ? void 0 : curAddress.locality,
+      location: curAddress === null || curAddress === void 0 ? void 0 : curAddress.location,
+      zipcode: curAddress === null || curAddress === void 0 ? void 0 : curAddress.zipcode
+    },
+    countryAutocomplete: countryAutocomplete,
+    editSpreadAddress: editSpreadAddress,
+    setEditSpreadAddress: setEditSpreadAddress,
+    onCancel: function onCancel() {
+      return handleCloseAddressForm();
+    },
+    onChangeAddress: setAddressSpreadForm
+  }))), (addressList.loading || actionStatus.loading || orderState.loading || (user === null || user === void 0 ? void 0 : user.id) !== (orderState === null || orderState === void 0 || (_orderState$options11 = orderState.options) === null || _orderState$options11 === void 0 ? void 0 : _orderState$options11.user_id)) && !isProductForm && !addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50,
     count: 3,
     style: {
@@ -377,6 +410,11 @@ var AddressListUI = function AddressListUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
+    showSpreadForm: showSpreadForm,
+    addressSpreadForm: addressSpreadForm,
+    setAddressSpreadForm: setAddressSpreadForm,
+    editSpreadAddress: editSpreadAddress,
+    setEditSpreadAddress: setEditSpreadAddress,
     useValidationFileds: true,
     address: curAddress,
     onCancel: function onCancel() {
@@ -402,14 +440,6 @@ var AddressListUI = function AddressListUI(props) {
     },
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 var AddressList = exports.AddressList = function AddressList(props) {
