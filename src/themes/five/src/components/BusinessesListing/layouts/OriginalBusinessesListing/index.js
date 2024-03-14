@@ -28,7 +28,6 @@ import {
   TypesContainer,
   TypeButton,
   IconTypeButton,
-  TypesWrapper,
   AdditionalTypesContainer
 } from './styles'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
@@ -201,7 +200,7 @@ const BusinessesListingUI = (props) => {
   }, [preorderBusiness])
 
   useEffect(() => {
-    setActiveMap(false)
+    !isCustomerMode && setActiveMap(false)
     if (!businessesList?.businesses?.length) return
     if (businessesList?.businesses?.length === 1 && configs?.activate_single_store_automatically?.value === '1') {
       onBusinessClick(businessesList?.businesses[0])
