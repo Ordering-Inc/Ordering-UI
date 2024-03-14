@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import Skeleton from 'react-loading-skeleton'
 import { Alert } from '../../../Confirm'
-import { InputPhoneNumber } from '../../../../../../../components/InputPhoneNumber'
+import { InputPhoneNumber } from '../../../InputPhoneNumber'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useTheme } from 'styled-components'
 import { Input } from '../../../../styles/Inputs'
@@ -55,7 +55,8 @@ const SignUpDriverUI = (props) => {
     fieldsNotValid,
     signupData,
     enableReCaptcha,
-    isDriverSignup
+    isDriverSignup,
+    setCellphoneStartZero
   } = props
 
   const theme = useTheme()
@@ -110,7 +111,7 @@ const SignUpDriverUI = (props) => {
     }
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setUserPhoneNumber(number)
 
     let phoneNumberParser = null
@@ -139,6 +140,7 @@ const SignUpDriverUI = (props) => {
         }
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeInput(phoneNumber, true)
   }
 
@@ -297,6 +299,7 @@ const SignUpDriverUI = (props) => {
                 {!!showInputPhoneNumber && (
                   <PhoneNumberWrapper className='formStyle'>
                     <InputPhoneNumber
+                      useProfileFormStyle
                       value={userPhoneNumber}
                       setValue={handleChangePhoneNumber}
                       handleIsValid={setIsValidPhoneNumber}

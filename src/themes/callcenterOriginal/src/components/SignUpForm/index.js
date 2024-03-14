@@ -60,7 +60,8 @@ const SignUpFormUI = (props) => {
     saveCustomerUser,
     fieldsNotValid,
     signupData,
-    enableReCaptcha
+    enableReCaptcha,
+    setCellphoneStartZero
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -113,7 +114,7 @@ const SignUpFormUI = (props) => {
     }
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setUserPhoneNumber(number)
 
     let phoneNumberParser = null
@@ -145,6 +146,7 @@ const SignUpFormUI = (props) => {
         }
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeInput(phoneNumber, true)
   }
 
