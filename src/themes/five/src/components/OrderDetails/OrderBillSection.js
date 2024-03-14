@@ -36,7 +36,7 @@ export const OrderBillSection = (props) => {
     }
   }
   const extraValueAdjustment = order?.metafields?.find?.(meta => meta?.key === 'extra_value_adjustment_amount')
-
+  const pulseCouponName = order?.metafields?.find?.(meta => meta?.key === 'pulse_coupon_name')
   const getIncludedTaxes = (isDeliveryFee) => {
     if (order?.taxes?.length === 0) {
       return order.tax_type === 1 ? order?.summary?.tax ?? 0 : 0
@@ -245,7 +245,7 @@ export const OrderBillSection = (props) => {
               {extraValueAdjustment && !!parseFloat(extraValueAdjustment?.value) && (
                 <tr>
                   <td>
-                    {t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
+                    {pulseCouponName ? pulseCouponName?.value : t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
                   </td>
                   <td>{parseFloat(extraValueAdjustment?.value) > 0 ? parsePrice(parseFloat(extraValueAdjustment?.value)) : `- ${parsePrice(parseFloat(extraValueAdjustment?.value) * -1)}`}</td>
                 </tr>
