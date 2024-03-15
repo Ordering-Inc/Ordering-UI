@@ -48,12 +48,12 @@ export const SpreadForm = (props) => {
   const [{ token: sessionToken }] = useSession()
   const [{ configs }] = useConfig()
   const [, t] = useLanguage()
-  const [formState, setFormState] = useState({ changes: {}, loading: false, error: null, added: false })
+  const [formState, setFormState] = useState({ changes: {}, loading: false, error: null, added: !!address?.location })
 
   const googleMapsApiKey = configs?.google_maps_api_key?.value
 
   const handleAddAddress = () => {
-    onChangeAddress(formState.changes)
+    onChangeAddress({ ...formState.changes, verified: !!formState?.previousResponseId })
     setFormState({ ...formState, added: true })
     editSpreadAddress && setEditSpreadAddress(!editSpreadAddress)
   }
