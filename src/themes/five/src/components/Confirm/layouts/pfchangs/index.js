@@ -26,7 +26,6 @@ const ConfirmUI = (props) => {
     cancelText
   } = props
   const [, t] = useLanguage()
-  const [theme] = useTheme()
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 27 || e.keyCode === 13) {
