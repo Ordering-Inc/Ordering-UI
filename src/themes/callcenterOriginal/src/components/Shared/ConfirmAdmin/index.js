@@ -42,7 +42,8 @@ const ConfirmAdminUI = (props) => {
 
     checkCodeState,
     handleChangeInput,
-    handleChangeCredentials
+    handleChangeCredentials,
+    setCellphoneStartZero
   } = props
 
   const [, t] = useLanguage()
@@ -73,7 +74,7 @@ const ConfirmAdminUI = (props) => {
     setOtpState('')
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setUserPhoneNumber(number)
     let phoneNumberParser = null
     let values = { country_phone_code: '', cellphone: '' }
@@ -87,6 +88,7 @@ const ConfirmAdminUI = (props) => {
         cellphone: phoneNumberParser.nationalNumber
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeCredentials(values)
   }
 

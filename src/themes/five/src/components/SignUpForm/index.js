@@ -99,7 +99,8 @@ const SignUpFormUI = (props) => {
     useSignUpFullDetails,
     useSignUpOtpEmail,
     useSignUpOtpCellphone,
-    isGuest
+    isGuest,
+    setCellphoneStartZero
   } = props
   const [, t] = useLanguage()
   const [, { showToast }] = useToast()
@@ -215,7 +216,7 @@ const SignUpFormUI = (props) => {
     }
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setUserPhoneNumber(number)
 
     let phoneNumberParser = null
@@ -247,6 +248,7 @@ const SignUpFormUI = (props) => {
         }
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeInput(phoneNumber, true)
   }
 
