@@ -225,7 +225,18 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
   (0, _react.useEffect)(function () {
     var _orderState$options3, _orderState$options3$;
     if (geoLocation && !auth && !(orderState !== null && orderState !== void 0 && (_orderState$options3 = orderState.options) !== null && _orderState$options3 !== void 0 && (_orderState$options3$ = _orderState$options3.address) !== null && _orderState$options3$ !== void 0 && _orderState$options3$.location)) {
-      setOrderTypeModal(true);
+      var localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'));
+      if (!(localMarketplacePopup !== null && localMarketplacePopup !== void 0 && localMarketplacePopup.open)) {
+        setOrderTypeModal(true);
+        return;
+      }
+      var intervalId = setInterval(function () {
+        var localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'));
+        if (!localMarketplacePopup.open) {
+          clearInterval(intervalId);
+          setOrderTypeModal(true);
+        }
+      }, 1000);
     }
   }, [geoLocation, auth, orderState === null || orderState === void 0 ? void 0 : (_orderState$options4 = orderState.options) === null || _orderState$options4 === void 0 ? void 0 : (_orderState$options4$ = _orderState$options4.address) === null || _orderState$options4$ === void 0 ? void 0 : _orderState$options4$.location]);
   (0, _react.useEffect)(function () {
