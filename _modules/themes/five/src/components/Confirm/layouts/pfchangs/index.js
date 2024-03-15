@@ -38,9 +38,6 @@ var ConfirmUI = function ConfirmUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useTheme = (0, _styledComponents.useTheme)(),
-    _useTheme2 = _slicedToArray(_useTheme, 1),
-    theme = _useTheme2[0];
   var handleKeyDown = function handleKeyDown(e) {
     if (e.keyCode === 27 || e.keyCode === 13) {
       onClose && onClose();
