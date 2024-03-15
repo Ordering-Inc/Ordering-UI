@@ -133,7 +133,18 @@ export const PFChangsHomeHero = (props) => {
 
   useEffect(() => {
     if (geoLocation && !auth && !orderState?.options?.address?.location) {
-      setOrderTypeModal(true)
+      const localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'))
+      if (!localMarketplacePopup?.open) {
+        setOrderTypeModal(true)
+        return
+      }
+      const intervalId = setInterval(() => {
+        const localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'))
+        if (!localMarketplacePopup.open) {
+          clearInterval(intervalId)
+          setOrderTypeModal(true)
+        }
+      }, 1000)
     }
   }, [geoLocation, auth, orderState?.options?.address?.location])
 
@@ -418,7 +429,7 @@ export const PFChangsHomeHero = (props) => {
               {t('DELIVERY_UPPER', 'Delivery')}
             </Button>
           </DeliveryPickupContainer>
-          <div style={{ height: 10, display: 'flex', background: '#F8F9FA'}} />
+          <div style={{ height: 10, display: 'flex', background: '#F8F9FA' }} />
           <p style={{ marginTop: 20, fontSize: 16, fontWeight: 700 }}>{t('LOGIN_OR_REGISTER', 'Iniciar sesión o regístrate')}</p>
           <OrderTypeSelectorContainer>
             <Button
