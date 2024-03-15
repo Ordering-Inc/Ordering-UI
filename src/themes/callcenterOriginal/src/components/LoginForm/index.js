@@ -66,7 +66,8 @@ const LoginFormUI = (props) => {
     isPopup,
     credentials,
     enableReCaptcha,
-    useRootPoint
+    useRootPoint,
+    setCellphoneStartZero
   } = props
   const numOtpInputs = 4
 
@@ -149,9 +150,10 @@ const LoginFormUI = (props) => {
     }
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setValidPhoneField(isValid)
     handleChangeInput({ target: { name: 'cellphone', value: number } })
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     formMethods.setValue('cellphone', number, '')
   }
 

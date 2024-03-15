@@ -16,7 +16,7 @@ import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { formatSeconds } from '../../../../../utils'
-import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
+import { InputPhoneNumber } from '../InputPhoneNumber'
 import { UserFormDetailsUI } from '../UserFormDetails'
 
 import {
@@ -279,11 +279,12 @@ const UserVerificationUI = (props) => {
               <>
                 <InputWrapper phone>
                   <InputPhoneNumber
+                    useProfileFormStyle
                     user={user}
                     value={phoneState?.formatted}
                     disabled={!!phoneState?.formatted}
-                    setValue={() => {}}
-                    handleIsValid={() => {}}
+                    setValue={() => { }}
+                    handleIsValid={() => { }}
                   />
                 </InputWrapper>
                 <Button

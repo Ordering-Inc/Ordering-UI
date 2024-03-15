@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import parsePhoneNumber from 'libphonenumber-js'
 import PhoneInput from 'react-phone-number-input'
 import BsPhone from '@meronex/icons/bs/BsPhone'
 import { useLanguage, useConfig, useSession } from 'ordering-components'
 
-import { Container, ErrorMsg, InputBeforeIconWrapper } from './styles'
+import { Container, ErrorMsg, InputBeforeIconWrapper, ContainerUserForm } from './styles'
 
 export const InputPhoneNumber = (props) => {
   const {
@@ -12,12 +12,16 @@ export const InputPhoneNumber = (props) => {
     value,
     setValue,
     handleIsValid,
-    disabled
+    disabled,
+    useProfileFormStyle
   } = props
 
   const [, t] = useLanguage()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
+
+  const phoneRef = useRef(null)
+  const codesStartsWithZero = ['44']
 
   const isValidPhoneNumber = (number) => {
     if (!number) return
@@ -25,8 +29,42 @@ export const InputPhoneNumber = (props) => {
       return true
     }
     const numberParser = parsePhoneNumber(number)
-    return numberParser?.isValid()
+    let enableIspossibly = false
+    if (codesStartsWithZero.includes(numberParser?.countryCallingCode)) {
+      const inputNumber = returnRawNumber(number)
+      const validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871']
+      const result = validationsForUK.some(areaCode => inputNumber?.number?.startsWith(areaCode))
+      enableIspossibly = result
+    }
+
+    return enableIspossibly ? numberParser?.isPossible?.() : numberParser?.isValid?.()
   }
+
+  const returnRawNumber = (number) => {
+    if (!number) return null
+    if (!parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10)) {
+      return null
+    }
+    const numberParser = parsePhoneNumber(number)
+    const validations = ['0', '+']
+    if (validations.includes(phoneRef?.current?.value[0]) && codesStartsWithZero.includes(numberParser?.countryCallingCode)) {
+      const numberInput = phoneRef?.current?.value.replace('-', '')
+      let numberRaw = ''
+      numberInput?.split(' ')?.filter((_splited, i) => i > 0 || (i === 0 && _splited[0] === '0'))?.map(splited => {
+        numberRaw = `${numberRaw}${splited}`
+        return numberRaw
+      })
+
+      return {
+        number: numberRaw,
+        countryCallingCode: numberParser?.countryCallingCode ? `+${numberParser?.countryCallingCode}` : null
+      }
+    }
+
+    return number
+  }
+
+  const ContainerStyled = useProfileFormStyle ? ContainerUserForm : Container
 
   useEffect(() => {
     if (value) {
@@ -35,24 +73,21 @@ export const InputPhoneNumber = (props) => {
   }, [value])
 
   return (
-    <Container className='phone_number' disabled={disabled} isValid={value ? isValidPhoneNumber(value) : true}>
+    <ContainerStyled className='phone_number' disabled={disabled} isValid={value ? isValidPhoneNumber(value) : true}>
       <>
-        {props.beforeElements?.map((BeforeElement, i) => (
-          <React.Fragment key={i}>
-            {BeforeElement}
-          </React.Fragment>))}
-        {props.beforeComponents?.map((BeforeComponent, i) => (
-          <BeforeComponent key={i} {...props} />))}
-        <InputBeforeIconWrapper>
-          <BsPhone />
-        </InputBeforeIconWrapper>
+        {!useProfileFormStyle && (
+          <InputBeforeIconWrapper>
+            <BsPhone />
+          </InputBeforeIconWrapper>
+        )}
         <PhoneInput
+          ref={phoneRef}
           disabled={disabled}
           placeholder={t('PHONE_NUMBER', 'Phone number')}
           defaultCountry={configs?.default_country_code?.value}
           value={value}
           displayInitialValueAsLocalNumber
-          onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val))}
+          onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val), returnRawNumber(val))}
         />
         {value && !isValidPhoneNumber(value) && !disabled && (
           <>
@@ -65,13 +100,8 @@ export const InputPhoneNumber = (props) => {
             )}
           </>
         )}
-        {props.afterComponents?.map((AfterComponent, i) => (
-          <AfterComponent key={i} {...props} />))}
-        {props.afterElements?.map((AfterElement, i) => (
-          <React.Fragment key={i}>
-            {AfterElement}
-          </React.Fragment>))}
+
       </>
-    </Container>
+    </ContainerStyled>
   )
 }

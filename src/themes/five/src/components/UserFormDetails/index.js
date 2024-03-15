@@ -23,7 +23,7 @@ import { Switch } from '../../../../../styles/Switch'
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
+import { InputPhoneNumber } from '../InputPhoneNumber'
 import { LanguageSelector } from '../../../../../components/LanguageSelector'
 import { Alert } from '../Confirm'
 import { sortInputFields } from '../../../../../utils'
@@ -55,7 +55,8 @@ export const UserFormDetailsUI = (props) => {
     isAllowGuest,
     isOrderTypeValidationField,
     checkoutFields,
-    isCheckoutPlace
+    isCheckoutPlace,
+    setCellphoneStartZero
   } = props
 
   const formMethods = useForm()
@@ -190,7 +191,7 @@ export const UserFormDetailsUI = (props) => {
     }
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setUserPhoneNumber(number)
     setIsChanged(true)
 
@@ -223,6 +224,7 @@ export const UserFormDetailsUI = (props) => {
         }
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeInput(phoneNumber, true)
   }
 
@@ -412,6 +414,7 @@ export const UserFormDetailsUI = (props) => {
                 <InputPhoneNumberWrapper>
                   <p>{t('PHONE', 'Phone')}</p>
                   <InputPhoneNumber
+                    useProfileFormStyle
                     user={user}
                     value={userPhoneNumber}
                     setValue={handleChangePhoneNumber}

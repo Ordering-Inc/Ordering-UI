@@ -52,7 +52,8 @@ const SignUpBusinessUI = (props) => {
     saveCustomerUser,
     fieldsNotValid,
     signupData,
-    enableReCaptcha
+    enableReCaptcha,
+    setCellphoneStartZero
   } = props
 
   const theme = useTheme()
@@ -104,7 +105,7 @@ const SignUpBusinessUI = (props) => {
     }
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setUserPhoneNumber(number)
 
     let phoneNumberParser = null
@@ -133,6 +134,7 @@ const SignUpBusinessUI = (props) => {
         }
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeInput(phoneNumber, true)
   }
 
