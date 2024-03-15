@@ -4,7 +4,7 @@ import {
   Pencil,
   Trash
 } from 'react-bootstrap-icons'
-import { useUtils, useLanguage, useOrder, useConfig } from 'ordering-components'
+import { useUtils, useLanguage, useOrder, useConfig, ProductItemAccordion as ProductItemAccordionController } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import {
   AccordionSection,
@@ -31,7 +31,7 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 
-export const ProductItemAccordion = (props) => {
+const ProductItemAccordionUI = (props) => {
   const {
     isDisabledEdit,
     isCartPending,
@@ -45,7 +45,8 @@ export const ProductItemAccordion = (props) => {
     isCheckout,
     isStore,
     isConfirmationPage,
-    toppingsRemoved
+    toppingsRemoved,
+    productInfo
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -66,25 +67,7 @@ export const ProductItemAccordion = (props) => {
   const showProductImage = !theme?.[viewString]?.components?.cart?.components?.products?.components?.image?.hidden
   const hideProductDummyLogo = theme?.business_view?.components?.products?.components?.product?.components?.dummy?.hidden
 
-  const productInfo = () => {
-    if (isCartProduct) {
-      const ingredients = JSON.parse(JSON.stringify(Object.values(product.ingredients ?? {})))
-      let options = JSON.parse(JSON.stringify(Object.values(product.options ?? {})))
-
-      options = options.map(option => {
-        option.suboptions = Object.values(option.suboptions ?? {})
-        return option
-      })
-      return {
-        ...productInfo,
-        ingredients,
-        options
-      }
-    }
-    return product
-  }
-
-  const showArrowIcon = props.showArrowIcon && (productInfo()?.ingredients?.length > 0 || productInfo()?.options?.length > 0 || product?.comment)
+  const showArrowIcon = props.showArrowIcon && (productInfo?.ingredients?.length > 0 || productInfo?.options?.length > 0 || product?.comment)
 
   const toggleAccordion = (e) => {
     const isActionsClick = productSelect.current?.contains(e.target) || productActionsEdit.current?.contains(e.target) || productActionsDelete.current?.contains(e.target)
@@ -220,7 +203,7 @@ export const ProductItemAccordion = (props) => {
                     <span>
                       {parsePrice(product.total || product.price)}
                     </span>
-                    {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
+                    {(productInfo.ingredients.length > 0 || productInfo.options.length > 0 || product.comment) && (
                       <p>
                         <IosArrowDown className={`${setRotate}`} />
                       </p>
@@ -305,19 +288,19 @@ export const ProductItemAccordion = (props) => {
           ref={content}
           style={{ maxHeight: `${setHeight}` }}
         >
-          {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
+          {productInfo.ingredients.length > 0 && productInfo.ingredients.some(ingredient => !ingredient.selected) && (
             <ProductOptionsList>
               <p>{t('INGREDIENTS', 'Ingredients')}</p>
-              {productInfo().ingredients.map(ingredient => !ingredient.selected && (
+              {productInfo.ingredients.map(ingredient => !ingredient.selected && (
                 <li className='ingredient' key={ingredient.id}>
                   <span>{t('NO', 'No')} {ingredient.name}</span>
                 </li>
               ))}
             </ProductOptionsList>
           )}
-          {productInfo().options.length > 0 && (
+          {productInfo.options.length > 0 && (
             <ProductOptionsList>
-              {productInfo().options.sort((a, b) => a.rank - b.rank).map(option => (
+              {productInfo.options.sort((a, b) => a.rank - b.rank).map(option => (
                 <li key={option.id}>
                   <p>{option.name}</p>
                   <ProductOptionsList className='suboption'>
@@ -371,5 +354,15 @@ export const ProductItemAccordion = (props) => {
           </React.Fragment>))
       }
     </>
+  )
+}
+
+export const ProductItemAccordion = (props) => {
+  const productItemAccordion = {
+    ...props,
+    UIComponent: ProductItemAccordionUI
+  }
+  return (
+    <ProductItemAccordionController {...productItemAccordion} />
   )
 }
