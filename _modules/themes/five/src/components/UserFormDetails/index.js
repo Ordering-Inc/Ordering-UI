@@ -17,7 +17,7 @@ var _styles = require("./styles");
 var _Switch = require("../../../../../styles/Switch");
 var _Inputs = require("../../styles/Inputs");
 var _Buttons = require("../../styles/Buttons");
-var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
+var _InputPhoneNumber = require("../InputPhoneNumber");
 var _LanguageSelector = require("../../../../../components/LanguageSelector");
 var _Confirm = require("../Confirm");
 var _utils = require("../../../../../utils");
@@ -67,7 +67,8 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
     isAllowGuest = props.isAllowGuest,
     isOrderTypeValidationField = props.isOrderTypeValidationField,
     checkoutFields = props.checkoutFields,
-    isCheckoutPlace = props.isCheckoutPlace;
+    isCheckoutPlace = props.isCheckoutPlace,
+    setCellphoneStartZero = props.setCellphoneStartZero;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -235,7 +236,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       handleButtonUpdateClick(changes);
     }
   };
-  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid, rawNumber) {
     setUserPhoneNumber(number);
     setIsChanged(true);
     var phoneNumberParser = null;
@@ -270,6 +271,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
         }
       };
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber !== null && rawNumber !== void 0 && rawNumber.number && rawNumber !== null && rawNumber !== void 0 && rawNumber.countryCallingCode ? rawNumber === null || rawNumber === void 0 ? void 0 : rawNumber.number : null);
     handleChangeInput(phoneNumber, true);
   };
   var handleChangeInputEmail = function handleChangeInputEmail(e) {
@@ -428,6 +430,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
     onChange: _handleChangeDate,
     name: "birthdate"
   })), (!(user !== null && user !== void 0 && user.guest_id) && !!showInputPhoneNumber || isOrderTypeValidationField || (user === null || user === void 0 ? void 0 : user.guest_id)) && showCustomerCellphone && (requiredFields && (requiredFields === null || requiredFields === void 0 || (_requiredFields$inclu7 = requiredFields.includes) === null || _requiredFields$inclu7 === void 0 ? void 0 : _requiredFields$inclu7.call(requiredFields, 'cellphone')) || !requiredFields || !isCheckoutPlace) && /*#__PURE__*/_react.default.createElement(_styles.InputPhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+    useProfileFormStyle: true,
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,

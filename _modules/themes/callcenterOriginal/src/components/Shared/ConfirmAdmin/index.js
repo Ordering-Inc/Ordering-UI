@@ -50,7 +50,8 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
     generateOtpCode = props.generateOtpCode,
     checkCodeState = props.checkCodeState,
     handleChangeInput = props.handleChangeInput,
-    handleChangeCredentials = props.handleChangeCredentials;
+    handleChangeCredentials = props.handleChangeCredentials,
+    setCellphoneStartZero = props.setCellphoneStartZero;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -100,7 +101,7 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
     });
     setOtpState('');
   };
-  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid, rawNumber) {
     setUserPhoneNumber(number);
     var phoneNumberParser = null;
     var values = {
@@ -116,6 +117,7 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
         cellphone: phoneNumberParser.nationalNumber
       };
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber !== null && rawNumber !== void 0 && rawNumber.number && rawNumber !== null && rawNumber !== void 0 && rawNumber.countryCallingCode ? rawNumber === null || rawNumber === void 0 ? void 0 : rawNumber.number : null);
     handleChangeCredentials(values);
   };
   var handleSendOtp = function handleSendOtp() {

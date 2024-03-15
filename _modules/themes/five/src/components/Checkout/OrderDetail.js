@@ -26,8 +26,7 @@ var OrderDetail = exports.OrderDetail = function OrderDetail(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')];
-  return /*#__PURE__*/_react.default.createElement(_styles.OrderDetailContainer, null, /*#__PURE__*/_react.default.createElement("h3", null, customerAddress), /*#__PURE__*/_react.default.createElement("h3", null, orderTypeList[orderType - 1] || t('DELIVERY', 'Delivery')), /*#__PURE__*/_react.default.createElement("div", null, item === null || item === void 0 ? void 0 : item.products.filter(function (product) {
+  return /*#__PURE__*/_react.default.createElement(_styles.OrderDetailContainer, null, /*#__PURE__*/_react.default.createElement("h3", null, customerAddress), /*#__PURE__*/_react.default.createElement("div", null, item === null || item === void 0 ? void 0 : item.products.filter(function (product) {
     return !(product !== null && product !== void 0 && product.calendar_event);
   }).map(function (product) {
     var _item$toppings_remove;

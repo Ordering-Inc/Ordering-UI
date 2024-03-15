@@ -56,7 +56,8 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
     saveCustomerUser = props.saveCustomerUser,
     fieldsNotValid = props.fieldsNotValid,
     signupData = props.signupData,
-    enableReCaptcha = props.enableReCaptcha;
+    enableReCaptcha = props.enableReCaptcha,
+    setCellphoneStartZero = props.setCellphoneStartZero;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -117,7 +118,7 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
       handleSuccessSignup(formState.result.result);
     }
   };
-  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid, rawNumber) {
     setUserPhoneNumber(number);
     var phoneNumberParser = null;
     var phoneNumber = {
@@ -145,6 +146,7 @@ var SignUpBusinessUI = function SignUpBusinessUI(props) {
         }
       };
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber !== null && rawNumber !== void 0 && rawNumber.number && rawNumber !== null && rawNumber !== void 0 && rawNumber.countryCallingCode ? rawNumber === null || rawNumber === void 0 ? void 0 : rawNumber.number : null);
     handleChangeInput(phoneNumber, true);
   };
   var handleChangeInputEmail = function handleChangeInputEmail(e) {

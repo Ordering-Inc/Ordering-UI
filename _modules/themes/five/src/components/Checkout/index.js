@@ -35,6 +35,7 @@ var _SignUpForm = require("../SignUpForm");
 var _LoginForm = require("../LoginForm");
 var _OrderDetail = require("./OrderDetail");
 var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
+var _OrderTypesSquares = require("../OrderTypesSquares");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -64,7 +65,7 @@ var mapConfigs = {
   }
 };
 var CheckoutUI = function CheckoutUI(props) {
-  var _ordering$project, _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$colors, _theme$colors$split, _cart$comment, _cart$offers, _paymethodSelected$da, _paymethodSelected$da2, _cardList$cards, _cartState$cart, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _theme$checkout, _theme$checkout2, _theme$checkout3, _theme$checkout4, _loyaltyPlansState$re, _creditPointPlan$busi, _cart$business2, _businessDetails$busi3, _theme$images, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values2, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _ref2, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _customerState$user3, _options$address;
+  var _ordering$project, _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$colors, _theme$colors$split, _cart$comment, _cart$offers, _paymethodSelected$da, _paymethodSelected$da2, _cardList$cards, _cartState$cart, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _theme$checkout, _theme$checkout2, _theme$checkout3, _theme$checkout4, _loyaltyPlansState$re, _creditPointPlan$busi, _cart$business2, _businessDetails$busi3, _theme$images, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values2, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _ref2, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _customerState$user3, _theme$colors2, _options$address;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
@@ -181,6 +182,7 @@ var CheckoutUI = function CheckoutUI(props) {
     productLoading = _useState26[0],
     setProductLoading = _useState26[1];
   var shouldActivateOrderDetailModal = ordering === null || ordering === void 0 || (_ordering$project = ordering.project) === null || _ordering$project === void 0 ? void 0 : _ordering$project.includes('alsea');
+  var orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')];
   var cardsMethods = ['stripe', 'credomatic'];
   var stripePaymethods = ['stripe', 'stripe_connect', 'stripe_redirect'];
   var businessConfigs = (_businessDetails$busi = businessDetails === null || businessDetails === void 0 || (_businessDetails$busi2 = businessDetails.business) === null || _businessDetails$busi2 === void 0 ? void 0 : _businessDetails$busi2.configs) !== null && _businessDetails$busi !== void 0 ? _businessDetails$busi : [];
@@ -619,7 +621,7 @@ var CheckoutUI = function CheckoutUI(props) {
     cart: cart,
     loyaltyPlansState: loyaltyPlansState,
     businessConfigs: businessDetails === null || businessDetails === void 0 || (_businessDetails$busi12 = businessDetails.business) === null || _businessDetails$busi12 === void 0 ? void 0 : _businessDetails$busi12.configs
-  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, !!(!isMultiDriverTips && driverTipsField) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, /*#__PURE__*/_react.default.createElement(_OrderTypesSquares.OrderTypesSquares, null), !!(!isMultiDriverTips && driverTipsField) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
     isFixedPrice: parseInt(configs === null || configs === void 0 || (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 1,
@@ -763,6 +765,11 @@ var CheckoutUI = function CheckoutUI(props) {
       return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         orderDetail: false
       }));
+    },
+    title: orderTypeList[(options === null || options === void 0 ? void 0 : options.type) - 1] || t('DELIVERY', 'Delivery'),
+    titleStyle: {
+      color: theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary,
+      fontSize: 30
     }
   }, /*#__PURE__*/_react.default.createElement(_OrderDetail.OrderDetail, {
     item: cart,

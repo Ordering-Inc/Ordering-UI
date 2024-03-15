@@ -14,7 +14,7 @@ var _Inputs = require("../../styles/Inputs");
 var _Buttons = require("../../styles/Buttons");
 var _useCountdownTimer3 = require("../../../../../hooks/useCountdownTimer");
 var _utils = require("../../../../../utils");
-var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
+var _InputPhoneNumber = require("../InputPhoneNumber");
 var _UserFormDetails = require("../UserFormDetails");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -231,6 +231,7 @@ var UserVerificationUI = function UserVerificationUI(props) {
   }, t('RESEND_AGAIN', 'Resend again?')))))), isPhoneVerifyRequired && !isEmailVerifyRequired && (!verificationState.phone ? phoneState !== null && phoneState !== void 0 && phoneState.formatted ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, {
     phone: true
   }, /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+    useProfileFormStyle: true,
     user: user,
     value: phoneState === null || phoneState === void 0 ? void 0 : phoneState.formatted,
     disabled: !!(phoneState !== null && phoneState !== void 0 && phoneState.formatted),

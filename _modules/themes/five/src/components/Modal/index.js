@@ -39,7 +39,8 @@ var ModalUI = function ModalUI(props) {
     onRemove = props.onRemove,
     isSlideBar = props.isSlideBar,
     slideBarPosition = props.slideBarPosition,
-    disableOverflowX = props.disableOverflowX;
+    disableOverflowX = props.disableOverflowX,
+    titleStyle = props.titleStyle;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -83,7 +84,9 @@ var ModalUI = function ModalUI(props) {
     onClick: function onClick() {
       return onClose();
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ModalHeader, null, title && /*#__PURE__*/_react.default.createElement(_styles.ModalTitle, null, title)), children, (onCancel || onAccept) && /*#__PURE__*/_react.default.createElement(_styles.ModalActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ModalHeader, null, title && /*#__PURE__*/_react.default.createElement(_styles.ModalTitle, {
+    style: titleStyle
+  }, title)), children, (onCancel || onAccept) && /*#__PURE__*/_react.default.createElement(_styles.ModalActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     onClick: function onClick() {
       return onCancel();

@@ -53,7 +53,8 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
     isCustomerMode = props.isCustomerMode,
     confirmDataLayout = props.confirmDataLayout,
     inputsconfirmData = props.inputsconfirmData,
-    handleRequestCustomerAddress = props.handleRequestCustomerAddress;
+    handleRequestCustomerAddress = props.handleRequestCustomerAddress,
+    setCellphoneStartZero = props.setCellphoneStartZero;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -165,7 +166,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       }));
     }
   };
-  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid, rawNumber) {
     setUserPhoneNumber(number);
     var phoneNumberParser = null;
     var phoneNumber = {
@@ -199,6 +200,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
         }
       };
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber !== null && rawNumber !== void 0 && rawNumber.number && rawNumber !== null && rawNumber !== void 0 && rawNumber.countryCallingCode ? rawNumber === null || rawNumber === void 0 ? void 0 : rawNumber.number : null);
     handleChangeInput(phoneNumber, true);
   };
   var handleChangeInputEmail = function handleChangeInputEmail(e) {
