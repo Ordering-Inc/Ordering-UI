@@ -89,7 +89,8 @@ const LoginFormUI = (props) => {
     useLoginOtpEmail,
     useLoginOtpCellphone,
     handleLoginSpoonity,
-    useLoginSpoonity
+    useLoginSpoonity,
+    setCellphoneStartZero
   } = props
   const numOtpInputs = loginTab === 'otp' ? 6 : 4
   const [ordering, { setOrdering }] = useApi()
@@ -221,9 +222,10 @@ const LoginFormUI = (props) => {
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''))
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setValidPhoneField(isValid)
     handleChangeInput({ target: { name: 'cellphone', value: number } })
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     formMethods.setValue('cellphone', number, '')
   }
 

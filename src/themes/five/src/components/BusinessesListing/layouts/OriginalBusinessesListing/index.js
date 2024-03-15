@@ -23,12 +23,7 @@ import {
   BusinessLogosContainer,
   BusinessBanner,
   BusinessLogosWrapper,
-  AddressFormWrapper,
-  Title,
-  TypesContainer,
-  TypeButton,
-  IconTypeButton,
-  AdditionalTypesContainer
+  AddressFormWrapper
 } from './styles'
 import { useWindowSize } from '../../../../../../../hooks/useWindowSize'
 import { Button } from '../../../../styles/Buttons'
@@ -55,6 +50,7 @@ import { OrdersSection } from './OrdersSection'
 import { getCateringValues } from '../../../../../../../utils'
 import { AddressList } from '../../../AddressList'
 import { AddressForm } from '../../../AddressForm'
+import { OrderTypesSquares } from '../../../OrderTypesSquares'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -78,11 +74,9 @@ const BusinessesListingUI = (props) => {
     actualSlug,
     orderTypes
   } = props
-  const allOrderTypes = [1, 2, 3, 4, 5]
-  const pickupTypes = [2, 4, 5]
-  const eatInType = 3
+
   const [, t] = useLanguage()
-  const [orderState, { changeCityFilter, changeType }] = useOrder()
+  const [orderState, { changeCityFilter }] = useOrder()
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
   const windowSize = useWindowSize()
@@ -94,7 +88,6 @@ const BusinessesListingUI = (props) => {
   const [isPreorder, setIsPreorder] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
   const [hasHighRatedBusiness, setHasHighRatedBusiness] = useState(true)
-  const [orderTypeSelected, setOrderTypeSelected] = useState(orderState?.options?.type)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [favoriteIds, setFavoriteIds] = useState([])
   const allCitiesDisabled = citiesState?.cities?.every(city => !city.enabled)
@@ -114,7 +107,6 @@ const BusinessesListingUI = (props) => {
     : orderState?.options?.type === 8
       ? 'catering_pickup'
       : null
-  const configTypes = configs?.order_types_allowed?.value.split('|').filter(value => (allOrderTypes.includes(Number(value)))).map(value => Number(value)) || []
   const cateringValues = preorderBusiness?.configs && getCateringValues(cateringTypeString, preorderBusiness?.configs)
 
   const handleScroll = useCallback(() => {
@@ -182,19 +174,6 @@ const BusinessesListingUI = (props) => {
     changeCityFilter(cityId === orderState?.options?.city_id ? null : cityId)
   }
 
-  const handleChangeType = (value) => {
-    if (!orderState?.loading) {
-      changeType(value)
-      setOrderTypeSelected(value)
-    }
-  }
-
-  const handleChangeToPickup = () => {
-    const firstEnabledPickupType = orderTypes.find(type => configTypes?.includes(type.value) && type.value !== 1)?.value
-    handleChangeType(firstEnabledPickupType)
-    setOrderTypeSelected(firstEnabledPickupType)
-  }
-
   useEffect(() => {
     if (preorderBusiness) setIsPreorder(true)
   }, [preorderBusiness])
@@ -223,28 +202,6 @@ const BusinessesListingUI = (props) => {
     if (!selectedCity || !selectedCity?.enabled) changeCityFilter(null)
     setHasHighRatedBusiness(true)
   }, [citiesState, orderState?.options?.city_id])
-
-  useEffect(() => {
-    setOrderTypeSelected(orderState?.options?.type)
-  }, [orderState?.options?.type])
-
-  const OrderTypesComponent = () => {
-    return (
-      <>
-        {orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value) && pickupTypes.includes(type?.value)) : orderTypes).map((item, i) => (
-          <Button
-            key={item.value}
-            onClick={() => handleChangeType(item.value)}
-            color={orderState?.options?.type === item?.value ? 'primary' : 'secondary'}
-            disabled={orderState?.loading}
-            className={orderState?.options?.type !== item?.value ? 'activated' : ''}
-          >
-            {item.text}
-          </Button>
-        ))}
-      </>
-    )
-  }
 
   if (logosLayout) {
     return (
@@ -295,63 +252,9 @@ const BusinessesListingUI = (props) => {
       )}
       {(userCustomer && orderState?.options?.address?.address && isCustomerMode) && (
         <>
-          {(configTypes.includes(1) || configTypes.some(type => pickupTypes.includes(type))) && (
-            <Title>{t('DELIVERY_TYPE', 'Delivery Type')}</Title>
-          )}
-          <TypesContainer>
-            {configTypes.includes(1) && (
-              <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={orderTypeSelected === 1}>
-                <IconTypeButton activated={orderTypeSelected === 1}>
-                  <img
-                    src={theme?.images?.general?.deliveryIco}
-                    width={20}
-                    height={20}
-                  />
-                </IconTypeButton>
-                <p>{t('DELIVERY', 'Delivery')}</p>
-              </TypeButton>
-            )}
-            {configTypes.some(type => pickupTypes.includes(type)) && (
-              <TypeButton
-                disabled={orderState?.loading}
-                activated={pickupTypes.includes(orderTypeSelected)}
-                onClick={() => handleChangeToPickup()}
-              >
-                <IconTypeButton activated={pickupTypes.includes(orderTypeSelected)}>
-                  <img
-                    src={theme?.images?.general?.pickupIco}
-                    width={22}
-                    height={22}
-                  />
-                </IconTypeButton>
-                <p>{t('PICKUP', 'Pickup')}</p>
-              </TypeButton>
-            )}
-            {configTypes.some(type => eatInType === type) && (
-              <TypeButton
-                disabled={orderState?.loading}
-                activated={orderTypeSelected === 3}
-                onClick={() => handleChangeType(3)}
-              >
-                <IconTypeButton activated={orderTypeSelected === 3}>
-                  <img
-                    src={theme?.images?.general?.eatinIco}
-                    width={22}
-                    height={22}
-                  />
-                </IconTypeButton>
-                <p>{t('EAT_IN', 'Eat in')}</p>
-              </TypeButton>
-            )}
-          </TypesContainer>
-          {pickupTypes.includes(orderTypeSelected) && (
-            <>
-              <p>{t('WHAT_PICKUP_YOU_NEED', 'What kind of pickup do you need?')}</p>
-              <AdditionalTypesContainer>
-                <OrderTypesComponent />
-              </AdditionalTypesContainer>
-            </>
-          )}
+          <OrderTypesSquares
+            orderTypes={orderTypes}
+          />
         </>
       )}
       {!isCustomerMode && (

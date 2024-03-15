@@ -70,6 +70,7 @@ import { SignUpForm } from '../SignUpForm'
 import { LoginForm } from '../LoginForm'
 import { OrderDetail } from './OrderDetail'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
+import { OrderTypesSquares } from '../OrderTypesSquares'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -135,6 +136,7 @@ const CheckoutUI = (props) => {
   const [productLoading, setProductLoading] = useState(false)
 
   const shouldActivateOrderDetailModal = ordering?.project?.includes('alsea')
+  const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const cardsMethods = ['stripe', 'credomatic']
   const stripePaymethods = ['stripe', 'stripe_connect', 'stripe_redirect']
   const businessConfigs = businessDetails?.business?.configs ?? []
@@ -593,7 +595,7 @@ const CheckoutUI = (props) => {
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
-
+        <OrderTypesSquares />
         {
           !!(!isMultiDriverTips && driverTipsField) &&
           <>
@@ -863,6 +865,11 @@ const CheckoutUI = (props) => {
         width='760px'
         padding='30px'
         onClose={() => setOpenModal({ ...openModal, orderDetail: false })}
+        title={(orderTypeList[options?.type - 1]) || t('DELIVERY', 'Delivery')}
+        titleStyle={{
+          color: theme?.colors?.primary,
+          fontSize: 30
+        }}
       >
         <OrderDetail
           item={cart}
