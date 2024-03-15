@@ -99,14 +99,16 @@ var SpreadForm = exports.SpreadForm = function SpreadForm(props) {
       changes: {},
       loading: false,
       error: null,
-      added: false
+      added: !!(address !== null && address !== void 0 && address.location)
     }),
     _useState2 = _slicedToArray(_useState, 2),
     formState = _useState2[0],
     setFormState = _useState2[1];
   var googleMapsApiKey = configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var handleAddAddress = function handleAddAddress() {
-    onChangeAddress(formState.changes);
+    onChangeAddress(_objectSpread(_objectSpread({}, formState.changes), {}, {
+      verified: !!(formState !== null && formState !== void 0 && formState.previousResponseId)
+    }));
     setFormState(_objectSpread(_objectSpread({}, formState), {}, {
       added: true
     }));

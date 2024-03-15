@@ -481,7 +481,17 @@ var AddressFormUI = function AddressFormUI(props) {
   }, [address]);
   (0, _react.useEffect)(function () {
     if (addressSpreadForm) {
-      handleChangeAddress(addressSpreadForm, true);
+      if (!isEditing) {
+        handleChangeAddress(addressSpreadForm, true);
+      } else {
+        setLocationChange(addressSpreadForm === null || addressSpreadForm === void 0 ? void 0 : addressSpreadForm.location);
+        if (addressSpreadForm !== null && addressSpreadForm !== void 0 && addressSpreadForm.verified) {
+          var values = addressSpreadForm;
+          delete values.verified;
+          setSelectedFromAutocomplete(true);
+          updateChanges(values);
+        }
+      }
     }
   }, [addressSpreadForm]);
   return /*#__PURE__*/_react.default.createElement("div", {
