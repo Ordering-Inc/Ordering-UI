@@ -131,7 +131,18 @@ export const PFChangsHomeHero = (props) => {
 
   useEffect(() => {
     if (geoLocation && !auth && !orderState?.options?.address?.location) {
-      handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
+      const localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'))
+      if (!localMarketplacePopup?.open) {
+        handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
+        return
+      }
+      const intervalId = setInterval(() => {
+        const localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'))
+        if (!localMarketplacePopup?.open) {
+          clearInterval(intervalId)
+          handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
+        }
+      }, 1000)
     }
   }, [geoLocation, auth, orderState?.options?.address?.location])
 

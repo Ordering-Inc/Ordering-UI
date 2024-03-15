@@ -314,10 +314,10 @@ const OrderDetailsUI = (props) => {
     let updated_at = null
     delayedETA = 0
     if (order.updated_at) {
-      updated_at = new Date(order.updated_at + ' UTC');
+      updated_at = new Date(order.updated_at + ' UTC')
     }
     if (order.updated_at && (order.delivery_type == 1 && statusDelayInfo[order.status].Show_delay_delivery || order.delivery_type == 2 && statusDelayInfo[order.status].Show_delay_pick_up)) {
-      let currentTime = new Date()
+      const currentTime = new Date()
       let delayETA = currentTime.getTime() - updated_at.getTime()
       delayETA = Math.floor(delayETA / 60000)
       if (delayETA > order.eta_current_status_time) {
@@ -332,12 +332,12 @@ const OrderDetailsUI = (props) => {
 
   const getEstimatedDeliveryTime = () => {
     if (layout === 'pfchangs') {
-      let estimatedDeliverytime = new Date(order.delivery_datetime)
+      const estimatedDeliverytime = new Date(order.delivery_datetime)
       if (verifyOrderOnTime()) {
-        estimatedDeliverytime.setMinutes(estimatedDeliverytime.getMinutes() + order.eta_drive_time + delayedETA);
+        estimatedDeliverytime.setMinutes(estimatedDeliverytime.getMinutes() + order.eta_drive_time + delayedETA)
         return setDateTimeETA(parseDate(estimatedDeliverytime))
       } else {
-        estimatedDeliverytime.setMinutes(estimatedDeliverytime.getMinutes() + order.eta_drive_time);
+        estimatedDeliverytime.setMinutes(estimatedDeliverytime.getMinutes() + order.eta_drive_time)
         return setDateTimeETA(parseDate(estimatedDeliverytime))
       }
     } else {
@@ -376,7 +376,7 @@ const OrderDetailsUI = (props) => {
     if (!reorderState?.error && reorderState.loading === false && businessData?.id) {
       const _businessId = 'businessId:' + businessData?.id
       const products = carts?.[_businessId]?.products
-      const available = products.every(product => product.valid === true)
+      const available = products?.every(product => product.valid === true)
       if (available && reorderState?.result?.uuid && (products?.length === order?.products.length)) {
         handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
       } else {
@@ -396,7 +396,7 @@ const OrderDetailsUI = (props) => {
 
   useEffect(() => {
     if (loading) return
-    const intervalETA = setInterval(() => getEstimatedDeliveryTime(), 1000);
+    const intervalETA = setInterval(() => getEstimatedDeliveryTime(), 1000)
     return () => {
       clearInterval(intervalETA)
     }
