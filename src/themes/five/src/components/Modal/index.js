@@ -29,7 +29,8 @@ const ModalUI = (props) => {
     onRemove,
     isSlideBar,
     slideBarPosition,
-    disableOverflowX
+    disableOverflowX,
+    titleStyle
   } = props
   const [, t] = useLanguage()
 
@@ -79,7 +80,9 @@ const ModalUI = (props) => {
       )}
       <ModalHeader>
         {title && (
-          <ModalTitle>
+          <ModalTitle
+            style={titleStyle}
+          >
             {title}
           </ModalTitle>
         )}

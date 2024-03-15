@@ -15,14 +15,11 @@ export const OrderDetail = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
 
   return (
     <OrderDetailContainer>
+
       <h3>{customerAddress}</h3>
-      <h3>
-        {(orderTypeList[orderType - 1]) || t('DELIVERY', 'Delivery')}
-      </h3>
       <div>
         {item?.products.filter(product => !product?.calendar_event).map(product => (
           <ProductItemAccordion
