@@ -31,7 +31,7 @@ import {
 } from './styles'
 
 import MdcCellphoneAndroid from '@meronex/icons/mdc/MdcCellphoneAndroid'
-import { OrderTypesSelectorNew } from '../../../../five/src/components/OrderTypesSelectorNew'
+import { OrderTypesSquares } from '../../../../five/src/components/OrderTypesSquares'
 
 const PhoneAutocompleteUI = (props) => {
   const {
@@ -289,7 +289,7 @@ const PhoneAutocompleteUI = (props) => {
         <ContentWrapper>
           <Title>{t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')}</Title>
           <Slogan>{t('SUBTITLE_HOME_CALLCENTER', 'Start first by selecting a delivery type')}</Slogan>
-          <OrderTypesSelectorNew
+          <OrderTypesSquares
             hideTitle
             orderTypes={orderTypes}
           />

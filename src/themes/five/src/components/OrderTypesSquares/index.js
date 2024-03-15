@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components'
 import { useConfig, useLanguage, useOrder } from 'ordering-components'
 import Button from '../../styles/Buttons'
 
-export const OrderTypesSelectorNewController = (props) => {
+export const OrderTypesSquaresController = (props) => {
   const {
     orderTypes,
     hideTitle
@@ -120,10 +120,10 @@ export const OrderTypesSelectorNewController = (props) => {
   )
 }
 
-export const OrderTypesSelectorNew = (props) => {
+export const OrderTypesSquares = (props) => {
   const [, t] = useLanguage()
 
-  const OrderTypesSelectorNewProps = {
+  const OrderTypesSquaresProps = {
     ...props,
     orderTypes: props.orderTypes || [
       {
@@ -153,5 +153,5 @@ export const OrderTypesSelectorNew = (props) => {
       }
     ]
   }
-  return <OrderTypesSelectorNewController {...OrderTypesSelectorNewProps} />
+  return <OrderTypesSquaresController {...OrderTypesSquaresProps} />
 }

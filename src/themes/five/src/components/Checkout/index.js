@@ -70,7 +70,7 @@ import { SignUpForm } from '../SignUpForm'
 import { LoginForm } from '../LoginForm'
 import { OrderDetail } from './OrderDetail'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
-import { OrderTypesSelectorNew } from '../OrderTypesSelectorNew'
+import { OrderTypesSquares } from '../OrderTypesSquares'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -595,7 +595,7 @@ const CheckoutUI = (props) => {
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
-        <OrderTypesSelectorNew />
+        <OrderTypesSquares />
         {
           !!(!isMultiDriverTips && driverTipsField) &&
           <>

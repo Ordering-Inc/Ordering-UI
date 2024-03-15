@@ -50,7 +50,7 @@ import { OrdersSection } from './OrdersSection'
 import { getCateringValues } from '../../../../../../../utils'
 import { AddressList } from '../../../AddressList'
 import { AddressForm } from '../../../AddressForm'
-import { OrderTypesSelectorNew } from '../../../OrderTypesSelectorNew'
+import { OrderTypesSquares } from '../../../OrderTypesSquares'
 
 const PIXELS_TO_SCROLL = 300
 
@@ -252,7 +252,7 @@ const BusinessesListingUI = (props) => {
       )}
       {(userCustomer && orderState?.options?.address?.address && isCustomerMode) && (
         <>
-          <OrderTypesSelectorNew
+          <OrderTypesSquares
             orderTypes={orderTypes}
           />
         </>
