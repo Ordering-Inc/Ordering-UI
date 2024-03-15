@@ -390,7 +390,17 @@ const AddressFormUI = (props) => {
 
   useEffect(() => {
     if (addressSpreadForm) {
-      handleChangeAddress(addressSpreadForm, true)
+      if (!isEditing) {
+        handleChangeAddress(addressSpreadForm, true)
+      } else {
+        setLocationChange(addressSpreadForm?.location)
+        if (addressSpreadForm?.verified) {
+          const values = addressSpreadForm
+          delete values.verified
+          setSelectedFromAutocomplete(true)
+          updateChanges(values)
+        }
+      }
     }
   }, [addressSpreadForm])
 

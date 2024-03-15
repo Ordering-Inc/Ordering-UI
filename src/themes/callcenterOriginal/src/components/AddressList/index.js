@@ -52,6 +52,23 @@ import { useTheme } from 'styled-components'
 import { scrollTo } from '../../../../../utils'
 import { SpreadForm } from '../AddressForm/SpreadForm'
 
+const getSpreadAddressFormatted = (_address, restValues = {}) => {
+  return {
+    route: _address?.route,
+    street_number: _address?.street_number,
+    neighborhood: _address?.neighborhood,
+    city: _address?.city,
+    state: _address?.state,
+    country_code: _address?.country_code,
+    country: _address?.country,
+    address: _address?.address,
+    locality: _address?.locality,
+    location: _address?.location,
+    zipcode: _address?.zipcode,
+    ...restValues
+  }
+}
+
 const AddressListUI = (props) => {
   const {
     actionStatus,
@@ -107,6 +124,7 @@ const AddressListUI = (props) => {
 
   const openAddress = (address) => {
     setCurAddress(address)
+    address?.location && setAddressSpreadForm(getSpreadAddressFormatted(address))
     setAddressOpen(true)
     setIsAddressFormOpen && setIsAddressFormOpen(true)
     const container = window.document.getElementsByClassName('form_edit')[0]
@@ -202,6 +220,7 @@ const AddressListUI = (props) => {
   const handleCloseAddressForm = () => {
     setAddressOpen(false)
     setIsAddressFormOpen && setIsAddressFormOpen(false)
+    setEditSpreadAddress(false)
   }
 
   /**
@@ -398,19 +417,7 @@ const AddressListUI = (props) => {
             </TitleFormContainer>
             {showSpreadForm && (
               <SpreadForm
-                address={curAddress?.address && {
-                  route: curAddress?.route,
-                  street_number: curAddress?.street_number,
-                  neighborhood: curAddress?.neighborhood,
-                  city: curAddress?.city,
-                  state: curAddress?.state,
-                  country_code: curAddress?.country_code,
-                  country: curAddress?.country,
-                  address: curAddress?.address,
-                  locality: curAddress?.locality,
-                  location: curAddress?.location,
-                  zipcode: curAddress?.zipcode
-                }}
+                address={curAddress?.address && getSpreadAddressFormatted(curAddress)}
                 countryAutocomplete={countryAutocomplete}
                 editSpreadAddress={editSpreadAddress}
                 setEditSpreadAddress={setEditSpreadAddress}
