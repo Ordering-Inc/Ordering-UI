@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import CgSearchLoading from '@meronex/icons/cg/CgSearchLoading'
 import {
   Heart,
   Building,
@@ -23,7 +22,6 @@ import {
   useEvent
 } from 'ordering-components'
 import { Alert } from '../Confirm'
-import { GoogleGpsButton } from '../../../../../components/GoogleGpsButton'
 import {
   FormControl,
   FormActions,
@@ -458,17 +456,6 @@ const AddressFormUI = (props) => {
                               countryCode={configState?.configs?.country_autocomplete?.value || '*'}
                             />
                           </WrapAddressInput>
-                          <GoogleGpsButton
-                            className='gps-button'
-                            apiKey={googleMapsApiKey}
-                            onAddress={(e) => {
-                              formMethods.setValue('address', e.address)
-                              handleChangeAddress(e)
-                            }}
-                            onError={setMapErrors}
-                            IconButton={GeoAlt}
-                            IconLoadingButton={CgSearchLoading}
-                          />
                         </AddressWrap>
                       )}
                       {(addressState?.address?.location || formState?.changes?.location) && (
