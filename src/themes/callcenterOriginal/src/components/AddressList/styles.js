@@ -241,6 +241,12 @@ export const TitleFormContainer = styled.div`
     margin: auto;
     font-size: 24px;
   }
+
+  @media (max-width: 930px) {
+    h1 {
+      font-size: 18px !important;
+    }
+  }
 `
 
 export const AddressHoverInfo = styled.span`
