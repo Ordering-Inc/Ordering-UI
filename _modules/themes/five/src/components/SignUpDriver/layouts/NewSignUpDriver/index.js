@@ -9,7 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _reactHookForm = require("react-hook-form");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Confirm = require("../../../Confirm");
-var _InputPhoneNumber = require("../../../../../../../components/InputPhoneNumber");
+var _InputPhoneNumber = require("../../../InputPhoneNumber");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _styledComponents = require("styled-components");
 var _Inputs = require("../../../../styles/Inputs");
@@ -58,7 +58,8 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
     fieldsNotValid = props.fieldsNotValid,
     signupData = props.signupData,
     enableReCaptcha = props.enableReCaptcha,
-    isDriverSignup = props.isDriverSignup;
+    isDriverSignup = props.isDriverSignup,
+    setCellphoneStartZero = props.setCellphoneStartZero;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -129,7 +130,7 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
       handleSuccessSignup(formState.result.result);
     }
   };
-  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid, rawNumber) {
     setUserPhoneNumber(number);
     var phoneNumberParser = null;
     var phoneNumber = {
@@ -157,6 +158,7 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
         }
       };
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber !== null && rawNumber !== void 0 && rawNumber.number && rawNumber !== null && rawNumber !== void 0 && rawNumber.countryCallingCode ? rawNumber === null || rawNumber === void 0 ? void 0 : rawNumber.number : null);
     handleChangeInput(phoneNumber, true);
   };
   var handleChangeInputEmail = function handleChangeInputEmail(e) {
@@ -302,6 +304,7 @@ var SignUpDriverUI = function SignUpDriverUI(props) {
   }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_styles.PhoneNumberWrapper, {
     className: "formStyle"
   }, /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
+    useProfileFormStyle: true,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber

@@ -74,7 +74,8 @@ var LoginFormUI = function LoginFormUI(props) {
     useLoginOtpEmail = props.useLoginOtpEmail,
     useLoginOtpCellphone = props.useLoginOtpCellphone,
     handleLoginSpoonity = props.handleLoginSpoonity,
-    useLoginSpoonity = props.useLoginSpoonity;
+    useLoginSpoonity = props.useLoginSpoonity,
+    setCellphoneStartZero = props.setCellphoneStartZero;
   var numOtpInputs = loginTab === 'otp' ? 6 : 4;
   var _useApi = (0, _orderingComponents.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 2),
@@ -272,7 +273,7 @@ var LoginFormUI = function LoginFormUI(props) {
     });
     formMethods.setValue('email', e.target.value.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
   };
-  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid, rawNumber) {
     setValidPhoneField(isValid);
     handleChangeInput({
       target: {
@@ -280,6 +281,7 @@ var LoginFormUI = function LoginFormUI(props) {
         value: number
       }
     });
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber !== null && rawNumber !== void 0 && rawNumber.number && rawNumber !== null && rawNumber !== void 0 && rawNumber.countryCallingCode ? rawNumber === null || rawNumber === void 0 ? void 0 : rawNumber.number : null);
     formMethods.setValue('cellphone', number, '');
   };
   var handleChangeProject = function handleChangeProject(e) {

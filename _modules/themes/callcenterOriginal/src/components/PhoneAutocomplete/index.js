@@ -520,12 +520,18 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }));
 };
 var PhoneAutocomplete = exports.PhoneAutocomplete = function PhoneAutocomplete(props) {
+  var _configState$configs2;
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
+  var _useConfig3 = (0, _orderingComponents.useConfig)(),
+    _useConfig4 = _slicedToArray(_useConfig3, 1),
+    configState = _useConfig4[0];
+  var countriesElevenPhoneLength = ['GB'];
   var phoneProps = _objectSpread(_objectSpread({
     UIComponent: PhoneAutocompleteUI
   }, props), {}, {
+    limitPhoneLength: countriesElevenPhoneLength.includes(configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.default_country_code) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) ? 11 : props.limitPhoneLength,
     orderTypes: props.orderTypes || [{
       value: 1,
       text: t('DELIVERY', 'Delivery'),
