@@ -140,6 +140,8 @@ export const Header = (props) => {
     events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
   }
 
+  const cutCharactersName = ({ str, maxSize = 8 }) => str.length <= maxSize ? str : str.slice(0, maxSize) + '...'
+
   useEffect(() => {
     if (isCustomerMode) {
       setCustomerModalOpen(false)
@@ -177,7 +179,10 @@ export const Header = (props) => {
                   onClick={(e) => handleClickUserCustomer(e)}
                 >
                   <span>
-                    <p>{userCustomer?.name} {userCustomer?.lastname}</p>
+                    <p>
+                      {windowSize.width > 940 ? userCustomer?.name : cutCharactersName({ str: userCustomer?.name })}
+                      {' '}{windowSize.width > 940 ? userCustomer?.lastname : null}
+                    </p>
                   </span>
                   <span
                     ref={clearCustomer}

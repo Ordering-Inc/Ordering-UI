@@ -2,6 +2,12 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   height: ${({ isEdit }) => isEdit ? 'auto' : '145px'};
+
+  @media (max-width: 930px) {
+    h1 {
+      font-size: 18px !important;
+    }
+  }
 `
 
 export const Header = styled.div`
