@@ -199,6 +199,12 @@ var Header = exports.Header = function Header(props) {
       }
     });
   };
+  var cutCharactersName = function cutCharactersName(_ref) {
+    var str = _ref.str,
+      _ref$maxSize = _ref.maxSize,
+      maxSize = _ref$maxSize === void 0 ? 8 : _ref$maxSize;
+    return str.length <= maxSize ? str : str.slice(0, maxSize) + '...';
+  };
   (0, _react.useEffect)(function () {
     if (isCustomerMode) {
       setCustomerModalOpen(false);
@@ -251,7 +257,9 @@ var Header = exports.Header = function Header(props) {
     onClick: function onClick(e) {
       return handleClickUserCustomer(e);
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ", userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname)), /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, windowSize.width > 940 ? userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name : cutCharactersName({
+    str: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name
+  }), ' ', windowSize.width > 940 ? userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname : null)), /*#__PURE__*/_react.default.createElement("span", {
     ref: clearCustomer
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineClose.default, null))), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (isPreOrderSetting || (configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.preorder_status_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === undefined) && /*#__PURE__*/_react.default.createElement(_styles.MomentMenu, {
     onClick: (configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.max_days_preorder) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) === -1 || (configState === null || configState === void 0 || (_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function () {

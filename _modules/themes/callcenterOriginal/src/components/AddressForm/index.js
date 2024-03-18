@@ -7,13 +7,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.AddressForm = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-var _CgSearchLoading = _interopRequireDefault(require("@meronex/icons/cg/CgSearchLoading"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styledComponents = require("styled-components");
 var _reactHookForm = require("react-hook-form");
 var _orderingComponents = require("ordering-components");
 var _Confirm = require("../Confirm");
-var _GoogleGpsButton = require("../../../../../components/GoogleGpsButton");
 var _styles = require("./styles");
 var _Buttons = require("../../styles/Buttons");
 var _Inputs = require("../../styles/Inputs");
@@ -537,17 +535,7 @@ var AddressFormUI = function AddressFormUI(props) {
       defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 || (_formState$result4 = formState.result) === null || _formState$result4 === void 0 || (_formState$result4 = _formState$result4.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.address : (_formState$changes$ad5 = formState === null || formState === void 0 || (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.address) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressValue,
       autoComplete: "new-field",
       countryCode: (configState === null || configState === void 0 || (_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.country_autocomplete) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) || '*'
-    })), /*#__PURE__*/_react.default.createElement(_GoogleGpsButton.GoogleGpsButton, {
-      className: "gps-button",
-      apiKey: googleMapsApiKey,
-      onAddress: function onAddress(e) {
-        formMethods.setValue('address', e.address);
-        handleChangeAddress(e);
-      },
-      onError: setMapErrors,
-      IconButton: _reactBootstrapIcons.GeoAlt,
-      IconLoadingButton: _CgSearchLoading.default
-    })), ((addressState === null || addressState === void 0 || (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 || (_formState$changes29 = formState.changes) === null || _formState$changes29 === void 0 ? void 0 : _formState$changes29.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
+    }))), ((addressState === null || addressState === void 0 || (_addressState$address12 = addressState.address) === null || _addressState$address12 === void 0 ? void 0 : _addressState$address12.location) || (formState === null || formState === void 0 || (_formState$changes29 = formState.changes) === null || _formState$changes29 === void 0 ? void 0 : _formState$changes29.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
       showMap: showMap || !showSpreadForm,
       notUseCustomerInfo: notUseCustomerInfo,
       addFormRestrictions: addFormRestrictions
