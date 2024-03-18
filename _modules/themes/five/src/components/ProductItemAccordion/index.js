@@ -15,24 +15,24 @@ var _styledComponents = require("styled-components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAccordion(props) {
-  var _theme$viewString, _theme$business_view, _productInfo, _productInfo2, _props$beforeElements, _props$beforeComponen, _product$valid, _theme$images, _theme$images2, _product$calendar_eve, _configs$format_time, _product$calendar_eve2, _configs$format_time2, _toppingsRemoved$remo, _props$afterComponent, _props$afterElements;
+var ProductItemAccordionUI = function ProductItemAccordionUI(props) {
+  var _theme$viewString, _theme$business_view, _productInfo$ingredie, _productInfo$options, _props$beforeElements, _props$beforeComponen, _product$valid, _theme$images, _theme$images2, _product$calendar_eve, _configs$format_time, _product$calendar_eve2, _configs$format_time2, _toppingsRemoved$remo, _props$afterComponent, _props$afterElements;
   var isDisabledEdit = props.isDisabledEdit,
     isCartPending = props.isCartPending,
     isCartProduct = props.isCartProduct,
@@ -45,7 +45,8 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
     isCheckout = props.isCheckout,
     isStore = props.isStore,
     isConfirmationPage = props.isConfirmationPage,
-    toppingsRemoved = props.toppingsRemoved;
+    toppingsRemoved = props.toppingsRemoved,
+    productInfo = props.productInfo;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -81,24 +82,7 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
   var viewString = isConfirmationPage ? 'confirmation' : isStore ? 'business_view' : 'header';
   var showProductImage = !(theme !== null && theme !== void 0 && (_theme$viewString = theme[viewString]) !== null && _theme$viewString !== void 0 && (_theme$viewString = _theme$viewString.components) !== null && _theme$viewString !== void 0 && (_theme$viewString = _theme$viewString.cart) !== null && _theme$viewString !== void 0 && (_theme$viewString = _theme$viewString.components) !== null && _theme$viewString !== void 0 && (_theme$viewString = _theme$viewString.products) !== null && _theme$viewString !== void 0 && (_theme$viewString = _theme$viewString.components) !== null && _theme$viewString !== void 0 && (_theme$viewString = _theme$viewString.image) !== null && _theme$viewString !== void 0 && _theme$viewString.hidden);
   var hideProductDummyLogo = theme === null || theme === void 0 || (_theme$business_view = theme.business_view) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.components) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.products) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.components) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.product) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.components) === null || _theme$business_view === void 0 || (_theme$business_view = _theme$business_view.dummy) === null || _theme$business_view === void 0 ? void 0 : _theme$business_view.hidden;
-  var productInfo = function productInfo() {
-    if (isCartProduct) {
-      var _product$ingredients, _product$options;
-      var ingredients = JSON.parse(JSON.stringify(Object.values((_product$ingredients = product.ingredients) !== null && _product$ingredients !== void 0 ? _product$ingredients : {})));
-      var options = JSON.parse(JSON.stringify(Object.values((_product$options = product.options) !== null && _product$options !== void 0 ? _product$options : {})));
-      options = options.map(function (option) {
-        var _option$suboptions;
-        option.suboptions = Object.values((_option$suboptions = option.suboptions) !== null && _option$suboptions !== void 0 ? _option$suboptions : {});
-        return option;
-      });
-      return _objectSpread(_objectSpread({}, productInfo), {}, {
-        ingredients: ingredients,
-        options: options
-      });
-    }
-    return product;
-  };
-  var showArrowIcon = props.showArrowIcon && (((_productInfo = productInfo()) === null || _productInfo === void 0 || (_productInfo = _productInfo.ingredients) === null || _productInfo === void 0 ? void 0 : _productInfo.length) > 0 || ((_productInfo2 = productInfo()) === null || _productInfo2 === void 0 || (_productInfo2 = _productInfo2.options) === null || _productInfo2 === void 0 ? void 0 : _productInfo2.length) > 0 || (product === null || product === void 0 ? void 0 : product.comment));
+  var showArrowIcon = props.showArrowIcon && ((productInfo === null || productInfo === void 0 || (_productInfo$ingredie = productInfo.ingredients) === null || _productInfo$ingredie === void 0 ? void 0 : _productInfo$ingredie.length) > 0 || (productInfo === null || productInfo === void 0 || (_productInfo$options = productInfo.options) === null || _productInfo$options === void 0 ? void 0 : _productInfo$options.length) > 0 || (product === null || product === void 0 ? void 0 : product.comment));
   var toggleAccordion = function toggleAccordion(e) {
     var _productSelect$curren, _productActionsEdit$c, _productActionsDelete;
     var isActionsClick = ((_productSelect$curren = productSelect.current) === null || _productSelect$curren === void 0 ? void 0 : _productSelect$curren.contains(e.target)) || ((_productActionsEdit$c = productActionsEdit.current) === null || _productActionsEdit$c === void 0 ? void 0 : _productActionsEdit$c.contains(e.target)) || ((_productActionsDelete = productActionsDelete.current) === null || _productActionsDelete === void 0 ? void 0 : _productActionsDelete.contains(e.target));
@@ -182,7 +166,7 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
     className: "".concat(setRotate)
   }), product.valid && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
     className: "prod-price"
-  }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (productInfo.ingredients.length > 0 || productInfo.options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
   }))), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, !isDisabledEdit && /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
@@ -229,14 +213,14 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
     style: {
       maxHeight: "".concat(setHeight)
     }
-  }, productInfo().ingredients.length > 0 && productInfo().ingredients.some(function (ingredient) {
+  }, productInfo.ingredients.length > 0 && productInfo.ingredients.some(function (ingredient) {
     return !ingredient.selected;
-  }) && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('INGREDIENTS', 'Ingredients')), productInfo().ingredients.map(function (ingredient) {
+  }) && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('INGREDIENTS', 'Ingredients')), productInfo.ingredients.map(function (ingredient) {
     return !ingredient.selected && /*#__PURE__*/_react.default.createElement("li", {
       className: "ingredient",
       key: ingredient.id
     }, /*#__PURE__*/_react.default.createElement("span", null, t('NO', 'No'), " ", ingredient.name));
-  })), productInfo().options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, productInfo().options.sort(function (a, b) {
+  })), productInfo.options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, productInfo.options.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (option) {
     return /*#__PURE__*/_react.default.createElement("li", {
@@ -269,4 +253,10 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
       key: i
     }, AfterElement);
   }));
+};
+var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAccordion(props) {
+  var productItemAccordion = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: ProductItemAccordionUI
+  });
+  return /*#__PURE__*/_react.default.createElement(_orderingComponents.ProductItemAccordion, productItemAccordion);
 };
