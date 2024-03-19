@@ -310,6 +310,7 @@ const BusinessProductsListingUI = (props) => {
           categoriesState={props.categoriesState}
           isCustomLayout={props.isCustomLayout}
           useKioskApp={props.useKioskApp}
+          configSlug={props.configSlug}
           categorySelected={categorySelected}
           openCategories={openCategories}
           openBusinessInformation={openBusinessInformation}

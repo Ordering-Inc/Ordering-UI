@@ -196,7 +196,7 @@ const OrdersOptionUI = (props) => {
     if (!reorderState?.error && reorderState.loading === false && reorderState?.result?.business_id) {
       const _businessId = 'businessId:' + reorderState?.result?.business_id
       const cartProducts = carts?.[_businessId]?.products
-      const available = cartProducts.every(product => product.valid === true)
+      const available = cartProducts?.every(product => product?.valid === true)
       const orderProducts = orders.find(order => order?.id === reorderState?.result?.orderId)?.products
 
       if (available && reorderState?.result?.uuid && (cartProducts?.length === orderProducts?.length)) {

@@ -285,6 +285,7 @@ export const RenderProductsLayout = (props) => {
                           subcategoriesLayout
                           subcategorySelected={subcategorySelected}
                           setSubcategorySelected={setSubcategorySelected}
+                          configSlug={props.configSlug}
                         />
                       )
                     }
@@ -529,7 +530,7 @@ export const RenderProductsLayout = (props) => {
             }
           </div>
           {showGoTopButton && (
-            <BackToTop showCartOnProductList={showCartOnProductList && currentCart?.products?.length > 0 && windowSize.width > 1000 && windowSize.height < 885} onClick={() => handleScrollToTop()}>
+            <BackToTop showCartOnProductList onClick={() => handleScrollToTop()}>
               <EnChevronThinUp />
               {t('BACK_TO_TOP', 'Back to top')}
             </BackToTop>
