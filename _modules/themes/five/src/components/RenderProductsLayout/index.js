@@ -53,7 +53,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var layoutOne = 'groceries';
 var RenderProductsLayout = function RenderProductsLayout(props) {
-  var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _business$categories, _business$categories2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view$5, _theme$business_view5, _theme$business_view6, _theme$business_view7, _theme$business_view8, _theme$business_view9, _theme$business_view10, _theme$business_view11, _theme$business_view12, _business$categories3, _business$categories4, _businessState$busine, _businessState$busine2, _business$professiona, _theme$defaultLanguag, _theme$defaultLanguag2, _categorySelected$sub, _categorySelected$sub2, _business$professiona2, _business$previously_, _categorySelected$sor, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _business$professiona3, _business$categories5, _theme$defaultLanguag5, _theme$defaultLanguag6, _business$previously_2, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3, _currentCart$products4;
+  var _configs$use_parent_c, _configs$use_parent_c2, _theme$business_view, _theme$business_view$, _theme$business_view$2, _theme$business_view$3, _theme$business_view$4, _business$categories, _business$categories2, _orderingTheme$theme, _orderingTheme$theme$, _orderingTheme$theme$2, _orderingTheme$theme$3, _orderingTheme$theme$4, _orderingTheme$theme$5, _orderingTheme$theme2, _orderingTheme$theme3, _orderingTheme$theme4, _orderingTheme$theme5, _orderingTheme$theme6, _orderingTheme$theme7, _theme$business_view2, _theme$business_view3, _theme$business_view4, _theme$business_view$5, _theme$business_view5, _theme$business_view6, _theme$business_view7, _theme$business_view8, _theme$business_view9, _theme$business_view10, _theme$business_view11, _theme$business_view12, _business$categories3, _business$categories4, _businessState$busine, _businessState$busine2, _business$professiona, _theme$defaultLanguag, _theme$defaultLanguag2, _categorySelected$sub, _categorySelected$sub2, _business$professiona2, _business$previously_, _categorySelected$sor, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products, _business$professiona3, _business$categories5, _theme$defaultLanguag5, _theme$defaultLanguag6, _business$previously_2, _theme$defaultLanguag7, _theme$defaultLanguag8, _currentCart$products2, _currentCart$products3;
   var errors = props.errors,
     isError = props.isError,
     isLoading = props.isLoading,
@@ -250,7 +250,8 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     wContainerStyle: useKioskApp && 'calc(100% - 50px)',
     subcategoriesLayout: true,
     subcategorySelected: subcategorySelected,
-    setSubcategorySelected: setSubcategorySelected
+    setSubcategorySelected: setSubcategorySelected,
+    configSlug: props.configSlug
   }), useKioskApp && /*#__PURE__*/_react.default.createElement(_styles.WrapperSearchAbsolute, {
     id: "WrapperSearchAbsolute"
   }, /*#__PURE__*/_react.default.createElement(_styles2.SearchIconWrapper, {
@@ -435,7 +436,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleChangeProfessionalSelected: handleChangeProfessionalSelected,
     subcategorySelected: subcategorySelected
   })))))), showGoTopButton && /*#__PURE__*/_react.default.createElement(_styles.BackToTop, {
-    showCartOnProductList: showCartOnProductList && (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 && windowSize.width > 1000 && windowSize.height < 885,
+    showCartOnProductList: true,
     onClick: function onClick() {
       return handleScrollToTop();
     }
@@ -472,7 +473,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
       textAlign: 'center',
       marginTop: '5px'
     }
-  }, t('YOUR_CART', 'Your cart')), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products4 = currentCart.products) === null || _currentCart$products4 === void 0 ? void 0 : _currentCart$products4.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+  }, t('YOUR_CART', 'Your cart')), (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products3 = currentCart.products) === null || _currentCart$products3 === void 0 ? void 0 : _currentCart$products3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isStore: true,
     isCustomMode: true,
     isForceOpenCart: true,

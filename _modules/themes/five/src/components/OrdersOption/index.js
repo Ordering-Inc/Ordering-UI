@@ -270,8 +270,8 @@ var OrdersOptionUI = function OrdersOptionUI(props) {
       var _reorderState$result5, _carts$_businessId, _orders$find, _reorderState$result7;
       var _businessId = 'businessId:' + (reorderState === null || reorderState === void 0 ? void 0 : (_reorderState$result5 = reorderState.result) === null || _reorderState$result5 === void 0 ? void 0 : _reorderState$result5.business_id);
       var cartProducts = carts === null || carts === void 0 ? void 0 : (_carts$_businessId = carts[_businessId]) === null || _carts$_businessId === void 0 ? void 0 : _carts$_businessId.products;
-      var available = cartProducts.every(function (product) {
-        return product.valid === true;
+      var available = cartProducts === null || cartProducts === void 0 ? void 0 : cartProducts.every(function (product) {
+        return (product === null || product === void 0 ? void 0 : product.valid) === true;
       });
       var orderProducts = (_orders$find = orders.find(function (order) {
         var _reorderState$result6;

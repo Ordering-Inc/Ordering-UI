@@ -162,6 +162,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       style0 += '}';
       var style1 = '.sticky-prod-cart {';
       style1 += 'position: fixed !important;';
+      style1 += 'margin-top: 90px !important;';
       style1 += 'top: 80px !important;';
       style1 += 'right: 1% !important;';
       style1 += 'width: 28.5% !important;';
