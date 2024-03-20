@@ -411,11 +411,23 @@ export const TitleWrapper = styled.div`
         `}
       `}
     }
+
     @media (min-width: 768px) {
       font-size: 32px;
-      
     }
   }
+
+  h3 {
+      font-size: 16px;
+      line-height: 36px;
+      margin: 0px;
+      font-weight: 500;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      background: ${({ theme }) => theme?.colors?.backgroundPage};
+    }
 `
 
 export const RibbonBox = styled.div`

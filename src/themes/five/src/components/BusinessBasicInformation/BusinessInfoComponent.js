@@ -59,6 +59,9 @@ export const BusinessInfoComponent = (props) => {
             {!loading ? (
               <TitleWrapper isCustomLayout={isCustomLayout} disableLeftSpace={singleBusinessRedirect}>
                 <h2 className='bold' id='business_name'>{business?.name}</h2>
+                {isCustomerMode && business?.address && (
+                  <h3>{business?.address}</h3>
+                )}
                 <span id='business_name_feedback' />
                 {business?.ribbon?.enabled && (
                   <RibbonBox
