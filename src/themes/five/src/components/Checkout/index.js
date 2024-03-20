@@ -135,7 +135,7 @@ const CheckoutUI = (props) => {
   const [paymethodClicked, setPaymethodClicked] = useState(null)
   const [productLoading, setProductLoading] = useState(false)
 
-  const shouldActivateOrderDetailModal = ordering?.project?.includes('alsea')
+  const shouldActivateOrderDetailModal = isCustomerMode
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const cardsMethods = ['stripe', 'credomatic']
   const stripePaymethods = ['stripe', 'stripe_connect', 'stripe_redirect']
