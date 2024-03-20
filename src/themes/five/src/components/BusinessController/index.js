@@ -33,7 +33,8 @@ import {
   FavoriteWrapper,
   BusinessHeaderClosedContainer,
   ScheduleContainer,
-  ClosedContainer
+  ClosedContainer,
+  BusinessAddress
   // CardOverlay
 } from './styles'
 import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
@@ -258,6 +259,19 @@ const BusinessControllerUI = (props) => {
                     <Skeleton width={100} />
                   )}
                 </div>
+                {isCustomerMode && (
+                  <>
+                    {business?.address ? (
+                      <div>
+                        <BusinessAddress>{business?.address}</BusinessAddress>
+                      </div>
+                    ) : (
+                      <div>
+                        <Skeleton width={100} />
+                      </div>
+                    )}
+                  </>
+                )}
                 <Medadata isCustomerMode={isCustomerMode} isSkeleton={isSkeleton}>
                   {!hideBusinessFee && orderType === 1 && (
                     <>
