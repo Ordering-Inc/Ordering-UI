@@ -103,7 +103,7 @@ var BusinessMoreDetail = exports.BusinessMoreDetail = _styledComponents.default.
 }, function (props) {
   return props.position ? 'black' : 'white';
 });
-var TitleWrapper = exports.TitleWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  span {\n    height: 70px;\n    width: 1px;\n    display: none;\n  }\n  h2 {\n    font-size: 24px;\n    line-height: 36px;\n    margin: 0 0 10px 0;\n    font-weight: 600;\n    width: 100%;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    background: ", ";\n    &.fixed-name {\n      z-index: 10001;\n      position: fixed;\n      top: 0;\n      padding: 10px 0;\n      font-size: 18px;\n      ", "\n      ", "\n    }\n    @media (min-width: 768px) {\n      font-size: 32px;\n      \n    }\n  }\n"])), function (_ref5) {
+var TitleWrapper = exports.TitleWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  span {\n    height: 70px;\n    width: 1px;\n    display: none;\n  }\n  h2 {\n    font-size: 24px;\n    line-height: 36px;\n    margin: 0 0 10px 0;\n    font-weight: 600;\n    width: 100%;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    background: ", ";\n    &.fixed-name {\n      z-index: 10001;\n      position: fixed;\n      top: 0;\n      padding: 10px 0;\n      font-size: 18px;\n      ", "\n      ", "\n    }\n\n    @media (min-width: 768px) {\n      font-size: 32px;\n    }\n  }\n\n  h3 {\n      font-size: 16px;\n      line-height: 36px;\n      margin: 0px;\n      font-weight: 500;\n      width: 100%;\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      background: ", ";\n    }\n"])), function (_ref5) {
   var _theme$colors;
   var theme = _ref5.theme;
   return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.backgroundPage;
@@ -122,6 +122,10 @@ var TitleWrapper = exports.TitleWrapper = _styledComponents.default.div(_templat
     var _props$theme13;
     return (_props$theme13 = props.theme) !== null && _props$theme13 !== void 0 && _props$theme13.rtl ? (0, _styledComponents.css)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n          right: 48px;\n          "]))) : (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n          left: 48px;\n        "])));
   });
+}, function (_ref8) {
+  var _theme$colors2;
+  var theme = _ref8.theme;
+  return theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.backgroundPage;
 });
 var RibbonBox = exports.RibbonBox = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  padding: 2px 8px;\n  box-sizing: border-box;\n  z-index: 10;\n  color: ", ";\n  font-weight: 400;\n  font-size: 10px;\n  line-height: 13px;\n  background-color: ", ";\n  max-width: 200px;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 2;\n  overflow: hidden;\n  margin-left: 5px;\n  margin-bottom: 10px;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.colorTextSignForm;
@@ -129,41 +133,41 @@ var RibbonBox = exports.RibbonBox = _styledComponents.default.div(_templateObjec
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    margin-left: 0px;\n    margin-right: 5px;\n  "])));
-}, function (_ref8) {
-  var bgColor = _ref8.bgColor;
-  return bgColor && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
 }, function (_ref9) {
-  var isRoundRect = _ref9.isRoundRect;
-  return isRoundRect && (0, _styledComponents.css)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
+  var bgColor = _ref9.bgColor;
+  return bgColor && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), bgColor);
 }, function (_ref10) {
-  var isCapsule = _ref10.isCapsule;
-  return isCapsule && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
+  var isRoundRect = _ref10.isRoundRect;
+  return isRoundRect && (0, _styledComponents.css)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n    border-radius: 7.6px;\n  "])));
 }, function (_ref11) {
-  var colorText = _ref11.colorText;
-  return colorText && (0, _styledComponents.css)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), colorText ? 'black' : 'white');
+  var isCapsule = _ref11.isCapsule;
+  return isCapsule && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n    border-radius: 50px;\n  "])));
 }, function (_ref12) {
-  var borderRibbon = _ref12.borderRibbon;
+  var colorText = _ref12.colorText;
+  return colorText && (0, _styledComponents.css)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), colorText ? 'black' : 'white');
+}, function (_ref13) {
+  var borderRibbon = _ref13.borderRibbon;
   return borderRibbon && (0, _styledComponents.css)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), borderRibbon ? 'black' : 'white');
 });
 var SearchIconWrapper = exports.SearchIconWrapper = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  background-color: ", ";\n  width: 36px;\n  height: 36px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  svg {\n    font-size: 18px;\n  }\n"])), function (props) {
   return props.theme.colors.gray200;
 });
-var SearchComponentContainer = exports.SearchComponentContainer = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10px;\n  right: 60px;\n  color: ", ";\n  #select-input {\n    color: #FFFFFF !important;\n  }\n  svg {\n    color: #FFFFFF;\n  }\n"])), function (_ref13) {
-  var theme = _ref13.theme;
+var SearchComponentContainer = exports.SearchComponentContainer = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 10px;\n  right: 60px;\n  color: ", ";\n  #select-input {\n    color: #FFFFFF !important;\n  }\n  svg {\n    color: #FFFFFF;\n  }\n"])), function (_ref14) {
+  var theme = _ref14.theme;
   return theme.colors.white;
 });
 var SocialList = exports.SocialList = _styledComponents.default.div(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-left: -3px;\n  ", "\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["\n    margin-right: -3px;\n    margin-left: 0px;\n  "])));
 });
-var CategorySelectedContainer = exports.CategorySelectedContainer = _styledComponents.default.div(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["\n  display: inline;\n  margin-left: 10px;\n  color: ", ";\n  padding-right: 5px;\n  cursor: pointer;\n  p{\n    margin: 0;\n  }\n  svg {\n    position: relative;\n    top: 2px;\n    margin-right: 3px;\n    width: 14px;\n    height: 14px;\n  }\n"])), function (_ref14) {
-  var _theme$colors2;
-  var theme = _ref14.theme;
-  return theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
+var CategorySelectedContainer = exports.CategorySelectedContainer = _styledComponents.default.div(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["\n  display: inline;\n  margin-left: 10px;\n  color: ", ";\n  padding-right: 5px;\n  cursor: pointer;\n  p{\n    margin: 0;\n  }\n  svg {\n    position: relative;\n    top: 2px;\n    margin-right: 3px;\n    width: 14px;\n    height: 14px;\n  }\n"])), function (_ref15) {
+  var _theme$colors3;
+  var theme = _ref15.theme;
+  return theme === null || theme === void 0 || (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.primary;
 });
 var IconWrapper = exports.IconWrapper = _styledComponents.default.a(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["\n  margin: 0px 3px 10px 3px;\n  border-radius: 3px;\n  border: 0.5px solid ", ";\n  width: 27px;\n  height: 27px;\n  min-width: 27px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  transition: all 0.2s linear;\n\n  ", "\n\n  svg {\n    height: 18px;\n    font-size: 18px;\n    transition: all 0.2s ease-in;\n    color: ", ";\n  }\n  &:hover {\n    background-color: ", ";\n    svg {\n      transform: scale(1.07);\n    }\n  }\n"])), function (props) {
   return props.theme.colors.gray200;
-}, function (_ref15) {
-  var isSkeleton = _ref15.isSkeleton;
+}, function (_ref16) {
+  var isSkeleton = _ref16.isSkeleton;
   return isSkeleton && (0, _styledComponents.css)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["\n    border: none;\n  "])));
 }, function (props) {
   return props.theme.colors.headingColor;
@@ -171,8 +175,8 @@ var IconWrapper = exports.IconWrapper = _styledComponents.default.a(_templateObj
   return props.theme.colors.gray200;
 });
 var BusinessInfoWrapper = exports.BusinessInfoWrapper = _styledComponents.default.div(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  @media (min-width: 768px) {\n    flex-direction: column;\n  }\n"])));
-var WrapperFloatingSearch = exports.WrapperFloatingSearch = _styledComponents.default.div(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["\n  position: absolute;\n  color: ", ";\n  display: flex;\n  background: rgba(0,0,0,0.2);\n  top: 80px;\n  right: 10px;\n  width: 80%;\n  border-bottom: 1px solid #FFFFFF;\n  #select-input {\n    color: #FFFFFF !important;\n    background: transparent;\n  }\n  svg, span {\n    color: #FFFFFF !important;\n  }\n  @media (min-width: 681px){\n    top: 23px;\n    right: 60px;\n    width: 300px;\n    input {\n      width: 80%;\n    }\n  }\n"])), function (_ref16) {
-  var theme = _ref16.theme;
+var WrapperFloatingSearch = exports.WrapperFloatingSearch = _styledComponents.default.div(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["\n  position: absolute;\n  color: ", ";\n  display: flex;\n  background: rgba(0,0,0,0.2);\n  top: 80px;\n  right: 10px;\n  width: 80%;\n  border-bottom: 1px solid #FFFFFF;\n  #select-input {\n    color: #FFFFFF !important;\n    background: transparent;\n  }\n  svg, span {\n    color: #FFFFFF !important;\n  }\n  @media (min-width: 681px){\n    top: 23px;\n    right: 60px;\n    width: 300px;\n    input {\n      width: 80%;\n    }\n  }\n"])), function (_ref17) {
+  var theme = _ref17.theme;
   return theme.colors.white;
 });
 var BackButton = exports.BackButton = _styledComponents.default.div(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["\n  button {\n    display: flex;\n    flex-direction: row;\n    align-items: center;}\n    margin-top: 10px;\n    svg {\n      margin-right: 10px;\n    }\n  }\n"])));
