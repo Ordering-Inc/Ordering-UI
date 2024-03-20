@@ -310,7 +310,7 @@ export const BusinessInfoItem = styled.div`
   }
 `
 
-export const BusinessName = styled.h6`
+export const BusinessName = styled.h5`
   font-size: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -532,4 +532,15 @@ export const ClosedContainer = styled.div`
   text-align: center;
   width: 100%;
   line-break: anywhere;
+`
+
+export const BusinessAddress = styled.h6`
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-weight: 400;
+  color: ${props => props.theme.colors.darkTextColor};
 `
