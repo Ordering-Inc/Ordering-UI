@@ -10,6 +10,7 @@ var _reactRouterDom = require("react-router-dom");
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
 var _AiOutlineClose = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineClose"));
+var _EnChevronWithCircleLeft = _interopRequireDefault(require("@meronex/icons/en/EnChevronWithCircleLeft"));
 var _LanguageSelector = require("../LanguageSelector");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _TiWarningOutline = _interopRequireDefault(require("@meronex/icons/ti/TiWarningOutline"));
@@ -56,7 +57,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Header = function Header(props) {
-  var _orderState$options, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$colors, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts3, _theme$layouts3$heade, _theme$layouts3$heade2, _theme$layouts3$heade3, _theme$layouts4, _theme$layouts4$heade, _theme$layouts4$heade2, _theme$layouts4$heade3, _theme$layouts4$heade4, _theme$layouts5, _theme$layouts5$heade, _theme$layouts5$heade2, _theme$layouts5$heade3, _theme$layouts5$heade4, _theme$layouts5$heade5, _theme$layouts6, _theme$layouts6$heade, _theme$layouts6$heade2, _theme$layouts6$heade3, _theme$layouts6$heade4, _theme$layouts6$heade5, _theme$layouts6$heade6, _theme$layouts7, _theme$layouts7$heade, _theme$layouts7$heade2, _theme$layouts7$heade3, _theme$layouts7$heade4, _theme$layouts7$heade5, _theme$layouts8, _theme$layouts8$heade, _theme$layouts8$heade2, _theme$layouts8$heade3, _theme$layouts9, _theme$layouts9$heade, _theme$layouts9$heade2, _theme$layouts9$heade3, _theme$layouts10, _theme$layouts10$head, _theme$layouts10$head2, _theme$layouts10$head3, _theme$layouts11, _theme$layouts11$gene, _theme$layouts11$gene2, _theme$layouts11$gene3, _customerState$user, _orderState$options4, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options6, _orderState$options6$, _orderState$options7, _orderState$options7$, _theme$colors2, _theme$colors3, _theme$colors4, _theme$colors5, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options8, _orderState$options8$, _configState$configs4, _configState$configs5, _orderState$options9, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options10, _orderState$options11, _orderState$options12, _orderState$options13, _configState$configs10, _configState$configs11, _orderState$options14, _configState$configs12, _configState$configs13, _configState$configs14, _configState$configs15, _orderState$options15, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
+  var _orderState$options, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _theme$layouts, _theme$layouts$header, _theme$layouts$header2, _theme$layouts$header3, _theme$colors, _theme$layouts2, _theme$layouts2$heade, _theme$layouts2$heade2, _theme$layouts2$heade3, _theme$layouts3, _theme$layouts3$heade, _theme$layouts3$heade2, _theme$layouts3$heade3, _theme$layouts4, _theme$layouts4$heade, _theme$layouts4$heade2, _theme$layouts4$heade3, _theme$layouts4$heade4, _theme$layouts5, _theme$layouts5$heade, _theme$layouts5$heade2, _theme$layouts5$heade3, _theme$layouts5$heade4, _theme$layouts5$heade5, _theme$layouts6, _theme$layouts6$heade, _theme$layouts6$heade2, _theme$layouts6$heade3, _theme$layouts6$heade4, _theme$layouts6$heade5, _theme$layouts6$heade6, _theme$layouts7, _theme$layouts7$heade, _theme$layouts7$heade2, _theme$layouts7$heade3, _theme$layouts7$heade4, _theme$layouts7$heade5, _theme$layouts8, _theme$layouts8$heade, _theme$layouts8$heade2, _theme$layouts8$heade3, _theme$layouts9, _theme$layouts9$heade, _theme$layouts9$heade2, _theme$layouts9$heade3, _theme$layouts10, _theme$layouts10$head, _theme$layouts10$head2, _theme$layouts10$head3, _theme$layouts11, _theme$layouts11$gene, _theme$layouts11$gene2, _theme$layouts11$gene3, _customerState$user, _orderState$options4, _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$logos, _theme$images2, _theme$images2$logos, _theme$images3, _theme$images3$logos, _orderState$options6, _orderState$options6$, _orderState$options7, _orderState$options7$, _theme$colors2, _theme$colors3, _theme$colors4, _theme$colors5, _theme$defaultLanguag2, _theme$defaultLanguag3, _cartsWithProducts$2, _orderState$options8, _orderState$options8$, _configState$configs4, _configState$configs5, _orderState$options9, _configState$configs6, _configState$configs7, _configState$configs8, _configState$configs9, _orderState$options10, _orderState$options11, _orderState$options12, _orderState$options13, _configState$configs10, _configState$configs11, _orderState$options14, _configState$configs12, _configState$configs13, _configState$configs14, _configState$configs15, _orderState$options15, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _props$afterComponent, _props$afterElements;
   var isHome = props.isHome,
     location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
@@ -300,13 +301,22 @@ var Header = function Header(props) {
   var handleClosePreorder = function handleClosePreorder() {
     setPreorderBusiness(null);
   };
-  var handleBusinessClick = function handleBusinessClick(business) {
-    events.emit('go_to_page', {
-      page: 'business',
-      params: {
-        store: business.slug
-      }
-    });
+  var handleBusinessClick = function handleBusinessClick(business, slug) {
+    if (!slug) {
+      events.emit('go_to_page', {
+        page: 'business',
+        params: {
+          store: business.slug
+        }
+      });
+    } else {
+      events.emit('go_to_page', {
+        page: 'business',
+        params: {
+          business_slug: business === null || business === void 0 ? void 0 : business.slug
+        }
+      });
+    }
   };
   var deleteOtpUser = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -562,7 +572,14 @@ var Header = function Header(props) {
     onClose: function onClose() {
       return handleClosePopover('user');
     }
-  }))))), onlineStatus && showOrderOptionsByTheme && isShowOrderOptions && !props.isCustomLayout && !isCustomerMode && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+  })), pathname.includes('/checkout') && (cartsWithProducts === null || cartsWithProducts === void 0 ? void 0 : cartsWithProducts.length) > 0 && ((_cartsWithProducts$2 = cartsWithProducts[0]) === null || _cartsWithProducts$2 === void 0 ? void 0 : _cartsWithProducts$2.valid) && /*#__PURE__*/_react.default.createElement(_styles.GoToMenu, {
+    onClick: function onClick() {
+      var _cartsWithProducts$3;
+      return handleBusinessClick((_cartsWithProducts$3 = cartsWithProducts[0]) === null || _cartsWithProducts$3 === void 0 ? void 0 : _cartsWithProducts$3.business, true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.BackIcon, null, /*#__PURE__*/_react.default.createElement(_EnChevronWithCircleLeft.default, {
+    color: theme.colors.primary
+  })), /*#__PURE__*/_react.default.createElement("p", null, t('MENU', 'Menu')))))), onlineStatus && showOrderOptionsByTheme && isShowOrderOptions && !props.isCustomLayout && !isCustomerMode && (windowSize.width > 768 && windowSize.width <= 820 ? /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick() {
       return openModal('address');
     }
