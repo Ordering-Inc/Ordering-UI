@@ -208,7 +208,18 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       if (result.state === 'granted' || result.state === 'prompt') {
         setGeoLocation(true);
       } else {
-        handleSetGuestLogin && handleSetGuestLogin('loginModal', true);
+        var localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'));
+        if (!(localMarketplacePopup !== null && localMarketplacePopup !== void 0 && localMarketplacePopup.open)) {
+          handleSetGuestLogin && handleSetGuestLogin('loginModal', true);
+          return;
+        }
+        var intervalId = setInterval(function () {
+          var localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'));
+          if (!(localMarketplacePopup !== null && localMarketplacePopup !== void 0 && localMarketplacePopup.open)) {
+            clearInterval(intervalId);
+            handleSetGuestLogin && handleSetGuestLogin('loginModal', true);
+          }
+        }, 1000);
       }
     });
     return function () {
