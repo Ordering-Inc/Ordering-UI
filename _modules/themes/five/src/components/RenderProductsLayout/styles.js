@@ -45,11 +45,8 @@ var BusinessCartContainer = (0, _styledComponents.default)(BusinessCategoriesCon
   return showPrincipalCategories ? '210px' : '90px';
 });
 exports.BusinessCartContainer = BusinessCartContainer;
-var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 30px;\n  position: relative;\n  margin-bottom: 30px;\n  max-height: ", ";\n  overflow: auto;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  /* .accordion.active {\n    padding-bottom: 10px;\n  } */\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n\n  @media (min-width: 768px) {\n    padding: 35px 30px;\n  }\n"])), function (_ref5) {
-  var maxHeight = _ref5.maxHeight;
-  return "".concat(maxHeight, "px");
-}, function (_ref6) {
-  var isModal = _ref6.isModal;
+var BusinessCartContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 20px 30px 0px;\n  position: relative;\n  margin-bottom: 30px;\n  max-height: calc(100vh - 196px);\n  overflow: auto;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  /* .accordion.active {\n    padding-bottom: 10px;\n  } */\n\n  ", "\n\n  @media (min-width: 1200px) {\n    position: sticky;\n    top: 0;\n  }\n\n"])), function (_ref5) {
+  var isModal = _ref5.isModal;
   return !isModal && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border: 1px solid #E9ECEF;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 7.6px;\n  "])));
 });
 exports.BusinessCartContent = BusinessCartContent;
@@ -69,8 +66,8 @@ var WrapperSearch = _styledComponents.default.div(_templateObject16 || (_templat
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      text-align: left;\n    "])));
 });
 exports.WrapperSearch = WrapperSearch;
-var ProfessionalFilterWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-bottom: 50px;\n  ", "\n"])), function (_ref7) {
-  var isTop = _ref7.isTop;
+var ProfessionalFilterWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-bottom: 50px;\n  ", "\n"])), function (_ref6) {
+  var isTop = _ref6.isTop;
   return isTop && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    margin-top: 30px;\n  "])));
 });
 exports.ProfessionalFilterWrapper = ProfessionalFilterWrapper;
@@ -80,16 +77,16 @@ var WrapperSearchAbsolute = _styledComponents.default.div(_templateObject21 || (
 exports.WrapperSearchAbsolute = WrapperSearchAbsolute;
 var NearBusiness = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 exports.NearBusiness = NearBusiness;
-var BackToTop = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  padding: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: fixed;\n  right: ", ";\n  bottom: ", ";\n  height: 80px;\n  width: 80px;\n  text-align: center;\n  color: ", ";\n  background: ", ";\n  border-radius: 6px;\n  cursor: pointer;\n  font-weight: 900;\n  opacity: 0.9;\n  svg {\n    font-size: 25px;\n  }\n"])), function (_ref8) {
-  var showCartOnProductList = _ref8.showCartOnProductList;
+var BackToTop = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  padding: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  position: fixed;\n  right: ", ";\n  bottom: ", ";\n  height: 80px;\n  width: 80px;\n  text-align: center;\n  color: ", ";\n  background: ", ";\n  border-radius: 6px;\n  cursor: pointer;\n  font-weight: 900;\n  opacity: 0.9;\n  svg {\n    font-size: 25px;\n  }\n"])), function (_ref7) {
+  var showCartOnProductList = _ref7.showCartOnProductList;
   return showCartOnProductList ? '31vw' : '20px';
-}, function (_ref9) {
-  var showCartOnProductList = _ref9.showCartOnProductList;
+}, function (_ref8) {
+  var showCartOnProductList = _ref8.showCartOnProductList;
   return showCartOnProductList ? '10px' : '20px';
 }, function (props) {
   return props.theme.colors.buttonPrimaryContrast || '#000';
-}, function (_ref10) {
-  var theme = _ref10.theme;
+}, function (_ref9) {
+  var theme = _ref9.theme;
   return theme.colors.gold;
 });
 exports.BackToTop = BackToTop;

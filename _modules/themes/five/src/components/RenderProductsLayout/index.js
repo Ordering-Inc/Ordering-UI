@@ -360,9 +360,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
   }))), showCartOnProductList && /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContainer, {
     id: "BusinessCartContainer",
     showPrincipalCategories: showPrincipalCategories
-  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, {
-    maxHeight: window.innerHeight - 100
-  }, (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessCartContent, null, (currentCart === null || currentCart === void 0 ? void 0 : (_currentCart$products = currentCart.products) === null || _currentCart$products === void 0 ? void 0 : _currentCart$products.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('YOUR_CART', 'Your cart')), /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
     isStore: true,
     isCustomMode: true,
     isForceOpenCart: true,
@@ -436,7 +434,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     handleChangeProfessionalSelected: handleChangeProfessionalSelected,
     subcategorySelected: subcategorySelected
   })))))), showGoTopButton && /*#__PURE__*/_react.default.createElement(_styles.BackToTop, {
-    showCartOnProductList: true,
+    showCartOnProductList: showCartOnProductList && windowSize.width > 1000,
     onClick: function onClick() {
       return handleScrollToTop();
     }

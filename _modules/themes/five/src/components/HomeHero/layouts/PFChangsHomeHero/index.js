@@ -232,7 +232,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
       }
       var intervalId = setInterval(function () {
         var localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'));
-        if (!localMarketplacePopup.open) {
+        if (!(localMarketplacePopup !== null && localMarketplacePopup !== void 0 && localMarketplacePopup.open)) {
           clearInterval(intervalId);
           setOrderTypeModal(true);
         }
@@ -459,7 +459,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
     orderTypeSelected: orderTypeSelected,
     style: {
-      marginBottom: 20
+      margin: '20px 15px'
     }
   }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     color: orderTypeSelected === 2 ? (props === null || props === void 0 ? void 0 : props.slug) === 'pf_changs' ? (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || '#FFF' : '#FFF' : '#000',
@@ -479,13 +479,14 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     disabled: orderState === null || orderState === void 0 ? void 0 : orderState.loading
   }, t('DELIVERY_UPPER', 'Delivery'))), /*#__PURE__*/_react.default.createElement("div", {
     style: {
+      margin: '0px 15px',
       height: 10,
       display: 'flex',
       background: '#F8F9FA'
     }
   }), /*#__PURE__*/_react.default.createElement("p", {
     style: {
-      marginTop: 20,
+      margin: '20px 15px',
       fontSize: 16,
       fontWeight: 700
     }
