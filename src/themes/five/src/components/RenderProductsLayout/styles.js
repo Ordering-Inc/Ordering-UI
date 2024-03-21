@@ -87,10 +87,10 @@ export const BusinessCartContainer = styled(BusinessCategoriesContainer)`
 
 export const BusinessCartContent = styled.div`
   background: white;
-  padding: 30px;
+  padding: 20px 30px 0px;
   position: relative;
   margin-bottom: 30px;
-  max-height: ${({ maxHeight }) => `${maxHeight}px`};
+  max-height: calc(100vh - 196px);
   overflow: auto;
 
   .product.accordion {
@@ -112,9 +112,6 @@ export const BusinessCartContent = styled.div`
     top: 0;
   }
 
-  @media (min-width: 768px) {
-    padding: 35px 30px;
-  }
 `
 
 export const EmptyCart = styled.div`

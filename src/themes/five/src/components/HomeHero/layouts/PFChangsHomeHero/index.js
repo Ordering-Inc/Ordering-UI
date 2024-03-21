@@ -140,7 +140,7 @@ export const PFChangsHomeHero = (props) => {
       }
       const intervalId = setInterval(() => {
         const localMarketplacePopup = JSON.parse(localStorage.getItem('marketplace_popup'))
-        if (!localMarketplacePopup.open) {
+        if (!localMarketplacePopup?.open) {
           clearInterval(intervalId)
           setOrderTypeModal(true)
         }
@@ -405,7 +405,7 @@ export const PFChangsHomeHero = (props) => {
           open={orderTypeModal}
           onClose={() => setOrderTypeModal(false)}
         >
-          <DeliveryPickupContainer orderTypeSelected={orderTypeSelected} style={{ marginBottom: 20 }}>
+          <DeliveryPickupContainer orderTypeSelected={orderTypeSelected} style={{ margin: '20px 15px' }}>
             <Button
               color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? theme?.colors?.tertiary || '#FFF' : '#FFF' : '#000'}
               onClick={() => {
@@ -429,8 +429,8 @@ export const PFChangsHomeHero = (props) => {
               {t('DELIVERY_UPPER', 'Delivery')}
             </Button>
           </DeliveryPickupContainer>
-          <div style={{ height: 10, display: 'flex', background: '#F8F9FA' }} />
-          <p style={{ marginTop: 20, fontSize: 16, fontWeight: 700 }}>{t('LOGIN_OR_REGISTER', 'Iniciar sesión o regístrate')}</p>
+          <div style={{ margin: '0px 15px', height: 10, display: 'flex', background: '#F8F9FA' }} />
+          <p style={{ margin: '20px 15px', fontSize: 16, fontWeight: 700 }}>{t('LOGIN_OR_REGISTER', 'Iniciar sesión o regístrate')}</p>
           <OrderTypeSelectorContainer>
             <Button
               color={props?.slug === 'pf_changs' ? '#000' : '#FFF'}

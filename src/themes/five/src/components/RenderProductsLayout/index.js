@@ -417,7 +417,7 @@ export const RenderProductsLayout = (props) => {
                 {
                   showCartOnProductList && (
                     <BusinessCartContainer id='BusinessCartContainer' showPrincipalCategories={showPrincipalCategories}>
-                      <BusinessCartContent maxHeight={window.innerHeight - 100}>
+                      <BusinessCartContent>
                         {currentCart?.products?.length > 0 ? (
                           <>
                             <Title>{t('YOUR_CART', 'Your cart')}</Title>
@@ -530,7 +530,7 @@ export const RenderProductsLayout = (props) => {
             }
           </div>
           {showGoTopButton && (
-            <BackToTop showCartOnProductList onClick={() => handleScrollToTop()}>
+            <BackToTop showCartOnProductList={showCartOnProductList && windowSize.width > 1000} onClick={() => handleScrollToTop()}>
               <EnChevronThinUp />
               {t('BACK_TO_TOP', 'Back to top')}
             </BackToTop>
