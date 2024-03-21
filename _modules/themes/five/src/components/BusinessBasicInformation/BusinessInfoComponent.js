@@ -87,7 +87,7 @@ var BusinessInfoComponent = exports.BusinessInfoComponent = function BusinessInf
   }, /*#__PURE__*/_react.default.createElement("h2", {
     className: "bold",
     id: "business_name"
-  }, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("span", {
+  }, business === null || business === void 0 ? void 0 : business.name), isCustomerMode && (business === null || business === void 0 ? void 0 : business.address) && /*#__PURE__*/_react.default.createElement("h3", null, business === null || business === void 0 ? void 0 : business.address), /*#__PURE__*/_react.default.createElement("span", {
     id: "business_name_feedback"
   }), (business === null || business === void 0 || (_business$ribbon = business.ribbon) === null || _business$ribbon === void 0 ? void 0 : _business$ribbon.enabled) && /*#__PURE__*/_react.default.createElement(_styles.RibbonBox, {
     bgColor: business === null || business === void 0 || (_business$ribbon2 = business.ribbon) === null || _business$ribbon2 === void 0 ? void 0 : _business$ribbon2.color,
