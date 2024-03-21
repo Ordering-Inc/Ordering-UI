@@ -458,53 +458,6 @@ export const MasterCardCoupon = styled.div`
     width: 100%
   }
 `
-
-export const GoToMenu = styled.div`
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  left: 70vw;
-  transform: translateY(75%);
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  p {
-    font-size: 14px;
-    margin: 0;
-  }
-  svg {
-    margin-right: 10px;
-    width: 20px;
-    height: 20px;
-    top: 4px;
-    position: relative;
-  }
-  @media (min-width: 768px) {
-    left: 70vw;
-    transform: translateY(100%);
-    p {
-      font-size: 16px;
-    }
-    svg {
-      width: 22px;
-      height: 22px;
-    }
-  }
-`
-
-export const BackIcon = styled.div`
-  * {
-    color: ${({ theme }) => theme?.colors?.primary};
-  }
-`
-
-export const ColumnDivider = styled.div`
-  height: 30px;
-  width: 1px;
-  background: #fff;
-  position: relative;
-  right: 20px;
-`
 export const RewardContainer = styled.div`
   padding: 0px 10px 25px 10px;
   text-align: left;

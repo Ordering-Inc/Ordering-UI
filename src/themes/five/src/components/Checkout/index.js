@@ -48,9 +48,6 @@ import {
   SubtitleContainer,
   BusinessDetails,
   MasterCardCoupon,
-  GoToMenu,
-  BackIcon,
-  ColumnDivider,
   RewardContainer,
   RewardBox,
   RewardBoxContainer,
@@ -186,8 +183,6 @@ const CheckoutUI = (props) => {
   const [isShowDeUnaCheckout, setShowDeUnaCheckout] = useState((configs?.webview_checkout_deuna?.value === '1' || configs?.webview_checkout_deuna?.value === true) && !forceOrderingCheckout)
   const loyaltyBrands = configs?.brands_wow_loyalty_program?.value && JSON.parse(configs?.brands_wow_loyalty_program?.value)[0]
   const isAlsea = ordering.project === 'alsea'
-
-  const DEUNA_URL = isAlsea ? 'https://api.deuna.com' : 'https://api.stg.deuna.io'
 
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
@@ -375,7 +370,6 @@ const CheckoutUI = (props) => {
   }
 
   const tokenizeOrder = async () => {
-    const currency = 'MXN'
     const data = {
       // order_type: 'PAYMENT_LINK',
       // order: {
@@ -488,7 +482,7 @@ const CheckoutUI = (props) => {
 
     const config = {
       orderToken: token,
-      apiKey: deUnaApiKey, // deUnaApiKey
+      apiKey: deUnaApiKey,
       env: 'staging', // Cambia a 'production' para ambiente de producción
       callbacks: {
         onSuccess: (payload) => {
@@ -627,19 +621,6 @@ const CheckoutUI = (props) => {
           {isShowDeUnaCheckout && (
             <SpinnerLoader />
           )}
-          {layout === 'pfchangs' && (
-            <>
-              {cart?.business?.slug && (
-                <GoToMenu onClick={() => handleStoreRedirect(cart?.business?.slug)}>
-                  <ColumnDivider />
-                  <BackIcon>
-                    <EnChevronWithCircleLeft color={theme.colors.primary} />
-                  </BackIcon>
-                  <p>{t('MENU', 'Menu')}</p>
-                </GoToMenu>
-              )}
-            </>
-          )}
           <IframeContainer>
             {/* <iframe src={t(`IFRAME_DEUNA_MARKETPLACE_${configSlug.toUpperCase()}`, 'https://vips-staging.tryordering.com/checkout/791c99ba-f103-47e7-a76d-18a2032be505')} width='100%' height='100%' loading='true' sandbox='allow-scripts allow-modals allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox' referrerPolicy='same-origin origin-when-cross-origin' /> */}
           </IframeContainer>
@@ -664,15 +645,6 @@ const CheckoutUI = (props) => {
               </TitleContainer>
               {layout === 'pfchangs' && (
                 <>
-                  {cart?.business?.slug && (
-                    <GoToMenu onClick={() => handleStoreRedirect(cart?.business?.slug)}>
-                      <ColumnDivider />
-                      <BackIcon>
-                        <EnChevronWithCircleLeft color={theme.colors.primary} />
-                      </BackIcon>
-                      <p>{t('MENU', 'Menu')}</p>
-                    </GoToMenu>
-                  )}
                   <SubtitleContainer>
                     <h2>{t('YOUR_INFORMATION', 'Your Information')}</h2>
                   </SubtitleContainer>

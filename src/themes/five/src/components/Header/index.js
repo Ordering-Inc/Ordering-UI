@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, useOrder, useEvent, useConfig, useCustomer, useUtils, useApi, useSite } from 'ordering-components'
 import { useTheme } from 'styled-components'
 import AiOutlineClose from '@meronex/icons/ai/AiOutlineClose'
+import EnChevronWithCircleLeft from '@meronex/icons/en/EnChevronWithCircleLeft'
+
 import { LanguageSelector } from '../LanguageSelector'
 
 import { GeoAlt } from 'react-bootstrap-icons'
@@ -26,7 +28,10 @@ import {
   FarAwayMessage,
   Divider,
   LoginButton,
-  DeliveryPickupContainer
+  DeliveryPickupContainer,
+  BackIcon,
+  GoToMenu,
+  ColumnDivider
 } from './styles'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useOnlineStatus } from '../../../../../hooks/useOnlineStatus'
@@ -248,8 +253,12 @@ export const Header = (props) => {
     setPreorderBusiness(null)
   }
 
-  const handleBusinessClick = (business) => {
-    events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
+  const handleBusinessClick = (business, slug) => {
+    if (!slug) {
+      events.emit('go_to_page', { page: 'business', params: { store: business.slug } })
+    } else {
+      events.emit('go_to_page', { page: 'business', params: { business_slug: business?.slug } })
+    }
   }
 
   const deleteOtpUser = async () => {
@@ -550,6 +559,14 @@ export const Header = (props) => {
                     </>
                   )
                 }
+                {pathname.includes('/checkout') && cartsWithProducts?.length > 0 && cartsWithProducts[0]?.valid && (
+                  <GoToMenu onClick={() => handleBusinessClick(cartsWithProducts[0]?.business, true)}>
+                    <BackIcon>
+                      <EnChevronWithCircleLeft color={theme.colors.primary} />
+                    </BackIcon>
+                    <p>{t('MENU', 'Menu')}</p>
+                  </GoToMenu>
+                )}
               </Menu>
             </RightHeader>
           )}

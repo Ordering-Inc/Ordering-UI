@@ -472,3 +472,42 @@ export const DeliveryPickupContainer = styled.div`
     height: 52px;
   }
 `
+export const BackIcon = styled.div`
+  * {
+    color: ${({ theme }) => theme?.colors?.primary};
+  }
+`
+export const GoToMenu = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  p {
+    padding-right: 20px;
+    font-size: 14px;
+    margin: 0;
+    color: ${({ theme }) => theme?.colors?.tertiary || 'initial'};
+  }
+  svg {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    top: 4px;
+    position: relative;
+  }
+  @media (min-width: 768px) {
+    p {
+      font-size: 16px;
+    }
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+`
+export const ColumnDivider = styled.div`
+  height: 30px;
+  width: 1px;
+  background: #fff;
+  position: relative;
+  right: 20px;
+`
