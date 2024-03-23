@@ -272,3 +272,13 @@ export const WithoutAddressContainer = styled.div`
     margin-bottom: 0;
   }
 `
+
+export const SmsClient = styled.div`
+  position: relative;
+  top: 20px;
+  display: flex;
+  p{
+    margin: 0;
+    white-space: pre;
+  }
+`

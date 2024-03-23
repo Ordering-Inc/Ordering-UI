@@ -32,7 +32,8 @@ import {
   WrapperSkeleton,
   AddressMarkContainer,
   StreetViewText,
-  WithoutAddressContainer
+  WithoutAddressContainer,
+  SmsClient
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -63,7 +64,9 @@ const AddressFormUI = (props) => {
     addressSpreadForm,
     setAddressSpreadForm,
     editSpreadAddress,
-    setEditSpreadAddress
+    setEditSpreadAddress,
+    setUserConfirmPhone,
+    userConfirmPhone
   } = props
 
   const [configState] = useConfig()
@@ -286,6 +289,11 @@ const AddressFormUI = (props) => {
     window.open(url, '_blank')
   }
 
+  const handleSendSmsToCustomer = () => {
+    setUserConfirmPhone({ ...userConfirmPhone, open: true })
+    onCancel()
+  }
+
   useEffect(() => {
     if (!auth) {
       setLocationChange(formState?.changes?.location ?? orderState?.options?.address?.location ?? '')
@@ -448,9 +456,9 @@ const AddressFormUI = (props) => {
                                 googleInputRef.current = ref
                               }}
                               defaultValue={
-                                  formState?.result?.result
-                                    ? formState?.result?.result?.address
-                                    : formState?.changes?.address ?? addressValue
+                                formState?.result?.result
+                                  ? formState?.result?.result?.address
+                                  : formState?.changes?.address ?? addressValue
                               }
                               autoComplete='new-field'
                               countryCode={configState?.configs?.country_autocomplete?.value || '*'}
@@ -458,12 +466,28 @@ const AddressFormUI = (props) => {
                           </WrapAddressInput>
                         </AddressWrap>
                       )}
+                      {!(addressState?.address?.location || formState?.changes?.location) && (
+                        <WrapperMap>
+                          <SmsClient>
+                            <p>
+                              {t('CAN_NOT_FIND_ADDRESS', 'Can\'t find address?')}{' '}
+                            </p>
+                            <a
+                              style={{ textDecoration: 'underline', color: theme?.colors?.primary, cursor: 'pointer' }}
+                              onClick={() => handleSendSmsToCustomer()}
+                            >
+                              {t('SEND_SMS_TO_CUSTOMER', 'Send SMS to customer')}
+                            </a>
+                          </SmsClient>
+                        </WrapperMap>
+                      )}
                       {(addressState?.address?.location || formState?.changes?.location) && (
                         <WrapperMap
                           showMap={showMap || !showSpreadForm}
                           notUseCustomerInfo={notUseCustomerInfo}
                           addFormRestrictions={addFormRestrictions}
                         >
+
                           {!showMap && (
                             <section>
                               <GeoAlt style={{ fontSize: 25, marginRight: 5 }} />
@@ -600,26 +624,26 @@ const AddressFormUI = (props) => {
                   address?.address &&
                   (!address?.location?.lat || !address?.location?.lng)) &&
                   Object.keys(formState?.changes).length > 0 &&
-                (
-                  <Button
-                    id='submit-btn'
-                    type='submit'
-                    disabled={formState.loading}
-                    color='primary'
-                  >
-                    {!formState.loading ? (
-                      <>
-                        {
-                          isEditing || (!auth && orderState.options?.address?.address)
-                            ? t('SAVE_AND_CONTINUE', 'Save and continue')
-                            : t('ADD_ADDRESS', 'Add address')
-                        }
-                      </>
-                    ) : (
-                      t('LOADING', 'Loading')
-                    )}
-                  </Button>
-                )}
+                  (
+                    <Button
+                      id='submit-btn'
+                      type='submit'
+                      disabled={formState.loading}
+                      color='primary'
+                    >
+                      {!formState.loading ? (
+                        <>
+                          {
+                            isEditing || (!auth && orderState.options?.address?.address)
+                              ? t('SAVE_AND_CONTINUE', 'Save and continue')
+                              : t('ADD_ADDRESS', 'Add address')
+                          }
+                        </>
+                      ) : (
+                        t('LOADING', 'Loading')
+                      )}
+                    </Button>
+                  )}
               </FormActions>
               {isAllowUnaddressOrderType && (
                 <WithoutAddressContainer>
