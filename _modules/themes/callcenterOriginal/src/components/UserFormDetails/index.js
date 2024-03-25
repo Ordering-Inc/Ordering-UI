@@ -54,7 +54,8 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
     confirmDataLayout = props.confirmDataLayout,
     inputsconfirmData = props.inputsconfirmData,
     handleRequestCustomerAddress = props.handleRequestCustomerAddress,
-    setCellphoneStartZero = props.setCellphoneStartZero;
+    setCellphoneStartZero = props.setCellphoneStartZero,
+    dontToggleEditMode = props.dontToggleEditMode;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -163,7 +164,9 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
       }
       handleButtonUpdateClick(_objectSpread(_objectSpread({}, changes), {}, {
         confirmDataLayout: confirmDataLayout
-      }));
+      }), null, null, {
+        dontToggleEditMode: dontToggleEditMode
+      });
     }
   };
   var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid, rawNumber) {

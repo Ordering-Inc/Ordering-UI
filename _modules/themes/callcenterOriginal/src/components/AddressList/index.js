@@ -293,7 +293,7 @@ var AddressListUI = function AddressListUI(props) {
     isHeader: isHeader,
     notUseCustomerInfo: notUseCustomerInfo,
     addFormRestrictions: addFormRestrictions
-  }, !addFormRestrictions && !addressOpen && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_styles.ButtonsContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, !addFormRestrictions && !addressOpen && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ButtonsContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
     color: (addressList === null || addressList === void 0 || (_addressList$addresse4 = addressList.addresses) === null || _addressList$addresse4 === void 0 ? void 0 : _addressList$addresse4.length) > 0 ? 'secondary' : 'primary',
@@ -312,7 +312,7 @@ var AddressListUI = function AddressListUI(props) {
       });
     },
     disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading || disabledSms
-  }, t('SEND_SMS_TO_CLIENT', 'Send SMS to client'))), (userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.result) && /*#__PURE__*/_react.default.createElement(_styles.WrapperSMS, null, /*#__PURE__*/_react.default.createElement("p", null, userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.result)), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+  }, t('SEND_SMS_TO_CLIENT', 'Send SMS to client'))), (userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.result) && /*#__PURE__*/_react.default.createElement(_styles.WrapperSMS, null, /*#__PURE__*/_react.default.createElement("p", null, userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.result))), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     showSpreadForm: showSpreadForm,
@@ -336,7 +336,7 @@ var AddressListUI = function AddressListUI(props) {
     style: {
       display: 'flex'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), isAllowUnaddressOrderType && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, ' ', t('OR', 'or'), ' '), /*#__PURE__*/_react.default.createElement(_styles.WithoutAddressText, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), isAllowUnaddressOrderType && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", null, ' ', t('OR', 'or'), ' '), /*#__PURE__*/_react.default.createElement(_styles.WithoutAddressText, {
     onClick: function onClick() {
       return events.emit('go_to_page', {
         page: 'search'

@@ -71,7 +71,7 @@ var AddressHoverInfo = exports.AddressHoverInfo = _styledComponents.default.span
 var AddressBookMark = exports.AddressBookMark = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  span {\n    opacity: 0;\n    transition: opacity 0.3s, visibility 0.3s;\n\n  }\n  &:hover + span {\n    opacity: 1;\n    transition: opacity 0.3s, visibility 0.3s;\n  }\n"])));
 var AddressBookMarkContainer = exports.AddressBookMarkContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  position: relative;\n"])));
 var AddressTitleContainer = exports.AddressTitleContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  white-space: break-spaces;\n"])));
-var WithoutAddressText = exports.WithoutAddressText = _styledComponents.default.p(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  text-decoration: underline;\n  color: ", ";\n  cursor: pointer;\n"])), function (_ref7) {
+var WithoutAddressText = exports.WithoutAddressText = _styledComponents.default.span(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  text-decoration: underline;\n  color: ", ";\n  cursor: pointer;\n"])), function (_ref7) {
   var _theme$colors;
   var theme = _ref7.theme;
   return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;

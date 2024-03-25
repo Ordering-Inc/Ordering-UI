@@ -482,7 +482,7 @@ var PhoneAutocomplete = exports.PhoneAutocomplete = function PhoneAutocomplete(p
   var phoneProps = _objectSpread(_objectSpread({
     UIComponent: PhoneAutocompleteUI
   }, props), {}, {
-    limitPhoneLength: countriesElevenPhoneLength.includes(configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.default_country_code) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) ? 11 : props.limitPhoneLength,
+    limitPhoneLength: countriesElevenPhoneLength.includes(configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.default_country_code) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) ? 11 : props.limitPhoneLength || 10,
     orderTypes: props.orderTypes || [{
       value: 1,
       text: t('DELIVERY', 'Delivery'),

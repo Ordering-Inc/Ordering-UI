@@ -116,7 +116,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
       width: 210,
       height: 50
     }));
-  })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, null, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
+  })), !(validationFields.loading || formState.loading || userState.loading) && /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    isEdit: isEdit
+  }, isModal && /*#__PURE__*/_react.default.createElement(_styles.TitleContainer, {
     isAddressFormOpen: isAddressFormOpen && !isEdit
   }, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
@@ -151,6 +153,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
     confirmDataLayout: true,
     isEdit: true,
+    dontToggleEditMode: true,
     inputsconfirmData: inputsConfirmAddress,
     userData: userData,
     isCustomerMode: isCustomerMode
