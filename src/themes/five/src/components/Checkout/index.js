@@ -595,7 +595,9 @@ const CheckoutUI = (props) => {
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
-        <OrderTypesSquares />
+        {isCustomerMode && (
+          <OrderTypesSquares />
+        )}
         {
           !!(!isMultiDriverTips && driverTipsField) &&
           <>
