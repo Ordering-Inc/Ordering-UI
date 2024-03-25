@@ -99,7 +99,7 @@ const UserDetailsUI = (props) => {
       )}
 
       {!(validationFields.loading || formState.loading || userState.loading) && (
-        <Container>
+        <Container isEdit={isEdit}>
           {isModal && (
             <TitleContainer isAddressFormOpen={isAddressFormOpen && !isEdit}>
               <ModalIcon>
@@ -169,6 +169,7 @@ const UserDetailsUI = (props) => {
           {...props}
           confirmDataLayout
           isEdit
+          dontToggleEditMode
           inputsconfirmData={inputsConfirmAddress}
           userData={userData}
           isCustomerMode={isCustomerMode}

@@ -282,33 +282,35 @@ const AddressListUI = (props) => {
           addFormRestrictions={addFormRestrictions}
         >
           {!addFormRestrictions && !addressOpen && !isOpenUserData && (
-            <ButtonsContainer>
-              <Button
-                className='add'
-                outline
-                color={addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
-                onClick={() => openAddress({})}
-                disabled={orderState?.loading || actionStatus.loading}
-                hoverColor='#CCC'
-              >
-                {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
-              </Button>
-              <Button
-                className='add sms'
-                color={disabledSms ? 'secondary' : 'primary'}
-                onClick={() => setUserConfirmPhone({ open: true, result: null })}
-                disabled={orderState?.loading || actionStatus.loading || disabledSms}
-              >
-                {t('SEND_SMS_TO_CLIENT', 'Send SMS to client')}
-              </Button>
-            </ButtonsContainer>
-          )}
-          {(userConfirmPhone?.result) && (
-            <WrapperSMS>
-              <p>
-                {userConfirmPhone?.result}
-              </p>
-            </WrapperSMS>
+            <>
+              <ButtonsContainer>
+                <Button
+                  className='add'
+                  outline
+                  color={addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
+                  onClick={() => openAddress({})}
+                  disabled={orderState?.loading || actionStatus.loading}
+                  hoverColor='#CCC'
+                >
+                  {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
+                </Button>
+                <Button
+                  className='add sms'
+                  color={disabledSms ? 'secondary' : 'primary'}
+                  onClick={() => setUserConfirmPhone({ open: true, result: null })}
+                  disabled={orderState?.loading || actionStatus.loading || disabledSms}
+                >
+                  {t('SEND_SMS_TO_CLIENT', 'Send SMS to client')}
+                </Button>
+              </ButtonsContainer>
+              {(userConfirmPhone?.result) && (
+                <WrapperSMS>
+                  <p>
+                    {userConfirmPhone?.result}
+                  </p>
+                </WrapperSMS>
+              )}
+            </>
           )}
           {
             isPopover && addressOpen && (
@@ -348,7 +350,7 @@ const AddressListUI = (props) => {
 
                   {isAllowUnaddressOrderType && (
                     <>
-                      <p>{' '}{t('OR', 'or')}{' '}</p>
+                      <span>{' '}{t('OR', 'or')}{' '}</span>
                       <WithoutAddressText onClick={() => events.emit('go_to_page', { page: 'search' })}>{t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')}</WithoutAddressText>
                     </>
                   )}

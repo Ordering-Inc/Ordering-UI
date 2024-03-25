@@ -38,7 +38,8 @@ export const UserFormDetailsUI = (props) => {
     confirmDataLayout,
     inputsconfirmData,
     handleRequestCustomerAddress,
-    setCellphoneStartZero
+    setCellphoneStartZero,
+    dontToggleEditMode
   } = props
 
   const formMethods = useForm()
@@ -131,7 +132,7 @@ export const UserFormDetailsUI = (props) => {
       handleButtonUpdateClick({
         ...changes,
         confirmDataLayout
-      })
+      }, null, null, { dontToggleEditMode })
     }
   }
 
