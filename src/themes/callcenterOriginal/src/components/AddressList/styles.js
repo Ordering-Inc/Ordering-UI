@@ -291,7 +291,7 @@ export const AddressTitleContainer = styled.div`
   white-space: break-spaces;
 `
 
-export const WithoutAddressText = styled.p`
+export const WithoutAddressText = styled.span`
   text-decoration: underline;
   color: ${({ theme }) => theme?.colors?.primary};
   cursor: pointer;

@@ -425,7 +425,7 @@ export const PhoneAutocomplete = (props) => {
   const phoneProps = {
     UIComponent: PhoneAutocompleteUI,
     ...props,
-    limitPhoneLength: countriesElevenPhoneLength.includes(configState?.configs?.default_country_code?.value) ? 11 : props.limitPhoneLength,
+    limitPhoneLength: countriesElevenPhoneLength.includes(configState?.configs?.default_country_code?.value) ? 11 : props.limitPhoneLength || 10,
     orderTypes: props.orderTypes || [
       {
         value: 1,
