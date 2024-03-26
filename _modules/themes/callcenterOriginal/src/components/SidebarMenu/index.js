@@ -16,8 +16,11 @@ var _AiOutlineHome = _interopRequireDefault(require("@meronex/icons/ai/AiOutline
 var _BiStore = _interopRequireDefault(require("@meronex/icons/bi/BiStore"));
 var _FaUserCircle = _interopRequireDefault(require("@meronex/icons/fa/FaUserCircle"));
 var _BiHelpCircle = _interopRequireDefault(require("@meronex/icons/bi/BiHelpCircle"));
+var _GiHistogram = _interopRequireDefault(require("@meronex/icons/gi/GiHistogram"));
+var _BsGraphUp = _interopRequireDefault(require("@meronex/icons/bs/BsGraphUp"));
 var _orderingComponents = require("ordering-components");
 var _styledComponents = require("styled-components");
+var _utils = require("../../../../../utils");
 var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 var _LogoutButton = require("../../../../../components/LogoutButton");
 var _Modal = require("../Modal");
@@ -29,22 +32,49 @@ var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var extraOptions = [{
+  name: 'profile',
+  pathname: '/profile',
+  displayName: 'view account',
+  key: 'view_account'
+}, {
+  name: 'help',
+  pathname: '/help',
+  displayName: 'help',
+  key: 'help'
+}];
+var adminOptionsDefault = [{
+  name: 'orderlist',
+  pathname: '/orderlist',
+  displayName: 'order list',
+  key: 'ORDER_LIST'
+}, {
+  name: 'deliveries',
+  pathname: '/deliveries',
+  displayName: 'delivery dashboard',
+  key: 'DELIVERY_DASHBOARD'
+}, {
+  name: 'drivers_dashboard',
+  pathname: '/drivers',
+  displayName: 'drivers dashboard',
+  key: 'DRIVERS_DASHBOARD'
+}];
 var SidebarMenu = exports.SidebarMenu = function SidebarMenu(props) {
-  var _props$beforeElements, _props$beforeComponen, _options$address2, _options$address3, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _props$afterComponent, _props$afterElements;
+  var _options$address2, _options$address3, _sessionState$user, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4;
   var auth = props.auth,
     isHideSignup = props.isHideSignup,
     userCustomer = props.userCustomer,
     isCustomerMode = props.isCustomerMode;
   var _useSession = (0, _orderingComponents.useSession)(),
-    _useSession2 = _slicedToArray(_useSession, 1),
-    login = _useSession2[0].login;
+    _useSession2 = _slicedToArray(_useSession, 2),
+    sessionState = _useSession2[0],
+    login = _useSession2[1].login;
   var _useEvent = (0, _orderingComponents.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
@@ -73,7 +103,6 @@ var SidebarMenu = exports.SidebarMenu = function SidebarMenu(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     showMessage = _useState8[0],
     setShowMessage = _useState8[1];
-  var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
   var closeModal = function closeModal() {
     setModalIsOpen(false);
     setModalPageToShow(null);
@@ -125,46 +154,41 @@ var SidebarMenu = exports.SidebarMenu = function SidebarMenu(props) {
       setShowMessage(true);
     }
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), showMessage && /*#__PURE__*/_react.default.createElement(_styles.MobileMessage, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, {
+  var getMenuIcon = function getMenuIcon(icon) {
+    var list = {
+      profile: /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null),
+      help: /*#__PURE__*/_react.default.createElement(_BiHelpCircle.default, null),
+      orderlist: /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null),
+      deliveries: /*#__PURE__*/_react.default.createElement(_GiHistogram.default, null),
+      drivers_dashboard: /*#__PURE__*/_react.default.createElement(_BsGraphUp.default, null)
+    };
+    return list[icon];
+  };
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showMessage && /*#__PURE__*/_react.default.createElement(_styles.MobileMessage, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, {
     onClick: function onClick() {
       return setShowMessage(false);
     }
   }), t('FOR_THE_BEST_EXPERIENCE_WHILE_SETTING_UP', 'For the best experience while setting up your project, we recommend using a computer.'))), /*#__PURE__*/_react.default.createElement(_styles.Container, {
     auth: auth
   }, /*#__PURE__*/_react.default.createElement(_styles.IconContent, {
-    isHome: isHome,
     "aria-label": "menu",
     onClick: function onClick() {
       return actionSidebar(true);
     }
   }, /*#__PURE__*/_react.default.createElement(_IosMenu.default, null)), /*#__PURE__*/_react.default.createElement(_styles.SidebarContent, {
-    id: "sidebar_menu",
-    isHome: isHome
+    id: "sidebar_menu"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuClose, {
-    isHome: isHome,
     "aria-label": "close",
     onClick: function onClick() {
       return actionSidebar(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), userCustomer && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     isCustomer: userCustomer
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: false
   }, /*#__PURE__*/_react.default.createElement(_FaUserCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: false
   }, "".concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name, " ").concat(userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       var _options$address;
       return handleGoToPage({
@@ -172,75 +196,64 @@ var SidebarMenu = exports.SidebarMenu = function SidebarMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
   }, options !== null && options !== void 0 && (_options$address2 = options.address) !== null && _options$address2 !== void 0 && _options$address2.location ? /*#__PURE__*/_react.default.createElement(_BiStore.default, null) : /*#__PURE__*/_react.default.createElement(_AiOutlineHome.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: window.location.pathname === '/' || window.location.pathname === '/home' || window.location.pathname === '/search'
-  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'profile'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
-    active: window.location.pathname === '/profile'
-  }, /*#__PURE__*/_react.default.createElement(_FaRegAddressCard.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
-    active: window.location.pathname === '/profile'
-  }, t('PROFILE', 'Profile'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
-    onClick: function onClick() {
-      return handleGoToPage({
-        page: 'help'
-      });
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
-    active: window.location.pathname === '/help'
-  }, /*#__PURE__*/_react.default.createElement(_BiHelpCircle.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
-    active: window.location.pathname === '/help'
-  }, t('HELP', 'help'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
+  }, options !== null && options !== void 0 && (_options$address3 = options.address) !== null && _options$address3 !== void 0 && _options$address3.location ? t('BUSINESSES', 'Businesses') : t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, extraOptions.map(function (option) {
+    return /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+      key: option.key,
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: option.name
+        });
+      }
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+      active: window.location.pathname === option.pathname
+    }, getMenuIcon(option.name)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+      active: window.location.pathname === option.pathname
+    }, t((option.key || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))));
+  }), (sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 && adminOptionsDefault.map(function (option) {
+    return /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
+      key: option.key,
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: option.name
+        });
+      }
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
+      active: window.location.pathname === option.pathname
+    }, getMenuIcon(option.name)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
+      active: window.location.pathname === option.pathname
+    }, t((option.key || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))));
+  }), !isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     onClick: function onClick() {
       return handleGoToPage({
         page: 'orders'
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: window.location.pathname === '/profile/orders'
   }, /*#__PURE__*/_react.default.createElement(_FaRegListAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: window.location.pathname === '/profile/orders'
   }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, {
     onCustomClick: function onCustomClick() {
       return actionSidebar(false);
     }
   })), !auth && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       return handleOpenLoginSignUp('login');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: modalPageToShow === 'login'
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineLogin.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: modalPageToShow === 'login'
   }, t('SIGN_IN', 'Sign in'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))), !isHideSignup && /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
-    isHome: isHome,
     onClick: function onClick() {
       return handleOpenLoginSignUp('signup');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome,
     active: modalPageToShow === 'signup'
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineUserAdd.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome,
     active: modalPageToShow === 'signup'
   }, t('SIGNUP', 'Sign up'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null))))))), modalIsOpen && !auth && /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: modalIsOpen,
@@ -291,13 +304,5 @@ var SidebarMenu = exports.SidebarMenu = function SidebarMenu(props) {
       href: "#"
     }, t('LOGIN', (theme === null || theme === void 0 || (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.LOGIN) || 'Login')),
     isPopup: true
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+  }))));
 };
