@@ -226,17 +226,17 @@ var Header = exports.Header = function Header(props) {
   }))), isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     className: "left-header",
     id: "center-side"
-  }, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
+  }, windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AddressMenu, {
     onClick: function onClick(e) {
       return handleClickUserCustomer(e);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, ((_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.address) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.address) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.split(',')) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3[0]) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), isCustomerMode && windowSize.width > 450 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, ((_orderState$options3 = orderState.options) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.address) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.address) === null || _orderState$options3 === void 0 || (_orderState$options3 = _orderState$options3.split(',')) === null || _orderState$options3 === void 0 ? void 0 : _orderState$options3[0]) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')))), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), isCustomerMode && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, {
     onClick: function onClick(e) {
       return handleClickUserCustomer(e);
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, windowSize.width > 940 ? userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name : cutCharactersName({
+  }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("p", null, windowSize.width > 1200 ? userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name : cutCharactersName({
     str: userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.name
-  }), ' ', windowSize.width > 940 ? userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname : null)), /*#__PURE__*/_react.default.createElement("span", {
+  }), ' ', windowSize.width > 1200 ? userCustomer === null || userCustomer === void 0 ? void 0 : userCustomer.lastname : null)), /*#__PURE__*/_react.default.createElement("span", {
     ref: clearCustomer
   }, /*#__PURE__*/_react.default.createElement(_AiOutlineClose.default, null))), onlineStatus && windowSize.width > 820 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (isPreOrderSetting || (configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.preorder_status_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === undefined) && /*#__PURE__*/_react.default.createElement(_styles.MomentMenu, {
     onClick: (configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.max_days_preorder) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) === -1 || (configState === null || configState === void 0 || (_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function () {
@@ -249,12 +249,10 @@ var Header = exports.Header = function Header(props) {
     onClick: function onClick() {
       return openModal('delivery');
     }
-  }))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (user === null || user === void 0 ? void 0 : user.level) === 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
+  }))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (user === null || user === void 0 ? void 0 : user.level) === 0 && windowSize.width > 1200 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isShowOrderOptions && /*#__PURE__*/_react.default.createElement(_styles.Menu, {
     className: "left-header invisible",
     id: "center-side"
   }), /*#__PURE__*/_react.default.createElement(_AdminAreaPopover.AdminAreaPopover, {
-    withLogout: true,
-    isCustomerMode: isCustomerMode,
     open: openPopover.admin,
     onClick: function onClick() {
       return handleTogglePopover('admin');

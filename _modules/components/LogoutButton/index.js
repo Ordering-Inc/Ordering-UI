@@ -27,7 +27,6 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var isHome = window.location.pathname === '/' || window.location.pathname === '/home';
   var handleLogOutClick = function handleLogOutClick() {
     var _window;
     window.FB.getLoginStatus(function (response) {
@@ -50,15 +49,10 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     id: "logoutbtn",
     onClick: handleLogOutClick,
-    isHome: isHome,
     style: props.styleContainer
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, {
     style: props.styleWrappContent
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    isHome: isHome
-  }, /*#__PURE__*/_react.default.createElement(_FaSignOutAlt.default, null)), !hideText && /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, {
-    isHome: isHome
-  }, t('LOGOUT', 'Logout'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))));
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, null, /*#__PURE__*/_react.default.createElement(_FaSignOutAlt.default, null)), !hideText && /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, null, t('LOGOUT', 'Logout'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))));
 };
 var LogoutButton = exports.LogoutButton = function LogoutButton(props) {
   var logoutButtonProps = _objectSpread(_objectSpread({}, props), {}, {

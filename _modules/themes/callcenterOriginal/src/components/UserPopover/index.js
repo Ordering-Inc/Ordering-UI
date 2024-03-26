@@ -50,8 +50,24 @@ var extraOptions = [{
   displayName: 'help',
   key: 'help'
 }];
+var adminOptionsDefault = [{
+  name: 'orderlist',
+  pathname: '/orderlist',
+  displayName: 'order list',
+  key: 'ORDER_LIST'
+}, {
+  name: 'deliveries',
+  pathname: '/deliveries',
+  displayName: 'delivery dashboard',
+  key: 'DELIVERY_DASHBOARD'
+}, {
+  name: 'drivers_dashboard',
+  pathname: '/drivers',
+  displayName: 'drivers dashboard',
+  key: 'DRIVERS_DASHBOARD'
+}];
 var UserPopover = exports.UserPopover = function UserPopover(props) {
-  var _props$beforeElements, _props$beforeComponen, _sessionState$user, _sessionState$user2, _props$afterComponent, _props$afterElements;
+  var _sessionState$user, _sessionState$user2, _sessionState$user3, _sessionState$user4;
   var open = props.open,
     isHome = props.isHome,
     optionsList = props.optionsList,
@@ -87,8 +103,7 @@ var UserPopover = exports.UserPopover = function UserPopover(props) {
     }]
   });
   var styles = popper.styles,
-    attributes = popper.attributes,
-    forceUpdate = popper.forceUpdate;
+    attributes = popper.attributes;
   (0, _react.useEffect)(function () {
     // forceUpdate && forceUpdate()
   }, [open, sessionState]);
@@ -131,15 +146,7 @@ var UserPopover = exports.UserPopover = function UserPopover(props) {
     style: {
       overflow: 'hidden'
     }
-  }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     isPhoto: sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     isHome: isHome,
     ref: referenceElement,
@@ -169,17 +176,19 @@ var UserPopover = exports.UserPopover = function UserPopover(props) {
         return handleGoToPage(option.name);
       }
     }, t((option.key || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)));
+  }), !((sessionState === null || sessionState === void 0 || (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.level) === 0) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), withLogout && /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, {
+    onClose: props.onClose
+  }))), (sessionState === null || sessionState === void 0 || (_sessionState$user4 = sessionState.user) === null || _sessionState$user4 === void 0 ? void 0 : _sessionState$user4.level) === 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ExtraOptions, null, adminOptionsDefault && adminOptionsDefault.map(function (option, i) {
+    return /*#__PURE__*/_react.default.createElement(_styles.PopoverListLink, {
+      key: i,
+      active: window.location.pathname === option.pathname,
+      onClick: function onClick() {
+        return handleGoToPage(option.name);
+      }
+    }, t((option.key || option.name).toUpperCase(), (0, _utils.capitalize)(option.displayName || option.name)));
   }), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), withLogout && /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, {
     onClose: props.onClose
-  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+  }))))));
 };
 var LogoutActionUI = function LogoutActionUI(props) {
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),

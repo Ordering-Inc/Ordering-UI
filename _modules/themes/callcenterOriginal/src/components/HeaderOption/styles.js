@@ -12,7 +12,7 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Container = exports.Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (_ref) {
   var variant = _ref.variant;
-  return variant === 'cart' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    > span {\n      cursor: pointer;\n      height: 20px;\n      padding: 10px 9px;\n      display: flex;\n      align-items: center;\n      background: ", ";\n      color: #FFFFFF;\n      border-radius: 7.6px;\n\n      span {\n        margin: 0;\n        font-size: 14px;\n        ", " \n      }\n      svg {\n        font-size: 17px;\n      }\n    }\n  "])), function (props) {
+  return variant === 'cart' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    > span {\n      padding: 10px;\n      display: flex;\n      align-items: center;\n      background: ", ";\n      color: #FFFFFF;\n      border-radius: 7.6px;\n\n      span {\n        margin: 0;\n        font-size: 14px;\n        ", "\n      }\n      svg {\n        font-size: 17px;\n      }\n    }\n  "])), function (props) {
     return props.theme.colors.primary;
   }, function (props) {
     var _props$theme;
