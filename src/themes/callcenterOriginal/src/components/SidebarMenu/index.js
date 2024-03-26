@@ -9,10 +9,13 @@ import AiOutlineHome from '@meronex/icons/ai/AiOutlineHome'
 import BiStore from '@meronex/icons/bi/BiStore'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
 import BiHelpCircle from '@meronex/icons/bi/BiHelpCircle'
+import GiHistogram from '@meronex/icons/gi/GiHistogram'
+import BsGraphUp from '@meronex/icons/bs/BsGraphUp'
 
 import { useEvent, useLanguage, useOrder, useSession } from 'ordering-components'
 import { useTheme } from 'styled-components'
 
+import { capitalize } from '../../../../../utils'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { LogoutButton } from '../../../../../components/LogoutButton'
 import { Modal } from '../Modal'
@@ -35,9 +38,20 @@ import {
   MobileMessage
 } from './styles'
 
+const extraOptions = [
+  { name: 'profile', pathname: '/profile', displayName: 'view account', key: 'view_account' },
+  { name: 'help', pathname: '/help', displayName: 'help', key: 'help' }
+]
+
+const adminOptionsDefault = [
+  { name: 'orderlist', pathname: '/orderlist', displayName: 'order list', key: 'ORDER_LIST' },
+  { name: 'deliveries', pathname: '/deliveries', displayName: 'delivery dashboard', key: 'DELIVERY_DASHBOARD' },
+  { name: 'drivers_dashboard', pathname: '/drivers', displayName: 'drivers dashboard', key: 'DRIVERS_DASHBOARD' }
+]
+
 export const SidebarMenu = (props) => {
   const { auth, isHideSignup, userCustomer, isCustomerMode } = props
-  const [{ login }] = useSession()
+  const [sessionState, { login }] = useSession()
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [{ options }] = useOrder()
@@ -47,8 +61,6 @@ export const SidebarMenu = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalPageToShow, setModalPageToShow] = useState(null)
   const [showMessage, setShowMessage] = useState(false)
-
-  const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -104,21 +116,26 @@ export const SidebarMenu = (props) => {
   }, [width])
 
   useEffect(() => {
-    if(!isCustomerMode) return
+    if (!isCustomerMode) return
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       setShowMessage(true)
     }
   }, [])
 
+  const getMenuIcon = (icon) => {
+    const list = {
+      profile: <FaRegAddressCard />,
+      help: <BiHelpCircle />,
+      orderlist: <FaRegListAlt />,
+      deliveries: <GiHistogram />,
+      drivers_dashboard: <BsGraphUp />
+    }
+    return list[icon]
+  }
+
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-        {showMessage && (
+      {showMessage && (
         <MobileMessage>
           <div>
             <CloseIcon onClick={() => setShowMessage(false)} />
@@ -128,18 +145,13 @@ export const SidebarMenu = (props) => {
       )}
       <Container auth={auth}>
         <IconContent
-          isHome={isHome}
           aria-label='menu'
           onClick={() => actionSidebar(true)}
         >
           <IosMenu />
         </IconContent>
-        <SidebarContent
-          id='sidebar_menu'
-          isHome={isHome}
-        >
+        <SidebarContent id='sidebar_menu'>
           <MenuClose
-            isHome={isHome}
             aria-label='close'
             onClick={() => actionSidebar(false)}
           >
@@ -147,17 +159,15 @@ export const SidebarMenu = (props) => {
           </MenuClose>
 
           {userCustomer && (
-            <MenuLink isHome={isHome} isCustomer={userCustomer}>
+            <MenuLink isCustomer={userCustomer}>
               <WrappContent>
                 <MenuLinkIcon
-                  isHome={isHome}
                   active={false}
                 >
                   <FaUserCircle />
                 </MenuLinkIcon>
                 <MenuLinkText>
                   <TextInfo
-                    isHome={isHome}
                     active={false}
                   >
                     {`${userCustomer?.name} ${userCustomer?.lastname}`}
@@ -172,13 +182,9 @@ export const SidebarMenu = (props) => {
             </MenuLink>
           )}
 
-          <MenuLink
-            isHome={isHome}
-            onClick={() => handleGoToPage({ page: options?.address?.location ? 'search' : 'home' })}
-          >
+          <MenuLink onClick={() => handleGoToPage({ page: options?.address?.location ? 'search' : 'home' })}>
             <WrappContent>
               <MenuLinkIcon
-                isHome={isHome}
                 active={
                   window.location.pathname === '/' ||
                   window.location.pathname === '/home' ||
@@ -193,7 +199,6 @@ export const SidebarMenu = (props) => {
               </MenuLinkIcon>
               <MenuLinkText>
                 <TextInfo
-                  isHome={isHome}
                   active={
                     window.location.pathname === '/' ||
                     window.location.pathname === '/home' ||
@@ -217,75 +222,57 @@ export const SidebarMenu = (props) => {
 
           {auth && (
             <>
-              <MenuLink
-                isHome={isHome}
-                onClick={() => handleGoToPage({ page: 'profile' })}
-              >
-                <WrappContent>
-                  <MenuLinkIcon
-                    isHome={isHome}
-                    active={
-                      window.location.pathname === '/profile'
-                    }
-                  >
-                    <FaRegAddressCard />
-                  </MenuLinkIcon>
-                  <MenuLinkText>
-                    <TextInfo
-                      isHome={isHome}
-                      active={
-                        window.location.pathname === '/profile'
-                      }
-                    >
-                      {t('PROFILE', 'Profile')}
-                    </TextInfo>
-                  </MenuLinkText>
-                  <MenuLinkSeparator>
-                    <div>
-                      <hr />
-                    </div>
-                  </MenuLinkSeparator>
-                </WrappContent>
-              </MenuLink>
-              <MenuLink
-                isHome={isHome}
-                onClick={() => handleGoToPage({ page: 'help' })}
-              >
-                <WrappContent>
-                  <MenuLinkIcon
-                    isHome={isHome}
-                    active={
-                      window.location.pathname === '/help'
-                    }
-                  >
-                    <BiHelpCircle />
-                  </MenuLinkIcon>
-                  <MenuLinkText>
-                    <TextInfo
-                      isHome={isHome}
-                      active={
-                        window.location.pathname === '/help'
-                      }
-                    >
-                      {t('HELP', 'help')}
-                    </TextInfo>
-                  </MenuLinkText>
-                  <MenuLinkSeparator>
-                    <div>
-                      <hr />
-                    </div>
-                  </MenuLinkSeparator>
-                </WrappContent>
-              </MenuLink>
+              {extraOptions.map(option => (
+                <MenuLink
+                  key={option.key}
+                  onClick={() => handleGoToPage({ page: option.name })}
+                >
+                  <WrappContent>
+                    <MenuLinkIcon active={window.location.pathname === option.pathname}>
+                      {getMenuIcon(option.name)}
+                    </MenuLinkIcon>
+                    <MenuLinkText>
+                      <TextInfo active={window.location.pathname === option.pathname}>
+                        {t((option.key || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
+                      </TextInfo>
+                    </MenuLinkText>
+                    <MenuLinkSeparator>
+                      <div>
+                        <hr />
+                      </div>
+                    </MenuLinkSeparator>
+                  </WrappContent>
+                </MenuLink>
+              ))}
+              {sessionState?.user?.level === 0 && adminOptionsDefault.map(option => (
+                <MenuLink
+                  key={option.key}
+                  onClick={() => handleGoToPage({ page: option.name })}
+                >
+                  <WrappContent>
+                    <MenuLinkIcon active={window.location.pathname === option.pathname}>
+                      {getMenuIcon(option.name)}
+                    </MenuLinkIcon>
+                    <MenuLinkText>
+                      <TextInfo active={window.location.pathname === option.pathname}>
+                        {t((option.key || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
+                      </TextInfo>
+                    </MenuLinkText>
+                    <MenuLinkSeparator>
+                      <div>
+                        <hr />
+                      </div>
+                    </MenuLinkSeparator>
+                  </WrappContent>
+                </MenuLink>
+              ))}
               {
                 !isCustomerMode && (
                   <MenuLink
-                    isHome={isHome}
                     onClick={() => handleGoToPage({ page: 'orders' })}
                   >
                     <WrappContent>
                       <MenuLinkIcon
-                        isHome={isHome}
                         active={
                           window.location.pathname === '/profile/orders'
                         }
@@ -294,7 +281,6 @@ export const SidebarMenu = (props) => {
                       </MenuLinkIcon>
                       <MenuLinkText>
                         <TextInfo
-                          isHome={isHome}
                           active={
                             window.location.pathname === '/profile/orders'
                           }
@@ -318,19 +304,16 @@ export const SidebarMenu = (props) => {
           {!auth && (
             <>
               <MenuLink
-                isHome={isHome}
                 onClick={() => handleOpenLoginSignUp('login')}
               >
                 <WrappContent>
                   <MenuLinkIcon
-                    isHome={isHome}
                     active={modalPageToShow === 'login'}
                   >
                     <AiOutlineLogin />
                   </MenuLinkIcon>
                   <MenuLinkText>
                     <TextInfo
-                      isHome={isHome}
                       active={modalPageToShow === 'login'}
                     >
                       {t('SIGN_IN', 'Sign in')}
@@ -345,19 +328,16 @@ export const SidebarMenu = (props) => {
               </MenuLink>
               {!isHideSignup && (
                 <MenuLink
-                  isHome={isHome}
                   onClick={() => handleOpenLoginSignUp('signup')}
                 >
                   <WrappContent>
                     <MenuLinkIcon
-                      isHome={isHome}
                       active={modalPageToShow === 'signup'}
                     >
                       <AiOutlineUserAdd />
                     </MenuLinkIcon>
                     <MenuLinkText>
                       <TextInfo
-                        isHome={isHome}
                         active={modalPageToShow === 'signup'}
                       >
                         {t('SIGNUP', 'Sign up')}
@@ -435,12 +415,6 @@ export const SidebarMenu = (props) => {
           </Modal>
         )}
       </Container>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }

@@ -5,9 +5,7 @@ export const Container = styled.div`
 
   ${({ variant }) => variant === 'cart' && css`
     > span {
-      cursor: pointer;
-      height: 20px;
-      padding: 10px 9px;
+      padding: 10px;
       display: flex;
       align-items: center;
       background: ${props => props.theme.colors.primary};
@@ -21,7 +19,7 @@ export const Container = styled.div`
           margin-right: 10px;
         ` : css`
           margin-left: 10px;
-        `} 
+        `}
       }
       svg {
         font-size: 17px;
