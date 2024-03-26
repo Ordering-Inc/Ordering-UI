@@ -16,25 +16,7 @@ export const InnerHeader = styled.div`
   align-items: center;
 
   #center-side {
-    width: ${({ theme }) => theme?.header?.components?.layout?.type === 'starbucks' ? 'calc(60% - 140px)' : 'calc(60% - 30px)'};
-  }
-
-  @media (min-width: 1024px) {
-    #center-side {
-      width: calc(60% - 100px);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    #center-side {
-      width: calc(60% - 160px);
-    }
-  }
-
-  @media (min-width: 1500px) {
-    #center-side {
-      width: calc(60% - 200px);
-    }
+    width: calc(60% - 30px);
   }
 `
 
@@ -241,32 +223,28 @@ export const SubMenu = styled(InnerHeader)`
 `
 
 export const CustomerInfo = styled.div`
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   flex: 1;
   position: relative;
-  @media (min-width: 450px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    span {
-      display: flex;
-      align-items: center;
+  span {
+    align-items: center;
+    margin: 0;
+    p {
+      max-width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #909BA9;
       margin: 0;
-      p {
-        max-width: 250px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        color: #909BA9;
-        margin: 0;
-      }
-      svg {
-        color: #748194;
-        margin: 0;
-        font-size: 20px;
-      }
+    }
+    svg {
+      color: #748194;
+      margin: 0;
+      font-size: 20px;
     }
   }
 `

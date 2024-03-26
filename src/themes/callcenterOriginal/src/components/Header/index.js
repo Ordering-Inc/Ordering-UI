@@ -168,20 +168,24 @@ export const Header = (props) => {
         {isShowOrderOptions && (
           <>
             <Menu className='left-header' id='center-side'>
-              <AddressMenu
-                onClick={(e) => handleClickUserCustomer(e)}
-              >
-                <GeoAlt /> <span><p>{orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}</p></span>
-              </AddressMenu>
-              <Divider />
-              {isCustomerMode && windowSize.width > 450 && (
+              {windowSize.width > 820 && (
+                <>
+                  <AddressMenu
+                    onClick={(e) => handleClickUserCustomer(e)}
+                  >
+                    <GeoAlt /> <span><p>{orderState.options?.address?.address?.split(',')?.[0] || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}</p></span>
+                  </AddressMenu>
+                  <Divider />
+                </>
+              )}
+              {isCustomerMode && (
                 <CustomerInfo
                   onClick={(e) => handleClickUserCustomer(e)}
                 >
                   <span>
                     <p>
-                      {windowSize.width > 940 ? userCustomer?.name : cutCharactersName({ str: userCustomer?.name })}
-                      {' '}{windowSize.width > 940 ? userCustomer?.lastname : null}
+                      {windowSize.width > 1200 ? userCustomer?.name : cutCharactersName({ str: userCustomer?.name })}
+                      {' '}{windowSize.width > 1200 ? userCustomer?.lastname : null}
                     </p>
                   </span>
                   <span
@@ -218,14 +222,12 @@ export const Header = (props) => {
           </>
         )}
         <>
-          {user?.level === 0 && (
+          {user?.level === 0 && windowSize.width > 1200 && (
             <>
               {!isShowOrderOptions && (
                 <Menu className='left-header invisible' id='center-side' />
               )}
               <AdminAreaPopover
-                withLogout
-                isCustomerMode={isCustomerMode}
                 open={openPopover.admin}
                 onClick={() => handleTogglePopover('admin')}
                 onClose={() => handleClosePopover('admin')}
