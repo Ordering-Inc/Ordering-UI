@@ -16,8 +16,6 @@ const LogoutButtonUI = (props) => {
   const { onCustomClick, hideText } = props
   const [, t] = useLanguage()
 
-  const isHome = window.location.pathname === '/' || window.location.pathname === '/home'
-
   const handleLogOutClick = () => {
     window.FB.getLoginStatus((response) => {
       if (response.status === 'connected') {
@@ -40,14 +38,14 @@ const LogoutButtonUI = (props) => {
   }
 
   return (
-    <MenuLink id='logoutbtn' onClick={handleLogOutClick} isHome={isHome} style={props.styleContainer}>
+    <MenuLink id='logoutbtn' onClick={handleLogOutClick} style={props.styleContainer}>
       <WrappContent style={props.styleWrappContent}>
-        <MenuLinkIcon isHome={isHome}>
+        <MenuLinkIcon>
           <FaSignOutAlt />
         </MenuLinkIcon>
         {!hideText && (
           <MenuLinkText>
-            <TextInfo isHome={isHome}>
+            <TextInfo>
               {t('LOGOUT', 'Logout')}
             </TextInfo>
           </MenuLinkText>

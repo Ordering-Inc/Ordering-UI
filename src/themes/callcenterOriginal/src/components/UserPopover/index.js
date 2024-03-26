@@ -27,6 +27,12 @@ const extraOptions = [
   { name: 'help', pathname: '/help', displayName: 'help', key: 'help' }
 ]
 
+const adminOptionsDefault = [
+  { name: 'orderlist', pathname: '/orderlist', displayName: 'order list', key: 'ORDER_LIST' },
+  { name: 'deliveries', pathname: '/deliveries', displayName: 'delivery dashboard', key: 'DELIVERY_DASHBOARD' },
+  { name: 'drivers_dashboard', pathname: '/drivers', displayName: 'drivers dashboard', key: 'DRIVERS_DASHBOARD' }
+]
+
 export const UserPopover = (props) => {
   const {
     open,
@@ -58,7 +64,7 @@ export const UserPopover = (props) => {
     ]
   })
 
-  const { styles, attributes, forceUpdate } = popper
+  const { styles, attributes } = popper
 
   useEffect(() => {
     // forceUpdate && forceUpdate()
@@ -99,12 +105,6 @@ export const UserPopover = (props) => {
   }
   return (
     <div style={{ overflow: 'hidden' }}>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       <HeaderItem
         isPhoto={sessionState?.user?.photo}
         isHome={isHome}
@@ -150,20 +150,39 @@ export const UserPopover = (props) => {
                 ))
               )
             }
-
-            <Divider />
-            {withLogout && (
-              <PopoverListItemLogout onClose={props.onClose} />
+            {!(sessionState?.user?.level === 0) && (
+              <>
+                <Divider />
+                {withLogout && (
+                  <PopoverListItemLogout onClose={props.onClose} />
+                )}
+              </>
             )}
           </ExtraOptions>
+          {sessionState?.user?.level === 0 && (
+            <>
+              <Divider />
+              <ExtraOptions>
+                {
+                  adminOptionsDefault && (adminOptionsDefault.map((option, i) => (
+                    <PopoverListLink
+                      key={i}
+                      active={window.location.pathname === option.pathname}
+                      onClick={() => handleGoToPage(option.name)}
+                    >
+                      {t((option.key || option.name).toUpperCase(), capitalize(option.displayName || option.name))}
+                    </PopoverListLink>
+                  )))
+                }
+                <Divider />
+                {withLogout && (
+                  <PopoverListItemLogout onClose={props.onClose} />
+                )}
+              </ExtraOptions>
+            </>
+          )}
         </PopoverList>
       </PopoverBody>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </div>
   )
 }
