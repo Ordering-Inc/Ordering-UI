@@ -17,6 +17,7 @@ import PhoneInput from 'react-phone-number-input'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import {
   UserFormDetails as UserFormController,
+  useConfig,
   useLanguage,
   useSession
 } from 'ordering-components'
@@ -45,6 +46,8 @@ const UserDetailsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [{ configs }] = useConfig()
+
   const userData = userState.result?.result || props.userData || formState.result?.result || user
 
   const validationFieldsLength = Object.values(validationFields?.fields?.checkout)?.map(field => field.enabled)
@@ -139,7 +142,7 @@ const UserDetailsUI = (props) => {
                   <CountryFlag>
                     {
                       countryPhoneCode && userData?.cellphone && (
-                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(countryPhoneCode?.replace('+', ''))} ${userData?.cellphone?.replace(`+${countryPhoneCode}`, '')}`)?.country} />
+                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(countryPhoneCode?.replace('+', ''))} ${userData?.cellphone?.replace(`+${countryPhoneCode}`, '')}`)?.country || configs?.default_country_code?.value} />
                       )
                     }
                   </CountryFlag>

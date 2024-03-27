@@ -33,6 +33,8 @@ import {
 import MdcCellphoneAndroid from '@meronex/icons/mdc/MdcCellphoneAndroid'
 import { OrderTypesSquares } from '../../../../five/src/components/OrderTypesSquares'
 
+const countriesElevenPhoneLength = ['GB']
+
 const PhoneAutocompleteUI = (props) => {
   const {
     phone,
@@ -161,7 +163,9 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const createNewUser = () => {
-    if ((optSelected && optSelected?.value?.length === limitPhoneLength) || (!optSelected && phone.length === limitPhoneLength)) {
+    const lengthIntervals = countriesElevenPhoneLength.includes(configState?.configs?.default_country_code?.value) ? [10, limitPhoneLength] : [limitPhoneLength]
+    if ((optSelected && lengthIntervals.includes(optSelected?.value?.length)) ||
+      (!optSelected && lengthIntervals.includes(phone.length))) {
       setOpenModal({ ...openModal, signup: true })
     } else {
       setAlertState({
@@ -421,7 +425,6 @@ const PhoneAutocompleteUI = (props) => {
 export const PhoneAutocomplete = (props) => {
   const [, t] = useLanguage()
   const [configState] = useConfig()
-  const countriesElevenPhoneLength = ['GB']
   const phoneProps = {
     UIComponent: PhoneAutocompleteUI,
     ...props,
