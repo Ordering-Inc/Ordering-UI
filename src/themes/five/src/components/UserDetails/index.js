@@ -21,6 +21,7 @@ import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import {
   UserFormDetails as UserFormController,
+  useConfig,
   useLanguage,
   useSession
 } from 'ordering-components'
@@ -53,6 +54,7 @@ const UserDetailsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ user, loading }] = useSession()
+  const [{ configs }] = useConfig()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [skeletonsLength] = useState(requiredFields)
   const userData = userState.result?.result || props.userData || formState.result?.result || user
@@ -197,7 +199,7 @@ const UserDetailsUI = (props) => {
                   <CountryFlag>
                     {
                       userData?.country_phone_code && (userData?.cellphone ?? userData?.guest_cellphone) && (
-                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.[userData?.guest_id ? 'guest_cellphone' : 'cellphone']?.replace(`+${userData?.country_phone_code}`, '')}`)?.country} />
+                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(userData?.country_phone_code?.replace('+', ''))} ${userData?.[userData?.guest_id ? 'guest_cellphone' : 'cellphone']?.replace(`+${userData?.country_phone_code}`, '')}`)?.country || configs?.default_country_code?.value} />
                       )
                     }
                   </CountryFlag>

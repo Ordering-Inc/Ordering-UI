@@ -220,10 +220,28 @@ const SignUpFormUI = (props) => {
     })
   }, [signupData])
 
+  const returnRawNumber = (number) => {
+    const numberParser = parsePhoneNumber(externalPhoneNumber)
+    const validations = ['0', '+']
+    if (validations.includes(externalPhoneNumber[0]) && externalPhoneNumber.includes(numberParser?.countryCallingCode)) {
+      const numberInput = externalPhoneNumber.replace('-', '')
+      let numberRaw = ''
+      numberInput?.split(' ')?.filter((_splited, i) => i > 0 || (i === 0 && _splited[0] === '0'))?.map(splited => {
+        numberRaw = `${numberRaw}${splited}`
+        return numberRaw
+      })
+
+      return {
+        number: numberRaw,
+        countryCallingCode: numberParser?.countryCallingCode ? `+${numberParser?.countryCallingCode}` : null
+      }
+    }
+    return number
+  }
   useEffect(() => {
     if (externalPhoneNumber) {
       setUserPhoneNumber(externalPhoneNumber)
-      handleChangePhoneNumber(externalPhoneNumber, true)
+      handleChangePhoneNumber(externalPhoneNumber, true, returnRawNumber(externalPhoneNumber))
     }
   }, [externalPhoneNumber])
 
