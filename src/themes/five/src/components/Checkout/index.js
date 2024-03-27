@@ -276,6 +276,7 @@ const CheckoutUI = (props) => {
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
+    const codesStartsWithZero = ['44']
     const userSelected = isCustomerMode ? customerState.user : user
     const _requiredFields = []
     Object.values(checkoutFieldsState?.fields).map(field => {
@@ -305,7 +306,15 @@ const CheckoutUI = (props) => {
         let phone = null
         phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone.replace(`+${userSelected?.country_phone_code}`, '')}`
         const phoneNumber = parsePhoneNumber(phone)
-        if (parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10) && !phoneNumber?.isValid()) {
+        let enableIspossibly = false
+        if (codesStartsWithZero.includes(phoneNumber?.countryCallingCode)) {
+          const inputNumber = userSelected?.cellphone
+          const validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871']
+          const result = validationsForUK.some(areaCode => inputNumber?.startsWith(areaCode))
+          enableIspossibly = result
+        }
+        const validation = enableIspossibly ? phoneNumber?.isPossible?.() : phoneNumber?.isValid?.()
+        if (parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10) && !validation) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'))
         }
       } else {
