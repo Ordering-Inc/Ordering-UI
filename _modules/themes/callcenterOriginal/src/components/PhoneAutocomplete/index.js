@@ -37,6 +37,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var countriesElevenPhoneLength = ['GB'];
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   var _ref, _userCustomer$country, _userCustomer$address, _configState$configs, _userCustomer$name, _orderState$options3, _orderState$options4, _orderState$options5, _orderState$options6, _orderState$options8, _orderState$options9, _theme$colors, _theme$images2, _customerState$result, _customerState$result2;
   var phone = props.phone,
@@ -228,8 +229,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     }
   };
   var createNewUser = function createNewUser() {
-    var _optSelected$value;
-    if (optSelected && (optSelected === null || optSelected === void 0 || (_optSelected$value = optSelected.value) === null || _optSelected$value === void 0 ? void 0 : _optSelected$value.length) === limitPhoneLength || !optSelected && phone.length === limitPhoneLength) {
+    var _configState$configs2, _optSelected$value;
+    var lengthIntervals = countriesElevenPhoneLength.includes(configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.default_country_code) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) ? [10, limitPhoneLength] : [limitPhoneLength];
+    if (optSelected && lengthIntervals.includes(optSelected === null || optSelected === void 0 || (_optSelected$value = optSelected.value) === null || _optSelected$value === void 0 ? void 0 : _optSelected$value.length) || !optSelected && lengthIntervals.includes(phone.length)) {
       setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         signup: true
       }));
@@ -471,18 +473,17 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   }));
 };
 var PhoneAutocomplete = exports.PhoneAutocomplete = function PhoneAutocomplete(props) {
-  var _configState$configs2;
+  var _configState$configs3;
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
   var _useConfig3 = (0, _orderingComponents.useConfig)(),
     _useConfig4 = _slicedToArray(_useConfig3, 1),
     configState = _useConfig4[0];
-  var countriesElevenPhoneLength = ['GB'];
   var phoneProps = _objectSpread(_objectSpread({
     UIComponent: PhoneAutocompleteUI
   }, props), {}, {
-    limitPhoneLength: countriesElevenPhoneLength.includes(configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.default_country_code) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) ? 11 : props.limitPhoneLength || 10,
+    limitPhoneLength: countriesElevenPhoneLength.includes(configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.default_country_code) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) ? 11 : props.limitPhoneLength || 10,
     orderTypes: props.orderTypes || [{
       value: 1,
       text: t('DELIVERY', 'Delivery'),

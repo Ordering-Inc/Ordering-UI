@@ -338,6 +338,7 @@ var CheckoutUI = function CheckoutUI(props) {
     var _Object$values, _configs$verification2;
     setUserErrors([]);
     var errors = [];
+    var codesStartsWithZero = ['44'];
     var userSelected = isCustomerMode ? customerState.user : user;
     var _requiredFields = [];
     Object.values(checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields).map(function (field) {
@@ -360,11 +361,21 @@ var CheckoutUI = function CheckoutUI(props) {
     setRequiredFields(_requiredFields);
     if (userSelected && userSelected !== null && userSelected !== void 0 && userSelected.cellphone) {
       if (userSelected !== null && userSelected !== void 0 && userSelected.country_phone_code) {
-        var _configs$validation_p, _configs$validation_p2;
+        var _phoneNumber$isPossib, _phoneNumber$isValid, _configs$validation_p, _configs$validation_p2;
         var phone = null;
         phone = "+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code).concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.cellphone.replace("+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code), ''));
         var phoneNumber = (0, _libphonenumberJs.default)(phone);
-        if (parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10) && !(phoneNumber !== null && phoneNumber !== void 0 && phoneNumber.isValid())) {
+        var enableIspossibly = false;
+        if (codesStartsWithZero.includes(phoneNumber === null || phoneNumber === void 0 ? void 0 : phoneNumber.countryCallingCode)) {
+          var inputNumber = userSelected === null || userSelected === void 0 ? void 0 : userSelected.cellphone;
+          var validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871'];
+          var result = validationsForUK.some(function (areaCode) {
+            return inputNumber === null || inputNumber === void 0 ? void 0 : inputNumber.startsWith(areaCode);
+          });
+          enableIspossibly = result;
+        }
+        var validation = enableIspossibly ? phoneNumber === null || phoneNumber === void 0 || (_phoneNumber$isPossib = phoneNumber.isPossible) === null || _phoneNumber$isPossib === void 0 ? void 0 : _phoneNumber$isPossib.call(phoneNumber) : phoneNumber === null || phoneNumber === void 0 || (_phoneNumber$isValid = phoneNumber.isValid) === null || _phoneNumber$isValid === void 0 ? void 0 : _phoneNumber$isValid.call(phoneNumber);
+        if (parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10) && !validation) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'));
         }
       } else {

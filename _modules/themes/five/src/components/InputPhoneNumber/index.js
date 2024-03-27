@@ -21,7 +21,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(props) {
-  var _configs$default_coun;
+  var _configs$default_coun, _phoneRef$current3;
   var user = props.user,
     value = props.value,
     setValue = props.setValue,
@@ -106,5 +106,5 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     onChange: function onChange(val) {
       return setValue && setValue(val, isValidPhoneNumber(val), returnRawNumber(val));
     }
-  }), value && !isValidPhoneNumber(value) && !disabled && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (auth && (user === null || user === void 0 ? void 0 : user.country_phone_code) || !auth || value.includes('+')) && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')), auth && !(user !== null && user !== void 0 && user.country_phone_code) && !value.includes('+') && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid'))));
+  }), value && !isValidPhoneNumber(value) && !disabled && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (auth && (user === null || user === void 0 ? void 0 : user.country_phone_code) || !auth || value.includes('+')) && (phoneRef === null || phoneRef === void 0 || (_phoneRef$current3 = phoneRef.current) === null || _phoneRef$current3 === void 0 ? void 0 : _phoneRef$current3.value) && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')), auth && !(user !== null && user !== void 0 && user.country_phone_code) && !value.includes('+') && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid'))));
 };

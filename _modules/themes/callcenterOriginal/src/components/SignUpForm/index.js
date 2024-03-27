@@ -244,10 +244,30 @@ var SignUpFormUI = function SignUpFormUI(props) {
       formMethods.setValue(fieldName, signupData[fieldName]);
     });
   }, [signupData]);
+  var returnRawNumber = function returnRawNumber(number) {
+    var numberParser = (0, _libphonenumberJs.default)(externalPhoneNumber);
+    var validations = ['0', '+'];
+    if (validations.includes(externalPhoneNumber[0]) && externalPhoneNumber.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
+      var _numberInput$split;
+      var numberInput = externalPhoneNumber.replace('-', '');
+      var numberRaw = '';
+      numberInput === null || numberInput === void 0 || (_numberInput$split = numberInput.split(' ')) === null || _numberInput$split === void 0 || (_numberInput$split = _numberInput$split.filter(function (_splited, i) {
+        return i > 0 || i === 0 && _splited[0] === '0';
+      })) === null || _numberInput$split === void 0 || _numberInput$split.map(function (splited) {
+        numberRaw = "".concat(numberRaw).concat(splited);
+        return numberRaw;
+      });
+      return {
+        number: numberRaw,
+        countryCallingCode: numberParser !== null && numberParser !== void 0 && numberParser.countryCallingCode ? "+".concat(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode) : null
+      };
+    }
+    return number;
+  };
   (0, _react.useEffect)(function () {
     if (externalPhoneNumber) {
       setUserPhoneNumber(externalPhoneNumber);
-      handleChangePhoneNumber(externalPhoneNumber, true);
+      handleChangePhoneNumber(externalPhoneNumber, true, returnRawNumber(externalPhoneNumber));
     }
   }, [externalPhoneNumber]);
   (0, _react.useEffect)(function () {
