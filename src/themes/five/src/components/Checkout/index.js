@@ -276,7 +276,7 @@ const CheckoutUI = (props) => {
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
-    const codesStartsWithZero = ['44']
+    const UKCodes = ['44']
     const userSelected = isCustomerMode ? customerState.user : user
     const _requiredFields = []
     Object.values(checkoutFieldsState?.fields).map(field => {
@@ -307,9 +307,9 @@ const CheckoutUI = (props) => {
         phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone.replace(`+${userSelected?.country_phone_code}`, '')}`
         const phoneNumber = parsePhoneNumber(phone)
         let enableIspossibly = false
-        if (codesStartsWithZero.includes(phoneNumber?.countryCallingCode)) {
+        if (UKCodes.includes(phoneNumber?.countryCallingCode)) {
           const inputNumber = userSelected?.cellphone
-          const validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871']
+          const validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871', '16']
           const result = validationsForUK.some(areaCode => inputNumber?.startsWith(areaCode))
           enableIspossibly = result
         }
