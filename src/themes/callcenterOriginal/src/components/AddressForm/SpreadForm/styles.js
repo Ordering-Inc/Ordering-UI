@@ -26,7 +26,7 @@ export const FormControl = styled.form`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
+  margin-top: 30px;
   input {
     box-sizing: border-box;
     margin: 10px 0px;
