@@ -243,12 +243,13 @@ export const AutoComplete = styled.div`
 `
 
 export const UserEdit = styled.div`
+  min-height: 70vh;
   > :first-child {
-     margin-bottom: 20px;
-     width: 100%;
-     ${props => !props.isOpenUserData && css`
-     position: absolute;
-     `}
+      margin-bottom: 20px;
+      width: 100%;
+      ${props => !props.isOpenUserData && css`
+      position: absolute;
+      `}
   }
 `
 
