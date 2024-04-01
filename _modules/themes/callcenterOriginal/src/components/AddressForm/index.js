@@ -16,6 +16,7 @@ var _styles = require("./styles");
 var _Buttons = require("../../styles/Buttons");
 var _Inputs = require("../../styles/Inputs");
 var _styles2 = require("../AddressList/styles");
+var _Tabs = require("../../styles/Tabs");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -35,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressFormUI = function AddressFormUI(props) {
-  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _addressState$address4, _formState$changes$lo, _formState$changes2, _businessesList$busin, _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _address$location5, _address$location6, _orderState$options6;
+  var _addressState$address, _ref, _formState$changes$ad, _formState$changes, _addressState$address2, _addressState$address3, _configState$configs, _addressState$address4, _formState$changes$lo, _formState$changes2, _businessesList$busin, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _address$location5, _address$location6, _orderState$options6;
   var addressesList = props.addressesList,
     googleMapsControls = props.googleMapsControls,
     formState = props.formState,
@@ -53,14 +54,15 @@ var AddressFormUI = function AddressFormUI(props) {
     address = props.address,
     notUseCustomerInfo = props.notUseCustomerInfo,
     addFormRestrictions = props.addFormRestrictions,
-    showSpreadForm = props.showSpreadForm,
     isAllowUnaddressOrderType = props.isAllowUnaddressOrderType,
     addressSpreadForm = props.addressSpreadForm,
     setAddressSpreadForm = props.setAddressSpreadForm,
     editSpreadAddress = props.editSpreadAddress,
     setEditSpreadAddress = props.setEditSpreadAddress,
     setUserConfirmPhone = props.setUserConfirmPhone,
-    userConfirmPhone = props.userConfirmPhone;
+    userConfirmPhone = props.userConfirmPhone,
+    tabSelected = props.tabSelected,
+    setTabSelected = props.setTabSelected;
   var _useConfig = (0, _orderingComponents.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -112,6 +114,8 @@ var AddressFormUI = function AddressFormUI(props) {
     setShowMap = _useState12[1];
   var isEditing = !!((_addressState$address3 = addressState.address) !== null && _addressState$address3 !== void 0 && _addressState$address3.id);
   var googleInputRef = (0, _react.useRef)();
+  var showTabs = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.addresses_form_type) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === 'general';
+  var showSpreadForm = tabSelected === 'country';
   var _useState13 = (0, _react.useState)(isEditing ? addressState === null || addressState === void 0 || (_addressState$address4 = addressState.address) === null || _addressState$address4 === void 0 ? void 0 : _addressState$address4.location : (_formState$changes$lo = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : null),
     _useState14 = _slicedToArray(_useState13, 2),
     locationChange = _useState14[0],
@@ -119,9 +123,9 @@ var AddressFormUI = function AddressFormUI(props) {
   var businessZones = businessesList === null || businessesList === void 0 || (_businessesList$busin = businessesList.businesses) === null || _businessesList$busin === void 0 ? void 0 : _businessesList$busin.map(function (business) {
     return business === null || business === void 0 ? void 0 : business.zones;
   });
-  var maxLimitLocation = configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.meters_to_change_address) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value;
-  var googleMapsApiKey = configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.google_maps_api_key) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value;
-  var isLocationRequired = ((_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.google_autocomplete_selection_required) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1' || ((_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.google_autocomplete_selection_required) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) === 'true';
+  var maxLimitLocation = configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.meters_to_change_address) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value;
+  var googleMapsApiKey = configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value;
+  var isLocationRequired = ((_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.google_autocomplete_selection_required) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) === '1' || ((_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.google_autocomplete_selection_required) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 'true';
   var mapErrors = {
     ERROR_NOT_FOUND_ADDRESS: 'Sorry, we couldn\'t find an address',
     ERROR_MAX_LIMIT_LOCATION: "Sorry, You can only set the position to ".concat(maxLimitLocation, "m")
@@ -508,18 +512,31 @@ var AddressFormUI = function AddressFormUI(props) {
     style: {
       marginBottom: '10px'
     }
-  })), (!showSpreadForm || showSpreadForm && (addressSpreadForm === null || addressSpreadForm === void 0 ? void 0 : addressSpreadForm.address)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !configState.loading && !addressState.loading && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
+  })), showTabs && /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return setTabSelected('general');
+    },
+    active: tabSelected === 'general',
+    borderBottom: true
+  }, t('DEFAULT', 'Default')), /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return setTabSelected('country');
+    },
+    active: tabSelected === 'country',
+    borderBottom: true
+  }, t('ADVANCED', 'Advanced')))), (!showSpreadForm || showSpreadForm && (addressSpreadForm === null || addressSpreadForm === void 0 ? void 0 : addressSpreadForm.address)) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !configState.loading && !addressState.loading && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     onKeyDown: function onKeyDown(e) {
       return checkKeyDown(e);
     },
     autoComplete: "off"
   }, inputNames.map(function (field) {
-    var _address$location3, _address$location4, _formState$result3, _formState$result4, _formState$changes$ad5, _formState$changes28, _configState$configs5, _addressState$address12, _formState$changes29, _theme$colors, _addressState$address13, _formState$changes30, _addressState$address14, _formState$changes31, _addressState$address15, _formState$changes32, _addressState$address16, _formState$changes33, _addressState$address17, _formState$changes34, _addressState$address18, _formState$changes35, _addressState$address19, _formState$changes36, _addressState$address20, _formState$changes37, _addressState$address21, _formState$changes38, _addressState$address22, _formState$changes39, _addressState$address23, _formState$changes40, _theme$images, _ref10, _formState$changes$fi2, _formState$changes41, _addressState$address24, _ref11, _formState$changes$ad6, _formState$changes42;
+    var _address$location3, _address$location4, _formState$result3, _formState$result4, _formState$changes$ad5, _formState$changes28, _configState$configs6, _addressState$address12, _formState$changes29, _theme$colors, _addressState$address13, _formState$changes30, _addressState$address14, _formState$changes31, _addressState$address15, _formState$changes32, _addressState$address16, _formState$changes33, _addressState$address17, _formState$changes34, _addressState$address18, _formState$changes35, _addressState$address19, _formState$changes36, _addressState$address20, _formState$changes37, _addressState$address21, _formState$changes38, _addressState$address22, _formState$changes39, _addressState$address23, _formState$changes40, _theme$images, _ref10, _formState$changes$fi2, _formState$changes41, _addressState$address24, _ref11, _formState$changes$ad6, _formState$changes42;
     return showField && showField(field.name) && (field.name === 'address' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.name
     }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !showSpreadForm && /*#__PURE__*/_react.default.createElement(_styles.AddressWrap, {
-      className: "google-control"
+      className: "google-control",
+      showTabs: showTabs
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapAddressInput, null, !selectedFromAutocomplete && (address === null || address === void 0 ? void 0 : address.address) && (!(address !== null && address !== void 0 && (_address$location3 = address.location) !== null && _address$location3 !== void 0 && _address$location3.lat) || !(address !== null && address !== void 0 && (_address$location4 = address.location) !== null && _address$location4 !== void 0 && _address$location4.lng)) && /*#__PURE__*/_react.default.createElement(_styles.AddressMarkContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('PLEASE_SELECT_GOOGLE_MAPS_ADDRESS', 'Please select an address given by google maps.'))), /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleAutocompleteInput, {
       className: "input-autocomplete",
       apiKey: googleMapsApiKey,
@@ -542,8 +559,10 @@ var AddressFormUI = function AddressFormUI(props) {
       },
       defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 || (_formState$result4 = formState.result) === null || _formState$result4 === void 0 || (_formState$result4 = _formState$result4.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.address : (_formState$changes$ad5 = formState === null || formState === void 0 || (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.address) !== null && _formState$changes$ad5 !== void 0 ? _formState$changes$ad5 : addressValue,
       autoComplete: "new-field",
-      countryCode: (configState === null || configState === void 0 || (_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.country_autocomplete) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) || '*'
-    }))), !(addressState !== null && addressState !== void 0 && (_addressState$address12 = addressState.address) !== null && _addressState$address12 !== void 0 && _addressState$address12.location || formState !== null && formState !== void 0 && (_formState$changes29 = formState.changes) !== null && _formState$changes29 !== void 0 && _formState$changes29.location) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_styles.SmsClient, null, /*#__PURE__*/_react.default.createElement("p", null, t('CAN_NOT_FIND_ADDRESS', 'Can\'t find address?'), ' '), /*#__PURE__*/_react.default.createElement("a", {
+      countryCode: (configState === null || configState === void 0 || (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 || (_configState$configs6 = _configState$configs6.country_autocomplete) === null || _configState$configs6 === void 0 ? void 0 : _configState$configs6.value) || '*'
+    }))), !(addressState !== null && addressState !== void 0 && (_addressState$address12 = addressState.address) !== null && _addressState$address12 !== void 0 && _addressState$address12.location || formState !== null && formState !== void 0 && (_formState$changes29 = formState.changes) !== null && _formState$changes29 !== void 0 && _formState$changes29.location) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
+      showTabs: showTabs
+    }, /*#__PURE__*/_react.default.createElement(_styles.SmsClient, null, /*#__PURE__*/_react.default.createElement("p", null, t('CAN_NOT_FIND_ADDRESS', 'Can\'t find address?'), ' '), /*#__PURE__*/_react.default.createElement("a", {
       style: {
         textDecoration: 'underline',
         color: theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary,
@@ -555,7 +574,8 @@ var AddressFormUI = function AddressFormUI(props) {
     }, t('SEND_SMS_TO_CUSTOMER', 'Send SMS to customer')))), ((addressState === null || addressState === void 0 || (_addressState$address13 = addressState.address) === null || _addressState$address13 === void 0 ? void 0 : _addressState$address13.location) || (formState === null || formState === void 0 || (_formState$changes30 = formState.changes) === null || _formState$changes30 === void 0 ? void 0 : _formState$changes30.location)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
       showMap: showMap || !showSpreadForm,
       notUseCustomerInfo: notUseCustomerInfo,
-      addFormRestrictions: addFormRestrictions
+      addFormRestrictions: addFormRestrictions,
+      showTabs: showTabs
     }, !showMap && /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, {
       style: {
         fontSize: 25,

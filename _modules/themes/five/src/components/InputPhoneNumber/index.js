@@ -39,7 +39,7 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
   var phoneRef = (0, _react.useRef)(null);
-  var codesStartsWithZero = ['44'];
+  var UKCodes = ['44'];
   var isValidPhoneNumber = function isValidPhoneNumber(number) {
     var _configs$validation_p, _configs$validation_p2, _numberParser$isPossi, _numberParser$isValid;
     if (!number) return;
@@ -48,9 +48,9 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     }
     var numberParser = (0, _libphonenumberJs.default)(number);
     var enableIspossibly = false;
-    if (codesStartsWithZero.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
+    if (UKCodes.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
       var inputNumber = returnRawNumber(number);
-      var validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871'];
+      var validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871', '16'];
       var result = validationsForUK.some(function (areaCode) {
         var _inputNumber$number;
         return inputNumber === null || inputNumber === void 0 || (_inputNumber$number = inputNumber.number) === null || _inputNumber$number === void 0 ? void 0 : _inputNumber$number.startsWith(areaCode);
@@ -67,7 +67,7 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     }
     var numberParser = (0, _libphonenumberJs.default)(number);
     var validations = ['0', '+'];
-    if (validations.includes(phoneRef === null || phoneRef === void 0 || (_phoneRef$current = phoneRef.current) === null || _phoneRef$current === void 0 ? void 0 : _phoneRef$current.value[0]) && codesStartsWithZero.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
+    if (validations.includes(phoneRef === null || phoneRef === void 0 || (_phoneRef$current = phoneRef.current) === null || _phoneRef$current === void 0 ? void 0 : _phoneRef$current.value[0]) && UKCodes.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
       var _phoneRef$current2, _numberInput$split;
       var numberInput = phoneRef === null || phoneRef === void 0 || (_phoneRef$current2 = phoneRef.current) === null || _phoneRef$current2 === void 0 ? void 0 : _phoneRef$current2.value.replace('-', '');
       var numberRaw = '';
