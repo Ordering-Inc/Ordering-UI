@@ -107,7 +107,7 @@ export const AddressWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  bottom: 79%;
+  top: ${({ showTabs }) => showTabs ? '110px' : '70px'};
   right: 0px;
   padding-right: 20px;
   button {
@@ -201,9 +201,10 @@ export const WrapperMap = styled.div`
   z-index: 100;
   width: 48%;
   position: absolute;
-  bottom: 2%;
+  top: ${({ showTabs }) => showTabs ? '150px' : '105px'};
   right: 0;
   padding-top: ${props => props.showMap ? '30px' : 0};
+  padding-right: 20px;
   height: ${({ notUseCustomerInfo }) =>
     notUseCustomerInfo
       ? '370px'
@@ -263,4 +264,25 @@ export const WithoutAddressContainer = styled.div`
   p {
     margin-bottom: 0;
   }
+`
+
+export const SmsClient = styled.div`
+  position: relative;
+  top: 20px;
+  display: flex;
+  p{
+    margin: 0;
+    white-space: pre;
+  }
+`
+
+export const TabsContainer = styled.div`
+  position: absolute;
+  width: 50%;
+  top: 60px;
+  right: 0px;
+  padding-right: 20px;
+  z-index: 1000;
+  border-bottom: 1px solid #E9ECEF;
+
 `
