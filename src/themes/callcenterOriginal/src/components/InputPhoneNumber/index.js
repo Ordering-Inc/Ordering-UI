@@ -47,10 +47,10 @@ export const InputPhoneNumber = (props) => {
     }
     const numberParser = parsePhoneNumber(number)
     const validations = ['0', '+']
-    if (validations.includes(phoneRef?.current?.value[0]) && UKCodes.includes(numberParser?.countryCallingCode)) {
+    if ((phoneRef?.current?.value?.startsWith('16') || validations.includes(phoneRef?.current?.value[0])) && UKCodes.includes(numberParser?.countryCallingCode)) {
       const numberInput = phoneRef?.current?.value.replace('-', '')
       let numberRaw = ''
-      numberInput?.split(' ')?.filter((_splited, i) => i > 0 || (i === 0 && _splited[0] === '0'))?.map(splited => {
+      numberInput?.split(' ')?.filter((_splited, i) => i > 0 || (i === 0 && (_splited[0] === '0' || _splited.startsWith('16'))))?.map(splited => {
         numberRaw = `${numberRaw}${splited}`
         return numberRaw
       })
