@@ -107,7 +107,6 @@ const AddressListUI = (props) => {
   const [{ user }] = useCustomer()
   const [addressSpreadForm, setAddressSpreadForm] = useState(null)
   const [editSpreadAddress, setEditSpreadAddress] = useState(false)
-  const [tabSelected, setTabSelected] = useState('general')
 
   const addFormRestrictions = userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
@@ -121,6 +120,7 @@ const AddressListUI = (props) => {
   const unaddressedTypes = configs?.unaddressed_order_types_allowed?.value.split('|').map(value => Number(value)) || []
   const isAllowUnaddressOrderType = unaddressedTypes.includes(orderState?.options?.type) && user?.id === orderState?.options?.user_id
   const countryAutocomplete = configs?.country_autocomplete?.value?.toUpperCase() ?? '*'
+  const showSpreadForm = configs?.addresses_form_type?.value === 'country'
 
   const openAddress = (address) => {
     setCurAddress(address)
@@ -280,8 +280,7 @@ const AddressListUI = (props) => {
               <AddressForm
                 userId={userId}
                 addressesList={addressList?.addresses}
-                tabSelected={tabSelected}
-                setTabSelected={setTabSelected}
+                showSpreadForm={showSpreadForm}
                 addressSpreadForm={addressSpreadForm}
                 setAddressSpreadForm={setAddressSpreadForm}
                 editSpreadAddress={editSpreadAddress}
@@ -385,8 +384,7 @@ const AddressListUI = (props) => {
               <AddressForm
                 userId={userId}
                 addressesList={addressList?.addresses}
-                tabSelected={tabSelected}
-                setTabSelected={setTabSelected}
+                showSpreadForm={showSpreadForm}
                 addressSpreadForm={addressSpreadForm}
                 setAddressSpreadForm={setAddressSpreadForm}
                 editSpreadAddress={editSpreadAddress}
@@ -417,7 +415,7 @@ const AddressListUI = (props) => {
               )}
               <h1>{t('ADD_NEW_ADDRESS', 'Add new address')}</h1>
             </TitleFormContainer>
-            {tabSelected === 'country' && (
+            {showSpreadForm && (
               <SpreadForm
                 address={curAddress?.address && getSpreadAddressFormatted(curAddress)}
                 countryAutocomplete={countryAutocomplete}
@@ -469,8 +467,7 @@ const AddressListUI = (props) => {
             <AddressForm
               userId={userId}
               addressesList={addressList?.addresses}
-              tabSelected={tabSelected}
-              setTabSelected={setTabSelected}
+              showSpreadForm={showSpreadForm}
               addressSpreadForm={addressSpreadForm}
               setAddressSpreadForm={setAddressSpreadForm}
               editSpreadAddress={editSpreadAddress}

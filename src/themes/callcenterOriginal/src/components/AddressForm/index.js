@@ -32,15 +32,12 @@ import {
   WrapperSkeleton,
   AddressMarkContainer,
   StreetViewText,
-  WithoutAddressContainer,
-  SmsClient,
-  TabsContainer
+  WithoutAddressContainer
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
 import { Input, TextArea } from '../../styles/Inputs'
 import { WithoutAddressText } from '../AddressList/styles'
-import { Tabs, Tab } from '../../styles/Tabs'
 
 const AddressFormUI = (props) => {
   const {
@@ -61,15 +58,12 @@ const AddressFormUI = (props) => {
     address,
     notUseCustomerInfo,
     addFormRestrictions,
+    showSpreadForm,
     isAllowUnaddressOrderType,
     addressSpreadForm,
     setAddressSpreadForm,
     editSpreadAddress,
-    setEditSpreadAddress,
-    setUserConfirmPhone,
-    userConfirmPhone,
-    tabSelected,
-    setTabSelected
+    setEditSpreadAddress
   } = props
 
   const [configState] = useConfig()
@@ -89,8 +83,7 @@ const AddressFormUI = (props) => {
   const [showMap, setShowMap] = useState(false)
   const isEditing = !!addressState.address?.id
   const googleInputRef = useRef()
-  const showTabs = configState?.configs?.addresses_form_type?.value === 'general'
-  const showSpreadForm = tabSelected === 'country'
+
   const [locationChange, setLocationChange] = useState(
     isEditing
       ? addressState?.address?.location
@@ -416,18 +409,7 @@ const AddressFormUI = (props) => {
           <Skeleton height={50} count={5} style={{ marginBottom: '10px' }} />
         </WrapperSkeleton>
       )}
-      {showTabs && (
-        <TabsContainer>
-          <Tabs>
-            <Tab onClick={() => setTabSelected('general')} active={tabSelected === 'general'} borderBottom>
-              {t('DEFAULT', 'Default')}
-            </Tab>
-            <Tab onClick={() => setTabSelected('country')} active={tabSelected === 'country'} borderBottom>
-              {t('ADVANCED', 'Advanced')}
-            </Tab>
-          </Tabs>
-        </TabsContainer>
-      )}
+
       {(!showSpreadForm || (showSpreadForm && addressSpreadForm?.address)) && (
         <>
           {!configState.loading && !addressState.loading && (
@@ -441,7 +423,7 @@ const AddressFormUI = (props) => {
                   <React.Fragment key={field.name}>
                     <>
                       {!showSpreadForm && (
-                        <AddressWrap className='google-control' showTabs={showTabs}>
+                        <AddressWrap className='google-control'>
                           <WrapAddressInput>
                             {!selectedFromAutocomplete && address?.address && (!address?.location?.lat || !address?.location?.lng) && (
                               <AddressMarkContainer>
@@ -481,7 +463,6 @@ const AddressFormUI = (props) => {
                           showMap={showMap || !showSpreadForm}
                           notUseCustomerInfo={notUseCustomerInfo}
                           addFormRestrictions={addFormRestrictions}
-                          showTabs={showTabs}
                         >
                           {!showMap && (
                             <section>
