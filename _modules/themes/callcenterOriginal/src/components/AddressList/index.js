@@ -52,7 +52,7 @@ var getSpreadAddressFormatted = function getSpreadAddressFormatted(_address) {
   }, restValues);
 };
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _configs$country_auto, _configs$country_auto2, _configs$addresses_fo, _addressList$addresse3, _addressList$addresse4, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12;
+  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _configs$country_auto, _configs$country_auto2, _addressList$addresse3, _addressList$addresse4, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -116,6 +116,10 @@ var AddressListUI = function AddressListUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     editSpreadAddress = _useState10[0],
     setEditSpreadAddress = _useState10[1];
+  var _useState11 = (0, _react.useState)('general'),
+    _useState12 = _slicedToArray(_useState11, 2),
+    tabSelected = _useState12[0],
+    setTabSelected = _useState12[1];
   var addFormRestrictions = (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text) && ((_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error);
   var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
     return i === self.findIndex(function (obj) {
@@ -127,7 +131,6 @@ var AddressListUI = function AddressListUI(props) {
   })) || [];
   var isAllowUnaddressOrderType = unaddressedTypes.includes(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) && (user === null || user === void 0 ? void 0 : user.id) === (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.user_id);
   var countryAutocomplete = (_configs$country_auto = configs === null || configs === void 0 || (_configs$country_auto2 = configs.country_autocomplete) === null || _configs$country_auto2 === void 0 || (_configs$country_auto2 = _configs$country_auto2.value) === null || _configs$country_auto2 === void 0 ? void 0 : _configs$country_auto2.toUpperCase()) !== null && _configs$country_auto !== void 0 ? _configs$country_auto : '*';
-  var showSpreadForm = (configs === null || configs === void 0 || (_configs$addresses_fo = configs.addresses_form_type) === null || _configs$addresses_fo === void 0 ? void 0 : _configs$addresses_fo.value) === 'country';
   var openAddress = function openAddress(address) {
     setCurAddress(address);
     (address === null || address === void 0 ? void 0 : address.location) && setAddressSpreadForm(getSpreadAddressFormatted(address));
@@ -277,7 +280,8 @@ var AddressListUI = function AddressListUI(props) {
   }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
-    showSpreadForm: showSpreadForm,
+    tabSelected: tabSelected,
+    setTabSelected: setTabSelected,
     addressSpreadForm: addressSpreadForm,
     setAddressSpreadForm: setAddressSpreadForm,
     editSpreadAddress: editSpreadAddress,
@@ -354,7 +358,8 @@ var AddressListUI = function AddressListUI(props) {
   }), !isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
-    showSpreadForm: showSpreadForm,
+    tabSelected: tabSelected,
+    setTabSelected: setTabSelected,
     addressSpreadForm: addressSpreadForm,
     setAddressSpreadForm: setAddressSpreadForm,
     editSpreadAddress: editSpreadAddress,
@@ -377,7 +382,7 @@ var AddressListUI = function AddressListUI(props) {
     onClick: function onClick() {
       return handleCloseAddressForm();
     }
-  })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))), showSpreadForm && /*#__PURE__*/_react.default.createElement(_SpreadForm.SpreadForm, {
+  })), /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_ADDRESS', 'Add new address'))), tabSelected === 'country' && /*#__PURE__*/_react.default.createElement(_SpreadForm.SpreadForm, {
     address: (curAddress === null || curAddress === void 0 ? void 0 : curAddress.address) && getSpreadAddressFormatted(curAddress),
     countryAutocomplete: countryAutocomplete,
     editSpreadAddress: editSpreadAddress,
@@ -416,7 +421,8 @@ var AddressListUI = function AddressListUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
-    showSpreadForm: showSpreadForm,
+    tabSelected: tabSelected,
+    setTabSelected: setTabSelected,
     addressSpreadForm: addressSpreadForm,
     setAddressSpreadForm: setAddressSpreadForm,
     editSpreadAddress: editSpreadAddress,
