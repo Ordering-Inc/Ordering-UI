@@ -54,6 +54,9 @@ export const InputPhoneNumber = (props) => {
           value={value}
           displayInitialValueAsLocalNumber
           onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val))}
+          numberInputProps={{
+            maxLength: value && parsePhoneNumber(value)?.country === 'MX' ? 12 : null
+          }}
         />
         {value && !isValidPhoneNumber(value) && !disabled && (
           <>
