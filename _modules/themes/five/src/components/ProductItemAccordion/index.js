@@ -220,14 +220,14 @@ var ProductItemAccordionUI = function ProductItemAccordionUI(props) {
       className: "ingredient",
       key: ingredient.id
     }, /*#__PURE__*/_react.default.createElement("span", null, t('NO', 'No'), " ", ingredient.name));
-  })), productInfo.options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, productInfo.options.sort(function (a, b) {
-    return a.rank - b.rank;
-  }).map(function (option) {
+  })), productInfo.options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, productInfo.options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: option.id
     }, /*#__PURE__*/_react.default.createElement("p", null, option.name), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, {
       className: "suboption"
-    }, option.suboptions.map(function (suboption) {
+    }, option.suboptions.sort(function (a, b) {
+      return a.rank - b.rank;
+    }).map(function (suboption) {
       var _suboption$half_price;
       return /*#__PURE__*/_react.default.createElement("li", {
         key: suboption.id
