@@ -21,7 +21,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(props) {
-  var _configs$default_coun, _phoneRef$current3;
+  var _configs$default_coun, _phoneRef$current4;
   var user = props.user,
     value = props.value,
     setValue = props.setValue,
@@ -60,19 +60,26 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     return enableIspossibly ? numberParser === null || numberParser === void 0 || (_numberParser$isPossi = numberParser.isPossible) === null || _numberParser$isPossi === void 0 ? void 0 : _numberParser$isPossi.call(numberParser) : numberParser === null || numberParser === void 0 || (_numberParser$isValid = numberParser.isValid) === null || _numberParser$isValid === void 0 ? void 0 : _numberParser$isValid.call(numberParser);
   };
   var returnRawNumber = function returnRawNumber(number) {
-    var _configs$validation_p3, _configs$validation_p4, _phoneRef$current;
+    var _configs$validation_p3, _configs$validation_p4, _phoneRef$current2;
     if (!number) return null;
     if (!parseInt((_configs$validation_p3 = configs === null || configs === void 0 || (_configs$validation_p4 = configs.validation_phone_number_lib) === null || _configs$validation_p4 === void 0 ? void 0 : _configs$validation_p4.value) !== null && _configs$validation_p3 !== void 0 ? _configs$validation_p3 : 1, 10)) {
       return null;
     }
     var numberParser = (0, _libphonenumberJs.default)(number);
     var validations = ['0', '+'];
-    if (validations.includes(phoneRef === null || phoneRef === void 0 || (_phoneRef$current = phoneRef.current) === null || _phoneRef$current === void 0 ? void 0 : _phoneRef$current.value[0]) && UKCodes.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
-      var _phoneRef$current2, _numberInput$split;
-      var numberInput = phoneRef === null || phoneRef === void 0 || (_phoneRef$current2 = phoneRef.current) === null || _phoneRef$current2 === void 0 ? void 0 : _phoneRef$current2.value.replace('-', '');
+    var startsWithValidations = ['16'];
+    var hasStartValidation = startsWithValidations.some(function (validation) {
+      var _phoneRef$current, _phoneRef$current$sta;
+      return phoneRef === null || phoneRef === void 0 || (_phoneRef$current = phoneRef.current) === null || _phoneRef$current === void 0 || (_phoneRef$current = _phoneRef$current.value) === null || _phoneRef$current === void 0 || (_phoneRef$current$sta = _phoneRef$current.startsWith) === null || _phoneRef$current$sta === void 0 ? void 0 : _phoneRef$current$sta.call(_phoneRef$current, validation);
+    });
+    if ((hasStartValidation || validations.includes(phoneRef === null || phoneRef === void 0 || (_phoneRef$current2 = phoneRef.current) === null || _phoneRef$current2 === void 0 ? void 0 : _phoneRef$current2.value[0])) && UKCodes.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
+      var _phoneRef$current3, _numberInput$split;
+      var numberInput = phoneRef === null || phoneRef === void 0 || (_phoneRef$current3 = phoneRef.current) === null || _phoneRef$current3 === void 0 ? void 0 : _phoneRef$current3.value.replace('-', '');
       var numberRaw = '';
       numberInput === null || numberInput === void 0 || (_numberInput$split = numberInput.split(' ')) === null || _numberInput$split === void 0 || (_numberInput$split = _numberInput$split.filter(function (_splited, i) {
-        return i > 0 || i === 0 && _splited[0] === '0';
+        return i > 0 || i === 0 && (_splited[0] === '0' || startsWithValidations.some(function (validation) {
+          return _splited.startsWith(validation);
+        }));
       })) === null || _numberInput$split === void 0 || _numberInput$split.map(function (splited) {
         numberRaw = "".concat(numberRaw).concat(splited);
         return numberRaw;
@@ -106,5 +113,5 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     onChange: function onChange(val) {
       return setValue && setValue(val, isValidPhoneNumber(val), returnRawNumber(val));
     }
-  }), value && !isValidPhoneNumber(value) && !disabled && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (auth && (user === null || user === void 0 ? void 0 : user.country_phone_code) || !auth || value.includes('+')) && (phoneRef === null || phoneRef === void 0 || (_phoneRef$current3 = phoneRef.current) === null || _phoneRef$current3 === void 0 ? void 0 : _phoneRef$current3.value) && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')), auth && !(user !== null && user !== void 0 && user.country_phone_code) && !value.includes('+') && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid'))));
+  }), value && !isValidPhoneNumber(value) && !disabled && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (auth && (user === null || user === void 0 ? void 0 : user.country_phone_code) || !auth || value.includes('+')) && (phoneRef === null || phoneRef === void 0 || (_phoneRef$current4 = phoneRef.current) === null || _phoneRef$current4 === void 0 ? void 0 : _phoneRef$current4.value) && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')), auth && !(user !== null && user !== void 0 && user.country_phone_code) && !value.includes('+') && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid'))));
 };
