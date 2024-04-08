@@ -70,6 +70,7 @@ import { SignUpForm } from '../SignUpForm'
 import { LoginForm } from '../LoginForm'
 import { OrderDetail } from './OrderDetail'
 import { SpinnerLoader } from '../../../../../components/SpinnerLoader'
+import { OrderTypesSquares } from '../OrderTypesSquares'
 
 const mapConfigs = {
   mapZoom: 16,
@@ -108,7 +109,6 @@ const CheckoutUI = (props) => {
   } = props
 
   const theme = useTheme()
-  const [ordering] = useApi()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
@@ -275,6 +275,7 @@ const CheckoutUI = (props) => {
   const checkValidationFields = () => {
     setUserErrors([])
     const errors = []
+    const UKCodes = ['44']
     const userSelected = isCustomerMode ? customerState.user : user
     const _requiredFields = []
     Object.values(checkoutFieldsState?.fields).map(field => {
@@ -304,7 +305,15 @@ const CheckoutUI = (props) => {
         let phone = null
         phone = `+${userSelected?.country_phone_code}${userSelected?.cellphone.replace(`+${userSelected?.country_phone_code}`, '')}`
         const phoneNumber = parsePhoneNumber(phone)
-        if (parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10) && !phoneNumber?.isValid()) {
+        let enableIspossibly = false
+        if (UKCodes.includes(phoneNumber?.countryCallingCode)) {
+          const inputNumber = userSelected?.cellphone
+          const validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871', '16']
+          const result = validationsForUK.some(areaCode => inputNumber?.startsWith(areaCode))
+          enableIspossibly = result
+        }
+        const validation = enableIspossibly ? phoneNumber?.isPossible?.() : phoneNumber?.isValid?.()
+        if (parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10) && !validation) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'))
         }
       } else {
@@ -594,27 +603,29 @@ const CheckoutUI = (props) => {
         </WrapperLeftContent>
       </WrapperLeftContainer>
       <WrapperRightContainer>
-
+        {isCustomerMode && (
+          <OrderTypesSquares />
+        )}
         {
           !!(!isMultiDriverTips && driverTipsField) &&
-          <>
-            <DriverTipContainer>
-              <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
-              <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
-              <DriverTips
-                businessId={cart?.business_id}
-                driverTipsOptions={driverTipsOptions}
-                isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-                isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-                driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                  ? cart?.driver_tip
-                  : cart?.driver_tip_rate}
-                cart={cart}
-                useOrderContext
-              />
-            </DriverTipContainer>
-            <DriverTipDivider />
-          </>
+            <>
+              <DriverTipContainer>
+                <h1>{t('DRIVER_TIPS', 'Driver Tips')}</h1>
+                <p>{t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')}</p>
+                <DriverTips
+                  businessId={cart?.business_id}
+                  driverTipsOptions={driverTipsOptions}
+                  isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
+                  isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
+                  driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
+                    ? cart?.driver_tip
+                    : cart?.driver_tip_rate}
+                  cart={cart}
+                  useOrderContext
+                />
+              </DriverTipContainer>
+              <DriverTipDivider />
+            </>
         }
         {!cartState.loading && placeSpotsEnabled && cart?.business_id && (
           <SelectSpotContainer>
@@ -864,6 +875,11 @@ const CheckoutUI = (props) => {
         width='760px'
         padding='30px'
         onClose={() => setOpenModal({ ...openModal, orderDetail: false })}
+        title={(orderTypeList[options?.type - 1]) || t('DELIVERY', 'Delivery')}
+        titleStyle={{
+          color: theme?.colors?.primary,
+          fontSize: 30
+        }}
       >
         <OrderDetail
           item={cart}

@@ -59,7 +59,7 @@ export const WrapperSearch = styled.div`
     margin: 0;
     margin-top: 10px;
     margin-bottom: 20px;
-    width: 100%; 
+    width: 100%;
     padding: 0 20px;
     ${isCustomerMode ? css`
       margin-right: 20px;
@@ -69,7 +69,7 @@ export const WrapperSearch = styled.div`
     svg {
       align-self: auto;
     }
-    
+
     @media(min-width: 681px){
       width: 75%;
       padding: 0;

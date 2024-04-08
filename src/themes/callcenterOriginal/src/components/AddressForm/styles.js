@@ -245,6 +245,14 @@ export const AddressMarkContainer = styled.div`
     color: #664D03;
     font-size: 12px;
   }
+
+  ${({ blue }) => blue && css`
+      background-color: #CFF4FC;
+      border: 1px solid #9EEAF9;
+      p {
+        color: #055160;
+      }
+  `}
 `
 
 export const StreetViewText = styled.span`

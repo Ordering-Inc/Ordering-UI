@@ -54,7 +54,6 @@ import { Button } from '../../styles/Buttons'
 
 export const Header = (props) => {
   const {
-    isHome,
     location,
     isShowOrderOptions,
     isHideSignup,
@@ -114,6 +113,7 @@ export const Header = (props) => {
       ? 'catering_pickup'
       : null
 
+  const franchiseLayout = theme?.my_products?.components?.website_theme?.components?.franchise_slug
   const cateringValues = getCateringValues(cateringTypeString, pathname.includes('store') && Object?.keys(business || {})?.length > 0 ? business?.configs : configState?.configs)
 
   const handleSuccessSignup = (user) => {
@@ -299,6 +299,7 @@ export const Header = (props) => {
                   )}
                   {!isCustomerMode && (isPreOrderSetting || configState?.configs?.preorder_status_enabled?.value === undefined) && (
                     <MomentMenu
+                      isFranchiseSlugOne={franchiseLayout === 'franchise_1'}
                       onClick={configState?.configs?.max_days_preorder?.value === -1 || configState?.configs?.max_days_preorder?.value === 0
                         ? null
                         : () => openModal('moment')}
@@ -312,17 +313,21 @@ export const Header = (props) => {
                   )}
                 </>
               )}
-              {windowSize.width > 768 ? (
-                <OrderTypeSelectorHeader
-                  orderTypeList={orderTypeList}
-                  onClick={() => openModal('delivery')}
-                />
-              ) : (
-                <HeaderOption
-                  variant='delivery'
-                  onClick={(variant) => openModal(variant)}
-                  orderTypeList={orderTypeList}
-                />
+              {franchiseLayout !== 'franchise_1' && (
+                <>
+                  {windowSize.width > 768 ? (
+                    <OrderTypeSelectorHeader
+                      orderTypeList={orderTypeList}
+                      onClick={() => openModal('delivery')}
+                    />
+                  ) : (
+                    <HeaderOption
+                      variant='delivery'
+                      onClick={(variant) => openModal(variant)}
+                      orderTypeList={orderTypeList}
+                    />
+                  )}
+                </>
               )}
             </Menu>
           )}

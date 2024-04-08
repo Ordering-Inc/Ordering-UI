@@ -22,7 +22,7 @@ export const InputPhoneNumber = (props) => {
   const [{ configs }] = useConfig()
 
   const phoneRef = useRef(null)
-  const codesStartsWithZero = ['44']
+  const UKCodes = ['44']
 
   const isValidPhoneNumber = (number) => {
     if (!number) return
@@ -31,9 +31,9 @@ export const InputPhoneNumber = (props) => {
     }
     const numberParser = parsePhoneNumber(number)
     let enableIspossibly = false
-    if (codesStartsWithZero.includes(numberParser?.countryCallingCode)) {
+    if (UKCodes.includes(numberParser?.countryCallingCode)) {
       const inputNumber = returnRawNumber(number)
-      const validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871']
+      const validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871', '16']
       const result = validationsForUK.some(areaCode => inputNumber?.number?.startsWith(areaCode))
       enableIspossibly = result
     }
@@ -48,13 +48,18 @@ export const InputPhoneNumber = (props) => {
     }
     const numberParser = parsePhoneNumber(number)
     const validations = ['0', '+']
-    if (validations.includes(phoneRef?.current?.value[0]) && codesStartsWithZero.includes(numberParser?.countryCallingCode)) {
+    const startsWithValidations = ['16']
+    const hasStartValidation = startsWithValidations.some(validation => phoneRef?.current?.value?.startsWith?.(validation))
+    if ((hasStartValidation || validations.includes(phoneRef?.current?.value[0])) && UKCodes.includes(numberParser?.countryCallingCode)) {
       const numberInput = phoneRef?.current?.value.replace('-', '')
       let numberRaw = ''
-      numberInput?.split(' ')?.filter((_splited, i) => i > 0 || (i === 0 && _splited[0] === '0'))?.map(splited => {
-        numberRaw = `${numberRaw}${splited}`
-        return numberRaw
-      })
+      numberInput && numberInput
+        .split(' ')
+        .filter((_splited, i) => i > 0 || (i === 0 && (_splited[0] === '0' || startsWithValidations.some(validation => _splited.startsWith(validation)))))
+        .map(splited => {
+          numberRaw = `${numberRaw}${splited}`
+          return numberRaw
+        })
 
       return {
         number: numberRaw,
@@ -92,7 +97,7 @@ export const InputPhoneNumber = (props) => {
       />
       {value && !isValidPhoneNumber(value) && !disabled && (
         <>
-          {((auth && user?.country_phone_code) || !auth || value.includes('+')) && (
+          {(((auth && user?.country_phone_code) || !auth || value.includes('+')) && phoneRef?.current?.value) && (
             <ErrorMsg>{t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')}</ErrorMsg>
           )}
 

@@ -176,15 +176,17 @@ export const App = () => {
   const websiteThemeType = themeUpdated?.my_products?.components?.website_theme?.components?.type
   const websiteThemeBusinessSlug = themeUpdated?.my_products?.components?.website_theme?.components?.business_slug
   const updatedBusinessSlug = (websiteThemeType === 'single_store' && websiteThemeBusinessSlug) || settings?.businessSlug
-
+  const franchiseLayout = themeUpdated?.my_products?.components?.website_theme?.components?.franchise_slug
+  const isFranchiseOne = franchiseLayout === 'franchise_1'
   const businessesSlug = {
     marketplace: 'marketplace',
-    kiosk: settings?.businessSlug
+    kiosk: updatedBusinessSlug,
+    business: updatedBusinessSlug
   }
 
   const singleBusinessConfig = {
-    isActive: settings?.use_marketplace || isKioskApp,
-    businessSlug: businessesSlug[isKioskApp ? 'kiosk' : 'marketplace']
+    isActive: settings?.use_marketplace || updatedBusinessSlug || isKioskApp,
+    businessSlug: businessesSlug[isKioskApp ? 'kiosk' : settings?.use_marketplace ? 'marketplace' : 'business']
   }
 
   const signUpBusinesslayout = themeUpdated?.business_signup?.components?.layout?.type === 'old'
@@ -431,8 +433,8 @@ export const App = () => {
   }, [configs, loaded])
 
   useEffect(() => {
-    if (isHome && settings?.use_marketplace) {
-      goToPage('business', { store: 'marketplace' })
+    if (isHome && (settings?.use_marketplace || updatedBusinessSlug)) {
+      goToPage('business', { store: settings?.use_marketplace ? 'marketplace' : updatedBusinessSlug })
     }
   }, [])
 
@@ -546,6 +548,7 @@ export const App = () => {
                 singleBusinessConfig={singleBusinessConfig}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
+                businessSlug={updatedBusinessSlug}
                 notificationState={oneSignalState}
                 useModalMode
               />
@@ -559,7 +562,7 @@ export const App = () => {
                     {isUserVerifyRequired && !guestCheckoutEnabled ? (
                       <Redirect to='/verify' />
                     ) : (
-                      isKioskApp
+                      isKioskApp || isFranchiseOne
                         ? <HomePage notificationState={oneSignalState} />
                         : (orderStatus.options?.address?.location || isAllowUnaddressOrderType)
                           ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/search'} />
@@ -572,7 +575,7 @@ export const App = () => {
                     {isUserVerifyRequired && !guestCheckoutEnabled ? (
                       <Redirect to='/verify' />
                     ) : (
-                      isKioskApp
+                      isKioskApp || isFranchiseOne
                         ? <HomePage notificationState={oneSignalState} />
                         : queryIntegrationToken && queryIntegrationCode === 'spoonity'
                           ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
@@ -677,7 +680,7 @@ export const App = () => {
                   </Route>
                   <Route exact path='/search'>
                     {
-                      isKioskApp
+                      isKioskApp || businessesSlug?.business
                         ? <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                         : queryIntegrationToken && queryIntegrationCode === 'spoonity'
                           ? <QueryLoginSpoonity token={queryIntegrationToken} notificationState={oneSignalState} />
@@ -688,7 +691,7 @@ export const App = () => {
                               isUserVerifyRequired && !guestCheckoutEnabled ? (
                                 <Redirect to='/verify' />
                               ) : (
-                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !singleBusinessConfig.isActive
+                                (orderStatus.options?.address?.location || isAllowUnaddressOrderType || isFranchiseOne) && !singleBusinessConfig.isActive
                                   ? <BusinessesList searchValueCustom={searchValue} />
                                   : <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />
                               )
@@ -700,7 +703,7 @@ export const App = () => {
                     {isUserVerifyRequired && !guestCheckoutEnabled ? (
                       <Redirect to='/verify' />
                     ) : (
-                      (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !isKioskApp ? (
+                      (orderStatus.options?.address?.location || isAllowUnaddressOrderType) && !isKioskApp && !singleBusinessConfig.isActive ? (
                         <BusinessListingSearch />
                       ) : (
                         <Redirect to={singleBusinessConfig.isActive ? `/${singleBusinessConfig.businessSlug}` : '/'} />

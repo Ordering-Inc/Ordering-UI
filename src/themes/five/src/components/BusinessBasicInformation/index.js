@@ -188,7 +188,7 @@ export const BusinessBasicInformation = (props) => {
         <SearchProducts
           {...props}
           onClose={() => {
-            handleChangeSearch('')
+            handleChangeSearch && handleChangeSearch('')
             setOpenSearchProducts(false)
             window.scroll({
               top: window.scrollY - 1,

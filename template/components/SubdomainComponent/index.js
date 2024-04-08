@@ -6,16 +6,12 @@ export const SubdomainComponent = (props) => {
   const isValidSubdomain = window.location.hostname.includes('tryordering.com') || window.location.hostname.includes('ordering.co')
 
   let project = settings?.project
-  if (settings?.use_project_subdomain) {
-    if (!settings?.use_project_domain || isValidSubdomain) {
-      project = projectFromSubdomain
-    }
+  if (settings?.use_project_subdomain && isValidSubdomain) {
+    project = projectFromSubdomain
   }
 
-  if (settings?.use_project_domain) {
-    if (!settings?.use_project_subdomain || !isValidSubdomain) {
-      project = '_'
-    }
+  if (settings?.use_project_domain && !isValidSubdomain) {
+    project = '_'
   }
 
   return (

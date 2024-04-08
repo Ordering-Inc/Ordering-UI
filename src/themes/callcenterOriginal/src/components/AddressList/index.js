@@ -27,7 +27,6 @@ import {
   AddressListUl,
   AddressItem,
   AddressItemActions,
-  WrappNotAddresses,
   FormActions,
   ContinueButton,
   AddressTitle,
@@ -40,7 +39,9 @@ import {
   AddressBookMark,
   AddressBookMarkContainer,
   AddressTitleContainer,
-  WithoutAddressText
+  WithoutAddressText,
+  WrapperSMS,
+  ButtonsContainer
 } from './styles'
 
 import { NotFoundSource } from '../NotFoundSource'
@@ -93,7 +94,10 @@ const AddressListUI = (props) => {
     notUseCustomerInfo,
     franchiseId,
     setIsSavedAddress,
-    isFromPhoneAutocomplete
+    isFromPhoneAutocomplete,
+    setUserConfirmPhone,
+    userConfirmPhone,
+    disabledSms
   } = props
 
   const [, t] = useLanguage()
@@ -102,7 +106,7 @@ const AddressListUI = (props) => {
   const [{ configs }] = useConfig()
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [confirm, setConfirm] = useState({ open: false, title: null, content: null, handleOnAccept: null, handleOnCancel: null })
   const theme = useTheme()
   const [{ user }] = useCustomer()
   const [addressSpreadForm, setAddressSpreadForm] = useState(null)
@@ -157,7 +161,7 @@ const AddressListUI = (props) => {
     handleCloseAddressForm()
   }
 
-  const handleSetAddress = (address) => {
+  const handleSetAddress = (address, options) => {
     if (
       checkAddress(address) &&
       isCustomerMode &&
@@ -180,7 +184,7 @@ const AddressListUI = (props) => {
       openAddress(address)
       return
     }
-    setIsSavedAddress && setIsSavedAddress(true)
+    (!options?.avoidRedirect && setIsSavedAddress) && setIsSavedAddress(true)
     handleCloseAddressForm()
     handleSetDefault(address, userCustomerSetup)
   }
@@ -223,6 +227,10 @@ const AddressListUI = (props) => {
     setEditSpreadAddress(false)
   }
 
+  const handleOnCancel = () => {
+    setConfirm({ ...confirm, open: false })
+  }
+
   /**
    * Close modals and alerts
    */
@@ -251,6 +259,18 @@ const AddressListUI = (props) => {
     }
   }, [userCustomerSetup?.imported_address_text, addressList.addresses, addressList?.loading, addressList?.error, isOpenUserData])
 
+  useEffect(() => {
+    if (!addressList?.addedBySocket) return
+    setConfirm({
+      open: true,
+      title: t('NEW_ADDRESS_REGISTERED', 'New address registered'),
+      content: t('NEW_ADDRESS_REGISTERED_CONTENT', 'The user has sent the address'),
+      handleOnAccept: () => setConfirm({ ...confirm, open: false }),
+      handleOnCancel: ''
+    })
+    handleSetAddress(addressList?.addresses[addressList?.addresses?.length - 1], { avoidRedirect: true })
+  }, [addressList?.addedBySocket])
+
   return (
     <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
       <AddressHalfContainer>
@@ -261,20 +281,37 @@ const AddressListUI = (props) => {
           notUseCustomerInfo={notUseCustomerInfo}
           addFormRestrictions={addFormRestrictions}
         >
-          {
-            !addFormRestrictions && !addressOpen && !isOpenUserData && (
-              <Button
-                className='add'
-                outline
-                color={addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
-                onClick={() => openAddress({})}
-                disabled={orderState?.loading || actionStatus.loading}
-                hoverColor='#CCC'
-              >
-                {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
-              </Button>
-            )
-          }
+          {!addFormRestrictions && !addressOpen && !isOpenUserData && (
+            <>
+              <ButtonsContainer>
+                <Button
+                  className='add'
+                  outline
+                  color={addressList?.addresses?.length > 0 ? 'secondary' : 'primary'}
+                  onClick={() => openAddress({})}
+                  disabled={orderState?.loading || actionStatus.loading}
+                  hoverColor='#CCC'
+                >
+                  {(orderState?.loading || actionStatus.loading) ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')}
+                </Button>
+                <Button
+                  className='add sms'
+                  color={disabledSms ? 'secondary' : 'primary'}
+                  onClick={() => setUserConfirmPhone({ open: true, result: null })}
+                  disabled={orderState?.loading || actionStatus.loading || disabledSms}
+                >
+                  {t('SEND_SMS_TO_CLIENT', 'Send SMS to client')}
+                </Button>
+              </ButtonsContainer>
+              {(userConfirmPhone?.result) && (
+                <WrapperSMS>
+                  <p>
+                    {userConfirmPhone?.result}
+                  </p>
+                </WrapperSMS>
+              )}
+            </>
+          )}
           {
             isPopover && addressOpen && (
               <AddressForm
@@ -292,6 +329,8 @@ const AddressListUI = (props) => {
                 onSaveAddress={handleSaveAddress}
                 userCustomerSetup={userCustomerSetup}
                 isAllowUnaddressOrderType={isAllowUnaddressOrderType}
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
               />
             )
           }
@@ -309,9 +348,10 @@ const AddressListUI = (props) => {
               <AddressListUl id='list'>
                 <AddressTitleContainer style={{ display: 'flex' }}>
                   <AddressTitle>{t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')}</AddressTitle>
+
                   {isAllowUnaddressOrderType && (
                     <>
-                      <p>{' '}{t('OR', 'or')}{' '}</p>
+                      <span>{' '}{t('OR', 'or')}{' '}</span>
                       <WithoutAddressText onClick={() => events.emit('go_to_page', { page: 'search' })}>{t('CONTINUE_WITHOUT_ADDRESS', 'Continue without address')}</WithoutAddressText>
                     </>
                   )}
@@ -400,6 +440,8 @@ const AddressListUI = (props) => {
                 franchiseId={franchiseId}
                 addFormRestrictions={addFormRestrictions}
                 isAllowUnaddressOrderType={isAllowUnaddressOrderType}
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
               />
             </AddressFormContainer>
           )}
@@ -481,17 +523,19 @@ const AddressListUI = (props) => {
               onSaveAddress={handleSaveAddress}
               userCustomerSetup={userCustomerSetup}
               isAllowUnaddressOrderType={isAllowUnaddressOrderType}
+              userConfirmPhone={userConfirmPhone}
+              setUserConfirmPhone={setUserConfirmPhone}
             />
           </Modal>
         )
       }
       <Confirm
-        title={t('SEARCH', 'Search')}
+        title={confirm.title || t('SEARCH', 'Search')}
         content={confirm.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={confirm.open}
         onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onCancel={confirm.handleOnCancel ?? handleOnCancel}
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />

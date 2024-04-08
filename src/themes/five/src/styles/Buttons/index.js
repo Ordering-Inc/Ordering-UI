@@ -66,9 +66,9 @@ export const IconButton = styled.button`
 `
 
 export const Button = styled.button`
-  background: #CCC;
+  background: #E9ECEF;
   color: #FFF;
-  border: 1px solid #CCC;
+  border: 1px solid #E9ECEF;
   border-radius: 7.6px;
   line-height: 30px;
   padding-left: 15px;

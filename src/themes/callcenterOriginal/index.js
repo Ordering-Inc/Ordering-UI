@@ -23,6 +23,7 @@ import { CardForm } from './src/components/CardForm'
 import { Cart } from './src/components/Cart'
 import { CartContent } from './src/components/CartContent'
 import { CartPopover } from './src/components/CartPopover'
+import { ConfirmAddressForm } from './src/components/ConfirmAddressForm'
 import { Checkout } from './src/components/Checkout'
 import { DriverTips } from './src/components/DriverTips'
 import { Footer } from './src/components/Footer'
@@ -103,6 +104,7 @@ export {
   CartContent,
   CartPopover,
   Checkout,
+  ConfirmAddressForm,
   DriverTips,
   Footer,
   ForgotPasswordForm,

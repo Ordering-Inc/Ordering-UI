@@ -11,14 +11,14 @@ export const Container = styled.div`
   @media (min-width: 769px) {
     width: 70%;
   }
-  
+
   h2 {
     margin: 0;
     font-weight: 600;
     font-size: 20px;
     line-height: 30px;
   }
-  
+
   h3 {
     margin: 0;
     font-weight: 600;
@@ -179,7 +179,7 @@ export const SingleOrderHeader = styled.div`
     > div {
       display: flex;
       flex-direction: column;
-      align-items: center; 
+      align-items: center;
       @media (min-width: 769px) {
         flex-direction: row;
       }

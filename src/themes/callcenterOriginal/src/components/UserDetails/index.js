@@ -17,11 +17,13 @@ import PhoneInput from 'react-phone-number-input'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import {
   UserFormDetails as UserFormController,
+  useConfig,
   useLanguage,
   useSession
 } from 'ordering-components'
 
 import { UserFormDetailsUI } from '../UserFormDetails'
+import { Modal } from '../Modal'
 
 const UserDetailsUI = (props) => {
   const {
@@ -37,16 +39,30 @@ const UserDetailsUI = (props) => {
     isModal,
     setIsOpenUserData,
     isAddressFormOpen,
-    onClose
+    onClose,
+    userConfirmPhone,
+    setUserConfirmPhone
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [{ configs }] = useConfig()
+
   const userData = userState.result?.result || props.userData || formState.result?.result || user
 
   const validationFieldsLength = Object.values(validationFields?.fields?.checkout)?.map(field => field.enabled)
   const countryPhoneCode = userData?.country_phone_code ?? userData?.country_code
-
+  const inputsConfirmAddress = [{
+    id: 1,
+    name: 'Name',
+    type: 'text',
+    code: 'name'
+  }, {
+    id: 2,
+    name: 'Lastname',
+    type: 'text',
+    code: 'lastname'
+  }]
   useEffect(() => {
     if (isUserDetailsEdit) {
       !isEdit && toggleIsEdit()
@@ -71,14 +87,17 @@ const UserDetailsUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       {(validationFields.loading || formState.loading || userState.loading) && (
-        <UserData>
-          {[...Array(isCustomerMode ? 1 : validationFieldsLength?.length)]?.map(field => (
-            <React.Fragment key={field?.id}>
-              <Skeleton width={250} height={isCustomerMode ? 10 : 50} />
-              <Skeleton width={180} height={isCustomerMode ? 10 : 25} />
-              <Skeleton width={210} height={isCustomerMode ? 10 : 50} />
-            </React.Fragment>
-          ))}
+        <UserData isModal={isModal}>
+          {isModal ? [...Array(4)].map((_, i) => (
+            <Skeleton key={i} width={150 + (i * 10)} height={15} />
+          ))
+            : validationFieldsLength?.map((field, i) => (
+              <React.Fragment key={field?.id}>
+                <Skeleton width={250} height={50} />
+                <Skeleton width={180} height={25} />
+                <Skeleton width={210} height={50} />
+              </React.Fragment>
+            ))}
         </UserData>
       )}
 
@@ -123,7 +142,7 @@ const UserDetailsUI = (props) => {
                   <CountryFlag>
                     {
                       countryPhoneCode && userData?.cellphone && (
-                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(countryPhoneCode?.replace('+', ''))} ${userData?.cellphone?.replace(`+${countryPhoneCode}`, '')}`)?.country} />
+                        <PhoneInput onChange={() => { }} defaultCountry={parsePhoneNumber(`+${(countryPhoneCode?.replace('+', ''))} ${userData?.cellphone?.replace(`+${countryPhoneCode}`, '')}`)?.country || configs?.default_country_code?.value} />
                       )
                     }
                   </CountryFlag>
@@ -144,6 +163,21 @@ const UserDetailsUI = (props) => {
           )}
         </Container>
       )}
+      <Modal
+        title={t('CONFIRM_CELLPHONE_CLIENT', 'Confirm client\'s cellphone')}
+        open={userConfirmPhone?.open}
+        onClose={() => setUserConfirmPhone({ open: false, result: null })}
+      >
+        <UserFormDetailsUI
+          {...props}
+          confirmDataLayout
+          isEdit
+          dontToggleEditMode
+          inputsconfirmData={inputsConfirmAddress}
+          userData={userData}
+          isCustomerMode={isCustomerMode}
+        />
+      </Modal>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

@@ -24,10 +24,6 @@ import {
   UserEdit,
   WrappBtn,
   SelectContainer,
-  TypesContainer,
-  TypeButton,
-  IconTypeButton,
-  AdditionalTypesContainer,
   PhoneAutocompleteContainer,
   ImageWrapper,
   NotFoundUser,
@@ -35,6 +31,9 @@ import {
 } from './styles'
 
 import MdcCellphoneAndroid from '@meronex/icons/mdc/MdcCellphoneAndroid'
+import { OrderTypesSquares } from '../../../../five/src/components/OrderTypesSquares'
+
+const countriesElevenPhoneLength = ['GB']
 
 const PhoneAutocompleteUI = (props) => {
   const {
@@ -57,10 +56,8 @@ const PhoneAutocompleteUI = (props) => {
     franchiseId,
     getUsers
   } = props
-  const allOrderTypes = [1, 2, 3, 4, 5]
-  const pickupTypes = [2, 4, 5]
-  const eatInType = 3
-  const [orderState, { changeType }] = useOrder()
+
+  const [orderState] = useOrder()
   const [, t] = useLanguage()
   const theme = useTheme()
   const [configState] = useConfig()
@@ -68,11 +65,14 @@ const PhoneAutocompleteUI = (props) => {
   const [, { deleteUserCustomer }] = useCustomer()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isOpenUserData, setIsOpenUserData] = useState(false)
+  const [userConfirmPhone, setUserConfirmPhone] = useState({ open: false, result: null })
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
-  const [orderTypeSelected, setOrderTypeSelected] = useState(orderState?.options?.type)
   const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
   const [inputValue, setInputValue] = useState(urlPhone ?? userCustomer?.cellphone ?? '')
   const [isSavedAddress, setIsSavedAddress] = useState(false)
+  const [disabledSms, setDisableSms] = useState(false)
+  const allOrderTypes = [1, 2, 3, 4, 5]
+
   const countryPhoneCode = userCustomer?.country_phone_code ?? userCustomer?.country_code
 
   const [optSelected, setOptSelected] = useState(userCustomer ? {
@@ -102,13 +102,6 @@ const PhoneAutocompleteUI = (props) => {
       onChange(optSelected)
     } else {
       setAlertState({ open: true, content: t('SELECT_ADDRESS_CUSTOMER', 'Please select an address for the selected customer') })
-    }
-  }
-
-  const handleChangeType = (value) => {
-    if (!orderState?.loading) {
-      changeType(value)
-      setOrderTypeSelected(value)
     }
   }
 
@@ -170,7 +163,9 @@ const PhoneAutocompleteUI = (props) => {
   }
 
   const createNewUser = () => {
-    if ((optSelected && optSelected?.value?.length === limitPhoneLength) || (!optSelected && phone.length === limitPhoneLength)) {
+    const lengthIntervals = countriesElevenPhoneLength.includes(configState?.configs?.default_country_code?.value) ? [10, limitPhoneLength] : [limitPhoneLength]
+    if ((optSelected && lengthIntervals.includes(optSelected?.value?.length)) ||
+      (!optSelected && lengthIntervals.includes(phone.length))) {
       setOpenModal({ ...openModal, signup: true })
     } else {
       setAlertState({
@@ -186,12 +181,6 @@ const PhoneAutocompleteUI = (props) => {
     if (isFromUrlPhone) {
       onRedirectPhoneUrlPage && onRedirectPhoneUrlPage('home')
     }
-  }
-
-  const handleChangeToPickup = () => {
-    const firstEnabledPickupType = orderTypes.find(type => configTypes?.includes(type.value) && type.value !== 1)?.value
-    handleChangeType(firstEnabledPickupType)
-    setOrderTypeSelected(firstEnabledPickupType)
   }
 
   const handleDeleteUser = () => {
@@ -271,10 +260,6 @@ const PhoneAutocompleteUI = (props) => {
   }, [urlPhone, customersPhones?.loading])
 
   useEffect(() => {
-    setOrderTypeSelected(orderState?.options?.type)
-  }, [orderState?.options?.type])
-
-  useEffect(() => {
     if (isSavedAddress &&
       userCustomer?.id === orderState?.options?.user_id &&
       orderState?.options?.address?.address
@@ -289,23 +274,18 @@ const PhoneAutocompleteUI = (props) => {
     }
   }, [userCustomer?.id, orderState?.loading])
 
-  const OrderTypesComponent = () => {
-    return (
-      <>
-        {orderTypes && (configTypes ? orderTypes.filter(type => configTypes?.includes(type.value) && pickupTypes.includes(type?.value)) : orderTypes).map((item, i) => (
-          <Button
-            key={item.value}
-            onClick={() => handleChangeType(item.value)}
-            color={orderState?.options?.type === item?.value ? 'primary' : 'secondary'}
-            disabled={orderState?.loading}
-            className={orderState?.options?.type !== item?.value ? 'activated' : ''}
-          >
-            {item.text}
-          </Button>
-        ))}
-      </>
-    )
-  }
+  useEffect(() => {
+    let timeout = null
+    if (userConfirmPhone?.result) {
+      setDisableSms(true)
+      timeout = setTimeout(() => {
+        setDisableSms(false)
+      }, 30000)
+    }
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [userConfirmPhone?.result])
 
   return (
     <>
@@ -313,60 +293,10 @@ const PhoneAutocompleteUI = (props) => {
         <ContentWrapper>
           <Title>{t('TITLE_HOME_CALLCENTER', 'Welcome to your Ordering Call Center.')}</Title>
           <Slogan>{t('SUBTITLE_HOME_CALLCENTER', 'Start first by selecting a delivery type')}</Slogan>
-          <TypesContainer>
-            {configTypes.includes(1) && (
-              <TypeButton onClick={() => handleChangeType(1)} disabled={orderState?.loading} activated={orderTypeSelected === 1}>
-                <IconTypeButton activated={orderTypeSelected === 1}>
-                  <img
-                    src={theme?.images?.general?.deliveryIco}
-                    width={20}
-                    height={20}
-                  />
-                </IconTypeButton>
-                <p>{t('DELIVERY', 'Delivery')}</p>
-              </TypeButton>
-            )}
-            {configTypes.some(type => pickupTypes.includes(type)) && (
-              <TypeButton
-                disabled={orderState?.loading}
-                activated={pickupTypes.includes(orderTypeSelected)}
-                onClick={() => handleChangeToPickup()}
-              >
-                <IconTypeButton activated={pickupTypes.includes(orderTypeSelected)}>
-                  <img
-                    src={theme?.images?.general?.pickupIco}
-                    width={22}
-                    height={22}
-                  />
-                </IconTypeButton>
-                <p>{t('PICKUP', 'Pickup')}</p>
-              </TypeButton>
-            )}
-            {configTypes.some(type => eatInType === type) && (
-              <TypeButton
-                disabled={orderState?.loading}
-                activated={orderTypeSelected === 3}
-                onClick={() => handleChangeType(3)}
-              >
-                <IconTypeButton activated={orderTypeSelected === 3}>
-                  <img
-                    src={theme?.images?.general?.eatinIco}
-                    width={22}
-                    height={22}
-                  />
-                </IconTypeButton>
-                <p>{t('EAT_IN', 'Eat in')}</p>
-              </TypeButton>
-            )}
-          </TypesContainer>
-          {pickupTypes.includes(orderTypeSelected) && (
-            <>
-              <p>{t('WHAT_PICKUP_YOU_NEED', 'What kind of pickup do you need?')}</p>
-              <AdditionalTypesContainer>
-                <OrderTypesComponent />
-              </AdditionalTypesContainer>
-            </>
-          )}
+          <OrderTypesSquares
+            hideTitle
+            orderTypes={orderTypes}
+          />
           {configTypes.includes(orderState?.options?.type) && (
             <>
               <PhoneAutocompleteContainer>
@@ -444,6 +374,8 @@ const PhoneAutocompleteUI = (props) => {
                 setIsOpenUserData={setIsOpenUserData}
                 onClose={() => handleCloseAddressList()}
                 franchiseId={franchiseId}
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
               />
               <AddressList
                 isModal
@@ -459,7 +391,10 @@ const PhoneAutocompleteUI = (props) => {
                 setIsOpenUserData={setIsOpenUserData}
                 setIsSavedAddress={setIsSavedAddress}
                 setIsAddressFormOpen={setIsAddressFormOpen}
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
                 franchiseId={franchiseId}
+                disabledSms={disabledSms}
                 isHeader
               />
             </>
@@ -490,11 +425,10 @@ const PhoneAutocompleteUI = (props) => {
 export const PhoneAutocomplete = (props) => {
   const [, t] = useLanguage()
   const [configState] = useConfig()
-  const countriesElevenPhoneLength = ['GB']
   const phoneProps = {
     UIComponent: PhoneAutocompleteUI,
     ...props,
-    limitPhoneLength: countriesElevenPhoneLength.includes(configState?.configs?.default_country_code?.value) ? 11 : props.limitPhoneLength,
+    limitPhoneLength: countriesElevenPhoneLength.includes(configState?.configs?.default_country_code?.value) ? 11 : props.limitPhoneLength || 10,
     orderTypes: props.orderTypes || [
       {
         value: 1,

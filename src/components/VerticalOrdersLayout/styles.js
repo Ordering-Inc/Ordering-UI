@@ -84,12 +84,12 @@ export const PastLogo = styled.div`
 `
 
 export const WrapperBusinessTitle = styled.div`
-  width: 80%;
+  width: 95%;
   display: flex;
   gap: 10px;
 
   @media (min-width: 480px) {
-    width: 95%;
+    width: 80%;
   }
 `
 

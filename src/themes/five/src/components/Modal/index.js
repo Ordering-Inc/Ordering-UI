@@ -29,7 +29,8 @@ const ModalUI = (props) => {
     onRemove,
     isSlideBar,
     slideBarPosition,
-    disableOverflowX
+    disableOverflowX,
+    titleStyle
   } = props
   const [, t] = useLanguage()
 
@@ -44,8 +45,8 @@ const ModalUI = (props) => {
       const scrollbarWidth = window.innerWidth - document.body.clientWidth
       const bodyPaddingRight = window.document.body.style.paddingRight
       document.body.style.paddingRight = props.open ? `${bodyPaddingRight + scrollbarWidth}px` : `${bodyPaddingRight}px`
+      document.body.style.overflow = props.open ? 'hidden' : 'auto'
     }
-    document.body.style.overflow = props.open ? 'hidden' : 'auto'
     if (props.open) {
       window.addEventListener('keydown', handleKeyDown)
       return () => window.removeEventListener('keydown', handleKeyDown)
@@ -79,7 +80,9 @@ const ModalUI = (props) => {
       )}
       <ModalHeader>
         {title && (
-          <ModalTitle>
+          <ModalTitle
+            style={titleStyle}
+          >
             {title}
           </ModalTitle>
         )}

@@ -71,6 +71,8 @@ export const Header = (props) => {
   const [isOpenUserData, setIsOpenUserData] = useState(false)
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false)
   const [preorderBusiness, setPreorderBusiness] = useState(null)
+  const [userConfirmPhone, setUserConfirmPhone] = useState({ open: false, result: null })
+  const [disabledSms, setDisableSms] = useState(false)
 
   const cartsWithProducts = (orderState?.carts && Object.values(orderState?.carts).filter(cart => cart.products && cart.products?.length > 0)) || null
 
@@ -147,6 +149,19 @@ export const Header = (props) => {
       setCustomerModalOpen(false)
     }
   }, [JSON.stringify(orderState?.options?.address?.address)])
+
+  useEffect(() => {
+    let timeout = null
+    if (userConfirmPhone?.result) {
+      setDisableSms(true)
+      timeout = setTimeout(() => {
+        setDisableSms(false)
+      }, 30000)
+    }
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [userConfirmPhone?.result])
 
   return (
     <HeaderContainer>
@@ -408,6 +423,8 @@ export const Header = (props) => {
                 setIsOpenUserData={setIsOpenUserData}
                 onClose={() => setCustomerModalOpen(false)}
                 franchiseId={franchiseId}
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
               />
               <AddressList
                 isModal
@@ -420,6 +437,9 @@ export const Header = (props) => {
                 setIsAddressFormOpen={setIsAddressFormOpen}
                 franchiseId={franchiseId}
                 isHeader
+                userConfirmPhone={userConfirmPhone}
+                setUserConfirmPhone={setUserConfirmPhone}
+                disabledSms={disabledSms}
               />
             </>
           </UserEdit>
@@ -453,3 +473,5 @@ export const Header = (props) => {
 Header.defaultProps = {
   isShowOrderOptions: true
 }
+
+export default Header
