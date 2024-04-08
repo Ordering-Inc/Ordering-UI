@@ -14,7 +14,7 @@ var Title = exports.Title = _styledComponents.default.h1(_templateObject || (_te
   return props.theme.colors.darkTextColor;
 });
 var WrappLayout = exports.WrappLayout = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral([""])));
-var WrapContent = exports.WrapContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n  ", "\n  @media (min-width: 576px) {\n    padding: 0px;\n  }\n  &#businessProductList {\n    > div {\n      margin-top: 30px;\n    }\n  }\n"])), function (props) {
+var WrapContent = exports.WrapContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding: 5px;\n  background: ", ";\n\n  ", "\n\n  @media (min-width: 576px) {\n    padding: 0px;\n  }\n  &#businessProductList {\n    > div {\n      margin-top: 30px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (_ref) {
   var isGroceries = _ref.isGroceries;

@@ -52,7 +52,7 @@ var getSpreadAddressFormatted = function getSpreadAddressFormatted(_address) {
   }, restValues);
 };
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _configs$country_auto, _configs$country_auto2, _addressList$addresse3, _addressList$addresse4, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12;
+  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _configs$country_auto, _configs$country_auto2, _addressList$addresse4, _addressList$addresse5, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12, _confirm$handleOnCanc;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -75,7 +75,10 @@ var AddressListUI = function AddressListUI(props) {
     notUseCustomerInfo = props.notUseCustomerInfo,
     franchiseId = props.franchiseId,
     setIsSavedAddress = props.setIsSavedAddress,
-    isFromPhoneAutocomplete = props.isFromPhoneAutocomplete;
+    isFromPhoneAutocomplete = props.isFromPhoneAutocomplete,
+    setUserConfirmPhone = props.setUserConfirmPhone,
+    userConfirmPhone = props.userConfirmPhone,
+    disabledSms = props.disabledSms;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -98,8 +101,10 @@ var AddressListUI = function AddressListUI(props) {
     setAddressOpen = _useState4[1];
   var _useState5 = (0, _react.useState)({
       open: false,
+      title: null,
       content: null,
-      handleOnAccept: null
+      handleOnAccept: null,
+      handleOnCancel: null
     }),
     _useState6 = _slicedToArray(_useState5, 2),
     confirm = _useState6[0],
@@ -163,7 +168,7 @@ var AddressListUI = function AddressListUI(props) {
     setIsSavedAddress && setIsSavedAddress(true);
     handleCloseAddressForm();
   };
-  var handleSetAddress = function handleSetAddress(address) {
+  var handleSetAddress = function handleSetAddress(address, options) {
     var _address$location3, _address$location4;
     if (checkAddress(address) && isCustomerMode && (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.id) === (user === null || user === void 0 ? void 0 : user.id) && !isFromCheckout) {
       var _address$location, _address$location2;
@@ -185,7 +190,7 @@ var AddressListUI = function AddressListUI(props) {
       openAddress(address);
       return;
     }
-    setIsSavedAddress && setIsSavedAddress(true);
+    !(options !== null && options !== void 0 && options.avoidRedirect) && setIsSavedAddress && setIsSavedAddress(true);
     handleCloseAddressForm();
     handleSetDefault(address, userCustomerSetup);
   };
@@ -230,6 +235,11 @@ var AddressListUI = function AddressListUI(props) {
     setIsAddressFormOpen && setIsAddressFormOpen(false);
     setEditSpreadAddress(false);
   };
+  var handleOnCancel = function handleOnCancel() {
+    setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+      open: false
+    }));
+  };
 
   /**
    * Close modals and alerts
@@ -259,6 +269,24 @@ var AddressListUI = function AddressListUI(props) {
       openAddress({});
     }
   }, [userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text, addressList.addresses, addressList === null || addressList === void 0 ? void 0 : addressList.loading, addressList === null || addressList === void 0 ? void 0 : addressList.error, isOpenUserData]);
+  (0, _react.useEffect)(function () {
+    var _addressList$addresse3;
+    if (!(addressList !== null && addressList !== void 0 && addressList.addedBySocket)) return;
+    setConfirm({
+      open: true,
+      title: t('NEW_ADDRESS_REGISTERED', 'New address registered'),
+      content: t('NEW_ADDRESS_REGISTERED_CONTENT', 'The user has sent the address'),
+      handleOnAccept: function handleOnAccept() {
+        return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+      },
+      handleOnCancel: ''
+    });
+    handleSetAddress(addressList === null || addressList === void 0 ? void 0 : addressList.addresses[(addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) - 1], {
+      avoidRedirect: true
+    });
+  }, [addressList === null || addressList === void 0 ? void 0 : addressList.addedBySocket]);
   return /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
     id: "address_control",
     isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading)
@@ -268,16 +296,26 @@ var AddressListUI = function AddressListUI(props) {
     isHeader: isHeader,
     notUseCustomerInfo: notUseCustomerInfo,
     addFormRestrictions: addFormRestrictions
-  }, !addFormRestrictions && !addressOpen && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, !addFormRestrictions && !addressOpen && !isOpenUserData && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ButtonsContainer, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     className: "add",
     outline: true,
-    color: (addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) > 0 ? 'secondary' : 'primary',
+    color: (addressList === null || addressList === void 0 || (_addressList$addresse4 = addressList.addresses) === null || _addressList$addresse4 === void 0 ? void 0 : _addressList$addresse4.length) > 0 ? 'secondary' : 'primary',
     onClick: function onClick() {
       return openAddress({});
     },
     disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading,
     hoverColor: "#CCC"
-  }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
+  }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add New Address')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    className: "add sms",
+    color: disabledSms ? 'secondary' : 'primary',
+    onClick: function onClick() {
+      return setUserConfirmPhone({
+        open: true,
+        result: null
+      });
+    },
+    disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading || disabledSms
+  }, t('SEND_SMS_TO_CLIENT', 'Send SMS to client'))), (userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.result) && /*#__PURE__*/_react.default.createElement(_styles.WrapperSMS, null, /*#__PURE__*/_react.default.createElement("p", null, userConfirmPhone === null || userConfirmPhone === void 0 ? void 0 : userConfirmPhone.result))), isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
     addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
     tabSelected: tabSelected,
@@ -293,14 +331,16 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup,
-    isAllowUnaddressOrderType: isAllowUnaddressOrderType
-  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse4 = addressList.addresses) === null || _addressList$addresse4 === void 0 ? void 0 : _addressList$addresse4.length) > 0 && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) === 'object' && !addressOpen && (user === null || user === void 0 ? void 0 : user.id) === (orderState === null || orderState === void 0 || (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.user_id) && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+    isAllowUnaddressOrderType: isAllowUnaddressOrderType,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone
+  }), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 || (_addressList$addresse5 = addressList.addresses) === null || _addressList$addresse5 === void 0 ? void 0 : _addressList$addresse5.length) > 0 && _typeof((_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.address) === 'object' && !addressOpen && (user === null || user === void 0 ? void 0 : user.id) === (orderState === null || orderState === void 0 || (_orderState$options9 = orderState.options) === null || _orderState$options9 === void 0 ? void 0 : _orderState$options9.user_id) && (!addressOpen && isPopover || isModal) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
   }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitleContainer, {
     style: {
       display: 'flex'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), isAllowUnaddressOrderType && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, ' ', t('OR', 'or'), ' '), /*#__PURE__*/_react.default.createElement(_styles.WithoutAddressText, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.AddressTitle, null, t('SELECT_ONE_OF_SAVED_PLACES', 'Select one of your saved places')), isAllowUnaddressOrderType && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", null, ' ', t('OR', 'or'), ' '), /*#__PURE__*/_react.default.createElement(_styles.WithoutAddressText, {
     onClick: function onClick() {
       return events.emit('go_to_page', {
         page: 'search'
@@ -374,7 +414,9 @@ var AddressListUI = function AddressListUI(props) {
     notUseCustomerInfo: notUseCustomerInfo,
     franchiseId: franchiseId,
     addFormRestrictions: addFormRestrictions,
-    isAllowUnaddressOrderType: isAllowUnaddressOrderType
+    isAllowUnaddressOrderType: isAllowUnaddressOrderType,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone
   }))), addressOpen && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, {
     width: "50%",
     addFormRestrictions: addFormRestrictions
@@ -434,9 +476,11 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup,
-    isAllowUnaddressOrderType: isAllowUnaddressOrderType
+    isAllowUnaddressOrderType: isAllowUnaddressOrderType,
+    userConfirmPhone: userConfirmPhone,
+    setUserConfirmPhone: setUserConfirmPhone
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Confirm, {
-    title: t('SEARCH', 'Search'),
+    title: confirm.title || t('SEARCH', 'Search'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: confirm.open,
@@ -445,11 +489,7 @@ var AddressListUI = function AddressListUI(props) {
         open: false
       }));
     },
-    onCancel: function onCancel() {
-      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-        open: false
-      }));
-    },
+    onCancel: (_confirm$handleOnCanc = confirm.handleOnCancel) !== null && _confirm$handleOnCanc !== void 0 ? _confirm$handleOnCanc : handleOnCancel,
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }));

@@ -35,6 +35,7 @@ var _SignUpForm = require("../SignUpForm");
 var _LoginForm = require("../LoginForm");
 var _OrderDetail = require("./OrderDetail");
 var _SpinnerLoader = require("../../../../../components/SpinnerLoader");
+var _OrderTypesSquares = require("../OrderTypesSquares");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -64,7 +65,7 @@ var mapConfigs = {
   }
 };
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$colors, _theme$colors$split, _cart$comment, _cart$offers, _paymethodSelected$da, _paymethodSelected$da2, _cardList$cards, _cartState$cart, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _theme$checkout, _theme$checkout2, _theme$checkout3, _theme$checkout4, _loyaltyPlansState$re, _creditPointPlan$busi, _cart$business2, _businessDetails$busi3, _theme$images, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values2, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _ref2, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _customerState$user3, _options$address;
+  var _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$colors, _theme$colors$split, _cart$comment, _cart$offers, _paymethodSelected$da, _paymethodSelected$da2, _cardList$cards, _cartState$cart, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _theme$checkout, _theme$checkout2, _theme$checkout3, _theme$checkout4, _loyaltyPlansState$re, _creditPointPlan$busi, _cart$business2, _businessDetails$busi3, _theme$images, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values2, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _ref2, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _customerState$user3, _theme$colors2, _options$address;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
@@ -90,9 +91,6 @@ var CheckoutUI = function CheckoutUI(props) {
     alseaCheckPriceError = props.alseaCheckPriceError,
     isLoadingCheckprice = props.isLoadingCheckprice;
   var theme = (0, _styledComponents.useTheme)();
-  var _useApi = (0, _orderingComponents.useApi)(),
-    _useApi2 = _slicedToArray(_useApi, 1),
-    ordering = _useApi2[0];
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     _useOrder2$ = _useOrder2[0],
@@ -337,6 +335,7 @@ var CheckoutUI = function CheckoutUI(props) {
     var _Object$values, _configs$verification2;
     setUserErrors([]);
     var errors = [];
+    var UKCodes = ['44'];
     var userSelected = isCustomerMode ? customerState.user : user;
     var _requiredFields = [];
     Object.values(checkoutFieldsState === null || checkoutFieldsState === void 0 ? void 0 : checkoutFieldsState.fields).map(function (field) {
@@ -359,11 +358,21 @@ var CheckoutUI = function CheckoutUI(props) {
     setRequiredFields(_requiredFields);
     if (userSelected && userSelected !== null && userSelected !== void 0 && userSelected.cellphone) {
       if (userSelected !== null && userSelected !== void 0 && userSelected.country_phone_code) {
-        var _configs$validation_p, _configs$validation_p2;
+        var _phoneNumber$isPossib, _phoneNumber$isValid, _configs$validation_p, _configs$validation_p2;
         var phone = null;
         phone = "+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code).concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.cellphone.replace("+".concat(userSelected === null || userSelected === void 0 ? void 0 : userSelected.country_phone_code), ''));
         var phoneNumber = (0, _libphonenumberJs.default)(phone);
-        if (parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10) && !(phoneNumber !== null && phoneNumber !== void 0 && phoneNumber.isValid())) {
+        var enableIspossibly = false;
+        if (UKCodes.includes(phoneNumber === null || phoneNumber === void 0 ? void 0 : phoneNumber.countryCallingCode)) {
+          var inputNumber = userSelected === null || userSelected === void 0 ? void 0 : userSelected.cellphone;
+          var validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871', '16'];
+          var result = validationsForUK.some(function (areaCode) {
+            return inputNumber === null || inputNumber === void 0 ? void 0 : inputNumber.startsWith(areaCode);
+          });
+          enableIspossibly = result;
+        }
+        var validation = enableIspossibly ? phoneNumber === null || phoneNumber === void 0 || (_phoneNumber$isPossib = phoneNumber.isPossible) === null || _phoneNumber$isPossib === void 0 ? void 0 : _phoneNumber$isPossib.call(phoneNumber) : phoneNumber === null || phoneNumber === void 0 || (_phoneNumber$isValid = phoneNumber.isValid) === null || _phoneNumber$isValid === void 0 ? void 0 : _phoneNumber$isValid.call(phoneNumber);
+        if (parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10) && !validation) {
           errors.push(t('VALIDATION_ERROR_MOBILE_PHONE_INVALID', 'The field Phone number is invalid.'));
         }
       } else {
@@ -620,7 +629,7 @@ var CheckoutUI = function CheckoutUI(props) {
     cart: cart,
     loyaltyPlansState: loyaltyPlansState,
     businessConfigs: businessDetails === null || businessDetails === void 0 || (_businessDetails$busi12 = businessDetails.business) === null || _businessDetails$busi12 === void 0 ? void 0 : _businessDetails$busi12.configs
-  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, !!(!isMultiDriverTips && driverTipsField) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperRightContainer, null, isCustomerMode && /*#__PURE__*/_react.default.createElement(_OrderTypesSquares.OrderTypesSquares, null), !!(!isMultiDriverTips && driverTipsField) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriverTipContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_TIPS', 'Driver Tips')), /*#__PURE__*/_react.default.createElement("p", null, t('100%_OF_THE_TIP_YOUR_DRIVER', '100% of the tip goes to your driver')), /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
     businessId: cart === null || cart === void 0 ? void 0 : cart.business_id,
     driverTipsOptions: driverTipsOptions,
     isFixedPrice: parseInt(configs === null || configs === void 0 || (_configs$driver_tip_t = configs.driver_tip_type) === null || _configs$driver_tip_t === void 0 ? void 0 : _configs$driver_tip_t.value, 10) === 1,
@@ -764,6 +773,11 @@ var CheckoutUI = function CheckoutUI(props) {
       return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         orderDetail: false
       }));
+    },
+    title: orderTypeList[(options === null || options === void 0 ? void 0 : options.type) - 1] || t('DELIVERY', 'Delivery'),
+    titleStyle: {
+      color: theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary,
+      fontSize: 30
     }
   }, /*#__PURE__*/_react.default.createElement(_OrderDetail.OrderDetail, {
     item: cart,
@@ -790,9 +804,9 @@ var Checkout = exports.Checkout = function Checkout(props) {
   var _useSession3 = (0, _orderingComponents.useSession)(),
     _useSession4 = _slicedToArray(_useSession3, 1),
     token = _useSession4[0].token;
-  var _useApi3 = (0, _orderingComponents.useApi)(),
-    _useApi4 = _slicedToArray(_useApi3, 1),
-    ordering = _useApi4[0];
+  var _useApi = (0, _orderingComponents.useApi)(),
+    _useApi2 = _slicedToArray(_useApi, 1),
+    ordering = _useApi2[0];
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];

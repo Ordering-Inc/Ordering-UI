@@ -25,4 +25,4 @@ var WrapperInput = exports.WrapperInput = _styledComponents.default.div(_templat
 var DriverTipMessage = exports.DriverTipMessage = _styledComponents.default.p(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-weight: 600;\n"])), function (props) {
   return props.theme.colors.primary;
 });
-var WrapperTips = exports.WrapperTips = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n\n  > div {\n    margin: 5px;\n  }\n"])));
+var WrapperTips = exports.WrapperTips = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  justify-content: flex-start;\n  align-items: center;\n  flex-wrap: wrap;\n\n  > div {\n    margin: 5px;\n    text-align: center;\n  }\n"])));

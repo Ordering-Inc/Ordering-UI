@@ -4,10 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.GoogleGpsButton = void 0;
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 var _orderingComponents = require("ordering-components");
 var _styles = require("./styles");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -20,7 +21,14 @@ var GoogleGpsButtonUI = function GoogleGpsButtonUI(props) {
     googleReady = props.googleReady,
     isLoading = props.isLoading,
     IconButton = props.IconButton,
-    IconLoadingButton = props.IconLoadingButton;
+    IconLoadingButton = props.IconLoadingButton,
+    geolocationState = props.geolocationState,
+    enableAutoGeolocation = props.enableAutoGeolocation,
+    location = props.location;
+  (0, _react.useEffect)(function () {
+    if ((geolocationState === null || geolocationState === void 0 ? void 0 : geolocationState.result) === 'OK' || location || !enableAutoGeolocation) return;
+    handleGPS();
+  }, [geolocationState === null || geolocationState === void 0 ? void 0 : geolocationState.result, isGoogleButton, googleReady, location]);
   return /*#__PURE__*/_react.default.createElement(_styles.GpsButtonStyle, {
     className: props.className || '',
     type: "button",

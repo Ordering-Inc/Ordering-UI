@@ -38,7 +38,7 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
   var phoneRef = (0, _react.useRef)(null);
-  var codesStartsWithZero = ['44'];
+  var UKCodes = ['44'];
   var isValidPhoneNumber = function isValidPhoneNumber(number) {
     var _configs$validation_p, _configs$validation_p2, _numberParser$isPossi, _numberParser$isValid;
     if (!number) return;
@@ -47,9 +47,9 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     }
     var numberParser = (0, _libphonenumberJs.default)(number);
     var enableIspossibly = false;
-    if (codesStartsWithZero.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
+    if (UKCodes.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
       var inputNumber = returnRawNumber(number);
-      var validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871'];
+      var validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871', '16'];
       var result = validationsForUK.some(function (areaCode) {
         var _inputNumber$number;
         return inputNumber === null || inputNumber === void 0 || (_inputNumber$number = inputNumber.number) === null || _inputNumber$number === void 0 ? void 0 : _inputNumber$number.startsWith(areaCode);
@@ -59,20 +59,27 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     return enableIspossibly ? numberParser === null || numberParser === void 0 || (_numberParser$isPossi = numberParser.isPossible) === null || _numberParser$isPossi === void 0 ? void 0 : _numberParser$isPossi.call(numberParser) : numberParser === null || numberParser === void 0 || (_numberParser$isValid = numberParser.isValid) === null || _numberParser$isValid === void 0 ? void 0 : _numberParser$isValid.call(numberParser);
   };
   var returnRawNumber = function returnRawNumber(number) {
-    var _configs$validation_p3, _configs$validation_p4, _phoneRef$current;
+    var _configs$validation_p3, _configs$validation_p4, _phoneRef$current2;
     if (!number) return null;
     if (!parseInt((_configs$validation_p3 = configs === null || configs === void 0 || (_configs$validation_p4 = configs.validation_phone_number_lib) === null || _configs$validation_p4 === void 0 ? void 0 : _configs$validation_p4.value) !== null && _configs$validation_p3 !== void 0 ? _configs$validation_p3 : 1, 10)) {
       return null;
     }
     var numberParser = (0, _libphonenumberJs.default)(number);
     var validations = ['0', '+'];
-    if (validations.includes(phoneRef === null || phoneRef === void 0 || (_phoneRef$current = phoneRef.current) === null || _phoneRef$current === void 0 ? void 0 : _phoneRef$current.value[0]) && codesStartsWithZero.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
-      var _phoneRef$current2, _numberInput$split;
-      var numberInput = phoneRef === null || phoneRef === void 0 || (_phoneRef$current2 = phoneRef.current) === null || _phoneRef$current2 === void 0 ? void 0 : _phoneRef$current2.value.replace('-', '');
+    var startsWithValidations = ['16'];
+    var hasStartValidation = startsWithValidations.some(function (validation) {
+      var _phoneRef$current, _phoneRef$current$sta;
+      return phoneRef === null || phoneRef === void 0 || (_phoneRef$current = phoneRef.current) === null || _phoneRef$current === void 0 || (_phoneRef$current = _phoneRef$current.value) === null || _phoneRef$current === void 0 || (_phoneRef$current$sta = _phoneRef$current.startsWith) === null || _phoneRef$current$sta === void 0 ? void 0 : _phoneRef$current$sta.call(_phoneRef$current, validation);
+    });
+    if ((hasStartValidation || validations.includes(phoneRef === null || phoneRef === void 0 || (_phoneRef$current2 = phoneRef.current) === null || _phoneRef$current2 === void 0 ? void 0 : _phoneRef$current2.value[0])) && UKCodes.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
+      var _phoneRef$current3;
+      var numberInput = phoneRef === null || phoneRef === void 0 || (_phoneRef$current3 = phoneRef.current) === null || _phoneRef$current3 === void 0 ? void 0 : _phoneRef$current3.value.replace('-', '');
       var numberRaw = '';
-      numberInput === null || numberInput === void 0 || (_numberInput$split = numberInput.split(' ')) === null || _numberInput$split === void 0 || (_numberInput$split = _numberInput$split.filter(function (_splited, i) {
-        return i > 0 || i === 0 && _splited[0] === '0';
-      })) === null || _numberInput$split === void 0 || _numberInput$split.map(function (splited) {
+      numberInput && numberInput.split(' ').filter(function (_splited, i) {
+        return i > 0 || i === 0 && (_splited[0] === '0' || startsWithValidations.some(function (validation) {
+          return _splited.startsWith(validation);
+        }));
+      }).map(function (splited) {
         numberRaw = "".concat(numberRaw).concat(splited);
         return numberRaw;
       });

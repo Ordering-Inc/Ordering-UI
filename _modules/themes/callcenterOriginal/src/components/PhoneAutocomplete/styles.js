@@ -4,10 +4,10 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrappBtn = exports.WrapInput = exports.UserEdit = exports.TypesContainer = exports.TypeButton = exports.Title = exports.Slogan = exports.SelectContainer = exports.SearchContainer = exports.PhoneContainer = exports.PhoneAutocompleteContainer = exports.OptionContainer = exports.NotFoundUser = exports.Info = exports.ImageWrapper = exports.IconTypeButton = exports.ContinueButton = exports.ContentWrapper = exports.AutoComplete = exports.AdditionalTypesContainer = void 0;
+exports.WrappBtn = exports.WrapInput = exports.UserEdit = exports.Title = exports.Slogan = exports.SelectContainer = exports.SearchContainer = exports.PhoneContainer = exports.PhoneAutocompleteContainer = exports.OptionContainer = exports.NotFoundUser = exports.Info = exports.ImageWrapper = exports.ContinueButton = exports.ContentWrapper = exports.AutoComplete = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -79,30 +79,7 @@ var ImageWrapper = exports.ImageWrapper = function ImageWrapper(props) {
     style: style
   }), props.children);
 };
-var TypeButton = exports.TypeButton = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 215px;\n  height: 75px;\n  border-radius: 7.6px;\n  padding: 16px;\n  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.10);\n  margin-right: 32px;\n  margin-bottom: 32px;\n  cursor: pointer;\n  background: ", ";\n  p{\n    margin: 0;\n    margin-left: 33px;\n    ", "\n  }\n"])), function (_ref4) {
-  var _theme$colors, _theme$colors2;
-  var activated = _ref4.activated,
-    theme = _ref4.theme;
-  return activated ? theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary : theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.white;
-}, function (_ref5) {
-  var _theme$colors3;
-  var activated = _ref5.activated,
-    theme = _ref5.theme;
-  return activated && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), theme === null || theme === void 0 || (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.white);
-});
-var IconTypeButton = exports.IconTypeButton = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 44px;\n  height: 44px;\n  background: ", ";\n  border-radius: 44px;\n"])), function (_ref6) {
-  var _theme$colors4;
-  var activated = _ref6.activated,
-    theme = _ref6.theme;
-  return activated ? theme === null || theme === void 0 || (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.white : '#F3F9FF';
-});
-var TypesContainer = exports.TypesContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
-var AdditionalTypesContainer = exports.AdditionalTypesContainer = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  width: 60%;\n  display: flex;\n  margin-bottom: 20px;\n  button {\n    padding: 4px 10px;\n    border-radius: 50px;\n    font-size: 10px;\n    line-height: 0;\n    height: 25px;\n    margin-right: 20px;\n  }\n  .activated {\n    color: ", "\n  }\n"])), function (_ref7) {
-  var _theme$colors5;
-  var theme = _ref7.theme;
-  return theme === null || theme === void 0 || (_theme$colors5 = theme.colors) === null || _theme$colors5 === void 0 ? void 0 : _theme$colors5.darkTextColor;
-});
-var PhoneAutocompleteContainer = exports.PhoneAutocompleteContainer = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  position: relative;\n  h2 {\n    font-size: 20px;\n    margin-bottom: 20px;\n  }\n"])));
-var ContinueButton = exports.ContinueButton = _styledComponents.default.span(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: -20px;\n  bottom: 5px;\n  width:\n  button {\n    cursor: pointer;\n  }\n"])));
-var NotFoundUser = exports.NotFoundUser = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  margin: 70px 0px;\n  text-align: center;\n"])));
-var OptionContainer = exports.OptionContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  img {\n    position: absolute;\n    right: 10px;\n    transform: translateY(55%);\n  }\n"])));
+var PhoneAutocompleteContainer = exports.PhoneAutocompleteContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  position: relative;\n  h2 {\n    font-size: 20px;\n    margin-bottom: 20px;\n  }\n"])));
+var ContinueButton = exports.ContinueButton = _styledComponents.default.span(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: -20px;\n  bottom: 5px;\n  width:\n  button {\n    cursor: pointer;\n  }\n"])));
+var NotFoundUser = exports.NotFoundUser = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  margin: 70px 0px;\n  text-align: center;\n"])));
+var OptionContainer = exports.OptionContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  img {\n    position: absolute;\n    right: 10px;\n    transform: translateY(55%);\n  }\n"])));

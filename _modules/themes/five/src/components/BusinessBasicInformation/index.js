@@ -193,7 +193,7 @@ var BusinessBasicInformation = exports.BusinessBasicInformation = function Busin
     }, props));
   }), openSearchProducts && /*#__PURE__*/_react.default.createElement(_SearchProducts.SearchProducts, _extends({}, props, {
     onClose: function onClose() {
-      handleChangeSearch('');
+      handleChangeSearch && handleChangeSearch('');
       setOpenSearchProducts(false);
       window.scroll({
         top: window.scrollY - 1,
