@@ -65,7 +65,7 @@ var mapConfigs = {
   }
 };
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$colors, _theme$colors$split, _cart$comment, _cart$offers, _paymethodSelected$da, _paymethodSelected$da2, _cardList$cards, _cartState$cart, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _theme$checkout, _theme$checkout2, _theme$checkout3, _theme$checkout4, _loyaltyPlansState$re, _creditPointPlan$busi, _cart$business2, _businessDetails$busi3, _theme$images, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values2, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _ref2, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _customerState$user3, _theme$colors2, _options$address;
+  var _ordering$project, _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$colors, _theme$colors$split, _cart$comment, _cart$offers, _paymethodSelected$da, _paymethodSelected$da2, _cardList$cards, _cartState$cart, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _theme$checkout, _theme$checkout2, _theme$checkout3, _theme$checkout4, _loyaltyPlansState$re, _creditPointPlan$busi, _cart$business2, _businessDetails$busi3, _theme$images, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values2, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _ref2, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _customerState$user3, _theme$colors2, _options$address;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
@@ -91,6 +91,9 @@ var CheckoutUI = function CheckoutUI(props) {
     alseaCheckPriceError = props.alseaCheckPriceError,
     isLoadingCheckprice = props.isLoadingCheckprice;
   var theme = (0, _styledComponents.useTheme)();
+  var _useApi = (0, _orderingComponents.useApi)(),
+    _useApi2 = _slicedToArray(_useApi, 1),
+    ordering = _useApi2[0];
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     _useOrder2$ = _useOrder2[0],
@@ -178,7 +181,7 @@ var CheckoutUI = function CheckoutUI(props) {
     _useState26 = _slicedToArray(_useState25, 2),
     productLoading = _useState26[0],
     setProductLoading = _useState26[1];
-  var shouldActivateOrderDetailModal = isCustomerMode;
+  var shouldActivateOrderDetailModal = ordering === null || ordering === void 0 || (_ordering$project = ordering.project) === null || _ordering$project === void 0 ? void 0 : _ordering$project.includes('alsea');
   var orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')];
   var cardsMethods = ['stripe', 'credomatic'];
   var stripePaymethods = ['stripe', 'stripe_connect', 'stripe_redirect'];
@@ -804,9 +807,9 @@ var Checkout = exports.Checkout = function Checkout(props) {
   var _useSession3 = (0, _orderingComponents.useSession)(),
     _useSession4 = _slicedToArray(_useSession3, 1),
     token = _useSession4[0].token;
-  var _useApi = (0, _orderingComponents.useApi)(),
-    _useApi2 = _slicedToArray(_useApi, 1),
-    ordering = _useApi2[0];
+  var _useApi3 = (0, _orderingComponents.useApi)(),
+    _useApi4 = _slicedToArray(_useApi3, 1),
+    ordering = _useApi4[0];
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];
