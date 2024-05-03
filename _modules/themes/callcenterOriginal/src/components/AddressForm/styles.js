@@ -22,10 +22,7 @@ var FormControl = exports.FormControl = _styledComponents.default.form(_template
   var _props$theme;
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "])));
 });
-var AddressWrap = exports.AddressWrap = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  position: absolute;\n  top: ", ";\n  right: 0px;\n  padding-right: 20px;\n  button {\n    height: 41px;\n    right: 25px;\n    border: none;\n    width: 25px;\n    position: absolute;\n    z-index: 1000;\n\n    ", "\n\n    svg {\n      font-size: 18px;\n    }\n  }\n"])), function (_ref) {
-  var showTabs = _ref.showTabs;
-  return showTabs ? '110px' : '70px';
-}, function (props) {
+var AddressWrap = exports.AddressWrap = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  button {\n    height: 41px;\n    right: 25px;\n    border: none;\n    width: 25px;\n    position: absolute;\n    z-index: 1000;\n\n    ", "\n\n    svg {\n      font-size: 18px;\n    }\n  }\n"])), function (props) {
   var _props$theme2;
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      left: 25px;\n      right: initial;\n    "])));
 });
@@ -41,23 +38,24 @@ var WrapAddressInput = exports.WrapAddressInput = _styledComponents.default.div(
 var AddressTagSection = exports.AddressTagSection = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin: 10px 0px;\n  display: flex;\n  justify-content: space-between;\n\n  button {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 46px;\n    height: 46px;\n    border: none;\n    color: #B1BCCC;\n\n    img {\n      width: 25px;\n      height: 25px;\n    }\n\n    span {\n      display: flex;\n      justify-content: center;\n      align-items: center;\n\n      svg {\n        font-size: 30px;\n      }\n    }\n  }\n\n  button.active {\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
-var WrapperMap = exports.WrapperMap = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  z-index: 100;\n  width: 48%;\n  position: absolute;\n  top: ", ";\n  right: 0;\n  padding-top: ", ";\n  padding-right: 20px;\n  height: ", ";\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"])), function (_ref2) {
-  var showTabs = _ref2.showTabs;
-  return showTabs ? '150px' : '105px';
+var WrapperMap = exports.WrapperMap = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  z-index: 100;\n  width: 48%;\n  position: absolute;\n  top: ", ";\n  right: 0;\n  padding-top: ", ";\n  padding-right: 20px;\n  height: ", ";\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"])), function (_ref) {
+  var showTabs = _ref.showTabs,
+    hasAddress = _ref.hasAddress;
+  return hasAddress ? '55px' : showTabs ? '105px' : '50px';
 }, function (props) {
   return props.showMap ? '30px' : 0;
-}, function (_ref3) {
-  var notUseCustomerInfo = _ref3.notUseCustomerInfo;
+}, function (_ref2) {
+  var notUseCustomerInfo = _ref2.notUseCustomerInfo;
   return notUseCustomerInfo ? '370px' : '480px';
 });
 var WrapperSkeleton = exports.WrapperSkeleton = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 10px;\n\n  span {\n    width: 100%;\n  }\n"])));
-var AddressMarkContainer = exports.AddressMarkContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFE69C;\n  border: 1px solid #FFF3CD;\n  display: flex;\n  padding: 8px;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  position: absolute;\n  top: 50px;\n  width: max-content;\n  p {\n    margin: 0;\n    color: #664D03;\n    font-size: 12px;\n  }\n\n  ", "\n"])), function (_ref4) {
-  var blue = _ref4.blue;
+var AddressMarkContainer = exports.AddressMarkContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: #FFE69C;\n  border: 1px solid #FFF3CD;\n  display: flex;\n  padding: 8px;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  position: absolute;\n  top: 50px;\n  width: max-content;\n  p {\n    margin: 0;\n    color: #664D03;\n    font-size: 12px;\n  }\n\n  ", "\n"])), function (_ref3) {
+  var blue = _ref3.blue;
   return blue && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      background-color: #CFF4FC;\n      border: 1px solid #9EEAF9;\n      p {\n        color: #055160;\n      }\n  "])));
 });
-var StreetViewText = exports.StreetViewText = _styledComponents.default.span(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 35px;\n  top: 30px;\n  text-decoration: underline;\n  color: ", ";\n  z-index: 9999;\n  cursor: pointer;\n"])), function (_ref5) {
+var StreetViewText = exports.StreetViewText = _styledComponents.default.span(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 35px;\n  top: 30px;\n  text-decoration: underline;\n  color: ", ";\n  z-index: 9999;\n  cursor: pointer;\n"])), function (_ref4) {
   var _theme$colors;
-  var theme = _ref5.theme;
+  var theme = _ref4.theme;
   return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
 });
 var WithoutAddressContainer = exports.WithoutAddressContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  p {\n    margin-bottom: 0;\n  }\n"])));
