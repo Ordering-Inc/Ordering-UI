@@ -231,17 +231,19 @@ export const SpreadForm = (props) => {
               color='primary'
               onClick={() => formState.changes?.location ? handleAddAddress() : handlePostAddress()}
             >
-              {!formState.loading ? (
-                address?.address
-                  ? formState.changes?.location
-                    ? t('CONTINUE', 'Continue')
-                    : t('VERIFY_ADDRESS', 'Verify address')
-                  : formState.changes?.location
-                    ? t('CONFIRM_ADDRESS', 'Confirm address')
-                    : t('VERIFY_ADDRESS', 'Verify address')
-              ) : (
-                t('LOADING', 'Loading')
-              )}
+              {!formState.loading
+                ? (
+                    address?.address
+                      ? formState.changes?.location
+                        ? t('CONTINUE', 'Continue')
+                        : t('VERIFY_ADDRESS', 'Verify address')
+                      : formState.changes?.location
+                        ? t('CONFIRM_ADDRESS', 'Confirm address')
+                        : t('VERIFY_ADDRESS', 'Verify address')
+                )
+                : (
+                  t('LOADING', 'Loading')
+                )}
             </Button>
           </FormActions>
         </>
