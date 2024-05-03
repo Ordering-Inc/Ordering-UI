@@ -89,9 +89,11 @@ export const FormControl = styled.form`
 
   .internal_number {
     width: 45%;
-    ${props => props.theme?.rtl ? css`
+    ${props => props.theme?.rtl
+? css`
       margin-left: 15px;
-    ` : css`
+    `
+: css`
       margin-right: 15px;
     `}
   }

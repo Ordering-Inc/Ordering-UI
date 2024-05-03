@@ -85,9 +85,11 @@ export const FormControl = styled.form`
 
   .internal_number {
     width: 45%;
-    ${props => props.theme?.rtl ? css`
+    ${props => props.theme?.rtl
+? css`
       margin-left: 15px;
-    ` : css`
+    `
+: css`
       margin-right: 15px;
     `}
   }
@@ -102,14 +104,10 @@ export const FormControl = styled.form`
 `
 
 export const AddressWrap = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
-  top: ${({ showTabs }) => showTabs ? '110px' : '70px'};
-  right: 0px;
-  padding-right: 20px;
   button {
     height: 41px;
     right: 25px;
@@ -201,7 +199,7 @@ export const WrapperMap = styled.div`
   z-index: 100;
   width: 48%;
   position: absolute;
-  top: ${({ showTabs }) => showTabs ? '150px' : '105px'};
+  top: ${({ showTabs, hasAddress }) => hasAddress ? '55px' : showTabs ? '105px' : '50px'};
   right: 0;
   padding-top: ${props => props.showMap ? '30px' : 0};
   padding-right: 20px;
