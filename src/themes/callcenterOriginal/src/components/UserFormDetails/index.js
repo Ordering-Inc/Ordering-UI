@@ -16,7 +16,7 @@ import {
 
 import { Input } from '../../styles/Inputs'
 import { Button } from '../../styles/Buttons'
-import { InputPhoneNumber } from '../../../../../components/InputPhoneNumber'
+import { InputPhoneNumber } from '../InputPhoneNumber'
 import { Alert } from '../Confirm'
 import { sortInputFields } from '../../../../../utils'
 
@@ -336,6 +336,7 @@ export const UserFormDetailsUI = (props) => {
                   setValue={handleChangePhoneNumber}
                   handleIsValid={setIsValidPhoneNumber}
                   disabled={!isEdit}
+                  useProfileFormStyle
                 />
               </InputPhoneNumberWrapper>
             )}
