@@ -14,7 +14,7 @@ var _reactPhoneNumberInput = require("react-phone-number-input");
 var _styles = require("./styles");
 var _Inputs = require("../../styles/Inputs");
 var _Buttons = require("../../styles/Buttons");
-var _InputPhoneNumber = require("../../../../../components/InputPhoneNumber");
+var _InputPhoneNumber = require("../InputPhoneNumber");
 var _Confirm = require("../Confirm");
 var _utils = require("../../../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -337,7 +337,8 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber,
-    disabled: !isEdit
+    disabled: !isEdit,
+    useProfileFormStyle: true
   })), !confirmDataLayout && /*#__PURE__*/_react.default.createElement(_styles.Divider, null), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
