@@ -118,7 +118,7 @@ export const getTraduction = key => {
     ERROR_PLACE_PAY_WITH_PAYPAL_CAPTURE: 'An error occurred while trying to pay by PayPal',
     ERROR_ADD_PRODUCT_VERY_FAR_FOR_DELIVERY: 'Error adding product, very far for delivery',
     ERROR_INVALID_OFFER: 'The offer doesn\'t exist',
-    ERROR_CASH_WALLET_FEATURE_DISABLED: 'Cash wallet feature is disabled',
+    ERROR_CASH_WALLET_FEATURE_DISABLED: 'Cash wallet feature is disabled'
   }
 
   return keyList[key] ? t(key, keyList[key]) : t(key)
@@ -136,7 +136,6 @@ export const bytesConverter = bytes => {
  * Function to get brightness of color.
  */
 export const lightenDarkenColor = (color) => {
-
   let r, g, b, hsp
   if (color.match(/^rgb/)) {
     // If HEX --> store the red, green, blue values in separate variables
@@ -147,7 +146,7 @@ export const lightenDarkenColor = (color) => {
     b = color[3]
   } else {
     // If RGB --> Convert it to HEX
-    color = +("0x" + color.slice(1).replace(color.length < 5 && /./g, '$&$&'))
+    color = +('0x' + color.slice(1).replace(color.length < 5 && /./g, '$&$&'))
 
     r = color >> 16
     g = color >> 8 & 255
@@ -163,7 +162,7 @@ export const lightenDarkenColor = (color) => {
 
   // Using the HSP value, determine whether the color is light or dark
   if (hsp > 197) {
-    return true //is light color
+    return true // is light color
   } else {
     return false
   }
@@ -678,7 +677,7 @@ export const getOrderStatuPickUp = (s) => {
     { key: 16, value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_STATUS_CANCELLED_BY_CUSTOMER || 'Order cancelled by customer'), slug: 'ORDER_STATUS_CANCELLED_BY_CUSTOMER', percentage: 0 },
     { key: 17, value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_NOT_PICKEDUP_BY_CUSTOMER || 'Order not picked up by customer'), slug: 'ORDER_NOT_PICKEDUP_BY_CUSTOMER', percentage: 0 },
     { key: 20, value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS || 'Customer almost arrived to business'), slug: 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', percentage: 70 },
-    { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ARRIVED_BUSINESS || 'Customer arrived to business'), slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS', percentage: 90 },
+    { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ARRIVED_BUSINESS || 'Customer arrived to business'), slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS', percentage: 90 }
   ]
   const objectStatus = orderStatus.find((o) => o.key === status)
   return objectStatus && objectStatus
@@ -711,30 +710,24 @@ export const calendarLanguages = {
 }
 
 export const getCateringValues = (cateringTypeString, configs) => {
-  let splitCateringValue
-  if (configs?.preorder_slot_interval) {
-    splitCateringValue = (configName) => configs[configName]
-      ?.value?.split('|')
-      ?.find(val => val.includes(cateringTypeString))?.split(',')[1]
-  } else {
-    splitCateringValue = (configName) => Object.values(configs || {})
-      ?.find(config => config?.key === configName)
-      ?.value?.split('|')
-      ?.find(val => val.includes(cateringTypeString))?.split(',')[1]
+  const getValue = (configName) => {
+    const config = configs?.[configName]
+    if (config && config.value) {
+      const value = config.value.split('|').find(val => val.includes(cateringTypeString))?.split(',')[1]
+      return isNaN(value) ? null : parseInt(value)
+    }
+    return null
   }
-  const preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'))
-  const preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'))
-  const preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'))
-  const preorderMaximumDays = parseInt(splitCateringValue('preorder_maximum_days'))
-  const preorderMinimumDays = parseInt(splitCateringValue('preorder_minimum_days'))
 
-  return {
-    preorderSlotInterval,
-    preorderLeadTime,
-    preorderTimeRange,
-    preorderMaximumDays,
-    preorderMinimumDays
+  const values = {
+    preorderSlotInterval: getValue('preorder_slot_interval'),
+    preorderLeadTime: getValue('preorder_lead_time'),
+    preorderTimeRange: getValue('preorder_time_range'),
+    preorderMaximumDays: getValue('preorder_maximum_days'),
+    preorderMinimumDays: getValue('preorder_minimum_days')
   }
+
+  return Object.fromEntries(Object.entries(values).filter(([_, v]) => v !== null))
 }
 
 export const getCurrenySymbol = (code) => {
