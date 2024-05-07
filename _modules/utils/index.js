@@ -173,7 +173,7 @@ var lightenDarkenColor = exports.lightenDarkenColor = function lightenDarkenColo
     b = color[3];
   } else {
     // If RGB --> Convert it to HEX
-    color = +("0x" + color.slice(1).replace(color.length < 5 && /./g, '$&$&'));
+    color = +('0x' + color.slice(1).replace(color.length < 5 && /./g, '$&$&'));
     r = color >> 16;
     g = color >> 8 & 255;
     b = color & 255;
@@ -184,7 +184,7 @@ var lightenDarkenColor = exports.lightenDarkenColor = function lightenDarkenColo
 
   // Using the HSP value, determine whether the color is light or dark
   if (hsp > 197) {
-    return true; //is light color
+    return true; // is light color
   } else {
     return false;
   }
@@ -1128,36 +1128,30 @@ var calendarLanguages = exports.calendarLanguages = {
   }
 };
 var getCateringValues = exports.getCateringValues = function getCateringValues(cateringTypeString, configs) {
-  var splitCateringValue;
-  if (configs !== null && configs !== void 0 && configs.preorder_slot_interval) {
-    splitCateringValue = function splitCateringValue(configName) {
-      var _configs$configName;
-      return (_configs$configName = configs[configName]) === null || _configs$configName === void 0 || (_configs$configName = _configs$configName.value) === null || _configs$configName === void 0 || (_configs$configName = _configs$configName.split('|')) === null || _configs$configName === void 0 || (_configs$configName = _configs$configName.find(function (val) {
+  var getValue = function getValue(configName) {
+    var config = configs === null || configs === void 0 ? void 0 : configs[configName];
+    if (config && config.value) {
+      var _config$value$split$f;
+      var value = (_config$value$split$f = config.value.split('|').find(function (val) {
         return val.includes(cateringTypeString);
-      })) === null || _configs$configName === void 0 ? void 0 : _configs$configName.split(',')[1];
-    };
-  } else {
-    splitCateringValue = function splitCateringValue(configName) {
-      var _Object$values;
-      return (_Object$values = Object.values(configs || {})) === null || _Object$values === void 0 || (_Object$values = _Object$values.find(function (config) {
-        return (config === null || config === void 0 ? void 0 : config.key) === configName;
-      })) === null || _Object$values === void 0 || (_Object$values = _Object$values.value) === null || _Object$values === void 0 || (_Object$values = _Object$values.split('|')) === null || _Object$values === void 0 || (_Object$values = _Object$values.find(function (val) {
-        return val.includes(cateringTypeString);
-      })) === null || _Object$values === void 0 ? void 0 : _Object$values.split(',')[1];
-    };
-  }
-  var preorderSlotInterval = parseInt(splitCateringValue('preorder_slot_interval'));
-  var preorderLeadTime = parseInt(splitCateringValue('preorder_lead_time'));
-  var preorderTimeRange = parseInt(splitCateringValue('preorder_time_range'));
-  var preorderMaximumDays = parseInt(splitCateringValue('preorder_maximum_days'));
-  var preorderMinimumDays = parseInt(splitCateringValue('preorder_minimum_days'));
-  return {
-    preorderSlotInterval: preorderSlotInterval,
-    preorderLeadTime: preorderLeadTime,
-    preorderTimeRange: preorderTimeRange,
-    preorderMaximumDays: preorderMaximumDays,
-    preorderMinimumDays: preorderMinimumDays
+      })) === null || _config$value$split$f === void 0 ? void 0 : _config$value$split$f.split(',')[1];
+      return isNaN(value) ? null : parseInt(value);
+    }
+    return null;
   };
+  var values = {
+    preorderSlotInterval: getValue('preorder_slot_interval'),
+    preorderLeadTime: getValue('preorder_lead_time'),
+    preorderTimeRange: getValue('preorder_time_range'),
+    preorderMaximumDays: getValue('preorder_maximum_days'),
+    preorderMinimumDays: getValue('preorder_minimum_days')
+  };
+  return Object.fromEntries(Object.entries(values).filter(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+      _ = _ref4[0],
+      v = _ref4[1];
+    return v !== null;
+  }));
 };
 var getCurrenySymbol = exports.getCurrenySymbol = function getCurrenySymbol(code) {
   var _CURRENCY$code$symbol, _CURRENCY$code;
