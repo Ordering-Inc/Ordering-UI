@@ -259,9 +259,9 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     deleteUserCustomer(true);
   };
   var handleOnPaste = function handleOnPaste(e) {
-    var _e$clipboardData, _e$clipboardData$getD;
+    var _e$clipboardData, _e$clipboardData$getD, _e$clipboardData$getD2;
     var regex = /\D/;
-    var textCellphone = e === null || e === void 0 || (_e$clipboardData = e.clipboardData) === null || _e$clipboardData === void 0 || (_e$clipboardData$getD = _e$clipboardData.getData) === null || _e$clipboardData$getD === void 0 ? void 0 : _e$clipboardData$getD.call(_e$clipboardData, 'text').replace(/\s/g, '');
+    var textCellphone = e === null || e === void 0 || (_e$clipboardData = e.clipboardData) === null || _e$clipboardData === void 0 || (_e$clipboardData$getD = _e$clipboardData.getData) === null || _e$clipboardData$getD === void 0 || (_e$clipboardData$getD = _e$clipboardData$getD.call(_e$clipboardData, 'text')) === null || _e$clipboardData$getD === void 0 || (_e$clipboardData$getD2 = _e$clipboardData$getD.replace) === null || _e$clipboardData$getD2 === void 0 ? void 0 : _e$clipboardData$getD2.call(_e$clipboardData$getD, /[^0-9]/g, '');
     var value = parseInt(textCellphone);
     if (!regex.test(value) && (textCellphone === null || textCellphone === void 0 ? void 0 : textCellphone.length) >= 7 && !optSelected) {
       getUsers(value);
