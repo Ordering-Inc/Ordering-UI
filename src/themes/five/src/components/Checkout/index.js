@@ -187,8 +187,6 @@ const CheckoutUI = (props) => {
   const loyaltyBrands = configs?.brands_wow_loyalty_program?.value && JSON.parse(configs?.brands_wow_loyalty_program?.value)[0]
   const isAlsea = ordering.project === 'alsea'
 
-  const DEUNA_URL = isAlsea ? 'https://api.deuna.com' : 'https://api.stg.deuna.io'
-
   const isDisablePlaceOrderButton = !cart?.valid ||
     (!paymethodSelected && cart?.balance > 0) ||
     placing ||
@@ -379,7 +377,6 @@ const CheckoutUI = (props) => {
   }
 
   const tokenizeOrder = async () => {
-    const currency = 'MXN'
     const data = {
       // order_type: 'PAYMENT_LINK',
       // order: {
@@ -403,7 +400,8 @@ const CheckoutUI = (props) => {
       brand_id: parseInt(businessDetails?.business?.brand_id),
       wow_rewards_user_id: user?.wow_rewards_user_id,
       min_amount: cart?.minimum,
-      max_amount: await getMaxCashDelivery()
+      max_amount: await getMaxCashDelivery(),
+      reward_behavior_name: null
       // custom_fields: {
       //   data: {
       //     external_auth_token: 'Bearer ' + token,
@@ -491,7 +489,7 @@ const CheckoutUI = (props) => {
 
     const config = {
       orderToken: token,
-      apiKey: deUnaApiKey, // deUnaApiKey
+      apiKey: deUnaApiKey,
       env: 'staging', // Cambia a 'production' para ambiente de producción
       callbacks: {
         onSuccess: (payload) => {
@@ -603,7 +601,7 @@ const CheckoutUI = (props) => {
   // }, [])
 
   useEffect(() => {
-    if (!isApplyMasterCoupon || paymethodSelected?.gateway !== 'openpay_mastercard' || cartState.loading) return
+    if (!forceOrderingCheckout || !isApplyMasterCoupon || paymethodSelected?.gateway !== 'openpay_mastercard' || cartState.loading) return
     if (configs?.advanced_offers_module?.value && cart?.offers.length === 0 && cart?.paymethod_id === paymethodSelected?.id) {
       const dataOffer = {
         business_id: cart?.business_id,
@@ -907,6 +905,7 @@ const CheckoutUI = (props) => {
                       isHideCash={isHideCash}
                       isApplyMasterCoupon={isApplyMasterCoupon}
                       hasCateringProducts={hasCateringProducts}
+                      forceOrderingCheckout={forceOrderingCheckout}
                     />
                   </PaymentMethodContainer>
                 </>
