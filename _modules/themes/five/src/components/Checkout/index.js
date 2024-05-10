@@ -227,7 +227,6 @@ var CheckoutUI = function CheckoutUI(props) {
     setShowDeUnaCheckout = _useState32[1];
   var loyaltyBrands = (configs === null || configs === void 0 ? void 0 : (_configs$brands_wow_l = configs.brands_wow_loyalty_program) === null || _configs$brands_wow_l === void 0 ? void 0 : _configs$brands_wow_l.value) && JSON.parse(configs === null || configs === void 0 ? void 0 : (_configs$brands_wow_l2 = configs.brands_wow_loyalty_program) === null || _configs$brands_wow_l2 === void 0 ? void 0 : _configs$brands_wow_l2.value)[0];
   var isAlsea = ordering.project === 'alsea';
-  var DEUNA_URL = isAlsea ? 'https://api.deuna.com' : 'https://api.stg.deuna.io';
   var isDisablePlaceOrderButton = !(cart !== null && cart !== void 0 && cart.valid) || !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 || placing || errorCash || loading || !(cart !== null && cart !== void 0 && cart.valid_maximum) || !isValidMinimum && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ||
   // (((placeSpotTypes.includes(options?.type) && !cart?.place) && hasBusinessPlaces)) ||
   options.type === 1 && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.driver_tip) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) && (validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : (_validationFields$fie5 = _validationFields$fie4.checkout) === null || _validationFields$fie5 === void 0 ? void 0 : (_validationFields$fie6 = _validationFields$fie5.driver_tip) === null || _validationFields$fie6 === void 0 ? void 0 : _validationFields$fie6.required) && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0 || cateringDayError || (hasCateringProducts === null || hasCateringProducts === void 0 ? void 0 : hasCateringProducts.loading);
@@ -415,12 +414,11 @@ var CheckoutUI = function CheckoutUI(props) {
   var tokenizeOrder = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       var _businessDetails$busi5;
-      var currency, data, params, url, response, result, eventDeUna;
+      var data, params, url, response, result, eventDeUna;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              currency = 'MXN';
               _context2.t0 = cart === null || cart === void 0 ? void 0 : cart.uuid;
               _context2.t1 = (cart === null || cart === void 0 ? void 0 : cart.total) * 100;
               _context2.t2 = user === null || user === void 0 ? void 0 : user.email;
@@ -428,9 +426,9 @@ var CheckoutUI = function CheckoutUI(props) {
               _context2.t4 = parseInt(businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi5 = businessDetails.business) === null || _businessDetails$busi5 === void 0 ? void 0 : _businessDetails$busi5.brand_id);
               _context2.t5 = user === null || user === void 0 ? void 0 : user.wow_rewards_user_id;
               _context2.t6 = cart === null || cart === void 0 ? void 0 : cart.minimum;
-              _context2.next = 10;
+              _context2.next = 9;
               return getMaxCashDelivery();
-            case 10:
+            case 9:
               _context2.t7 = _context2.sent;
               data = {
                 order_id: _context2.t0,
@@ -441,7 +439,8 @@ var CheckoutUI = function CheckoutUI(props) {
                 brand_id: _context2.t4,
                 wow_rewards_user_id: _context2.t5,
                 min_amount: _context2.t6,
-                max_amount: _context2.t7
+                max_amount: _context2.t7,
+                reward_behavior_name: null
               };
               params = {
                 method: 'POST',
@@ -455,14 +454,14 @@ var CheckoutUI = function CheckoutUI(props) {
                 body: JSON.stringify(data)
               }; // const url = `${DEUNA_URL}/merchants/orders`
               url = "https://alsea-plugins".concat(isAlsea ? '' : '-staging', ".ordering.co/alseaplatform/deuna_order.php");
-              _context2.prev = 14;
-              _context2.next = 17;
+              _context2.prev = 13;
+              _context2.next = 16;
               return fetch(url, params);
-            case 17:
+            case 16:
               response = _context2.sent;
-              _context2.next = 20;
+              _context2.next = 19;
               return response.json();
-            case 20:
+            case 19:
               result = _context2.sent;
               eventDeUna = !result.error ? 'deuna_checkout' : 'deuna_checkout_tokenize_error';
               events.emit(eventDeUna, {
@@ -470,30 +469,30 @@ var CheckoutUI = function CheckoutUI(props) {
                 data: data
               });
               if (result.error) {
-                _context2.next = 26;
+                _context2.next = 25;
                 break;
               }
               initCheckout(result.token);
               return _context2.abrupt("return");
-            case 26:
+            case 25:
               setShowDeUnaCheckout(false);
-              _context2.next = 34;
+              _context2.next = 33;
               break;
-            case 29:
-              _context2.prev = 29;
-              _context2.t8 = _context2["catch"](14);
+            case 28:
+              _context2.prev = 28;
+              _context2.t8 = _context2["catch"](13);
               console.log('err tokized order', _context2.t8);
               events.emit('deuna_checkout_tokenize_error', {
                 event: 'deuna_checkout_tokenize_error',
                 data: _context2.t8
               });
               setShowDeUnaCheckout(false);
-            case 34:
+            case 33:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[14, 29]]);
+      }, _callee2, null, [[13, 28]]);
     }));
     return function tokenizeOrder() {
       return _ref2.apply(this, arguments);
@@ -577,7 +576,6 @@ var CheckoutUI = function CheckoutUI(props) {
               config = {
                 orderToken: token,
                 apiKey: _utils.deUnaApiKey,
-                // deUnaApiKey
                 env: 'staging',
                 // Cambia a 'production' para ambiente de producción
                 callbacks: {
@@ -713,7 +711,7 @@ var CheckoutUI = function CheckoutUI(props) {
 
   (0, _react.useEffect)(function () {
     var _configs$advanced_off2;
-    if (!isApplyMasterCoupon || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay_mastercard' || cartState.loading) return;
+    if (!forceOrderingCheckout || !isApplyMasterCoupon || (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'openpay_mastercard' || cartState.loading) return;
     if (configs !== null && configs !== void 0 && (_configs$advanced_off2 = configs.advanced_offers_module) !== null && _configs$advanced_off2 !== void 0 && _configs$advanced_off2.value && (cart === null || cart === void 0 ? void 0 : cart.offers.length) === 0 && (cart === null || cart === void 0 ? void 0 : cart.paymethod_id) === (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id)) {
       var dataOffer = {
         business_id: cart === null || cart === void 0 ? void 0 : cart.business_id,
@@ -905,7 +903,8 @@ var CheckoutUI = function CheckoutUI(props) {
     brandInformation: brandInformation,
     isHideCash: isHideCash,
     isApplyMasterCoupon: isApplyMasterCoupon,
-    hasCateringProducts: hasCateringProducts
+    hasCateringProducts: hasCateringProducts,
+    forceOrderingCheckout: forceOrderingCheckout
   }))), isWalletEnabled && !(businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart,
     businessConfigs: businessDetails === null || businessDetails === void 0 ? void 0 : (_businessDetails$busi15 = businessDetails.business) === null || _businessDetails$busi15 === void 0 ? void 0 : _businessDetails$busi15.configs
