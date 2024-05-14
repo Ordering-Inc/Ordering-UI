@@ -15,7 +15,8 @@ const PaymentOptionCardUI = (props) => {
     cardSelected,
     gateway,
     paymethodsWithoutSaveCards,
-    onSelectCard
+    onSelectCard,
+    setUserHasCards
   } = props
 
   const [, t] = useLanguage()
@@ -28,6 +29,11 @@ const PaymentOptionCardUI = (props) => {
       setAddCardOpen(true)
     }
   }, [cardsList?.cards])
+
+  useEffect(() => {
+    const hasCardSelected = cardsList?.cards?.some?.((card) => card?.id === cardSelected?.data?.id)
+    setUserHasCards && setUserHasCards(cardsList?.cards?.length > 0 && hasCardSelected)
+  }, [cardsList?.cards?.length, cardSelected])
 
   return (
     <>
