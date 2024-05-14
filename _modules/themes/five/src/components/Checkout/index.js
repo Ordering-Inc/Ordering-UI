@@ -627,7 +627,8 @@ var CheckoutUI = function CheckoutUI(props) {
     requiredFields: requiredFields,
     openUserModal: setIsOpen,
     paymethodClicked: paymethodClicked,
-    setPaymethodClicked: setPaymethodClicked
+    setPaymethodClicked: setPaymethodClicked,
+    validateDriverTipField: validateDriverTipField
   })), isWalletEnabled && !(businessDetails !== null && businessDetails !== void 0 && businessDetails.loading) && /*#__PURE__*/_react.default.createElement(_styles.WalletPaymentOptionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionWallet.PaymentOptionWallet, {
     cart: cart,
     loyaltyPlansState: loyaltyPlansState,

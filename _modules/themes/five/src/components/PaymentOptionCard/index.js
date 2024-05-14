@@ -26,6 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOptionCardUI = function PaymentOptionCardUI(props) {
+  var _cardsList$cards4;
   var deleteCard = props.deleteCard,
     cardsList = props.cardsList,
     handleCardClick = props.handleCardClick,
@@ -34,7 +35,8 @@ var PaymentOptionCardUI = function PaymentOptionCardUI(props) {
     cardSelected = props.cardSelected,
     gateway = props.gateway,
     paymethodsWithoutSaveCards = props.paymethodsWithoutSaveCards,
-    onSelectCard = props.onSelectCard;
+    onSelectCard = props.onSelectCard,
+    setUserHasCards = props.setUserHasCards;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -51,6 +53,14 @@ var PaymentOptionCardUI = function PaymentOptionCardUI(props) {
       setAddCardOpen(true);
     }
   }, [cardsList === null || cardsList === void 0 ? void 0 : cardsList.cards]);
+  (0, _react.useEffect)(function () {
+    var _cardsList$cards2, _cardsList$cards2$som, _cardsList$cards3;
+    var hasCardSelected = cardsList === null || cardsList === void 0 || (_cardsList$cards2 = cardsList.cards) === null || _cardsList$cards2 === void 0 || (_cardsList$cards2$som = _cardsList$cards2.some) === null || _cardsList$cards2$som === void 0 ? void 0 : _cardsList$cards2$som.call(_cardsList$cards2, function (card) {
+      var _cardSelected$data;
+      return (card === null || card === void 0 ? void 0 : card.id) === (cardSelected === null || cardSelected === void 0 || (_cardSelected$data = cardSelected.data) === null || _cardSelected$data === void 0 ? void 0 : _cardSelected$data.id);
+    });
+    setUserHasCards && setUserHasCards((cardsList === null || cardsList === void 0 || (_cardsList$cards3 = cardsList.cards) === null || _cardsList$cards3 === void 0 ? void 0 : _cardsList$cards3.length) > 0 && hasCardSelected);
+  }, [cardsList === null || cardsList === void 0 || (_cardsList$cards4 = cardsList.cards) === null || _cardsList$cards4 === void 0 ? void 0 : _cardsList$cards4.length, cardSelected]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionStripe.PaymentOptionStripeUI, {
     deleteCard: deleteCard,
     cardsList: cardsList,
