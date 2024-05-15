@@ -1129,7 +1129,9 @@ var calendarLanguages = exports.calendarLanguages = {
 };
 var getCateringValues = exports.getCateringValues = function getCateringValues(cateringTypeString, configs) {
   var getValue = function getValue(configName) {
-    var config = configs === null || configs === void 0 ? void 0 : configs[configName];
+    var config = (configs === null || configs === void 0 ? void 0 : configs[configName]) || (configs === null || configs === void 0 ? void 0 : configs.find(function (config) {
+      return (config === null || config === void 0 ? void 0 : config.key) === configName;
+    }));
     if (config && config.value) {
       var _config$value$split$f;
       var value = (_config$value$split$f = config.value.split('|').find(function (val) {
