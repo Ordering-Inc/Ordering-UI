@@ -123,7 +123,8 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     requiredFields = props.requiredFields,
     openUserModal = props.openUserModal,
     paymethodClicked = props.paymethodClicked,
-    setPaymethodClicked = props.setPaymethodClicked;
+    setPaymethodClicked = props.setPaymethodClicked,
+    validateDriverTipField = props.validateDriverTipField;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -162,11 +163,10 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   })) === null || _list$filter === void 0 ? void 0 : _list$filter.filter(function (p) {
     return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
   });
-  var paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay'];
+  var paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay', 'google_pay'];
   var isAlsea = ['alsea', 'alsea-staging'].includes(ordering.project);
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
-    var _validationFields$fie, _validationFields$fie2;
-    if (paymethodsFieldRequired.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) && options.type === 1 && validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.checkout) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.driver_tip) !== null && _validationFields$fie !== void 0 && _validationFields$fie.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie2 = validationFields.fields) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.driver_tip) !== null && _validationFields$fie2 !== void 0 && _validationFields$fie2.required && Number(cart === null || cart === void 0 ? void 0 : cart.driver_tip) <= 0) {
+    if (paymethodsFieldRequired.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway) && validateDriverTipField) {
       setAlertState({
         open: true,
         content: [t('DRIVER_TIPS_REQUIRED', 'Driver tips is required, please select a driver tip before select this paymethod')]
