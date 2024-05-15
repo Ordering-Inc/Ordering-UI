@@ -107,7 +107,8 @@ const PaymentOptionsUI = (props) => {
     requiredFields,
     openUserModal,
     paymethodClicked,
-    setPaymethodClicked
+    setPaymethodClicked,
+    validateDriverTipField
   } = props
   const [, t] = useLanguage()
   const [{ token, user }] = useSession()
@@ -131,16 +132,13 @@ const PaymentOptionsUI = (props) => {
 
   const supportedMethods = list?.filter(p => !multiCheckoutMethods.includes(p.gateway))?.filter(p => useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p)
 
-  const paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay']
+  const paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay', 'google_pay']
 
   const isAlsea = ['alsea', 'alsea-staging'].includes(ordering.project)
 
   const handlePaymentMethodClick = (paymethod) => {
     if (paymethodsFieldRequired.includes(paymethod?.gateway) &&
-      options.type === 1 &&
-      validationFields?.fields?.checkout?.driver_tip?.enabled &&
-      validationFields?.fields?.checkout?.driver_tip?.required &&
-      (Number(cart?.driver_tip) <= 0)
+    validateDriverTipField
     ) {
       setAlertState({
         open: true,
@@ -148,6 +146,7 @@ const PaymentOptionsUI = (props) => {
       })
       return
     }
+
     if (paymethodsFieldRequired.includes(paymethod?.gateway) && requiredFields.length > 0) {
       openUserModal && openUserModal(true)
       setPaymethodClicked({
