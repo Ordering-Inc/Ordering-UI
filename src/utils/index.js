@@ -711,7 +711,7 @@ export const calendarLanguages = {
 
 export const getCateringValues = (cateringTypeString, configs) => {
   const getValue = (configName) => {
-    const config = configs?.[configName]
+    const config = configs?.[configName] || configs?.find(config => config?.key === configName)
     if (config && config.value) {
       const value = config.value.split('|').find(val => val.includes(cateringTypeString))?.split(',')[1]
       return isNaN(value) ? null : parseInt(value)
