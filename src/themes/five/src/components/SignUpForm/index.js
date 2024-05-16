@@ -21,7 +21,8 @@ import {
   useSession,
   useToast, ToastType,
   ReCaptcha,
-  useEvent
+  useEvent,
+  useOptimizationLoad
 } from 'ordering-components'
 import { useCountdownTimer } from '../../../../../hooks/useCountdownTimer'
 import { useRecaptcha } from '../../../../../hooks/useRecaptcha'
@@ -107,14 +108,16 @@ const SignUpFormUI = (props) => {
   const [{ configs }] = useConfig()
   const formMethods = useForm()
   const [events] = useEvent()
+  const [optimizationLoad] = useOptimizationLoad()
+  const [, { login }] = useSession()
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [recaptchaConfig] = useRecaptcha(enableReCaptcha)
   const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: '', siteKey: '' })
-  const [, { login }] = useSession()
   const isFacebookLogin = configs?.facebook_login?.value === 'true' || configs?.facebook_login?.value === '1'
-  const googleLoginEnabled = configs?.google_login_enabled?.value === '1' || !configs?.google_login_enabled?.enabled
-  const facebookLoginEnabled = configs?.facebook_login_enabled?.value === '1' || !configs?.facebook_login_enabled?.enabled
-  const appleLoginEnabled = configs?.apple_login_enabled?.value === '1' || !configs?.apple_login_enabled?.enabled
+  const googleLoginEnabled = optimizationLoad?.result?.configs?.google_login_enabled?.value === '1'
+  const facebookLoginEnabled = optimizationLoad?.result?.configs?.facebook_login_enabled?.value === '1'
+  const appleLoginEnabled = optimizationLoad?.result?.configs?.apple_login_enabled?.value === '1'
 
   const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(600, !checkPhoneCodeState?.loading && willVerifyOtpState)
   const [userPhoneNumber, setUserPhoneNumber] = useState('')
