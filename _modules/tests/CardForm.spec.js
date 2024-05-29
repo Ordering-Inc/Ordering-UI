@@ -6,7 +6,7 @@ var _CardForm = require("../components/CardForm");
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
 var _pure = require("@stripe/stripe-js/pure");
 var _reactStripeJs = require("@stripe/react-stripe-js");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var publicKey = 'pk_test_SP5YYDD4PdEVfH8U2QJhsVxR';
 describe('Mounting Card Form component', function () {
   it('Component UI', function () {

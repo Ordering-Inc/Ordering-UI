@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.PreviousOrders = exports.PreviousButtonWrapper = exports.ErrorMessage = exports.BusinessesTitle = exports.BusinessList = exports.BusinessContainer = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var BusinessContainer = exports.BusinessContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 90%;\n  margin: 30px auto;\n  min-height: calc(100vh - 390px);\n\n  > h1 {\n    color: ", ";\n    font-size: 24px;\n    text-align: center;\n    width: 100%;\n    margin: 0 0 20px 0;\n  }\n\n  @media (min-width: 768px) {\n    > h1 {\n      font-size: 32px;\n    }\n  }\n\n  @media (min-width: 992px) {\n    width: 80%;\n    min-height: calc(100vh - 350px);\n\n    > h1 {\n      font-size: 40px;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    min-height: calc(100vh - 430px);\n    margin: 70px auto;\n    > h1 {\n      font-size: 48px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 });

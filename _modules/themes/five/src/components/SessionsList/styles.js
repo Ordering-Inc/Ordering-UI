@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.Title = exports.SessionsWrapper = exports.SessionsListContainer = exports.SessionItem = exports.SeessionDelete = exports.NoSessionsContainer = exports.NoMessage = exports.DurationWrapper = exports.ButtonsGroup = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var SessionsListContainer = exports.SessionsListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto;\n  padding: 30px 15px 15px 15px;\n  box-sizing: border-box;\n  min-height: calc(100vh - 280px);\n\n  @media (min-width: 769px) {\n    width: 70%;\n  }\n"])));
 var Title = exports.Title = _styledComponents.default.h1(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-size: 32px;\n  font-weight: 600;\n  margin-top: 0;\n  margin-bottom: 40px;\n  \n  @media (min-width: 768px) {\n    padding: 0 15px;\n  }\n"])));
 var SessionItem = exports.SessionItem = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 0px;\n  border-bottom: 1px solid ", ";\n  \n  > p.current {\n    flex: 1;\n    font-weight: 700;\n    font-size: 14px;\n    margin: 0 15px;\n  }\n\n  @media (min-width: 768px) {\n    padding: 15px;\n  }\n"])), function (props) {

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getCardType = exports.formatExpirationDate = exports.formatCreditCardNumber = exports.formatCVC = void 0;
 var _payment = _interopRequireDefault(require("payment"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var clearNumber = function clearNumber() {
   var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   return value.replace(/\D+/g, '');

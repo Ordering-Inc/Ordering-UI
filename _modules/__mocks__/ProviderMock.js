@@ -9,7 +9,7 @@ var _orderingComponents = require("ordering-components");
 var _Confirm = require("../components/Confirm");
 var _ThemeContext = require("../contexts/ThemeContext");
 var _theme = _interopRequireDefault(require("../../template/theme.json"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var configFile = {
   app_id: 'ordering-react',
   project: 'luisv4',

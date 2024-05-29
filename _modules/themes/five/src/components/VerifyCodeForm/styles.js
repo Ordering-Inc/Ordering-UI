@@ -7,8 +7,8 @@ exports.OtpWrapper = exports.DownTimer = exports.Container = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 var _polished = require("polished");
 var _templateObject, _templateObject2, _templateObject3;
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var Container = exports.Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin: 0px auto;\n  max-width: 350px;\n\n  > p {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-top: 0px;\n    margin-bottom: 18px;\n  }\n\n  > button {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    padding: 0px;\n    transition: all 0.3s linear;\n\n    &:hover {\n      background-color: ", ";\n    }\n  }\n\n  @media (min-width: 576px) {\n    max-width: 500px;\n  }\n"])), function (props) {
   return props.theme.colors.primaryContrast;
 });

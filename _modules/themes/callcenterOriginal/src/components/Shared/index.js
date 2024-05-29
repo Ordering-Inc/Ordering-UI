@@ -246,4 +246,4 @@ var _SpreadSheetEditor = _interopRequireDefault(require("./SpreadSheetEditor"));
 var _ProgressRing = require("./ProgressRing");
 var _ColorPicker = require("./ColorPicker");
 var _HtmlEditor = require("./HtmlEditor");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }

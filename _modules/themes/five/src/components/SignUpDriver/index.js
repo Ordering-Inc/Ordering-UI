@@ -7,7 +7,7 @@ exports.SignUpDriver = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _OldSignUpDriver = require("./layouts/OldSignUpDriver");
 var _NewSignUpDriver = require("./layouts/NewSignUpDriver");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var SignUpDriver = exports.SignUpDriver = function SignUpDriver(props) {
   var layout = props.layout;
   var _layout = layout !== null && layout !== void 0 ? layout : 'old';

@@ -4,7 +4,7 @@ var _react = _interopRequireDefault(require("react"));
 var _react2 = require("@cypress/react");
 var _LogoutButton = require("../components/LogoutButton");
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var handleClick = function handleClick() {
   console.log('handle click');
 };

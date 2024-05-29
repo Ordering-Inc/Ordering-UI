@@ -9,7 +9,7 @@ var _styles = require("./styles");
 var _reactDateRange = require("react-date-range");
 require("react-date-range/dist/styles.css");
 require("react-date-range/dist/theme/default.css");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var DatePickerUI = exports.DatePickerUI = function DatePickerUI(props) {
   var value = props.value,
     onChange = props.onChange,

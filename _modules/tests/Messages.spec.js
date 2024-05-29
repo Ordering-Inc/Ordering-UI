@@ -4,7 +4,7 @@ var _react = _interopRequireDefault(require("react"));
 var _react2 = require("@cypress/react");
 var _Messages = require("../components/Messages");
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('Mounting Messages component', function () {
   var order = {
     id: 1000,
