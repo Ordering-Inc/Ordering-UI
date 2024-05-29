@@ -138,7 +138,13 @@ export const BusinessProductsList = (props) => {
       'previously_products',
       'configs',
       'previously_products',
-      'types'
+      'types',
+      'available_products_count',
+      'today',
+      'lazy_load_products_recommended',
+      'minimum',
+      'ribbon',
+      'valid_service'
     ],
     handleSearchRedirect: () => {
       events.emit('go_to_page', { page: 'search' })
