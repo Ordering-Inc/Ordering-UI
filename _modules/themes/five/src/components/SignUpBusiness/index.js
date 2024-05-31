@@ -7,7 +7,7 @@ exports.SignUpBusiness = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _OldSignUpBusiness = require("./layouts/OldSignUpBusiness");
 var _NewSignUpBusiness = require("./layouts/NewSignUpBusiness");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var SignUpBusiness = exports.SignUpBusiness = function SignUpBusiness(props) {
   var layout = props.layout;
   var _layout = layout !== null && layout !== void 0 ? layout : 'old';

@@ -9,7 +9,7 @@ var _styles = require("./styles");
 var _Select = require("../../styles/Select");
 var _styledComponents = require("styled-components");
 var _CgSearch = _interopRequireDefault(require("@meronex/icons/cg/CgSearch"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var SearchComponent = exports.SearchComponent = function SearchComponent(props) {
   var _theme$business_view;
   var setOpenSearchProducts = props.setOpenSearchProducts,

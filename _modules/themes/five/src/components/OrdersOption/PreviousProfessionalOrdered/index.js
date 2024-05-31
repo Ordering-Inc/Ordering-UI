@@ -8,7 +8,7 @@ var _react = _interopRequireDefault(require("react"));
 var _styles = require("./styles");
 var _AutoScroll = require("../../AutoScroll");
 var _SingleProfessionalCard = require("../../SingleProfessionalCard");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var PreviousProfessionalOrdered = exports.PreviousProfessionalOrdered = function PreviousProfessionalOrdered(props) {
   var professionals = props.professionals,
     handleUpdateProfessionals = props.handleUpdateProfessionals;

@@ -11,7 +11,7 @@ var _StarbucksBusinessesListing = require("./layouts/StarbucksBusinessesListing"
 var _AppointmentsBusinessListing = require("./layouts/AppointmentsBusinessListing");
 var _styledComponents = require("styled-components");
 var _OloBusinessesListing = require("./franchises/OloBusinessesListing");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var BusinessesListing = exports.BusinessesListing = function BusinessesListing(props) {
   var _theme$my_products, _theme$my_products2, _theme$business_listi;
   var logosLayout = props.logosLayout;

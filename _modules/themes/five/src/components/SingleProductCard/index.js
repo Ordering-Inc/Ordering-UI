@@ -8,7 +8,7 @@ var _react = _interopRequireDefault(require("react"));
 var _styledComponents = require("styled-components");
 var _original = require("./layouts/original");
 var _starbucks = require("./layouts/starbucks");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var SingleProductCard = exports.SingleProductCard = function SingleProductCard(props) {
   var _theme$business_view;
   var theme = (0, _styledComponents.useTheme)();

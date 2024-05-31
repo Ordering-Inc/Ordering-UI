@@ -4,7 +4,7 @@ var _react = _interopRequireDefault(require("react"));
 var _react2 = require("@cypress/react");
 var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"));
 var _ResetPassword = require("../components/ResetPassword");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var code = '1234567890';
 var random = '1234567890';
 var handleResetPassword = function handleResetPassword() {

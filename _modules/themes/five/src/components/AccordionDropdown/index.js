@@ -9,7 +9,7 @@ var _BiCaretUp = _interopRequireDefault(require("@meronex/icons/bi/BiCaretUp"));
 var _AiOutlineCheck = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineCheck"));
 var _styles = require("./styles");
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var AccordionDropdown = exports.AccordionDropdown = function AccordionDropdown(props) {
   var item = props.item,
     spaceTab = props.spaceTab,
