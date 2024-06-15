@@ -21,7 +21,7 @@ export const BusinessesListing = (props) => {
       {websiteTheme === 'franchise' ? (
         <>
           {oloLayout.includes(franchiseLayout) && <OloBusinessesListing {...props} />}
-          {!franchiseLayout && <OriginalBusinessesListing {...props} />}
+          {!oloLayout.includes(franchiseLayout) && <OriginalBusinessesListing {...props} />}
         </>
       ) : (
         <>
