@@ -76,8 +76,6 @@
     "@loadable/component": "^5.15.2",
     "@meronex/icons": "^4.0.0",
     "@popperjs/core": "^2.5.3",
-    "@sentry/react": "^5.25.0",
-    "@sentry/tracing": "^5.25.0",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.9.0",
     "date-fns": "^2.30.0",
