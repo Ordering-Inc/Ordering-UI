@@ -63,12 +63,16 @@ var ThemeProvider = function ThemeProvider(_ref) {
         fontFamily = _ref4[1];
       if (!window.document.getElementById("".concat(name, "-font-styles"))) {
         var font = window.document.createElement('link');
+        var _href = null;
         font.id = "".concat(name, "-font-styles");
         font.rel = 'stylesheet';
         font.async = true;
         font.defer = true;
         font.name = fontFamily.name;
-        font.href = fontFamily.href || "https://fonts.googleapis.com/css2?family=".concat(fontFamily.name, ":wght@").concat(fontFamily.weights.join(';'), "&display=swap");
+        if (fontFamily.href !== 'null' && fontFamily.href) {
+          _href = fontFamily.href;
+        }
+        font.href = _href || "https://fonts.googleapis.com/css2?family=".concat(fontFamily.name, ":wght@").concat(fontFamily.weights.join(';'), "&display=swap");
         window.document.body.appendChild(font);
       }
     });

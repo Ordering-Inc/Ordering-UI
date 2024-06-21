@@ -123,7 +123,7 @@ var FarAwayMessage = _styledComponents.default.div(_templateObject27 || (_templa
 exports.FarAwayMessage = FarAwayMessage;
 var Divider = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  border: 1px solid #DEE2E6;\n  height: 100%;\n"])));
 exports.Divider = Divider;
-var LoginButton = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  p {\n    color: ", ";\n  }\n\n  svg{\n    color: ", ";\n    margin-right: 10px;\n  }\n"])), function (_ref13) {
+var LoginButton = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n\n  p {\n    color: ", ";\n  }\n\n  svg{\n    color: ", ";\n    margin-right: 10px;\n  }\n"])), function (_ref13) {
   var _theme$colors3;
   var theme = _ref13.theme;
   return (theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.tertiary) || 'initial';
@@ -133,7 +133,7 @@ var LoginButton = _styledComponents.default.div(_templateObject32 || (_templateO
   return theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.gold;
 });
 exports.LoginButton = LoginButton;
-var DeliveryPickupContainer = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row-reverse;\n  position: relative;\n  border-radius: 10px;\n  height: 45px;\n  background-color: #F4F4F4;\n\n  button {\n    outline: none;\n    background: none;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    z-index: 1;\n    border-radius: 10px;\n    min-width: 120px;\n\n    @media (min-width: 992px) {\n      min-width: 125px;\n    }\n  }\n\n  &::after {\n    border-radius: 5px;\n    height: 100%;\n    width: 50%;\n\n    ", "\n  }\n\n  @media (min-width: 468px) {\n    margin-right: 35px;\n  }\n\n  @media (min-width: 992px) {\n    height: 52px;\n  }\n"])), function (_ref15) {
+var DeliveryPickupContainer = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row-reverse;\n  position: relative;\n  border-radius: 10px;\n  height: 45px;\n  background-color: #F4F4F4;\n\n  button {\n    outline: none;\n    background: none;\n    border: none;\n    cursor: pointer;\n    width: 100%;\n    z-index: 1;\n    border-radius: 10px;\n    min-width: 120px;\n    font-size: 12px;\n    @media (min-width: 992px) {\n      min-width: 125px;\n      font-size: 13px;\n    }\n  }\n\n  &::after {\n    border-radius: 5px;\n    height: 100%;\n    width: 50%;\n\n    ", "\n  }\n\n  @media (min-width: 468px) {\n    margin-right: 35px;\n  }\n\n  @media (min-width: 992px) {\n    height: 52px;\n  }\n"])), function (_ref15) {
   var orderTypeSelected = _ref15.orderTypeSelected;
   return orderTypeSelected === 1 ? (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n        content: \"\";\n        background:  ", ";\n        position: absolute;\n        transition: all 0.2s linear 0s;\n        left: 0px;\n      "])), function (_ref16) {
     var theme = _ref16.theme;
