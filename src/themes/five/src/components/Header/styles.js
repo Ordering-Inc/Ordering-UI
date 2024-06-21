@@ -411,6 +411,8 @@ export const Divider = styled.div`
 export const LoginButton = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
+
   p {
     color: ${({ theme }) => theme?.colors?.tertiary || 'initial'};
   }
@@ -437,9 +439,10 @@ export const DeliveryPickupContainer = styled.div`
     z-index: 1;
     border-radius: 10px;
     min-width: 120px;
-
+    font-size: 12px;
     @media (min-width: 992px) {
       min-width: 125px;
+      font-size: 13px;
     }
   }
 
