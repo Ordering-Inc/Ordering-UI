@@ -159,7 +159,7 @@ var BusinessBasicInformation = exports.BusinessBasicInformation = function Busin
         if (!isChew) {
           var _backArrowElement$cla, _backArrowElement$cla2;
           var classAdded2 = backArrowElement === null || backArrowElement === void 0 || (_backArrowElement$cla = backArrowElement.classList) === null || _backArrowElement$cla === void 0 || (_backArrowElement$cla2 = _backArrowElement$cla.contains) === null || _backArrowElement$cla2 === void 0 ? void 0 : _backArrowElement$cla2.call(_backArrowElement$cla, 'fixed-arrow');
-          !classAdded2 && backArrowElement.classList.add('fixed-arrow');
+          !classAdded2 && backArrowElement && backArrowElement.classList.add('fixed-arrow');
         }
         if (businessNameFeedbackElement) businessNameFeedbackElement.style.display = 'block';
       } else {
