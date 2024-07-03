@@ -151,7 +151,7 @@ export const BusinessBasicInformation = (props) => {
         !classAdded && businessNameElement.classList.add('fixed-name')
         if (!isChew) {
           const classAdded2 = backArrowElement?.classList?.contains?.('fixed-arrow')
-          !classAdded2 && backArrowElement.classList.add('fixed-arrow')
+          !classAdded2 && backArrowElement && backArrowElement.classList.add('fixed-arrow')
         }
         if (businessNameFeedbackElement) businessNameFeedbackElement.style.display = 'block'
       } else {
