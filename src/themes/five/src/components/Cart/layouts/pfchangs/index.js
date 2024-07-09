@@ -420,7 +420,7 @@ const CartUI = (props) => {
                         <td>{parsePrice(cart?.driver_tip)}</td>
                       </tr>
                     )}
-                    {cart?.va_por_mi_cuenta && (
+                    {cart?.va_por_mi_cuenta && Array.isArray(cart?.metafields) && cart?.metafields?.length > 0 && (
                       <tr>
                         <td><img src='https://d2gjwc6pypyhyf.cloudfront.net/va-por-mi-cuenta.svg' /></td>
                         <td>{parsePrice(cart?.va_por_mi_cuenta.amount)}</td>

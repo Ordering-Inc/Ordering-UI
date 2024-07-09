@@ -129,7 +129,6 @@ const CheckoutUI = (props) => {
   } = props
   const theme = useTheme()
   const [validationFields] = useValidationFields()
-  // const [{ options, loading }, { changePaymethod }] = useOrder()
   const [{ options, loading }, { refreshOrderOptions, applyOffer }] = useOrder()
   const [ordering] = useApi()
   const windowSize = useWindowSize()
@@ -890,7 +889,7 @@ const CheckoutUI = (props) => {
                     </div>
                   </div>
                 )}
-                {!vaXMiCuenta.loading && defaultOptionsVaXMiCuenta.enable && (
+                {defaultOptionsVaXMiCuenta !== null && defaultOptionsVaXMiCuenta?.enable && (
                   <VaXMiCuenta
                     defaultOptionsVaXMiCuenta={defaultOptionsVaXMiCuenta}
                     vaXMiCuenta={vaXMiCuenta}
