@@ -104,7 +104,6 @@
     "react-select": "^4.3.1",
     "react-smartbanner": "^5.1.4",
     "react-to-print": "^2.12.3",
-    "smoothscroll-polyfill": "^0.4.4",
     "styled-components": "5.3.3",
     "swiper": "^6.8.4"
   },
