@@ -100,7 +100,6 @@ var CheckoutUI = function CheckoutUI(props) {
   var _useValidationFields = (0, _orderingComponents.useValidationFields)(),
     _useValidationFields2 = _slicedToArray(_useValidationFields, 1),
     validationFields = _useValidationFields2[0];
-  // const [{ options, loading }, { changePaymethod }] = useOrder()
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 2),
     _useOrder2$ = _useOrder2[0],
@@ -888,7 +887,7 @@ var CheckoutUI = function CheckoutUI(props) {
     style: {
       marginBottom: '10px'
     }
-  }))), !vaXMiCuenta.loading && defaultOptionsVaXMiCuenta.enable && /*#__PURE__*/_react.default.createElement(_VaXMiCuenta.VaXMiCuenta, {
+  }))), defaultOptionsVaXMiCuenta !== null && (defaultOptionsVaXMiCuenta === null || defaultOptionsVaXMiCuenta === void 0 ? void 0 : defaultOptionsVaXMiCuenta.enable) && /*#__PURE__*/_react.default.createElement(_VaXMiCuenta.VaXMiCuenta, {
     defaultOptionsVaXMiCuenta: defaultOptionsVaXMiCuenta,
     vaXMiCuenta: vaXMiCuenta,
     handleChangeVaXMiCuenta: handleChangeVaXMiCuenta

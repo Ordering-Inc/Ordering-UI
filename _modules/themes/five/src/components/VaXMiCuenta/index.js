@@ -21,17 +21,23 @@ var VaXMiCuenta = function VaXMiCuenta(props) {
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useOrder = (0, _orderingComponents.useOrder)(),
+    _useOrder2 = _slicedToArray(_useOrder, 1),
+    loading = _useOrder2[0].loading;
   return /*#__PURE__*/_react.default.createElement(_styles.VaXMiCuentaContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, "\xBFDeseas donar a ", /*#__PURE__*/_react.default.createElement("div", null, " ", /*#__PURE__*/_react.default.createElement("img", {
     src: "https://d2gjwc6pypyhyf.cloudfront.net/va-por-mi-cuenta.svg"
   })), " ?"), /*#__PURE__*/_react.default.createElement("p", null, t('VA_POR_MI_CUENTA', 'VA_POR_MI_CUENTA'), " ", /*#__PURE__*/_react.default.createElement("a", {
     href: t('VA_POR_MI_CUENTA_URL', 'VA_POR_MI_CUENTA'),
-    target: "_blank"
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, " ", t('VA_POR_MI_CUENTA_URL_NAME', 'VA_POR_MI_CUENTA_URL_NAME'))), /*#__PURE__*/_react.default.createElement("div", null, Object.values(defaultOptionsVaXMiCuenta === null || defaultOptionsVaXMiCuenta === void 0 ? void 0 : defaultOptionsVaXMiCuenta.donation_values[0]).map(function (value, index) {
+    var _vaXMiCuenta$selected;
     return /*#__PURE__*/_react.default.createElement("div", {
       key: index
     }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+      disabled: loading || vaXMiCuenta.loading,
       value: value,
-      isSelected: value === vaXMiCuenta.selectedOption.amount,
+      isSelected: value === (vaXMiCuenta === null || vaXMiCuenta === void 0 ? void 0 : (_vaXMiCuenta$selected = vaXMiCuenta.selectedOption) === null || _vaXMiCuenta$selected === void 0 ? void 0 : _vaXMiCuenta$selected.amount),
       onClick: function onClick() {
         return handleChangeVaXMiCuenta(value, index);
       }
