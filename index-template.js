@@ -6,7 +6,6 @@ import { Alert } from './src/components/Confirm'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
-import smoothscroll from 'smoothscroll-polyfill'
 
 /**
  * Theme images
@@ -190,8 +189,6 @@ theme.images = {
     pickUp: pickUp
   }
 }
-
-smoothscroll.polyfill()
 
 const wrapper = document.getElementById('app')
 ReactDOM.render(
