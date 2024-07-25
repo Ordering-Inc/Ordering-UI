@@ -112,6 +112,7 @@ const AddressListUI = (props) => {
   const [addressSpreadForm, setAddressSpreadForm] = useState(null)
   const [editSpreadAddress, setEditSpreadAddress] = useState(false)
   const [tabSelected, setTabSelected] = useState('general')
+  const [isAddAddressFromButton, setAddAddressFromButton] = useState(false)
 
   const addFormRestrictions = userCustomerSetup?.imported_address_text && addressList.addresses?.length === 0 && !addressList?.loading && !addressList?.error
   const uniqueAddressesList = (addressList.addresses && addressList.addresses.filter(
@@ -135,7 +136,7 @@ const AddressListUI = (props) => {
     container && scrollTo(container, 0, 500)
   }
 
-  const handleSaveAddress = (address) => {
+  const _handleSaveAddress = (address) => {
     let found = false
     const addresses = addressList.addresses.map(_address => {
       if (_address?.id === address?.id) {
@@ -159,6 +160,11 @@ const AddressListUI = (props) => {
     }
     setIsSavedAddress && setIsSavedAddress(true)
     handleCloseAddressForm()
+  }
+
+  const handleSaveAddress = (address) => {
+    setAddAddressFromButton(true)
+    _handleSaveAddress(address)
   }
 
   const handleSetAddress = (address, options) => {
@@ -260,7 +266,7 @@ const AddressListUI = (props) => {
   }, [userCustomerSetup?.imported_address_text, addressList.addresses, addressList?.loading, addressList?.error, isOpenUserData])
 
   useEffect(() => {
-    if (!addressList?.addedBySocket) return
+    if (!addressList?.addedBySocket || isAddAddressFromButton) return
     setConfirm({
       open: true,
       title: t('NEW_ADDRESS_REGISTERED', 'New address registered'),
@@ -269,7 +275,7 @@ const AddressListUI = (props) => {
       handleOnCancel: ''
     })
     handleSetAddress(addressList?.addresses[addressList?.addresses?.length - 1], { avoidRedirect: true })
-  }, [addressList?.addedBySocket])
+  }, [addressList?.addedBySocket, isAddAddressFromButton])
 
   return (
     <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
