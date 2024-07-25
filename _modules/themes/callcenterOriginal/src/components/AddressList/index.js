@@ -125,6 +125,10 @@ var AddressListUI = function AddressListUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     tabSelected = _useState12[0],
     setTabSelected = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    isAddAddressFromButton = _useState14[0],
+    setAddAddressFromButton = _useState14[1];
   var addFormRestrictions = (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text) && ((_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error);
   var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
     return i === self.findIndex(function (obj) {
@@ -144,7 +148,7 @@ var AddressListUI = function AddressListUI(props) {
     var container = window.document.getElementsByClassName('form_edit')[0];
     container && (0, _utils.scrollTo)(container, 0, 500);
   };
-  var handleSaveAddress = function handleSaveAddress(address) {
+  var _handleSaveAddress = function _handleSaveAddress(address) {
     var found = false;
     var addresses = addressList.addresses.map(function (_address) {
       if ((_address === null || _address === void 0 ? void 0 : _address.id) === (address === null || address === void 0 ? void 0 : address.id)) {
@@ -167,6 +171,10 @@ var AddressListUI = function AddressListUI(props) {
     }
     setIsSavedAddress && setIsSavedAddress(true);
     handleCloseAddressForm();
+  };
+  var handleSaveAddress = function handleSaveAddress(address) {
+    setAddAddressFromButton(true);
+    _handleSaveAddress(address);
   };
   var handleSetAddress = function handleSetAddress(address, options) {
     var _address$location3, _address$location4;
@@ -271,7 +279,7 @@ var AddressListUI = function AddressListUI(props) {
   }, [userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text, addressList.addresses, addressList === null || addressList === void 0 ? void 0 : addressList.loading, addressList === null || addressList === void 0 ? void 0 : addressList.error, isOpenUserData]);
   (0, _react.useEffect)(function () {
     var _addressList$addresse3;
-    if (!(addressList !== null && addressList !== void 0 && addressList.addedBySocket)) return;
+    if (!(addressList !== null && addressList !== void 0 && addressList.addedBySocket) || isAddAddressFromButton) return;
     setConfirm({
       open: true,
       title: t('NEW_ADDRESS_REGISTERED', 'New address registered'),
@@ -286,7 +294,7 @@ var AddressListUI = function AddressListUI(props) {
     handleSetAddress(addressList === null || addressList === void 0 ? void 0 : addressList.addresses[(addressList === null || addressList === void 0 || (_addressList$addresse3 = addressList.addresses) === null || _addressList$addresse3 === void 0 ? void 0 : _addressList$addresse3.length) - 1], {
       avoidRedirect: true
     });
-  }, [addressList === null || addressList === void 0 ? void 0 : addressList.addedBySocket]);
+  }, [addressList === null || addressList === void 0 ? void 0 : addressList.addedBySocket, isAddAddressFromButton]);
   return /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
     id: "address_control",
     isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading)
