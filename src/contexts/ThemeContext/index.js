@@ -98,10 +98,11 @@ export const ThemeProvider = ({ children, ...props }) => {
         font.async = true
         font.defer = true
         font.name = fontFamily.name
-        if (fontFamily.href !== 'null' && fontFamily.href) {
+        if (fontFamily?.href !== 'null' && fontFamily?.href) {
           _href = fontFamily.href
         }
-        font.href = (_href) || `https://fonts.googleapis.com/css2?family=${fontFamily.name}:wght@${fontFamily.weights.join(';')}&display=swap`
+        const hasWeights = Array.isArray(fontFamily?.weights) && fontFamily?.weights.length > 0
+        font.href = (_href) || `https://fonts.googleapis.com/css2?family=${fontFamily?.name}${hasWeights ? `:wght@${fontFamily?.weights.join(';')}` : ''}&display=swap`
         window.document.body.appendChild(font)
       }
     })
