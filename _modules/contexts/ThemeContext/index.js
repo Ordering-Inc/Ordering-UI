@@ -69,10 +69,11 @@ var ThemeProvider = function ThemeProvider(_ref) {
         font.async = true;
         font.defer = true;
         font.name = fontFamily.name;
-        if (fontFamily.href !== 'null' && fontFamily.href) {
+        if ((fontFamily === null || fontFamily === void 0 ? void 0 : fontFamily.href) !== 'null' && fontFamily !== null && fontFamily !== void 0 && fontFamily.href) {
           _href = fontFamily.href;
         }
-        font.href = _href || "https://fonts.googleapis.com/css2?family=".concat(fontFamily.name, ":wght@").concat(fontFamily.weights.join(';'), "&display=swap");
+        var hasWeights = Array.isArray(fontFamily === null || fontFamily === void 0 ? void 0 : fontFamily.weights) && (fontFamily === null || fontFamily === void 0 ? void 0 : fontFamily.weights.length) > 0;
+        font.href = _href || "https://fonts.googleapis.com/css2?family=".concat(fontFamily === null || fontFamily === void 0 ? void 0 : fontFamily.name).concat(hasWeights ? ":wght@".concat(fontFamily === null || fontFamily === void 0 ? void 0 : fontFamily.weights.join(';')) : '', "&display=swap");
         window.document.body.appendChild(font);
       }
     });
