@@ -462,9 +462,10 @@ export const App = () => {
 
   const oneSignalSetup = () => {
     const OneSignal = window.OneSignal || []
+    const hostname = window.location.hostname
     const initConfig = {
       appId: configs?.onesignal_orderingweb_id?.value,
-      // allowLocalhostAsSecureOrigin: true,
+      allowLocalhostAsSecureOrigin: hostname === 'localhost',
       notificationClickHandlerAction: 'navigate'
     }
 
@@ -472,7 +473,9 @@ export const App = () => {
       OneSignal.SERVICE_WORKER_PARAM = { scope: '/push/onesignal/' }
       OneSignal.SERVICE_WORKER_PATH = 'push/onesignal/OneSignalSDKWorker.js'
       OneSignal.SERVICE_WORKER_UPDATER_PATH = 'push/onesignal/OneSignalSDKWorker.js'
-      OneSignal.init(initConfig)
+      if (!OneSignal._initCalled) {
+        OneSignal.init(initConfig)
+      }
 
       const onNotificationClicked = function (data) {
         if (data?.additionalData?.order_uuid) {
@@ -481,9 +484,13 @@ export const App = () => {
       }
       const handler = function (data) {
         onNotificationClicked(data)
+        if (typeof OneSignal.addListenerForNotificationOpened === 'function') {
+          OneSignal.addListenerForNotificationOpened(handler)
+        }
+      }
+      if (typeof OneSignal.addListenerForNotificationOpened === 'function') {
         OneSignal.addListenerForNotificationOpened(handler)
       }
-      OneSignal.addListenerForNotificationOpened(handler)
 
       OneSignal.on('subscriptionChange', function (isSubscribed) {
         console.log("The user's subscription state is now:", isSubscribed)
