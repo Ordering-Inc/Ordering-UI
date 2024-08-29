@@ -57,7 +57,7 @@ const BusinessProductsCategoriesUI = (props) => {
         {props.pfchangs ? (
           <TabsPF {...props}>{props.children}</TabsPF>
         ) : (
-          <Tabs {...props}>{props.children}</Tabs>
+          <Tabs initialWidth {...props}>{props.children}</Tabs>
         )}
       </>
     )

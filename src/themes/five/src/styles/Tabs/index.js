@@ -6,12 +6,15 @@ export const Tabs = styled.div`
   ${({ variant }) => variant === 'primary' && css`
     color: ${props => props.theme.colors.darkTextColor};
   `}
-  
+
   ${({ theme }) => theme?.general?.components?.layout?.type === 'pfchangs' && css`
     width: 100%;
-    @media (min-width: 768px){
-      width: initial;
-    }
+
+    ${({ initialWidth }) => initialWidth && css`
+      @media (min-width: 768px){
+        width: initial;
+      }
+    `}
   `}
 `
 
@@ -24,14 +27,14 @@ export const Tab = styled.div`
   ${({ hover }) => hover && css`
     border: 1px solid transparent;
     @keyframes hoverTab {
-      from { 
+      from {
         color: ${props => props.theme?.colors?.tertiary || props.theme.colors.darkGray};
       }
-      to { 
+      to {
         color: ${({ activeColor }) => activeColor || ''};
       }
     }
-    
+
     &:hover{
       animation-name: hoverTab;
       animation-duration: 1s;

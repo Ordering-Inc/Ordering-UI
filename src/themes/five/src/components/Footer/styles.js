@@ -17,7 +17,7 @@ export const FooterWrapper = styled.div`
   padding: 0px 2px;
 
   * {
-    font-family: ${({ theme }) => (theme?.footer?.components?.slug === 'footer_pf_changs' ? theme?.fonts?.special?.name : theme?.fonts?.primary?.name) + '!important'};
+    font-family: ${({ theme }) => theme?.fonts?.primary?.name + ', sans-serif'} !important;
   }
 `
 

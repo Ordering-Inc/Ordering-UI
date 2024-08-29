@@ -146,6 +146,7 @@ export const Container = styled.div`
     }
 
     ${({ disabled }) => disabled && css`
+      padding: 0px 15px 0px 40px;
       cursor: not-allowed;
     `}
   }

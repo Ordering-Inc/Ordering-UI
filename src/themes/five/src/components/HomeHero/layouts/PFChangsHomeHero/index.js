@@ -224,14 +224,14 @@ export const PFChangsHomeHero = (props) => {
             </div>
             <DeliveryPickupContainer orderTypeSelected={orderTypeSelected}>
               <Button
-                color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+                color={orderTypeSelected === 2 ? props?.slug === 'pf_changs' ? theme?.colors?.buttonPrimaryContrast : '#FFF' : theme?.colors?.tertiary || '#FFF'}
                 onClick={() => handleChangeOrderType(2)}
                 disabled={orderState?.loading}
               >
                 {t('PICKUP', 'Pickup')}
               </Button>
               <Button
-                color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? '#000' : '#FFF' : theme?.colors?.tertiary || '#FFF'}
+                color={orderTypeSelected === 1 ? props?.slug === 'pf_changs' ? theme?.colors?.buttonPrimaryContrast : '#FFF' : theme?.colors?.tertiary || '#FFF'}
                 onClick={() => handleChangeOrderType(1)}
                 disabled={orderState?.loading}
               >
@@ -244,7 +244,7 @@ export const PFChangsHomeHero = (props) => {
               <WrapInput onClick={handleAddressInput} withIcon>
                 <HiOutlineLocationMarker />
                 <p>
-                  {orderState?.options?.address?.address || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
+                  {orderState?.options?.address?.address !== 'null' && !!orderState?.options?.address?.address ? orderState?.options?.address?.address : t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')}
                 </p>
               </WrapInput>
               <IosSend className='geolocation-button' />
@@ -433,7 +433,7 @@ export const PFChangsHomeHero = (props) => {
           <p style={{ margin: '20px 15px', fontSize: 16, fontWeight: 700 }}>{t('LOGIN_OR_REGISTER', 'Iniciar sesión o regístrate')}</p>
           <OrderTypeSelectorContainer>
             <Button
-              color={props?.slug === 'pf_changs' ? '#000' : '#FFF'}
+              color={theme?.colors?.buttonPrimaryContrast ?? '#FFF'}
               onClick={() => {
                 handleSetGuestLogin && handleSetGuestLogin('loginModal', true)
                 setOrderTypeModal(false)
