@@ -19,7 +19,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      padding: 8px 40px 8px 15px;\n    "])));
 }, function (_ref) {
   var disabled = _ref.disabled;
-  return disabled && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      cursor: not-allowed;\n    "])));
+  return disabled && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      padding: 0px 15px 0px 40px;\n      cursor: not-allowed;\n    "])));
 }, function (_ref2) {
   var isError = _ref2.isError;
   return isError && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    input.PhoneInputInput {\n      border: 1px solid ", " !important;\n    }\n  "])), function (props) {
