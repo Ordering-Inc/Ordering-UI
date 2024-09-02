@@ -41,6 +41,8 @@ import GoPrimitiveDot from '@meronex/icons/go/GoPrimitiveDot'
 import BisStar from '@meronex/icons/bi/BisStar'
 import FaCrown from '@meronex/icons/fa/FaCrown'
 
+const deliveryTypes = [1, 7]
+
 const BusinessControllerUI = (props) => {
   const {
     isSkeleton,
@@ -273,7 +275,7 @@ const BusinessControllerUI = (props) => {
                   </>
                 )}
                 <Medadata isCustomerMode={isCustomerMode} isSkeleton={isSkeleton}>
-                  {!hideBusinessFee && orderType === 1 && (
+                  {!hideBusinessFee && deliveryTypes.includes(orderType) && (
                     <>
                       {(businessDeliveryPrice ?? business?.delivery_price) >= 0 ? (
                         <p>
@@ -290,7 +292,7 @@ const BusinessControllerUI = (props) => {
                       {Object.keys(business).length > 0 ? (
                         <p className='bullet'>
                           <GoPrimitiveDot />
-                          {convertHoursToMinutes(orderState?.options?.type === 1 ? (businessDeliveryTime ?? business?.delivery_time) : (businessPickupTime ?? business?.pickup_time)) || <Skeleton width={100} />}
+                          {convertHoursToMinutes(deliveryTypes.includes(orderState?.options?.type) ? (businessDeliveryTime ?? business?.delivery_time) : (businessPickupTime ?? business?.pickup_time)) || <Skeleton width={100} />}
                         </p>
                       ) : (
                         <Skeleton width={65} />
