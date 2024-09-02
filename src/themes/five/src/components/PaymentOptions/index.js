@@ -111,7 +111,7 @@ const PaymentOptionsUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ token, user }] = useSession()
-  const [ , { applyCoupon, removeOffer }] = useOrder()
+  const [, { applyCoupon, removeOffer }] = useOrder()
   const [{ configs }] = useConfig()
   const [ordering] = useApi()
 
@@ -271,11 +271,16 @@ const PaymentOptionsUI = (props) => {
                         {getPayIcon(paymethod.id)}
                       </div>
                       <p>
-                        {t(paymethod.gateway.toUpperCase(), paymethod.name)}
+                        {paymethod.gateway === 'wow' ? 'Wow+' : t(paymethod.gateway.toUpperCase(), paymethod.name)}
                         {paymethod.gateway === 'wow_rewards' && wowPoints?.points >= 0 && (
-                          <>
-                            {' '}({wowPoints.points || 0} {t('PTS', 'pts')})
-                          </>
+                          <p>
+                            {' '}( {wowPoints.points || 0} {t('PTS', 'pts')} )
+                          </p>
+                        )}
+                        {paymethod.gateway === 'wow' && (
+                          <p>
+                            {' '}( 100.24 {t('PTS', 'pts')} )
+                          </p>
                         )}
                       </p>
                     </PayCard>

@@ -169,25 +169,11 @@ export const PFChangsHomeHero = (props) => {
   }, [orderState?.options?.address?.location])
 
   useEffect(() => {
-    let timeout
-
-    if (goToElement && nearestBusinessContainer?.current) {
-      timeout = setTimeout(() => {
-        const elementRect = nearestBusinessContainer.current.getBoundingClientRect()
-        const offsetTop = elementRect.top + window.scrollY
-
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        })
-        setGoToElement(false)
-      }, 2000)
+    if (goToElement && nearestBusinessContainer?.current && businessesLocations?.length > 0) {
+      nearestBusinessContainer.current.scrollBy({ top: 230, behavior: 'smooth' })
+      setGoToElement(false)
     }
-
-    return () => {
-      typeof timeout === 'number' && clearTimeout(timeout)
-    }
-  }, [goToElement])
+  }, [goToElement, businessesLocations])
 
   useEffect(() => {
     if ((!isShowGuestLogin?.loginModal && !isShowGuestLogin?.addressModal) || (isShowGuestLogin?.loginModal && !isShowGuestLogin?.addressModal)) return
@@ -217,7 +203,7 @@ export const PFChangsHomeHero = (props) => {
     <>
       <HeroContainer bgimage={homeBackgroundImage || theme.images?.general?.homeHero}>
         <ContentWrapper contentPosition={contentPosition}>
-          <SearchLocationsContainer id='search-container'>
+          <SearchLocationsContainer ref={nearestBusinessContainer} id='search-container'>
             <h1>{auth ? `${t('WELCOME_BACK', 'Welcome back')} ${user?.name}` : t('WELCOME', 'Welcome')}</h1>
             <div>
               <p>{t('SEARCH_OR_VIEW_LOCATIONS_BELOW', 'Search or view nearby locations below')}</p>
@@ -249,7 +235,7 @@ export const PFChangsHomeHero = (props) => {
               </WrapInput>
               <IosSend className='geolocation-button' />
             </AddressInputContainer>
-            <StartOrder ref={nearestBusinessContainer}>
+            <StartOrder>
               <Button onClick={handleAddressInput}>
                 {t('START_ORDER', 'Start order')}
               </Button>
