@@ -258,22 +258,14 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     }
   }, [orderState === null || orderState === void 0 ? void 0 : (_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : (_orderState$options6$ = _orderState$options6.address) === null || _orderState$options6$ === void 0 ? void 0 : _orderState$options6$.location]);
   (0, _react.useEffect)(function () {
-    var timeout;
-    if (goToElement && nearestBusinessContainer !== null && nearestBusinessContainer !== void 0 && nearestBusinessContainer.current) {
-      timeout = setTimeout(function () {
-        var elementRect = nearestBusinessContainer.current.getBoundingClientRect();
-        var offsetTop = elementRect.top + window.scrollY;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
-        setGoToElement(false);
-      }, 2000);
+    if (goToElement && nearestBusinessContainer !== null && nearestBusinessContainer !== void 0 && nearestBusinessContainer.current && (businessesLocations === null || businessesLocations === void 0 ? void 0 : businessesLocations.length) > 0) {
+      nearestBusinessContainer.current.scrollBy({
+        top: 230,
+        behavior: 'smooth'
+      });
+      setGoToElement(false);
     }
-    return function () {
-      typeof timeout === 'number' && clearTimeout(timeout);
-    };
-  }, [goToElement]);
+  }, [goToElement, businessesLocations]);
   (0, _react.useEffect)(function () {
     if (!(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.loginModal) && !(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.addressModal) || isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.loginModal && !(isShowGuestLogin !== null && isShowGuestLogin !== void 0 && isShowGuestLogin.addressModal)) return;
     setModals(_objectSpread(_objectSpread({}, modals), {}, {
@@ -305,6 +297,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, {
     contentPosition: contentPosition
   }, /*#__PURE__*/_react.default.createElement(_styles.SearchLocationsContainer, {
+    ref: nearestBusinessContainer,
     id: "search-container"
   }, /*#__PURE__*/_react.default.createElement("h1", null, auth ? "".concat(t('WELCOME_BACK', 'Welcome back'), " ").concat(user === null || user === void 0 ? void 0 : user.name) : t('WELCOME', 'Welcome')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('SEARCH_OR_VIEW_LOCATIONS_BELOW', 'Search or view nearby locations below'))), /*#__PURE__*/_react.default.createElement(_styles.DeliveryPickupContainer, {
     orderTypeSelected: orderTypeSelected
@@ -325,9 +318,7 @@ var PFChangsHomeHero = function PFChangsHomeHero(props) {
     withIcon: true
   }, /*#__PURE__*/_react.default.createElement(_HiOutlineLocationMarker.default, null), /*#__PURE__*/_react.default.createElement("p", null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : (_orderState$options11 = _orderState$options10.address) === null || _orderState$options11 === void 0 ? void 0 : _orderState$options11.address) !== 'null' && !!(orderState !== null && orderState !== void 0 && (_orderState$options12 = orderState.options) !== null && _orderState$options12 !== void 0 && (_orderState$options13 = _orderState$options12.address) !== null && _orderState$options13 !== void 0 && _orderState$options13.address) ? orderState === null || orderState === void 0 ? void 0 : (_orderState$options14 = orderState.options) === null || _orderState$options14 === void 0 ? void 0 : (_orderState$options15 = _orderState$options14.address) === null || _orderState$options15 === void 0 ? void 0 : _orderState$options15.address : t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?'))), /*#__PURE__*/_react.default.createElement(_IosSend.default, {
     className: "geolocation-button"
-  })), /*#__PURE__*/_react.default.createElement(_styles.StartOrder, {
-    ref: nearestBusinessContainer
-  }, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.StartOrder, null, /*#__PURE__*/_react.default.createElement(_pfchangs.Button, {
     onClick: handleAddressInput
   }, t('START_ORDER', 'Start order'))), !isResponsive && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showCities && /*#__PURE__*/_react.default.createElement(_styles.ViewLocationsContainer, null, /*#__PURE__*/_react.default.createElement("p", {
     onClick: function onClick() {
