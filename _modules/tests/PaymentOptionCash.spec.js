@@ -8,7 +8,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 var orderTotal = 5;
 describe('Mounting Payment Option Cash component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_PaymentOptionCash.PaymentOptionCash, {
       orderTotal: orderTotal
     })));
     cy.get('label').should('contain', 'Don\'t have exact amount? Let us know with how much will you pay');

@@ -7,7 +7,7 @@ var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"))
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('Mounting Home Hero component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_HomeHero.HomeHero, null)));
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_HomeHero.HomeHero, null)));
     cy.get('h1').should('contain.text', 'Welcome');
     cy.get('p').should('contain.text', 'Let’s start to order now');
     cy.get('div').should('contain.text', 'Type an address');

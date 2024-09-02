@@ -7,7 +7,7 @@ var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"))
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('Mounting Forgot password component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_ForgotPasswordForm.ForgotPasswordForm, {
       elementLinkToLogin: /*#__PURE__*/_react.default.createElement("a", null, "Login")
     })));
     cy.get('div').contains('Login').should('be.visible');

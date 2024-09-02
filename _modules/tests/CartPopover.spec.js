@@ -49,7 +49,7 @@ describe('Mounting Cart Popover component', function () {
     valid: true
   }];
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_CartPopover.CartPopover, {
       carts: carts,
       onClick: function onClick() {},
       onClose: function onClose() {},

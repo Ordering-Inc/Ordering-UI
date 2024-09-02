@@ -230,7 +230,7 @@ var ProductForm = exports.ProductForm = function ProductForm(props) {
    * Load product from API
    */
   var loadProductWithOptions = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var source, _yield$ordering$busin, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -277,7 +277,7 @@ var ProductForm = exports.ProductForm = function ProductForm(props) {
    * @param {object} cart Current cart
    * @param {number} suboptionId Suboption id
    */
-  var removeRelatedOptions = function removeRelatedOptions(productCart, suboptionId) {
+  var _removeRelatedOptions = function removeRelatedOptions(productCart, suboptionId) {
     product.product.extras.forEach(function (_extra) {
       _extra.options.forEach(function (_option) {
         if (_option.respect_to === suboptionId) {
@@ -285,7 +285,7 @@ var ProductForm = exports.ProductForm = function ProductForm(props) {
           var suboptions = (_productCart$options2 = productCart.options["id:".concat(_option.id)]) === null || _productCart$options2 === void 0 ? void 0 : _productCart$options2.suboptions;
           if (suboptions) {
             Object.keys(suboptions).map(function (suboptionKey) {
-              return removeRelatedOptions(productCart, parseInt(suboptionKey.split(':')[1]));
+              return _removeRelatedOptions(productCart, parseInt(suboptionKey.split(':')[1]));
             });
           }
           if (productCart.options["id:".concat(_option.id)]) {
@@ -329,13 +329,13 @@ var ProductForm = exports.ProductForm = function ProductForm(props) {
     }
     if (!state.selected) {
       delete newProductCart.options["id:".concat(option.id)].suboptions["id:".concat(suboption.id)];
-      removeRelatedOptions(newProductCart, suboption.id);
+      _removeRelatedOptions(newProductCart, suboption.id);
     } else {
       if (option.min === option.max && option.min === 1) {
         var suboptions = newProductCart.options["id:".concat(option.id)].suboptions;
         if (suboptions) {
           Object.keys(suboptions).map(function (suboptionKey) {
-            return removeRelatedOptions(newProductCart, parseInt(suboptionKey.split(':')[1]));
+            return _removeRelatedOptions(newProductCart, parseInt(suboptionKey.split(':')[1]));
           });
         }
         if (newProductCart.options["id:".concat(option.id)]) {
@@ -375,13 +375,13 @@ var ProductForm = exports.ProductForm = function ProductForm(props) {
       }
       if (!state.selected) {
         delete newProductCart.options["id:".concat(option.id)].suboptions["id:".concat(suboption.id)];
-        removeRelatedOptions(newProductCart, suboption.id);
+        _removeRelatedOptions(newProductCart, suboption.id);
       } else {
         if (option.min === option.max && option.min === 1) {
           var suboptions = newProductCart.options["id:".concat(option.id)].suboptions;
           if (suboptions) {
             Object.keys(suboptions).map(function (suboptionKey) {
-              return removeRelatedOptions(newProductCart, parseInt(suboptionKey.split(':')[1]));
+              return _removeRelatedOptions(newProductCart, parseInt(suboptionKey.split(':')[1]));
             });
           }
           if (newProductCart.options["id:".concat(option.id)]) {
@@ -460,7 +460,7 @@ var ProductForm = exports.ProductForm = function ProductForm(props) {
    * Handle when click on save product
    */
   var handleSave = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       var errors, successful, _props$productCart6, _props$productCart7;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {

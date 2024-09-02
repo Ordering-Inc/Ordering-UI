@@ -7,7 +7,7 @@ var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"))
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('Mounting Address Form component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, null)));
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, null)));
     cy.get('div.address-form').should('be.visible');
     cy.wait(4000);
     cy.get('form').should('be.visible');

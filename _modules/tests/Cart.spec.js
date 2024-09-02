@@ -49,7 +49,7 @@ describe('Mounting Cart component', function () {
     valid: true
   };
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_Cart.Cart, {
       cart: cart,
       isProducts: 1
     })));

@@ -20,7 +20,7 @@ var business = {
 };
 describe('Mounting Business Information component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
       business: business
     })));
     cy.get('p').contains(business.description).should('be.visible');

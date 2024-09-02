@@ -251,7 +251,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     });
   };
   var businessLogoUrlValidation = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _order$business;
       var isValidImage;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -370,7 +370,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
         open: true,
         content: t('QUESTION_DELETE_PRODUCTS_FROM_CART', 'Are you sure that you want to delete all products from cart?'),
         handleOnAccept: function () {
-          var _handleOnAccept = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+          var _handleOnAccept = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
             return _regeneratorRuntime().wrap(function _callee2$(_context2) {
               while (1) switch (_context2.prev = _context2.next) {
                 case 0:

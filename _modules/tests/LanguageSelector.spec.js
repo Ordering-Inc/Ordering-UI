@@ -18,7 +18,7 @@ var languages = [{
 var currentLanguage = 'two';
 describe('Mounting Language Selector component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, {
       languages: languages,
       currentLanguage: currentLanguage,
       handlerCustomChangeLanguage: function handlerCustomChangeLanguage() {

@@ -12,7 +12,7 @@ var handleResetPassword = function handleResetPassword() {
 };
 describe('Mounting Reset Password component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_ResetPassword.ResetPassword, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_ResetPassword.ResetPassword, {
       code: code,
       random: random,
       handleResetPassword: handleResetPassword

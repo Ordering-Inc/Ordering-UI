@@ -35,7 +35,7 @@ var NotNetworkConnectivity = exports.NotNetworkConnectivity = function NotNetwor
     base64ImageString = _useState2[0],
     setBase64ImageString = _useState2[1];
   var getBase64ImageFromUrl = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(imageUrl) {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(imageUrl) {
       var response, blob;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {

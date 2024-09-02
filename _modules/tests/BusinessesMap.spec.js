@@ -40,7 +40,7 @@ describe('Mounting Businesses Map component', function () {
     id: 12
   }];
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_BusinessesMap.BusinessesMap, {
       userLocation: userLocation,
       businessList: businessList
     })));

@@ -10,7 +10,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 var publicKey = 'pk_test_SP5YYDD4PdEVfH8U2QJhsVxR';
 describe('Mounting Card Form component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_reactStripeJs.Elements, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_reactStripeJs.Elements, {
       stripe: (0, _pure.loadStripe)(publicKey)
     }, /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_CardForm.CardForm, null))));
     cy.get('form').should('be.visible');

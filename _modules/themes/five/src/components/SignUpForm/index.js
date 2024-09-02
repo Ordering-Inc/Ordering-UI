@@ -203,7 +203,7 @@ var SignUpFormUI = function SignUpFormUI(props) {
     formMethods.clearErrors();
   };
   var onSubmit = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _validationFields$fie3, _validationFields$fie4, _configs$verification2;
       var isPhoneNumberValid;
       return _regeneratorRuntime().wrap(function _callee$(_context) {

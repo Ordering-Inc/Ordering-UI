@@ -7,7 +7,7 @@ var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"))
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('Mounting Footer component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_Footer.Footer, null)));
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_Footer.Footer, null)));
     cy.get('h1[name="title-1"]').should('be.visible');
     cy.get('h1[name="title-2"]').should('be.visible');
     cy.get('h1[name="title-3"]').should('be.visible');

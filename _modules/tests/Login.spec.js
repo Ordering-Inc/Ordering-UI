@@ -7,7 +7,7 @@ var _ProviderMock = _interopRequireDefault(require("../__mocks__/ProviderMock"))
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 describe('Mounting Login component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_LoginForm.LoginForm, {
       useLoginByCellphone: true,
       elementLinkToSignup: /*#__PURE__*/_react.default.createElement("a", null, "Create account"),
       elementLinkToForgotPassword: /*#__PURE__*/_react.default.createElement("a", null, "Reset password")

@@ -67,7 +67,7 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
   var productSelect = (0, _react.useRef)(null);
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
-  var productInfo = function productInfo() {
+  var _productInfo = function productInfo() {
     if (isCartProduct) {
       var _product$ingredients, _product$options;
       var ingredients = JSON.parse(JSON.stringify(Object.values((_product$ingredients = product.ingredients) !== null && _product$ingredients !== void 0 ? _product$ingredients : {})));
@@ -77,7 +77,7 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
         option.suboptions = Object.values((_option$suboptions = option.suboptions) !== null && _option$suboptions !== void 0 ? _option$suboptions : {});
         return option;
       });
-      return _objectSpread(_objectSpread({}, productInfo), {}, {
+      return _objectSpread(_objectSpread({}, _productInfo), {}, {
         ingredients: ingredients,
         options: options
       });
@@ -156,7 +156,7 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
     }
   })))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, {
     className: "prod-price"
-  }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product.total || product.price)), (_productInfo().ingredients.length > 0 || _productInfo().options.length > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
   }))), isCartProduct && !isCartPending && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
@@ -203,14 +203,14 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
     style: {
       maxHeight: "".concat(setHeight)
     }
-  }, productInfo().ingredients.length > 0 && productInfo().ingredients.some(function (ingredient) {
+  }, _productInfo().ingredients.length > 0 && _productInfo().ingredients.some(function (ingredient) {
     return !ingredient.selected;
-  }) && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('INGREDIENTS', 'Ingredients')), productInfo().ingredients.map(function (ingredient) {
+  }) && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('INGREDIENTS', 'Ingredients')), _productInfo().ingredients.map(function (ingredient) {
     return !ingredient.selected && /*#__PURE__*/_react.default.createElement("li", {
       className: "ingredient",
       key: ingredient.id
     }, /*#__PURE__*/_react.default.createElement("span", null, t('NO', 'No'), " ", ingredient.name));
-  })), productInfo().options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, productInfo().options.map(function (option) {
+  })), _productInfo().options.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, _productInfo().options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: option.id
     }, /*#__PURE__*/_react.default.createElement("p", null, option.name), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, {

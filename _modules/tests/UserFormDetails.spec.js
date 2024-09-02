@@ -76,7 +76,7 @@ var isRequiredField = function isRequiredField(fieldName) {
 };
 describe('Mounting User Form Details component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, {
       validationFields: validationFields,
       showField: showField,
       isRequiredField: isRequiredField,

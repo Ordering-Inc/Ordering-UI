@@ -30,7 +30,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var CategoryTreeNode = function CategoryTreeNode(props) {
+var _CategoryTreeNode = function CategoryTreeNode(props) {
   var _category$subcategori2;
   var category = props.category,
     index = props.index,
@@ -103,7 +103,7 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       maxHeight: !setActive && '0px'
     }
   }, (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 || (_category$subcategori2 = category.subcategories) === null || _category$subcategori2 === void 0 ? void 0 : _category$subcategori2.length) > 0 && category.subcategories.map(function (subCategory) {
-    return /*#__PURE__*/_react.default.createElement(CategoryTreeNode, _extends({}, props, {
+    return /*#__PURE__*/_react.default.createElement(_CategoryTreeNode, _extends({}, props, {
       key: subCategory.id,
       category: subCategory,
       index: index + 1
@@ -132,7 +132,7 @@ var SelectBusinessCategoriesUI = function SelectBusinessCategoriesUI(props) {
   })) : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.categories.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (category) {
-    return /*#__PURE__*/_react.default.createElement(CategoryTreeNode, {
+    return /*#__PURE__*/_react.default.createElement(_CategoryTreeNode, {
       key: category.id,
       index: 0,
       category: category,

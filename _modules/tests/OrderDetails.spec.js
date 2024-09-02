@@ -56,7 +56,7 @@ var order = {
 };
 describe('Mounting Order Details component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
       order: order
     })));
     cy.get('.order-header').should('exist');

@@ -31,7 +31,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var CategoryTreeNode = function CategoryTreeNode(props) {
+var _CategoryTreeNode = function CategoryTreeNode(props) {
   var _subCategoriesList$fi, _category$subcategori;
   var category = props.category,
     index = props.index,
@@ -162,7 +162,7 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.product), 'h_50,c_limit')
     })), /*#__PURE__*/_react.default.createElement("span", null, product.name)));
   }), (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 || (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0 && category.subcategories.map(function (subCategory) {
-    return /*#__PURE__*/_react.default.createElement(CategoryTreeNode, _extends({}, props, {
+    return /*#__PURE__*/_react.default.createElement(_CategoryTreeNode, _extends({}, props, {
       key: subCategory.id,
       category: subCategory,
       index: index + 1
@@ -183,7 +183,7 @@ var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
     var _businessState$busine;
     if (businessState.loading) return;
     var _subCategoriesList = [];
-    var iterateCategories = function iterateCategories(categories) {
+    var _iterateCategories = function iterateCategories(categories) {
       return (categories === null || categories === void 0 ? void 0 : categories.length) > 0 && (categories === null || categories === void 0 ? void 0 : categories.forEach(function (category) {
         var _category$products3, _category$subcategori2;
         var productIds = [];
@@ -206,10 +206,10 @@ var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
           name: category.name,
           productIds: productIds
         });
-        iterateCategories(category.subcategories);
+        _iterateCategories(category.subcategories);
       }));
     };
-    iterateCategories((_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.categories);
+    _iterateCategories((_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.categories);
     setSubCategoriesList(_subCategoriesList);
   }, [(_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.categories]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
@@ -230,7 +230,7 @@ var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
   }).sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (category) {
-    return /*#__PURE__*/_react.default.createElement(CategoryTreeNode, {
+    return /*#__PURE__*/_react.default.createElement(_CategoryTreeNode, {
       subCategoriesList: subCategoriesList,
       key: category.id,
       index: 0,

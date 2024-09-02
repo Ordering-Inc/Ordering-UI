@@ -44,7 +44,7 @@ var paymethods = [{
 }];
 describe('Mounting Payment Options component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_PaymentOptions.PaymentOptions, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_PaymentOptions.PaymentOptions, {
       paymethods: paymethods
     })));
     cy.get('.payments-list').find('div.card').should('have.length', paymethods.length);
