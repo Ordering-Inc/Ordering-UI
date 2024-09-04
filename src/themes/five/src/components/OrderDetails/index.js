@@ -161,7 +161,7 @@ const OrderDetailsUI = (props) => {
   const hideCustomerEmail = theme?.confirmation?.components?.customer?.components?.email?.hidden
   const hideCustomerPhoto = theme?.confirmation?.components?.customer?.components?.photo?.hidden
 
-  const validTrackingStatus = [9, 19, 23, 26]
+  const validTrackingStatus = [9, 18, 19, 23, 26]
   const mapConfigs = { zoom: 15 }
 
   const handleGoToPage = (data) => {
