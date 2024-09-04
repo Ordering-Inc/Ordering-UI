@@ -8,7 +8,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 var address = '5th av. New York.';
 describe('Mounting Address details component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_AddressDetails.AddressDetails, {
       businessId: 22,
       addressToShow: address
     })));

@@ -48,7 +48,7 @@ describe('Mounting Messages component', function () {
     }]
   };
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
       business: true,
       order: order,
       messagesToShow: messages,

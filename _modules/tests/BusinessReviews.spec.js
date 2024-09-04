@@ -31,7 +31,7 @@ var business = {
 };
 describe('Mounting Business Reviews component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_BusinessReviews.BusinessReviews, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_BusinessReviews.BusinessReviews, {
       businessId: 22,
       reviews: business.reviews.reviews,
       businessName: business.name,

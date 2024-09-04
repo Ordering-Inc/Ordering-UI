@@ -247,7 +247,7 @@ var AddressFormUI = function AddressFormUI(props) {
     events.emit('go_to_page', data);
   };
   var onSubmit = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _formState$changes3, _addressState$address5, _formState$changes4, _formState$changes5, _arrayList$map$some2;
       var _formState$changes6, arrayList, addressToCompare, isAddressAlreadyExist;
       return _regeneratorRuntime().wrap(function _callee$(_context) {

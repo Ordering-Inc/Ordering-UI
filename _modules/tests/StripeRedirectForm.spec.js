@@ -20,7 +20,7 @@ var paymethods = [{
 }];
 describe('Mounting Stripe Redirect Form component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_StripeRedirectForm.StripeRedirectForm, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_StripeRedirectForm.StripeRedirectForm, {
       paymethods: paymethods
     })));
     cy.get('select').select('Alipay').should('have.value', 'alipay');

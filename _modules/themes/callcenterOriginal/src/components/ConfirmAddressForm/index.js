@@ -236,7 +236,7 @@ var ConfirmAddressFormUI = function ConfirmAddressFormUI(props) {
     return !(theme !== null && theme !== void 0 && (_theme$address3 = theme.address) !== null && _theme$address3 !== void 0 && (_theme$address3 = _theme$address3.components) !== null && _theme$address3 !== void 0 && (_theme$address3 = _theme$address3[name]) !== null && _theme$address3 !== void 0 && _theme$address3.hidden);
   };
   var onSubmit = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _formState$changes3, _addressState$address6, _formState$changes4, _formState$changes5, _arrayList$map$some2;
       var _formState$changes6, arrayList, addressToCompare, isAddressAlreadyExist;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -317,7 +317,7 @@ var ConfirmAddressFormUI = function ConfirmAddressFormUI(props) {
     });
   };
   var handleChangeAddress = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(address, isGps) {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(address, isGps) {
       var _googleInputRef$curre;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {

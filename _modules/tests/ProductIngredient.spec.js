@@ -18,7 +18,7 @@ var state = {
 };
 describe('Mounting Product Ingredient component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_ProductIngredient.ProductIngredient, {
       state: state,
       ingredient: ingredient
     })));

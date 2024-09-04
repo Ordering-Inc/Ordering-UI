@@ -11,7 +11,7 @@ describe('Mounting MomentControl component', function () {
     maxDate: currentDate
   };
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, momentProps)));
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_MomentControl.MomentControl, momentProps)));
     cy.get('[name="days"]').should('be.visible');
     cy.get('[name="hours"]').should('be.visible');
   });

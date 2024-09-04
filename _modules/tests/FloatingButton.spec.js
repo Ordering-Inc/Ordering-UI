@@ -11,7 +11,7 @@ var handleClick = function handleClick() {
 var btnText = 'Testing';
 describe('Mounting Floating button component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_FloatingButton.FloatingButton, {
       btnText: btnText,
       btnValue: 10,
       handleClick: handleClick

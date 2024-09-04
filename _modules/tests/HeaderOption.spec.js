@@ -8,7 +8,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 var variant = 'moment';
 describe('Mounting Header Option component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
       variant: variant
     })));
     cy.get('div').should('contain.text', 'ASAP');

@@ -8,7 +8,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 var driverTipsOptions = [1, 2, 3, 4, 5];
 describe('Mounting Driver Tips component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_DriverTips.DriverTips, {
       businessId: 41,
       driverTipsOptions: driverTipsOptions,
       useOrderContext: true

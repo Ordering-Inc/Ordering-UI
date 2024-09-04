@@ -120,7 +120,7 @@ var OrdersOptionUI = exports.OrdersOptionUI = function OrdersOptionUI(props) {
     return objectStatus && objectStatus;
   };
   var handleReorder = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(orderId) {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(orderId) {
       var _yield$reorder, error, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {

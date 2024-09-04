@@ -13,7 +13,7 @@ var product = {
 };
 describe('Mounting Single Product Card component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_SingleProductCard.SingleProductCard, {
       product: product,
       businessId: 41
     })));

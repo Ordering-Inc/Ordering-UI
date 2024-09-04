@@ -196,7 +196,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setOpenBusinessInformation(true);
   };
   var onProductClick = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(product) {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(product) {
       var _currentCart$products, isProductAddedToCart, productQuantity, minimumPerOrder, addCurrentProduct, updateCurrentProduct, cartData, _business$professiona, _product$category;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -346,7 +346,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     });
   };
   var adjustBusiness = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(adjustBusinessId) {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(adjustBusinessId) {
       var _carts$adjustBusiness;
       var _carts, products, unavailableProducts, alreadyRemoved;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {

@@ -51,15 +51,15 @@ var scrollTo = exports.scrollTo = function scrollTo(element, to, duration) {
   var change = to - start;
   var currentTime = 0;
   var increment = 20;
-  var animateScroll = function animateScroll() {
+  var _animateScroll = function animateScroll() {
     currentTime += increment;
     var val = easeInOutQuad(currentTime, start, change, duration);
     element.scrollTop = val;
     if (currentTime < duration && val > 0) {
-      setTimeout(animateScroll, increment);
+      setTimeout(_animateScroll, increment);
     }
   };
-  animateScroll();
+  _animateScroll();
 };
 
 /**

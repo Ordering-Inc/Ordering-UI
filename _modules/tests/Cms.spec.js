@@ -8,7 +8,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e
 var content = 'Sorry, the selected page was not found';
 describe('Mounting Cms component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_Cms.Cms, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_Cms.Cms, {
       pageSlug: "testing"
     })));
     cy.get('h1').contains(content).should('be.visible');

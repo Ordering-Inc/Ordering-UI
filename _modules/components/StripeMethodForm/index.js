@@ -78,7 +78,7 @@ var StripeMethodFormUI = exports.StripeMethodFormUI = function StripeMethodFormU
         }
       });
       pr.on('paymentmethod', /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+        var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
           var _e$paymentMethod, _e$paymentMethod2;
           var data;
           return _regeneratorRuntime().wrap(function _callee$(_context) {

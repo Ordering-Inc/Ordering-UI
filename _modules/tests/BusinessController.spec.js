@@ -23,7 +23,7 @@ var business = {
 };
 describe('Mounting Business Controller component', function () {
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_BusinessController.BusinessController, {
       business: business,
       handleCustomClick: handleBusinessClick,
       orderType: 1

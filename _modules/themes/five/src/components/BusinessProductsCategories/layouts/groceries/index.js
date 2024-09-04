@@ -44,7 +44,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       setCategoryClicked(true);
     }
   };
-  var IterateCategories = function IterateCategories(_ref) {
+  var _IterateCategories = function IterateCategories(_ref) {
     var _category$level4, _category;
     var list = _ref.list,
       isSub = _ref.isSub,
@@ -63,7 +63,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
         handleClickItem: function handleClickItem(isSelectCategory) {
           return _handleClickItem(category, isSelectCategory);
         },
-        IterateCategories: IterateCategories
+        IterateCategories: _IterateCategories
       }))), isSub && !(category !== null && category !== void 0 && (_category$subcategori3 = category.subcategories) !== null && _category$subcategori3 !== void 0 && _category$subcategori3.length) && /*#__PURE__*/_react.default.createElement(_styles.CategoryTab, {
         active: (categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id) === category.id,
         className: "".concat(category.id === 'featured' ? 'special' : ''),
@@ -95,7 +95,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
     featured: featured
   }, !isSkeleton ? /*#__PURE__*/_react.default.createElement(_styles.CategoriesWrap, {
     variant: "primary"
-  }, (categories === null || categories === void 0 ? void 0 : categories.length) && /*#__PURE__*/_react.default.createElement(IterateCategories, {
+  }, (categories === null || categories === void 0 ? void 0 : categories.length) && /*#__PURE__*/_react.default.createElement(_IterateCategories, {
     list: categories
   })) : /*#__PURE__*/_react.default.createElement(_styles.CategoriesWrap, {
     variant: "primary"

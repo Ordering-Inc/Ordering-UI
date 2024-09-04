@@ -50,7 +50,7 @@ describe('Mounting Cart Content component', function () {
     valid_address: true
   }];
   it('Component UI', function () {
-    (0, _react2.mount)( /*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
+    (0, _react2.mount)(/*#__PURE__*/_react.default.createElement(_ProviderMock.default, null, /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
       carts: carts,
       onClose: function onClose() {},
       isCartPopover: true,
