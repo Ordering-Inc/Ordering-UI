@@ -141,7 +141,7 @@ const CartUI = (props) => {
       return cart?.business.tax_type === 1 ? cart?.tax : 0
     } else {
       return cart?.taxes.reduce((taxIncluded, tax) => {
-        return taxIncluded + (((!isDeliveryFee && tax.type === 1 && tax.target === 'product') || (isDeliveryFee && tax.type === 1 && tax.target === 'delivery_fee')) ? tax.summary?.tax : 0)
+        return taxIncluded + (((!isDeliveryFee && tax.type === 1 && tax.target === 'product') || (isDeliveryFee && tax.type === 1 && tax.target === 'delivery_fee')) ? tax.summary?.tax_after_discount : 0)
       }, 0)
     }
   }
