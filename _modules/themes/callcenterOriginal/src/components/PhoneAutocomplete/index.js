@@ -284,7 +284,6 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
       onRedirectPhoneUrlPage('home');
     } else {
       onRedirectPage('home');
-      handleSetInitialValues();
     }
   };
   var optionsToSelect = customersPhones.users.map(function (user) {
