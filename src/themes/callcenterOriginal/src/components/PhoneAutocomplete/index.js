@@ -210,7 +210,6 @@ const PhoneAutocompleteUI = (props) => {
       onRedirectPhoneUrlPage('home')
     } else {
       onRedirectPage('home')
-      handleSetInitialValues()
     }
   }
 
