@@ -64,6 +64,7 @@ import { PageBanner } from './src/components/PageBanner'
 import { PaymentOptionCash } from './src/components/PaymentOptionCash'
 import { PaymentOptions } from './src/components/PaymentOptions'
 import { PaymentOptionStripe } from './src/components/PaymentOptionStripe'
+import { PaymentOptionStripeLink } from './src/components/PaymentOptionStripeLink'
 import { PaymentOptionWallet } from './src/components/PaymentOptionWallet'
 import { PlaceSpot } from './src/components/PlaceSpot'
 import { ProductForm } from './src/components/ProductForm'
@@ -196,6 +197,7 @@ export {
   PageBanner,
   PaymentOptionCash,
   PaymentOptionStripe,
+  PaymentOptionStripeLink,
   PaymentOptionWallet,
   PaymentOptions,
   PlaceSpot,
