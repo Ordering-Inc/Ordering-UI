@@ -206,7 +206,7 @@ export const PaymentOptionStripeLinkUI = (props) => {
                   type='text'
                   name='lastname'
                   className='form'
-                  placeholder={t('NAME', 'Name')}
+                  placeholder={t('LAST_NAME', 'Last name')}
                   defaultValue={userInfo?.lastname ?? user?.lastname ?? ''}
                   onChange={(e) => handleChangeUserInfo({ lastname: e.target.value })}
                   autoComplete='off'
