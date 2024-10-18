@@ -75,7 +75,8 @@ var ModalUI = function ModalUI(props) {
     disableOverflowX: disableOverflowX,
     style: props.customStyle
   }, isProductForm && /*#__PURE__*/_react.default.createElement(_styles.ModalBackHeader, null), !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles.ModalIconWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, {
-    isProductForm: isProductForm
+    isProductForm: isProductForm,
+    style: props.modalIconStyle
   }, authModal && onRemove ? /*#__PURE__*/_react.default.createElement(_MdClose.default, {
     onClick: function onClick() {
       return onRemove();

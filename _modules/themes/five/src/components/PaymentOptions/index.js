@@ -252,7 +252,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
     var _isOpenMethod$paymeth;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: paymethod.id
-    }, ((!isCustomerMode || isAlsea && isCustomerMode) && paymethod.gateway || isCustomerMode && (paymethod.gateway === 'card_delivery' || paymethod.gateway === 'cash')) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
+    }, ((!isCustomerMode || isAlsea && isCustomerMode) && paymethod.gateway || isCustomerMode && ['cash', 'card_delivery', 'stripe_link'].includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.gateway)) && /*#__PURE__*/_react.default.createElement(_styles.PayCard, {
       isDisabled: isDisabled,
       className: "".concat(((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.id) || (isOpenMethod === null || isOpenMethod === void 0 || (_isOpenMethod$paymeth = isOpenMethod.paymethod) === null || _isOpenMethod$paymeth === void 0 ? void 0 : _isOpenMethod$paymeth.id)) === paymethod.id ? 'active' : ''),
       onClick: function onClick() {

@@ -102,7 +102,9 @@ var InputPhoneNumber = exports.InputPhoneNumber = function InputPhoneNumber(prop
     disabled: disabled,
     isValid: value ? isValidPhoneNumber(value) : true,
     isError: isError
-  }, !useProfileFormStyle && /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIconWrapper, null, /*#__PURE__*/_react.default.createElement(_BsPhone.default, null)), /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
+  }, !useProfileFormStyle && /*#__PURE__*/_react.default.createElement(_styles.InputBeforeIconWrapper, {
+    className: "input-icon"
+  }, /*#__PURE__*/_react.default.createElement(_BsPhone.default, null)), /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     ref: phoneRef,
     disabled: disabled,
     placeholder: t('PHONE_NUMBER', 'Phone number'),

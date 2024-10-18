@@ -13,6 +13,7 @@ var _Modal = require("../Modal");
 var _orderingComponents = require("ordering-components");
 var _useWindowSize = require("../../../../../hooks/useWindowSize");
 var _UpsellingPage = require("../UpsellingPage");
+var _PaymentOptionStripeLink = require("../PaymentOptionStripeLink");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _reactRouterDom = require("react-router-dom");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -66,7 +67,7 @@ var mapConfigs = {
 };
 var driverTipsTypes = [1, 2];
 var CheckoutUI = function CheckoutUI(props) {
-  var _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$colors, _theme$colors$split, _configs$driver_tip_a, _cart$comment, _cart$offers, _paymethodSelected$da, _paymethodSelected$da2, _cardList$cards, _cartState$cart, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _theme$checkout, _theme$checkout2, _theme$checkout3, _theme$checkout4, _loyaltyPlansState$re, _creditPointPlan$busi, _cart$business2, _businessDetails$busi3, _theme$images, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values2, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _ref2, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _customerState$user3, _theme$colors2, _options$address;
+  var _businessDetails$busi, _businessDetails$busi2, _configs$table_numer_, _businessConfigs$find, _businessConfigs$find2, _configs$cash_wallet, _configs$wallet_enabl, _theme$header, _theme$colors, _theme$colors$split, _configs$driver_tip_a, _cart$comment, _cart$offers, _paymethodSelected$da, _paymethodSelected$da2, _cardList$cards, _cartState$cart, _configs$driver_tip_o, _configs$driver_tip_o2, _configs$driver_tip_o3, _instructionsOptions$, _theme$checkout, _theme$checkout2, _theme$checkout3, _theme$checkout4, _loyaltyPlansState$re, _creditPointPlan$busi, _cart$order3, _cart$business2, _businessDetails$busi3, _theme$images, _configs$google_maps_, _customerState$user, _customerState$user2, _Object$values2, _businessDetails$busi4, _businessDetails$busi5, _businessDetails$busi6, _businessDetails$busi7, _businessDetails$busi8, _businessDetails$busi9, _businessDetails$erro, _businessDetails$erro2, _businessDetails$busi10, _businessDetails$busi11, _businessDetails$busi12, _configs$driver_tip_t, _configs$driver_tip_u, _configs$driver_tip_t2, _cartState$cart$spot_, _cartState$cart2, _cart$business3, _cart$products2, _ref2, _creditPointPlanOnBus, _configs$driver_tip_t3, _configs$driver_tip_u2, _configs$driver_tip_t4, _customerState$user3, _theme$colors2, _options$address, _cart$paymethod_data;
   var cart = props.cart,
     errors = props.errors,
     placing = props.placing,
@@ -161,7 +162,8 @@ var CheckoutUI = function CheckoutUI(props) {
   var _useState17 = (0, _react.useState)({
       login: false,
       signup: false,
-      isGuest: false
+      isGuest: false,
+      stripeLink: false
     }),
     _useState18 = _slicedToArray(_useState17, 2),
     openModal = _useState18[0],
@@ -182,7 +184,7 @@ var CheckoutUI = function CheckoutUI(props) {
     _useState26 = _slicedToArray(_useState25, 2),
     productLoading = _useState26[0],
     setProductLoading = _useState26[1];
-  var shouldActivateOrderDetailModal = isCustomerMode;
+  var shouldActivateOrderDetailModal = isCustomerMode && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) !== 'stripe_link';
   var orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')];
   var cardsMethods = ['stripe', 'credomatic'];
   var stripePaymethods = ['stripe', 'stripe_connect', 'stripe_redirect'];
@@ -278,6 +280,11 @@ var CheckoutUI = function CheckoutUI(props) {
       var body = {};
       if (behalfName) {
         body.on_behalf_of = behalfName;
+      }
+      if ((paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_link') {
+        setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+          stripeLink: true
+        }));
       }
       handlerClickPlaceOrder && handlerClickPlaceOrder(null, body);
       return;
@@ -460,6 +467,11 @@ var CheckoutUI = function CheckoutUI(props) {
       });
     }
   }, [JSON.stringify(cart === null || cart === void 0 ? void 0 : cart.products)]);
+  (0, _react.useEffect)(function () {
+    var _cart$order, _cart$order2;
+    if ((cart === null || cart === void 0 ? void 0 : cart.status) !== 1 || !(cart !== null && cart !== void 0 && (_cart$order = cart.order) !== null && _cart$order !== void 0 && _cart$order.uuid) || !isCustomerMode) return;
+    handleOrderRedirect(cart === null || cart === void 0 || (_cart$order2 = cart.order) === null || _cart$order2 === void 0 ? void 0 : _cart$order2.uuid);
+  }, [cart === null || cart === void 0 ? void 0 : cart.status, cart === null || cart === void 0 || (_cart$order3 = cart.order) === null || _cart$order3 === void 0 ? void 0 : _cart$order3.uuid]);
   (0, _react.useEffect)(function () {
     window.scrollTo(0, 0);
   }, []);
@@ -686,7 +698,14 @@ var CheckoutUI = function CheckoutUI(props) {
         orderDetail: true
       })) : handlePlaceOrder();
     }
-  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING_ORDER', 'Placing order') : t('PLACE_ORDER', 'Place Order'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')), isTableNumberEnabled === '1' && (options === null || options === void 0 ? void 0 : options.type) === 3 && !(cart !== null && cart !== void 0 && cart.spot_number || placeSpotNumber) && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')), validateDriverTipField && !isGiftCardCart && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')), validateCouponField && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_COUPON_FIELD', 'Coupon is required.')), validateCommentsCartField && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_CART_COMMENTS', 'Cart comments is required.')), validateZipcodeCard && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_CARD_ZIPCODE_REQUIRED', 'Your card selected has not zipcode')), !!alseaCheckPriceError && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, alseaCheckPriceError), isLoadingCheckprice && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('RECALCULATING_TOTAL_PRICE', 'Recalculating total price')), (cart === null || cart === void 0 ? void 0 : cart.valid_preorder) !== undefined && !(cart !== null && cart !== void 0 && cart.valid_preorder) && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_MOMENT', 'Selected schedule time is invalid, please select a schedule into the business schedule interval.'))), windowSize.width < 576 && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MobileWrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, !(cart !== null && cart !== void 0 && cart.valid_maximum) ? "".concat(t('MAXIMUM_SUBTOTAL_ORDER', 'Maximum subtotal order'), ": ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.maximum)) : !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? "".concat(t('MINIMUN_SUBTOTAL_ORDER', 'Minimum subtotal order:'), " ").concat(parsePrice(cart === null || cart === void 0 ? void 0 : cart.minimum)) : placing ? t('PLACING_ORDER', 'Placing order') : t('PLACE_ORDER', 'Place Order'))), isCustomerMode && (paymethodSelected === null || paymethodSelected === void 0 ? void 0 : paymethodSelected.gateway) === 'stripe_link' && (cart === null || cart === void 0 ? void 0 : cart.status) === 2 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "secundary",
+    onClick: function onClick() {
+      return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+        stripeLink: true
+      }));
+    }
+  }, t('RESEND_STRIPE_LIKE', 'Resend stripe link'))), !(cart !== null && cart !== void 0 && cart.valid_address) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')), !paymethodSelected && (cart === null || cart === void 0 ? void 0 : cart.balance) > 0 && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_NOT_PAYMENT_SELECTED', 'Please, select a payment method to place order.')), !(cart !== null && cart !== void 0 && cart.valid_products) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_PRODUCTS', 'Some products are invalid, please check them.')), isTableNumberEnabled === '1' && (options === null || options === void 0 ? void 0 : options.type) === 3 && !(cart !== null && cart !== void 0 && cart.spot_number || placeSpotNumber) && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_PLACE_SPOT', 'Please, select your spot to place order.')), validateDriverTipField && !isGiftCardCart && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_DRIVER_TIP', 'Driver Tip is required.')), validateCouponField && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_COUPON_FIELD', 'Coupon is required.')), validateCommentsCartField && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_INVALID_CART_COMMENTS', 'Cart comments is required.')), validateZipcodeCard && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('WARNING_CARD_ZIPCODE_REQUIRED', 'Your card selected has not zipcode')), !!alseaCheckPriceError && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, alseaCheckPriceError), isLoadingCheckprice && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('RECALCULATING_TOTAL_PRICE', 'Recalculating total price')), (cart === null || cart === void 0 ? void 0 : cart.valid_preorder) !== undefined && !(cart !== null && cart !== void 0 && cart.valid_preorder) && /*#__PURE__*/_react.default.createElement(_styles.WarningText, null, t('INVALID_CART_MOMENT', 'Selected schedule time is invalid, please select a schedule into the business schedule interval.'))), windowSize.width < 576 && !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MobileWrapperPlaceOrderButton, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(cart === null || cart === void 0 ? void 0 : cart.total)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: !(cart !== null && cart !== void 0 && cart.valid_maximum) || !(cart !== null && cart !== void 0 && cart.valid_minimum) && !((cart === null || cart === void 0 ? void 0 : cart.discount_type) === 1 && (cart === null || cart === void 0 ? void 0 : cart.discount_rate) === 100) ? 'secundary' : 'primary',
     disabled: isDisablePlaceOrderButton,
     onClick: function onClick() {
@@ -791,6 +810,21 @@ var CheckoutUI = function CheckoutUI(props) {
     orderType: options === null || options === void 0 ? void 0 : options.type,
     customerAddress: options === null || options === void 0 || (_options$address = options.address) === null || _options$address === void 0 ? void 0 : _options$address.address,
     onClick: handlePlaceOrder
+  })), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    open: openModal.stripeLink,
+    width: "650px",
+    padding: "30px 10px",
+    onClose: function onClose() {
+      return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+        stripeLink: false
+      }));
+    },
+    title: t('SEND_SMS_WHATSAPP', 'Send SMS/WhatsApp'),
+    modalIconStyle: {
+      top: 20
+    }
+  }, /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeLink.PaymentOptionStripeLink, {
+    paymentURL: cart === null || cart === void 0 || (_cart$paymethod_data = cart.paymethod_data) === null || _cart$paymethod_data === void 0 || (_cart$paymethod_data = _cart$paymethod_data.result) === null || _cart$paymethod_data === void 0 ? void 0 : _cart$paymethod_data.payment_url
   })));
 };
 var Checkout = exports.Checkout = function Checkout(props) {
