@@ -71,7 +71,7 @@ const ModalUI = (props) => {
       )}
       {!hideCloseDefault && (
         <ModalIconWrapper>
-          <ModalIcon isProductForm={isProductForm}>
+          <ModalIcon isProductForm={isProductForm} style={props.modalIconStyle}>
             {
               (authModal && onRemove) ? <MdClose onClick={() => onRemove()} /> : <MdClose onClick={() => onClose()} />
             }
