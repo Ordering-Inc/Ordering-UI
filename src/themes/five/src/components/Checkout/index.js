@@ -16,6 +16,7 @@ import {
 } from 'ordering-components'
 import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { UpsellingPage } from '../UpsellingPage'
+import { PaymentOptionStripeLink } from '../PaymentOptionStripeLink'
 import parsePhoneNumber from 'libphonenumber-js'
 import { useHistory } from 'react-router-dom'
 import { ArrowLeft } from 'react-bootstrap-icons'
@@ -131,13 +132,13 @@ const CheckoutUI = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [requiredFields, setRequiredFields] = useState([])
   const [isSuccess, setIsSuccess] = useState(false)
-  const [openModal, setOpenModal] = useState({ login: false, signup: false, isGuest: false })
+  const [openModal, setOpenModal] = useState({ login: false, signup: false, isGuest: false, stripeLink: false })
   const [allowedGuest, setAllowedGuest] = useState(false)
   const [cardList, setCardList] = useState([])
   const [paymethodClicked, setPaymethodClicked] = useState(null)
   const [productLoading, setProductLoading] = useState(false)
 
-  const shouldActivateOrderDetailModal = ordering?.project?.includes('alsea')
+  const shouldActivateOrderDetailModal = isCustomerMode && paymethodSelected?.gateway !== 'stripe_link'
   const orderTypeList = [t('DELIVERY', 'Delivery'), t('PICKUP', 'Pickup'), t('EAT_IN', 'Eat in'), t('CURBSIDE', 'Curbside'), t('DRIVE_THRU', 'Drive thru')]
   const cardsMethods = ['stripe', 'credomatic']
   const stripePaymethods = ['stripe', 'stripe_connect', 'stripe_redirect']
@@ -213,6 +214,9 @@ const CheckoutUI = (props) => {
       const body = {}
       if (behalfName) {
         body.on_behalf_of = behalfName
+      }
+      if (paymethodSelected?.gateway === 'stripe_link') {
+        setOpenModal({ ...openModal, stripeLink: true })
       }
       handlerClickPlaceOrder && handlerClickPlaceOrder(null, body)
       return
@@ -382,6 +386,11 @@ const CheckoutUI = (props) => {
       events.emit('go_to_page', { page: 'wallets' })
     }
   }, [JSON.stringify(cart?.products)])
+
+  useEffect(() => {
+    if (cart?.status !== 1 || !cart?.order?.uuid || !isCustomerMode) return
+    handleOrderRedirect(cart?.order?.uuid)
+  }, [cart?.status, cart?.order?.uuid])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -716,6 +725,17 @@ const CheckoutUI = (props) => {
           </WrapperPlaceOrderButton>
         )}
 
+        {isCustomerMode && paymethodSelected?.gateway === 'stripe_link' && cart?.status === 2 && (
+          <WrapperPlaceOrderButton>
+            <Button
+              color='secundary'
+              onClick={() => setOpenModal({ ...openModal, stripeLink: true })}
+            >
+              {t('RESEND_STRIPE_LIKE', 'Resend stripe link')}
+            </Button>
+          </WrapperPlaceOrderButton>
+        )}
+
         {!cart?.valid_address && cart?.status !== 2 && (
           <WarningText>
             {t('INVALID_CART_ADDRESS', 'Selected address is invalid, please select a closer address.')}
@@ -891,6 +911,18 @@ const CheckoutUI = (props) => {
           orderType={options?.type}
           customerAddress={options?.address?.address}
           onClick={handlePlaceOrder}
+        />
+      </Modal>
+      <Modal
+        open={openModal.stripeLink}
+        width='650px'
+        padding='30px 10px'
+        onClose={() => setOpenModal({ ...openModal, stripeLink: false })}
+        title={t('SEND_SMS_WHATSAPP', 'Send SMS/WhatsApp')}
+        modalIconStyle={{ top: 20 }}
+      >
+        <PaymentOptionStripeLink
+          paymentURL={cart?.paymethod_data?.result?.payment_url}
         />
       </Modal>
     </Container>

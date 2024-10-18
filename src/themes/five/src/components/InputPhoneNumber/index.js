@@ -81,7 +81,7 @@ export const InputPhoneNumber = (props) => {
   return (
     <ContainerStyled className='phone_number' disabled={disabled} isValid={value ? isValidPhoneNumber(value) : true} isError={isError}>
       {!useProfileFormStyle && (
-        <InputBeforeIconWrapper>
+        <InputBeforeIconWrapper className='input-icon'>
           <BsPhone />
         </InputBeforeIconWrapper>
       )}
