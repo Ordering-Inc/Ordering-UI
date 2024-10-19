@@ -148,8 +148,11 @@ var UpsellingPageUI = function UpsellingPageUI(props) {
   })));
 };
 var UpsellingPage = exports.UpsellingPage = function UpsellingPage(props) {
+  var _JSON$parse;
+  var useSuggestiveUpselling = (_JSON$parse = JSON.parse(window.localStorage.getItem('suggestive-upselling'))) !== null && _JSON$parse !== void 0 ? _JSON$parse : false;
   var UpsellingPageProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: UpsellingPageUI
+    UIComponent: UpsellingPageUI,
+    useSuggestiveUpselling: useSuggestiveUpselling
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponents.UpsellingPage, UpsellingPageProps);
 };
