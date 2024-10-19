@@ -222,9 +222,12 @@ const UpsellingPageUI = (props) => {
 }
 
 export const UpsellingPage = (props) => {
+  const useSuggestiveUpselling = JSON.parse(window.localStorage.getItem('suggestive-upselling')) ?? false
+
   const UpsellingPageProps = {
     ...props,
-    UIComponent: UpsellingPageUI
+    UIComponent: UpsellingPageUI,
+    useSuggestiveUpselling
   }
 
   return <UpsellingPageController {...UpsellingPageProps} />
