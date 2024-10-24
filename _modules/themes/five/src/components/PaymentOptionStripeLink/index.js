@@ -160,6 +160,13 @@ var PaymentOptionStripeLinkUI = exports.PaymentOptionStripeLinkUI = function Pay
         });
         return;
       }
+      if (!(stripeLinkState !== null && stripeLinkState !== void 0 && stripeLinkState.paymentURL)) {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_LINK_NOT_AVAILABLE', 'The link is not available please reload the page')]
+        });
+        return;
+      }
       handleSendStripeLink(type, function () {
         setShowCountdown(true);
       });
