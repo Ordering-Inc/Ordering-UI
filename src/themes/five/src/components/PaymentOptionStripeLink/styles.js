@@ -30,12 +30,14 @@ export const StripeLinkContainer = styled.div`
   .buttons-wrapper {
     display: flex;
     padding-top: 20px;
+    gap: 10px;
 
     div {
-      width: 50%;
-    }
-    div:first-child {
-      margin-right: 10px;
+      flex: 1;
+
+      p {
+        text-align: center;
+      }
     }
 
     button {

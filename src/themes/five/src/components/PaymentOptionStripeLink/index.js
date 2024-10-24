@@ -24,6 +24,7 @@ import {
 export const PaymentOptionStripeLinkUI = (props) => {
   const {
     userInfo,
+    businessConfigs,
     stripeLinkState,
     setStripeLinkState,
     handleSendStripeLink,
@@ -38,6 +39,9 @@ export const PaymentOptionStripeLinkUI = (props) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [showCountdown, setShowCountdown] = useState(false)
   const [countdown, setCountdown] = useState(59)
+
+  const isWhatappEnabled = businessConfigs?.find(config => config?.key === 'allow_text_messages_whatsapp')?.value === '1'
+  const isSmsEnabled = businessConfigs?.find(config => config?.key === 'allow_text_messages_sms')?.value === '1'
 
   const setUserCellPhone = (_user) => {
     if (userPhoneNumber && !userPhoneNumber.includes('null')) {
@@ -230,25 +234,35 @@ export const PaymentOptionStripeLinkUI = (props) => {
             </InputPhoneNumberWrapper>
           </div>
           <div className='buttons-wrapper'>
-            <div>
-              <Button
-                color='primary'
-                onClick={() => onSubmit('sms')}
-                disabled={stripeLinkState.loading}
-              >
-                {t('SEND_SMS', 'Send SMS')}
-              </Button>
-            </div>
-            <div>
-              <Button
-                color='primary'
-                outline
-                onClick={() => onSubmit('whatsapp')}
-                disabled={stripeLinkState.loading}
-              >
-                {t('SEND_WHATSAPP', 'Send WhatsApp')}
-              </Button>
-            </div>
+            {isSmsEnabled && (
+              <div>
+                <Button
+                  color='primary'
+                  onClick={() => onSubmit('sms')}
+                  disabled={stripeLinkState.loading}
+                >
+                  {t('SEND_SMS', 'Send SMS')}
+                </Button>
+              </div>
+            )}
+            {isWhatappEnabled && (
+              <div>
+                <Button
+                  color='primary'
+                  outline
+                  onClick={() => onSubmit('whatsapp')}
+                  disabled={stripeLinkState.loading}
+                >
+                  {t('SEND_WHATSAPP', 'Send WhatsApp')}
+                </Button>
+              </div>
+            )}
+
+            {!isSmsEnabled && !isWhatappEnabled && (
+              <div>
+                <p>{t('NOT_OPTIONS_TO_SHOW', 'No options to show')}</p>
+              </div>
+            )}
           </div>
         </StripeLinkContainer>
       )}
