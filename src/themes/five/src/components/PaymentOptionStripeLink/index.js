@@ -130,6 +130,13 @@ export const PaymentOptionStripeLinkUI = (props) => {
         })
         return
       }
+      if (!stripeLinkState?.paymentURL) {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_LINK_NOT_AVAILABLE', 'The link is not available please reload the page')]
+        })
+        return
+      }
       handleSendStripeLink(type, () => {
         setShowCountdown(true)
       })
