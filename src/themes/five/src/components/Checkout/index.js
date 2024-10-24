@@ -388,11 +388,6 @@ const CheckoutUI = (props) => {
   }, [JSON.stringify(cart?.products)])
 
   useEffect(() => {
-    if (cart?.status !== 1 || !cart?.order?.uuid || !isCustomerMode) return
-    handleOrderRedirect(cart?.order?.uuid)
-  }, [cart?.status, cart?.order?.uuid])
-
-  useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
