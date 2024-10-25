@@ -917,6 +917,7 @@ const CheckoutUI = (props) => {
         modalIconStyle={{ top: 20 }}
       >
         <PaymentOptionStripeLink
+          businessConfigs={businessDetails?.business?.configs ?? []}
           paymentURL={cart?.paymethod_data?.result?.payment_url}
         />
       </Modal>
