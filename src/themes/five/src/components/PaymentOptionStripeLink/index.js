@@ -259,8 +259,16 @@ export const PaymentOptionStripeLinkUI = (props) => {
             )}
 
             {!isSmsEnabled && !isWhatappEnabled && (
-              <div>
-                <p>{t('NOT_OPTIONS_TO_SHOW', 'No options to show')}</p>
+              <div className='url-link'>
+                {stripeLinkState?.loading ? (
+                  <div className='loading'>
+                    <p>{t('LOADING', 'Loading...')}</p>
+                  </div>
+                ) : (
+                  <div>
+                    <a href={stripeLinkState?.paymentURL ?? ''} rel='noopener noreferrer' target='_blank'>{stripeLinkState?.paymentURL ?? ''}</a>
+                  </div>
+                )}
               </div>
             )}
           </div>
