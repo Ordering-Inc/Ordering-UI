@@ -45,6 +45,18 @@ export const StripeLinkContainer = styled.div`
       min-height: 45px;
     }
   }
+
+  .loading {
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .url-link {
+    text-align: center;
+  }
 `
 
 export const WarningMessage = styled.p`
