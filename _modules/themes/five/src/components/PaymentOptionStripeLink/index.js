@@ -30,7 +30,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var PaymentOptionStripeLinkUI = exports.PaymentOptionStripeLinkUI = function PaymentOptionStripeLinkUI(props) {
-  var _businessConfigs$find, _businessConfigs$find2, _ref, _userInfo$name, _ref2, _userInfo$lastname;
+  var _businessConfigs$find, _businessConfigs$find2, _ref, _userInfo$name, _ref2, _userInfo$lastname, _stripeLinkState$paym, _stripeLinkState$paym2;
   var userInfo = props.userInfo,
     businessConfigs = props.businessConfigs,
     stripeLinkState = props.stripeLinkState,
@@ -263,7 +263,15 @@ var PaymentOptionStripeLinkUI = exports.PaymentOptionStripeLinkUI = function Pay
       return onSubmit('whatsapp');
     },
     disabled: stripeLinkState.loading
-  }, t('SEND_WHATSAPP', 'Send WhatsApp'))), !isSmsEnabled && !isWhatappEnabled && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('NOT_OPTIONS_TO_SHOW', 'No options to show'))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
+  }, t('SEND_WHATSAPP', 'Send WhatsApp'))), !isSmsEnabled && !isWhatappEnabled && /*#__PURE__*/_react.default.createElement("div", {
+    className: "url-link"
+  }, stripeLinkState !== null && stripeLinkState !== void 0 && stripeLinkState.loading ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "loading"
+  }, /*#__PURE__*/_react.default.createElement("p", null, t('LOADING', 'Loading...'))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("a", {
+    href: (_stripeLinkState$paym = stripeLinkState === null || stripeLinkState === void 0 ? void 0 : stripeLinkState.paymentURL) !== null && _stripeLinkState$paym !== void 0 ? _stripeLinkState$paym : '',
+    rel: "noopener noreferrer",
+    target: "_blank"
+  }, (_stripeLinkState$paym2 = stripeLinkState === null || stripeLinkState === void 0 ? void 0 : stripeLinkState.paymentURL) !== null && _stripeLinkState$paym2 !== void 0 ? _stripeLinkState$paym2 : ''))))), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('ERROR', 'Error'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
