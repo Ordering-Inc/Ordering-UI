@@ -40,7 +40,7 @@ var Toast = exports.Toast = function Toast() {
     toast.style.animation = 'fadein 0.5s, fadeout 0.5s 2.5s';
     setTimeout(function () {
       toast.style.visibility = 'hidden';
-      hideToast();
+      hideToast && hideToast();
     }, duration);
   }, [toastConfig]);
   if (!toastConfig) {
