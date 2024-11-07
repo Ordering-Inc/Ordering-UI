@@ -32,7 +32,8 @@ const UpsellingPageUI = (props) => {
     canOpenUpselling,
     setCanOpenUpselling,
     business,
-    isCustomMode
+    isCustomMode,
+    businessId
   } = props
 
   const [, t] = useLanguage()
@@ -61,7 +62,7 @@ const UpsellingPageUI = (props) => {
   }, [upsellingProducts?.products.length])
 
   const handleFormProduct = (product) => {
-    setActualProduct(product)
+    setActualProduct({ ...product, api: { ...product?.api, businessId } })
     setModalIsOpen(true)
   }
 
@@ -210,7 +211,7 @@ const UpsellingPageUI = (props) => {
           <ProductForm
             useKioskApp={props.useKioskApp}
             product={actualProduct}
-            businessId={actualProduct.api.businessId}
+            businessId={actualProduct?.api?.businessId}
             businessSlug={business.slug}
             onSave={() => handleSaveProduct()}
           />
