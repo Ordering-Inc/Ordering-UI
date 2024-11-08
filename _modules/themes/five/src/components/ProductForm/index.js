@@ -55,7 +55,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 _swiper.default.use([_swiper.Navigation, _swiper.Thumbs]);
 var ProductOptionsUI = function ProductOptionsUI(props) {
-  var _configs$unaddressed_, _configs$guest_checko, _orderState$options, _configs$allowed_orde, _orderState$options2, _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$defaultLanguag, _product$tags, _product$ingredients2, _product$extras, _product$ingredients3, _product$ingredients4, _product$ingredients5, _product$extras2, _theme$defaultLanguag2, _theme$defaultLanguag3, _props$afterMidElemen, _props$afterMidCompon, _orderState$options3, _orderState$options4, _orderState$options5, _orderState$options6, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _orderState$options7, _orderState$options8, _theme$defaultLanguag7, _orderState$options9, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _error$;
+  var _configs$unaddressed_, _configs$guest_checko, _orderState$options, _configs$allowed_orde, _orderState$options2, _theme$business_view, _theme$business_view2, _theme$business_view3, _theme$defaultLanguag, _product$tags, _product$ingredients2, _product$extras3, _product$ingredients3, _product$extras4, _product$ingredients4, _product$ingredients5, _product$extras5, _theme$defaultLanguag2, _theme$defaultLanguag3, _props$afterMidElemen, _props$afterMidCompon, _orderState$options3, _orderState$options4, _orderState$options5, _orderState$options6, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _orderState$options7, _orderState$options8, _theme$defaultLanguag7, _orderState$options9, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _error$;
   var businessSlug = props.businessSlug,
     editMode = props.editMode,
     isSoldOut = props.isSoldOut,
@@ -309,17 +309,19 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   (0, _react.useEffect)(function () {
     var scrollElement = document.querySelector('.popup-dialog');
     var handleScroll = function handleScroll() {
+      var _product$extras;
       var extraHeight = 60;
-      if ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || (product === null || product === void 0 ? void 0 : product.extras.length) > 0) {
-        var _product$ingredients;
+      if ((product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 || (product === null || product === void 0 || (_product$extras = product.extras) === null || _product$extras === void 0 ? void 0 : _product$extras.length) > 0) {
+        var _product$ingredients, _product$extras2;
         var menuList = [];
         if ((product === null || product === void 0 || (_product$ingredients = product.ingredients) === null || _product$ingredients === void 0 ? void 0 : _product$ingredients.length) > 0) {
           menuList.push('ingredients');
         }
-        ((product === null || product === void 0 ? void 0 : product.extras.length) > 0 && (product === null || product === void 0 ? void 0 : product.extras) || []).sort(function (a, b) {
+        ((product === null || product === void 0 || (_product$extras2 = product.extras) === null || _product$extras2 === void 0 ? void 0 : _product$extras2.length) > 0 && (product === null || product === void 0 ? void 0 : product.extras) || []).sort(function (a, b) {
           return a.rank - b.rank;
         }).forEach(function (extra) {
-          ((extra === null || extra === void 0 ? void 0 : extra.options.length) > 0 && (extra === null || extra === void 0 ? void 0 : extra.options) || []).sort(function (a, b) {
+          var _extra$options;
+          ((extra === null || extra === void 0 || (_extra$options = extra.options) === null || _extra$options === void 0 ? void 0 : _extra$options.length) > 0 && (extra === null || extra === void 0 ? void 0 : extra.options) || []).sort(function (a, b) {
             return a.rank - b.rank;
           }).forEach(function (option) {
             showOption(option) && menuList.push("id_".concat(option === null || option === void 0 ? void 0 : option.id));
@@ -567,7 +569,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       src: optimizeImage((tag === null || tag === void 0 ? void 0 : tag.image) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.dummies) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.product), 'h_40,c_limit'),
       alt: ""
     }), /*#__PURE__*/_react.default.createElement("span", null, tag.name));
-  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, ((product === null || product === void 0 || (_product$ingredients2 = product.ingredients) === null || _product$ingredients2 === void 0 ? void 0 : _product$ingredients2.length) > 0 || (product === null || product === void 0 || (_product$extras = product.extras) === null || _product$extras === void 0 ? void 0 : _product$extras.length) > 0) && /*#__PURE__*/_react.default.createElement(_styles.ProductTabContainer, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null), /*#__PURE__*/_react.default.createElement(_styles.ProductEdition, null, ((product === null || product === void 0 || (_product$ingredients2 = product.ingredients) === null || _product$ingredients2 === void 0 ? void 0 : _product$ingredients2.length) > 0 || (product === null || product === void 0 || (_product$extras3 = product.extras) === null || _product$extras3 === void 0 ? void 0 : _product$extras3.length) > 0) && /*#__PURE__*/_react.default.createElement(_styles.ProductTabContainer, {
     id: "all"
   }, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     scrollId: "optionList"
@@ -579,12 +581,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       return handleChangeTabValue('ingredients');
     },
     borderBottom: true
-  }, t('INGREDIENTS', 'ingredients')), product === null || product === void 0 ? void 0 : product.extras.sort(function (a, b) {
-    return a.rank - b.rank;
+  }, t('INGREDIENTS', 'ingredients')), product === null || product === void 0 || (_product$extras4 = product.extras) === null || _product$extras4 === void 0 ? void 0 : _product$extras4.sort(function (a, b) {
+    return (a === null || a === void 0 ? void 0 : a.rank) - (b === null || b === void 0 ? void 0 : b.rank);
   }).map(function (extra) {
-    var _extra$options;
-    return (_extra$options = extra.options) === null || _extra$options === void 0 ? void 0 : _extra$options.sort(function (a, b) {
-      return a.rank - b.rank;
+    var _extra$options2;
+    return extra === null || extra === void 0 || (_extra$options2 = extra.options) === null || _extra$options2 === void 0 ? void 0 : _extra$options2.sort(function (a, b) {
+      return (a === null || a === void 0 ? void 0 : a.rank) - (b === null || b === void 0 ? void 0 : b.rank);
     }).map(function (option) {
       return showOption(option) && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
         key: option === null || option === void 0 ? void 0 : option.id,
@@ -608,11 +610,12 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
       onChange: handleChangeIngredientState,
       isSoldOut: isSoldOut
     });
-  }))), /*#__PURE__*/_react.default.createElement("div", null, product === null || product === void 0 || (_product$extras2 = product.extras) === null || _product$extras2 === void 0 ? void 0 : _product$extras2.sort(function (a, b) {
-    return a.rank - b.rank;
+  }))), /*#__PURE__*/_react.default.createElement("div", null, product === null || product === void 0 || (_product$extras5 = product.extras) === null || _product$extras5 === void 0 ? void 0 : _product$extras5.sort(function (a, b) {
+    return (a === null || a === void 0 ? void 0 : a.rank) - (b === null || b === void 0 ? void 0 : b.rank);
   }).map(function (extra) {
-    return extra.options.sort(function (a, b) {
-      return a.rank - b.rank;
+    var _extra$options3;
+    return extra === null || extra === void 0 || (_extra$options3 = extra.options) === null || _extra$options3 === void 0 ? void 0 : _extra$options3.sort(function (a, b) {
+      return (a === null || a === void 0 ? void 0 : a.rank) - (b === null || b === void 0 ? void 0 : b.rank);
     }).map(function (option) {
       var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
