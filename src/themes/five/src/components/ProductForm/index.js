@@ -289,13 +289,13 @@ const ProductOptionsUI = (props) => {
     const scrollElement = document.querySelector('.popup-dialog')
     const handleScroll = () => {
       const extraHeight = 60
-      if (product?.ingredients.length > 0 || product?.extras.length > 0) {
+      if (product?.ingredients.length > 0 || product?.extras?.length > 0) {
         const menuList = []
         if (product?.ingredients?.length > 0) {
           menuList.push('ingredients')
         }
-        ((product?.extras.length > 0 && product?.extras) || []).sort((a, b) => a.rank - b.rank).forEach(extra => {
-          ((extra?.options.length > 0 && extra?.options) || []).sort((a, b) => a.rank - b.rank).forEach(option => {
+        ((product?.extras?.length > 0 && product?.extras) || []).sort((a, b) => a.rank - b.rank).forEach(extra => {
+          ((extra?.options?.length > 0 && extra?.options) || []).sort((a, b) => a.rank - b.rank).forEach(option => {
             showOption(option) && menuList.push(`id_${option?.id}`)
           })
         })
@@ -604,7 +604,7 @@ const ProductOptionsUI = (props) => {
                           )
                         }
                         {
-                          product?.extras.sort((a, b) => a.rank - b.rank).map(extra => extra.options?.sort((a, b) => a.rank - b.rank).map(option => {
+                          product?.extras?.sort((a, b) => a?.rank - b?.rank).map(extra => extra?.options?.sort((a, b) => a?.rank - b?.rank).map(option => {
                             return (
                               showOption(option) && (
                                 <Tab
@@ -643,7 +643,7 @@ const ProductOptionsUI = (props) => {
               )}
               <div>
                 {
-                  product?.extras?.sort((a, b) => a.rank - b.rank).map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
+                  product?.extras?.sort((a, b) => a?.rank - b?.rank).map(extra => extra?.options?.sort((a, b) => a?.rank - b?.rank).map(option => {
                     const currentState = productCart.options[`id:${option?.id}`] || {}
                     return (
                       <React.Fragment key={option?.id}>
