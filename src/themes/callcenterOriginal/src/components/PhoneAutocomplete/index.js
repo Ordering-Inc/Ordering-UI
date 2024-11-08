@@ -304,9 +304,9 @@ const PhoneAutocompleteUI = (props) => {
                 </h2>
                 <WrappBtn>
                   <Button
-                    color={(inputValue || (userCustomer && orderState?.options?.address?.address)) ? 'primary' : 'secundary'}
+                    color={((inputValue || phone) || (userCustomer && orderState?.options?.address?.address)) ? 'primary' : 'secundary'}
                     onMouseDown={() => !(userCustomer && orderState?.options?.address?.address) && !optSelected ? createNewUser() : handleFindClick()}
-                    disabled={(!inputValue && !(userCustomer && orderState?.options?.address?.address) && !optSelected)}
+                    disabled={((!inputValue && !phone) && !(userCustomer && orderState?.options?.address?.address) && !optSelected)}
                   >
                     {
                       !(userCustomer && orderState?.options?.address?.address) && !optSelected
@@ -325,7 +325,7 @@ const PhoneAutocompleteUI = (props) => {
                     placeholder={t('PHONE_NUMBER', 'Phone number')}
                     value={optSelected}
                     noOptionsMessage={() => inputValue?.length > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')}
-                    inputValue={!optSelected ? inputValue : ''}
+                    inputValue={!optSelected ? phone || inputValue : ''}
                     onChange={onChange}
                     onInputChange={onInputChange}
                     isLoading={customersPhones?.loading}
