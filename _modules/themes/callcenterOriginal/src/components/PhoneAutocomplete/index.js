@@ -367,12 +367,12 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     hideTitle: true,
     orderTypes: orderTypes
   }), configTypes.includes(orderState === null || orderState === void 0 || (_orderState$options5 = orderState.options) === null || _orderState$options5 === void 0 ? void 0 : _orderState$options5.type) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PhoneAutocompleteContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ADDING_CUSTOMERS_PHONE_NUMBER', 'Adding the customers’ phone number')), /*#__PURE__*/_react.default.createElement(_styles.WrappBtn, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: inputValue || userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6 = _orderState$options6.address) !== null && _orderState$options6 !== void 0 && _orderState$options6.address ? 'primary' : 'secundary',
+    color: inputValue || phone || userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options6 = orderState.options) !== null && _orderState$options6 !== void 0 && (_orderState$options6 = _orderState$options6.address) !== null && _orderState$options6 !== void 0 && _orderState$options6.address ? 'primary' : 'secundary',
     onMouseDown: function onMouseDown() {
       var _orderState$options7;
       return !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options7 = orderState.options) !== null && _orderState$options7 !== void 0 && (_orderState$options7 = _orderState$options7.address) !== null && _orderState$options7 !== void 0 && _orderState$options7.address) && !optSelected ? createNewUser() : handleFindClick();
     },
-    disabled: !inputValue && !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options8 = orderState.options) !== null && _orderState$options8 !== void 0 && (_orderState$options8 = _orderState$options8.address) !== null && _orderState$options8 !== void 0 && _orderState$options8.address) && !optSelected
+    disabled: !inputValue && !phone && !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options8 = orderState.options) !== null && _orderState$options8 !== void 0 && (_orderState$options8 = _orderState$options8.address) !== null && _orderState$options8 !== void 0 && _orderState$options8.address) && !optSelected
   }, !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options9 = orderState.options) !== null && _orderState$options9 !== void 0 && (_orderState$options9 = _orderState$options9.address) !== null && _orderState$options9 !== void 0 && _orderState$options9.address) && !optSelected ? t('CREATE_CUSTOMER', 'Create new customer') : "".concat(t('CONTINUE_WITH', 'Continue with'), " ").concat(userName))), /*#__PURE__*/_react.default.createElement(_styles.SelectContainer, {
     onPaste: handleOnPaste
   }, /*#__PURE__*/_react.default.createElement(_MdcCellphoneAndroid.default, {
@@ -388,7 +388,7 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     noOptionsMessage: function noOptionsMessage() {
       return (inputValue === null || inputValue === void 0 ? void 0 : inputValue.length) > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions');
     },
-    inputValue: !optSelected ? inputValue : '',
+    inputValue: !optSelected ? phone || inputValue : '',
     onChange: onChange,
     onInputChange: onInputChange,
     isLoading: customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.loading,

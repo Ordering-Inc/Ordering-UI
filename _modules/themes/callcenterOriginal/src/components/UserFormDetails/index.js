@@ -221,7 +221,7 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
-        return error.message;
+        return error.message || Object.keys(formMethods.errors)[0] === 'email' && error.type === 'pattern' && t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'));
       });
       if (!isValidPhoneNumber && userPhoneNumber) {
         content.push(t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid.'));
