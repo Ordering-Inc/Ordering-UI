@@ -182,7 +182,11 @@ export const UserFormDetailsUI = (props) => {
 
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
-      const content = Object.values(formMethods.errors).map(error => error.message)
+      const content = Object.values(formMethods.errors).map(
+        error => error.message ||
+        (Object.keys(formMethods.errors)[0] === 'email' && error.type === 'pattern' &&
+        t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email')))
+      )
       if (!isValidPhoneNumber && userPhoneNumber) {
         content.push(t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid.'))
       }
