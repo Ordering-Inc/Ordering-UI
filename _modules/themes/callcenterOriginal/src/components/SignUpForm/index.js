@@ -221,11 +221,12 @@ var SignUpFormUI = function SignUpFormUI(props) {
   }, [formState]);
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
+      var content = Object.values(formMethods.errors).map(function (error) {
+        return error.message || Object.keys(formMethods.errors)[0] === 'email' && error.type === 'pattern' && t('INVALID_ERROR_EMAIL', 'Invalid email address').replace('_attribute_', t('EMAIL', 'Email'));
+      });
       setAlertState({
         open: true,
-        content: Object.values(formMethods.errors).map(function (error) {
-          return error.message;
-        })
+        content: content
       });
     }
   }, [formMethods.errors]);
