@@ -84,7 +84,7 @@
     "libphonenumber-js": "^1.9.4",
     "lodash": "^4.17.19",
     "moment": "^2.29.4",
-    "nanoid": "^4.0.0",
+    "nanoid": "^5.0.9",
     "ordering-components": "github:Ordering-Inc/ordering-components#development",
     "payment": "^2.4.6",
     "polished": "^3.6.6",
