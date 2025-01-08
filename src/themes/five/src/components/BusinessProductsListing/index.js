@@ -165,12 +165,14 @@ const BusinessProductsListingUI = (props) => {
       }
       setProductLoading(false)
     } else {
+      const productSlug = product?.slug || product?.id
+      const categorySlug = product?.category?.slug || product?.category_id
       if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
         if (site?.product_url_template) {
           onProductRedirect({
             slug: business?.slug,
-            product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
-            category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
+            product: site.product_url_template.includes('product_slug') ? productSlug : product.id,
+            category: site.product_url_template.includes('category_slug') ? categorySlug : product.category_id
           })
         } else {
           onProductRedirect({
@@ -187,12 +189,14 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleCustomProductBannerClick = (product) => {
+    const productSlug = product?.slug || product?.id
+    const categorySlug = product?.category?.slug || product?.category_id
     if (!((product?.type === 'service') && business?.professionals?.length > 0)) {
       if (site?.product_url_template) {
         onProductRedirect({
           slug: business?.slug,
-          product: site.product_url_template.includes('product_slug') ? product?.slug : product.id,
-          category: site.product_url_template.includes('category_slug') ? product?.category?.slug : product.category_id
+          product: site.product_url_template.includes('product_slug') ? productSlug : product.id,
+          category: site.product_url_template.includes('category_slug') ? categorySlug : product.category_id
         })
       } else {
         onProductRedirect({
