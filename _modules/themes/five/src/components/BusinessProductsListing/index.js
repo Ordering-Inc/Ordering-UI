@@ -197,7 +197,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
   var onProductClick = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(product) {
-      var _currentCart$products, isProductAddedToCart, productQuantity, minimumPerOrder, addCurrentProduct, updateCurrentProduct, cartData, _business$professiona, _product$category;
+      var _currentCart$products, isProductAddedToCart, productQuantity, minimumPerOrder, addCurrentProduct, updateCurrentProduct, cartData, _product$category, _business$professiona, productSlug, categorySlug;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -236,15 +236,17 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
             return addProduct(addCurrentProduct, cartData, isQuickAddProduct);
           case 15:
             setProductLoading(false);
-            _context.next = 22;
+            _context.next = 24;
             break;
           case 18:
+            productSlug = (product === null || product === void 0 ? void 0 : product.slug) || (product === null || product === void 0 ? void 0 : product.id);
+            categorySlug = (product === null || product === void 0 || (_product$category = product.category) === null || _product$category === void 0 ? void 0 : _product$category.slug) || (product === null || product === void 0 ? void 0 : product.category_id);
             if (!((product === null || product === void 0 ? void 0 : product.type) === 'service' && (business === null || business === void 0 || (_business$professiona = business.professionals) === null || _business$professiona === void 0 ? void 0 : _business$professiona.length) > 0)) {
               if (site !== null && site !== void 0 && site.product_url_template) {
                 onProductRedirect({
                   slug: business === null || business === void 0 ? void 0 : business.slug,
-                  product: site.product_url_template.includes('product_slug') ? product === null || product === void 0 ? void 0 : product.slug : product.id,
-                  category: site.product_url_template.includes('category_slug') ? product === null || product === void 0 || (_product$category = product.category) === null || _product$category === void 0 ? void 0 : _product$category.slug : product.category_id
+                  product: site.product_url_template.includes('product_slug') ? productSlug : product.id,
+                  category: site.product_url_template.includes('category_slug') ? categorySlug : product.category_id
                 });
               } else {
                 onProductRedirect({
@@ -257,7 +259,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
             setCurProduct(product);
             setModalIsOpen(true);
             events.emit('product_clicked', product);
-          case 22:
+          case 24:
           case "end":
             return _context.stop();
         }
@@ -268,14 +270,15 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     };
   }();
   var handleCustomProductBannerClick = function handleCustomProductBannerClick(product) {
-    var _business$professiona2;
+    var _product$category2, _business$professiona2;
+    var productSlug = (product === null || product === void 0 ? void 0 : product.slug) || (product === null || product === void 0 ? void 0 : product.id);
+    var categorySlug = (product === null || product === void 0 || (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.slug) || (product === null || product === void 0 ? void 0 : product.category_id);
     if (!((product === null || product === void 0 ? void 0 : product.type) === 'service' && (business === null || business === void 0 || (_business$professiona2 = business.professionals) === null || _business$professiona2 === void 0 ? void 0 : _business$professiona2.length) > 0)) {
       if (site !== null && site !== void 0 && site.product_url_template) {
-        var _product$category2;
         onProductRedirect({
           slug: business === null || business === void 0 ? void 0 : business.slug,
-          product: site.product_url_template.includes('product_slug') ? product === null || product === void 0 ? void 0 : product.slug : product.id,
-          category: site.product_url_template.includes('category_slug') ? product === null || product === void 0 || (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.slug : product.category_id
+          product: site.product_url_template.includes('product_slug') ? productSlug : product.id,
+          category: site.product_url_template.includes('category_slug') ? categorySlug : product.category_id
         });
       } else {
         onProductRedirect({
