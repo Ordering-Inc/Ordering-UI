@@ -199,7 +199,7 @@ const CheckoutUI = (props) => {
   const hideBusinessDetails = theme?.checkout?.components?.business?.hidden
   const hideBusinessMap = theme?.checkout?.components?.map?.hidden
   const hideCustomerDetails = theme?.checkout?.components?.customer?.hidden
-  const driverTipsField = !cartState.loading && cart && cart?.business_id && (options.type === 1 || allowDriverTipPickup) && cart?.status !== 2 && driverTipsOptions.length > 0 && !useKioskApp
+  const driverTipsField = !cartState.loading && cart && cart?.business_id && (options.type === 1 || allowDriverTipPickup) && cart?.status !== 2 && (guestCheckoutDriveTip?.enabled) && driverTipsOptions.length > 0 && !useKioskApp
   const creditPointPlan = loyaltyPlansState?.result?.find(loyal => loyal.type === 'credit_point')
   const creditPointPlanOnBusiness = creditPointPlan?.businesses?.find(b => b.business_id === cart?.business_id && b.accumulates)
 
