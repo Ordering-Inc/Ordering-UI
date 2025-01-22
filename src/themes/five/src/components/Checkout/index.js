@@ -918,6 +918,7 @@ const CheckoutUI = (props) => {
         <PaymentOptionStripeLink
           businessConfigs={businessDetails?.business?.configs ?? []}
           paymentURL={cart?.paymethod_data?.result?.payment_url}
+          cartTotal={cart?.total}
         />
       </Modal>
     </Container>
