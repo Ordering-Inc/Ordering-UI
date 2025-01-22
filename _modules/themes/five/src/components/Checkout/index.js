@@ -93,9 +93,6 @@ var CheckoutUI = function CheckoutUI(props) {
     alseaCheckPriceError = props.alseaCheckPriceError,
     isLoadingCheckprice = props.isLoadingCheckprice;
   var theme = (0, _styledComponents.useTheme)();
-  var _useApi = (0, _orderingComponents.useApi)(),
-    _useApi2 = _slicedToArray(_useApi, 1),
-    ordering = _useApi2[0];
   var _useOrder = (0, _orderingComponents.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     _useOrder2$ = _useOrder2[0],
@@ -260,7 +257,7 @@ var CheckoutUI = function CheckoutUI(props) {
   var hideBusinessDetails = theme === null || theme === void 0 || (_theme$checkout2 = theme.checkout) === null || _theme$checkout2 === void 0 || (_theme$checkout2 = _theme$checkout2.components) === null || _theme$checkout2 === void 0 || (_theme$checkout2 = _theme$checkout2.business) === null || _theme$checkout2 === void 0 ? void 0 : _theme$checkout2.hidden;
   var hideBusinessMap = theme === null || theme === void 0 || (_theme$checkout3 = theme.checkout) === null || _theme$checkout3 === void 0 || (_theme$checkout3 = _theme$checkout3.components) === null || _theme$checkout3 === void 0 || (_theme$checkout3 = _theme$checkout3.map) === null || _theme$checkout3 === void 0 ? void 0 : _theme$checkout3.hidden;
   var hideCustomerDetails = theme === null || theme === void 0 || (_theme$checkout4 = theme.checkout) === null || _theme$checkout4 === void 0 || (_theme$checkout4 = _theme$checkout4.components) === null || _theme$checkout4 === void 0 || (_theme$checkout4 = _theme$checkout4.customer) === null || _theme$checkout4 === void 0 ? void 0 : _theme$checkout4.hidden;
-  var driverTipsField = !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && (options.type === 1 || allowDriverTipPickup) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && driverTipsOptions.length > 0 && !useKioskApp;
+  var driverTipsField = !cartState.loading && cart && (cart === null || cart === void 0 ? void 0 : cart.business_id) && (options.type === 1 || allowDriverTipPickup) && (cart === null || cart === void 0 ? void 0 : cart.status) !== 2 && (guestCheckoutDriveTip === null || guestCheckoutDriveTip === void 0 ? void 0 : guestCheckoutDriveTip.enabled) && driverTipsOptions.length > 0 && !useKioskApp;
   var creditPointPlan = loyaltyPlansState === null || loyaltyPlansState === void 0 || (_loyaltyPlansState$re = loyaltyPlansState.result) === null || _loyaltyPlansState$re === void 0 ? void 0 : _loyaltyPlansState$re.find(function (loyal) {
     return loyal.type === 'credit_point';
   });
@@ -840,9 +837,9 @@ var Checkout = exports.Checkout = function Checkout(props) {
   var _useSession3 = (0, _orderingComponents.useSession)(),
     _useSession4 = _slicedToArray(_useSession3, 1),
     token = _useSession4[0].token;
-  var _useApi3 = (0, _orderingComponents.useApi)(),
-    _useApi4 = _slicedToArray(_useApi3, 1),
-    ordering = _useApi4[0];
+  var _useApi = (0, _orderingComponents.useApi)(),
+    _useApi2 = _slicedToArray(_useApi, 1),
+    ordering = _useApi2[0];
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
     _useLanguage4 = _slicedToArray(_useLanguage3, 2),
     t = _useLanguage4[1];

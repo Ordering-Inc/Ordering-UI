@@ -112,7 +112,6 @@ const CheckoutUI = (props) => {
   } = props
 
   const theme = useTheme()
-  const [ordering] = useApi()
   const [{ options, loading }] = useOrder()
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
