@@ -820,7 +820,8 @@ var CheckoutUI = function CheckoutUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeLink.PaymentOptionStripeLink, {
     businessConfigs: (_businessDetails$busi13 = businessDetails === null || businessDetails === void 0 || (_businessDetails$busi14 = businessDetails.business) === null || _businessDetails$busi14 === void 0 ? void 0 : _businessDetails$busi14.configs) !== null && _businessDetails$busi13 !== void 0 ? _businessDetails$busi13 : [],
-    paymentURL: cart === null || cart === void 0 || (_cart$paymethod_data = cart.paymethod_data) === null || _cart$paymethod_data === void 0 || (_cart$paymethod_data = _cart$paymethod_data.result) === null || _cart$paymethod_data === void 0 ? void 0 : _cart$paymethod_data.payment_url
+    paymentURL: cart === null || cart === void 0 || (_cart$paymethod_data = cart.paymethod_data) === null || _cart$paymethod_data === void 0 || (_cart$paymethod_data = _cart$paymethod_data.result) === null || _cart$paymethod_data === void 0 ? void 0 : _cart$paymethod_data.payment_url,
+    cartTotal: cart === null || cart === void 0 ? void 0 : cart.total
   })));
 };
 var Checkout = exports.Checkout = function Checkout(props) {
