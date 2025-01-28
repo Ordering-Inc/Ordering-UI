@@ -54,9 +54,21 @@ const ProductOptionSubOptionUI = React.memo((props) => {
     quesoYSalsaOptions
   } = props
 
+  const maxByPosition = state.position === 'whole'
+    ? suboption?.max
+    : suboption?.max * 2
+
+  const shouldApplyHalfLogic = option?.with_half_option && option?.allow_suboption_quantity && option?.limit_suboptions_by_max
+
+  const wouldExceedMaxInWhole = shouldApplyHalfLogic && state.position === 'whole'
+    ? (balance - state.quantity + (state.quantity + 1)) > option?.max
+    : false
+
   const disableIncrement =
     option?.with_half_option
-      ? pizzaState?.[`option:${option?.id}`]?.value >= option?.max
+      ? shouldApplyHalfLogic
+        ? state.quantity === maxByPosition || pizzaState?.[`option:${option?.id}`]?.value >= option?.max || wouldExceedMaxInWhole
+        : pizzaState?.[`option:${option?.id}`]?.value >= option?.max
       : option?.limit_suboptions_by_max
         ? (balance === option?.max || state.quantity === suboption.max)
         : state.quantity === suboption?.max || (!state.selected && balance === option?.max)
