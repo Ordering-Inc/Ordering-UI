@@ -36,7 +36,7 @@ var ProductOptionSubOptionPropsAreEqual = function ProductOptionSubOptionPropsAr
   return JSON.stringify(prevProps.state) === JSON.stringify(nextProps.state) && JSON.stringify(prevProps.pizzaState) === JSON.stringify(nextProps.pizzaState) && prevProps.balance === nextProps.balance && JSON.stringify(prevProps.productCart) === JSON.stringify(nextProps.productCart);
 };
 var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props) {
-  var _pizzaState, _option$name, _option$name$toLowerC, _pizzaState2, _props$beforeElements, _props$beforeComponen, _pizzaState3, _pizzaState4, _props$afterComponent, _props$afterElements;
+  var _pizzaState, _pizzaState2, _option$name, _option$name$toLowerC, _pizzaState3, _props$beforeElements, _props$beforeComponen, _pizzaState4, _pizzaState5, _props$afterComponent, _props$afterElements;
   var state = props.state,
     increment = props.increment,
     decrement = props.decrement,
@@ -52,7 +52,10 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     changeQuantity = props.changeQuantity,
     isAlsea = props.isAlsea,
     quesoYSalsaOptions = props.quesoYSalsaOptions;
-  var disableIncrement = option !== null && option !== void 0 && option.with_half_option ? (pizzaState === null || pizzaState === void 0 || (_pizzaState = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState === void 0 ? void 0 : _pizzaState.value) >= (option === null || option === void 0 ? void 0 : option.max) : option !== null && option !== void 0 && option.limit_suboptions_by_max ? balance === (option === null || option === void 0 ? void 0 : option.max) || state.quantity === suboption.max : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
+  var maxByPosition = state.position === 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.max : (suboption === null || suboption === void 0 ? void 0 : suboption.max) * 2;
+  var shouldApplyHalfLogic = (option === null || option === void 0 ? void 0 : option.with_half_option) && (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && (option === null || option === void 0 ? void 0 : option.limit_suboptions_by_max);
+  var wouldExceedMaxInWhole = shouldApplyHalfLogic && state.position === 'whole' ? balance - state.quantity + (state.quantity + 1) > (option === null || option === void 0 ? void 0 : option.max) : false;
+  var disableIncrement = option !== null && option !== void 0 && option.with_half_option ? shouldApplyHalfLogic ? state.quantity === maxByPosition || (pizzaState === null || pizzaState === void 0 || (_pizzaState = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState === void 0 ? void 0 : _pizzaState.value) >= (option === null || option === void 0 ? void 0 : option.max) || wouldExceedMaxInWhole : (pizzaState === null || pizzaState === void 0 || (_pizzaState2 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState2 === void 0 ? void 0 : _pizzaState2.value) >= (option === null || option === void 0 ? void 0 : option.max) : option !== null && option !== void 0 && option.limit_suboptions_by_max ? balance === (option === null || option === void 0 ? void 0 : option.max) || state.quantity === suboption.max : state.quantity === (suboption === null || suboption === void 0 ? void 0 : suboption.max) || !state.selected && balance === (option === null || option === void 0 ? void 0 : option.max);
   var quesoYSalsa = quesoYSalsaOptions.includes(option === null || option === void 0 || (_option$name = option.name) === null || _option$name === void 0 || (_option$name$toLowerC = _option$name.toLowerCase) === null || _option$name$toLowerC === void 0 ? void 0 : _option$name$toLowerC.call(_option$name));
   var price = option !== null && option !== void 0 && option.with_half_option && suboption !== null && suboption !== void 0 && suboption.half_price && state.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
@@ -102,7 +105,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     if (!minMaxValidation) {
       setShowMessage(false);
     }
-  }, [balance, pizzaState === null || pizzaState === void 0 || (_pizzaState2 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState2 === void 0 ? void 0 : _pizzaState2.value]);
+  }, [balance, pizzaState === null || pizzaState === void 0 || (_pizzaState3 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState3 === void 0 ? void 0 : _pizzaState3.value]);
   (0, _react.useEffect)(function () {
     if (balance === (option === null || option === void 0 ? void 0 : option.max) && state !== null && state !== void 0 && state.selected && dirtyRef) {
       if ((dirtyRef === null || dirtyRef === void 0 ? void 0 : dirtyRef.current) !== null) {
@@ -143,7 +146,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
       return handlePosition(e, 'left');
     }
   }), /*#__PURE__*/_react.default.createElement(_BsCircleFill.default, {
-    className: [(pizzaState === null || pizzaState === void 0 || (_pizzaState3 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState3 === void 0 ? void 0 : _pizzaState3.value) >= (option === null || option === void 0 ? void 0 : option.max) && !((option === null || option === void 0 ? void 0 : option.max) === 1 && (option === null || option === void 0 ? void 0 : option.min) === 1) ? 'disabled' : '', state.selected && state.position === 'whole' ? 'selected' : null].filter(function (classname) {
+    className: [(pizzaState === null || pizzaState === void 0 || (_pizzaState4 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState4 === void 0 ? void 0 : _pizzaState4.value) >= (option === null || option === void 0 ? void 0 : option.max) && !((option === null || option === void 0 ? void 0 : option.max) === 1 && (option === null || option === void 0 ? void 0 : option.min) === 1) ? 'disabled' : '', state.selected && state.position === 'whole' ? 'selected' : null].filter(function (classname) {
       return classname;
     }).join(' '),
     onClick: function onClick(e) {
@@ -164,7 +167,7 @@ var ProductOptionSubOptionUI = /*#__PURE__*/_react.default.memo(function (props)
     onClick: function onClick(e) {
       return handleChangeQuantity(e, 2);
     },
-    className: (pizzaState === null || pizzaState === void 0 || (_pizzaState4 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState4 === void 0 ? void 0 : _pizzaState4.value) >= (option === null || option === void 0 ? void 0 : option.max) && !((option === null || option === void 0 ? void 0 : option.max) === 1 && (option === null || option === void 0 ? void 0 : option.min) === 1) ? 'disabled' : ''
+    className: (pizzaState === null || pizzaState === void 0 || (_pizzaState5 = pizzaState["option:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _pizzaState5 === void 0 ? void 0 : _pizzaState5.value) >= (option === null || option === void 0 ? void 0 : option.max) && !((option === null || option === void 0 ? void 0 : option.max) === 1 && (option === null || option === void 0 ? void 0 : option.min) === 1) ? 'disabled' : ''
   }, /*#__PURE__*/_react.default.createElement(_styles.Text, null, /*#__PURE__*/_react.default.createElement("div", null, t('EXTRA', 'Extra'))), " ", /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, {
     disabled: true
   })))), /*#__PURE__*/_react.default.createElement(_styles.SuboptionPrice, null, price > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "+ ", parsePrice(price)))), showMessage && /*#__PURE__*/_react.default.createElement(_styles.Text, {
