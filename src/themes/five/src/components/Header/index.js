@@ -243,7 +243,13 @@ export const Header = (props) => {
               isChew={isChew}
             >
               <img alt='Logotype' width='170px' height={isChew ? '35px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.logotype} loading='lazy' />
-              <img alt='Isotype' width={isChew ? '70px' : '35px'} height={isChew ? '20px' : '45px'} src={isChew ? theme?.images?.logos?.chewLogo : (windowSize.width <= 768 ? theme?.images?.logos?.isotypeInvert : theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
+              <img
+                alt='Isotype'
+                width={isChew ? '70px' : '35px'}
+                height={isChew ? '20px' : '45px'}
+                src={isChew ? theme?.images?.logos?.chewLogo : (windowSize.width <= 768
+                  ? theme?.my_products?.components?.images?.components?.logo_mobile?.components?.image || theme?.images?.logos?.isotypeInvert
+                  : theme?.my_products?.components?.images?.components?.logo?.components?.image || theme?.images?.logos?.isotype)} loading='lazy' />
             </LogoHeader>
           </LeftHeader>
           {isShowOrderOptions && windowSize.width >= 576 && (
