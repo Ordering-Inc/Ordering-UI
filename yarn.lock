@@ -2156,13 +2156,14 @@
     tslib "^2.4.1"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.79.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.79.0.tgz#55e1a7577854b0975c9ceefd1869c10eca2294bd"
-  integrity sha512-56k8WV8W/LK1pnhSj68sogatsicxQ6FBfA8nR9lRYcdRQkJ+l3zv3m5AZVVhiV5J75DKSpxWsVZwJ1DtVtIRNw==
+  version "1.80.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.80.0.tgz#d41eb5fbfef6665051f69bb4dca512f5ee6694f9"
+  integrity sha512-U/r60YVKee3GMspnteKmrLUgX7skSsL060Rc1WnBNa3rhaeLCFvU5Qc7zvYa8BBV6KjNtQZkP8wbQv6yyM5PAA==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics-core" "1.8.1"
     "@segment/analytics-generic-utils" "1.2.0"
+    "@segment/analytics-page-tools" "1.0.0"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
     dset "^3.1.4"
@@ -2170,6 +2171,13 @@
     node-fetch "^2.6.7"
     tslib "^2.4.1"
     unfetch "^4.1.0"
+
+"@segment/analytics-page-tools@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-page-tools/-/analytics-page-tools-1.0.0.tgz#f5fb9b8f0c1e80e821b0a77ca13ac53daf08a28a"
+  integrity sha512-o9OVB91qLB9qb0Bw1HfjmWm5AnrMNULRjx++4lBqLt8InKRX1urrRBparVlpj+yJA0sckN5ZcsfazRLuPgBYDQ==
+  dependencies:
+    tslib "^2.4.1"
 
 "@segment/analytics.js-video-plugins@^0.2.1":
   version "0.2.1"
@@ -2261,9 +2269,9 @@
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
-  version "22.14.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.14.0.tgz#d3bfa3936fef0dbacd79ea3eb17d521c628bb47e"
-  integrity sha512-Kmpl+z84ILoG+3T/zQFyAJsU6EPTmOCj8/2+83fSN6djd6I4o7uOuGIH6vq3PrjY5BGitSbFuMN18j3iknubbA==
+  version "22.14.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.14.1.tgz#53b54585cec81c21eee3697521e31312d6ca1e6f"
+  integrity sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==
   dependencies:
     undici-types "~6.21.0"
 
@@ -3586,9 +3594,9 @@ camelize@^1.0.0:
   integrity sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==
 
 caniuse-lite@^1.0.30001688:
-  version "1.0.30001713"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001713.tgz#6b33a8857e6c7dcb41a0caa2dd0f0489c823a52d"
-  integrity sha512-wCIWIg+A4Xr7NfhTuHdX+/FKh3+Op3LBbSp2N5Pfx6T/LhdQy3GTyoTg48BReaW/MyMNZAkTadsBtai3ldWK0Q==
+  version "1.0.30001714"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001714.tgz#cfd27ff07e6fa20a0f45c7a10d28a0ffeaba2122"
+  integrity sha512-mtgapdwDLSSBnCI3JokHM7oEQBLxiJKVRtg10AxM1AyeiKcM96f0Mkbqeq+1AbiCtvMcHRulAAEMu693JrSWqg==
 
 canvg@^3.0.6:
   version "3.0.11"
@@ -4808,9 +4816,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.5.73:
-  version "1.5.136"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.136.tgz#854b45e6a892137762cb026ed6ec77391fc5c07b"
-  integrity sha512-kL4+wUTD7RSA5FHx5YwWtjDnEEkIIikFgWHR4P6fqjw1PPLlqYkxeOb++wAauAssat0YClCy8Y3C5SxgSkjibQ==
+  version "1.5.137"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.137.tgz#53a7fef3ea9f7eb5fcf704454050ff930c43ed92"
+  integrity sha512-/QSJaU2JyIuTbbABAo/crOs+SuAZLS+fVVS10PVrIT9hrRkmZl8Hb0xPSkKRUUWHQtYzXHpQUW3Dy5hwMzGZkA==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -8891,9 +8899,9 @@ polished@^3.6.6:
     "@babel/runtime" "^7.12.5"
 
 portfinder@^1.0.26:
-  version "1.0.35"
-  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.35.tgz#6ebaf945da4d14c55d996e907b217f73e1dc06c9"
-  integrity sha512-73JaFg4NwYNAufDtS5FsFu/PdM49ahJrO1i44aCRsDWju1z5wuGDaqyFUQWR6aJoK2JPDWlaYYAGFNIGTSUHSw==
+  version "1.0.36"
+  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.36.tgz#4eef523c15e972417a9ee496c3e9c95b8f649d52"
+  integrity sha512-gMKUzCoP+feA7t45moaSx7UniU7PgGN3hA8acAB+3Qn7/js0/lJ07fYZlxt9riE9S3myyxDCyAFzSrLlta0c9g==
   dependencies:
     async "^3.2.6"
     debug "^4.3.6"
@@ -9054,9 +9062,9 @@ protobufjs@^6.11.3:
     long "^4.0.0"
 
 protobufjs@^7.2.5:
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-7.4.0.tgz#7efe324ce9b3b61c82aae5de810d287bc08a248a"
-  integrity sha512-mRUWCc3KUU4w1jU8sGxICXH/gNS94DvI1gxqDvBzhj1JpcsimQkYiOJfwsPUykUI5ZaspFbSgmBLER8IrQ3tqw==
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-7.5.0.tgz#a317ad80713e9db43c8e55afa8636a9aa76bb630"
+  integrity sha512-Z2E/kOY1QjoMlCytmexzYfDm/w5fKAiRwpSzGtdnXW1zC88Z2yXazHHrOtwCzn+7wSxyE8PYM4rvVcMphF9sOA==
   dependencies:
     "@protobufjs/aspromise" "^1.1.2"
     "@protobufjs/base64" "^1.1.2"
