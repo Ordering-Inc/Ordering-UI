@@ -105,11 +105,11 @@ const SingleProductCardUI = React.memo((props) => {
     }
 
     if (isFavorite) {
-      onProductClick && onProductClick()
+      onProductClick && onProductClick(product)
       return
     }
     (!isSkeleton && !useCustomFunctionality && onProductClick && onProductClick(product, product?.business?.slug)) ||
-      (useCustomFunctionality && onCustomClick && onCustomClick())
+      (useCustomFunctionality && onCustomClick && onCustomClick(product))
   }
 
   const closeAlert = () => {
