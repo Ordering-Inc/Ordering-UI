@@ -289,7 +289,7 @@ const ProductOptionsUI = (props) => {
     const scrollElement = document.querySelector('.popup-dialog')
     const handleScroll = () => {
       const extraHeight = 60
-      if (product?.ingredients.length > 0 || product?.extras?.length > 0) {
+      if (product?.ingredients?.length > 0 || product?.extras?.length > 0) {
         const menuList = []
         if (product?.ingredients?.length > 0) {
           menuList.push('ingredients')
@@ -542,7 +542,7 @@ const ProductOptionsUI = (props) => {
                   </PriceContent>
                 )}
                 <ProductMeta>
-                  {product?.calories && (
+                  {!!product?.calories && (
                     <>
                       <span className='calories'>{product?.calories}{' '}cal</span>
                       <span>&nbsp;&#183;&nbsp;</span>
