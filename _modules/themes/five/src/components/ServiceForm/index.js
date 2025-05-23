@@ -27,8 +27,7 @@ require("swiper/swiper-bundle.min.css");
 require("swiper/swiper.min.css");
 var _styles = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -98,25 +97,25 @@ var ServiceFormUI = function ServiceFormUI(props) {
     currentProfessional = _useState8[0],
     setCurrentProfessional = _useState8[1];
   var _useState9 = (0, _react.useState)([]),
-    _useState10 = _slicedToArray(_useState9, 2),
-    timeList = _useState10[0],
-    setTimeList = _useState10[1];
-  var _useState11 = (0, _react.useState)(null),
+    _useState0 = _slicedToArray(_useState9, 2),
+    timeList = _useState0[0],
+    setTimeList = _useState0[1];
+  var _useState1 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    timeSelected = _useState10[0],
+    setTimeSelected = _useState10[1];
+  var _useState11 = (0, _react.useState)(new Date()),
     _useState12 = _slicedToArray(_useState11, 2),
-    timeSelected = _useState12[0],
-    setTimeSelected = _useState12[1];
-  var _useState13 = (0, _react.useState)(new Date()),
+    selectDate = _useState12[0],
+    setSelectedDate = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    selectDate = _useState14[0],
-    setSelectedDate = _useState14[1];
-  var _useState15 = (0, _react.useState)(false),
+    isEnabled = _useState14[0],
+    setIsEnabled = _useState14[1];
+  var _useState15 = (0, _react.useState)([]),
     _useState16 = _slicedToArray(_useState15, 2),
-    isEnabled = _useState16[0],
-    setIsEnabled = _useState16[1];
-  var _useState17 = (0, _react.useState)([]),
-    _useState18 = _slicedToArray(_useState17, 2),
-    datesList = _useState18[0],
-    setDatesList = _useState18[1];
+    datesList = _useState16[0],
+    setDatesList = _useState16[1];
   var guestCheckoutEnabled = (configs === null || configs === void 0 || (_configs$guest_checko = configs.guest_checkout_enabled) === null || _configs$guest_checko === void 0 ? void 0 : _configs$guest_checko.value) === '1';
   var orderTypeEnabled = !_utils.orderTypeList[(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) - 1] || (configs === null || configs === void 0 || (_configs$allowed_orde = configs.allowed_order_types_guest_checkout) === null || _configs$allowed_orde === void 0 || (_configs$allowed_orde = _configs$allowed_orde.value) === null || _configs$allowed_orde === void 0 ? void 0 : _configs$allowed_orde.includes(_utils.orderTypeList[(orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) - 1]));
   var dropDownRef = (0, _react.useRef)();
@@ -149,21 +148,21 @@ var ServiceFormUI = function ServiceFormUI(props) {
     });
     closeModal();
   };
-  var _useState19 = (0, _react.useState)([]),
-    _useState20 = _slicedToArray(_useState19, 2),
-    gallery = _useState20[0],
-    setGallery = _useState20[1];
-  var _useState21 = (0, _react.useState)({
+  var _useState17 = (0, _react.useState)([]),
+    _useState18 = _slicedToArray(_useState17, 2),
+    gallery = _useState18[0],
+    setGallery = _useState18[1];
+  var _useState19 = (0, _react.useState)({
       open: false,
       content: []
     }),
+    _useState20 = _slicedToArray(_useState19, 2),
+    alertState = _useState20[0],
+    setAlertState = _useState20[1];
+  var _useState21 = (0, _react.useState)(null),
     _useState22 = _slicedToArray(_useState21, 2),
-    alertState = _useState22[0],
-    setAlertState = _useState22[1];
-  var _useState23 = (0, _react.useState)(null),
-    _useState24 = _slicedToArray(_useState23, 2),
-    dateSelected = _useState24[0],
-    setDateSelected = _useState24[1];
+    dateSelected = _useState22[0],
+    setDateSelected = _useState22[1];
   var handleAddProduct = function handleAddProduct() {
     if (!(currentProfessional !== null && currentProfessional !== void 0 && currentProfessional.id)) {
       setAlertState({

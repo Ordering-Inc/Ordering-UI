@@ -37,8 +37,7 @@ var _BusinessPreorder = require("../BusinessPreorder");
 var _SearchBar = require("../SearchBar");
 var _Buttons = require("../../styles/Buttons");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -52,7 +51,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var Header = exports.Header = function Header(props) {
-  var _window$location$path, _configState$configs, _configState$configs2, _theme$header, _theme$header2, _orderState$options, _orderState$options2, _theme$my_products, _Object$keys, _customerState$user, _orderState$options5, _theme$images, _theme$my_products2, _theme$images2, _theme$images3, _theme$my_products3, _theme$images4, _theme$my_products4, _theme$images5, _orderState$options7, _orderState$options8, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options9, _orderState$options10, _configState$configs6, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options11, _configState$configs8, _orderState$options12, _configState$configs9, _configState$configs10, _orderState$options13, _configState$configs11, _orderState$options14, _configState$configs12, _configState$configs13, _orderState$options15, _orderState$options16, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
+  var _window$location$path, _configState$configs, _configState$configs2, _theme$header, _theme$header2, _orderState$options, _orderState$options2, _theme$my_products, _Object$keys, _customerState$user, _orderState$options5, _theme$images, _theme$my_products2, _theme$images2, _theme$images3, _theme$my_products3, _theme$images4, _theme$my_products4, _theme$images5, _orderState$options7, _orderState$options8, _configState$configs3, _configState$configs4, _configState$configs5, _orderState$options9, _orderState$options0, _configState$configs6, _theme$defaultLanguag2, _theme$defaultLanguag3, _orderState$options1, _configState$configs8, _orderState$options10, _configState$configs9, _configState$configs0, _orderState$options11, _configState$configs1, _orderState$options12, _configState$configs10, _configState$configs11, _orderState$options13, _orderState$options14, _customerState$user2, _customerState$user3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9;
   var location = props.location,
     isShowOrderOptions = props.isShowOrderOptions,
     isHideSignup = props.isHideSignup,
@@ -111,37 +110,37 @@ var Header = exports.Header = function Header(props) {
     authModalOpen = _useState8[0],
     setAuthModalOpen = _useState8[1];
   var _useState9 = (0, _react.useState)(null),
-    _useState10 = _slicedToArray(_useState9, 2),
-    modalSelected = _useState10[0],
-    setModalSelected = _useState10[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    modalSelected = _useState0[0],
+    setModalSelected = _useState0[1];
+  var _useState1 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    modalPageToShow = _useState10[0],
+    setModalPageToShow = _useState10[1];
   var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    modalPageToShow = _useState12[0],
-    setModalPageToShow = _useState12[1];
-  var _useState13 = (0, _react.useState)(null),
+    preorderBusiness = _useState12[0],
+    setPreorderBusiness = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    preorderBusiness = _useState14[0],
-    setPreorderBusiness = _useState14[1];
+    isAddressFormOpen = _useState14[0],
+    setIsAddressFormOpen = _useState14[1];
   var _useState15 = (0, _react.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    isAddressFormOpen = _useState16[0],
-    setIsAddressFormOpen = _useState16[1];
-  var _useState17 = (0, _react.useState)(false),
-    _useState18 = _slicedToArray(_useState17, 2),
-    isOpenUserData = _useState18[0],
-    setIsOpenUserData = _useState18[1];
-  var _useState19 = (0, _react.useState)({
+    isOpenUserData = _useState16[0],
+    setIsOpenUserData = _useState16[1];
+  var _useState17 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
+    _useState18 = _slicedToArray(_useState17, 2),
+    confirm = _useState18[0],
+    setConfirm = _useState18[1];
+  var _useState19 = (0, _react.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    confirm = _useState20[0],
-    setConfirm = _useState20[1];
-  var _useState21 = (0, _react.useState)(false),
-    _useState22 = _slicedToArray(_useState21, 2),
-    isFarAway = _useState22[0],
-    setIsFarAway = _useState22[1];
+    isFarAway = _useState20[0],
+    setIsFarAway = _useState20[1];
   var isMulticheckoutPage = (_window$location$path = window.location.pathname) === null || _window$location$path === void 0 ? void 0 : _window$location$path.includes('/multi-checkout');
   var cartsWithProducts = (orderState === null || orderState === void 0 ? void 0 : orderState.carts) && Object.values(orderState === null || orderState === void 0 ? void 0 : orderState.carts).filter(function (cart) {
     var _cart$products;
@@ -324,7 +323,7 @@ var Header = exports.Header = function Header(props) {
     onClick: (configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.max_days_preorder) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) === -1 || (configState === null || configState === void 0 || (_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.max_days_preorder) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value) === 0 ? null : function () {
       return openModal('moment');
     }
-  }, /*#__PURE__*/_react.default.createElement("div", null, (_orderState$options9 = orderState.options) !== null && _orderState$options9 !== void 0 && _orderState$options9.moment ? parseDate((_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : _orderState$options10.moment, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, (_orderState$options9 = orderState.options) !== null && _orderState$options9 !== void 0 && _orderState$options9.moment ? parseDate((_orderState$options0 = orderState.options) === null || _orderState$options0 === void 0 ? void 0 : _orderState$options0.moment, {
     outputFormat: configState === null || configState === void 0 || (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 || (_configState$configs6 = _configState$configs6.dates_moment_format) === null || _configState$configs6 === void 0 ? void 0 : _configState$configs6.value
   }) : t('ASAP_ABBREVIATION', 'ASAP')))), franchiseLayout !== 'franchise_1' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, windowSize.width > 768 ? /*#__PURE__*/_react.default.createElement(_OrderTypeSelectorHeader.OrderTypeSelectorHeader, {
     orderTypeList: orderTypeList,
@@ -408,25 +407,25 @@ var Header = exports.Header = function Header(props) {
     onClick: function onClick() {
       return openModal('address');
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options11 = orderState.options) === null || _orderState$options11 === void 0 || (_orderState$options11 = _orderState$options11.address) === null || _orderState$options11 === void 0 ? void 0 : _orderState$options11.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 || (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 || (_configState$configs8 = _configState$configs8.preorder_status_enabled) === null || _configState$configs8 === void 0 ? void 0 : _configState$configs8.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), " ", ((_orderState$options1 = orderState.options) === null || _orderState$options1 === void 0 || (_orderState$options1 = _orderState$options1.address) === null || _orderState$options1 === void 0 ? void 0 : _orderState$options1.address) || t('WHAT_IS_YOUR_ADDRESS', 'What\'s your address?')), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 || (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 || (_configState$configs8 = _configState$configs8.preorder_status_enabled) === null || _configState$configs8 === void 0 ? void 0 : _configState$configs8.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
-    momentState: orderState === null || orderState === void 0 || (_orderState$options12 = orderState.options) === null || _orderState$options12 === void 0 ? void 0 : _orderState$options12.moment,
-    onClick: (configState === null || configState === void 0 || (_configState$configs9 = configState.configs) === null || _configState$configs9 === void 0 || (_configState$configs9 = _configState$configs9.max_days_preorder) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === -1 || (configState === null || configState === void 0 || (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 || (_configState$configs10 = _configState$configs10.max_days_preorder) === null || _configState$configs10 === void 0 ? void 0 : _configState$configs10.value) === 0 ? null : function (variant) {
+    momentState: orderState === null || orderState === void 0 || (_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : _orderState$options10.moment,
+    onClick: (configState === null || configState === void 0 || (_configState$configs9 = configState.configs) === null || _configState$configs9 === void 0 || (_configState$configs9 = _configState$configs9.max_days_preorder) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) === -1 || (configState === null || configState === void 0 || (_configState$configs0 = configState.configs) === null || _configState$configs0 === void 0 || (_configState$configs0 = _configState$configs0.max_days_preorder) === null || _configState$configs0 === void 0 ? void 0 : _configState$configs0.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
   })) : windowSize.width >= 576 && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, null, isFarAway && /*#__PURE__*/_react.default.createElement(_styles.FarAwayMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('YOU_ARE_FAR_FROM_ADDRESS', 'You are far from this address'))), /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "address",
-    addressState: orderState === null || orderState === void 0 || (_orderState$options13 = orderState.options) === null || _orderState$options13 === void 0 || (_orderState$options13 = _orderState$options13.address) === null || _orderState$options13 === void 0 ? void 0 : _orderState$options13.address,
+    addressState: orderState === null || orderState === void 0 || (_orderState$options11 = orderState.options) === null || _orderState$options11 === void 0 || (_orderState$options11 = _orderState$options11.address) === null || _orderState$options11 === void 0 ? void 0 : _orderState$options11.address,
     onClick: function onClick(variant) {
       return openModal(variant);
     },
     containerStyle: {
       width: '80%'
     }
-  }), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 || (_configState$configs11 = configState.configs) === null || _configState$configs11 === void 0 || (_configState$configs11 = _configState$configs11.preorder_status_enabled) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
+  }), !isCustomerMode && (isPreOrderSetting || (configState === null || configState === void 0 || (_configState$configs1 = configState.configs) === null || _configState$configs1 === void 0 || (_configState$configs1 = _configState$configs1.preorder_status_enabled) === null || _configState$configs1 === void 0 ? void 0 : _configState$configs1.value) === undefined) && /*#__PURE__*/_react.default.createElement(_HeaderOption.HeaderOption, {
     variant: "moment",
-    momentState: orderState === null || orderState === void 0 || (_orderState$options14 = orderState.options) === null || _orderState$options14 === void 0 ? void 0 : _orderState$options14.moment,
-    onClick: (configState === null || configState === void 0 || (_configState$configs12 = configState.configs) === null || _configState$configs12 === void 0 || (_configState$configs12 = _configState$configs12.max_days_preorder) === null || _configState$configs12 === void 0 ? void 0 : _configState$configs12.value) === -1 || (configState === null || configState === void 0 || (_configState$configs13 = configState.configs) === null || _configState$configs13 === void 0 || (_configState$configs13 = _configState$configs13.max_days_preorder) === null || _configState$configs13 === void 0 ? void 0 : _configState$configs13.value) === 0 ? null : function (variant) {
+    momentState: orderState === null || orderState === void 0 || (_orderState$options12 = orderState.options) === null || _orderState$options12 === void 0 ? void 0 : _orderState$options12.moment,
+    onClick: (configState === null || configState === void 0 || (_configState$configs10 = configState.configs) === null || _configState$configs10 === void 0 || (_configState$configs10 = _configState$configs10.max_days_preorder) === null || _configState$configs10 === void 0 ? void 0 : _configState$configs10.value) === -1 || (configState === null || configState === void 0 || (_configState$configs11 = configState.configs) === null || _configState$configs11 === void 0 || (_configState$configs11 = _configState$configs11.max_days_preorder) === null || _configState$configs11 === void 0 ? void 0 : _configState$configs11.value) === 0 ? null : function (variant) {
       return openModal(variant);
     }
   }))), modalIsOpen && /*#__PURE__*/_react.default.createElement(_Modal.Modal, _extends({}, !auth && modalSelected === 'address' && {
@@ -436,7 +435,7 @@ var Header = exports.Header = function Header(props) {
     onClose: function onClose() {
       return setModalIsOpen(false);
     },
-    width: modalSelected === 'address' ? orderState !== null && orderState !== void 0 && (_orderState$options15 = orderState.options) !== null && _orderState$options15 !== void 0 && _orderState$options15.user_id ? '70%' : '50%' : '700px'
+    width: modalSelected === 'address' ? orderState !== null && orderState !== void 0 && (_orderState$options13 = orderState.options) !== null && _orderState$options13 !== void 0 && _orderState$options13.user_id ? '70%' : '50%' : '700px'
   }), modalSelected === 'cart' && /*#__PURE__*/_react.default.createElement(_CartContent.CartContent, {
     carts: carts,
     isOrderStateCarts: !!orderState.carts,
@@ -453,7 +452,7 @@ var Header = exports.Header = function Header(props) {
     isCustomerMode: isCustomerMode
   }) : /*#__PURE__*/_react.default.createElement(_styles.AddressFormWrapper, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     useValidationFileds: true,
-    address: (orderState === null || orderState === void 0 || (_orderState$options16 = orderState.options) === null || _orderState$options16 === void 0 ? void 0 : _orderState$options16.address) || {},
+    address: (orderState === null || orderState === void 0 || (_orderState$options14 = orderState.options) === null || _orderState$options14 === void 0 ? void 0 : _orderState$options14.address) || {},
     onCancel: function onCancel() {
       return setModalIsOpen(false);
     },

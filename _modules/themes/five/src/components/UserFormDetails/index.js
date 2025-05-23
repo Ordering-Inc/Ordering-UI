@@ -25,8 +25,7 @@ var _Modal = _interopRequireDefault(require("../Modal"));
 var _moment = _interopRequireDefault(require("moment"));
 var _DatePicker = require("../DatePicker");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -104,27 +103,27 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
     isChanged = _useState8[0],
     setIsChanged = _useState8[1];
   var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    modalIsOpen = _useState10[0],
-    setModalIsOpen = _useState10[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    modalIsOpen = _useState0[0],
+    setModalIsOpen = _useState0[1];
   var emailInput = (0, _react.useRef)(null);
   var user = userData || userSession;
-  var _useState11 = (0, _react.useState)(user !== null && user !== void 0 && user.birthdate ? (0, _moment.default)(user === null || user === void 0 ? void 0 : user.birthdate, 'YYYY-MM-DD').toDate() : null),
+  var _useState1 = (0, _react.useState)(user !== null && user !== void 0 && user.birthdate ? (0, _moment.default)(user === null || user === void 0 ? void 0 : user.birthdate, 'YYYY-MM-DD').toDate() : null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    birthdate = _useState10[0],
+    setBirthdate = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
     _useState12 = _slicedToArray(_useState11, 2),
-    birthdate = _useState12[0],
-    setBirthdate = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
-    _useState14 = _slicedToArray(_useState13, 2),
-    openCalendar = _useState14[0],
-    setOpenCalendar = _useState14[1];
-  var _useState15 = (0, _react.useState)({
+    openCalendar = _useState12[0],
+    setOpenCalendar = _useState12[1];
+  var _useState13 = (0, _react.useState)({
       email: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? !!(formState !== null && formState !== void 0 && (_formState$result2 = formState.result) !== null && _formState$result2 !== void 0 && (_formState$result2 = _formState$result2.result) !== null && _formState$result2 !== void 0 && (_formState$result2 = _formState$result2.settings) !== null && _formState$result2 !== void 0 && (_formState$result2 = _formState$result2.email) !== null && _formState$result2 !== void 0 && _formState$result2.newsletter) : !!((_formState$changes$se = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 || (_formState$changes = _formState$changes.settings) === null || _formState$changes === void 0 || (_formState$changes = _formState$changes.email) === null || _formState$changes === void 0 ? void 0 : _formState$changes.newsletter) !== null && _formState$changes$se !== void 0 ? _formState$changes$se : user && (user === null || user === void 0 || (_user$settings = user.settings) === null || _user$settings === void 0 || (_user$settings = _user$settings.email) === null || _user$settings === void 0 ? void 0 : _user$settings.newsletter)),
       sms: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? !!(formState !== null && formState !== void 0 && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && (_formState$result4 = _formState$result4.result) !== null && _formState$result4 !== void 0 && (_formState$result4 = _formState$result4.settings) !== null && _formState$result4 !== void 0 && (_formState$result4 = _formState$result4.sms) !== null && _formState$result4 !== void 0 && _formState$result4.newsletter) : !!((_formState$changes$se2 = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 || (_formState$changes2 = _formState$changes2.settings) === null || _formState$changes2 === void 0 || (_formState$changes2 = _formState$changes2.sms) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.newsletter) !== null && _formState$changes$se2 !== void 0 ? _formState$changes$se2 : user && (user === null || user === void 0 || (_user$settings2 = user.settings) === null || _user$settings2 === void 0 || (_user$settings2 = _user$settings2.sms) === null || _user$settings2 === void 0 ? void 0 : _user$settings2.newsletter)),
       notification: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? !!(formState !== null && formState !== void 0 && (_formState$result6 = formState.result) !== null && _formState$result6 !== void 0 && (_formState$result6 = _formState$result6.result) !== null && _formState$result6 !== void 0 && (_formState$result6 = _formState$result6.settings) !== null && _formState$result6 !== void 0 && (_formState$result6 = _formState$result6.notification) !== null && _formState$result6 !== void 0 && _formState$result6.newsletter) : !!((_formState$changes$se3 = formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 || (_formState$changes3 = _formState$changes3.settings) === null || _formState$changes3 === void 0 || (_formState$changes3 = _formState$changes3.notification) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.newsletter) !== null && _formState$changes$se3 !== void 0 ? _formState$changes$se3 : user && (user === null || user === void 0 || (_user$settings3 = user.settings) === null || _user$settings3 === void 0 || (_user$settings3 = _user$settings3.notification) === null || _user$settings3 === void 0 ? void 0 : _user$settings3.newsletter))
     }),
-    _useState16 = _slicedToArray(_useState15, 2),
-    notificationList = _useState16[0],
-    setNotificationList = _useState16[1];
+    _useState14 = _slicedToArray(_useState13, 2),
+    notificationList = _useState14[0],
+    setNotificationList = _useState14[1];
   var showCustomerCellphone = !(theme !== null && theme !== void 0 && (_theme$profile = theme.profile) !== null && _theme$profile !== void 0 && (_theme$profile = _theme$profile.components) !== null && _theme$profile !== void 0 && (_theme$profile = _theme$profile.cellphone) !== null && _theme$profile !== void 0 && _theme$profile.hidden);
   var showCustomerPassword = !(theme !== null && theme !== void 0 && (_theme$profile2 = theme.profile) !== null && _theme$profile2 !== void 0 && (_theme$profile2 = _theme$profile2.components) !== null && _theme$profile2 !== void 0 && (_theme$profile2 = _theme$profile2.password) !== null && _theme$profile2 !== void 0 && _theme$profile2.hidden);
   var showCustomerPromotions = !(theme !== null && theme !== void 0 && (_theme$profile3 = theme.profile) !== null && _theme$profile3 !== void 0 && (_theme$profile3 = _theme$profile3.components) !== null && _theme$profile3 !== void 0 && (_theme$profile3 = _theme$profile3.promotions) !== null && _theme$profile3 !== void 0 && _theme$profile3.hidden);
@@ -338,13 +337,13 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
   }, [user, isEdit]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading && birthdate) {
-      var _formState$result9, _formState$result10, _ref, _formState$changes$bi, _formState$changes8;
-      formMethods.setValue('birthdate', formState !== null && formState !== void 0 && (_formState$result9 = formState.result) !== null && _formState$result9 !== void 0 && _formState$result9.result ? formState === null || formState === void 0 || (_formState$result10 = formState.result) === null || _formState$result10 === void 0 || (_formState$result10 = _formState$result10.result) === null || _formState$result10 === void 0 ? void 0 : _formState$result10.birthdate : (_ref = (_formState$changes$bi = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.birthdate) !== null && _formState$changes$bi !== void 0 ? _formState$changes$bi : user && (user === null || user === void 0 ? void 0 : user.birthdate)) !== null && _ref !== void 0 ? _ref : '');
+      var _formState$result9, _formState$result0, _ref, _formState$changes$bi, _formState$changes8;
+      formMethods.setValue('birthdate', formState !== null && formState !== void 0 && (_formState$result9 = formState.result) !== null && _formState$result9 !== void 0 && _formState$result9.result ? formState === null || formState === void 0 || (_formState$result0 = formState.result) === null || _formState$result0 === void 0 || (_formState$result0 = _formState$result0.result) === null || _formState$result0 === void 0 ? void 0 : _formState$result0.birthdate : (_ref = (_formState$changes$bi = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.birthdate) !== null && _formState$changes$bi !== void 0 ? _formState$changes$bi : user && (user === null || user === void 0 ? void 0 : user.birthdate)) !== null && _ref !== void 0 ? _ref : '');
     }
   }, [validationFields, birthdate]);
   (0, _react.useEffect)(function () {
-    var _formState$changes9, _formState$changes10, _configs$verification2;
-    if (isChanged && userPhoneNumber && isValidPhoneNumber && formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.country_phone_code && formState !== null && formState !== void 0 && (_formState$changes10 = formState.changes) !== null && _formState$changes10 !== void 0 && _formState$changes10.cellphone && (configs === null || configs === void 0 || (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1') {
+    var _formState$changes9, _formState$changes0, _configs$verification2;
+    if (isChanged && userPhoneNumber && isValidPhoneNumber && formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.country_phone_code && formState !== null && formState !== void 0 && (_formState$changes0 = formState.changes) !== null && _formState$changes0 !== void 0 && _formState$changes0.cellphone && (configs === null || configs === void 0 || (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1') {
       setWillVerifyOtpState && setWillVerifyOtpState(true);
     }
   }, [isValidPhoneNumber, userPhoneNumber, configs === null || configs === void 0 || (_configs$verification3 = configs.verification_phone_required) === null || _configs$verification3 === void 0 ? void 0 : _configs$verification3.value, isChanged]);
