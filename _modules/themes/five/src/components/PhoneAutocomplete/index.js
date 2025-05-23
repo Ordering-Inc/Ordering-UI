@@ -18,8 +18,7 @@ var _UserDetails = require("../UserDetails");
 var _styles = require("./styles");
 var _MdcCellphoneAndroid = _interopRequireDefault(require("@meronex/icons/mdc/MdcCellphoneAndroid"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -36,7 +35,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
-  var _orderState$options, _configState$configs, _customersPhones$user2, _orderState$options4, _orderState$options7, _theme$images, _theme$images2, _orderState$options8, _orderState$options9, _orderState$options11, _orderState$options12, _theme$colors, _theme$images3, _customerState$result, _customerState$result2;
+  var _orderState$options, _configState$configs, _customersPhones$user2, _orderState$options4, _orderState$options7, _theme$images, _theme$images2, _orderState$options8, _orderState$options9, _orderState$options1, _orderState$options10, _theme$colors, _theme$images3, _customerState$result, _customerState$result2;
   var phone = props.phone,
     customerState = props.customerState,
     customersPhones = props.customersPhones,
@@ -87,13 +86,13 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
     isOpenUserData = _useState8[0],
     setIsOpenUserData = _useState8[1];
   var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    isAddressFormOpen = _useState10[0],
-    setIsAddressFormOpen = _useState10[1];
-  var _useState11 = (0, _react.useState)(pickupTypes.includes(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type)),
-    _useState12 = _slicedToArray(_useState11, 2),
-    isPickupSelected = _useState12[0],
-    setIsPickupSelected = _useState12[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    isAddressFormOpen = _useState0[0],
+    setIsAddressFormOpen = _useState0[1];
+  var _useState1 = (0, _react.useState)(pickupTypes.includes(orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type)),
+    _useState10 = _slicedToArray(_useState1, 2),
+    isPickupSelected = _useState10[0],
+    setIsPickupSelected = _useState10[1];
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));
   var configTypes = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.order_types_allowed) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').filter(function (value) {
     return allOrderTypes.includes(Number(value));
@@ -294,11 +293,11 @@ var PhoneAutocompleteUI = function PhoneAutocompleteUI(props) {
   })), /*#__PURE__*/_react.default.createElement("p", null, t('PICKUP', 'Pickup')))), isPickupSelected && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, t('WHAT_PICKUP_YOU_NEED', 'What kind of pickup do you need?')), /*#__PURE__*/_react.default.createElement(_styles.AdditionalTypesContainer, null, /*#__PURE__*/_react.default.createElement(OrderTypesComponent, null))), configTypes.includes(orderState === null || orderState === void 0 || (_orderState$options8 = orderState.options) === null || _orderState$options8 === void 0 ? void 0 : _orderState$options8.type) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !userCustomer && /*#__PURE__*/_react.default.createElement(_styles.PhoneAutocompleteContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ADDING_CUSTOMERS_PHONE_NUMBER', 'Adding the customers’ phone number')), /*#__PURE__*/_react.default.createElement(_styles.WrappBtn, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: inputValue || userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options9 = orderState.options) !== null && _orderState$options9 !== void 0 && (_orderState$options9 = _orderState$options9.address) !== null && _orderState$options9 !== void 0 && _orderState$options9.address ? 'primary' : 'secundary',
     onMouseDown: function onMouseDown() {
-      var _orderState$options10;
-      return !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options10 = orderState.options) !== null && _orderState$options10 !== void 0 && (_orderState$options10 = _orderState$options10.address) !== null && _orderState$options10 !== void 0 && _orderState$options10.address) ? createNewUser() : handleFindClick();
+      var _orderState$options0;
+      return !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options0 = orderState.options) !== null && _orderState$options0 !== void 0 && (_orderState$options0 = _orderState$options0.address) !== null && _orderState$options0 !== void 0 && _orderState$options0.address) ? createNewUser() : handleFindClick();
     },
-    disabled: !inputValue && !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options11 = orderState.options) !== null && _orderState$options11 !== void 0 && (_orderState$options11 = _orderState$options11.address) !== null && _orderState$options11 !== void 0 && _orderState$options11.address)
-  }, !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options12 = orderState.options) !== null && _orderState$options12 !== void 0 && (_orderState$options12 = _orderState$options12.address) !== null && _orderState$options12 !== void 0 && _orderState$options12.address) ? t('CREATE_CUSTOMER', 'Create new customer') : "".concat(t('CONTINUE_WITH', 'Continue with'), " ").concat(userName))), /*#__PURE__*/_react.default.createElement(_styles.SelectContainer, null, /*#__PURE__*/_react.default.createElement(_MdcCellphoneAndroid.default, {
+    disabled: !inputValue && !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options1 = orderState.options) !== null && _orderState$options1 !== void 0 && (_orderState$options1 = _orderState$options1.address) !== null && _orderState$options1 !== void 0 && _orderState$options1.address)
+  }, !(userCustomer && orderState !== null && orderState !== void 0 && (_orderState$options10 = orderState.options) !== null && _orderState$options10 !== void 0 && (_orderState$options10 = _orderState$options10.address) !== null && _orderState$options10 !== void 0 && _orderState$options10.address) ? t('CREATE_CUSTOMER', 'Create new customer') : "".concat(t('CONTINUE_WITH', 'Continue with'), " ").concat(userName))), /*#__PURE__*/_react.default.createElement(_styles.SelectContainer, null, /*#__PURE__*/_react.default.createElement(_MdcCellphoneAndroid.default, {
     size: 18,
     color: theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary
   }), /*#__PURE__*/_react.default.createElement(_reactSelect.default, {

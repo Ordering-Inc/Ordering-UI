@@ -873,7 +873,7 @@ var getStarWidth = exports.getStarWidth = function getStarWidth(qualification) {
   }
 };
 var getOrderStatus = exports.getOrderStatus = function getOrderStatus(s) {
-  var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24, _theme$defaultLanguag25, _theme$defaultLanguag26, _theme$defaultLanguag27;
+  var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag0, _theme$defaultLanguag1, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22, _theme$defaultLanguag23, _theme$defaultLanguag24, _theme$defaultLanguag25;
   var _useLanguage7 = (0, _orderingComponents.useLanguage)(),
     _useLanguage8 = _slicedToArray(_useLanguage7, 2),
     t = _useLanguage8[1];
@@ -926,92 +926,92 @@ var getOrderStatus = exports.getOrderStatus = function getOrderStatus(s) {
     percentage: 40
   }, {
     key: 9,
-    value: t('PICK_UP_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.PICK_UP_COMPLETED_BY_DRIVER) || 'Pick up completed by driver'),
+    value: t('PICK_UP_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag0 = theme.defaultLanguages) === null || _theme$defaultLanguag0 === void 0 ? void 0 : _theme$defaultLanguag0.PICK_UP_COMPLETED_BY_DRIVER) || 'Pick up completed by driver'),
     slug: 'PICK_UP_COMPLETED_BY_DRIVER',
     percentage: 70
   }, {
     key: 10,
-    value: t('PICK_UP_FAILED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag11 = theme.defaultLanguages) === null || _theme$defaultLanguag11 === void 0 ? void 0 : _theme$defaultLanguag11.PICK_UP_FAILED_BY_DRIVER) || 'Pick up Failed by driver'),
+    value: t('PICK_UP_FAILED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag1 = theme.defaultLanguages) === null || _theme$defaultLanguag1 === void 0 ? void 0 : _theme$defaultLanguag1.PICK_UP_FAILED_BY_DRIVER) || 'Pick up Failed by driver'),
     slug: 'PICK_UP_FAILED_BY_DRIVER',
     percentage: 0
   }, {
     key: 11,
-    value: t('DELIVERY_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag12 = theme.defaultLanguages) === null || _theme$defaultLanguag12 === void 0 ? void 0 : _theme$defaultLanguag12.DELIVERY_COMPLETED_BY_DRIVER) || 'Delivery completed by driver'),
+    value: t('DELIVERY_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.DELIVERY_COMPLETED_BY_DRIVER) || 'Delivery completed by driver'),
     slug: 'DELIVERY_COMPLETED_BY_DRIVER',
     percentage: 100
   }, {
     key: 12,
-    value: t('DELIVERY_FAILED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag13 = theme.defaultLanguages) === null || _theme$defaultLanguag13 === void 0 ? void 0 : _theme$defaultLanguag13.DELIVERY_FAILED_BY_DRIVER) || 'Delivery Failed by driver'),
+    value: t('DELIVERY_FAILED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag11 = theme.defaultLanguages) === null || _theme$defaultLanguag11 === void 0 ? void 0 : _theme$defaultLanguag11.DELIVERY_FAILED_BY_DRIVER) || 'Delivery Failed by driver'),
     slug: 'DELIVERY_FAILED_BY_DRIVER',
     percentage: 0
   }, {
     key: 13,
-    value: t('PREORDER', (theme === null || theme === void 0 || (_theme$defaultLanguag14 = theme.defaultLanguages) === null || _theme$defaultLanguag14 === void 0 ? void 0 : _theme$defaultLanguag14.PREORDER) || 'PreOrder'),
+    value: t('PREORDER', (theme === null || theme === void 0 || (_theme$defaultLanguag12 = theme.defaultLanguages) === null || _theme$defaultLanguag12 === void 0 ? void 0 : _theme$defaultLanguag12.PREORDER) || 'PreOrder'),
     slug: 'PREORDER',
     percentage: 0
   }, {
     key: 14,
-    value: t('ORDER_NOT_READY', (theme === null || theme === void 0 || (_theme$defaultLanguag15 = theme.defaultLanguages) === null || _theme$defaultLanguag15 === void 0 ? void 0 : _theme$defaultLanguag15.ORDER_NOT_READY) || 'Order not ready'),
+    value: t('ORDER_NOT_READY', (theme === null || theme === void 0 || (_theme$defaultLanguag13 = theme.defaultLanguages) === null || _theme$defaultLanguag13 === void 0 ? void 0 : _theme$defaultLanguag13.ORDER_NOT_READY) || 'Order not ready'),
     slug: 'ORDER_NOT_READY',
     percentage: 15
   }, {
     key: 15,
-    value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER) || 'Order picked up completed by customer'),
+    value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag14 = theme.defaultLanguages) === null || _theme$defaultLanguag14 === void 0 ? void 0 : _theme$defaultLanguag14.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER) || 'Order picked up completed by customer'),
     slug: 'ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER',
     percentage: 100
   }, {
     key: 16,
-    value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag17 = theme.defaultLanguages) === null || _theme$defaultLanguag17 === void 0 ? void 0 : _theme$defaultLanguag17.ORDER_STATUS_CANCELLED_BY_CUSTOMER) || 'Order cancelled by customer'),
+    value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag15 = theme.defaultLanguages) === null || _theme$defaultLanguag15 === void 0 ? void 0 : _theme$defaultLanguag15.ORDER_STATUS_CANCELLED_BY_CUSTOMER) || 'Order cancelled by customer'),
     slug: 'ORDER_STATUS_CANCELLED_BY_CUSTOMER',
     percentage: 0
   }, {
     key: 17,
-    value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag18 = theme.defaultLanguages) === null || _theme$defaultLanguag18 === void 0 ? void 0 : _theme$defaultLanguag18.ORDER_NOT_PICKEDUP_BY_CUSTOMER) || 'Order not picked up by customer'),
+    value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ORDER_NOT_PICKEDUP_BY_CUSTOMER) || 'Order not picked up by customer'),
     slug: 'ORDER_NOT_PICKEDUP_BY_CUSTOMER',
     percentage: 0
   }, {
     key: 18,
-    value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag19 = theme.defaultLanguages) === null || _theme$defaultLanguag19 === void 0 ? void 0 : _theme$defaultLanguag19.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS) || 'Driver almost arrived to business'),
+    value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag17 = theme.defaultLanguages) === null || _theme$defaultLanguag17 === void 0 ? void 0 : _theme$defaultLanguag17.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS) || 'Driver almost arrived to business'),
     slug: 'ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS',
     percentage: 50
   }, {
     key: 19,
-    value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag20 = theme.defaultLanguages) === null || _theme$defaultLanguag20 === void 0 ? void 0 : _theme$defaultLanguag20.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER) || 'Driver almost arrived to customer'),
+    value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag18 = theme.defaultLanguages) === null || _theme$defaultLanguag18 === void 0 ? void 0 : _theme$defaultLanguag18.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER) || 'Driver almost arrived to customer'),
     slug: 'ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER',
     percentage: 90
   }, {
     key: 20,
-    value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag21 = theme.defaultLanguages) === null || _theme$defaultLanguag21 === void 0 ? void 0 : _theme$defaultLanguag21.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) || 'Customer almost arrived to business'),
+    value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag19 = theme.defaultLanguages) === null || _theme$defaultLanguag19 === void 0 ? void 0 : _theme$defaultLanguag19.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) || 'Customer almost arrived to business'),
     slug: 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS',
     percentage: 90
   }, {
     key: 21,
-    value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag22 = theme.defaultLanguages) === null || _theme$defaultLanguag22 === void 0 ? void 0 : _theme$defaultLanguag22.ORDER_CUSTOMER_ARRIVED_BUSINESS) || 'Customer arrived to business'),
+    value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag20 = theme.defaultLanguages) === null || _theme$defaultLanguag20 === void 0 ? void 0 : _theme$defaultLanguag20.ORDER_CUSTOMER_ARRIVED_BUSINESS) || 'Customer arrived to business'),
     slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS',
     percentage: 90
   }, {
     key: 22,
-    value: t('ORDER_LOOKING_FOR_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag23 = theme.defaultLanguages) === null || _theme$defaultLanguag23 === void 0 ? void 0 : _theme$defaultLanguag23.ORDER_LOOKING_FOR_DRIVER) || 'Looking for driver'),
+    value: t('ORDER_LOOKING_FOR_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag21 = theme.defaultLanguages) === null || _theme$defaultLanguag21 === void 0 ? void 0 : _theme$defaultLanguag21.ORDER_LOOKING_FOR_DRIVER) || 'Looking for driver'),
     slug: 'ORDER_LOOKING_FOR_DRIVER',
     percentage: 30
   }, {
     key: 23,
-    value: t('ORDER_DRIVER_ON_WAY', (theme === null || theme === void 0 || (_theme$defaultLanguag24 = theme.defaultLanguages) === null || _theme$defaultLanguag24 === void 0 ? void 0 : _theme$defaultLanguag24.ORDER_DRIVER_ON_WAY) || 'Driver on way'),
+    value: t('ORDER_DRIVER_ON_WAY', (theme === null || theme === void 0 || (_theme$defaultLanguag22 = theme.defaultLanguages) === null || _theme$defaultLanguag22 === void 0 ? void 0 : _theme$defaultLanguag22.ORDER_DRIVER_ON_WAY) || 'Driver on way'),
     slug: 'ORDER_DRIVER_ON_WAY',
     percentage: 80
   }, {
     key: 24,
-    value: t('ORDER_DRIVER_WAITING_FOR_ORDER', (theme === null || theme === void 0 || (_theme$defaultLanguag25 = theme.defaultLanguages) === null || _theme$defaultLanguag25 === void 0 ? void 0 : _theme$defaultLanguag25.ORDER_DRIVER_WAITING_FOR_ORDER) || 'Driver waiting for order'),
+    value: t('ORDER_DRIVER_WAITING_FOR_ORDER', (theme === null || theme === void 0 || (_theme$defaultLanguag23 = theme.defaultLanguages) === null || _theme$defaultLanguag23 === void 0 ? void 0 : _theme$defaultLanguag23.ORDER_DRIVER_WAITING_FOR_ORDER) || 'Driver waiting for order'),
     slug: 'ORDER_DRIVER_WAITING_FOR_ORDER',
     percentage: 25
   }, {
     key: 25,
-    value: t('ORDER_ACCEPTED_BY_DRIVER_COMPANY', (theme === null || theme === void 0 || (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.ORDER_ACCEPTED_BY_DRIVER_COMPANY) || 'Accepted by driver company'),
+    value: t('ORDER_ACCEPTED_BY_DRIVER_COMPANY', (theme === null || theme === void 0 || (_theme$defaultLanguag24 = theme.defaultLanguages) === null || _theme$defaultLanguag24 === void 0 ? void 0 : _theme$defaultLanguag24.ORDER_ACCEPTED_BY_DRIVER_COMPANY) || 'Accepted by driver company'),
     slug: 'ORDER_ACCEPTED_BY_DRIVER_COMPANY',
     percentage: 25
   }, {
     key: 26,
-    value: t('ORDER_DRIVER_ARRIVED_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag27 = theme.defaultLanguages) === null || _theme$defaultLanguag27 === void 0 ? void 0 : _theme$defaultLanguag27.ORDER_DRIVER_ARRIVED_CUSTOMER) || 'Driver arrived to customer'),
+    value: t('ORDER_DRIVER_ARRIVED_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag25 = theme.defaultLanguages) === null || _theme$defaultLanguag25 === void 0 ? void 0 : _theme$defaultLanguag25.ORDER_DRIVER_ARRIVED_CUSTOMER) || 'Driver arrived to customer'),
     slug: 'ORDER_DRIVER_ARRIVED_CUSTOMER',
     percentage: 80
   }];
@@ -1021,80 +1021,80 @@ var getOrderStatus = exports.getOrderStatus = function getOrderStatus(s) {
   return objectStatus && objectStatus;
 };
 var getOrderStatuPickUp = exports.getOrderStatuPickUp = function getOrderStatuPickUp(s) {
-  var _theme$defaultLanguag28, _theme$defaultLanguag29, _theme$defaultLanguag30, _theme$defaultLanguag31, _theme$defaultLanguag32, _theme$defaultLanguag33, _theme$defaultLanguag34, _theme$defaultLanguag35, _theme$defaultLanguag36, _theme$defaultLanguag37, _theme$defaultLanguag38, _theme$defaultLanguag39, _theme$defaultLanguag40, _theme$defaultLanguag41;
+  var _theme$defaultLanguag26, _theme$defaultLanguag27, _theme$defaultLanguag28, _theme$defaultLanguag29, _theme$defaultLanguag30, _theme$defaultLanguag31, _theme$defaultLanguag32, _theme$defaultLanguag33, _theme$defaultLanguag34, _theme$defaultLanguag35, _theme$defaultLanguag36, _theme$defaultLanguag37, _theme$defaultLanguag38, _theme$defaultLanguag39;
   var _useLanguage9 = (0, _orderingComponents.useLanguage)(),
-    _useLanguage10 = _slicedToArray(_useLanguage9, 2),
-    t = _useLanguage10[1];
+    _useLanguage0 = _slicedToArray(_useLanguage9, 2),
+    t = _useLanguage0[1];
   var theme = (0, _styledComponents.useTheme)();
   var status = parseInt(s);
   var orderStatus = [{
     key: 0,
-    value: t('PENDING', (theme === null || theme === void 0 || (_theme$defaultLanguag28 = theme.defaultLanguages) === null || _theme$defaultLanguag28 === void 0 ? void 0 : _theme$defaultLanguag28.PENDING) || 'Pending'),
+    value: t('PENDING', (theme === null || theme === void 0 || (_theme$defaultLanguag26 = theme.defaultLanguages) === null || _theme$defaultLanguag26 === void 0 ? void 0 : _theme$defaultLanguag26.PENDING) || 'Pending'),
     slug: 'PENDING',
     percentage: 10
   }, {
     key: 1,
-    value: t('COMPLETED', (theme === null || theme === void 0 || (_theme$defaultLanguag29 = theme.defaultLanguages) === null || _theme$defaultLanguag29 === void 0 ? void 0 : _theme$defaultLanguag29.COMPLETED) || 'Completed'),
+    value: t('COMPLETED', (theme === null || theme === void 0 || (_theme$defaultLanguag27 = theme.defaultLanguages) === null || _theme$defaultLanguag27 === void 0 ? void 0 : _theme$defaultLanguag27.COMPLETED) || 'Completed'),
     slug: 'COMPLETED',
     percentage: 100
   }, {
     key: 2,
-    value: t('REJECTED', (theme === null || theme === void 0 || (_theme$defaultLanguag30 = theme.defaultLanguages) === null || _theme$defaultLanguag30 === void 0 ? void 0 : _theme$defaultLanguag30.REJECTED) || 'Rejected'),
+    value: t('REJECTED', (theme === null || theme === void 0 || (_theme$defaultLanguag28 = theme.defaultLanguages) === null || _theme$defaultLanguag28 === void 0 ? void 0 : _theme$defaultLanguag28.REJECTED) || 'Rejected'),
     slug: 'REJECTED',
     percentage: 0
   }, {
     key: 4,
-    value: t('PREPARATION_COMPLETED', (theme === null || theme === void 0 || (_theme$defaultLanguag31 = theme.defaultLanguages) === null || _theme$defaultLanguag31 === void 0 ? void 0 : _theme$defaultLanguag31.PREPARATION_COMPLETED) || 'Preparation Completed'),
+    value: t('PREPARATION_COMPLETED', (theme === null || theme === void 0 || (_theme$defaultLanguag29 = theme.defaultLanguages) === null || _theme$defaultLanguag29 === void 0 ? void 0 : _theme$defaultLanguag29.PREPARATION_COMPLETED) || 'Preparation Completed'),
     slug: 'PREPARATION_COMPLETED',
     percentage: 50
   }, {
     key: 5,
-    value: t('REJECTED_BY_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag32 = theme.defaultLanguages) === null || _theme$defaultLanguag32 === void 0 ? void 0 : _theme$defaultLanguag32.REJECTED_BY_BUSINESS) || 'Rejected by business'),
+    value: t('REJECTED_BY_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag30 = theme.defaultLanguages) === null || _theme$defaultLanguag30 === void 0 ? void 0 : _theme$defaultLanguag30.REJECTED_BY_BUSINESS) || 'Rejected by business'),
     slug: 'REJECTED_BY_BUSINESS',
     percentage: 0
   }, {
     key: 7,
-    value: t('ACCEPTED_BY_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag33 = theme.defaultLanguages) === null || _theme$defaultLanguag33 === void 0 ? void 0 : _theme$defaultLanguag33.ACCEPTED_BY_BUSINESS) || 'Accepted by business'),
+    value: t('ACCEPTED_BY_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag31 = theme.defaultLanguages) === null || _theme$defaultLanguag31 === void 0 ? void 0 : _theme$defaultLanguag31.ACCEPTED_BY_BUSINESS) || 'Accepted by business'),
     slug: 'ACCEPTED_BY_BUSINESS',
     percentage: 30
   }, {
     key: 11,
-    value: t('DELIVERY_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag34 = theme.defaultLanguages) === null || _theme$defaultLanguag34 === void 0 ? void 0 : _theme$defaultLanguag34.DELIVERY_COMPLETED_BY_DRIVER) || 'Delivery completed by driver'),
+    value: t('DELIVERY_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag32 = theme.defaultLanguages) === null || _theme$defaultLanguag32 === void 0 ? void 0 : _theme$defaultLanguag32.DELIVERY_COMPLETED_BY_DRIVER) || 'Delivery completed by driver'),
     slug: 'DELIVERY_COMPLETED_BY_DRIVER',
     percentage: 100
   }, {
     key: 13,
-    value: t('PREORDER', (theme === null || theme === void 0 || (_theme$defaultLanguag35 = theme.defaultLanguages) === null || _theme$defaultLanguag35 === void 0 ? void 0 : _theme$defaultLanguag35.PREORDER) || 'PreOrder'),
+    value: t('PREORDER', (theme === null || theme === void 0 || (_theme$defaultLanguag33 = theme.defaultLanguages) === null || _theme$defaultLanguag33 === void 0 ? void 0 : _theme$defaultLanguag33.PREORDER) || 'PreOrder'),
     slug: 'PREORDER',
     percentage: 0
   }, {
     key: 14,
-    value: t('ORDER_NOT_READY', (theme === null || theme === void 0 || (_theme$defaultLanguag36 = theme.defaultLanguages) === null || _theme$defaultLanguag36 === void 0 ? void 0 : _theme$defaultLanguag36.ORDER_NOT_READY) || 'Order not ready'),
+    value: t('ORDER_NOT_READY', (theme === null || theme === void 0 || (_theme$defaultLanguag34 = theme.defaultLanguages) === null || _theme$defaultLanguag34 === void 0 ? void 0 : _theme$defaultLanguag34.ORDER_NOT_READY) || 'Order not ready'),
     slug: 'ORDER_NOT_READY',
     percentage: 30
   }, {
     key: 15,
-    value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag37 = theme.defaultLanguages) === null || _theme$defaultLanguag37 === void 0 ? void 0 : _theme$defaultLanguag37.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER) || 'Order picked up completed by customer'),
+    value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag35 = theme.defaultLanguages) === null || _theme$defaultLanguag35 === void 0 ? void 0 : _theme$defaultLanguag35.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER) || 'Order picked up completed by customer'),
     slug: 'ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER',
     percentage: 100
   }, {
     key: 16,
-    value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag38 = theme.defaultLanguages) === null || _theme$defaultLanguag38 === void 0 ? void 0 : _theme$defaultLanguag38.ORDER_STATUS_CANCELLED_BY_CUSTOMER) || 'Order cancelled by customer'),
+    value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag36 = theme.defaultLanguages) === null || _theme$defaultLanguag36 === void 0 ? void 0 : _theme$defaultLanguag36.ORDER_STATUS_CANCELLED_BY_CUSTOMER) || 'Order cancelled by customer'),
     slug: 'ORDER_STATUS_CANCELLED_BY_CUSTOMER',
     percentage: 0
   }, {
     key: 17,
-    value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag39 = theme.defaultLanguages) === null || _theme$defaultLanguag39 === void 0 ? void 0 : _theme$defaultLanguag39.ORDER_NOT_PICKEDUP_BY_CUSTOMER) || 'Order not picked up by customer'),
+    value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag37 = theme.defaultLanguages) === null || _theme$defaultLanguag37 === void 0 ? void 0 : _theme$defaultLanguag37.ORDER_NOT_PICKEDUP_BY_CUSTOMER) || 'Order not picked up by customer'),
     slug: 'ORDER_NOT_PICKEDUP_BY_CUSTOMER',
     percentage: 0
   }, {
     key: 20,
-    value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag40 = theme.defaultLanguages) === null || _theme$defaultLanguag40 === void 0 ? void 0 : _theme$defaultLanguag40.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) || 'Customer almost arrived to business'),
+    value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag38 = theme.defaultLanguages) === null || _theme$defaultLanguag38 === void 0 ? void 0 : _theme$defaultLanguag38.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) || 'Customer almost arrived to business'),
     slug: 'ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS',
     percentage: 70
   }, {
     key: 21,
-    value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag41 = theme.defaultLanguages) === null || _theme$defaultLanguag41 === void 0 ? void 0 : _theme$defaultLanguag41.ORDER_CUSTOMER_ARRIVED_BUSINESS) || 'Customer arrived to business'),
+    value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag39 = theme.defaultLanguages) === null || _theme$defaultLanguag39 === void 0 ? void 0 : _theme$defaultLanguag39.ORDER_CUSTOMER_ARRIVED_BUSINESS) || 'Customer arrived to business'),
     slug: 'ORDER_CUSTOMER_ARRIVED_BUSINESS',
     percentage: 90
   }];

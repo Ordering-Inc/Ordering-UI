@@ -24,8 +24,7 @@ var _BusinessesMap = require("../BusinessesMap");
 var _reactRouterDom = require("react-router-dom");
 var _orderingComponents = require("ordering-components");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -94,30 +93,30 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     isPickup = _useState8[0],
     setIsPickup = _useState8[1];
   var _useState9 = (0, _react.useState)(''),
-    _useState10 = _slicedToArray(_useState9, 2),
-    mapErrors = _useState10[0],
-    setMapErrors = _useState10[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    mapErrors = _useState0[0],
+    setMapErrors = _useState0[1];
+  var _useState1 = (0, _react.useState)({
+      page: currentPageParam || 1,
+      loading: false
+    }),
+    _useState10 = _slicedToArray(_useState1, 2),
+    prevPage = _useState10[0],
+    setPrevPage = _useState10[1];
   var _useState11 = (0, _react.useState)({
       page: currentPageParam || 1,
       loading: false
     }),
     _useState12 = _slicedToArray(_useState11, 2),
-    prevPage = _useState12[0],
-    setPrevPage = _useState12[1];
-  var _useState13 = (0, _react.useState)({
-      page: currentPageParam || 1,
-      loading: false
-    }),
-    _useState14 = _slicedToArray(_useState13, 2),
-    nextPage = _useState14[0],
-    setNextPage = _useState14[1];
-  var _useState15 = (0, _react.useState)(false),
-    _useState16 = _slicedToArray(_useState15, 1),
-    categoryShow = _useState16[0];
-  var _useState17 = (0, _react.useState)([]),
-    _useState18 = _slicedToArray(_useState17, 2),
-    brandBusiness = _useState18[0],
-    setBrandBusiness = _useState18[1];
+    nextPage = _useState12[0],
+    setNextPage = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 1),
+    categoryShow = _useState14[0];
+  var _useState15 = (0, _react.useState)([]),
+    _useState16 = _slicedToArray(_useState15, 2),
+    brandBusiness = _useState16[0],
+    setBrandBusiness = _useState16[1];
   var location = (0, _reactRouterDom.useLocation)();
   var history = (0, _reactRouterDom.useHistory)();
   var userCustomer = JSON.parse(window.localStorage.getItem('user-customer'));

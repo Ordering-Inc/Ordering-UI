@@ -6,9 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.WrapperSMS = exports.WrappNotAddresses = exports.WithoutAddressText = exports.TitleFormContainer = exports.List = exports.FormActions = exports.ContinueButton = exports.CloseIcon = exports.ButtonsContainer = exports.AddressTitleContainer = exports.AddressTitle = exports.AddressListUl = exports.AddressListContainer = exports.AddressItemActions = exports.AddressItem = exports.AddressHoverInfo = exports.AddressHalfContainer = exports.AddressFormContainer = exports.AddressBookMarkContainer = exports.AddressBookMark = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0, _templateObject1, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var AddressListContainer = exports.AddressListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 0px 10px;\n  width: 100%;\n  ", "\n\n  button.add {\n    height: 50px;\n  }\n"])), function (_ref) {
   var isLoading = _ref.isLoading;
@@ -34,51 +33,51 @@ var AddressItemActions = exports.AddressItemActions = _styledComponents.default.
 var WrappNotAddresses = exports.WrappNotAddresses = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  height: 270px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  width: 80%;\n  margin: 20px auto 10px;\n\n  img {\n    width: 200px;\n    height: auto;\n    aspect-ratio: attr(width) / attr(height)\n  }\n  h1 {\n    margin: 5px 0px 0px;\n    opacity: 0.5;\n    text-align: center;\n    font-size: 24px;\n  }\n"])));
 var FormActions = exports.FormActions = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  padding: 10px 0px;\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  button {\n    height: 45px;\n    flex: 1;\n\n    &:last-child#second-btn {\n      margin-left: 10px;\n      ", "\n    }\n  }\n\n  @media (min-width: 769px) {\n    button {\n      &:last-child#second-btn {\n        margin-left: 25px;\n        ", "\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme3;
-  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n        margin-left: 0;\n        margin-right: 10px;\n      "])));
+  return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject0 || (_templateObject0 = _taggedTemplateLiteral(["\n        margin-left: 0;\n        margin-right: 10px;\n      "])));
 }, function (props) {
   var _props$theme4;
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n          margin-left: 0;\n          margin-right: 25px;\n      "])));
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject1 || (_templateObject1 = _taggedTemplateLiteral(["\n          margin-left: 0;\n          margin-right: 25px;\n      "])));
 });
-var ContinueButton = exports.ContinueButton = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  position: sticky;\n  bottom: 1px;\n\n  button {\n    width: 100%;\n    white-space: nowrap;\n    height: 50px;\n  }\n"])));
-var AddressTitle = exports.AddressTitle = _styledComponents.default.span(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  margin-bottom: 25px;\n  text-align: left;\n  ", "\n"])), function (props) {
+var ContinueButton = exports.ContinueButton = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 100%;\n  position: sticky;\n  bottom: 1px;\n\n  button {\n    width: 100%;\n    white-space: nowrap;\n    height: 50px;\n  }\n"])));
+var AddressTitle = exports.AddressTitle = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  margin-bottom: 25px;\n  text-align: left;\n  ", "\n"])), function (props) {
   var _props$theme5;
-  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    text-align: right;\n  "])));
+  return ((_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.rtl) && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    text-align: right;\n  "])));
 });
-var AddressHalfContainer = exports.AddressHalfContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n"])));
-var List = exports.List = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: ", ";\n  padding-right: 10px;\n  ", "\n  ", "\n  button {\n    width: 100%;\n  }\n"])), function (_ref2) {
+var AddressHalfContainer = exports.AddressHalfContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n"])));
+var List = exports.List = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: ", ";\n  padding-right: 10px;\n  ", "\n  ", "\n  button {\n    width: 100%;\n  }\n"])), function (_ref2) {
   var halfWidth = _ref2.halfWidth;
   return halfWidth ? '50%' : '100%';
 }, function (_ref3) {
   var isEnableContinueButton = _ref3.isEnableContinueButton,
     isOpenUserData = _ref3.isOpenUserData,
     notUseCustomerInfo = _ref3.notUseCustomerInfo;
-  return isEnableContinueButton || isOpenUserData || notUseCustomerInfo ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-top: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-top: 200px;\n  "])));
+  return isEnableContinueButton || isOpenUserData || notUseCustomerInfo ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    margin-top: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    margin-top: 200px;\n  "])));
 }, function (_ref4) {
   var addFormRestrictions = _ref4.addFormRestrictions;
-  return addFormRestrictions && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    height: 405px;\n  "])));
+  return addFormRestrictions && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    height: 405px;\n  "])));
 });
-var AddressFormContainer = exports.AddressFormContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  z-index: 10;\n  padding-left: 10px;\n  ", "\n  ", "\n"])), function (_ref5) {
+var AddressFormContainer = exports.AddressFormContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  z-index: 10;\n  padding-left: 10px;\n  ", "\n  ", "\n"])), function (_ref5) {
   var width = _ref5.width;
-  return (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    width: ", ";\n  "])), width);
+  return (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    width: ", ";\n  "])), width);
 }, function (_ref6) {
   var isEnableContinueButton = _ref6.isEnableContinueButton,
     addFormRestrictions = _ref6.addFormRestrictions;
-  return isEnableContinueButton && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    position: relative;\n    bottom: 164px;\n  "])));
+  return isEnableContinueButton && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    position: relative;\n    bottom: 164px;\n  "])));
 });
-var CloseIcon = exports.CloseIcon = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  svg{\n    width: 30px;\n    height: 30px;\n  }\n"])));
-var TitleFormContainer = exports.TitleFormContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 7px;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n\n  @media (max-width: 930px) {\n    h1 {\n      font-size: 18px !important;\n    }\n  }\n"])));
-var AddressHoverInfo = exports.AddressHoverInfo = _styledComponents.default.span(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  background: #FFE69C;\n  border: 1px solid #FFF3CD;\n  display: flex;\n  padding: 8px;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  position: absolute;\n  top: 0px;\n  left: 25px;\n  opacity: 0;\n  width: max-content;\n  p {\n    margin: 0;\n    color: #664D03;\n    font-size: 12px;\n  }\n\n"])));
-var AddressBookMark = exports.AddressBookMark = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  span {\n    opacity: 0;\n    transition: opacity 0.3s, visibility 0.3s;\n\n  }\n  &:hover + span {\n    opacity: 1;\n    transition: opacity 0.3s, visibility 0.3s;\n  }\n"])));
-var AddressBookMarkContainer = exports.AddressBookMarkContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  position: relative;\n"])));
-var AddressTitleContainer = exports.AddressTitleContainer = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  white-space: break-spaces;\n"])));
-var WithoutAddressText = exports.WithoutAddressText = _styledComponents.default.span(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  text-decoration: underline;\n  color: ", ";\n  cursor: pointer;\n"])), function (_ref7) {
+var CloseIcon = exports.CloseIcon = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  svg{\n    width: 30px;\n    height: 30px;\n  }\n"])));
+var TitleFormContainer = exports.TitleFormContainer = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 7px;\n  h1 {\n    margin: auto;\n    font-size: 24px;\n  }\n\n  @media (max-width: 930px) {\n    h1 {\n      font-size: 18px !important;\n    }\n  }\n"])));
+var AddressHoverInfo = exports.AddressHoverInfo = _styledComponents.default.span(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  background: #FFE69C;\n  border: 1px solid #FFF3CD;\n  display: flex;\n  padding: 8px;\n  justify-content: center;\n  align-items: center;\n  border-radius: 4px;\n  position: absolute;\n  top: 0px;\n  left: 25px;\n  opacity: 0;\n  width: max-content;\n  p {\n    margin: 0;\n    color: #664D03;\n    font-size: 12px;\n  }\n\n"])));
+var AddressBookMark = exports.AddressBookMark = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  span {\n    opacity: 0;\n    transition: opacity 0.3s, visibility 0.3s;\n\n  }\n  &:hover + span {\n    opacity: 1;\n    transition: opacity 0.3s, visibility 0.3s;\n  }\n"])));
+var AddressBookMarkContainer = exports.AddressBookMarkContainer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  position: relative;\n"])));
+var AddressTitleContainer = exports.AddressTitleContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  white-space: break-spaces;\n"])));
+var WithoutAddressText = exports.WithoutAddressText = _styledComponents.default.span(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  text-decoration: underline;\n  color: ", ";\n  cursor: pointer;\n"])), function (_ref7) {
   var _theme$colors;
   var theme = _ref7.theme;
   return theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.primary;
 });
-var WrapperSMS = exports.WrapperSMS = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  p {\n    color: ", "\n  }\n"])), function (_ref8) {
+var WrapperSMS = exports.WrapperSMS = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  p {\n    color: ", "\n  }\n"])), function (_ref8) {
   var _theme$colors2;
   var theme = _ref8.theme;
   return theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.primary;
 });
-var ButtonsContainer = exports.ButtonsContainer = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  .sms{\n    margin-left: 20px;\n  }\n"])));
+var ButtonsContainer = exports.ButtonsContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  .sms{\n    margin-left: 20px;\n  }\n"])));

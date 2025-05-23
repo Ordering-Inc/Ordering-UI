@@ -21,8 +21,7 @@ var _styledComponents = require("styled-components");
 var _utils = require("../../../../../utils");
 var _SpreadForm = require("../AddressForm/SpreadForm");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -52,7 +51,7 @@ var getSpreadAddressFormatted = function getSpreadAddressFormatted(_address) {
   }, restValues);
 };
 var AddressListUI = function AddressListUI(props) {
-  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _configs$country_auto, _configs$country_auto2, _addressList$addresse4, _addressList$addresse5, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options10, _orderState$options11, _orderState$options12, _confirm$handleOnCanc;
+  var _addressList$addresse, _configs$unaddressed_, _orderState$options, _orderState$options2, _configs$country_auto, _configs$country_auto2, _addressList$addresse4, _addressList$addresse5, _orderState$options8, _orderState$options9, _addressList$error$, _orderState$options0, _orderState$options1, _orderState$options10, _confirm$handleOnCanc;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -118,17 +117,17 @@ var AddressListUI = function AddressListUI(props) {
     addressSpreadForm = _useState8[0],
     setAddressSpreadForm = _useState8[1];
   var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    editSpreadAddress = _useState10[0],
-    setEditSpreadAddress = _useState10[1];
-  var _useState11 = (0, _react.useState)('general'),
+    _useState0 = _slicedToArray(_useState9, 2),
+    editSpreadAddress = _useState0[0],
+    setEditSpreadAddress = _useState0[1];
+  var _useState1 = (0, _react.useState)('general'),
+    _useState10 = _slicedToArray(_useState1, 2),
+    tabSelected = _useState10[0],
+    setTabSelected = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
     _useState12 = _slicedToArray(_useState11, 2),
-    tabSelected = _useState12[0],
-    setTabSelected = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
-    _useState14 = _slicedToArray(_useState13, 2),
-    isAddAddressFromButton = _useState14[0],
-    setAddAddressFromButton = _useState14[1];
+    isAddAddressFromButton = _useState12[0],
+    setAddAddressFromButton = _useState12[1];
   var addFormRestrictions = (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.imported_address_text) && ((_addressList$addresse = addressList.addresses) === null || _addressList$addresse === void 0 ? void 0 : _addressList$addresse.length) === 0 && !(addressList !== null && addressList !== void 0 && addressList.loading) && !(addressList !== null && addressList !== void 0 && addressList.error);
   var uniqueAddressesList = addressList.addresses && addressList.addresses.filter(function (address, i, self) {
     return i === self.findIndex(function (obj) {
@@ -401,7 +400,7 @@ var AddressListUI = function AddressListUI(props) {
     }, t('CONTINUE_WITH', 'Continue with'), ": ", address.address));
   })), !(addressList.loading || actionStatus.loading || orderState.loading) && addressList.error && addressList.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_addressList$error$ = addressList.error[0]) === null || _addressList$error$ === void 0 ? void 0 : _addressList$error$.message) || addressList.error[0]
-  }), !(addressList.loading || actionStatus.loading || orderState.loading) && _typeof((_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : _orderState$options10.address) !== 'object' && !addressList.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
+  }), !(addressList.loading || actionStatus.loading || orderState.loading) && _typeof((_orderState$options0 = orderState.options) === null || _orderState$options0 === void 0 ? void 0 : _orderState$options0.address) !== 'object' && !addressList.error && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: t('NETWORK_ERROR', 'Network error, please reload the page')
   }), !isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressFormContainer, null, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
     userId: userId,
@@ -441,13 +440,13 @@ var AddressListUI = function AddressListUI(props) {
       return handleCloseAddressForm();
     },
     onChangeAddress: setAddressSpreadForm
-  }))), (addressList.loading || actionStatus.loading || orderState.loading || (user === null || user === void 0 ? void 0 : user.id) !== (orderState === null || orderState === void 0 || (_orderState$options11 = orderState.options) === null || _orderState$options11 === void 0 ? void 0 : _orderState$options11.user_id)) && !isProductForm && !addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }))), (addressList.loading || actionStatus.loading || orderState.loading || (user === null || user === void 0 ? void 0 : user.id) !== (orderState === null || orderState === void 0 || (_orderState$options1 = orderState.options) === null || _orderState$options1 === void 0 ? void 0 : _orderState$options1.user_id)) && !isProductForm && !addressOpen && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 50,
     count: 3,
     style: {
       marginBottom: '10px'
     }
-  })), onCancel && onAccept && _typeof((_orderState$options12 = orderState.options) === null || _orderState$options12 === void 0 ? void 0 : _orderState$options12.address) === 'object' && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  })), onCancel && onAccept && _typeof((_orderState$options10 = orderState.options) === null || _orderState$options10 === void 0 ? void 0 : _orderState$options10.address) === 'object' && !notUseCustomerInfo && /*#__PURE__*/_react.default.createElement(_styles.FormActions, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     type: "button",
     disabled: addressList.loading || actionStatus.loading || orderState.loading,

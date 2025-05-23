@@ -6,9 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.WrapSearchBar = exports.UserEdit = exports.SearchBarContainer = exports.RightHeader = exports.MenuLink = exports.MenuItem = exports.Menu = exports.LogoHeader = exports.LeftHeader = exports.InnerHeader = exports.Header = exports.CustomerInfo = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0, _templateObject1, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var Header = exports.Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;  \n  background-color: ", ";\n  position: relative;\n  z-index: 1005;\n\n  @media (min-width: 1200px) {\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
@@ -31,25 +30,25 @@ var Menu = exports.Menu = _styledComponents.default.div(_templateObject8 || (_te
 }, function (props) {
   return props.theme.colors.primary;
 });
-var MenuItem = exports.MenuItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
-var MenuLink = exports.MenuLink = _styledComponents.default.a(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 16px;\n  padding: 10px;\n  color: #333;\n  cursor: pointer;\n  color: ", ";\n  font-weight: 600;\n\n  ", "\n"])), function (props) {
+var MenuItem = exports.MenuItem = _styledComponents.default.div(_templateObject0 || (_templateObject0 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
+var MenuLink = exports.MenuLink = _styledComponents.default.a(_templateObject1 || (_templateObject1 = _taggedTemplateLiteral(["\n  text-decoration: none;\n  font-size: 16px;\n  padding: 10px;\n  color: #333;\n  cursor: pointer;\n  color: ", ";\n  font-weight: 600;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (_ref3) {
   var highlight = _ref3.highlight;
-  return highlight && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n    border-radius: 100px;\n    padding: 5px 15px;\n  "])), function (props) {
+  return highlight && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n    border-radius: 100px;\n    padding: 5px 15px;\n  "])), function (props) {
     return props.theme.colors.primary;
   });
 });
-var CustomerInfo = exports.CustomerInfo = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: none;\n  cursor: pointer;\n\n  @media (min-width: 450px) {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n\n    span {\n      display: flex;\n      align-items: center;\n      height: 30px;\n      p {\n        color: ", ";\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n        max-width: 50px;\n\n        @media (min-width: 768px) {\n          max-width: 70px;\n        }\n      }\n      svg {\n        color: ", ";\n        font-size: 30px;\n        margin-right: 5px;\n      }\n    }\n  }\n"])), function (props) {
+var CustomerInfo = exports.CustomerInfo = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: none;\n  cursor: pointer;\n\n  @media (min-width: 450px) {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n\n    span {\n      display: flex;\n      align-items: center;\n      height: 30px;\n      p {\n        color: ", ";\n        overflow: hidden;\n        text-overflow: ellipsis;\n        white-space: nowrap;\n        max-width: 50px;\n\n        @media (min-width: 768px) {\n          max-width: 70px;\n        }\n      }\n      svg {\n        color: ", ";\n        font-size: 30px;\n        margin-right: 5px;\n      }\n    }\n  }\n"])), function (props) {
   return props.isHome ? '#FFF' : '#333';
 }, function (props) {
   return props.theme.colors.primary;
 });
-var UserEdit = exports.UserEdit = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  > :first-child{\n     margin-bottom: 20px;  \n  }\n"])));
-var WrapSearchBar = exports.WrapSearchBar = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: #fff;\n  border-radius: 10px;\n  padding: 5px;\n  box-sizing: border-box;\n  justify-content: flex-end;\n  @media (max-width: 1200px) {\n    width: 91%;\n    margin: 0px auto;\n  }\n"])));
-var SearchBarContainer = exports.SearchBarContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  width: 100%;\n  padding: 10px 0;\n  position: sticky;\n  top: 0px;\n  z-index: 1000;\n  @media (max-width: 1200px) {\n    ", "\n  }\n"])), function (props) {
+var UserEdit = exports.UserEdit = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  > :first-child{\n     margin-bottom: 20px;  \n  }\n"])));
+var WrapSearchBar = exports.WrapSearchBar = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  background-color: #fff;\n  border-radius: 10px;\n  padding: 5px;\n  box-sizing: border-box;\n  justify-content: flex-end;\n  @media (max-width: 1200px) {\n    width: 91%;\n    margin: 0px auto;\n  }\n"])));
+var SearchBarContainer = exports.SearchBarContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  width: 100%;\n  padding: 10px 0;\n  position: sticky;\n  top: 0px;\n  z-index: 1000;\n  @media (max-width: 1200px) {\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 }, function (_ref4) {
   var home = _ref4.home;
-  return !home && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      border-bottom-right-radius: 15px;\n      border-bottom-left-radius: 15px;\n    "])));
+  return !home && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      border-bottom-right-radius: 15px;\n      border-bottom-left-radius: 15px;\n    "])));
 });

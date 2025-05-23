@@ -18,8 +18,7 @@ var _InputPhoneNumber = require("../InputPhoneNumber");
 var _UserFormDetails = require("../UserFormDetails");
 var _styles = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -84,9 +83,9 @@ var UserVerificationUI = function UserVerificationUI(props) {
     phoneState = _useState8[0],
     setPhoneState = _useState8[1];
   var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    modalIsOpen = _useState10[0],
-    setModalIsOpen = _useState10[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    modalIsOpen = _useState0[0],
+    setModalIsOpen = _useState0[1];
   var isEmailVerifyRequired = auth && (configs === null || configs === void 0 || (_configs$verification = configs.verification_email_required) === null || _configs$verification === void 0 ? void 0 : _configs$verification.value) === '1' && !(user !== null && user !== void 0 && user.email_verified);
   var isPhoneVerifyRequired = auth && (configs === null || configs === void 0 || (_configs$verification2 = configs.verification_phone_required) === null || _configs$verification2 === void 0 ? void 0 : _configs$verification2.value) === '1' && !(user !== null && user !== void 0 && user.phone_verified);
   var phoneLength = (phoneState === null || phoneState === void 0 ? void 0 : phoneState.cellphone) && (phoneState === null || phoneState === void 0 ? void 0 : phoneState.country_phone_code) && (phoneState === null || phoneState === void 0 || (_phoneState$cellphone = phoneState.cellphone) === null || _phoneState$cellphone === void 0 || (_phoneState$cellphone = _phoneState$cellphone.split('')) === null || _phoneState$cellphone === void 0 ? void 0 : _phoneState$cellphone.length);

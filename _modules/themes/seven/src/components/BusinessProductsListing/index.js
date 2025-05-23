@@ -23,8 +23,7 @@ var _ProductForm = require("../ProductForm");
 var _Confirm = require("../../../../../components/Confirm");
 var _Buttons = require("../../styles/Buttons");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -43,7 +42,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var PIXELS_TO_SCROLL = 300;
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products2, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _error$, _theme$defaultLanguag9, _productModal$error$, _theme$defaultLanguag10, _props$afterComponent, _props$afterElements;
+  var _Object$values$find, _props$beforeElements, _props$beforeComponen, _currentCart$products, _business$categories, _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _currentCart$products2, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _error$, _theme$defaultLanguag9, _productModal$error$, _theme$defaultLanguag0, _props$afterComponent, _props$afterElements;
   var errors = props.errors,
     isInitialRender = props.isInitialRender,
     businessState = props.businessState,
@@ -98,40 +97,40 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     openUpselling = _useState8[0],
     setOpenUpselling = _useState8[1];
   var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    canOpenUpselling = _useState10[0],
-    setCanOpenUpselling = _useState10[1];
-  var _useState11 = (0, _react.useState)(false),
-    _useState12 = _slicedToArray(_useState11, 2),
-    openBusinessInformation = _useState12[0],
-    setOpenBusinessInformation = _useState12[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    canOpenUpselling = _useState0[0],
+    setCanOpenUpselling = _useState0[1];
+  var _useState1 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    openBusinessInformation = _useState10[0],
+    setOpenBusinessInformation = _useState10[1];
   var currentCart = (_Object$values$find = Object.values(carts).find(function (cart) {
     var _cart$business;
     return (cart === null || cart === void 0 || (_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.slug) === (business === null || business === void 0 ? void 0 : business.slug);
   })) !== null && _Object$values$find !== void 0 ? _Object$values$find : {};
-  var _useState13 = (0, _react.useState)(false),
-    _useState14 = _slicedToArray(_useState13, 2),
-    isOver18Age = _useState14[0],
-    setIsOver18Age = _useState14[1];
-  var _useState15 = (0, _react.useState)({
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isOver18Age = _useState12[0],
+    setIsOver18Age = _useState12[1];
+  var _useState13 = (0, _react.useState)({
       open: false,
       content: []
     }),
+    _useState14 = _slicedToArray(_useState13, 2),
+    alertState = _useState14[0],
+    setAlertState = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    alertState = _useState16[0],
-    setAlertState = _useState16[1];
+    ageError = _useState16[0],
+    setAgeError = _useState16[1];
   var _useState17 = (0, _react.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    ageError = _useState18[0],
-    setAgeError = _useState18[1];
-  var _useState19 = (0, _react.useState)(false),
+    isNestBreackFast = _useState18[0],
+    setIsNestBreackFast = _useState18[1];
+  var _useState19 = (0, _react.useState)(''),
     _useState20 = _slicedToArray(_useState19, 2),
-    isNestBreackFast = _useState20[0],
-    setIsNestBreackFast = _useState20[1];
-  var _useState21 = (0, _react.useState)(''),
-    _useState22 = _slicedToArray(_useState21, 2),
-    businessOpentime = _useState22[0],
-    setBusinessOpentime = _useState22[1];
+    businessOpentime = _useState20[0],
+    setBusinessOpentime = _useState20[1];
   var ageValidationCategorys = ['Vinos'.toUpperCase(), 'Cervezas'.toUpperCase()];
   var breakFastCategories = ['Desayunos'.toUpperCase(), 'Desayuno'.toUpperCase()];
   var url = window.location.pathname;
@@ -404,7 +403,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }))), productModal.error && productModal.error.length > 0 && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
     content: ((_productModal$error$ = productModal.error[0]) === null || _productModal$error$ === void 0 ? void 0 : _productModal$error$.message) || productModal.error[0]
   }), isInitialRender && !productModal.loading && !productModal.error && !productModal.product && /*#__PURE__*/_react.default.createElement(_NotFoundSource.NotFoundSource, {
-    content: t('ERROR_GET_PRODUCT', (theme === null || theme === void 0 || (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.ERROR_GET_PRODUCT) || 'Sorry, we couldn\'t find the requested product.')
+    content: t('ERROR_GET_PRODUCT', (theme === null || theme === void 0 || (_theme$defaultLanguag0 = theme.defaultLanguages) === null || _theme$defaultLanguag0 === void 0 ? void 0 : _theme$defaultLanguag0.ERROR_GET_PRODUCT) || 'Sorry, we couldn\'t find the requested product.')
   }), (productModal.product || curProduct) && /*#__PURE__*/_react.default.createElement(_ProductForm.ProductForm, {
     businessSlug: business === null || business === void 0 ? void 0 : business.slug,
     product: productModal.product || curProduct,
@@ -455,10 +454,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }));
 };
 var BusinessProductsListing = exports.BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState23 = (0, _react.useState)(false),
-    _useState24 = _slicedToArray(_useState23, 2),
-    isInitialRender = _useState24[0],
-    setIsInitialRender = _useState24[1];
+  var _useState21 = (0, _react.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    isInitialRender = _useState22[0],
+    setIsInitialRender = _useState22[1];
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,
     isInitialRender: isInitialRender,
@@ -509,13 +508,13 @@ var BreackFastCheck = exports.BreackFastCheck = function BreackFastCheck(props) 
   }, " ", t('OK', 'Ok'))));
 };
 var useWindowSize = exports.useWindowSize = function useWindowSize() {
-  var _useState25 = (0, _react.useState)({
+  var _useState23 = (0, _react.useState)({
       width: undefined,
       height: undefined
     }),
-    _useState26 = _slicedToArray(_useState25, 2),
-    windowSize = _useState26[0],
-    setWindowSize = _useState26[1];
+    _useState24 = _slicedToArray(_useState23, 2),
+    windowSize = _useState24[0],
+    setWindowSize = _useState24[1];
   (0, _react.useEffect)(function () {
     var handleResize = function handleResize() {
       setWindowSize({
